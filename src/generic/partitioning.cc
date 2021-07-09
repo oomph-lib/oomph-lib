@@ -29,7 +29,6 @@
 #include "mesh.h"
 #include "refineable_mesh.h"
 // Include to fill in additional_setup_shared_node_scheme() function
-// #include "refineable_mesh.tpp" // PM: Not sure this is required anymore
 
 namespace oomph
 {
