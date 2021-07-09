@@ -12,9 +12,10 @@ touch Validation
 rm -rf Validation
 mkdir Validation
 
-# Alias for the location of the fpdiff python script; note that the oomph
-# root directory is one level higher because we descended into the Validation
-# directory after getting the relative address for the root directory
+# Alias for the location of the fpdiff python script. To make aliases work
+# inside non-interactive shells (i.e. just in a script), we need to enable the
+# "expand_aliases" shell option.
+shopt -s expand_aliases
 alias fpdiff="$OOMPH_ROOT_DIR/scripts/fpdiff.py"
 
 # Validation for flow past cylinder

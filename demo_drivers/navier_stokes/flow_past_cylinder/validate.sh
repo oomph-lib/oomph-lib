@@ -3,10 +3,8 @@
 # Get the OOPMH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$1
 
-
 #Set the number of tests to be checked
 NUM_TESTS=1
-
 
 # Setup validation directory
 #---------------------------
@@ -19,34 +17,30 @@ mkdir Validation
 cd Validation
 
 echo "Running flow_past_cylinder"
-../flow_past_cylinder > OUTPUT
+../flow_past_cylinder >OUTPUT
 echo "done "
-echo " " >> validation.log
-echo "Flow past cylinder validation" >> validation.log
-echo "-----------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
+echo " " >>validation.log
+echo "Flow past cylinder validation" >>validation.log
+echo "-----------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
 
 if test "$2" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/soln.dat.gz  \
-         ./soln.dat 0.1 1.0e-8 >> validation.log
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/soln.dat.gz \
+    ./soln.dat 0.1 1.0e-8 >>validation.log
 fi
 
-
-
 # Append log to main validation log
-cat validation.log >> $OOMPH_ROOT_DIR/validation.log
+cat validation.log >>$OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
-
 #######################################################################
-
 
 #Check that we get the correct number of OKs
 # validate_ok_count will exit with status
