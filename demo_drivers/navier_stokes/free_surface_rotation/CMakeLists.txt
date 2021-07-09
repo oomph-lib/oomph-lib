@@ -18,6 +18,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.free_surface_rotation
   TARGET_DEPENDENCIES free_surface_rotation
   EXTRA_REQUIRES
-  LABELS "navier_stokes;free_surface_rotation")
+  LABELS "navier_stokes;free_surface_rotation"
+  SILENCE_MISSING_VALIDATA_WARNING)
 
 # ------------------------------------------------------------------------------

@@ -18,7 +18,6 @@ set(SUBDIRS
     free_surface_rotation
     hp_adaptive_driven_cavity
     inclined_plane
-    jeffery_orbit
     lagrange_enforced_flow_preconditioner
     navier_stokes_with_singularity
     osc_ellipse
@@ -36,9 +35,6 @@ set(SUBDIRS
     three_d_static_cap
     turek_flag_non_fsi
     two_layer_interface
-    unstructured_adaptive_3d_ALE
-    unstructured_adaptive_ALE
-    unstructured_adaptive_fs
     unstructured_fluid
     unstructured_three_d_fluid
     vmtk_fluid
