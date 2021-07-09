@@ -32,6 +32,13 @@ lib_LTLIBRARIES = liboomph_lapack.la
 liboomph_lapack_la_SOURCES = $(headers_and_sources)
 liboomph_lapack_la_LDFLAGS = -static
 
+# Deal with implicit function declaration which causes problems on MacOS
+if HAVE_DARWIN
+CFLAGS += -Wno-implicit-function-declaration
+endif
+
+junk:
+	echo $(CFLAGS)
 
 # The library's include headers:
 #-------------------------------
@@ -58,19 +65,19 @@ dummy_$(libname).h:  $(headers)
 	$(AWK) -f $(top_builddir)/bin/headers.awk < \
 	          all_$(libname).aux > $(libname).h
 	rm all_$(libname).aux
-	rm -f ../$(libname).h 
+	rm -f ../$(libname).h
 	(cd .. && $(LN_S) $(libname)/$(libname).h $(libname).h)
 
 # Extra hook for install: Optionally replace headers by symbolic links
 #---------------------------------------------------------------------
 if SYMBOLIC_LINKS_FOR_HEADERS
-install-data-hook: 
+install-data-hook:
 	(cd $(library_includedir) && rm -f $(headers) )
 	(echo "$(headers)" > include_files.list )
 	($(top_builddir)/bin/change_headers_to_links.sh `pwd`)
 	($(LN_S) `cat include_files.list.aux` $(library_includedir) )
-	(rm -r include_files.list.aux include_files.list ) 
+	(rm -r include_files.list.aux include_files.list )
 else
-install-data-hook: 
+install-data-hook:
 endif
 

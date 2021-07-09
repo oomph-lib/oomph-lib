@@ -1,8 +1,8 @@
 ###################################################
 # Serial metis as distributed with parmetis 3.1.1
 #
-# Turn into oomph_metis_from_parmetis_3.1.1 to avoid 
-# clashes with any existing installations of metis 
+# Turn into oomph_metis_from_parmetis_3.1.1 to avoid
+# clashes with any existing installations of metis
 # which are likely to be accessible via -lmetis
 ###################################################
 
@@ -25,7 +25,7 @@ frename.c     mbalance.c       mkwayfmh.c    pmetis.c
 
 # Define the headers: This is the combined header provided with
 # and used by metis itself
-headers = metis.h 
+headers = metis.h
 
 # Additional headers that need to be distributed
 extra_headers = defs.h	macros.h  proto.h  rename.h  stdheaders.h  struct.h
@@ -61,6 +61,14 @@ endif
 junk:
 	echo $(CFLAGS)
 
+# Deal with implicit function declaration which causes problems on MacOS
+if HAVE_DARWIN
+CFLAGS += -Wno-implicit-function-declaration
+endif
+
+junk:
+	echo $(CFLAGS)
+
 # The library's include headers:
 #-------------------------------
 # Headers that are to be included in the $(includedir) directory:
@@ -72,12 +80,12 @@ include_HEADERS = $(libname).h
 library_includedir=$(includedir)/oomph_metis_from_parmetis_3.1.1
 
 #These are the header files that are to be placed in subdirectory
-library_include_HEADERS=$(headers) $(extra_headers) 
+library_include_HEADERS=$(headers) $(extra_headers)
 
 
-# Combined header file 
+# Combined header file
 #---------------------
-# Combined header file was hand-written. It is the same as 
+# Combined header file was hand-written. It is the same as
 # metis.h (provided with METIS) but the includes are redirected
 # to the include directory where they will be
 # found after installation.
@@ -89,21 +97,21 @@ $(libname).h: dummy_$(libname).h
 # in exactly the same way as after its installation in the include
 # directory. (After the installation, the combined header lives
 # in the directory above the actual individual header files)
-dummy_$(libname).h: 
-	rm -f ../$(libname).h 
+dummy_$(libname).h:
+	rm -f ../$(libname).h
 	(cd .. && $(LN_S) $(libname)/$(libname).h $(libname).h)
 
 
 # Extra hook for install: Optionally replace headers by symbolic links
 #---------------------------------------------------------------------
 if SYMBOLIC_LINKS_FOR_HEADERS
-install-data-hook: 
+install-data-hook:
 	(cd $(library_includedir) && rm -f $(headers) $(extra_headers) )
 	(echo "$(headers) $(extra_headers)" > include_files.list )
 	($(top_builddir)/bin/change_headers_to_links.sh `pwd`)
 	($(LN_S) `cat include_files.list.aux` $(library_includedir) )
-	(rm -r include_files.list.aux include_files.list ) 
+	(rm -r include_files.list.aux include_files.list )
 else
-install-data-hook: 
+install-data-hook:
 endif
 

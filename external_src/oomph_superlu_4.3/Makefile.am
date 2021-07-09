@@ -35,7 +35,7 @@ ilu_dpivotL.c ddiagonal.c
 # also include them. Plus various other files that we're not compiling
 # but are keeping alive for completeness so that what we have in here
 # is the complete set of sources for superlu
-#  xerbla.c  lsame.c dlamch.c  
+#  xerbla.c  lsame.c dlamch.c
 EXTRA_DIST =  xerbla.c.back  lsame.c.back dzsum1.c.back izmax1.c.back \
               zlacon.c.back dlamch.c.back \
 ilu_zcopy_to_ucol.c \
@@ -157,8 +157,15 @@ lib_LTLIBRARIES = liboomph_superlu_4.3.la
 # Sources that the library depends on:
 #-------------------------------------
 liboomph_superlu_4_3_la_SOURCES = $(headers_and_sources)
-liboomph_superlu_4_3_la_LDFLAGS = -static 
+liboomph_superlu_4_3_la_LDFLAGS = -static
 
+# Deal with implicit function declaration which causes problems on MacOS
+if HAVE_DARWIN
+CFLAGS += -Wno-implicit-function-declaration
+endif
+
+junk:
+	echo $(CFLAGS)
 
 # The library's include headers:
 #-------------------------------
@@ -191,19 +198,19 @@ dummy_$(libname).h:  $(headers)
 	$(AWK) -f $(top_builddir)/bin/headers.awk < \
 	          all_$(libname).aux > $(libname).h
 	rm all_$(libname).aux
-	rm -f ../$(libname).h 
+	rm -f ../$(libname).h
 	(cd .. && $(LN_S) $(libname)/$(libname).h $(libname).h)
 
 # Extra hook for install: Optionally replace headers by symbolic links
 #---------------------------------------------------------------------
 if SYMBOLIC_LINKS_FOR_HEADERS
-install-data-hook: 
+install-data-hook:
 	(cd $(library_includedir) && rm -f $(headers) )
 	(echo "$(headers)" > include_files.list )
 	($(top_builddir)/bin/change_headers_to_links.sh `pwd`)
 	($(LN_S) `cat include_files.list.aux` $(library_includedir) )
-	(rm -r include_files.list.aux include_files.list ) 
+	(rm -r include_files.list.aux include_files.list )
 else
-install-data-hook: 
+install-data-hook:
 endif
 
