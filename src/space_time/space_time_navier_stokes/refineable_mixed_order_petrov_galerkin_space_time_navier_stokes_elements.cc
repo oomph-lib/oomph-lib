@@ -24,7 +24,7 @@
 // LIC//
 // LIC//====================================================================
 // Non-inline functions for space-time Navier-Stokes elements
-#include <refineable_mixed_order_petrov_galerkin_space_time_navier_stokes_elements.h>
+#include "refineable_mixed_order_petrov_galerkin_space_time_navier_stokes_elements.h"
 
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////

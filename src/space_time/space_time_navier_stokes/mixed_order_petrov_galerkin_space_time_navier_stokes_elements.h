@@ -33,10 +33,10 @@
 #endif
 
 // Oomph-lib headers
-#include <generic/Qelements.h>
-#include <generic/shape.h>
-#include <generic/fsi.h>
-#include <generic/projection.h>
+#include "generic/Qelements.h"
+#include "generic/shape.h"
+#include "generic/fsi.h"
+#include "generic/projection.h"
 
 namespace oomph
 {
