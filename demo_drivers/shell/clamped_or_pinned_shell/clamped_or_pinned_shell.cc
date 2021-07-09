@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -30,6 +26,7 @@
 // Driver function for a simple test shell problem:
 // Calculate the deformation of an elastic tube approximated
 // using Kirchoff--Love shell theory using various boundary conditions
+
 
 // Include files from the finite-element library
 #include "generic.h"

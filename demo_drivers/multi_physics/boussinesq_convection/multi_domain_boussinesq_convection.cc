@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -29,6 +25,7 @@
 // LIC//====================================================================
 // Driver for a multi-physics problem that couples a Navier--Stokes
 // mesh to an advection diffusion mesh, giving Boussinesq convection
+
 
 // Oomph-lib headers, we require the generic, advection-diffusion,
 // and navier-stokes elements.

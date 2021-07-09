@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -32,6 +28,7 @@
 // The problem is described in Feudel et al. (2011) Phys Rev E 83, 046304
 // There is a loss of spherical symmetry at Ra=2491, which leads to an
 // axisymmetric branch of solutions at a transcritical bifurcation.
+
 
 // Generic includes
 #include "generic.h"
