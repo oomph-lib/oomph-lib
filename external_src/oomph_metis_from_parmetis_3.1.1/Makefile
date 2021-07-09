@@ -97,9 +97,6 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-pc-linux-gnu
 host_triplet = x86_64-pc-linux-gnu
-
-# Deal with implicit function declaration which causes problems on MacOS
-#am__append_1 = -Wno-implicit-function-declaration
 subdir = external_src/oomph_metis_from_parmetis_3.1.1
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/configure.ac_scripts/automake_init_command_file \
@@ -279,7 +276,7 @@ BOOST_INCLUDE = /home/runner/work/oomph-lib/oomph-lib/external_distributions/boo
 BOOST_LIB = /home/runner/work/oomph-lib/oomph-lib/external_distributions/boost/boost_default_installation/lib
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -Wall $(am__append_1)
+CFLAGS = -g -Wall
 CGAL_DIR = /home/runner/work/oomph-lib/oomph-lib/external_distributions/cgal/cgal_default_installation
 CGAL_INCLUDE = /home/runner/work/oomph-lib/oomph-lib/external_distributions/cgal/cgal_default_installation/include
 CGAL_LIB = /home/runner/work/oomph-lib/oomph-lib/external_distributions/cgal/cgal_default_installation/lib
@@ -1022,9 +1019,6 @@ uninstall-am: uninstall-includeHEADERS uninstall-libLTLIBRARIES \
 
 .PRECIOUS: Makefile
 
-
-junk:
-	echo $(CFLAGS)
 
 # Combined header file 
 #---------------------
