@@ -631,8 +631,7 @@ References Built, and oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+
 For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
  
 
-For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
- 
+For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. 
 
 Definition at line 2388 of file matrices.\+cc.
 
@@ -951,8 +950,7 @@ References Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
 
 Sorts the entries associated with each row of the matrix in the column index vector and the value vector into ascending order and sets up the Index\+\_\+of\+\_\+diagonal\+\_\+entries vector. 
 
-This helper function sorts the entries in the column index vector and the value vector. During the construction of the matrix the entries were most likely assigned in an arbitrary order. As a result, it cannot be assumed that the entries in the column index vector corresponding to each row of the matrix have been arranged in increasing order. During the setup an additional vector will be set up; Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of this vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. ~\newline
- 
+This helper function sorts the entries in the column index vector and the value vector. During the construction of the matrix the entries were most likely assigned in an arbitrary order. As a result, it cannot be assumed that the entries in the column index vector corresponding to each row of the matrix have been arranged in increasing order. During the setup an additional vector will be set up; Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of this vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. 
 
 Definition at line 1469 of file matrices.\+cc.
 
