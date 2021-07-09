@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #Little script to check for dead links
 def search_dead_links(doc_root_directory):

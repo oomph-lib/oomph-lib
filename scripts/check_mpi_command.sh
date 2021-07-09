@@ -4,7 +4,8 @@ set -o errexit
 set -o nounset
 
 # Function to test that the given mpi compilation and run commands work
-check_mpi_run_command() {
+check_mpi_run_command ()
+{
     _mpi_run_command="$1"
     _cxx_compile_command="$2"
 
@@ -14,20 +15,21 @@ check_mpi_run_command() {
     fi
 
     # Check that we have a complie command
-    if test "$_cxx_compile_command" == ""; then
+    if test "$_cxx_compile_command" == ""
+    then 
         echo " "
         echo "================================================="
         echo " "
         echo "WARNING (ISSUED BY OOMPH-LIB):"
         echo "------------------------------"
         echo " "
-        echo "Sorry I got myself confused when parsing "
+        echo "Sorry I got myself confused when parsing " 
         echo "the configure options and could not find"
         echo "the specification of the c++ mpi compiler"
         echo "via the CXX flag. Please make sure this is"
         echo "specified in configure/configure_optinios/current"
         echo "in the form: CXX=mpic++, say, (no quotes, no spaces)."
-        echo " "
+        echo " " 
         echo "NOTE: This is not necessarily a problem, but will"
         echo "keep me from checking if mpi is up and running"
         echo "before starting the self-tests."
@@ -38,37 +40,38 @@ check_mpi_run_command() {
     fi
 
     # Test the compilation of an mpi example
-    full_command="$_cxx_compile_command -o scripts/minimal_mpi_test scripts/minimal_mpi_test.cc"
+    full_command="$_cxx_compile_command -o bin/minimal_mpi_test bin/minimal_mpi_test.cc"
     printf "Testing mpi compilation command: $full_command\n"
-    rm -f scripts/minimal_mpi_test
+    rm -f bin/minimal_mpi_test
 
     # Compile
     set +e
-    $(echo $full_command)
+    `echo $full_command` 
     set -e
 
     # run it
     set +e
-    $(echo $_mpi_run_command scripts/minimal_mpi_test) >scripts/minimal_mpi_test.out
-    result=$(grep 'This worked' scripts/minimal_mpi_test.out | wc | awk '{print $1}')
+    `echo $_mpi_run_command bin/minimal_mpi_test ` > bin/minimal_mpi_test.out
+    result=`grep 'This worked'  bin/minimal_mpi_test.out | wc | awk '{print $1}'`
     set -e
 
     echo "RESULT: " $result
 
-    if [ "$result" -eq "2" ]; then
+    if [ "$result" -eq "2" ]
+    then
         printf " [Passed]\n"
-        return 0
+        return 0 
     else
         printf " [Failed]\n"
         # Report info about errors
-        if [ ! -e scripts/minimal_mpi_test ]; then
-            echo " "
+        if [ ! -e bin/minimal_mpi_test ]; then
+            echo " " 
             echo "================================================="
             echo " "
             echo "WARNING (ISSUED BY OOMPH-LIB):"
             echo "------------------------------"
             echo " "
-            echo "Compilation of scripts/minimal_mpi_test.cc failed."
+            echo "Compilation of bin/minimal_mpi_test.cc failed."
             echo "Are you sure your c++ compiler can compile mpi code?"
             echo " "
             echo "Note: This does not necessarily indicate a problem. "
@@ -84,16 +87,16 @@ check_mpi_run_command() {
             echo " "
             return 2
         else
-            echo " "
+            echo " " 
             echo "================================================="
             echo " "
             echo "WARNING (ISSUED BY OOMPH-LIB):"
             echo "------------------------------"
             echo " "
-            echo "The mpi test code scripts/minimal_mpi_test was not run"
-            echo "successfully."
-            echo " "
-            echo "You may want to check the following:"
+            echo "The mpi test code bin/minimal_mpi_test was not run"
+            echo "successfully." 
+            echo " " 
+            echo "You may want to check the following:" 
             echo "-- Are you sure your mpi demons have been started?"
             echo "   E.g. under lam you have to use the lamboot "
             echo "   command to get mpi up and running...."
@@ -113,7 +116,8 @@ check_mpi_run_command() {
 
 # Function to test that the given mpi compilation and run commands work
 # with variable numbers of processors.
-check_mpi_np_run_command() {
+check_mpi_np_run_command()
+{
     _mpi_np_run_command="$1"
     _cxx_compile_command="$2"
 
@@ -143,43 +147,44 @@ check_mpi_np_run_command() {
     fi
 
     # Check we have a compile command
-    if test "$_cxx_compile_command" == ""; then
+    if test "$_cxx_compile_command" == "" 
+    then  
         echo " "
         echo "================================================="
         echo " "
         echo "WARNING (ISSUED BY OOMPH-LIB):"
         echo "------------------------------"
         echo " "
-        echo "Sorry I got myself confused when parsing "
+        echo "Sorry I got myself confused when parsing " 
         echo "the configure options and could not find"
         echo "the specification of the c++ mpi compiler"
         echo "via the CXX flag. Please make sure this is"
         echo "specified in configure/configure_optinios/current"
         echo "in the form: CXX=mpic++, say, (no quotes, no spaces)."
-        echo " "
+        echo " " 
         echo "NOTE: This is not necessarily a problem, but will"
         echo "keep me from checking if mpi is up and running"
         echo "before starting the self-tests."
         echo " "
         echo "================================================="
-        echo " "
+        echo " "     
 
         return 2
     fi
 
     # Check that we can compile
-    rm -f scripts/minimal_mpi_variablenp_test
-    full_command="$_cxx_compile_command -o scripts/minimal_mpi_variablenp_test scripts/minimal_mpi_variablenp_test.cc"
+    rm -f bin/minimal_mpi_variablenp_test
+    full_command="$_cxx_compile_command -o bin/minimal_mpi_variablenp_test bin/minimal_mpi_variablenp_test.cc"
     eval "$full_command"
 
-    if [ ! -e scripts/minimal_mpi_variablenp_test ]; then
-        echo " "
+    if [ ! -e bin/minimal_mpi_variablenp_test ]; then
+        echo " " 
         echo "================================================="
         echo " "
         echo "WARNING (ISSUED BY OOMPH-LIB):"
         echo "------------------------------"
         echo " "
-        echo "Compilation of scripts/minimal_mpi_test.cc usint the command"
+        echo "Compilation of bin/minimal_mpi_test.cc usint the command"
         echo "     $full_command"
         echo "failed. Are you sure your c++ compiler can compile mpi code?"
         echo " "
@@ -201,36 +206,38 @@ check_mpi_np_run_command() {
     set +e
 
     MPI_RUN_ON_NP_COMMAND=$(echo $_mpi_np_run_command | sed -e "s/OOMPHNP/1/g")
-    $MPI_RUN_ON_NP_COMMAND scripts/minimal_mpi_variablenp_test
+    $MPI_RUN_ON_NP_COMMAND bin/minimal_mpi_variablenp_test
 
     MPI_RUN_ON_NP_COMMAND=$(echo $_mpi_np_run_command | sed -e "s/OOMPHNP/2/g")
-    $MPI_RUN_ON_NP_COMMAND scripts/minimal_mpi_variablenp_test
+    $MPI_RUN_ON_NP_COMMAND bin/minimal_mpi_variablenp_test
 
     MPI_RUN_ON_NP_COMMAND=$(echo $_mpi_np_run_command | sed -e "s/OOMPHNP/3/g")
-    $MPI_RUN_ON_NP_COMMAND scripts/minimal_mpi_variablenp_test
+    $MPI_RUN_ON_NP_COMMAND bin/minimal_mpi_variablenp_test
 
     MPI_RUN_ON_NP_COMMAND=$(echo $_mpi_np_run_command | sed -e "s/OOMPHNP/4/g")
-    $MPI_RUN_ON_NP_COMMAND scripts/minimal_mpi_variablenp_test
+    $MPI_RUN_ON_NP_COMMAND bin/minimal_mpi_variablenp_test
 
     set -e
 
-    rm -f scripts/minimal_mpi_variablenp_test
+    rm -f bin/minimal_mpi_variablenp_test
     variablenp_outputs="mpi_seltest_np1rank0 mpi_seltest_np2rank0 mpi_seltest_np2rank1 mpi_seltest_np3rank0 mpi_seltest_np3rank1 mpi_seltest_np3rank2 mpi_seltest_np4rank0 mpi_seltest_np4rank1 mpi_seltest_np4rank2 mpi_seltest_np4rank3"
 
-    for OUTFILE in $variablenp_outputs; do
-        result=$(grep 'This worked' $OUTFILE | wc -l)
+    for OUTFILE in $variablenp_outputs 
+    do
+        result=$(grep 'This worked'  $OUTFILE | wc -l)
 
-        if [ "$result" -ne "1" ]; then
-            echo " "
+        if [ "$result" -ne "1" ]
+        then
+            echo " " 
             echo "================================================="
             echo " "
             echo "WARNING (ISSUED BY OOMPH-LIB):"
             echo "------------------------------"
             echo " "
-            echo "The mpi test code scripts/minimal_mpi_test was not run"
-            echo "successfully."
-            echo " "
-            echo "You may want to check the following:"
+            echo "The mpi test code bin/minimal_mpi_test was not run"
+            echo "successfully." 
+            echo " " 
+            echo "You may want to check the following:" 
             echo "-- Are you sure your mpi demons have been started?"
             echo "   E.g. under lam you have to use the lamboot "
             echo "   command to get mpi up and running...."
@@ -250,8 +257,10 @@ check_mpi_np_run_command() {
     done
 }
 
+
 makefile_location="$1"
-get_makefile_variable() {
+get_makefile_variable()
+{
     echo "print-var:; @echo \$($1)" | make -f - -f $makefile_location print-var
 }
 
@@ -264,6 +273,7 @@ mpi_run_command="$(get_makefile_variable MPI_RUN_COMMAND)"
 
 # Get mpi run command on variable number of processors.
 mpi_np_run_command="$(get_makefile_variable MPI_VARIABLENP_RUN_COMMAND)"
+
 
 # echo $cxx_compile_command
 # echo $mpi_run_command
