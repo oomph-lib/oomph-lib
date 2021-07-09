@@ -325,6 +325,9 @@ fi
 if test $(uname) == "Darwin"
 then
     LIBTOOL_COMMAND=glibtool;
+    # MacOS has problems compiling some external libraries because
+    # of implicit function definitions
+    accumulated_cpp_flags=`echo $accumulated_cpp_flags `" -Wno-implicit-function-declaration"
 else
     LIBTOOL_COMMAND=libtool;
 fi
