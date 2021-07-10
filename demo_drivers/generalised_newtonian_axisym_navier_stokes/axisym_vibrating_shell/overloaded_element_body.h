@@ -3,7 +3,11 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//    Version 1.0; svn revision $LastChangedRevision$
+// LIC//
+// LIC// $LastChangedDate$
+// LIC//
+// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -204,67 +208,6 @@ void extrapolated_strain_rate(const unsigned& ipt,
 void extrapolated_strain_rate(const Vector<double>& s,
                               DenseMatrix<double>& strainrate) const
 {
-  if (Aitken_index == 2)
-  {
-    Aitken_index = 0;
-    for (unsigned ipt = 0; ipt < n_intpt; ipt++)
-    {
-      for (unsigned i = 0; i < 3; i++)
-      {
-        for (unsigned j = 0; j < 3; j++)
-        {
-          double v0 = Fixed_point_iteration_guess_for_strain_rate[0][ipt](i, j);
-          double v1 = Fixed_point_iteration_guess_for_strain_rate[1][ipt](i, j);
-          double v2 = Fixed_point_iteration_guess_for_strain_rate[2][ipt](i, j);
-
-          double new_value = v2;
-
-          if (Use_aitken_extrapolation)
-          {
-            double max_diff = std::max(std::fabs(v1 - v0), std::fabs(v2 - v1));
-
-            if (max_diff > 1.0e-16)
-            {
-              new_value = v2 - std::pow(v2 - v1, 2.0) / (v2 - 2.0 * v1 + v0);
-            }
-          }
-
-          Fixed_point_iteration_guess_for_strain_rate[Aitken_index][ipt](i, j) =
-            new_value;
-        }
-      }
-    }
-  }
-
-  Aitken_index++;
-}
-
-/// \short Get strain-rate tensor: \f$ e_{ij} \f$  where
-/// \f$ i,j = r,z,\theta \f$ (in that order). Extrapolated
-/// from history values evaluated at integration point ipt. Overloaded
-/// version from base class.
-void extrapolated_strain_rate(const unsigned& ipt,
-                              DenseMatrix<double>& strainrate) const
-{
-  if (Use_fixed_point_for_strain_rate)
-  {
-    latest_fixed_point_iteration_guess_for_strain_rate(ipt, strainrate);
-  }
-  else
-  {
-    Vector<double> s(2);
-    for (unsigned i = 0; i < 2; i++) s[i] = integral_pt()->knot(ipt, i);
-    extrapolated_strain_rate(s, strainrate);
-  }
-}
-
-/// \short Get strain-rate tensor: \f$ e_{ij} \f$  where
-/// \f$ i,j = r,z,\theta \f$ (in that order). Extrapolated
-/// from history values evaluated at local coordinate s. Overloaded
-/// version from base class.
-void extrapolated_strain_rate(const Vector<double>& s,
-                              DenseMatrix<double>& strainrate) const
-{
 #ifdef PARANOID
   if ((strainrate.ncol() != 3) || (strainrate.nrow() != 3))
   {
@@ -277,6 +220,7 @@ void extrapolated_strain_rate(const Vector<double>& s,
       error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 #endif
+
 
   // Get required previous strain rates
   Vector<DenseMatrix<double>> previous_strain_rate(
@@ -299,6 +243,7 @@ void extrapolated_strain_rate(const Vector<double>& s,
   }
   // hierher #endif
 
+
   // Which extrapolation are we doing?
   switch (Nprev_for_extrapolation_of_strain_rate)
   {
@@ -308,6 +253,7 @@ void extrapolated_strain_rate(const Vector<double>& s,
       strainrate = previous_strain_rate[0];
     }
     break;
+
 
       // First order extrapolation -- two history values
     case 2:
@@ -334,6 +280,7 @@ void extrapolated_strain_rate(const Vector<double>& s,
     }
     break;
 
+
       // Four history values
     case 4:
     {
@@ -352,6 +299,7 @@ void extrapolated_strain_rate(const Vector<double>& s,
           double dt_minus_1 = time_stepper_pt->time_pt()->dt(1);
           double dt_minus_2 = time_stepper_pt->time_pt()->dt(2);
           double dt_minus_3 = time_stepper_pt->time_pt()->dt(3);
+
 
           double MapleGenVar1 = 0.0;
           double MapleGenVar2 = 0.0;
@@ -551,6 +499,7 @@ void extrapolated_strain_rate(const Vector<double>& s,
   }
 }
 
+
 /// Set error value for post-processing
 void set_error(const double& error)
 {
@@ -610,6 +559,7 @@ std::string variable_identifier()
   txt += "\n";
   return txt;
 }
+
 
 /// Overload output function
 void output(std::ostream& outfile, const unsigned& nplot)
@@ -711,6 +661,7 @@ void output(std::ostream& outfile, const unsigned& nplot)
         dudt_ALE[i] -= mesh_veloc[k] * interpolated_dudx(i, k);
       }
     }
+
 
     // Actual rate of strain
     DenseMatrix<double> rate_of_strain(3, 3, 0.0);
@@ -839,6 +790,7 @@ void output(std::ostream& outfile, const unsigned& nplot)
     // outfile << rate_of_strain(1,1) << " ";
     // outfile << rate_of_strain(2,2) << " ";
     // outfile << rate_of_strain(0,1) << " ";
+
 
     // Rate of strain at second previous timestep
     // this->strain_rate(2,s,rate_of_strain);
@@ -1136,6 +1088,7 @@ double square_of_norm_of_fixed_point(double& norm_squared,
   return area;
 }
 
+
 /// Get square of L2 norm of velocity
 double square_of_l2_norm()
 {
@@ -1204,6 +1157,7 @@ double square_of_l2_norm()
 
   return sum;
 }
+
 
 private:
 /// Current, last and 2nd last best guess for strain rate tensor
