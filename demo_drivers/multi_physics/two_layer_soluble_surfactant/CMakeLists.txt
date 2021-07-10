@@ -24,12 +24,21 @@ oomph_add_executable(
             oomph::fluid_interface
   CXX_STANDARD 11)
 
+oomph_add_executable(
+  NAME refineable_unstructured_two_layer_ss
+  SOURCES double_buoyant_navier_stokes_elements.h
+          refineable_unstructured_two_layer_ss.cc
+  LIBRARIES oomph::advection_diffusion_reaction oomph::navier_stokes
+            oomph::fluid_interface oomph::solid oomph::constitutive
+  CXX_STANDARD 11)
+
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
   TEST_NAME multi_physics.two_layer_soluble_surfactant
-  TARGET_DEPENDENCIES refineable_two_layer_soluble_surfactant
-                      two_layer_soluble_surfactant
+  TARGET_DEPENDENCIES
+    refineable_two_layer_soluble_surfactant two_layer_soluble_surfactant
+    refineable_unstructured_two_layer_ss
   EXTRA_REQUIRES
   LABELS "multi_physics;two_layer_soluble_surfactant")
 

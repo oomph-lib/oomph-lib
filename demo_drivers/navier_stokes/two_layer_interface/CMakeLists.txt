@@ -19,11 +19,19 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes oomph::fluid_interface
   CXX_STANDARD 11)
 
+oomph_add_executable(
+  NAME refineable_two_layer_interface
+  SOURCES refineable_two_layer_interface.cc
+  LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
+            oomph::constitutive
+  CXX_STANDARD 11)
+
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
   TEST_NAME navier_stokes.two_layer_interface
   TARGET_DEPENDENCIES elastic_two_layer_interface spine_two_layer_interface
+                      refineable_two_layer_interface
   EXTRA_REQUIRES
   LABELS "navier_stokes;two_layer_interface")
 
