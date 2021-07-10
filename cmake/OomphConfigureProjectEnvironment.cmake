@@ -13,15 +13,28 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   )
 endif()
 
+# ------------------------------------------------------------------------------
 # Configuration variables; store as custom variables to avoid issues with
 # regular variables being overriden by third-party libraries or by parties that
 # import this library. The variable names used here follow a similar template to
 # that used by the nlohmann JSON library here:
 # https://github.com/nlohmann/json/blob/develop/CMakeLists.txt
+# ------------------------------------------------------------------------------
+
+# The project directory; passed to consumers of the exported library incase they
+# need to use anything from there, e.g. the demo_drivers nearly all need the
+# fpdiff.py script from the scripts/ subdirectory.
 set(OOMPH_ROOT_DIR "${PROJECT_SOURCE_DIR}")
+
+# Set the install paths
 set(OOMPH_CONFIG_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
     CACHE INTERNAL "")
-set(OOMPH_INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_FULL_INCLUDEDIR}")
+set(OOMPH_INSTALL_INCLUDE_DIR
+    "${CMAKE_INSTALL_FULL_INCLUDEDIR}/${PROJECT_NAME}")
+set(OOMPH_INSTALL_BIN_DIR "${CMAKE_INSTALL_FULL_BINDIR}/${PROJECT_NAME}")
+set(OOMPH_INSTALL_LIB_DIR "${CMAKE_INSTALL_FULL_LIBDIR}/${PROJECT_NAME}")
+
+# Define the export information
 set(OOMPH_TARGETS_EXPORT_NAME "${PROJECT_NAME}Exports")
 set(OOMPH_CMAKE_CONFIG_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 set(OOMPH_CMAKE_CONFIG_TEMPLATE
@@ -30,7 +43,7 @@ set(OOMPH_CMAKE_VERSION_CONFIG_FILE
     "${OOMPH_CMAKE_CONFIG_DIR}/${PROJECT_NAME}ConfigVersion.cmake")
 set(OOMPH_CMAKE_PROJECT_CONFIG_FILE
     "${OOMPH_CMAKE_CONFIG_DIR}/${PROJECT_NAME}Config.cmake")
-set(OOMPH_CMAKE_PROJECT_TARGETS_FILE
+set(OOMPH_CMAKE_PROJECT_EXPORTS_FILE
     "${OOMPH_CMAKE_CONFIG_DIR}/${PROJECT_NAME}Exports.cmake")
 
 # Silence warnings on MacOS about targets of ranlib having no symbols. This

@@ -132,6 +132,13 @@ function(oomph_library_config)
   #   enclosing folder
   # * CMAKE_CURRENT_BINARY_DIR/../: To get access to the combined headers (which
   #   are placed in the build directory so they don't pollute the source tree).
+  #
+  # At install-time, we just place the files under:
+  #
+  # ${CMAKE_INSTALL_PREFIX}/include/oomphlib.
+  #
+  # Note that the CMAKE_INSTALL_PREFIX is added automatically here, so we don't
+  # need to specify it ourselves.
   target_include_directories(
     ${LIBNAME}
     ${INCLUDE_TYPE}
@@ -168,35 +175,33 @@ function(oomph_library_config)
     HEADERS ${HEADERS} ${SOURCES_NO_BUILD}
     SUBDIRECTORY ${LIBNAME})
 
-  # Export locations: place everything in system-specific folders (e.g.
-  # /usr/local/bin, /usr/local/lib, /usr/local/include) by default. If the user
-  # specified a CMAKE_INSTALL_PREFIX then things will get installed relative to
-  # that location
-  include(GNUInstallDirs)
-  set(OOMPH_BINDIR "${CMAKE_INSTALL_FULL_BINDIR}/${PROJECT_NAME}")
-  set(OOMPH_LIBDIR "${CMAKE_INSTALL_FULL_LIBDIR}/${PROJECT_NAME}")
-  set(OOMPH_INCLUDEDIR "${OOMPH_INCLUDE_INSTALL_DIR}/${PROJECT_NAME}")
-
-  # Define the installation locations and export target
+  # Define the installation locations and export target. Although this only
+  # installs the library, it's important that the includes directory is added so
+  # that anything linking to the exported library, knows where the associated
+  # headers live.
   install(
     TARGETS ${LIBNAME}
     EXPORT ${TARGETS_EXPORT_NAME}
-    LIBRARY DESTINATION "${OOMPH_LIBDIR}"
+    LIBRARY DESTINATION "${OOMPH_INSTALL_LIB_DIR}"
             COMPONENT ${PROJECT_NAME}_Runtime
             NAMELINK_COMPONENT ${PROJECT_NAME}_Development
-    ARCHIVE DESTINATION "${OOMPH_LIBDIR}" COMPONENT ${PROJECT_NAME}_Development
-    RUNTIME DESTINATION "${OOMPH_BINDIR}" COMPONENT ${PROJECT_NAME}_Runtime
+    ARCHIVE DESTINATION "${OOMPH_INSTALL_LIB_DIR}"
+            COMPONENT ${PROJECT_NAME}_Development
+    RUNTIME DESTINATION "${OOMPH_INSTALL_BIN_DIR}"
+            COMPONENT ${PROJECT_NAME}_Runtime
     INCLUDES
-    DESTINATION "${OOMPH_INCLUDEDIR}")
+    DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
 
   # Install the combined header
   install(FILES "${CMAKE_CURRENT_BINARY_DIR}/../${LIBNAME}.h"
-          DESTINATION "${OOMPH_INCLUDEDIR}")
+          DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
 
-  # Create the directory to install headers to. Do it now so that there's a
-  # valid directory to create symlinks from (if used)
-  set(LIBRARY_INCLUDE_DIR "${OOMPH_INCLUDEDIR}/${LIBNAME}")
-  install(DIRECTORY DESTINATION ${LIBRARY_INCLUDE_DIR})
+  # The directory to install the library headers to
+  set(LIBRARY_INCLUDE_DIR "${OOMPH_INSTALL_INCLUDE_DIR}/${LIBNAME}")
+
+  # Create the headers install directory. Do it now so that there's a valid
+  # directory to create symlinks from (if used)
+  install(DIRECTORY DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}/${LIBNAME}")
 
   # Combine everything that shouldn't be built into a single variable
   set(ALL_HEADERS ${HEADERS} ${HEADERS_NO_COMBINE} ${SOURCES_NO_BUILD})

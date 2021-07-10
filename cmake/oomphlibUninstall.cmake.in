@@ -61,10 +61,10 @@ foreach(dir ${FOLDERS})
   delete_folder_if_empty(${dir})
 endforeach(dir)
 
-delete_folder_if_empty("@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_INCLUDEDIR@")
-delete_folder_if_empty("@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_BINDIR@")
-delete_folder_if_empty("@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@/cmake")
-delete_folder_if_empty("@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@")
+delete_folder_if_empty("@OOMPH_INSTALL_INCLUDE_DIR@")
+delete_folder_if_empty("@OOMPH_INSTALL_BIN_DIR@")
+delete_folder_if_empty("@OOMPH_INSTALL_LIB_DIR@/cmake")
+delete_folder_if_empty("@OOMPH_INSTALL_LIB_DIR@")
 
 message(STATUS "Uninstall complete.")
 # ------------------------------------------------------------------------------

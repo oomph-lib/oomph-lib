@@ -47,7 +47,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-# ---------------------------[ Initial project setup ]--------------------------
+# ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
 if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
@@ -60,7 +60,7 @@ include(OomphConfigureProjectEnvironment)
 set(CMAKE_MESSAGE_LOG_LEVEL VERBOSE)
 include(OomphSilenceWarnings)
 
-# ----------------------[ Find required/desired packages ]----------------------
+# ----------------------[ FIND REQUIRED/DESIRED PACKAGES ]----------------------
 
 # Built-in modules to find out whether certain packages are installed
 find_package(BLAS)
@@ -69,7 +69,7 @@ find_package(Git)
 find_package(LAPACK)
 find_package(Python3 REQUIRED)
 
-# ------------------------------[ Build options ]-------------------------------
+# ------------------------------[ BUILD OPTIONS ]-------------------------------
 # Enable the clang-tidy static code analyser. NOTE: You should NOT run the
 # Makefile/Ninja build in parallel as it may lead to data races. This
 # functionality should probably be reserved for a CI server to run
@@ -94,7 +94,7 @@ option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
-option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
+option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" ON)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
 # Optionally build third-party libraries
@@ -124,7 +124,7 @@ option(SUPPRESS_TETGEN_LIB
 option(OOMPH_USE_DEPRECATED_SUPERLU
        "Use oomph-lib's deprecated version of SuperLU" OFF)
 
-# -------------------------[ Process selected options ]-------------------------
+# -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
 
 # Run clang-tidy during the build if the user requires
 if(OOMPH_ENABLE_CLANG_TIDY)
@@ -186,7 +186,7 @@ if(OOMPH_ENABLE_CUDA)
   find_package(CUDA REQUIRED)
 endif()
 
-# --------------------------[ Find required headers ]---------------------------
+# --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
 include(OomphCheckForRequiredHeaders)
 
@@ -195,14 +195,14 @@ include(OomphCheckForRequiredHeaders)
 # https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/RPATH-handling#:~:text=Since%20version%202.8.,overridden%20for%20the%20install%20tree.
 set(CMAKE_MACOSX_RPATH TRUE)
 
-# --------------------------[ Add oomph-lib-config.h ]--------------------------
+# -------------------------[ ADD CONFIG. HEADER FLAG ]--------------------------
 
 set(OOMPH_ADD_CONFIG_H TRUE)
 if(OOMPH_ADD_CONFIG_H)
   add_compile_definitions(HAVE_CONFIG_H)
 endif()
 
-# -------------------------[ Build & install library ]--------------------------
+# -------------------------[ BUILD & INSTALL LIBRARY ]--------------------------
 
 message(VERBOSE "<====== Starting oomph-lib library build ======>")
 
@@ -216,10 +216,12 @@ add_subdirectory(src)
 
 message(VERBOSE "<====== Finished oomph-lib library build ======>")
 
+# --------------------------------[ EXPORTING ]---------------------------------
+
 # Now export the package so it can be found using find_package(...)
 include(OomphExportPackage)
 
-# ---------------------------------[ Testing ]----------------------------------
+# ---------------------------------[ TESTING ]----------------------------------
 
 # The last part to the build is compiling tests. The demo_drivers are currently
 # working when run *outside* the library build. The integration of their build
@@ -236,7 +238,7 @@ if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) AND OOMPH_ENABLE_TESTING)
   add_subdirectory(tests)
 endif()
 
-# -----------------------[ Configure oomph-lib-config.h ]-----------------------
+# -----------------------[ CONFIGURE oomph-lib-config.h ]-----------------------
 
 # Construct a oomph-lib-specific config file. Currently
 if(OOMPH_ADD_CONFIG_H)
@@ -245,14 +247,14 @@ if(OOMPH_ADD_CONFIG_H)
   configure_file(${CMAKE_SOURCE_DIR}/cmake/oomph-lib-config.h.in
                  ${CMAKE_BINARY_DIR}/src/oomph-lib-config.h @ONLY)
   install(FILES ${CMAKE_BINARY_DIR}/src/oomph-lib-config.h
-          DESTINATION "${OOMPH_INCLUDE_INSTALL_DIR}/${PROJECT_NAME}")
+          DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
 endif()
 
-# -------------------[ Debug shit: delete after overhaul ]----------------------
+# -------------------[ DEBUG SHIT: DELETE AFTER OVERHAUL ]----------------------
 
 include(OomphPrintCompilerDefinitions)
 
-# --------------------------------[ Packaging ]---------------------------------
+# --------------------------------[ PACKAGING ]---------------------------------
 
 # Work in progress...
 

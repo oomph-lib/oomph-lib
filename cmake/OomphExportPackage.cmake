@@ -32,7 +32,7 @@ write_basic_package_version_file(
 export(
   EXPORT ${OOMPH_TARGETS_EXPORT_NAME}
   NAMESPACE ${PROJECT_NAMESPACE}::
-  FILE ${OOMPH_CMAKE_PROJECT_TARGETS_FILE})
+  FILE ${OOMPH_CMAKE_PROJECT_EXPORTS_FILE})
 
 # Install config files
 install(FILES ${OOMPH_CMAKE_PROJECT_CONFIG_FILE}
@@ -57,7 +57,7 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
 # The list of modules to export
 set(CMAKE_MODULES_TO_INSTALL OomphAddExecutable.cmake OomphAddTest.cmake)
 
-# Iterate over the modules and place in the appropriate build/install directory
+# Place each module in the appropriate build/install directory
 foreach(MODULE IN LISTS CMAKE_MODULES_TO_INSTALL)
   # Copy to binary (i.e. build) directory
   file(COPY "${CMAKE_CURRENT_LIST_DIR}/${MODULE}"
