@@ -1,27 +1,27 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
 //The actual solve functions for Iterative solvers.
 
@@ -2231,6 +2231,17 @@ namespace oomph
                  << Jacobian_setup_time << std::endl;
     }
 
+    // If we want to compute the gradient for the globally convergent
+    // Newton method, then do it here
+    if (Compute_gradient)
+     {
+      // Compute it
+      Matrix_pt->multiply_transpose(f,
+                                    Gradient_for_glob_conv_newton_solve);
+      // Set the flag
+      Gradient_has_been_computed=true;
+     }
+    
     // Call linear algebra-style solver
     //If the result distribution is wrong, then redistribute
     //before the solve and return to original distribution
@@ -2256,14 +2267,15 @@ namespace oomph
   };
 
 
-  //=============================================================================
+  //==========================================================================
   /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector
   /// and returns the solution of the linear system.
   /// based on the algorithm presented in Templates for the
-  /// Solution of Linear Systems: Building Blocks for Iterative Methods, Barrett,
+  /// Solution of Linear Systems: Building Blocks for Iterative
+  /// Methods, Barrett,
   /// Berry et al, SIAM, 2006 and the implementation in the IML++ library :
   /// http://math.nist.gov/iml++/
-  //=============================================================================
+  //==========================================================================
   template <typename MATRIX>
   void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
                                    const DoubleVector &rhs,
@@ -2321,15 +2333,15 @@ namespace oomph
     // of the rhs
     if (solution.built())
     {
-      if (!(*rhs.distribution_pt() == *solution.distribution_pt()))
+     if (!(*rhs.distribution_pt() == *solution.distribution_pt()))
       {
-        std::ostringstream error_message_stream;
-        error_message_stream
-            << "If the result distribution is setup then it must be the same as the "
-            << "rhs distribution";
-        throw OomphLibError(error_message_stream.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
+       std::ostringstream error_message_stream;
+       error_message_stream
+        << "If the result distribution is setup then it must be the same as the "
+        << "rhs distribution";
+       throw OomphLibError(error_message_stream.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
       }
     }
 #endif
