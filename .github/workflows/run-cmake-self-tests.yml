@@ -8,12 +8,14 @@ on:
 env:
   CMAKE_BUILD_TYPE: Debug
   CTEST_OUTPUT_ON_FAILURE: 1
+  INSTALL_LOCATION: .local
 
 jobs:
   build:
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-18.04, ubuntu-latest, macos-latest]
         OOMPH_ENABLE_MPI: [0]
         include:
           - os: ubuntu-18.04
@@ -38,13 +40,16 @@ jobs:
       - name: Install dependencies
         run: ${{ matrix.install-deps }}
 
-      - name: Install CMake and OpenMPI (Linux)
+      - name: Install CMake (Linux)
         if: runner.os == 'Linux'
         run: |
           # Install CMake 3.16
           curl -sSL https://github.com/Kitware/CMake/releases/download/v3.16.0/cmake-3.16.0-Linux-x86_64.tar.gz -o cmake.tar.gz
           sudo tar xf cmake.tar.gz --strip 1 -C /usr/local
 
+      - name: Install OpenMPI (Linux) [WIP]
+        if: ( runner.os == 'Linux' ) && ( matrix.OOMPH_ENABLE_MPI == 1 )
+        run: |
           # Install OpenMPI 4.0.3
           wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.3.tar.gz
           tar -xvf openmpi-4.0.3.tar.gz
@@ -62,20 +67,19 @@ jobs:
 
       - name: Configure (${{ env.CMAKE_BUILD_TYPE }})
         run: |
-          mkdir build
-          cd build
           cmake -DCMAKE_BUILD_TYPE=${{ env.CMAKE_BUILD_TYPE }} \
-          -DOOMPH_ENABLE_MPI=${{ matrix.OOMPH_ENABLE_MPI }} ..
+          -DOOMPH_ENABLE_MPI=${{ matrix.OOMPH_ENABLE_MPI }} \
+          -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION \
+          -B build
 
       - name: Build & install
         working-directory: build
         run: |
-          make --jobs 10
+          make --jobs 16
           make install
 
       # - name: Run self-tests
       #   run: |
       #     cd demo_drivers
-      #     mkdir build && cd build
-      #     cmake -G Ninja ..
-      #     ctest -C ${{ env.CMAKE_BUILD_TYPE }}
+      #     cmake -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/$INSTALL_LOCATION -B build
+      #     ctest -C ${{ env.CMAKE_BUILD_TYPE }} -VV --output-on-failure -j 8
