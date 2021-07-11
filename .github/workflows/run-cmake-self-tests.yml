@@ -14,6 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        OOMPH_ENABLE_MPI: [0]
         include:
           - os: ubuntu-18.04
             compiler: gcc
@@ -23,7 +24,7 @@ jobs:
           - os: ubuntu-latest
             compiler: gcc
             install-deps: |
-              sudo apt-get install -y gfortran openmpi-bin
+              sudo apt-get install -y gfortran openmpi-bin libopenmpi-dev
 
           - os: macos-latest
             compiler: clang
@@ -63,7 +64,8 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ env.CMAKE_BUILD_TYPE }} ..
+          cmake -DCMAKE_BUILD_TYPE=${{ env.CMAKE_BUILD_TYPE }} \
+          -DOOMPH_ENABLE_MPI=${{ matrix.OOMPH_ENABLE_MPI }} ..
 
       - name: Build & install
         working-directory: build
