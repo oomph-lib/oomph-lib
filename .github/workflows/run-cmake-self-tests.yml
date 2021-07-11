@@ -37,12 +37,21 @@ jobs:
       - name: Install dependencies
         run: ${{ matrix.install-deps }}
 
-      - name: Install CMake (Linux)
+      - name: Install CMake and OpenMPI (Linux)
         if: runner.os == 'Linux'
         run: |
-          ${{ matrix.install-deps }}
+          # Install CMake 3.16
           curl -sSL https://github.com/Kitware/CMake/releases/download/v3.16.0/cmake-3.16.0-Linux-x86_64.tar.gz -o cmake.tar.gz
           sudo tar xf cmake.tar.gz --strip 1 -C /usr/local
+
+          # Install OpenMPI 4.0.3
+          wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.3.tar.gz
+          tar -xvf openmpi-4.0.3.tar.gz
+          cd openmpi-4.0.3
+          ./configure --prefix=/usr/local
+          make all
+          sudo make install
+          sudo ldconfig
 
       - name: Output CMake version
         run: cmake --version
