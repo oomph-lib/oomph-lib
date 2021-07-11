@@ -1,5 +1,7 @@
 [![oomph-lib](https://github.com/PuneetMatharu/oomph-lib-cmake/blob/dev/doc/figures/oomph_logo.png)](https://github.com/PuneetMatharu/oomph-lib-cmake/releases)
 
+[![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)
+
 - [Description](#description)
 - [Compatibility](#compatibility)
 - [Documentation to-do list](#documentation-to-do-list)
