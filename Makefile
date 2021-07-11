@@ -10,6 +10,7 @@ setup:
 	fi
 
 check:
+	touch validation.log && rm -f validation.log
 	cd demo_drivers
 	mkdir build
 	cd build
