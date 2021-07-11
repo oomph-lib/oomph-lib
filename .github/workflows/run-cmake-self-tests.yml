@@ -78,8 +78,8 @@ jobs:
           make --jobs 16
           make install
 
-      # - name: Run self-tests
-      #   run: |
-      #     cd demo_drivers
-      #     cmake -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/$INSTALL_LOCATION -B build
-      #     ctest -C ${{ env.CMAKE_BUILD_TYPE }} -VV --output-on-failure -j 8
+      - name: Run self-tests
+        run: |
+          cd demo_drivers
+          cmake -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/$INSTALL_LOCATION -B build
+          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -VV --output-on-failure -j 8
