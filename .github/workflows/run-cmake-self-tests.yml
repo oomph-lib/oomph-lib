@@ -82,4 +82,5 @@ jobs:
         run: |
           cd demo_drivers
           cmake -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/$INSTALL_LOCATION -B build
+          cd build
           ctest -C ${{ env.CMAKE_BUILD_TYPE }} -VV --output-on-failure -j 8
