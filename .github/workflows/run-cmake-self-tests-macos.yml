@@ -1,4 +1,4 @@
-name: CMake build & self-test
+name: MacOS
 
 on:
   push:
@@ -15,19 +15,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-18.04, ubuntu-latest, macos-latest]
+        os: [macos-latest]
         OOMPH_ENABLE_MPI: [0]
         include:
-          - os: ubuntu-18.04
-            compiler: gcc
-            install-deps: |
-              sudo apt-get install -y gfortran openmpi-bin
-
-          - os: ubuntu-latest
-            compiler: gcc
-            install-deps: |
-              sudo apt-get install -y gfortran openmpi-bin libopenmpi-dev
-
           - os: macos-latest
             compiler: clang
             install-deps: |
@@ -39,25 +29,6 @@ jobs:
     steps:
       - name: Install dependencies
         run: ${{ matrix.install-deps }}
-
-      - name: Install CMake (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          # Install CMake 3.16
-          curl -sSL https://github.com/Kitware/CMake/releases/download/v3.16.0/cmake-3.16.0-Linux-x86_64.tar.gz -o cmake.tar.gz
-          sudo tar xf cmake.tar.gz --strip 1 -C /usr/local
-
-      - name: Install OpenMPI (Linux) [WIP]
-        if: ( runner.os == 'Linux' ) && ( matrix.OOMPH_ENABLE_MPI == 1 )
-        run: |
-          # Install OpenMPI 4.0.3
-          wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.3.tar.gz
-          tar -xvf openmpi-4.0.3.tar.gz
-          cd openmpi-4.0.3
-          ./configure --prefix=/usr/local
-          make all
-          sudo make install
-          sudo ldconfig
 
       - name: Output CMake version
         run: cmake --version
