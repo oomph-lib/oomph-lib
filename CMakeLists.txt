@@ -202,7 +202,7 @@ if(OOMPH_ADD_CONFIG_H)
   add_compile_definitions(HAVE_CONFIG_H)
 endif()
 
-# -------------------------[ BUILD & INSTALL LIBRARY ]--------------------------
+# ------------------------------[ BUILD LIBRARY ]-------------------------------
 
 message(VERBOSE "<====== Starting oomph-lib library build ======>")
 
@@ -223,17 +223,20 @@ include(OomphExportPackage)
 
 # ---------------------------------[ TESTING ]----------------------------------
 
-# The last part to the build is compiling tests. The demo_drivers are currently
-# working when run *outside* the library build. The integration of their build
-# with the build of the library itself has not yet been tested. I think they
-# should be fine, but there might be an issue with find_package(oomphlib). Note
-# that private/ and user_src/ and user_drivers/ are not built with the library.
+# The last part to the build is compiling tests. The demo_drivers currently work
+# when run *outside* the library build. I haven't tried integrating their build
+# into the build of the library itself yet. I imagine it should be okay for the
+# most part. There might be an issue with calling find_package(oomphlib) from
+# the demo_drivers CMakeLists.txt files though. Also, note that private/ and
+# user_src/ and user_drivers/ are not built with the library.
 
-# Enable testing for the current directory and all child directories
+# Enable testing for the current directory and all child directories but only
+# when this is the root project, i.e. it isn't being built as part of some
+# larger project hierarchy.
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) AND OOMPH_ENABLE_TESTING)
   add_subdirectory(demo_drivers)
   add_subdirectory(self_tests)
-  find_package(Doctest)
+  include(OomphGetDoctest)
   enable_testing()
   add_subdirectory(tests)
 endif()

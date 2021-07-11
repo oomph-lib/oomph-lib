@@ -14,10 +14,10 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 # ------------------------------------------------------------------------------
-# Configuration variables; store as custom variables to avoid issues with
-# regular variables being overriden by third-party libraries or by parties that
-# import this library. The variable names used here follow a similar template to
-# that used by the nlohmann JSON library here:
+# Configuration variables; create custom variables to avoid issues with regular
+# variables being overriden by third-party libraries or by parties that import
+# this library. The variable names used here follow a similar template to that
+# used by the nlohmann JSON library:
 # https://github.com/nlohmann/json/blob/develop/CMakeLists.txt
 # ------------------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ set(OOMPH_CMAKE_PROJECT_EXPORTS_FILE
 # Silence warnings on MacOS about targets of ranlib having no symbols. This
 # occurs when there is no code to be compiled, e.g. when #ifdef directives
 # exclude all of the code from all of the files required by a library. This
-# could possibly moved to it's own simple module.
+# could possibly moved to it's own simple module. Found online somewhere...
 if(APPLE)
   set(CMAKE_C_ARCHIVE_CREATE "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
   set(CMAKE_CXX_ARCHIVE_CREATE "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
