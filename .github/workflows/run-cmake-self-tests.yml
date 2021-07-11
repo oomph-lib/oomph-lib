@@ -57,6 +57,7 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=${{ env.CMAKE_BUILD_TYPE }} ..
 
       - name: Build & install
+        working-directory: build
         run: |
           make --jobs 10
           make install

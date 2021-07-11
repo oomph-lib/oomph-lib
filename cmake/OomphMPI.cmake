@@ -14,7 +14,7 @@
 # ------------------------------------------------------------------------------
 function(oomph_check_mpi)
   # Requires CMake 3.19: include(CheckSourceCompiles)
-  include(CheckSourceRuns)
+  include(CheckCSourceRuns)
 
   # TODO: I have a feeling I should be using the MPI_C library instead. Find out
   # then come back and change the code below accordingly. See TOOD-LIST.md.
@@ -23,7 +23,7 @@ function(oomph_check_mpi)
   set(CMAKE_REQUIRED_FLAGS)
   set(CMAKE_REQUIRED_LIBRARIES MPI::MPI_CXX)
 
-  check_source_runs(
+  check_c_source_runs(
     CXX
     "#include <iostream>
     #include <mpi.h>
