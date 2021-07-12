@@ -14,7 +14,7 @@ jobs:
             install-script: |
               brew install make automake libtool autoconf doxygen
               brew reinstall gfortran
-            extra-config: --enable-suppress-CGAL-build\n
+            extra-config: --enable-suppress-CGAL-build
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -22,7 +22,7 @@ jobs:
     - name: Install requirements
       run: ${{ matrix.install-script }}
     - name: Extra config
-      run: printf '${{ matrix.extra-config }}' >> config/configure_options/default
+      run: printf '%s\n' '${{ matrix.extra-config }}' >> config/configure_options/default
     - name: Build
       run: ./non_interactive_autogen.sh -s
     - name: Validate
