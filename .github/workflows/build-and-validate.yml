@@ -22,7 +22,7 @@ jobs:
     - name: Install requirements
       run: ${{ matrix.install-script }}
     - name: Extra config
-      run: printf '${{ extra-config }}' >> config/configure_options/default
+      run: printf '${{ matrix.extra-config }}' >> config/configure_options/default
     - name: Build
       run: ./non_interactive_autogen.sh -s
     - name: Validate
