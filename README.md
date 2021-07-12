@@ -1,8 +1,8 @@
 [![oomph-lib](https://github.com/PuneetMatharu/oomph-lib-cmake/blob/dev/doc/figures/oomph_logo.png)](https://github.com/PuneetMatharu/oomph-lib-cmake/releases)
 
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)
-![Ubuntu tests status](https://github.com/PuneetMatharu/oomph-lib/actions/workflows/test-ubuntu.yml/badge.svg)
-![MacOS tests status](https://github.com/PuneetMatharu/oomph-lib/actions/workflows/test-macos.yml/badge.svg)
+![Ubuntu tests status](https://github.com/PuneetMatharu/oomph-lib/actions/workflows/test-ubuntu.yaml/badge.svg)
+![MacOS tests status](https://github.com/PuneetMatharu/oomph-lib/actions/workflows/test-macos.yaml/badge.svg)
 
 - [Description](#description)
 - [Compatibility](#compatibility)

@@ -1033,7 +1033,7 @@ fi
 mv RESLT RESLT_DirectSolverTest
 
 # Append log to main validation log
-cat validation.log >$OOMPH_ROOT_DIR/validation.log
+cat validation.log >>$OOMPH_ROOT_DIR/validation.log
 
 cd ..
 

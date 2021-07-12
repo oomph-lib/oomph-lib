@@ -77,10 +77,16 @@ jobs:
           cd demo_drivers
           cmake -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/$INSTALL_LOCATION -B build
           cd build
-          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j 8 --timeout 10000
+          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j 4 --timeout 10000
         continue-on-error: true
 
-      - name: Get failed test info.
+      - name: Upload validation log file on failure
         if: steps.self_tests.outcome == 'failure'
-        run: |
-          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j 8 --timeout 10000 --rerun-failed --output-on-failure
+        uses: actions/upload-artifact@v2
+        with:
+          name: Validation log file
+          path: ./validation.log
+
+      - name: Propagate status
+        if: steps.self_tests.outcome == 'failure'
+        run: exit 8
