@@ -29,6 +29,6 @@ oomph_add_test(
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(biharmonic.unstructured_2d_biharmonic PROPERTIES TIMEOUT
-                                                                      5000)
+                                                                      10000)
 
 # ------------------------------------------------------------------------------

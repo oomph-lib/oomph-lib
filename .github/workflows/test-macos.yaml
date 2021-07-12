@@ -50,8 +50,15 @@ jobs:
           make install
 
       - name: Run self-tests
+        id: self_tests
         run: |
           cd demo_drivers
           cmake -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/$INSTALL_LOCATION -B build
           cd build
-          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -VV --output-on-failure -j 8
+          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j 8 --timeout 10000
+        continue-on-error: true
+
+      - name: Get failed test info.
+        if: steps.self_tests.outcome == 'failure'
+        run: |
+          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j 8 --timeout 10000 --rerun-failed --output-on-failure

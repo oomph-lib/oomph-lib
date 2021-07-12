@@ -30,6 +30,6 @@ oomph_add_test(
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(linearised_axisym_navier_stokes.counter_rotating_disks
-                     PROPERTIES TIMEOUT 5000)
+                     PROPERTIES TIMEOUT 10000)
 
 # ------------------------------------------------------------------------------

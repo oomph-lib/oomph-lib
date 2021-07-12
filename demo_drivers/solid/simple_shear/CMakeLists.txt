@@ -33,6 +33,6 @@ oomph_add_test(
   LABELS "solid;simple_shear")
 
 # This test needs more than the default allotted time to complete
-set_tests_properties(solid.simple_shear PROPERTIES TIMEOUT 5000)
+set_tests_properties(solid.simple_shear PROPERTIES TIMEOUT 10000)
 
 # ------------------------------------------------------------------------------

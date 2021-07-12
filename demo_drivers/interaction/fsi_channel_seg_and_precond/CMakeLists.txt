@@ -37,6 +37,6 @@ oomph_add_test(
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(interaction.fsi_channel_seg_and_precond PROPERTIES TIMEOUT
-                                                                        5000)
+                                                                        10000)
 
 # ------------------------------------------------------------------------------

@@ -24,6 +24,6 @@ oomph_add_test(
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(generalised_newtonian_navier_stokes.vibrating_shell
-                     PROPERTIES TIMEOUT 5000)
+                     PROPERTIES TIMEOUT 10000)
 
 # ------------------------------------------------------------------------------
