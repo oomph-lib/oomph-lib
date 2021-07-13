@@ -56,9 +56,9 @@ endif()
 # Sort out config files
 include(OomphConfigureProjectEnvironment)
 
-# TODO: Change first and delete second once finished overhauling
+# Select level of verbosity (e.g. STATUS, VERBOSE, etc.). Only valid from CMake
+# 3.17 onwards. For earlier CMake versions, setting this variable has no effect
 set(CMAKE_MESSAGE_LOG_LEVEL VERBOSE)
-include(OomphSilenceWarnings)
 
 # ----------------------[ FIND REQUIRED/DESIRED PACKAGES ]----------------------
 
@@ -70,9 +70,14 @@ find_package(LAPACK)
 find_package(Python3 REQUIRED)
 
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
-# Enable the clang-tidy static code analyser. NOTE: You should NOT run the
-# Makefile/Ninja build in parallel as it may lead to data races. This
-# functionality should probably be reserved for a CI server to run
+# We silence a few harmless warnings in external_src/ and in src/. If you want,
+# you can choose to have them displayed during the build
+option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display all warnings" OFF)
+
+# Enable the Clang static code analyser/formatter. NOTE: If you enable
+# clang-tidy, you should NOT run the Makefile/Ninja build in parallel as it may
+# lead to data races. This functionality should probably be reserved for a CI
+# server to run. [WORK IN PROGRESS.]
 option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy C++ static code analysis" OFF)
 option(OOMPH_ENABLE_CLANG_FORMAT "Enable Clang-based C++ code formatting" OFF)
 
@@ -94,10 +99,10 @@ option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
-option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" ON)
+option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
-# Optionally build third-party libraries
+# Optionally build third-party libraries. [WORK IN PROGRESS.]
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
@@ -180,8 +185,9 @@ if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
 endif()
 
-# Set up CUDA functionality (nothing in the library uses CUDA at the moment, so
-# I'm just doing the bare minimum to incorporate it for now)
+# Set up CUDA functionality. Nothing in the library uses CUDA yet. However, the
+# plan is to support SuperLU Dist 7.0.0 in the future, which is capable of
+# harnessing CUDA functionality for (hopefully damn fast) computations.
 if(OOMPH_ENABLE_CUDA)
   find_package(CUDA REQUIRED)
 endif()

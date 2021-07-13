@@ -158,6 +158,14 @@ function(oomph_library_config)
     target_link_libraries(${LIBNAME} ${LINK_TYPE} ${LINKLIBS})
   endif()
 
+  # Silence the annoying warnings produced by this library if it is going to be
+  # compiled, i.e. it is not an INTERFACE library
+  if(NOT (LINK_TYPE STREQUAL INTERFACE))
+    include(OomphTargetSilenceWarnings)
+    oomph_target_silence_warnings(TARGET ${LIBNAME}
+                                  CXX_COMPILE_FLAGS -Wno-undefined-var-template)
+  endif()
+
   # ----------------------------------------------------------------------------
   # The install rules: we want to do the following
   #

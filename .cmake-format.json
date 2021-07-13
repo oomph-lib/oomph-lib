@@ -7,6 +7,15 @@
     "additional_commands": {
       "set": {
       },
+      "oomph_target_silence_warnings": {
+        "flags": [],
+        "kwargs": {
+          "TARGET": "*",
+          "C_COMPILE_FLAGS": "*",
+          "CXX_COMPILE_FLAGS": "*",
+          "FORTRAN_COMPILE_FLAGS": "*"
+        }
+      },
       "oomph_create_combined_header": {
         "flags": [],
         "kwargs": {
@@ -183,11 +192,11 @@
     "_help_command_case": [
       "Format command names consistently as 'lower' or 'upper' case"
     ],
-    "command_case": "canonical",
+    "command_case": "lower",
     "_help_keyword_case": [
       "Format keywords consistently as 'lower' or 'upper' case"
     ],
-    "keyword_case": "unchanged",
+    "keyword_case": "upper",
     "_help_always_wrap": [
       "A list of command names which should always be wrapped"
     ],

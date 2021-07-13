@@ -101,6 +101,13 @@ oomph_library_config(
   HEADERS_NO_COMBINE ${HEADERS_NO_COMBINE}
   SOURCES ${SOURCES})
 
+# Silence the annoying warnings produced by this library
+include(OomphTargetSilenceWarnings)
+oomph_target_silence_warnings(
+  TARGET ${LIBNAME}
+  C_COMPILE_FLAGS -Wno-implicit-function-declaration -Wno-shift-op-parentheses
+                  -Wno-format-security)
+
 # Add the library to the list of external source libraries and make the updated
 # variable value visible to the parent scope
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})

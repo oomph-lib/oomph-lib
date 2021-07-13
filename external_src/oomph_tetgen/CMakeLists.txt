@@ -33,6 +33,11 @@ oomph_library_config(
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
 
+# Silence the annoying warnings produced by this library
+include(OomphTargetSilenceWarnings)
+oomph_target_silence_warnings(TARGET ${LIBNAME}
+                              CXX_COMPILE_FLAGS -Wno-int-to-pointer-cast)
+
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS OOMPH_HAS_TETGEN_LIB)
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})

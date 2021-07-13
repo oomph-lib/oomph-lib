@@ -272,6 +272,14 @@ oomph_library_config(
 target_include_directories(
   ${LIBNAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/external_src>)
 
+# Silence the annoying warnings produced by this library
+include(OomphTargetSilenceWarnings)
+oomph_target_silence_warnings(
+  TARGET ${LIBNAME}
+  CXX_COMPILE_FLAGS
+    -Wno-potentially-evaluated-expression
+    -Wno-instantiation-after-specialization -Wno-tautological-compare)
+
 # if(OOMPH_HAS_TRILINOS) # Note: the quotes are important here otherwise the
 # path to Trilinos include # directories will be interpreted as relative paths
 # rather than absolute! target_include_directories( ${LIBNAME} PUBLIC

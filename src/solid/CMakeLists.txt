@@ -24,5 +24,10 @@ oomph_library_config(
   SOURCES ${SOURCES}
   LINKLIBS ${LINKLIBS})
 
+# Silence the annoying (typeid) warning produced by this library
+include(OomphTargetSilenceWarnings)
+oomph_target_silence_warnings(
+  TARGET ${LIBNAME} CXX_COMPILE_FLAGS -Wno-potentially-evaluated-expression)
+
 message(VERBOSE "Leaving solid subdirectory")
 # ------------------------------------------------------------------------------

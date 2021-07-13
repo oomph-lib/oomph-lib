@@ -98,6 +98,14 @@ oomph_library_config(
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
 
+# Silence the annoying warnings produced by this library
+include(OomphTargetSilenceWarnings)
+oomph_target_silence_warnings(
+  TARGET ${LIBNAME}
+  C_COMPILE_FLAGS
+    -Wno-format -Wno-dangling-else -Wno-implicit-function-declaration
+    -Wno-enum-conversion -Wno-parentheses)
+
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS USING_OOMPH_SUPERLU_DIST)
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})
