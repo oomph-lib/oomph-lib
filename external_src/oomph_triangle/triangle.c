@@ -1,7 +1,11 @@
 
 // Oomph-lib manual addition to compile into library
 #define ANSI_DECLARATORS
+#ifdef __linux__
 #define LINUX
+#else
+#undef LINUX
+#endif
 #define TRILIBRARY
 
 /*****************************************************************************/

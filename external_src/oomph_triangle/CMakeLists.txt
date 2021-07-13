@@ -10,17 +10,6 @@ set(SOURCES triangle.c)
 # Define the headers
 set(HEADERS triangle.h)
 
-# If we can't find fpu_control.h, symlink the dummy version
-if(NOT OOMPH_HAS_FPUCONTROLH)
-  message(VERBOSE "Unable to find fpu_control.h")
-  message(VERBOSE "Symlinking the dummy version instead.")
-
-  # Now add the header to the list of headers required to build triangle.c
-  list(APPEND HEADERS dummy_fpu_control.h)
-  file(CREATE_LINK dummy_fpu_control.h
-       "${CMAKE_CURRENT_LIST_DIR}/fpu_control.h" SYMBOLIC)
-endif()
-
 # Define the name of the library
 set(LIBNAME oomph_triangle)
 
