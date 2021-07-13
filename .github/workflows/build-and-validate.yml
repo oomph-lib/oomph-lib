@@ -14,7 +14,9 @@ jobs:
             install-script: |
               brew install make automake libtool autoconf doxygen
               brew reinstall gfortran
-            extra-config: --enable-suppress-cgal-build
+            extra-config: |
+              --enable-suppress-cgal-build
+              --disable-shared
 
     runs-on: ${{ matrix.os }}
     steps:
