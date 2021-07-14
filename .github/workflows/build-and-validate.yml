@@ -34,5 +34,5 @@ jobs:
       if: ${{ always() }}
       uses: actions/upload-artifact@v2
       with:
-        name: Validation log file
+        name: ${{ matrix.os }} validation log
         path: ./validation.log
