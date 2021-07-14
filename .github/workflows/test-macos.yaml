@@ -58,11 +58,10 @@ jobs:
           ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j 4 --timeout 10000
         continue-on-error: true
 
-      - name: Upload validation log file on failure
-        if: steps.self_tests.outcome == 'failure'
+      - name: Upload validation log file
         uses: actions/upload-artifact@v2
         with:
-          name: Validation log file
+          name: validation-${{ matrix.os }}-${{ matrix.compiler }}-MPI_${{ matrix.OOMPH_ENABLE_MPI }}.log
           path: ./validation.log
 
       - name: Propagate status

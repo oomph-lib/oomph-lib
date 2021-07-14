@@ -8,7 +8,8 @@
 1. Empty.
 
 ## Not urgent but important
-1. Add code coverage.
+1. Add Ninja and MPI support to Workflows
+2. Add code coverage.
 3. Add Docker support; see https://github.com/FEniCS/dolfinx
 4. Remove warnings for external sources on a target basis; see e.g. OomphWarnings.cmake.
 5. Test the build of the demo_drivers with the main build (i.e. add_subdirectory(demo_drivers)).
