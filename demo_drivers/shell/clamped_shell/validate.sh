@@ -4,7 +4,7 @@
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
-NUM_TESTS=3
+NUM_TESTS=2
 
 # Setup validation directory
 #---------------------------
@@ -15,8 +15,6 @@ mkdir Validation
 
 cd Validation
 
-
-
 # Validation for buckling of clamped shell with arclength continuation
 #---------------------------------------------------------------------
 
@@ -24,33 +22,29 @@ mkdir RESLT
 cd RESLT
 
 echo "Running clamped_shell with arclength continuation validation "
-../../clamped_shell_with_arclength_cont > ../OUTPUT_clamped_shell_with_arclength_cont
+../../clamped_shell_with_arclength_cont >../OUTPUT_clamped_shell_with_arclength_cont
 
 echo "done"
 cd ..
-echo " " >> validation.log
+echo " " >>validation.log
 echo "Clamped shell buckling with arclength continuation validation" \
- >> validation.log
-echo "---------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT/final_shape.dat RESLT/trace.dat RESLT/trace_disp.dat > shell_with_arclength_cont_results.dat
+  >>validation.log
+echo "---------------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
+cat RESLT/final_shape.dat RESLT/trace.dat RESLT/trace_disp.dat >shell_with_arclength_cont_results.dat
 
 if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-../../../../bin/fpdiff.py ../validata/shell_with_arclength_cont_results.dat.gz \
- shell_with_arclength_cont_results.dat 0.1 1.0e-9 >> validation.log
+  ../../../../bin/fpdiff.py ../validata/shell_with_arclength_cont_results.dat.gz \
+    shell_with_arclength_cont_results.dat 0.1 1.0e-9 >>validation.log
 fi
 
-
 mv RESLT RESLT_with_arclength
-
-
-
 
 # Validation for buckling of clamped shell with displacement control
 #-------------------------------------------------------------------
@@ -59,69 +53,36 @@ mkdir RESLT
 cd RESLT
 
 echo "Running clamped_shell with displacement control validation "
-../../clamped_shell > ../OUTPUT_clamped_shell
+../../clamped_shell >../OUTPUT_clamped_shell
 
 echo "done"
 cd ..
-echo " " >> validation.log
-echo "Clamped shell buckling validation" \
- >> validation.log
-echo "---------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT/final_shape.dat RESLT/trace.dat > shell.dat
+echo " " >>validation.log
+echo "Clamped shell buckling validation" >>validation.log
+echo "---------------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
+cat RESLT/final_shape.dat RESLT/trace.dat >shell.dat
 
 if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-../../../../bin/fpdiff.py ../validata/shell.dat.gz \
- shell.dat  0.1 1.0e-9 >> validation.log
+  ../../../../bin/fpdiff.py ../validata/shell.dat.gz \
+    shell.dat 0.1 1.0e-9 >>validation.log
 fi
-
 
 mv RESLT RESLT_shell
 
-
-# Validation for unstructured mesh triangles for a clamped circular tube
-#---------------------------------------------------------------------
-
-mkdir RESLT_unstructured_curved_shell
-
-echo "Running unstructured_curved_shell validation "
-../unstructured_clamped_curved_shell ../Rectangle_CirTube.1.node ../Rectangle_CirTube.1.ele ../Rectangle_CirTube.1.poly > OUTPUT_unstructured_curved_shell
-
-echo "done"
-echo " " >> validation.log
-echo "Unstructured curved shell validation" \
- >> validation.log
-echo "---------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT_unstructured_curved_shell/soln1.dat RESLT_unstructured_curved_shell/soln2.dat > unstructured_curved_shell.dat
-
-if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
-else
-../../../../bin/fpdiff.py ../validata/unstructured_curved_shell.dat.gz \
- unstructured_curved_shell.dat >> validation.log
-fi
-
-
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >>../../../../validation.log
 
 cd ..
 
-
 #######################################################################
-
 
 #Check that we get the correct number of OKs
 # validate_ok_count will exit with status
