@@ -87,8 +87,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-check_PROGRAMS = plate$(EXEEXT) \
-	unstructured_clamped_square_plate$(EXEEXT)
+check_PROGRAMS = plate$(EXEEXT)
 subdir = demo_drivers/shell/plate
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/configure.ac_scripts/automake_init_command_file \
@@ -109,12 +108,6 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-am_unstructured_clamped_square_plate_OBJECTS =  \
-	unstructured_clamped_square_plate.$(OBJEXT)
-unstructured_clamped_square_plate_OBJECTS =  \
-	$(am_unstructured_clamped_square_plate_OBJECTS)
-unstructured_clamped_square_plate_DEPENDENCIES =  \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -130,8 +123,7 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/plate.Po \
-	./$(DEPDIR)/unstructured_clamped_square_plate.Po
+am__depfiles_remade = ./$(DEPDIR)/plate.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -150,10 +142,8 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(plate_SOURCES) \
-	$(unstructured_clamped_square_plate_SOURCES)
-DIST_SOURCES = $(plate_SOURCES) \
-	$(unstructured_clamped_square_plate_SOURCES)
+SOURCES = $(plate_SOURCES)
+DIST_SOURCES = $(plate_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -393,28 +383,16 @@ TESTS_ENVIRONMENT = MPI_RUN_COMMAND='@MPI_RUN_COMMAND@' MPI_VARIABLENP_RUN_COMMA
 @COMPARE_AGAINST_VALIDATA_TRUE@TESTS = $(top_builddir)/bin/wrapper_for_validate.sh 
 
 # Distribute validation script and validation data
-
-# -------------------------------------------------------------------
-EXTRA_DIST = validate.sh validata UnitPlate.1.poly UnitPlate.1.ele \
-	UnitPlate.1.node
+EXTRA_DIST = validate.sh validata
 
 #-------------------------------------------------------------------
 
 # Sources for executable
-plate_SOURCES = plate.cc 
+plate_SOURCES = plate.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 plate_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-
-#-------------------------------------------------------------------
-
-# Sources for executable
-unstructured_clamped_square_plate_SOURCES = unstructured_clamped_square_plate.cc
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-unstructured_clamped_square_plate_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 all: all-am
 
 .SUFFIXES:
@@ -463,10 +441,6 @@ plate$(EXEEXT): $(plate_OBJECTS) $(plate_DEPENDENCIES) $(EXTRA_plate_DEPENDENCIE
 	@rm -f plate$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(plate_OBJECTS) $(plate_LDADD) $(LIBS)
 
-unstructured_clamped_square_plate$(EXEEXT): $(unstructured_clamped_square_plate_OBJECTS) $(unstructured_clamped_square_plate_DEPENDENCIES) $(EXTRA_unstructured_clamped_square_plate_DEPENDENCIES) 
-	@rm -f unstructured_clamped_square_plate$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(unstructured_clamped_square_plate_OBJECTS) $(unstructured_clamped_square_plate_LDADD) $(LIBS)
-
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 
@@ -474,7 +448,6 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plate.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unstructured_clamped_square_plate.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -730,7 +703,6 @@ clean-am: clean-checkPROGRAMS clean-generic clean-libtool clean-local \
 
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/plate.Po
-	-rm -f ./$(DEPDIR)/unstructured_clamped_square_plate.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -777,7 +749,6 @@ installcheck-am:
 
 maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/plate.Po
-	-rm -f ./$(DEPDIR)/unstructured_clamped_square_plate.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -834,6 +805,8 @@ check-if-executables-exist:
 # Get command to run gmsh on command line
 spit_out_gmsh_command:
 	@echo $(GMSH_RUN_COMMAND)
+
+# -------------------------------------------------------------------
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

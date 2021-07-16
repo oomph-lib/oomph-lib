@@ -88,8 +88,7 @@ POST_UNINSTALL = :
 build_triplet = x86_64-pc-linux-gnu
 host_triplet = x86_64-pc-linux-gnu
 check_PROGRAMS = clamped_shell$(EXEEXT) \
-	clamped_shell_with_arclength_cont$(EXEEXT) \
-	unstructured_clamped_curved_shell$(EXEEXT)
+	clamped_shell_with_arclength_cont$(EXEEXT)
 subdir = demo_drivers/shell/clamped_shell
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/configure.ac_scripts/automake_init_command_file \
@@ -117,12 +116,6 @@ clamped_shell_with_arclength_cont_OBJECTS =  \
 	$(am_clamped_shell_with_arclength_cont_OBJECTS)
 clamped_shell_with_arclength_cont_DEPENDENCIES =  \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
-am_unstructured_clamped_curved_shell_OBJECTS =  \
-	unstructured_clamped_curved_shell.$(OBJEXT)
-unstructured_clamped_curved_shell_OBJECTS =  \
-	$(am_unstructured_clamped_curved_shell_OBJECTS)
-unstructured_clamped_curved_shell_DEPENDENCIES =  \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -139,8 +132,7 @@ DEFAULT_INCLUDES = -I. -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/clamped_shell.Po \
-	./$(DEPDIR)/clamped_shell_with_arclength_cont.Po \
-	./$(DEPDIR)/unstructured_clamped_curved_shell.Po
+	./$(DEPDIR)/clamped_shell_with_arclength_cont.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -160,11 +152,9 @@ am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
 SOURCES = $(clamped_shell_SOURCES) \
-	$(clamped_shell_with_arclength_cont_SOURCES) \
-	$(unstructured_clamped_curved_shell_SOURCES)
+	$(clamped_shell_with_arclength_cont_SOURCES)
 DIST_SOURCES = $(clamped_shell_SOURCES) \
-	$(clamped_shell_with_arclength_cont_SOURCES) \
-	$(unstructured_clamped_curved_shell_SOURCES)
+	$(clamped_shell_with_arclength_cont_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -404,15 +394,12 @@ TESTS_ENVIRONMENT = MPI_RUN_COMMAND='' MPI_VARIABLENP_RUN_COMMAND=''
 TESTS = $(top_builddir)/bin/wrapper_for_validate.sh 
 
 # Distribute validation script and validation data
-
-#-------------------------------------------------------------------
-EXTRA_DIST = validate.sh validata Rectangle_CirTube.1.ele \
-	Rectangle_CirTube.1.node Rectangle_CirTube.1.poly
+EXTRA_DIST = validate.sh validata
 
 #-------------------------------------------------------------------
 
 # Sources for executable
-clamped_shell_SOURCES = clamped_shell.cc 
+clamped_shell_SOURCES = clamped_shell.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -422,7 +409,7 @@ clamped_shell_LDADD = -L${exec_prefix}/lib -lshell -lgeneric $(EXTERNAL_LIBS) $(
 
 # Sources for executable
 clamped_shell_with_arclength_cont_SOURCES = \
- clamped_shell_with_arclength_cont.cc 
+ clamped_shell_with_arclength_cont.cc
 
 
 # Required libraries:
@@ -430,15 +417,6 @@ clamped_shell_with_arclength_cont_SOURCES = \
 clamped_shell_with_arclength_cont_LDADD = \
 -L${exec_prefix}/lib -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
-
-#-------------------------------------------------------------------
-
-# Sources for executable
-unstructured_clamped_curved_shell_SOURCES = unstructured_clamped_curved_shell.cc 
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-unstructured_clamped_curved_shell_LDADD = -L${exec_prefix}/lib -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 all: all-am
 
 .SUFFIXES:
@@ -491,10 +469,6 @@ clamped_shell_with_arclength_cont$(EXEEXT): $(clamped_shell_with_arclength_cont_
 	@rm -f clamped_shell_with_arclength_cont$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(clamped_shell_with_arclength_cont_OBJECTS) $(clamped_shell_with_arclength_cont_LDADD) $(LIBS)
 
-unstructured_clamped_curved_shell$(EXEEXT): $(unstructured_clamped_curved_shell_OBJECTS) $(unstructured_clamped_curved_shell_DEPENDENCIES) $(EXTRA_unstructured_clamped_curved_shell_DEPENDENCIES) 
-	@rm -f unstructured_clamped_curved_shell$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(unstructured_clamped_curved_shell_OBJECTS) $(unstructured_clamped_curved_shell_LDADD) $(LIBS)
-
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 
@@ -503,7 +477,6 @@ distclean-compile:
 
 include ./$(DEPDIR)/clamped_shell.Po # am--include-marker
 include ./$(DEPDIR)/clamped_shell_with_arclength_cont.Po # am--include-marker
-include ./$(DEPDIR)/unstructured_clamped_curved_shell.Po # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -760,7 +733,6 @@ clean-am: clean-checkPROGRAMS clean-generic clean-libtool clean-local \
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/clamped_shell.Po
 	-rm -f ./$(DEPDIR)/clamped_shell_with_arclength_cont.Po
-	-rm -f ./$(DEPDIR)/unstructured_clamped_curved_shell.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -808,7 +780,6 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/clamped_shell.Po
 	-rm -f ./$(DEPDIR)/clamped_shell_with_arclength_cont.Po
-	-rm -f ./$(DEPDIR)/unstructured_clamped_curved_shell.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -865,6 +836,8 @@ check-if-executables-exist:
 # Get command to run gmsh on command line
 spit_out_gmsh_command:
 	@echo $(GMSH_RUN_COMMAND)
+
+#-------------------------------------------------------------------
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

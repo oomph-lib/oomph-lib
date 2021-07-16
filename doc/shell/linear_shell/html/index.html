@@ -286,95 +286,16 @@ Implementation in oomph-lib</h1>
 <hr  />
 <h2><a class="anchor" id="global"></a>
 Global parameters and functions</h2>
-<p>The namespace <code><a class="el" href="namespacePhysical__Variables.html" title="Namespace for the solution of 2D linear shell equation.">Physical_Variables</a></code> is where the source function and the exact solution are defined. The source function can be specified via <code><a class="el" href="namespacePhysical__Variables.html#a36f0d0dc5f8aa4eafd7c4d6fe943c4e8" title="Source function applied in the normal vector.">Physical_Variables::source_function()</a></code> while the exact solutions are defined via <code><a class="el" href="namespacePhysical__Variables.html#af90d0c580c57b1152fd1cc7046055031">Physical_Variables::get_exact_u()</a></code>. Note that the six exact solutions correspond to the six degrees of freedom defined on each node. Furthermore, the applied source functions are required to be in the direction of the unit normal vector.</p>
- <div class="fragment"><div class="line"><span class="comment">//=======================start_of_namespace===========================</span></div>
-<div class="line"><span class="comment">/// Namespace for the solution of 2D linear shell equation</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
-<div class="line"><span class="keyword">namespace </span><a class="code" href="namespacePhysical__Variables.html">Physical_Variables</a></div>
-<div class="line">{<span class="comment"></span></div>
-<div class="line"><span class="comment"> /// Pressure load</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespacePhysical__Variables.html#a58adc76bae4751599143c613f9100904">P_ext</a>;</div>
-<div class="line"> </div>
-<div class="line"> <span class="keywordtype">double</span> <a class="code" href="namespacePhysical__Variables.html#ac374cc60da0f1e5df3fc48a3c9ce1d74">epsilon</a> = 1.0e-8;</div>
-<div class="line"> <span class="comment"></span></div>
-<div class="line"><span class="comment"> /// Exact solution as a vector</span></div>
-<div class="line"><span class="comment"> /// differentiate u with respect to global coordinates </span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespacePhysical__Variables.html#af90d0c580c57b1152fd1cc7046055031">get_exact_u</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>)</div>
-<div class="line"> {</div>
-<div class="line">  <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>[0] = 0.0;</div>
-<div class="line">  <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>[1] = 0.0;</div>
-<div class="line">  <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>[2] = 0.0;</div>
-<div class="line">  <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>[3] = 0.0;</div>
-<div class="line">  <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>[4] = 0.0;</div>
-<div class="line">  <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>[5] = 0.0;</div>
-<div class="line">  <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>[6] = 0.0;</div>
-<div class="line">  <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>[7] = 0.0;</div>
-<div class="line"> }</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Source function applied in the normal vector </span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespacePhysical__Variables.html#a36f0d0dc5f8aa4eafd7c4d6fe943c4e8">source_function</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keyword">const</span> Vector&lt;double&gt;&amp; unit_n, Vector&lt;double&gt;&amp; source)</div>
-<div class="line"> {</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>=0;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>&lt;3;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>++)</div>
-<div class="line">   {</div>
-<div class="line">    source[<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>] = <a class="code" href="namespacePhysical__Variables.html#ac374cc60da0f1e5df3fc48a3c9ce1d74">epsilon</a>*<a class="code" href="namespacePhysical__Variables.html#a58adc76bae4751599143c613f9100904">P_ext</a>*unit_n[<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>];</div>
-<div class="line">   }</div>
-<div class="line"> }</div>
-<div class="line">} <span class="comment">// end of namespace</span></div>
-</div><!-- fragment --><hr  />
+<p>The namespace <code>Physical_Variables</code> is where the source function and the exact solution are defined. The source function can be specified via <code>Physical_Variables::source_function()</code> while the exact solutions are defined via <code>Physical_Variables::get_exact_u()</code>. Note that the six exact solutions correspond to the six degrees of freedom defined on each node. Furthermore, the applied source functions are required to be in the direction of the unit normal vector.</p>
+ <div class="fragment"></div><!-- fragment --><hr  />
 <h2><a class="anchor" id="main"></a>
 The driver code</h2>
 <p>The driver code is very simple and short. It is where the problem is defined. In this study, the problem is constructed using the unstructured mesh with triangular elements in 2D. A number of nodes in an element has to be specific as a template parameter in the problem set up. This is crucial in order to take care of element nodes when the number of nodes on the element defined differently for each interpolation functions.</p>
 <p>Normally, in the problem that <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-shape functions are the only interpolation functions used to approximate the variable space, the number of <code>NNODE_1D</code> remains 2 as required by the <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-shape functions (see <a href="../../../c1_element/bell_element/html/index.html">the Bell triangular finite element</a> and <a href="../../../c1_element/curved_element/html/index.html">the <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-curved triangular finite element tutorials</a>). However, in a linear shell problem, different shape functions are used to interpolate displacements in different directions as different order of continuity is required in their governing equations.</p>
 <p>In this study, the displacements in tangential directions are chosen to approximate by the quadratic Lagrange interpolations which provide only <img class="formulaInl" alt="$ C^0 $" src="form_43.png"/> continuity and are defined to have 3 nodes per side on a triangle. On the other hand, the approximation of the normal displacement employs the <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-interpolation functions which are defined to have 2 nodes per side on a triangle.</p>
 <p>Therefore, the number of <code>NNODE_1D</code> has been modified in the <code>BellShellElement&lt;DIM,NNODE_1D&gt;</code> (and <code>C1CurvedShellElement</code> when dealing with the curvilinear boundary domain) to be 3 in this problem. Consequencely, the extra nodes that are not necessary for the <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-shape functions have to be taken care.</p>
-<p>Following the usual self-test, we call the function <code><a class="el" href="classMyLinearisedShellProblem.html#ab9255e3cbaae69ad5d61757d891b633e" title="Solver loop to perform parameter study.">MyLinearisedShellProblem::parameter_study()</a></code> to compute the solution of the problem within a range of external pressures.</p>
- <div class="fragment"><div class="line"><span class="comment">//======start_of_main==================================================</span></div>
-<div class="line"><span class="comment">/// Driver for 2D linearised shell problem: square flat plate</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="unstructured__clamped__square__plate_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
-<div class="line">{</div>
-<div class="line"> <span class="comment">// Store command line arguments</span></div>
-<div class="line"> CommandLineArgs::setup(argc,argv);</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Check number of command line arguments: Need exactly two.</span></div>
-<div class="line"> <span class="keywordflow">if</span> (argc!=4)</div>
-<div class="line">  {</div>
-<div class="line">   std::string error_message =</div>
-<div class="line">    <span class="stringliteral">&quot;Wrong number of command line arguments.\n&quot;</span>;</div>
-<div class="line">   error_message +=</div>
-<div class="line">    <span class="stringliteral">&quot;Must specify the following file names  \n&quot;</span>;</div>
-<div class="line">   error_message += </div>
-<div class="line">    <span class="stringliteral">&quot;filename.node then filename.ele then filename.poly\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">   <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
-<div class="line">                       <span class="stringliteral">&quot;main()&quot;</span>,</div>
-<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line">  }</div>
-<div class="line"> <span class="comment">// Convert arguments to strings that specify th input file names</span></div>
-<div class="line"> <span class="keywordtype">string</span> node_file_name(argv[1]);</div>
-<div class="line"> <span class="keywordtype">string</span> element_file_name(argv[2]);</div>
-<div class="line"> <span class="keywordtype">string</span> poly_file_name(argv[3]);</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Set up the problem: </span></div>
-<div class="line"> <a class="code" href="classMyLinearisedShellProblem.html">MyLinearisedShellProblem&lt;BellShellElement&lt;2,3&gt;</a>,2,3&gt; <span class="comment">//Element type as template parameter</span></div>
-<div class="line">  <a class="code" href="linear__shell_8txt.html#a560411ef94f070ecd32898bd4df006cf">problem</a>(<a class="code" href="namespacePhysical__Variables.html#a36f0d0dc5f8aa4eafd7c4d6fe943c4e8">Physical_Variables::source_function</a>,node_file_name,element_file_name,poly_file_name);</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Check whether the problem can be solved</span></div>
-<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\n\n\nProblem self-test &quot;</span>;</div>
-<div class="line"> <span class="keywordflow">if</span> (<a class="code" href="linear__shell_8txt.html#a560411ef94f070ecd32898bd4df006cf">problem</a>.self_test()==0)  </div>
-<div class="line">  {</div>
-<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;passed: Problem can be solved.&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">  }</div>
-<div class="line"> <span class="keywordflow">else</span> </div>
-<div class="line">  {</div>
-<div class="line">   <span class="keywordflow">throw</span> OomphLibError(<span class="stringliteral">&quot;failed!&quot;</span>,<span class="stringliteral">&quot;main()&quot;</span>,OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line">  }</div>
-<div class="line">  </div>
-<div class="line"> <span class="comment">// Solve the problem</span></div>
-<div class="line"> <a class="code" href="linear__shell_8txt.html#a560411ef94f070ecd32898bd4df006cf">problem</a>.parameter_study();</div>
-<div class="line">} <span class="comment">//end of main</span></div>
-</div><!-- fragment --><hr  />
+<p>Following the usual self-test, we call the function <code>MyLinearisedShellProblem::parameter_study()</code> to compute the solution of the problem within a range of external pressures.</p>
+ <div class="fragment"></div><!-- fragment --><hr  />
 <h2><a class="anchor" id="problem"></a>
 The problem class</h2>
 <p>The problem class has five member functions, illustrated as follows:</p>
@@ -387,189 +308,20 @@ The problem class</h2>
 </ul>
 <p>From the above mentioned functions, only the problem constructor is non-trivial. The reader is referred to <a href="../../../beam/tensioned_string/html/index.html">another tutorial</a> for a description on <code>parameter_study</code>.</p>
 <p>In the present problem, the function <code>Problem::actions_after_newton_solve()</code> is not required, so it remains empty. Also, the class includes two private data members which store pointers to a source function and to the geometric object that specifies the shell's undeformed shape.</p>
- <div class="fragment"><div class="line"><span class="comment">//==start_of_problem_class============================================</span></div>
-<div class="line"><span class="comment">/// 2D linearised shell problem.</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keywordtype">unsigned</span> DIM, <span class="keywordtype">unsigned</span> NNODE_1D&gt; </div>
-<div class="line"><span class="keyword">class </span><a class="code" href="classMyLinearisedShellProblem.html">MyLinearisedShellProblem</a> : <span class="keyword">public</span> Problem</div>
-<div class="line">{</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Constructor: Pass number of elements and pointer to source function</span></div>
-<div class="line"><span class="comment"></span> <a class="code" href="classMyLinearisedShellProblem.html#a2ccc4ed3e631ca68d1d86423ef8eeb03">MyLinearisedShellProblem</a>(<span class="keyword">typename</span> MyShellEquations&lt;DIM,NNODE_1D&gt;::SourceFctPt source_fct_pt,</div>
-<div class="line">                          <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; node_file_name,</div>
-<div class="line">                          <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; element_file_name,</div>
-<div class="line">                          <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; poly_file_name);</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
-<div class="line"><span class="comment"></span> <a class="code" href="classMyLinearisedShellProblem.html#a8720e7226adb9f23266fe729f7e4eb5a">~MyLinearisedShellProblem</a>()</div>
-<div class="line">  {</div>
-<div class="line">   <span class="keyword">delete</span> mesh_pt();</div>
-<div class="line">  }</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Update the problem specs before solve: (Re)set boundary conditions</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classMyLinearisedShellProblem.html#a81d050ee6958694b7645ea73cc8e4e9f">actions_before_newton_solve</a>();</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classMyLinearisedShellProblem.html#a8ad6606f22859a5bd32d238bcc10efd1">actions_after_newton_solve</a>(){}</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// \short Doc the solution, pass the number of the case considered,</span></div>
-<div class="line"><span class="comment"> /// so that output files can be distinguished.</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classMyLinearisedShellProblem.html#a5894d8fae239fd5255b6a661cbc23fa5">doc_solution</a>(DocInfo&amp; doc_info);</div>
-<div class="line"> </div>
-<div class="line"> <span class="keywordtype">void</span> <a class="code" href="classMyLinearisedShellProblem.html#ab9255e3cbaae69ad5d61757d891b633e">parameter_study</a>();</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">private</span>:</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Pointer to source function</span></div>
-<div class="line"><span class="comment"></span> <span class="keyword">typename</span> MyShellEquations&lt;DIM,NNODE_1D&gt;::SourceFctPt <a class="code" href="classMyLinearisedShellProblem.html#a55fd5e4ce59d478cb41bd8457e868dea">Source_fct_pt</a>;<span class="comment"></span></div>
-<div class="line"><span class="comment"> /// Pointer to geometric object that represents the shell&#39;s undeformed shape</span></div>
-<div class="line"><span class="comment"></span> GeomObject* <a class="code" href="classMyLinearisedShellProblem.html#a18e84aab4a7fad179e35d381e61c4584">Undef_midplane_pt</a>;</div>
-<div class="line"> </div>
-<div class="line">}; <span class="comment">// end of problem class</span></div>
-</div><!-- fragment --><hr  />
+ <div class="fragment"></div><!-- fragment --><hr  />
 <h2><a class="anchor" id="constructor"></a>
 The Problem constructor</h2>
 <p>The problem constructor starts by overloading the function <code>Problem::mesh_pt()</code> and set to the specific mesh used in the problem. In this tutorial, we implement the problem with 2D triangular unstructured mesh which is externally created by <code>Triangle</code>. The generated output will be used to build <code>oomph-lib</code> mesh. The reader may refer to <a href="../../../meshes/mesh_from_inline_triangle/html/index.html">another tutorial</a> to create an unstructured triangular mesh internally.</p>
- <div class="fragment"><div class="line"><span class="comment">//=====start_of_constructor===============================================</span></div>
-<div class="line"><span class="comment">/// \short Constructor for 2D Shell problem.</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// Discretise the 2D domain with n_element elements of type ELEMENT.</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// Specify function pointer to source function. </span></div>
-<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keywordtype">unsigned</span> DIM, <span class="keywordtype">unsigned</span> NNODE_1D&gt;</div>
-<div class="line"><a class="code" href="classMyLinearisedShellProblem.html#a2ccc4ed3e631ca68d1d86423ef8eeb03">MyLinearisedShellProblem&lt;ELEMENT,DIM,NNODE_1D&gt;::MyLinearisedShellProblem</a></div>
-<div class="line">(<span class="keyword">typename</span> MyShellEquations&lt;DIM,NNODE_1D&gt;::SourceFctPt source_fct_pt,</div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">string</span>&amp; node_file_name,<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; element_file_name,</div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">string</span>&amp; poly_file_name) : </div>
-<div class="line"> Source_fct_pt(source_fct_pt)</div>
-<div class="line">{ </div>
-<div class="line"> <span class="comment">// Build mesh and store pointer in Problem</span></div>
-<div class="line"> Problem::mesh_pt() = <span class="keyword">new</span> TriangleMesh&lt;ELEMENT&gt;(node_file_name,element_file_name,poly_file_name);</div>
-</div><!-- fragment --><p>We then create the undeformed centreline of the shell to one of an oomph-lib's standard shell geometric objects.</p>
-<div class="fragment"><div class="line"> <span class="comment">// set the undeformed shell</span></div>
-<div class="line"> Undef_midplane_pt = <span class="keyword">new</span> Plate(1.0,1.0);</div>
-</div><!-- fragment --><p>Prior to consider the boundary conditions, we will illustrate how to take care extra nodes on the element for the <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-interpolations. Since there is no degree of freedom of the <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-interpolations defined on the mid-sided nodes, they have to be pinned.</p>
+ <div class="fragment"></div><!-- fragment --><p>We then create the undeformed centreline of the shell to one of an oomph-lib's standard shell geometric objects.</p>
+<div class="fragment"></div><!-- fragment --><p>Prior to consider the boundary conditions, we will illustrate how to take care extra nodes on the element for the <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-interpolations. Since there is no degree of freedom of the <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-interpolations defined on the mid-sided nodes, they have to be pinned.</p>
 <p>In order to do this, firstly, we loop over the element and pin all degrees of freedom on non-vertex nodes that associated with the <img class="formulaInl" alt="$ C^1 $" src="form_0.png"/>-interpolations. Since nodes in the element situate anticlockwise and the midside nodes fill in progressing along the consecutive edges, the pinning procedure is easily done by starting to pin from the third node and so on.</p>
-<div class="fragment"><div class="line"> <span class="comment">// pinning the middle nodes in each element for normal direction</span></div>
-<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_element;n++)</div>
-<div class="line"> {</div>
-<div class="line">  <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
-<div class="line">  ELEMENT *elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(n));</div>
-<div class="line">   </div>
-<div class="line">  <span class="keywordtype">unsigned</span> nnode = elem_pt-&gt;nnode();</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>=0;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>&lt;nnode;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>++)</div>
-<div class="line">   {</div>
-<div class="line">    <span class="keywordflow">if</span>((<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>==0) || (<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>==1) || (<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>==2))</div>
-<div class="line">     {</div>
-<div class="line">     }</div>
-<div class="line">    <span class="keywordflow">else</span></div>
-<div class="line">     {</div>
-<div class="line">      elem_pt-&gt;node_pt(<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>)-&gt;pin(2);</div>
-<div class="line">      elem_pt-&gt;node_pt(<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>)-&gt;pin(3);</div>
-<div class="line">      elem_pt-&gt;node_pt(<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>)-&gt;pin(4);</div>
-<div class="line">      elem_pt-&gt;node_pt(<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>)-&gt;pin(5); </div>
-<div class="line">      elem_pt-&gt;node_pt(<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>)-&gt;pin(6);</div>
-<div class="line">      elem_pt-&gt;node_pt(<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>)-&gt;pin(7);</div>
-<div class="line">     }</div>
-<div class="line">   }</div>
-<div class="line"> } <span class="comment">// end of the middle node pinning</span></div>
-</div><!-- fragment --><p>Next, the boundary conditions of the problem will be taken care. We pin the nodal values on the boundaries where the boundary conditions applied. Note that, at the clamped boundaries, all second-order derivatives degrees of freedom are also pinned in order to reduce the number of degrees of freedom in the problem. These second-order derivatives are the derived boundary conditions that can be taken care by the natural boundary conditions.</p>
-<div class="fragment"><div class="line"> <span class="comment">// start_of_boundary_conditions</span></div>
-<div class="line"> <span class="comment">// Set the boundary conditions for this problem: By default, all nodal</span></div>
-<div class="line"> <span class="comment">// values are free -- we only need to pin the ones that have </span></div>
-<div class="line"> <span class="comment">// Dirichlet conditions. </span></div>
-<div class="line"><span class="comment">// unsigned n_side0 = mesh_pt()-&gt;nboundary_node(0);</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_side1 = mesh_pt()-&gt;nboundary_node(1);</div>
-<div class="line"> <span class="comment">//unsigned n_side2 = mesh_pt()-&gt;nboundary_node(2);</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_side3 = mesh_pt()-&gt;nboundary_node(3);</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">//------ PLATE BENDING PROBLEM -------------</span></div>
-<div class="line"> <span class="comment">// Pin the single nodal value at the single node on mesh </span></div>
-<div class="line"> <span class="comment">// boundary 1 (= the right domain boundary at x=l)</span><span class="comment"></span></div>
-<div class="line"><span class="comment"> /// loop over the nodes on the boundary</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>=0;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>&lt;n_side1;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>++)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// loop over the degrees of freedom that need to be</span></div>
-<div class="line">   <span class="comment">// taken care for the Dirichlet boundary conditions</span></div>
-<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>=0;<a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>&lt;8;<a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>++)</div>
-<div class="line">    {</div>
-<div class="line">     mesh_pt()-&gt;boundary_node_pt(1,<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>)-&gt;pin(<a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>); </div>
-<div class="line">    }</div>
-<div class="line">  } </div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// boundary 3 (= the left domain boundary at x=0)</span><span class="comment"></span></div>
-<div class="line"><span class="comment"> /// loop over the nodes on the boundary</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>=0;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>&lt;n_side3;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>++)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// loop over the degrees of freedom that need to be</span></div>
-<div class="line">   <span class="comment">// taken care for the Dirichlet boundary conditions</span></div>
-<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>=0;<a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>&lt;8;<a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>++)</div>
-<div class="line">    {</div>
-<div class="line">     mesh_pt()-&gt;boundary_node_pt(3,<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>)-&gt;pin(<a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>); </div>
-<div class="line">    }</div>
-<div class="line">  } <span class="comment">// end of boundary conditions</span></div>
-</div><!-- fragment --><p>We then loop over the elements and set the pointer to the physical parameters (if any), the function pointer to the source function, and the pointer to the geometric object that specifies the undeformed surface of the shell.</p>
-<div class="fragment"><div class="line"> <span class="comment">// Loop over elements and set pointers to Physical parameters</span></div>
-<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>=0;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>&lt;n_element;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>++)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
-<div class="line">   ELEMENT *elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>));</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">//Set the source function pointer and all physical variables</span></div>
-<div class="line">   elem_pt-&gt;source_fct_pt() = Source_fct_pt;</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">//Set the pointer to the undeformed mid-plane geometry</span></div>
-<div class="line">   elem_pt-&gt;undeformed_midplane_pt() = Undef_midplane_pt;</div>
-<div class="line">  } <span class="comment">// end of loop over elements</span></div>
-</div><!-- fragment --><p>We finish the constructor by assigning the equation numbering scheme. </p><div class="fragment"><div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
-<div class="line"> assign_eqn_numbers();</div>
-<div class="line"> </div>
-<div class="line">} <span class="comment">// end of constructor</span></div>
-</div><!-- fragment --><hr  />
+<div class="fragment"></div><!-- fragment --><p>Next, the boundary conditions of the problem will be taken care. We pin the nodal values on the boundaries where the boundary conditions applied. Note that, at the clamped boundaries, all second-order derivatives degrees of freedom are also pinned in order to reduce the number of degrees of freedom in the problem. These second-order derivatives are the derived boundary conditions that can be taken care by the natural boundary conditions.</p>
+<div class="fragment"></div><!-- fragment --><p>We then loop over the elements and set the pointer to the physical parameters (if any), the function pointer to the source function, and the pointer to the geometric object that specifies the undeformed surface of the shell.</p>
+<div class="fragment"></div><!-- fragment --><p>We finish the constructor by assigning the equation numbering scheme. </p><div class="fragment"></div><!-- fragment --><hr  />
 <h2><a class="anchor" id="actionbefore"></a>
 Action before newton solve</h2>
 <p>In the <code>action_before_newton_solve()</code>, the problem specifications will be updated before performing the newton solve. The boundary values will be (re)set from the exact solutions.</p>
- <div class="fragment"><div class="line"><span class="comment">//===start_of_actions_before_newton_solve=================================</span></div>
-<div class="line"><span class="comment">/// \short Update the problem specs before solve: (Re)set boundary values</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// from the exact solution. </span></div>
-<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keywordtype">unsigned</span> DIM, <span class="keywordtype">unsigned</span> NNODE_1D&gt;</div>
-<div class="line"><span class="keywordtype">void</span> <a class="code" href="classMyLinearisedShellProblem.html#a81d050ee6958694b7645ea73cc8e4e9f">MyLinearisedShellProblem&lt;ELEMENT,DIM,NNODE_1D&gt;::actions_before_newton_solve</a>()</div>
-<div class="line">{</div>
-<div class="line"> <span class="comment">// Assign boundary values for this problem by reading them out</span></div>
-<div class="line"> <span class="comment">// from the exact solution.</span></div>
-<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;mesh_pt()-&gt;nboundary();n++)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// find number of nodes in each boundary</span></div>
-<div class="line">   <span class="keywordtype">unsigned</span> n_side = mesh_pt()-&gt;nboundary_node(n);<span class="comment"></span></div>
-<div class="line"><span class="comment">   /// loop over the nodes on the boundary</span></div>
-<div class="line"><span class="comment"></span>   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>=0;<a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>&lt;n_side;<a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>++)</div>
-<div class="line">    {</div>
-<div class="line">     <span class="comment">// Left boundary is every nodes on the left boundary </span></div>
-<div class="line">     Node* left_node_pt=mesh_pt()-&gt;boundary_node_pt(n,<a class="code" href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a>);</div>
-<div class="line">   </div>
-<div class="line">     <span class="comment">// Loop for variables u</span></div>
-<div class="line">     ELEMENT e;</div>
-<div class="line">     Vector&lt;double&gt; <a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>((e.required_nvalue(0)));</div>
-<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>=0;<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>&lt;(e.required_nvalue(0));<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>++)</div>
-<div class="line">      {</div>
-<div class="line">       <span class="comment">// Determine the position of the boundary node (the exact solution</span></div>
-<div class="line">       <span class="comment">// requires the coordinate in a 1D vector!)</span></div>
-<div class="line">       Vector&lt;double&gt; x(2);</div>
-<div class="line">       x[0]=left_node_pt-&gt;x(0);</div>
-<div class="line">       x[1]=left_node_pt-&gt;x(1);</div>
-<div class="line">       </div>
-<div class="line">       <span class="comment">// Boundary value (read in from exact solution)</span></div>
-<div class="line">       <a class="code" href="namespacePhysical__Variables.html#af90d0c580c57b1152fd1cc7046055031">Physical_Variables::get_exact_u</a>(x,<a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>);</div>
-<div class="line">  </div>
-<div class="line">       <span class="comment">// Assign the boundary condition to nodal values</span></div>
-<div class="line">       left_node_pt-&gt;set_value(<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>,<a class="code" href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a>[<a class="code" href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a>]);</div>
-<div class="line">      }</div>
-<div class="line">    }</div>
-<div class="line">  } </div>
-<div class="line">} <span class="comment">// end of actions before solve</span></div>
-</div><!-- fragment --><hr  />
+ <div class="fragment"></div><!-- fragment --><hr  />
  <hr  />
 <h1><a class="anchor" id="sources"></a>
 Source files for this tutorial</h1>
@@ -606,25 +358,6 @@ PDF file</h1>
 <p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
-<div class="ttc" id="anamespacePhysical__Variables_html_af90d0c580c57b1152fd1cc7046055031"><div class="ttname"><a href="namespacePhysical__Variables.html#af90d0c580c57b1152fd1cc7046055031">Physical_Variables::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01611">unstructured_clamped_square_plate.cc:1611</a></div></div>
-<div class="ttc" id="aclassMyLinearisedShellProblem_html_a81d050ee6958694b7645ea73cc8e4e9f"><div class="ttname"><a href="classMyLinearisedShellProblem.html#a81d050ee6958694b7645ea73cc8e4e9f">MyLinearisedShellProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve: (Re)set boundary conditions.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01782">unstructured_clamped_square_plate.cc:1782</a></div></div>
-<div class="ttc" id="anamespacePhysical__Variables_html"><div class="ttname"><a href="namespacePhysical__Variables.html">Physical_Variables</a></div><div class="ttdoc">Namespace for the solution of 2D linear shell equation.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01602">unstructured_clamped_square_plate.cc:1602</a></div></div>
-<div class="ttc" id="aclassMyLinearisedShellProblem_html_a2ccc4ed3e631ca68d1d86423ef8eeb03"><div class="ttname"><a href="classMyLinearisedShellProblem.html#a2ccc4ed3e631ca68d1d86423ef8eeb03">MyLinearisedShellProblem::MyLinearisedShellProblem</a></div><div class="ttdeci">MyLinearisedShellProblem(typename MyShellEquations&lt; DIM, NNODE_1D &gt;::SourceFctPt source_fct_pt, const string &amp;node_file_name, const string &amp;element_file_name, const string &amp;poly_file_name)</div><div class="ttdoc">Constructor: Pass number of elements and pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01682">unstructured_clamped_square_plate.cc:1682</a></div></div>
-<div class="ttc" id="alinear__shell_8txt_html_a7e98b8a17c0aad30ba64d47b74e2a6c1"><div class="ttname"><a href="linear__shell_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a></div><div class="ttdeci">i</div><div class="ttdef"><b>Definition:</b> <a href="linear__shell_8txt_source.html#l00132">linear_shell.txt:132</a></div></div>
-<div class="ttc" id="anamespacePhysical__Variables_html_a58adc76bae4751599143c613f9100904"><div class="ttname"><a href="namespacePhysical__Variables.html#a58adc76bae4751599143c613f9100904">Physical_Variables::P_ext</a></div><div class="ttdeci">double P_ext</div><div class="ttdoc">Pressure load.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01605">unstructured_clamped_square_plate.cc:1605</a></div></div>
-<div class="ttc" id="alinear__shell_8txt_html_a560411ef94f070ecd32898bd4df006cf"><div class="ttname"><a href="linear__shell_8txt.html#a560411ef94f070ecd32898bd4df006cf">problem</a></div><div class="ttdeci">f and their variations in&lt; HR &gt; subsection tube The circular tube problem In this we consider a deformation of a circular tube which is subjected to a pressure loading on its surface as illustrated in the following figure The loads applied on the tube are uniformly distributed in the normal direction I w textwidth circular_tube The geometry of the square plate with two clamped edges and two free edges To implement the deformation of the circular tube in this the quarter of a circular tube will be implemented and symmetric conditions are assumed along the tube The boundary conditions determined in this problem are clamped supports at both ends of the tube Similar to the plate bending problem</div><div class="ttdef"><b>Definition:</b> <a href="linear__shell_8txt_source.html#l00164">linear_shell.txt:164</a></div></div>
-<div class="ttc" id="aunstructured__clamped__square__plate_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="unstructured__clamped__square__plate_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver for 2D linearised shell problem: square flat plate.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01883">unstructured_clamped_square_plate.cc:1883</a></div></div>
-<div class="ttc" id="aclassMyLinearisedShellProblem_html_a5894d8fae239fd5255b6a661cbc23fa5"><div class="ttname"><a href="classMyLinearisedShellProblem.html#a5894d8fae239fd5255b6a661cbc23fa5">MyLinearisedShellProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution, pass the number of the case considered, so that output files can be distinguished.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01822">unstructured_clamped_square_plate.cc:1822</a></div></div>
-<div class="ttc" id="anamespacePhysical__Variables_html_ac374cc60da0f1e5df3fc48a3c9ce1d74"><div class="ttname"><a href="namespacePhysical__Variables.html#ac374cc60da0f1e5df3fc48a3c9ce1d74">Physical_Variables::epsilon</a></div><div class="ttdeci">double epsilon</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01607">unstructured_clamped_square_plate.cc:1607</a></div></div>
-<div class="ttc" id="anamespacePhysical__Variables_html_a36f0d0dc5f8aa4eafd7c4d6fe943c4e8"><div class="ttname"><a href="namespacePhysical__Variables.html#a36f0d0dc5f8aa4eafd7c4d6fe943c4e8">Physical_Variables::source_function</a></div><div class="ttdeci">void source_function(const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;unit_n, Vector&lt; double &gt; &amp;source)</div><div class="ttdoc">Source function applied in the normal vector.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01624">unstructured_clamped_square_plate.cc:1624</a></div></div>
-<div class="ttc" id="aclassMyLinearisedShellProblem_html_a55fd5e4ce59d478cb41bd8457e868dea"><div class="ttname"><a href="classMyLinearisedShellProblem.html#a55fd5e4ce59d478cb41bd8457e868dea">MyLinearisedShellProblem::Source_fct_pt</a></div><div class="ttdeci">MyShellEquations&lt; DIM, NNODE_1D &gt;::SourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01669">unstructured_clamped_square_plate.cc:1669</a></div></div>
-<div class="ttc" id="alinear__shell_8txt_html_a9306993569365df2424bb3d6b4ec8903"><div class="ttname"><a href="linear__shell_8txt.html#a9306993569365df2424bb3d6b4ec8903">u</a></div><div class="ttdeci">f are associated components of a displacement f the linear version of the deformed metric tensor can be considered as f[A_{\alpha\beta}=a_{\alpha\beta}+u^{\beta}|_{\alpha}+u^{\alpha}|_{\beta}, \f] where the quantity f u</div><div class="ttdef"><b>Definition:</b> <a href="linear__shell_8txt_source.html#l00077">linear_shell.txt:77</a></div></div>
-<div class="ttc" id="alinear__shell_8txt_html_abf2bc2545a4a5f5683d9ef3ed0d977e0"><div class="ttname"><a href="linear__shell_8txt.html#abf2bc2545a4a5f5683d9ef3ed0d977e0">j</a></div><div class="ttdeci">j</div><div class="ttdef"><b>Definition:</b> <a href="linear__shell_8txt_source.html#l00068">linear_shell.txt:68</a></div></div>
-<div class="ttc" id="aclassMyLinearisedShellProblem_html_a8ad6606f22859a5bd32d238bcc10efd1"><div class="ttname"><a href="classMyLinearisedShellProblem.html#a8ad6606f22859a5bd32d238bcc10efd1">MyLinearisedShellProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01658">unstructured_clamped_square_plate.cc:1658</a></div></div>
-<div class="ttc" id="aclassMyLinearisedShellProblem_html"><div class="ttname"><a href="classMyLinearisedShellProblem.html">MyLinearisedShellProblem</a></div><div class="ttdoc">2D linearised shell problem.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01637">unstructured_clamped_square_plate.cc:1637</a></div></div>
-<div class="ttc" id="aclassMyLinearisedShellProblem_html_a18e84aab4a7fad179e35d381e61c4584"><div class="ttname"><a href="classMyLinearisedShellProblem.html#a18e84aab4a7fad179e35d381e61c4584">MyLinearisedShellProblem::Undef_midplane_pt</a></div><div class="ttdeci">GeomObject * Undef_midplane_pt</div><div class="ttdoc">Pointer to geometric object that represents the shell's undeformed shape.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01671">unstructured_clamped_square_plate.cc:1671</a></div></div>
-<div class="ttc" id="aclassMyLinearisedShellProblem_html_a8720e7226adb9f23266fe729f7e4eb5a"><div class="ttname"><a href="classMyLinearisedShellProblem.html#a8720e7226adb9f23266fe729f7e4eb5a">MyLinearisedShellProblem::~MyLinearisedShellProblem</a></div><div class="ttdeci">~MyLinearisedShellProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01649">unstructured_clamped_square_plate.cc:1649</a></div></div>
-<div class="ttc" id="aclassMyLinearisedShellProblem_html_ab9255e3cbaae69ad5d61757d891b633e"><div class="ttname"><a href="classMyLinearisedShellProblem.html#ab9255e3cbaae69ad5d61757d891b633e">MyLinearisedShellProblem::parameter_study</a></div><div class="ttdeci">void parameter_study()</div><div class="ttdoc">Solver loop to perform parameter study.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__square__plate_8cc_source.html#l01845">unstructured_clamped_square_plate.cc:1845</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
     <script src="../../../js/jquery-1.12.0.min.js"></script>
@@ -652,7 +385,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Jul 9 2021 15:22:19
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Jul 16 2021 19:41:21
         </div>
       </div>
     </footer>

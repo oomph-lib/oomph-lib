@@ -222,43 +222,10 @@ In the following, we illustrate the driver codes for the square-\/plate bending 
 
 \DoxyHorRuler{0}
 \hypertarget{index_global}{}\doxysubsection{Global parameters and functions}\label{index_global}
-The namespace {\ttfamily \mbox{\hyperlink{namespacePhysical__Variables}{Physical\+\_\+\+Variables}}} is where the source function and the exact solution are defined. The source function can be specified via {\ttfamily \mbox{\hyperlink{namespacePhysical__Variables_a36f0d0dc5f8aa4eafd7c4d6fe943c4e8}{Physical\+\_\+\+Variables\+::source\+\_\+function()}}} while the exact solutions are defined via {\ttfamily \mbox{\hyperlink{namespacePhysical__Variables_af90d0c580c57b1152fd1cc7046055031}{Physical\+\_\+\+Variables\+::get\+\_\+exact\+\_\+u()}}}. Note that the six exact solutions correspond to the six degrees of freedom defined on each node. Furthermore, the applied source functions are required to be in the direction of the unit normal vector.
+The namespace {\ttfamily Physical\+\_\+\+Variables} is where the source function and the exact solution are defined. The source function can be specified via {\ttfamily Physical\+\_\+\+Variables\+::source\+\_\+function()} while the exact solutions are defined via {\ttfamily Physical\+\_\+\+Variables\+::get\+\_\+exact\+\_\+u()}. Note that the six exact solutions correspond to the six degrees of freedom defined on each node. Furthermore, the applied source functions are required to be in the direction of the unit normal vector.
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//=======================start\_of\_namespace===========================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace for the solution of 2D linear shell equation}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespacePhysical__Variables}{Physical\_Variables}}}
-\DoxyCodeLine{\{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pressure load}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacePhysical__Variables_a58adc76bae4751599143c613f9100904}{P\_ext}};}
-\DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacePhysical__Variables_ac374cc60da0f1e5df3fc48a3c9ce1d74}{epsilon}} = 1.0e-\/8;}
-\DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Exact solution as a vector}}
-\DoxyCodeLine{\textcolor{comment}{ /// differentiate u with respect to global coordinates }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacePhysical__Variables_af90d0c580c57b1152fd1cc7046055031}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}})}
-\DoxyCodeLine{ \{}
-\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[0] = 0.0;}
-\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[1] = 0.0;}
-\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[2] = 0.0;}
-\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[3] = 0.0;}
-\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[4] = 0.0;}
-\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[5] = 0.0;}
-\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[6] = 0.0;}
-\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[7] = 0.0;}
-\DoxyCodeLine{ \}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Source function applied in the normal vector }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacePhysical__Variables_a36f0d0dc5f8aa4eafd7c4d6fe943c4e8}{source\_function}}(\textcolor{keyword}{const} Vector<double>\& x, \textcolor{keyword}{const} Vector<double>\& unit\_n, Vector<double>\& source)}
-\DoxyCodeLine{ \{}
-\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<3;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
-\DoxyCodeLine{   \{}
-\DoxyCodeLine{    source[\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}] = \mbox{\hyperlink{namespacePhysical__Variables_ac374cc60da0f1e5df3fc48a3c9ce1d74}{epsilon}}*\mbox{\hyperlink{namespacePhysical__Variables_a58adc76bae4751599143c613f9100904}{P\_ext}}*unit\_n[\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}];}
-\DoxyCodeLine{   \}}
-\DoxyCodeLine{ \}}
-\DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 
 \end{DoxyCodeInclude}
 
@@ -273,56 +240,10 @@ In this study, the displacements in tangential directions are chosen to approxim
 
 Therefore, the number of {\ttfamily N\+N\+O\+D\+E\+\_\+1D} has been modified in the {\ttfamily Bell\+Shell\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$} (and {\ttfamily C1\+Curved\+Shell\+Element} when dealing with the curvilinear boundary domain) to be 3 in this problem. Consequencely, the extra nodes that are not necessary for the $ C^1 $-\/shape functions have to be taken care.
 
-Following the usual self-\/test, we call the function {\ttfamily \mbox{\hyperlink{classMyLinearisedShellProblem_ab9255e3cbaae69ad5d61757d891b633e}{My\+Linearised\+Shell\+Problem\+::parameter\+\_\+study()}}} to compute the solution of the problem within a range of external pressures.
+Following the usual self-\/test, we call the function {\ttfamily My\+Linearised\+Shell\+Problem\+::parameter\+\_\+study()} to compute the solution of the problem within a range of external pressures.
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//======start\_of\_main==================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver for 2D linearised shell problem: square flat plate}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
-\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__clamped__square__plate_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
-\DoxyCodeLine{ CommandLineArgs::setup(argc,argv);}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Check number of command line arguments: Need exactly two.}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (argc!=4)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   std::string error\_message =}
-\DoxyCodeLine{    \textcolor{stringliteral}{"Wrong number of command line arguments.\(\backslash\)n"};}
-\DoxyCodeLine{   error\_message +=}
-\DoxyCodeLine{    \textcolor{stringliteral}{"Must specify the following file names  \(\backslash\)n"};}
-\DoxyCodeLine{   error\_message += }
-\DoxyCodeLine{    \textcolor{stringliteral}{"filename.node then filename.ele then filename.poly\(\backslash\)n"};}
-\DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(error\_message,}
-\DoxyCodeLine{                       \textcolor{stringliteral}{"main()"},}
-\DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{ \textcolor{comment}{// Convert arguments to strings that specify th input file names}}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name(argv[1]);}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name(argv[2]);}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} poly\_file\_name(argv[3]);}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Set up the problem: }}
-\DoxyCodeLine{ \mbox{\hyperlink{classMyLinearisedShellProblem}{MyLinearisedShellProblem<BellShellElement<2,3>}},2,3> \textcolor{comment}{//Element type as template parameter}}
-\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a560411ef94f070ecd32898bd4df006cf}{problem}}(\mbox{\hyperlink{namespacePhysical__Variables_a36f0d0dc5f8aa4eafd7c4d6fe943c4e8}{Physical\_Variables::source\_function}},node\_file\_name,element\_file\_name,poly\_file\_name);}
-\DoxyCodeLine{ }
-\DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Check whether the problem can be solved}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "};}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (\mbox{\hyperlink{linear__shell_8txt_a560411ef94f070ecd32898bd4df006cf}{problem}}.self\_test()==0)  }
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"passed: Problem can be solved."} << std::endl;}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{ \textcolor{keywordflow}{else} }
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"failed!"},\textcolor{stringliteral}{"main()"},OOMPH\_EXCEPTION\_LOCATION);}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{  }
-\DoxyCodeLine{ \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{ \mbox{\hyperlink{linear__shell_8txt_a560411ef94f070ecd32898bd4df006cf}{problem}}.parameter\_study();}
-\DoxyCodeLine{\} \textcolor{comment}{//end of main}}
 
 \end{DoxyCodeInclude}
 
@@ -344,47 +265,6 @@ In the present problem, the function {\ttfamily Problem\+::actions\+\_\+after\+\
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D linearised shell problem.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keywordtype}{unsigned} DIM, \textcolor{keywordtype}{unsigned} NNODE\_1D> }
-\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMyLinearisedShellProblem}{MyLinearisedShellProblem}} : \textcolor{keyword}{public} Problem}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{public}:}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass number of elements and pointer to source function}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyLinearisedShellProblem_a2ccc4ed3e631ca68d1d86423ef8eeb03}{MyLinearisedShellProblem}}(\textcolor{keyword}{typename} MyShellEquations<DIM,NNODE\_1D>::SourceFctPt source\_fct\_pt,}
-\DoxyCodeLine{                          \textcolor{keyword}{const} \textcolor{keywordtype}{string}\& node\_file\_name,}
-\DoxyCodeLine{                          \textcolor{keyword}{const} \textcolor{keywordtype}{string}\& element\_file\_name,}
-\DoxyCodeLine{                          \textcolor{keyword}{const} \textcolor{keywordtype}{string}\& poly\_file\_name);}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyLinearisedShellProblem_a8720e7226adb9f23266fe729f7e4eb5a}{\string~MyLinearisedShellProblem}}()}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keyword}{delete} mesh\_pt();}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve: (Re)set boundary conditions}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_a81d050ee6958694b7645ea73cc8e4e9f}{actions\_before\_newton\_solve}}();}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_a8ad6606f22859a5bd32d238bcc10efd1}{actions\_after\_newton\_solve}}()\{\}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc the solution, pass the number of the case considered,}}
-\DoxyCodeLine{\textcolor{comment}{ /// so that output files can be distinguished.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_a5894d8fae239fd5255b6a661cbc23fa5}{doc\_solution}}(DocInfo\& doc\_info);}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_ab9255e3cbaae69ad5d61757d891b633e}{parameter\_study}}();}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{private}:}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to source function}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{typename} MyShellEquations<DIM,NNODE\_1D>::SourceFctPt \mbox{\hyperlink{classMyLinearisedShellProblem_a55fd5e4ce59d478cb41bd8457e868dea}{Source\_fct\_pt}};\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to geometric object that represents the shell's undeformed shape}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classMyLinearisedShellProblem_a18e84aab4a7fad179e35d381e61c4584}{Undef\_midplane\_pt}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 
 \end{DoxyCodeInclude}
 
@@ -395,20 +275,6 @@ The problem constructor starts by overloading the function {\ttfamily Problem\+:
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Constructor for 2D Shell problem.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Discretise the 2D domain with n\_element elements of type ELEMENT.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Specify function pointer to source function. }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keywordtype}{unsigned} DIM, \textcolor{keywordtype}{unsigned} NNODE\_1D>}
-\DoxyCodeLine{\mbox{\hyperlink{classMyLinearisedShellProblem_a2ccc4ed3e631ca68d1d86423ef8eeb03}{MyLinearisedShellProblem<ELEMENT,DIM,NNODE\_1D>::MyLinearisedShellProblem}}}
-\DoxyCodeLine{(\textcolor{keyword}{typename} MyShellEquations<DIM,NNODE\_1D>::SourceFctPt source\_fct\_pt,}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& node\_file\_name,\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& element\_file\_name,}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& poly\_file\_name) : }
-\DoxyCodeLine{ Source\_fct\_pt(source\_fct\_pt)}
-\DoxyCodeLine{\{ }
-\DoxyCodeLine{ \textcolor{comment}{// Build mesh and store pointer in Problem}}
-\DoxyCodeLine{ Problem::mesh\_pt() = \textcolor{keyword}{new} TriangleMesh<ELEMENT>(node\_file\_name,element\_file\_name,poly\_file\_name);}
 
 \end{DoxyCodeInclude}
 
@@ -417,8 +283,6 @@ We then create the undeformed centreline of the shell to one of an oomph-\/lib\t
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// set the undeformed shell}}
-\DoxyCodeLine{ Undef\_midplane\_pt = \textcolor{keyword}{new} Plate(1.0,1.0);}
 
 \end{DoxyCodeInclude}
 
@@ -429,29 +293,6 @@ In order to do this, firstly, we loop over the element and pin all degrees of fr
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// pinning the middle nodes in each element for normal direction}}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<n\_element;n++)}
-\DoxyCodeLine{ \{}
-\DoxyCodeLine{  \textcolor{comment}{// Upcast from GeneralisedElement to the present element}}
-\DoxyCodeLine{  ELEMENT *elem\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(n));}
-\DoxyCodeLine{   }
-\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} nnode = elem\_pt-\/>nnode();}
-\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<nnode;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
-\DoxyCodeLine{   \{}
-\DoxyCodeLine{    \textcolor{keywordflow}{if}((\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}==0) || (\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}==1) || (\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}==2))}
-\DoxyCodeLine{     \{}
-\DoxyCodeLine{     \}}
-\DoxyCodeLine{    \textcolor{keywordflow}{else}}
-\DoxyCodeLine{     \{}
-\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(2);}
-\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(3);}
-\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(4);}
-\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(5); }
-\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(6);}
-\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(7);}
-\DoxyCodeLine{     \}}
-\DoxyCodeLine{   \}}
-\DoxyCodeLine{ \} \textcolor{comment}{// end of the middle node pinning}}
 
 \end{DoxyCodeInclude}
 
@@ -460,40 +301,6 @@ Next, the boundary conditions of the problem will be taken care. We pin the noda
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// start\_of\_boundary\_conditions}}
-\DoxyCodeLine{ \textcolor{comment}{// Set the boundary conditions for this problem: By default, all nodal}}
-\DoxyCodeLine{ \textcolor{comment}{// values are free -\/-\/ we only need to pin the ones that have }}
-\DoxyCodeLine{ \textcolor{comment}{// Dirichlet conditions. }}
-\DoxyCodeLine{\textcolor{comment}{// unsigned n\_side0 = mesh\_pt()-\/>nboundary\_node(0);}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_side1 = mesh\_pt()-\/>nboundary\_node(1);}
-\DoxyCodeLine{ \textcolor{comment}{//unsigned n\_side2 = mesh\_pt()-\/>nboundary\_node(2);}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_side3 = mesh\_pt()-\/>nboundary\_node(3);}
-\DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/ PLATE BENDING PROBLEM -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ \textcolor{comment}{// Pin the single nodal value at the single node on mesh }}
-\DoxyCodeLine{ \textcolor{comment}{// boundary 1 (= the right domain boundary at x=l)}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// loop over the nodes on the boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<n\_side1;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// loop over the degrees of freedom that need to be}}
-\DoxyCodeLine{   \textcolor{comment}{// taken care for the Dirichlet boundary conditions}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}=0;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}<8;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}++)}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{     mesh\_pt()-\/>boundary\_node\_pt(1,\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}); }
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{  \} }
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// boundary 3 (= the left domain boundary at x=0)}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// loop over the nodes on the boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<n\_side3;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// loop over the degrees of freedom that need to be}}
-\DoxyCodeLine{   \textcolor{comment}{// taken care for the Dirichlet boundary conditions}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}=0;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}<8;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}++)}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{     mesh\_pt()-\/>boundary\_node\_pt(3,\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}); }
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{  \} \textcolor{comment}{// end of boundary conditions}}
 
 \end{DoxyCodeInclude}
 
@@ -502,28 +309,12 @@ We then loop over the elements and set the pointer to the physical parameters (i
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Loop over elements and set pointers to Physical parameters}}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<n\_element;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// Upcast from GeneralisedElement to the present element}}
-\DoxyCodeLine{   ELEMENT *elem\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}));}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{//Set the source function pointer and all physical variables}}
-\DoxyCodeLine{   elem\_pt-\/>source\_fct\_pt() = Source\_fct\_pt;}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{//Set the pointer to the undeformed mid-\/plane geometry}}
-\DoxyCodeLine{   elem\_pt-\/>undeformed\_midplane\_pt() = Undef\_midplane\_pt;}
-\DoxyCodeLine{  \} \textcolor{comment}{// end of loop over elements}}
 
 \end{DoxyCodeInclude}
 
 
 We finish the constructor by assigning the equation numbering scheme. 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ assign\_eqn\_numbers();}
-\DoxyCodeLine{}
-\DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
 
@@ -534,45 +325,6 @@ In the {\ttfamily action\+\_\+before\+\_\+newton\+\_\+solve()}, the problem spec
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//===start\_of\_actions\_before\_newton\_solve=================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Update the problem specs before solve: (Re)set boundary values}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from the exact solution. }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keywordtype}{unsigned} DIM, \textcolor{keywordtype}{unsigned} NNODE\_1D>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_a81d050ee6958694b7645ea73cc8e4e9f}{MyLinearisedShellProblem<ELEMENT,DIM,NNODE\_1D>::actions\_before\_newton\_solve}}()}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{ \textcolor{comment}{// Assign boundary values for this problem by reading them out}}
-\DoxyCodeLine{ \textcolor{comment}{// from the exact solution.}}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<mesh\_pt()-\/>nboundary();n++)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// find number of nodes in each boundary}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_side = mesh\_pt()-\/>nboundary\_node(n);\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{   /// loop over the nodes on the boundary}}
-\DoxyCodeLine{\textcolor{comment}{}   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}=0;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}<n\_side;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}++)}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{     \textcolor{comment}{// Left boundary is every nodes on the left boundary }}
-\DoxyCodeLine{     Node* left\_node\_pt=mesh\_pt()-\/>boundary\_node\_pt(n,\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}});}
-\DoxyCodeLine{   }
-\DoxyCodeLine{     \textcolor{comment}{// Loop for variables u}}
-\DoxyCodeLine{     ELEMENT e;}
-\DoxyCodeLine{     Vector<double> \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}((e.required\_nvalue(0)));}
-\DoxyCodeLine{     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<(e.required\_nvalue(0));\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
-\DoxyCodeLine{      \{}
-\DoxyCodeLine{       \textcolor{comment}{// Determine the position of the boundary node (the exact solution}}
-\DoxyCodeLine{       \textcolor{comment}{// requires the coordinate in a 1D vector!)}}
-\DoxyCodeLine{       Vector<double> x(2);}
-\DoxyCodeLine{       x[0]=left\_node\_pt-\/>x(0);}
-\DoxyCodeLine{       x[1]=left\_node\_pt-\/>x(1);}
-\DoxyCodeLine{       }
-\DoxyCodeLine{       \textcolor{comment}{// Boundary value (read in from exact solution)}}
-\DoxyCodeLine{       \mbox{\hyperlink{namespacePhysical__Variables_af90d0c580c57b1152fd1cc7046055031}{Physical\_Variables::get\_exact\_u}}(x,\mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}});}
-\DoxyCodeLine{  }
-\DoxyCodeLine{       \textcolor{comment}{// Assign the boundary condition to nodal values}}
-\DoxyCodeLine{       left\_node\_pt-\/>set\_value(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}},\mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}]);}
-\DoxyCodeLine{      \}}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{  \} }
-\DoxyCodeLine{\} \textcolor{comment}{// end of actions before solve}}
 
 \end{DoxyCodeInclude}
 
