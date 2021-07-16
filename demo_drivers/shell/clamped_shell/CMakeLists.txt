@@ -18,20 +18,12 @@ oomph_add_executable(
   LIBRARIES oomph::shell
   CXX_STANDARD 11)
 
-oomph_add_executable(
-  NAME unstructured_clamped_curved_shell
-  SOURCES unstructured_clamped_curved_shell.cc
-  LIBRARIES oomph::shell
-  CXX_STANDARD 11)
-
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
   TEST_NAME shell.clamped_shell
   TARGET_DEPENDENCIES clamped_shell clamped_shell_with_arclength_cont
-                      unstructured_clamped_curved_shell
-  EXTRA_REQUIRES Rectangle_CirTube.1.ele Rectangle_CirTube.1.node
-                 Rectangle_CirTube.1.poly
+  EXTRA_REQUIRES
   LABELS "shell;clamped_shell")
 
 # ------------------------------------------------------------------------------

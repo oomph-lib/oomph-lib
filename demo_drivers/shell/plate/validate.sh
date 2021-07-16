@@ -4,7 +4,7 @@
 OOMPH_ROOT_DIR=$1
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=1
 
 # Setup validation directory
 #---------------------------
@@ -25,8 +25,7 @@ echo "Running square flat plate "
 
 echo "done"
 echo " " >>validation.log
-echo "Clamped shell" \
-  >>validation.log
+echo "Clamped shell" >>validation.log
 echo "---------------------------------" >>validation.log
 echo " " >>validation.log
 echo "Validation directory: " >>validation.log
@@ -40,29 +39,6 @@ if test "$2" = "no_fpdiff"; then
 else
   $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/plate.dat.gz \
     plate.dat >>validation.log
-fi
-
-echo "Running unstructured square flat plate "
-mkdir RESLT_unstructured_plate
-../unstructured_clamped_square_plate ../UnitPlate.1.node ../UnitPlate.1.ele ../UnitPlate.1.poly >OUTPUT_unstructured_plate
-
-echo "done"
-echo " " >>validation.log
-echo "Unstructured Clamped square flat plate" \
-  >>validation.log
-echo "---------------------------------" >>validation.log
-echo " " >>validation.log
-echo "Validation directory: " >>validation.log
-echo " " >>validation.log
-echo "  " $(pwd) >>validation.log
-echo " " >>validation.log
-cat RESLT_unstructured_plate/soln1.dat RESLT_unstructured_plate/soln2.dat >unstructured_square_plate.dat
-
-if test "$2" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
-else
-  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_square_plate.dat.gz \
-    unstructured_square_plate.dat 0.3 5.0e-09 >>validation.log
 fi
 
 # Append output to global validation log file

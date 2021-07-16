@@ -12,18 +12,12 @@ oomph_add_executable(
   LIBRARIES oomph::shell
   CXX_STANDARD 11)
 
-oomph_add_executable(
-  NAME unstructured_clamped_square_plate
-  SOURCES unstructured_clamped_square_plate.cc
-  LIBRARIES oomph::shell
-  CXX_STANDARD 11)
-
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
   TEST_NAME shell.plate
-  TARGET_DEPENDENCIES plate unstructured_clamped_square_plate
-  EXTRA_REQUIRES UnitPlate.1.ele UnitPlate.1.node UnitPlate.1.poly
+  TARGET_DEPENDENCIES plate
+  EXTRA_REQUIRES
   LABELS "shell;plate")
 
 # This test contains a huge number of subtests and as such needs a larger amount
