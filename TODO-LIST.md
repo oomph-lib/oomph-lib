@@ -8,22 +8,23 @@
 1. Empty.
 
 ## Not urgent but important
-1. Add Ninja and MPI support to Workflows
-2. Add code coverage.
-3. Add Docker support; see https://github.com/FEniCS/dolfinx
-4. Remove warnings for external sources on a target basis; see e.g. OomphWarnings.cmake.
-5. Test the build of the demo_drivers with the main build (i.e. add_subdirectory(demo_drivers)).
-6. Add sanitiser support (e.g. address/memory, etc.).
-7. Sort out external distribution build
-8. Add check_...() calls to make sure the C/C++/Fortran compiler work
-9. Add (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) in conditionals where appropriate. See: https://cliutils.gitlab.io/modern-cmake/chapters/testing.html
-10. Sort out building of oomph-lib with shared libraries. Currently breaks when it gets to oomph_superlu
-11. Sort out *sequential* build of MUMPS
-12. Sort out a subproject build of private/
-13. Grab latest version of oomph-lib and add in new code.
-14. Find and doc. how users can build a Debug and Release version and easily switch between the two.
-15. Remove OomphPrintCompilerDefinitions.cmake.
-16. Download CMake oomph-lib in a folder that has a space in the name.
+1. Add function oomphlib(<your-target>) that implements target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS}) if the user doesn't use the oomph-lib CMake commands to add drivers, see e.g. cotire().
+2. Add Ninja and MPI support to Workflows
+3. Add code coverage.
+4. Add Docker support; see https://github.com/FEniCS/dolfinx
+5. Remove warnings for external sources on a target basis; see e.g. OomphWarnings.cmake.
+6. Test the build of the demo_drivers with the main build (i.e. add_subdirectory(demo_drivers)).
+7. Add sanitiser support (e.g. address/memory, etc.).
+8. Sort out external distribution build
+9. Add check_...() calls to make sure the C/C++/Fortran compiler work
+10. Add (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) in conditionals where appropriate. See: https://cliutils.gitlab.io/modern-cmake/chapters/testing.html
+11. Sort out building of oomph-lib with shared libraries. Currently breaks when it gets to oomph_superlu
+12. Sort out *sequential* build of MUMPS
+13. Sort out a subproject build of private/
+14. Grab latest version of oomph-lib and add in new code.
+15. Find and doc. how users can build a Debug and Release version and easily switch between the two.
+16. Remove OomphPrintCompilerDefinitions.cmake.
+17. Download CMake oomph-lib in a folder that has a space in the name.
 
 ## Not urgent and not important
 1. Sort out external distribution build with up-to-date sources.
