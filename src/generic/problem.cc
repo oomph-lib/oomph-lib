@@ -9020,7 +9020,7 @@ void Problem::newton_solve()
      if (!Shut_up_in_newton_solve)
       {
        oomph_info << "Newton Step " << count << ": Maximum residuals "
-                  << maxres << std::endl;
+                  << maxres << std::endl << std::endl;
       }
     }
 
@@ -9176,6 +9176,8 @@ void Problem::globally_convergent_line_search(
    else if(half_residual_squared <= half_residual_squared_old+
            min_fct_decrease*lambda*slope)
     {
+     oomph_info << "Returning from linesearch with lambda="
+                << lambda << std::endl;
      return;
     }
    else

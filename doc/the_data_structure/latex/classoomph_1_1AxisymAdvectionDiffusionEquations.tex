@@ -86,7 +86,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquations_a5
 \begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
  \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquations_a47f44dc0f9ba78e0db3a72c9b1f90633}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
-\begin{DoxyCompactList}\small\item\em Get flux\+: \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get flux\+: \mbox{[}du/dr,du/dz\mbox{]}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquations_a00d9356ebf0f2fe1a5f470db379c9bd9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector (wrapper) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquations_a4afbd032aca7d93c1e4402bd3ccc2379}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
@@ -290,7 +290,7 @@ Return derivative of u at point s with respect to all data that can affect its v
 
 
 
-Definition at line 460 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 458 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -412,7 +412,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 416 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 414 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -434,7 +434,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 402 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 400 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -479,11 +479,11 @@ Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+
 
 
 
-Get flux\+: 
+Get flux\+: \mbox{[}du/dr,du/dz\mbox{]}. 
 
 
 
-Definition at line 372 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 370 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -551,7 +551,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 428 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 426 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -992,7 +992,7 @@ Boolean flag to indicate whether AlE formulation is disable.
 
 
 
-Definition at line 562 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 560 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1010,7 +1010,7 @@ Pointer to global Diffusion parameter.
 
 
 
-Definition at line 553 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 551 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1028,7 +1028,7 @@ Static default value for the Peclet number.
 
 Default Diffusion coefficient. 
 
-Definition at line 570 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 568 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1046,7 +1046,7 @@ Static default value for the Peclet number.
 
 Default value for Peclet number. 
 
-Definition at line 567 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 565 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1064,7 +1064,7 @@ Pointer to global Peclet number.
 
 
 
-Definition at line 547 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 545 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1082,7 +1082,7 @@ Pointer to global Peclet number multiplied by Strouhal number.
 
 
 
-Definition at line 550 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 548 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1100,7 +1100,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 556 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 554 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1118,7 +1118,7 @@ Pointer to wind function\+:
 
 
 
-Definition at line 559 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 557 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

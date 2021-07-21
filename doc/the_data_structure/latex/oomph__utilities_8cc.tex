@@ -15,8 +15,6 @@
 \item 
  \mbox{\hyperlink{namespaceoomph_1_1CumulativeTimings}{oomph\+::\+Cumulative\+Timings}}
 \begin{DoxyCompactList}\small\item\em Namespace for global (cumulative) timings. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver}}
-\begin{DoxyCompactList}\small\item\em Namespace for black-\/box FD Newton solver. \end{DoxyCompactList}\item 
  \mbox{\hyperlink{namespaceoomph_1_1StringConversion}{oomph\+::\+String\+Conversion}}
 \item 
  \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs}{oomph\+::\+Command\+Line\+Args}}
@@ -33,11 +31,6 @@
 \begin{DoxyCompactList}\small\item\em Helper for recording execution time. \end{DoxyCompactList}\item 
  \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage}{oomph\+::\+Memory\+Usage}}
 \end{DoxyCompactItemize}
-\doxysubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-typedef void($\ast$ \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a0b45d0bd1b7ae8ff5c24715b6118d1fd}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Residual\+Fct\+Pt}}) (const Vector$<$ double $>$ \&, const Vector$<$ double $>$ \&, Vector$<$ double $>$ \&)
-\begin{DoxyCompactList}\small\item\em Function pointer for residual function\+: Parameters, unknowns, residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -63,10 +56,6 @@ void \mbox{\hyperlink{namespaceoomph_1_1CumulativeTimings_a15855a46d3acb353e3ca8
 \begin{DoxyCompactList}\small\item\em Reset all timers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1CumulativeTimings_a49a6558826c7842f0e14dbdaccc3ed01}{oomph\+::\+Cumulative\+Timings\+::set\+\_\+ntimers}} (const unsigned \&ntimers)
 \begin{DoxyCompactList}\small\item\em Set number of timings that can be recorded in parallel. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_ad3ba3031554be43788d296a7a4dddd67}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve}} (Residual\+Fct\+Pt residual\+\_\+fct, const Vector$<$ double $>$ \&params, Vector$<$ double $>$ \&unknowns)
-\begin{DoxyCompactList}\small\item\em Black-\/box FD Newton solver\+: Calling sequence for residual function is. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a4a1361a9b08163b59fe82b3042b0f887}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::line\+\_\+search}} (const Vector$<$ double $>$ \&x\+\_\+old, const double half\+\_\+residual\+\_\+squared\+\_\+old, const Vector$<$ double $>$ \&gradient, Residual\+Fct\+Pt residual\+\_\+fct, const Vector$<$ double $>$ \&params, Vector$<$ double $>$ \&newton\+\_\+dir, Vector$<$ double $>$ \&x, double \&half\+\_\+residual\+\_\+squared, const double \&stpmax)
-\begin{DoxyCompactList}\small\item\em Line search helper for globally convergent Newton method. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{namespaceoomph_1_1StringConversion_aab6637703088959640bd73844a597728}{oomph\+::\+String\+Conversion\+::to\+\_\+lower}} (const std\+::string \&input)
 \begin{DoxyCompactList}\small\item\em Convert a string to lower case (outputs a copy). \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{namespaceoomph_1_1StringConversion_afdee5876392b9daa3563484f63a9b55f}{oomph\+::\+String\+Conversion\+::to\+\_\+upper}} (const std\+::string \&input)
@@ -162,18 +151,6 @@ Vector$<$ clock\+\_\+t $>$ \mbox{\hyperlink{namespaceoomph_1_1CumulativeTimings_
 \begin{DoxyCompactList}\small\item\em Cumulative timings. \end{DoxyCompactList}\item 
 Vector$<$ clock\+\_\+t $>$ \mbox{\hyperlink{namespaceoomph_1_1CumulativeTimings_ad9ef14aa764288369edd9265b61dc39c}{oomph\+::\+Cumulative\+Timings\+::\+Start\+\_\+time}}
 \begin{DoxyCompactList}\small\item\em Start times of active timers. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a20ac8568daf0d63afa3945a817ff3e2d}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Max\+\_\+iter}} =20
-\begin{DoxyCompactList}\small\item\em Max. \# of Newton iterations. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a3067ba88fad991fdb619eae7533028bd}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+N\+\_\+iter\+\_\+taken}} =0
-\begin{DoxyCompactList}\small\item\em Number of Newton iterations taken in most recent invocation. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_ac2603699f47446716ca5a818f46a7f17}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Doc\+\_\+\+Progress}} =false
-\begin{DoxyCompactList}\small\item\em Flag to indicate if progress of Newton iteration is to be documented (defaults to false) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a6f0d2ceb4451e66bb7ef4ab4fdb62bcf}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+F\+D\+\_\+step}} =1.\+0e-\/8
-\begin{DoxyCompactList}\small\item\em FD step. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a4bacc59c8e1194e553f698530e9e945e}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Tol}} =1.\+0e-\/8
-\begin{DoxyCompactList}\small\item\em Tolerance. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_afd90cb451fb7ae5a8e30cab0a1884568}{oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Use\+\_\+step\+\_\+length\+\_\+control}} =false
-\begin{DoxyCompactList}\small\item\em Use steplength control do make globally convergent (default false) \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_ab0f9a1024bd371139a86ee7db3ddfe83}{oomph\+::\+Command\+Line\+Args\+::\+Argc}}
 \begin{DoxyCompactList}\small\item\em Number of arguments + 1. \end{DoxyCompactList}\item 
 char $\ast$$\ast$ \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a3b51290f4dc7018bba2e46bfc6f8bedc}{oomph\+::\+Command\+Line\+Args\+::\+Argv}}

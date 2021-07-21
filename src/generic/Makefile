@@ -190,16 +190,16 @@ am__libgeneric_la_SOURCES_DIST = oomph_definitions.h Qelements.h \
 	unstructured_two_d_mesh_geometry_base.h geometric_multigrid.h \
 	sample_point_container.h sample_point_parameters.h \
 	sparse_vector.h geom_obj_with_boundary.h \
-	extruded_macro_element.h extruded_domain.h mumps_solver.h \
-	stacktrace.h hypre_solver.h trilinos_helpers.h \
-	trilinos_preconditioners.h trilinos_solver.h \
-	trilinos_eigen_solver.h cfortran.h frontal.h arpack.h \
-	lapack_qz.h mumps.h oomph_definitions.cc oomph_utilities.cc \
-	complex_matrices.cc matrices.cc timesteppers.cc \
-	explicit_timesteppers.cc integral.cc nodes.cc elements.cc \
-	mesh.cc assembly_handler.cc periodic_orbit_handler.cc \
-	problem.cc Qelements.cc Qspectral_elements.cc \
-	frontal_solver.cc linear_solver.cc \
+	extruded_macro_element.h extruded_domain.h \
+	black_box_newton_solver.h mumps_solver.h stacktrace.h \
+	hypre_solver.h trilinos_helpers.h trilinos_preconditioners.h \
+	trilinos_solver.h trilinos_eigen_solver.h cfortran.h frontal.h \
+	arpack.h lapack_qz.h mumps.h oomph_definitions.cc \
+	oomph_utilities.cc complex_matrices.cc matrices.cc \
+	timesteppers.cc explicit_timesteppers.cc integral.cc nodes.cc \
+	elements.cc mesh.cc assembly_handler.cc \
+	periodic_orbit_handler.cc problem.cc Qelements.cc \
+	Qspectral_elements.cc frontal_solver.cc linear_solver.cc \
 	Qelement_face_coordinate_translation_schemes.cc Telements.cc \
 	hermite_elements.cc elastic_problems.cc hijacked_elements.cc \
 	algebraic_elements.cc macro_element.cc \
@@ -227,8 +227,9 @@ am__libgeneric_la_SOURCES_DIST = oomph_definitions.h Qelements.h \
 	unstructured_two_d_mesh_geometry_base.cc \
 	sample_point_container.cc sample_point_parameters.cc \
 	geometric_multigrid.cc extruded_macro_element.cc \
-	extruded_domain.cc mumps_fortran_solver.F mumps_solver.cc \
-	superlu_dist.c hypre_solver.cc trilinos_helpers.cc \
+	extruded_domain.cc black_box_newton_solver.cc \
+	mumps_fortran_solver.F mumps_solver.cc superlu_dist.c \
+	hypre_solver.cc trilinos_helpers.cc \
 	trilinos_preconditioners.cc trilinos_solver.cc \
 	trilinos_eigen_solver.cc
 am__objects_1 =
@@ -275,8 +276,8 @@ am__objects_7 = oomph_definitions.lo oomph_utilities.lo \
 	unstructured_two_d_mesh_geometry_base.lo \
 	sample_point_container.lo sample_point_parameters.lo \
 	geometric_multigrid.lo extruded_macro_element.lo \
-	extruded_domain.lo $(am__objects_3) $(am__objects_4) \
-	$(am__objects_5) $(am__objects_6)
+	extruded_domain.lo black_box_newton_solver.lo $(am__objects_3) \
+	$(am__objects_4) $(am__objects_5) $(am__objects_6)
 am__objects_8 = $(am__objects_2) $(am__objects_1) $(am__objects_7)
 am_libgeneric_la_OBJECTS = $(am__objects_8)
 libgeneric_la_OBJECTS = $(am_libgeneric_la_OBJECTS)
@@ -304,6 +305,7 @@ am__depfiles_remade =  \
 	./$(DEPDIR)/Qelements.Plo ./$(DEPDIR)/Qspectral_elements.Plo \
 	./$(DEPDIR)/Telements.Plo ./$(DEPDIR)/algebraic_elements.Plo \
 	./$(DEPDIR)/assembly_handler.Plo ./$(DEPDIR)/binary_tree.Plo \
+	./$(DEPDIR)/black_box_newton_solver.Plo \
 	./$(DEPDIR)/block_preconditioner.Plo \
 	./$(DEPDIR)/brick_mesh.Plo ./$(DEPDIR)/communicator.Plo \
 	./$(DEPDIR)/complex_matrices.Plo ./$(DEPDIR)/dg_elements.Plo \
@@ -469,10 +471,10 @@ am__library_include_HEADERS_DIST = oomph_definitions.h Qelements.h \
 	unstructured_two_d_mesh_geometry_base.h geometric_multigrid.h \
 	sample_point_container.h sample_point_parameters.h \
 	sparse_vector.h geom_obj_with_boundary.h \
-	extruded_macro_element.h extruded_domain.h mumps_solver.h \
-	stacktrace.h hypre_solver.h trilinos_helpers.h \
-	trilinos_preconditioners.h trilinos_solver.h \
-	trilinos_eigen_solver.h tree.template.cc \
+	extruded_macro_element.h extruded_domain.h \
+	black_box_newton_solver.h mumps_solver.h stacktrace.h \
+	hypre_solver.h trilinos_helpers.h trilinos_preconditioners.h \
+	trilinos_solver.h trilinos_eigen_solver.h tree.template.cc \
 	refineable_mesh.template.cc multi_domain.template.cc \
 	missing_masters.template.cc
 HEADERS = $(include_HEADERS) $(library_include_HEADERS)
@@ -718,8 +720,8 @@ sources = oomph_definitions.cc oomph_utilities.cc complex_matrices.cc \
 	unstructured_two_d_mesh_geometry_base.cc \
 	sample_point_container.cc sample_point_parameters.cc \
 	geometric_multigrid.cc extruded_macro_element.cc \
-	extruded_domain.cc $(am__append_1) $(am__append_2) \
-	$(am__append_5) $(am__append_7)
+	extruded_domain.cc black_box_newton_solver.cc $(am__append_1) \
+	$(am__append_2) $(am__append_5) $(am__append_7)
 
 # Define the headers
 headers = oomph_definitions.h Qelements.h Qspectral_elements.h \
@@ -763,8 +765,9 @@ headers = oomph_definitions.h Qelements.h Qspectral_elements.h \
 	unstructured_two_d_mesh_geometry_base.h geometric_multigrid.h \
 	sample_point_container.h sample_point_parameters.h \
 	sparse_vector.h geom_obj_with_boundary.h \
-	extruded_macro_element.h extruded_domain.h $(am__append_3) \
-	$(am__append_4) $(am__append_6) $(am__append_8)
+	extruded_macro_element.h extruded_domain.h \
+	black_box_newton_solver.h $(am__append_3) $(am__append_4) \
+	$(am__append_6) $(am__append_8)
 
 # Template-only files: Need to be included in include directory
 # but should not be listed in combined header file
@@ -888,6 +891,7 @@ include ./$(DEPDIR)/Telements.Plo # am--include-marker
 include ./$(DEPDIR)/algebraic_elements.Plo # am--include-marker
 include ./$(DEPDIR)/assembly_handler.Plo # am--include-marker
 include ./$(DEPDIR)/binary_tree.Plo # am--include-marker
+include ./$(DEPDIR)/black_box_newton_solver.Plo # am--include-marker
 include ./$(DEPDIR)/block_preconditioner.Plo # am--include-marker
 include ./$(DEPDIR)/brick_mesh.Plo # am--include-marker
 include ./$(DEPDIR)/communicator.Plo # am--include-marker
@@ -1212,6 +1216,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/algebraic_elements.Plo
 	-rm -f ./$(DEPDIR)/assembly_handler.Plo
 	-rm -f ./$(DEPDIR)/binary_tree.Plo
+	-rm -f ./$(DEPDIR)/black_box_newton_solver.Plo
 	-rm -f ./$(DEPDIR)/block_preconditioner.Plo
 	-rm -f ./$(DEPDIR)/brick_mesh.Plo
 	-rm -f ./$(DEPDIR)/communicator.Plo
@@ -1346,6 +1351,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/algebraic_elements.Plo
 	-rm -f ./$(DEPDIR)/assembly_handler.Plo
 	-rm -f ./$(DEPDIR)/binary_tree.Plo
+	-rm -f ./$(DEPDIR)/black_box_newton_solver.Plo
 	-rm -f ./$(DEPDIR)/block_preconditioner.Plo
 	-rm -f ./$(DEPDIR)/brick_mesh.Plo
 	-rm -f ./$(DEPDIR)/communicator.Plo

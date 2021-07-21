@@ -139,16 +139,17 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a0b45d0bd1b7ae8ff5c24715b6118d1fd"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;)</td></tr>
-<tr class="memdesc:a0b45d0bd1b7ae8ff5c24715b6118d1fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for residual function: Parameters, unknowns, residuals.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">More...</a><br /></td></tr>
-<tr class="separator:a0b45d0bd1b7ae8ff5c24715b6118d1fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae43745d4b8933505d52d50820c5ed5bf"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ae43745d4b8933505d52d50820c5ed5bf">ResidualFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;parameters, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;unknowns, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td></tr>
+<tr class="separator:ae43745d4b8933505d52d50820c5ed5bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a8995752628445edff43f942b4d3e88"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a6a8995752628445edff43f942b4d3e88">JacobianFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;jacobian)</td></tr>
+<tr class="separator:a6a8995752628445edff43f942b4d3e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad3ba3031554be43788d296a7a4dddd67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ad3ba3031554be43788d296a7a4dddd67">black_box_fd_newton_solve</a> (<a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a> residual_fct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;params, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;unknowns)</td></tr>
-<tr class="memdesc:ad3ba3031554be43788d296a7a4dddd67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Black-box FD Newton solver: Calling sequence for residual function is.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ad3ba3031554be43788d296a7a4dddd67">More...</a><br /></td></tr>
-<tr class="separator:ad3ba3031554be43788d296a7a4dddd67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a1361a9b08163b59fe82b3042b0f887"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a4a1361a9b08163b59fe82b3042b0f887">line_search</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x_old, const double half_residual_squared_old, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;gradient, <a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a> residual_fct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;params, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;newton_dir, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, double &amp;half_residual_squared, const double &amp;stpmax)</td></tr>
+<tr class="memitem:ae132e48f67e6523676abad29b61397ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ae132e48f67e6523676abad29b61397ba">black_box_fd_newton_solve</a> (<a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ae43745d4b8933505d52d50820c5ed5bf">ResidualFctPt</a> residual_fct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;params, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;unknowns, <a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a6a8995752628445edff43f942b4d3e88">JacobianFctPt</a> jacobian_fct)</td></tr>
+<tr class="memdesc:ae132e48f67e6523676abad29b61397ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Black-box FD Newton solver: Calling sequence for residual function is.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ae132e48f67e6523676abad29b61397ba">More...</a><br /></td></tr>
+<tr class="separator:ae132e48f67e6523676abad29b61397ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a1361a9b08163b59fe82b3042b0f887"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a4a1361a9b08163b59fe82b3042b0f887">line_search</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x_old, const double half_residual_squared_old, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;gradient, <a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ae43745d4b8933505d52d50820c5ed5bf">ResidualFctPt</a> residual_fct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;params, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;newton_dir, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, double &amp;half_residual_squared, const double &amp;stpmax)</td></tr>
 <tr class="memdesc:a4a1361a9b08163b59fe82b3042b0f887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Line search helper for globally convergent Newton method.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a4a1361a9b08163b59fe82b3042b0f887">More...</a><br /></td></tr>
 <tr class="separator:a4a1361a9b08163b59fe82b3042b0f887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -176,27 +177,41 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Namespace for black-box FD Newton solver. </p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="a0b45d0bd1b7ae8ff5c24715b6118d1fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b45d0bd1b7ae8ff5c24715b6118d1fd">&#9670;&nbsp;</a></span>ResidualFctPt</h2>
+<a id="a6a8995752628445edff43f942b4d3e88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a8995752628445edff43f942b4d3e88">&#9670;&nbsp;</a></span>JacobianFctPt</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* oomph::BlackBoxFDNewtonSolver::ResidualFctPt)(const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;parameters, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;unknowns, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td>
+          <td class="memname">typedef void(* oomph::BlackBoxFDNewtonSolver::JacobianFctPt) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;jacobian)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function pointer for residual function: Parameters, unknowns, residuals. </p>
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8h_source.html#l00065">65</a> of file <a class="el" href="black__box__newton__solver_8h_source.html">black_box_newton_solver.h</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00305">305</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+</div>
+</div>
+<a id="ae43745d4b8933505d52d50820c5ed5bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae43745d4b8933505d52d50820c5ed5bf">&#9670;&nbsp;</a></span>ResidualFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* oomph::BlackBoxFDNewtonSolver::ResidualFctPt) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;parameters, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;unknowns, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8h_source.html#l00060">60</a> of file <a class="el" href="black__box__newton__solver_8h_source.html">black_box_newton_solver.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ad3ba3031554be43788d296a7a4dddd67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3ba3031554be43788d296a7a4dddd67">&#9670;&nbsp;</a></span>black_box_fd_newton_solve()</h2>
+<a id="ae132e48f67e6523676abad29b61397ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae132e48f67e6523676abad29b61397ba">&#9670;&nbsp;</a></span>black_box_fd_newton_solve()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,7 +219,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void oomph::BlackBoxFDNewtonSolver::black_box_fd_newton_solve </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ae43745d4b8933505d52d50820c5ed5bf">ResidualFctPt</a>&#160;</td>
           <td class="paramname"><em>residual_fct</em>, </td>
         </tr>
         <tr>
@@ -217,7 +232,13 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>unknowns</em>&#160;</td>
+          <td class="paramname"><em>unknowns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a6a8995752628445edff43f942b4d3e88">JacobianFctPt</a>&#160;</td>
+          <td class="paramname"><em>jacobian_fct</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -232,9 +253,9 @@ Variables</h2></td></tr>
 </div><!-- fragment --><p> where all arguments are double Vectors. unknowns.size() = residuals.size() </p>
 <p>Reset number of Newton iterations taken in most recent invocation</p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00333">333</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8cc_source.html#l00071">71</a> of file <a class="el" href="black__box__newton__solver_8cc_source.html">black_box_newton_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00317">Doc_Progress</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00320">FD_step</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00500">line_search()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00310">Max_iter</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00313">N_iter_taken</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="matrices_8cc_source.html#l00051">oomph::DoubleMatrixBase::solve()</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00323">Tol</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00326">Use_step_length_control</a>.</p>
+<p class="reference">References <a class="el" href="black__box__newton__solver_8cc_source.html#l00055">Doc_Progress</a>, <a class="el" href="black__box__newton__solver_8cc_source.html#l00058">FD_step</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="black__box__newton__solver_8cc_source.html#l00249">line_search()</a>, <a class="el" href="black__box__newton__solver_8cc_source.html#l00048">Max_iter</a>, <a class="el" href="black__box__newton__solver_8cc_source.html#l00051">N_iter_taken</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="matrices_8cc_source.html#l00051">oomph::DoubleMatrixBase::solve()</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="black__box__newton__solver_8cc_source.html#l00061">Tol</a>, and <a class="el" href="black__box__newton__solver_8cc_source.html#l00064">Use_step_length_control</a>.</p>
 
 </div>
 </div>
@@ -265,7 +286,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ae43745d4b8933505d52d50820c5ed5bf">ResidualFctPt</a>&#160;</td>
           <td class="paramname"><em>residual_fct</em>, </td>
         </tr>
         <tr>
@@ -308,11 +329,11 @@ Variables</h2></td></tr>
 
 <p>Line search helper for globally convergent Newton method. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00500">500</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8cc_source.html#l00249">249</a> of file <a class="el" href="black__box__newton__solver_8cc_source.html">black_box_newton_solver.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="black__box__newton__solver_8cc_source.html#l00071">black_box_fd_newton_solve()</a>.</p>
 
 </div>
 </div>
@@ -331,9 +352,9 @@ Variables</h2></td></tr>
 
 <p>Flag to indicate if progress of Newton iteration is to be documented (defaults to false) </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00317">317</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8cc_source.html#l00055">55</a> of file <a class="el" href="black__box__newton__solver_8cc_source.html">black_box_newton_solver.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="black__box__newton__solver_8cc_source.html#l00071">black_box_fd_newton_solve()</a>.</p>
 
 </div>
 </div>
@@ -351,9 +372,9 @@ Variables</h2></td></tr>
 
 <p>FD step. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00320">320</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8cc_source.html#l00058">58</a> of file <a class="el" href="black__box__newton__solver_8cc_source.html">black_box_newton_solver.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>, <a class="el" href="problem_8cc_source.html#l07871">oomph::Problem::get_derivative_wrt_global_parameter()</a>, <a class="el" href="problem_8cc_source.html#l07807">oomph::Problem::get_fd_jacobian()</a>, <a class="el" href="problem_8cc_source.html#l07970">oomph::Problem::get_hessian_vector_products()</a>, <a class="el" href="assembly__handler_8cc_source.html#l01185">oomph::FoldHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02991">oomph::PitchForkHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04566">oomph::HopfHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00634">oomph::AugmentedBlockFoldLinearSolver::resolve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02376">oomph::AugmentedBlockPitchForkLinearSolver::resolve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00383">oomph::AugmentedBlockFoldLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02160">oomph::AugmentedBlockPitchForkLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="black__box__newton__solver_8cc_source.html#l00071">black_box_fd_newton_solve()</a>, <a class="el" href="problem_8cc_source.html#l07871">oomph::Problem::get_derivative_wrt_global_parameter()</a>, <a class="el" href="problem_8cc_source.html#l07807">oomph::Problem::get_fd_jacobian()</a>, <a class="el" href="problem_8cc_source.html#l07970">oomph::Problem::get_hessian_vector_products()</a>, <a class="el" href="assembly__handler_8cc_source.html#l01185">oomph::FoldHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02991">oomph::PitchForkHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04566">oomph::HopfHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00634">oomph::AugmentedBlockFoldLinearSolver::resolve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02376">oomph::AugmentedBlockPitchForkLinearSolver::resolve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00383">oomph::AugmentedBlockFoldLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02160">oomph::AugmentedBlockPitchForkLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>.</p>
 
 </div>
 </div>
@@ -371,9 +392,9 @@ Variables</h2></td></tr>
 
 <p>Max. # of Newton iterations. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00310">310</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8cc_source.html#l00048">48</a> of file <a class="el" href="black__box__newton__solver_8cc_source.html">black_box_newton_solver.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>, <a class="el" href="complex__smoother_8h_source.html#l00546">oomph::ComplexDampedJacobi&lt; MATRIX &gt;::complex_solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l01275">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00621">oomph::CG&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00181">oomph::BiCGStab&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01190">oomph::GS&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01947">oomph::DampedJacobi&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02268">oomph::GMRES&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l02535">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::solve_helper()</a>, and <a class="el" href="complex__smoother_8h_source.html#l03628">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::solve_helper()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="black__box__newton__solver_8cc_source.html#l00071">black_box_fd_newton_solve()</a>, <a class="el" href="complex__smoother_8h_source.html#l00546">oomph::ComplexDampedJacobi&lt; MATRIX &gt;::complex_solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l01275">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00621">oomph::CG&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00181">oomph::BiCGStab&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01190">oomph::GS&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01947">oomph::DampedJacobi&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02280">oomph::GMRES&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l02535">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::solve_helper()</a>, and <a class="el" href="complex__smoother_8h_source.html#l03628">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::solve_helper()</a>.</p>
 
 </div>
 </div>
@@ -391,9 +412,9 @@ Variables</h2></td></tr>
 
 <p>Number of Newton iterations taken in most recent invocation. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00313">313</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8cc_source.html#l00051">51</a> of file <a class="el" href="black__box__newton__solver_8cc_source.html">black_box_newton_solver.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="black__box__newton__solver_8cc_source.html#l00071">black_box_fd_newton_solve()</a>.</p>
 
 </div>
 </div>
@@ -411,9 +432,9 @@ Variables</h2></td></tr>
 
 <p>Tolerance. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00323">323</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8cc_source.html#l00061">61</a> of file <a class="el" href="black__box__newton__solver_8cc_source.html">black_box_newton_solver.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="black__box__newton__solver_8cc_source.html#l00071">black_box_fd_newton_solve()</a>.</p>
 
 </div>
 </div>
@@ -431,9 +452,9 @@ Variables</h2></td></tr>
 
 <p>Use steplength control do make globally convergent (default false) </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00326">326</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="black__box__newton__solver_8cc_source.html#l00064">64</a> of file <a class="el" href="black__box__newton__solver_8cc_source.html">black_box_newton_solver.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="black__box__newton__solver_8cc_source.html#l00071">black_box_fd_newton_solve()</a>.</p>
 
 </div>
 </div>
@@ -466,7 +487,7 @@ Variables</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Jul 16 2021 19:24:43
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Jul 21 2021 16:09:59
         </div>
       </div>
     </footer>

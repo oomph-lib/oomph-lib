@@ -1420,7 +1420,7 @@ Activate generic bifurcation tracking for a single (real) eigenvalue where the i
 
 Activate the generic bifurcation ///tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt. 
 
-Definition at line 10040 of file problem.\+cc.
+Definition at line 10042 of file problem.\+cc.
 
 
 
@@ -1438,7 +1438,7 @@ Activate generic bifurcation tracking for a single (real) eigenvalue where the i
 
 Activate the generic bifurcation ///tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt. 
 
-Definition at line 10070 of file problem.\+cc.
+Definition at line 10072 of file problem.\+cc.
 
 
 
@@ -1456,7 +1456,7 @@ Turn on fold tracking using the augmented system specified in the \mbox{\hyperli
 
 Activate the fold tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt. 
 
-Definition at line 10014 of file problem.\+cc.
+Definition at line 10016 of file problem.\+cc.
 
 
 
@@ -1478,7 +1478,7 @@ Turn on Hopf bifurcation tracking using the augmented system specified in the \m
 
 Activate the hopf tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt. 
 
-Definition at line 10138 of file problem.\+cc.
+Definition at line 10140 of file problem.\+cc.
 
 
 
@@ -1500,7 +1500,7 @@ Turn on Hopf bifurcation tracking using the augmented system specified in the \m
 
 Activate the hopf tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt and the frequency and null vectors specified. 
 
-Definition at line 10166 of file problem.\+cc.
+Definition at line 10168 of file problem.\+cc.
 
 
 
@@ -1518,7 +1518,7 @@ Turn on pitchfork tracking using the augmented system specified in the \mbox{\hy
 
 Activate the pitchfork tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt and a symmetry vector. The boolean flag is used to specify whether a block solver is used, default is true. 
 
-Definition at line 10105 of file problem.\+cc.
+Definition at line 10107 of file problem.\+cc.
 
 
 
@@ -1558,7 +1558,7 @@ Adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es), bas
 
 Adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es), based on their own error estimates and the target errors specified in the mesh(es). Following mesh adaptation, update global mesh, and re-\/assign equation numbers. Return \# of refined/unrefined elements. On return from this function, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} can immediately be solved again. 
 
-Definition at line 13524 of file problem.\+cc.
+Definition at line 13526 of file problem.\+cc.
 
 
 
@@ -1576,7 +1576,7 @@ Adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es), bas
 
 Perform mesh adaptation for (all) refineable (sub)mesh(es), based on the error estimates in elemental\+\_\+error and the target errors specified in the mesh(es). Following mesh adaptation, update global mesh, and re-\/assign equation numbers. Return \# of refined/unrefined elements. On return from this function, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} can immediately be solved again. 
 
-Definition at line 14413 of file problem.\+cc.
+Definition at line 14415 of file problem.\+cc.
 
 
 
@@ -1616,7 +1616,7 @@ Attempt to advance timestep by dt\+\_\+desired. If the solution fails the timest
 
 Attempt to take one timestep forward using dt\+\_\+desired. The error control parameter, epsilon, is used to specify the desired approximate value of the global error norm per timestep. The routine returns the value an estimate of the next value of dt that should be taken. 
 
-Definition at line 10944 of file problem.\+cc.
+Definition at line 10946 of file problem.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a3f5bde6d7fa8972e01a20c522b5fb2ef}\label{classoomph_1_1Problem_a3f5bde6d7fa8972e01a20c522b5fb2ef}} 
 \index{oomph::Problem@{oomph::Problem}!adaptive\_unsteady\_newton\_solve@{adaptive\_unsteady\_newton\_solve}}
@@ -1630,7 +1630,7 @@ Attempt to advance timestep by dt\+\_\+desired. If the solution fails the timest
 
 Attempt to take one timestep forward using the dt\+\_\+desired. This is the driver for a number of adaptive solvers. If the solution fails to converge at a given timestep, the routine will automatically halve the time step and try again, until the time step falls below the specified minimum value. The routine returns the value an estimate of the next value of dt that should be taken. Timestep is also rejected if the error estimate post-\/solve (computed by \mbox{\hyperlink{classoomph_1_1Problem_ac7667864b71a3889c95c29307422ac8e}{global\+\_\+temporal\+\_\+error\+\_\+norm()}}) exceeds epsilon. This behaviour can be over-\/ruled by setting the protected boolean \mbox{\hyperlink{classoomph_1_1Problem_ab27af4a444de9f59125ee50ac778d97a}{Problem\+::\+Keep\+\_\+temporal\+\_\+error\+\_\+below\+\_\+tolerance}} to false. 
 
-Definition at line 10965 of file problem.\+cc.
+Definition at line 10967 of file problem.\+cc.
 
 
 
@@ -1750,7 +1750,7 @@ Solve a steady problem using arc-\/length continuation, when the variable corres
 
 This function takes one step of length ds in pseudo-\/arclength.\+The argument data\+\_\+pt is a pointer to the data that holds the parameter (global variable) that is being traded for arc-\/length. The exact value is located at the location given by data\+\_\+index. The function returns the next desired arc-\/length according to criteria based upon the desired number of Newton Iterations per solve. 
 
-Definition at line 10307 of file problem.\+cc.
+Definition at line 10309 of file problem.\+cc.
 
 
 
@@ -1768,7 +1768,7 @@ Solve a steady problem using arc-\/length continuation, when the parameter that 
 
 This function takes one step of length ds in pseudo-\/arclength.\+The argument parameter\+\_\+pt is a pointer to the parameter (global variable) that is being traded for arc-\/length. The function returns the next desired arc-\/length according to criteria based upon the desired number of Newton Iterations per solve. 
 
-Definition at line 10213 of file problem.\+cc.
+Definition at line 10215 of file problem.\+cc.
 
 
 
@@ -1786,7 +1786,7 @@ Private helper function that actually contains the guts of the arc-\/length step
 
 This function takes one step of length ds in pseudo-\/arclength.\+The argument parameter\+\_\+pt is a pointer to the parameter (global variable) that is being traded for arc-\/length. The function returns the next desired arc-\/length according to criteria based upon the desired number of Newton Iterations per solve. end of adaptation loop
 
-Definition at line 10442 of file problem.\+cc.
+Definition at line 10444 of file problem.\+cc.
 
 
 
@@ -1910,7 +1910,7 @@ Initialise data and nodal positions to simulate impulsive start from initial con
 
 Initialise the previous values of the variables for time stepping corresponding to an impulsive start. Previous history for all data is generated by the appropriate timesteppers. Previous nodal positions are simply copied backwards. 
 
-Definition at line 11382 of file problem.\+cc.
+Definition at line 11384 of file problem.\+cc.
 
 
 
@@ -1932,7 +1932,7 @@ Initialise data and nodal positions to simulate an impulsive start and also set 
 
 Assign the values for an impulsive start and also set the initial values of the previous dts to both be dt 
 
-Definition at line 11401 of file problem.\+cc.
+Definition at line 11403 of file problem.\+cc.
 
 
 
@@ -1950,7 +1950,7 @@ A function that is used to document the errors used in the adaptive solution of 
 
 A function that is used to document the errors when adapting a bifurcation-\/tracking problem, which requires separate interpolation of the associated eigenfunction. The error measure is chosen to be a suitable combination of the errors in the base flow and the eigenfunction. The bifurcation type is passed as an argument 
 
-Definition at line 13505 of file problem.\+cc.
+Definition at line 13507 of file problem.\+cc.
 
 
 
@@ -1972,7 +1972,7 @@ A function that is used to adapt a bifurcation-\/tracking problem, which require
 
 A function that is used to adapt a bifurcation-\/tracking problem, which requires separate interpolation of the associated eigenfunction. The error measure is chosen to be a suitable combination of the errors in the base flow and the eigenfunction. The bifurcation type is passed as an argument 
 
-Definition at line 13214 of file problem.\+cc.
+Definition at line 13216 of file problem.\+cc.
 
 
 
@@ -1994,7 +1994,7 @@ Return pointer to the parameter that is used in the bifurcation detection. If we
 
 Return pointer to the parameter that is used in the bifurcation detection. If we are not tracking a bifurcation then an error will be thrown by the \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} 
 
-Definition at line 9994 of file problem.\+cc.
+Definition at line 9996 of file problem.\+cc.
 
 
 
@@ -2060,7 +2060,7 @@ A function to calculate the derivatives with respect to the arc-\/length require
 
 A function to calculate the derivatives with respect to the arc-\/length required for continuation. The arguments is the solution of the linear system, Jz = d\+R/dparameter, that gives du/dparameter and the direction output from the newton\+\_\+solve\+\_\+continuation function. The derivatives are stored in the Continuation\+Parameters namespace. 
 
-Definition at line 9724 of file problem.\+cc.
+Definition at line 9726 of file problem.\+cc.
 
 
 
@@ -2078,7 +2078,7 @@ A function to calculate the derivatives wrt the arc-\/length. This version of th
 
 A function to calculate the derivatives wrt the arc-\/length. This version of the function actually does a linear solve so that the derivatives are calculated \char`\"{}exactly\char`\"{} rather than using the values at the Newton step just before convergence. This is only necessary in spatially adaptive problems, in which the number of degrees of freedom changes and so the appropriate derivatives must be calculated for the new variables. 
 
-Definition at line 9647 of file problem.\+cc.
+Definition at line 9649 of file problem.\+cc.
 
 
 
@@ -2100,7 +2100,7 @@ A function to calculate the derivatives with respect to the arc-\/length require
 
 A function to calculate the derivatives with respect to the arc-\/length required for continuation using finite differences. 
 
-Definition at line 9751 of file problem.\+cc.
+Definition at line 9753 of file problem.\+cc.
 
 
 
@@ -2122,7 +2122,7 @@ A function that performs the guts of the continuation derivative calculation in 
 
 A private helper function to calculate the derivatives with respect to the arc-\/length required for continuation using finite differences. 
 
-Definition at line 9920 of file problem.\+cc.
+Definition at line 9922 of file problem.\+cc.
 
 
 
@@ -2144,7 +2144,7 @@ A function that performs the guts of the continuation derivative calculation in 
 
 A private helper function to calculate the derivatives with respect to the arc-\/length required for continuation. The arguments is the solution of the linear system, Jz = d\+R/dparameter, that gives du/dparameter and the direction output from the newton\+\_\+solve\+\_\+continuation function. The derivatives are stored in the Continuation\+Parameters namespace. 
 
-Definition at line 9837 of file problem.\+cc.
+Definition at line 9839 of file problem.\+cc.
 
 
 
@@ -2166,7 +2166,7 @@ Calculate predictions.
 
 Calculate the predictions of all variables in problem. 
 
-Definition at line 11532 of file problem.\+cc.
+Definition at line 11534 of file problem.\+cc.
 
 
 
@@ -2210,7 +2210,7 @@ Check the halo/haloed node/element schemes.
 
 Check the halo/haloed/shared node/element schemes. 
 
-Definition at line 16364 of file problem.\+cc.
+Definition at line 16366 of file problem.\+cc.
 
 
 
@@ -2286,7 +2286,7 @@ Copy \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, nodal positions etc fro
 
 Copy \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, nodal positions etc from specified problem. Note\+: This is not a copy constructor. We assume that the current and the \char`\"{}original\char`\"{} problem have both been created by calling the same problem constructor so that all \mbox{\hyperlink{classoomph_1_1Data}{Data}} objects, time steppers etc. in the two problems are completely independent. This function copies the nodal, internal and global values and the time parameters from the original problem into \char`\"{}this\char`\"{} one. This functionality is required, e.\+g. for multigrid computations. 
 
-Definition at line 11742 of file problem.\+cc.
+Definition at line 11744 of file problem.\+cc.
 
 
 
@@ -2306,7 +2306,7 @@ external halo/ed elements/nodes or the \char`\"{}normal\char`\"{} halo/ed ones.
 
 A private helper function to copy the haloed equation numbers into the halo equation numbers, either for the problem\textquotesingle{}s one and only mesh or for all of its submeshes. Bools control if we deal with data associated with 
 
-Definition at line 16887 of file problem.\+cc.
+Definition at line 16889 of file problem.\+cc.
 
 
 
@@ -2368,7 +2368,7 @@ Wrapper function to delete external storage for each submesh of the problem.
 
 Delete any external storage for any submeshes NB this would ordinarily take place within the adaptation procedure for each submesh (See Refineable\+Mesh\+::adapt\+\_\+mesh(...)), but there are instances where the actions\+\_\+before/after\+\_\+adapt routines are used and no adaptive routines are called in between (e.\+g. when doc-\/ing errors at the end of an adaptive newton solver) 
 
-Definition at line 16316 of file problem.\+cc.
+Definition at line 16318 of file problem.\+cc.
 
 
 
@@ -2502,7 +2502,7 @@ Turn off recyling of the mass matrix in explicit timestepping schemes.
 
 Turn off the recyling of the mass matrix in explicit time-\/stepping schemes. 
 
-Definition at line 11709 of file problem.\+cc.
+Definition at line 11711 of file problem.\+cc.
 
 
 
@@ -2686,7 +2686,7 @@ Get max and min error for all elements in submeshes.
 
 
 
-Definition at line 14667 of file problem.\+cc.
+Definition at line 14669 of file problem.\+cc.
 
 
 
@@ -2704,7 +2704,7 @@ Return a boolean flag to indicate whether the pointer parameter\+\_\+pt refers t
 
 Function that returns a boolean flag to indicate whether the pointer parameter\+\_\+pt refers to memory that is a value in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object used within the problem 
 
-Definition at line 9780 of file problem.\+cc.
+Definition at line 9782 of file problem.\+cc.
 
 
 
@@ -2908,7 +2908,7 @@ Private helper function that actually performs the unsteady \char`\"{}doubly\cha
 
 Private helper function to perform unsteady \char`\"{}doubly\char`\"{} adaptive Newton solve\+: Does temporal adaptation first, i.\+e. we try to do a timestep with an increment of dt, and adjusting dt until the solution on the given mesh satisfies the temporal error measure with tolerance epsilon. Following this, we do up to max\+\_\+adapt spatial adaptions (without re-\/examining the temporal error). If first==true, the initial conditions are re-\/assigned after the mesh adaptations. Shifting of time can be suppressed by overwriting the default value of shift (true). \mbox{[}Shifting must be done if first\+\_\+timestep==true because we\textquotesingle{}re constantly re-\/assigning the initial conditions; if first\+\_\+timestep==true and shift==false shifting is performed anyway and a warning is issued. Pseudo-\/\+Boolean flag suppress\+\_\+resolve\+\_\+after\+\_\+spatial\+\_\+adapt \mbox{[}0\+: false; 1\+: true\mbox{]} does what it says.\mbox{]} 
 
-Definition at line 11266 of file problem.\+cc.
+Definition at line 11268 of file problem.\+cc.
 
 
 
@@ -2948,7 +2948,7 @@ Dump refinement pattern of all refineable meshes and all generic \mbox{\hyperlin
 
 Dump refinement pattern of all refineable meshes and all generic \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} data to file for restart. 
 
-Definition at line 11912 of file problem.\+cc.
+Definition at line 11914 of file problem.\+cc.
 
 
 
@@ -3118,7 +3118,7 @@ Enable recycling of the mass matrix in explicit timestepping schemes. Useful for
 
 
 
-Definition at line 11684 of file problem.\+cc.
+Definition at line 11686 of file problem.\+cc.
 
 
 
@@ -3198,7 +3198,7 @@ Take an explicit timestep of size dt and optionally shift any stored values of t
 
 Take an explicit timestep of size dt. 
 
-Definition at line 10817 of file problem.\+cc.
+Definition at line 10819 of file problem.\+cc.
 
 
 
@@ -3260,7 +3260,7 @@ Return the error estimates computed by (all) refineable (sub)mesh(es) in the ele
 
 Return the error estimates computed by (all) refineable (sub)mesh(es) in the elemental\+\_\+error structure, which consists of a vector of elemental errors for each (sub)mesh. 
 
-Definition at line 14516 of file problem.\+cc.
+Definition at line 14518 of file problem.\+cc.
 
 
 
@@ -3282,7 +3282,7 @@ Get pointers to all possible halo data indexed by global equation number in a ma
 
 Get all the halo data stored on this processor and store pointers to the data in a map, indexed by the gobal eqn number 
 
-Definition at line 16338 of file problem.\+cc.
+Definition at line 16340 of file problem.\+cc.
 
 
 
@@ -3304,7 +3304,7 @@ Return the eigenfunction calculated as part of a bifurcation tracking process. I
 
 Return the eigenfunction calculated as part of a bifurcation tracking process. If we are not tracking a bifurcation then an error will be thrown by the \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} 
 
-Definition at line 10002 of file problem.\+cc.
+Definition at line 10004 of file problem.\+cc.
 
 
 
@@ -3344,7 +3344,7 @@ Load balance helper routine\+: Get data to be sent to other processors during lo
 
 Where do I come from, where do I go to?
 
-Definition at line 19144 of file problem.\+cc.
+Definition at line 19146 of file problem.\+cc.
 
 
 
@@ -3556,7 +3556,7 @@ Get flat-\/packed refinement pattern for each root element in current mesh (labe
 \end{DoxyItemize}
 \end{DoxyItemize}
 
-Definition at line 19691 of file problem.\+cc.
+Definition at line 19693 of file problem.\+cc.
 
 
 
@@ -3812,7 +3812,7 @@ Definition at line 9098 of file problem.\+cc.
 
 
 
-References Dof\+\_\+pt, get\+\_\+residuals(), i, ndof(), and residuals().
+References Dof\+\_\+pt, get\+\_\+residuals(), i, ndof(), oomph\+::oomph\+\_\+info, and residuals().
 
 
 
@@ -3830,7 +3830,7 @@ Set all timesteps to the same value, dt, and assign weights for all timesteppers
 
 Set all timesteps to the same value, dt, and assign weights for all timesteppers in the problem. 
 
-Definition at line 13096 of file problem.\+cc.
+Definition at line 13098 of file problem.\+cc.
 
 
 
@@ -3852,7 +3852,7 @@ Set the value of the timesteps to be equal to the values passed in a vector and 
 
 Set the value of the timesteps to be equal to the values passed in a vector and assign weights for all timesteppers in the problem 
 
-Definition at line 13119 of file problem.\+cc.
+Definition at line 13121 of file problem.\+cc.
 
 
 
@@ -4008,7 +4008,7 @@ Balance the load of a (possibly non-\/uniformly refined) problem that has alread
 
 Balance the load of a (possibly non-\/uniformly refined) problem that has already been distributed, by re-\/distributing elements over the processors. Produce explicit stats of load balancing process if boolean, report\+\_\+stats, is set to true and doc various bits of data (mainly for debugging) in directory specified by \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object. 
 
-Definition at line 17107 of file problem.\+cc.
+Definition at line 17109 of file problem.\+cc.
 
 
 
@@ -4026,7 +4026,7 @@ Make and return a pointer to the copy of the problem. A virtual function that mu
 
 Make and return a pointer to the copy of the problem. A virtual function that must be filled in by the user is they wish to perform adaptive refinement in bifurcation tracking or in multigrid problems. A\+LH\+: W\+I\+LL N\+OT BE N\+E\+C\+E\+S\+S\+A\+RY IN B\+I\+F\+U\+R\+C\+A\+T\+I\+ON T\+R\+A\+C\+K\+I\+NG IN L\+O\+NG R\+UN... 
 
-Definition at line 11893 of file problem.\+cc.
+Definition at line 11895 of file problem.\+cc.
 
 
 
@@ -4288,7 +4288,7 @@ Adaptive Newton solver. The linear solver takes a pointer to the problem (which 
 
 \[ {\bf J} {\bf x} = - \bf{r} \]. Performs at most max\+\_\+adapt adaptations on all meshes. 
 
-Definition at line 16185 of file problem.\+cc.
+Definition at line 16187 of file problem.\+cc.
 
 
 
@@ -4306,7 +4306,7 @@ Perform a basic arc-\/length continuation step using Newton\textquotesingle{}s m
 
 Perform a basic continuation step using Newton\textquotesingle{}s method. The governing parameter of the problem is passed as a pointer to the routine. The number of Newton steps taken is returned 
 
-Definition at line 9326 of file problem.\+cc.
+Definition at line 9328 of file problem.\+cc.
 
 
 
@@ -4324,7 +4324,7 @@ This function performs a basic continuation step using the Newton method. The nu
 
 This function performs a basic continuation step using the Newton method. The number of Newton steps taken is returned, to be used in any external step-\/size control routines. The governing parameter of the problem is passed as a pointer to the routine, as is the sign of the Jacobian and a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} in which to store the derivatives wrt the parameter, if required. 
 
-Definition at line 9347 of file problem.\+cc.
+Definition at line 9349 of file problem.\+cc.
 
 
 
@@ -4458,7 +4458,7 @@ p-\/adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es),
 
 p-\/adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es), based on their own error estimates and the target errors specified in the mesh(es). Following mesh adaptation, update global mesh, and re-\/assign equation numbers. Return \# of refined/unrefined elements. On return from this function, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} can immediately be solved again. 
 
-Definition at line 14115 of file problem.\+cc.
+Definition at line 14117 of file problem.\+cc.
 
 
 
@@ -4476,7 +4476,7 @@ p-\/refine specified submesh by refining the elements identified by their pointe
 
 p-\/refine specified submesh by refining the elements identified by their pointers, then rebuild the problem. 
 
-Definition at line 15238 of file problem.\+cc.
+Definition at line 15240 of file problem.\+cc.
 
 
 
@@ -4494,7 +4494,7 @@ p-\/refine specified submesh by refining the elements identified by their number
 
 p-\/refine specified submesh by refining the elements identified by their numbers relative to the specified mesh, then rebuild the problem. 
 
-Definition at line 15182 of file problem.\+cc.
+Definition at line 15184 of file problem.\+cc.
 
 
 
@@ -4512,7 +4512,7 @@ p-\/refine (one and only!) mesh by refining the elements identified by their poi
 
 p-\/refine (one and only!) mesh by refining the elements identified by their pointers, then rebuild the problem. 
 
-Definition at line 15133 of file problem.\+cc.
+Definition at line 15135 of file problem.\+cc.
 
 
 
@@ -4530,7 +4530,7 @@ p-\/refine (one and only!) mesh by refining the elements identified by their num
 
 p-\/refine (one and only!) mesh by refining the elements identified by their numbers relative to the problems\textquotesingle{} only mesh, then rebuild the problem. 
 
-Definition at line 15084 of file problem.\+cc.
+Definition at line 15086 of file problem.\+cc.
 
 
 
@@ -4548,7 +4548,7 @@ p-\/refine all submeshes by refining the elements identified by their pointers w
 
 p-\/refine all submeshes by refining the elements identified by their pointers within each submesh in a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of Vectors, then rebuild the problem. 
 
-Definition at line 15338 of file problem.\+cc.
+Definition at line 15340 of file problem.\+cc.
 
 
 
@@ -4566,7 +4566,7 @@ p-\/refine all submeshes by refining the elements identified by their numbers re
 
 p-\/refine all submeshes by refining the elements identified by their numbers relative to each submesh in a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of Vectors, then rebuild the problem. 
 
-Definition at line 15294 of file problem.\+cc.
+Definition at line 15296 of file problem.\+cc.
 
 
 
@@ -4624,7 +4624,7 @@ Do uniform p-\/refinement for submesh i\+\_\+mesh with documentation.
 
 p-\/refine submesh i\+\_\+mesh uniformly and rebuild problem; doc refinement process. 
 
-Definition at line 15737 of file problem.\+cc.
+Definition at line 15739 of file problem.\+cc.
 
 
 
@@ -4754,7 +4754,7 @@ Helper function to do compund p-\/refinement of (all) p-\/refineable (sub)mesh(e
 
 Helper function to do compund p-\/refinement of (all) p-\/refineable (sub)mesh(es) uniformly as many times as specified in vector and rebuild problem; doc refinement process. Set boolean argument to true if you want to prune immediately after refining the meshes individually. 
 
-Definition at line 15537 of file problem.\+cc.
+Definition at line 15539 of file problem.\+cc.
 
 
 
@@ -4776,7 +4776,7 @@ Do uniform p-\/unrefinement for submesh i\+\_\+mesh without documentation.
 
 p-\/unrefine submesh i\+\_\+mesh uniformly and rebuild problem; doc refinement process. 
 
-Definition at line 15983 of file problem.\+cc.
+Definition at line 15985 of file problem.\+cc.
 
 
 
@@ -4794,7 +4794,7 @@ p-\/unrefine (all) p-\/refineable (sub)mesh(es) uniformly and rebuild problem.
 
 p-\/unrefine (all) p-\/refineable (sub)mesh(es) uniformly and rebuild problem; doc refinement process. 
 
-Definition at line 15922 of file problem.\+cc.
+Definition at line 15924 of file problem.\+cc.
 
 
 
@@ -4948,7 +4948,7 @@ Read refinement pattern of all refineable meshes and refine them accordingly, th
 
 Read refinement pattern of all refineable meshes and refine them accordingly, then read all \mbox{\hyperlink{classoomph_1_1Data}{Data}} and nodal position info from file for restart. Return flag to indicate if the restart was from steady or unsteady solution. 
 
-Definition at line 12136 of file problem.\+cc.
+Definition at line 12138 of file problem.\+cc.
 
 
 
@@ -5014,7 +5014,7 @@ Load balance helper routine\+: refine each new base (sub)mesh based upon the ele
 
 Load balance helper routine\+: Function performs max\+\_\+level\+\_\+overall successive refinements of the problem\textquotesingle{}s mesh(es) using the following procdure\+: Given ID of root element, root\+\_\+element\+\_\+id, and current refinement level, level, the e-\/th entry in refinement\+\_\+info\+\_\+for\+\_\+root\+\_\+elements\mbox{[}root\+\_\+element\+\_\+id\mbox{]}\mbox{[}level\mbox{]}\mbox{[}e\mbox{]} is equal to 2 if the e-\/th element (using the enumeration when the mesh has been refined to the level-\/th level) is to be refined during the next refinement; it\textquotesingle{}s 1 if it\textquotesingle{}s not to be refined. 
 
-Definition at line 19843 of file problem.\+cc.
+Definition at line 19845 of file problem.\+cc.
 
 
 
@@ -5036,7 +5036,7 @@ Refine specified submesh by splitting the elements identified by their pointers,
 
 Refine specified submesh by splitting the elements identified by their pointers, then rebuild the problem. 
 
-Definition at line 14954 of file problem.\+cc.
+Definition at line 14956 of file problem.\+cc.
 
 
 
@@ -5054,7 +5054,7 @@ Refine specified submesh by splitting the elements identified by their numbers r
 
 Refine specified submesh by splitting the elements identified by their numbers relative to the specified mesh, then rebuild the problem. 
 
-Definition at line 14903 of file problem.\+cc.
+Definition at line 14905 of file problem.\+cc.
 
 
 
@@ -5072,7 +5072,7 @@ Refine (one and only!) mesh by splitting the elements identified by their pointe
 
 Refine (one and only!) mesh by splitting the elements identified by their pointers, then rebuild the problem. 
 
-Definition at line 14854 of file problem.\+cc.
+Definition at line 14856 of file problem.\+cc.
 
 
 
@@ -5090,7 +5090,7 @@ Refine (one and only!) mesh by splitting the elements identified by their number
 
 Refine (one and only!) mesh by splitting the elements identified by their numbers relative to the problems\textquotesingle{} only mesh, then rebuild the problem. 
 
-Definition at line 14805 of file problem.\+cc.
+Definition at line 14807 of file problem.\+cc.
 
 
 
@@ -5108,7 +5108,7 @@ Refine all submeshes by splitting the elements identified by their pointers with
 
 Refine all submeshes by splitting the elements identified by their pointers within each submesh in a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of Vectors, then rebuild the problem. 
 
-Definition at line 15044 of file problem.\+cc.
+Definition at line 15046 of file problem.\+cc.
 
 
 
@@ -5126,7 +5126,7 @@ Refine all submeshes by splitting the elements identified by their numbers relat
 
 Refine all submeshes by splitting the elements identified by their numbers relative to each submesh in a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of Vectors, then rebuild the problem. 
 
-Definition at line 15005 of file problem.\+cc.
+Definition at line 15007 of file problem.\+cc.
 
 
 
@@ -5184,7 +5184,7 @@ Do uniform refinement for submesh i\+\_\+mesh with documentation.
 
 Refine submesh i\+\_\+mesh uniformly and rebuild problem; doc refinement process. 
 
-Definition at line 15689 of file problem.\+cc.
+Definition at line 15691 of file problem.\+cc.
 
 
 
@@ -5314,7 +5314,7 @@ Helper function to do compund refinement of (all) refineable (sub)mesh(es) unifo
 
 Helper function to do compund refinement of (all) refineable (sub)mesh(es) uniformly as many times as specified in vector and rebuild problem; doc refinement process. Set boolean argument to true if you want to prune immediately after refining the meshes individually. 
 
-Definition at line 15386 of file problem.\+cc.
+Definition at line 15388 of file problem.\+cc.
 
 
 
@@ -5398,7 +5398,7 @@ Reset the system to the standard non-\/augemented state.
 
 Reset the assembly handler to default. 
 
-Definition at line 10194 of file problem.\+cc.
+Definition at line 10196 of file problem.\+cc.
 
 
 
@@ -5442,7 +5442,7 @@ Self-\/test\+: Check meshes and global data. Return 0 for OK.
 
 
 
-Definition at line 13141 of file problem.\+cc.
+Definition at line 13143 of file problem.\+cc.
 
 
 
@@ -5476,7 +5476,7 @@ Load balance helper routine\+: Send data to other processors during load balanci
 \item send\+\_\+displacement\+: Input, start location within send\+\_\+data for data to be sent to each processor 
 \end{DoxyItemize}
 
-Definition at line 18822 of file problem.\+cc.
+Definition at line 18824 of file problem.\+cc.
 
 
 
@@ -5498,7 +5498,7 @@ Send refinement information between processors.
 
 
 
-Definition at line 18230 of file problem.\+cc.
+Definition at line 18232 of file problem.\+cc.
 
 
 
@@ -5556,7 +5556,7 @@ Private helper function that is used to set the appropriate pinned values for co
 
 Private helper function that is used to set the appropriate pinned values for continuation. If the data is pinned, the its current value is always the same as the original value and the derivative is always zero. If these are not set properly then interpolation and projection in spatial adaptivity will not give the best answers. 
 
-Definition at line 10392 of file problem.\+cc.
+Definition at line 10394 of file problem.\+cc.
 
 
 
@@ -5756,7 +5756,7 @@ Set all problem data to have the same timestepper (timestepper\+\_\+pt) Return t
 
 Set all problem data to have the same timestepper (timestepper\+\_\+pt). This is mainly used in continuation and bifurcation detection problems in which case the total number of unknowns may change and the changes to the underlying memory layout means that the Dof\+\_\+pt must be reallocated. Thus, the function calls \mbox{\hyperlink{classoomph_1_1Problem_a0df501c6aed60c4938861df776b10119}{assign\+\_\+eqn\+\_\+numbers()}} and returns the number of new equation numbers. 
 
-Definition at line 11448 of file problem.\+cc.
+Definition at line 11450 of file problem.\+cc.
 
 
 
@@ -5778,7 +5778,7 @@ Helper function to re-\/setup the Base\+\_\+mesh enumeration (used during load b
 
 Helper function to re-\/setup the Base\+\_\+mesh enumeration (used during load balancing) after pruning. 
 
-Definition at line 19956 of file problem.\+cc.
+Definition at line 19958 of file problem.\+cc.
 
 
 
@@ -5840,7 +5840,7 @@ Shift all values along to prepare for next timestep.
 
 Shift all time-\/dependent data along for next timestep. 
 
-Definition at line 11509 of file problem.\+cc.
+Definition at line 11511 of file problem.\+cc.
 
 
 
@@ -6060,7 +6060,7 @@ Solve a steady problem using adaptive Newton\textquotesingle{}s method, but in t
 
 Solve a steady problem, in the context of an overall unsteady problem. This is achieved by setting the weights in the timesteppers to be zero which has the effect of rendering them steady timesteppers The optional argument max\+\_\+adapt specifies the max. number of adaptations of all refineable submeshes are performed to achieve the the error targets specified in the refineable submeshes. 
 
-Definition at line 9238 of file problem.\+cc.
+Definition at line 9240 of file problem.\+cc.
 
 
 
@@ -6100,7 +6100,7 @@ Virtual function that is used to symmetrise the problem so that the current solu
 
 
 
-Definition at line 9972 of file problem.\+cc.
+Definition at line 9974 of file problem.\+cc.
 
 
 
@@ -6118,7 +6118,7 @@ Perform all required synchronisation in solvers.
 
 Synchronise all dofs by calling the appropriate synchronisation routines for all meshes and the assembly handler 
 
-Definition at line 16400 of file problem.\+cc.
+Definition at line 16402 of file problem.\+cc.
 
 
 
@@ -6142,7 +6142,7 @@ external halo/ed elements/nodes or the \char`\"{}normal\char`\"{} halo/ed ones.
 
 Synchronise the degrees of freedom by overwriting the haloed values with their non-\/halo counterparts held on other processors. Bools control if we deal with data associated with 
 
-Definition at line 16424 of file problem.\+cc.
+Definition at line 16426 of file problem.\+cc.
 
 
 
@@ -6164,7 +6164,7 @@ Classify any non-\/classified nodes into halo/haloed and synchronise equation nu
 
 Synchronise equation numbers and return the total number of degrees of freedom in the overall problem 
 
-Definition at line 16650 of file problem.\+cc.
+Definition at line 16652 of file problem.\+cc.
 
 
 
@@ -6192,7 +6192,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a4
 
 
 
-Definition at line 11413 of file problem.\+cc.
+Definition at line 11415 of file problem.\+cc.
 
 
 
@@ -6344,7 +6344,7 @@ Refine (all) refineable (sub)mesh(es) uniformly and rebuild problem. Return 0 fo
 
 Unrefine (all) refineable (sub)mesh(es) uniformly and rebuild problem. Return 0 for success, 1 for failure (if unrefinement has reached the coarsest permitted level) 
 
-Definition at line 15788 of file problem.\+cc.
+Definition at line 15790 of file problem.\+cc.
 
 
 
@@ -6360,7 +6360,7 @@ Do uniform refinement for submesh i\+\_\+mesh without documentation. Return 0 fo
 
 Unrefine submesh i\+\_\+mesh uniformly and rebuild problem. Return 0 for success, 1 for failure (if unrefinement has reached the coarsest permitted level) 
 
-Definition at line 15861 of file problem.\+cc.
+Definition at line 15863 of file problem.\+cc.
 
 
 
@@ -6432,7 +6432,7 @@ Advance time by dt and solve by Newton\textquotesingle{}s method. This version a
 
 Do one timestep of size dt using Newton\textquotesingle{}s method with the specified tolerance and linear solver defined as member data of the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} class. This will be the most commonly used version of unsteady\+\_\+newton\+\_\+solve, in which the time values are always shifted This does not include any kind of adaptativity. If the solution fails to converge the program will end. 
 
-Definition at line 10846 of file problem.\+cc.
+Definition at line 10848 of file problem.\+cc.
 
 
 
@@ -6450,7 +6450,7 @@ Advance time by dt and solve the system, using Newton\textquotesingle{}s method.
 
 Do one timestep forward of size dt using Newton\textquotesingle{}s method with the specified tolerance and linear solver defined via member data of the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} class. The boolean flag shift\+\_\+values is used to control whether the time values should be shifted or not. 
 
-Definition at line 10859 of file problem.\+cc.
+Definition at line 10861 of file problem.\+cc.
 
 
 
@@ -6468,7 +6468,7 @@ Unsteady adaptive Newton solve\+: up to max\+\_\+adapt adaptations of all refine
 
 Do one timestep, dt, forward using Newton\textquotesingle{}s method with specified tolerance and linear solver specified via member data. Keep adapting on all meshes to criteria specified in these meshes (up to max\+\_\+adapt adaptations are performed). If first\+\_\+timestep==true, re-\/set initial conditions after mesh adaptation. Shifting of time can be suppressed by overwriting the default value of shift (true). \mbox{[}Shifting must be done if first\+\_\+timestep==true because we\textquotesingle{}re constantly re-\/assigning the initial conditions; if first\+\_\+timestep==true and shift==false shifting is performed anyway and a warning is issued. 
 
-Definition at line 16040 of file problem.\+cc.
+Definition at line 16042 of file problem.\+cc.
 
 
 

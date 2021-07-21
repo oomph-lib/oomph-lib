@@ -414,68 +414,6 @@ namespace oomph
  };
 
 
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-
-//======================================================================
-// Namespace for black-box FD Newton solver.
-//======================================================================
- namespace BlackBoxFDNewtonSolver
- {
-
-
-// Function pointer for function that specifies residuals: The arguments 
-// are: Parameters, unknowns, residuals
-  typedef void (*ResidualFctPt)(const Vector<double>& parameters,
-				const Vector<double>& unknowns,
-				Vector<double>& residuals);
-
-// Maximum number of Newton iterations
-  extern unsigned Max_iter;
-
-// Number of Newton iterations taken in most recent invocation
-  extern unsigned N_iter_taken;
-
-// Flag to indicate if progress of Newton iteration is to be documented
-// (defaults to false) 
-  extern bool Doc_Progress;
-
-// Size of increment used in finite-difference calculations 
-  extern double FD_step;
-
-// Tolerance (maximum allowed value of an single residual at convergence) 
-  extern double Tol;
-
-// Use steplength control do make globally convergent (default false)
-  extern bool Use_step_length_control;
-
-// Black-box FD Newton solver:
-// Calling sequence for residual function is
-// \code residual_fct(parameters,unknowns,residuals) \endcode
-// where all arguments are double Vectors.
-// unknowns.size() = residuals.size() 
-  extern void black_box_fd_newton_solve(ResidualFctPt residual_fct,
-					const Vector<double>& params, 
-					Vector<double>& unknowns);
-
-
-// Line search helper for globally convergent Newton method
-  extern void line_search(const Vector<double>& x_old, 
-			  const double half_residual_squared_old, 
-			  const Vector<double>& gradient, 
-			  ResidualFctPt residual_fct, 
-			  const Vector<double>& params,
-			  Vector<double>& newton_dir,
-			  Vector<double>& x, 
-			  double& half_residual_squared,
-			  const double& stpmax);
-
- }
-
-
 //====================================================================
 /// \short Collection of data structures for storing information about
 /// linear solves. Currently only contains storage for the
