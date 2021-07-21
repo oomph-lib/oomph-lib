@@ -19,5 +19,5 @@ repos:
         description: Format files with clang-format.
         entry: clang-format -i
         language: system
-        files: ^(src|demo_drivers)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|hpp|cc|cpp|tpp)$
+        files: ^(src|demo_drivers|user_drivers|user_src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|hpp|cc|cpp|tpp)$
         args: ['-style=file']
