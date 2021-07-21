@@ -2276,9 +2276,11 @@ namespace oomph
 
     unsigned nbin_x = Dimensions_of_bin_array[0];
     unsigned nbin_y = 1;
-    if (n_lagrangian > 1) nbin_y = Dimensions_of_bin_array[1];
+    if (n_lagrangian > 1)
+      nbin_y = Dimensions_of_bin_array[1];
     unsigned nbin_z = 1;
-    if (n_lagrangian > 2) nbin_z = Dimensions_of_bin_array[2];
+    if (n_lagrangian > 2)
+      nbin_z = Dimensions_of_bin_array[2];
 
     unsigned b = 0;
     for (unsigned iz = 0; iz < nbin_z; iz++)
@@ -2323,8 +2325,10 @@ namespace oomph
     const unsigned n_lagrangian = this->ndim_zeta();
 
     unsigned nbin = Dimensions_of_bin_array[0];
-    if (n_lagrangian > 1) nbin *= Dimensions_of_bin_array[1];
-    if (n_lagrangian > 2) nbin *= Dimensions_of_bin_array[2];
+    if (n_lagrangian > 1)
+      nbin *= Dimensions_of_bin_array[1];
+    if (n_lagrangian > 2)
+      nbin *= Dimensions_of_bin_array[2];
 
     for (unsigned i_bin = 0; i_bin < nbin; i_bin++)
     {
@@ -2610,8 +2614,10 @@ namespace oomph
     for (IT it = map_pt->begin(); it != map_pt->end(); it++)
     {
       unsigned nentry = (*it).second.size();
-      if (nentry > max_n_entry) max_n_entry = nentry;
-      if (nentry < min_n_entry) min_n_entry = nentry;
+      if (nentry > max_n_entry)
+        max_n_entry = nentry;
+      if (nentry < min_n_entry)
+        min_n_entry = nentry;
       tot_n_entry += nentry;
     }
   }
@@ -3025,7 +3031,8 @@ namespace oomph
         dist += pow(bin_vertex[v][i] - zeta[i], 2);
       }
       dist = sqrt(dist);
-      if (dist < min_dist) min_dist = dist;
+      if (dist < min_dist)
+        min_dist = dist;
     }
     return min_dist;
   }

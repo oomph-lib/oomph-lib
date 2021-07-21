@@ -898,7 +898,8 @@ namespace oomph
 
       // Do the two blocks (0: veloc; 1: press)
       unsigned max_block = 0;
-      if (!Use_LSC) max_block = 1;
+      if (!Use_LSC)
+        max_block = 1;
       for (unsigned block_index = 0; block_index <= max_block; block_index++)
       {
         // Local working variables: Default to velocity
@@ -952,7 +953,8 @@ namespace oomph
             Vector<double> el_pmm_diagonal(el_dof, 0.0);
 
             unsigned which_one = 2;
-            if (block_index == 1) which_one = 1;
+            if (block_index == 1)
+              which_one = 1;
 
             NavierStokesElementWithDiagonalMassMatrices* cast_el_pt = 0;
             cast_el_pt =
@@ -1483,7 +1485,8 @@ namespace oomph
 
       // Fp needs pressure and velocity mass matrices
       unsigned which_one = 0;
-      if (Use_LSC) which_one = 2;
+      if (Use_LSC)
+        which_one = 2;
 
       // get the contribution for each element
       for (unsigned e = 0; e < n_el; e++)

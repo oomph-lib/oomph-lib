@@ -678,7 +678,8 @@ namespace oomph
       // far larger than this brute force search.
 
       // If no Doc_times have been set then always output.
-      if (Doc_times.empty()) return true;
+      if (Doc_times.empty())
+        return true;
 
       // Loop over entries of Doc_times and check if they are in the
       // range (t - dt, t].

@@ -382,7 +382,8 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
       double error =
         sqrt(pow(u_exact - u_fe, 2) + pow(dudt_exact - dudt_fe, 2) +
              pow(d2udt2_exact - d2udt2_fe, 2));
-      if (error > err_max) err_max = error;
+      if (error > err_max)
+        err_max = error;
     }
     cout << "Max. error in assignment of initial condition " << err_max
          << std::endl;

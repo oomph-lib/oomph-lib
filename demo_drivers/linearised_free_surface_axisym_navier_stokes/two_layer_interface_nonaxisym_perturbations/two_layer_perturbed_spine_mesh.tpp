@@ -433,7 +433,8 @@ namespace oomph
 
       // Last spine needs special treatment in x-periodic meshes:
       unsigned n_pmax = n_p;
-      if ((this->Xperiodic) && (j == this->Nx - 1)) n_pmax = n_p - 1;
+      if ((this->Xperiodic) && (j == this->Nx - 1))
+        n_pmax = n_p - 1;
 
       for (unsigned l2 = 1; l2 < n_pmax; l2++)
       {

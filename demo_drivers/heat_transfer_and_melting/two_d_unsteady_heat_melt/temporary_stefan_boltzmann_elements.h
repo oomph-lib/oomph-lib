@@ -1868,8 +1868,10 @@ namespace oomph
           }
 
           // Cut it off if it goes outside the bin structure
-          if (x_intersect > Max_coord[0]) x_intersect = Max_coord[0];
-          if (x_intersect < Min_coord[0]) x_intersect = Min_coord[0];
+          if (x_intersect > Max_coord[0])
+            x_intersect = Max_coord[0];
+          if (x_intersect < Min_coord[0])
+            x_intersect = Min_coord[0];
 
           // What's the x-bin index of that point
           unsigned ix_intersect =
@@ -1896,7 +1898,8 @@ namespace oomph
           unit_offset = 0;
 
           // ...but don't fall off the end...
-          if (i_hi == Nx_bin) i_hi -= 1;
+          if (i_hi == Nx_bin)
+            i_hi -= 1;
 
           // Now add all the bins at this y-level
           for (unsigned i = i_lo; i <= i_hi; i++)
@@ -2433,7 +2436,8 @@ namespace oomph
             // Note: this includes the current one because its integration
             // points may illuminate each other!
             unsigned e_lo = 0;
-            if (exploit_symmetry) e_lo = e_illuminated;
+            if (exploit_symmetry)
+              e_lo = e_illuminated;
             for (unsigned e_illuminating = e_lo; e_illuminating < nel;
                  e_illuminating++)
             {
@@ -2614,9 +2618,11 @@ namespace oomph
                               }
                             } // end of loop over sampling points
                           } // endif for self-intersection
-                          if (have_intersection) break;
+                          if (have_intersection)
+                            break;
                         } // end of loop over elements in bin
-                        if (have_intersection) break;
+                        if (have_intersection)
+                          break;
                       } // End of loop over bins that contain ray
 
                       // No intersection

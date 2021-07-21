@@ -86,7 +86,8 @@ namespace oomph
     {
       // This wipes all elements/binary trees in the tree representation
       // but leaves the leaf elements alone
-      if (this->Forest_pt != 0) delete this->Forest_pt;
+      if (this->Forest_pt != 0)
+        delete this->Forest_pt;
 
       // Each finite element in the coarse base mesh gets associated with
       // (the root of) a BinaryTree. Store BinaryTreeRoots in vector:

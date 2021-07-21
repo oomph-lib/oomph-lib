@@ -57,7 +57,8 @@ namespace oomph
     inline double legendre(const unsigned& p, const double& x)
     {
       // Return the constant value
-      if (p == 0) return 1.0;
+      if (p == 0)
+        return 1.0;
       // Return the linear polynomial
       else if (p == 1)
         return x;
@@ -119,7 +120,8 @@ namespace oomph
     inline double dlegendre(const unsigned& p, const double& x)
     {
       double dL1 = 1.0, dL2 = 3 * x, dL3 = 0.0;
-      if (p == 0) return 0.0;
+      if (p == 0)
+        return 0.0;
       else if (p == 1)
         return dL1;
       else if (p == 2)
@@ -142,7 +144,8 @@ namespace oomph
     inline double ddlegendre(const unsigned& p, const double& x)
     {
       double ddL2 = 3.0, ddL3 = 15 * x, ddL4 = 0.0;
-      if (p == 0) return 0.0;
+      if (p == 0)
+        return 0.0;
       else if (p == 1)
         return 0.0;
       else if (p == 2)
@@ -171,7 +174,8 @@ namespace oomph
       double P0 = 1.0;
       double P1 = 0.5 * (alpha - beta + (alpha + beta + 2.0) * x);
       double P2;
-      if (p == 0) return P0;
+      if (p == 0)
+        return P0;
       else if (p == 1)
         return P1;
       else

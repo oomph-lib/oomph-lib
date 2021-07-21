@@ -49,7 +49,8 @@ namespace oomph
       // conditions
       for (unsigned i = 0; i < addmesh_pt->nboundary(); i++)
       {
-        if (addmesh_map_boundary[i] == -1) bound2 = i;
+        if (addmesh_map_boundary[i] == -1)
+          bound2 = i;
       }
 
 #ifdef PARANOID
@@ -105,7 +106,8 @@ namespace oomph
           }
 
           nodecounter++;
-          if (dmin > d) dmin = d;
+          if (dmin > d)
+            dmin = d;
 
         } while ((nodecounter < mesh_pt->nboundary_node(bound1)) &&
                  (d > 1E-10));
@@ -306,9 +308,11 @@ namespace oomph
             bool alr_included = 0;
             for (unsigned k = 0; k < mesh_pt->nboundary_node(i); k++)
             {
-              if (node_pt == mesh_pt->boundary_node_pt(i, k)) alr_included = 1;
+              if (node_pt == mesh_pt->boundary_node_pt(i, k))
+                alr_included = 1;
             }
-            if (!alr_included) node_pt->remove_from_boundary(i);
+            if (!alr_included)
+              node_pt->remove_from_boundary(i);
 
             // We test again not to include the nodes which will be deleted
             if (map_bound_node[node_pt] == 0)

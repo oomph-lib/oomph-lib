@@ -552,7 +552,8 @@ private:
   /// \short Delete volume constraint elements
   void delete_volume_constraint_elements()
   {
-    if (Volume_constraint_mesh_pt == 0) return;
+    if (Volume_constraint_mesh_pt == 0)
+      return;
 
     // Backup
     if (Vol_constraint_el_pt != 0)
@@ -907,7 +908,8 @@ template<class ELEMENT>
 void DropInChannelProblem<ELEMENT>::create_volume_constraint_elements()
 {
   // Do we need it?
-  if (!Use_volume_constraint) return;
+  if (!Use_volume_constraint)
+    return;
 
   // Store pointer to element whose pressure we're trading/hi-jacking:
   // Element 0 in region 1

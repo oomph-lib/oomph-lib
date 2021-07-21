@@ -1579,7 +1579,8 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Return immediately if there are no dofs
-    if (ndof() == 0) return;
+    if (ndof() == 0)
+      return;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -1750,7 +1751,8 @@ namespace oomph
     unsigned flag)
   {
     // Return immediately if there are no dofs
-    if (ndof() == 0) return;
+    if (ndof() == 0)
+      return;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -1907,7 +1909,8 @@ namespace oomph
             for (unsigned k = 0; k < DIM; k++)
             {
               double tmp = scaled_re * interpolated_u[k];
-              if (!ALE_is_disabled) tmp -= scaled_re_st * mesh_velocity[k];
+              if (!ALE_is_disabled)
+                tmp -= scaled_re_st * mesh_velocity[k];
               residuals[local_eqn] -=
                 tmp * interpolated_dudx(i, k) * testf[l] * W;
             }

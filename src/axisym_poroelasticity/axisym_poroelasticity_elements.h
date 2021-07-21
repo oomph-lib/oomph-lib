@@ -1487,7 +1487,8 @@ namespace oomph
       unsigned return_value = this->node_pt(0)->ntstorage();
 
       // Pressure: No history values (just present one!)
-      if (fld == 2) return_value = 1;
+      if (fld == 2)
+        return_value = 1;
 
       // Flux: infer from first midside node
       if (fld == 3)

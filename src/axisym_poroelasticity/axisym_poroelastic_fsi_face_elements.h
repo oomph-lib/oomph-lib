@@ -777,7 +777,8 @@ namespace oomph
           break;
         }
       }
-      if (do_it) add_external_data(cast_bulk_el_pt->node_pt(j));
+      if (do_it)
+        add_external_data(cast_bulk_el_pt->node_pt(j));
     }
 
     // We need Dim+1 additional values for each FaceElement node to store the

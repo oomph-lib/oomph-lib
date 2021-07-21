@@ -4799,7 +4799,8 @@ namespace oomph
         Vector<int> send_displacement(nproc, 0);
 
         double t_total_ndata_start;
-        if (enable_timing) t_total_ndata_start = TimingHelpers::timer();
+        if (enable_timing)
+          t_total_ndata_start = TimingHelpers::timer();
 
         // Get the total amount of data which needs to be sent, so we can
         // reserve space for it.
@@ -4822,7 +4823,8 @@ namespace oomph
         }
 
         double t_flat_pack_start;
-        if (enable_timing) t_flat_pack_start = TimingHelpers::timer();
+        if (enable_timing)
+          t_flat_pack_start = TimingHelpers::timer();
 
         // Now we don't have to re-allocate data/memory when push_back is
         // called. Nb. Using push_back without reserving memory may cause
@@ -4865,7 +4867,8 @@ namespace oomph
         }
 
         double t_sendn_start;
-        if (enable_timing) t_sendn_start = TimingHelpers::timer();
+        if (enable_timing)
+          t_sendn_start = TimingHelpers::timer();
 
         // Strorage for the number of data to be received from each processor
         Vector<int> receive_n(nproc, 0);
@@ -4913,7 +4916,8 @@ namespace oomph
         }
 
         double t_send_data_start;
-        if (enable_timing) t_send_data_start = TimingHelpers::timer();
+        if (enable_timing)
+          t_send_data_start = TimingHelpers::timer();
 
         // Now send the data between all processors
         MPI_Alltoallv(&send_values_data[0],
@@ -4970,7 +4974,8 @@ namespace oomph
         unsigned long res_nnz_local = 0;
 
         double t_locations_start;
-        if (enable_timing) t_locations_start = TimingHelpers::timer();
+        if (enable_timing)
+          t_locations_start = TimingHelpers::timer();
 
         // Loop through the data currently on this processor.
         unsigned location_i = 0;
@@ -5049,7 +5054,8 @@ namespace oomph
         }
 
         double t_fillvecs_start;
-        if (enable_timing) t_fillvecs_start = TimingHelpers::timer();
+        if (enable_timing)
+          t_fillvecs_start = TimingHelpers::timer();
 
         // Now loop through the locations and store the values
         // the column indices in the correct order.
@@ -5123,7 +5129,8 @@ namespace oomph
         }
 
         double t_buildres_start;
-        if (enable_timing) t_buildres_start = TimingHelpers::timer();
+        if (enable_timing)
+          t_buildres_start = TimingHelpers::timer();
 
         // build the matrix.
         result_matrix.build(

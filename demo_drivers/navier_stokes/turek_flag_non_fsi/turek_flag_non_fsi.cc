@@ -89,7 +89,8 @@ namespace Flag_definition
   Vector<double> upper_tip(const double& t)
   {
     double tmp_ampl = Amplitude;
-    if (t <= 0.0) tmp_ampl = 0.0;
+    if (t <= 0.0)
+      tmp_ampl = 0.0;
     Vector<double> uppertip(2);
     uppertip[0] =
       Centre_x + Radius * sqrt(1.0 - H * H / (4.0 * Radius * Radius)) + L;
@@ -102,7 +103,8 @@ namespace Flag_definition
   Vector<double> lower_tip(const double& t)
   {
     double tmp_ampl = Amplitude;
-    if (t <= 0.0) tmp_ampl = 0.0;
+    if (t <= 0.0)
+      tmp_ampl = 0.0;
     Vector<double> lowertip(2);
     lowertip[0] =
       Centre_x + Radius * sqrt(1.0 - H * H / (4.0 * Radius * Radius)) + L;

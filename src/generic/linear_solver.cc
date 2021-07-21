@@ -145,7 +145,8 @@ namespace oomph
       for (unsigned long j = 0; j < n; j++)
       {
         double tmp = std::fabs((*matrix_pt)(i, j));
-        if (tmp > largest_entry) largest_entry = tmp;
+        if (tmp > largest_entry)
+          largest_entry = tmp;
       }
       if (largest_entry == 0.0)
       {
@@ -1846,7 +1847,8 @@ namespace oomph
     // Does this evenly divide the processor grid?
     while (nprow > 1)
     {
-      if (nproc % nprow == 0) break;
+      if (nproc % nprow == 0)
+        break;
       nprow -= 1;
     }
 

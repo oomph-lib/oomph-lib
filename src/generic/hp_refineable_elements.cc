@@ -2276,7 +2276,8 @@ namespace oomph
               // Determine the edge on which the new node will live
               //(cannot be a vertex node)
               int my_bound = Tree::OMEGA;
-              if (s_fraction[0] == 0.0) my_bound = QuadTreeNames::W;
+              if (s_fraction[0] == 0.0)
+                my_bound = QuadTreeNames::W;
               else if (s_fraction[0] == 1.0)
                 my_bound = QuadTreeNames::E;
               else if (s_fraction[1] == 0.0)
@@ -2411,7 +2412,8 @@ namespace oomph
                 // Determine the edge on which the new node will live
                 //(cannot be a vertex node)
                 int my_bound = Tree::OMEGA;
-                if (s_fraction[0] == 0.0) my_bound = QuadTreeNames::W;
+                if (s_fraction[0] == 0.0)
+                  my_bound = QuadTreeNames::W;
                 else if (s_fraction[0] == 1.0)
                   my_bound = QuadTreeNames::E;
                 else if (s_fraction[1] == 0.0)
@@ -2531,7 +2533,8 @@ namespace oomph
           // Determine the edge on which the new node will live
           //(cannot be a vertex node)
           int my_bound = Tree::OMEGA;
-          if (s_fraction[0] == 0.0) my_bound = QuadTreeNames::W;
+          if (s_fraction[0] == 0.0)
+            my_bound = QuadTreeNames::W;
           else if (s_fraction[0] == 1.0)
             my_bound = QuadTreeNames::E;
           else if (s_fraction[1] == 0.0)
@@ -3977,8 +3980,10 @@ namespace oomph
     }
 
     max_error = max_error_x[0];
-    if (max_error_x[1] > max_error) max_error = max_error_x[1];
-    if (max_error_val > max_error) max_error = max_error_val;
+    if (max_error_x[1] > max_error)
+      max_error = max_error_x[1];
+    if (max_error_val > max_error)
+      max_error = max_error_val;
 
     if (max_error > 1e-9)
     {
@@ -4122,7 +4127,8 @@ namespace oomph
     {
       // Compute the active coordinate index along the this side of mortar
       unsigned active_coord_index;
-      if (my_edge == N || my_edge == S) active_coord_index = 0;
+      if (my_edge == N || my_edge == S)
+        active_coord_index = 0;
       else if (my_edge == E || my_edge == W)
         active_coord_index = 1;
       else
@@ -8831,7 +8837,8 @@ namespace oomph
                 master_is_not_edge = true;
             }
 
-            if (master_is_not_edge) break;
+            if (master_is_not_edge)
+              break;
 
             // Set node as master node
             master_node_number.push_back(neighbour_node_number);
@@ -9211,7 +9218,8 @@ namespace oomph
                 bool skip = false;
                 for (unsigned i = 0; i < master_node_zero_weight.size(); i++)
                 {
-                  if (m == master_node_zero_weight[i]) skip = true;
+                  if (m == master_node_zero_weight[i])
+                    skip = true;
                 }
 
                 // Add pointer and weight to hang info
@@ -9571,7 +9579,8 @@ namespace oomph
                 bool skip = false;
                 for (unsigned k = 0; k < master_node_zero_weight.size(); k++)
                 {
-                  if (m == master_node_zero_weight[k]) skip = true;
+                  if (m == master_node_zero_weight[k])
+                    skip = true;
                 }
 
                 // Add pointer and weight to hang info

@@ -293,7 +293,8 @@ void CompressedSquareProblem<ELEMENT>::doc_solution(const bool& incompress)
 
   // Poisson's ratio
   double nu = Global_Physical_Variables::Nu;
-  if (incompress) nu = 0.5;
+  if (incompress)
+    nu = 0.5;
 
   // Loop over all elements
   for (unsigned e = 0; e < nelem; e++)

@@ -591,7 +591,8 @@ namespace oomph
             Back_pt->position(zeta, r);
 
             // Flip it
-            if (ibound == 0) r[1] = -r[1];
+            if (ibound == 0)
+              r[1] = -r[1];
 
             // Check:
             for (unsigned i = 0; i < 2; i++)

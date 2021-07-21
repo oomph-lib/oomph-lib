@@ -254,8 +254,10 @@ namespace oomph
       int global_eqn_u = nod_pt->eqn_number(U_index_ust_heat);
       int global_eqn_m = nod_pt->eqn_number(first_index);
 
-      if (global_eqn_u < 0) abort();
-      if (global_eqn_m < 0) abort();
+      if (global_eqn_u < 0)
+        abort();
+      if (global_eqn_m < 0)
+        abort();
 
       // Output actual solution
       DoubleVector residuals;

@@ -444,7 +444,8 @@ namespace oomph
                  it != (*bnd_pt).end();
                  it++)
             {
-              if (!is_on_fsi_boundary[(*it)]) only_on_fsi = false;
+              if (!is_on_fsi_boundary[(*it)])
+                only_on_fsi = false;
               add_boundary_node((*it), new_node_pt);
             }
             new_node_pt->set_coordinates_on_boundary(b, zeta);
@@ -605,7 +606,8 @@ namespace oomph
                  it != (*bnd_pt).end();
                  it++)
             {
-              if (!is_on_fsi_boundary[(*it)]) only_on_fsi = false;
+              if (!is_on_fsi_boundary[(*it)])
+                only_on_fsi = false;
               add_boundary_node((*it), new_node_pt);
             }
             new_node_pt->set_coordinates_on_boundary(b, zeta);
@@ -774,7 +776,8 @@ namespace oomph
             for (std::set<unsigned>::iterator it = bnd.begin(); it != bnd.end();
                  it++)
             {
-              if (!is_on_fsi_boundary[(*it)]) only_on_fsi = false;
+              if (!is_on_fsi_boundary[(*it)])
+                only_on_fsi = false;
               add_boundary_node((*it), new_node_pt);
             }
             new_node_pt->set_coordinates_on_boundary(b, zeta);
@@ -959,7 +962,8 @@ namespace oomph
             for (std::set<unsigned>::iterator it = bnd.begin(); it != bnd.end();
                  it++)
             {
-              if (!is_on_fsi_boundary[(*it)]) only_on_fsi = false;
+              if (!is_on_fsi_boundary[(*it)])
+                only_on_fsi = false;
               add_boundary_node((*it), new_node_pt);
             }
             new_node_pt->set_coordinates_on_boundary(b, zeta);
@@ -1458,10 +1462,14 @@ namespace oomph
 
                   // Use edge node on bottom node layer to assess
                   // the element/s affiliation with boundary
-                  if (j == 1) face_index = -2;
-                  if (j == 3) face_index = -1;
-                  if (j == 5) face_index = 1;
-                  if (j == 7) face_index = 2;
+                  if (j == 1)
+                    face_index = -2;
+                  if (j == 3)
+                    face_index = -1;
+                  if (j == 5)
+                    face_index = 1;
+                  if (j == 7)
+                    face_index = 2;
 
                   if (face_index != 0)
                   {
@@ -1548,7 +1556,8 @@ namespace oomph
     // Average unit normals
     std::ofstream outfile;
     bool doc_normals = false; // keep alive for future debugging
-    if (doc_normals) outfile.open("normals.dat");
+    if (doc_normals)
+      outfile.open("normals.dat");
     for (std::map<Node*, Vector<Vector<double>>>::iterator it = normals.begin();
          it != normals.end();
          it++)
@@ -1594,7 +1603,8 @@ namespace oomph
                 << unit_normal[1] << " " << unit_normal[2] << "\n";
       }
     }
-    if (doc_normals) outfile.close();
+    if (doc_normals)
+      outfile.close();
 
     // Lookup scheme has now been setup yet
     Lookup_for_elements_next_boundary_is_setup = true;

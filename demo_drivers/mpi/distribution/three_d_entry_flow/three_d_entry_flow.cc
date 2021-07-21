@@ -167,11 +167,13 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo& doc_info,
     {
       // Boundary 1 is the vertical symmetry boundary: We allow flow in
       // the y-direction. Elsewhere, pin the y velocity
-      if (ibound != 1) mesh_pt()->boundary_node_pt(ibound, inod)->pin(1);
+      if (ibound != 1)
+        mesh_pt()->boundary_node_pt(ibound, inod)->pin(1);
 
       // Boundary 2 is the horizontal symmetry boundary: We allow flow in
       // the x-direction. Elsewhere, pin the x velocity
-      if (ibound != 2) mesh_pt()->boundary_node_pt(ibound, inod)->pin(0);
+      if (ibound != 2)
+        mesh_pt()->boundary_node_pt(ibound, inod)->pin(0);
 
       // Boundaries 0 and 3 are the inflow and the wall respectively.
       // Pin the axial velocity because of the prescribed inflow

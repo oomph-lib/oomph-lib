@@ -66,7 +66,8 @@ public:
   void actions_before_adapt()
   {
     // Kill the contact angle elements and wipe contact angle mesh
-    if (Contact_angle_mesh_pt != 0) delete_contact_angle_elements();
+    if (Contact_angle_mesh_pt != 0)
+      delete_contact_angle_elements();
 
     // Rebuild the Problem's global mesh from its various sub-meshes
     rebuild_global_mesh();
@@ -213,7 +214,8 @@ RefineableYoungLaplaceProblem<ELEMENT>::RefineableYoungLaplaceProblem()
   // single unknown value
   else
   {
-    if (GlobalParameters::Kappa_pt != 0) delete GlobalParameters::Kappa_pt;
+    if (GlobalParameters::Kappa_pt != 0)
+      delete GlobalParameters::Kappa_pt;
     GlobalParameters::Kappa_pt = new Data(1);
     GlobalParameters::Kappa_pt->set_value(0, GlobalParameters::Kappa_initial);
     GlobalParameters::Kappa_pt->pin(0);

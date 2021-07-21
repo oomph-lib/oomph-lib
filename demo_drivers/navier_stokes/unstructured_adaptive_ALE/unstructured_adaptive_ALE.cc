@@ -1114,8 +1114,10 @@ void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
       the_file << zeta[0] << " ";
 
       // Update max/min boundary coordinate
-      if (zeta[0] < zeta_min) zeta_min = zeta[0];
-      if (zeta[0] > zeta_max) zeta_max = zeta[0];
+      if (zeta[0] < zeta_min)
+        zeta_min = zeta[0];
+      if (zeta[0] > zeta_max)
+        zeta_max = zeta[0];
 
       the_file << std::endl;
     }
@@ -1274,7 +1276,8 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(const std::string& comment,
   some_file.close();
 
   // No trace file writing after projection
-  if (project) return;
+  if (project)
+    return;
 
   // Get max/min area
   double max_area;

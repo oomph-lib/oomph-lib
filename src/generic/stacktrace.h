@@ -84,7 +84,8 @@ static inline void print_stacktrace(std::ostream& exception_stream,
     // ./module(function+0x15c) [0x8048a6d]
     for (char* p = symbollist[i]; *p; ++p)
     {
-      if (*p == '[') begin_absolute = p;
+      if (*p == '[')
+        begin_absolute = p;
       else if (*p == ']' && begin_absolute)
       {
         end_absolute = p;
@@ -116,7 +117,8 @@ static inline void print_stacktrace(std::ostream& exception_stream,
     // ./module(function+0x15c) [0x8048a6d]
     for (char* p = symbollist[i]; *p; ++p)
     {
-      if (*p == '(') begin_name = p;
+      if (*p == '(')
+        begin_name = p;
       else if (*p == '+')
         begin_offset = p;
       else if (*p == ')' && begin_offset)

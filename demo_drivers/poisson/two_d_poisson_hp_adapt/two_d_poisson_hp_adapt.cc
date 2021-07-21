@@ -409,7 +409,8 @@ int main()
   unsigned hang_no = 0;
   for (unsigned n = 0; n < problem.mesh_pt()->nnode(); n++)
   {
-    if (problem.mesh_pt()->node_pt(n)->is_hanging()) hang_no++;
+    if (problem.mesh_pt()->node_pt(n)->is_hanging())
+      hang_no++;
   }
   cout << hang_no << " hanging nodes in mesh." << endl;
 

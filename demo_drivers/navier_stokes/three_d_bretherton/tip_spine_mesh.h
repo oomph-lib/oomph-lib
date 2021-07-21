@@ -100,7 +100,8 @@ public:
   void change_radius(double R)
   {
     double scaled_R = R / (this->Zmax - this->Zmin);
-    if ((scaled_R < 0.95) && (scaled_R > 0.05)) Radius = R;
+    if ((scaled_R < 0.95) && (scaled_R > 0.05))
+      Radius = R;
     else
     {
       std::ostringstream error_stream;

@@ -42,7 +42,8 @@ namespace oomph
     //========================================================================
     double factorial(const unsigned& l)
     {
-      if (l == 0) return 1.0;
+      if (l == 0)
+        return 1.0;
       return double(l * factorial(l - 1));
     }
 
@@ -131,7 +132,8 @@ namespace oomph
           fact += 2.0;
         }
       }
-      if (l == m) return pmm;
+      if (l == m)
+        return pmm;
 
       // Compute pmmp1 : if l=m+1 it's finished
       else

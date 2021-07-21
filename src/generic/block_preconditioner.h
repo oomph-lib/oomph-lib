@@ -3226,7 +3226,8 @@ namespace oomph
     /// block number passed is returned
     unsigned internal_master_dof_number(const unsigned& b) const
     {
-      if (is_master_block_preconditioner()) return b;
+      if (is_master_block_preconditioner())
+        return b;
       else
         return Doftype_in_master_preconditioner_fine[b];
     }

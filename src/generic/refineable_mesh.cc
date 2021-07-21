@@ -59,7 +59,8 @@ namespace oomph
     for (unsigned e = 0; e < nnodes; e++)
     {
       unsigned level = all_tree_nodes_pt[e]->level();
-      if (level > max_level) max_level = level;
+      if (level > max_level)
+        max_level = level;
     }
 
     // Assign storage for refinement pattern
@@ -178,7 +179,8 @@ namespace oomph
     {
       // Loop over elements that need to be refined at this level
       unsigned n_to_be_refined = 0;
-      if (l < my_max_level) n_to_be_refined = to_be_refined[l].size();
+      if (l < my_max_level)
+        n_to_be_refined = to_be_refined[l].size();
 
       // Select relevant elements to be refined
       for (unsigned i = 0; i < n_to_be_refined; i++)
@@ -838,8 +840,10 @@ namespace oomph
         unsigned level = dynamic_cast<RefineableElement*>(this->element_pt(e))
                            ->refinement_level();
 
-        if (level > max_refinement_level) max_refinement_level = level;
-        if (level < min_refinement_level) min_refinement_level = level;
+        if (level > max_refinement_level)
+          max_refinement_level = level;
+        if (level < min_refinement_level)
+          min_refinement_level = level;
       }
     }
   }
@@ -1981,7 +1985,8 @@ namespace oomph
         for (unsigned i = 0; i < n_sons; i++)
         {
           // If (at least) one of the sons is not a leaf, we can't unrefine
-          if (!father_pt->son_pt(i)->is_leaf()) can_unrefine = false;
+          if (!father_pt->son_pt(i)->is_leaf())
+            can_unrefine = false;
         }
 
         // If we can unrefine, the father element will be

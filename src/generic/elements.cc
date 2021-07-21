@@ -710,7 +710,8 @@ namespace oomph
     {
 #ifdef OOMPH_HAS_MPI
       error_stream << "Element is ";
-      if (!is_halo()) error_stream << "not ";
+      if (!is_halo())
+        error_stream << "not ";
       error_stream << "a halo element\n\n";
 #endif
       error_stream << "\nLocal/lobal equation numbers: " << std::endl;
@@ -3707,7 +3708,8 @@ namespace oomph
     unsigned n_nod = nnode();
 
     // If the element has no nodes (why??!!) return straightaway
-    if (n_nod == 0) return;
+    if (n_nod == 0)
+      return;
 
     // Get dimension from first node
     unsigned dim_nod = node_pt(0)->ndim();
@@ -3908,7 +3910,8 @@ namespace oomph
         dist_squared +=
           (cog[i] - zeta_nodal(j, 0, i)) * (cog[i] - zeta_nodal(j, 0, i));
       }
-      if (dist_squared > max_radius) max_radius = dist_squared;
+      if (dist_squared > max_radius)
+        max_radius = dist_squared;
     }
     max_radius = sqrt(max_radius);
   }
@@ -5195,7 +5198,8 @@ namespace oomph
 
     // Bail out if we're in a point element -- not sure what
     // J_eulerian actually is, but this is harmless
-    if (n_dim_el == 0) return 1.0;
+    if (n_dim_el == 0)
+      return 1.0;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();

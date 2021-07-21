@@ -571,7 +571,8 @@ int main(int argc, char* argv[])
       double alpha = 2.0 * atan(2.0 * tanbeta / (1.0 - tanbeta * tanbeta));
 
       // Jump back onto the main branch if alpha>180 degrees
-      if (alpha < 0) alpha += 2.0 * MathematicalConstants::Pi;
+      if (alpha < 0)
+        alpha += 2.0 * MathematicalConstants::Pi;
 
       // Green strain:
       double gamma =

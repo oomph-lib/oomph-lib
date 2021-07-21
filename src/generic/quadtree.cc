@@ -986,10 +986,14 @@ namespace oomph
            (Trees_pt[j]->object_pt()->get_node_number(
               Trees_pt[i]->object_pt()->node_pt(n * (n - 1))) != -1));
 
-        if (is_N_neighbour) Trees_pt[i]->neighbour_pt(N) = Trees_pt[j];
-        if (is_S_neighbour) Trees_pt[i]->neighbour_pt(S) = Trees_pt[j];
-        if (is_E_neighbour) Trees_pt[i]->neighbour_pt(E) = Trees_pt[j];
-        if (is_W_neighbour) Trees_pt[i]->neighbour_pt(W) = Trees_pt[j];
+        if (is_N_neighbour)
+          Trees_pt[i]->neighbour_pt(N) = Trees_pt[j];
+        if (is_S_neighbour)
+          Trees_pt[i]->neighbour_pt(S) = Trees_pt[j];
+        if (is_E_neighbour)
+          Trees_pt[i]->neighbour_pt(E) = Trees_pt[j];
+        if (is_W_neighbour)
+          Trees_pt[i]->neighbour_pt(W) = Trees_pt[j];
       }
     }
 
@@ -1032,10 +1036,14 @@ namespace oomph
                (Trees_pt[j]->object_pt()->get_node_number(
                   Trees_pt[i]->object_pt()->node_pt(n * (n - 1))) != -1));
 
-            if (is_N_neighbour) Trees_pt[i]->neighbour_pt(N) = Trees_pt[j];
-            if (is_S_neighbour) Trees_pt[i]->neighbour_pt(S) = Trees_pt[j];
-            if (is_E_neighbour) Trees_pt[i]->neighbour_pt(E) = Trees_pt[j];
-            if (is_W_neighbour) Trees_pt[i]->neighbour_pt(W) = Trees_pt[j];
+            if (is_N_neighbour)
+              Trees_pt[i]->neighbour_pt(N) = Trees_pt[j];
+            if (is_S_neighbour)
+              Trees_pt[i]->neighbour_pt(S) = Trees_pt[j];
+            if (is_E_neighbour)
+              Trees_pt[i]->neighbour_pt(E) = Trees_pt[j];
+            if (is_W_neighbour)
+              Trees_pt[i]->neighbour_pt(W) = Trees_pt[j];
           }
         }
       }

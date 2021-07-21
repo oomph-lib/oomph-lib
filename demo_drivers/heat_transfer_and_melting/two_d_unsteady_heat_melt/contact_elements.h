@@ -1122,7 +1122,8 @@ namespace oomph
 
         // Plot vector from current point to boundary of penetrator
         double d_tmp = d;
-        if (!intersection) d_tmp = 0.0;
+        if (!intersection)
+          d_tmp = 0.0;
         outfile << -d_tmp * unit_normal[0] << " ";
         outfile << -d_tmp * unit_normal[1] << " ";
 
@@ -1823,7 +1824,8 @@ namespace oomph
 
         // Plot vector from current point to boundary of penetrator
         double d_tmp = d;
-        if (!intersection) d_tmp = 0.0;
+        if (!intersection)
+          d_tmp = 0.0;
         outfile << -d_tmp * unit_normal[0] << " "; // col 7
         outfile << -d_tmp * unit_normal[1] << " "; // col 8
 

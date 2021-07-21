@@ -141,7 +141,8 @@ public:
   void actions_before_adapt()
   {
     // Kill the contact angle elements and wipe contact angle mesh
-    if (Contact_angle_mesh_pt != 0) delete_contact_angle_elements();
+    if (Contact_angle_mesh_pt != 0)
+      delete_contact_angle_elements();
 
     // Rebuild the Problem's global mesh from its various sub-meshes
     rebuild_global_mesh();

@@ -99,7 +99,8 @@ namespace oomph
     // Should we document the output here
     bool doc = false;
 
-    if (outfile) doc = true;
+    if (outfile)
+      doc = true;
 
     // Number of boundaries
     unsigned nbound = nboundary();
@@ -132,7 +133,8 @@ namespace oomph
       // Get pointer to element
       FiniteElement* fe_pt = finite_element_pt(e);
 
-      if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
+      if (doc)
+        outfile << "Element: " << e << " " << fe_pt << std::endl;
 
       // Only include 3D elements! Some meshes contain interface elements too.
       if (fe_pt->dim() == 3)
@@ -392,7 +394,8 @@ namespace oomph
           length += edge[j][i] * edge[j][i];
         }
         length = sqrt(length);
-        if (length > max_length) max_length = length;
+        if (length > max_length)
+          max_length = length;
       }
 
       double min_height = DBL_MAX;
@@ -447,7 +450,8 @@ namespace oomph
         double height = fabs(edge[e2][0] * normal[0] + edge[e2][1] * normal[1] +
                              edge[e2][2] * normal[2]);
 
-        if (height < min_height) min_height = height;
+        if (height < min_height)
+          min_height = height;
       }
 
       double aspect_ratio = max_length / min_height;

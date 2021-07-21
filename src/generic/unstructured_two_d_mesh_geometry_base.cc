@@ -65,7 +65,8 @@ namespace oomph
       triangulate_io.numberofsegments = 0;
 
       // Clear hole list
-      if (clear_hole_data) free(triangulate_io.holelist);
+      if (clear_hole_data)
+        free(triangulate_io.holelist);
       triangulate_io.numberofholes = 0;
 
       // Clear region list

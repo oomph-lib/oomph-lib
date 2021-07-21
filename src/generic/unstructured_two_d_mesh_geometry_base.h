@@ -5251,7 +5251,8 @@ namespace oomph
           // Re-assign boundary coordinate for the case where boundary
           // is represented by polygon
           unsigned use_old = false;
-          if (n_vertex == 0) use_old = true;
+          if (n_vertex == 0)
+            use_old = true;
 
           // Now scale the coordinates accordingly
           for (std::set<Node*>::iterator it = all_nodes_pt.begin();

@@ -1742,7 +1742,8 @@ namespace oomph
         double J_via_ipt = J_eulerian_at_knot(ipt);
 
         double error = std::fabs(J_via_s - J_via_ipt);
-        if (error > max_error) max_error = error;
+        if (error > max_error)
+          max_error = error;
       }
       if (max_error > 1.0e-14)
       {

@@ -358,7 +358,8 @@ namespace oomph
 
         double stream = 0.5 * x[1];
         // Zero boundary conditions for eigenproblem
-        if (this->eigenfunction) stream = 0.0;
+        if (this->eigenfunction)
+          stream = 0.0;
 
         // Assign values to the first nodal value
         nod_pt->set_value(0, stream);

@@ -1168,7 +1168,8 @@ void ModalPRefineableQElement<1>::initial_setup(Tree* const& adopted_father_pt,
         delete internal_data_pt(0);
         internal_data_pt(0) = new_data_pt;
       }
-      if (this->ninternal_data() == 0) delete this->internal_data_pt(0);
+      if (this->ninternal_data() == 0)
+        delete this->internal_data_pt(0);
       // Interpolate initial guess from father to modes
       //// How to interpolate for the initial guess?
       // Set to zero for now, don't do projection problem
@@ -1247,7 +1248,8 @@ void ModalPRefineableQElement<1>::p_refine(const int& inc,
     delete internal_data_pt(0);
     internal_data_pt(0) = new_data_pt;
   }
-  if (this->ninternal_data() == 0) delete this->internal_data_pt(0);
+  if (this->ninternal_data() == 0)
+    delete this->internal_data_pt(0);
 }
 
 template<unsigned DIM>

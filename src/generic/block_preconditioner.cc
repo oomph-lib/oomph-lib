@@ -2340,7 +2340,8 @@ namespace oomph
     }
 
     // If we asked for output of blocks to a file then do it.
-    if (block_output_on()) output_blocks_to_files(Output_base_filename);
+    if (block_output_on())
+      output_blocks_to_files(Output_base_filename);
   }
 
   //============================================================================

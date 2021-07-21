@@ -596,7 +596,8 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
           doc_info.number());
   ofstream quality_file;
   quality_file.open(filename);
-  if (do_bulk_output) Bulk_mesh_pt->assess_mesh_quality(quality_file);
+  if (do_bulk_output)
+    Bulk_mesh_pt->assess_mesh_quality(quality_file);
   quality_file.close();
 
   // Output elements adjacent to outer boundary
@@ -1042,7 +1043,8 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
   sprintf(
     filename, "%s/soln%i.dat", doc_info.directory().c_str(), doc_info.number());
   some_file.open(filename);
-  if (do_bulk_output) Bulk_mesh_pt->output(some_file, nplot);
+  if (do_bulk_output)
+    Bulk_mesh_pt->output(some_file, nplot);
   some_file.close();
 
   // Output solution showing element outlines
@@ -1052,7 +1054,8 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
           doc_info.directory().c_str(),
           doc_info.number());
   some_file.open(filename);
-  if (do_bulk_output) Bulk_mesh_pt->output(some_file, 2);
+  if (do_bulk_output)
+    Bulk_mesh_pt->output(some_file, 2);
   some_file.close();
 
   // Get norm of solution

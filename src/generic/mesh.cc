@@ -773,7 +773,8 @@ namespace oomph
     bool passed = true;
 
     // Check the mesh for repeated nodes (issues its own error message)
-    if (0 != check_for_repeated_nodes()) passed = false;
+    if (0 != check_for_repeated_nodes())
+      passed = false;
 
     // hierher -- re-enable once problem with Hermite elements has been
     // resolved.
@@ -2528,7 +2529,8 @@ namespace oomph
     {
       // Some elements may not have been build yet, just store a null pointer
       // for these cases.
-      if (Element_pt[e] == 0) fe_pt[e] = 0;
+      if (Element_pt[e] == 0)
+        fe_pt[e] = 0;
       else
         fe_pt[e] = finite_element_pt(e);
     }
@@ -3518,7 +3520,8 @@ namespace oomph
            it != procs_set.end();
            it++)
       {
-        if (*it > proc_max) proc_max = *it;
+        if (*it > proc_max)
+          proc_max = *it;
       }
       processor_in_charge[nod_pt] = proc_max;
 
@@ -3533,7 +3536,8 @@ namespace oomph
              it != procs_set_solid.end();
              it++)
         {
-          if (*it > proc_max_solid) proc_max_solid = *it;
+          if (*it > proc_max_solid)
+            proc_max_solid = *it;
         }
         processor_in_charge[solid_nod_pt->variable_position_pt()] =
           proc_max_solid;
@@ -4793,8 +4797,10 @@ namespace oomph
       for (int i = 0; i < n_proc; i++)
       {
         av_number += double(nhalo_nodes[i]);
-        if (int(nhalo_nodes[i]) > max) max = nhalo_nodes[i];
-        if (int(nhalo_nodes[i]) < min) min = nhalo_nodes[i];
+        if (int(nhalo_nodes[i]) > max)
+          max = nhalo_nodes[i];
+        if (int(nhalo_nodes[i]) < min)
+          min = nhalo_nodes[i];
       }
       av_number /= double(n_proc);
     }
@@ -4851,8 +4857,10 @@ namespace oomph
       for (int i = 0; i < n_proc; i++)
       {
         av_number += double(nhaloed_nodes[i]);
-        if (int(nhaloed_nodes[i]) > max) max = nhaloed_nodes[i];
-        if (int(nhaloed_nodes[i]) < min) min = nhaloed_nodes[i];
+        if (int(nhaloed_nodes[i]) > max)
+          max = nhaloed_nodes[i];
+        if (int(nhaloed_nodes[i]) < min)
+          min = nhaloed_nodes[i];
       }
       av_number /= double(n_proc);
     }
@@ -6341,8 +6349,10 @@ namespace oomph
           eff = double(n_elements[i] - nhalo_elements[i]) / double(nel);
         }
         av_efficiency += eff;
-        if (eff > max) max = eff;
-        if (eff < min) min = eff;
+        if (eff > max)
+          max = eff;
+        if (eff < min)
+          min = eff;
       }
       av_efficiency /= double(n_proc);
     }
@@ -7369,7 +7379,8 @@ namespace oomph
                         count_hanging++;
 
                         // Record geom hang status of other node
-                        if (i == -1) other_geom_hanging = nmaster_other;
+                        if (i == -1)
+                          other_geom_hanging = nmaster_other;
 
                         // Value is hanging on local proc: Does it have the same
                         // number of masters as its counterpart on other proc?
@@ -8181,7 +8192,8 @@ namespace oomph
                         count_hanging++;
 
                         // Record geom hang status of other node
-                        if (i == -1) other_geom_hanging = nmaster_other;
+                        if (i == -1)
+                          other_geom_hanging = nmaster_other;
 
                         // Value is hanging on local proc: Does it have the same
                         // number of masters as its counterpart on other proc?
@@ -8765,7 +8777,8 @@ namespace oomph
 
     // If int_ndof_types if still -1 then no elements were found for this mesh,
     // so it has no dofs.
-    if (int_ndof_types == -1) int_ndof_types = 0;
+    if (int_ndof_types == -1)
+      int_ndof_types = 0;
 
     return unsigned(int_ndof_types);
   }
@@ -8903,7 +8916,8 @@ namespace oomph
 
     // If int_dim if still -1 then no elements were found for this mesh, so it
     // has no elemental dimension.
-    if (int_dim == -1) int_dim = 0;
+    if (int_dim == -1)
+      int_dim = 0;
 
     return unsigned(int_dim);
   }
@@ -9041,7 +9055,8 @@ namespace oomph
 
     // If int_dim if still -1 then no elements were found for this mesh, so it
     // has no nodal dimension.
-    if (int_dim == -1) int_dim = 0;
+    if (int_dim == -1)
+      int_dim = 0;
 
     return unsigned(int_dim);
   }

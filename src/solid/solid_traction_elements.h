@@ -1556,7 +1556,8 @@ namespace oomph
           }
         }
 
-        if (Sparsify) zeta = Zeta_sub_geom_object[ipt];
+        if (Sparsify)
+          zeta = Zeta_sub_geom_object[ipt];
 
         // Now find the local undeformed metric tensor from the tangent Vectors
         DenseMatrix<double> a(dim_el);
@@ -1711,7 +1712,8 @@ namespace oomph
           }
         }
 
-        if (Sparsify) zeta = Zeta_sub_geom_object[ipt];
+        if (Sparsify)
+          zeta = Zeta_sub_geom_object[ipt];
 
         // Now find the local undeformed metric tensor from the tangent Vectors
         DenseMatrix<double> a(dim_el);
@@ -2093,7 +2095,8 @@ namespace oomph
           }
         }
 
-        if (this->Sparsify) zeta = this->Zeta_sub_geom_object[ipt];
+        if (this->Sparsify)
+          zeta = this->Zeta_sub_geom_object[ipt];
 
         // Now find the local undeformed metric tensor from the tangent Vectors
         DenseMatrix<double> a(dim_el);

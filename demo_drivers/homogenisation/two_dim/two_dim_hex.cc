@@ -221,7 +221,8 @@ public:
       // This is needed during parallel runs when dofs that are not
       // held on the current processor are nulled out. Can change
       // this once/if the Dof_pt vector is distributed too.
-      if (Dof_pt[l] != 0) *Dof_pt[l] -= dx[l];
+      if (Dof_pt[l] != 0)
+        *Dof_pt[l] -= dx[l];
     }
 
 #ifdef OOMPH_HAS_MPI

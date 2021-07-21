@@ -681,21 +681,24 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::enable_pmls()
       el_pt->get_x(s, x);
 
       // If it's in the left (x-direction) PML region
-      if (x[0] <= left_boundary) el_pt->enable_pml(0, left_boundary, 0.0);
+      if (x[0] <= left_boundary)
+        el_pt->enable_pml(0, left_boundary, 0.0);
 
       // If it's in the right (x-direction) PML region
       if (x[0] >= right_boundary)
         el_pt->enable_pml(0, right_boundary, GlobalParameters::Lx);
 
       // If it's in the left (y-direction) PML region
-      if (x[1] <= left_boundary) el_pt->enable_pml(1, left_boundary, 0.0);
+      if (x[1] <= left_boundary)
+        el_pt->enable_pml(1, left_boundary, 0.0);
 
       // If it's in the right (y-direction) PML region
       if (x[1] >= right_boundary)
         el_pt->enable_pml(1, right_boundary, GlobalParameters::Ly);
 
       // If it's in the left (z-direction) PML region
-      if (x[2] <= left_boundary) el_pt->enable_pml(2, left_boundary, 0.0);
+      if (x[2] <= left_boundary)
+        el_pt->enable_pml(2, left_boundary, 0.0);
 
       // If it's in the right (z-direction) PML region
       if (x[2] >= right_boundary)
@@ -853,12 +856,18 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::doc_solution()
 
       // We only take the contribution from this element if it does
       // not lie in the PML region
-      if (x[0] <= left_boundary) continue;
-      if (x[0] >= right_boundary) continue;
-      if (x[1] <= left_boundary) continue;
-      if (x[1] >= right_boundary) continue;
-      if (x[2] <= left_boundary) continue;
-      if (x[2] >= right_boundary) continue;
+      if (x[0] <= left_boundary)
+        continue;
+      if (x[0] >= right_boundary)
+        continue;
+      if (x[1] <= left_boundary)
+        continue;
+      if (x[1] >= right_boundary)
+        continue;
+      if (x[2] <= left_boundary)
+        continue;
+      if (x[2] >= right_boundary)
+        continue;
 
       // If it's in the (pinned) central region, ignore it
 

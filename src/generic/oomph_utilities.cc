@@ -512,7 +512,8 @@ namespace oomph
       {
         double temp =
           std::fabs(newton_dir[i]) / std::max(std::fabs(x_old[i]), 1.0);
-        if (temp > test) test = temp;
+        if (temp > test)
+          test = temp;
       }
       double lambda_min = convergence_tol_on_x / test;
       double lambda = 1.0;
@@ -1084,7 +1085,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
           int flag;
           MPI_Initialized(&flag);
-          if (flag != 0) MPI_Helpers::finalize();
+          if (flag != 0)
+            MPI_Helpers::finalize();
 #endif
           oomph_info << "Shutting down...\n";
           exit(0);
@@ -1642,7 +1644,8 @@ namespace oomph
     void empty_my_memory_usage_file()
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
       // Open without appending and write header
       std::ofstream the_file;
@@ -1663,7 +1666,8 @@ namespace oomph
     void doc_my_memory_usage(const std::string& prefix_string)
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
       // Write prefix
       std::ofstream the_file;
@@ -1711,7 +1715,8 @@ namespace oomph
     void empty_total_memory_usage_file()
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
       // Open without appending and write header
       std::ofstream the_file;
@@ -1728,7 +1733,8 @@ namespace oomph
     void doc_total_memory_usage(const std::string& prefix_string)
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
       // Write prefix
       std::ofstream the_file;
@@ -1760,7 +1766,8 @@ namespace oomph
     void empty_memory_usage_files()
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
       empty_my_memory_usage_file();
       empty_total_memory_usage_file();
@@ -1773,7 +1780,8 @@ namespace oomph
     void doc_memory_usage(const std::string& prefix_string)
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
 #ifdef OOMPH_HAS_UNISTDH
       doc_my_memory_usage(prefix_string);
@@ -1801,7 +1809,8 @@ namespace oomph
     void empty_top_file()
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
       // Open without appending and write header
       std::ofstream the_file;
@@ -1819,7 +1828,8 @@ namespace oomph
     void run_continous_top(const std::string& comment)
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
       // Sync all processors if in parallel
       std::string modifier = "";
@@ -1876,7 +1886,8 @@ namespace oomph
     void stop_continous_top(const std::string& comment)
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
       // Sync all processors if in parallel
       std::string modifier = "";
@@ -1914,7 +1925,8 @@ namespace oomph
     void insert_comment_to_continous_top(const std::string& comment)
     {
       // bail out straight away?
-      if (Bypass_all_memory_usage_monitoring) return;
+      if (Bypass_all_memory_usage_monitoring)
+        return;
 
       std::stringstream tmp;
       tmp << " echo \"OOMPH-LIB EVENT: " << comment << "\"  >> "

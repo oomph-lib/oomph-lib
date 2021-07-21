@@ -273,7 +273,8 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0) set_boundary_node_pt[0].insert(nod_pt);
+                if (j == 0)
+                  set_boundary_node_pt[0].insert(nod_pt);
               }
             }
           }
@@ -381,7 +382,8 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0) set_boundary_node_pt[0].insert(nod_pt);
+                if (j == 0)
+                  set_boundary_node_pt[0].insert(nod_pt);
               }
             }
           }
@@ -475,7 +477,8 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0) set_boundary_node_pt[1].insert(nod_pt);
+                if (j == 0)
+                  set_boundary_node_pt[1].insert(nod_pt);
               }
             }
           }
@@ -569,7 +572,8 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0) set_boundary_node_pt[1].insert(nod_pt);
+                if (j == 0)
+                  set_boundary_node_pt[1].insert(nod_pt);
               }
             }
           }
@@ -652,7 +656,8 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0) set_boundary_node_pt[2].insert(nod_pt);
+                if (j == 0)
+                  set_boundary_node_pt[2].insert(nod_pt);
               }
             }
           }
@@ -724,7 +729,8 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0) set_boundary_node_pt[2].insert(nod_pt);
+                if (j == 0)
+                  set_boundary_node_pt[2].insert(nod_pt);
               }
             }
           }

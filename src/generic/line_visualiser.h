@@ -309,7 +309,8 @@ namespace oomph
             MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag, Comm_pt->mpi_comm());
 
             // Send the sizes of fields to the main process
-            if (buff_size == 0) size_values.resize(1);
+            if (buff_size == 0)
+              size_values.resize(1);
             MPI_Send(&size_values[0],
                      buff_size,
                      MPI_UNSIGNED,
@@ -322,7 +323,8 @@ namespace oomph
             MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag, Comm_pt->mpi_comm());
 
             // Send the data to the main process
-            if (buff_size == 0) local_values.resize(1);
+            if (buff_size == 0)
+              local_values.resize(1);
             MPI_Send(&local_values[0],
                      buff_size,
                      MPI_DOUBLE,
@@ -542,7 +544,8 @@ namespace oomph
             MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag, Comm_pt->mpi_comm());
 
             // Send the sizes of fields to the main process
-            if (buff_size == 0) size_values.resize(1);
+            if (buff_size == 0)
+              size_values.resize(1);
             MPI_Send(&size_values[0],
                      buff_size,
                      MPI_UNSIGNED,
@@ -555,7 +558,8 @@ namespace oomph
             MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag, Comm_pt->mpi_comm());
 
             // Send the data to the main process
-            if (buff_size == 0) local_values.resize(1);
+            if (buff_size == 0)
+              local_values.resize(1);
             MPI_Send(&local_values[0],
                      buff_size,
                      MPI_DOUBLE,
@@ -655,7 +659,8 @@ namespace oomph
       // Read out number of plot points
       Nplot_points = coord_vec.size();
 
-      if (Nplot_points == 0) return;
+      if (Nplot_points == 0)
+        return;
 
       // Keep track of unlocated plot points
       unsigned count_not_found_local = 0;

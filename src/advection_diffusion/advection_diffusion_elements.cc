@@ -199,7 +199,8 @@ namespace oomph
                 {
                   // Temporary term used in assembly
                   double tmp = peclet * wind[i];
-                  if (!ALE_is_disabled) tmp -= peclet_st * mesh_velocity[i];
+                  if (!ALE_is_disabled)
+                    tmp -= peclet_st * mesh_velocity[i];
                   // Now assemble Jacobian term
                   jacobian(local_eqn, local_unknown) -=
                     dpsidx(l2, i) * (tmp * test(l) + dtestdx(l, i)) * W;

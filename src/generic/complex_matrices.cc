@@ -155,7 +155,8 @@ namespace oomph
       for (unsigned long j = 0; j < M; j++)
       {
         double tmp = std::abs((*this)(i, j));
-        if (tmp > big) big = tmp;
+        if (tmp > big)
+          big = tmp;
       }
       if (big == 0.0)
       {
@@ -623,7 +624,8 @@ namespace oomph
 
     // Doc (0/1) = (false/true)
     int doc = 0;
-    if (Doc_stats_during_solve) doc = 1;
+    if (Doc_stats_during_solve)
+      doc = 1;
 
     // Cast to integers for stupid SuperLU
     int n_aux = (int)N;
@@ -696,7 +698,8 @@ namespace oomph
 
     // Doc (0/1) = (false/true)
     int doc = 0;
-    if (Doc_stats_during_solve) doc = 1;
+    if (Doc_stats_during_solve)
+      doc = 1;
 
     // Number of RHSs
     int nrhs = 1;
@@ -746,7 +749,8 @@ namespace oomph
 
       // Doc (0/1) = (false/true)
       int doc = 0;
-      if (Doc_stats_during_solve) doc = 1;
+      if (Doc_stats_during_solve)
+        doc = 1;
 
       // Cast to integers for stupid SuperLU
       int n_aux = (int)N;
@@ -947,7 +951,8 @@ namespace oomph
 
     // Doc (0/1) = (false/true)
     int doc = 0;
-    if (Doc_stats_during_solve) doc = 1;
+    if (Doc_stats_during_solve)
+      doc = 1;
 
     // Copies so that const-ness is maintained
     int n_aux = int(N);
@@ -1019,7 +1024,8 @@ namespace oomph
 
     // Doc (0/1) = (false/true)
     int doc = 0;
-    if (Doc_stats_during_solve) doc = 1;
+    if (Doc_stats_during_solve)
+      doc = 1;
 
     // Number of RHSs
     int nrhs = 1;
@@ -1069,7 +1075,8 @@ namespace oomph
 
       // Doc (0/1) = (false/true)
       int doc = 0;
-      if (Doc_stats_during_solve) doc = 1;
+      if (Doc_stats_during_solve)
+        doc = 1;
 
       // Copies so that const-ness is maintained
       int n_aux = int(N);

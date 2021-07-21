@@ -198,7 +198,8 @@ void demo_smoothing_with_linear_elasticity()
     bool mesh_has_inverted_elements;
     Orig_mesh_pt->check_inverted_elements(mesh_has_inverted_elements);
     cout << "Before quadratic snapping mesh does ";
-    if (!mesh_has_inverted_elements) cout << "not ";
+    if (!mesh_has_inverted_elements)
+      cout << "not ";
     cout << "have inverted elements. \n";
 
     if (do_solid == 1)
@@ -239,7 +240,8 @@ void demo_smoothing_with_linear_elasticity()
                                           inverted_mesh_elements);
     inverted_mesh_elements.close();
     cout << "After quadratic snapping mesh does ";
-    if (!mesh_has_inverted_elements) cout << "not ";
+    if (!mesh_has_inverted_elements)
+      cout << "not ";
     cout << "have inverted elements. \n";
 
     // Smooth it:
@@ -311,7 +313,8 @@ void demo_smoothing_with_linear_elasticity()
                                           inverted_mesh_elements);
     inverted_mesh_elements.close();
     cout << "After smoothing mesh does ";
-    if (!mesh_has_inverted_elements) cout << "not ";
+    if (!mesh_has_inverted_elements)
+      cout << "not ";
     cout << "have inverted elements. \n";
 
     // Cleanup
@@ -482,7 +485,8 @@ void demo_smoothing_with_poisson()
     bool mesh_has_inverted_elements;
     Orig_mesh_pt->check_inverted_elements(mesh_has_inverted_elements);
     cout << "Before quadratic snapping mesh does ";
-    if (!mesh_has_inverted_elements) cout << "not ";
+    if (!mesh_has_inverted_elements)
+      cout << "not ";
     cout << "have inverted elements. \n";
 
     if (do_solid == 1)
@@ -523,7 +527,8 @@ void demo_smoothing_with_poisson()
                                           inverted_mesh_elements);
     inverted_mesh_elements.close();
     cout << "After quadratic snapping mesh does ";
-    if (!mesh_has_inverted_elements) cout << "not ";
+    if (!mesh_has_inverted_elements)
+      cout << "not ";
     cout << "have inverted elements. \n";
 
     // Smooth it:
@@ -594,7 +599,8 @@ void demo_smoothing_with_poisson()
                                           inverted_mesh_elements);
     inverted_mesh_elements.close();
     cout << "After smoothing mesh does ";
-    if (!mesh_has_inverted_elements) cout << "not ";
+    if (!mesh_has_inverted_elements)
+      cout << "not ";
     cout << "have inverted elements. \n";
 
     // Cleanup
@@ -770,7 +776,8 @@ void demo_smoothing_with_nonlinear_elasticity()
     bool mesh_has_inverted_elements;
     Orig_mesh_pt->check_inverted_elements(mesh_has_inverted_elements);
     cout << "Before quadratic snapping mesh does ";
-    if (!mesh_has_inverted_elements) cout << "not ";
+    if (!mesh_has_inverted_elements)
+      cout << "not ";
     cout << "have inverted elements. \n";
 
     // Snap FSI interface to quadratic surface
@@ -803,7 +810,8 @@ void demo_smoothing_with_nonlinear_elasticity()
                                           inverted_mesh_elements);
     inverted_mesh_elements.close();
     cout << "After quadratic snapping mesh does ";
-    if (!mesh_has_inverted_elements) cout << "not ";
+    if (!mesh_has_inverted_elements)
+      cout << "not ";
     cout << "have inverted elements. \n";
 
     // Smooth it: Specify the two meshes (the original and a working
@@ -833,7 +841,8 @@ void demo_smoothing_with_nonlinear_elasticity()
                                           inverted_mesh_elements);
     inverted_mesh_elements.close();
     cout << "After smoothing mesh does ";
-    if (!mesh_has_inverted_elements) cout << "not ";
+    if (!mesh_has_inverted_elements)
+      cout << "not ";
     cout << "have inverted elements. \n";
 
     filename = doc_info.directory();

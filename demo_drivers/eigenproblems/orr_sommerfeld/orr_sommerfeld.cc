@@ -943,7 +943,8 @@ public:
     // There is only one value
     unsigned n_dof = ndof();
     // If we're pinned return
-    if (n_dof == 0) return;
+    if (n_dof == 0)
+      return;
 
     // Solve the eigenvalue problem
     Vector<complex<double>> eval;

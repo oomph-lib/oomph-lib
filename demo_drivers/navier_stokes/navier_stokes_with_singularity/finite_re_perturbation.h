@@ -259,8 +259,10 @@ namespace PerturbationSolution
     soln.resize(3);
     double p = 0.0;
     full_soln(x, soln, p, N_terms_for_plot);
-    if (std::isinf(p)) p = 200.0;
-    if (std::isnan(p)) p = 200.0;
+    if (std::isinf(p))
+      p = 200.0;
+    if (std::isnan(p))
+      p = 200.0;
     soln[2] = p;
   }
 
@@ -298,8 +300,10 @@ namespace PerturbationSolution
 
     for (unsigned i = 0; i < 3; i++)
     {
-      if (std::isinf(soln[i])) soln[i] = 200.0;
-      if (std::isnan(soln[i])) soln[i] = 200.0;
+      if (std::isinf(soln[i]))
+        soln[i] = 200.0;
+      if (std::isnan(soln[i]))
+        soln[i] = 200.0;
     }
   }
 
@@ -337,8 +341,10 @@ namespace PerturbationSolution
 
     for (unsigned i = 0; i < 3; i++)
     {
-      if (std::isinf(soln[i])) soln[i] = 200.0;
-      if (std::isnan(soln[i])) soln[i] = 200.0;
+      if (std::isinf(soln[i]))
+        soln[i] = 200.0;
+      if (std::isnan(soln[i]))
+        soln[i] = 200.0;
     }
   }
 

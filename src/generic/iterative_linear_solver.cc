@@ -152,7 +152,8 @@ namespace oomph
     }
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve) clean_up_memory();
+    if (!Enable_resolve)
+      clean_up_memory();
   };
 
   //==================================================================
@@ -276,7 +277,8 @@ namespace oomph
     DoubleVector residual(rhs);
     double residual_norm = residual.norm();
     double rhs_norm = residual_norm;
-    if (rhs_norm == 0.0) rhs_norm = 1.0;
+    if (rhs_norm == 0.0)
+      rhs_norm = 1.0;
     DoubleVector x(rhs.distribution_pt(), 0.0);
 
     // Hat residual by copy operation
@@ -704,7 +706,8 @@ namespace oomph
     DoubleVector residual(rhs);
     double residual_norm = residual.norm();
     double rhs_norm = residual_norm;
-    if (rhs_norm == 0.0) rhs_norm = 1.0;
+    if (rhs_norm == 0.0)
+      rhs_norm = 1.0;
 
     // Normalised residual
     double normalised_residual_norm = residual_norm / rhs_norm;
@@ -991,7 +994,8 @@ namespace oomph
     }
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve) clean_up_memory();
+    if (!Enable_resolve)
+      clean_up_memory();
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -1129,7 +1133,8 @@ namespace oomph
     this->solve_helper(Matrix_pt, f, result);
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve) clean_up_memory();
+    if (!Enable_resolve)
+      clean_up_memory();
   } // End of solve
 
   //==================================================================
@@ -1395,7 +1400,8 @@ namespace oomph
     solve_helper(Matrix_pt, f, result);
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve) clean_up_memory();
+    if (!Enable_resolve)
+      clean_up_memory();
   } // End of solve
 
   //==================================================================
@@ -1883,7 +1889,8 @@ namespace oomph
     solve_helper(Matrix_pt, f, result);
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve) clean_up_memory();
+    if (!Enable_resolve)
+      clean_up_memory();
   } // End of solve
 
   //==================================================================
@@ -2192,7 +2199,8 @@ namespace oomph
     }
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve) clean_up_memory();
+    if (!Enable_resolve)
+      clean_up_memory();
   };
 
   //=============================================================================
@@ -2368,7 +2376,8 @@ namespace oomph
     double beta = normb;
 
     // compute initial relative residual
-    if (normb == 0.0) normb = 1;
+    if (normb == 0.0)
+      normb = 1;
     resid = beta / normb;
 
     // if required will document convergence history to screen or file (if
@@ -2588,7 +2597,8 @@ namespace oomph
       }
 
       // update
-      if (iter_restart > 0) update((iter_restart - 1), H, s, v, solution);
+      if (iter_restart > 0)
+        update((iter_restart - 1), H, s, v, solution);
 
       // solve Mr = (b-Jx) for r
       {
@@ -2773,7 +2783,8 @@ namespace oomph
     }
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve) clean_up_memory();
+    if (!Enable_resolve)
+      clean_up_memory();
   };
 
   //==================================================================

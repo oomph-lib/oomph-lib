@@ -350,7 +350,8 @@ PrescribedBoundaryDisplacementProblem<
   // Create the mesh
 
   unsigned nel = 4;
-  if (CommandLineArgs::Argc != 1) nel = 2;
+  if (CommandLineArgs::Argc != 1)
+    nel = 2;
 
   // # of elements in x-direction
   unsigned n_x = nel;

@@ -133,7 +133,8 @@ namespace GlobalFct
                  "--completely_smooth"))
       {
         double phi = atan2(fc, (U_max - u));
-        if (phi < 0) phi += 2.0 * MathematicalConstants::Pi;
+        if (phi < 0)
+          phi += 2.0 * MathematicalConstants::Pi;
 
         // Quadratic fit to periodic polynomial that's only
         // above zero between phi=90 and 180 degrees.

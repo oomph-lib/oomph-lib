@@ -353,7 +353,8 @@ void PrescribedBoundaryDisplacementProblem<
   ELEMENT>::create_lagrange_multiplier_elements()
 {
   // Actually attach elements?
-  if (!Global_Physical_Variables::Actually_attach_face_elements) return;
+  if (!Global_Physical_Variables::Actually_attach_face_elements)
+    return;
 
   // Lagrange multiplier elements are located on boundary 2:
   unsigned b = 2;

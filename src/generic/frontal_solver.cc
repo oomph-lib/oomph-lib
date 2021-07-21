@@ -386,8 +386,10 @@ namespace oomph
         nfront[0] = int(ceil(Front_factor * double(front0_recommendation)));
         nfront[1] = int(ceil(Front_factor * double(front1_recommendation)));
 
-        if (n_dof < nfront[0]) nfront[0] = n_dof;
-        if (n_dof < nfront[1]) nfront[1] = n_dof;
+        if (n_dof < nfront[0])
+          nfront[0] = n_dof;
+        if (n_dof < nfront[1])
+          nfront[1] = n_dof;
       }
       // We have a problem if the front size is cocked
 
@@ -532,7 +534,8 @@ namespace oomph
         // Set the new value of Lw (member data)
         Lw = lw;
         // Delete the previously allocated storage
-        if (W) delete[] W;
+        if (W)
+          delete[] W;
         // Now allocate new storage
         W = new (std::nothrow) double[Lw];
         if (!W)

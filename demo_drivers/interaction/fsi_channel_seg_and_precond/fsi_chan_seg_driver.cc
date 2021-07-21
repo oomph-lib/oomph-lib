@@ -286,7 +286,8 @@ public:
     // Max. change:
     convergence_file << rms_change << " " << max_change << " " << rms_norm
                      << " ";
-    if (doc_max_global_residual) convergence_file << max_res << " ";
+    if (doc_max_global_residual)
+      convergence_file << max_res << " ";
     convergence_file << std::endl;
   }
 
@@ -1329,7 +1330,8 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run(
     // Newton solver
     if (Flags::Use_segregated_solver == 1)
     {
-      if (doc_info.number() == 10) doc_info.number() -= 10;
+      if (doc_info.number() == 10)
+        doc_info.number() -= 10;
       std::cout << "Resetting doc file numbers" << std::endl;
     }
 
@@ -1461,11 +1463,13 @@ int main(int argc, char* argv[])
 
   // Use displacement control?
   bool displ_control = false;
-  if (Flags::Use_displ_control == 1) displ_control = true;
+  if (Flags::Use_displ_control == 1)
+    displ_control = true;
 
   // Steady run?
   bool steady_flag = false;
-  if (Flags::Steady_flag == 1) steady_flag = true;
+  if (Flags::Steady_flag == 1)
+    steady_flag = true;
 
   // Build the problem with QTaylorHoodElements
   SegregatedFSICollapsibleChannelProblem<

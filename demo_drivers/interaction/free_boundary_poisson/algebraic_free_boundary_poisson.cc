@@ -147,7 +147,8 @@ private:
       if (Case_id == 0)
       {
         el_pt->evaluate_shape_derivs_by_direct_fd();
-        if (!done) std::cout << "\n\n [CR residuals] Direct FD" << std::endl;
+        if (!done)
+          std::cout << "\n\n [CR residuals] Direct FD" << std::endl;
       }
       // Chain rule with/without FD
       else if ((Case_id == 1) || (Case_id == 2))
@@ -458,7 +459,8 @@ void demo_fish_poisson(const string& directory_name)
   double dyc = 0.6 / double(nstep - 1);
 
   // Valiation: Just do one step
-  if (CommandLineArgs::Argc > 1) nstep = 1;
+  if (CommandLineArgs::Argc > 1)
+    nstep = 1;
 
   for (unsigned istep = 0; istep < nstep; istep++)
   {

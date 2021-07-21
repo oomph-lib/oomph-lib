@@ -1255,7 +1255,8 @@ namespace oomph
     std::ostream& outfile)
   {
     bool doc = false;
-    if (outfile) doc = true;
+    if (outfile)
+      doc = true;
 
     // Number of boundaries
     unsigned nbound = nboundary();
@@ -1281,7 +1282,8 @@ namespace oomph
       // Get pointer to element
       FiniteElement* fe_pt = finite_element_pt(e);
 
-      if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
+      if (doc)
+        outfile << "Element: " << e << " " << fe_pt << std::endl;
 
       // Only include 2D elements! Some meshes contain interface elements too.
       if (fe_pt->dim() == 2)

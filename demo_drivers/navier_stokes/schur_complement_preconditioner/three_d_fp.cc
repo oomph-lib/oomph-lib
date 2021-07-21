@@ -148,7 +148,8 @@ public:
       Bulk_mesh_pt->element_pt());
 
     // Now set the first pressure dof in the first element to 0.0
-    if (Problem_id == Global_Variables::Driven_cavity) fix_pressure(0, 0, 0.0);
+    if (Problem_id == Global_Variables::Driven_cavity)
+      fix_pressure(0, 0, 0.0);
   } // end_of_actions_after_adapt
 
   /// Actions after Newton step record number of iterations
@@ -478,7 +479,8 @@ FpTestProblem::FpTestProblem(const unsigned& n_el,
         {
           if (!(nod_pt->is_on_boundary(0)))
           {
-            if ((nod_pt->x(1) < 0.5) && nod_pt->x(2) < 0.5) nod_pt->unpin(0);
+            if ((nod_pt->x(1) < 0.5) && nod_pt->x(2) < 0.5)
+              nod_pt->unpin(0);
           }
         }
       }
@@ -510,7 +512,8 @@ FpTestProblem::FpTestProblem(const unsigned& n_el,
   }
 
   // Now set the first pressure value in element 0 to 0.0
-  if (Problem_id == Global_Variables::Driven_cavity) fix_pressure(0, 0, 0.0);
+  if (Problem_id == Global_Variables::Driven_cavity)
+    fix_pressure(0, 0, 0.0);
 
   // Setup equation numbering scheme
   oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
@@ -753,7 +756,8 @@ int main(int argc, char** argv)
 
         // Number of elements in x/y directions (reduced for validaton)
         unsigned max_nel_1d = 4;
-        if (argc > 1) max_nel_1d = 2;
+        if (argc > 1)
+          max_nel_1d = 2;
         for (unsigned nel_1d = 2; nel_1d <= max_nel_1d; nel_1d *= 2)
         {
           // Build the problem
@@ -808,7 +812,8 @@ int main(int argc, char** argv)
 
           // Loop over Reynolds numbers (limited during validation)
           double start_re = 0.0;
-          if (argc > 1) start_re = 50;
+          if (argc > 1)
+            start_re = 50;
           double end_re = 50.0;
           for (double re = start_re; re <= end_re; re += 50.0)
           {

@@ -1162,7 +1162,8 @@ namespace oomph
       for (unsigned i = 0; i < ncoord; i++)
       {
         // Each coordinate must be positive individually
-        if (s[i] < 0.0) s[i] = 0.0;
+        if (s[i] < 0.0)
+          s[i] = 0.0;
         sum += s[i];
       }
 

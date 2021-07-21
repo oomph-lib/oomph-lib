@@ -202,7 +202,8 @@ public:
       Data* data_pt = Inflow_ext_data[i];
       // Number of values
       unsigned n_val = data_pt->nvalue();
-      if (n_val > max_nvalue) max_nvalue = n_val;
+      if (n_val > max_nvalue)
+        max_nvalue = n_val;
     }
 
     // Allocate sufficient storage
@@ -256,7 +257,8 @@ public:
     // Call "normal" jacobian first.
     ELEMENT::get_jacobian(residuals, jacobian);
 
-    if (n_ext == 0) return;
+    if (n_ext == 0)
+      return;
 
     // Get ready for FD operations
     Vector<double> residuals_plus(residuals.size());

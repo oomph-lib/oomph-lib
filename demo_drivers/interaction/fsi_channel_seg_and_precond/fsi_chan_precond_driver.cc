@@ -672,11 +672,13 @@ int main(int argc, char* argv[])
 
   // Use displacement control?
   bool displ_control = false;
-  if (Flags::Use_displ_control == 1) displ_control = true;
+  if (Flags::Use_displ_control == 1)
+    displ_control = true;
 
   // Steady run?
   bool steady_flag = false;
-  if (Flags::Steady_flag == 1) steady_flag = true;
+  if (Flags::Steady_flag == 1)
+    steady_flag = true;
 
   // Build the problem with QTaylorHoodElements
   PreconditionedFSICollapsibleChannelProblem<

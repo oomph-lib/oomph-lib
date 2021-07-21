@@ -551,7 +551,8 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
           doc_info.number());
   ofstream quality_file;
   quality_file.open(filename);
-  if (do_bulk_output) Bulk_mesh_pt->assess_mesh_quality(quality_file);
+  if (do_bulk_output)
+    Bulk_mesh_pt->assess_mesh_quality(quality_file);
   quality_file.close();
 
   // Output elements adjacent to outer boundary

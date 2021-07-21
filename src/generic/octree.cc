@@ -4149,7 +4149,8 @@ namespace oomph
     }
 
     double max_error = max_error_face;
-    if (max_error_edge > max_error) max_error = max_error_edge;
+    if (max_error_edge > max_error)
+      max_error = max_error_edge;
 
     if (failed)
     {
@@ -5589,7 +5590,8 @@ namespace oomph
     }
 
     double max_error = max_error_face;
-    if (max_error_edge > max_error) max_error = max_error_edge;
+    if (max_error_edge > max_error)
+      max_error = max_error_edge;
 
     if (failed)
     {

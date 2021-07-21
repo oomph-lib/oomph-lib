@@ -71,7 +71,8 @@ namespace oomph
       // this->build_mesh();
 
       // Function to log space the mesh
-      if (Global_Physical_Variables::log_mesh) stretch_mesh();
+      if (Global_Physical_Variables::log_mesh)
+        stretch_mesh();
 
       // Nodal positions etc. were created in constructor for
       // RectangularMesh<...>. Only need to setup quadtree forest

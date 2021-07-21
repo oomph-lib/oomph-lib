@@ -55,7 +55,8 @@ namespace oomph
 
     // If file declared in outfile exists,set doc=true to enable writing to
     // stream
-    if (outfile) doc = true;
+    if (outfile)
+      doc = true;
 
     // Number of boundaries. Gives the value assigned by the function
     // nboundary()
@@ -108,7 +109,8 @@ namespace oomph
       FiniteElement* fe_pt = finite_element_pt(e);
 
       // print out values of all elements to doc
-      if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
+      if (doc)
+        outfile << "Element: " << e << " " << fe_pt << std::endl;
 
       // Loop over the element's nodes and find out which boundaries they're on
       // ----------------------------------------------------------------------

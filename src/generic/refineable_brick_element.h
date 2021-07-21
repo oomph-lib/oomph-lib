@@ -314,7 +314,8 @@ namespace oomph
         mesh_pt, new_node_pt, was_already_built, new_nodes_file);
 
       // Are we done?
-      if (was_already_built) return;
+      if (was_already_built)
+        return;
 
       // Now need to loop over the nodes again and set solid variables
 

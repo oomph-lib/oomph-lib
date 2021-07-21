@@ -320,7 +320,8 @@ namespace oomph
           Previous_solid_value[value_count] - Solid_data_pt[i]->value(k);
 
         // Max change?
-        if (std::fabs(change) > max_change) max_change = std::fabs(change);
+        if (std::fabs(change) > max_change)
+          max_change = std::fabs(change);
 
         // Add square of change relative to previous value
         rms_change += pow(change, 2);
@@ -439,7 +440,8 @@ namespace oomph
     else
     {
       // No relaxation: Can return immediately
-      if (Omega_relax == 1.0) return;
+      if (Omega_relax == 1.0)
+        return;
 
       // Counter for the number of values:
       unsigned value_count = 0;

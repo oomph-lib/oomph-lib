@@ -296,7 +296,8 @@ namespace oomph
     template<class BULK_ELEMENT>
     void doc_boundary_coordinates(const unsigned& b, std::ofstream& the_file)
     {
-      if (nelement() == 0) return;
+      if (nelement() == 0)
+        return;
       if (!Boundary_coordinate_exists[b])
       {
         oomph_info << "No boundary coordinates were set up for boundary " << b
@@ -804,7 +805,8 @@ namespace oomph
           }
         }
       }
-      if (failed) return 1;
+      if (failed)
+        return 1;
 
       // If we made it to here, we must have passed the test.
       oomph_info << "...done: Test passed!" << std::endl << std::endl;
@@ -1797,7 +1799,8 @@ namespace oomph
       unsigned n = nelement();
       for (unsigned e = 0; e < n; e++)
       {
-        if (!(element_pt(e)->is_halo())) count++;
+        if (!(element_pt(e)->is_halo()))
+          count++;
       }
       return count;
     }

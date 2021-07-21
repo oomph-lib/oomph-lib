@@ -107,7 +107,8 @@ int main()
   char multi_boundary_ids_marker;
   std::cin >> multi_boundary_ids_marker;
   bool do_multi_boundary_ids = true;
-  if (multi_boundary_ids_marker == 'n') do_multi_boundary_ids = false;
+  if (multi_boundary_ids_marker == 'n')
+    do_multi_boundary_ids = false;
 
   // Define filenames
   //-----------------

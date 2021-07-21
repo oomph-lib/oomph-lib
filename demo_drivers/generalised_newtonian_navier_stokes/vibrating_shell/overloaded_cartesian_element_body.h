@@ -869,7 +869,8 @@ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   // region gets immediately left behind by rapidly moving
   // yield surface
   bool add_yield_bias = false;
-  if (!add_yield_bias) yield = 0.0;
+  if (!add_yield_bias)
+    yield = 0.0;
 
   // Start with diagonal terms
   for (unsigned i = 0; i < el_dim; i++)

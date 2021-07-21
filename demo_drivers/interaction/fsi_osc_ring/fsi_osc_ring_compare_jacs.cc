@@ -603,7 +603,8 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
     if (i_case == 0)
     {
       el_pt->evaluate_shape_derivs_by_direct_fd();
-      if (!done) std::cout << "\n\n [CR residuals] Direct FD" << std::endl;
+      if (!done)
+        std::cout << "\n\n [CR residuals] Direct FD" << std::endl;
     }
     // Chain rule with/without FD
     else if ((i_case == 1) || (i_case == 2))

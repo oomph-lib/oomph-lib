@@ -479,7 +479,8 @@ namespace oomph
                           for (unsigned b = a; b < DIM; b++)
                           {
                             double factor = d_G_dX.raw_direct_access(count1);
-                            if (a == b) factor *= 0.5;
+                            if (a == b)
+                              factor *= 0.5;
 
                             // Offset for faster access
                             unsigned offset3 = d_stress_dG.offset(a, b);
@@ -1653,7 +1654,8 @@ namespace oomph
                           for (unsigned b = a; b < DIM; b++)
                           {
                             double factor = d_G_dX.raw_direct_access(count1);
-                            if (a == b) factor *= 0.5;
+                            if (a == b)
+                              factor *= 0.5;
 
                             // Offset for faster access
                             unsigned offset3 = d_stress_dG.offset(a, b);

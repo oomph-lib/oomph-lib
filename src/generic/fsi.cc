@@ -171,7 +171,8 @@ namespace oomph
 
     // Loop over front and back if required: Get number of fluid-loaded faces
     unsigned n_loaded_face = 2;
-    if (Only_front_is_loaded_by_fluid) n_loaded_face = 1;
+    if (Only_front_is_loaded_by_fluid)
+      n_loaded_face = 1;
 
     for (unsigned face = 0; face < n_loaded_face; face++)
     {
@@ -208,7 +209,8 @@ namespace oomph
       // points into the fluid, the normal at the back points away
       // from it.
       double sign = 1.0;
-      if (face == 1) sign = -1.0;
+      if (face == 1)
+        sign = -1.0;
 
       // The load is scaled by the stress-scale ratio Q
       for (unsigned i = 0; i < n_load; i++)
@@ -233,7 +235,8 @@ namespace oomph
 
     // Loop over front and back if required: Get number of fluid-loaded faces
     unsigned n_loaded_face = 2;
-    if (Only_front_is_loaded_by_fluid) n_loaded_face = 1;
+    if (Only_front_is_loaded_by_fluid)
+      n_loaded_face = 1;
     for (unsigned face = 0; face < n_loaded_face; face++)
     {
       // Loop over all integration points in wall element

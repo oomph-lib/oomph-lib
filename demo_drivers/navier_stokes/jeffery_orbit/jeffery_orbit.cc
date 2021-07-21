@@ -1127,7 +1127,8 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
   some_file.close();
 
   // No trace file writing after projection
-  if (project) return;
+  if (project)
+    return;
 
   // Output the boundary only if not projecting
   sprintf(filename,

@@ -2709,9 +2709,12 @@ namespace oomph
     }
 
     max_error = max_error_x[0];
-    if (max_error_x[1] > max_error) max_error = max_error_x[1];
-    if (max_error_x[2] > max_error) max_error = max_error_x[2];
-    if (max_error_val > max_error) max_error = max_error_val;
+    if (max_error_x[1] > max_error)
+      max_error = max_error_x[1];
+    if (max_error_x[2] > max_error)
+      max_error = max_error_x[2];
+    if (max_error_val > max_error)
+      max_error = max_error_val;
 
     if (max_error > 1e-9)
     {

@@ -442,7 +442,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   {
     // Loop over in/outflow boundaries
     unsigned n = nfluid_inflow_traction_boundary();
-    if (in_out == 1) n = nfluid_outflow_traction_boundary();
+    if (in_out == 1)
+      n = nfluid_outflow_traction_boundary();
     for (unsigned i = 0; i < n; i++)
     {
       // Get boundary ID
@@ -775,7 +776,8 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   {
     // Loop over boundaries with fluid traction elements
     unsigned n = nfluid_inflow_traction_boundary();
-    if (in_out == 1) n = nfluid_outflow_traction_boundary();
+    if (in_out == 1)
+      n = nfluid_outflow_traction_boundary();
     for (unsigned i = 0; i < n; i++)
     {
       // Get boundary ID

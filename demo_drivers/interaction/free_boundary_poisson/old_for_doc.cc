@@ -385,7 +385,8 @@ void demo_fish_poisson(const string& directory_name)
 
   // Number of steps
   unsigned nstep = 5;
-  if (CommandLineArgs::Argc > 1) nstep = 1;
+  if (CommandLineArgs::Argc > 1)
+    nstep = 1;
 
   // Increment in displacement
   double dyc = 0.6 / double(nstep - 1);

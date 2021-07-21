@@ -263,7 +263,8 @@ namespace oomph
       Vector<double>& residuals)
     {
       // No further action
-      if (S_point_source.size() == 0) return;
+      if (S_point_source.size() == 0)
+        return;
 
       // Find out how many nodes there are
       const unsigned n_node = this->nnode();

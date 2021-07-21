@@ -62,7 +62,8 @@ namespace oomph
     /// Setup terminate helper
     void setup()
     {
-      if (Exception_stringstream_pt != 0) delete Exception_stringstream_pt;
+      if (Exception_stringstream_pt != 0)
+        delete Exception_stringstream_pt;
       Exception_stringstream_pt = new std::stringstream;
       std::set_terminate(spawn_errors_from_uncaught_errors);
     }

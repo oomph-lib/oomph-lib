@@ -849,7 +849,8 @@ namespace oomph
           // Loop over front and back if required: Get number of fluid-loaded
           // faces
           unsigned n_loaded_face = 2;
-          if (el_pt->only_front_is_loaded_by_fluid()) n_loaded_face = 1;
+          if (el_pt->only_front_is_loaded_by_fluid())
+            n_loaded_face = 1;
 
           for (unsigned face = 0; face < n_loaded_face; face++)
           {
@@ -1111,7 +1112,8 @@ namespace oomph
 
         // If we've written something for the last node, bump up
         // counter for file so we don't overwrite
-        if (written_something) count++;
+        if (written_something)
+          count++;
       }
 
     } // end_of_doc_fsi

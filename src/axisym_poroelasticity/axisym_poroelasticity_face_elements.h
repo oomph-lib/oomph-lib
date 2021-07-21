@@ -490,7 +490,8 @@ namespace oomph
                      (x[0] + disp[0]);
 
       double return_val = 1.0;
-      if (J_def != 0.0) return_val = J_undef / J_def;
+      if (J_def != 0.0)
+        return_val = J_undef / J_def;
       return return_val;
     }
 

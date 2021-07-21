@@ -510,7 +510,8 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
 
       // If we want for each planar face its own ID, the boundary ID is
       // counter, otherwise, the boundary ID is i+1
-      if (do_multi_boundary_ids) fluid_output_stream << counter << '\n';
+      if (do_multi_boundary_ids)
+        fluid_output_stream << counter << '\n';
       else
         fluid_output_stream << i + 1 << '\n';
 
@@ -603,7 +604,8 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
                         << "# --------------------------------" << '\n';
     // get the number of faces
     unsigned nface;
-    if (i == 0 || i == 4) nface = nfluid_face[0];
+    if (i == 0 || i == 4)
+      nface = nfluid_face[0];
     else
       nface = nsolid_linking_faces[i - 1];
 
@@ -611,7 +613,8 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
     {
       // get pointer to the vector storing the three nodes
       std::vector<unsigned>* face_node;
-      if (i == 0 || i == 4) face_node = &(fluid_faces[0][iface]);
+      if (i == 0 || i == 4)
+        face_node = &(fluid_faces[0][iface]);
       // *[i-1] because *[k] stores informations for the (k+2)-th boundary
       else
         face_node = &(solid_linking_faces[i - 1][iface]);
@@ -624,7 +627,8 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
 
       // If we want for each planar face its own ID, the boundary ID is
       // counter, otherwise, the boundary ID is i+1
-      if (do_multi_boundary_ids) solid_output_stream << counter << '\n';
+      if (do_multi_boundary_ids)
+        solid_output_stream << counter << '\n';
       else
         solid_output_stream << i + 1 << '\n';
 
@@ -751,7 +755,8 @@ int main()
             << "Enter y or n: ";
   std::cin >> multi_boundary_ids_marker;
 
-  if (multi_boundary_ids_marker == 'n') do_multi_boundary_ids = false;
+  if (multi_boundary_ids_marker == 'n')
+    do_multi_boundary_ids = false;
 
   char xda_filename[100];
   char fluid_filename[100];

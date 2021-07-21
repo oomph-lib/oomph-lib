@@ -154,8 +154,10 @@ public:
   void actions_before_solve()
   {
     unsigned long start = 1, end = 4;
-    if (Global_Physical_Variables::inlet_traction) end = 2;
-    if (Global_Physical_Variables::outlet_traction) start = 3;
+    if (Global_Physical_Variables::inlet_traction)
+      end = 2;
+    if (Global_Physical_Variables::outlet_traction)
+      start = 3;
 
     double A = Global_Physical_Variables::Alpha;
 
@@ -283,8 +285,10 @@ public:
     // Inlet/Outlet perturbation
     // Which ends do we need to pin both u and v at?
     unsigned long start = 1, end = 4;
-    if (Global_Physical_Variables::inlet_traction) end = 2;
-    if (Global_Physical_Variables::outlet_traction) start = 3;
+    if (Global_Physical_Variables::inlet_traction)
+      end = 2;
+    if (Global_Physical_Variables::outlet_traction)
+      start = 3;
 
     for (unsigned long ibound = start; ibound < end; ibound += 2)
     {
@@ -501,8 +505,10 @@ void PolarNSProblem<ELEMENT>::pin_boundaries_to_zero()
   // Initially set to zero both inlet and outlet
   unsigned long start = 1, end = 4;
   // But which ends have we pinned u at?
-  if (Global_Physical_Variables::inlet_traction) end = 2;
-  if (Global_Physical_Variables::outlet_traction) start = 3;
+  if (Global_Physical_Variables::inlet_traction)
+    end = 2;
+  if (Global_Physical_Variables::outlet_traction)
+    start = 3;
   for (unsigned long ibound = start; ibound < end; ibound += 2)
   {
     unsigned num_nod = mesh_pt()->nboundary_node(ibound);

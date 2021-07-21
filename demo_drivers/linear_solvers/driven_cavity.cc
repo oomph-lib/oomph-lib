@@ -81,16 +81,20 @@ public:
   ~RectangularDrivenCavityProblem()
   {
     // Kill oomph-lib iterative linear solver
-    if (Solver_pt != 0) delete Solver_pt;
+    if (Solver_pt != 0)
+      delete Solver_pt;
 
     // Kill preconditioner
-    if (Prec_pt != 0) delete Prec_pt;
+    if (Prec_pt != 0)
+      delete Prec_pt;
 
     // Kill inexact solver for P block
-    if (P_matrix_preconditioner_pt != 0) delete P_matrix_preconditioner_pt;
+    if (P_matrix_preconditioner_pt != 0)
+      delete P_matrix_preconditioner_pt;
 
     // Kill inexact solver for F block
-    if (F_matrix_preconditioner_pt != 0) delete F_matrix_preconditioner_pt;
+    if (F_matrix_preconditioner_pt != 0)
+      delete F_matrix_preconditioner_pt;
 
     // Kill mesh
     delete mesh_pt();

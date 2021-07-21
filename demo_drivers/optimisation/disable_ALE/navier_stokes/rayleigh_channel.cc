@@ -574,7 +574,8 @@ int main(int argc, char* argv[])
   for (unsigned ale_flag = 0; ale_flag < 2; ale_flag++)
   {
     bool use_ale = true;
-    if (ale_flag == 1) use_ale = false;
+    if (ale_flag == 1)
+      use_ale = false;
 
     // Solve with Crouzeix-Raviart elements
     {

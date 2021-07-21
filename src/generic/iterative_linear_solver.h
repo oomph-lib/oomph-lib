@@ -163,7 +163,8 @@ namespace oomph
     /// Close convergence history output stream
     void close_convergence_history_file_stream()
     {
-      if (Output_file_stream.is_open()) Output_file_stream.close();
+      if (Output_file_stream.is_open())
+        Output_file_stream.close();
     }
 
     ///  \short returns the time taken to assemble the jacobian matrix and

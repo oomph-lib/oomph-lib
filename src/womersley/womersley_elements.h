@@ -542,7 +542,8 @@ namespace oomph
       {
         WomersleyEquations<DIM>* el_pt = dynamic_cast<WomersleyEquations<DIM>*>(
           Womersley_mesh_pt->element_pt(e));
-        if (el_pt != 0) flux += el_pt->get_volume_flux();
+        if (el_pt != 0)
+          flux += el_pt->get_volume_flux();
       }
 
       // Return total volume flux

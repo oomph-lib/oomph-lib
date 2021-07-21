@@ -183,7 +183,8 @@ protected:
     // Find out how may dofs there are in the element
     unsigned n_dof = ndof();
     // If there are no freedoms then return immediately
-    if (n_dof == 0) return;
+    if (n_dof == 0)
+      return;
 
     // Pseudo-elastic force balance to determine the position of the
     // ring's centre for a given load.
@@ -503,7 +504,8 @@ void demo_fish_poisson(const string& directory_name)
 
   // Number of steps
   unsigned nstep = 5;
-  if (CommandLineArgs::Argc > 1) nstep = 1;
+  if (CommandLineArgs::Argc > 1)
+    nstep = 1;
 
   // Increment in load
   double dp = 0.6 / double(nstep - 1);

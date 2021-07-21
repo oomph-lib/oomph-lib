@@ -333,7 +333,8 @@ namespace oomph
           count++;
           doc_solution(doc_info);
           doc_info.number()++;
-          if (Helper_namespace_for_mesh_smoothing::Scale >= 1.0) done = true;
+          if (Helper_namespace_for_mesh_smoothing::Scale >= 1.0)
+            done = true;
           if (count == max_steps)
           {
             oomph_info << "Bailing out after " << count << " steps.\n";
@@ -438,7 +439,8 @@ namespace oomph
     void doc_solution(DocInfo& doc_info)
     {
       // Bail out
-      if (!doc_info.is_doc_enabled()) return;
+      if (!doc_info.is_doc_enabled())
+        return;
 
       std::ofstream some_file;
       std::ostringstream filename;
@@ -465,7 +467,8 @@ namespace oomph
                                              some_file);
       some_file.close();
       oomph_info << "Dummy mesh does ";
-      if (!mesh_has_inverted_elements) oomph_info << "not ";
+      if (!mesh_has_inverted_elements)
+        oomph_info << "not ";
       oomph_info << "have inverted elements. \n";
     }
 

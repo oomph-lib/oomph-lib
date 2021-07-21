@@ -232,7 +232,8 @@ namespace oomph
     /// Virtual destructor
     virtual ~GeneralisedMooneyRivlin()
     {
-      if (Must_delete_e) delete E_pt;
+      if (Must_delete_e)
+        delete E_pt;
     }
 
     /// Return the strain energy in terms of strain tensor
@@ -717,7 +718,8 @@ namespace oomph
     /// Virtual destructor
     virtual ~GeneralisedHookean()
     {
-      if (Must_delete_e) delete E_pt;
+      if (Must_delete_e)
+        delete E_pt;
     }
 
     /// \short Calculate the contravariant 2nd Piola Kirchhoff

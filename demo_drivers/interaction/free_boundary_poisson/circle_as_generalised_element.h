@@ -188,7 +188,8 @@ namespace oomph
       // Find out how may dofs there are in the element
       unsigned n_dof = ndof();
       // If everything is pinned return straight away
-      if (n_dof == 0) return;
+      if (n_dof == 0)
+        return;
 
       // Pseudo-elastic force balance to determine the position of the
       // ring's centre for a given load.

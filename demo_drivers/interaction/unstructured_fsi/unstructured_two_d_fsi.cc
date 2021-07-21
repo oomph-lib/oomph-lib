@@ -190,8 +190,10 @@ public:
         this->add_boundary_node(1, nod_pt);
 
         // Add overlapping nodes back to boundary 0
-        if (nod_pt->x(1) < 0.2) this->add_boundary_node(0, nod_pt);
-        if (nod_pt->x(1) > 4.06) this->add_boundary_node(0, nod_pt);
+        if (nod_pt->x(1) < 0.2)
+          this->add_boundary_node(0, nod_pt);
+        if (nod_pt->x(1) > 4.06)
+          this->add_boundary_node(0, nod_pt);
       }
 
       // Boundary 2 is right (outflow) boundary
@@ -201,8 +203,10 @@ public:
         this->add_boundary_node(2, nod_pt);
 
         // Add overlapping nodes back to boundary 0
-        if (nod_pt->x(1) < 0.2) this->add_boundary_node(0, nod_pt);
-        if (nod_pt->x(1) > 4.06) this->add_boundary_node(0, nod_pt);
+        if (nod_pt->x(1) < 0.2)
+          this->add_boundary_node(0, nod_pt);
+        if (nod_pt->x(1) > 4.06)
+          this->add_boundary_node(0, nod_pt);
       }
 
       // Boundary 3 is FSI boundary
@@ -212,7 +216,8 @@ public:
         this->add_boundary_node(3, nod_pt);
 
         // If it's below y=0.2 it's also on boundary 0 so stick it back on
-        if (nod_pt->x(1) < 0.2) this->add_boundary_node(0, nod_pt);
+        if (nod_pt->x(1) < 0.2)
+          this->add_boundary_node(0, nod_pt);
       }
     }
     TriangleMesh<ELEMENT>::setup_boundary_element_info();
@@ -557,8 +562,10 @@ void UnstructuredFSIProblem<FLUID_ELEMENT,
       the_file << zeta[0] << " ";
 
       // Update max/min boundary coordinate
-      if (zeta[0] < zeta_min) zeta_min = zeta[0];
-      if (zeta[0] > zeta_max) zeta_max = zeta[0];
+      if (zeta[0] < zeta_min)
+        zeta_min = zeta[0];
+      if (zeta[0] > zeta_max)
+        zeta_max = zeta[0];
 
       the_file << std::endl;
     }

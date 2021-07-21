@@ -398,7 +398,8 @@ namespace oomph
     // Should we document the output here
     bool doc = false;
 
-    if (outfile) doc = true;
+    if (outfile)
+      doc = true;
 
     // Number of boundaries
     unsigned nbound = nboundary();

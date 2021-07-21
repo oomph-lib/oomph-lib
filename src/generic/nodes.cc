@@ -1057,7 +1057,8 @@ namespace oomph
     Nvalue = n_value_new;
 
     // Now delete the old storage and set the new pointers
-    if (n_value_old != 0) delete[] Value[0];
+    if (n_value_old != 0)
+      delete[] Value[0];
     delete[] Value;
     Value = value_new_pt;
     delete[] Eqn_number;

@@ -177,7 +177,8 @@ namespace oomph
       }
 
       // Modify bc: If outflow (flux>0) apply Neumann condition instead
-      if (flux > 0.0) flux = 0.0;
+      if (flux > 0.0)
+        flux = 0.0;
 
       // Get pressure
       double interpolated_press = bulk_el_pt->interpolated_p_nst(s_bulk);

@@ -304,7 +304,8 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
     unsigned nel = mesh_pt()->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      if (!(mesh_pt()->element_pt(e)->is_halo())) count_non_halo++;
+      if (!(mesh_pt()->element_pt(e)->is_halo()))
+        count_non_halo++;
     }
     unsigned total_count_non_halo = 0;
     MPI_Allreduce(&count_non_halo,
@@ -345,7 +346,8 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
         unsigned cnt = 0;
         for (unsigned i = 0; i < nval; i++)
         {
-          if (!(nod_pt->is_pinned(i))) cnt++;
+          if (!(nod_pt->is_pinned(i)))
+            cnt++;
         }
         some_file2 << nod_pt->x(0) << " " << nod_pt->x(1) << " " << cnt << "\n";
       }

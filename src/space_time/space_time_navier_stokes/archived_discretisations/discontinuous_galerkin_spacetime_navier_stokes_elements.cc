@@ -1810,7 +1810,8 @@ namespace oomph
                     OOMPH_EXCEPTION_LOCATION);
 
     // Return immediately if there are no dofs
-    if (ndof() == 0) return;
+    if (ndof() == 0)
+      return;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -1980,7 +1981,8 @@ namespace oomph
                                               const unsigned& flag)
   {
     // Return immediately if there are no dofs
-    if (ndof() == 0) return;
+    if (ndof() == 0)
+      return;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();

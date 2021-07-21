@@ -1342,7 +1342,8 @@ namespace oomph
           std::set<unsigned> region_id(
             facet_pt->one_based_adjacent_region_id());
           unsigned nr = region_id.size();
-          if (nr == 1) outer_bounding_facet.push_back(nfacet_offset + f + 1);
+          if (nr == 1)
+            outer_bounding_facet.push_back(nfacet_offset + f + 1);
           if ((nr == 0) && inner_surface_is_closed)
           {
             // Add to list of plane surfaces that don't bound regions so we

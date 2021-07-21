@@ -740,11 +740,13 @@ PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 
       // Boundary 1 is the vertical symmetry boundary (y=const) where
       // we allow flow in the y-direction. Elsewhere, pin the y velocity
-      if (b != 1) Fluid_mesh_pt->boundary_node_pt(b, i)->pin(1);
+      if (b != 1)
+        Fluid_mesh_pt->boundary_node_pt(b, i)->pin(1);
 
       // Boundary 2 is the horizontal symmetry boundary (x=const) where
       // we allow flow in the x-direction. Elsewhere, pin the x velocity
-      if (b != 2) Fluid_mesh_pt->boundary_node_pt(b, i)->pin(0);
+      if (b != 2)
+        Fluid_mesh_pt->boundary_node_pt(b, i)->pin(0);
 
       // Boundaries 0 and 3 are the inflow and the wall respectively.
       // Pin the axial velocity because of the prescribed inflow
@@ -1074,25 +1076,29 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
         // all Lagrange multipliers
         if (node_pt->is_on_boundary(0))
         {
-          if (d == 0 || d == 1 || d == 2) node_pt->pin(j);
+          if (d == 0 || d == 1 || d == 2)
+            node_pt->pin(j);
         }
         // Boundary 1 (symm BC, x=const.): Pseudo-solid displacement is
         // fixed in x-direction so pin corresponding Lagrange multiplier
         if (node_pt->is_on_boundary(1))
         {
-          if (d == 0) node_pt->pin(j);
+          if (d == 0)
+            node_pt->pin(j);
         }
         // Boundary 2 (symm BC, y=const.): Pseudo-solid displacement is
         // fixed in y-direction so pin corresponding Lagrange multiplier
         if (node_pt->is_on_boundary(2))
         {
-          if (d == 1) node_pt->pin(j);
+          if (d == 1)
+            node_pt->pin(j);
         }
         // Boundary 4 (outflow): Pseudo-solid displacement is fixed so pin
         // all Lagrange multipliers
         if (node_pt->is_on_boundary(4))
         {
-          if (d == 0 || d == 1 || d == 2) node_pt->pin(j);
+          if (d == 0 || d == 1 || d == 2)
+            node_pt->pin(j);
         }
       }
     }

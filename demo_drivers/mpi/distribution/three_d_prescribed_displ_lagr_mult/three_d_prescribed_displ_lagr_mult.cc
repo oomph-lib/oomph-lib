@@ -283,7 +283,8 @@ PrescribedBoundaryDisplacementProblem<
   // Create the mesh
 
   unsigned nel = 4;
-  if (CommandLineArgs::Argc != 1) nel = 2;
+  if (CommandLineArgs::Argc != 1)
+    nel = 2;
 
   // # of elements in x-direction
   unsigned n_x = nel;
@@ -587,7 +588,8 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
     }
   }
   // Dummy line
-  if (written == 0) some_file << "ZONE\n0 0 0 0 0 0 0 0 1\n";
+  if (written == 0)
+    some_file << "ZONE\n0 0 0 0 0 0 0 0 1\n";
   some_file.close();
 
   // Increment label for output files

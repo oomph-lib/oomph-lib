@@ -423,7 +423,8 @@ namespace oomph
 #endif
 
     // Bail out?
-    if (n_mesh == 0) return;
+    if (n_mesh == 0)
+      return;
 
     // Bulk elements must be external elements in this case
     Use_bulk_element_as_external = true;
@@ -544,7 +545,8 @@ namespace oomph
 #endif
 
     // Bail out?
-    if (n_mesh == 0) return;
+    if (n_mesh == 0)
+      return;
 
       // Multi-domain setup will not work for elements with
       // nonuniformly spaced nodes

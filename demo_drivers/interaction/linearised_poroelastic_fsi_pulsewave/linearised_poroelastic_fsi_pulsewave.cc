@@ -488,7 +488,8 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
     // =============================================================
 
     unsigned n = 2;
-    if ((i == 0) || (i == 2)) n = 3;
+    if ((i == 0) || (i == 2))
+      n = 3;
     Vector<Vector<double>> temp_coord(n, Vector<double>(2));
     for (unsigned j = 0; j < n; j++)
     {

@@ -269,7 +269,8 @@ namespace oomph
       for (unsigned ibound = 0; ibound < 4; ibound += 2)
       {
         int index;
-        if (ibound == 0) index = -2;
+        if (ibound == 0)
+          index = -2;
         else
           index = 2;
 

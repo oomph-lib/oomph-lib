@@ -147,8 +147,10 @@ namespace oomph
       for (unsigned i = 0; i < ncoord; i++)
       {
         // Adjust to move it onto the boundary
-        if (s[i] > s_max()) s[i] = s_max();
-        if (s[i] < s_min()) s[i] = s_min();
+        if (s[i] > s_max())
+          s[i] = s_max();
+        if (s[i] < s_min())
+          s[i] = s_min();
       }
     }
 

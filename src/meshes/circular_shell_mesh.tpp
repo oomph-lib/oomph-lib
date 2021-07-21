@@ -88,7 +88,8 @@ namespace oomph
             fabs(x - dynamic_cast<SolidNode*>(el_pt->node_pt(k))->xi(0));
           if (dx < min_dx[nod_pt])
           {
-            if (dx != 0.0) min_dx[nod_pt] = dx;
+            if (dx != 0.0)
+              min_dx[nod_pt] = dx;
           }
         }
       }

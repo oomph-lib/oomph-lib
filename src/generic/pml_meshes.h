@@ -898,7 +898,8 @@ namespace oomph
                 // If it is one of the ones on the left boundary
                 if (e == 0)
                 {
-                  if (inod == 0) el_pt->node_pt(inod) = special_corner_node_pt;
+                  if (inod == 0)
+                    el_pt->node_pt(inod) = special_corner_node_pt;
                   if ((inod % nnode_1d == 0) && (inod > 0))
                   {
                     // Get the pointer from the triangular mesh

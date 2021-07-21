@@ -545,7 +545,8 @@ namespace oomph
         for (unsigned e = 0; e < n_part; e++)
         {
           // ... another one for me.
-          if (int(element_partition[e]) == my_rank) n_my_elements++;
+          if (int(element_partition[e]) == my_rank)
+            n_my_elements++;
 
           sum_element_partition += element_partition[e];
         }
@@ -1624,7 +1625,8 @@ namespace oomph
         First_el_for_assembly[p] = p * range;
 
         unsigned last_el_plus_one = (p + 1) * range;
-        if (last_el_plus_one > n_elements) last_el_plus_one = n_elements;
+        if (last_el_plus_one > n_elements)
+          last_el_plus_one = n_elements;
         Last_el_plus_one_for_assembly[p] = last_el_plus_one;
       }
 
@@ -2213,7 +2215,8 @@ namespace oomph
 
         // Break out of the loop if we haven't done anything here.
         unsigned status = 0;
-        if (actually_removed_some_data) status = 1;
+        if (actually_removed_some_data)
+          status = 1;
 
         // Allreduce to check if anyone has removed any data
         unsigned overall_status = 0;
@@ -6726,7 +6729,8 @@ namespace oomph
                       broken = true;
                       break;
                     }
-                    if (broken) break;
+                    if (broken)
+                      break;
                   }
                 }
 
@@ -6928,8 +6932,10 @@ namespace oomph
       {
         sum += ncoef[m][e];
         sum_total += Sparse_assemble_with_arrays_previous_allocation[m][e];
-        if (ncoef[m][e] > max) max = ncoef[m][e];
-        if (ncoef[m][e] < min) min = ncoef[m][e];
+        if (ncoef[m][e] > max)
+          max = ncoef[m][e];
+        if (ncoef[m][e] < min)
+          min = ncoef[m][e];
 
         // Now shrink the storage to what we actually need
         unsigned new_allocation = ncoef[m][e];
@@ -8840,7 +8846,8 @@ namespace oomph
         // If we're doing the first iteration and the problem is nonlinear,
         // the residuals have already been computed above during the
         // initial convergence check. Otherwise compute them here.
-        if ((count != 1) || (!Problem_is_nonlinear)) get_residuals(dx);
+        if ((count != 1) || (!Problem_is_nonlinear))
+          get_residuals(dx);
 
         // Backup residuals
         DoubleVector resid(dx);
@@ -9015,7 +9022,8 @@ namespace oomph
                    << "[too fast]" << std::endl;
       }
     }
-    if (!Shut_up_in_newton_solve) oomph_info << std::endl;
+    if (!Shut_up_in_newton_solve)
+      oomph_info << std::endl;
   }
 
   //========================================================================
@@ -9068,7 +9076,8 @@ namespace oomph
     {
       double temp =
         std::fabs(newton_dir[i]) / std::max(std::fabs(x_old[i]), 1.0);
-      if (temp > test) test = temp;
+      if (temp > test)
+        test = temp;
     }
     double lambda_min = convergence_tol_on_x / test;
     double lambda = 1.0;
@@ -11728,7 +11737,8 @@ namespace oomph
 
     // Loop over submeshes:
     unsigned nmesh = nsub_mesh();
-    if (nmesh == 0) nmesh = 1;
+    if (nmesh == 0)
+      nmesh = 1;
     for (unsigned m = 0; m < nmesh; m++)
     {
       // Find number of nodes in present mesh
@@ -12047,7 +12057,8 @@ namespace oomph
 
     // Loop over submeshes and dump their data
     unsigned nmesh = nsub_mesh();
-    if (nmesh == 0) nmesh = 1;
+    if (nmesh == 0)
+      nmesh = 1;
     for (unsigned m = 0; m < nmesh; m++)
     {
       mesh_pt(m)->dump(dump_file);
@@ -12935,11 +12946,13 @@ namespace oomph
 
     // Initialise timestep -- also sets the weights for all timesteppers
     // in the problem.
-    if (unsteady_restart) initialise_dt(dt);
+    if (unsteady_restart)
+      initialise_dt(dt);
 
     // Loop over submeshes:
     unsigned nmesh = nsub_mesh();
-    if (nmesh == 0) nmesh = 1;
+    if (nmesh == 0)
+      nmesh = 1;
     for (unsigned m = 0; m < nmesh; m++)
     {
       //    //---------------------------------------------------------
@@ -17434,7 +17447,8 @@ namespace oomph
       unsigned n = pruned_refinement_level.size();
       for (unsigned i = 0; i < n; i++)
       {
-        if (pruned_refinement_level[i] > 0) some_mesh_has_been_pruned = true;
+        if (pruned_refinement_level[i] > 0)
+          some_mesh_has_been_pruned = true;
       }
 
       // (Re-)build the new mesh(es) -- this must get the problem into the

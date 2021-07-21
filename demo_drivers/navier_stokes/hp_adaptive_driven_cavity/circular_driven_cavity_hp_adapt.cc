@@ -324,7 +324,8 @@ int main()
   {
     // Set output directory
     DocInfo doc_info;
-    if (driven_bdry == 0) doc_info.set_directory("RESLT_circ_bdry0");
+    if (driven_bdry == 0)
+      doc_info.set_directory("RESLT_circ_bdry0");
     else
       doc_info.set_directory("RESLT_circ_bdry1");
 

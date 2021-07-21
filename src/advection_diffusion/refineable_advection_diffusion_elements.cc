@@ -198,7 +198,8 @@ namespace oomph
               // Terms that multiply the test function
               double tmp = peclet * wind[k];
               // If the mesh is moving need to subtract the mesh velocity
-              if (!ALE_is_disabled_flag) tmp -= peclet_st * mesh_velocity[k];
+              if (!ALE_is_disabled_flag)
+                tmp -= peclet_st * mesh_velocity[k];
               // Now combine the terms into the residual
               residuals[local_eqn] -= interpolated_dudx[k] *
                                       (tmp * test(l) + dtestdx(l, k)) * W *

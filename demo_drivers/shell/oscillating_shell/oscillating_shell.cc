@@ -536,7 +536,8 @@ void ShellProblem<ELEMENT>::run_it()
 
   // Reduce number of timesteps for validation
   unsigned nstep = 200;
-  if (CommandLineArgs::Argc > 1) nstep = 4;
+  if (CommandLineArgs::Argc > 1)
+    nstep = 4;
 
   // Time integration loop
   for (unsigned i = 1; i <= nstep; i++)

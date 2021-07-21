@@ -498,7 +498,8 @@ namespace SarahBL
     // Initial guess:
     double rho = sqrt(x[0] * x[0] + x[1] * x[1]);
     double zeta = 0.5 * MathematicalConstants::Pi;
-    if (abs(x[0]) > 1e-4) zeta = atan(x[1] / x[0]);
+    if (abs(x[0]) > 1e-4)
+      zeta = atan(x[1] / x[0]);
 
     // Copy across
     unknowns[0] = rho;
@@ -561,7 +562,8 @@ namespace SarahBL
     // Initial guess:
     double rho = sqrt(x[0] * x[0] + x[1] * x[1]);
     double zeta = 0.5 * MathematicalConstants::Pi;
-    if (abs(x[0]) > 1e-4) zeta = atan(x[1] / x[0]);
+    if (abs(x[0]) > 1e-4)
+      zeta = atan(x[1] / x[0]);
 
     // Copy across
     unknowns[0] = rho;

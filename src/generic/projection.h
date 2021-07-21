@@ -1407,7 +1407,8 @@ namespace oomph
     {
       // No need to do anything if there are no elements (in fact, we
       // probably never get here...)
-      if (Problem::mesh_pt()->nelement() == 0) return;
+      if (Problem::mesh_pt()->nelement() == 0)
+        return;
 
       // Deal with positional dofs if (pseudo-)solid element
       // If we can cast the first element to a SolidFiniteElement then
@@ -1448,7 +1449,8 @@ namespace oomph
     {
       // No need to do anything if there are no elements (in fact, we
       // probably never get here...)
-      if (Problem::mesh_pt()->nelement() == 0) return;
+      if (Problem::mesh_pt()->nelement() == 0)
+        return;
 
       // Deal with positional dofs if (pseudo-)solid element
       // If we can cast the first element to a SolidFiniteElement then
@@ -1485,7 +1487,8 @@ namespace oomph
     {
       // No need to do anything if there are no elements (in fact, we
       // probably never get here...)
-      if (Problem::mesh_pt()->nelement() == 0) return;
+      if (Problem::mesh_pt()->nelement() == 0)
+        return;
 
       // Loop over all the elements
       const unsigned n_element = Problem::mesh_pt()->nelement();
@@ -1554,7 +1557,8 @@ namespace oomph
     {
       // No need to do anything if there are no elements (in fact, we
       // probably never get here...)
-      if (Problem::mesh_pt()->nelement() == 0) return;
+      if (Problem::mesh_pt()->nelement() == 0)
+        return;
 
       // Loop over all the elements
       const unsigned n_element = Problem::mesh_pt()->nelement();

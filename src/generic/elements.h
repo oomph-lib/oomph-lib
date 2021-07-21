@@ -2867,7 +2867,8 @@ namespace oomph
     {
       // Decide the dimensions of the nodes
       unsigned nnod = nnode();
-      if (nnod == 0) return;
+      if (nnod == 0)
+        return;
       unsigned n = node_pt(0)->ndim();
 
       // Vector for local coordinates

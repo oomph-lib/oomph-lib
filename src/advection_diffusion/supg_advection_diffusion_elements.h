@@ -110,7 +110,8 @@ namespace oomph
           pow(this->vertex_node_pt(2)->x(0) - this->vertex_node_pt(1)->x(0),
               2) +
           pow(this->vertex_node_pt(2)->x(1) - this->vertex_node_pt(1)->x(1), 2);
-        if (h1 > h) h = h1;
+        if (h1 > h)
+          h = h1;
         h = sqrt(h);
       }
       else if (DIM == 3)
@@ -127,7 +128,8 @@ namespace oomph
                 2) +
             pow(this->vertex_node_pt(n1)->x(2) - this->vertex_node_pt(n2)->x(2),
                 2);
-          if (h1 > h) h = h1;
+          if (h1 > h)
+            h = h1;
           n1++;
           n2--;
         }

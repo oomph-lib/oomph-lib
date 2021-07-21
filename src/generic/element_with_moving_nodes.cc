@@ -326,7 +326,8 @@ namespace oomph
       const unsigned n_geometric_data = ngeom_data();
 
       // If there is nothing to be done, then leave
-      if (n_geometric_data == 0) return;
+      if (n_geometric_data == 0)
+        return;
 
       // Number of dofs
       const unsigned n_dof = this->ndof();
@@ -335,7 +336,8 @@ namespace oomph
       unsigned n_nod = this->nnode();
 
       // If there are no dofs, return
-      if (n_nod == 0) return;
+      if (n_nod == 0)
+        return;
 
       // Get nodal dimension from first node
       const unsigned dim_nod = node_pt(0)->ndim();
@@ -547,7 +549,8 @@ namespace oomph
     const unsigned n_nod = nnode();
 
     // If the element has no nodes (why??!!) return straightaway
-    if (n_nod == 0) return;
+    if (n_nod == 0)
+      return;
 
     // Get dimension from first node
     unsigned dim_nod = node_pt(0)->ndim();

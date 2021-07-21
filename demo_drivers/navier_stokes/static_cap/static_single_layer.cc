@@ -991,12 +991,14 @@ int main()
   for (unsigned i = 0; i < 2; i++)
   {
     bool hijack_internal = false;
-    if (i == 1) hijack_internal = true;
+    if (i == 1)
+      hijack_internal = true;
     // Construct the problem
     CapProblem<Hijacked<QCrouzeixRaviartElement<2>>> problem(hijack_internal);
 
     string dir_name = "RESLT_hijacked_external";
-    if (i == 1) dir_name = "RESLT_hijacked_internal";
+    if (i == 1)
+      dir_name = "RESLT_hijacked_internal";
 
     // Do parameter study
     problem.parameter_study(dir_name);
@@ -1007,7 +1009,8 @@ int main()
   for (unsigned i = 0; i < 2; i++)
   {
     bool hijack_internal = false;
-    if (i == 1) hijack_internal = true;
+    if (i == 1)
+      hijack_internal = true;
     // Construct the problem
     PseudoSolidCapProblem<
       Hijacked<PseudoSolidNodeUpdateElement<QCrouzeixRaviartElement<2>,
@@ -1015,7 +1018,8 @@ int main()
       problem(hijack_internal);
 
     string dir_name = "RESLT_elastic_hijacked_external";
-    if (i == 1) dir_name = "RESLT_elastic_hijacked_internal";
+    if (i == 1)
+      dir_name = "RESLT_elastic_hijacked_internal";
 
     // Do parameter study
     problem.parameter_study(dir_name);

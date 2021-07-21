@@ -490,7 +490,8 @@ namespace oomph
           for (unsigned j = 0; j < 3; j++)
           {
             Node* nod_pt = el_pt->node_pt(j);
-            if (nod_pt->is_on_boundary()) count++;
+            if (nod_pt->is_on_boundary())
+              count++;
           }
           if (count == 2)
           {
@@ -904,8 +905,10 @@ namespace oomph
           (distance_to_edge[0] * normal[0] + distance_to_edge[1] * normal[1] +
            distance_to_edge[2] * normal[2]) /
           rho;
-        if (cos_phi0 > 1.0) cos_phi0 = 1.0;
-        if (cos_phi0 < -1.0) cos_phi0 = -1.0;
+        if (cos_phi0 > 1.0)
+          cos_phi0 = 1.0;
+        if (cos_phi0 < -1.0)
+          cos_phi0 = -1.0;
 
         double phi_0 = acos(cos_phi0);
 
@@ -1100,8 +1103,10 @@ namespace oomph
       {
         double z = sorted_perimeter_vertex_pt[j]->x(2);
         z_mean += z;
-        if (z > z_max) z_max = z;
-        if (z < z_min) z_min = z;
+        if (z > z_max)
+          z_max = z;
+        if (z < z_min)
+          z_min = z;
       }
       z_mean /= double(n);
       double layer_thickness = 0.6 * (z_max - z_min);
@@ -1115,7 +1120,8 @@ namespace oomph
       for (unsigned i_offset = 0; i_offset < 2; i_offset++)
       {
         unsigned one_based_region_id = one_based_region_id_below_disk;
-        if (i_offset == 1) one_based_region_id = one_based_region_id_above_disk;
+        if (i_offset == 1)
+          one_based_region_id = one_based_region_id_above_disk;
 
         for (unsigned j = 0; j < n_vertex_on_disk_perimeter; j++)
         {

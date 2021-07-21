@@ -597,7 +597,8 @@ namespace oomph
     unsigned n_nod = nnode();
 
     // If the element has no nodes (why??!!) return straightaway
-    if (n_nod == 0) return;
+    if (n_nod == 0)
+      return;
 
     // Get dimension from first node
     unsigned dim_nod = node_pt(0)->ndim();

@@ -112,7 +112,8 @@ namespace oomph
 
       // Hacky: This is only appropriate for 3 point integration of
       // 1D line elements
-      if (outfile.is_open()) outfile << "ZONE I=3" << std::endl;
+      if (outfile.is_open())
+        outfile << "ZONE I=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -242,7 +243,8 @@ namespace oomph
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
-      if (outfile.is_open()) outfile << "ZONE I=3, J=3" << std::endl;
+      if (outfile.is_open())
+        outfile << "ZONE I=3, J=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -401,7 +403,8 @@ namespace oomph
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
-      if (outfile.is_open()) outfile << "ZONE I=3, J=3" << std::endl;
+      if (outfile.is_open())
+        outfile << "ZONE I=3, J=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -577,7 +580,8 @@ namespace oomph
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
-      if (outfile.is_open()) outfile << "ZONE I=3, J=3" << std::endl;
+      if (outfile.is_open())
+        outfile << "ZONE I=3, J=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -716,7 +720,8 @@ namespace oomph
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
-      if (outfile.is_open()) outfile << "ZONE I=3, J=3" << std::endl;
+      if (outfile.is_open())
+        outfile << "ZONE I=3, J=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
