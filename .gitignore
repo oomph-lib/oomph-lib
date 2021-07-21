@@ -111,6 +111,7 @@ config/configure.ac_scripts/automake_init_command_file
 # Demo drivers log output
 Validation/
 validation.log
+validate_sh_timing_generated_by_make_check.dat
 
 # Build crap
 config/configure.ac_scripts/user_drivers.dir_list
@@ -140,10 +141,12 @@ config.cache
 doc/the_distribution/joe_cool_makefile.am
 doc/the_distribution/linked_make_file.am
 compile
+src/generic/mumps_module.mod
 
 # Some binaries/scripts that are generated
 external_distributions/hypre/build_script.bash
 external_distributions/trilinos/build_script.bash
+bin/txt2h.sh
 
 # Hypre/Trilinos build files
 external_distributions/hypre/hypre-*
@@ -237,6 +240,14 @@ src/linearised_axisym_navier_stokes/linearised_axisym_navier_stokes.h
 src/unsteady_heat/unsteady_heat.h
 src/womersley/womersley.h
 src/young_laplace/young_laplace.h
+src/linearised_navier_stokes/linearised_navier_stokes.h
+src/meshes/extruded_cube_mesh_from_quad_mesh_with_macro_elements.h
+src/pml_time_harmonic_linear_elasticity/pml_time_harmonic_linear_elasticity.h
+src/space_time/space_time_block_preconditioner/space_time_block_preconditioner.h
+src/space_time/space_time_navier_stokes/space_time_navier_stokes.h
+src/space_time/space_time_unsteady_heat/galerkin_equal_order/space_time_unsteady_heat_equal_order_galerkin.h
+src/space_time/space_time_unsteady_heat/galerkin_petrov_equal_order/space_time_unsteady_heat_equal_order_galerkin_petrov.h
+src/space_time/space_time_unsteady_heat/galerkin_petrov_mixed_order/space_time_unsteady_heat_mixed_order_galerkin_petrov.h
 
 src/meshes/*mesh.h
 src/meshes/meshes.h
