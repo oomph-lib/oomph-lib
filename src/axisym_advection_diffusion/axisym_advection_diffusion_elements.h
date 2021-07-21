@@ -366,9 +366,7 @@ public:
    }
  }
 
- /// \short Get flux: 
- // \f$ \mbox{flux}[i] = \nabla u = \mbox{d}u / \mbox{d} r 
- // + 1/r \mbox{d}u / \mbox{d} \theta \f$
+ /// \short Get flux: [du/dr,du/dz]
  void get_flux(const Vector<double>& s, Vector<double>& flux) const
   {
    //Find out how many nodes there are in the element
