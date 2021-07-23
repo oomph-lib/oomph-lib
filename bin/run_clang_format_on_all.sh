@@ -81,9 +81,9 @@ for dir in "$@"; do
         -o -name '*.cpp' \
         -o -name '*.h' \
         -o -name '*.hpp' \
-        -o -name '*.tpp' \
-        ! -name 'cfortran.h' \
-        ! -name 'lapack_qz.h' \) \
+        -o -name '*.tpp' \) \
+         ! -name 'cfortran.h'  \
+         ! -name 'lapack_qz.h' \
         -exec "${FMT}" -i '{}' \;
     popd &>/dev/null
 done
