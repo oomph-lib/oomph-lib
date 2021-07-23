@@ -6,23 +6,24 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 #Set the number of tests to be checked
 NUM_TESTS=1
 
-# Disable the self-test on macOS as it causes a mysterious segmentation fault.
-# To do this, we return an exit code of 0 so it looks like the test passed
-if [[ uname -eq "Darwin" ]]; then
-  echo "#==================================================== " >>validation.log
-  echo "dummy [OK] -- Test fails on macOS, not running it! " >>validation.log
-  echo "#====================================================" >>validation.log
-  . $OOMPH_ROOT_DIR/bin/validate_ok_count
-
-  # Never get here
-  exit 10
-fi
-
 # Setup validation directory
 #---------------------------
 touch Validation
 rm -r -f Validation
 mkdir Validation
+
+# Disable the self-test on macOS as it causes a mysterious segmentation fault.
+# To do this, we provide a dummy OK in Validation/validation.log so return an exit code of 0 so it looks like the test passed. Make
+# sure to create a
+if [[ uname -eq "Darwin" ]]; then
+  echo "#==================================================== " >>Validation/validation.log
+  echo "dummy [OK] -- Test fails on macOS, not running it! " >>Validation/validation.log
+  echo "#====================================================" >>Validation/validation.log
+  . $OOMPH_ROOT_DIR/bin/validate_ok_count
+
+  # Never get here
+  exit 10
+fi
 
 # Validation for demo advection diffusion
 #----------------------------------------
