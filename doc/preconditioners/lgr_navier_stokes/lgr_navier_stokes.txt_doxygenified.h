@@ -53,8 +53,9 @@ insisting that
 \f]
 where \f$ {\bf t}\f$ is the tangent vector at each discrete point on the
 boundary \f$ \Omega_{O}\f$.  We weakly enforce the flow constraint by
-augmenting the Navier-Stokes momentum residual equation (introduced in the <a
-href="../../../navier_stokes/rayleigh_traction_channel/html/index.html">
+augmenting the Navier-Stokes momentum residual equation (introduced in
+the
+<a href="../../../navier_stokes/rayleigh_traction_channel/html/index.html">
 Unsteady flow in a 2D channel, driven by an applied traction</a> tutorial) with
 a Lagrange multiplier term so that it becomes
 \f[
@@ -131,8 +132,7 @@ the <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
 Deformation of a solid by a prescribed boundary motion </a> tutorial which
 employs a similar technique used to enforce prescribed boundary displacements
 in solid mechanics problems. We discretise the Navier-Stokes equations using \c
-oomph-lib's \c QTaylorHoodElements, see the <a
-href="../../../navier_stokes/driven_cavity/html/index.html"> 2D Driven Cavity
+oomph-lib's \c QTaylorHoodElements, see the <a href="../../../navier_stokes/driven_cavity/html/index.html"> 2D Driven Cavity
 Problem</a> tutorial for more information.
 
 
@@ -381,8 +381,7 @@ GMRES iterations remains constant under mesh refinement.
 
 
 To demonstrate how to use the preconditioner, here are the relevant extracts
-from the driver code <A
-HREF="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc">
+from the driver code <A HREF="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc">
 two_d_tilted_square.cc</A> which solves the model problem described above.  As
 explained in the <a href="../../../linear_solvers/html/index.html">Linear
 Solvers Tutorial</A> switching to an iterative linear solver is typically

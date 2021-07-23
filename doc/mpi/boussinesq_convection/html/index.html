@@ -278,39 +278,6 @@ element" that contains a "target point" may not be located on the same processor
 <p>The algorithm is based on the assumption that the majority of the pairs of interacting elements will be stored on the same processor, which is typically the case when <code>METIS</code> is used to determine the distribution. The algorithm also assumes that the external elements can usually be found by searching only in the bin containing the "target
  point", which is true provided the bin structure is not too fine. The algorithm should always find the external elements even if these assumptions are not satisfied, but it may not be optimal in these situations.</p>
 <hr  />
-<h2><a class="anchor" id="optim"></a>
-Optimising the setup of multi-domain interactions</h2>
-<p>It is possible to optimise the setup of the multi-domain interactions by changing the default parameters defined in the <code>Multi_domain_functions</code> namespace. (<b>Note:</b> Because the parameters discussed below are defined in a global namespace, they have to be re-set manually to their defaults.)</p><ul>
-<li>If the size of the domain is known, the extremal coordinates of the bin structure do not have to be (re-)computed "on the fly". Hence if the user knows that a 2D mesh is contained within the region <img class="formulaInl" alt="$ 0 \le x \le 3 $" src="form_1.png"/> and <img class="formulaInl" alt="$ 0 \le y \le 1 $" src="form_2.png"/>, say, the determination of the bin boundaries may be bypassed by setting <br  />
-<br  />
-  <div class="fragment"></div><!-- fragment --> If the size of the mesh is known exactly, it makes sense to suppress the slight increase in the size of the bin structure beyond the extreme mesh coordinates: <br  />
-<br  />
- <div class="fragment"></div><!-- fragment --> <br  />
-<br  />
- (By default, this parameter is set to 5% to allow for the fact that the automatic determination of the mesh's size only samples the mesh at the vertex nodes of its elements. In problems with strongly curved boundaries, elements may extend slightly beyond their vertex nodes.) <br  />
-<br  />
-</li>
-<li>Similarly, the number of bins in each of the coordinate directions may be adjusted. For instance, if the width of the domain (in the x-direction) is three times greater than its height (in the y-direction), it makes sense to adjust the number of bins accordingly. <br  />
-<br  />
-  <div class="fragment"></div><!-- fragment --> <br  />
-<br  />
- Unfortunately, the optimal number of bins is problem-dependent. If we use very few bins, each bin will contain a large number of "external 
-  elements" and it may take a long time to locate the element that actually contains the "target point". <br  />
-<br  />
- Choosing a large number of bins is therefore likely to be beneficial (at least for non-distributed problems) as long as the (relatively small) storage requirements for the bin structure itself remain acceptable. This is because in a sufficiently fine bin structure (where the number of bins greatly exceeds the number of sampling points), most of the bins will be empty. When spiralling outwards from the bin that contains the "target
-  point", the fact that a bin is empty can be detected very quickly, and there is no need to perform any costly Newton iterations until we encounter the first non-empty bin. The bin that contains the "external element" with the "target point" can therefore be located fairly quickly even if a large number of empty bins have to be visited first. <br  />
-<br  />
- In a distributed problem, the issue is more complicated because we only perform one level of the spiralling search through the bins before communicating the missing "external elements" to other processors. An unnecessarily fine bin structure therefore incurs large communication costs. <br  />
-<br  />
-</li>
-<li>Finally, we can adjust the parameter <code>Multi_domain::Nsample_point</code> which controls the number of sampling points per element used when populating the bins with the pairs of elements and local coordinates. We note that <code>Multi_domain::Nsample_point</code> does not specify the number of sampling points within the element directly; the sampling points are, in fact, the same as the element's plot points and their number may be obtained from the <code>FiniteElement::nplot_points(...)</code> function. <br  />
-<br  />
- The number of sampling points should be increased if the mesh contains strongly distorted elements. This is because in such elements the Newton method may not converge to the "target point" from all sample points in the element, even if the "target point" is contained in the element. Increasing the number of sampling points ensures that more of them <br  />
- are "close" to the "target point", thus improving the chances that the Newton method will converge. An increase in the number of sampling points can lead to a significant increase in the multi-domain setup times, however. In the present problem, the elements are only stretched in the coordinate directions so a small number of sample points per element suffices: <br  />
-<br  />
-  <div class="fragment"></div><!-- fragment --></li>
-</ul>
-<p>Luckily, the setup of the multi-domain interactions tends to be relatively cheap (compared to other phases of a typical computation) so in most cases the default settings for above parameters are perfectly adequate.</p>
 <hr  />
  <hr  />
 <h1><a class="anchor" id="sources"></a>
@@ -356,7 +323,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Jul 21 2021 19:42:03
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Jul 23 2021 09:06:25
         </div>
       </div>
     </footer>

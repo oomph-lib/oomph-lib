@@ -586,16 +586,16 @@ the \c FaceGeometry of the bulk element and sets the indices
 associated with the bulk fluid velocity components from the bulk
 element.
 
-\dontinclude line_interface_elements.h
+\dontinclude specific_node_update_interface_elements.h
 \skipline SpineLineFluidInterfaceElement(
-\until //End of constructor
+\until {}
 
 
  If a spine method is used to update the nodal positions then the
 spine height is the unknown associated with the kinematic
 condition. Thus, the function \c kinematic_local_eqn(...) is
 overloaded accordingly
-\dontinclude line_interface_elements.h
+\dontinclude specific_node_update_interface_elements.h
 \skipline kinematic_local_eqn(
 \until spine_local_eqn(n)
 
@@ -634,14 +634,14 @@ associated with the bulk fluid velocity components from the bulk
 element, it also adds the additional storage required for the Lagrange
 multipliers 
 
-\dontinclude line_interface_elements.h
+\dontinclude specific_node_update_interface_elements.h
 \skipline ElasticLineFluidInterfaceElement(
 \until //End of constructor
 
 The kinematic boundary condition is associated with the Lagrange multiplier
 and \c kinematic_local_eqn(...) is
 overloaded accordingly
-\dontinclude line_interface_elements.h
+\dontinclude specific_node_update_interface_elements.h
 \skipline Lagrange multiplier) 
 \until }
 

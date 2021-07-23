@@ -340,8 +340,12 @@ Consider the creation of the internal boundary 4 shown on the sketch of the doma
 \item Finally, create the {\ttfamily Triangle\+Mesh\+Open\+Curve} object as usual
 \end{DoxyItemize}
 
- 
+
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{  \textcolor{comment}{// The open curve that define this boundary is composed of just one}}
+\DoxyCodeLine{  \textcolor{comment}{// curve section}}
+\DoxyCodeLine{  inner\_open\_boundaries\_pt[2] =}
+\DoxyCodeLine{      \textcolor{keyword}{new} TriangleMeshOpenCurve(internal\_curve\_section3\_pt);}
 
 \end{DoxyCodeInclude}
 

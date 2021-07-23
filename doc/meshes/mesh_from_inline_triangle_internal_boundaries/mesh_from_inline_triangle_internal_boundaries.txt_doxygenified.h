@@ -178,8 +178,7 @@ and vertex #1 for the final end. Once identified, we perform the connection as f
 
 - Finally, create the \c TriangleMeshOpenCurve object as usual
 
-\dontinclude mesh_from_inline_triangle_internal_boundaries.cc
-\skipline The open curve that defines this curved boundary is composed of just one
+\skipline The open curve 
 \until new TriangleMeshOpenCurve(internal_curve_section3_pt);
 
 <HR>

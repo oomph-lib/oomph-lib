@@ -128,7 +128,7 @@ The template-\/free \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement}{oomph\
  which is called from {\itshape  within } the integration loop and is used to assemble any additional surface transport equations or equations arising from different node update strategies. This function is virtual so that it can be overloaded in derived classes.
 \item The function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{int} FluidInterfaceElement::kinematic\_local\_eqn(...)}
+\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{FluidInterfaceElement::kinematic\_local\_eqn}}(...)}
 \end{DoxyCode}
  that is used to specify the local equation number used for the kinematic condition, which depends on the mesh-\/update strategy chosen.
 \end{DoxyItemize}\hypertarget{index_line}{}\doxysubsection{The Line\+Derivatives class}\label{index_line}
@@ -150,18 +150,26 @@ Note that the use of templates to make the code generic makes it hard to read. A
 
  
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    SpineLineFluidInterfaceElement(}
+\DoxyCodeLine{     FiniteElement* \textcolor{keyword}{const} \&element\_pt, }
+\DoxyCodeLine{     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \&face\_index) : }
+\DoxyCodeLine{   SpineUpdateFluidInterfaceElement<FluidInterfaceElement,}
+\DoxyCodeLine{    LineDerivatives,ELEMENT>(element\_pt,face\_index) \{\}}
 
 \end{DoxyCodeInclude}
 
 
-If a spine method is used to update the nodal positions then the spine height is the unknown associated with the kinematic condition. Thus, the function {\ttfamily kinematic\+\_\+local\+\_\+eqn(...)} is overloaded accordingly  
+If a spine method is used to update the nodal positions then the spine height is the unknown associated with the kinematic condition. Thus, the function {\ttfamily \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{kinematic\+\_\+local\+\_\+eqn(...)}}} is overloaded accordingly  
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{  \textcolor{keywordtype}{int} \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{kinematic\_local\_eqn}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n) }
+\DoxyCodeLine{  \{\textcolor{keywordflow}{return} this-\/>spine\_local\_eqn(n);\}}
 
 \end{DoxyCodeInclude}
 
 
 Finally, the element calculates the geometric contributions to the jacobian using the generic functionality in {\ttfamily Element\+With\+Moving\+Nodes} 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{  \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double> \&residuals, }
 
 \end{DoxyCodeInclude}
 
@@ -180,18 +188,34 @@ The constructor is given below and in addition to building the element based on 
 
  
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    ElasticLineFluidInterfaceElement(}
 
 \end{DoxyCodeInclude}
 
 
-The kinematic boundary condition is associated with the Lagrange multiplier and {\ttfamily kinematic\+\_\+local\+\_\+eqn(...)} is overloaded accordingly  
+The kinematic boundary condition is associated with the Lagrange multiplier and {\ttfamily \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{kinematic\+\_\+local\+\_\+eqn(...)}}} is overloaded accordingly  
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{  \textcolor{comment}{/// (This is the equation for the Lagrange multiplier) }}
+\DoxyCodeLine{  \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{kinematic\_local\_eqn}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{// Get the index of the nodal value associated with Lagrange multiplier}}
+\DoxyCodeLine{   \textcolor{keywordflow}{return} this-\/>nodal\_local\_eqn(n,this-\/>lagrange\_index(n));}
+\DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
 
 
 The element calculates the geometric contributions to the jacobian using the generic functionality in {\ttfamily Solid\+Elements} 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{  \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double> \&residuals, }
+\DoxyCodeLine{                                        DenseMatrix<double> \&jacobian)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//Call the generic routine with the flag set to 1}}
+\DoxyCodeLine{   EQUATION\_CLASS::fill\_in\_generic\_residual\_contribution\_interface(residuals,jacobian,1);}
+\DoxyCodeLine{  }
+\DoxyCodeLine{   \textcolor{comment}{//Call the generic finite difference routine for the solid variables}}
+\DoxyCodeLine{   this-\/>fill\_in\_jacobian\_from\_solid\_position\_by\_fd(jacobian);}
+\DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
 

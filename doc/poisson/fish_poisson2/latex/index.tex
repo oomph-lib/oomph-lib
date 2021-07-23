@@ -204,7 +204,7 @@ Next, we pass the (pointer to the) {\ttfamily Circle} object to the constructor 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{double} xi\_nose=2.6; }
 \DoxyCodeLine{\textcolor{keywordtype}{double} \mbox{\hyperlink{fish__poisson2_8txt_a44a04c4143efa1228ac3cd5add2a1917}{xi\_tail}}=0.4; }
-\DoxyCodeLine{\mbox{\hyperlink{fish__poisson2_8txt_a36182deccc274d25f67a270c999c54c3}{Domain}}* \mbox{\hyperlink{fish__poisson2_8txt_af5f8290ba6539fcd5dd8fb6357487caa}{domain\_pt}}=\textcolor{keyword}{new} \mbox{\hyperlink{fish__poisson2_8txt_a42536cd36f5f484d09e2343c570769c0}{FishDomain}}(\mbox{\hyperlink{fish__poisson2_8txt_a68a3f92caf63697dc8a7fa23dcd50d53}{back\_pt}},xi\_nose,\mbox{\hyperlink{fish__poisson2_8txt_a44a04c4143efa1228ac3cd5add2a1917}{xi\_tail}});}
+\DoxyCodeLine{\mbox{\hyperlink{fish__poisson2_8txt_a36182deccc274d25f67a270c999c54c3}{Domain}}* \mbox{\hyperlink{fish__poisson2_8txt_af5f8290ba6539fcd5dd8fb6357487caa}{domain\_pt}}=\textcolor{keyword}{new} FishDomain(\mbox{\hyperlink{fish__poisson2_8txt_a68a3f92caf63697dc8a7fa23dcd50d53}{back\_pt}},xi\_nose,\mbox{\hyperlink{fish__poisson2_8txt_a44a04c4143efa1228ac3cd5add2a1917}{xi\_tail}});}
 \end{DoxyCode}
 
 
@@ -215,7 +215,7 @@ To see how this works internally, let us have a look at the {\ttfamily Fish\+Dom
 \DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Constructor: Pass pointer to GeomObject that represents the}}
 \DoxyCodeLine{\textcolor{comment}{ /// (upper) curved boundary of the fish's body, and the start and end values}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// of the Lagrangian coordinates along the GeomObject. }}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{fish__poisson2_8txt_a42536cd36f5f484d09e2343c570769c0}{FishDomain}}(\mbox{\hyperlink{fish__poisson2_8txt_a21f866477909132765bd833a91c16259}{GeomObject}}* \mbox{\hyperlink{fish__poisson2_8txt_a68a3f92caf63697dc8a7fa23dcd50d53}{back\_pt}}, }
+\DoxyCodeLine{\textcolor{comment}{} FishDomain(\mbox{\hyperlink{fish__poisson2_8txt_a21f866477909132765bd833a91c16259}{GeomObject}}* \mbox{\hyperlink{fish__poisson2_8txt_a68a3f92caf63697dc8a7fa23dcd50d53}{back\_pt}}, }
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& xi\_nose,  }
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{fish__poisson2_8txt_a44a04c4143efa1228ac3cd5add2a1917}{xi\_tail}}) :  }
 \DoxyCodeLine{  Xi\_nose(xi\_nose),  Xi\_tail(\mbox{\hyperlink{fish__poisson2_8txt_a44a04c4143efa1228ac3cd5add2a1917}{xi\_tail}}), \mbox{\hyperlink{fish__poisson2_8txt_abecec0ffd252d5c008335db6e6a529b4}{Back\_pt}}(\mbox{\hyperlink{fish__poisson2_8txt_a68a3f92caf63697dc8a7fa23dcd50d53}{back\_pt}})}
@@ -241,15 +241,7 @@ To see how this works internally, let us have a look at the {\ttfamily Fish\+Dom
 \end{DoxyCodeInclude}
 
 
-Most of the remaining public member functions are equally straightforward\+: The destructor deletes the {\ttfamily Macro\+Elements},
-
- 
-\begin{DoxyCodeInclude}{0}
-
-\end{DoxyCodeInclude}
-
-
-and we provide various access functions to the geometric parameters such as {\ttfamily X\+\_\+mouth}, etc -- we will not list these explicitly. All the \char`\"{}real work\char`\"{} is done in the implementation of the pure virtual function {\ttfamily Domain\+::macro\+\_\+element\+\_\+boundary(...)}. Given
+Most of the remaining public member functions are equally straightforward. We provide various access functions to the geometric parameters such as {\ttfamily X\+\_\+mouth}, etc -- we will not list these explicitly. All the \char`\"{}real work\char`\"{} is done in the implementation of the pure virtual function {\ttfamily Domain\+::macro\+\_\+element\+\_\+boundary(...)}. Given
 \begin{DoxyItemize}
 \item the number of the {\ttfamily Macro\+Element} in its {\ttfamily Domain} 
 \item the direction of its boundary (N\mbox{[}orth\mbox{]}, S\mbox{[}outh\mbox{]}, E\mbox{[}ast\mbox{]}, W\mbox{[}est\mbox{]}, enumerated in the namespace {\ttfamily Quad\+Tree\+Names})
@@ -266,6 +258,18 @@ Since the shape of the domain can evolve in time, the full interface for the fun
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Vector representation of the  i\_macro-\/th macro element}}
+\DoxyCodeLine{\textcolor{comment}{ /// boundary i\_direct (N/S/W/E) at the discrete time level t }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// (t=0: present; t>0: previous): \(\backslash\)f\$ \{\(\backslash\)bf r\}(\{\(\backslash\)bf zeta\}) \(\backslash\)f\$}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// Note that the local coordinate \(\backslash\)b zeta is a 1D}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// Vector rather than a scalar -\/-\/ this is unavoidable because}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// this function implements the pure virtual function in the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// Domain base class.}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} macro\_element\_boundary(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
+\DoxyCodeLine{                             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_macro,}
+\DoxyCodeLine{                             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_direct,}
+\DoxyCodeLine{                             \textcolor{keyword}{const} Vector<double>\& zeta,}
+\DoxyCodeLine{                             Vector<double>\& r);}
 
 \end{DoxyCodeInclude}
 
@@ -317,15 +321,15 @@ To illustrate the general procedure, here is the complete listing of the {\ttfam
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_lower\_body\_N(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_aff5c7f5413186755d84d595d45239926}{S}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_af82e9c1ad3f168acfc9694f88e672b77}{S}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_lower\_body\_S(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_af3bf412369a3982586f54f0e04d60630}{W}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_ab5e75af9bd71f640a1c5a41a65b85099}{W}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_lower\_body\_W(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_a493a882b1dd7b4a37614521db1740c2e}{E}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_ac3e00526534ae96f709b8a3ec072ea4e}{E}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_lower\_body\_E(t,zeta,r);}
 \DoxyCodeLine{    \}}
@@ -351,15 +355,15 @@ To illustrate the general procedure, here is the complete listing of the {\ttfam
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_lower\_fin\_N(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_aff5c7f5413186755d84d595d45239926}{S}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_af82e9c1ad3f168acfc9694f88e672b77}{S}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_lower\_fin\_S(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_af3bf412369a3982586f54f0e04d60630}{W}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_ab5e75af9bd71f640a1c5a41a65b85099}{W}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_lower\_fin\_W(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_a493a882b1dd7b4a37614521db1740c2e}{E}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_ac3e00526534ae96f709b8a3ec072ea4e}{E}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_lower\_fin\_E(t,zeta,r);}
 \DoxyCodeLine{    \}}
@@ -386,15 +390,15 @@ To illustrate the general procedure, here is the complete listing of the {\ttfam
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_upper\_body\_N(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_aff5c7f5413186755d84d595d45239926}{S}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_af82e9c1ad3f168acfc9694f88e672b77}{S}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_upper\_body\_S(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_af3bf412369a3982586f54f0e04d60630}{W}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_ab5e75af9bd71f640a1c5a41a65b85099}{W}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_upper\_body\_W(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_a493a882b1dd7b4a37614521db1740c2e}{E}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_ac3e00526534ae96f709b8a3ec072ea4e}{E}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_upper\_body\_E(t,zeta,r);}
 \DoxyCodeLine{    \}}
@@ -421,15 +425,15 @@ To illustrate the general procedure, here is the complete listing of the {\ttfam
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_upper\_fin\_N(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_aff5c7f5413186755d84d595d45239926}{S}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_af82e9c1ad3f168acfc9694f88e672b77}{S}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_upper\_fin\_S(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_af3bf412369a3982586f54f0e04d60630}{W}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_ab5e75af9bd71f640a1c5a41a65b85099}{W}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_upper\_fin\_W(t,zeta,r);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_a493a882b1dd7b4a37614521db1740c2e}{E}})}
+\DoxyCodeLine{   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (idirect==\mbox{\hyperlink{fish__poisson2_8txt_ac3e00526534ae96f709b8a3ec072ea4e}{E}})}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     FishDomain::r\_upper\_fin\_E(t,zeta,r);}
 \DoxyCodeLine{    \}}

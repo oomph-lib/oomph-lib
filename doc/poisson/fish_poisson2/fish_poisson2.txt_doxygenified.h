@@ -313,14 +313,8 @@ of the \c MacroElement takes a pointer to the Domain, and the
 \skipline Constructor: Pass pointer to GeomObject that 
 \until end of constructor
 
-Most of the remaining public member functions are equally straightforward:
-The destructor deletes the \c MacroElements,
-
-\dontinclude fish_domain.h
-\skipline Destructor for FishDomain: Kill macro elements
-\until }
-
-and we provide various access functions to the geometric parameters
+Most of the remaining public member functions are equally
+straightforward. We provide various access functions to the geometric parameters
 such as \c X_mouth, etc -- we will not list these explicitly.
 All the "real work" is done in the implementation of the pure 
 virtual function \c Domain::macro_element_boundary(...). Given 

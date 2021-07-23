@@ -293,7 +293,7 @@ The FluidInterfaceElement class</h2>
 </div><!-- fragment --> that is responsible for assembling the residual and jacobian contributions corresponding to the dynamic and kinematic boundary conditions.</li>
 <li>The function <div class="fragment"><div class="line">FluidInterfaceElement::add_additional_residual_contributions_interface(...)</div>
 </div><!-- fragment --> which is called from <em> within </em> the integration loop and is used to assemble any additional surface transport equations or equations arising from different node update strategies. This function is virtual so that it can be overloaded in derived classes.</li>
-<li>The function <div class="fragment"><div class="line"><span class="keyword">virtual</span> <span class="keywordtype">int</span> FluidInterfaceElement::kinematic_local_eqn(...)</div>
+<li>The function <div class="fragment"><div class="line"><span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="surface__theory_8txt.html#a3bad7200e996f3bbea6cbbce2e83e61a">FluidInterfaceElement::kinematic_local_eqn</a>(...)</div>
 </div><!-- fragment --> that is used to specify the local equation number used for the kinematic condition, which depends on the mesh-update strategy chosen.</li>
 </ul>
 <h2><a class="anchor" id="line"></a>
@@ -324,7 +324,15 @@ The SpineLine/Axi/SurfaceFluidInterfaceElement classes</h1>
 <p>We shall discuss the "line" version of the elements, but the others are essentially the same.</p>
 <p>The class <a class="el" href="classoomph_1_1SpineLineFluidInterfaceElement.html">oomph::SpineLineFluidInterfaceElement</a> is templated by the bulk element type, <code>ELEMENT</code>, and inherits from <code>FluidInterfaceElement</code>, LineDerivatives and <code>Hijacked&lt;SpineElement&lt;FaceGeometry&lt;ELEMENT&gt;</code> &gt; &gt;. The hijacking is only required for imposition of contact angle boundary conditions, see <a href="../../static_single_layer/html/index.html">another tutorial </a> for more details.</p>
 <p>Note that the use of templates to make the code generic makes it hard to read. A simplified constructor is given below and simply builds the element based on the <code>FaceGeometry</code> of the bulk element and sets the indices associated with the bulk fluid velocity components from the bulk element.</p>
- <div class="fragment"></div><!-- fragment --><p>If a spine method is used to update the nodal positions then the spine height is the unknown associated with the kinematic condition. Thus, the function <code>kinematic_local_eqn(...)</code> is overloaded accordingly  </p><div class="fragment"></div><!-- fragment --><p>Finally, the element calculates the geometric contributions to the jacobian using the generic functionality in <code>ElementWithMovingNodes</code> </p><div class="fragment"></div><!-- fragment --><p>There are no additional contributions to the residuals or jacobian.</p>
+ <div class="fragment"><div class="line">    SpineLineFluidInterfaceElement(</div>
+<div class="line">     FiniteElement* <span class="keyword">const</span> &amp;element_pt, </div>
+<div class="line">     <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;face_index) : </div>
+<div class="line">   SpineUpdateFluidInterfaceElement&lt;FluidInterfaceElement,</div>
+<div class="line">    LineDerivatives,ELEMENT&gt;(element_pt,face_index) {}</div>
+</div><!-- fragment --><p>If a spine method is used to update the nodal positions then the spine height is the unknown associated with the kinematic condition. Thus, the function <code><a class="el" href="surface__theory_8txt.html#a3bad7200e996f3bbea6cbbce2e83e61a">kinematic_local_eqn(...)</a></code> is overloaded accordingly  </p><div class="fragment"><div class="line">  <span class="keywordtype">int</span> <a class="code" href="surface__theory_8txt.html#a3bad7200e996f3bbea6cbbce2e83e61a">kinematic_local_eqn</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;n) </div>
+<div class="line">  {<span class="keywordflow">return</span> this-&gt;spine_local_eqn(n);}</div>
+</div><!-- fragment --><p>Finally, the element calculates the geometric contributions to the jacobian using the generic functionality in <code>ElementWithMovingNodes</code> </p><div class="fragment"><div class="line">  <span class="keywordtype">void</span> fill_in_contribution_to_jacobian(Vector&lt;double&gt; &amp;residuals, </div>
+</div><!-- fragment --><p>There are no additional contributions to the residuals or jacobian.</p>
 <hr  />
 <h1><a class="anchor" id="elastic_formulation"></a>
 The ElasticLine/Axi/SurfaceFluidInterfaceElement classes</h1>
@@ -332,7 +340,23 @@ The ElasticLine/Axi/SurfaceFluidInterfaceElement classes</h1>
 <p>The class <a class="el" href="classoomph_1_1ElasticLineFluidInterfaceElement.html" title="Specialise the elastic update template class to concrete 1D case.">oomph::ElasticLineFluidInterfaceElement</a> is templated by the bulk element type, <code>ELEMENT</code>, and inherits from <code>LineDerivatives</code>, FluidInterfaceElement and <code>Hijacked&lt;FaceGeometry&lt;ELEMENT&gt;</code> &gt;. The hijacking is again only required for imposition of contact angle boundary conditions.</p>
 <p>The "elastic" versions of the elements are more complicated than the "spine" versions because the kinematic condition is imposed using Lagrange multipliers, following the method described by Cairncross et al A finite element method for free surface flows of incompressible fluids in three dimensions. Part I. Boundary fitted mesh motion' (2000). These Lagrange multipliers must be added to the <code>Nodes</code> on the free surface and their introduction adds additional terms to the equations governing the bulk mesh motion.</p>
 <p>The constructor is given below and in addition to building the element based on the <code>FaceGeometry</code> of the bulk element and setting the indices associated with the bulk fluid velocity components from the bulk element, it also adds the additional storage required for the Lagrange multipliers</p>
- <div class="fragment"></div><!-- fragment --><p>The kinematic boundary condition is associated with the Lagrange multiplier and <code>kinematic_local_eqn(...)</code> is overloaded accordingly  </p><div class="fragment"></div><!-- fragment --><p>The element calculates the geometric contributions to the jacobian using the generic functionality in <code>SolidElements</code> </p><div class="fragment"></div><!-- fragment --><p>The additional contributions to the residuals and jacobian arise from the Lagrange multiplier contributions to the equations that determine the position of the nodes. The essential loop is the contribution below which adds the normal traction to the governing equations of solid mechanics: </p><div class="fragment"></div><!-- fragment --><h1><a class="anchor" id="surface"></a>
+ <div class="fragment"><div class="line">    ElasticLineFluidInterfaceElement(</div>
+</div><!-- fragment --><p>The kinematic boundary condition is associated with the Lagrange multiplier and <code><a class="el" href="surface__theory_8txt.html#a3bad7200e996f3bbea6cbbce2e83e61a">kinematic_local_eqn(...)</a></code> is overloaded accordingly  </p><div class="fragment"><div class="line">  <span class="comment">/// (This is the equation for the Lagrange multiplier) </span></div>
+<div class="line">  <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="surface__theory_8txt.html#a3bad7200e996f3bbea6cbbce2e83e61a">kinematic_local_eqn</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;n)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get the index of the nodal value associated with Lagrange multiplier</span></div>
+<div class="line">   <span class="keywordflow">return</span> this-&gt;nodal_local_eqn(n,this-&gt;lagrange_index(n));</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>The element calculates the geometric contributions to the jacobian using the generic functionality in <code>SolidElements</code> </p><div class="fragment"><div class="line">  <span class="keywordtype">void</span> fill_in_contribution_to_jacobian(Vector&lt;double&gt; &amp;residuals, </div>
+<div class="line">                                        DenseMatrix&lt;double&gt; &amp;jacobian)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Call the generic routine with the flag set to 1</span></div>
+<div class="line">   EQUATION_CLASS::fill_in_generic_residual_contribution_interface(residuals,jacobian,1);</div>
+<div class="line">  </div>
+<div class="line">   <span class="comment">//Call the generic finite difference routine for the solid variables</span></div>
+<div class="line">   this-&gt;fill_in_jacobian_from_solid_position_by_fd(jacobian);</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>The additional contributions to the residuals and jacobian arise from the Lagrange multiplier contributions to the equations that determine the position of the nodes. The essential loop is the contribution below which adds the normal traction to the governing equations of solid mechanics: </p><div class="fragment"></div><!-- fragment --><h1><a class="anchor" id="surface"></a>
 The SurfaceDerivatives class</h1>
 <p>The recommended strategy for implementing surface transport equations is to inherit from the appropriate <code>FluidInterfaceElement</code>, and include the equations independently of the mesh-update strategy by overloading the function </p><div class="fragment"><div class="line">FluidInterfaceElement::add_additional_residual_contributions_interface(...)</div>
 </div><!-- fragment --><p> The mesh-update specialisations can be added by further specialisation as required. Alternatively, one could simply inherit directly from the specialised element. This is the approach taken in this <a href="../../../multi_physics/rayleigh_instability_surfactant/html/index.html">example code. </a></p>
@@ -350,6 +374,7 @@ PDF file</h1>
 <p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
+<div class="ttc" id="asurface__theory_8txt_html_a3bad7200e996f3bbea6cbbce2e83e61a"><div class="ttname"><a href="surface__theory_8txt.html#a3bad7200e996f3bbea6cbbce2e83e61a">kinematic_local_eqn</a></div><div class="ttdeci">oomph SurfaceDerivatives, the specific residuals associated with a general two dimensional surface in a three dimensional domain Once again, the global coordinate is Cartesian, so the contribution to each momentum equation is found by setting the two other components of the test function to be zero section spine_formulation The SpineLine Axi SurfaceFluidInterfaceElement classes We shall discuss the line version of the elements, but the others are essentially the same The class oomph::SpineLineFluidInterfaceElement is templated by the bulk element type, c ELEMENT, and inherits from c FluidInterfaceElement, LineDerivatives and c Hijacked The hijacking is only required for imposition of contact angle boundary conditions, see another tutorial for more details Note that the use of templates to make the code generic makes it hard to read A simplified constructor is given below and simply builds the element based on the c FaceGeometry of the bulk element and sets the indices associated with the bulk fluid velocity components from the bulk element dontinclude specific_node_update_interface_elements::h skipline SpineLineFluidInterfaceElement until kinematic_local_eqn(...) is overloaded accordingly \dontinclude specific_node_update_interface_elements.h \skipline kinematic_local_eqn(\until spine_local_eqn(n) Finally</div></div>
 <div class="ttc" id="asurface__theory_8txt_html_aa6e311b025109a0aa3e5058952a5cd99"><div class="ttname"><a href="surface__theory_8txt.html#aa6e311b025109a0aa3e5058952a5cd99">sigma</a></div><div class="ttdeci">kappa phi phi sigma</div><div class="ttdef"><b>Definition:</b> <a href="surface__theory_8txt_source.html#l00216">surface_theory.txt:216</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -378,7 +403,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Jul 21 2021 19:23:03
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Jul 23 2021 08:48:23
         </div>
       </div>
     </footer>

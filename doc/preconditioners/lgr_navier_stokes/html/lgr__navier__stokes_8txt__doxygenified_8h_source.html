@@ -171,86 +171,86 @@
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">\f]</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">where \f$ {\bf t}\f$ is the tangent vector at each discrete point on the</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">boundary \f$ \Omega_{O}\f$.  We weakly enforce the flow constraint by</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">augmenting the Navier-Stokes momentum residual equation (introduced in the &lt;a</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">href=&quot;../../../navier_stokes/rayleigh_traction_channel/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">Unsteady flow in a 2D channel, driven by an applied traction&lt;/a&gt; tutorial) with</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">a Lagrange multiplier term so that it becomes</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">\f[</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">r_{il}^{u}</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">=</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">\int_\Omega</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">\left[</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">  Re</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    \left(</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">      St\frac{\partial u_i}{\partial t}</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">      + u_j\frac{\partial u_i}{\partial x_j}</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">    \right) \psi_l</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">  + \tau_{ij}\frac{\partial \psi_l}{\partial x_j}</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">\right]</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">d\Omega</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">-</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">\int_{\partial\Omega}</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">\tau_{ij} n_j\psi_l dS</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">+ \delta \Pi_{constraint} = 0,</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (3)</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">\f]</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">where</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">\f[</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">\Pi_{constraint}</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">=</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">\int_{\partial \Omega} \lambda u_i t_i dS,</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (4)</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">\f]</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">and \f$\lambda\f$ is the Lagrange multiplier. Upon taking the first variation</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">of the constraint with respect to the unknown velocity and the Lagrange</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">multiplier, the residual form of the constrained momentum equation is</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">\f[</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">r_{il}^{u}</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">=</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">\int_\Omega</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">\left[</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">  Re</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    \left(</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">      St\frac{\partial u_i}{\partial t}</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">      + u_j\frac{\partial u_i}{\partial x_j}</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    \right) \psi_l</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">  + \tau_{ij}\frac{\partial \psi_l}{\partial x_j}</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">\right]</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">d\Omega</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">-</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">\int_{\partial\Omega}</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">\tau_{ij} n_j\psi_l dS</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">+ </span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">\int_{\partial\Omega}</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">\lambda\psi_l t_i = 0.</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (5)</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">\f]</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">The weak formulation of (2) is simply</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">\f[</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">r_{l}^{\lambda}</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">=</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">\int_\Omega</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">u_i t_i \psi^\lambda</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">dS</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">=</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">0,</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (6)</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">\f]</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">where \f$\psi^\lambda\f$ is a suitable basis function.  Equation</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">(5) reveals that the Lagrange multipliers act as</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">the (negative) tangential traction \f$(\lambda =</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">-{\mathbf{n}}^T{\mathbf{\tau}}{\mathbf{t}})\f$ that enforce the parallel flow</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">across the boundary \f$\partial\Omega_{O}\f$.  We discretise this constraint by</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">attaching \c ImposeParallelOutflowElements to the boundaries of the &quot;bulk&quot;</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">Navier-Stokes elements that are adjacent to \f$ \partial \Omega_O \f$ as shown</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">in the &lt;a href=&quot;../../../navier_stokes/vmtk_fluid/html/index.html&quot;&gt; Steady</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">finite-Reynolds-number flow through an iliac bifurcation&lt;/a&gt; tutorial, also see</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">the &lt;a href=&quot;../../../solid/prescribed_displ_lagr_mult/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">Deformation of a solid by a prescribed boundary motion &lt;/a&gt; tutorial which</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">employs a similar technique used to enforce prescribed boundary displacements</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">in solid mechanics problems. We discretise the Navier-Stokes equations using \c</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">oomph-lib&#39;s \c QTaylorHoodElements, see the &lt;a</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">href=&quot;../../../navier_stokes/driven_cavity/html/index.html&quot;&gt; 2D Driven Cavity</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">augmenting the Navier-Stokes momentum residual equation (introduced in</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">the</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">&lt;a href=&quot;../../../navier_stokes/rayleigh_traction_channel/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">Unsteady flow in a 2D channel, driven by an applied traction&lt;/a&gt; tutorial) with</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">a Lagrange multiplier term so that it becomes</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">r_{il}^{u}</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">=</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">\int_\Omega</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">\left[</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">  Re</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    \left(</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">      St\frac{\partial u_i}{\partial t}</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">      + u_j\frac{\partial u_i}{\partial x_j}</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    \right) \psi_l</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">  + \tau_{ij}\frac{\partial \psi_l}{\partial x_j}</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">\right]</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">d\Omega</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">-</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">\int_{\partial\Omega}</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">\tau_{ij} n_j\psi_l dS</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">+ \delta \Pi_{constraint} = 0,</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (3)</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">where</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">\Pi_{constraint}</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">=</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">\int_{\partial \Omega} \lambda u_i t_i dS,</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (4)</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">and \f$\lambda\f$ is the Lagrange multiplier. Upon taking the first variation</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">of the constraint with respect to the unknown velocity and the Lagrange</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">multiplier, the residual form of the constrained momentum equation is</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">r_{il}^{u}</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">=</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">\int_\Omega</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">\left[</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">  Re</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    \left(</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">      St\frac{\partial u_i}{\partial t}</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">      + u_j\frac{\partial u_i}{\partial x_j}</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">    \right) \psi_l</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">  + \tau_{ij}\frac{\partial \psi_l}{\partial x_j}</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">\right]</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">d\Omega</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">-</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">\int_{\partial\Omega}</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">\tau_{ij} n_j\psi_l dS</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">+ </span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">\int_{\partial\Omega}</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">\lambda\psi_l t_i = 0.</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (5)</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">The weak formulation of (2) is simply</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">r_{l}^{\lambda}</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">=</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">\int_\Omega</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">u_i t_i \psi^\lambda</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">dS</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">=</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">0,</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (6)</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">where \f$\psi^\lambda\f$ is a suitable basis function.  Equation</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">(5) reveals that the Lagrange multipliers act as</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">the (negative) tangential traction \f$(\lambda =</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">-{\mathbf{n}}^T{\mathbf{\tau}}{\mathbf{t}})\f$ that enforce the parallel flow</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">across the boundary \f$\partial\Omega_{O}\f$.  We discretise this constraint by</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">attaching \c ImposeParallelOutflowElements to the boundaries of the &quot;bulk&quot;</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">Navier-Stokes elements that are adjacent to \f$ \partial \Omega_O \f$ as shown</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">in the &lt;a href=&quot;../../../navier_stokes/vmtk_fluid/html/index.html&quot;&gt; Steady</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">finite-Reynolds-number flow through an iliac bifurcation&lt;/a&gt; tutorial, also see</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">the &lt;a href=&quot;../../../solid/prescribed_displ_lagr_mult/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">Deformation of a solid by a prescribed boundary motion &lt;/a&gt; tutorial which</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">employs a similar technique used to enforce prescribed boundary displacements</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">in solid mechanics problems. We discretise the Navier-Stokes equations using \c</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">oomph-lib&#39;s \c QTaylorHoodElements, see the &lt;a href=&quot;../../../navier_stokes/driven_cavity/html/index.html&quot;&gt; 2D Driven Cavity</span></div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">Problem&lt;/a&gt; tutorial for more information.</span></div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment"></span> </div>
@@ -499,84 +499,83 @@
 <div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">To demonstrate how to use the preconditioner, here are the relevant extracts</span></div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">from the driver code &lt;A</span></div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">HREF=&quot;../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc&quot;&gt;</span></div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">two_d_tilted_square.cc&lt;/A&gt; which solves the model problem described above.  As</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">explained in the &lt;a href=&quot;../../../linear_solvers/html/index.html&quot;&gt;Linear</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">Solvers Tutorial&lt;/A&gt; switching to an iterative linear solver is typically</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">performed in the \c Problem constructor and involves a few straightforward</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">steps:</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">-# &lt;b&gt;Create an instance of the IterativeLinearSolver and pass it to the</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">   Problem&lt;/b&gt; \n\n</span></div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">   In our problem, we choose right preconditioned \c GMRES as the linear </span></div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">   solver: \n\n</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">   \dontinclude two_d_tilted_square.cc</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">   \skipline Create oomph-lib</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">   \until solver_pt;</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">   \n\n</span></div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">-# &lt;b&gt;Create an instance of the Preconditioner and give it access to the </span></div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">   meshes&lt;/b&gt; \n\n</span></div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">   The \c LagrangeEnforceFlowPreconditioner takes a pointer of meshes. </span></div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">   It is important that the bulk mesh is in position \c 0 :</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">   \skipline Create the preconditioner</span></div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">   \until set_meshes(mesh_pt);</span></div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">   By default, \c SuperLUPreconditioner is used for all subsidiary block</span></div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">   solves. To use the LSC preconditioner to approximately solve the</span></div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">   sub-block system involving the momentum block, we invoke the following:</span></div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">   \skipline Create the NS LSC preconditioner</span></div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">   \until set_navier_stokes_preconditioner(lsc_prec_pt);</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">   The LSC preconditioner is discussed in</span></div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">   &lt;a href=&quot;../../lsc_navier_stokes/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">   another tutorial&lt;/A&gt;.</span></div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">   \n\n</span></div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">-# &lt;b&gt;Pass the preconditioner to the solver, and the solver to the problem</span></div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">   &lt;/b&gt; \n\n</span></div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">   \skipline Pass the preconditioner to the solver.</span></div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">   \until linear_solver_pt() = Solver_pt;</span></div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">   \n\n</span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">.</span></div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">from the driver code &lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">two_d_tilted_square.cc&lt;/A&gt; which solves the model problem described above.  As</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">explained in the &lt;a href=&quot;../../../linear_solvers/html/index.html&quot;&gt;Linear</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">Solvers Tutorial&lt;/A&gt; switching to an iterative linear solver is typically</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">performed in the \c Problem constructor and involves a few straightforward</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">steps:</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">-# &lt;b&gt;Create an instance of the IterativeLinearSolver and pass it to the</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">   Problem&lt;/b&gt; \n\n</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">   In our problem, we choose right preconditioned \c GMRES as the linear </span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">   solver: \n\n</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">   \dontinclude two_d_tilted_square.cc</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">   \skipline Create oomph-lib</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">   \until solver_pt;</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">-# &lt;b&gt;Create an instance of the Preconditioner and give it access to the </span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">   meshes&lt;/b&gt; \n\n</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">   The \c LagrangeEnforceFlowPreconditioner takes a pointer of meshes. </span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">   It is important that the bulk mesh is in position \c 0 :</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">   \skipline Create the preconditioner</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">   \until set_meshes(mesh_pt);</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">   By default, \c SuperLUPreconditioner is used for all subsidiary block</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">   solves. To use the LSC preconditioner to approximately solve the</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">   sub-block system involving the momentum block, we invoke the following:</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">   \skipline Create the NS LSC preconditioner</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">   \until set_navier_stokes_preconditioner(lsc_prec_pt);</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">   The LSC preconditioner is discussed in</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">   &lt;a href=&quot;../../lsc_navier_stokes/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">   another tutorial&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">-# &lt;b&gt;Pass the preconditioner to the solver, and the solver to the problem</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">   &lt;/b&gt; \n\n</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">   \skipline Pass the preconditioner to the solver.</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">   \until linear_solver_pt() = Solver_pt;</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">\section sources Source files for this tutorial</span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">- The source files for this tutorial are located in the directory:\n\n</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner&quot;&gt;</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">&lt;/CENTER&gt;\n</span></div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">- The driver code is: \n\n</span></div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc&quot;&gt;</span></div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc</span></div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">\section sources Source files for this tutorial</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">- The source files for this tutorial are located in the directory:\n\n</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner&quot;&gt;</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">&lt;/CENTER&gt;\n</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">- The driver code is: \n\n</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
 <div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">\section pdf PDF file</span></div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="algr__navier__stokes_8txt_html_a62f0a458352206719cb3775c6648fbfa"><div class="ttname"><a href="lgr__navier__stokes_8txt.html#a62f0a458352206719cb3775c6648fbfa">block</a></div><div class="ttdeci">By c SuperLUPreconditioner is used for all subsidiary block solves To use the LSC preconditioner to approximately solve the sub block system involving the momentum block</div><div class="ttdef"><b>Definition:</b> <a href="lgr__navier__stokes_8txt_source.html#l00405">lgr_navier_stokes.txt:405</a></div></div>
+<div class="ttc" id="algr__navier__stokes_8txt_html_a62f0a458352206719cb3775c6648fbfa"><div class="ttname"><a href="lgr__navier__stokes_8txt.html#a62f0a458352206719cb3775c6648fbfa">block</a></div><div class="ttdeci">By c SuperLUPreconditioner is used for all subsidiary block solves To use the LSC preconditioner to approximately solve the sub block system involving the momentum block</div><div class="ttdef"><b>Definition:</b> <a href="lgr__navier__stokes_8txt_source.html#l00404">lgr_navier_stokes.txt:404</a></div></div>
 <div class="ttc" id="algr__navier__stokes_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="lgr__navier__stokes_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="lgr__navier__stokes_8txt_source.html#l00007">lgr_navier_stokes.txt:7</a></div></div>
 <div class="ttc" id="algr__navier__stokes_8txt_html_a9fe48f37eb1da14c81bb9bb3910ccfc1"><div class="ttname"><a href="lgr__navier__stokes_8txt.html#a9fe48f37eb1da14c81bb9bb3910ccfc1">c</a></div><div class="ttdeci">this is the default or by any other c Preconditioner(interpreted as an &quot;inexact solver&quot;) specified via the access function \code LagrangeEnforcedFlowPreconditioner n n meshes&lt;/b &gt; n n The c LagrangeEnforceFlowPreconditioner takes a pointer of meshes It is important that the bulk mesh is in position c</div><div class="ttdef"><b>Definition:</b> <a href="lgr__navier__stokes_8txt_source.html#l00356">lgr_navier_stokes.txt:356</a></div></div>
-<div class="ttc" id="algr__navier__stokes_8txt_html_ae21d0e8035b920d37467483a2b1ac04a"><div class="ttname"><a href="lgr__navier__stokes_8txt.html#ae21d0e8035b920d37467483a2b1ac04a">following</a></div><div class="ttdeci">By c SuperLUPreconditioner is used for all subsidiary block solves To use the LSC preconditioner to approximately solve the sub block system involving the momentum we invoke the following</div><div class="ttdef"><b>Definition:</b> <a href="lgr__navier__stokes_8txt_source.html#l00407">lgr_navier_stokes.txt:407</a></div></div>
+<div class="ttc" id="algr__navier__stokes_8txt_html_ae21d0e8035b920d37467483a2b1ac04a"><div class="ttname"><a href="lgr__navier__stokes_8txt.html#ae21d0e8035b920d37467483a2b1ac04a">following</a></div><div class="ttdeci">By c SuperLUPreconditioner is used for all subsidiary block solves To use the LSC preconditioner to approximately solve the sub block system involving the momentum we invoke the following</div><div class="ttdef"><b>Definition:</b> <a href="lgr__navier__stokes_8txt_source.html#l00406">lgr_navier_stokes.txt:406</a></div></div>
 <div class="ttc" id="algr__navier__stokes_8txt_html_ac131914a186803ddf7a4d7fddfa83547"><div class="ttname"><a href="lgr__navier__stokes_8txt.html#ac131914a186803ddf7a4d7fddfa83547">Omega</a></div><div class="ttdeci">[0, 1]^2\f$ by the following transformation \f[R(\alpha)=\left(\begin{array}{cc} {\cos(\alpha)} &amp;{-\sin(\alpha)} \\ {\sin(\alpha)} &amp;{\cos(\alpha)} \end{array} \right), \ \ \ \ \ \ \ \ \ \ @E[eqnrotation]@ \f] where \f$\alpha\f$ is the angle of rotation. The figure below show the flow field(velocity vectors and pressure contours) for a unit square domain rotated by an angle of \f$\alpha=30^\circ \f$ and a Reynolds number of \f$ Re=100 \f$. The flow is driven by a prescribed parabolic boundary condition. @I w 0.4\textwidth SimAng30Rey100Noel4 &quot;Velocity field and pressure contours.&quot; For convenience, we present the boundary conditions for the non-rotated unit square \f$\alpha=0^{\circ}\f$. In order to obtain the boundary conditions for \f$\alpha \ne 0^\circ\f$, we only have to apply the rotation( @R[eqnrotation]@). The flow is driven by imposing a parabolic velocity profile along the inflow boundary \f$\Omega_I\f$. Along the characteristic boundary, \f$\Omega_C\f$, the no-slip condition \f $u_i=0\f$, \f $i=1, 2\f$, is prescribed. We impose `parallel outflow' along the outlet \f$\Omega_O\f$ by insisting that \f[{\bf u}\cdot {\bf t}_{}=0 \mbox{\ \ \ \ on $\Omega_{O}$,} \ \ \ \ \ \ \ \ \ \ @E[eqnbcpostrong]@ \f] where \f$ {\bf t}\f$ is the tangent vector at each discrete point on the boundary \f$ \Omega_{O}\f$. We weakly enforce the flow constraint by augmenting the Navier-Stokes momentum residual equation(introduced in the&lt; a href=&quot;../../../navier_stokes/rayleigh_traction_channel/html/index.html&quot;&gt; Unsteady flow in a 2D channel, driven by an applied traction&lt;/a &gt; tutorial) with a Lagrange multiplier term so that it becomes \f[r_{il}^{u}=\int_\Omega \left[Re \left(St\frac{\partial u_i}{\partial t}+u_j\frac{\partial u_i}{\partial x_j} \right) \psi_l+\tau_{ij}\frac{\partial \psi_l}{\partial x_j} \right] d\Omega - \int_{\partial\Omega} \tau_{ij} n_j\psi_l dS+\delta \Pi_{constraint}=0, \ \ \ \ \ \ \ \ \ \ @E[eqnaugmentedresu]@ \f] where \f[\Pi_{constraint}=\int_{\partial \Omega} \lambda u_i t_i dS, \ \ \ \ \ \ \ \ \ \ @E[eqnlgrterm]@ \f] and \f$\lambda\f$ is the Lagrange multiplier. Upon taking the first variation of the constraint with respect to the unknown velocity and the Lagrange multiplier, the residual form of the constrained momentum equation is \f[r_{il}^{u}=\int_\Omega \left[Re \left(St\frac{\partial u_i}{\partial t}+u_j\frac{\partial u_i}{\partial x_j} \right) \psi_l+\tau_{ij}\frac{\partial \psi_l}{\partial x_j} \right] d\Omega - \int_{\partial\Omega} \tau_{ij} n_j\psi_l dS+\int_{\partial\Omega} \lambda\psi_l t_i=0. \ \ \ \ \ \ \ \ \ \ @E[eqnaugmentedresufirstvar]@ \f] The weak formulation of( @R[eqnbcpostrong]@) is simply \f[r_{l}^{\lambda}=\int_\Omega u_i t_i \psi^\lambda dS=0, \ \ \ \ \ \ \ \ \ \ @E[eqnweakconstraint]@ \f] where \f$\psi^\lambda\f$ is a suitable basis function. Equation( @R[eqnaugmentedresufirstvar]@) reveals that the Lagrange multipliers act as the(negative) tangential traction \f$(\lambda=-{\mathbf{n}}^T{\mathbf{\tau}}{\mathbf{t}})\f$ that enforce the parallel flow across the boundary \f$\partial\Omega_{O}\f$. We discretise this constraint by attaching \c ImposeParallelOutflowElements to the boundaries of the &quot;bulk&quot; Navier-Stokes elements that are adjacent to \f$ \partial \Omega_O \f$ as shown in the&lt; a href=&quot;../../../navier_stokes/vmtk_fluid/html/index.html&quot;&gt; Steady finite-Reynolds-number flow through an iliac bifurcation&lt;/a &gt; tutorial, also see the&lt; a href=&quot;../../../solid/prescribed_displ_lagr_mult/html/index.html&quot;&gt; Deformation of a solid by a prescribed boundary motion&lt;/a &gt; tutorial which employs a similar technique used to enforce prescribed boundary displacements in solid mechanics problems. We discretise the Navier-Stokes equations using \c oomph-lib 's \c QTaylorHoodElements, see the&lt; a href=&quot;../../../navier_stokes/driven_cavity/html/index.html&quot;&gt; 2D Driven Cavity Problem&lt;/a &gt; tutorial for more information. The discretised problem therefore contains the following types of discrete unknowns:- The fluid degrees of freedom(velocity and pressure).\n\n - The nodal values representing the components of the(vector-valued) Lagrange multipliers. These only exist for the nodes on \f$ \partial \Omega_O\f$.(The nodes are re-sized to accommodate the additional unknowns when the \c ImposeParallelOutflowElements are attached to the bulk elements.) . The preconditioner requires a further sub-division of these degrees of freedom into the following categories:- the unconstrained velocity in the x-direction - the unconstrained velocity in the y-direction -[the unconstrained velocity in the z-direction(only in 3D)] - the constrained velocity in the x-direction - the constrained velocity in the y-direction -[the constrained velocity in the z-direction(only in 3D)] - the Lagrange multiplier at the constrained nodes -[the other Lagrange multiplier at the constrained nodes(only in 3D)]. . For a 2D problem, the linear system to be solved in the course of the Newton iteration can then be(formally) re-ordered into the following block structure:\f[\left[\begin{array}{ccccc|c} { F_{\rm xx}}&amp;{ F_{\rm x\bar{\rm x}}}&amp;{ F_{\rm xy}}&amp;{ F_{\rm x\bar{\rm y}}}&amp;{ B_{\rm x}^{T}}&amp;\\ { F_{\bar{\rm x}\rm x}}&amp;{ F_{\bar{\rm x}\bar{\rm x}}}&amp;{ F_{\bar{\rm x}\rm y}}&amp;{ F_{\bar{\rm x}\bar{\rm y}}}&amp;{ B_{\bar{\rm x}}^{T}}&amp;{ M_{\rm x}}\\ { F_{\rm yx}}&amp;{ F_{\rm y\bar{\rm x}}}&amp;{ F_{\rm yy}}&amp;{ F_{\rm y\bar{\rm y}}}&amp;{ B_{\rm y}^{T}}&amp;\\ { F_{\bar{\rm y}\rm x}}&amp;{ F_{\bar{\rm y}\bar{\rm x}}}&amp;{ F_{\bar{\rm y}\rm y}}&amp;{ F_{\bar{\rm y}\bar{\rm y}}}&amp;{ B_{\bar{\rm y}}^{T}}&amp;{ M_{\rm y}}\\ { B_{\rm x}}&amp;{ B_{\bar{\rm x}}}&amp;{ B_{\rm y}}&amp;{ B_{\bar{\rm y}}}&amp;\\ \hline &amp;{ M_{\rm x}}&amp;&amp;{ M_{\rm y}}&amp;&amp;\end{array} \right] \left[\begin{array}{c} \Delta \mathbf{U}_{\rm x}\\ \Delta \mathbf{\overline{U}}_{\rm x}\\ \Delta \mathbf{U}_{\rm y}\\ \Delta \mathbf{\overline{U}}_{\rm y}\\ \Delta \mathbf{P}\\ \Delta \mathbf{\Lambda} \end{array} \right]=- \left[\begin{array}{c} \mathbf{r}_{\rm x}\\ \mathbf{r}_{\bar{\rm x}}\\ \mathbf{r}_{\rm y}\\ \mathbf{r}_{\bar{\rm y}}\\ \mathbf{r}_{\rm p}\\ \mathbf{r}_{\rm \Lambda} \end{array} \right]. \ \ \ \ \ \ @E[linear_system]@ \f] Here the vectors \f${\bf U}_{\rm x}\f$, \f${\bf U}_{\rm y}\f$, \f${\bf P}\f$ and \f${\bf \Lambda}\f$ contain the \f $x\f$ and \f $y\f$ components of the velocity unknowns, the pressure unknowns and Lagrange multipliers unknowns, respectively. The overbars identify the unknown nodal positions that are constrained by the Lagrange multiplier. The matrices \f $M_{\rm x}\f$ and \f $M_{\rm y}\f$ are mass-like matrices whose entries are formed from products of the basis functions multiplied by a component of the tangent vector at each discrete point on \f$\partial\Omega_{O}\f$, for example, \f$[M_{{\rm x}}]_{ij}=\int_{\partial \Omega_{O}} t_x {\psi_i} \ {\psi_j} \ dS \f$. Denote \f[J_{\rm NS}=\left[\begin{array}{ccccc} { F_{\rm xx}}&amp;{ F_{\rm x\bar{\rm x}}}&amp;{ F_{\rm xy}}&amp;{ F_{\rm x\bar{\rm y}}}&amp;{ B_{\rm x}^{T}}\\ { F_{\bar{\rm x}\rm x}}&amp;{ F_{\bar{\rm x}\bar{\rm x}}}&amp;{ F_{\bar{\rm x}\rm y}}&amp;{ F_{\bar{\rm x}\bar{\rm y}}}&amp;{ B_{\bar{\rm x}}^{T}}\\ { F_{\rm yx}}&amp;{ F_{\rm y\bar{\rm x}}}&amp;{ F_{\rm yy}}&amp;{ F_{\rm y\bar{\rm y}}}&amp;{ B_{\rm y}^{T}}\\ { F_{\bar{\rm y}\rm x}}&amp;{ F_{\bar{\rm y}\bar{\rm x}}}&amp;{ F_{\bar{\rm y}\rm y}}&amp;{ F_{\bar{\rm y}\bar{\rm y}}}&amp;{ B_{\bar{\rm y}}^{T}}\\ { B_{\rm x}}&amp;{ B_{\bar{\rm x}}}&amp;{ B_{\rm y}}&amp;{ B_{\bar{\rm y}}} \end{array} \right], \ \ \ L=\left[\begin{array}{ccccc} &amp;{M_{\rm x}}&amp;&amp;{ M_{\rm x}} &amp;\end{array} \right], \ \ \ \Delta \mathbf{X}_{\rm NS}=\left[\begin{array}{c} \Delta \mathbf{U}_{\rm x}\\ \Delta \mathbf{\overline{U}}_{\rm x}\\ \Delta \mathbf{U}_{\rm y}\\ \Delta \mathbf{\overline{U}}_{\rm y}\\ \Delta \mathbf{P} \end{array} \right],\mbox{\ \ \ \ and } \ \ \ \mathbf{r}_{\rm NS}=\left[\begin{array}{c} \mathbf{r}_{\rm x}\\ \mathbf{r}_{\bar{\rm x}}\\ \mathbf{r}_{\rm y}\\ \mathbf{r}_{\bar{\rm y}}\\ \mathbf{r}_{\rm p} \end{array} \right]. \f] Then we can re-write( @R[linear_system]@) as \f[\left[\begin{array}{cc} { J_{\rm NS}}&amp;L^{T}\\ L &amp;\end{array} \right] \left[\begin{array}{c} \Delta \mathbf{X}_{\rm NS}\\ \Delta \mathbf{\Lambda} \end{array} \right]=- \left[\begin{array}{c} \mathbf{r}_{\rm NS}\\ \mathbf{r}_{\rm \Lambda} \end{array} \right]. \ \ \ \ \ \ @E[linear_system_small]@ \f] We have shown that \f[P=\left[\begin{array}{cc} { J_{\rm NS}}+L^{T}W^{-1} L &amp;\\ &amp;W \end{array} \right], \ \ \ \ \ \ @E[prec_ideal_small]@ \f] where \f $W=\frac{1}{\sigma}LL^{T}\f$ is an optimal preconditioner for the linear system( @R[linear_system_small]@) if we set \f$ \sigma=\|F\|_{\infty} \f$ where \f $F\f$ is the compound \f $4\times 4\f$ top-left block \f[F=\left[\begin{array}{ccccc} { F_{\rm xx}}&amp;{ F_{\rm x\bar{\rm x}}}&amp;{ F_{\rm xy}}&amp;{ F_{\rm x\bar{\rm y}}}\\ { F_{\bar{\rm x}\rm x}}&amp;{ F_{\bar{\rm x}\bar{\rm x}}}&amp;{ F_{\bar{\rm x}\rm y}}&amp;{ F_{\bar{\rm x}\bar{\rm y}}}\\ { F_{\rm yx}}&amp;{ F_{\rm y\bar{\rm x}}}&amp;{ F_{\rm yy}}&amp;{ F_{\rm y\bar{\rm y}}}\\ { F_{\bar{\rm y}\rm x}}&amp;{ F_{\bar{\rm y}\bar{\rm x}}}&amp;{ F_{\bar{\rm y}\rm y}}&amp;{ F_{\bar{\rm y}\bar{\rm y}}} \end{array} \right] \f] in the Jacobian matrix. Application of the preconditioner \f $P\f$ requires the repeated solution of linear systems involving the diagonal blocks \f${J_{\rm NS}}+L^{T}W^{-1} L\f$ and \f $W\f$. The matrix \f $W^{-1}=\sigma(LL^{T})^{-1}=\sigma({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}\f$ is dense and will cause the addition of dense sub-matrices to the Jacobian matrix:\f[\sigma L^{T}(LL^{T})^{-1}L=\sigma \left[\begin{array}{ccccc} \cal O &amp;\cal O &amp;\cal O &amp;\cal O &amp;\cal O \\ \cal O &amp;{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&amp;\cal O &amp;{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}&amp;\cal O \\ \cal O &amp;\cal O &amp;\cal O &amp;\cal O &amp;\cal O \\ \cal O &amp;{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&amp;\cal O &amp;{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}&amp;\cal O\\ \cal O &amp;\cal O &amp;\cal O &amp;\cal O &amp;\cal O \end{array} \right]. \f] Numerical experiments show that an efficient implementation can be obtained by replacing \f $W\f$ by its diagonal approximation \f$\widehat{W}=\mbox{diag}(M_{\rm x}^{2}+M_{\rm y}^{2})\f$. Then the inversion of \f $W\f$ is straight forward and the addition of \f $L^{T}{\widehat{W}}^{-1}L\f$ to the Jacobian does not significantly increase the number of non-zero entries in the matrix \f $J_{\rm NS}\f$. Denote the efficient implementation by \f[\tilde{P}=\left[\begin{array}{cc} { \tilde{J}_{\rm NS}}&amp;\\ &amp;\widehat{W} \end{array} \right], \ \ \ \ \ \ @E[prec_eff_small]@ \f] where \f$\tilde{J}_{\rm NS}=J_{\rm NS}+L^{T}{\widehat{W}}^{-1}L\f$ is the augmented Navier-Stokes Jacobian matrix. In our implementation of the preconditioner, the linear system involving \f$\tilde{J}_{\rm NS}\f$ can either be solved &quot;exactly&quot;, using \c SuperLU(in its incarnation as an exact preconditioner Omega</div><div class="ttdef"><b>Definition:</b> <a href="lgr__navier__stokes_8txt_source.html#l00355">lgr_navier_stokes.txt:355</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -605,7 +604,7 @@
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Jul 21 2021 19:39:43
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Jul 23 2021 09:04:11
         </div>
       </div>
     </footer>

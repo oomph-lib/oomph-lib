@@ -213,56 +213,7 @@ element\char`\"{} that contains a \char`\"{}target point\char`\"{} may not be lo
  point\char`\"{}, which is true provided the bin structure is not too fine. The algorithm should always find the external elements even if these assumptions are not satisfied, but it may not be optimal in these situations.
 
 \DoxyHorRuler{0}
-\hypertarget{index_optim}{}\doxysubsection{Optimising the setup of multi-\/domain interactions}\label{index_optim}
-It is possible to optimise the setup of the multi-\/domain interactions by changing the default parameters defined in the {\ttfamily Multi\+\_\+domain\+\_\+functions} namespace. ({\bfseries{Note\+:}} Because the parameters discussed below are defined in a global namespace, they have to be re-\/set manually to their defaults.)
-\begin{DoxyItemize}
-\item If the size of the domain is known, the extremal coordinates of the bin structure do not have to be (re-\/)computed \char`\"{}on the fly\char`\"{}. Hence if the user knows that a 2D mesh is contained within the region $ 0 \le x \le 3 $ and $ 0 \le y \le 1 $, say, the determination of the bin boundaries may be bypassed by setting ~\newline
-~\newline
-  
-\begin{DoxyCodeInclude}{0}
 
-\end{DoxyCodeInclude}
- If the size of the mesh is known exactly, it makes sense to suppress the slight increase in the size of the bin structure beyond the extreme mesh coordinates\+: ~\newline
-~\newline
- 
-\begin{DoxyCodeInclude}{0}
-
-\end{DoxyCodeInclude}
- ~\newline
-~\newline
- (By default, this parameter is set to 5\% to allow for the fact that the automatic determination of the mesh\textquotesingle{}s size only samples the mesh at the vertex nodes of its elements. In problems with strongly curved boundaries, elements may extend slightly beyond their vertex nodes.) ~\newline
-~\newline
-
-\item Similarly, the number of bins in each of the coordinate directions may be adjusted. For instance, if the width of the domain (in the x-\/direction) is three times greater than its height (in the y-\/direction), it makes sense to adjust the number of bins accordingly. ~\newline
-~\newline
-  
-\begin{DoxyCodeInclude}{0}
-
-\end{DoxyCodeInclude}
- ~\newline
-~\newline
- Unfortunately, the optimal number of bins is problem-\/dependent. If we use very few bins, each bin will contain a large number of \char`\"{}external 
-  elements\char`\"{} and it may take a long time to locate the element that actually contains the \char`\"{}target point\char`\"{}. ~\newline
-~\newline
- Choosing a large number of bins is therefore likely to be beneficial (at least for non-\/distributed problems) as long as the (relatively small) storage requirements for the bin structure itself remain acceptable. This is because in a sufficiently fine bin structure (where the number of bins greatly exceeds the number of sampling points), most of the bins will be empty. When spiralling outwards from the bin that contains the \char`\"{}target
-  point\char`\"{}, the fact that a bin is empty can be detected very quickly, and there is no need to perform any costly Newton iterations until we encounter the first non-\/empty bin. The bin that contains the \char`\"{}external element\char`\"{} with the \char`\"{}target point\char`\"{} can therefore be located fairly quickly even if a large number of empty bins have to be visited first. ~\newline
-~\newline
- In a distributed problem, the issue is more complicated because we only perform one level of the spiralling search through the bins before communicating the missing \char`\"{}external elements\char`\"{} to other processors. An unnecessarily fine bin structure therefore incurs large communication costs. ~\newline
-~\newline
-
-\item Finally, we can adjust the parameter {\ttfamily Multi\+\_\+domain\+::\+Nsample\+\_\+point} which controls the number of sampling points per element used when populating the bins with the pairs of elements and local coordinates. We note that {\ttfamily Multi\+\_\+domain\+::\+Nsample\+\_\+point} does not specify the number of sampling points within the element directly; the sampling points are, in fact, the same as the element\textquotesingle{}s plot points and their number may be obtained from the {\ttfamily Finite\+Element\+::nplot\+\_\+points(...)} function. ~\newline
-~\newline
- The number of sampling points should be increased if the mesh contains strongly distorted elements. This is because in such elements the Newton method may not converge to the \char`\"{}target point\char`\"{} from all sample points in the element, even if the \char`\"{}target point\char`\"{} is contained in the element. Increasing the number of sampling points ensures that more of them ~\newline
- are \char`\"{}close\char`\"{} to the \char`\"{}target point\char`\"{}, thus improving the chances that the Newton method will converge. An increase in the number of sampling points can lead to a significant increase in the multi-\/domain setup times, however. In the present problem, the elements are only stretched in the coordinate directions so a small number of sample points per element suffices\+: ~\newline
-~\newline
-  
-\begin{DoxyCodeInclude}{0}
-
-\end{DoxyCodeInclude}
-
-\end{DoxyItemize}
-
-Luckily, the setup of the multi-\/domain interactions tends to be relatively cheap (compared to other phases of a typical computation) so in most cases the default settings for above parameters are perfectly adequate.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
