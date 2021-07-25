@@ -13,8 +13,9 @@ rm -r -f Validation
 mkdir Validation
 
 # Disable the self-test on macOS as it causes a mysterious segmentation fault.
-# To do this, we provide a dummy OK in Validation/validation.log so return an exit code of 0 so it looks like the test passed. Make
-# sure to create a
+# To do this, we provide a dummy OK in the validation log. Note that the script
+# validate_ok_count reads the Validation/validation.log file so we need to make
+# sure to create the log file in there
 if [[ uname -eq "Darwin" ]]; then
   echo "#==================================================== " >>Validation/validation.log
   echo "dummy [OK] -- Test fails on macOS, not running it! " >>Validation/validation.log
