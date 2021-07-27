@@ -1,4 +1,4 @@
-name: Build and validate
+name: macOS self-tests
 
 on: push
 
@@ -8,8 +8,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            install-script: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ 
           - os: macos-latest
             install-script: |
               brew install make automake libtool autoconf doxygen
