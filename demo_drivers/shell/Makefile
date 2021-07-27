@@ -363,6 +363,7 @@ top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
 SUBDIRS = \
+clamped_shell \
 clamped_or_pinned_shell \
 oscillating_shell \
 plate
