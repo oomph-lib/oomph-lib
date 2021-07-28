@@ -14,9 +14,9 @@ installing `oomph-lib`:
 **2. Installation using the standard GNU build process**
 
    You may, of course, also use GNU's standard
-
-      configure && make && make install && make check
-
+   ```bash
+   configure && make && make install && make check
+   ```
    procedure, described in more detail below.
 
 ## Basic Installation
@@ -71,23 +71,21 @@ The simplest way to compile this package is:
      all sorts of other programs in order to regenerate files that came
      with the distribution.
 
-Compilers and Options
-=====================
+## Compilers and Options
 
    Some systems require unusual options for compilation or linking that
 the `configure` script does not know about.  You can give `configure`
 initial values for variables by setting them in the environment.  Using
 a Bourne-compatible shell, you can do that on the command line like
 this:
-
-     CC=c89 CFLAGS=-O2 LIBS=-lposix ./configure
-
+```bash
+CC=c89 CFLAGS=-O2 LIBS=-lposix ./configure
+```
 Or on systems that have the `env` program, you can do it like this:
-
-     env CPPFLAGS=-I/usr/local/include LDFLAGS=-s ./configure
-
-Compiling For Multiple Architectures
-====================================
+```bash
+env CPPFLAGS=-I/usr/local/include LDFLAGS=-s ./configure
+```
+## Compiling For Multiple Architectures
 
    You can compile the package for more than one kind of computer at the
 same time, by placing the object files for each architecture in their
@@ -103,8 +101,7 @@ in the source code directory.  After you have installed the package for
 one architecture, use `make distclean` before reconfiguring for another
 architecture.
 
-Installation Names
-==================
+## Installation Names
 
    By default, `make install` will install the package's files in
 `/usr/local/bin`, `/usr/local/man`, etc.  You can specify an
@@ -126,8 +123,7 @@ you can set and what kinds of files go in them.
 with an extra prefix or suffix on their names by giving `configure` the
 option `--program-prefix=PREFIX` or `--program-suffix=SUFFIX`.
 
-Optional Features
-=================
+## Optional Features
 
    Some packages pay attention to `--enable-FEATURE` options to
 `configure`, where `FEATURE` indicates an optional part of the package.
@@ -141,8 +137,7 @@ find the X include and library files automatically, but if it doesn't,
 you can use the `configure` options `--x-includes=DIR` and
 `--x-libraries=DIR` to specify their locations.
 
-Specifying the System Type
-==========================
+## Specifying the System Type
 
    There may be some features `configure` can not figure out
 automatically, but needs to determine by the type of host the package
@@ -162,8 +157,7 @@ use the `--target=TYPE` option to select the type of system they will
 produce code for and the `--build=TYPE` option to select the type of
 system on which you are compiling the package.
 
-Sharing Defaults
-================
+## Sharing Defaults
 
    If you want to set default values for `configure` scripts to share,
 you can create a site shell script called `config.site` that gives
@@ -174,8 +168,7 @@ default values for variables like `CC`, `cache_file`, and `prefix`.
 
 **WARNING:** Not all `configure` scripts look for a site script.
 
-Operation Controls
-==================
+## Operation Controls
 
    `configure` recognizes the following options to control how it
 operates.
