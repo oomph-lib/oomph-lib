@@ -26,7 +26,7 @@ complex_harmonic_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 endif
 
-junk:
+do_we_have_arpack:
 if HAVE_ARPACK_SOURCES
 	echo "have arpack"
 else
