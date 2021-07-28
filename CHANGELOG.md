@@ -1,7 +1,6 @@
 
 
-CHANGE LOG
-==========
+# Change-log
 
 See
 
@@ -13,4 +12,3 @@ the corresponding webpage
 	doc/change_log/html/index.html
 
 
-	
