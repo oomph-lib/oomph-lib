@@ -108,10 +108,10 @@ option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
-option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
+option(OOMPH_WANT_TRILINOS "Use Trilinos library" ON)
 option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 
-# Fine-grained control of build of external_srcs
+# Fine-grained control of build of external_srcs. NOTE: These don't work yet!
 option(ALREADY_HAVE_BLAS "Use BLAS library specified via absolute path" OFF)
 option(ALREADY_HAVE_LAPACK "Use LAPACK library specified via absolute path" OFF)
 option(ALREADY_HAVE_METIS "Suppress build of oomph-lib's own copy of metis" OFF)

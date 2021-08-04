@@ -8,12 +8,15 @@ message(STATUS "Entered nlohmann_json subdirectory")
 set(JSON_BuildTests OFF)
 
 # Download and populate the nlohmann JSON library
-FetchContent_Declare(
+fetchcontent_declare(
   nlohmann_json
   GIT_REPOSITORY https://github.com/nlohmann/json.git
   GIT_SHALLOW TRUE
   GIT_TAG v3.9.1)
-FetchContent_MakeAvailable(nlohmann_json)
+fetchcontent_makeavailable(nlohmann_json)
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update global variables
 
 # Update external distributions preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_NLOHMANN_JSON)

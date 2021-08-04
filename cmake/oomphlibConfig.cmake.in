@@ -51,6 +51,11 @@ endif()
 # and again unnecessarily
 if(OOMPH_HAS_TRILINOS AND NOT Trilinos_FOUND)
   find_dependency(Trilinos 11.8.1 REQUIRED)
+
+  # TrilinosConfig.cmake doesn't set Trilinos_FOUND
+  if(Trilinos_LIBRARIES)
+    set(Trilinos_FOUND TRUE)
+  endif()
 endif()
 if(OOMPH_HAS_MUMPS AND NOT MUMPS_FOUND)
   find_dependency(MUMPS 5.4.0 REQUIRED)

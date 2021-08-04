@@ -66,7 +66,7 @@ if(NOT OOMPH_HAS_MPI)
     oomph_add_executable(
       NAME TrilinosSolver_test
       SOURCES TrilinosSolver_test.cc
-      LIBRARIES oomph::poisson
+      LIBRARIES oomph::poisson Trilinos::Trilinos
       CXX_STANDARD 11)
   endif()
 endif()

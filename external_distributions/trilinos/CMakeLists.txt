@@ -7,11 +7,12 @@ include(ExternalProject)
 set(TPL_BLAS_LIBRARIES "$<TARGET_LINKER_FILE:oomph_blas>")
 set(TPL_LAPACK_LIBRARIES "$<TARGET_LINKER_FILE:oomph_lapack>")
 
-# An implicit function declaration appears in a C file in Trilinos v11.8.1,
-# which the compiler issues an error over(!). I'm hoping this will be fixed in a
-# newer version. To get around this for now, we'll just disable the warning
+# The compiler issues an error about an implicit function declaration, which
+# appears in a C file in Trilinos v11.8.1. I'm hoping this will be fixed in a
+# newer version, but to get around this for now, we'll just disable the warning
 set(TRILINOS_C_FLAGS ${CMAKE_C_FLAGS} -Wno-implicit-function-declaration)
 
+# Build flags
 set(OOMPH_TRILINOS_FLAGS
     -DCMAKE_VERBOSE_MAKEFILE:BOOL=OFF
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
@@ -48,13 +49,6 @@ set(TRILINOS_INCLUDE_DIR "${TRILINOS_INSTALL_DIR}/include")
 set(TRILINOS_LIBRARY_DIR "${TRILINOS_INSTALL_DIR}/lib")
 # file(MAKE_DIRECTORY ${TRILINOS_INCLUDE_DIR})
 
-ExternalProject_Add(
-  oomph_trilinos_project
-  INSTALL_DIR "${TRILINOS_INSTALL_DIR}"
-  URL "${CMAKE_CURRENT_LIST_DIR}/trilinos-11.8.1-Source.tar.gz"
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR> ${OOMPH_TRILINOS_FLAGS}
-  DEPENDS oomph_blas oomph_lapack)
-
 # Trilinos library names for linking
 set(TRILINOS_LIBRARIES
     amesos
@@ -67,6 +61,27 @@ set(TRILINOS_LIBRARIES
     teuchos
     triutils)
 
+# The libraries built by Trilinos with full paths and lib decorations (e.g.
+# "lib" prefix and ".a" suffix)
+set(TRILINOS_LIBRARIES_WITH_PATHS)
+foreach(TRILINOS_LIBRARY IN LISTS TRILINOS_LIBRARIES)
+  list(
+    APPEND
+    TRILINOS_LIBRARIES_WITH_PATHS
+    "${TRILINOS_LIBRARY_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}${TRILINOS_LIBRARY}${CMAKE_STATIC_LIBRARY_SUFFIX}"
+  )
+endforeach()
+
+# The recipe for building the actual library
+externalproject_add(
+  oomph_trilinos_project
+  INSTALL_DIR "${TRILINOS_INSTALL_DIR}"
+  URL "${CMAKE_CURRENT_LIST_DIR}/trilinos-11.8.1-Source.tar.gz"
+  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR> ${OOMPH_TRILINOS_FLAGS}
+  BUILD_BYPRODUCTS ${TRILINOS_LIBRARIES_WITH_PATHS}
+  DEPENDS oomph::oomph_blas oomph::oomph_lapack)
+externalproject_get_property(oomph_trilinos_project INSTALL_DIR)
+
 # Build it as a static/shared library depending on how oomph-lib is being built
 set(LIBTYPE STATIC)
 if(BUILD_SHARED_LIBS)
@@ -75,16 +90,18 @@ endif()
 
 # Make a target that combines the Trilinos libraries into one
 add_library(Trilinos::Trilinos ${LIBTYPE} IMPORTED GLOBAL)
+set_target_properties(
+  Trilinos::Trilinos
+  PROPERTIES IMPORTED_LOCATION "${TRILINOS_LIBRARIES_WITH_PATHS}"
+             INTERFACE_INCLUDE_DIRECTORIES ${TRILINOS_INCLUDE_DIR})
 target_link_libraries(Trilinos::Trilinos INTERFACE "${TRILINOS_LIBRARIES}")
-target_include_directories(
-  Trilinos::Trilinos INTERFACE $<BUILD_INTERFACE:${TRILINOS_INCLUDE_DIR}>
-                               $<INSTALL_INTERFACE:include/trilinos>)
-
-message("Trilinos::Trilinos: ${TRILINOS_INCLUDE_DIR}")
 
 # Make it clear that our aliased library depends on the ExternalProject library
 # being built to handle the race condition for linking
 add_dependencies(Trilinos::Trilinos oomph_trilinos_project)
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update global variables
 
 # Update external distributions preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_TRILINOS)
