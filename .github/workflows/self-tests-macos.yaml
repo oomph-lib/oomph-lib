@@ -4,33 +4,22 @@ on: push
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: macos-latest
-            install-script: |
-              brew install make automake libtool autoconf doxygen
-              brew reinstall gfortran
-            extra-config: |
-              --enable-suppress-cgal-build
-              --disable-shared
-
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install requirements
-      run: ${{ matrix.install-script }}
+      run: |
+        brew install make automake libtool autoconf doxygen
+        brew reinstall gfortran
     - name: Extra config
-      run: printf '%s\n' '${{ matrix.extra-config }}' >> config/configure_options/default \
+      run: printf '%s\n' '--enable-suppress-cgal-build --disable-shared' >> config/configure_options/default \
            && ( export LC_ALL=C; sort -o config/configure_options/default config/configure_options/default )
     - name: Build
       run: ./non_interactive_autogen.sh -s
     - name: Validate
       run: make check -k -s
     - name: Upload validation log file
-      if: ${{ always() }}
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ matrix.os }} validation log
+        name: macos-latest validation log
         path: ./validation.log
