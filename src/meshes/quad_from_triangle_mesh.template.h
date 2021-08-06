@@ -53,8 +53,6 @@
 #include "../generic/refineable_quad_mesh.h"
 #include "../generic/Qelements.h"
 
-using namespace std;
-using namespace oomph;
  
 
 ////////////////////////////////////////////////////////////////////

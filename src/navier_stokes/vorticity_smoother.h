@@ -37,7 +37,8 @@
 //===============================================================
 // WARNING: THIS IS WORK IN PROGRESS -- ONLY USED IN 2D SO FAR
 //===============================================================
-
+namespace oomph
+{
 
 
 
@@ -215,9 +216,6 @@ namespace VorticityRecoveryHelpers
 } // End of VorticityRecoveryHelpers
 
 
-// namespace extension
-namespace oomph
-{
  //===============================================
  /// Overloaded element that allows projection of
  /// vorticity.
@@ -1797,7 +1795,6 @@ namespace oomph
   /// derivs (for validation).
   ExactVorticityFctPt Exact_vorticity_fct_pt;
  };
-} // End of namespace oomph
 
 
 //////////////////////////////////////////////////////////////////////
@@ -2627,5 +2624,7 @@ private:
  /// Order of recovery polynomials
  unsigned Recovery_order;
 };
+
+}
 
 #endif

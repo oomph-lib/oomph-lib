@@ -106,7 +106,7 @@ mv RESLT RESLT_mixed_order_galerkin_petrov
 
 
 # Append log to main validation log
-cat validation.log >> ../../../../../../../validation.log
+cat validation.log >> ../../../validation.log
 
 cd ..
 

@@ -32,7 +32,8 @@
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
  
-
+namespace oomph
+{
 
 //==================CLASS FOR THE ADDITIONAL UNKNOWN==================
 /// We consider a singularity in the solution at the point O.
@@ -1634,7 +1635,7 @@ Vector<SingularNavierStokesSolutionElement<NavierStokesElementWithSingularity
 /// \short Vector indicating which velocity component of
 /// which node is subject to Dirichlet BC
 /// [size = number of nodes; initialised to false]
-Vector<vector<bool> > Node_is_subject_to_velocity_dirichlet_bcs;
+Vector<std::vector<bool> > Node_is_subject_to_velocity_dirichlet_bcs;
 
 /// \short Imposed values of velocity component at nodes
 /// that are subject to Dirichlet BC
@@ -1643,7 +1644,7 @@ Vector<Vector<double> > Imposed_velocity_values_at_node;
 
 /// \short Vector indicating which pressure dof is subject to Dirichlet BC
 /// [size = number of pressure dofs; initialised to false]
-vector<bool> Pressure_dof_is_subject_to_dirichlet_bc;
+std::vector<bool> Pressure_dof_is_subject_to_dirichlet_bc;
 
 /// \short Imposed value at pressure dofs
 /// that are subject to Dirichlet BC
@@ -1651,5 +1652,7 @@ vector<bool> Pressure_dof_is_subject_to_dirichlet_bc;
 Vector<double> Imposed_value_at_pressure_dof;
 
 }; // End of NavierStokesElementWithSingularity class
+
+}
 
 #endif

@@ -35,7 +35,6 @@
 #endif
 
 
-
 namespace oomph
 {
 
@@ -691,7 +690,7 @@ protected:
  unsigned Nfacet;
 
  /// Is facet on boundary?
- vector<bool> Facet_is_on_boundary;
+ std::vector<bool> Facet_is_on_boundary;
 
  /// Left boundary coordinate of i-th facet
  Vector<double> Left_boundary_coordinate;
@@ -1251,7 +1250,7 @@ public:
  
 };
 
-
 }
+
 
 #endif
