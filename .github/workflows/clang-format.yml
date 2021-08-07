@@ -18,8 +18,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # Need to checkout the repository and specify the ref in the case of non-
+    # push events for the git-auto-commit-action (at the end) to work correctly.
+    # See: https://github.com/stefanzweifel/git-auto-commit-action
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
 
     # Format all files in the src/ directory except cfortran.h, lapack_qz.h,
     # superlu.c, superlu_dist.c, which sit in the src/generic/ subdirectory.
