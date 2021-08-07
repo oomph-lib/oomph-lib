@@ -1,0 +1,326 @@
+\hypertarget{classoomph_1_1VorticitySmoother}{}\doxysection{oomph\+::Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1VorticitySmoother}\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+
+
+\mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} for vorticity in 2D.  
+
+
+
+
+{\ttfamily \#include $<$vorticity\+\_\+smoother.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1VorticitySmoother_aa848dd59d224d397c568e86922962c4b}{Vorticity\+Smoother}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1VorticitySmoother_aa6f69b6e4063b73ccfbcdc6443bce623}{recovery\+\_\+order}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Set order of recovery shape functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1VorticitySmoother_ae34a120ba636a670982ea1becc773023}{Vorticity\+Smoother}} (const \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{Vorticity\+Smoother}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a20bae100bba736485aebc233b406f62e}{operator=}} (const \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{Vorticity\+Smoother}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a58770377b1a6c0e3e0922015bae8040d}{$\sim$\+Vorticity\+Smoother}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1VorticitySmoother_aa6f69b6e4063b73ccfbcdc6443bce623}{recovery\+\_\+order}} ()
+\begin{DoxyCompactList}\small\item\em Access function for order of recovery polynomials. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a7c6a0c1333a418b70ae3e629d63f7bf6}{shape\+\_\+rec}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&psi\+\_\+r)
+\begin{DoxyCompactList}\small\item\em Recovery shape functions as functions of the global, Eulerian coordinate x of dimension dim. The recovery shape functions are complete polynomials of the order specified by Recovery\+\_\+order. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$ \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a9b758449024e0dd49d5062fcc502aed7}{integral\+\_\+rec}} (const bool \&is\+\_\+q\+\_\+mesh)
+\item 
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother_ae8e49f99dfb35e6ee5eebbce87131d44}{setup\+\_\+patches}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ E\+L\+E\+M\+E\+NT $\ast$ $>$ $\ast$ $>$ \&adjacent\+\_\+elements\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&vertex\+\_\+node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+elements\+\_\+pt\mbox{[}nod\+\_\+pt\mbox{]} contains the pointer to the vector that contains the pointers to the elements that the node is part of. Also returns a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vertex nodes for use in get\+\_\+element\+\_\+errors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother_adc724f10b642aa3edc2d02fa8e35787d}{get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ E\+L\+E\+M\+E\+NT $\ast$ $>$ \&patch\+\_\+el\+\_\+pt, const unsigned \&num\+\_\+recovery\+\_\+terms, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\&recovered\+\_\+vorticity\+\_\+coefficient\+\_\+pt, unsigned \&n\+\_\+deriv)
+\begin{DoxyCompactList}\small\item\em Given the vector of elements that make up a patch, compute the vector of recovered vorticity coefficients and return a pointer to it. n\+\_\+deriv indicates which derivative of the vorticity is supposed to be smoothed\+: 0\+: zeroth (i.\+e. the vorticity itself) 1\+: d/dx; 2\+: d/dy; 3\+: d$^\wedge$2/dx$^\wedge$2; 4\+: d$^\wedge$2/dxdy 5\+: d$^\wedge$2/dy$^\wedge$2 6\+: d$^\wedge$3/dx$^\wedge$3, 7\+: d$^\wedge$3/dx$^\wedge$2dy, 8\+: d$^\wedge$3/dxdy$^\wedge$2, 9\+: d$^\wedge$3/dy$^\wedge$3, 10\+: du/dx, 11\+: du/dy, 12\+: dv/dx, 13\+: dv/dy. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a203602aa127f5c89480304a2f10426f1}{nrecovery\+\_\+order}} () const
+\begin{DoxyCompactList}\small\item\em Get the recovery order. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a4d708f1505080ea241cbb6bc71e2b01a}{recover\+\_\+vorticity}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Recover vorticity from patches. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a43d407cf76048465189095a82c4f1e32}{recover\+\_\+vorticity}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Recover vorticity from patches -- output intermediate steps to directory specified by \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmoother_acda3329b3b841aa78abf756222a5ccbb}{Recovery\+\_\+order}}
+\begin{DoxyCompactList}\small\item\em Order of recovery polynomials. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+\mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} for vorticity in 2D. 
+
+Definition at line 1809 of file vorticity\+\_\+smoother.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_aa848dd59d224d397c568e86922962c4b}\label{classoomph_1_1VorticitySmoother_aa848dd59d224d397c568e86922962c4b}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!VorticitySmoother@{VorticitySmoother}}
+\index{VorticitySmoother@{VorticitySmoother}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{VorticitySmoother()}{VorticitySmoother()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1VorticitySmoother}{Vorticity\+Smoother}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{recovery\+\_\+order }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Set order of recovery shape functions. 
+
+
+
+Definition at line 1814 of file vorticity\+\_\+smoother.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_ae34a120ba636a670982ea1becc773023}\label{classoomph_1_1VorticitySmoother_ae34a120ba636a670982ea1becc773023}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!VorticitySmoother@{VorticitySmoother}}
+\index{VorticitySmoother@{VorticitySmoother}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{VorticitySmoother()}{VorticitySmoother()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1VorticitySmoother}{Vorticity\+Smoother}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 1819 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a58770377b1a6c0e3e0922015bae8040d}\label{classoomph_1_1VorticitySmoother_a58770377b1a6c0e3e0922015bae8040d}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!````~VorticitySmoother@{$\sim$VorticitySmoother}}
+\index{````~VorticitySmoother@{$\sim$VorticitySmoother}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$VorticitySmoother()}{~VorticitySmoother()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1VorticitySmoother}{Vorticity\+Smoother}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line 1831 of file vorticity\+\_\+smoother.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_adc724f10b642aa3edc2d02fa8e35787d}\label{classoomph_1_1VorticitySmoother_adc724f10b642aa3edc2d02fa8e35787d}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!get\_recovered\_vorticity\_in\_patch@{get\_recovered\_vorticity\_in\_patch}}
+\index{get\_recovered\_vorticity\_in\_patch@{get\_recovered\_vorticity\_in\_patch}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_recovered\_vorticity\_in\_patch()}{get\_recovered\_vorticity\_in\_patch()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ E\+L\+E\+M\+E\+NT $\ast$ $>$ \&}]{patch\+\_\+el\+\_\+pt,  }\item[{const unsigned \&}]{num\+\_\+recovery\+\_\+terms,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\&}]{recovered\+\_\+vorticity\+\_\+coefficient\+\_\+pt,  }\item[{unsigned \&}]{n\+\_\+deriv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Given the vector of elements that make up a patch, compute the vector of recovered vorticity coefficients and return a pointer to it. n\+\_\+deriv indicates which derivative of the vorticity is supposed to be smoothed\+: 0\+: zeroth (i.\+e. the vorticity itself) 1\+: d/dx; 2\+: d/dy; 3\+: d$^\wedge$2/dx$^\wedge$2; 4\+: d$^\wedge$2/dxdy 5\+: d$^\wedge$2/dy$^\wedge$2 6\+: d$^\wedge$3/dx$^\wedge$3, 7\+: d$^\wedge$3/dx$^\wedge$2dy, 8\+: d$^\wedge$3/dxdy$^\wedge$2, 9\+: d$^\wedge$3/dy$^\wedge$3, 10\+: du/dx, 11\+: du/dy, 12\+: dv/dx, 13\+: dv/dy. 
+
+
+
+Definition at line 2089 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References e, i, oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::integral\+\_\+rec(), oomph\+::\+Integral\+::knot(), oomph\+::\+Dense\+Double\+Matrix\+::lubksub(), oomph\+::\+Dense\+Double\+Matrix\+::ludecompose(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, s, oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+rec(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+
+
+
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::recover\+\_\+vorticity().
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a9b758449024e0dd49d5062fcc502aed7}\label{classoomph_1_1VorticitySmoother_a9b758449024e0dd49d5062fcc502aed7}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!integral\_rec@{integral\_rec}}
+\index{integral\_rec@{integral\_rec}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{integral\_rec()}{integral\_rec()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Integral}{Integral}}$\ast$ \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::integral\+\_\+rec (\begin{DoxyParamCaption}\item[{const bool \&}]{is\+\_\+q\+\_\+mesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Integation scheme associated with the recovery shape functions must be of sufficiently high order to integrate the mass matrix associated with the recovery shape functions. The argument is the dimension of the elements. The integration is performed locally over the elements, so the integration scheme does depend on the geometry of the element. The type of element is specified by the boolean which is true if elements in the patch are Q\+Elements and false if they are T\+Elements (will need change if we ever have other element types) Find order of recovery shape functions
+
+Definition at line 1906 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::recovery\+\_\+order().
+
+
+
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch().
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a203602aa127f5c89480304a2f10426f1}\label{classoomph_1_1VorticitySmoother_a203602aa127f5c89480304a2f10426f1}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!nrecovery\_order@{nrecovery\_order}}
+\index{nrecovery\_order@{nrecovery\_order}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the recovery order. 
+
+
+
+Definition at line 2363 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Recovery\+\_\+order.
+
+
+
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::recover\+\_\+vorticity().
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a20bae100bba736485aebc233b406f62e}\label{classoomph_1_1VorticitySmoother_a20bae100bba736485aebc233b406f62e}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 1825 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a4d708f1505080ea241cbb6bc71e2b01a}\label{classoomph_1_1VorticitySmoother_a4d708f1505080ea241cbb6bc71e2b01a}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!recover\_vorticity@{recover\_vorticity}}
+\index{recover\_vorticity@{recover\_vorticity}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{recover\_vorticity()}{recover\_vorticity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::recover\+\_\+vorticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Recover vorticity from patches. 
+
+
+
+Definition at line 2403 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Doc\+Info\+::disable\+\_\+doc().
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a43d407cf76048465189095a82c4f1e32}\label{classoomph_1_1VorticitySmoother_a43d407cf76048465189095a82c4f1e32}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!recover\_vorticity@{recover\_vorticity}}
+\index{recover\_vorticity@{recover\_vorticity}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{recover\_vorticity()}{recover\_vorticity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::recover\+\_\+vorticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Recover vorticity from patches -- output intermediate steps to directory specified by \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object. 
+
+
+
+Definition at line 2417 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch(), i, oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nrecovery\+\_\+order(), oomph\+::oomph\+\_\+info, s, oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+patches(), oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+rec(), and oomph\+::\+Timing\+Helpers\+::timer().
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_aa6f69b6e4063b73ccfbcdc6443bce623}\label{classoomph_1_1VorticitySmoother_aa6f69b6e4063b73ccfbcdc6443bce623}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!recovery\_order@{recovery\_order}}
+\index{recovery\_order@{recovery\_order}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{recovery\_order()}{recovery\_order()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned\& \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::recovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for order of recovery polynomials. 
+
+
+
+Definition at line 1834 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Recovery\+\_\+order.
+
+
+
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::integral\+\_\+rec(), and oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+rec().
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_ae8e49f99dfb35e6ee5eebbce87131d44}\label{classoomph_1_1VorticitySmoother_ae8e49f99dfb35e6ee5eebbce87131d44}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!setup\_patches@{setup\_patches}}
+\index{setup\_patches@{setup\_patches}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_patches()}{setup\_patches()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::setup\+\_\+patches (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ E\+L\+E\+M\+E\+NT $\ast$ $>$ $\ast$ $>$ \&}]{adjacent\+\_\+elements\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{vertex\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+elements\+\_\+pt\mbox{[}nod\+\_\+pt\mbox{]} contains the pointer to the vector that contains the pointers to the elements that the node is part of. Also returns a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vertex nodes for use in get\+\_\+element\+\_\+errors. 
+
+
+
+Definition at line 1979 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References e, oomph\+::\+Mesh\+::element\+\_\+pt(), n, oomph\+::\+Mesh\+::nelement(), oomph\+::oomph\+\_\+info, and oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Recovery\+\_\+order.
+
+
+
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::recover\+\_\+vorticity().
+
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a7c6a0c1333a418b70ae3e629d63f7bf6}\label{classoomph_1_1VorticitySmoother_a7c6a0c1333a418b70ae3e629d63f7bf6}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!shape\_rec@{shape\_rec}}
+\index{shape\_rec@{shape\_rec}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_rec()}{shape\_rec()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+rec (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{psi\+\_\+r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Recovery shape functions as functions of the global, Eulerian coordinate x of dimension dim. The recovery shape functions are complete polynomials of the order specified by Recovery\+\_\+order. 
+
+
+
+Definition at line 1843 of file vorticity\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::recovery\+\_\+order().
+
+
+
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch(), and oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::recover\+\_\+vorticity().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_acda3329b3b841aa78abf756222a5ccbb}\label{classoomph_1_1VorticitySmoother_acda3329b3b841aa78abf756222a5ccbb}} 
+\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!Recovery\_order@{Recovery\_order}}
+\index{Recovery\_order@{Recovery\_order}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Recovery\_order}{Recovery\_order}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Recovery\+\_\+order\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Order of recovery polynomials. 
+
+
+
+Definition at line 2625 of file vorticity\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nrecovery\+\_\+order(), oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::recovery\+\_\+order(), and oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+patches().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{vorticity__smoother_8h}{vorticity\+\_\+smoother.\+h}}\end{DoxyCompactItemize}

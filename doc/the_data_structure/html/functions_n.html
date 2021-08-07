@@ -488,8 +488,8 @@ $(function() {
 , <a class="el" href="classoomph_1_1RefineableSolidTractionElement.html#a9119a5b387cf3e5c3e3dee4dcabb08a3">oomph::RefineableSolidTractionElement&lt; ELEMENT &gt;</a>
 , <a class="el" href="classoomph_1_1RefineableTimeHarmonicLinearElasticityEquations.html#a00935c8f08aaa87a054a55b901d47dad">oomph::RefineableTimeHarmonicLinearElasticityEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1SpectralPeriodicOrbitElement.html#a7a1e61b3aa06a7402448215c6b99dcc3">oomph::SpectralPeriodicOrbitElement&lt; NNODE_1D &gt;</a>
+, <a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#aaa14d720c414b6c90b6067270253310f">oomph::VorticityRecoveryHelpers::RecoveryHelper</a>
 , <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a15559517f708dbdfe51e2e94f5bca3dc">oomph::VorticitySmootherElement&lt; ELEMENT &gt;</a>
-, <a class="el" href="classVorticityRecoveryHelpers_1_1RecoveryHelper.html#a552a9daee2699b515a3b81113f800b54">VorticityRecoveryHelpers::RecoveryHelper</a>
 </li>
 <li>ncoordinates_on_boundary()
 : <a class="el" href="classoomph_1_1BoundaryNode.html#a1fdf098d397c0b677566f353efae23a7">oomph::BoundaryNode&lt; NODE_TYPE &gt;</a>
@@ -1508,8 +1508,8 @@ $(function() {
 , <a class="el" href="classoomph_1_1TRaviartThomasDarcyElement.html#a73c28d7e3789db421c5c5eccc3e25581">oomph::TRaviartThomasDarcyElement&lt; ORDER &gt;</a>
 </li>
 <li>npartial_derivative()
-: <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a24820e11328d5c4a87eb6fc8399e2a54">oomph::VorticitySmootherElement&lt; ELEMENT &gt;</a>
-, <a class="el" href="classVorticityRecoveryHelpers_1_1RecoveryHelper.html#ae89029d89e2497fb767027bd44a6fa68">VorticityRecoveryHelpers::RecoveryHelper</a>
+: <a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#abddaf75308a06b853355a2f0fd7acd17">oomph::VorticityRecoveryHelpers::RecoveryHelper</a>
+, <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a24820e11328d5c4a87eb6fc8399e2a54">oomph::VorticitySmootherElement&lt; ELEMENT &gt;</a>
 </li>
 <li>nplot_points()
 : <a class="el" href="classoomph_1_1FiniteElement.html#a8ed563c7ff0cfd8bafdbb0132b388106">oomph::FiniteElement</a>
@@ -1784,7 +1784,7 @@ $(function() {
 , <a class="el" href="classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement.html#a6b8053ed436ccb21829f78b9df39ea23">oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement&lt; NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1TTimeHarmonicLinearElasticityElement.html#a15e0965ae89f4c6523fe61784aada176">oomph::TTimeHarmonicLinearElasticityElement&lt; DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1TUnsteadyHeatElement.html#a5216b9570896508b5fd6063ca46223a5">oomph::TUnsteadyHeatElement&lt; DIM, NNODE_1D &gt;</a>
-, <a class="el" href="classVorticitySmoother.html#afd541244932a3f42dd4c59c2a8430058">VorticitySmoother&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1VorticitySmoother.html#a203602aa127f5c89480304a2f10426f1">oomph::VorticitySmoother&lt; ELEMENT &gt;</a>
 </li>
 <li>nrecovery_terms()
 : <a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a1782984fa64738f9a8e7ca40d585597a">oomph::Z2ErrorEstimator</a>
@@ -2170,8 +2170,8 @@ $(function() {
 : <a class="el" href="classoomph_1_1DocInfo.html#acb66c97dad89c6e9fb6334e9ac530093">oomph::DocInfo</a>
 </li>
 <li>Number_of_values_per_field
-: <a class="el" href="classoomph_1_1VorticitySmootherElement.html#ab25f6ce614cbcca04d1dc8e72baf80e6">oomph::VorticitySmootherElement&lt; ELEMENT &gt;</a>
-, <a class="el" href="classVorticityRecoveryHelpers_1_1RecoveryHelper.html#a8c3f392e7798627cc08eeebdfa535ff0">VorticityRecoveryHelpers::RecoveryHelper</a>
+: <a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a24925c7c5b573a3e9ced37ace48deb5b">oomph::VorticityRecoveryHelpers::RecoveryHelper</a>
+, <a class="el" href="classoomph_1_1VorticitySmootherElement.html#ab25f6ce614cbcca04d1dc8e72baf80e6">oomph::VorticitySmootherElement&lt; ELEMENT &gt;</a>
 </li>
 <li>numberofcorners
 : <a class="el" href="structoomph_1_1TriangulateIO.html#adc650f3a1adb293757fe9877c68bdc67">oomph::TriangulateIO</a>
@@ -2483,16 +2483,14 @@ $(function() {
 <li>Ny
 : <a class="el" href="classoomph_1_1CollapsibleChannelMesh.html#afa8d1dceef1cafeb166794d9275a30a3">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;</a>
 , <a class="el" href="classoomph_1_1FSIDrivenCavityMesh.html#af80a5662c2f61ebe49caba4ab08886b9">oomph::FSIDrivenCavityMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>
 </li>
 <li>ny()
 : <a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1SimpleCubicMesh.html#a16979ec3b0e88fb37730415190021c1c">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
 </li>
 <li>Ny
-: <a class="el" href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>
-, <a class="el" href="classoomph_1_1SimpleCubicMesh.html#a084445d7cbea1c3d1d67739934bbd6ec">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
-</li>
-<li>ny()
-: <a class="el" href="classoomph_1_1SimpleCubicMesh.html#a16979ec3b0e88fb37730415190021c1c">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
+: <a class="el" href="classoomph_1_1SimpleCubicMesh.html#a084445d7cbea1c3d1d67739934bbd6ec">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
 </li>
 <li>NY
 : <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html#a6db96125790b46858fb00eef46bf7201">oomph::SimpleRectangularQuadMesh&lt; ELEMENT &gt;</a>
@@ -2514,19 +2512,19 @@ $(function() {
 : <a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a1596a538b4263b42d20f9c098c5f2752">oomph::ChannelWithLeafletDomain</a>
 , <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a48a69edc318571675eed16c9154235e3">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;</a>
 </li>
+<li>Nz
+: <a class="el" href="classoomph_1_1ExtrudedCubeMeshFromQuadMesh.html#a7ed68dab30f3e19371a1729d82c3e83e">oomph::ExtrudedCubeMeshFromQuadMesh&lt; ELEMENT &gt;</a>
+</li>
 <li>nz()
 : <a class="el" href="classoomph_1_1ExtrudedCubeMeshFromQuadMesh.html#a9b41f4d8f41711e5e0d68abd1ef42f7a">oomph::ExtrudedCubeMeshFromQuadMesh&lt; ELEMENT &gt;</a>
 </li>
 <li>Nz
-: <a class="el" href="classoomph_1_1ExtrudedCubeMeshFromQuadMesh.html#a7ed68dab30f3e19371a1729d82c3e83e">oomph::ExtrudedCubeMeshFromQuadMesh&lt; ELEMENT &gt;</a>
-, <a class="el" href="classoomph_1_1QuarterPipeDomain.html#aab1bf3900c3537c44942e3fee0c3d24e">oomph::QuarterPipeDomain</a>
+: <a class="el" href="classoomph_1_1QuarterPipeDomain.html#aab1bf3900c3537c44942e3fee0c3d24e">oomph::QuarterPipeDomain</a>
 , <a class="el" href="classoomph_1_1QuarterPipeMesh.html#a43bdaa4d81e936615332c5d43e347413">oomph::QuarterPipeMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1SimpleCubicMesh.html#a370e4597208fa51bca60750ae1e5acd4">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
 </li>
 <li>nz()
 : <a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad78725440e4e87598fd9339653b28e61">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
-</li>
-<li>Nz
-: <a class="el" href="classoomph_1_1SimpleCubicMesh.html#a370e4597208fa51bca60750ae1e5acd4">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -2557,7 +2555,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 6 2021 14:52:38
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 6 2021 23:42:08
         </div>
       </div>
     </footer>

@@ -143,16 +143,16 @@ namespace oomph
   // e_rr
   strain(0,0)=durdr;
   // e_rz
-  strain(0,1)=durdz+duzdr;
-  strain(1,0)=durdz+duzdr;
+  strain(0,1)=0.5*(durdz+duzdr);
+  strain(1,0)=0.5*(durdz+duzdr);
   // e_rphi
-  strain(0,2)=duthdr-uth/r;
-  strain(2,0)=duthdr-uth/r;
+  strain(0,2)=0.5*(duthdr-uth/r);
+  strain(2,0)=0.5*(duthdr-uth/r);
   // e_zz
   strain(1,1)=duzdz;
   // e_zphi
-  strain(1,2)=duthdz;
-  strain(2,1)=duthdz;
+  strain(1,2)=0.5*duthdz;
+  strain(2,1)=0.5*duthdz;
   // e_phiphi
   strain(2,2)=ur/r;
   

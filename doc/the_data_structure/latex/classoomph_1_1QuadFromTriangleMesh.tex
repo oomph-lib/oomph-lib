@@ -46,7 +46,7 @@ class oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 Quad mesh built on top of triangle scaffold mesh coming ~\newline
  from the triangle mesh generator Triangle. \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ http\+://www.\+cs.\+cmu.\+edu/$\sim$quake/triangle.\+html}} 
 
-Definition at line 74 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 72 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -64,7 +64,11 @@ Empty constructor.
 
 
 
-Definition at line 81 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 79 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries.
 
 \mbox{\Hypertarget{classoomph_1_1QuadFromTriangleMesh_ab6fd5b49a1c1a4b29fc000953b732b98}\label{classoomph_1_1QuadFromTriangleMesh_ab6fd5b49a1c1a4b29fc000953b732b98}} 
 \index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!QuadFromTriangleMesh@{QuadFromTriangleMesh}}
@@ -79,7 +83,11 @@ Constructor with the input files.
 
 
 
-Definition at line 94 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 92 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries, oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+\_\+stepper\+\_\+pt, and oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Use\+\_\+attributes.
 
 \mbox{\Hypertarget{classoomph_1_1QuadFromTriangleMesh_a78f9c12882d4554e4484255640b6bf51}\label{classoomph_1_1QuadFromTriangleMesh_a78f9c12882d4554e4484255640b6bf51}} 
 \index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!QuadFromTriangleMesh@{QuadFromTriangleMesh}}
@@ -94,11 +102,11 @@ Build mesh, based on the specifications on \mbox{\hyperlink{classoomph_1_1Triang
 
 
 
-Definition at line 140 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 138 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 
 
-References oomph\+::\+Triangle\+Mesh\+Parameters\+::communicator\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Parameters\+::element\+\_\+area(), oomph\+::\+Triangle\+Mesh\+Parameters\+::extra\+\_\+holes\+\_\+coordinates(), i, oomph\+::\+Triangle\+Mesh\+Parameters\+::internal\+\_\+closed\+\_\+curve\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Parameters\+::internal\+\_\+open\+\_\+curves\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries\+\_\+allowed(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+boundary\+\_\+refinement\+\_\+allowed(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+internal\+\_\+boundary\+\_\+refinement\+\_\+allowed(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+use\+\_\+attributes(), oomph\+::\+Triangle\+Mesh\+Parameters\+::outer\+\_\+boundary\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Parameters\+::regions\+\_\+coordinates(), and oomph\+::\+Triangle\+Mesh\+Parameters\+::target\+\_\+area\+\_\+for\+\_\+region().
+References oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::closed\+\_\+curve\+\_\+to\+\_\+polygon\+\_\+helper(), oomph\+::\+Triangle\+Mesh\+Parameters\+::communicator\+\_\+pt(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::create\+\_\+open\+\_\+curve\+\_\+with\+\_\+polyline\+\_\+helper(), oomph\+::\+Triangle\+Mesh\+Parameters\+::element\+\_\+area(), oomph\+::\+Triangle\+Mesh\+Parameters\+::extra\+\_\+holes\+\_\+coordinates(), oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor(), i, oomph\+::\+Triangle\+Mesh\+Parameters\+::internal\+\_\+closed\+\_\+curve\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Parameters\+::internal\+\_\+open\+\_\+curves\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries\+\_\+allowed(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+boundary\+\_\+refinement\+\_\+allowed(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+internal\+\_\+boundary\+\_\+refinement\+\_\+allowed(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Triangle\+Mesh\+Parameters\+::is\+\_\+use\+\_\+attributes(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Triangle\+Mesh\+Parameters\+::outer\+\_\+boundary\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Parameters\+::regions\+\_\+coordinates(), oomph\+::\+Mesh\+::set\+\_\+communicator\+\_\+pt(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::set\+\_\+geom\+\_\+objects\+\_\+and\+\_\+coordinate\+\_\+limits\+\_\+for\+\_\+close\+\_\+curve(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::set\+\_\+geom\+\_\+objects\+\_\+and\+\_\+coordinate\+\_\+limits\+\_\+for\+\_\+open\+\_\+curve(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Triangle\+Mesh\+Parameters\+::target\+\_\+area\+\_\+for\+\_\+region(), and oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+\_\+stepper\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1QuadFromTriangleMesh_adc45cf7389f505a2f05d477474b2dcbb}\label{classoomph_1_1QuadFromTriangleMesh_adc45cf7389f505a2f05d477474b2dcbb}} 
 \index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!QuadFromTriangleMesh@{QuadFromTriangleMesh}}
@@ -113,7 +121,7 @@ Broken copy constructor.
 
 
 
-Definition at line 510 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 508 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -132,7 +140,11 @@ Empty destructor.
 
 
 
-Definition at line 523 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 521 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Free\+\_\+curve\+\_\+section\+\_\+pt, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Free\+\_\+open\+\_\+curve\+\_\+pt, and oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Free\+\_\+polygon\+\_\+pt.
 
 
 
@@ -176,6 +188,10 @@ Definition at line 73 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.
 
 References e, oomph\+::\+Triangle\+Scaffold\+Mesh\+::edge\+\_\+boundary(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nelement(), Node, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), s, and oomph\+::\+Node\+::x().
 
+
+
+Referenced by oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor(), and oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quad\+From\+Triangle\+Mesh().
+
 \mbox{\Hypertarget{classoomph_1_1QuadFromTriangleMesh_acc09586ae510ea1a6bd021bdc0424cc1}\label{classoomph_1_1QuadFromTriangleMesh_acc09586ae510ea1a6bd021bdc0424cc1}} 
 \index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!generic\_constructor@{generic\_constructor}}
 \index{generic\_constructor@{generic\_constructor}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
@@ -189,11 +205,15 @@ A general-\/purpose construction function that builds the mesh once the differen
 
 
 
-Definition at line 366 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 364 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 
 
-References oomph\+::\+Triangle\+Helper\+::clear\+\_\+triangulateio(), e, oomph\+::\+Triangle\+Helper\+::initialise\+\_\+triangulateio(), and oomph\+::triangulate().
+References oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::build\+\_\+triangulateio(), oomph\+::\+Triangle\+Helper\+::clear\+\_\+triangulateio(), e, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Extra\+\_\+holes\+\_\+coordinates, oomph\+::\+Triangle\+Helper\+::initialise\+\_\+triangulateio(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Internal\+\_\+open\+\_\+curve\+\_\+pt, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Internal\+\_\+polygon\+\_\+pt, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::is\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries\+\_\+allowed(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Outer\+\_\+boundary\+\_\+pt, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Regions\+\_\+coordinates, oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+\_\+stepper\+\_\+pt, oomph\+::triangulate(), and oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Use\+\_\+attributes.
+
+
+
+Referenced by oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quad\+From\+Triangle\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1QuadFromTriangleMesh_a873e7ed187ae267ad985e61e71e3b90c}\label{classoomph_1_1QuadFromTriangleMesh_a873e7ed187ae267ad985e61e71e3b90c}} 
 \index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!operator=@{operator=}}
@@ -208,7 +228,7 @@ Broken assignment operator.
 
 
 
-Definition at line 516 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 514 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -230,7 +250,11 @@ Timestepper used to build elements.
 
 
 
-Definition at line 560 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 558 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor(), and oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quad\+From\+Triangle\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1QuadFromTriangleMesh_ac654f77f031a4126e6e2707d1fa7dad1}\label{classoomph_1_1QuadFromTriangleMesh_ac654f77f031a4126e6e2707d1fa7dad1}} 
 \index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!Use\_attributes@{Use\_attributes}}
@@ -241,7 +265,11 @@ bool \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\
 
 Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) 
 
-Definition at line 564 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 562 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor(), and oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quad\+From\+Triangle\+Mesh().
 
 
 

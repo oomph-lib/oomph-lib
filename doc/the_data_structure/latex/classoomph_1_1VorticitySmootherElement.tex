@@ -33,15 +33,15 @@ unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a752d6be1a14a39
 unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ab4a59ee60f1d6591594fe9d7169f75bc}{get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivative}} () const
 \begin{DoxyCompactList}\small\item\em The maximum order of velocity derivative that can be recovered. This is set in the constructor and should N\+OT be changed during the running of the code. As such, a set...() function is not provided. D\+R\+A\+IG\+: Leave get\+\_\+ prefix? \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_aad7f79c7cf34ceeb090153881b070f1f}{get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}} () const
-\begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the vorticity recovery. Note, this value can only be set through the namespace \mbox{\hyperlink{namespaceVorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. D\+R\+A\+IG\+: Leave get\+\_\+ prefix? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the vorticity recovery. Note, this value can only be set through the namespace \mbox{\hyperlink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. D\+R\+A\+IG\+: Leave get\+\_\+ prefix? \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a019761da9b0b46ef3c4b6197b93fbfbc}{get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}} () const
-\begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the velocity recovery. Note, this value can only be set through the namespace \mbox{\hyperlink{namespaceVorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. D\+R\+A\+IG\+: Leave get\+\_\+ prefix? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the velocity recovery. Note, this value can only be set through the namespace \mbox{\hyperlink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. D\+R\+A\+IG\+: Leave get\+\_\+ prefix? \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a7a433092a73a9fed26330e247a415414}{nvorticity\+\_\+derivatives\+\_\+to\+\_\+recover}} () const
 \begin{DoxyCompactList}\small\item\em The number of terms calculated in the vorticity recovery. Also includes the zeroth derivative, i.\+e. the vorticity itself. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_abfa785cee70e98c2e1890a1d2053abba}{nvelocity\+\_\+derivatives\+\_\+to\+\_\+recover}} () const
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a24820e11328d5c4a87eb6fc8399e2a54}{npartial\+\_\+derivative}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
-\begin{DoxyCompactList}\small\item\em Call the function written in \mbox{\hyperlink{namespaceVorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Call the function written in \mbox{\hyperlink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}{Exact\+Vorticity\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_acf41507313bc7171bdaf0f579ab25dd7}{exact\+\_\+vorticity\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to function that specifies exact vorticity and derivatives (for validation). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}{Exact\+Vorticity\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_af554c9bc41710d8b042a51c19383351e}{exact\+\_\+vorticity\+\_\+fct\+\_\+pt}} () const
@@ -117,7 +117,7 @@ class oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 Overloaded element that allows projection of vorticity. 
 
-Definition at line 226 of file vorticity\+\_\+smoother.\+h.
+Definition at line 224 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -131,7 +131,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oom
 
 Typedef for pointer to function that specifies the exact vorticity and derivatives (for validation) 
 
-Definition at line 270 of file vorticity\+\_\+smoother.\+h.
+Definition at line 268 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -149,11 +149,11 @@ Constructor.
 
 
 
-Definition at line 231 of file vorticity\+\_\+smoother.\+h.
+Definition at line 229 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Exact\+\_\+vorticity\+\_\+fct\+\_\+pt, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivatives, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivatives, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+N\+\_\+dim, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field, Vorticity\+Recovery\+Helpers\+::\+Recovery\+\_\+helper, and oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index.
+References oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Exact\+\_\+vorticity\+\_\+fct\+\_\+pt, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivatives, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivatives, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+N\+\_\+dim, oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field, oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+\_\+helper, and oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index.
 
 
 
@@ -171,7 +171,7 @@ Helper function to create a container for the vorticity and its partial derivati
 
 
 
-Definition at line 278 of file vorticity\+\_\+smoother.\+h.
+Definition at line 276 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -194,7 +194,7 @@ Access function\+: Pointer to function that specifies exact vorticity and deriva
 
 
 
-Definition at line 701 of file vorticity\+\_\+smoother.\+h.
+Definition at line 699 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -213,7 +213,7 @@ Access function\+: Pointer to function that specifies exact vorticity and deriva
 
 
 
-Definition at line 709 of file vorticity\+\_\+smoother.\+h.
+Definition at line 707 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -232,7 +232,7 @@ Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Not
 
 
 
-Definition at line 755 of file vorticity\+\_\+smoother.\+h.
+Definition at line 753 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -251,7 +251,7 @@ Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Not
 
 
 
-Definition at line 742 of file vorticity\+\_\+smoother.\+h.
+Definition at line 740 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -270,7 +270,7 @@ The maximum order of velocity derivative that can be recovered. This is set in t
 
 
 
-Definition at line 630 of file vorticity\+\_\+smoother.\+h.
+Definition at line 628 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -289,7 +289,7 @@ The maximum order of vorticity derivative that can be recovered. This is set in 
 
 
 
-Definition at line 620 of file vorticity\+\_\+smoother.\+h.
+Definition at line 618 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -304,11 +304,11 @@ int \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticit
 
 
 
-The maximum order of derivatives calculated in the velocity recovery. Note, this value can only be set through the namespace \mbox{\hyperlink{namespaceVorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. D\+R\+A\+IG\+: Leave get\+\_\+ prefix? 
+The maximum order of derivatives calculated in the velocity recovery. Note, this value can only be set through the namespace \mbox{\hyperlink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. D\+R\+A\+IG\+: Leave get\+\_\+ prefix? 
 
 
 
-Definition at line 650 of file vorticity\+\_\+smoother.\+h.
+Definition at line 648 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -323,11 +323,11 @@ int \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticit
 
 
 
-The maximum order of derivatives calculated in the vorticity recovery. Note, this value can only be set through the namespace \mbox{\hyperlink{namespaceVorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. D\+R\+A\+IG\+: Leave get\+\_\+ prefix? 
+The maximum order of derivatives calculated in the vorticity recovery. Note, this value can only be set through the namespace \mbox{\hyperlink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. D\+R\+A\+IG\+: Leave get\+\_\+ prefix? 
 
 
 
-Definition at line 640 of file vorticity\+\_\+smoother.\+h.
+Definition at line 638 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -346,7 +346,7 @@ Get raw derivative of velocity.
 
 
 
-Definition at line 1262 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1260 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -365,7 +365,7 @@ Get raw derivative of velocity.
 
 
 
-Definition at line 1228 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1226 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -384,7 +384,7 @@ Get raw derivative of smoothed vorticity.
 
 
 
-Definition at line 1355 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1353 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -403,7 +403,7 @@ Get raw derivative of smoothed vorticity.
 
 
 
-Definition at line 1323 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1321 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -418,7 +418,7 @@ void \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vortici
 
 Get raw derivative of smoothed derivative vorticity \mbox{[}0\mbox{]}\+: d$^\wedge$2/dx$^\wedge$2, \mbox{[}1\mbox{]}\+: d$^\wedge$2/dxdy, \mbox{[}2\mbox{]}\+: d$^\wedge$2/dy$^\wedge$2 
 
-Definition at line 1438 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1436 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -437,7 +437,7 @@ Get raw derivative of smoothed derivative vorticity.
 
 
 
-Definition at line 1400 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1398 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -452,7 +452,7 @@ void \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vortici
 
 Get raw derivative of smoothed derivative vorticity \mbox{[}0\mbox{]}\+: d$^\wedge$3/dx$^\wedge$3, \mbox{[}1\mbox{]}\+: d$^\wedge$3/dx$^\wedge$2dy, \mbox{[}2\mbox{]}\+: d$^\wedge$3/dxdy$^\wedge$2, \mbox{[}3\mbox{]}\+: d$^\wedge$3/dy$^\wedge$3, 
 
-Definition at line 1537 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1535 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -467,7 +467,7 @@ void \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vortici
 
 Get raw derivative of smoothed derivative vorticity \mbox{[}0\mbox{]}\+: d$^\wedge$3/dx$^\wedge$3, \mbox{[}1\mbox{]}\+: d$^\wedge$3/dx$^\wedge$2dy, \mbox{[}2\mbox{]}\+: d$^\wedge$3/dxdy$^\wedge$2, \mbox{[}3\mbox{]}\+: d$^\wedge$3/dy$^\wedge$3 
 
-Definition at line 1495 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1493 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -486,7 +486,7 @@ Number of continuously interpolated values\+:
 
 
 
-Definition at line 732 of file vorticity\+\_\+smoother.\+h.
+Definition at line 730 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -505,15 +505,15 @@ unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vor
 
 
 
-Call the function written in \mbox{\hyperlink{namespaceVorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. 
+Call the function written in \mbox{\hyperlink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}}. 
 
 
 
-Definition at line 693 of file vorticity\+\_\+smoother.\+h.
+Definition at line 691 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References n, Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::npartial\+\_\+derivative(), and Vorticity\+Recovery\+Helpers\+::\+Recovery\+\_\+helper.
+References n, oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::npartial\+\_\+derivative(), and oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+\_\+helper.
 
 
 
@@ -532,7 +532,7 @@ Number of scalars/fields output by this element. Re-\/implements broken virtual 
 
 
 
-Definition at line 974 of file vorticity\+\_\+smoother.\+h.
+Definition at line 972 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -551,7 +551,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vor
 
 The number of derivatives calculated in the velocity recovery. This does N\+OT include the zeroth derivatives as they are not \char`\"{}recovered\char`\"{} 
 
-Definition at line 676 of file vorticity\+\_\+smoother.\+h.
+Definition at line 674 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -574,7 +574,7 @@ The number of terms calculated in the vorticity recovery. Also includes the zero
 
 
 
-Definition at line 658 of file vorticity\+\_\+smoother.\+h.
+Definition at line 656 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -597,7 +597,7 @@ Overloaded output function\+: Output velocity, pressure and the smoothed vortici
 
 
 
-Definition at line 1145 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1143 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -616,7 +616,7 @@ Output exact velocity, vorticity, derivatives and indicator based on functions s
 
 
 
-Definition at line 812 of file vorticity\+\_\+smoother.\+h.
+Definition at line 810 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -635,7 +635,7 @@ Output the velocity, smoothed vorticity and derivatives.
 
 
 
-Definition at line 886 of file vorticity\+\_\+smoother.\+h.
+Definition at line 884 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -654,7 +654,7 @@ Pin all smoothed vorticity quantities.
 
 
 
-Definition at line 790 of file vorticity\+\_\+smoother.\+h.
+Definition at line 788 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -673,7 +673,7 @@ Helper function that, given the local dof number of the i-\/th vorticity or velo
 
 
 
-Definition at line 458 of file vorticity\+\_\+smoother.\+h.
+Definition at line 456 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -696,7 +696,7 @@ Number of values required at local node n. In order to simplify matters, we allo
 
 
 
-Definition at line 725 of file vorticity\+\_\+smoother.\+h.
+Definition at line 723 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -715,7 +715,7 @@ Name of the i-\/th scalar field. Default implementation returns V1 for the first
 
 
 
-Definition at line 1050 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1048 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -734,7 +734,7 @@ Write values of the i-\/th scalar field at the plot points. Needs to be implemen
 
 
 
-Definition at line 982 of file vorticity\+\_\+smoother.\+h.
+Definition at line 980 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -753,7 +753,7 @@ Index of smoothed vorticity -- followed by derivatives.
 
 
 
-Definition at line 716 of file vorticity\+\_\+smoother.\+h.
+Definition at line 714 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -772,7 +772,7 @@ Given the S\+T\+O\+R\+ED dof number, this function returns the global recovered 
 
 
 
-Definition at line 552 of file vorticity\+\_\+smoother.\+h.
+Definition at line 550 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -795,7 +795,7 @@ Compute smoothed vorticity and its derivatives.
 
 
 
-Definition at line 1715 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1713 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -818,7 +818,7 @@ Helper function that, given the local dof number of the i-\/th vorticity or velo
 
 
 
-Definition at line 318 of file vorticity\+\_\+smoother.\+h.
+Definition at line 316 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -837,7 +837,7 @@ Compute the element\textquotesingle{}s contribution to the (squared) L2 norm of 
 
 
 
-Definition at line 1605 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1603 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -859,7 +859,7 @@ Pointer to function that specifies exact vorticity and derivs (for validation).
 
 
 
-Definition at line 1798 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1796 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -878,7 +878,7 @@ The current maximum order of velocity derivatives that can be recovered. Current
 
 
 
-Definition at line 1778 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1776 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -897,7 +897,7 @@ The current maximum order of vorticity derivatives that can be recovered. Curren
 
 
 
-Definition at line 1773 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1771 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -916,7 +916,7 @@ Maximum number of derivatives to retain in the velocity recovery. Note, the valu
 
 
 
-Definition at line 1794 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1792 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -935,7 +935,7 @@ Maximum number of derivatives to retain in the vorticity recovery. Note, the val
 
 
 
-Definition at line 1789 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1787 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -954,7 +954,7 @@ Number of dimensions in the element.
 
 
 
-Definition at line 1762 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1760 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -973,7 +973,7 @@ Number of values per field; how many of the following do we want\+: u,v,p,omega,
 
 
 
-Definition at line 1785 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1783 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -992,7 +992,7 @@ Index of smoothed vorticity -- followed by derivatives; in 2D this has value 3.
 
 
 
-Definition at line 1766 of file vorticity\+\_\+smoother.\+h.
+Definition at line 1764 of file vorticity\+\_\+smoother.\+h.
 
 
 

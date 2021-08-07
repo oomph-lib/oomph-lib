@@ -831,7 +831,7 @@ check-if-executables-exist:
 spit_out_gmsh_command:
 	@echo $(GMSH_RUN_COMMAND)
 
-junk:
+do_we_have_arpack:
 #	echo "have arpack"
 	echo "dont have arpack"
 

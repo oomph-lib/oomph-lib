@@ -459,7 +459,7 @@ template<unsigned DIM>
   {
    // The maximum of either the viscosity at alpha*cut-off or the cut-off
    // viscosity for a cut-off of zero
-    return max(a*pow(alpha, 2.0)*pow(fabs(*Critical_second_invariant_pt), 2.0) +
+   return std::max(a*pow(alpha, 2.0)*pow(fabs(*Critical_second_invariant_pt), 2.0) +
 	       b*alpha*fabs(*Critical_second_invariant_pt) + c,
 	       calculate_cutoff_viscosity());
   }

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::VorticityRecoveryHelpers::RecoveryHelper Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1VorticityRecoveryHelpers.html">VorticityRecoveryHelpers</a></li><li class="navelem"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html">RecoveryHelper</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::VorticityRecoveryHelpers::RecoveryHelper Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class to indicate which derivatives of the vorticity/ velocity we want to recover. We choose to immediately instantiate an object of this class by dropping the semi-colon after the class description.  
+ <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a588568f558fcea66735e8fb62c7c80f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a588568f558fcea66735e8fb62c7c80f1">RecoveryHelper</a> ()</td></tr>
+<tr class="memdesc:a588568f558fcea66735e8fb62c7c80f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a588568f558fcea66735e8fb62c7c80f1">More...</a><br /></td></tr>
+<tr class="separator:a588568f558fcea66735e8fb62c7c80f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee2cd32415604ee6585f565e0c6cc8bd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#aee2cd32415604ee6585f565e0c6cc8bd">maximum_order_of_vorticity_derivative</a> () const</td></tr>
+<tr class="memdesc:aee2cd32415604ee6585f565e0c6cc8bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum order of derivatives calculated in the vorticity recovery.  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#aee2cd32415604ee6585f565e0c6cc8bd">More...</a><br /></td></tr>
+<tr class="separator:aee2cd32415604ee6585f565e0c6cc8bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04617cfe4ae00832dad1ab445f670582"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a04617cfe4ae00832dad1ab445f670582">maximum_order_of_velocity_derivative</a> () const</td></tr>
+<tr class="memdesc:a04617cfe4ae00832dad1ab445f670582"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum order of derivatives calculated in the velocity recovery.  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a04617cfe4ae00832dad1ab445f670582">More...</a><br /></td></tr>
+<tr class="separator:a04617cfe4ae00832dad1ab445f670582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade8563120c4c4743c738399e2b35fe27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#ade8563120c4c4743c738399e2b35fe27">set_maximum_order_of_vorticity_derivative</a> (const int &amp;max_deriv)</td></tr>
+<tr class="memdesc:ade8563120c4c4743c738399e2b35fe27"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum order of derivatives calculated in the vorticity recovery.  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#ade8563120c4c4743c738399e2b35fe27">More...</a><br /></td></tr>
+<tr class="separator:ade8563120c4c4743c738399e2b35fe27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56eb67510ea8b188b9f5e92b1cf6fe01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a56eb67510ea8b188b9f5e92b1cf6fe01">set_maximum_order_of_velocity_derivative</a> (const int &amp;max_deriv)</td></tr>
+<tr class="memdesc:a56eb67510ea8b188b9f5e92b1cf6fe01"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum order of derivatives calculated in the velocity recovery.  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a56eb67510ea8b188b9f5e92b1cf6fe01">More...</a><br /></td></tr>
+<tr class="separator:a56eb67510ea8b188b9f5e92b1cf6fe01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e9ce59067778e843b9fada67c36eb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a81e9ce59067778e843b9fada67c36eb9">calculate_number_of_values_per_field</a> ()</td></tr>
+<tr class="memdesc:a81e9ce59067778e843b9fada67c36eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the number of values per field given the number of vorticity and velocity derivatives to recover (stored as private data)  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a81e9ce59067778e843b9fada67c36eb9">More...</a><br /></td></tr>
+<tr class="separator:a81e9ce59067778e843b9fada67c36eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abddaf75308a06b853355a2f0fd7acd17"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#abddaf75308a06b853355a2f0fd7acd17">npartial_derivative</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
+<tr class="memdesc:abddaf75308a06b853355a2f0fd7acd17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that determines the number of n-th order partial derivatives in d-dimensions. Specifically there are (n+d-1)(choose)(d-1) possible n-th order partial derivatives in d-dimensions. Implementation makes use of the code found at: www.geeksforgeeks.org/space-and-time-efficient-binomial-coefficient/.  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#abddaf75308a06b853355a2f0fd7acd17">More...</a><br /></td></tr>
+<tr class="separator:abddaf75308a06b853355a2f0fd7acd17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa14d720c414b6c90b6067270253310f"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#aaa14d720c414b6c90b6067270253310f">ncont_interpolated_values</a> () const</td></tr>
+<tr class="memdesc:aaa14d720c414b6c90b6067270253310f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of continuously interpolated values:  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#aaa14d720c414b6c90b6067270253310f">More...</a><br /></td></tr>
+<tr class="separator:aaa14d720c414b6c90b6067270253310f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a24925c7c5b573a3e9ced37ace48deb5b"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a24925c7c5b573a3e9ced37ace48deb5b">Number_of_values_per_field</a></td></tr>
+<tr class="memdesc:a24925c7c5b573a3e9ced37ace48deb5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of values per field; how many of the following do we want: u,v,p,omega,d/dx,d/dy, d^2/dx^2,d^2/dxdy,d^2/dy^2, d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3, du/dx,du/dy,dv/dx,dv/dy.  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a24925c7c5b573a3e9ced37ace48deb5b">More...</a><br /></td></tr>
+<tr class="separator:a24925c7c5b573a3e9ced37ace48deb5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48870979a47b05c46d540f985517746e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a48870979a47b05c46d540f985517746e">Maximum_order_of_vorticity_derivative</a></td></tr>
+<tr class="memdesc:a48870979a47b05c46d540f985517746e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of derivatives to retain in the vorticity recovery. Note, the value -1 means we ONLY output u,v[,w],p.  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a48870979a47b05c46d540f985517746e">More...</a><br /></td></tr>
+<tr class="separator:a48870979a47b05c46d540f985517746e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9075ed323c333feb9c2a6e43b780150c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a9075ed323c333feb9c2a6e43b780150c">Maximum_order_of_velocity_derivative</a></td></tr>
+<tr class="memdesc:a9075ed323c333feb9c2a6e43b780150c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of derivatives to retain in the velocity recovery. Note, the value 0 means we don't calculate the derivatives of the velocity.  <a href="classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper.html#a9075ed323c333feb9c2a6e43b780150c">More...</a><br /></td></tr>
+<tr class="separator:a9075ed323c333feb9c2a6e43b780150c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class to indicate which derivatives of the vorticity/ velocity we want to recover. We choose to immediately instantiate an object of this class by dropping the semi-colon after the class description. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00058">58</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a588568f558fcea66735e8fb62c7c80f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a588568f558fcea66735e8fb62c7c80f1">&#9670;&nbsp;</a></span>RecoveryHelper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::VorticityRecoveryHelpers::RecoveryHelper::RecoveryHelper </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00062">62</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00212">Maximum_order_of_velocity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00207">Maximum_order_of_vorticity_derivative</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a81e9ce59067778e843b9fada67c36eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e9ce59067778e843b9fada67c36eb9">&#9670;&nbsp;</a></span>calculate_number_of_values_per_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::VorticityRecoveryHelpers::RecoveryHelper::calculate_number_of_values_per_field </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the number of values per field given the number of vorticity and velocity derivatives to recover (stored as private data) </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00129">129</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00212">Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00207">Maximum_order_of_vorticity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00154">npartial_derivative()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00203">Number_of_values_per_field</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00106">set_maximum_order_of_velocity_derivative()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00086">set_maximum_order_of_vorticity_derivative()</a>.</p>
+
+</div>
+</div>
+<a id="a04617cfe4ae00832dad1ab445f670582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04617cfe4ae00832dad1ab445f670582">&#9670;&nbsp;</a></span>maximum_order_of_velocity_derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::VorticityRecoveryHelpers::RecoveryHelper::maximum_order_of_velocity_derivative </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The maximum order of derivatives calculated in the velocity recovery. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00079">79</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00212">Maximum_order_of_velocity_derivative</a>.</p>
+
+</div>
+</div>
+<a id="aee2cd32415604ee6585f565e0c6cc8bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee2cd32415604ee6585f565e0c6cc8bd">&#9670;&nbsp;</a></span>maximum_order_of_vorticity_derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::VorticityRecoveryHelpers::RecoveryHelper::maximum_order_of_vorticity_derivative </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The maximum order of derivatives calculated in the vorticity recovery. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00072">72</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00207">Maximum_order_of_vorticity_derivative</a>.</p>
+
+</div>
+</div>
+<a id="aaa14d720c414b6c90b6067270253310f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa14d720c414b6c90b6067270253310f">&#9670;&nbsp;</a></span>ncont_interpolated_values()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::VorticityRecoveryHelpers::RecoveryHelper::ncont_interpolated_values </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of continuously interpolated values: </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00190">190</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00203">Number_of_values_per_field</a>.</p>
+
+</div>
+</div>
+<a id="abddaf75308a06b853355a2f0fd7acd17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abddaf75308a06b853355a2f0fd7acd17">&#9670;&nbsp;</a></span>npartial_derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::VorticityRecoveryHelpers::RecoveryHelper::npartial_derivative </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function that determines the number of n-th order partial derivatives in d-dimensions. Specifically there are (n+d-1)(choose)(d-1) possible n-th order partial derivatives in d-dimensions. Implementation makes use of the code found at: www.geeksforgeeks.org/space-and-time-efficient-binomial-coefficient/. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00154">154</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00691">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
+
+</div>
+</div>
+<a id="a56eb67510ea8b188b9f5e92b1cf6fe01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56eb67510ea8b188b9f5e92b1cf6fe01">&#9670;&nbsp;</a></span>set_maximum_order_of_velocity_derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::VorticityRecoveryHelpers::RecoveryHelper::set_maximum_order_of_velocity_derivative </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>max_deriv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The maximum order of derivatives calculated in the velocity recovery. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00106">106</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00212">Maximum_order_of_velocity_derivative</a>.</p>
+
+</div>
+</div>
+<a id="ade8563120c4c4743c738399e2b35fe27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade8563120c4c4743c738399e2b35fe27">&#9670;&nbsp;</a></span>set_maximum_order_of_vorticity_derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::VorticityRecoveryHelpers::RecoveryHelper::set_maximum_order_of_vorticity_derivative </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>max_deriv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The maximum order of derivatives calculated in the vorticity recovery. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00086">86</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00207">Maximum_order_of_vorticity_derivative</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9075ed323c333feb9c2a6e43b780150c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9075ed323c333feb9c2a6e43b780150c">&#9670;&nbsp;</a></span>Maximum_order_of_velocity_derivative</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::VorticityRecoveryHelpers::RecoveryHelper::Maximum_order_of_velocity_derivative</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of derivatives to retain in the velocity recovery. Note, the value 0 means we don't calculate the derivatives of the velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00212">212</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00079">maximum_order_of_velocity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00062">RecoveryHelper()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00106">set_maximum_order_of_velocity_derivative()</a>.</p>
+
+</div>
+</div>
+<a id="a48870979a47b05c46d540f985517746e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48870979a47b05c46d540f985517746e">&#9670;&nbsp;</a></span>Maximum_order_of_vorticity_derivative</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::VorticityRecoveryHelpers::RecoveryHelper::Maximum_order_of_vorticity_derivative</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of derivatives to retain in the vorticity recovery. Note, the value -1 means we ONLY output u,v[,w],p. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00207">207</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00072">maximum_order_of_vorticity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00062">RecoveryHelper()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00086">set_maximum_order_of_vorticity_derivative()</a>.</p>
+
+</div>
+</div>
+<a id="a24925c7c5b573a3e9ced37ace48deb5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24925c7c5b573a3e9ced37ace48deb5b">&#9670;&nbsp;</a></span>Number_of_values_per_field</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::VorticityRecoveryHelpers::RecoveryHelper::Number_of_values_per_field</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of values per field; how many of the following do we want: u,v,p,omega,d/dx,d/dy, d^2/dx^2,d^2/dxdy,d^2/dy^2, d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3, du/dx,du/dy,dv/dx,dv/dy. </p>
+
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00203">203</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00190">ncont_interpolated_values()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 6 2021 23:39:28
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

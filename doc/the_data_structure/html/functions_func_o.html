@@ -590,6 +590,7 @@ $(function() {
 , <a class="el" href="classoomph_1_1TubeDomain.html#a3731e671028bb0ea3b01e7fe2723cbbc">oomph::TubeDomain</a>
 , <a class="el" href="classoomph_1_1TWomersleyElement.html#a5df99cc667253edc774b3a32cc2a4e7a">oomph::TWomersleyElement&lt; DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1UnstructuredTwoDMeshGeometryBase.html#a8ca153f1dfa57edf9931d4cc4c5ef9b6">oomph::UnstructuredTwoDMeshGeometryBase</a>
+, <a class="el" href="classoomph_1_1VorticitySmoother.html#a20bae100bba736485aebc233b406f62e">oomph::VorticitySmoother&lt; ELEMENT &gt;</a>
 , <a class="el" href="classoomph_1_1WarpedCircularDisk.html#a08535ed3d62242444ab367f20f455c5b">oomph::WarpedCircularDisk</a>
 , <a class="el" href="classoomph_1_1WarpedCircularDiskWithAnnularInternalBoundary.html#a7f7cbd42f9399bfff46f5c4cc07218e5">oomph::WarpedCircularDiskWithAnnularInternalBoundary</a>
 , <a class="el" href="classoomph_1_1WarpedCubeDomain.html#a475e5275c5a93aa96c03509051cede55">oomph::WarpedCubeDomain</a>
@@ -601,7 +602,6 @@ $(function() {
 , <a class="el" href="classRefineableBinArray.html#aedf0b5374a41ba17415bee6778e07600">RefineableBinArray</a>
 , <a class="el" href="classSamplePoint.html#aa91f365695d1f4567723770d880e60b2">SamplePoint</a>
 , <a class="el" href="classSamplePointContainer.html#a9b614945308f23a6852f9a38b8a85957">SamplePointContainer</a>
-, <a class="el" href="classVorticitySmoother.html#aeaf3571e328e4b43a9e30de6165b9ea9">VorticitySmoother&lt; ELEMENT &gt;</a>
 </li>
 <li>operator==()
 : <a class="el" href="classoomph_1_1DoubleMultiVector.html#ab06d289ff582170e19500861e8bd7e90">oomph::DoubleMultiVector</a>
@@ -909,7 +909,7 @@ $(function() {
 , <a class="el" href="classoomph_1_1UnsteadyHeatFluxElement.html#a96ad3606e27ea00fc36c9ceb1cb9986b">oomph::UnsteadyHeatFluxElement&lt; ELEMENT &gt;</a>
 , <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a981931bfa4139cd4d64ed427b65c95d9">oomph::VorticitySmootherElement&lt; ELEMENT &gt;</a>
 , <a class="el" href="classoomph_1_1WomersleyEquations.html#ad5254560613d0c22280f15cc9cb42dc7">oomph::WomersleyEquations&lt; DIM &gt;</a>
-, <a class="el" href="classoomph_1_1YoungLaplaceContactAngleElement.html#a16968ee7e86d676783b07400a4afc61d">oomph::YoungLaplaceContactAngleElement&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1YoungLaplaceContactAngleElement.html#adbabdfc299dcc79b82870690ccd9ec64">oomph::YoungLaplaceContactAngleElement&lt; ELEMENT &gt;</a>
 , <a class="el" href="classoomph_1_1YoungLaplaceEquations.html#a91fb5787aae4e4f5ed2d777f759170f3">oomph::YoungLaplaceEquations</a>
 , <a class="el" href="classQGeneralisedAxisymAdvectionDiffusionElement.html#a27d90ccfbecff454ee6d15ea44b1c956">QGeneralisedAxisymAdvectionDiffusionElement&lt; NNODE_1D &gt;</a>
 , <a class="el" href="classRefineableBin.html#a52d935cc69527220005ecee7cfb2b5e8">RefineableBin</a>
@@ -1006,13 +1006,13 @@ $(function() {
 , <a class="el" href="classoomph_1_1LinearElasticityEquations.html#af11315d53dcb1e8fe39aef29ccab504a">oomph::LinearElasticityEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1LinearWaveEquations.html#aa0089c4e106d9bd525639d3215ed6825">oomph::LinearWaveEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1Mesh.html#a56d3007b3d8a11c8f5852bcfcc1d195d">oomph::Mesh</a>
-, <a class="el" href="classoomph_1_1NavierStokesEquations.html#afcfdf3272b9ab0c0baf1508e47164c06">oomph::NavierStokesEquations&lt; DIM &gt;</a>
-, <a class="el" href="classoomph_1_1PMLFourierDecomposedHelmholtzEquations.html#a7702d97ca56f4c8a64969ee48f50331e">oomph::PMLFourierDecomposedHelmholtzEquations</a>
+, <a class="el" href="classoomph_1_1NavierStokesEquations.html#ae2c60e77c8348895c883176845bcc5bd">oomph::NavierStokesEquations&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1PMLFourierDecomposedHelmholtzEquations.html#a99529254ab80edf5e658e32034344a69">oomph::PMLFourierDecomposedHelmholtzEquations</a>
 , <a class="el" href="classoomph_1_1PMLHelmholtzEquations.html#ae56afa0bfd1de461e033a7ecc5a4f895">oomph::PMLHelmholtzEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquations.html#aa929f4592cdb1bdad9c7fd35b70bd299">oomph::PMLTimeHarmonicLinearElasticityEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1PoissonEquations.html#ad6c637c8a5221313c2220e8e8c27ec42">oomph::PoissonEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1PolarNavierStokesEquations.html#a72787983b9bcc07aafb46d5f7a2e592d">oomph::PolarNavierStokesEquations</a>
-, <a class="el" href="classoomph_1_1PoroelasticityEquations.html#a11af50ce3426539de63b8efe57a5fa4c">oomph::PoroelasticityEquations&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1PoroelasticityEquations.html#af6ff5d6c420bb061faab9faedfa02938">oomph::PoroelasticityEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1QAdvectionDiffusionElement.html#a42d9f526bc4bcc8fe51c6dbb1d216b4c">oomph::QAdvectionDiffusionElement&lt; DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QAdvectionDiffusionReactionElement.html#aced1d7c07e1e49b95aff9b354676808b">oomph::QAdvectionDiffusionReactionElement&lt; NREAGENT, DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QAxisymAdvectionDiffusionElement.html#a07a6680226c412753604695d77b19467">oomph::QAxisymAdvectionDiffusionElement&lt; NNODE_1D &gt;</a>
@@ -1025,19 +1025,19 @@ $(function() {
 , <a class="el" href="classoomph_1_1QPMLFourierDecomposedHelmholtzElement.html#a3c7542e5bc38c702caf2d248a31a8b7e">oomph::QPMLFourierDecomposedHelmholtzElement&lt; NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QPMLHelmholtzElement.html#a11cffc61d0cf6cac32ffb004d26d836c">oomph::QPMLHelmholtzElement&lt; DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QPoissonElement.html#a11884e74fcb40b630380daa52aa6d2d7">oomph::QPoissonElement&lt; DIM, NNODE_1D &gt;</a>
-, <a class="el" href="classoomph_1_1QSpectralPoissonElement.html#a112f8c43964b2514296974a90dc4b587">oomph::QSpectralPoissonElement&lt; DIM, NNODE_1D &gt;</a>
+, <a class="el" href="classoomph_1_1QSpectralPoissonElement.html#aa18ae34af7cc2aee225d5e30a76edb10">oomph::QSpectralPoissonElement&lt; DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QSphericalAdvectionDiffusionElement.html#ae67830606f8940978529b305794ec98d">oomph::QSphericalAdvectionDiffusionElement&lt; NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QSteadyAxisymAdvectionDiffusionElement.html#a6f21bbd8825931be66be210cea87000d">oomph::QSteadyAxisymAdvectionDiffusionElement&lt; NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QUnsteadyHeatElement.html#a4a9b9735828f0e11fd439944e2332781">oomph::QUnsteadyHeatElement&lt; DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QUnsteadyHeatMixedOrderSpaceTimeElement.html#aa3f6d8b0a75e3e9c5b28ecd738c4e838">oomph::QUnsteadyHeatMixedOrderSpaceTimeElement&lt; SPATIAL_DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QUnsteadyHeatSpaceTimeElement.html#ada0ae572412eade00a0302b665423dbb">oomph::QUnsteadyHeatSpaceTimeElement&lt; SPATIAL_DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1QWomersleyElement.html#a2730f3cf9212c0b5cbc22939a376af07">oomph::QWomersleyElement&lt; DIM, NNODE_1D &gt;</a>
-, <a class="el" href="classoomph_1_1QYoungLaplaceElement.html#a617863102f725a73a8768ba8e3da896d">oomph::QYoungLaplaceElement&lt; NNODE_1D &gt;</a>
+, <a class="el" href="classoomph_1_1QYoungLaplaceElement.html#adfb61689825789e178eeb2985c4985e8">oomph::QYoungLaplaceElement&lt; NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#aa1eaab23a14039a18701b5666629b5bc">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1SpaceTimeNavierStokesEquations.html#a600eac3637dc613c068c718fc7c245d3">oomph::SpaceTimeNavierStokesEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1SpaceTimeNavierStokesMixedOrderEquations.html#a878b399596017aca6d933af07ab4254f">oomph::SpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1SpaceTimeUnsteadyHeatEquations.html#a073aa06236cc2025ac4d5d3e39050006">oomph::SpaceTimeUnsteadyHeatEquations&lt; SPATIAL_DIM &gt;</a>
-, <a class="el" href="classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations.html#ae25cdb67f8dd4a624348eac853c9cea0">oomph::SpaceTimeUnsteadyHeatMixedOrderEquations&lt; SPATIAL_DIM &gt;</a>
+, <a class="el" href="classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations.html#aee31ec2f2c410e2eabd32243f57fe1e3">oomph::SpaceTimeUnsteadyHeatMixedOrderEquations&lt; SPATIAL_DIM &gt;</a>
 , <a class="el" href="classoomph_1_1SphericalAdvectionDiffusionEquations.html#a2fcb664a740cfb2a645b0e1893a00773">oomph::SphericalAdvectionDiffusionEquations</a>
 , <a class="el" href="classoomph_1_1SphericalNavierStokesEquations.html#aa273df1ad9fe7cebb284bdae8b7e1a21">oomph::SphericalNavierStokesEquations</a>
 , <a class="el" href="classoomph_1_1SteadyAxisymAdvectionDiffusionEquations.html#a444263cb79d63da6bd1e7b47f9c60c72">oomph::SteadyAxisymAdvectionDiffusionEquations</a>
@@ -1055,11 +1055,11 @@ $(function() {
 , <a class="el" href="classoomph_1_1TWomersleyElement.html#a2ff66a70ff364d1ddfc0ef0a99ad70cb">oomph::TWomersleyElement&lt; DIM, NNODE_1D &gt;</a>
 , <a class="el" href="classoomph_1_1UnsteadyHeatEquations.html#ab6f0a3d6afeec2fc0395f6185d91e588">oomph::UnsteadyHeatEquations&lt; DIM &gt;</a>
 , <a class="el" href="classoomph_1_1WomersleyEquations.html#ab1468b769eeb97f0a603526531e01564">oomph::WomersleyEquations&lt; DIM &gt;</a>
-, <a class="el" href="classoomph_1_1YoungLaplaceEquations.html#a53c0bf42a2e2a4469cb7f6afe235c141">oomph::YoungLaplaceEquations</a>
+, <a class="el" href="classoomph_1_1YoungLaplaceEquations.html#a7938b426803efb21be5d7b7e78be16c5">oomph::YoungLaplaceEquations</a>
 , <a class="el" href="classQGeneralisedAxisymAdvectionDiffusionElement.html#a1f731cce10286e25c409d13bf3354da1">QGeneralisedAxisymAdvectionDiffusionElement&lt; NNODE_1D &gt;</a>
 </li>
 <li>output_fct_paraview()
-: <a class="el" href="classoomph_1_1Mesh.html#a16157f769019724da979e47445e6c2d2">oomph::Mesh</a>
+: <a class="el" href="classoomph_1_1Mesh.html#a8bba347dea4098f0bf7142db582adc38">oomph::Mesh</a>
 </li>
 <li>output_fluid_velocity()
 : <a class="el" href="classoomph_1_1BiharmonicEquations.html#a1aa52e23ab7e609c21d97728e9a8f2ce">oomph::BiharmonicEquations&lt; DIM &gt;</a>
@@ -1078,10 +1078,10 @@ $(function() {
 : <a class="el" href="classoomph_1_1FSIAxisymFoepplvonKarmanElement.html#a8c7be29df60b6ed699d585c9e175333b">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;</a>
 </li>
 <li>output_local_values()
-: <a class="el" href="classoomph_1_1DoubleVector.html#a2cdcd660a9a90868ba1f837095403649">oomph::DoubleVector</a>
+: <a class="el" href="classoomph_1_1DoubleVector.html#a1cbc454999c271e7cb476f7c5c76ce72">oomph::DoubleVector</a>
 </li>
 <li>output_local_values_with_offset()
-: <a class="el" href="classoomph_1_1DoubleVector.html#afc5d6ab2c9ba7a0f307cc419a331df70">oomph::DoubleVector</a>
+: <a class="el" href="classoomph_1_1DoubleVector.html#aa9f03b47d00fe70e4f5e4f2474b48bf4">oomph::DoubleVector</a>
 </li>
 <li>output_macro_element_boundaries()
 : <a class="el" href="classoomph_1_1Domain.html#a59dfe3a2cff10aa2e12f86dba9584f15">oomph::Domain</a>
@@ -1194,7 +1194,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 6 2021 14:52:38
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 6 2021 23:42:08
         </div>
       </div>
     </footer>
