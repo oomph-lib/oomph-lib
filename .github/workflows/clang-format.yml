@@ -1,0 +1,38 @@
+name: clang-format
+
+on:
+  # Trigger the workflow in the following cases:
+  #  -- After a pull request to the 'development' branch; these changes will
+  #     later be integrated into 'main' when it is merged in.
+  #  -- After a push to any branch except 'main' and 'development', as these
+  #     branches should never be updated directly by a user.
+  pull_request:
+    branches:
+      - development
+  push:
+    branches-ignore:
+      - main
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # Format all files in the src/ directory except cfortran.h, lapack_qz.h,
+    # superlu.c, superlu_dist.c, which sit in the src/generic/ subdirectory.
+    - uses: DoozyX/clang-format-lint-action@v0.12
+      with:
+        source: 'src'
+        exclude: 'src/generic/cfortran.h src/generic/lapack_qz.h src/generic/superlu.c src/generic/superlu_dist.c'
+        extensions: 'h,cc'
+        clangFormatVersion: 12
+        style: file
+        inplace: True
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_user_name: clang-format-bot
+        commit_message: 'Automated commit of clang-format CI changes.'
