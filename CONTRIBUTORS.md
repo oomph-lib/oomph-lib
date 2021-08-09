@@ -12,7 +12,7 @@ Person                              | Position        | Contribution
 ------------------------------------|-----------------|--------------------------------------------------------------------------------------------
 [**Puneet Matharu**](https://github.com/PuneetMatharu) | **Maintainer**  | Worked on the implementation of a space-time finite-element modelling of the flow past an oscillating cylinder, geometric multigrid solvers, particularly for the Helmholtz equations, and various other small additions.
 [**Jonathan Deakin**](https://github.com/jondea) | **Maintainer**  | Worked on the numerical solution of acoustic fluid-structure interaction problems as PhD student, overhauled the `oomph-lib` website, and worked on a glaciology-related melt problem.
-[**Christian Vaquero-Stainer**](https://github.com/orgs/oomph-lib/people/wobblygomboc) | **Contributor** | _**PM to MH: Fill this in.**_
+[**Christian Vaquero-Stainer**](https://github.com/orgs/oomph-lib/people/wobblygomboc) | **Contributor** | Developed and implemented an efficient method to deal with the singularities that arise in Stokes flow past arbitrarily-shaped disks.
 **Thierry Gonon**                   | **Contributor** | Implemented the methodology to subtract singular (or non-singular) functions off solutions to the Poisson and Navier-Stokes equations.
 **Chris Johnson**                   | **Contributor** | Has provided many bug fixes.
 **Chihebeddine Hammami**            | **Contributor** | Worked on the implementation of Yulii Shikhmurzaev's interface formation theory.
