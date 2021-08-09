@@ -179,16 +179,24 @@ This involves the following steps:
    create mode 100644 new-file2.h
    ```
    **IMPORTANT:**
-   You can switch between branches at any point (e.g. `git checkout main` will get you onto the `main` branch in your local repository) but if you have not committed your work, the changes will automatically be moved across to the branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate branch to keep our new work isolated from the rest of the code. If you don't want to commit your changes before switching to another branch, you can use
-   ```bash
-   git stash
-   ```
-   to stash away your changes; see `git help stash` for details on how to reapply the stashed changes.
-
-   If you accidentally ended up moving changed files onto another, otherwise clean branch, all is not lost! You can reset changes to all tracked files in your current branch since the last commit to that branch using
-   ```bash
-   git reset --hard HEAD
-   ```
+   You can switch between branches at any point (e.g. `git checkout main` will get you onto the `main` branch in your local repository) but if you have not committed your work, the changes will automatically be moved across to the branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate branch to keep our new work isolated from the rest of the code. If you accidentally ended up moving changed files onto another, otherwise clean branch, all is not lost! In this situation, you have three options: 
+     1. Switch back to the branch you were just on and commit your changes (`feature/add-new-important-headers` in this case). When you switch to the `main` branches, these changes will no longer follow you.
+     2. Save your changes for later by first running
+     
+        ```bash
+        git stash
+        ```        
+        and, once you have returned to the branch upon which you made changes, running
+        
+        ```bash
+        git stash apply
+        ```        
+        If you ran `git stash` again before running `git stash apply`, you will need to identify which stashed changes to use; see `git help stash` for more details on how to do this.
+        Because this option is more likely to create issues when multiple stashes exists, we recommend that you only use it once you are familiar with Git.
+     3. Finally, the most aggressive option: get rid of these changes entirely. Use this option if you do not care about the changes you previously made. You can reset changes to all tracked files in your current branch since the last commit to that branch using
+        ```bash
+        git reset --hard HEAD
+        ```
    Phew!
 
 5. Now push the commit to your (GitHub-hosted) remote forked repository (`origin`).
