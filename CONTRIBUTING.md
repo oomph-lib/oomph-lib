@@ -226,14 +226,17 @@ This involves the following steps:
 
    ![](doc/README/base_repository_button_development.png)
 
-
    Provide a meaningful description of your changes in the textbox, press the button "Create pull request" and wait for somebody to merge your changes in (or get back to you with comments/requests). Note that subsequent changes (in response to discussions/requests, say) can simply be submitted to the same branch (repeating everything from step 3 above); they will automatically be added/included to the same pull request.
 
-   Note that when you return to the branch's GitHub page you won't see the lovely green ![](doc/README/compare_and_pull_request_button.png) button any more (presumably because a pull request is already pending). To add the newly made changes to the pull request, click on the "Contribute" button, next to the "Fetch upstream" one
+   Note that when you return to the branch's GitHub page (on your remote forked repository) you won't see the lovely green 
+   
+   ![](doc/README/compare_and_pull_request_button.png) 
+
+   button any more (presumably because a pull request is already pending). To add the newly made changes to the existing pull request, click on the "Contribute" button, next to the "Fetch upstream" one
 
    ![](doc/README/contribute_or_fetch_upstream_button.png)
 
-   and continue from there. Leave another comment to explain the changes you've made in response to the reviewer's comments/requests.
+   and continue from there. Leave another comment to explain the changes you've made in response to the reviewer's comments/requests, and then fingers crossed!
 
 7. Once the pull request has been accepted and the changes made have been merged
    into the official repository, update the `development` branch on your remote forked branch. This is done most easily via the webpage: go to the `development` branch for the remote forked repository, i.e. go to https://github.com/JoeCoolDummy/oomph-lib and click on the button with a branch symbol and the text "`main`":
