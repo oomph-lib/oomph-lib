@@ -209,7 +209,11 @@ This involves the following steps:
 
     ![](doc/README/main_button.png)
 
-    then click on the `feature/add-new-important-headers` branch in the drop-down menu that appears. When you reach the new page, click the green "Compare & pull request" button. Carefully check all changes and select reviewers, using the button on the right hand side of the screen.
+    then click on the `feature/add-new-important-headers` branch in the drop-down menu that appears. When you reach the new page, click the green "Compare & pull request" button.
+    
+    ![](doc/README/compare_and_pull_request_button.png)
+
+     Carefully check all changes (shown at the bottom of the page) and select reviewers, using the button on the right hand side of the screen.
 
     ![](doc/README/reviewers_button.png)
 
