@@ -13,7 +13,7 @@ Contributing to `oomph-lib` involves three separate repositories:
 
 - Your remote forked version of the official repository, https://github.com/JoeCoolDummy/oomph-lib.
 
-     This is a remote repository, hosted on GitHub. In Git terminology this repository is known as `origin` because it is the repository that you clone (as described in the next step) onto your local forked computer. You create the remote forked repository by going to the GitHub page for the official repository, https://github.com/oomph-lib/oomph-lib, and clicking on the fork button in the top right corner of that page.
+     This is a remote repository, hosted on GitHub. In Git terminology this repository is known as `origin` because it is the repository that you clone (as described in the next step) onto your local computer. You create the remote forked repository by going to the GitHub page for the official repository, https://github.com/oomph-lib/oomph-lib, and clicking on the fork button in the top right corner of that page.
 
     ![](doc/README/fork_button.png)
 
@@ -30,7 +30,7 @@ Contributing to `oomph-lib` involves three separate repositories:
 
 - The cloned repository on your computer (obtained by cloning your forked repository).
 
-    This repository is local forked to your computer and is cloned from your remote forked repository. It is where you do all your work before ultimately commiting it, via the procedure described below, to the GitHub-hosted remote repositories.
+    This repository is local to your computer and is cloned from your remote forked repository. It is where you do all your work before ultimately commiting it, via the procedure described below, to the GitHub-hosted remote repositories.
 
     You create this repository from the command line on your computer, using
    ```bash
@@ -85,13 +85,13 @@ create a contribution via a mechanism called a "pull request", from your *remote
 This involves the following steps:
 
 1. Create a new branch on your computer.
-2. Do some work and add/commit it on your computer (i.e. local forkedly).
+2. Do some work and add/commit it on your computer (i.e. locally).
 3. Check it.
 4. Check it again.
 5. Push the changes from your local forked repository (the one on your computer) to your remote forked repository (on GitHub).
 6. Wait for the automated self-tests to pass (check the Actions tab of your remote forked repository on GitHub for progress updates and log files). If they don't, resolve the issues and repeat from step 2.
 7. Create a pull request to merge the changes created in that branch into the `development` branch of the official (`oomph-lib/oomph-lib`) repository (`upstream`).
-8. Once the pull request has been accepted (and your changes have thus been merged into official repository), update your remote forked repository (`origin`) on GitHub.
+8. Once the pull request has been accepted (and your changes have thus been merged into the official repository), update your remote forked repository (`origin`) on GitHub.
 9. Update the `development` branch on your computer from your remote forked repository (`origin`).
 
 ## The steps in detail:
@@ -255,7 +255,7 @@ This involves the following steps:
    >>> git diff feature/add-new-important-headers..development
    ```
 
-   The above command should not produce an output. We can then get rid of the branch on which we did the work, both local forkedly,
+   The above command should not produce an output. We can then get rid of the branch on which we did the work, both locally,
 
    ```bash
    >>> git branch -d feature/add-new-important-headers
@@ -300,8 +300,8 @@ Described below is an alternative way to pull changes from the official reposito
 6. Resolve any merge conflicts you may have. Strictly speaking, you
    should only be using the `development` branch to stay in sync with the upstream repository i.e. you shouldn't be adding changes to it directly yourself, so there should never be any merge conflicts.
 
-7. Now push the changes in your local forked repository up to your forked
-   remote repository (`origin`)
+7. Now push the changes in your local forked repository up to your remote forked
+   repository (`origin`)
    ```bash
    >>> git push origin development
    ```
