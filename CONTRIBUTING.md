@@ -185,6 +185,12 @@ This involves the following steps:
    ```
    to stash away your changes; see `git help stash` for details on how to reapply the stashed changes.
 
+   If you accidentally ended up moving changed files onto another, otherwise clean branch, all is not lost! You can reset changes to all tracked files in your current branch since the last commit to that branch using
+   ```bash
+   git reset --hard HEAD
+   ```
+   Phew!
+
 5. Now push the commit to your (GitHub-hosted) remote forked repository (`origin`).
 
    The first time you do this you have to this explicitly state that you want the branch to be added to the `origin` repository, using the `--set-upstream` flag,
