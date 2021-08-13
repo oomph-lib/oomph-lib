@@ -1,57 +1,28 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
-// LIC// ====================================================================
-// LIC// This file forms part of oomph-lib, the object-oriented,
-// LIC// multi-physics finite-element library, available
-// LIC// at http://www.oomph-lib.org.
-// LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
-// LIC//
-// LIC// This library is free software; you can redistribute it and/or
-// LIC// modify it under the terms of the GNU Lesser General Public
-// LIC// License as published by the Free Software Foundation; either
-// LIC// version 2.1 of the License, or (at your option) any later version.
-// LIC//
-// LIC// This library is distributed in the hope that it will be useful,
-// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// LIC// Lesser General Public License for more details.
-// LIC//
-// LIC// You should have received a copy of the GNU Lesser General Public
-// LIC// License along with this library; if not, write to the Free Software
-// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-// LIC// 02110-1301  USA.
-// LIC//
-// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-// LIC//
-// LIC//====================================================================
 // Header file for a class that is used to represent a mesh
 // as a geometric object
 
@@ -126,9 +97,9 @@ class MeshAsGeomObject : public GeomObject
 
  private:
 
- 
+
  /// Helper function to actually build the thing
- void build_it(SamplePointContainerParameters* 
+ void build_it(SamplePointContainerParameters*
                sample_point_container_parameters_pt)
  {
   Mesh_pt=sample_point_container_parameters_pt->mesh_pt();
@@ -155,36 +126,36 @@ class MeshAsGeomObject : public GeomObject
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
-  
+
 #ifdef OOMPH_HAS_MPI
 
  // Set communicator
  Communicator_pt=Mesh_pt->communicator_pt();
- 
+
 #endif
 
 
  //Storage for the Lagrangian and Eulerian dimension
  int dim[2]={0,0};
- 
+
  //Set the Lagrangian dimension from the dimension of the first element
  //if it exists (if not the Lagrangian dimension will be zero)
- if(Mesh_pt->nelement()!=0) 
+ if(Mesh_pt->nelement()!=0)
   {
    dim[0] = Mesh_pt->finite_element_pt(0)->dim();
   }
- 
+
  //Read out the Eulerian dimension from the first node, if it exists.
  //(if not the Eulerian dimension will be zero);
  if(Mesh_pt->nnode()!=0)
   {
    dim[1] = Mesh_pt->node_pt(0)->ndim();
   }
- 
+
  // Need to do an Allreduce to ensure that the dimension is consistent
  // even when no elements are assigned to a certain processor
 #ifdef OOMPH_HAS_MPI
- 
+
 //Only a problem if the mesh has been distributed
  if(Mesh_pt->is_mesh_distributed())
   {
@@ -197,22 +168,22 @@ class MeshAsGeomObject : public GeomObject
        int dim_reduce[2];
        MPI_Allreduce(&dim,&dim_reduce,2,MPI_INT,
                      MPI_MAX,Communicator_pt->mpi_comm());
-       
-       dim[0] = dim_reduce[0]; 
+
+       dim[0] = dim_reduce[0];
        dim[1] = dim_reduce[1];
       }
     }
   }
 #endif
- 
+
  //Set the Lagrangian and Eulerian dimensions within this geometric object
  this->set_nlagrangian_and_ndim(static_cast<unsigned>(dim[0]),
                                 static_cast<unsigned>(dim[1]));
- 
- // Create temporary storage for geometric Data (don't count 
+
+ // Create temporary storage for geometric Data (don't count
  // Data twice!
  std::set<Data*> tmp_geom_data;
- 
+
  //Copy all the elements in the mesh into local storage
  //N.B. elements must be able to have a geometric object representation.
  unsigned n_sub_object = Mesh_pt->nelement();
@@ -222,12 +193,12 @@ class MeshAsGeomObject : public GeomObject
    // (Try to) cast to a finite element:
    Sub_geom_object_pt[e]=
     dynamic_cast<FiniteElement*>(Mesh_pt->element_pt(e));
-   
+
 #ifdef PARANOID
    if (Sub_geom_object_pt[e]==0)
     {
      std::ostringstream error_message;
-     error_message 
+     error_message
       << "Unable to dynamic cast element: " << std::endl
       << "into a FiniteElement: GeomObject representation is not possible\n";
      throw OomphLibError(
@@ -236,7 +207,7 @@ class MeshAsGeomObject : public GeomObject
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-   
+
    // Add the geometric Data of each element into set
    unsigned ngeom_data=Sub_geom_object_pt[e]->ngeom_data();
    for (unsigned i=0;i<ngeom_data;i++)
@@ -244,7 +215,7 @@ class MeshAsGeomObject : public GeomObject
      tmp_geom_data.insert(Sub_geom_object_pt[e]->geom_data_pt(i));
     }
   }
- 
+
  // Now copy unique geom Data values across into vector
  unsigned ngeom=tmp_geom_data.size();
  Geom_data_pt.resize(ngeom);
@@ -255,43 +226,43 @@ class MeshAsGeomObject : public GeomObject
    Geom_data_pt[count]=*it;
    count++;
   }
- 
+
  // Build the right type of bin array
  switch (Sample_point_container_version)
   {
   case UseRefineableBinArray:
-   
+
    Sample_point_container_pt=new RefineableBinArray(sample_point_container_parameters_pt);
    break;
-   
+
   case UseNonRefineableBinArray:
-   
+
    Sample_point_container_pt=new NonRefineableBinArray(sample_point_container_parameters_pt);
    break;
-   
+
 #ifdef OOMPH_HAS_CGAL
 
   case UseCGALSamplePointContainer:
-   
+
    Sample_point_container_pt=new CGALSamplePointContainer(sample_point_container_parameters_pt);
    break;
 
 #endif
-   
+
   default:
-   
+
    oomph_info << "Sample_point_container_version = "
               << Sample_point_container_version << std::endl;
    throw OomphLibError("Sample_point_container_version",
                        OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);  
+                       OOMPH_EXCEPTION_LOCATION);
   }
  }
- 
- 
+
+
  /// \short Vector of pointers to Data items that affects the object's shape
  Vector<Data*> Geom_data_pt;
- 
+
  /// Internal storage for the elements that constitute the object
  Vector<FiniteElement*> Sub_geom_object_pt;
 
@@ -332,14 +303,14 @@ class MeshAsGeomObject : public GeomObject
  unsigned sample_point_container_version() const
   {
    return Sample_point_container_version;
-  } 
- 
+  }
+
  /// Number of elements in the underlying mesh
  unsigned nelement()
  {
   return Sub_geom_object_pt.size();
  }
- 
+
  ///\short Constructor
   MeshAsGeomObject(Mesh* const& mesh_pt)
    : GeomObject()
@@ -356,13 +327,13 @@ class MeshAsGeomObject : public GeomObject
 
 
  ///\short Constructor
-  MeshAsGeomObject(SamplePointContainerParameters* 
+  MeshAsGeomObject(SamplePointContainerParameters*
                    sample_point_container_parameters_pt)
    : GeomObject()
   {
    build_it(sample_point_container_parameters_pt);
   }
- 
+
  /// Empty Constructor
  MeshAsGeomObject() {}
 
@@ -401,8 +372,8 @@ class MeshAsGeomObject : public GeomObject
  /// argument "s" is used as the initial guess. However, this doesn't
  /// make sense here and the argument is ignored (though a warning
  /// is issued when the code is compiled in PARANOID setting)
- void locate_zeta(const Vector<double>& zeta, 
-                  GeomObject*& sub_geom_object_pt, 
+ void locate_zeta(const Vector<double>& zeta,
+                  GeomObject*& sub_geom_object_pt,
                   Vector<double>& s,
                   const bool& use_coordinate_as_initial_guess = false)
  {
