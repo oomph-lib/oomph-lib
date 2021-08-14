@@ -331,10 +331,11 @@ automatically be enabled for you.
 
 Whenever you push to a branch in your GitHub repository, the `clang-format`
 GitHub Action will be triggered and run. (**Note:** this Action does exclude the
-`main` and `development` branches, but you should never push to them anyway!)
-After formatting your code it will create an extra commit containing any changes
-that were made. If your code did not require any changes, an additional commit
-will not be created.
+`main` branch and it assumes that you won't touch your `development` branch, but
+it should be clear after reading this guide that you should never push to them
+directly anyway!) After formatting your code it will create an extra commit
+containing any changes that were made. If your code did not require any changes,
+an additional commit will not be created.
 
 Importantly, because of this automation, you should always run
 ```bash
