@@ -1,0 +1,17 @@
+repos:
+  - repo: local
+    hooks:
+      # Run clang-format over all C++ files. We only want to format the src/
+      # directory. We don't format files with a .c prefix which avoids C sources
+      # (as they are likely not ours). However, files with a .h prefix may be
+      # confused for our C++ headers (e.g. src/generic/cfortran.h) so we have
+      # to ignore them explicitly in the regex recipe.
+      # IMPORTANT: This pre-commit hook should only be used if you have a recent
+      # enough version of .clang-format. To date, that appears to be V10.0.0.
+      - id: clang-format
+        name: clang-format
+        description: Format files with clang-format.
+        entry: clang-format -i
+        language: system
+        files: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|cc)$
+        args: ['-style=file']
