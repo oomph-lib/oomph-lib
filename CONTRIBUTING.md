@@ -1,7 +1,18 @@
-# oomph-lib's GitHub workflow
+# Table of contents
+
+  - [oomph-lib's GitHub workflow](#oomph-libs-github-workflow)
+  - [Basic setup (only to be done once)](#basic-setup-only-to-be-done-once)
+  - [The workflow](#the-workflow)
+  - [The steps in detail](#the-steps-in-detail)
+  - [Advanced approach to pulling in upstream changes](#advanced-approach-to-pulling-in-upstream-changes)
+  - [C++ development](#c-development)
+
+## oomph-lib's GitHub workflow
+
 **A guide to working with and contributing to the (now-GitHub-hosted) `oomph-lib` repository.**
 
 _Notation:_ We prefix any command line input with "`>>>`" and generally show the resulting output from Git underneath. Lengthy output is sometimes truncated and omitted parts are then indicated by "`[...]`". Comments for specific commands are prefixed with "`#`".
+
 ## Basic setup (only to be done once)
 
 We assume that you have created a GitHub account, and for the purpose of this document assume that your GitHub home page is https://github.com/JoeCoolDummy. Unless your name is Joe Cool Dummy, you'll have to change the name to your own.
@@ -38,8 +49,8 @@ Contributing to `oomph-lib` involves three separate repositories:
    ```
    This command will create a new directory, `oomph-lib` which contains all the code and the relevant Git information. Have a look around:
    ```bash
-   cd oomph-lib
-   ls -l
+   >>> cd oomph-lib
+   >>> ls -l
    ```
 
 The official (`upstream`) repository has two key branches: `main` and `development`. These have now made it onto your computer. You can list the branches as follows:
@@ -94,7 +105,7 @@ This involves the following steps:
 8. Once the pull request has been accepted (and your changes have thus been merged into official repository), update your remote forked repository (`origin`) on GitHub.
 9. Update the `development` branch on your computer from your remote forked repository (`origin`).
 
-## The steps in detail:
+## The steps in detail
 
 
 1. Start from the branch you want to work on, e.g. `development`,
@@ -181,7 +192,7 @@ This involves the following steps:
    **IMPORTANT:**
    You can switch between branches at any point (e.g. `git checkout main` will get you onto the `main` branch in your local repository) but if you have not committed your work, the changes will automatically be moved across to the branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate branch to keep our new work isolated from the rest of the code. If you don't want to commit your changes before switching to another branch, you can use
    ```bash
-   git stash
+   >>> git stash
    ```
    to stash away your changes; see `git help stash` for details on how to reapply the stashed changes.
 
@@ -195,7 +206,7 @@ This involves the following steps:
 
    Subsequent pushes will no longer require the `--set-upstream` flag, so you can just do
    ```bash
-   git push origin feature/add-new-important-headers
+   >>> git push origin feature/add-new-important-headers
    ```
 
 6. Now go to the GitHub webpage for your remote forked repository
@@ -307,3 +318,27 @@ Described below is an alternative way to pull changes from the official reposito
    ```
    Now both your local forked repository and your remote forked repository are in
    sync with the upstream (i.e. official) repository. Hurray!
+
+
+## C++ development
+
+### Clang-format
+To ensure a consistent C++ code style throughout the `oomph-lib` library, we use
+the [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html) code formatter,
+automated through the use of a GitHub Action. The [`.clang-format`](.clang-format)
+file in the root directory provides the style specification to `clang-format` and
+the [`.github/workflows/clang-format.yml`](.github/workflows/clang-format.yml)
+GitHub Action applies the formatting. If you followed the steps in [Basic setup
+(only to be done once)](#basic-setup-only-to-be-done-once), this Action will
+automatically be enabled for you.
+
+Whenever you push to a branch in your GitHub repository, the `clang-format`
+GitHub Action will be triggered and run. (Note: this excludes the `main` and
+`development` branches, but you should never push to them anyway!) After
+formatting your code it will create an extra commit containing any changes that
+were made. If your code did not require any changes, an additional commit will
+not be created.
+
+Importantly, because of this automation, make sure to run `git pull` before you
+push a commit to your GitHub repository, otherwise you may not be able to push
+your commit.
