@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 // Created (18/03/08) by recopying from my_oomph-codes/polar_navier_stokes.h
 // Now I know what I'm doing it needs updating to current oomph conventions.
 
@@ -39,27 +39,27 @@
 //                   - dshape_and_dtest_eulerian()
 //                   - dshape_and_dtest_eulerian_at_knot()
 
-// The following generality is necessary for elements with multiple physics.  
-// That is where we can't just assume that values one and two at the nodes 
+// The following generality is necessary for elements with multiple physics.
+// That is where we can't just assume that values one and two at the nodes
 // are velocities and the third a pressure.
 
 // Then renamed "index_of_nodal_pressure_value to p_nodal_index_pnst.
 
 // Added u_index_pnst (by default just returns the value you give it)
 
-// The internal pressure data in Crouzeix Raviart elements is now stored 
+// The internal pressure data in Crouzeix Raviart elements is now stored
 // as one data object with three values:
-// Added P_pnst_internal_index which stores the index of that internal 
-// data, specified in the constructor. 
+// Added P_pnst_internal_index which stores the index of that internal
+// data, specified in the constructor.
 // Adjusted:   - p_pnst
-//             - fix_pressure 
+//             - fix_pressure
 //             - get_load_data
 // To reflect this change in internal data storage.
 
 // Plus added Pressure_not_stored_at_node, default = -100.
 
-// assign_additional_local_eqn_numbers removed in favour of 
-//  - p_local_eqn 
+// assign_additional_local_eqn_numbers removed in favour of
+//  - p_local_eqn
 // And we have:
 //  - local_eqn = nodal_local_eqn(l,u_nodal_index[i]);
 //  - local_eqn = p_local_eqn(l);
@@ -82,7 +82,7 @@
 // interpolated positions / velocities now assembled using nodal_position
 // and nodal_value - both of which should cope with hanging nodes.
 
-// Also stokes_output() added to compute convergence rates when exact 
+// Also stokes_output() added to compute convergence rates when exact
 // (Stokes) solution is known.
 
 #ifndef OOMPH_POLAR_NAVIER_STOKES
@@ -93,1003 +93,1166 @@
 #include <oomph-lib-config.h>
 #endif
 
-//OOMPH-LIB headers 
+// OOMPH-LIB headers
 #include "../generic/Qelements.h"
 
 
 namespace oomph
 {
-
-//=====================================================================
-/// A class for elements that solve the polar Navier--Stokes equations,
-/// This contains the generic maths -- any concrete implementation must 
-/// be derived from this.
-//======================================================================
-class PolarNavierStokesEquations : public virtual FiniteElement
-{
-
+  //=====================================================================
+  /// A class for elements that solve the polar Navier--Stokes equations,
+  /// This contains the generic maths -- any concrete implementation must
+  /// be derived from this.
+  //======================================================================
+  class PolarNavierStokesEquations : public virtual FiniteElement
+  {
   public:
+    /// \short Function pointer to body force function fct(t,x,f(x))
+    /// x is a Vector!
+    typedef void (*NavierStokesBodyForceFctPt)(const double& time,
+                                               const Vector<double>& x,
+                                               Vector<double>& body_force);
 
- /// \short Function pointer to body force function fct(t,x,f(x))
- /// x is a Vector!
- typedef void (*NavierStokesBodyForceFctPt)(const double& time,
-                                            const Vector<double>& x,
-                                            Vector<double>& body_force);
-
- /// \short Function pointer to source function fct(t,x)
- /// x is a Vector!
- typedef double (*NavierStokesSourceFctPt)(const double& time,
-                                           const Vector<double>& x);
+    /// \short Function pointer to source function fct(t,x)
+    /// x is a Vector!
+    typedef double (*NavierStokesSourceFctPt)(const double& time,
+                                              const Vector<double>& x);
 
   private:
+    /// \short Static "magic" number that indicates that the pressure is
+    /// not stored at a node
+    static int Pressure_not_stored_at_node;
 
- /// \short Static "magic" number that indicates that the pressure is
- /// not stored at a node
- static int Pressure_not_stored_at_node;
+    /// Static default value for the physical constants (all initialised to
+    /// zero)
+    static double Default_Physical_Constant_Value;
 
- /// Static default value for the physical constants (all initialised to zero)
- static double Default_Physical_Constant_Value;
+    /// Static default value for the physical ratios (all are initialised to
+    /// one)
+    static double Default_Physical_Ratio_Value;
 
- /// Static default value for the physical ratios (all are initialised to one)
- static double Default_Physical_Ratio_Value;
-
- /// Static default value for the gravity vector
- static Vector<double> Default_Gravity_vector; 
+    /// Static default value for the gravity vector
+    static Vector<double> Default_Gravity_vector;
 
   protected:
+    // Physical constants
 
- //Physical constants
+    /// \short Pointer to the viscosity ratio (relative to the
+    /// viscosity used in the definition of the Reynolds number)
+    double* Viscosity_Ratio_pt;
 
- /// \short Pointer to the viscosity ratio (relative to the 
- /// viscosity used in the definition of the Reynolds number)
- double *Viscosity_Ratio_pt;
- 
- /// \short Pointer to the density ratio (relative to the density used in the 
- /// definition of the Reynolds number)
- double *Density_Ratio_pt;
- 
- // Pointers to global physical constants
+    /// \short Pointer to the density ratio (relative to the density used in the
+    /// definition of the Reynolds number)
+    double* Density_Ratio_pt;
 
- /// Pointer to the angle alpha
- double *Alpha_pt;
+    // Pointers to global physical constants
 
- /// Pointer to global Reynolds number
- double *Re_pt;
- 
- /// Pointer to global Reynolds number x Strouhal number (=Womersley)
- double *ReSt_pt;
- 
- /// \short Pointer to global Reynolds number x inverse Froude number
- /// (= Bond number / Capillary number) 
- double *ReInvFr_pt;
- 
- /// Pointer to global gravity Vector
- Vector<double> *G_pt;
- 
- /// Pointer to body force function
- NavierStokesBodyForceFctPt Body_force_fct_pt;
- 
- /// Pointer to volumetric source function
- NavierStokesSourceFctPt Source_fct_pt;
+    /// Pointer to the angle alpha
+    double* Alpha_pt;
 
- /// \short Access function for the local equation number information for
- /// the pressure.
- /// p_local_eqn[n] = local equation number or < 0 if pinned
- virtual int p_local_eqn(const unsigned &n)=0;
+    /// Pointer to global Reynolds number
+    double* Re_pt;
 
- /// \short Compute the shape functions and derivatives 
- /// w.r.t. global coords at local coordinate s.
- /// Return Jacobian of mapping between local and global coordinates.
- virtual double dshape_and_dtest_eulerian_pnst(const Vector<double> &s, Shape &psi, 
-                                          DShape &dpsidx, Shape &test, 
-                                          DShape &dtestdx) const=0;
+    /// Pointer to global Reynolds number x Strouhal number (=Womersley)
+    double* ReSt_pt;
 
- /// \short Compute the shape functions and derivatives 
- /// w.r.t. global coords at ipt-th integration point
- /// Return Jacobian of mapping between local and global coordinates.
- virtual double dshape_and_dtest_eulerian_at_knot_pnst(const unsigned &ipt, 
-                                                  Shape &psi, 
-                                                  DShape &dpsidx, Shape &test, 
-                                                  DShape &dtestdx) const=0;
+    /// \short Pointer to global Reynolds number x inverse Froude number
+    /// (= Bond number / Capillary number)
+    double* ReInvFr_pt;
 
- /// Compute the pressure shape functions at local coordinate s
- virtual void pshape_pnst(const Vector<double> &s, Shape &psi) const=0;
+    /// Pointer to global gravity Vector
+    Vector<double>* G_pt;
 
- /// \short Compute the pressure shape and test functions 
- /// at local coordinate s
- virtual void pshape_pnst(const Vector<double> &s, Shape &psi, Shape &test) const=0;
+    /// Pointer to body force function
+    NavierStokesBodyForceFctPt Body_force_fct_pt;
+
+    /// Pointer to volumetric source function
+    NavierStokesSourceFctPt Source_fct_pt;
+
+    /// \short Access function for the local equation number information for
+    /// the pressure.
+    /// p_local_eqn[n] = local equation number or < 0 if pinned
+    virtual int p_local_eqn(const unsigned& n) = 0;
+
+    /// \short Compute the shape functions and derivatives
+    /// w.r.t. global coords at local coordinate s.
+    /// Return Jacobian of mapping between local and global coordinates.
+    virtual double dshape_and_dtest_eulerian_pnst(const Vector<double>& s,
+                                                  Shape& psi,
+                                                  DShape& dpsidx,
+                                                  Shape& test,
+                                                  DShape& dtestdx) const = 0;
+
+    /// \short Compute the shape functions and derivatives
+    /// w.r.t. global coords at ipt-th integration point
+    /// Return Jacobian of mapping between local and global coordinates.
+    virtual double dshape_and_dtest_eulerian_at_knot_pnst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
+
+    /// Compute the pressure shape functions at local coordinate s
+    virtual void pshape_pnst(const Vector<double>& s, Shape& psi) const = 0;
+
+    /// \short Compute the pressure shape and test functions
+    /// at local coordinate s
+    virtual void pshape_pnst(const Vector<double>& s,
+                             Shape& psi,
+                             Shape& test) const = 0;
 
 
- /// Calculate the body force at a given time and Eulerian position
- void get_body_force(double time, const Vector<double> &x, 
-                     Vector<double> &result)
-  {
-   //If the function pointer is zero return zero
-   if(Body_force_fct_pt == 0)
+    /// Calculate the body force at a given time and Eulerian position
+    void get_body_force(double time,
+                        const Vector<double>& x,
+                        Vector<double>& result)
     {
-     //Loop over dimensions and set body forces to zero
-     for(unsigned i=0;i<2;i++) {result[i] = 0.0;}
-    }
-   //Otherwise call the function
-   else
-    {
-     (*Body_force_fct_pt)(time,x,result);
-    }
-  }
-
- /// \short Calculate the source fct at given time and
- /// Eulerian position 
- double get_source_fct(double time, const Vector<double> &x)
-  {
-   //If the function pointer is zero return zero
-   if (Source_fct_pt == 0) {return 0;}
-   //Otherwise call the function
-   else {return (*Source_fct_pt)(time,x);}
-  }
-
-public:
-
- /// \short Constructor: NULL the body force and source function
- PolarNavierStokesEquations() : Body_force_fct_pt(0), Source_fct_pt(0)
-  {
-   //Set all the Physical parameter pointers to the default value zero
-   Re_pt = &Default_Physical_Constant_Value;
-   ReSt_pt = &Default_Physical_Constant_Value;
-   ReInvFr_pt = &Default_Physical_Constant_Value;
-   G_pt = &Default_Gravity_vector;
-   //Set the Physical ratios to the default value of 1
-   Viscosity_Ratio_pt = &Default_Physical_Ratio_Value;
-   Density_Ratio_pt = &Default_Physical_Ratio_Value;
-  }
-
- /// Vector to decide whether the stress-divergence form is used or not
- // N.B. This needs to be public so that the intel compiler gets things correct
- // somehow the access function messes things up when going to refineable
- // navier--stokes
- static Vector<double> Gamma;
-
- //Access functions for the physical constants
-
- /// Reynolds number
- const double &re() const {return *Re_pt;}
-
- /// Alpha
- const double &alpha() const {return *Alpha_pt;}
-
- /// Product of Reynolds and Strouhal number (=Womersley number)
- const double &re_st() const {return *ReSt_pt;}
-
- /// Pointer to Reynolds number
- double* &re_pt() {return Re_pt;}
-
- /// Pointer to Alpha
- double* &alpha_pt() {return Alpha_pt;}
-
- /// Pointer to product of Reynolds and Strouhal number (=Womersley number)
- double* &re_st_pt() {return ReSt_pt;}
-
- /// \short Viscosity ratio for element: Element's viscosity relative to the 
- /// viscosity used in the definition of the Reynolds number
- const double &viscosity_ratio() const {return *Viscosity_Ratio_pt;}
-
- /// Pointer to Viscosity Ratio
- double* &viscosity_ratio_pt() {return Viscosity_Ratio_pt;}
-
- /// \short Density ratio for element: Element's density relative to the 
- ///  viscosity used in the definition of the Reynolds number
- const double &density_ratio() const {return *Density_Ratio_pt;}
-
- /// Pointer to Density ratio
- double* &density_ratio_pt() {return Density_Ratio_pt;}
-
- /// Global inverse Froude number
- const double &re_invfr() const {return *ReInvFr_pt;}
-
- /// Pointer to global inverse Froude number
- double* &re_invfr_pt() {return ReInvFr_pt;}
- 
- /// Vector of gravitational components
- const Vector<double> &g() const {return *G_pt;}
-
- /// Pointer to Vector of gravitational components
- Vector<double>* &g_pt() {return G_pt;}
-
- /// Access function for the body-force pointer
- NavierStokesBodyForceFctPt& body_force_fct_pt() 
-  {return Body_force_fct_pt;}
-
- /// Access function for the body-force pointer. Const version
- NavierStokesBodyForceFctPt body_force_fct_pt() const
-  {return Body_force_fct_pt;}
- 
- ///Access function for the source-function pointer
- NavierStokesSourceFctPt& source_fct_pt() {return Source_fct_pt;}
-
- ///Access function for the source-function pointer. Const version
- NavierStokesSourceFctPt source_fct_pt() const {return Source_fct_pt;}
- 
- ///Function to return number of pressure degrees of freedom
- virtual unsigned npres_pnst() const=0;
- 
- /// \short Velocity i at local node n. Uses suitably interpolated value 
- /// for hanging nodes.
- virtual double u_pnst(const unsigned &n, const unsigned &i) const=0;
-
- /// \short Velocity i at local node n at timestep t (t=0: present; 
- /// t>0: previous). Uses suitably interpolated value for hanging nodes.
- virtual double u_pnst(const unsigned &t, const unsigned &n, 
-                  const unsigned &i) const=0;
-
-  /// \short Return the index at which the i-th unknown velocity component
- /// is stored. The default value, i, is appropriate for single-physics
- /// problems.
- /// In derived multi-physics elements, this function should be overloaded
- /// to reflect the chosen storage scheme. Note that these equations require
- /// that the unknowns are always stored at the same indices at each node.
- virtual inline unsigned u_index_pnst(const unsigned &i) const {return i;}
-
- /// \short i-th component of du/dt at local node n. 
- /// Uses suitably interpolated value for hanging nodes.
- double du_dt_pnst(const unsigned &n, const unsigned &i) const
-  {
-   // Get the data's timestepper
-   TimeStepper* time_stepper_pt=node_pt(n)->time_stepper_pt();
-
-   // Number of timsteps (past & present)
-   unsigned n_time = time_stepper_pt->ntstorage();
-
-   //Initialise dudt
-   double dudt=0.0;
-   //Loop over the timesteps, if there is a non Steady timestepper
-   if (time_stepper_pt->type()!="Steady")
-    {
-     for(unsigned t=0;t<n_time;t++)
+      // If the function pointer is zero return zero
+      if (Body_force_fct_pt == 0)
       {
-       dudt+=time_stepper_pt->weight(1,t)*u_pnst(t,n,i);
+        // Loop over dimensions and set body forces to zero
+        for (unsigned i = 0; i < 2; i++)
+        {
+          result[i] = 0.0;
+        }
+      }
+      // Otherwise call the function
+      else
+      {
+        (*Body_force_fct_pt)(time, x, result);
       }
     }
-   
-   return dudt;
-  }
 
- /// \short Pressure at local pressure "node" n_p
- /// Uses suitably interpolated value for hanging nodes.
- virtual double p_pnst(const unsigned &n_p)const=0; 
+    /// \short Calculate the source fct at given time and
+    /// Eulerian position
+    double get_source_fct(double time, const Vector<double>& x)
+    {
+      // If the function pointer is zero return zero
+      if (Source_fct_pt == 0)
+      {
+        return 0;
+      }
+      // Otherwise call the function
+      else
+      {
+        return (*Source_fct_pt)(time, x);
+      }
+    }
 
- /// Pin p_dof-th pressure dof and set it to value specified by p_value.
- virtual void fix_pressure(const unsigned &p_dof, const double &p_value)=0;
+  public:
+    /// \short Constructor: NULL the body force and source function
+    PolarNavierStokesEquations() : Body_force_fct_pt(0), Source_fct_pt(0)
+    {
+      // Set all the Physical parameter pointers to the default value zero
+      Re_pt = &Default_Physical_Constant_Value;
+      ReSt_pt = &Default_Physical_Constant_Value;
+      ReInvFr_pt = &Default_Physical_Constant_Value;
+      G_pt = &Default_Gravity_vector;
+      // Set the Physical ratios to the default value of 1
+      Viscosity_Ratio_pt = &Default_Physical_Ratio_Value;
+      Density_Ratio_pt = &Default_Physical_Ratio_Value;
+    }
 
- /// \short Which nodal value represents the pressure? (Default: negative,
- /// indicating that pressure is not based on nodal interpolation).
- virtual int p_nodal_index_pnst() {return Pressure_not_stored_at_node;}
+    /// Vector to decide whether the stress-divergence form is used or not
+    // N.B. This needs to be public so that the intel compiler gets things
+    // correct somehow the access function messes things up when going to
+    // refineable navier--stokes
+    static Vector<double> Gamma;
 
- /// \short Pointer to n_p-th pressure node (Default: NULL, 
- /// indicating that pressure is not based on nodal interpolation).
- virtual Node* pressure_node_pt(const unsigned& n_p) {return NULL;}
+    // Access functions for the physical constants
 
- /// Integral of pressure over element
- double pressure_integral() const;
+    /// Reynolds number
+    const double& re() const
+    {
+      return *Re_pt;
+    }
 
- /// \short Return integral of dissipation over element
- double dissipation() const;
- 
- /// \short Return dissipation at local coordinate s
- double dissipation(const Vector<double>& s) const;
+    /// Alpha
+    const double& alpha() const
+    {
+      return *Alpha_pt;
+    }
 
-/// \short Get integral of kinetic energy over element
- double kin_energy() const;
+    /// Product of Reynolds and Strouhal number (=Womersley number)
+    const double& re_st() const
+    {
+      return *ReSt_pt;
+    }
 
- /// Strain-rate tensor: Now returns polar strain
- void strain_rate(const Vector<double>& s, 
-		  DenseMatrix<double>& strain_rate) const;
+    /// Pointer to Reynolds number
+    double*& re_pt()
+    {
+      return Re_pt;
+    }
 
- /// Function to return polar strain multiplied by r
- void strain_rate_by_r(const Vector<double>& s, 
-		  DenseMatrix<double>& strain_rate) const;
- 
- /// \short Compute traction (on the viscous scale) at local coordinate s 
- /// for outer unit normal N
- void get_traction(const Vector<double>& s, const Vector<double>& N, 
-                   Vector<double>& traction);
+    /// Pointer to Alpha
+    double*& alpha_pt()
+    {
+      return Alpha_pt;
+    }
 
- /// \short The potential loading on an external SolidElement is always 
- /// provided by the traction function
- void get_load(const Vector<double> &s, const Vector<double> &xi,
-               const Vector<double> &x, const Vector<double> &N,
-               Vector<double> &load)
-  {get_traction(s,N,load);}
- 
+    /// Pointer to product of Reynolds and Strouhal number (=Womersley number)
+    double*& re_st_pt()
+    {
+      return ReSt_pt;
+    }
 
- /// \short Output functionget_vels(const Vector<double>& x_to_get, Vector<double>& vels): x,y,[z],u,v,[w],p
- /// in tecplot format. Default number of plot points
- void output(std::ostream &outfile)
-  {
-   unsigned nplot=5;
-   output(outfile,nplot);
-  }
+    /// \short Viscosity ratio for element: Element's viscosity relative to the
+    /// viscosity used in the definition of the Reynolds number
+    const double& viscosity_ratio() const
+    {
+      return *Viscosity_Ratio_pt;
+    }
 
- /// \short Output function: x,y,[z],u,v,[w],p
- /// in tecplot format. nplot points in each coordinate direction
- void output(std::ostream &outfile, const unsigned &nplot);
+    /// Pointer to Viscosity Ratio
+    double*& viscosity_ratio_pt()
+    {
+      return Viscosity_Ratio_pt;
+    }
 
- /// \short C-style output function: x,y,[z],u,v,[w],p
- /// in tecplot format. Default number of plot points
- void output(FILE* file_pt)
-  {
-   unsigned nplot=5;
-   output(file_pt,nplot);
-  }
+    /// \short Density ratio for element: Element's density relative to the
+    ///  viscosity used in the definition of the Reynolds number
+    const double& density_ratio() const
+    {
+      return *Density_Ratio_pt;
+    }
 
- /// \short C-style output function: x,y,[z],u,v,[w],p
- /// in tecplot format. nplot points in each coordinate direction
- void output(FILE* file_pt, const unsigned &nplot);
+    /// Pointer to Density ratio
+    double*& density_ratio_pt()
+    {
+      return Density_Ratio_pt;
+    }
 
- /// \short Full output function: 
- /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
- /// in tecplot format. Default number of plot points
- void full_output(std::ostream &outfile)
-  {
-   unsigned nplot=5;
-   full_output(outfile,nplot);
-  }
+    /// Global inverse Froude number
+    const double& re_invfr() const
+    {
+      return *ReInvFr_pt;
+    }
 
- /// \short Full output function: 
- /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
- /// in tecplot format. nplot points in each coordinate direction
- void full_output(std::ostream &outfile, const unsigned &nplot);
+    /// Pointer to global inverse Froude number
+    double*& re_invfr_pt()
+    {
+      return ReInvFr_pt;
+    }
+
+    /// Vector of gravitational components
+    const Vector<double>& g() const
+    {
+      return *G_pt;
+    }
+
+    /// Pointer to Vector of gravitational components
+    Vector<double>*& g_pt()
+    {
+      return G_pt;
+    }
+
+    /// Access function for the body-force pointer
+    NavierStokesBodyForceFctPt& body_force_fct_pt()
+    {
+      return Body_force_fct_pt;
+    }
+
+    /// Access function for the body-force pointer. Const version
+    NavierStokesBodyForceFctPt body_force_fct_pt() const
+    {
+      return Body_force_fct_pt;
+    }
+
+    /// Access function for the source-function pointer
+    NavierStokesSourceFctPt& source_fct_pt()
+    {
+      return Source_fct_pt;
+    }
+
+    /// Access function for the source-function pointer. Const version
+    NavierStokesSourceFctPt source_fct_pt() const
+    {
+      return Source_fct_pt;
+    }
+
+    /// Function to return number of pressure degrees of freedom
+    virtual unsigned npres_pnst() const = 0;
+
+    /// \short Velocity i at local node n. Uses suitably interpolated value
+    /// for hanging nodes.
+    virtual double u_pnst(const unsigned& n, const unsigned& i) const = 0;
+
+    /// \short Velocity i at local node n at timestep t (t=0: present;
+    /// t>0: previous). Uses suitably interpolated value for hanging nodes.
+    virtual double u_pnst(const unsigned& t,
+                          const unsigned& n,
+                          const unsigned& i) const = 0;
+
+    /// \short Return the index at which the i-th unknown velocity component
+    /// is stored. The default value, i, is appropriate for single-physics
+    /// problems.
+    /// In derived multi-physics elements, this function should be overloaded
+    /// to reflect the chosen storage scheme. Note that these equations require
+    /// that the unknowns are always stored at the same indices at each node.
+    virtual inline unsigned u_index_pnst(const unsigned& i) const
+    {
+      return i;
+    }
+
+    /// \short i-th component of du/dt at local node n.
+    /// Uses suitably interpolated value for hanging nodes.
+    double du_dt_pnst(const unsigned& n, const unsigned& i) const
+    {
+      // Get the data's timestepper
+      TimeStepper* time_stepper_pt = node_pt(n)->time_stepper_pt();
+
+      // Number of timsteps (past & present)
+      unsigned n_time = time_stepper_pt->ntstorage();
+
+      // Initialise dudt
+      double dudt = 0.0;
+      // Loop over the timesteps, if there is a non Steady timestepper
+      if (time_stepper_pt->type() != "Steady")
+      {
+        for (unsigned t = 0; t < n_time; t++)
+        {
+          dudt += time_stepper_pt->weight(1, t) * u_pnst(t, n, i);
+        }
+      }
+
+      return dudt;
+    }
+
+    /// \short Pressure at local pressure "node" n_p
+    /// Uses suitably interpolated value for hanging nodes.
+    virtual double p_pnst(const unsigned& n_p) const = 0;
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    virtual void fix_pressure(const unsigned& p_dof, const double& p_value) = 0;
+
+    /// \short Which nodal value represents the pressure? (Default: negative,
+    /// indicating that pressure is not based on nodal interpolation).
+    virtual int p_nodal_index_pnst()
+    {
+      return Pressure_not_stored_at_node;
+    }
+
+    /// \short Pointer to n_p-th pressure node (Default: NULL,
+    /// indicating that pressure is not based on nodal interpolation).
+    virtual Node* pressure_node_pt(const unsigned& n_p)
+    {
+      return NULL;
+    }
+
+    /// Integral of pressure over element
+    double pressure_integral() const;
+
+    /// \short Return integral of dissipation over element
+    double dissipation() const;
+
+    /// \short Return dissipation at local coordinate s
+    double dissipation(const Vector<double>& s) const;
+
+    /// \short Get integral of kinetic energy over element
+    double kin_energy() const;
+
+    /// Strain-rate tensor: Now returns polar strain
+    void strain_rate(const Vector<double>& s,
+                     DenseMatrix<double>& strain_rate) const;
+
+    /// Function to return polar strain multiplied by r
+    void strain_rate_by_r(const Vector<double>& s,
+                          DenseMatrix<double>& strain_rate) const;
+
+    /// \short Compute traction (on the viscous scale) at local coordinate s
+    /// for outer unit normal N
+    void get_traction(const Vector<double>& s,
+                      const Vector<double>& N,
+                      Vector<double>& traction);
+
+    /// \short The potential loading on an external SolidElement is always
+    /// provided by the traction function
+    void get_load(const Vector<double>& s,
+                  const Vector<double>& xi,
+                  const Vector<double>& x,
+                  const Vector<double>& N,
+                  Vector<double>& load)
+    {
+      get_traction(s, N, load);
+    }
 
 
- /// \short Output function: x,y,[z],u,v,[w] in tecplot format.
- /// nplot points in each coordinate direction at timestep t
- /// (t=0: present; t>0: previous timestep)
- void output_veloc(std::ostream &outfile, const unsigned &nplot, 
-                   const unsigned& t);
+    /// \short Output functionget_vels(const Vector<double>& x_to_get,
+    /// Vector<double>& vels): x,y,[z],u,v,[w],p in tecplot format. Default
+    /// number of plot points
+    void output(std::ostream& outfile)
+    {
+      unsigned nplot = 5;
+      output(outfile, nplot);
+    }
 
- /// \short Output exact solution specified via function pointer
- /// at a given number of plot points. Function prints as
- /// many components as are returned in solution Vector
- void output_fct(std::ostream &outfile, const unsigned &nplot, 
-                 FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+    /// \short Output function: x,y,[z],u,v,[w],p
+    /// in tecplot format. nplot points in each coordinate direction
+    void output(std::ostream& outfile, const unsigned& nplot);
 
- /// \short Output exact solution specified via function pointer
- /// at a given time and at a given number of plot points.
- /// Function prints as many components as are returned in solution Vector.
- void output_fct(std::ostream &outfile, const unsigned &nplot, 
-                 const double& time,
-                 FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
+    /// \short C-style output function: x,y,[z],u,v,[w],p
+    /// in tecplot format. Default number of plot points
+    void output(FILE* file_pt)
+    {
+      unsigned nplot = 5;
+      output(file_pt, nplot);
+    }
 
- /// \short Validate against exact solution at given time
- /// Solution is provided via function pointer.
- /// Plot at a given number of plot points and compute L2 error
- /// and L2 norm of velocity solution over element
- void compute_error(std::ostream &outfile,
-                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+    /// \short C-style output function: x,y,[z],u,v,[w],p
+    /// in tecplot format. nplot points in each coordinate direction
+    void output(FILE* file_pt, const unsigned& nplot);
+
+    /// \short Full output function:
+    /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+    /// in tecplot format. Default number of plot points
+    void full_output(std::ostream& outfile)
+    {
+      unsigned nplot = 5;
+      full_output(outfile, nplot);
+    }
+
+    /// \short Full output function:
+    /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+    /// in tecplot format. nplot points in each coordinate direction
+    void full_output(std::ostream& outfile, const unsigned& nplot);
+
+
+    /// \short Output function: x,y,[z],u,v,[w] in tecplot format.
+    /// nplot points in each coordinate direction at timestep t
+    /// (t=0: present; t>0: previous timestep)
+    void output_veloc(std::ostream& outfile,
+                      const unsigned& nplot,
+                      const unsigned& t);
+
+    /// \short Output exact solution specified via function pointer
+    /// at a given number of plot points. Function prints as
+    /// many components as are returned in solution Vector
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
+                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+
+    /// \short Output exact solution specified via function pointer
+    /// at a given time and at a given number of plot points.
+    /// Function prints as many components as are returned in solution Vector.
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
                     const double& time,
-                    double& error, double& norm);
+                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
- /// \short Validate against exact solution.
- /// Solution is provided via function pointer.
- /// Plot at a given number of plot points and compute L2 error
- /// and L2 norm of velocity solution over element
- void compute_error(std::ostream &outfile,
-                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                    double& error, double& norm);
+    /// \short Validate against exact solution at given time
+    /// Solution is provided via function pointer.
+    /// Plot at a given number of plot points and compute L2 error
+    /// and L2 norm of velocity solution over element
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                       const double& time,
+                       double& error,
+                       double& norm);
 
- /// Compute the element's residual Vector
- void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    /// \short Validate against exact solution.
+    /// Solution is provided via function pointer.
+    /// Plot at a given number of plot points and compute L2 error
+    /// and L2 norm of velocity solution over element
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                       double& error,
+                       double& norm);
+
+    /// Compute the element's residual Vector
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // Call the generic residuals function with flag set to 0
+      fill_in_generic_residual_contribution(residuals,
+                                            GeneralisedElement::Dummy_matrix,
+                                            GeneralisedElement::Dummy_matrix,
+                                            0);
+    }
+
+    ///\short Compute the element's residual Vector and the jacobian matrix
+    /// Virtual function can be overloaded by hanging-node version
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution(
+        residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
+
+      /*
+      // Only needed for test purposes
+      //Create a new matrix
+      unsigned n_dof = ndof();
+      DenseMatrix<double> jacobian_fd(n_dof,n_dof,0.0);
+      fill_in_jacobian_from_internal_by_fd(residuals,jacobian_fd);
+      fill_in_jacobian_from_nodal_by_fd(residuals,jacobian_fd);
+
+      if(n_dof==21)
+       {
+         for(unsigned i=0;i<n_dof;i++)
+          {
+      for(unsigned j=0;j<n_dof;j++)
+       {
+         if(std::fabs(jacobian(i,j) - jacobian_fd(i,j)) > 1.0e-3)
+          {
+            std::cout << i << " " << j << " " << std::fabs(jacobian(i,j) -
+      jacobian_fd(i,j)) << std::endl;
+          }
+       }
+          }
+       }
+      // Only needed for test purposes
+
+      // Only needed for test purposes
+      //Create a new matrix
+      unsigned n_dof = ndof();
+      DenseMatrix<double>
+      jacobian_new(n_dof,n_dof,0.0),jacobian_old(n_dof,n_dof,0.0);
+      Vector<double> residuals_new(n_dof,0.0),residuals_old(n_dof,0.0);
+
+      //Call the generic routine with the flag set to 1
+      PolarNavierStokesEquations::fill_in_generic_residual_contribution(residuals_old,jacobian_old,
+                                            GeneralisedElement::Dummy_matrix,1);
+      //Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution(residuals_new,jacobian_new,
+                                            GeneralisedElement::Dummy_matrix,1);
+
+      if(n_dof==21)
+        {
+         for(unsigned i=0;i<n_dof;i++)
+          {
+      if(std::fabs(residuals_new[i] - residuals_old[i])>1.0e-8) std::cout << i
+      << " " << std::fabs(residuals_new[i] - residuals_old[i]) << std::endl;
+      //std::cout << residuals_new[i] << std::endl;
+      for(unsigned j=0;j<n_dof;j++)
+       {
+         if(std::fabs(jacobian_new(i,j) - jacobian_old(i,j)) > 1.0e-8)
+          {
+            std::cout << i << " " << j << " " << std::fabs(jacobian_new(i,j) -
+      jacobian_old(i,j)) << std::endl;
+          }
+       }
+          }
+        }
+      // Only needed for test purposes
+      */
+    } // End of fill_in_contribution_to_jacobian
+
+    ///\short Compute the element's residual Vector and the jacobian matrix
+    /// Plus the mass matrix especially for eigenvalue problems
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      // Call the generic routine with the flag set to 2
+      fill_in_generic_residual_contribution(
+        residuals, jacobian, mass_matrix, 2);
+    }
+
+    ///\short Compute the residuals for the Navier--Stokes equations;
+    /// flag=1(or 0): do (or don't) compute the Jacobian as well.
+    virtual void fill_in_generic_residual_contribution(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      unsigned flag);
+
+    /// Compute vector of FE interpolated velocity u at local coordinate s
+    void interpolated_u_pnst(const Vector<double>& s,
+                             Vector<double>& veloc) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+      // Local shape function
+      Shape psi(n_node);
+      // Find values of shape function
+      shape(s, psi);
+
+      for (unsigned i = 0; i < 2; i++)
+      {
+        // Initialise value of u
+        veloc[i] = 0.0;
+        // Loop over the local nodes and sum
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          veloc[i] += u_pnst(l, i) * psi[l];
+        }
+      }
+    }
+
+    /// Return FE interpolated velocity u[i] at local coordinate s
+    double interpolated_u_pnst(const Vector<double>& s, const unsigned& i) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+      // Local shape function
+      Shape psi(n_node);
+      // Find values of shape function
+      shape(s, psi);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_u += u_pnst(l, i) * psi[l];
+      }
+
+      return (interpolated_u);
+    }
+
+    /// Return FE interpolated pressure at local coordinate s
+    double interpolated_p_pnst(const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_pres = npres_pnst();
+      // Local shape function
+      Shape psi(n_pres);
+      // Find values of shape function
+      pshape_pnst(s, psi);
+
+      // Initialise value of p
+      double interpolated_p = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        interpolated_p += p_pnst(l) * psi[l];
+      }
+
+      return (interpolated_p);
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    /// My own work:                                                ///
+    /// Return FE interpolated velocity derivative du[i]/dx[j]      ///
+    /// at local coordinate s                                       ///
+    ///////////////////////////////////////////////////////////////////
+    double interpolated_dudx_pnst(const Vector<double>& s,
+                                  const unsigned& i,
+                                  const unsigned& j) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+
+      // Set up memory for the shape and test functions
+      Shape psif(n_node);
+      DShape dpsifdx(n_node, 2);
+
+      // double J =
+      dshape_eulerian(s, psif, dpsifdx);
+
+      // Initialise to zero
+      double interpolated_dudx = 0.0;
+
+      // Calculate velocity derivative:
+
+      // Loop over nodes
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_dudx += u_pnst(l, i) * dpsifdx(l, j);
+      }
+
+      return (interpolated_dudx);
+    }
+  };
+
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+
+
+  //==========================================================================
+  /// Crouzeix_Raviart elements are Navier--Stokes elements with quadratic
+  /// interpolation for velocities and positions, but a discontinuous linear
+  /// pressure interpolation
+  //==========================================================================
+  class PolarCrouzeixRaviartElement : public virtual QElement<2, 3>,
+                                      public virtual PolarNavierStokesEquations
   {
-   //Call the generic residuals function with flag set to 0
-   fill_in_generic_residual_contribution(residuals,
-                                       GeneralisedElement::Dummy_matrix,
-                                     GeneralisedElement::Dummy_matrix,0);
+  private:
+    /// Static array of ints to hold required number of variables at nodes
+    static const unsigned Initial_Nvalue[];
+
+  protected:
+    /// Internal index that indicates at which internal data the pressure
+    /// is stored
+    unsigned P_pnst_internal_index;
+
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_pnst(const Vector<double>& s,
+                                                 Shape& psi,
+                                                 DShape& dpsidx,
+                                                 Shape& test,
+                                                 DShape& dtestdx) const;
+
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_at_knot_pnst(const unsigned& ipt,
+                                                         Shape& psi,
+                                                         DShape& dpsidx,
+                                                         Shape& test,
+                                                         DShape& dtestdx) const;
+
+    /// Pressure shape functions at local coordinate s
+    inline void pshape_pnst(const Vector<double>& s, Shape& psi) const;
+
+    /// Pressure shape and test functions at local coordinte s
+    inline void pshape_pnst(const Vector<double>& s,
+                            Shape& psi,
+                            Shape& test) const;
+
+    /// Return the local equation numbers for the pressure values.
+    inline int p_local_eqn(const unsigned& n)
+    {
+      return this->internal_local_eqn(P_pnst_internal_index, n);
+    }
+
+  public:
+    /// Constructor, there are DIM+1 internal values (for the pressure)
+    PolarCrouzeixRaviartElement()
+      : QElement<2, 3>(), PolarNavierStokesEquations()
+    {
+      // Allocate and add one Internal data object that stores 3 pressure
+      // values;
+      P_pnst_internal_index = this->add_internal_data(new Data(3));
+    }
+
+    /// \short Number of values (pinned or dofs) required at local node n.
+    virtual unsigned required_nvalue(const unsigned& n) const;
+
+    /// \short Return the velocity component u[i] at local node
+    /// n. Uses suitably interpolated value for hanging nodes.
+    double u_pnst(const unsigned& n, const unsigned& i) const
+    {
+      return this->nodal_value(n, i);
+    }
+
+    /// \short Return the velocity component u[i] at local node
+    /// n at timestep t (t=0: present; t>0: previous timestep).
+    /// Uses suitably interpolated value for hanging nodes.
+    double u_pnst(const unsigned& t, const unsigned& n, const unsigned& i) const
+    {
+      return this->nodal_value(t, n, i);
+    }
+
+    /// \short Return the pressure values at internal dof i_internal
+    /// (Discontinous pressure interpolation -- no need to cater for hanging
+    /// nodes).
+    double p_pnst(const unsigned& i_internal) const
+    {
+      return *this->internal_data_pt(P_pnst_internal_index)
+                ->value_pt(i_internal);
+    }
+
+    /// Return number of pressure values
+    unsigned npres_pnst() const
+    {
+      return 3;
+    }
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    void fix_pressure(const unsigned& p_dof, const double& p_value)
+    {
+      this->internal_data_pt(P_pnst_internal_index)->pin(p_dof);
+      *this->internal_data_pt(P_pnst_internal_index)->value_pt(p_dof) = p_value;
+    }
+
+    /// \short Add to the set paired_load_data
+    /// pairs of pointers to data objects and unsigned integers that
+    /// index the values in the data object that affect the load (traction),
+    /// as specified in the get_load() function.
+    void get_load_data(std::set<std::pair<Data*, unsigned>>& paired_load_data);
+
+    /// Redirect output to NavierStokesEquations output
+    void output(std::ostream& outfile)
+    {
+      PolarNavierStokesEquations::output(outfile);
+    }
+
+    /// Redirect output to NavierStokesEquations output
+    void output(std::ostream& outfile, const unsigned& Nplot)
+    {
+      PolarNavierStokesEquations::output(outfile, Nplot);
+    }
+
+
+    /// Redirect output to NavierStokesEquations output
+    void output(FILE* file_pt)
+    {
+      PolarNavierStokesEquations::output(file_pt);
+    }
+
+    /// Redirect output to NavierStokesEquations output
+    void output(FILE* file_pt, const unsigned& Nplot)
+    {
+      PolarNavierStokesEquations::output(file_pt, Nplot);
+    }
+
+
+    /// \short Full output function:
+    /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+    /// in tecplot format. Default number of plot points
+    void full_output(std::ostream& outfile)
+    {
+      PolarNavierStokesEquations::full_output(outfile);
+    }
+
+    /// \short Full output function:
+    /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+    /// in tecplot format. nplot points in each coordinate direction
+    void full_output(std::ostream& outfile, const unsigned& nplot)
+    {
+      PolarNavierStokesEquations::full_output(outfile, nplot);
+    }
+  };
+
+  // Inline functions
+
+  //=======================================================================
+  /// 2D
+  /// Derivatives of the shape functions and test functions w.r.t. to global
+  /// (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //=======================================================================
+  inline double PolarCrouzeixRaviartElement::dshape_and_dtest_eulerian_pnst(
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    double J = QElement<2, 3>::dshape_eulerian(s, psi, dpsidx);
+    // Loop over the test functions and derivatives and set them equal to the
+    // shape functions
+    for (unsigned i = 0; i < 9; i++)
+    {
+      test[i] = psi[i];
+      dtestdx(i, 0) = dpsidx(i, 0);
+      dtestdx(i, 1) = dpsidx(i, 1);
+    }
+    // Return the jacobian
+    return J;
   }
 
- ///\short Compute the element's residual Vector and the jacobian matrix
- /// Virtual function can be overloaded by hanging-node version
- void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                       DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution(residuals,jacobian,
-                                       GeneralisedElement::Dummy_matrix,1);
 
-   /*
-   // Only needed for test purposes
-   //Create a new matrix
-   unsigned n_dof = ndof();
-   DenseMatrix<double> jacobian_fd(n_dof,n_dof,0.0);
-   fill_in_jacobian_from_internal_by_fd(residuals,jacobian_fd);
-   fill_in_jacobian_from_nodal_by_fd(residuals,jacobian_fd);
-   
-   if(n_dof==21)
+  //=======================================================================
+  /// 2D
+  /// Derivatives of the shape functions and test functions w.r.t. to global
+  /// (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //=======================================================================
+  inline double PolarCrouzeixRaviartElement::
+    dshape_and_dtest_eulerian_at_knot_pnst(const unsigned& ipt,
+                                           Shape& psi,
+                                           DShape& dpsidx,
+                                           Shape& test,
+                                           DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    double J = QElement<2, 3>::dshape_eulerian_at_knot(ipt, psi, dpsidx);
+    // Loop over the test functions and derivatives and set them equal to the
+    // shape functions
+    for (unsigned i = 0; i < 9; i++)
     {
-      for(unsigned i=0;i<n_dof;i++)
-       {
-	 for(unsigned j=0;j<n_dof;j++)
-	  {
-	    if(std::fabs(jacobian(i,j) - jacobian_fd(i,j)) > 1.0e-3)
-	     {
-	       std::cout << i << " " << j << " " << std::fabs(jacobian(i,j) - jacobian_fd(i,j)) << std::endl;
-	     }
-	  }
-       }
+      test[i] = psi[i];
+      dtestdx(i, 0) = dpsidx(i, 0);
+      dtestdx(i, 1) = dpsidx(i, 1);
     }
-   // Only needed for test purposes
+    // Return the jacobian
+    return J;
+  }
 
-   // Only needed for test purposes
-   //Create a new matrix
-   unsigned n_dof = ndof();
-   DenseMatrix<double> jacobian_new(n_dof,n_dof,0.0),jacobian_old(n_dof,n_dof,0.0);
-   Vector<double> residuals_new(n_dof,0.0),residuals_old(n_dof,0.0);
-
-   //Call the generic routine with the flag set to 1
-   PolarNavierStokesEquations::fill_in_generic_residual_contribution(residuals_old,jacobian_old,
-                                         GeneralisedElement::Dummy_matrix,1);
-   //Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution(residuals_new,jacobian_new,
-                                         GeneralisedElement::Dummy_matrix,1);
-   
-   if(n_dof==21)
-     {
-      for(unsigned i=0;i<n_dof;i++)
-       {
-	 if(std::fabs(residuals_new[i] - residuals_old[i])>1.0e-8) std::cout << i << " " << std::fabs(residuals_new[i] - residuals_old[i]) << std::endl;
-	 //std::cout << residuals_new[i] << std::endl;
-	 for(unsigned j=0;j<n_dof;j++)
-	  {
-	    if(std::fabs(jacobian_new(i,j) - jacobian_old(i,j)) > 1.0e-8)
-	     {
-	       std::cout << i << " " << j << " " << std::fabs(jacobian_new(i,j) - jacobian_old(i,j)) << std::endl;
-	     }
-	  }
-       }
-     }
-   // Only needed for test purposes
-   */
-  } //End of fill_in_contribution_to_jacobian
-
- ///\short Compute the element's residual Vector and the jacobian matrix
- /// Plus the mass matrix especially for eigenvalue problems
- void fill_in_contribution_to_jacobian_and_mass_matrix(
-  Vector<double> &residuals,
-  DenseMatrix<double> &jacobian,DenseMatrix<double> &mass_matrix)
-  {   
-   //Call the generic routine with the flag set to 2
-   fill_in_generic_residual_contribution(residuals,jacobian,mass_matrix,2);
-  } 
-
- ///\short Compute the residuals for the Navier--Stokes equations; 
- /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
- virtual void fill_in_generic_residual_contribution(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian,
-  DenseMatrix<double> &mass_matrix, unsigned flag);
-
- /// Compute vector of FE interpolated velocity u at local coordinate s
- void interpolated_u_pnst(const Vector<double> &s, Vector<double>& veloc) const
+  //=======================================================================
+  /// 2D :
+  /// Pressure shape functions
+  //=======================================================================
+  inline void PolarCrouzeixRaviartElement::pshape_pnst(const Vector<double>& s,
+                                                       Shape& psi) const
   {
-   //Find number of nodes
-   unsigned n_node = nnode();
-   //Local shape function
-   Shape psi(n_node);
-   //Find values of shape function
-   shape(s,psi);
-   
-   for (unsigned i=0;i<2;i++)
+    psi[0] = 1.0;
+    psi[1] = s[0];
+    psi[2] = s[1];
+  }
+
+  /// Define the pressure shape and test functions
+  inline void PolarCrouzeixRaviartElement::pshape_pnst(const Vector<double>& s,
+                                                       Shape& psi,
+                                                       Shape& test) const
+  {
+    // Call the pressure shape functions
+    pshape_pnst(s, psi);
+    // Loop over the test functions and set them equal to the shape functions
+    for (unsigned i = 0; i < 3; i++) test[i] = psi[i];
+  }
+
+  //=======================================================================
+  /// Face geometry of the 2D Crouzeix_Raviart elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<PolarCrouzeixRaviartElement>
+    : public virtual QElement<1, 3>
+  {
+  public:
+    FaceGeometry() : QElement<1, 3>() {}
+  };
+
+  ////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////
+
+  //=======================================================================
+  /// Taylor--Hood elements are Navier--Stokes elements
+  /// with quadratic interpolation for velocities and positions and
+  /// continous linear pressure interpolation
+  //=======================================================================
+  class PolarTaylorHoodElement : public virtual QElement<2, 3>,
+                                 public virtual PolarNavierStokesEquations
+  {
+  private:
+    /// Static array of ints to hold number of variables at node
+    static const unsigned Initial_Nvalue[];
+
+  protected:
+    /// \short Static array of ints to hold conversion from pressure
+    /// node numbers to actual node numbers
+    static const unsigned Pconv[];
+
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_pnst(const Vector<double>& s,
+                                                 Shape& psi,
+                                                 DShape& dpsidx,
+                                                 Shape& test,
+                                                 DShape& dtestdx) const;
+
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_at_knot_pnst(const unsigned& ipt,
+                                                         Shape& psi,
+                                                         DShape& dpsidx,
+                                                         Shape& test,
+                                                         DShape& dtestdx) const;
+
+    /// Pressure shape functions at local coordinate s
+    inline void pshape_pnst(const Vector<double>& s, Shape& psi) const;
+
+    /// Pressure shape and test functions at local coordinte s
+    inline void pshape_pnst(const Vector<double>& s,
+                            Shape& psi,
+                            Shape& test) const;
+
+    /// Return the local equation numbers for the pressure values.
+    inline int p_local_eqn(const unsigned& n)
     {
-     //Initialise value of u
-     veloc[i] = 0.0;
-     //Loop over the local nodes and sum
-     for(unsigned l=0;l<n_node;l++) 
+      return this->nodal_local_eqn(Pconv[n], p_nodal_index_pnst());
+    }
+
+  public:
+    /// Constructor, no internal data points
+    PolarTaylorHoodElement() : QElement<2, 3>(), PolarNavierStokesEquations() {}
+
+    /// \short Number of values (pinned or dofs) required at node n. Can
+    /// be overwritten for hanging node version
+    inline virtual unsigned required_nvalue(const unsigned& n) const
+    {
+      return Initial_Nvalue[n];
+    }
+
+    /// \short Which nodal value represents the pressure?
+    virtual int p_nodal_index_pnst()
+    {
+      return 2;
+    }
+
+    /// \short Pointer to n_p-th pressure node
+    Node* pressure_node_pt(const unsigned& n_p)
+    {
+      return this->node_pt(Pconv[n_p]);
+    }
+
+    ///\short Return the velocity component u[i] at local node
+    /// n. Uses suitably interpolated value for hanging nodes.
+    double u_pnst(const unsigned& n, const unsigned& i) const
+    {
+      return this->nodal_value(n, i);
+    }
+
+    /// \short Return the velocity component u[i] at local node
+    /// n at timestep t (t=0: present; t>0: previous timestep).
+    /// Uses suitably interpolated value for hanging nodes.
+    double u_pnst(const unsigned& t, const unsigned& n, const unsigned& i) const
+    {
+      return this->nodal_value(t, n, i);
+    }
+
+    /// \short Access function for the pressure values at local pressure
+    /// node n_p (const version)
+    double p_pnst(const unsigned& n_p) const
+    {
+      return this->nodal_value(Pconv[n_p], 2);
+    }
+    // {return this->nodal_value(Pconv[n_p],this->p_nodal_index_pnst());}
+
+    /// Return number of pressure values
+    unsigned npres_pnst() const
+    {
+      return 4;
+    }
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    void fix_pressure(const unsigned& p_dof, const double& p_value)
+    {
+      this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_pnst());
+      *this->node_pt(Pconv[p_dof])->value_pt(this->p_nodal_index_pnst()) =
+        p_value;
+    }
+
+
+    /// \short Add to the set paired_load_data
+    /// pairs of pointers to data objects and unsigned integers that
+    /// index the values in the data object that affect the load (traction),
+    /// as specified in the get_load() function.
+    void get_load_data(std::set<std::pair<Data*, unsigned>>& paired_load_data);
+
+    /// Redirect output to NavierStokesEquations output
+    void output(std::ostream& outfile)
+    {
+      PolarNavierStokesEquations::output(outfile);
+    }
+
+    /// Redirect output to NavierStokesEquations output
+    void output(std::ostream& outfile, const unsigned& Nplot)
+    {
+      PolarNavierStokesEquations::output(outfile, Nplot);
+    }
+
+    /// Redirect output to NavierStokesEquations output
+    void output(FILE* file_pt)
+    {
+      PolarNavierStokesEquations::output(file_pt);
+    }
+
+    /// Redirect output to NavierStokesEquations output
+    void output(FILE* file_pt, const unsigned& Nplot)
+    {
+      PolarNavierStokesEquations::output(file_pt, Nplot);
+    }
+  };
+
+  // Inline functions
+
+  //==========================================================================
+  /// 2D :
+  /// Derivatives of the shape functions and test functions w.r.t to
+  /// global (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //==========================================================================
+  inline double PolarTaylorHoodElement::dshape_and_dtest_eulerian_pnst(
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    double J = QElement<2, 3>::dshape_eulerian(s, psi, dpsidx);
+    // Loop over the test functions and derivatives and set them equal to the
+    // shape functions
+    for (unsigned i = 0; i < 9; i++)
+    {
+      test[i] = psi[i];
+      dtestdx(i, 0) = dpsidx(i, 0);
+      dtestdx(i, 1) = dpsidx(i, 1);
+    }
+    // Return the jacobian
+    return J;
+  }
+
+
+  //==========================================================================
+  /// 2D :
+  /// Derivatives of the shape functions and test functions w.r.t to
+  /// global (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //==========================================================================
+  inline double PolarTaylorHoodElement::dshape_and_dtest_eulerian_at_knot_pnst(
+    const unsigned& ipt,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    double J = QElement<2, 3>::dshape_eulerian_at_knot(ipt, psi, dpsidx);
+    // Loop over the test functions and derivatives and set them equal to the
+    // shape functions
+    for (unsigned i = 0; i < 9; i++)
+    {
+      test[i] = psi[i];
+      dtestdx(i, 0) = dpsidx(i, 0);
+      dtestdx(i, 1) = dpsidx(i, 1);
+    }
+    // Return the jacobian
+    return J;
+  }
+
+
+  //==========================================================================
+  /// 2D :
+  /// Pressure shape functions
+  //==========================================================================
+  inline void PolarTaylorHoodElement::pshape_pnst(const Vector<double>& s,
+                                                  Shape& psi) const
+  {
+    // Call the OneDimensional Shape functions
+    // Local storage
+    double psi1[2], psi2[2];
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], psi1);
+    OneDimLagrange::shape<2>(s[1], psi2);
+
+    // Now let's loop over the nodal points in the element
+    // s1 is the "x" coordinate, s2 the "y"
+    for (unsigned i = 0; i < 2; i++)
+    {
+      for (unsigned j = 0; j < 2; j++)
       {
-       veloc[i] += u_pnst(l,i)*psi[l];
+        /*Multiply the two 1D functions together to get the 2D function*/
+        psi[2 * i + j] = psi2[i] * psi1[j];
       }
     }
   }
 
- /// Return FE interpolated velocity u[i] at local coordinate s
- double interpolated_u_pnst(const Vector<double> &s, const unsigned &i) const
+
+  //==========================================================================
+  /// 2D :
+  /// Pressure shape and test functions
+  //==========================================================================
+  inline void PolarTaylorHoodElement::pshape_pnst(const Vector<double>& s,
+                                                  Shape& psi,
+                                                  Shape& test) const
   {
-   //Find number of nodes
-   unsigned n_node = nnode();
-   //Local shape function
-   Shape psi(n_node);
-   //Find values of shape function
-   shape(s,psi);
-   
-   //Initialise value of u
-   double interpolated_u = 0.0;
-   //Loop over the local nodes and sum
-   for(unsigned l=0;l<n_node;l++) 
-    {
-     interpolated_u += u_pnst(l,i)*psi[l];
-    }
-   
-   return(interpolated_u);
+    // Call the pressure shape functions
+    pshape_pnst(s, psi);
+    // Loop over the test functions and set them equal to the shape functions
+    for (unsigned i = 0; i < 4; i++) test[i] = psi[i];
   }
 
- /// Return FE interpolated pressure at local coordinate s
- double interpolated_p_pnst(const Vector<double> &s) const
+  //=======================================================================
+  /// Face geometry of the 2D Taylor_Hood elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<PolarTaylorHoodElement> : public virtual QElement<1, 3>
   {
-   //Find number of nodes
-   unsigned n_pres = npres_pnst();
-   //Local shape function
-   Shape psi(n_pres);
-   //Find values of shape function
-   pshape_pnst(s,psi);
-   
-   //Initialise value of p
-   double interpolated_p = 0.0;
-   //Loop over the local nodes and sum
-   for(unsigned l=0;l<n_pres;l++) 
-    {
-     interpolated_p += p_pnst(l)*psi[l];
-    }
-   
-   return(interpolated_p);
-  }
-
- ///////////////////////////////////////////////////////////////////
- /// My own work:                                                ///
- /// Return FE interpolated velocity derivative du[i]/dx[j]      ///
- /// at local coordinate s                                       ///
- ///////////////////////////////////////////////////////////////////
- double interpolated_dudx_pnst(const Vector<double> &s, const unsigned &i,const unsigned &j) const
-  {
-   //Find number of nodes
-   unsigned n_node = nnode(); 
-
-   //Set up memory for the shape and test functions
-   Shape psif(n_node);
-   DShape dpsifdx(n_node,2);
-
-   //double J = 
-   dshape_eulerian(s,psif,dpsifdx);
-
-   //Initialise to zero
-   double interpolated_dudx = 0.0;
-   
-   //Calculate velocity derivative:
-
-   // Loop over nodes
-   for(unsigned l=0;l<n_node;l++) 
-    {                              
-     interpolated_dudx += u_pnst(l,i)*dpsifdx(l,j);
-    }
-  
-   return(interpolated_dudx);
-  }
-
-}; 
-
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-
-//==========================================================================
-///Crouzeix_Raviart elements are Navier--Stokes elements with quadratic
-///interpolation for velocities and positions, but a discontinuous linear
-///pressure interpolation
-//==========================================================================
-class PolarCrouzeixRaviartElement : public virtual QElement<2,3>, 
- public virtual PolarNavierStokesEquations
-{
-  private:
-
- /// Static array of ints to hold required number of variables at nodes
- static const unsigned Initial_Nvalue[];
- 
-  protected:
-
- /// Internal index that indicates at which internal data the pressure
- /// is stored
- unsigned P_pnst_internal_index;
- 
- /// \short Velocity shape and test functions and their derivs 
- /// w.r.t. to global coords  at local coordinate s (taken from geometry)
- ///Return Jacobian of mapping between local and global coordinates.
- inline double dshape_and_dtest_eulerian_pnst(const Vector<double> &s, Shape &psi, 
-                                         DShape &dpsidx, Shape &test, 
-                                         DShape &dtestdx) const;
-
- /// \short Velocity shape and test functions and their derivs 
- /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
- ///Return Jacobian of mapping between local and global coordinates.
- inline double dshape_and_dtest_eulerian_at_knot_pnst(const unsigned &ipt, 
-                                                 Shape &psi, 
-                                                 DShape &dpsidx, Shape &test, 
-                                                 DShape &dtestdx) const;
-
- /// Pressure shape functions at local coordinate s
- inline void pshape_pnst(const Vector<double> &s, Shape &psi) const;
-
- /// Pressure shape and test functions at local coordinte s
- inline void pshape_pnst(const Vector<double> &s, Shape &psi, Shape &test) const;
-
- /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)
-  {return this->internal_local_eqn(P_pnst_internal_index,n);}
-
-public:
-
- /// Constructor, there are DIM+1 internal values (for the pressure)
- PolarCrouzeixRaviartElement() : QElement<2,3>(), PolarNavierStokesEquations()
-  {
-   //Allocate and add one Internal data object that stores 3 pressure
-   //values;
-   P_pnst_internal_index = this->add_internal_data(new Data(3));
-  }
- 
- /// \short Number of values (pinned or dofs) required at local node n. 
- virtual unsigned required_nvalue(const unsigned &n) const;
-
- /// \short Return the velocity component u[i] at local node 
- /// n. Uses suitably interpolated value for hanging nodes.
- double u_pnst(const unsigned &n, const unsigned &i) const 
-  {return this->nodal_value(n,i);}
-
- /// \short Return the velocity component u[i] at local node 
- /// n at timestep t (t=0: present; t>0: previous timestep).
- /// Uses suitably interpolated value for hanging nodes.
- double u_pnst(const unsigned &t, const unsigned &n, const unsigned &i) 
-  const
-  {return this->nodal_value(t,n,i);}
- 
- /// \short Return the pressure values at internal dof i_internal
- /// (Discontinous pressure interpolation -- no need to cater for hanging 
- /// nodes). 
- double p_pnst(const unsigned &i_internal) const
-   {return *this->internal_data_pt(P_pnst_internal_index)->value_pt(i_internal);}
-
- /// Return number of pressure values
- unsigned npres_pnst() const {return 3;} 
- 
- /// Pin p_dof-th pressure dof and set it to value specified by p_value.
- void fix_pressure(const unsigned &p_dof, const double &p_value)
-  {
-   this->internal_data_pt(P_pnst_internal_index)->pin(p_dof);
-   *this->internal_data_pt(P_pnst_internal_index)->value_pt(p_dof) = p_value;
-  }
-
- /// \short Add to the set paired_load_data
- /// pairs of pointers to data objects and unsigned integers that
- /// index the values in the data object that affect the load (traction), 
- /// as specified in the get_load() function. 
- void get_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data);
-
- /// Redirect output to NavierStokesEquations output
- void output(std::ostream &outfile) {PolarNavierStokesEquations::output(outfile);}
-
- /// Redirect output to NavierStokesEquations output
- void output(std::ostream &outfile, const unsigned &Nplot)
-  {PolarNavierStokesEquations::output(outfile,Nplot);}
-
-
- /// Redirect output to NavierStokesEquations output
- void output(FILE* file_pt) {PolarNavierStokesEquations::output(file_pt);}
-
- /// Redirect output to NavierStokesEquations output
- void output(FILE* file_pt, const unsigned &Nplot)
-  {PolarNavierStokesEquations::output(file_pt,Nplot);}
-
-
- /// \short Full output function: 
- /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
- /// in tecplot format. Default number of plot points
- void full_output(std::ostream &outfile)
-  {PolarNavierStokesEquations::full_output(outfile);}
-
- /// \short Full output function: 
- /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
- /// in tecplot format. nplot points in each coordinate direction
- void full_output(std::ostream &outfile, const unsigned &nplot)
-  {PolarNavierStokesEquations::full_output(outfile,nplot);}
-
-};
-
-//Inline functions
-
-//=======================================================================
-/// 2D
-/// Derivatives of the shape functions and test functions w.r.t. to global
-/// (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//=======================================================================
-inline double PolarCrouzeixRaviartElement::dshape_and_dtest_eulerian_pnst(
-				  const Vector<double> &s, Shape &psi, 
-                                  DShape &dpsidx, Shape &test, 
-                                  DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = QElement<2,3>::dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
-
-
-//=======================================================================
-/// 2D
-/// Derivatives of the shape functions and test functions w.r.t. to global
-/// (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//=======================================================================
-inline double PolarCrouzeixRaviartElement::dshape_and_dtest_eulerian_at_knot_pnst(
-                                              const unsigned &ipt, Shape &psi, 
-                                              DShape &dpsidx, Shape &test, 
-                                              DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = QElement<2,3>::dshape_eulerian_at_knot(ipt,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
-
-//=======================================================================
-/// 2D :
-/// Pressure shape functions
-//=======================================================================
-inline void PolarCrouzeixRaviartElement::pshape_pnst(const Vector<double> &s, Shape &psi)
-const
-{
- psi[0] = 1.0;
- psi[1] = s[0];
- psi[2] = s[1];
-}
-
-///Define the pressure shape and test functions
-inline void PolarCrouzeixRaviartElement::pshape_pnst(const Vector<double> &s, Shape &psi, 
-Shape &test) const
-{
- //Call the pressure shape functions
- pshape_pnst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<3;i++) test[i] = psi[i];
-}
-
-//=======================================================================
-/// Face geometry of the 2D Crouzeix_Raviart elements
-//=======================================================================
-template<>
-class FaceGeometry<PolarCrouzeixRaviartElement>: public virtual QElement<1,3>
-{
   public:
- FaceGeometry() : QElement<1,3>() {}
-};
+    FaceGeometry() : QElement<1, 3>() {}
+  };
 
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-//=======================================================================
-/// Taylor--Hood elements are Navier--Stokes elements 
-/// with quadratic interpolation for velocities and positions and 
-/// continous linear pressure interpolation
-//=======================================================================
-class PolarTaylorHoodElement : public virtual QElement<2,3>, 
-			       public virtual PolarNavierStokesEquations
-{
-  private:
- 
- /// Static array of ints to hold number of variables at node
- static const unsigned Initial_Nvalue[];
- 
-  protected:
-
- /// \short Static array of ints to hold conversion from pressure 
- /// node numbers to actual node numbers
- static const unsigned Pconv[];
- 
- /// \short Velocity shape and test functions and their derivs 
- /// w.r.t. to global coords  at local coordinate s (taken from geometry)
- /// Return Jacobian of mapping between local and global coordinates.
- inline double dshape_and_dtest_eulerian_pnst(const Vector<double> &s, Shape &psi, 
-                                         DShape &dpsidx, Shape &test, 
-                                         DShape &dtestdx) const;
-
- /// \short Velocity shape and test functions and their derivs 
- /// w.r.t. to global coords  at local coordinate s (taken from geometry)
- /// Return Jacobian of mapping between local and global coordinates.
- inline double dshape_and_dtest_eulerian_at_knot_pnst(const unsigned &ipt, 
-                                                 Shape &psi, 
-                                                 DShape &dpsidx, Shape &test, 
-                                                 DShape &dtestdx) const;
-
- /// Pressure shape functions at local coordinate s
- inline void pshape_pnst(const Vector<double> &s, Shape &psi) const;
-
- /// Pressure shape and test functions at local coordinte s
- inline void pshape_pnst(const Vector<double> &s, Shape &psi, Shape &test) const;
-
- /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)
-  {return this->nodal_local_eqn(Pconv[n],p_nodal_index_pnst());}
-
-public:
-
- /// Constructor, no internal data points
- PolarTaylorHoodElement() : QElement<2,3>(),  PolarNavierStokesEquations() {}
- 
- /// \short Number of values (pinned or dofs) required at node n. Can
- /// be overwritten for hanging node version
- inline virtual unsigned required_nvalue(const unsigned &n) const 
-  {return Initial_Nvalue[n];}
-
- /// \short Which nodal value represents the pressure? 
- virtual int p_nodal_index_pnst() {return 2;}
-
- /// \short Pointer to n_p-th pressure node
- Node* pressure_node_pt(const unsigned &n_p)
-  {return this->node_pt(Pconv[n_p]);}
-
- ///\short Return the velocity component u[i] at local node 
- /// n. Uses suitably interpolated value for hanging nodes.
- double u_pnst(const unsigned &n, const unsigned &i) const
-  {return this->nodal_value(n,i);} 
-
- /// \short Return the velocity component u[i] at local node 
- /// n at timestep t (t=0: present; t>0: previous timestep).
- /// Uses suitably interpolated value for hanging nodes.
- double u_pnst(const unsigned &t, const unsigned &n, 
-          const unsigned &i) const {return this->nodal_value(t,n,i);}
-
- /// \short Access function for the pressure values at local pressure 
- /// node n_p (const version)
- double p_pnst(const unsigned &n_p) const
-   {return this->nodal_value(Pconv[n_p],2);}
-   // {return this->nodal_value(Pconv[n_p],this->p_nodal_index_pnst());}
- 
- /// Return number of pressure values
- unsigned npres_pnst() const {return 4;}
-
- /// Pin p_dof-th pressure dof and set it to value specified by p_value.
- void fix_pressure(const unsigned &p_dof, const double &p_value)
-  {
-   this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_pnst());
-   *this->node_pt(Pconv[p_dof])->value_pt(this->p_nodal_index_pnst()) = p_value;
-  }
-
-
- /// \short Add to the set paired_load_data
- /// pairs of pointers to data objects and unsigned integers that
- /// index the values in the data object that affect the load (traction), 
- /// as specified in the get_load() function. 
- void get_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data);
-
- /// Redirect output to NavierStokesEquations output
- void output(std::ostream &outfile) {PolarNavierStokesEquations::output(outfile);}
-
- /// Redirect output to NavierStokesEquations output
- void output(std::ostream &outfile, const unsigned &Nplot)
-  {PolarNavierStokesEquations::output(outfile,Nplot);}
-
- /// Redirect output to NavierStokesEquations output
- void output(FILE* file_pt) {PolarNavierStokesEquations::output(file_pt);}
-
- /// Redirect output to NavierStokesEquations output
- void output(FILE* file_pt, const unsigned &Nplot)
-  {PolarNavierStokesEquations::output(file_pt,Nplot);}
-
-
-};
-
-//Inline functions
-
-//==========================================================================
-/// 2D : 
-/// Derivatives of the shape functions and test functions w.r.t to
-/// global (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//==========================================================================
-inline double PolarTaylorHoodElement::dshape_and_dtest_eulerian_pnst(
-				       const Vector<double> &s,
-                                              Shape &psi, 
-                                              DShape &dpsidx, Shape &test, 
-                                              DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = QElement<2,3>::dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
-
-
-//==========================================================================
-/// 2D : 
-/// Derivatives of the shape functions and test functions w.r.t to
-/// global (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//==========================================================================
-inline double PolarTaylorHoodElement::dshape_and_dtest_eulerian_at_knot_pnst(
- const unsigned &ipt,Shape &psi, DShape &dpsidx, Shape &test, 
- DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = QElement<2,3>::dshape_eulerian_at_knot(ipt,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
-
-
-//==========================================================================
-/// 2D :
-/// Pressure shape functions
-//==========================================================================
-inline void PolarTaylorHoodElement::pshape_pnst(const Vector<double> &s, Shape &psi)
-const
-{
- //Call the OneDimensional Shape functions
- //Local storage
- double psi1[2], psi2[2];
- //Call the OneDimensional Shape functions
- OneDimLagrange::shape<2>(s[0],psi1);
- OneDimLagrange::shape<2>(s[1],psi2);
-
- //Now let's loop over the nodal points in the element
- //s1 is the "x" coordinate, s2 the "y" 
- for(unsigned i=0;i<2;i++)
-  {
-   for(unsigned j=0;j<2;j++)
-    {
-     /*Multiply the two 1D functions together to get the 2D function*/
-     psi[2*i + j] = psi2[i]*psi1[j];
-    }
-  }
-}
-
-
-//==========================================================================
-/// 2D :
-/// Pressure shape and test functions
-//==========================================================================
-inline void PolarTaylorHoodElement::pshape_pnst(const Vector<double> &s, Shape &psi, 
-                                           Shape &test) const
-{
- //Call the pressure shape functions
- pshape_pnst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<4;i++) test[i] = psi[i];
-}
-
-//=======================================================================
-/// Face geometry of the 2D Taylor_Hood elements
-//=======================================================================
-template<>
-class FaceGeometry<PolarTaylorHoodElement>: public virtual QElement<1,3>
-{
-  public:
- FaceGeometry() : QElement<1,3>() {}
-};
-
-}
+} // namespace oomph
 #endif

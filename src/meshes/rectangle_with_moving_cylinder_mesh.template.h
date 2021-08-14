@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 // Header file for SpaceTimeNavierStokesMixedOrder elements
 #ifndef OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_HEADER
 #define OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_HEADER
@@ -44,10 +44,11 @@ namespace oomph
 {
   //=============================================================================
   /// Rectangular domain with circular whole
-  /// DRAIG: This looks like a redefinition of the RectangleWithHoleAndAnnularRegionDomain in
-  /// src/meshes but it creates 8 macro-elements instead of 4 macro-elements
-  /// and creates an annular region around the cylinder. It's probably a good
-  /// idea to rename this class to avoid ambiguity and a name clash...
+  /// DRAIG: This looks like a redefinition of the
+  /// RectangleWithHoleAndAnnularRegionDomain in src/meshes but it creates 8
+  /// macro-elements instead of 4 macro-elements and creates an annular region
+  /// around the cylinder. It's probably a good idea to rename this class to
+  /// avoid ambiguity and a name clash...
   //=============================================================================
   class RectangleWithHoleAndAnnularRegionDomain : public Domain
   {
@@ -59,56 +60,55 @@ namespace oomph
     /// in anticlockwise direction.
     RectangleWithHoleAndAnnularRegionDomain(GeomObject* cylinder_pt,
                                             const double& annular_region_radius,
-                                            const double& length) :
-      Cylinder_pt(cylinder_pt),
-      Annular_region_radius(annular_region_radius)
+                                            const double& length)
+      : Cylinder_pt(cylinder_pt), Annular_region_radius(annular_region_radius)
     {
       // Vertices of rectangle
       Lower_left.resize(2);
-      Lower_left[0]=-0.5*length;
-      Lower_left[1]=-0.5*length;
+      Lower_left[0] = -0.5 * length;
+      Lower_left[1] = -0.5 * length;
 
       Upper_left.resize(2);
-      Upper_left[0]=-0.5*length;
-      Upper_left[1]= 0.5*length;
+      Upper_left[0] = -0.5 * length;
+      Upper_left[1] = 0.5 * length;
 
       Lower_right.resize(2);
-      Lower_right[0]= 0.5*length;
-      Lower_right[1]=-0.5*length;
+      Lower_right[0] = 0.5 * length;
+      Lower_right[1] = -0.5 * length;
 
       Upper_right.resize(2);
-      Upper_right[0]=0.5*length;
-      Upper_right[1]=0.5*length;
+      Upper_right[0] = 0.5 * length;
+      Upper_right[1] = 0.5 * length;
 
       // Coordinates of points where the "radial" lines from central
       // cylinder meet the upper and lower boundaries
       Lower_mid_left.resize(2);
-      Lower_mid_left[0]=-0.5*length;
-      Lower_mid_left[1]=-0.5*length;
+      Lower_mid_left[0] = -0.5 * length;
+      Lower_mid_left[1] = -0.5 * length;
 
       Upper_mid_left.resize(2);
-      Upper_mid_left[0]=-0.5*length;
-      Upper_mid_left[1]=0.5*length;
+      Upper_mid_left[0] = -0.5 * length;
+      Upper_mid_left[1] = 0.5 * length;
 
       Lower_mid_right.resize(2);
-      Lower_mid_right[0]=0.5*length;
-      Lower_mid_right[1]=-0.5*length;
+      Lower_mid_right[0] = 0.5 * length;
+      Lower_mid_right[1] = -0.5 * length;
 
       Upper_mid_right.resize(2);
-      Upper_mid_right[0]=0.5*length;
-      Upper_mid_right[1]=0.5*length;
+      Upper_mid_right[0] = 0.5 * length;
+      Upper_mid_right[1] = 0.5 * length;
 
       // The number of macro elements
-      unsigned n_macro_element=8;
+      unsigned n_macro_element = 8;
 
       // There are four macro elements
       Macro_element_pt.resize(n_macro_element);
 
       // Build the 2D macro elements
-      for (unsigned i=0; i<n_macro_element; i++)
+      for (unsigned i = 0; i < n_macro_element; i++)
       {
         // Create the i-th macro element
-        Macro_element_pt[i]=new QMacroElement<2>(this,i);
+        Macro_element_pt[i] = new QMacroElement<2>(this, i);
       }
     } // End of RectangleWithHoleAndAnnularRegionDomain
 
@@ -122,16 +122,16 @@ namespace oomph
     /// point on the outer boundary of the annular region (where the inner
     /// boundary is prescribed by the boundary of the cylinder)
     void project_point_on_cylinder_to_annular_boundary(const unsigned& time,
-        const Vector<double>& xi,
-        Vector<double>& r);
+                                                       const Vector<double>& xi,
+                                                       Vector<double>& r);
 
     /// \short Helper function that, given the Lagrangian coordinate, xi,
     /// (associated with a point on the cylinder), returns the corresponding
     /// point on the outer boundary of the annular region (where the inner
     /// boundary is prescribed by the boundary of the cylinder)
     void project_point_on_cylinder_to_annular_boundary(const double& time,
-        const Vector<double>& xi,
-        Vector<double>& r);
+                                                       const Vector<double>& xi,
+                                                       Vector<double>& r);
 
 
     /// \short Helper function to interpolate linearly between the
@@ -142,17 +142,18 @@ namespace oomph
                             Vector<double>& f)
     {
       // Loop over the coordinates
-      for (unsigned i=0; i<2; i++)
+      for (unsigned i = 0; i < 2; i++)
       {
         // Get the linear interpolation of the two points
-        f[i]=left[i]+(right[i]-left[i])*0.5*(s+1.0);
+        f[i] = left[i] + (right[i] - left[i]) * 0.5 * (s + 1.0);
       }
     } // End of linear_interpolate
 
 
     /// \short Parametrisation of macro element boundaries: f(s) is the position
-    /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
-    /// at the specified discrete time level (time=0: present; time>0: previous)
+    /// vector to macro-element m's boundary in the specified direction
+    /// [N/S/E/W] at the specified discrete time level (time=0: present; time>0:
+    /// previous)
     void macro_element_boundary(const double& time,
                                 const unsigned& m,
                                 const unsigned& direction,
@@ -160,8 +161,9 @@ namespace oomph
                                 Vector<double>& f);
 
     /// \short Parametrisation of macro element boundaries: f(s) is the position
-    /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
-    /// at the specified discrete time level (time=0: present; time>0: previous)
+    /// vector to macro-element m's boundary in the specified direction
+    /// [N/S/E/W] at the specified discrete time level (time=0: present; time>0:
+    /// previous)
     void macro_element_boundary(const unsigned& time,
                                 const unsigned& m,
                                 const unsigned& direction,
@@ -169,7 +171,6 @@ namespace oomph
                                 Vector<double>& f);
 
   private:
-
     /// Lower left corner of rectangle
     Vector<double> Lower_left;
 
@@ -221,24 +222,25 @@ namespace oomph
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
     /// in anticlockwise direction. Timestepper defaults to Steady
     /// default timestepper.
-    RectangleWithHoleAndAnnularRegionMesh(GeomObject* cylinder_pt,
-                                          const double& annular_region_radius,
-                                          const double& length,
-                                          TimeStepper* time_stepper_pt=
-                                            &Mesh::Default_TimeStepper);
+    RectangleWithHoleAndAnnularRegionMesh(
+      GeomObject* cylinder_pt,
+      const double& annular_region_radius,
+      const double& length,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Destructor: We made the Domain object so we have a responsibility
     /// for deleting it!
     ~RectangleWithHoleAndAnnularRegionMesh()
     {
-      // If it's a non-null pointer (don't know why it shouldn't be but still...)
-      if (Domain_pt!=0)
+      // If it's a non-null pointer (don't know why it shouldn't be but
+      // still...)
+      if (Domain_pt != 0)
       {
         // Delete the domain pointer
         delete Domain_pt;
 
         // Make it a null pointer
-        Domain_pt=0;
+        Domain_pt = 0;
       }
     } // End of ~RectangleWithHoleAndAnnularRegionMesh
 
@@ -250,7 +252,6 @@ namespace oomph
     }
 
   protected:
-
     /// Pointer to the domain
     RectangleWithHoleAndAnnularRegionDomain* Domain_pt;
   };
@@ -260,44 +261,41 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
 
   //=============================================================================
-  /// Refineable version of RectangleWithHoleAndAnnularRegionMesh. Applies one uniform
-  /// refinement immediately to avoid problems with the automatic
+  /// Refineable version of RectangleWithHoleAndAnnularRegionMesh. Applies one
+  /// uniform refinement immediately to avoid problems with the automatic
   /// applications of boundary conditions in subsequent refinements
   //=============================================================================
   template<class ELEMENT>
-  class RefineableRectangleWithHoleAndAnnularRegionMesh :
-    public RectangleWithHoleAndAnnularRegionMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class RefineableRectangleWithHoleAndAnnularRegionMesh
+    : public RectangleWithHoleAndAnnularRegionMesh<ELEMENT>,
+      public RefineableQuadMesh<ELEMENT>
   {
   public:
-
     /// Constructor. Pass pointer to geometric object that
     /// represents the cylinder, the length and height of the domain.
     /// The GeomObject must be parametrised such that
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
     /// in anticlockwise direction. Timestepper defaults to Steady
     /// default timestepper.
-    RefineableRectangleWithHoleAndAnnularRegionMesh(GeomObject* cylinder_pt,
-        const double& annular_region_radius,
-        const double& length,
-        TimeStepper* time_stepper_pt=
-          &Mesh::Default_TimeStepper) :
-      RectangleWithHoleAndAnnularRegionMesh<ELEMENT>(cylinder_pt,
-          annular_region_radius,
-          length,
-          time_stepper_pt)
+    RefineableRectangleWithHoleAndAnnularRegionMesh(
+      GeomObject* cylinder_pt,
+      const double& annular_region_radius,
+      const double& length,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangleWithHoleAndAnnularRegionMesh<ELEMENT>(
+          cylinder_pt, annular_region_radius, length, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // Cylinder...<...>. Need to set up adaptive information.
 
       // Get the size of the container
-      unsigned n_macro_element=this->Domain_pt->nmacro_element();
+      unsigned n_macro_element = this->Domain_pt->nmacro_element();
 
       // Loop over all elements and set macro element pointer
-      for (unsigned e=0; e<n_macro_element; e++)
+      for (unsigned e = 0; e < n_macro_element; e++)
       {
-        dynamic_cast<ELEMENT*>(this->element_pt(e))->
-        set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
+        dynamic_cast<ELEMENT*>(this->element_pt(e))
+          ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
       }
 
       // Setup boundary element lookup schemes
@@ -319,41 +317,41 @@ namespace oomph
   /// My Mesh
   //=============================================================================
   template<class ELEMENT>
-  class RefineableQuadMeshWithMovingCylinder :
-    public virtual RefineableQuadMesh<ELEMENT>
+  class RefineableQuadMeshWithMovingCylinder
+    : public virtual RefineableQuadMesh<ELEMENT>
   {
   public:
-
     /// Constructor. Pass pointer to geometric object that represents the
     /// cylinder; hierher the length and height of the domain. The GeomObject
     /// must be parametrised such that \f$\zeta \in [0,2\pi]\f$ sweeps around
     /// the circumference in anticlockwise direction. Timestepper defaults to
     /// Steady default timestepper.
-    RefineableQuadMeshWithMovingCylinder(GeomObject* cylinder_pt,
-                                         const double& annular_region_radius,
-                                         const double& length_of_central_box,
-                                         const double& x_left,
-                                         const double& x_right,
-                                         const double& height,
-                                         TimeStepper* time_stepper_pt=
-                                           &Mesh::Default_TimeStepper);
+    RefineableQuadMeshWithMovingCylinder(
+      GeomObject* cylinder_pt,
+      const double& annular_region_radius,
+      const double& length_of_central_box,
+      const double& x_left,
+      const double& x_right,
+      const double& height,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// Destructor: Delete the part of the mesh which has a Domain representation
+    /// Destructor: Delete the part of the mesh which has a Domain
+    /// representation
     ~RefineableQuadMeshWithMovingCylinder()
     {
       // Delete the central mesh
       delete Central_mesh_pt;
 
       // Make it a null pointer
-      Central_mesh_pt=0;
+      Central_mesh_pt = 0;
     } // End of ~RefineableQuadMeshWithMovingCylinder
 
   private:
-
-    /// \short Pointer to the part of the mesh which has a Domain representation.
-    /// We have to store it because we can't delete it in the constructor as it
-    /// would delete the Domain pointer which might be needed after the whole
-    /// mesh has been constructed (e.g. for the mesh extrusion machinery)...
+    /// \short Pointer to the part of the mesh which has a Domain
+    /// representation. We have to store it because we can't delete it in the
+    /// constructor as it would delete the Domain pointer which might be needed
+    /// after the whole mesh has been constructed (e.g. for the mesh extrusion
+    /// machinery)...
     RefineableRectangleWithHoleAndAnnularRegionMesh<ELEMENT>* Central_mesh_pt;
 
     // Make the problem as coarse as possible

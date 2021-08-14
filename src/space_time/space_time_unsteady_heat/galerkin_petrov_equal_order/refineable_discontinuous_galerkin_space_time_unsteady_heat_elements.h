@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 // Header file for refineable unsteady heat elements
 #ifndef OOMPH_REFINEABLE_DISCONTINUOUS_GALERKIN_SPACE_TIME_UNSTEADY_HEAT_ELEMENTS_HEADER
 #define OOMPH_REFINEABLE_DISCONTINUOUS_GALERKIN_SPACE_TIME_UNSTEADY_HEAT_ELEMENTS_HEADER
@@ -47,20 +47,20 @@ namespace oomph
   //======================================================================
   /// Refineable version of Unsteady Heat equations
   //======================================================================
-  template <unsigned SPATIAL_DIM>
-  class RefineableSpaceTimeUnsteadyHeatEquations :
-    public virtual SpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  template<unsigned SPATIAL_DIM>
+  class RefineableSpaceTimeUnsteadyHeatEquations
+    : public virtual SpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
-
     /// Constructor
-    RefineableSpaceTimeUnsteadyHeatEquations() :
-      SpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
-    {}
+    RefineableSpaceTimeUnsteadyHeatEquations()
+      : SpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
+    {
+    }
 
 
     /// Broken copy constructor
@@ -75,7 +75,7 @@ namespace oomph
     unsigned num_Z2_flux_terms()
     {
       // The flux terms are associated with spatial AND temporal derivatives
-      return SPATIAL_DIM+1;
+      return SPATIAL_DIM + 1;
     } // End of num_Z2_flux_terms
 
 
@@ -85,35 +85,35 @@ namespace oomph
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       // Find out how many nodes there are in the element
-      unsigned n_node=nnode();
+      unsigned n_node = nnode();
 
       // Find the index at which the variable is stored
-      unsigned u_nodal_index=this->u_index_ust_heat();
+      unsigned u_nodal_index = this->u_index_ust_heat();
 
       // Set up memory for the shape and test functions
       Shape psi(n_node);
 
       // Set up memory for the derivatives of the shape and test functions
-      DShape dpsidx(n_node,SPATIAL_DIM+1);
+      DShape dpsidx(n_node, SPATIAL_DIM + 1);
 
       // Call the derivatives of the shape and test functions
-      dshape_eulerian(s,psi,dpsidx);
+      dshape_eulerian(s, psi, dpsidx);
 
       // Loop over the entries of the flux vector
-      for (unsigned j=0; j<SPATIAL_DIM+1; j++)
+      for (unsigned j = 0; j < SPATIAL_DIM + 1; j++)
       {
         // Initialise j-th flux entry to zero
-        flux[j]=0.0;
+        flux[j] = 0.0;
       }
 
       // Loop over nodes
-      for (unsigned l=0; l<n_node; l++)
+      for (unsigned l = 0; l < n_node; l++)
       {
         // Loop over derivative directions
-        for (unsigned j=0; j<SPATIAL_DIM+1; j++)
+        for (unsigned j = 0; j < SPATIAL_DIM + 1; j++)
         {
           // Update the flux value
-          flux[j]+=this->nodal_value(l,u_nodal_index)*dpsidx(l,j);
+          flux[j] += this->nodal_value(l, u_nodal_index) * dpsidx(l, j);
         }
       } // for (unsigned l=0;l<n_node;l++)
     } // End of get_Z2_flux
@@ -123,31 +123,32 @@ namespace oomph
     /// Note: Given the generality of the interface (this function is usually
     /// called from black-box documentation or interpolation routines), the
     /// values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double>& s, Vector<double>& values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set the size of the vector u
       values.resize(1);
 
       // Find the number of nodes
-      unsigned n_node=nnode();
+      unsigned n_node = nnode();
 
       // Find the nodal index at which the unknown is stored
-      unsigned u_nodal_index=this->u_index_ust_heat();
+      unsigned u_nodal_index = this->u_index_ust_heat();
 
       // Local shape function
       Shape psi(n_node);
 
       // Find values of shape function
-      shape(s,psi);
+      shape(s, psi);
 
       // Initialise the value of u
-      values[0]=0.0;
+      values[0] = 0.0;
 
       // Loop over the local nodes and sum
-      for (unsigned l=0; l<n_node; l++)
+      for (unsigned l = 0; l < n_node; l++)
       {
         // Update the solution value
-        values[0]+=this->nodal_value(l,u_nodal_index)*psi[l];
+        values[0] += this->nodal_value(l, u_nodal_index) * psi[l];
       }
     } // End of get_interpolated_values
 
@@ -164,25 +165,25 @@ namespace oomph
       values.resize(1);
 
       // Find the number of nodes
-      unsigned n_node=nnode();
+      unsigned n_node = nnode();
 
       // Find the nodal index at which the unknown is stored
-      unsigned u_nodal_index=this->u_index_ust_heat();
+      unsigned u_nodal_index = this->u_index_ust_heat();
 
       // Local shape function
       Shape psi(n_node);
 
       // Find values of shape function
-      shape(s,psi);
+      shape(s, psi);
 
       // Initialise the value of u
-      values[0]=0.0;
+      values[0] = 0.0;
 
       // Loop over the local nodes and sum
-      for (unsigned l=0; l<n_node; l++)
+      for (unsigned l = 0; l < n_node; l++)
       {
         // Update the solution value
-        values[0]+=this->nodal_value(t,l,u_nodal_index)*psi[l];
+        values[0] += this->nodal_value(t, l, u_nodal_index) * psi[l];
       }
     } // End of get_interpolated_values
 
@@ -191,19 +192,19 @@ namespace oomph
     void further_build()
     {
       // Get pointer to the father
-      RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>* cast_father_element_pt=
-        dynamic_cast<RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>*>(
-          this->father_element_pt());
+      RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>*
+        cast_father_element_pt =
+          dynamic_cast<RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>*>(
+            this->father_element_pt());
 
       // Get the source function from the parent and store it
-      this->Source_fct_pt=cast_father_element_pt->source_fct_pt();
+      this->Source_fct_pt = cast_father_element_pt->source_fct_pt();
 
       // Set the ALE status from the father
-      this->ALE_is_disabled=cast_father_element_pt->ALE_is_disabled;
+      this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
     } // End of further_build
 
   private:
-
     /// \short Add element's contribution to elemental residual vector and/or
     /// Jacobian matrix
     /// flag=0: compute residual vector only
@@ -218,26 +219,27 @@ namespace oomph
   //======================================================================
   /// Refineable version of 2D QUnsteadyHeatSpaceTimeElement elements
   //======================================================================
-  template <unsigned SPATIAL_DIM, unsigned NNODE_1D>
-  class RefineableQUnsteadyHeatSpaceTimeElement :
-    public QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,NNODE_1D>,
-    public virtual RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>,
-    public virtual RefineableQElement<SPATIAL_DIM+1>
+  template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
+  class RefineableQUnsteadyHeatSpaceTimeElement
+    : public QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>,
+      public virtual RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>,
+      public virtual RefineableQElement<SPATIAL_DIM + 1>
   {
   public:
-
     /// \short Constructor
-    RefineableQUnsteadyHeatSpaceTimeElement() :
-      RefineableElement(),
-      RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>(),
-      RefineableQElement<SPATIAL_DIM+1>(),
-      QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,NNODE_1D>()
-    {}
+    RefineableQUnsteadyHeatSpaceTimeElement()
+      : RefineableElement(),
+        RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>(),
+        RefineableQElement<SPATIAL_DIM + 1>(),
+        QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>()
+    {
+    }
 
 
     /// Broken copy constructor
     RefineableQUnsteadyHeatSpaceTimeElement(
-      const RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,NNODE_1D>& dummy)
+      const RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>&
+        dummy)
     {
       // Output a broken copy message
       BrokenCopy::broken_copy("RefineableQuadUnsteadyHeatSpaceTimeElement");
@@ -245,7 +247,7 @@ namespace oomph
 
 
     /// Rebuild from sons (empty)
-    void rebuild_from_sons(Mesh* &mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
 
     /// \short Perform additional hanging node procedures for variables
@@ -265,7 +267,8 @@ namespace oomph
     unsigned nvertex_node() const
     {
       // Call the base class function
-      return QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,NNODE_1D>::nvertex_node();
+      return QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,
+                                           NNODE_1D>::nvertex_node();
     } // End of nvertex_node
 
 
@@ -273,7 +276,8 @@ namespace oomph
     Node* vertex_node_pt(const unsigned& j) const
     {
       // Call the base class function
-      return QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,NNODE_1D>::vertex_node_pt(j);
+      return QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,
+                                           NNODE_1D>::vertex_node_pt(j);
     } // End of vertex_node_pt
 
 
@@ -282,7 +286,7 @@ namespace oomph
     unsigned nrecovery_order()
     {
       // Return the approriate value
-      return (NNODE_1D-1);
+      return (NNODE_1D - 1);
     } // End of nrecovery_order
   }; // End of RefineableQUnsteadyHeatSpaceTimeElement class
 
@@ -300,16 +304,15 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
-  class FaceGeometry<RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,NNODE_1D> >:
-    public virtual QElement<SPATIAL_DIM,NNODE_1D>
+  class FaceGeometry<
+    RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>>
+    : public virtual QElement<SPATIAL_DIM, NNODE_1D>
   {
   public:
-
     /// \short Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
-    FaceGeometry() : QElement<SPATIAL_DIM,NNODE_1D>() {}
+    FaceGeometry() : QElement<SPATIAL_DIM, NNODE_1D>() {}
   }; // End of FaceGeometry<RefineableQUnsteadyHeatSpaceTimeElement... class
 } // End of namespace oomph
 
 #endif
-
