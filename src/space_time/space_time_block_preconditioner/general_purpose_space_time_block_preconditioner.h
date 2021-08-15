@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 // Header file for SpaceTime elements
 #ifndef OOMPH_GENERAL_PURPOSE_SPACE_TIME_BLOCK_PRECONDITIONER_HEADER
 #define OOMPH_GENERAL_PURPOSE_SPACE_TIME_BLOCK_PRECONDITIONER_HEADER
@@ -49,28 +49,26 @@ namespace oomph
   /// \short General purpose block tridiagonal preconditioner. By default
   /// SuperLUPreconditioner (or SuperLUDistPreconditioner) is used to solve the
   /// subsidiary systems, but other preconditioners can be used by setting them
-  /// using passing a pointer to a function of type SubsidiaryPreconditionerFctPt
-  /// to the method subsidiary_preconditioner_function_pt().
+  /// using passing a pointer to a function of type
+  /// SubsidiaryPreconditionerFctPt to the method
+  /// subsidiary_preconditioner_function_pt().
   //=============================================================================
   template<typename MATRIX>
-  class ExactDGPBlockPreconditioner :
-    public GeneralPurposeBlockPreconditioner<MATRIX>
+  class ExactDGPBlockPreconditioner
+    : public GeneralPurposeBlockPreconditioner<MATRIX>
   {
-
-  public :
-
+  public:
     /// Constructor. (By default this preconditioner is upper triangular).
-    ExactDGPBlockPreconditioner() :
-      GeneralPurposeBlockPreconditioner<MATRIX>()
+    ExactDGPBlockPreconditioner() : GeneralPurposeBlockPreconditioner<MATRIX>()
     {
       // The preconditioner has been created but it hasn't been set up yet
-      Preconditioner_has_been_setup=false;
+      Preconditioner_has_been_setup = false;
 
       // By default, don't store the memory statistics of this preconditioner
-      Compute_memory_statistics=false;
+      Compute_memory_statistics = false;
 
       // Initialise the value of Memory_usage_in_bytes
-      Memory_usage_in_bytes=0.0;
+      Memory_usage_in_bytes = 0.0;
     } // End of ExactDGPBlockPreconditioner
 
 
@@ -105,7 +103,7 @@ namespace oomph
 
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
 
     /// \short Setup the preconditioner
@@ -116,7 +114,7 @@ namespace oomph
     void enable_doc_memory_usage()
     {
       /// Set the appropriate flag to true
-      Compute_memory_statistics=true;
+      Compute_memory_statistics = true;
     } // End of enable_doc_memory_usage
 
 
@@ -124,7 +122,7 @@ namespace oomph
     void disable_doc_memory_usage()
     {
       /// Set the appropriate flag to false
-      Compute_memory_statistics=false;
+      Compute_memory_statistics = false;
     } // End of disable_doc_memory_usage
 
 
@@ -146,8 +144,9 @@ namespace oomph
           std::ostringstream warning_message_stream;
 
           // Create a warning message
-          warning_message_stream << "The memory statistics have not been calculated "
-                                 << "so I'm returning\nthe value zero." << std::endl;
+          warning_message_stream
+            << "The memory statistics have not been calculated "
+            << "so I'm returning\nthe value zero." << std::endl;
 
           // Give the user a warning
           OomphLibWarning(warning_message_stream.str(),
@@ -165,8 +164,9 @@ namespace oomph
         std::ostringstream warning_message_stream;
 
         // Create a warning message
-        warning_message_stream << "The preconditioner hasn't even been set up yet "
-                               << "so I'm returning\nthe value zero." << std::endl;
+        warning_message_stream
+          << "The preconditioner hasn't even been set up yet "
+          << "so I'm returning\nthe value zero." << std::endl;
 
         // Give the user a warning
         OomphLibWarning(warning_message_stream.str(),
@@ -179,7 +179,6 @@ namespace oomph
     } // End of get_memory_usage_in_bytes
 
   private:
-
     /// \short Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
@@ -198,34 +197,33 @@ namespace oomph
   /// operates as an upper triangular preconditioner. Also, by default
   /// SuperLUPreconditioner (or SuperLUDistPreconditioner) is used to solve the
   /// subsidiary systems, but other preconditioners can be used by setting them
-  /// using passing a pointer to a function of type SubsidiaryPreconditionerFctPt
-  /// to the method subsidiary_preconditioner_function_pt().
+  /// using passing a pointer to a function of type
+  /// SubsidiaryPreconditionerFctPt to the method
+  /// subsidiary_preconditioner_function_pt().
   //=============================================================================
   template<typename MATRIX>
-  class BandedBlockTriangularPreconditioner :
-    public GeneralPurposeBlockPreconditioner<MATRIX>
+  class BandedBlockTriangularPreconditioner
+    : public GeneralPurposeBlockPreconditioner<MATRIX>
   {
-
-  public :
-
+  public:
     /// Constructor. (By default this preconditioner is upper triangular).
-    BandedBlockTriangularPreconditioner() :
-      GeneralPurposeBlockPreconditioner<MATRIX>()
+    BandedBlockTriangularPreconditioner()
+      : GeneralPurposeBlockPreconditioner<MATRIX>()
     {
       // Default to upper triangular
-      Upper_triangular=true;
+      Upper_triangular = true;
 
       // Default is to assume every block above the diagonal is non-empty
-      Block_bandwidth=-1;
+      Block_bandwidth = -1;
 
       // The preconditioner has been created but it hasn't been set up yet
-      Preconditioner_has_been_setup=false;
+      Preconditioner_has_been_setup = false;
 
       // By default, don't store the memory statistics of this preconditioner
-      Compute_memory_statistics=false;
+      Compute_memory_statistics = false;
 
       // Initialise the value of Memory_usage_in_bytes
-      Memory_usage_in_bytes=0.0;
+      Memory_usage_in_bytes = 0.0;
     } // End of BandedBlockTriangularPreconditioner
 
 
@@ -241,15 +239,19 @@ namespace oomph
     virtual void clean_up_memory()
     {
       // Delete anything in Off_diagonal_matrix_vector_products
-      for (unsigned i=0,ni=Off_diagonal_matrix_vector_products.nrow(); i<ni; i++)
+      for (unsigned i = 0, ni = Off_diagonal_matrix_vector_products.nrow();
+           i < ni;
+           i++)
       {
-        for (unsigned j=0,nj=Off_diagonal_matrix_vector_products.ncol(); j<nj; j++)
+        for (unsigned j = 0, nj = Off_diagonal_matrix_vector_products.ncol();
+             j < nj;
+             j++)
         {
           // Delete the matrix-vector product
-          delete Off_diagonal_matrix_vector_products(i,j);
+          delete Off_diagonal_matrix_vector_products(i, j);
 
           // Make it a null pointer
-          Off_diagonal_matrix_vector_products(i,j)=0;
+          Off_diagonal_matrix_vector_products(i, j) = 0;
         }
       } // for (unsigned i=0,ni=Off_diagonal_matrix_vector_products.nrow();...
 
@@ -274,7 +276,7 @@ namespace oomph
 
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
 
     /// \short Setup the preconditioner
@@ -285,7 +287,7 @@ namespace oomph
     void set_block_bandwidth(const int& block_bandwidth)
     {
       // Store it
-      Block_bandwidth=block_bandwidth;
+      Block_bandwidth = block_bandwidth;
     } // End of set_block_bandwidth
 
 
@@ -301,7 +303,7 @@ namespace oomph
     void upper_triangular()
     {
       // Update the Upper_triangular flag
-      Upper_triangular=true;
+      Upper_triangular = true;
     } // End of upper_triangular
 
 
@@ -309,7 +311,7 @@ namespace oomph
     void lower_triangular()
     {
       // Update the Upper_triangular flag
-      Upper_triangular=false;
+      Upper_triangular = false;
     } // End of lower_triangular
 
 
@@ -325,7 +327,7 @@ namespace oomph
     void enable_doc_memory_usage()
     {
       /// Set the appropriate flag to true
-      Compute_memory_statistics=true;
+      Compute_memory_statistics = true;
     } // End of enable_doc_memory_usage
 
 
@@ -333,7 +335,7 @@ namespace oomph
     void disable_doc_memory_usage()
     {
       /// Set the appropriate flag to false
-      Compute_memory_statistics=false;
+      Compute_memory_statistics = false;
     } // End of disable_doc_memory_usage
 
 
@@ -355,8 +357,9 @@ namespace oomph
           std::ostringstream warning_message_stream;
 
           // Create a warning message
-          warning_message_stream << "The memory statistics have not been calculated "
-                                 << "so I'm returning\nthe value zero." << std::endl;
+          warning_message_stream
+            << "The memory statistics have not been calculated "
+            << "so I'm returning\nthe value zero." << std::endl;
 
           // Give the user a warning
           OomphLibWarning(warning_message_stream.str(),
@@ -374,8 +377,9 @@ namespace oomph
         std::ostringstream warning_message_stream;
 
         // Create a warning message
-        warning_message_stream << "The preconditioner hasn't even been set up yet "
-                               << "so I'm returning\nthe value zero." << std::endl;
+        warning_message_stream
+          << "The preconditioner hasn't even been set up yet "
+          << "so I'm returning\nthe value zero." << std::endl;
 
         // Give the user a warning
         OomphLibWarning(warning_message_stream.str(),
@@ -388,12 +392,10 @@ namespace oomph
     } // End of get_memory_usage_in_bytes
 
   protected:
-
     /// Matrix of matrix-vector product operators for the off diagonals
     DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
 
   private:
-
     /// \short Storage for the block bandwidth of the matrix. Defaults to -1
     /// indicating that we assume every off-diagonal block is non-empty. If
     /// the matrix is block diagonal then the value is zero

@@ -1,31 +1,31 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 
 
-//Include guard to prevent multiple inclusions of the header
+// Include guard to prevent multiple inclusions of the header
 #ifndef OOMPH_BLACK_BOX_NEWTON_SOLVER_HEADER
 #define OOMPH_BLACK_BOX_NEWTON_SOLVER_HEADER
 
@@ -40,80 +40,74 @@
 
 namespace oomph
 {
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
 
 
+  //======================================================================
+  // Namespace for black-box FD Newton solver.
+  //======================================================================
+  namespace BlackBoxFDNewtonSolver
+  {
+    // Function pointer for function that specifies residuals: The arguments
+    // are: Parameters, unknowns, residuals
+    typedef void (*ResidualFctPt)(const Vector<double>& parameters,
+                                  const Vector<double>& unknowns,
+                                  Vector<double>& residuals);
 
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
+    // Function pointer for Jacobian function: Parameters, unknowns, Jacobian
+    typedef void (*JacobianFctPt)(const Vector<double>&,
+                                  const Vector<double>&,
+                                  DenseDoubleMatrix& jacobian);
 
+    // Maximum number of Newton iterations
+    extern unsigned Max_iter;
 
-//======================================================================
-// Namespace for black-box FD Newton solver.
-//======================================================================
- namespace BlackBoxFDNewtonSolver
- {
+    // Number of Newton iterations taken in most recent invocation
+    extern unsigned N_iter_taken;
 
+    // Flag to indicate if progress of Newton iteration is to be documented
+    // (defaults to false)
+    extern bool Doc_Progress;
 
-// Function pointer for function that specifies residuals: The arguments 
-// are: Parameters, unknowns, residuals
-  typedef void (*ResidualFctPt)(const Vector<double>& parameters,
-				const Vector<double>& unknowns,
-				Vector<double>& residuals);
+    // Size of increment used in finite-difference calculations
+    extern double FD_step;
 
-  // Function pointer for Jacobian function: Parameters, unknowns, Jacobian
-  typedef void (*JacobianFctPt)(const Vector<double>&,
-                                const Vector<double>&,
-                                DenseDoubleMatrix& jacobian);
-  
-// Maximum number of Newton iterations
-  extern unsigned Max_iter;
+    // Tolerance (maximum allowed value of an single residual at convergence)
+    extern double Tol;
 
-// Number of Newton iterations taken in most recent invocation
-  extern unsigned N_iter_taken;
+    // Use steplength control do make globally convergent (default false)
+    extern bool Use_step_length_control;
 
-// Flag to indicate if progress of Newton iteration is to be documented
-// (defaults to false) 
-  extern bool Doc_Progress;
-
-// Size of increment used in finite-difference calculations 
-  extern double FD_step;
-
-// Tolerance (maximum allowed value of an single residual at convergence) 
-  extern double Tol;
-
-// Use steplength control do make globally convergent (default false)
-  extern bool Use_step_length_control;
-
-// Black-box FD Newton solver:
-// Calling sequence for residual function is
-// \code residual_fct(parameters,unknowns,residuals) \endcode
-// where all arguments are double Vectors.
-// unknowns.size() = residuals.size().
-  // Final optional argument specifies function that computes
-  // analytical Jacobian (yes, despite the name of the namespace and the
-  // function -- it is optional!).
-  extern void black_box_fd_newton_solve(ResidualFctPt residual_fct,
-					const Vector<double>& params, 
-					Vector<double>& unknowns,
-                                        JacobianFctPt jacobian_fct=0);
+    // Black-box FD Newton solver:
+    // Calling sequence for residual function is
+    // \code residual_fct(parameters,unknowns,residuals) \endcode
+    // where all arguments are double Vectors.
+    // unknowns.size() = residuals.size().
+    // Final optional argument specifies function that computes
+    // analytical Jacobian (yes, despite the name of the namespace and the
+    // function -- it is optional!).
+    extern void black_box_fd_newton_solve(ResidualFctPt residual_fct,
+                                          const Vector<double>& params,
+                                          Vector<double>& unknowns,
+                                          JacobianFctPt jacobian_fct = 0);
 
 
-// Line search helper for globally convergent Newton method
-  extern void line_search(const Vector<double>& x_old, 
-			  const double half_residual_squared_old, 
-			  const Vector<double>& gradient, 
-			  ResidualFctPt residual_fct, 
-			  const Vector<double>& params,
-			  Vector<double>& newton_dir,
-			  Vector<double>& x, 
-			  double& half_residual_squared,
-			  const double& stpmax);
+    // Line search helper for globally convergent Newton method
+    extern void line_search(const Vector<double>& x_old,
+                            const double half_residual_squared_old,
+                            const Vector<double>& gradient,
+                            ResidualFctPt residual_fct,
+                            const Vector<double>& params,
+                            Vector<double>& newton_dir,
+                            Vector<double>& x,
+                            double& half_residual_squared,
+                            const double& stpmax);
 
- }
+  } // namespace BlackBoxFDNewtonSolver
 
 
-
-}
+} // namespace oomph
 
 #endif

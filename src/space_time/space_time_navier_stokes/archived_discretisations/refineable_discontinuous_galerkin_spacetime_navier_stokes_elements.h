@@ -1,29 +1,29 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
-//Header file for refineable space-time Navier Stokes elements
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// Header file for refineable space-time Navier Stokes elements
 #ifndef OOMPH_REFINEABLE_DISCONTINUOUS_GALERKIN_SPACE_TIME_NAVIER_STOKES_ELEMENTS_HEADER
 #define OOMPH_REFINEABLE_DISCONTINUOUS_GALERKIN_SPACE_TIME_NAVIER_STOKES_ELEMENTS_HEADER
 
@@ -32,7 +32,7 @@
 #include <oomph-lib-config.h>
 #endif
 
-//Oomph-lib headers
+// Oomph-lib headers
 #include "generic/refineable_quad_element.h"
 #include "generic/refineable_brick_element.h"
 #include "generic/hp_refineable_elements.h"
@@ -41,1233 +41,1237 @@
 
 namespace oomph
 {
- //======================================================================
- /// A class for elements that allow the imposition of Robin boundary
- /// conditions for the pressure advection diffusion problem in the
- /// Fp preconditioner.
- /// The geometrical information can be read from the FaceGeometry<ELEMENT> 
- /// class and and thus, we can be generic enough without the need to have
- /// a separate equations class
- //======================================================================
- template <class ELEMENT>
- class RefineableFpPressureAdvDiffRobinBCSpaceTimeElement :
-  public virtual FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>
- { 
- public:
- 
-  /// Constructor, which takes a "bulk" element and the value of the
-  /// index and its limit
-  RefineableFpPressureAdvDiffRobinBCSpaceTimeElement(FiniteElement* const&
-						     element_pt,
-						     const int& face_index) :
-   FaceGeometry<ELEMENT>(),
-   FaceElement(), 
-   FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>(element_pt,face_index,true)
-  {}
-
-  /// \short This function returns the residuals for the traction
-  /// function. If construct_jacobian_flag=1 (or 0): do (or don't)
-  /// compute the Jacobian as well.
-  virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
-   Vector<double>& residuals,
-   DenseMatrix<double>& jacobian,
-   const unsigned& construct_jacobian_flag);
- };
-
- 
- //======================================================================
- /// Get residuals and Jacobian of Robin boundary conditions in pressure
- /// advection diffusion problem in Fp preconditoner. Refineable version.
- //======================================================================
- template<class ELEMENT>
- void RefineableFpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>::
- fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
-  Vector<double>& residuals,
-  DenseMatrix<double>& jacobian,
-  const unsigned& flag)
- {
-  // Throw a warning
-  throw OomphLibError("You shouldn't be using this just yet!",
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
-  
-  // Pointers to first hang info object
-  HangInfo* hang_info_pt=0;
-  
-  // Pointers to second hang info object
-  HangInfo* hang_info2_pt=0;
- 
-  // Get the dimension of the element
-  // DRAIG: Should be 2 as bulk (space-time) element is 3D...
-  unsigned my_dim=this->dim();
-  
-  // Storage for local coordinates in FaceElement
-  Vector<double> s(my_dim,0.0);
-  
-  // Storage for local coordinates in the associated bulk element
-  Vector<double> s_bulk(my_dim+1,0.0);
- 
-  // Storage for outer unit normal
-  // DRAIG: Need to be careful here...
-  Vector<double> unit_normal(my_dim+1,0.0);
- 
-  // Storage for velocity in bulk element
-  // DRAIG: Need to be careful here...
-  Vector<double> velocity(my_dim,0.0);
- 
-  // Set the value of n_intpt
-  unsigned n_intpt=this->integral_pt()->nweight();
- 
-  // Integer to store local equation number
-  int local_eqn=0;
-  
-  // Integer to store local unknown number
-  int local_unknown=0;
- 
-  // Get upcast bulk element
-  ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(this->bulk_element_pt());
- 
-  // Find out how many pressure dofs there are in the bulk element
-  unsigned n_pres=bulk_el_pt->npres_nst(); 
- 
-  // Which nodal value represents the pressure? (Negative if pressure
-  // is not based on nodal interpolation).
-  int p_index=bulk_el_pt->p_nodal_index_nst();
- 
-  // Local array of booleans that are true if the l-th pressure value is
-  // hanging (avoid repeated virtual function calls)
-  bool pressure_dof_is_hanging[n_pres];
-  
-  // If the pressure is stored at a node
-  if (p_index>=0)
+  //======================================================================
+  /// A class for elements that allow the imposition of Robin boundary
+  /// conditions for the pressure advection diffusion problem in the
+  /// Fp preconditioner.
+  /// The geometrical information can be read from the FaceGeometry<ELEMENT>
+  /// class and and thus, we can be generic enough without the need to have
+  /// a separate equations class
+  //======================================================================
+  template<class ELEMENT>
+  class RefineableFpPressureAdvDiffRobinBCSpaceTimeElement
+    : public virtual FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>
   {
-   // Read out whether the pressure is hanging
-   for(unsigned l=0;l<n_pres;++l)
-   {
-    // Check the hang status of the pressure node
-    pressure_dof_is_hanging[l]=bulk_el_pt->
-     pressure_node_pt(l)->is_hanging(p_index);
-   }
-  }
-  // Otherwise the pressure is not stored at a node and so cannot hang
-  else
-  {
-   // Create an output stream
-   std::ostringstream error_message_stream;
-
-   // Create an error message
-   error_message_stream << "Pressure advection diffusion does not work "
-			<< "in this case!" << std::endl;
-
-   // Throw an error
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-
-   // Loop over the pressure dofs
-   for(unsigned l=0;l<n_pres;++l)
-   {
-    // DRAIG: This makes no sense...
-    pressure_dof_is_hanging[l]=false;
-   }
-  } // if (p_index>=0)
- 
-  // Get the Reynolds number from the bulk element
-  double re=bulk_el_pt->re();
- 
-  //Set up memory for pressure shape and test functions
-  Shape psip(n_pres), testp(n_pres);
- 
-  // Loop over the integration points
-  for (unsigned ipt=0;ipt<n_intpt;ipt++)
-  {
-   //Get the integral weight
-   double w = this->integral_pt()->weight(ipt);
-   
-   //Assign values of local coordinate in FaceElement
-   for(unsigned i=0;i<my_dim;i++) s[i] = this->integral_pt()->knot(ipt,i);
-   
-   // Find corresponding coordinate in the the bulk element
-   s_bulk=this->local_coordinate_in_bulk(s);
-   
-   /// Get outer unit normal
-   this->outer_unit_normal(ipt,unit_normal);
-   
-   // Get velocity in bulk element
-   bulk_el_pt->interpolated_u_nst(s_bulk,velocity);
-   
-   // Get normal component of veloc
-   double flux=0.0;
-   for (unsigned i=0;i<my_dim+1;i++)
-   {
-    flux+=velocity[i]*unit_normal[i];
-   }
-   
-   // Modify bc: If outflow (flux>0) apply Neumann condition instead
-   if (flux>0.0) flux=0.0;
-   
-   // Get pressure
-   double interpolated_press=bulk_el_pt->interpolated_p_nst(s_bulk);
-   
-   //Call the pressure shape and test functions in bulk element
-   bulk_el_pt->pshape_nst(s_bulk,psip,testp);
-   
-   //Find the Jacobian of the mapping within the FaceElement
-   double J = this->J_eulerian(s);
-   
-   //Premultiply the weights and the Jacobian
-   double W = w*J;
-   
-   
-   //Number of master nodes and storage for the weight of the shape function
-   unsigned n_master=1; double hang_weight=1.0;
-   
-   //Loop over the pressure shape functions
-   for (unsigned l=0;l<n_pres;l++)
-   {
-    //If the pressure dof is hanging
-    if(pressure_dof_is_hanging[l])
+  public:
+    /// Constructor, which takes a "bulk" element and the value of the
+    /// index and its limit
+    RefineableFpPressureAdvDiffRobinBCSpaceTimeElement(
+      FiniteElement* const& element_pt, const int& face_index)
+      : FaceGeometry<ELEMENT>(),
+        FaceElement(),
+        FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>(
+          element_pt, face_index, true)
     {
-     // Pressure dof is hanging so it must be nodal-based
-     // Get the hang info object
-     hang_info_pt = bulk_el_pt->pressure_node_pt(l)->hanging_pt(p_index);
-       
-     //Get the number of master nodes from the pressure node
-     n_master = hang_info_pt->nmaster();
     }
-    //Otherwise the node is its own master
+
+    /// \short This function returns the residuals for the traction
+    /// function. If construct_jacobian_flag=1 (or 0): do (or don't)
+    /// compute the Jacobian as well.
+    virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& construct_jacobian_flag);
+  };
+
+
+  //======================================================================
+  /// Get residuals and Jacobian of Robin boundary conditions in pressure
+  /// advection diffusion problem in Fp preconditoner. Refineable version.
+  //======================================================================
+  template<class ELEMENT>
+  void RefineableFpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>::
+    fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
+  {
+    // Throw a warning
+    throw OomphLibError("You shouldn't be using this just yet!",
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+
+    // Pointers to first hang info object
+    HangInfo* hang_info_pt = 0;
+
+    // Pointers to second hang info object
+    HangInfo* hang_info2_pt = 0;
+
+    // Get the dimension of the element
+    // DRAIG: Should be 2 as bulk (space-time) element is 3D...
+    unsigned my_dim = this->dim();
+
+    // Storage for local coordinates in FaceElement
+    Vector<double> s(my_dim, 0.0);
+
+    // Storage for local coordinates in the associated bulk element
+    Vector<double> s_bulk(my_dim + 1, 0.0);
+
+    // Storage for outer unit normal
+    // DRAIG: Need to be careful here...
+    Vector<double> unit_normal(my_dim + 1, 0.0);
+
+    // Storage for velocity in bulk element
+    // DRAIG: Need to be careful here...
+    Vector<double> velocity(my_dim, 0.0);
+
+    // Set the value of n_intpt
+    unsigned n_intpt = this->integral_pt()->nweight();
+
+    // Integer to store local equation number
+    int local_eqn = 0;
+
+    // Integer to store local unknown number
+    int local_unknown = 0;
+
+    // Get upcast bulk element
+    ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
+
+    // Find out how many pressure dofs there are in the bulk element
+    unsigned n_pres = bulk_el_pt->npres_nst();
+
+    // Which nodal value represents the pressure? (Negative if pressure
+    // is not based on nodal interpolation).
+    int p_index = bulk_el_pt->p_nodal_index_nst();
+
+    // Local array of booleans that are true if the l-th pressure value is
+    // hanging (avoid repeated virtual function calls)
+    bool pressure_dof_is_hanging[n_pres];
+
+    // If the pressure is stored at a node
+    if (p_index >= 0)
+    {
+      // Read out whether the pressure is hanging
+      for (unsigned l = 0; l < n_pres; ++l)
+      {
+        // Check the hang status of the pressure node
+        pressure_dof_is_hanging[l] =
+          bulk_el_pt->pressure_node_pt(l)->is_hanging(p_index);
+      }
+    }
+    // Otherwise the pressure is not stored at a node and so cannot hang
     else
     {
-     n_master = 1;
-    }
-     
-    //Loop over the master nodes
-    for (unsigned m=0;m<n_master;m++)
-    {
-     //Get the number of the unknown
-     //If the pressure dof is hanging
-     if(pressure_dof_is_hanging[l])
-     {
-      //Get the local equation from the master node
-      local_eqn =
-       bulk_el_pt->local_hang_eqn(hang_info_pt->master_node_pt(m),
-				  p_index);
-      //Get the weight for the node
-      hang_weight = hang_info_pt->master_weight(m);
-     }
-     else
-     {
-      local_eqn = bulk_el_pt->p_local_eqn(l);
-      hang_weight = 1.0;
-     }
-       
-     //If the equation is not pinned
-     if (local_eqn>=0)
-     {
-      residuals[local_eqn] -=
-       re*flux*interpolated_press*testp[l]*W*hang_weight;
-         
-      // Jacobian too?
-      if (flag)
+      // Create an output stream
+      std::ostringstream error_message_stream;
+
+      // Create an error message
+      error_message_stream << "Pressure advection diffusion does not work "
+                           << "in this case!" << std::endl;
+
+      // Throw an error
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+
+      // Loop over the pressure dofs
+      for (unsigned l = 0; l < n_pres; ++l)
       {
-       //Number of master nodes and weights
-       unsigned n_master2=1; double hang_weight2=1.0;
-           
-       //Loop over the pressure shape functions
-       for (unsigned l2=0;l2<n_pres;l2++)
-       {
-	//If the pressure dof is hanging
-	if(pressure_dof_is_hanging[l2])
-	{
-	 hang_info2_pt =
-	  bulk_el_pt->pressure_node_pt(l2)->hanging_pt(p_index);
-	 // Pressure dof is hanging so it must be nodal-based
-	 //Get the number of master nodes from the pressure node
-	 n_master2 =  hang_info2_pt->nmaster();
-	}
-	//Otherwise the node is its own master
-	else
-	{
-	 n_master2 = 1;
-	}
-             
-	//Loop over the master nodes
-	for (unsigned m2=0;m2<n_master2;m2++)
-	{
-	 //Get the number of the unknown
-	 //If the pressure dof is hanging
-	 if(pressure_dof_is_hanging[l2])
-	 {
-	  //Get the unknown from the master node
-	  local_unknown =
-	   bulk_el_pt->local_hang_eqn(
-	    hang_info2_pt->master_node_pt(m2),
-	    p_index);
-	  //Get the weight from the hanging object
-	  hang_weight2 = hang_info2_pt->master_weight(m2);
-	 }
-	 else
-	 {
-	  local_unknown = bulk_el_pt->p_local_eqn(l2);
-	  hang_weight2 = 1.0;
-	 }
-               
-	 // If the unknown is not pinned
-	 if (local_unknown>=0)
-	 {                 
-	  jacobian(local_eqn,local_unknown)-=(re*flux*psip[l2]*testp[l]*
-					      W*hang_weight*hang_weight2);
-	 }
-	} // for (unsigned m2=0;m2<n_master2;m2++)
-       } // for (unsigned l2=0;l2<n_pres;l2++)
-      } // if (flag)
-     } // if (local_eqn>=0)
-    } // for (unsigned m=0;m<n_master;m++)
-   } // for (unsigned l=0;l<n_pres;l++)
-  } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
- } // End of fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc
+        // DRAIG: This makes no sense...
+        pressure_dof_is_hanging[l] = false;
+      }
+    } // if (p_index>=0)
 
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
+    // Get the Reynolds number from the bulk element
+    double re = bulk_el_pt->re();
 
- //======================================================================
- /// Refineable version of the Navier-Stokes equations
- //======================================================================
- template<unsigned DIM>
- class RefineableSpaceTimeNavierStokesEquations : 
-  public virtual SpaceTimeNavierStokesEquations<DIM>,
-  public virtual RefineableElement,
-  public virtual ElementWithZ2ErrorEstimator
- {
- protected:
- 
-  /// \short Unpin all pressure dofs in the element 
-  virtual void unpin_elemental_pressure_dofs()=0;
+    // Set up memory for pressure shape and test functions
+    Shape psip(n_pres), testp(n_pres);
 
-  /// \short Pin unused nodal pressure dofs (empty by default, because
-  /// by default pressure dofs are not associated with nodes)
-  virtual void pin_elemental_redundant_nodal_pressure_dofs(){}
-   
- public:
- 
-  /// \short Constructor
-  RefineableSpaceTimeNavierStokesEquations() : 
-   SpaceTimeNavierStokesEquations<DIM>(),
-   RefineableElement(),
-   ElementWithZ2ErrorEstimator()
-  {}
+    // Loop over the integration points
+    for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+    {
+      // Get the integral weight
+      double w = this->integral_pt()->weight(ipt);
 
- 
-  /// \short  Loop over all elements in Vector (which typically contains
-  /// all the elements in a fluid mesh) and pin the nodal pressure degrees
-  /// of freedom that are not being used. Function uses 
-  /// the member function
-  /// - \c RefineableSpaceTimeNavierStokesEquations::
-  ///      pin_elemental_redundant_nodal_pressure_dofs()
-  /// .
-  /// which is empty by default and should be implemented for
-  /// elements with nodal pressure degrees of freedom  
-  /// (e.g. for refineable Taylor-Hood.)
-  static void pin_redundant_nodal_pressures(const Vector<GeneralisedElement*>&
-					    element_pt)
+      // Assign values of local coordinate in FaceElement
+      for (unsigned i = 0; i < my_dim; i++)
+        s[i] = this->integral_pt()->knot(ipt, i);
+
+      // Find corresponding coordinate in the the bulk element
+      s_bulk = this->local_coordinate_in_bulk(s);
+
+      /// Get outer unit normal
+      this->outer_unit_normal(ipt, unit_normal);
+
+      // Get velocity in bulk element
+      bulk_el_pt->interpolated_u_nst(s_bulk, velocity);
+
+      // Get normal component of veloc
+      double flux = 0.0;
+      for (unsigned i = 0; i < my_dim + 1; i++)
+      {
+        flux += velocity[i] * unit_normal[i];
+      }
+
+      // Modify bc: If outflow (flux>0) apply Neumann condition instead
+      if (flux > 0.0) flux = 0.0;
+
+      // Get pressure
+      double interpolated_press = bulk_el_pt->interpolated_p_nst(s_bulk);
+
+      // Call the pressure shape and test functions in bulk element
+      bulk_el_pt->pshape_nst(s_bulk, psip, testp);
+
+      // Find the Jacobian of the mapping within the FaceElement
+      double J = this->J_eulerian(s);
+
+      // Premultiply the weights and the Jacobian
+      double W = w * J;
+
+
+      // Number of master nodes and storage for the weight of the shape function
+      unsigned n_master = 1;
+      double hang_weight = 1.0;
+
+      // Loop over the pressure shape functions
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        // If the pressure dof is hanging
+        if (pressure_dof_is_hanging[l])
+        {
+          // Pressure dof is hanging so it must be nodal-based
+          // Get the hang info object
+          hang_info_pt = bulk_el_pt->pressure_node_pt(l)->hanging_pt(p_index);
+
+          // Get the number of master nodes from the pressure node
+          n_master = hang_info_pt->nmaster();
+        }
+        // Otherwise the node is its own master
+        else
+        {
+          n_master = 1;
+        }
+
+        // Loop over the master nodes
+        for (unsigned m = 0; m < n_master; m++)
+        {
+          // Get the number of the unknown
+          // If the pressure dof is hanging
+          if (pressure_dof_is_hanging[l])
+          {
+            // Get the local equation from the master node
+            local_eqn = bulk_el_pt->local_hang_eqn(
+              hang_info_pt->master_node_pt(m), p_index);
+            // Get the weight for the node
+            hang_weight = hang_info_pt->master_weight(m);
+          }
+          else
+          {
+            local_eqn = bulk_el_pt->p_local_eqn(l);
+            hang_weight = 1.0;
+          }
+
+          // If the equation is not pinned
+          if (local_eqn >= 0)
+          {
+            residuals[local_eqn] -=
+              re * flux * interpolated_press * testp[l] * W * hang_weight;
+
+            // Jacobian too?
+            if (flag)
+            {
+              // Number of master nodes and weights
+              unsigned n_master2 = 1;
+              double hang_weight2 = 1.0;
+
+              // Loop over the pressure shape functions
+              for (unsigned l2 = 0; l2 < n_pres; l2++)
+              {
+                // If the pressure dof is hanging
+                if (pressure_dof_is_hanging[l2])
+                {
+                  hang_info2_pt =
+                    bulk_el_pt->pressure_node_pt(l2)->hanging_pt(p_index);
+                  // Pressure dof is hanging so it must be nodal-based
+                  // Get the number of master nodes from the pressure node
+                  n_master2 = hang_info2_pt->nmaster();
+                }
+                // Otherwise the node is its own master
+                else
+                {
+                  n_master2 = 1;
+                }
+
+                // Loop over the master nodes
+                for (unsigned m2 = 0; m2 < n_master2; m2++)
+                {
+                  // Get the number of the unknown
+                  // If the pressure dof is hanging
+                  if (pressure_dof_is_hanging[l2])
+                  {
+                    // Get the unknown from the master node
+                    local_unknown = bulk_el_pt->local_hang_eqn(
+                      hang_info2_pt->master_node_pt(m2), p_index);
+                    // Get the weight from the hanging object
+                    hang_weight2 = hang_info2_pt->master_weight(m2);
+                  }
+                  else
+                  {
+                    local_unknown = bulk_el_pt->p_local_eqn(l2);
+                    hang_weight2 = 1.0;
+                  }
+
+                  // If the unknown is not pinned
+                  if (local_unknown >= 0)
+                  {
+                    jacobian(local_eqn, local_unknown) -=
+                      (re * flux * psip[l2] * testp[l] * W * hang_weight *
+                       hang_weight2);
+                  }
+                } // for (unsigned m2=0;m2<n_master2;m2++)
+              } // for (unsigned l2=0;l2<n_pres;l2++)
+            } // if (flag)
+          } // if (local_eqn>=0)
+        } // for (unsigned m=0;m<n_master;m++)
+      } // for (unsigned l=0;l<n_pres;l++)
+    } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
+  } // End of fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  //======================================================================
+  /// Refineable version of the Navier-Stokes equations
+  //======================================================================
+  template<unsigned DIM>
+  class RefineableSpaceTimeNavierStokesEquations
+    : public virtual SpaceTimeNavierStokesEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
-   // How many elements are there?
-   unsigned n_element=element_pt.size();
-   
-   // Loop over all elements
-   for(unsigned e=0;e<n_element;e++)
-   {
-    // Call the function that pins the unused nodal pressure data
-    dynamic_cast<RefineableSpaceTimeNavierStokesEquations<DIM>*>
-     (element_pt[e])->pin_elemental_redundant_nodal_pressure_dofs();
-   }
-  } // End of pin_redundant_nodal_pressures
-  
+  protected:
+    /// \short Unpin all pressure dofs in the element
+    virtual void unpin_elemental_pressure_dofs() = 0;
 
-  /// \short Unpin all pressure dofs in elements listed in vector.
-  static void unpin_all_pressure_dofs(const Vector<GeneralisedElement*>&
-				      element_pt)
-  {
-   // How many elements are there?
-   unsigned n_element=element_pt.size();
-   
-   // Loop over all elements
-   for (unsigned e=0;e<n_element;e++)
-   {
-    // Unpin the pressure dofs in the e-th element
-    dynamic_cast<RefineableSpaceTimeNavierStokesEquations<DIM>*>
-     (element_pt[e])->unpin_elemental_pressure_dofs();
-   }
-  } // End of unpin_all_pressure_dofs
-  
+    /// \short Pin unused nodal pressure dofs (empty by default, because
+    /// by default pressure dofs are not associated with nodes)
+    virtual void pin_elemental_redundant_nodal_pressure_dofs() {}
 
-  /// \short Pointer to n_p-th pressure node (Default: NULL, 
-  /// indicating that pressure is not based on nodal interpolation).
-  virtual Node* pressure_node_pt(const unsigned& n_p)
-  {
-   // Return a null pointer
-   return NULL;
-  } // End of pressure_node_pt
+  public:
+    /// \short Constructor
+    RefineableSpaceTimeNavierStokesEquations()
+      : SpaceTimeNavierStokesEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
+    {
+    }
 
-  
-  /// \short Compute the diagonal of the velocity/pressure mass matrices.
-  /// If which one=0, both are computed, otherwise only the pressure 
-  /// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
-  /// LSC version of the preconditioner only needs that one)
-  void get_pressure_and_velocity_mass_matrix_diagonal(
-   Vector<double>& press_mass_diag,
-   Vector<double>& veloc_mass_diag,
-   const unsigned& which_one=0);
 
- 
-  /// Number of 'flux' terms for Z2 error estimation 
-  unsigned num_Z2_flux_terms()
-  {
-   // DIM diagonal strain rates, DIM(DIM-1)/2 off diagonal rates (plus
-   // DIM velocity time-derivatives)
-   return (DIM+(DIM*(DIM-1))/2)+DIM;
-  } // End of num_Z2_flux_terms
-  
+    /// \short  Loop over all elements in Vector (which typically contains
+    /// all the elements in a fluid mesh) and pin the nodal pressure degrees
+    /// of freedom that are not being used. Function uses
+    /// the member function
+    /// - \c RefineableSpaceTimeNavierStokesEquations::
+    ///      pin_elemental_redundant_nodal_pressure_dofs()
+    /// .
+    /// which is empty by default and should be implemented for
+    /// elements with nodal pressure degrees of freedom
+    /// (e.g. for refineable Taylor-Hood.)
+    static void pin_redundant_nodal_pressures(
+      const Vector<GeneralisedElement*>& element_pt)
+    {
+      // How many elements are there?
+      unsigned n_element = element_pt.size();
 
-  /// \short Get 'flux' for Z2 error recovery: Upper triangular entries
-  /// in strain rate tensor.
-  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
-  {
+      // Loop over all elements
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        // Call the function that pins the unused nodal pressure data
+        dynamic_cast<RefineableSpaceTimeNavierStokesEquations<DIM>*>(
+          element_pt[e])
+          ->pin_elemental_redundant_nodal_pressure_dofs();
+      }
+    } // End of pin_redundant_nodal_pressures
+
+
+    /// \short Unpin all pressure dofs in elements listed in vector.
+    static void unpin_all_pressure_dofs(
+      const Vector<GeneralisedElement*>& element_pt)
+    {
+      // How many elements are there?
+      unsigned n_element = element_pt.size();
+
+      // Loop over all elements
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        // Unpin the pressure dofs in the e-th element
+        dynamic_cast<RefineableSpaceTimeNavierStokesEquations<DIM>*>(
+          element_pt[e])
+          ->unpin_elemental_pressure_dofs();
+      }
+    } // End of unpin_all_pressure_dofs
+
+
+    /// \short Pointer to n_p-th pressure node (Default: NULL,
+    /// indicating that pressure is not based on nodal interpolation).
+    virtual Node* pressure_node_pt(const unsigned& n_p)
+    {
+      // Return a null pointer
+      return NULL;
+    } // End of pressure_node_pt
+
+
+    /// \short Compute the diagonal of the velocity/pressure mass matrices.
+    /// If which one=0, both are computed, otherwise only the pressure
+    /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
+    /// LSC version of the preconditioner only needs that one)
+    void get_pressure_and_velocity_mass_matrix_diagonal(
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one = 0);
+
+
+    /// Number of 'flux' terms for Z2 error estimation
+    unsigned num_Z2_flux_terms()
+    {
+      // DIM diagonal strain rates, DIM(DIM-1)/2 off diagonal rates (plus
+      // DIM velocity time-derivatives)
+      return (DIM + (DIM * (DIM - 1)) / 2) + DIM;
+    } // End of num_Z2_flux_terms
+
+
+    /// \short Get 'flux' for Z2 error recovery: Upper triangular entries
+    /// in strain rate tensor.
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+    {
 #ifdef PARANOID
-   // Calculate the number of entries there should be
-   unsigned num_entries=(DIM+(DIM*(DIM-1))/2)+DIM;
-   
-   // Check if the flux vector has the correct size
-   if (flux.size()<num_entries)
-   {
-    std::ostringstream error_message;
-    error_message << "The flux vector has the wrong number of entries, " 
-		  << flux.size() << ", whereas it should be at least " 
-		  << num_entries << std::endl;
-    throw OomphLibError(error_message.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
+      // Calculate the number of entries there should be
+      unsigned num_entries = (DIM + (DIM * (DIM - 1)) / 2) + DIM;
+
+      // Check if the flux vector has the correct size
+      if (flux.size() < num_entries)
+      {
+        std::ostringstream error_message;
+        error_message << "The flux vector has the wrong number of entries, "
+                      << flux.size() << ", whereas it should be at least "
+                      << num_entries << std::endl;
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-   // Allocate space for the strain-rate
-   DenseMatrix<double> strainrate(DIM,DIM,0.0);
-   
-   // Get strain rate matrix
-   this->strain_rate(s,strainrate);
-   
-   // Pack into flux Vector
-   unsigned icount=0;
-   
-   // Loop over the diagonal entries
-   for (unsigned i=0;i<DIM;i++)
-   {
-    // Add the next strain rate entry to the flux vector
-    flux[icount]=strainrate(i,i);
+      // Allocate space for the strain-rate
+      DenseMatrix<double> strainrate(DIM, DIM, 0.0);
 
-    // Increment the counter
-    icount++;
-   }
+      // Get strain rate matrix
+      this->strain_rate(s, strainrate);
 
-   // Loop over the rows of the matrix
-   for (unsigned i=0;i<DIM;i++)
-   {
-    // Loop over the lower triangular columns
-    for (unsigned j=i+1;j<DIM;j++)
-    {
-     // Add the next strain rate entry to the flux vector
-     flux[icount]=strainrate(i,j);
-     
-     // Increment the counter
-     icount++;
-    }
-   } // for (unsigned i=0;i<DIM;i++)
+      // Pack into flux Vector
+      unsigned icount = 0;
 
-   // The number of nodes in the element
-   unsigned n_node=this->nnode();
-   
-   // Set up memory for the shape and test functions
-   Shape psif(n_node);
-    
-   // Set up memory for the derivatives of the shape and test functions
-   DShape dpsifdx(n_node,DIM+1);
-    
-   // Call the derivatives of the shape and test functions
-   dshape_eulerian(s,psif,dpsifdx);
-   
-   // Loop over velocity components
-   for (unsigned j=0;j<DIM;j++)
-   {
-    // Find the index at which the variable is stored
-    unsigned u_nodal_index=this->u_index_nst(j);
-    
-    // Loop over nodes
-    for (unsigned l=0;l<n_node;l++)
-    {
-     // Add the time-derivative contribution from the l-th node
-     flux[icount]+=this->nodal_value(l,u_nodal_index)*dpsifdx(l,DIM);
-    }
-    
-    // Increment the counter
-    icount++;
-   } // for (unsigned j=0;j<DIM;j++)
-  } // End of get_Z2_flux
-  
-
-  ///  Further build, pass the pointers down to the sons
-  void further_build()
-  {
-   //Find the father element
-   RefineableSpaceTimeNavierStokesEquations<DIM>* cast_father_element_pt=
-    dynamic_cast<RefineableSpaceTimeNavierStokesEquations<DIM>*>
-    (this->father_element_pt());
-   
-   // Set the viscosity ratio pointer
-   this->Viscosity_Ratio_pt=cast_father_element_pt->viscosity_ratio_pt();
-   
-   // Set the density ratio pointer
-   this->Density_Ratio_pt=cast_father_element_pt->density_ratio_pt();
-   
-   // Set pointer to global Reynolds number
-   this->Re_pt=cast_father_element_pt->re_pt();
-   
-   // Set pointer to global Reynolds number x Strouhal number (=Womersley)
-   this->St_pt=cast_father_element_pt->st_pt();
-   
-   // The Strouhal number (which is a proxy for the period here) is not
-   // stored as external data
-   this->Strouhal_is_stored_as_external_data=
-    cast_father_element_pt->is_strouhal_stored_as_external_data();
-
-   // If we're storing the Strouhal number as external data
-   if (this->Strouhal_is_stored_as_external_data)
-   {
-    // The index of the external data (which contains the st)
-    unsigned data_index=0;
-
-    // Get the external data pointer from the father and store it
-    this->store_strouhal_as_external_data(
-     cast_father_element_pt->external_data_pt(data_index));
-   }
-   
-   // Set pointer to global Reynolds number x inverse Froude number
-   this->ReInvFr_pt=cast_father_element_pt->re_invfr_pt();
-   
-   // Set pointer to global gravity Vector
-   this->G_pt=cast_father_element_pt->g_pt();
-   
-   // Set pointer to body force function
-   this->Body_force_fct_pt=cast_father_element_pt->body_force_fct_pt();
- 
-   // Set pointer to volumetric source function
-   this->Source_fct_pt=cast_father_element_pt->source_fct_pt();
-
-   // Set the ALE flag
-   this->ALE_is_disabled=cast_father_element_pt->ALE_is_disabled;
-  } // End of further_build
-
-
-  /// \short Compute the derivatives of the i-th component of 
-  /// velocity at point s with respect
-  /// to all data that can affect its value. In addition, return the global
-  /// equation numbers corresponding to the data.
-  /// Overload the non-refineable version to take account of hanging node
-  /// information
-  void dinterpolated_u_nst_ddata(const Vector<double>& s,
-				 const unsigned& i,
-				 Vector<double>& du_ddata,
-				 Vector<unsigned>& global_eqn_number)
-  {
-   // Find the number of nodes in the element
-   unsigned n_node=this->nnode();
-   //Local shape function
-   Shape psi(n_node);
-   //Find values of shape function at the given local coordinate
-   this->shape(s,psi);
-   
-   //Find the index at which the velocity component is stored
-   const unsigned u_nodal_index = this->u_index_nst(i);
-   
-   //Storage for hang info pointer
-   HangInfo* hang_info_pt=0;
-   //Storage for global equation
-   int global_eqn = 0;
-          
-   //Find the number of dofs associated with interpolated u
-   unsigned n_u_dof=0;
-   for(unsigned l=0;l<n_node;l++)
-   {
-    unsigned n_master = 1;
-     
-    //Local bool (is the node hanging)
-    bool is_node_hanging = this->node_pt(l)->is_hanging();
-     
-    //If the node is hanging, get the number of master nodes
-    if(is_node_hanging)
-    {
-     hang_info_pt = this->node_pt(l)->hanging_pt();
-     n_master = hang_info_pt->nmaster();
-    }
-    //Otherwise there is just one master node, the node itself
-    else 
-    {
-     n_master = 1;
-    }
-     
-    //Loop over the master nodes
-    for(unsigned m=0;m<n_master;m++)
-    {
-     //Get the equation number
-     if(is_node_hanging)
-     {
-      //Get the equation number from the master node
-      global_eqn = hang_info_pt->master_node_pt(m)->
-       eqn_number(u_nodal_index);
-     }
-     else
-     {
-      // Global equation number
-      global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
-     }
-       
-     //If it's positive add to the count
-     if(global_eqn >= 0) {++n_u_dof;}
-    }
-   }
-   
-   // Now resize the storage schemes
-   du_ddata.resize(n_u_dof,0.0);
-   global_eqn_number.resize(n_u_dof,0);
-   
-   // Loop over the nodes again and set the derivatives
-   unsigned count=0;
-   
-   // Loop over the nodes in the element
-   for (unsigned l=0;l<n_node;l++) 
-   {
-    // Initialise the number of master nodes to one
-    unsigned n_master=1;
-
-    // Initialise the hang weight to one
-    double hang_weight=1.0;
-     
-    // Local bool (is the node hanging)
-    bool is_node_hanging=this->node_pt(l)->is_hanging();
-     
-    // If the node is hanging, get the number of master nodes
-    if (is_node_hanging)
-    {
-     // Get the HangInfo pointer associated with the l-th node
-     hang_info_pt=this->node_pt(l)->hanging_pt();
-
-     // How many master nodes does this node have?
-     n_master=hang_info_pt->nmaster();
-    }
-    // Otherwise there is just one master node, the node itself
-    else 
-    {
-     // Set n_master to one
-     n_master=1;
-    }
-     
-    // Loop over the master nodes
-    for (unsigned m=0;m<n_master;m++)
-    {
-     // If the node is hanging get weight from master node
-     if (is_node_hanging)
-     {
-      // Get the hang weight from the master node
-      hang_weight=hang_info_pt->master_weight(m);
-     }
-     else
-     {
-      // Node contributes with full weight
-      hang_weight=1.0;
-     }
-       
-     // Get the equation number
-     if (is_node_hanging)
-     {
-      // Get the equation number from the master node
-      global_eqn=hang_info_pt->master_node_pt(m)->eqn_number(u_nodal_index);
-     }
-     else
-     {
-      // Get the global equation number
-      global_eqn=this->node_pt(l)->eqn_number(u_nodal_index);
-     }
-     
-     // If it's a proper degree of freedom  
-     if (global_eqn>=0)
-     {
-      // Set the global equation number
-      global_eqn_number[count]=global_eqn;
-      
-      // Set the derivative with respect to the unknown
-      du_ddata[count]=psi[l]*hang_weight;
-      
-      // Increase the counter
-      ++count;
-     }
-    } // for (unsigned m=0;m<n_master;m++)
-   } // for (unsigned l=0;l<n_node;l++)
-  } // End of dinterpolated_u_nst_ddata
-
- protected:
-
-  /// \short Add the elements contribution to elemental residual vector
-  /// and/or Jacobian matrix. 
-  ///           compute_jacobian_flag=0: compute residual vector only
-  ///           compute_jacobian_flag=1: compute both
-  void fill_in_generic_residual_contribution_nst(
-   Vector<double>& residuals, 
-   DenseMatrix<double>& jacobian, 
-   DenseMatrix<double>& mass_matrix,
-   const unsigned& compute_jacobian_flag);
-  
-  
-  /// \short Compute the residuals for the associated pressure advection 
-  /// diffusion problem. Used by the Fp preconditioner.
-  /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
-  void fill_in_generic_pressure_advection_diffusion_contribution_nst(
-   Vector<double>& residuals,
-   DenseMatrix<double>& jacobian,
-   const unsigned& compute_jacobian_flag);
- 
-    
-  /// \short Compute derivatives of elemental residual vector with respect
-  /// to nodal coordinates. Overwrites default implementation in 
-  /// FiniteElement base class.
-  /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
-  virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
-						dresidual_dnodal_coordinates);
-  
- };
-
-
-//======================================================================
-/// Refineable version of Taylor Hood elements. These classes
-/// can be written in total generality.
-//======================================================================
- template<unsigned DIM>
- class RefineableQTaylorHoodSpaceTimeElement : 
-  public QTaylorHoodSpaceTimeElement<DIM>,
-  public virtual RefineableSpaceTimeNavierStokesEquations<DIM>,
-  public virtual RefineableQElement<DIM+1>
- {
- public:
- 
-  /// \short Constructor
-  RefineableQTaylorHoodSpaceTimeElement() : 
-   RefineableElement(),
-   RefineableSpaceTimeNavierStokesEquations<DIM>(),
-   RefineableQElement<DIM+1>(), 
-   QTaylorHoodSpaceTimeElement<DIM>()
-  {}
-
-  
-  /// \short Number of values required at local node n. In order to simplify
-  /// matters, we allocate storage for pressure variables at all the nodes
-  /// and then pin those that are not used.
-  unsigned required_nvalue(const unsigned& n) const
-  {
-   // There are DIM velocity components and 1 pressure component
-   return DIM+1;
-  } // End of required_nvalue
-
-  
-  /// Number of continuously interpolated values
-  unsigned ncont_interpolated_values() const
-  {
-   // There are DIM velocities and 1 pressure component
-   return DIM+1;
-  } // End of ncont_interpolated_values
-
-  
-  /// Rebuild from sons: empty
-  void rebuild_from_sons(Mesh*& mesh_pt) {}
-  
-
-  /// \short Order of recovery shape functions for Z2 error estimation:
-  /// Same order as shape functions.
-  unsigned nrecovery_order()
-  {
-   // Using quadratic interpolation
-   return 2;
-  } // End of nrecovery_order
-
-  
-  /// \short Number of vertex nodes in the element
-  unsigned nvertex_node() const
-  {
-   // Call the base class implementation of the function
-   return QTaylorHoodSpaceTimeElement<DIM>::nvertex_node();
-  } // End of nvertex_node
-
-  
-  /// \short Pointer to the j-th vertex node in the element
-  Node* vertex_node_pt(const unsigned& j) const
-  {
-   // Call the base class implementation of the function
-   return QTaylorHoodSpaceTimeElement<DIM>::vertex_node_pt(j);
-  } // End of vertex_node_pt
-
-  
-  /// \short Get the function value u in Vector.
-  /// Note: Given the generality of the interface (this function is usually
-  /// called from black-box documentation or interpolation routines), the
-  /// values Vector sets its own size in here.
-  void get_interpolated_values(const Vector<double>& s,Vector<double>& values)
-  {
-   // Set size of Vector: u,v,p and initialise to zero
-   values.resize(DIM+1,0.0);
-   
-   // Calculate velocities: values[0],...
-   for (unsigned i=0;i<DIM;i++)
-   {
-    // Calculate the i-th velocity component at local coordinates s
-    values[i]=this->interpolated_u_nst(s,i);
-   }
-   
-   // Calculate the pressure field at local coordinates s
-   values[DIM]=this->interpolated_p_nst(s);
-  } // End of get_interpolated_values
-
-  
-  /// \short Get the function value u in Vector.
-  /// Note: Given the generality of the interface (this function
-  /// is usually called from black-box documentation or interpolation routines),
-  /// the values Vector sets its own size in here.
-  void get_interpolated_values(const unsigned& t,
-			       const Vector<double>& s, 
-			       Vector<double>& values)
-  {
-   // The only time this makes sense (if you can even say that...)
-   if (t==0)
-   {
-    // Call the other function
-    get_interpolated_values(s,values);
-   }
-   else
-   {
-    // Create an output stream
-    std::ostringstream error_message_stream;
-
-    // Create an error message
-    error_message_stream << "History values don't make sense in "
-			 << "space-time elements!" << std::endl;
-
-    // Throw an error message
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-  } // End of get_interpolated_values
-
-  
-  /// \short Perform additional hanging node procedures for variables
-  /// that are not interpolated by all nodes. The pressures are stored 
-  /// at the p_nodal_index_nst-th location in each node
-  void further_setup_hanging_nodes()
-  {
-   // Set up the hang info for the pressure nodes
-   this->setup_hang_for_value(this->p_nodal_index_nst());
-  } // End of further_setup_hanging_nodes
-  
-
-  /// \short Pointer to n_p-th pressure node
-  Node* pressure_node_pt(const unsigned& n_p)
-  {
-   // Return a pointer to the n_p-th pressure node
-   return this->node_pt(this->Pconv[n_p]);
-  } // End of pressure node_pt
-  
-
-  /// \short The velocities are isoparametric and so the "nodes" interpolating
-  /// the velocities are the geometric nodes. The pressure "nodes" are a 
-  /// subset of the nodes, so when value_id==DIM, the n-th pressure
-  /// node is returned.
-  Node* interpolating_node_pt(const unsigned& n,
-			      const int& value_id) 
-
-  {
-   // The only different nodes are the pressure nodes
-   if (value_id==DIM)
-   {
-    // Return a pointer to the n-th pressure node
-    return this->pressure_node_pt(n);
-   }
-   // The other variables are interpolated via the usual nodes
-   else
-   {
-    // Return a pointer to the n-th regular node
-    return this->node_pt(n);
-   }
-  } // End of interpolating_node_pt
-
-  
-  /// \short The pressure nodes are the corner nodes, so when n_value==DIM,
-  /// the fraction is the same as the 1D node number, 0 or 1.
-  double local_one_d_fraction_of_interpolating_node(const unsigned& n_1d,
-						    const unsigned& i, 
-						    const int& value_id)
-  {
-   // If we're dealing with a pressure node
-   if (value_id==DIM) 
-   {
-    // The pressure nodes are just located on the boundaries at 0 or 1
-    return double(n_1d); 
-   }
-   // Otherwise we're dealing with a velocity node
-   else
-   {
-    // The velocity nodes are the same as the geometric ones
-    return this->local_one_d_fraction_of_node(n_1d,i);
-   }
-  } // End of local_one_d_fraction_of_interpolating_node
-
-  
-  /// \short The velocity nodes are the same as the geometric nodes. The
-  /// pressure nodes must be calculated by using the same methods as
-  /// the geometric nodes, but by recalling that there are only two pressure
-  /// nodes per edge.
-  Node* get_interpolating_node_at_local_coordinate(const Vector<double>& s,   
-						   const int& value_id)
-  {
-   // If we are calculating pressure nodes
-   if (value_id==DIM)
-   {
-    // Storage for the index of the pressure node
-    unsigned total_index=0;
-    
-    // The number of nodes along each 1D edge is 2.
-    unsigned nnode_1d=2;
-    
-    // Storage for the index along each boundary
-    Vector<int> index(DIM+1);
-    
-    // Loop over the coordinate directions
-    for (unsigned i=0;i<DIM+1;i++)
-    {
-     // If we are at the lower limit, the index is zero
-     if (s[i]==-1.0)
-     {
-      // We're at the first node
-      index[i]=0;
-     }
-     // If we are at the upper limit, the index is the number of nodes minus 1
-     else if (s[i]==1.0)
-     {
-      // We're on the last node
-      index[i]=nnode_1d-1;
-     }
-     // Otherwise, we have to calculate the index in general
-     else
-     {
-      // For uniformly spaced nodes this should produce an integer when
-      // s[i] is associated with a nodal location
-      double float_index=0.5*(1.0+s[i])*(nnode_1d-1);
-
-      // Take the integer part of the float_index value
-      index[i]=int(float_index);
-      
-      // What is the excess. This should be safe because the taking the
-      // integer part rounds down
-      double excess=float_index-index[i];
-      
-      // If the excess is bigger than our tolerance there is no node
-      if ((excess>FiniteElement::Node_location_tolerance)&&
-	  ((1.0-excess)>FiniteElement::Node_location_tolerance))
+      // Loop over the diagonal entries
+      for (unsigned i = 0; i < DIM; i++)
       {
-       // As there is no node, return null
-       return 0;
+        // Add the next strain rate entry to the flux vector
+        flux[icount] = strainrate(i, i);
+
+        // Increment the counter
+        icount++;
       }
-     } // if (s[i]==-1.0)
-     
-     // Construct the general pressure index from the components.
-     total_index+=index[i]*
-      static_cast<unsigned>(pow(static_cast<float>(nnode_1d),
-				static_cast<int>(i)));
-    } // for (unsigned i=0;i<DIM;i++)
-    
-    // If we've got here we have a node, so let's return a pointer to it
-    return this->pressure_node_pt(total_index);
-   }
-   // Otherwise velocity nodes are the same as pressure nodes
-   else
-   {
-    // Call the regular helper function to find the right node
-    return this->get_node_at_local_coordinate(s);
-   } // if (value_id==DIM)
-  } // End of get_interpolating_node_at_local_coordinate
 
-
-  /// \short The number of 1D pressure nodes is 2, the number of 1D velocity
-  /// nodes is the same as the number of 1D geometric nodes.
-  unsigned ninterpolating_node_1d(const int& value_id)
-  {
-   // If we're dealing with the pressure nodes
-   if (value_id==DIM)
-   {
-    // Using linear interpolation for the pressure
-    return 2;
-   }
-   // If we're dealing with the velocity nodes
-   else
-   {
-    // Every node is a velocity interpolating node 
-    return this->nnode_1d();
-   }
-  } // End of ninterpolating_node_1d
-  
-
-  /// \short The number of pressure nodes is 2^DIM. The number of 
-  /// velocity nodes is the same as the number of geometric nodes.
-  unsigned ninterpolating_node(const int& value_id)
-  {
-   // If we want the pressure basis functions
-   if (value_id==DIM) 
-   {
-    // There are 2^{DIM+1} pressure dofs (also interpolating in time)
-    return static_cast<unsigned>(pow(2.0,static_cast<int>(DIM+1)));
-   }
-   // If we want the velocity basis functions
-   else
-   {
-    // Every node is a velocity interpolating node
-    return this->nnode();
-   }
-  } // End if ninterpolating_node
-
-  
-  /// \short The basis interpolating the pressure is given by pshape().
-  //// The basis interpolating the velocity is shape().
-  void interpolating_basis(const Vector<double>& s,
-			   Shape& psi,
-			   const int& value_id) const
-  {
-   // If we want the pressure basis functions
-   if (value_id==DIM)
-   {
-    // Call the pressure shape function
-    return this->pshape_nst(s,psi);
-   }
-   // If we want the velocity basis functions
-   else
-   {
-    // Call the velocity shape function
-    return this->shape(s,psi);
-   }
-  } // End of interpolating_basis
-
-
-  /// \short Build FaceElements that apply the Robin boundary condition
-  /// to the pressure advection diffusion problem required by 
-  /// Fp preconditioner
-  void build_fp_press_adv_diff_robin_bc_element(const unsigned& 
-						face_index)
-  {
-   this->Pressure_advection_diffusion_robin_element_pt.push_back(
-    new RefineableFpPressureAdvDiffRobinBCSpaceTimeElement<
-    RefineableQTaylorHoodSpaceTimeElement<DIM> >
-    (this,face_index));
-  } // End of build_fp_press_adv_diff_robin_bc_element
-
-
-  /// \short Add to the set \c paired_load_data pairs containing
-  /// - the pointer to a Data object
-  /// and
-  /// - the index of the value in that Data object
-  /// .
-  /// for all values (pressures, velocities) that affect the
-  /// load computed in the \c get_load(...) function.
-  /// (Overloads non-refineable version and takes hanging nodes
-  /// into account)
-  void identify_load_data(std::set<std::pair<Data*,unsigned> >&
-			  paired_load_data)
-  {
-   // Allocate space for the velocity component indices
-   unsigned u_index[DIM];
-
-   // Loop over the velocity components
-   for (unsigned i=0;i<DIM;i++)
-   {    
-    // Get the nodal indices at which the velocities are stored
-    u_index[i]=this->u_index_nst(i);
-   }
-
-   // Get the number of nodes in the element
-   unsigned n_node=this->nnode();
-   
-   // Loop over the nodes
-   for (unsigned n=0;n<n_node;n++)
-   {
-    // Pointer to current node
-    Node* nod_pt=this->node_pt(n);
-     
-    // Check if it's hanging:
-    if (nod_pt->is_hanging())
-    {
-     // It's hanging -- get number of master nodes
-     unsigned nmaster=nod_pt->hanging_pt()->nmaster();
-       
-     // Loop over master nodes
-     for (unsigned j=0;j<nmaster;j++)
-     {
-      // Create a pointer to the j-th master node
-      Node* master_nod_pt=nod_pt->hanging_pt()->master_node_pt(j);
-         
-      // Loop over the velocity components and add a pointer to their data
-      // and indices to the vectors
-      for (unsigned i=0;i<DIM;i++)
+      // Loop over the rows of the matrix
+      for (unsigned i = 0; i < DIM; i++)
       {
-       // Create a pair and add it to the storage
-       paired_load_data.insert(std::make_pair(master_nod_pt,u_index[i]));
+        // Loop over the lower triangular columns
+        for (unsigned j = i + 1; j < DIM; j++)
+        {
+          // Add the next strain rate entry to the flux vector
+          flux[icount] = strainrate(i, j);
+
+          // Increment the counter
+          icount++;
+        }
+      } // for (unsigned i=0;i<DIM;i++)
+
+      // The number of nodes in the element
+      unsigned n_node = this->nnode();
+
+      // Set up memory for the shape and test functions
+      Shape psif(n_node);
+
+      // Set up memory for the derivatives of the shape and test functions
+      DShape dpsifdx(n_node, DIM + 1);
+
+      // Call the derivatives of the shape and test functions
+      dshape_eulerian(s, psif, dpsifdx);
+
+      // Loop over velocity components
+      for (unsigned j = 0; j < DIM; j++)
+      {
+        // Find the index at which the variable is stored
+        unsigned u_nodal_index = this->u_index_nst(j);
+
+        // Loop over nodes
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          // Add the time-derivative contribution from the l-th node
+          flux[icount] += this->nodal_value(l, u_nodal_index) * dpsifdx(l, DIM);
+        }
+
+        // Increment the counter
+        icount++;
+      } // for (unsigned j=0;j<DIM;j++)
+    } // End of get_Z2_flux
+
+
+    ///  Further build, pass the pointers down to the sons
+    void further_build()
+    {
+      // Find the father element
+      RefineableSpaceTimeNavierStokesEquations<DIM>* cast_father_element_pt =
+        dynamic_cast<RefineableSpaceTimeNavierStokesEquations<DIM>*>(
+          this->father_element_pt());
+
+      // Set the viscosity ratio pointer
+      this->Viscosity_Ratio_pt = cast_father_element_pt->viscosity_ratio_pt();
+
+      // Set the density ratio pointer
+      this->Density_Ratio_pt = cast_father_element_pt->density_ratio_pt();
+
+      // Set pointer to global Reynolds number
+      this->Re_pt = cast_father_element_pt->re_pt();
+
+      // Set pointer to global Reynolds number x Strouhal number (=Womersley)
+      this->St_pt = cast_father_element_pt->st_pt();
+
+      // The Strouhal number (which is a proxy for the period here) is not
+      // stored as external data
+      this->Strouhal_is_stored_as_external_data =
+        cast_father_element_pt->is_strouhal_stored_as_external_data();
+
+      // If we're storing the Strouhal number as external data
+      if (this->Strouhal_is_stored_as_external_data)
+      {
+        // The index of the external data (which contains the st)
+        unsigned data_index = 0;
+
+        // Get the external data pointer from the father and store it
+        this->store_strouhal_as_external_data(
+          cast_father_element_pt->external_data_pt(data_index));
       }
-     } // for (unsigned j=0;j<nmaster;j++)
-    }
-    // If the node is not hanging
-    else
-    {
-     // Loop over the velocity components and add pointer to their data
-     // and indices to the vectors
-     for (unsigned i=0;i<DIM;i++)
-     {
-      // Create a pair and add it to the storage
-      paired_load_data.insert(std::make_pair(this->node_pt(n),u_index[i]));
-     }
-    } // if (nod_pt->is_hanging())
-   } // for (unsigned n=0;n<n_node;n++)
-   
-   // Get the nodal index at which the pressure is stored
-   int p_index=this->p_nodal_index_nst();
 
-   // Get the number of pressure degrees of freedom
-   unsigned n_pres=this->npres_nst();
-   
-   // Loop over the pressure data
-   for (unsigned l=0;l<n_pres;l++)
-   {
-    // Get the pointer to the l-th pressure node
-    Node* pres_node_pt=this->pressure_node_pt(l);
-    
-    // Check if the pressure dof is hanging
-    if (pres_node_pt->is_hanging(p_index))
-    {
-     // Get the pointer to the hang info object (pressure is stored
-     // as p_index-th nodal dof).
-     HangInfo* hang_info_pt=pres_node_pt->hanging_pt(p_index);
+      // Set pointer to global Reynolds number x inverse Froude number
+      this->ReInvFr_pt = cast_father_element_pt->re_invfr_pt();
 
-     // Get number of pressure master nodes (pressure is stored  
-     unsigned nmaster=hang_info_pt->nmaster();
-       
-     // Loop over pressure master nodes
-     for(unsigned m=0;m<nmaster;m++)
-     {
-      // The p_index-th entry in each nodal data is the pressure, which
-      // affects the traction
-      paired_load_data.insert(
-       std::make_pair(hang_info_pt->master_node_pt(m),p_index));
-     }
-    }
-    // If the pressure dof is not hanging
-    else
+      // Set pointer to global gravity Vector
+      this->G_pt = cast_father_element_pt->g_pt();
+
+      // Set pointer to body force function
+      this->Body_force_fct_pt = cast_father_element_pt->body_force_fct_pt();
+
+      // Set pointer to volumetric source function
+      this->Source_fct_pt = cast_father_element_pt->source_fct_pt();
+
+      // Set the ALE flag
+      this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
+    } // End of further_build
+
+
+    /// \short Compute the derivatives of the i-th component of
+    /// velocity at point s with respect
+    /// to all data that can affect its value. In addition, return the global
+    /// equation numbers corresponding to the data.
+    /// Overload the non-refineable version to take account of hanging node
+    /// information
+    void dinterpolated_u_nst_ddata(const Vector<double>& s,
+                                   const unsigned& i,
+                                   Vector<double>& du_ddata,
+                                   Vector<unsigned>& global_eqn_number)
     {
-     // The p_index-th entry in each nodal data is the pressure, which
-     // affects the traction
-     paired_load_data.insert(std::make_pair(pres_node_pt,p_index));
-    } // if (pres_node_pt->is_hanging(p_index))
-   } // for (unsigned l=0;l<n_pres;l++)
-  } // End of identify_load_data
-  
- private:
-  
-  /// Unpin all pressure dofs
-  void unpin_elemental_pressure_dofs()
+      // Find the number of nodes in the element
+      unsigned n_node = this->nnode();
+      // Local shape function
+      Shape psi(n_node);
+      // Find values of shape function at the given local coordinate
+      this->shape(s, psi);
+
+      // Find the index at which the velocity component is stored
+      const unsigned u_nodal_index = this->u_index_nst(i);
+
+      // Storage for hang info pointer
+      HangInfo* hang_info_pt = 0;
+      // Storage for global equation
+      int global_eqn = 0;
+
+      // Find the number of dofs associated with interpolated u
+      unsigned n_u_dof = 0;
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        unsigned n_master = 1;
+
+        // Local bool (is the node hanging)
+        bool is_node_hanging = this->node_pt(l)->is_hanging();
+
+        // If the node is hanging, get the number of master nodes
+        if (is_node_hanging)
+        {
+          hang_info_pt = this->node_pt(l)->hanging_pt();
+          n_master = hang_info_pt->nmaster();
+        }
+        // Otherwise there is just one master node, the node itself
+        else
+        {
+          n_master = 1;
+        }
+
+        // Loop over the master nodes
+        for (unsigned m = 0; m < n_master; m++)
+        {
+          // Get the equation number
+          if (is_node_hanging)
+          {
+            // Get the equation number from the master node
+            global_eqn =
+              hang_info_pt->master_node_pt(m)->eqn_number(u_nodal_index);
+          }
+          else
+          {
+            // Global equation number
+            global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
+          }
+
+          // If it's positive add to the count
+          if (global_eqn >= 0)
+          {
+            ++n_u_dof;
+          }
+        }
+      }
+
+      // Now resize the storage schemes
+      du_ddata.resize(n_u_dof, 0.0);
+      global_eqn_number.resize(n_u_dof, 0);
+
+      // Loop over the nodes again and set the derivatives
+      unsigned count = 0;
+
+      // Loop over the nodes in the element
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Initialise the number of master nodes to one
+        unsigned n_master = 1;
+
+        // Initialise the hang weight to one
+        double hang_weight = 1.0;
+
+        // Local bool (is the node hanging)
+        bool is_node_hanging = this->node_pt(l)->is_hanging();
+
+        // If the node is hanging, get the number of master nodes
+        if (is_node_hanging)
+        {
+          // Get the HangInfo pointer associated with the l-th node
+          hang_info_pt = this->node_pt(l)->hanging_pt();
+
+          // How many master nodes does this node have?
+          n_master = hang_info_pt->nmaster();
+        }
+        // Otherwise there is just one master node, the node itself
+        else
+        {
+          // Set n_master to one
+          n_master = 1;
+        }
+
+        // Loop over the master nodes
+        for (unsigned m = 0; m < n_master; m++)
+        {
+          // If the node is hanging get weight from master node
+          if (is_node_hanging)
+          {
+            // Get the hang weight from the master node
+            hang_weight = hang_info_pt->master_weight(m);
+          }
+          else
+          {
+            // Node contributes with full weight
+            hang_weight = 1.0;
+          }
+
+          // Get the equation number
+          if (is_node_hanging)
+          {
+            // Get the equation number from the master node
+            global_eqn =
+              hang_info_pt->master_node_pt(m)->eqn_number(u_nodal_index);
+          }
+          else
+          {
+            // Get the global equation number
+            global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
+          }
+
+          // If it's a proper degree of freedom
+          if (global_eqn >= 0)
+          {
+            // Set the global equation number
+            global_eqn_number[count] = global_eqn;
+
+            // Set the derivative with respect to the unknown
+            du_ddata[count] = psi[l] * hang_weight;
+
+            // Increase the counter
+            ++count;
+          }
+        } // for (unsigned m=0;m<n_master;m++)
+      } // for (unsigned l=0;l<n_node;l++)
+    } // End of dinterpolated_u_nst_ddata
+
+  protected:
+    /// \short Add the elements contribution to elemental residual vector
+    /// and/or Jacobian matrix.
+    ///           compute_jacobian_flag=0: compute residual vector only
+    ///           compute_jacobian_flag=1: compute both
+    void fill_in_generic_residual_contribution_nst(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      const unsigned& compute_jacobian_flag);
+
+
+    /// \short Compute the residuals for the associated pressure advection
+    /// diffusion problem. Used by the Fp preconditioner.
+    /// flag=1(or 0): do (or don't) compute the Jacobian as well.
+    void fill_in_generic_pressure_advection_diffusion_contribution_nst(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& compute_jacobian_flag);
+
+
+    /// \short Compute derivatives of elemental residual vector with respect
+    /// to nodal coordinates. Overwrites default implementation in
+    /// FiniteElement base class.
+    /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+    virtual void get_dresidual_dnodal_coordinates(
+      RankThreeTensor<double>& dresidual_dnodal_coordinates);
+  };
+
+
+  //======================================================================
+  /// Refineable version of Taylor Hood elements. These classes
+  /// can be written in total generality.
+  //======================================================================
+  template<unsigned DIM>
+  class RefineableQTaylorHoodSpaceTimeElement
+    : public QTaylorHoodSpaceTimeElement<DIM>,
+      public virtual RefineableSpaceTimeNavierStokesEquations<DIM>,
+      public virtual RefineableQElement<DIM + 1>
   {
-   // Find the index at which the pressure is stored
-   int p_index=this->p_nodal_index_nst();
-
-   // Get the number of nodes in the element
-   unsigned n_node=this->nnode();
-   
-   // Loop over nodes
-   for (unsigned n=0;n<n_node;n++) 
-   {
-    // Unpin the p_index-th dof at node n
-    this->node_pt(n)->unpin(p_index);
-   }
-  } // End of unpin_elemental_pressure_dofs
-  
- 
-  /// Pin all nodal pressure dofs that are not required
-  void pin_elemental_redundant_nodal_pressure_dofs()
-  {
-   // Find the pressure index
-   int p_index=this->p_nodal_index_nst();
-   
-   // Loop over all nodes
-   unsigned n_node=this->nnode();
-   
-   // Loop over all nodes and pin all the nodal pressures
-   for (unsigned n=0;n<n_node;n++)
-   {
-    // Pin the p_index-th dof at node n
-    this->node_pt(n)->pin(p_index);
-   }
-   
-   // Loop over all actual pressure nodes and unpin if they're not hanging
-   unsigned n_pres=this->npres_nst();
-
-   // Loop over all pressure nodes
-   for (unsigned l=0;l<n_pres;l++)
-   {
-    // Get a pointer to the l-th pressure node
-    Node* nod_pt=this->pressure_node_pt(l);
-
-    // If the node isn't hanging
-    if (!nod_pt->is_hanging(p_index))
+  public:
+    /// \short Constructor
+    RefineableQTaylorHoodSpaceTimeElement()
+      : RefineableElement(),
+        RefineableSpaceTimeNavierStokesEquations<DIM>(),
+        RefineableQElement<DIM + 1>(),
+        QTaylorHoodSpaceTimeElement<DIM>()
     {
-     // Unpin the p_index-th dof at this node
-     nod_pt->unpin(p_index);
     }
-   } // for (unsigned l=0;l<n_pres;l++)
-  } // End of pin_elemental_redundant_nodal_pressure_dofs
- };
 
 
-//=======================================================================
-/// \short Face geometry of the RefineableQTaylorHoodSpaceTimeElements is the
-/// same as the Face geometry of the QTaylorHoodSpaceTimeElements.
-//=======================================================================
- template<unsigned DIM>
- class FaceGeometry<RefineableQTaylorHoodSpaceTimeElement<DIM> >: 
-  public virtual FaceGeometry<QTaylorHoodSpaceTimeElement<DIM> >
- {
- public:
-  
-  /// Constructor; empty
-  FaceGeometry() : FaceGeometry<QTaylorHoodSpaceTimeElement<DIM> >() {}
- };
+    /// \short Number of values required at local node n. In order to simplify
+    /// matters, we allocate storage for pressure variables at all the nodes
+    /// and then pin those that are not used.
+    unsigned required_nvalue(const unsigned& n) const
+    {
+      // There are DIM velocity components and 1 pressure component
+      return DIM + 1;
+    } // End of required_nvalue
 
 
- //=======================================================================
- /// \short Face geometry of the face geometry of the
- /// RefineableQTaylorHoodSpaceTimeElements is the same as the Face geometry
- /// of the Face geometry of QTaylorHoodSpaceTimeElements.
- //=======================================================================
- template<unsigned DIM>
- class FaceGeometry<FaceGeometry<RefineableQTaylorHoodSpaceTimeElement<DIM> > > : 
-  public virtual FaceGeometry<FaceGeometry<QTaylorHoodSpaceTimeElement<DIM> > >
- {
- public:
+    /// Number of continuously interpolated values
+    unsigned ncont_interpolated_values() const
+    {
+      // There are DIM velocities and 1 pressure component
+      return DIM + 1;
+    } // End of ncont_interpolated_values
 
-  /// Constructor; empty
-  FaceGeometry() :
-   FaceGeometry<FaceGeometry<QTaylorHoodSpaceTimeElement<DIM> > >() 
-  {}
- };
+
+    /// Rebuild from sons: empty
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
+
+
+    /// \short Order of recovery shape functions for Z2 error estimation:
+    /// Same order as shape functions.
+    unsigned nrecovery_order()
+    {
+      // Using quadratic interpolation
+      return 2;
+    } // End of nrecovery_order
+
+
+    /// \short Number of vertex nodes in the element
+    unsigned nvertex_node() const
+    {
+      // Call the base class implementation of the function
+      return QTaylorHoodSpaceTimeElement<DIM>::nvertex_node();
+    } // End of nvertex_node
+
+
+    /// \short Pointer to the j-th vertex node in the element
+    Node* vertex_node_pt(const unsigned& j) const
+    {
+      // Call the base class implementation of the function
+      return QTaylorHoodSpaceTimeElement<DIM>::vertex_node_pt(j);
+    } // End of vertex_node_pt
+
+
+    /// \short Get the function value u in Vector.
+    /// Note: Given the generality of the interface (this function is usually
+    /// called from black-box documentation or interpolation routines), the
+    /// values Vector sets its own size in here.
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
+    {
+      // Set size of Vector: u,v,p and initialise to zero
+      values.resize(DIM + 1, 0.0);
+
+      // Calculate velocities: values[0],...
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        // Calculate the i-th velocity component at local coordinates s
+        values[i] = this->interpolated_u_nst(s, i);
+      }
+
+      // Calculate the pressure field at local coordinates s
+      values[DIM] = this->interpolated_p_nst(s);
+    } // End of get_interpolated_values
+
+
+    /// \short Get the function value u in Vector.
+    /// Note: Given the generality of the interface (this function
+    /// is usually called from black-box documentation or interpolation
+    /// routines), the values Vector sets its own size in here.
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
+    {
+      // The only time this makes sense (if you can even say that...)
+      if (t == 0)
+      {
+        // Call the other function
+        get_interpolated_values(s, values);
+      }
+      else
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
+
+        // Create an error message
+        error_message_stream << "History values don't make sense in "
+                             << "space-time elements!" << std::endl;
+
+        // Throw an error message
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+    } // End of get_interpolated_values
+
+
+    /// \short Perform additional hanging node procedures for variables
+    /// that are not interpolated by all nodes. The pressures are stored
+    /// at the p_nodal_index_nst-th location in each node
+    void further_setup_hanging_nodes()
+    {
+      // Set up the hang info for the pressure nodes
+      this->setup_hang_for_value(this->p_nodal_index_nst());
+    } // End of further_setup_hanging_nodes
+
+
+    /// \short Pointer to n_p-th pressure node
+    Node* pressure_node_pt(const unsigned& n_p)
+    {
+      // Return a pointer to the n_p-th pressure node
+      return this->node_pt(this->Pconv[n_p]);
+    } // End of pressure node_pt
+
+
+    /// \short The velocities are isoparametric and so the "nodes" interpolating
+    /// the velocities are the geometric nodes. The pressure "nodes" are a
+    /// subset of the nodes, so when value_id==DIM, the n-th pressure
+    /// node is returned.
+    Node* interpolating_node_pt(const unsigned& n, const int& value_id)
+
+    {
+      // The only different nodes are the pressure nodes
+      if (value_id == DIM)
+      {
+        // Return a pointer to the n-th pressure node
+        return this->pressure_node_pt(n);
+      }
+      // The other variables are interpolated via the usual nodes
+      else
+      {
+        // Return a pointer to the n-th regular node
+        return this->node_pt(n);
+      }
+    } // End of interpolating_node_pt
+
+
+    /// \short The pressure nodes are the corner nodes, so when n_value==DIM,
+    /// the fraction is the same as the 1D node number, 0 or 1.
+    double local_one_d_fraction_of_interpolating_node(const unsigned& n_1d,
+                                                      const unsigned& i,
+                                                      const int& value_id)
+    {
+      // If we're dealing with a pressure node
+      if (value_id == DIM)
+      {
+        // The pressure nodes are just located on the boundaries at 0 or 1
+        return double(n_1d);
+      }
+      // Otherwise we're dealing with a velocity node
+      else
+      {
+        // The velocity nodes are the same as the geometric ones
+        return this->local_one_d_fraction_of_node(n_1d, i);
+      }
+    } // End of local_one_d_fraction_of_interpolating_node
+
+
+    /// \short The velocity nodes are the same as the geometric nodes. The
+    /// pressure nodes must be calculated by using the same methods as
+    /// the geometric nodes, but by recalling that there are only two pressure
+    /// nodes per edge.
+    Node* get_interpolating_node_at_local_coordinate(const Vector<double>& s,
+                                                     const int& value_id)
+    {
+      // If we are calculating pressure nodes
+      if (value_id == DIM)
+      {
+        // Storage for the index of the pressure node
+        unsigned total_index = 0;
+
+        // The number of nodes along each 1D edge is 2.
+        unsigned nnode_1d = 2;
+
+        // Storage for the index along each boundary
+        Vector<int> index(DIM + 1);
+
+        // Loop over the coordinate directions
+        for (unsigned i = 0; i < DIM + 1; i++)
+        {
+          // If we are at the lower limit, the index is zero
+          if (s[i] == -1.0)
+          {
+            // We're at the first node
+            index[i] = 0;
+          }
+          // If we are at the upper limit, the index is the number of nodes
+          // minus 1
+          else if (s[i] == 1.0)
+          {
+            // We're on the last node
+            index[i] = nnode_1d - 1;
+          }
+          // Otherwise, we have to calculate the index in general
+          else
+          {
+            // For uniformly spaced nodes this should produce an integer when
+            // s[i] is associated with a nodal location
+            double float_index = 0.5 * (1.0 + s[i]) * (nnode_1d - 1);
+
+            // Take the integer part of the float_index value
+            index[i] = int(float_index);
+
+            // What is the excess. This should be safe because the taking the
+            // integer part rounds down
+            double excess = float_index - index[i];
+
+            // If the excess is bigger than our tolerance there is no node
+            if ((excess > FiniteElement::Node_location_tolerance) &&
+                ((1.0 - excess) > FiniteElement::Node_location_tolerance))
+            {
+              // As there is no node, return null
+              return 0;
+            }
+          } // if (s[i]==-1.0)
+
+          // Construct the general pressure index from the components.
+          total_index +=
+            index[i] * static_cast<unsigned>(pow(static_cast<float>(nnode_1d),
+                                                 static_cast<int>(i)));
+        } // for (unsigned i=0;i<DIM;i++)
+
+        // If we've got here we have a node, so let's return a pointer to it
+        return this->pressure_node_pt(total_index);
+      }
+      // Otherwise velocity nodes are the same as pressure nodes
+      else
+      {
+        // Call the regular helper function to find the right node
+        return this->get_node_at_local_coordinate(s);
+      } // if (value_id==DIM)
+    } // End of get_interpolating_node_at_local_coordinate
+
+
+    /// \short The number of 1D pressure nodes is 2, the number of 1D velocity
+    /// nodes is the same as the number of 1D geometric nodes.
+    unsigned ninterpolating_node_1d(const int& value_id)
+    {
+      // If we're dealing with the pressure nodes
+      if (value_id == DIM)
+      {
+        // Using linear interpolation for the pressure
+        return 2;
+      }
+      // If we're dealing with the velocity nodes
+      else
+      {
+        // Every node is a velocity interpolating node
+        return this->nnode_1d();
+      }
+    } // End of ninterpolating_node_1d
+
+
+    /// \short The number of pressure nodes is 2^DIM. The number of
+    /// velocity nodes is the same as the number of geometric nodes.
+    unsigned ninterpolating_node(const int& value_id)
+    {
+      // If we want the pressure basis functions
+      if (value_id == DIM)
+      {
+        // There are 2^{DIM+1} pressure dofs (also interpolating in time)
+        return static_cast<unsigned>(pow(2.0, static_cast<int>(DIM + 1)));
+      }
+      // If we want the velocity basis functions
+      else
+      {
+        // Every node is a velocity interpolating node
+        return this->nnode();
+      }
+    } // End if ninterpolating_node
+
+
+    /// \short The basis interpolating the pressure is given by pshape().
+    //// The basis interpolating the velocity is shape().
+    void interpolating_basis(const Vector<double>& s,
+                             Shape& psi,
+                             const int& value_id) const
+    {
+      // If we want the pressure basis functions
+      if (value_id == DIM)
+      {
+        // Call the pressure shape function
+        return this->pshape_nst(s, psi);
+      }
+      // If we want the velocity basis functions
+      else
+      {
+        // Call the velocity shape function
+        return this->shape(s, psi);
+      }
+    } // End of interpolating_basis
+
+
+    /// \short Build FaceElements that apply the Robin boundary condition
+    /// to the pressure advection diffusion problem required by
+    /// Fp preconditioner
+    void build_fp_press_adv_diff_robin_bc_element(const unsigned& face_index)
+    {
+      this->Pressure_advection_diffusion_robin_element_pt.push_back(
+        new RefineableFpPressureAdvDiffRobinBCSpaceTimeElement<
+          RefineableQTaylorHoodSpaceTimeElement<DIM>>(this, face_index));
+    } // End of build_fp_press_adv_diff_robin_bc_element
+
+
+    /// \short Add to the set \c paired_load_data pairs containing
+    /// - the pointer to a Data object
+    /// and
+    /// - the index of the value in that Data object
+    /// .
+    /// for all values (pressures, velocities) that affect the
+    /// load computed in the \c get_load(...) function.
+    /// (Overloads non-refineable version and takes hanging nodes
+    /// into account)
+    void identify_load_data(
+      std::set<std::pair<Data*, unsigned>>& paired_load_data)
+    {
+      // Allocate space for the velocity component indices
+      unsigned u_index[DIM];
+
+      // Loop over the velocity components
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        // Get the nodal indices at which the velocities are stored
+        u_index[i] = this->u_index_nst(i);
+      }
+
+      // Get the number of nodes in the element
+      unsigned n_node = this->nnode();
+
+      // Loop over the nodes
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        // Pointer to current node
+        Node* nod_pt = this->node_pt(n);
+
+        // Check if it's hanging:
+        if (nod_pt->is_hanging())
+        {
+          // It's hanging -- get number of master nodes
+          unsigned nmaster = nod_pt->hanging_pt()->nmaster();
+
+          // Loop over master nodes
+          for (unsigned j = 0; j < nmaster; j++)
+          {
+            // Create a pointer to the j-th master node
+            Node* master_nod_pt = nod_pt->hanging_pt()->master_node_pt(j);
+
+            // Loop over the velocity components and add a pointer to their data
+            // and indices to the vectors
+            for (unsigned i = 0; i < DIM; i++)
+            {
+              // Create a pair and add it to the storage
+              paired_load_data.insert(
+                std::make_pair(master_nod_pt, u_index[i]));
+            }
+          } // for (unsigned j=0;j<nmaster;j++)
+        }
+        // If the node is not hanging
+        else
+        {
+          // Loop over the velocity components and add pointer to their data
+          // and indices to the vectors
+          for (unsigned i = 0; i < DIM; i++)
+          {
+            // Create a pair and add it to the storage
+            paired_load_data.insert(
+              std::make_pair(this->node_pt(n), u_index[i]));
+          }
+        } // if (nod_pt->is_hanging())
+      } // for (unsigned n=0;n<n_node;n++)
+
+      // Get the nodal index at which the pressure is stored
+      int p_index = this->p_nodal_index_nst();
+
+      // Get the number of pressure degrees of freedom
+      unsigned n_pres = this->npres_nst();
+
+      // Loop over the pressure data
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        // Get the pointer to the l-th pressure node
+        Node* pres_node_pt = this->pressure_node_pt(l);
+
+        // Check if the pressure dof is hanging
+        if (pres_node_pt->is_hanging(p_index))
+        {
+          // Get the pointer to the hang info object (pressure is stored
+          // as p_index-th nodal dof).
+          HangInfo* hang_info_pt = pres_node_pt->hanging_pt(p_index);
+
+          // Get number of pressure master nodes (pressure is stored
+          unsigned nmaster = hang_info_pt->nmaster();
+
+          // Loop over pressure master nodes
+          for (unsigned m = 0; m < nmaster; m++)
+          {
+            // The p_index-th entry in each nodal data is the pressure, which
+            // affects the traction
+            paired_load_data.insert(
+              std::make_pair(hang_info_pt->master_node_pt(m), p_index));
+          }
+        }
+        // If the pressure dof is not hanging
+        else
+        {
+          // The p_index-th entry in each nodal data is the pressure, which
+          // affects the traction
+          paired_load_data.insert(std::make_pair(pres_node_pt, p_index));
+        } // if (pres_node_pt->is_hanging(p_index))
+      } // for (unsigned l=0;l<n_pres;l++)
+    } // End of identify_load_data
+
+  private:
+    /// Unpin all pressure dofs
+    void unpin_elemental_pressure_dofs()
+    {
+      // Find the index at which the pressure is stored
+      int p_index = this->p_nodal_index_nst();
+
+      // Get the number of nodes in the element
+      unsigned n_node = this->nnode();
+
+      // Loop over nodes
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        // Unpin the p_index-th dof at node n
+        this->node_pt(n)->unpin(p_index);
+      }
+    } // End of unpin_elemental_pressure_dofs
+
+
+    /// Pin all nodal pressure dofs that are not required
+    void pin_elemental_redundant_nodal_pressure_dofs()
+    {
+      // Find the pressure index
+      int p_index = this->p_nodal_index_nst();
+
+      // Loop over all nodes
+      unsigned n_node = this->nnode();
+
+      // Loop over all nodes and pin all the nodal pressures
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        // Pin the p_index-th dof at node n
+        this->node_pt(n)->pin(p_index);
+      }
+
+      // Loop over all actual pressure nodes and unpin if they're not hanging
+      unsigned n_pres = this->npres_nst();
+
+      // Loop over all pressure nodes
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        // Get a pointer to the l-th pressure node
+        Node* nod_pt = this->pressure_node_pt(l);
+
+        // If the node isn't hanging
+        if (!nod_pt->is_hanging(p_index))
+        {
+          // Unpin the p_index-th dof at this node
+          nod_pt->unpin(p_index);
+        }
+      } // for (unsigned l=0;l<n_pres;l++)
+    } // End of pin_elemental_redundant_nodal_pressure_dofs
+  };
+
+
+  //=======================================================================
+  /// \short Face geometry of the RefineableQTaylorHoodSpaceTimeElements is the
+  /// same as the Face geometry of the QTaylorHoodSpaceTimeElements.
+  //=======================================================================
+  template<unsigned DIM>
+  class FaceGeometry<RefineableQTaylorHoodSpaceTimeElement<DIM>>
+    : public virtual FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>
+  {
+  public:
+    /// Constructor; empty
+    FaceGeometry() : FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>() {}
+  };
+
+
+  //=======================================================================
+  /// \short Face geometry of the face geometry of the
+  /// RefineableQTaylorHoodSpaceTimeElements is the same as the Face geometry
+  /// of the Face geometry of QTaylorHoodSpaceTimeElements.
+  //=======================================================================
+  template<unsigned DIM>
+  class FaceGeometry<FaceGeometry<RefineableQTaylorHoodSpaceTimeElement<DIM>>>
+    : public virtual FaceGeometry<
+        FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>>
+  {
+  public:
+    /// Constructor; empty
+    FaceGeometry()
+      : FaceGeometry<FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>>()
+    {
+    }
+  };
 
 } // End of namespace oomph
 
