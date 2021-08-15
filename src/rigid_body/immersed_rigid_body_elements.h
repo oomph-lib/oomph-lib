@@ -358,7 +358,7 @@ namespace oomph
     inline void reset_in_external_fd(const unsigned& i) {}
 
     ///\short After all external data finite-differencing, update nodal
-    ///positions
+    /// positions
     inline void reset_after_external_fd()
     {
       node_update_adjacent_fluid_elements();
@@ -374,7 +374,7 @@ namespace oomph
     inline void reset_in_internal_fd(const unsigned& i) {}
 
     ///\short After all internal data finite-differencing, update nodal
-    ///positions
+    /// positions
     inline void reset_after_internal_fd()
     {
       node_update_adjacent_fluid_elements();

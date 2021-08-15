@@ -279,7 +279,7 @@ namespace oomph
     virtual void build_all_faces() = 0;
 
     ///\short Function that returns the current value of the residuals
-    ///multiplied by the inverse mass matrix (virtual so that it can be
+    /// multiplied by the inverse mass matrix (virtual so that it can be
     /// overloaded specific elements in which time saving tricks can be applied)
     virtual void get_inverse_mass_matrix_times_residuals(
       Vector<double>& minv_res);

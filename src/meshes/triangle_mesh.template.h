@@ -1960,7 +1960,7 @@ namespace oomph
     }
 
     ///\short Stores the boundary elements adjacent to the shared boundaries,
-    ///these
+    /// these
     /// elements are a subset of the halo and haloed elements
     std::map<unsigned, Vector<FiniteElement*>> Shared_boundary_element_pt;
 
@@ -1983,7 +1983,7 @@ namespace oomph
     std::map<unsigned, Vector<TriangleMeshPolyLine*>> Boundary_subpolylines;
 
     ///\short Flag to indicate if an internal boundary will be used as shared
-    ///boundary
+    /// boundary
     /// because there is overlapping of the internal boundary with the shared
     /// boundary
     std::map<unsigned, std::vector<bool>> Boundary_marked_as_shared_boundary;

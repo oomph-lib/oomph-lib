@@ -725,7 +725,8 @@ namespace oomph
 
 
     ///\short Return the local equation number corresponding to the
-    ///ieqn_global-th global equation number. Returns minus one (-1) if there is
+    /// ieqn_global-th global equation number. Returns minus one (-1) if there
+    /// is
     /// no local degree of freedom corresponding to the chosen global equation
     /// number
     int local_eqn_number(const unsigned long& ieqn_global) const
@@ -1817,8 +1818,9 @@ namespace oomph
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
     // conflict warning when used in the virtual inheritence hierarchy.
-    // Essentially the compiler doesn't realise that two separate implementations
-    // of the broken function are the same and so, quite rightly, it shouts.
+    // Essentially the compiler doesn't realise that two separate
+    // implementations of the broken function are the same and so, quite
+    // rightly, it shouts.
     /*void operator=(const FiniteElement&)
       {
       BrokenCopy::broken_assign("FiniteElement");

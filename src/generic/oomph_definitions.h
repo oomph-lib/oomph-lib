@@ -444,7 +444,7 @@ namespace oomph
     }
 
     ///\short Overload the << operator, writing output to the stream addressed
-    ///by Stream_pt and calling the function defined by the object addressed by
+    /// by Stream_pt and calling the function defined by the object addressed by
     /// Output_modifier_pt
     template<class _Tp>
     std::ostream& operator<<(_Tp argument)

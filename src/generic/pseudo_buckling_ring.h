@@ -394,7 +394,7 @@ namespace oomph
 
 
     ///\short Parametrised velocity on object at current time: veloc = d
-    ///r(zeta)/dt.
+    /// r(zeta)/dt.
     void veloc(const Vector<double>& zeta, Vector<double>& veloc) // const
     {
 #ifdef PARANOID

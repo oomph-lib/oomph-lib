@@ -10834,8 +10834,8 @@ namespace oomph
     {
       // Default is to calculate the continuation derivatives by solving the
       // linear system. We must do this to ensure that the derivatives are in
-      // sync It could lead to problems near turning points when we should really
-      // be solving an eigenproblem, but seems OK so far!
+      // sync It could lead to problems near turning points when we should
+      // really be solving an eigenproblem, but seems OK so far!
 
       // Save the current sign of the jacobian
       int temp_sign = Sign_of_jacobian;

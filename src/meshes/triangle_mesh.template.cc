@@ -43668,8 +43668,9 @@ namespace oomph
     // In case the mapping between the geometric object's intrinsic coordinate
     // and the arc-length coordinate is nonlinear. This is only an
     // approximation, but it will ensure that the nodes that were input to
-    // triangle will retain exactly the same boundary coordinates and then linear
-    // interpolation is used between those values for any newly created nodes.
+    // triangle will retain exactly the same boundary coordinates and then
+    // linear interpolation is used between those values for any newly created
+    // nodes.
 
     // We need to get the boundary nodes from the boundary face
     // elements since the "multi_domain" methods add nodes to the

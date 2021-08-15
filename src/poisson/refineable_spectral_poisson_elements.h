@@ -75,8 +75,9 @@ namespace oomph
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
     // conflict warning when used in the virtual inheritence hierarchy.
-    // Essentially the compiler doesn't realise that two separate implementations
-    // of the broken function are the same and so, quite rightly, it shouts.
+    // Essentially the compiler doesn't realise that two separate
+    // implementations of the broken function are the same and so, quite
+    // rightly, it shouts.
     /*void operator=(const RefineableQSpectralPoissonElement<DIM,NNODE_1D>&)
      {
       BrokenCopy::broken_assign("RefineableQuadPoissonElement");

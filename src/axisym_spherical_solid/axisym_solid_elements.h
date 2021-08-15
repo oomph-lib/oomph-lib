@@ -213,7 +213,7 @@ namespace oomph
         get_stress(g, G, sigma);
 
         //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL
-        //DISPLACEMENTS========
+        // DISPLACEMENTS========
 
         // Loop over the test functions, nodes of the element
         for (unsigned l = 0; l < n_node; l++)
@@ -940,7 +940,7 @@ namespace oomph
 
 
         //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL
-        //DISPLACEMENTS========
+        // DISPLACEMENTS========
 
         // Loop over the test functions, nodes of the element
         for (unsigned l = 0; l < n_node; l++)

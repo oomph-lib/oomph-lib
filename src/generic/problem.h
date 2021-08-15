@@ -2294,13 +2294,13 @@ namespace oomph
                                 const bool& block_solve = true);
 
     ///\short Activate generic bifurcation tracking for a single (real)
-    ///eigenvalue where the initial guess for the eigenvector can be specified.
+    /// eigenvalue where the initial guess for the eigenvector can be specified.
     void activate_bifurcation_tracking(double* const& parameter_pt,
                                        const DoubleVector& eigenvector,
                                        const bool& block_solve = true);
 
     ///\short Activate generic bifurcation tracking for a single (real)
-    ///eigenvalue where the initial guess for the eigenvector can be specified
+    /// eigenvalue where the initial guess for the eigenvector can be specified
     /// and the normalisation condition can also be specified.
     void activate_bifurcation_tracking(double* const& parameter_pt,
                                        const DoubleVector& eigenvector,

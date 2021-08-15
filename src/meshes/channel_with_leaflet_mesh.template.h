@@ -55,7 +55,7 @@ namespace oomph
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
-    ///leaflet,
+    /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
     /// the number of element columns to the left and right of the leaflet,
@@ -108,7 +108,7 @@ namespace oomph
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
-    ///leaflet,
+    /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
     /// the number of element columns to the left and right of the leaflet,
@@ -169,7 +169,7 @@ namespace oomph
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
-    ///leaflet,
+    /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
     /// the number of element columns to the left and right of the leaflet,
@@ -295,7 +295,7 @@ namespace oomph
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
-    ///leaflet,
+    /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
     /// the number of element columns to the left and right of the leaflet,
@@ -363,7 +363,7 @@ namespace oomph
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
-    ///leaflet,
+    /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
     /// the number of element columns to the left and right of the leaflet,
@@ -472,7 +472,7 @@ namespace oomph
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
-    ///leaflet,
+    /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
     /// the number of element columns to the left and right of the leaflet,

@@ -118,7 +118,7 @@ namespace oomph
     }
 
     ///\short The number of unknowns at each node is the number of flux
-    ///components
+    /// components
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return DIM + 2;
@@ -273,8 +273,9 @@ namespace oomph
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
     // conflict warning when used in the virtual inheritence hierarchy.
-    // Essentially the compiler doesn't realise that two separate implementations
-    // of the broken function are the same and so, quite rightly, it shouts.
+    // Essentially the compiler doesn't realise that two separate
+    // implementations of the broken function are the same and so, quite
+    // rightly, it shouts.
     /*void operator=(
      const QSpectralEulerElement<DIM,NNODE_1D>&)
      {

@@ -256,7 +256,7 @@ namespace oomph
       }
 
       //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL
-      //DISPLACEMENTS========
+      // DISPLACEMENTS========
 
 
       // Default setting for non-hanging node
@@ -1005,7 +1005,7 @@ namespace oomph
       }
 
       //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL
-      //DISPLACEMENTS========
+      // DISPLACEMENTS========
 
       unsigned n_master = 1;
       double hang_weight = 1.0;

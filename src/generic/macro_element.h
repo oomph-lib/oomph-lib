@@ -140,7 +140,7 @@ namespace oomph
 
 
     ///\short The time-dependent mapping from local to global coordinates:
-    ///r(t,s).
+    /// r(t,s).
     /// t is the discrete timelevel: t=0: current time; t>0: previous timestep.
     virtual void macro_map(const unsigned& t,
                            const Vector<double>& s,
@@ -173,7 +173,7 @@ namespace oomph
 
 
     ///\short the jacobian of the mapping from the macro coordinates to the
-    ///global
+    /// global
     /// coordinates
     virtual void assemble_macro_to_eulerian_jacobian(
       const unsigned& t, const Vector<double>& s, DenseMatrix<double>& jacobian)
@@ -208,7 +208,7 @@ namespace oomph
 
 
     ///\short Assembles the jacobian of the mapping from the macro coordinates
-    ///to
+    /// to
     /// the global coordinates
     void assemble_macro_to_eulerian_jacobian(const Vector<double>& s,
                                              DenseMatrix<double>& jacobian)

@@ -51,7 +51,7 @@ namespace oomph
   {
   public:
     ///\short Constructor, which takes a "bulk" element and the value of an
-    ///index describing to which face the element should be attached.
+    /// index describing to which face the element should be attached.
     NavierStokesSurfaceDragTorqueElement(FiniteElement* const& element_pt,
                                          const int& face_index)
       : FaceGeometry<ELEMENT>(), FaceElement()

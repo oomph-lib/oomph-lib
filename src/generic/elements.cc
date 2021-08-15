@@ -5720,8 +5720,8 @@ namespace oomph
         // Initialise the tangent, interior tangent and normal vectors to zero
         // The idea is that even if the element is in a two-dimensional space,
         // the normal cannot be calculated without embedding the element in
-        // three dimensions, in which case, the tangent and interior tangent will
-        // have zero z-components.
+        // three dimensions, in which case, the tangent and interior tangent
+        // will have zero z-components.
         Vector<double> tangent(3, 0.0), interior_tangent(3, 0.0),
           normal(3, 0.0);
 
@@ -6206,8 +6206,8 @@ namespace oomph
         // Initialise the tangent, interior tangent and normal vectors to zero
         // The idea is that even if the element is in a two-dimensional space,
         // the normal cannot be calculated without embedding the element in
-        // three dimensions, in which case, the tangent and interior tangent will
-        // have zero z-components.
+        // three dimensions, in which case, the tangent and interior tangent
+        // will have zero z-components.
         Vector<double> tangent(3, 0.0), interior_tangent(3, 0.0),
           normal(3, 0.0);
 

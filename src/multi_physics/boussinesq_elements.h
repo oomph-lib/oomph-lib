@@ -90,7 +90,7 @@ namespace oomph
     }
 
     ///\short The required number of values stored at the nodes is the sum of
-    ///the required values of the two single-physics  elements. Note that this
+    /// the required values of the two single-physics  elements. Note that this
     /// step is generic for any multi-physics element of this type.
     unsigned required_nvalue(const unsigned& n) const
     {

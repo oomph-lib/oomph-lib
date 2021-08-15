@@ -137,7 +137,7 @@ namespace oomph
 
   protected:
     ///\short Pointer to mesh containing the
-    ///NavierStokesImpedanceTractionElements
+    /// NavierStokesImpedanceTractionElements
     /// that contribute to the volume flux into the "downstream tube" that
     /// provides the flow resistance
     Mesh* Navier_stokes_outflow_mesh_pt;

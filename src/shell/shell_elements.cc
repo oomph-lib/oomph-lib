@@ -621,7 +621,7 @@ namespace oomph
       double normal_var[3][3];
 
       //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL
-      //DISPLACEMENTS========
+      // DISPLACEMENTS========
 
       // Little tensor to handle the mixed derivative terms
       unsigned mix[2][2] = {{0, 2}, {2, 1}};

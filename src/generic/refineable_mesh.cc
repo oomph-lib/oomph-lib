@@ -932,8 +932,8 @@ namespace oomph
 #endif
 
     // Only perform the adapt step if the mesh has any elements.  This is
-    // relevant in a distributed problem with multiple meshes, where a particular
-    // process may not have any elements on a particular submesh.
+    // relevant in a distributed problem with multiple meshes, where a
+    // particular process may not have any elements on a particular submesh.
     if (this->nelement() > 0)
     {
       // Pointer to mesh needs to be passed to some functions
@@ -4029,7 +4029,7 @@ namespace oomph
           // ... and its refinement level is more than the minimum desired level
           // mark is to be refined
           //(Also check that we don't unrefine past the initial refinement
-          //level)
+          // level)
           if ((el_pt->p_refinement_is_enabled()) &&
               (el_pt->p_order() > this->min_p_refinement_level()) &&
               (el_pt->p_order() > el_pt->initial_p_order()))
@@ -4439,8 +4439,8 @@ namespace oomph
 #endif
 
     // Only perform the adapt step if the mesh has any elements.  This is
-    // relevant in a distributed problem with multiple meshes, where a particular
-    // process may not have any elements on a particular submesh.
+    // relevant in a distributed problem with multiple meshes, where a
+    // particular process may not have any elements on a particular submesh.
     if (this->nelement() > 0)
     {
       double t_start = 0.0;
@@ -4812,7 +4812,7 @@ namespace oomph
       // addressed by elements that are dead but still living in the tree might
       // have been made obsolete in the last round of refinement
       //(Not strictly required, as tree structure has not changed, but does no
-      //harm)
+      // harm)
       for (unsigned long e = 0; e < this->forest_pt()->ntree(); e++)
       {
         this->forest_pt()->tree_pt(e)->traverse_all(&Tree::deactivate_object);
