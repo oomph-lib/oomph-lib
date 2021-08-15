@@ -28,7 +28,7 @@ Contributing to `oomph-lib` involves three separate repositories:
 
 - Your remote forked version of the official repository, https://github.com/JoeCoolDummy/oomph-lib.
 
-     This is a remote repository, hosted on GitHub. In Git terminology this repository is known as `origin` because it is the repository that you clone (as described in the next step) onto your local forked computer. You create the remote forked repository by going to the GitHub page for the official repository, https://github.com/oomph-lib/oomph-lib, and clicking on the fork button in the top right corner of that page.
+     This is a remote repository, hosted on GitHub. In Git terminology this repository is known as `origin` because it is the repository that you clone (as described in the next step) onto your local computer. You create the remote forked repository by going to the GitHub page for the official repository, https://github.com/oomph-lib/oomph-lib, and clicking on the fork button in the top right corner of that page.
 
     ![](doc/README/fork_button.png)
 
@@ -45,7 +45,7 @@ Contributing to `oomph-lib` involves three separate repositories:
 
 - The cloned repository on your computer (obtained by cloning your forked repository).
 
-    This repository is local forked to your computer and is cloned from your remote forked repository. It is where you do all your work before ultimately commiting it, via the procedure described below, to the GitHub-hosted remote repositories.
+    This repository is local to your computer and is cloned from your remote forked repository. It is where you do all your work before ultimately commiting it, via the procedure described below, to the GitHub-hosted remote repositories.
 
     You create this repository from the command line on your computer, using
    ```bash
@@ -100,13 +100,13 @@ create a contribution via a mechanism called a "pull request", from your *remote
 This involves the following steps:
 
 1. Create a new branch on your computer.
-2. Do some work and add/commit it on your computer (i.e. local forkedly).
+2. Do some work and add/commit it on your computer (i.e. locally).
 3. Check it.
 4. Check it again.
 5. Push the changes from your local forked repository (the one on your computer) to your remote forked repository (on GitHub).
 6. Wait for the automated self-tests to pass (check the Actions tab of your remote forked repository on GitHub for progress updates and log files). If they don't, resolve the issues and repeat from step 2.
 7. Create a pull request to merge the changes created in that branch into the `development` branch of the official (`oomph-lib/oomph-lib`) repository (`upstream`).
-8. Once the pull request has been accepted (and your changes have thus been merged into official repository), update your remote forked repository (`origin`) on GitHub.
+8. Once the pull request has been accepted (and your changes have thus been merged into the official repository), update your remote forked repository (`origin`) on GitHub.
 9. Update the `development` branch on your computer from your remote forked repository (`origin`).
 
 ## The steps in detail
@@ -194,11 +194,22 @@ This involves the following steps:
    create mode 100644 new-file2.h
    ```
    **IMPORTANT:**
-   You can switch between branches at any point (e.g. `git checkout main` will get you onto the `main` branch in your local repository) but if you have not committed your work, the changes will automatically be moved across to the branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate branch to keep our new work isolated from the rest of the code. If you don't want to commit your changes before switching to another branch, you can use
+   You can switch between branches at any point (e.g. `git checkout main` will get you onto the `main` branch 
+   in your local repository) but if you have not committed your work, the changes will automatically be moved across to the 
+   branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate 
+   branch to keep our new work isolated from the rest of the code. If you accidentally ended up moving changed files onto another branch
+   you can simply switch back to the branch you were just on (i.e. do  `git checkoutfeature/add-new-important-headers`) and commit your changes there. 
+   When you then switch back to the `main` branch, these changes will no longer follow you.
+     
+   If your work is not quite ready to be committed, you use can save your changes for later by first running
    ```bash
    >>> git stash
-   ```
-   to stash away your changes; see `git help stash` for details on how to reapply the stashed changes.
+   ```        
+   and, once you have returned to the branch upon which you made changes, running      
+   ```bash
+   >>> git stash apply
+   ```        
+   to restore them; see `git help stash` for more detail
 
 5. Now push the commit to your (GitHub-hosted) remote forked repository (`origin`).
 
@@ -218,7 +229,11 @@ This involves the following steps:
 
     ![](doc/README/main_button.png)
 
-    then click on the `feature/add-new-important-headers` branch in the drop-down menu that appears. When you reach the new page, click the green "Compare & pull request" button. Carefully check all changes and select reviewers, using the button on the right hand side of the screen.
+    then click on the `feature/add-new-important-headers` branch in the drop-down menu that appears. When you reach the new page, click the green "Compare & pull request" button.
+    
+    ![](doc/README/compare_and_pull_request_button.png)
+
+     Carefully check all changes (shown at the bottom of the page) and select reviewers, using the button on the right hand side of the screen.
 
     ![](doc/README/reviewers_button.png)
 
@@ -231,8 +246,17 @@ This involves the following steps:
 
    ![](doc/README/base_repository_button_development.png)
 
-
    Provide a meaningful description of your changes in the textbox, press the button "Create pull request" and wait for somebody to merge your changes in (or get back to you with comments/requests). Note that subsequent changes (in response to discussions/requests, say) can simply be submitted to the same branch (repeating everything from step 3 above); they will automatically be added/included to the same pull request.
+
+   Note that when you return to the branch's GitHub page (on your remote forked repository) you won't see the lovely green 
+   
+   ![](doc/README/compare_and_pull_request_button.png) 
+
+   button any more (presumably because a pull request is already pending). To add the newly made changes to the existing pull request, click on the "Contribute" button, next to the "Fetch upstream" one
+
+   ![](doc/README/contribute_or_fetch_upstream_button.png)
+
+   and continue from there. Leave another comment to explain the changes you've made in response to the reviewer's comments/requests, and then fingers crossed!
 
 7. Once the pull request has been accepted and the changes made have been merged
    into the official repository, update the `development` branch on your remote forked branch. This is done most easily via the webpage: go to the `development` branch for the remote forked repository, i.e. go to https://github.com/JoeCoolDummy/oomph-lib and click on the button with a branch symbol and the text "`main`":
@@ -270,7 +294,7 @@ This involves the following steps:
    >>> git diff feature/add-new-important-headers..development
    ```
 
-   The above command should not produce an output. We can then get rid of the branch on which we did the work, both local forkedly,
+   The above command should not produce an output. We can then get rid of the branch on which we did the work, both locally,
 
    ```bash
    >>> git branch -d feature/add-new-important-headers
@@ -310,8 +334,8 @@ Described below is an alternative way to pull changes from the official reposito
 5. Resolve any merge conflicts you may have. Strictly speaking, you
    should only be using the `development` branch to stay in sync with the upstream repository i.e. you shouldn't be adding changes to it directly yourself, so there should never be any merge conflicts.
 
-6. Now push the changes in your local forked repository up to your forked
-   remote repository (`origin`)
+7. Now push the changes in your local forked repository up to your remote forked
+   repository (`origin`)
    ```bash
    >>> git push origin development
    ```
@@ -345,7 +369,7 @@ where `<branch-name>` is the name of your current branch, before you push a
 commit to your GitHub repository, otherwise you may not be able to push your
 commit.
 
-## Pre-commit hooks
+## Pre-commit hooks (optional)
 
 A pre-commit hook is something that automatically runs on your local computer
 when you perform a commit. Pre-commit hooks can be useful for pointing out
