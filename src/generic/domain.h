@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 #ifndef OOMPH_DOMAIN_HEADER
 #define OOMPH_DOMAIN_HEADER
 
@@ -32,12 +32,11 @@
 #include <oomph-lib-config.h>
 #endif
 
-//oomph-lib headers
+// oomph-lib headers
 #include "macro_element.h"
 
 namespace oomph
 {
-
   class MacroElement;
   class GeomObject;
 
@@ -66,9 +65,7 @@ namespace oomph
   //=================================================================
   class Domain
   {
-
   public:
-
     /// Constructor
     Domain()
     {
@@ -95,28 +92,28 @@ namespace oomph
     /// already been done in the derived class) to avoid memory leaks.
     virtual ~Domain()
     {
-     // How many macro elements are there?
-     unsigned n_macro_element=Macro_element_pt.size();
-     
-     // Loop over the macro elements
-     for (unsigned i=0; i<n_macro_element; i++)
+      // How many macro elements are there?
+      unsigned n_macro_element = Macro_element_pt.size();
+
+      // Loop over the macro elements
+      for (unsigned i = 0; i < n_macro_element; i++)
       {
-       // They might have already deleted (some or all of) the macro elements
-       // so skip them if they've already been made null pointers
-       if (Macro_element_pt[i]!=0)
+        // They might have already deleted (some or all of) the macro elements
+        // so skip them if they've already been made null pointers
+        if (Macro_element_pt[i] != 0)
         {
-         // Delete the i-th macro element
-         delete Macro_element_pt[i];
-         
-         // Make it a null pointer
-         Macro_element_pt[i]=0;
+          // Delete the i-th macro element
+          delete Macro_element_pt[i];
+
+          // Make it a null pointer
+          Macro_element_pt[i] = 0;
         }
       } // for (unsigned i=0;i<n_macro_element;i++)
-     
-     // Now clear the storage. NOTE: We can't just call this function
-     // as this would only delete the pointers to the macro elements,
-     // not the macro elements themselves!
-     Macro_element_pt.clear();
+
+      // Now clear the storage. NOTE: We can't just call this function
+      // as this would only delete the pointers to the macro elements,
+      // not the macro elements themselves!
+      Macro_element_pt.clear();
 
     } // End of ~Domain
 
@@ -139,17 +136,17 @@ namespace oomph
     {
       std::ofstream outfile;
       outfile.open(filename.c_str());
-      output(outfile,nplot);
+      output(outfile, nplot);
       outfile.close();
     }
 
     /// Output macro elements
-    void output(std::ostream &outfile, const unsigned& nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
-      unsigned nmacro=Macro_element_pt.size();
-      for (unsigned i_macro=0; i_macro<nmacro; i_macro++)
+      unsigned nmacro = Macro_element_pt.size();
+      for (unsigned i_macro = 0; i_macro < nmacro; i_macro++)
       {
-        Macro_element_pt[i_macro]->output(outfile,nplot);
+        Macro_element_pt[i_macro]->output(outfile, nplot);
       }
     }
 
@@ -161,7 +158,7 @@ namespace oomph
                                         const unsigned& i_macro,
                                         const unsigned& i_direct,
                                         const Vector<double>& s,
-                                        Vector<double>& f)=0;
+                                        Vector<double>& f) = 0;
 
 
     /// \short Vector representation of the i_macro-th macro element
@@ -187,10 +184,9 @@ namespace oomph
                                 Vector<double>& f)
     {
       // Call unsteady version for current time
-      unsigned t=0;
-      macro_element_boundary(t,i_macro,i_direct,s,f);
+      unsigned t = 0;
+      macro_element_boundary(t, i_macro, i_direct, s, f);
     }
-
 
 
     /// \short Output all macro element boundaries as tecplot zones
@@ -199,19 +195,19 @@ namespace oomph
     {
       std::ofstream outfile;
       outfile.open(filename.c_str());
-      output_macro_element_boundaries(outfile,nplot);
+      output_macro_element_boundaries(outfile, nplot);
       outfile.close();
     }
 
     /// \short Output all macro element boundaries as tecplot zones
-    void output_macro_element_boundaries(std::ostream &outfile,
+    void output_macro_element_boundaries(std::ostream& outfile,
                                          const unsigned& nplot)
     {
       // Loop over macro elements
-      unsigned nmacro=nmacro_element();
-      for (unsigned i=0; i<nmacro; i++)
+      unsigned nmacro = nmacro_element();
+      for (unsigned i = 0; i < nmacro; i++)
       {
-        macro_element_pt(i)->output_macro_element_boundaries(outfile,nplot);
+        macro_element_pt(i)->output_macro_element_boundaries(outfile, nplot);
       }
     }
 
@@ -225,9 +221,10 @@ namespace oomph
                                          const Vector<double>& s,
                                          Vector<double>& f)
     {
-      throw OomphLibError("Domain::dmacro_element_boundary() is broken virtual.",
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError(
+        "Domain::dmacro_element_boundary() is broken virtual.",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
     }
 
 
@@ -240,37 +237,40 @@ namespace oomph
                                          const Vector<double>& s,
                                          Vector<double>& f)
     {
-      throw OomphLibError("Domain::dmacro_element_boundary() is broken virtual.",
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError(
+        "Domain::dmacro_element_boundary() is broken virtual.",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
     }
 
 
     /// \short Vector representation of the  i_macro-th macro element
-    /// boundary derivatives i_direct (e.g. N/S/W/E in 2D) at current time: f(s).
+    /// boundary derivatives i_direct (e.g. N/S/W/E in 2D) at current time:
+    /// f(s).
     void dmacro_element_boundary(const unsigned& i_macro,
                                  const unsigned& i_direct,
                                  const Vector<double>& s,
                                  Vector<double>& f)
     {
       // Call unsteady version for current time
-      unsigned t=0;
-      dmacro_element_boundary(t,i_macro,i_direct,s,f);
+      unsigned t = 0;
+      dmacro_element_boundary(t, i_macro, i_direct, s, f);
     }
 
 
     /// \short Vector representation of the  i_macro-th macro element
-    /// boundary second derivatives i_direct (e.g. N/S/W/E in 2D) at time level t
-    /// (t=0: present; t>0: previous): f(s). Broken virtual.
+    /// boundary second derivatives i_direct (e.g. N/S/W/E in 2D) at time level
+    /// t (t=0: present; t>0: previous): f(s). Broken virtual.
     virtual void d2macro_element_boundary(const unsigned& t,
                                           const unsigned& i_macro,
                                           const unsigned& i_direct,
                                           const Vector<double>& s,
                                           Vector<double>& f)
     {
-      throw OomphLibError("Domain::d2macro_element_boundary() is broken virtual.",
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError(
+        "Domain::d2macro_element_boundary() is broken virtual.",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
     }
 
     /// \short Vector representation of the i_macro-th macro element boundary
@@ -282,9 +282,10 @@ namespace oomph
                                           const Vector<double>& s,
                                           Vector<double>& f)
     {
-      throw OomphLibError("Domain::d2macro_element_boundary() is broken virtual.",
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError(
+        "Domain::d2macro_element_boundary() is broken virtual.",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
     }
 
     /// \short Vector representation of the  i_macro-th macro element
@@ -296,19 +297,15 @@ namespace oomph
                                   Vector<double>& f)
     {
       // Call unsteady version for current time
-      unsigned t=0;
-      d2macro_element_boundary(t,i_macro,i_direct,s,f);
+      unsigned t = 0;
+      d2macro_element_boundary(t, i_macro, i_direct, s, f);
     }
 
 
   protected:
-
     /// \short Vector of pointers to macro elements
     Vector<MacroElement*> Macro_element_pt;
-
   };
-
-
 
 
   /////////////////////////////////////////////////////////////////////////
@@ -324,11 +321,7 @@ namespace oomph
   //=================================================================
   class WarpedCubeDomain : public Domain
   {
-
   public:
-
-
-
     /// \short Constructor:
     WarpedCubeDomain()
     {
@@ -336,7 +329,7 @@ namespace oomph
       Macro_element_pt.resize(1);
 
       // Create macro element
-      Macro_element_pt[0]=new QMacroElement<3>(this,0);
+      Macro_element_pt[0] = new QMacroElement<3>(this, 0);
     }
 
     /// Broken copy constructor
@@ -353,7 +346,7 @@ namespace oomph
 
 
     /// Destructor (empty; clean up handled in base class)
-    ~WarpedCubeDomain(){}
+    ~WarpedCubeDomain() {}
 
 
     /// Warp the unit cube
@@ -372,44 +365,36 @@ namespace oomph
 
 
   private:
-
     /// \short Left boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_L(const unsigned& t, const Vector<double>& zeta,
-             Vector<double>& f);
+    void r_L(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
     /// \short Right boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_R(const unsigned& t, const Vector<double>& zeta,
-             Vector<double>& f);
+    void r_R(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
 
     /// \short Down boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_D(const unsigned& t, const Vector<double>& zeta,
-             Vector<double>& f);
+    void r_D(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
 
     /// \short Up boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_U(const unsigned& t, const Vector<double>& zeta,
-             Vector<double>& f);
+    void r_U(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
 
     /// \short Back boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_B(const unsigned& t, const Vector<double>& zeta,
-             Vector<double>& f);
+    void r_B(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
 
     /// \short Front boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_F(const unsigned& t, const Vector<double>& zeta,
-             Vector<double>& f);
-
+    void r_F(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
   };
 
 
-}
+} // namespace oomph
 
 #endif

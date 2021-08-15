@@ -1,29 +1,29 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
-//Include guards
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// Include guards
 #ifndef OOMPH_COMPLEX_SMOOTHER_HEADER
 #define OOMPH_COMPLEX_SMOOTHER_HEADER
 
@@ -35,4264 +35,4289 @@
 // Namespace extension
 namespace oomph
 {
-
- //====================================================================
- /// Helmholtz smoother class:
- /// The smoother class is designed for the Helmholtz equation to be used
- /// in conjunction with multigrid. The action of the smoother should
- /// reduce the high frequency errors. These methods are inefficient as
- /// stand-alone solvers
- //====================================================================
- class HelmholtzSmoother : public IterativeLinearSolver
- {
- public:
-
-  /// Empty constructor
-  HelmholtzSmoother() : Use_as_smoother(false)
-   {}
-
-  /// Virtual empty destructor
-  virtual ~HelmholtzSmoother(){};
-  
-  /// \short The smoother_solve function performs fixed number of iterations
-  /// on the system A*result=rhs. The number of (smoothing) iterations is
-  /// the same as the max. number of iterations in the underlying
-  /// IterativeLinearSolver class.
-  virtual void complex_smoother_solve(const Vector<DoubleVector>& rhs,
-				      Vector<DoubleVector>& result)=0;
-
-
-  /// Setup the smoother for the matrix specified by the pointer
-  virtual void complex_smoother_setup(Vector<CRDoubleMatrix*> matrix_pt)=0;
-
-  /// \short Helper function to calculate a complex matrix-vector product.
-  /// Assumes the matrix has been provided as a Vector of length two; the
-  /// first entry containing the real part of the system matrix and the
-  /// second entry containing the imaginary part
-  void complex_matrix_multiplication(Vector<CRDoubleMatrix*> matrices_pt,
-				     const Vector<DoubleVector>& x,
-				     Vector<DoubleVector>& soln)
-   {
-#ifdef PARANOID
-    // PARANOID check - Make sure the input matrix has the right size
-    if (matrices_pt.size()!=2)
-    {
-     // Create an output stream
-     std::ostringstream error_message_stream;
-
-     // Create the error message
-     error_message_stream << "Can only deal with two matrices. You have "
-			  << matrices_pt.size()
-			  << " matrices." << std::endl;
-
-     // Throw an error
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-    // PARANOID check - Make sure the vector x has the right size
-    if (x.size()!=2)
-    {
-     // Create an output stream
-     std::ostringstream error_message_stream;
-
-     // Create the error message
-     error_message_stream << "Can only deal with two input vectors. You have "
-			  << x.size()
-			  << " vectors." << std::endl;
-
-     // Throw an error
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-    // PARANOID check - Make sure the vector soln has the right size
-    if (soln.size()!=2)
-    {
-     // Create an output stream
-     std::ostringstream error_message_stream;
-
-     // Create the error message
-     error_message_stream << "Can only deal with two output vectors. You have "
-			  << soln.size()
-			  << " output vectors." << std::endl;
-
-     // Throw an error
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-    
-    //-----------------------------------------------------------------------
-    // Suppose we have a complex matrix, A, and two complex vectors, x and
-    // soln. We wish to compute the product A*x=soln (note, * does not mean
-    // we are using complex conjugates here, it is simply used to indicate
-    // a multiplication). To do this we must make use of the fact that we
-    // possess the real and imaginary separately. As a result, it is computed
-    // using:
-    //           soln = A*x,
-    //                = (A_r + i*A_c)*(x_r + i*x_c),
-    //                = [A_r*x_r - A_c*x_c] + i*[A_r*x_c + A_c*x_r],
-    // ==> real(soln) = A_r*x_r - A_c*x_c,
-    //   & imag(soln) = A_r*x_c + A_c*x_r,
-    // where the subscripts _r and _c are used to identify the real and
-    // imaginary part, respectively.
-    //-----------------------------------------------------------------------
-
-    // Store the value of A_r*x_r in the real part of soln
-    matrices_pt[0]->multiply(x[0],soln[0]);
-
-    // Store the value of A_r*x_c in the imaginary part of soln
-    matrices_pt[0]->multiply(x[1],soln[1]);
-
-    // Create a temporary vector
-    DoubleVector temp(this->distribution_pt(),0.0);
-
-    // Calculate the value of A_c*x_c
-    matrices_pt[1]->multiply(x[1],temp);
-
-    // Subtract the value of temp from soln[0] to get the real part of soln
-    soln[0]-=temp;
-
-    // Calculate the value of A_c*x_r
-    matrices_pt[1]->multiply(x[0],temp);
-
-    // Add the value of temp to soln[1] to get the imaginary part of soln
-    soln[1]+=temp;
-   } // End of complex_matrix_multiplication
-  
-  /// \short Self-test to check that all the dimensions of the inputs to
-  /// solve helper are consistent and everything that needs to be built, is.
-  template <typename MATRIX>
-  void check_validity_of_solve_helper_inputs(CRDoubleMatrix* const &real_matrix_pt,
-					     CRDoubleMatrix* const &imag_matrix_pt,
-					     const Vector<DoubleVector>& rhs,
-					     Vector<DoubleVector>& solution,
-					     const double& n_dof);
-  
- protected:
-  
-  /// \short When a derived class object is being used as a smoother in
-  /// the MG algorithm the residual norm
-  /// does not need to be calculated. This boolean is used as a flag to
-  /// indicate this in solve_helper(...)
-  bool Use_as_smoother;
- };
-
-//==================================================================
-/// \short Self-test to be called inside solve_helper to ensure
-/// that all inputs are consistent and everything that needs to
-/// be built, is.
-//==================================================================
- template<typename MATRIX>
- void HelmholtzSmoother::
- check_validity_of_solve_helper_inputs(CRDoubleMatrix* const &real_matrix_pt,
-				       CRDoubleMatrix* const &imag_matrix_pt,
-				       const Vector<DoubleVector>& rhs,
-				       Vector<DoubleVector>& solution,
-				       const double& n_dof)
- {
-  // Number of dof types should be 2 (real & imaginary)
-  unsigned n_dof_types=2;
-
-  // Create a vector to hold the matrices
-  Vector<CRDoubleMatrix*> matrix_storage_pt(2,0);
-  
-  // Assign the first entry in matrix_storage_pt
-  matrix_storage_pt[0]=real_matrix_pt;
-  
-  // Assign the second entry in matrix_storage_pt
-  matrix_storage_pt[1]=imag_matrix_pt;
-  
-  // Loop over the real and imaginary parts
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
+  //====================================================================
+  /// Helmholtz smoother class:
+  /// The smoother class is designed for the Helmholtz equation to be used
+  /// in conjunction with multigrid. The action of the smoother should
+  /// reduce the high frequency errors. These methods are inefficient as
+  /// stand-alone solvers
+  //====================================================================
+  class HelmholtzSmoother : public IterativeLinearSolver
   {
-   // Check if the matrix is distributable. If it is then it should
-   // not be distributed
-   if (dynamic_cast<DistributableLinearAlgebraObject*>
-       (matrix_storage_pt[dof_type])!=0)
-   {
-    if (dynamic_cast<DistributableLinearAlgebraObject*>
-	(matrix_storage_pt[dof_type])->distributed())
+  public:
+    /// Empty constructor
+    HelmholtzSmoother() : Use_as_smoother(false) {}
+
+    /// Virtual empty destructor
+    virtual ~HelmholtzSmoother(){};
+
+    /// \short The smoother_solve function performs fixed number of iterations
+    /// on the system A*result=rhs. The number of (smoothing) iterations is
+    /// the same as the max. number of iterations in the underlying
+    /// IterativeLinearSolver class.
+    virtual void complex_smoother_solve(const Vector<DoubleVector>& rhs,
+                                        Vector<DoubleVector>& result) = 0;
+
+
+    /// Setup the smoother for the matrix specified by the pointer
+    virtual void complex_smoother_setup(Vector<CRDoubleMatrix*> matrix_pt) = 0;
+
+    /// \short Helper function to calculate a complex matrix-vector product.
+    /// Assumes the matrix has been provided as a Vector of length two; the
+    /// first entry containing the real part of the system matrix and the
+    /// second entry containing the imaginary part
+    void complex_matrix_multiplication(Vector<CRDoubleMatrix*> matrices_pt,
+                                       const Vector<DoubleVector>& x,
+                                       Vector<DoubleVector>& soln)
     {
-     std::ostringstream error_message_stream;
-     error_message_stream << "The matrix must not be distributed.";
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-   }
-   // Check that this rhs distribution is setup
-   if (!(rhs[dof_type].built()))
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream << "The rhs vector distribution must be setup.";
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-   // Check that the rhs has the right number of global rows
-   if (rhs[dof_type].nrow()!=n_dof)
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream << "RHS does not have the same dimension as the "
-			 << "linear system";
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-   // Check that the rhs is not distributed
-   if (rhs[dof_type].distribution_pt()->distributed())
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream << "The rhs vector must not be distributed.";
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-   // Check that if the result is setup it matches the distribution
-   // of the rhs
-   if (solution[dof_type].built())
-   {
-    if (!(*rhs[dof_type].distribution_pt()==
-	  *solution[dof_type].distribution_pt()))
-    {
-     std::ostringstream error_message_stream;
-     error_message_stream << "If the result distribution is setup then it "
-			  << "must be the same as the rhs distribution";
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-   } // if ((solution[0].built())||(solution[1].built()))  
-  } // for (unsigned dof_type=0;dof_type<n_dof_types;dof_type)
- } // End of check_validity_of_solve_helper_inputs
-
- 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
- 
-//=========================================================================
-/// Damped Jacobi "solver" templated by matrix type. The "solver"
-/// exists in many different incarnations: It's an IterativeLinearSolver,
-/// and a Smoother, all of which use the same basic iteration.
-//=========================================================================
- template<typename MATRIX>
- class ComplexDampedJacobi : public HelmholtzSmoother
- {
-
- public:
-
-  /// Constructor (empty)
-  ComplexDampedJacobi(const double& omega=0.5) :
-   Matrix_can_be_deleted(true),
-   Matrix_real_pt(0),
-   Matrix_imag_pt(0),
-   Omega(omega)
-   {};
-
-  /// Empty destructor
-  ~ComplexDampedJacobi()
-   {
-    // Run clean_up_memory
-    clean_up_memory();
-   } // End of ~ComplexDampedJacobi
-
-  /// Cleanup data that's stored for resolve (if any has been stored)
-  void clean_up_memory()
-   {
-    // If the real matrix pointer isn't null AND we're allowed to delete
-    // the matrix which is only when we create the matrix ourselves
-    if ((Matrix_real_pt!=0) && (Matrix_can_be_deleted))
-    {
-     // Delete the matrix
-     delete Matrix_real_pt;
-
-     // Assign the associated pointer the value NULL
-     Matrix_real_pt=0;
-    }
-
-    // If the real matrix pointer isn't null AND we're allowed to delete
-    // the matrix which is only when we create the matrix ourselves
-    if ((Matrix_imag_pt!=0) && (Matrix_can_be_deleted))
-    {
-     // Delete the matrix
-     delete Matrix_imag_pt;
-
-     // Assign the associated pointer the value NULL
-     Matrix_imag_pt=0;
-    }
-   } // End of clean_up_memory
-
-  /// \short Broken copy constructor
-  ComplexDampedJacobi(const ComplexDampedJacobi&)
-   {
-    BrokenCopy::broken_copy("ComplexDampedJacobi");
-   }
-
-  /// \short Broken assignment operator
-  void operator=(const ComplexDampedJacobi&)
-   {
-    BrokenCopy::broken_assign("ComplexDampedJacobi");
-   }
-
-  /// \short Function to calculate the value of Omega by passing in the
-  /// value of k and h [see Elman et al. "A multigrid method enhanced by
-  /// Krylov subspace iteration for discrete Helmholtz equations", p.1303]
-  void calculate_omega(const double& k,const double& h)
-   {
-    // Create storage for the parameter kh
-    double kh=k*h;
-
-    // Store the value of pi
-    double pi=MathematicalConstants::Pi;
-
-    // Calculate the value of Omega
-    double omega=(12.0-4.0*pow(kh,2.0))/(18.0-3.0*pow(kh,2.0));
-
-    // Set the tolerance for how close omega can be to 0
-    double tolerance=1.0e-03;
-
-    // Only store the value of omega if it lies in the range (0,1]. If it
-    // isn't it will produce a divergent scheme. Note, to avoid letting
-    // omega become too small we make sure it is greater than some tolerance
-    if ((omega>tolerance) && !(omega>1))
-    {
-     // Since omega lies in the specified range, store it
-     Omega=omega;
-    }
-    // On the coarsest grids: if the wavenumber is greater than pi and
-    // kh>2cos(pi*h/2) then we can choose omega from the range (0,omega_2)
-    // where omega_2 is defined in [Elman et al."A multigrid method
-    // enhanced by Krylov subspace iteration for discrete Helmholtz
-    // equations", p.1295]
-    else if ((k>pi) && (kh>2*cos(pi*h/2)))
-    {
-     // Calculate the numerator of omega_2
-     double omega_2=(2.0-pow(kh,2.0));
-
-     // Divide by the denominator of the fraction
-     omega_2/=(2.0*pow(sin(pi*h/2),2.0)-0.5*pow(kh,2.0));
-
-     // If 2/3 lies in the range (0,omega_2), use it
-     if (omega_2>(2.0/3.0))
-     {
-      // Assign Omega the damping factor used for the Poisson equation
-      Omega=2.0/3.0;
-     }
-     // If omega_2 is less than 2/3 use the midpoint of (tolerance,omega_2)
-     else
-     {
-      // Set the value of Omega
-      Omega=0.5*(tolerance+omega_2);
-     }
-    }
-    // Since the value of kh must be fairly large, make the value of
-    // omega small to compensate
-    else
-    {
-     // Since kh doesn't lie in the chosen range, set it to some small value
-     Omega=0.2;
-    }
-   } // End of calculate_omega
-
-  /// Get access to the value of Omega (lvalue)
-  double& omega()
-   {
-    // Return the value of Omega
-    return Omega;
-   } // End of omega
-
-  /// Setup: Pass pointer to the matrix and store in cast form
-  void complex_smoother_setup(Vector<CRDoubleMatrix*> helmholtz_matrix_pt)
-   {
-    // Assume the matrices have been passed in from the outside so we must
-    // not delete it. This is needed to avoid pre- and post-smoothers
-    // deleting the same matrix in the MG solver. If this was originally
-    // set to TRUE then this will be sorted out in the other functions
-    // from which this was called
-    Matrix_can_be_deleted=false;
-
-    // Assign the real matrix pointers
-    Matrix_real_pt=helmholtz_matrix_pt[0];
-
-    // Assign the imaginary matrix pointers
-    Matrix_imag_pt=helmholtz_matrix_pt[1];
-
 #ifdef PARANOID
-    // PARANOID check that if the matrix is distributable. If it is not then
-    // it should not be distributed
-    if (Matrix_real_pt->nrow()!=Matrix_imag_pt->nrow())
-    {
-     std::ostringstream error_message_stream;
-     error_message_stream << "Incompatible real and complex matrix sizes.";
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
+      // PARANOID check - Make sure the input matrix has the right size
+      if (matrices_pt.size() != 2)
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
+
+        // Create the error message
+        error_message_stream << "Can only deal with two matrices. You have "
+                             << matrices_pt.size() << " matrices." << std::endl;
+
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // PARANOID check - Make sure the vector x has the right size
+      if (x.size() != 2)
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
+
+        // Create the error message
+        error_message_stream
+          << "Can only deal with two input vectors. You have " << x.size()
+          << " vectors." << std::endl;
+
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // PARANOID check - Make sure the vector soln has the right size
+      if (soln.size() != 2)
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
+
+        // Create the error message
+        error_message_stream
+          << "Can only deal with two output vectors. You have " << soln.size()
+          << " output vectors." << std::endl;
+
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    //--------------------------------------------------------------------
-    // We need the matrix diagonals to calculate inv(D) (where D is the
-    // diagonal of A) as it remains the same for each use of the iterative
-    // scheme. To avoid unnecessary computations we store it now so it can
-    // simply be called in each iteration.
-    //--------------------------------------------------------------------
-    
-    // Grab the diagonal entries of the real part of the system matrix
-    Matrix_diagonal_real=Matrix_real_pt->diagonal_entries();
+      //-----------------------------------------------------------------------
+      // Suppose we have a complex matrix, A, and two complex vectors, x and
+      // soln. We wish to compute the product A*x=soln (note, * does not mean
+      // we are using complex conjugates here, it is simply used to indicate
+      // a multiplication). To do this we must make use of the fact that we
+      // possess the real and imaginary separately. As a result, it is computed
+      // using:
+      //           soln = A*x,
+      //                = (A_r + i*A_c)*(x_r + i*x_c),
+      //                = [A_r*x_r - A_c*x_c] + i*[A_r*x_c + A_c*x_r],
+      // ==> real(soln) = A_r*x_r - A_c*x_c,
+      //   & imag(soln) = A_r*x_c + A_c*x_r,
+      // where the subscripts _r and _c are used to identify the real and
+      // imaginary part, respectively.
+      //-----------------------------------------------------------------------
 
-    // Grab the diagonal entries of the imaginary part of the system matrix
-    Matrix_diagonal_imag=Matrix_imag_pt->diagonal_entries();
+      // Store the value of A_r*x_r in the real part of soln
+      matrices_pt[0]->multiply(x[0], soln[0]);
 
-    // Find the number of entries in the vectors containing the diagonal entries
-    // of both the real and the imaginary matrix
-    unsigned n_dof=Matrix_diagonal_real.size();
+      // Store the value of A_r*x_c in the imaginary part of soln
+      matrices_pt[0]->multiply(x[1], soln[1]);
 
-    // Make a dummy vector to store the entries of Matrix_diagonal_inv_sq
-    Matrix_diagonal_inv_sq.resize(n_dof,0.0);
+      // Create a temporary vector
+      DoubleVector temp(this->distribution_pt(), 0.0);
 
-    // Create a helper variable to store A_r(j,j), for some j
-    double dummy_r;
+      // Calculate the value of A_c*x_c
+      matrices_pt[1]->multiply(x[1], temp);
 
-    // Create a helper variable to store A_c(j,j), for some j
-    double dummy_c;
+      // Subtract the value of temp from soln[0] to get the real part of soln
+      soln[0] -= temp;
 
-    // Loop over the entries of Matrix_diagonal_inv_sq and set the i-th
-    // entry to 1/(A_r(i,i)^2 + A_c(i,i)^2)
-    for (unsigned i=0;i<n_dof;i++)
+      // Calculate the value of A_c*x_r
+      matrices_pt[1]->multiply(x[0], temp);
+
+      // Add the value of temp to soln[1] to get the imaginary part of soln
+      soln[1] += temp;
+    } // End of complex_matrix_multiplication
+
+    /// \short Self-test to check that all the dimensions of the inputs to
+    /// solve helper are consistent and everything that needs to be built, is.
+    template<typename MATRIX>
+    void check_validity_of_solve_helper_inputs(
+      CRDoubleMatrix* const& real_matrix_pt,
+      CRDoubleMatrix* const& imag_matrix_pt,
+      const Vector<DoubleVector>& rhs,
+      Vector<DoubleVector>& solution,
+      const double& n_dof);
+
+  protected:
+    /// \short When a derived class object is being used as a smoother in
+    /// the MG algorithm the residual norm
+    /// does not need to be calculated. This boolean is used as a flag to
+    /// indicate this in solve_helper(...)
+    bool Use_as_smoother;
+  };
+
+  //==================================================================
+  /// \short Self-test to be called inside solve_helper to ensure
+  /// that all inputs are consistent and everything that needs to
+  /// be built, is.
+  //==================================================================
+  template<typename MATRIX>
+  void HelmholtzSmoother::check_validity_of_solve_helper_inputs(
+    CRDoubleMatrix* const& real_matrix_pt,
+    CRDoubleMatrix* const& imag_matrix_pt,
+    const Vector<DoubleVector>& rhs,
+    Vector<DoubleVector>& solution,
+    const double& n_dof)
+  {
+    // Number of dof types should be 2 (real & imaginary)
+    unsigned n_dof_types = 2;
+
+    // Create a vector to hold the matrices
+    Vector<CRDoubleMatrix*> matrix_storage_pt(2, 0);
+
+    // Assign the first entry in matrix_storage_pt
+    matrix_storage_pt[0] = real_matrix_pt;
+
+    // Assign the second entry in matrix_storage_pt
+    matrix_storage_pt[1] = imag_matrix_pt;
+
+    // Loop over the real and imaginary parts
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
     {
-     // Store the value of A_r(i,i)
-     dummy_r=Matrix_diagonal_real[i];
+      // Check if the matrix is distributable. If it is then it should
+      // not be distributed
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(
+            matrix_storage_pt[dof_type]) != 0)
+      {
+        if (dynamic_cast<DistributableLinearAlgebraObject*>(
+              matrix_storage_pt[dof_type])
+              ->distributed())
+        {
+          std::ostringstream error_message_stream;
+          error_message_stream << "The matrix must not be distributed.";
+          throw OomphLibError(error_message_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+      // Check that this rhs distribution is setup
+      if (!(rhs[dof_type].built()))
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "The rhs vector distribution must be setup.";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // Check that the rhs has the right number of global rows
+      if (rhs[dof_type].nrow() != n_dof)
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "RHS does not have the same dimension as the "
+                             << "linear system";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // Check that the rhs is not distributed
+      if (rhs[dof_type].distribution_pt()->distributed())
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "The rhs vector must not be distributed.";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // Check that if the result is setup it matches the distribution
+      // of the rhs
+      if (solution[dof_type].built())
+      {
+        if (!(*rhs[dof_type].distribution_pt() ==
+              *solution[dof_type].distribution_pt()))
+        {
+          std::ostringstream error_message_stream;
+          error_message_stream << "If the result distribution is setup then it "
+                               << "must be the same as the rhs distribution";
+          throw OomphLibError(error_message_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+      } // if ((solution[0].built())||(solution[1].built()))
+    } // for (unsigned dof_type=0;dof_type<n_dof_types;dof_type)
+  } // End of check_validity_of_solve_helper_inputs
 
-     // Store the value of A_c(i,i)
-     dummy_c=Matrix_diagonal_imag[i];
 
-     // Store the value of 1/(A_r(i,i)^2 + A_c(i,i)^2)
-     Matrix_diagonal_inv_sq[i]=1.0/(dummy_r*dummy_r+dummy_c*dummy_c);
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+
+  //=========================================================================
+  /// Damped Jacobi "solver" templated by matrix type. The "solver"
+  /// exists in many different incarnations: It's an IterativeLinearSolver,
+  /// and a Smoother, all of which use the same basic iteration.
+  //=========================================================================
+  template<typename MATRIX>
+  class ComplexDampedJacobi : public HelmholtzSmoother
+  {
+  public:
+    /// Constructor (empty)
+    ComplexDampedJacobi(const double& omega = 0.5)
+      : Matrix_can_be_deleted(true),
+        Matrix_real_pt(0),
+        Matrix_imag_pt(0),
+        Omega(omega){};
+
+    /// Empty destructor
+    ~ComplexDampedJacobi()
+    {
+      // Run clean_up_memory
+      clean_up_memory();
+    } // End of ~ComplexDampedJacobi
+
+    /// Cleanup data that's stored for resolve (if any has been stored)
+    void clean_up_memory()
+    {
+      // If the real matrix pointer isn't null AND we're allowed to delete
+      // the matrix which is only when we create the matrix ourselves
+      if ((Matrix_real_pt != 0) && (Matrix_can_be_deleted))
+      {
+        // Delete the matrix
+        delete Matrix_real_pt;
+
+        // Assign the associated pointer the value NULL
+        Matrix_real_pt = 0;
+      }
+
+      // If the real matrix pointer isn't null AND we're allowed to delete
+      // the matrix which is only when we create the matrix ourselves
+      if ((Matrix_imag_pt != 0) && (Matrix_can_be_deleted))
+      {
+        // Delete the matrix
+        delete Matrix_imag_pt;
+
+        // Assign the associated pointer the value NULL
+        Matrix_imag_pt = 0;
+      }
+    } // End of clean_up_memory
+
+    /// \short Broken copy constructor
+    ComplexDampedJacobi(const ComplexDampedJacobi&)
+    {
+      BrokenCopy::broken_copy("ComplexDampedJacobi");
     }
-   } // End of complex_smoother_setup
 
-  /// \short The smoother_solve function performs fixed number of iterations
-  /// on the system A*result=rhs. The number of (smoothing) iterations is
-  /// the same as the max. number of iterations in the underlying
-  /// IterativeLinearSolver class.
-  void complex_smoother_solve(const Vector<DoubleVector>& rhs,
-			      Vector<DoubleVector>& solution)
-   {
-    // If you use a smoother but you don't want to calculate the residual
-    Use_as_smoother=true;
+    /// \short Broken assignment operator
+    void operator=(const ComplexDampedJacobi&)
+    {
+      BrokenCopy::broken_assign("ComplexDampedJacobi");
+    }
 
-    // Call the helper function
-    complex_solve_helper(rhs,solution);
-   } // End of complex_smoother_solve
+    /// \short Function to calculate the value of Omega by passing in the
+    /// value of k and h [see Elman et al. "A multigrid method enhanced by
+    /// Krylov subspace iteration for discrete Helmholtz equations", p.1303]
+    void calculate_omega(const double& k, const double& h)
+    {
+      // Create storage for the parameter kh
+      double kh = k * h;
 
-  /// \short Use damped Jacobi iteration as an IterativeLinearSolver:
-  /// This obtains the Jacobian matrix J and the residual vector r
-  /// (needed for the Newton method) from the problem's get_jacobian
-  /// function and returns the result of Jx=r.
-  void solve(Problem* const& problem_pt, DoubleVector& result)
-   {
-    BrokenCopy::broken_assign("ComplexDampedJacobi");
-   }
+      // Store the value of pi
+      double pi = MathematicalConstants::Pi;
 
-  /// Number of iterations taken
-  unsigned iterations() const
-   {
-    return Iterations;
-   }
+      // Calculate the value of Omega
+      double omega = (12.0 - 4.0 * pow(kh, 2.0)) / (18.0 - 3.0 * pow(kh, 2.0));
 
- private:
+      // Set the tolerance for how close omega can be to 0
+      double tolerance = 1.0e-03;
 
+      // Only store the value of omega if it lies in the range (0,1]. If it
+      // isn't it will produce a divergent scheme. Note, to avoid letting
+      // omega become too small we make sure it is greater than some tolerance
+      if ((omega > tolerance) && !(omega > 1))
+      {
+        // Since omega lies in the specified range, store it
+        Omega = omega;
+      }
+      // On the coarsest grids: if the wavenumber is greater than pi and
+      // kh>2cos(pi*h/2) then we can choose omega from the range (0,omega_2)
+      // where omega_2 is defined in [Elman et al."A multigrid method
+      // enhanced by Krylov subspace iteration for discrete Helmholtz
+      // equations", p.1295]
+      else if ((k > pi) && (kh > 2 * cos(pi * h / 2)))
+      {
+        // Calculate the numerator of omega_2
+        double omega_2 = (2.0 - pow(kh, 2.0));
+
+        // Divide by the denominator of the fraction
+        omega_2 /= (2.0 * pow(sin(pi * h / 2), 2.0) - 0.5 * pow(kh, 2.0));
+
+        // If 2/3 lies in the range (0,omega_2), use it
+        if (omega_2 > (2.0 / 3.0))
+        {
+          // Assign Omega the damping factor used for the Poisson equation
+          Omega = 2.0 / 3.0;
+        }
+        // If omega_2 is less than 2/3 use the midpoint of (tolerance,omega_2)
+        else
+        {
+          // Set the value of Omega
+          Omega = 0.5 * (tolerance + omega_2);
+        }
+      }
+      // Since the value of kh must be fairly large, make the value of
+      // omega small to compensate
+      else
+      {
+        // Since kh doesn't lie in the chosen range, set it to some small value
+        Omega = 0.2;
+      }
+    } // End of calculate_omega
+
+    /// Get access to the value of Omega (lvalue)
+    double& omega()
+    {
+      // Return the value of Omega
+      return Omega;
+    } // End of omega
+
+    /// Setup: Pass pointer to the matrix and store in cast form
+    void complex_smoother_setup(Vector<CRDoubleMatrix*> helmholtz_matrix_pt)
+    {
+      // Assume the matrices have been passed in from the outside so we must
+      // not delete it. This is needed to avoid pre- and post-smoothers
+      // deleting the same matrix in the MG solver. If this was originally
+      // set to TRUE then this will be sorted out in the other functions
+      // from which this was called
+      Matrix_can_be_deleted = false;
+
+      // Assign the real matrix pointers
+      Matrix_real_pt = helmholtz_matrix_pt[0];
+
+      // Assign the imaginary matrix pointers
+      Matrix_imag_pt = helmholtz_matrix_pt[1];
+
+#ifdef PARANOID
+      // PARANOID check that if the matrix is distributable. If it is not then
+      // it should not be distributed
+      if (Matrix_real_pt->nrow() != Matrix_imag_pt->nrow())
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "Incompatible real and complex matrix sizes.";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      //--------------------------------------------------------------------
+      // We need the matrix diagonals to calculate inv(D) (where D is the
+      // diagonal of A) as it remains the same for each use of the iterative
+      // scheme. To avoid unnecessary computations we store it now so it can
+      // simply be called in each iteration.
+      //--------------------------------------------------------------------
+
+      // Grab the diagonal entries of the real part of the system matrix
+      Matrix_diagonal_real = Matrix_real_pt->diagonal_entries();
+
+      // Grab the diagonal entries of the imaginary part of the system matrix
+      Matrix_diagonal_imag = Matrix_imag_pt->diagonal_entries();
+
+      // Find the number of entries in the vectors containing the diagonal
+      // entries of both the real and the imaginary matrix
+      unsigned n_dof = Matrix_diagonal_real.size();
+
+      // Make a dummy vector to store the entries of Matrix_diagonal_inv_sq
+      Matrix_diagonal_inv_sq.resize(n_dof, 0.0);
+
+      // Create a helper variable to store A_r(j,j), for some j
+      double dummy_r;
+
+      // Create a helper variable to store A_c(j,j), for some j
+      double dummy_c;
+
+      // Loop over the entries of Matrix_diagonal_inv_sq and set the i-th
+      // entry to 1/(A_r(i,i)^2 + A_c(i,i)^2)
+      for (unsigned i = 0; i < n_dof; i++)
+      {
+        // Store the value of A_r(i,i)
+        dummy_r = Matrix_diagonal_real[i];
+
+        // Store the value of A_c(i,i)
+        dummy_c = Matrix_diagonal_imag[i];
+
+        // Store the value of 1/(A_r(i,i)^2 + A_c(i,i)^2)
+        Matrix_diagonal_inv_sq[i] =
+          1.0 / (dummy_r * dummy_r + dummy_c * dummy_c);
+      }
+    } // End of complex_smoother_setup
+
+    /// \short The smoother_solve function performs fixed number of iterations
+    /// on the system A*result=rhs. The number of (smoothing) iterations is
+    /// the same as the max. number of iterations in the underlying
+    /// IterativeLinearSolver class.
+    void complex_smoother_solve(const Vector<DoubleVector>& rhs,
+                                Vector<DoubleVector>& solution)
+    {
+      // If you use a smoother but you don't want to calculate the residual
+      Use_as_smoother = true;
+
+      // Call the helper function
+      complex_solve_helper(rhs, solution);
+    } // End of complex_smoother_solve
+
+    /// \short Use damped Jacobi iteration as an IterativeLinearSolver:
+    /// This obtains the Jacobian matrix J and the residual vector r
+    /// (needed for the Newton method) from the problem's get_jacobian
+    /// function and returns the result of Jx=r.
+    void solve(Problem* const& problem_pt, DoubleVector& result)
+    {
+      BrokenCopy::broken_assign("ComplexDampedJacobi");
+    }
+
+    /// Number of iterations taken
+    unsigned iterations() const
+    {
+      return Iterations;
+    }
+
+  private:
+    /// \short This is where the actual work is done
+    void complex_solve_helper(const Vector<DoubleVector>& rhs,
+                              Vector<DoubleVector>& solution);
+
+    /// \short Boolean flag to indicate if the matrices pointed to by
+    /// Matrix_real_pt and Matrix_imag_pt can be deleted.
+    bool Matrix_can_be_deleted;
+
+    /// Pointer to the real part of the system matrix
+    CRDoubleMatrix* Matrix_real_pt;
+
+    /// Pointer to the real part of the system matrix
+    CRDoubleMatrix* Matrix_imag_pt;
+
+    /// Vector containing the diagonal entries of A_r (real(A))
+    Vector<double> Matrix_diagonal_real;
+
+    /// Vector containing the diagonal entries of A_c (imag(A))
+    Vector<double> Matrix_diagonal_imag;
+
+    /// Vector whose j'th entry is given by 1/(A_r(j,j)^2 + A_c(j,j)^2)
+    Vector<double> Matrix_diagonal_inv_sq;
+
+    /// Number of iterations taken
+    unsigned Iterations;
+
+    /// Damping factor
+    double Omega;
+  };
+
+  //======================================================================
+  /// \short This is where the actual work is done.
+  //======================================================================
+  template<typename MATRIX>
+  void ComplexDampedJacobi<MATRIX>::complex_solve_helper(
+    const Vector<DoubleVector>& rhs, Vector<DoubleVector>& solution)
+  {
+    // Get number of dofs
+    unsigned n_dof = Matrix_real_pt->nrow();
+
+#ifdef PARANOID
+    // Upcast the matrix to the appropriate type
+    CRDoubleMatrix* tmp_rmatrix_pt =
+      dynamic_cast<CRDoubleMatrix*>(Matrix_real_pt);
+
+    // Upcast the matrix to the appropriate type
+    CRDoubleMatrix* tmp_imatrix_pt =
+      dynamic_cast<CRDoubleMatrix*>(Matrix_imag_pt);
+
+    // PARANOID Run the self-tests to check the inputs are correct
+    this->check_validity_of_solve_helper_inputs<MATRIX>(
+      tmp_rmatrix_pt, tmp_imatrix_pt, rhs, solution, n_dof);
+
+    // We don't need the real matrix pointer any more
+    tmp_rmatrix_pt = 0;
+
+    // We don't need the imaginary matrix pointer any more
+    tmp_imatrix_pt = 0;
+#endif
+
+    // Setup the solution if it is not
+    if ((!solution[0].distribution_pt()->built()) ||
+        (!solution[1].distribution_pt()->built()))
+    {
+      solution[0].build(rhs[0].distribution_pt(), 0.0);
+      solution[1].build(rhs[1].distribution_pt(), 0.0);
+    }
+
+    // Initialise timer
+    double t_start = TimingHelpers::timer();
+
+    // Copy the real and imaginary part of the solution vector
+    DoubleVector x_real(solution[0]);
+    DoubleVector x_imag(solution[1]);
+
+    // Copy the real and imaginary part of the RHS vector
+    DoubleVector rhs_real(rhs[0]);
+    DoubleVector rhs_imag(rhs[1]);
+
+    // Create storage for the real and imaginary part of the constant term
+    DoubleVector constant_term_real(this->distribution_pt(), 0.0);
+    DoubleVector constant_term_imag(this->distribution_pt(), 0.0);
+
+    // Create storage for the real and imaginary part of the residual vector.
+    // These aren't used/built if we're inside the multigrid solver
+    DoubleVector residual_real;
+    DoubleVector residual_imag;
+
+    // Create storage for the norm of the real and imaginary parts of the
+    // residual vector. These aren't used if we're inside the multigrid
+    // solver
+    double res_real_norm = 0.0;
+    double res_imag_norm = 0.0;
+
+    // Variable to hold the current residual norm. This isn't used if
+    // we're inside the multigrid solver
+    double norm_res = 0.0;
+
+    // Variables to hold the initial residual norm. This isn't used if
+    // we're inside the multigrid solver
+    double norm_f = 0.0;
+
+    // Initialise the value of Iterations
+    Iterations = 0;
+
+    //------------------------------------------------------------------------
+    // Initial guess isn't necessarily zero (restricted solution from finer
+    // grids) therefore both x and the residual need to be assigned values
+    // from inputs. The constant term at the end of the stationary iteration
+    // is also calculated here since it does not change at all throughout the
+    // iterative process:
+    //------------------------------------------------------------------------
+
+    // Loop over all the entries of each vector
+    for (unsigned i = 0; i < n_dof; i++)
+    {
+      // Calculate the numerator of the i'th entry in the real component of
+      // the constant term
+      constant_term_real[i] = (Matrix_diagonal_real[i] * rhs_real[i] +
+                               Matrix_diagonal_imag[i] * rhs_imag[i]);
+
+      // Divide by the denominator
+      constant_term_real[i] *= Matrix_diagonal_inv_sq[i];
+
+      // Scale by the damping factor
+      constant_term_real[i] *= Omega;
+
+      // Calculate the numerator of the i'th entry in the imaginary component of
+      // the constant term
+      constant_term_imag[i] = (Matrix_diagonal_real[i] * rhs_imag[i] -
+                               Matrix_diagonal_imag[i] * rhs_real[i]);
+
+      // Divide by the denominator
+      constant_term_imag[i] *= Matrix_diagonal_inv_sq[i];
+
+      // Scale by the damping factor
+      constant_term_imag[i] *= Omega;
+    }
+
+    // Create 4 temporary vectors to store the various matrix-vector products
+    // required. The appropriate combination has been appended to the name. For
+    // instance, the product A_r*x_c corresponds to temp_vec_rc (real*imag)
+    DoubleVector temp_vec_rr(this->distribution_pt(), 0.0);
+    DoubleVector temp_vec_cc(this->distribution_pt(), 0.0);
+    DoubleVector temp_vec_rc(this->distribution_pt(), 0.0);
+    DoubleVector temp_vec_cr(this->distribution_pt(), 0.0);
+
+    // Calculate the different combinations of A*x (or A*e depending on the
+    // level in the heirarchy) in the complex case (i.e. A_r*x_r, A_c*x_c,
+    // A_r*x_c and A_c*x_r)
+    Matrix_real_pt->multiply(x_real, temp_vec_rr);
+    Matrix_imag_pt->multiply(x_imag, temp_vec_cc);
+    Matrix_real_pt->multiply(x_imag, temp_vec_rc);
+    Matrix_imag_pt->multiply(x_real, temp_vec_cr);
+
+    //---------------------------------------------------------------------------
+    // Calculating the residual r=b-Ax in the complex case requires more care
+    // than the real case. The correct calculation can be derived rather easily.
+    // Consider the splitting of A, x and b into their complex components:
+    //           r = b - A*x
+    //             = (b_r + i*b_c) - (A_r + i*A_c)*(x_r + i*x_c)
+    //             = [b_r - A_r*x_r + A_c*x_c] + i*[b_c - A_r*x_c - A_c*x_r]
+    // ==> real(r) = b_r - A_r*x_r + A_c*x_c
+    //   & imag(r) = b_c - A_r*x_c - A_c*x_r.
+    //---------------------------------------------------------------------------
+
+    // Calculate the residual only if we're not inside the multigrid solver
+    if (!Use_as_smoother)
+    {
+      // Create storage for the real and imaginary part of the residual vector
+      residual_real.build(this->distribution_pt(), 0.0);
+      residual_imag.build(this->distribution_pt(), 0.0);
+
+      // Real part of the residual:
+      residual_real = rhs_real;
+      residual_real -= temp_vec_rr;
+      residual_real += temp_vec_cc;
+
+      // Imaginary part of the residual:
+      residual_imag = rhs_imag;
+      residual_imag -= temp_vec_rc;
+      residual_imag -= temp_vec_cr;
+
+      // Calculate the 2-norm (noting that the 2-norm of a complex vector a of
+      // length n is simply the square root of the sum of the squares of each
+      // real and imaginary component). That is:
+      // \f[
+      // \|a\|_2^2=\sum_{i=0}^{i=n-1}\real(a[i])^2+\imag(a[i])^2.
+      // \f]
+      // can be written as:
+      // \f[
+      // \|a\|_2^2=\|\real(a)\|_2^2+\|\imag(a)\|_2^2.
+      // \f]
+      double res_real_norm = residual_real.norm();
+      double res_imag_norm = residual_imag.norm();
+      double norm_res =
+        sqrt(res_real_norm * res_real_norm + res_imag_norm * res_imag_norm);
+
+      // If required will document convergence history to screen
+      // or file (if stream is open)
+      if (Doc_convergence_history)
+      {
+        if (!Output_file_stream.is_open())
+        {
+          oomph_info << Iterations << " " << norm_res << std::endl;
+        }
+        else
+        {
+          Output_file_stream << Iterations << " " << norm_res << std::endl;
+        }
+      } // if (Doc_convergence_history)
+    } // if (!Use_as_smoother)
+
+    // Two temporary vectors to store the value of A_r*x_r - A_c*x_c and
+    // A_c*x_r + A_r*x_c in each iteration
+    DoubleVector temp_vec_real(this->distribution_pt(), 0.0);
+    DoubleVector temp_vec_imag(this->distribution_pt(), 0.0);
+
+    // Calculate A_r*x_r - A_c*x_c
+    temp_vec_real = temp_vec_rr;
+    temp_vec_real -= temp_vec_cc;
+
+    // Calculate A_c*x_r + A_r*x_c
+    temp_vec_imag = temp_vec_cr;
+    temp_vec_imag += temp_vec_rc;
+
+    // Outermost loop: Run up to Max_iter times
+    for (unsigned iter_num = 0; iter_num < Max_iter; iter_num++)
+    {
+      // Loop over each degree of freedom and update
+      // the current approximation
+      for (unsigned i = 0; i < n_dof; i++)
+      {
+        // Make a couple of dummy variables to help with calculations
+        double dummy_r = 0.0;
+        double dummy_c = 0.0;
+
+        // Calculate one part of the correction term (real)
+        dummy_r = (Matrix_diagonal_real[i] * temp_vec_real[i] +
+                   Matrix_diagonal_imag[i] * temp_vec_imag[i]);
+
+        // Calculate one part of the correction term (imaginary)
+        dummy_c = (Matrix_diagonal_real[i] * temp_vec_imag[i] -
+                   Matrix_diagonal_imag[i] * temp_vec_real[i]);
+
+        // Scale by Omega/([A(i,i)_r]^2+[A(i,i)_c]^2)
+        dummy_r *= Omega * Matrix_diagonal_inv_sq[i];
+        dummy_c *= Omega * Matrix_diagonal_inv_sq[i];
+
+        // Update the value of x_real
+        x_real[i] -= dummy_r;
+        x_imag[i] -= dummy_c;
+      }
+
+      // Update the value of x (or e depending on the level in the heirarchy)
+      x_real += constant_term_real;
+      x_imag += constant_term_imag;
+
+      // Calculate the different combinations of A*x (or A*e depending on the
+      // level in the heirarchy) in the complex case (i.e. A_r*x_r, A_c*x_c,
+      // A_r*x_c and A_c*x_r)
+      Matrix_real_pt->multiply(x_real, temp_vec_rr);
+      Matrix_imag_pt->multiply(x_imag, temp_vec_cc);
+      Matrix_real_pt->multiply(x_imag, temp_vec_rc);
+      Matrix_imag_pt->multiply(x_real, temp_vec_cr);
+
+      // Calculate A_r*x_r - A_c*x_c
+      temp_vec_real = temp_vec_rr;
+      temp_vec_real -= temp_vec_cc;
+
+      // Calculate A_c*x_r + A_r*x_c
+      temp_vec_imag = temp_vec_cr;
+      temp_vec_imag += temp_vec_rc;
+
+      // Calculate the residual only if we're not inside the multigrid solver
+      if (!Use_as_smoother)
+      {
+        // Calculate the residual
+        residual_real = rhs_real;
+        residual_real -= temp_vec_rr;
+        residual_real += temp_vec_cc;
+
+        // Calculate the imaginary part of the residual vector
+        residual_imag = rhs_imag;
+        residual_imag -= temp_vec_rc;
+        residual_imag -= temp_vec_cr;
+
+        // Calculate the 2-norm using the method mentioned previously
+        res_real_norm = residual_real.norm();
+        res_imag_norm = residual_imag.norm();
+        norm_res =
+          sqrt(res_real_norm * res_real_norm + res_imag_norm * res_imag_norm) /
+          norm_f;
+
+        // If required, this will document convergence history to
+        // screen or file (if the stream is open)
+        if (Doc_convergence_history)
+        {
+          if (!Output_file_stream.is_open())
+          {
+            oomph_info << Iterations << " " << norm_res << std::endl;
+          }
+          else
+          {
+            Output_file_stream << Iterations << " " << norm_res << std::endl;
+          }
+        } // if (Doc_convergence_history)
+
+        // Check the tolerance only if the residual norm is being computed
+        if (norm_res < Tolerance)
+        {
+          // Break out of the for-loop
+          break;
+        }
+      } // if (!Use_as_smoother)
+    } // for (unsigned iter_num=0;iter_num<Max_iter;iter_num++)
+
+    // Calculate the residual only if we're not inside the multigrid solver
+    if (!Use_as_smoother)
+    {
+      // If time documentation is enabled
+      if (Doc_time)
+      {
+        oomph_info << "\n(Complex) damped Jacobi converged. Residual norm: "
+                   << norm_res
+                   << "\nNumber of iterations to convergence: " << Iterations
+                   << "\n"
+                   << std::endl;
+      }
+    } // if (!Use_as_smoother)
+
+    // Copy the solution into the solution vector
+    solution[0] = x_real;
+    solution[1] = x_imag;
+
+    // Doc time for solver
+    double t_end = TimingHelpers::timer();
+    Solution_time = t_end - t_start;
+    if (Doc_time)
+    {
+      oomph_info << "Time for solve with (complex) damped Jacobi [sec]: "
+                 << Solution_time << std::endl;
+    }
+
+    // If the solver failed to converge and the user asked for an error if
+    // this happened
+    if ((Iterations > Max_iter - 1) && (Throw_error_after_max_iter))
+    {
+      std::string error_message =
+        "Solver failed to converge and you requested ";
+      error_message += "an error on convergence failures.";
+      throw OomphLibError(
+        error_message, OOMPH_EXCEPTION_LOCATION, OOMPH_CURRENT_FUNCTION);
+    }
+  } // End of complex_solve_helper function
+
+  //======================================================================
+  /// \short The GMRES method rewritten for complex matrices
+  //======================================================================
+  template<typename MATRIX>
+  class ComplexGMRES : public HelmholtzSmoother
+  {
+  public:
+    /// Constructor
+    ComplexGMRES()
+      : Iterations(0),
+        Matrices_storage_pt(0),
+        Resolving(false),
+        Matrix_can_be_deleted(true)
+    {
+    } // End of ComplexGMRES constructor
+
+    /// Empty destructor
+    ~ComplexGMRES()
+    {
+      // Run clean_up_memory
+      clean_up_memory();
+    } // End of ~ComplexGMRES
+
+    /// Broken copy constructor
+    ComplexGMRES(const ComplexGMRES&)
+    {
+      BrokenCopy::broken_copy("ComplexGMRES");
+    } // End of ComplexGMRES (copy constructor)
+
+    /// Broken assignment operator
+    void operator=(const ComplexGMRES&)
+    {
+      BrokenCopy::broken_assign("ComplexGMRES");
+    } // End of operator= (assignment operator)
+
+    /// Overload disable resolve so that it cleans up memory too
+    void disable_resolve()
+    {
+      // Disable resolve using the LinearSolver function
+      LinearSolver::disable_resolve();
+
+      // Clean up anything kept in memory
+      clean_up_memory();
+    } // End of disable resolve
+
+    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// which contains the solution of the linear system defined by
+    /// the problem's fully assembled Jacobian and residual vector.
+    void solve(Problem* const& problem_pt, DoubleVector& result)
+    {
+      // Write the error message into a string
+      std::string error_message = "Solve function for class\n\n";
+      error_message += "ComplexGMRES\n\n";
+      error_message += "is deliberately broken to avoid the accidental \n";
+      error_message += "use of the inappropriate C++ default. If you \n";
+      error_message += "really need one for this class, write it yourself...\n";
+
+      // Throw an error
+      throw OomphLibError(
+        error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    } // End of solve
+
+    /// \short Linear-algebra-type solver: Takes pointer to a matrix
+    /// and rhs vector and returns the solution of the linear system
+    /// Call the broken base-class version. If you want this, please
+    /// implement it
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
+    {
+      LinearSolver::solve(matrix_pt, rhs, result);
+    } // End of solve
+
+    /// Number of iterations taken
+    unsigned iterations() const
+    {
+      // Return the number of iterations used
+      return Iterations;
+    } // End of iterations
+
+    /// Setup: Pass pointer to the matrix and store in cast form
+    void complex_smoother_setup(Vector<CRDoubleMatrix*> helmholtz_matrix_pt)
+    {
+      // Assume the matrices have been passed in from the outside so we must
+      // not delete it. This is needed to avoid pre- and post-smoothers
+      // deleting the same matrix in the MG solver. If this was originally
+      // set to TRUE then this will be sorted out in the other functions
+      // from which this was called
+      Matrix_can_be_deleted = false;
+
+#ifdef PARANOID
+      // PARANOID check - Make sure the input has the right number of matrices
+      if (helmholtz_matrix_pt.size() != 2)
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "Can only deal with two matrices. You have "
+                             << helmholtz_matrix_pt.size() << " matrices."
+                             << std::endl;
+
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Resize the storage for the system matrices
+      Matrices_storage_pt.resize(2, 0);
+
+      // Assign the real matrix pointer
+      Matrices_storage_pt[0] = helmholtz_matrix_pt[0];
+
+      // Assign the imaginary matrix pointers
+      Matrices_storage_pt[1] = helmholtz_matrix_pt[1];
+
+#ifdef PARANOID
+      // PARANOID check - Make sure that the constituent matrices have the same
+      // number of rows
+      if (Matrices_storage_pt[0]->nrow() != Matrices_storage_pt[1]->nrow())
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "Incompatible real and imag. matrix sizes.";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // PARANOID check - Make sure that the constituent matrices have the same
+      // number of columns
+      if (Matrices_storage_pt[0]->ncol() != Matrices_storage_pt[1]->ncol())
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "Incompatible real and imag. matrix sizes.";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    } // End of complex_smoother_setup
+
+    /// \short The smoother_solve function performs fixed number of iterations
+    /// on the system A*result=rhs. The number of (smoothing) iterations is
+    /// the same as the max. number of iterations in the underlying
+    /// IterativeLinearSolver class.
+    void complex_smoother_solve(const Vector<DoubleVector>& rhs,
+                                Vector<DoubleVector>& solution)
+    {
+      // If you use a smoother but you don't want to calculate the residual
+      Use_as_smoother = true;
+
+      // Use the helper function where the work is actually done
+      complex_solve_helper(rhs, solution);
+    } // End of complex_smoother_solve
+
+  private:
+    /// Cleanup data that's stored for resolve (if any has been stored)
+    void clean_up_memory()
+    {
+      // If the real matrix pointer isn't null AND we're allowed to delete
+      // the matrix which is only when we create the matrix ourselves
+      if ((Matrices_storage_pt[0] != 0) && (Matrix_can_be_deleted))
+      {
+        // Delete the matrix
+        delete Matrices_storage_pt[0];
+
+        // Assign the associated pointer the value NULL
+        Matrices_storage_pt[0] = 0;
+      }
+
+      // If the real matrix pointer isn't null AND we're allowed to delete
+      // the matrix which is only when we create the matrix ourselves
+      if ((Matrices_storage_pt[1] != 0) && (Matrix_can_be_deleted))
+      {
+        // Delete the matrix
+        delete Matrices_storage_pt[1];
+
+        // Assign the associated pointer the value NULL
+        Matrices_storage_pt[1] = 0;
+      }
+    } // End of clean_up_memory
+
+    /// This is where the actual work is done
+    void complex_solve_helper(const Vector<DoubleVector>& rhs,
+                              Vector<DoubleVector>& solution);
+
+    /// Helper function to update the result vector
+    void update(const unsigned& k,
+                const Vector<Vector<std::complex<double>>>& hessenberg,
+                const Vector<std::complex<double>>& s,
+                const Vector<Vector<DoubleVector>>& v,
+                Vector<DoubleVector>& x)
+    {
+      // Make a local copy of s
+      Vector<std::complex<double>> y(s);
+
+      //-----------------------------------------------------------------
+      // The Hessenberg matrix should be an upper triangular matrix at
+      // this point (although from its storage it would appear to be a
+      // lower triangular matrix since the indexing has been reversed)
+      // so finding the minimiser of J(y)=min||s-R_m*y|| where R_m is
+      // the matrix R in the QR factorisation of the Hessenberg matrix.
+      // Therefore, to obtain y we simply need to use a backwards
+      // substitution. Note: The implementation here may appear to be
+      // somewhat confusing as the indexing in the Hessenberg matrix is
+      // reversed. This implementation of a backwards substitution does
+      // not run along the columns of the triangular matrix but rather
+      // up the rows.
+      //-----------------------------------------------------------------
+      // The outer loop is a loop over the columns of the Hessenberg matrix
+      // since the indexing is reversed
+      for (int i = int(k); i >= 0; i--)
+      {
+        // Divide the i-th entry of y by the i-th diagonal entry of H
+        y[i] /= hessenberg[i][i];
+
+        // The inner loop is a loop over the rows of the Hessenberg matrix
+        for (int j = i - 1; j >= 0; j--)
+        {
+          // Update the j-th entry of y
+          y[j] -= hessenberg[i][j] * y[i];
+        }
+      } // for (int i=int(k);i>=0;i--)
+
+      // Calculate the number of entries in x (simply use the real part as
+      // both the real and imaginary part should have the same length)
+      unsigned n_row = x[0].nrow();
+
+      // We assume here that the vector x (which is passed in) is actually x_0
+      // so we simply need to update its entries to calculate the solution, x
+      // which is given by x=x_0+Vy.
+      for (unsigned j = 0; j <= k; j++)
+      {
+        // For fast access (real part)
+        const double* vj_r_pt = v[j][0].values_pt();
+
+        // For fast access (imaginary part)
+        const double* vj_c_pt = v[j][1].values_pt();
+
+        // Loop over the entries in x and update them
+        for (unsigned i = 0; i < n_row; i++)
+        {
+          // Update the real part of the i-th entry in x
+          x[0][i] += (vj_r_pt[i] * y[j].real()) - (vj_c_pt[i] * y[j].imag());
+
+          // Update the imaginary part of the i-th entry in x
+          x[1][i] += (vj_c_pt[i] * y[j].real()) + (vj_r_pt[i] * y[j].imag());
+        }
+      } // for (unsigned j=0;j<=k;j++)
+    } // End of update
+
+    /// \short Helper function: Generate a plane rotation. This is done by
+    /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
+    /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
+    /// \f[
+    /// \begin{bmatrix}
+    /// \overline{\cos\theta} & \overline{\sin\theta} \cr
+    /// -\sin\theta & \cos\theta
+    /// \end{bmatrix}
+    /// \begin{bmatrix}
+    /// dx
+    /// \\ dy
+    /// \end{bmatrix}
+    /// =
+    /// \begin{bmatrix}
+    /// r
+    /// \\ 0
+    /// \end{bmatrix},
+    /// \f]
+    /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
+    /// are given by:
+    /// The values of dx and dy are given by:
+    /// \f[
+    /// \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}},
+    /// \f]
+    /// and
+    /// \f[
+    /// \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}.
+    /// \f]
+    /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
+    /// We also check to see that sn is always a real (nonnegative) number. See
+    /// pp.193-194 for an explanation.
+    void generate_plane_rotation(std::complex<double>& dx,
+                                 std::complex<double>& dy,
+                                 std::complex<double>& cs,
+                                 std::complex<double>& sn)
+    {
+      // If dy=0 then we do not need to apply a rotation
+      if (dy == 0.0)
+      {
+        // Using theta=0 gives cos(theta)=1
+        cs = 1.0;
+
+        // Using theta=0 gives sin(theta)=0
+        sn = 0.0;
+      }
+      // If dx or dy is large using the original form of calculting cs and sn is
+      // naive since this may overflow or underflow so instead we calculate
+      // r=sqrt(pow(|dx|,2)+pow(|dy|,2)) using r=|dy|sqrt(1+pow(|dx|/|dy|,2)) if
+      // |dy|>|dx| [see <A
+      // HREF=https://en.wikipedia.org/wiki/Hypot">Hypot</A>.].
+      else if (std::abs(dy) > std::abs(dx))
+      {
+        // Since |dy|>|dx| calculate the ratio |dx|/|dy|
+        std::complex<double> temp = dx / dy;
+
+        // Calculate the value of sin(theta) using:
+        //          sin(theta)=dy/sqrt(pow(|dx|,2)+pow(|dy|,2))
+        //                    =(dy/|dy|)/sqrt(1+pow(|dx|/|dy|,2)).
+        sn = (dy / std::abs(dy)) / sqrt(1.0 + pow(std::abs(temp), 2.0));
+
+        // Calculate the value of cos(theta) using:
+        //            cos(theta)=dx/sqrt(pow(|dy|,2)+pow(|dx|,2))
+        //                      =(dx/|dy|)/sqrt(1+pow(|dx|/|dy|,2))
+        //                      =(dx/dy)*sin(theta).
+        cs = temp * sn;
+      }
+      // Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow
+      // calculate the values of cs and sn using the method above
+      else
+      {
+        // Since |dx|>=|dy| calculate the ratio dy/dx
+        std::complex<double> temp = dy / dx;
+
+        // Calculate the value of cos(theta) using:
+        //          cos(theta)=dx/sqrt(pow(|dx|,2)+pow(|dy|,2))
+        //                    =(dx/|dx|)/sqrt(1+pow(|dy|/|dx|,2)).
+        cs = (dx / std::abs(dx)) / sqrt(1.0 + pow(std::abs(temp), 2.0));
+
+        // Calculate the value of sin(theta) using:
+        //            sin(theta)=dy/sqrt(pow(|dx|,2)+pow(|dy|,2))
+        //                      =(dy/|dx|)/sqrt(1+pow(|dy|/|dx|,2))
+        //                      =(dy/dx)*cos(theta).
+        sn = temp * cs;
+      }
+
+      // Set the tolerance for sin(theta)
+      double tolerance = 1.0e-15;
+
+      // Make sure sn is real and nonnegative (it should be!)
+      if ((std::fabs(sn.imag()) > tolerance) || (sn.real() < 0))
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
+
+        // Create an error message
+        error_message_stream << "The value of sin(theta) is not real "
+                             << "and/or nonnegative. Value is: " << sn
+                             << std::endl;
+
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+    } // End of generate_plane_rotation
+
+    /// \short Helper function: Apply plane rotation. This is done using the
+    /// update:
+    /// \f[
+    /// \begin{bmatrix}
+    /// dx
+    /// \\ dy
+    /// \end{bmatrix}
+    /// \leftarrow
+    /// \begin{bmatrix}
+    /// \overline{\cos\theta} & \overline{\sin\theta}
+    /// \\ -\sin\theta & \cos\theta
+    /// \end{bmatrix}
+    /// \begin{bmatrix}
+    /// dx
+    /// \\ dy
+    /// \end{bmatrix}.
+    /// \f]
+    /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
+    void apply_plane_rotation(std::complex<double>& dx,
+                              std::complex<double>& dy,
+                              std::complex<double>& cs,
+                              std::complex<double>& sn)
+    {
+      // Calculate the value of dx but don't update it yet
+      std::complex<double> temp = std::conj(cs) * dx + std::conj(sn) * dy;
+
+      // Set the value of dy
+      dy = -sn * dx + cs * dy;
+
+      // Set the value of dx using the correct values of dx and dy
+      dx = temp;
+    } // End of apply_plane_rotation
+
+    /// Number of iterations taken
+    unsigned Iterations;
+
+    /// Vector of pointers to the real and imaginary part of the system matrix
+    Vector<CRDoubleMatrix*> Matrices_storage_pt;
+
+    /// \short Boolean flag to indicate if the solve is done in re-solve mode,
+    /// bypassing setup of matrix and preconditioner
+    bool Resolving;
+
+    /// \short Boolean flag to indicate if the real and imaginary system
+    /// matrices can be deleted
+    bool Matrix_can_be_deleted;
+  };
+
+  //======================================================================
   /// \short This is where the actual work is done
-  void complex_solve_helper(const Vector<DoubleVector>& rhs,
-				      Vector<DoubleVector>& solution);
+  //======================================================================
+  template<typename MATRIX>
+  void ComplexGMRES<MATRIX>::complex_solve_helper(
+    const Vector<DoubleVector>& rhs, Vector<DoubleVector>& solution)
+  {
+    // Set the number of dof types (real and imaginary for this solver)
+    unsigned n_dof_types = 2;
 
-  /// \short Boolean flag to indicate if the matrices pointed to by
-  /// Matrix_real_pt and Matrix_imag_pt can be deleted.
-  bool Matrix_can_be_deleted;
+    // Get the number of dofs (note, the total number of dofs in the problem
+    // is 2*n_row but if the constituent vectors and matrices were stored in
+    // complex objects there would only be (n_row) rows so we use that)
+    unsigned n_row = Matrices_storage_pt[0]->nrow();
 
-  /// Pointer to the real part of the system matrix
-  CRDoubleMatrix* Matrix_real_pt;
+    // Make sure Max_iter isn't greater than n_dof. The user cannot use this
+    // many iterations when using Krylov subspace methods
+    if (Max_iter > n_row)
+    {
+      // Create an output string stream
+      std::ostringstream error_message_stream;
 
-  /// Pointer to the real part of the system matrix
-  CRDoubleMatrix* Matrix_imag_pt;
+      // Create the error message
+      error_message_stream << "The maximum number of iterations cannot exceed "
+                           << "the number of rows in the problem."
+                           << "\nMaximum number of iterations: " << Max_iter
+                           << "\nNumber of rows: " << n_row << std::endl;
 
-  /// Vector containing the diagonal entries of A_r (real(A))
-  Vector<double> Matrix_diagonal_real;
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
 
-  /// Vector containing the diagonal entries of A_c (imag(A))
-  Vector<double> Matrix_diagonal_imag;
-
-  /// Vector whose j'th entry is given by 1/(A_r(j,j)^2 + A_c(j,j)^2)
-  Vector<double> Matrix_diagonal_inv_sq;
-
-  /// Number of iterations taken
-  unsigned Iterations;
-
-  /// Damping factor
-  double Omega;
-
- };
-
- //======================================================================
- /// \short This is where the actual work is done.
- //======================================================================
- template<typename MATRIX>
- void ComplexDampedJacobi<MATRIX>::
- complex_solve_helper(const Vector<DoubleVector>& rhs,
-		      Vector<DoubleVector>& solution)
- {
-  // Get number of dofs
-  unsigned n_dof=Matrix_real_pt->nrow();
-
+    // Loop over the real and imaginary parts
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
 #ifdef PARANOID
-  // Upcast the matrix to the appropriate type
-  CRDoubleMatrix* tmp_rmatrix_pt=dynamic_cast<CRDoubleMatrix*>(Matrix_real_pt);
-  
-  // Upcast the matrix to the appropriate type
-  CRDoubleMatrix* tmp_imatrix_pt=dynamic_cast<CRDoubleMatrix*>(Matrix_imag_pt);
-  
-  // PARANOID Run the self-tests to check the inputs are correct
-  this->check_validity_of_solve_helper_inputs<MATRIX>(tmp_rmatrix_pt,
-						      tmp_imatrix_pt,
-						      rhs,solution,n_dof);
-
-  // We don't need the real matrix pointer any more
-  tmp_rmatrix_pt=0;
-  
-  // We don't need the imaginary matrix pointer any more
-  tmp_imatrix_pt=0;
+      // PARANOID check that if the matrix is distributable then it should not
+      // be then it should not be distributed
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(
+            Matrices_storage_pt[dof_type]) != 0)
+      {
+        if (dynamic_cast<DistributableLinearAlgebraObject*>(
+              Matrices_storage_pt[dof_type])
+              ->distributed())
+        {
+          std::ostringstream error_message_stream;
+          error_message_stream << "The matrix must not be distributed.";
+          throw OomphLibError(error_message_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+      // PARANOID check that this rhs distribution is setup
+      if (!rhs[dof_type].built())
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "The rhs vector distribution must be setup.";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // PARANOID check that the rhs has the right number of global rows
+      if (rhs[dof_type].nrow() != n_row)
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "RHS does not have the same dimension as the"
+                             << " linear system";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // PARANOID check that the rhs is not distributed
+      if (rhs[dof_type].distribution_pt()->distributed())
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "The rhs vector must not be distributed.";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // PARANOID check that if the result is setup it matches the distribution
+      // of the rhs
+      if (solution[dof_type].built())
+      {
+        if (!(*rhs[dof_type].distribution_pt() ==
+              *solution[dof_type].distribution_pt()))
+        {
+          std::ostringstream error_message_stream;
+          error_message_stream << "If the result distribution is setup then it "
+                               << "must be the same as the rhs distribution";
+          throw OomphLibError(error_message_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+      } // if (solution[dof_type].built())
 #endif
-  
-  // Setup the solution if it is not
-  if ((!solution[0].distribution_pt()->built())||
-       (!solution[1].distribution_pt()->built()))
-  {
-   solution[0].build(rhs[0].distribution_pt(),0.0);
-   solution[1].build(rhs[1].distribution_pt(),0.0);
-  }
+      // Set up the solution distribution if it's not already distributed
+      if (!solution[dof_type].built())
+      {
+        // Build the distribution
+        solution[dof_type].build(this->distribution_pt(), 0.0);
+      }
+      // Otherwise initialise all entries to zero
+      else
+      {
+        // Initialise the entries in the k-th vector in solution to zero
+        solution[dof_type].initialise(0.0);
+      }
+    } // for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
 
-  // Initialise timer
-  double t_start=TimingHelpers::timer();
+    // Start the solver timer
+    double t_start = TimingHelpers::timer();
 
-  // Copy the real and imaginary part of the solution vector
-  DoubleVector x_real(solution[0]);
-  DoubleVector x_imag(solution[1]);
+    // Storage for the relative residual
+    double resid;
 
-  // Copy the real and imaginary part of the RHS vector
-  DoubleVector rhs_real(rhs[0]);
-  DoubleVector rhs_imag(rhs[1]);
+    // Initialise vectors (since these are not distributed vectors we template
+    // one vector by the type std::complex<double> instead of using two vectors,
+    // each templated by the type double
 
-  // Create storage for the real and imaginary part of the constant term
-  DoubleVector constant_term_real(this->distribution_pt(),0.0);
-  DoubleVector constant_term_imag(this->distribution_pt(),0.0);
+    // Vector, s, used in the minimisation problem: J(y)=min||s-R_m*y||
+    // [see Saad Y."Iterative methods for sparse linear systems", p.176.]
+    Vector<std::complex<double>> s(n_row + 1, std::complex<double>(0.0, 0.0));
 
-  // Create storage for the real and imaginary part of the residual vector.
-  // These aren't used/built if we're inside the multigrid solver
-  DoubleVector residual_real;
-  DoubleVector residual_imag;
-  
-  // Create storage for the norm of the real and imaginary parts of the
-  // residual vector. These aren't used if we're inside the multigrid
-  // solver
-  double res_real_norm=0.0;
-  double res_imag_norm=0.0;
-   
-  // Variable to hold the current residual norm. This isn't used if
-  // we're inside the multigrid solver
-  double norm_res=0.0;
-  
-  // Variables to hold the initial residual norm. This isn't used if
-  // we're inside the multigrid solver
-  double norm_f=0.0;
-  
-  // Initialise the value of Iterations
-  Iterations=0;
-  
-  //------------------------------------------------------------------------
-  // Initial guess isn't necessarily zero (restricted solution from finer
-  // grids) therefore both x and the residual need to be assigned values
-  // from inputs. The constant term at the end of the stationary iteration
-  // is also calculated here since it does not change at all throughout the
-  // iterative process:
-  //------------------------------------------------------------------------
+    // Vector to store the value of cos(theta) when using the Givens rotation
+    Vector<std::complex<double>> cs(n_row + 1, std::complex<double>(0.0, 0.0));
 
-  // Loop over all the entries of each vector
-  for(unsigned i=0;i<n_dof;i++)
-  {
-   // Calculate the numerator of the i'th entry in the real component of
-   // the constant term
-   constant_term_real[i]=(Matrix_diagonal_real[i]*rhs_real[i]+
-			  Matrix_diagonal_imag[i]*rhs_imag[i]);
+    // Vector to store the value of sin(theta) when using the Givens rotation
+    Vector<std::complex<double>> sn(n_row + 1, std::complex<double>(0.0, 0.0));
 
-   // Divide by the denominator
-   constant_term_real[i]*=Matrix_diagonal_inv_sq[i];
+    // Create a vector of DoubleVectors (this is a distributed vector so we have
+    // to create two separate DoubleVector objects to cope with the arithmetic)
+    Vector<DoubleVector> w(n_dof_types);
 
-   // Scale by the damping factor
-   constant_term_real[i]*=Omega;
-
-   // Calculate the numerator of the i'th entry in the imaginary component of
-   // the constant term
-   constant_term_imag[i]=(Matrix_diagonal_real[i]*rhs_imag[i]-
-			  Matrix_diagonal_imag[i]*rhs_real[i]);
-
-   // Divide by the denominator
-   constant_term_imag[i]*=Matrix_diagonal_inv_sq[i];
-
-   // Scale by the damping factor
-   constant_term_imag[i]*=Omega;
-  }
-
-  // Create 4 temporary vectors to store the various matrix-vector products
-  // required. The appropriate combination has been appended to the name. For
-  // instance, the product A_r*x_c corresponds to temp_vec_rc (real*imag)
-  DoubleVector temp_vec_rr(this->distribution_pt(),0.0);
-  DoubleVector temp_vec_cc(this->distribution_pt(),0.0);
-  DoubleVector temp_vec_rc(this->distribution_pt(),0.0);
-  DoubleVector temp_vec_cr(this->distribution_pt(),0.0);
-
-  // Calculate the different combinations of A*x (or A*e depending on the
-  // level in the heirarchy) in the complex case (i.e. A_r*x_r, A_c*x_c,
-  // A_r*x_c and A_c*x_r)
-  Matrix_real_pt->multiply(x_real,temp_vec_rr);
-  Matrix_imag_pt->multiply(x_imag,temp_vec_cc);
-  Matrix_real_pt->multiply(x_imag,temp_vec_rc);
-  Matrix_imag_pt->multiply(x_real,temp_vec_cr);
-  
-  //---------------------------------------------------------------------------
-  // Calculating the residual r=b-Ax in the complex case requires more care
-  // than the real case. The correct calculation can be derived rather easily.
-  // Consider the splitting of A, x and b into their complex components:
-  //           r = b - A*x
-  //             = (b_r + i*b_c) - (A_r + i*A_c)*(x_r + i*x_c)
-  //             = [b_r - A_r*x_r + A_c*x_c] + i*[b_c - A_r*x_c - A_c*x_r]
-  // ==> real(r) = b_r - A_r*x_r + A_c*x_c
-  //   & imag(r) = b_c - A_r*x_c - A_c*x_r.
-  //---------------------------------------------------------------------------
-
-  // Calculate the residual only if we're not inside the multigrid solver
-  if (!Use_as_smoother)
-  {
-   // Create storage for the real and imaginary part of the residual vector
-   residual_real.build(this->distribution_pt(),0.0);
-   residual_imag.build(this->distribution_pt(),0.0);
-  
-   // Real part of the residual:
-   residual_real=rhs_real;
-   residual_real-=temp_vec_rr;
-   residual_real+=temp_vec_cc;
-
-   // Imaginary part of the residual:
-   residual_imag=rhs_imag;
-   residual_imag-=temp_vec_rc;
-   residual_imag-=temp_vec_cr;
-
-   // Calculate the 2-norm (noting that the 2-norm of a complex vector a of
-   // length n is simply the square root of the sum of the squares of each
-   // real and imaginary component). That is:
-   // \f[
-   // \|a\|_2^2=\sum_{i=0}^{i=n-1}\real(a[i])^2+\imag(a[i])^2.
-   // \f]
-   // can be written as:
-   // \f[
-   // \|a\|_2^2=\|\real(a)\|_2^2+\|\imag(a)\|_2^2.
-   // \f]
-   double res_real_norm=residual_real.norm();
-   double res_imag_norm=residual_imag.norm();
-   double norm_res=sqrt(res_real_norm*res_real_norm+
-			res_imag_norm*res_imag_norm);
-  
-   // If required will document convergence history to screen
-   // or file (if stream is open)
-   if (Doc_convergence_history)
-   {
-    if (!Output_file_stream.is_open())
+    // Build the distribution of both vectors
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
     {
-     oomph_info << Iterations << " " << norm_res << std::endl;
+      // Build the distribution of the k-th constituent vector
+      w[dof_type].build(this->distribution_pt(), 0.0);
     }
-    else
+
+    // Create a vector of DoubleVectors to store the RHS of b-Jx=Mr. We assume
+    // both x=0 and that a preconditioner is not applied by which we deduce b=r
+    Vector<DoubleVector> r(n_dof_types);
+
+    // Build the distribution of both vectors
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
     {
-     Output_file_stream << Iterations << " " << norm_res <<std::endl;
+      // Build the distribution of the k-th constituent vector
+      r[dof_type].build(this->distribution_pt(), 0.0);
     }
-   } // if (Doc_convergence_history)
-  } // if (!Use_as_smoother)
 
-  // Two temporary vectors to store the value of A_r*x_r - A_c*x_c and
-  // A_c*x_r + A_r*x_c in each iteration
-  DoubleVector temp_vec_real(this->distribution_pt(),0.0);
-  DoubleVector temp_vec_imag(this->distribution_pt(),0.0);
+    // Store the value of b (the RHS vector) in r
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Build the distribution of the k-th constituent vector
+      r[dof_type] = rhs[dof_type];
+    }
 
-  // Calculate A_r*x_r - A_c*x_c
-  temp_vec_real=temp_vec_rr;
-  temp_vec_real-=temp_vec_cc;
+    // Calculate the norm of the real part of r
+    double norm_r = r[0].norm();
 
-  // Calculate A_c*x_r + A_r*x_c
-  temp_vec_imag=temp_vec_cr;
-  temp_vec_imag+=temp_vec_rc;
+    // Calculate the norm of the imaginary part of r
+    double norm_c = r[1].norm();
 
-  // Outermost loop: Run up to Max_iter times
-  for (unsigned iter_num=0;iter_num<Max_iter;iter_num++)
-  {
-   // Loop over each degree of freedom and update
-   // the current approximation
-   for (unsigned i=0;i<n_dof;i++)
-   {
-    // Make a couple of dummy variables to help with calculations
-    double dummy_r=0.0;
-    double dummy_c=0.0;
+    // Compute norm(r)
+    double normb = sqrt(pow(norm_r, 2.0) + pow(norm_c, 2.0));
 
-    // Calculate one part of the correction term (real)
-    dummy_r=(Matrix_diagonal_real[i]*temp_vec_real[i]+
-	     Matrix_diagonal_imag[i]*temp_vec_imag[i]);
+    // Set the value of beta (the initial residual)
+    double beta = normb;
 
-    // Calculate one part of the correction term (imaginary)
-    dummy_c=(Matrix_diagonal_real[i]*temp_vec_imag[i]-
-	     Matrix_diagonal_imag[i]*temp_vec_real[i]);
+    // Compute the initial relative residual. If the entries of the RHS vector
+    // are all zero then set normb equal to one. This is because we divide the
+    // value of the norm at later stages by normb and dividing by zero is not
+    // definied
+    if (normb == 0.0)
+    {
+      // Set the value of normb
+      normb = 1.0;
+    }
 
-    // Scale by Omega/([A(i,i)_r]^2+[A(i,i)_c]^2)
-    dummy_r*=Omega*Matrix_diagonal_inv_sq[i];
-    dummy_c*=Omega*Matrix_diagonal_inv_sq[i];
+    // Calculate the ratio between the initial norm and the current norm.
+    // Since we haven't completed an iteration yet this will simply be one
+    // unless normb was zero, in which case resid will have value zero
+    resid = beta / normb;
 
-    // Update the value of x_real
-    x_real[i]-=dummy_r;
-    x_imag[i]-=dummy_c;
-   }
-
-   // Update the value of x (or e depending on the level in the heirarchy)
-   x_real+=constant_term_real;
-   x_imag+=constant_term_imag;
-
-   // Calculate the different combinations of A*x (or A*e depending on the
-   // level in the heirarchy) in the complex case (i.e. A_r*x_r, A_c*x_c,
-   // A_r*x_c and A_c*x_r)
-   Matrix_real_pt->multiply(x_real,temp_vec_rr);
-   Matrix_imag_pt->multiply(x_imag,temp_vec_cc);
-   Matrix_real_pt->multiply(x_imag,temp_vec_rc);
-   Matrix_imag_pt->multiply(x_real,temp_vec_cr);
-
-   // Calculate A_r*x_r - A_c*x_c
-   temp_vec_real=temp_vec_rr;
-   temp_vec_real-=temp_vec_cc;
-
-   // Calculate A_c*x_r + A_r*x_c
-   temp_vec_imag=temp_vec_cr;
-   temp_vec_imag+=temp_vec_rc;
-
-   // Calculate the residual only if we're not inside the multigrid solver
-   if (!Use_as_smoother)
-   {
-    // Calculate the residual
-    residual_real=rhs_real;
-    residual_real-=temp_vec_rr;
-    residual_real+=temp_vec_cc;
-
-    // Calculate the imaginary part of the residual vector
-    residual_imag=rhs_imag;
-    residual_imag-=temp_vec_rc;
-    residual_imag-=temp_vec_cr;
-
-    // Calculate the 2-norm using the method mentioned previously
-    res_real_norm=residual_real.norm();
-    res_imag_norm=residual_imag.norm();
-    norm_res=sqrt(res_real_norm*res_real_norm+
-		  res_imag_norm*res_imag_norm)/norm_f;
-   
-    // If required, this will document convergence history to
-    // screen or file (if the stream is open)
+    // If required, will document convergence history to screen or file (if
+    // stream open)
     if (Doc_convergence_history)
     {
-     if (!Output_file_stream.is_open())
-     {
-      oomph_info << Iterations << " " << norm_res << std::endl;
-     }
-     else
-     {
-      Output_file_stream << Iterations << " " << norm_res << std::endl;
-     }
+      // If an output file which is open isn't provided then output to screen
+      if (!Output_file_stream.is_open())
+      {
+        // Output the residual value to the screen
+        oomph_info << 0 << " " << resid << std::endl;
+      }
+      // Otherwise, output to file
+      else
+      {
+        // Output the residual value to file
+        Output_file_stream << 0 << " " << resid << std::endl;
+      }
     } // if (Doc_convergence_history)
 
-    // Check the tolerance only if the residual norm is being computed
-    if (norm_res<Tolerance)
+    // If the GMRES algorithm converges immediately
+    if (resid <= Tolerance)
     {
-     // Break out of the for-loop
-     break;
-    }
-   } // if (!Use_as_smoother)
-  } // for (unsigned iter_num=0;iter_num<Max_iter;iter_num++)
+      // If time documentation is enabled
+      if (Doc_time)
+      {
+        // Notify the user
+        oomph_info << "GMRES converged immediately. Normalised residual norm: "
+                   << resid << std::endl;
+      }
 
-  // Calculate the residual only if we're not inside the multigrid solver
-  if (!Use_as_smoother)
-  {
-   // If time documentation is enabled
-   if(Doc_time)
-   {
-    oomph_info << "\n(Complex) damped Jacobi converged. Residual norm: "
-	       << norm_res
-	       << "\nNumber of iterations to convergence: "
-	       << Iterations << "\n" << std::endl;
-   }
-  } // if (!Use_as_smoother)
+      // Finish running the solver
+      return;
+    } // if (resid<=Tolerance)
 
-  // Copy the solution into the solution vector
-  solution[0]=x_real;
-  solution[1]=x_imag;
+    // Initialise a vector of orthogonal basis vectors
+    Vector<Vector<DoubleVector>> v;
 
-  // Doc time for solver
-  double t_end=TimingHelpers::timer();
-  Solution_time=t_end-t_start;
-  if(Doc_time)
-  {
-   oomph_info << "Time for solve with (complex) damped Jacobi [sec]: "
-	      << Solution_time << std::endl;
-  }
- 
-  // If the solver failed to converge and the user asked for an error if
-  // this happened
-  if((Iterations>Max_iter-1)&&(Throw_error_after_max_iter))
-  {
-   std::string error_message="Solver failed to converge and you requested ";
-   error_message+="an error on convergence failures.";
-   throw OomphLibError(error_message,
-		       OOMPH_EXCEPTION_LOCATION,
-		       OOMPH_CURRENT_FUNCTION);
-  }
- } // End of complex_solve_helper function
+    // Resize the number of vectors needed
+    v.resize(n_row + 1);
 
-//======================================================================
-/// \short The GMRES method rewritten for complex matrices
-//======================================================================
- template<typename MATRIX>
- class ComplexGMRES : public HelmholtzSmoother
- {
-
- public:
-
-  /// Constructor
-  ComplexGMRES() :
-   Iterations(0),
-   Matrices_storage_pt(0),
-   Resolving(false),
-   Matrix_can_be_deleted(true)
-   {} // End of ComplexGMRES constructor
-
-  /// Empty destructor
-  ~ComplexGMRES()
-   {
-    // Run clean_up_memory
-    clean_up_memory();
-   } // End of ~ComplexGMRES
-
-  /// Broken copy constructor
-  ComplexGMRES(const ComplexGMRES&)
-   {
-    BrokenCopy::broken_copy("ComplexGMRES");
-   } // End of ComplexGMRES (copy constructor)
-
-  /// Broken assignment operator
-  void operator=(const ComplexGMRES&)
-   {
-    BrokenCopy::broken_assign("ComplexGMRES");
-   } // End of operator= (assignment operator)
-
-  /// Overload disable resolve so that it cleans up memory too
-  void disable_resolve()
-   {
-    // Disable resolve using the LinearSolver function
-    LinearSolver::disable_resolve();
-
-    // Clean up anything kept in memory
-    clean_up_memory();
-   } // End of disable resolve
-
-  /// \short Solver: Takes pointer to problem and returns the results vector
-  /// which contains the solution of the linear system defined by
-  /// the problem's fully assembled Jacobian and residual vector.
-  void solve(Problem* const &problem_pt, DoubleVector &result)
-   {
-    // Write the error message into a string
-    std::string error_message="Solve function for class\n\n";
-    error_message+="ComplexGMRES\n\n";
-    error_message+="is deliberately broken to avoid the accidental \n";
-    error_message+="use of the inappropriate C++ default. If you \n";
-    error_message+="really need one for this class, write it yourself...\n";
-
-    // Throw an error
-    throw OomphLibError(error_message,
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   } // End of solve
-
-  /// \short Linear-algebra-type solver: Takes pointer to a matrix
-  /// and rhs vector and returns the solution of the linear system
-  /// Call the broken base-class version. If you want this, please
-  /// implement it
-  void solve(DoubleMatrixBase* const &matrix_pt,
-	     const Vector<double> &rhs,
-	     Vector<double> &result)
-   {
-    LinearSolver::solve(matrix_pt,rhs,result);
-   } // End of solve
-
-  /// Number of iterations taken
-  unsigned iterations() const
-   {
-    // Return the number of iterations used
-    return Iterations;
-   } // End of iterations
-
-  /// Setup: Pass pointer to the matrix and store in cast form
-  void complex_smoother_setup(Vector<CRDoubleMatrix*> helmholtz_matrix_pt)
-   {
-    // Assume the matrices have been passed in from the outside so we must
-    // not delete it. This is needed to avoid pre- and post-smoothers
-    // deleting the same matrix in the MG solver. If this was originally
-    // set to TRUE then this will be sorted out in the other functions
-    // from which this was called
-    Matrix_can_be_deleted=false;
-
-#ifdef PARANOID
-    // PARANOID check - Make sure the input has the right number of matrices
-    if (helmholtz_matrix_pt.size()!=2)
+    // Resize each Vector of DoubleVectors to store the real and imaginary
+    // part of a given vector
+    for (unsigned dof_type = 0; dof_type < n_row + 1; dof_type++)
     {
-     std::ostringstream error_message_stream;
-     error_message_stream << "Can only deal with two matrices. You have "
-			  << helmholtz_matrix_pt.size()
-			  << " matrices." << std::endl;
-
-     // Throw an error
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Resize the storage for the system matrices
-    Matrices_storage_pt.resize(2,0);
-
-    // Assign the real matrix pointer
-    Matrices_storage_pt[0]=helmholtz_matrix_pt[0];
-
-    // Assign the imaginary matrix pointers
-    Matrices_storage_pt[1]=helmholtz_matrix_pt[1];
-
-#ifdef PARANOID
-    // PARANOID check - Make sure that the constituent matrices have the same
-    // number of rows
-    if (Matrices_storage_pt[0]->nrow()!=Matrices_storage_pt[1]->nrow())
-    {
-     std::ostringstream error_message_stream;
-     error_message_stream << "Incompatible real and imag. matrix sizes.";
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-    // PARANOID check - Make sure that the constituent matrices have the same
-    // number of columns
-    if (Matrices_storage_pt[0]->ncol()!=Matrices_storage_pt[1]->ncol())
-    {
-     std::ostringstream error_message_stream;
-     error_message_stream << "Incompatible real and imag. matrix sizes.";
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   } // End of complex_smoother_setup
-
-  /// \short The smoother_solve function performs fixed number of iterations
-  /// on the system A*result=rhs. The number of (smoothing) iterations is
-  /// the same as the max. number of iterations in the underlying
-  /// IterativeLinearSolver class.
-  void complex_smoother_solve(const Vector<DoubleVector>& rhs,
-			      Vector<DoubleVector>& solution)
-   {
-    // If you use a smoother but you don't want to calculate the residual
-    Use_as_smoother=true;
-
-    // Use the helper function where the work is actually done
-    complex_solve_helper(rhs,solution);
-   } // End of complex_smoother_solve
-
- private:
-
-  /// Cleanup data that's stored for resolve (if any has been stored)
-  void clean_up_memory()
-   {
-    // If the real matrix pointer isn't null AND we're allowed to delete
-    // the matrix which is only when we create the matrix ourselves
-    if ((Matrices_storage_pt[0]!=0)&&(Matrix_can_be_deleted))
-    {
-     // Delete the matrix
-     delete Matrices_storage_pt[0];
-
-     // Assign the associated pointer the value NULL
-     Matrices_storage_pt[0]=0;
+      // Create two DoubleVector objects in each Vector
+      v[dof_type].resize(n_dof_types);
     }
 
-    // If the real matrix pointer isn't null AND we're allowed to delete
-    // the matrix which is only when we create the matrix ourselves
-    if ((Matrices_storage_pt[1]!=0)&&(Matrix_can_be_deleted))
+    // Initialise the upper hessenberg matrix. Since we are not using
+    // distributed vectors here, the algebra is best done using entries
+    // of the type std::complex<double>. NOTE: For implementation purposes
+    // the upper Hessenberg matrix indices are swapped so the matrix is
+    // effectively transposed
+    Vector<Vector<std::complex<double>>> hessenberg(n_row + 1);
+
+    // Build the zeroth basis vector
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
     {
-     // Delete the matrix
-     delete Matrices_storage_pt[1];
-
-     // Assign the associated pointer the value NULL
-     Matrices_storage_pt[1]=0;
-    }
-   } // End of clean_up_memory
-
-  /// This is where the actual work is done
-  void complex_solve_helper(const Vector<DoubleVector>& rhs,
-			    Vector<DoubleVector>& solution);
-
-  /// Helper function to update the result vector
-  void update(const unsigned& k,
-	      const Vector<Vector<std::complex<double> > >& hessenberg,
-	      const Vector<std::complex<double> >& s,
-	      const Vector<Vector<DoubleVector> >& v,
-	      Vector<DoubleVector>& x)
-   {
-    // Make a local copy of s
-    Vector<std::complex<double> > y(s);
-    
-    //-----------------------------------------------------------------
-    // The Hessenberg matrix should be an upper triangular matrix at
-    // this point (although from its storage it would appear to be a
-    // lower triangular matrix since the indexing has been reversed)
-    // so finding the minimiser of J(y)=min||s-R_m*y|| where R_m is
-    // the matrix R in the QR factorisation of the Hessenberg matrix.
-    // Therefore, to obtain y we simply need to use a backwards
-    // substitution. Note: The implementation here may appear to be
-    // somewhat confusing as the indexing in the Hessenberg matrix is
-    // reversed. This implementation of a backwards substitution does
-    // not run along the columns of the triangular matrix but rather
-    // up the rows.
-    //-----------------------------------------------------------------
-    // The outer loop is a loop over the columns of the Hessenberg matrix
-    // since the indexing is reversed
-    for (int i=int(k);i>=0;i--)
-    {     
-     // Divide the i-th entry of y by the i-th diagonal entry of H
-     y[i]/=hessenberg[i][i];
-     
-     // The inner loop is a loop over the rows of the Hessenberg matrix
-     for (int j=i-1;j>=0;j--)
-     {
-      // Update the j-th entry of y
-      y[j]-=hessenberg[i][j]*y[i];
-     }
-    } // for (int i=int(k);i>=0;i--)
-    
-    // Calculate the number of entries in x (simply use the real part as
-    // both the real and imaginary part should have the same length)
-    unsigned n_row=x[0].nrow();
-    
-    // We assume here that the vector x (which is passed in) is actually x_0
-    // so we simply need to update its entries to calculate the solution, x
-    // which is given by x=x_0+Vy. 
-    for (unsigned j=0;j<=k;j++)
-    {
-     // For fast access (real part)
-     const double* vj_r_pt=v[j][0].values_pt();
-     
-     // For fast access (imaginary part)
-     const double* vj_c_pt=v[j][1].values_pt();
-
-     // Loop over the entries in x and update them
-     for (unsigned i=0;i<n_row;i++)
-     {
-      // Update the real part of the i-th entry in x
-      x[0][i]+=(vj_r_pt[i]*y[j].real())-(vj_c_pt[i]*y[j].imag());
-
-      // Update the imaginary part of the i-th entry in x      
-      x[1][i]+=(vj_c_pt[i]*y[j].real())+(vj_r_pt[i]*y[j].imag());
-     }
-    } // for (unsigned j=0;j<=k;j++)
-   } // End of update
-
-  /// \short Helper function: Generate a plane rotation. This is done by
-  /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
-  /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
-  /// \f[
-  /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \cr
-  /// -\sin\theta & \cos\theta
-  /// \end{bmatrix}
-  /// \begin{bmatrix}
-  /// dx 
-  /// \\ dy
-  /// \end{bmatrix}
-  /// =
-  /// \begin{bmatrix}
-  /// r 
-  /// \\ 0
-  /// \end{bmatrix},
-  /// \f]
-  /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
-  /// are given by:
-  /// The values of dx and dy are given by:
-  /// \f[
-  /// \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}},
-  /// \f]
-  /// and
-  /// \f[
-  /// \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}.
-  /// \f]
-  /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
-  /// We also check to see that sn is always a real (nonnegative) number. See
-  /// pp.193-194 for an explanation.
-  void generate_plane_rotation(std::complex<double>& dx,
-			       std::complex<double>& dy,
-			       std::complex<double>& cs,
-			       std::complex<double>& sn)
-   {
-    // If dy=0 then we do not need to apply a rotation
-    if (dy==0.0)
-    {
-     // Using theta=0 gives cos(theta)=1
-     cs=1.0;
-
-     // Using theta=0 gives sin(theta)=0
-     sn=0.0;
-    }
-    // If dx or dy is large using the original form of calculting cs and sn is
-    // naive since this may overflow or underflow so instead we calculate
-    // r=sqrt(pow(|dx|,2)+pow(|dy|,2)) using r=|dy|sqrt(1+pow(|dx|/|dy|,2)) if
-    // |dy|>|dx| [see <A HREF=https://en.wikipedia.org/wiki/Hypot">Hypot</A>.].
-    else if(std::abs(dy)>std::abs(dx))
-    {
-     // Since |dy|>|dx| calculate the ratio |dx|/|dy|
-     std::complex<double> temp=dx/dy;
-     
-     // Calculate the value of sin(theta) using:
-     //          sin(theta)=dy/sqrt(pow(|dx|,2)+pow(|dy|,2))
-     //                    =(dy/|dy|)/sqrt(1+pow(|dx|/|dy|,2)).
-     sn=(dy/std::abs(dy))/sqrt(1.0+pow(std::abs(temp),2.0));
-     
-     // Calculate the value of cos(theta) using:
-     //            cos(theta)=dx/sqrt(pow(|dy|,2)+pow(|dx|,2))
-     //                      =(dx/|dy|)/sqrt(1+pow(|dx|/|dy|,2))
-     //                      =(dx/dy)*sin(theta).
-     cs=temp*sn;
-    }
-    // Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow
-    // calculate the values of cs and sn using the method above
-    else
-    {
-     // Since |dx|>=|dy| calculate the ratio dy/dx
-     std::complex<double> temp=dy/dx;
-
-     // Calculate the value of cos(theta) using:
-     //          cos(theta)=dx/sqrt(pow(|dx|,2)+pow(|dy|,2))
-     //                    =(dx/|dx|)/sqrt(1+pow(|dy|/|dx|,2)).
-     cs=(dx/std::abs(dx))/sqrt(1.0+pow(std::abs(temp),2.0));
-     
-     // Calculate the value of sin(theta) using:
-     //            sin(theta)=dy/sqrt(pow(|dx|,2)+pow(|dy|,2))
-     //                      =(dy/|dx|)/sqrt(1+pow(|dy|/|dx|,2))
-     //                      =(dy/dx)*cos(theta).
-     sn=temp*cs;
+      // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
+      // to the real and imaginary part of the zeroth vector, respectively
+      v[0][dof_type].build(this->distribution_pt(), 0.0);
     }
 
-    // Set the tolerance for sin(theta)
-    double tolerance=1.0e-15;
-    
-    // Make sure sn is real and nonnegative (it should be!)
-    if ((std::fabs(sn.imag())>tolerance)||(sn.real()<0))
+    // Loop over the real and imaginary parts of v
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
     {
-     // Create an output stream
-     std::ostringstream error_message_stream;
+      // For fast access
+      double* v0_pt = v[0][dof_type].values_pt();
 
-     // Create an error message
-     error_message_stream << "The value of sin(theta) is not real "
-			  << "and/or nonnegative. Value is: "
-			  << sn << std::endl;
+      // For fast access
+      const double* r_pt = r[dof_type].values_pt();
 
-     // Throw an error
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }      
-   } // End of generate_plane_rotation
+      // Set the zeroth basis vector v[0] to r/beta
+      for (unsigned i = 0; i < n_row; i++)
+      {
+        // Assign the i-th entry of the zeroth basis vector
+        v0_pt[i] = r_pt[i] / beta;
+      }
+    } // for (unsigned k=0;k<n_dof_types;k++)
 
-  /// \short Helper function: Apply plane rotation. This is done using the
-  /// update:
-  /// \f[
-  /// \begin{bmatrix}
-  /// dx 
-  /// \\ dy
-  /// \end{bmatrix}
-  /// \leftarrow
-  /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta}
-  /// \\ -\sin\theta & \cos\theta
-  /// \end{bmatrix}
-  /// \begin{bmatrix}
-  /// dx 
-  /// \\ dy
-  /// \end{bmatrix}.
-  /// \f]
-  /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
-  void apply_plane_rotation(std::complex<double>& dx,
-			    std::complex<double>& dy,
-			    std::complex<double>& cs,
-			    std::complex<double>& sn)
-   {
-    // Calculate the value of dx but don't update it yet
-    std::complex<double> temp=std::conj(cs)*dx+std::conj(sn)*dy;
+    // Set the first entry in the minimisation problem RHS vector (is meant
+    // to the vector beta*e_1 initially, where e_1 is the unit vector with
+    // one in its first entry)
+    s[0] = beta;
 
-    // Set the value of dy
-    dy=-sn*dx+cs*dy;
-
-    // Set the value of dx using the correct values of dx and dy
-    dx=temp;
-   } // End of apply_plane_rotation
-
-  /// Number of iterations taken
-  unsigned Iterations;
-
-  /// Vector of pointers to the real and imaginary part of the system matrix
-  Vector<CRDoubleMatrix*> Matrices_storage_pt;
-
-  /// \short Boolean flag to indicate if the solve is done in re-solve mode,
-  /// bypassing setup of matrix and preconditioner
-  bool Resolving;
-
-  /// \short Boolean flag to indicate if the real and imaginary system
-  /// matrices can be deleted
-  bool Matrix_can_be_deleted;
- };
-
- //======================================================================
- /// \short This is where the actual work is done
- //======================================================================
- template<typename MATRIX>
- void ComplexGMRES<MATRIX>::
- complex_solve_helper(const Vector<DoubleVector>& rhs,
-		      Vector<DoubleVector>& solution)
- {
-  // Set the number of dof types (real and imaginary for this solver)
-  unsigned n_dof_types=2;
-  
-  // Get the number of dofs (note, the total number of dofs in the problem
-  // is 2*n_row but if the constituent vectors and matrices were stored in
-  // complex objects there would only be (n_row) rows so we use that)
-  unsigned n_row=Matrices_storage_pt[0]->nrow();
-
-  // Make sure Max_iter isn't greater than n_dof. The user cannot use this
-  // many iterations when using Krylov subspace methods
-  if (Max_iter>n_row)
-  {
-   // Create an output string stream
-   std::ostringstream error_message_stream;
-
-   // Create the error message
-   error_message_stream << "The maximum number of iterations cannot exceed "
-			<< "the number of rows in the problem."
-			<< "\nMaximum number of iterations: " << Max_iter
-			<< "\nNumber of rows: " << n_row
-			<< std::endl;
-
-   // Throw the error message
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-  
-  // Loop over the real and imaginary parts
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-#ifdef PARANOID
-   // PARANOID check that if the matrix is distributable then it should not be
-   // then it should not be distributed
-   if (dynamic_cast<DistributableLinearAlgebraObject*>
-       (Matrices_storage_pt[dof_type])!=0)
-   {
-    if (dynamic_cast<DistributableLinearAlgebraObject*>
-	(Matrices_storage_pt[dof_type])->distributed())
+    // Compute the next step of the iterative scheme
+    for (unsigned j = 0; j < Max_iter; j++)
     {
-     std::ostringstream error_message_stream;
-     error_message_stream << "The matrix must not be distributed.";
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-   }
-   // PARANOID check that this rhs distribution is setup
-   if (!rhs[dof_type].built())
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream << "The rhs vector distribution must be setup.";
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-   // PARANOID check that the rhs has the right number of global rows
-   if(rhs[dof_type].nrow()!=n_row)
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream << "RHS does not have the same dimension as the"
-			 << " linear system";
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-   // PARANOID check that the rhs is not distributed
-   if (rhs[dof_type].distribution_pt()->distributed())
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream << "The rhs vector must not be distributed.";
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-   // PARANOID check that if the result is setup it matches the distribution
-   // of the rhs
-   if (solution[dof_type].built())
-   {
-    if (!(*rhs[dof_type].distribution_pt()==
-	  *solution[dof_type].distribution_pt()))
-    {
-     std::ostringstream error_message_stream;
-     error_message_stream << "If the result distribution is setup then it "
-			  << "must be the same as the rhs distribution";
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-   } // if (solution[dof_type].built())
-#endif
-   // Set up the solution distribution if it's not already distributed
-   if (!solution[dof_type].built())
-   {
-    // Build the distribution
-    solution[dof_type].build(this->distribution_pt(),0.0);
-   }
-   // Otherwise initialise all entries to zero
-   else
-   {
-    // Initialise the entries in the k-th vector in solution to zero
-    solution[dof_type].initialise(0.0);
-   }
-  } // for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
+      // Resize the next column of the upper hessenberg matrix
+      hessenberg[j].resize(j + 2, std::complex<double>(0.0, 0.0));
 
-  // Start the solver timer
-  double t_start=TimingHelpers::timer();
+      // Calculate w=J*v_j. Note, we cannot use inbuilt complex matrix algebra
+      // here as we're using distributed vectors
+      complex_matrix_multiplication(Matrices_storage_pt, v[j], w);
 
-  // Storage for the relative residual
-  double resid;
-  
-  // Initialise vectors (since these are not distributed vectors we template
-  // one vector by the type std::complex<double> instead of using two vectors,
-  // each templated by the type double
+      // For fast access
+      double* w_r_pt = w[0].values_pt();
 
-  // Vector, s, used in the minimisation problem: J(y)=min||s-R_m*y||
-  // [see Saad Y."Iterative methods for sparse linear systems", p.176.]
-  Vector<std::complex<double> > s(n_row+1,std::complex<double>(0.0,0.0));
+      // For fast access
+      double* w_c_pt = w[1].values_pt();
 
-  // Vector to store the value of cos(theta) when using the Givens rotation
-  Vector<std::complex<double> > cs(n_row+1,std::complex<double>(0.0,0.0));
+      // Loop over all of the entries on and above the principal subdiagonal of
+      // the Hessenberg matrix in the j-th column (remembering that
+      // the indices of the upper Hessenberg matrix are swapped for the purpose
+      // of implementation)
+      for (unsigned i = 0; i < j + 1; i++)
+      {
+        // For fast access
+        const double* vi_r_pt = v[i][0].values_pt();
 
-  // Vector to store the value of sin(theta) when using the Givens rotation
-  Vector<std::complex<double> > sn(n_row+1,std::complex<double>(0.0,0.0));
+        // For fast access
+        const double* vi_c_pt = v[i][1].values_pt();
 
-  // Create a vector of DoubleVectors (this is a distributed vector so we have
-  // to create two separate DoubleVector objects to cope with the arithmetic)
-  Vector<DoubleVector> w(n_dof_types);
+        // Loop over the entries of v and w
+        for (unsigned k = 0; k < n_row; k++)
+        {
+          // Store the appropriate entry in v as a complex value
+          std::complex<double> complex_v(vi_r_pt[k], vi_c_pt[k]);
 
-  // Build the distribution of both vectors
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the distribution of the k-th constituent vector
-   w[dof_type].build(this->distribution_pt(),0.0);
-  }
+          // Store the appropriate entry in w as a complex value
+          std::complex<double> complex_w(w_r_pt[k], w_c_pt[k]);
 
-  // Create a vector of DoubleVectors to store the RHS of b-Jx=Mr. We assume
-  // both x=0 and that a preconditioner is not applied by which we deduce b=r
-  Vector<DoubleVector> r(n_dof_types);
+          // Update the value of H(i,j) noting we're computing a complex
+          // inner product here
+          hessenberg[j][i] += std::conj(complex_v) * complex_w;
+        }
 
-  // Build the distribution of both vectors
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the distribution of the k-th constituent vector
-   r[dof_type].build(this->distribution_pt(),0.0);
-  }
+        // Orthonormalise w against all previous orthogonal vectors, v_i by
+        // looping over its entries and updating them
+        for (unsigned k = 0; k < n_row; k++)
+        {
+          // Update the real part of the k-th entry of w
+          w_r_pt[k] -= (hessenberg[j][i].real() * vi_r_pt[k] -
+                        hessenberg[j][i].imag() * vi_c_pt[k]);
 
-  // Store the value of b (the RHS vector) in r
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the distribution of the k-th constituent vector
-   r[dof_type]=rhs[dof_type];
-  }
+          // Update the imaginary part of the k-th entry of w
+          w_c_pt[k] -= (hessenberg[j][i].real() * vi_c_pt[k] +
+                        hessenberg[j][i].imag() * vi_r_pt[k]);
+        }
+      } // for (unsigned i=0;i<j+1;i++)
 
-  // Calculate the norm of the real part of r
-  double norm_r=r[0].norm();
+      // Calculate the norm of the real part of w
+      norm_r = w[0].norm();
 
-  // Calculate the norm of the imaginary part of r
-  double norm_c=r[1].norm();
+      // Calculate the norm of the imaginary part of w
+      norm_c = w[1].norm();
 
-  // Compute norm(r)
-  double normb=sqrt(pow(norm_r,2.0)+pow(norm_c,2.0));
-  
-  // Set the value of beta (the initial residual)
-  double beta=normb;
+      // Calculate the norm of the vector w using norm_r and norm_c and assign
+      // its value to the appropriate entry in the Hessenberg matrix
+      hessenberg[j][j + 1] = sqrt(pow(norm_r, 2.0) + pow(norm_c, 2.0));
 
-  // Compute the initial relative residual. If the entries of the RHS vector
-  // are all zero then set normb equal to one. This is because we divide the
-  // value of the norm at later stages by normb and dividing by zero is not
-  // definied
-  if (normb==0.0)
-  {
-   // Set the value of normb
-   normb=1.0;
-  }
+      // Build the real part of the next orthogonal vector
+      v[j + 1][0].build(this->distribution_pt(), 0.0);
 
-  // Calculate the ratio between the initial norm and the current norm.
-  // Since we haven't completed an iteration yet this will simply be one
-  // unless normb was zero, in which case resid will have value zero
-  resid=beta/normb;
+      // Build the imaginary part of the next orthogonal vector
+      v[j + 1][1].build(this->distribution_pt(), 0.0);
 
-  // If required, will document convergence history to screen or file (if
-  // stream open)
-  if (Doc_convergence_history)
-  {
-   // If an output file which is open isn't provided then output to screen
-   if (!Output_file_stream.is_open())
-   {
-    // Output the residual value to the screen
-    oomph_info << 0 << " " << resid << std::endl;
-   }
-   // Otherwise, output to file
-   else
-   {
-    // Output the residual value to file
-    Output_file_stream << 0 << " " << resid <<std::endl;
-   }
-  } // if (Doc_convergence_history)
+      // Check if the value of hessenberg[j][j+1] is zero. If it
+      // isn't then we update the next entries in v
+      if (hessenberg[j][j + 1] != 0.0)
+      {
+        // For fast access
+        double* v_r_pt = v[j + 1][0].values_pt();
 
-  // If the GMRES algorithm converges immediately
-  if (resid<=Tolerance)
-  {
-   // If time documentation is enabled
-   if(Doc_time)
-   {
-    // Notify the user
-    oomph_info << "GMRES converged immediately. Normalised residual norm: "
-	       << resid << std::endl;
-   }
+        // For fast access
+        double* v_c_pt = v[j + 1][1].values_pt();
 
-   // Finish running the solver
-   return;
-  } // if (resid<=Tolerance)
+        // For fast access
+        const double* w_r_pt = w[0].values_pt();
 
-  // Initialise a vector of orthogonal basis vectors
-  Vector<Vector<DoubleVector> > v;
+        // For fast access
+        const double* w_c_pt = w[1].values_pt();
 
-  // Resize the number of vectors needed
-  v.resize(n_row+1);
+        // Notice, the value of H(j,j+1), as calculated above, is clearly a real
+        // number. As such, calculating the division
+        //                      v_{j+1}=w_{j}/h_{j+1,j},
+        // here is simple, i.e. we don't need to worry about cross terms in the
+        // algebra. To avoid computing h_{j+1,j} several times we precompute it
+        double h_subdiag_val = hessenberg[j][j + 1].real();
 
-  // Resize each Vector of DoubleVectors to store the real and imaginary
-  // part of a given vector
-  for (unsigned dof_type=0;dof_type<n_row+1;dof_type++)
-  {
-   // Create two DoubleVector objects in each Vector
-   v[dof_type].resize(n_dof_types);
-  }
+        // Loop over the entries of the new orthogonal vector and set its values
+        for (unsigned k = 0; k < n_row; k++)
+        {
+          // The i-th entry of the real component is given by
+          v_r_pt[k] = w_r_pt[k] / h_subdiag_val;
 
-  // Initialise the upper hessenberg matrix. Since we are not using
-  // distributed vectors here, the algebra is best done using entries
-  // of the type std::complex<double>. NOTE: For implementation purposes
-  // the upper Hessenberg matrix indices are swapped so the matrix is
-  // effectively transposed
-  Vector<Vector<std::complex<double> > > hessenberg(n_row+1);
+          // Similarly, the i-th entry of the imaginary component is given by
+          v_c_pt[k] = w_c_pt[k] / h_subdiag_val;
+        }
+      }
+      // Otherwise, we have to jump to the next part of the algorithm; if
+      // the value of hessenberg[j][j+1] is zero then the norm of the latest
+      // orthogonal vector is zero. This is only possible if the entries
+      // in w are all zero. As a result, the Krylov space of A and r_0 has
+      // been spanned by the previously calculated orthogonal vectors
+      else
+      {
+        // Book says "Set m=j and jump to step 11" (p.172)...
+        // Do something here!
+        oomph_info << "Subdiagonal Hessenberg entry is zero."
+                   << "Do something here..." << std::endl;
+      } // if (hessenberg[j][j+1]!=0.0)
 
-  // Build the zeroth basis vector
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
-   // to the real and imaginary part of the zeroth vector, respectively
-   v[0][dof_type].build(this->distribution_pt(),0.0);
-  }
+      // Loop over the entries in the Hessenberg matrix and calculate the
+      // entries of the Givens rotation matrices
+      for (unsigned k = 0; k < j; k++)
+      {
+        // Apply the plane rotation to all of the previous entries in the
+        // (j)-th column (remembering the indexing is reversed)
+        apply_plane_rotation(
+          hessenberg[j][k], hessenberg[j][k + 1], cs[k], sn[k]);
+      }
 
-  // Loop over the real and imaginary parts of v
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {   
-   // For fast access
-   double* v0_pt=v[0][dof_type].values_pt();
-   
-   // For fast access
-   const double* r_pt=r[dof_type].values_pt();     
-     
-   // Set the zeroth basis vector v[0] to r/beta
-   for (unsigned i=0;i<n_row;i++)
-   {
-    // Assign the i-th entry of the zeroth basis vector
-    v0_pt[i]=r_pt[i]/beta;
-   }
-  } // for (unsigned k=0;k<n_dof_types;k++)
-    
-  // Set the first entry in the minimisation problem RHS vector (is meant
-  // to the vector beta*e_1 initially, where e_1 is the unit vector with
-  // one in its first entry)
-  s[0]=beta;
+      // Now calculate the entries of the latest Givens rotation matrix
+      generate_plane_rotation(
+        hessenberg[j][j], hessenberg[j][j + 1], cs[j], sn[j]);
 
-  // Compute the next step of the iterative scheme
-  for (unsigned j=0;j<Max_iter;j++)
-  {
-   // Resize the next column of the upper hessenberg matrix
-   hessenberg[j].resize(j+2,std::complex<double>(0.0,0.0));
+      // Apply the plane rotation using the newly calculated entries
+      apply_plane_rotation(
+        hessenberg[j][j], hessenberg[j][j + 1], cs[j], sn[j]);
 
-   // Calculate w=J*v_j. Note, we cannot use inbuilt complex matrix algebra
-   // here as we're using distributed vectors
-   complex_matrix_multiplication(Matrices_storage_pt,v[j],w);
-      
-   // For fast access
-   double* w_r_pt=w[0].values_pt();
-   
-   // For fast access
-   double* w_c_pt=w[1].values_pt();
-   
-   // Loop over all of the entries on and above the principal subdiagonal of
-   // the Hessenberg matrix in the j-th column (remembering that
-   // the indices of the upper Hessenberg matrix are swapped for the purpose
-   // of implementation)
-   for (unsigned i=0;i<j+1;i++)
-   {
-    // For fast access
-    const double* vi_r_pt=v[i][0].values_pt();
-   
-    // For fast access
-    const double* vi_c_pt=v[i][1].values_pt();
-    
-    // Loop over the entries of v and w
-    for (unsigned k=0;k<n_row;k++)
-    {
-     // Store the appropriate entry in v as a complex value
-     std::complex<double> complex_v(vi_r_pt[k],vi_c_pt[k]);
-     
-     // Store the appropriate entry in w as a complex value
-     std::complex<double> complex_w(w_r_pt[k],w_c_pt[k]);
+      // Apply a plane rotation to the corresponding entry in the vector
+      // s used in the minimisation problem, J(y)=min||s-R_m*y||
+      apply_plane_rotation(s[j], s[j + 1], cs[j], sn[j]);
 
-     // Update the value of H(i,j) noting we're computing a complex
-     // inner product here
-     hessenberg[j][i]+=std::conj(complex_v)*complex_w;
-    }
-   
-    // Orthonormalise w against all previous orthogonal vectors, v_i by
-    // looping over its entries and updating them
-    for (unsigned k=0;k<n_row;k++)
-    {
-     // Update the real part of the k-th entry of w
-     w_r_pt[k]-=(hessenberg[j][i].real()*vi_r_pt[k]-
-		 hessenberg[j][i].imag()*vi_c_pt[k]);
+      // Compute current residual using equation (6.42) in Saad Y, "Iterative
+      // methods for sparse linear systems", p.177.]. Note, since s has complex
+      // entries we have to use std::abs instead of std::fabs
+      beta = std::abs(s[j + 1]);
 
-     // Update the imaginary part of the k-th entry of w
-     w_c_pt[k]-=(hessenberg[j][i].real()*vi_c_pt[k]+
-		 hessenberg[j][i].imag()*vi_r_pt[k]);
-    }
-   } // for (unsigned i=0;i<j+1;i++)
+      // Compute the relative residual
+      resid = beta / normb;
 
-   // Calculate the norm of the real part of w
-   norm_r=w[0].norm();
+      // If required will document convergence history to screen or file (if
+      // stream open)
+      if (Doc_convergence_history)
+      {
+        // If an output file which is open isn't provided then output to screen
+        if (!Output_file_stream.is_open())
+        {
+          // Output the residual value to the screen
+          oomph_info << j + 1 << " " << resid << std::endl;
+        }
+        // Otherwise, output to file
+        else
+        {
+          // Output the residual value to file
+          Output_file_stream << j + 1 << " " << resid << std::endl;
+        }
+      } // if (Doc_convergence_history)
 
-   // Calculate the norm of the imaginary part of w
-   norm_c=w[1].norm();
+      // If the required tolerance has been met
+      if (resid < Tolerance)
+      {
+        // Store the number of iterations taken
+        Iterations = j + 1;
 
-   // Calculate the norm of the vector w using norm_r and norm_c and assign
-   // its value to the appropriate entry in the Hessenberg matrix
-   hessenberg[j][j+1]=sqrt(pow(norm_r,2.0)+pow(norm_c,2.0));
+        // Update the result vector using the result, x=x_0+V_m*y (where V_m
+        // is given by v here)
+        update(j, hessenberg, s, v, solution);
 
-   // Build the real part of the next orthogonal vector
-   v[j+1][0].build(this->distribution_pt(),0.0);
+        // If time documentation was enabled
+        if (Doc_time)
+        {
+          // Output the current normalised residual norm
+          oomph_info << "\nGMRES converged (1). Normalised residual norm: "
+                     << resid << std::endl;
 
-   // Build the imaginary part of the next orthogonal vector
-   v[j+1][1].build(this->distribution_pt(),0.0);
+          // Output the number of iterations it took for convergence
+          oomph_info << "Number of iterations to convergence: " << j + 1 << "\n"
+                     << std::endl;
+        }
 
-   // Check if the value of hessenberg[j][j+1] is zero. If it
-   // isn't then we update the next entries in v
-   if (hessenberg[j][j+1]!=0.0)
-   {    
-    // For fast access
-    double* v_r_pt=v[j+1][0].values_pt();
-   
-    // For fast access
-    double* v_c_pt=v[j+1][1].values_pt();
-    
-    // For fast access
-    const double* w_r_pt=w[0].values_pt();
-   
-    // For fast access
-    const double* w_c_pt=w[1].values_pt();
+        // Stop the timer
+        double t_end = TimingHelpers::timer();
 
-    // Notice, the value of H(j,j+1), as calculated above, is clearly a real
-    // number. As such, calculating the division
-    //                      v_{j+1}=w_{j}/h_{j+1,j},
-    // here is simple, i.e. we don't need to worry about cross terms in the
-    // algebra. To avoid computing h_{j+1,j} several times we precompute it
-    double h_subdiag_val=hessenberg[j][j+1].real();
-    
-    // Loop over the entries of the new orthogonal vector and set its values
-    for(unsigned k=0;k<n_row;k++)
-    {
-     // The i-th entry of the real component is given by
-     v_r_pt[k]=w_r_pt[k]/h_subdiag_val;
+        // Calculate the time taken to calculate the solution
+        Solution_time = t_end - t_start;
 
-     // Similarly, the i-th entry of the imaginary component is given by
-     v_c_pt[k]=w_c_pt[k]/h_subdiag_val;
-    }
-   }
-   // Otherwise, we have to jump to the next part of the algorithm; if
-   // the value of hessenberg[j][j+1] is zero then the norm of the latest
-   // orthogonal vector is zero. This is only possible if the entries
-   // in w are all zero. As a result, the Krylov space of A and r_0 has
-   // been spanned by the previously calculated orthogonal vectors
-   else
-   {
-    // Book says "Set m=j and jump to step 11" (p.172)...
-    // Do something here!
-    oomph_info << "Subdiagonal Hessenberg entry is zero."
-	       << "Do something here..." << std::endl;
-   } // if (hessenberg[j][j+1]!=0.0)
+        // If time documentation was enabled
+        if (Doc_time)
+        {
+          // Output the time taken to solve the problem using GMRES
+          oomph_info << "Time for solve with GMRES [sec]: " << Solution_time
+                     << std::endl;
+        }
 
-   // Loop over the entries in the Hessenberg matrix and calculate the
-   // entries of the Givens rotation matrices
-   for (unsigned k=0;k<j;k++)
-   {
-    // Apply the plane rotation to all of the previous entries in the
-    // (j)-th column (remembering the indexing is reversed)
-    apply_plane_rotation(hessenberg[j][k],hessenberg[j][k+1],cs[k],sn[k]);
-   }
+        // As we've met the tolerance for the solver and everything that should
+        // be documented, has been, finish using the solver
+        return;
+      } // if (resid<Tolerance)
+    } // for (unsigned j=0;j<Max_iter;j++)
 
-   // Now calculate the entries of the latest Givens rotation matrix
-   generate_plane_rotation(hessenberg[j][j],hessenberg[j][j+1],cs[j],sn[j]);
-
-   // Apply the plane rotation using the newly calculated entries
-   apply_plane_rotation(hessenberg[j][j],hessenberg[j][j+1],cs[j],sn[j]);
-
-   // Apply a plane rotation to the corresponding entry in the vector
-   // s used in the minimisation problem, J(y)=min||s-R_m*y||
-   apply_plane_rotation(s[j],s[j+1],cs[j],sn[j]);
-
-   // Compute current residual using equation (6.42) in Saad Y, "Iterative
-   // methods for sparse linear systems", p.177.]. Note, since s has complex
-   // entries we have to use std::abs instead of std::fabs
-   beta=std::abs(s[j+1]);
-
-   // Compute the relative residual
-   resid=beta/normb;
-
-   // If required will document convergence history to screen or file (if
-   // stream open)
-   if (Doc_convergence_history)
-   {
-    // If an output file which is open isn't provided then output to screen
-    if (!Output_file_stream.is_open())
-    {
-     // Output the residual value to the screen
-     oomph_info << j+1 << " " << resid << std::endl;
-    }
-    // Otherwise, output to file
-    else
-    {
-     // Output the residual value to file
-     Output_file_stream << j+1 << " " << resid <<std::endl;
-    }
-   } // if (Doc_convergence_history)
-
-   // If the required tolerance has been met
-   if (resid<Tolerance)
-   {
     // Store the number of iterations taken
-    Iterations=j+1;
+    Iterations = Max_iter;
 
-    // Update the result vector using the result, x=x_0+V_m*y (where V_m
-    // is given by v here)
-    update(j,hessenberg,s,v,solution);
-
-    // If time documentation was enabled
-    if(Doc_time)
+    // Only update if we actually did something
+    if (Max_iter > 0)
     {
-     // Output the current normalised residual norm
-     oomph_info << "\nGMRES converged (1). Normalised residual norm: "
-		<< resid << std::endl;
-
-     // Output the number of iterations it took for convergence
-     oomph_info << "Number of iterations to convergence: "
-		<< j+1 << "\n" << std::endl;
+      // Update the result vector using the result, x=x_0+V_m*y (where V_m
+      // is given by v here)
+      update(Max_iter - 1, hessenberg, s, v, solution);
     }
 
     // Stop the timer
-    double t_end=TimingHelpers::timer();
+    double t_end = TimingHelpers::timer();
 
     // Calculate the time taken to calculate the solution
-    Solution_time=t_end-t_start;
+    Solution_time = t_end - t_start;
 
     // If time documentation was enabled
-    if(Doc_time)
+    if (Doc_time)
     {
-     // Output the time taken to solve the problem using GMRES
-     oomph_info << "Time for solve with GMRES [sec]: "
-		<< Solution_time << std::endl;
+      // Output the time taken to solve the problem using GMRES
+      oomph_info << "Time for solve with GMRES [sec]: " << Solution_time
+                 << std::endl;
     }
 
-    // As we've met the tolerance for the solver and everything that should
-    // be documented, has been, finish using the solver
+    // Finish using the solver
     return;
-   } // if (resid<Tolerance)
-  } // for (unsigned j=0;j<Max_iter;j++)
-  
-  // Store the number of iterations taken
-  Iterations=Max_iter;
+  } // End of complex_solve_helper
 
-  // Only update if we actually did something
-  if (Max_iter>0)
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+
+  //======================================================================
+  /// \short The GMRES method for the Helmholtz solver.
+  //======================================================================
+  template<typename MATRIX>
+  class HelmholtzGMRESMG : public IterativeLinearSolver,
+                           public BlockPreconditioner<MATRIX>
   {
-   // Update the result vector using the result, x=x_0+V_m*y (where V_m
-   // is given by v here)
-   update(Max_iter-1,hessenberg,s,v,solution);
-  }
-  
-  // Stop the timer
-  double t_end=TimingHelpers::timer();
+  public:
+    /// Constructor
+    HelmholtzGMRESMG()
+      : BlockPreconditioner<CRDoubleMatrix>(),
+        Iterations(0),
+        Resolving(false),
+        Matrix_can_be_deleted(true)
+    {
+      Preconditioner_LHS = true;
+    }
 
-  // Calculate the time taken to calculate the solution
-  Solution_time=t_end-t_start;
+    /// Destructor (cleanup storage)
+    virtual ~HelmholtzGMRESMG()
+    {
+      clean_up_memory();
+    }
 
-  // If time documentation was enabled
-  if(Doc_time)
-  {
-   // Output the time taken to solve the problem using GMRES
-   oomph_info << "Time for solve with GMRES [sec]: "
-	      << Solution_time << std::endl;
-  }
+    /// Broken copy constructor
+    HelmholtzGMRESMG(const HelmholtzGMRESMG&)
+    {
+      BrokenCopy::broken_copy("HelmholtzGMRESMG");
+    }
 
-  // Finish using the solver
-  return;
- } // End of complex_solve_helper
+    /// Broken assignment operator
+    void operator=(const HelmholtzGMRESMG&)
+    {
+      BrokenCopy::broken_assign("HelmholtzGMRESMG");
+    }
 
- 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+    /// Overload disable resolve so that it cleans up memory too
+    void disable_resolve()
+    {
+      LinearSolver::disable_resolve();
+      clean_up_memory();
+    }
 
- 
-//======================================================================
-/// \short The GMRES method for the Helmholtz solver.
-//======================================================================
- template<typename MATRIX>
- class HelmholtzGMRESMG : public IterativeLinearSolver,
-			  public BlockPreconditioner<MATRIX>
- {
- public:
+    /// \short Implementation of the pure virtual base class function. The
+    /// function has been broken because this is meant to be used as a linear
+    /// solver
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+    {
+      // Open an output stream
+      std::ostringstream error_message_stream;
 
-  /// Constructor
-  HelmholtzGMRESMG() :
-   BlockPreconditioner<CRDoubleMatrix>(),
-   Iterations(0),
-   Resolving(false), 
-   Matrix_can_be_deleted(true)
-   {
-    Preconditioner_LHS=true;
-   }
-  
-  /// Destructor (cleanup storage)
-  virtual ~HelmholtzGMRESMG()
-   {
-    clean_up_memory();
-   }
- 
-  /// Broken copy constructor
-  HelmholtzGMRESMG(const HelmholtzGMRESMG&) 
-   { 
-    BrokenCopy::broken_copy("HelmholtzGMRESMG");
-   } 
- 
-  /// Broken assignment operator
-  void operator=(const HelmholtzGMRESMG&) 
-   {
-    BrokenCopy::broken_assign("HelmholtzGMRESMG");
-   }
- 
-  /// Overload disable resolve so that it cleans up memory too
-  void disable_resolve()
-   {
-    LinearSolver::disable_resolve();
-    clean_up_memory();
-   }
+      // Create an error message
+      error_message_stream << "Preconditioner_solve(...) is broken. "
+                           << "HelmholtzGMRESMG is only meant to be used as "
+                           << "a linear solver.\n";
 
-  /// \short Implementation of the pure virtual base class function. The
-  /// function has been broken because this is meant to be used as a linear
-  /// solver
-  void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
-   {
-    // Open an output stream
-    std::ostringstream error_message_stream;
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
 
-    // Create an error message
-    error_message_stream << "Preconditioner_solve(...) is broken. "
-			 << "HelmholtzGMRESMG is only meant to be used as "
-			 << "a linear solver.\n";
+    /// \short Implementation of the pure virtual base class function. This
+    /// accompanies the preconditioner_solve function and so is also broken
+    void setup()
+    {
+      // Open an output stream
+      std::ostringstream error_message_stream;
 
-    // Throw the error message
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
+      // Create an error message
+      error_message_stream << "This function is broken. HelmholtzGMRESMG is "
+                           << "only meant to be used as a linear solver.\n";
 
-  /// \short Implementation of the pure virtual base class function. This
-  /// accompanies the preconditioner_solve function and so is also broken
-  void setup()
-   {
-    // Open an output stream
-    std::ostringstream error_message_stream;
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
 
-    // Create an error message
-    error_message_stream << "This function is broken. HelmholtzGMRESMG is "
-			 << "only meant to be used as a linear solver.\n";
-
-    // Throw the error message
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);    
-   }
-  
-  /// \short Solver: Takes pointer to problem and returns the results vector
-  /// which contains the solution of the linear system defined by
-  /// the problem's fully assembled Jacobian and residual vector.
-  void solve(Problem* const &problem_pt,DoubleVector &result)
-   { 
+    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// which contains the solution of the linear system defined by
+    /// the problem's fully assembled Jacobian and residual vector.
+    void solve(Problem* const& problem_pt, DoubleVector& result)
+    {
 #ifdef OOMPH_HAS_MPI
-  // Make sure that this is running in serial. Can't guarantee it'll
-  // work when the problem is distributed over several processors
-  if (MPI_Helpers::communicator_pt()->nproc()>1)
-  {
-   // Throw a warning
-   OomphLibWarning("Can't guarantee the MG solver will work in parallel!",
-		   OOMPH_CURRENT_FUNCTION,
-		   OOMPH_EXCEPTION_LOCATION);
-  }
+      // Make sure that this is running in serial. Can't guarantee it'll
+      // work when the problem is distributed over several processors
+      if (MPI_Helpers::communicator_pt()->nproc() > 1)
+      {
+        // Throw a warning
+        OomphLibWarning("Can't guarantee the MG solver will work in parallel!",
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
-  
-    // Find # of degrees of freedom (variables)
-    unsigned n_dof=problem_pt->ndof();
- 
-    // Initialise timer
-    double t_start=TimingHelpers::timer();
 
-    // We're not re-solving
-    Resolving=false;
+      // Find # of degrees of freedom (variables)
+      unsigned n_dof = problem_pt->ndof();
 
-    // Get rid of any previously stored data
-    clean_up_memory();
-    
-    // Grab the communicator from the MGProblem object and assign it
-    this->set_comm_pt(problem_pt->communicator_pt());
-    
-    // Setup the distribution
-    LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_dof,false);
+      // Initialise timer
+      double t_start = TimingHelpers::timer();
 
-    // Build the internal distribution in this way because both the
-    // IterativeLinearSolver and BlockPreconditioner class have base-
-    // class subobjects of type oomph::DistributableLinearAlgebraObject
-    IterativeLinearSolver::build_distribution(dist);
+      // We're not re-solving
+      Resolving = false;
 
-    // Get Jacobian matrix in format specified by template parameter
-    // and nonlinear residual vector
-    MATRIX* matrix_pt=new MATRIX;
-    DoubleVector f;    
-    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
-    {
-     if (dynamic_cast<CRDoubleMatrix*>(matrix_pt) != 0)
-     {
-      dynamic_cast<CRDoubleMatrix* >(matrix_pt)->
-       build(IterativeLinearSolver::distribution_pt());
-      f.build(IterativeLinearSolver::distribution_pt(),0.0);
-     }
-    }
-     
-    // Get the Jacobian and residuals vector
-    problem_pt->get_jacobian(f,*matrix_pt);
-    
-    // We've made the matrix, we can delete it...
-    Matrix_can_be_deleted=true;
+      // Get rid of any previously stored data
+      clean_up_memory();
 
-    // Replace the current matrix used in Preconditioner by the new matrix
-    this->set_matrix_pt(matrix_pt);
+      // Grab the communicator from the MGProblem object and assign it
+      this->set_comm_pt(problem_pt->communicator_pt());
 
-    // The preconditioner works with one mesh; set it! Since we only use
-    // the block preconditioner on the finest level, we use the mesh from
-    // that level
-    this->set_nmesh(1);
+      // Setup the distribution
+      LinearAlgebraDistribution dist(
+        problem_pt->communicator_pt(), n_dof, false);
 
-    // Elements in actual pml layer are trivially wrapped versions of
-    // their bulk counterparts. Technically they are different elements
-    // so we have to allow different element types
-    bool allow_different_element_types_in_mesh=true;
-    this->set_mesh(0,problem_pt->mesh_pt(),
-		   allow_different_element_types_in_mesh);
-  
-    // Set up the generic block look up scheme
-    this->block_setup();
-  
-    // Extract the number of blocks.
-    unsigned nblock_types=this->nblock_types();
-  
-#ifdef PARANOID
-    // PARANOID check - there must only be two block types
-    if (nblock_types!=2)
-    {
-     // Create the error message
-     std::stringstream tmp;
-     tmp << "There are supposed to be two block types.\nYours has "
-	 << nblock_types << std::endl;
+      // Build the internal distribution in this way because both the
+      // IterativeLinearSolver and BlockPreconditioner class have base-
+      // class subobjects of type oomph::DistributableLinearAlgebraObject
+      IterativeLinearSolver::build_distribution(dist);
 
-     // Throw an error
-     throw OomphLibError(tmp.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-  
-    // Resize the storage for the system matrices
-    Matrices_storage_pt.resize(2,0);
+      // Get Jacobian matrix in format specified by template parameter
+      // and nonlinear residual vector
+      MATRIX* matrix_pt = new MATRIX;
+      DoubleVector f;
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+      {
+        if (dynamic_cast<CRDoubleMatrix*>(matrix_pt) != 0)
+        {
+          dynamic_cast<CRDoubleMatrix*>(matrix_pt)->build(
+            IterativeLinearSolver::distribution_pt());
+          f.build(IterativeLinearSolver::distribution_pt(), 0.0);
+        }
+      }
 
-    // Loop over the rows of the block matrix
-    for (unsigned i=0;i<nblock_types;i++)
-    {
-     // Fix the column index
-     unsigned j=0;
+      // Get the Jacobian and residuals vector
+      problem_pt->get_jacobian(f, *matrix_pt);
 
-     // Create new CRDoubleMatrix objects
-     Matrices_storage_pt[i]=new CRDoubleMatrix;
-   
-     // Extract the required blocks, i.e. the first column
-     this->get_block(i,j,*Matrices_storage_pt[i]);
-    }
-    
-    // Doc time for setup
-    double t_end=TimingHelpers::timer();
-    Jacobian_setup_time=t_end-t_start;
+      // We've made the matrix, we can delete it...
+      Matrix_can_be_deleted = true;
 
-    if(Doc_time)
-    {
-     oomph_info << "\nTime for setup of block Jacobian [sec]: "
-		<< Jacobian_setup_time << std::endl;
-    }
+      // Replace the current matrix used in Preconditioner by the new matrix
+      this->set_matrix_pt(matrix_pt);
 
-    // Call linear algebra-style solver
-    // If the result distribution is wrong, then redistribute
-    // before the solve and return to original distribution
-    // afterwards
-    if((!(*result.distribution_pt()==*IterativeLinearSolver::distribution_pt()))
-       &&(result.built()))
-    {
-     // Make a distribution object
-     LinearAlgebraDistribution temp_global_dist(result.distribution_pt());
+      // The preconditioner works with one mesh; set it! Since we only use
+      // the block preconditioner on the finest level, we use the mesh from
+      // that level
+      this->set_nmesh(1);
 
-     // Build the result vector distribution
-     result.build(IterativeLinearSolver::distribution_pt(),0.0);
+      // Elements in actual pml layer are trivially wrapped versions of
+      // their bulk counterparts. Technically they are different elements
+      // so we have to allow different element types
+      bool allow_different_element_types_in_mesh = true;
+      this->set_mesh(
+        0, problem_pt->mesh_pt(), allow_different_element_types_in_mesh);
 
-     // Solve the problem
-     solve_helper(matrix_pt,f,result);
+      // Set up the generic block look up scheme
+      this->block_setup();
 
-     // Redistribute the vector
-     result.redistribute(&temp_global_dist);
-    }
-    // Otherwise just solve
-    else
-    {
-     // Solve
-     solve_helper(matrix_pt,f,result);
-    }
-     
-    // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve)
-    {
-     // Clean up anything left in memory
-     clean_up_memory();
-    }
-   } // End of solve
-  
-  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
-  /// vector and returns the solution of the linear system.
-  void solve(DoubleMatrixBase* const &matrix_pt,
-	     const DoubleVector &rhs,
-	     DoubleVector &solution)
-   {
-    // Open an output stream
-    std::ostringstream error_message_stream;
-
-    // Create an error message
-    error_message_stream << "This function is broken. The block preconditioner "
-			 << "needs access to the underlying mesh.\n";
-
-    // Throw the error message
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION); 
-   }
- 
- 
-  /// \short Linear-algebra-type solver: Takes pointer to a matrix
-  /// and rhs vector and returns the solution of the linear system
-  /// Call the broken base-class version. If you want this, please 
-  /// implement it
-  void solve(DoubleMatrixBase* const &matrix_pt,
-	     const Vector<double> &rhs,
-	     Vector<double> &result)
-   {LinearSolver::solve(matrix_pt,rhs,result);}
-
-  /// \short Re-solve the system defined by the last assembled Jacobian
-  /// and the rhs vector specified here. Solution is returned in the
-  /// vector result.
-  void resolve(const DoubleVector &rhs,
-	       DoubleVector &result)
-   {
-    // We are re-solving
-    Resolving=true;
+      // Extract the number of blocks.
+      unsigned nblock_types = this->nblock_types();
 
 #ifdef PARANOID
-    if ((Matrices_storage_pt[0]==0)||(Matrices_storage_pt[1]==0))
-    {
-     throw OomphLibError("No matrix was stored -- cannot re-solve",
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
+      // PARANOID check - there must only be two block types
+      if (nblock_types != 2)
+      {
+        // Create the error message
+        std::stringstream tmp;
+        tmp << "There are supposed to be two block types.\nYours has "
+            << nblock_types << std::endl;
+
+        // Throw an error
+        throw OomphLibError(
+          tmp.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    // Set up a dummy matrix. As we're resolving this won't be used in
-    // solve_helper but we need to pass a matrix in to fill the input.
-    // The matrices used in the calculations have already been stored
-    CRDoubleMatrix* matrix_pt=new CRDoubleMatrix;
-    
-    // Call the helper function
-    solve_helper(matrix_pt,rhs,result);
+      // Resize the storage for the system matrices
+      Matrices_storage_pt.resize(2, 0);
 
-    // Delete the matrix
-    delete matrix_pt;
-    
-    // Make it a null pointer
-    matrix_pt=0;
-  
-    // Reset re-solving flag
-    Resolving=false;
-   }
+      // Loop over the rows of the block matrix
+      for (unsigned i = 0; i < nblock_types; i++)
+      {
+        // Fix the column index
+        unsigned j = 0;
 
-  /// Number of iterations taken 
-  unsigned iterations() const 
-   {
-    return Iterations;
-   }
+        // Create new CRDoubleMatrix objects
+        Matrices_storage_pt[i] = new CRDoubleMatrix;
 
-  /// \short Set left preconditioning (the default)
-  void set_preconditioner_LHS() {Preconditioner_LHS=true;}
+        // Extract the required blocks, i.e. the first column
+        this->get_block(i, j, *Matrices_storage_pt[i]);
+      }
 
-  /// \short Enable right preconditioning 
-  void set_preconditioner_RHS() {Preconditioner_LHS=false;}
- 
- protected:
+      // Doc time for setup
+      double t_end = TimingHelpers::timer();
+      Jacobian_setup_time = t_end - t_start;
 
-  /// General interface to solve function 
-  void solve_helper(DoubleMatrixBase* const &matrix_pt,
-		    const DoubleVector &rhs,
-		    DoubleVector &solution);
- 
-  /// Cleanup data that's stored for resolve (if any has been stored)
-  void clean_up_memory()
-   {
-    // If the matrix storage has been resized
-    if (Matrices_storage_pt.size()>0)
+      if (Doc_time)
+      {
+        oomph_info << "\nTime for setup of block Jacobian [sec]: "
+                   << Jacobian_setup_time << std::endl;
+      }
+
+      // Call linear algebra-style solver
+      // If the result distribution is wrong, then redistribute
+      // before the solve and return to original distribution
+      // afterwards
+      if ((!(*result.distribution_pt() ==
+             *IterativeLinearSolver::distribution_pt())) &&
+          (result.built()))
+      {
+        // Make a distribution object
+        LinearAlgebraDistribution temp_global_dist(result.distribution_pt());
+
+        // Build the result vector distribution
+        result.build(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Solve the problem
+        solve_helper(matrix_pt, f, result);
+
+        // Redistribute the vector
+        result.redistribute(&temp_global_dist);
+      }
+      // Otherwise just solve
+      else
+      {
+        // Solve
+        solve_helper(matrix_pt, f, result);
+      }
+
+      // Kill matrix unless it's still required for resolve
+      if (!Enable_resolve)
+      {
+        // Clean up anything left in memory
+        clean_up_memory();
+      }
+    } // End of solve
+
+    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// vector and returns the solution of the linear system.
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution)
     {
-     // If the real matrix pointer isn't null AND we're allowed to delete
-     // the matrix which is only when we create the matrix ourselves
-     if ((Matrices_storage_pt[0]!=0)&&(Matrix_can_be_deleted))
-     {
+      // Open an output stream
+      std::ostringstream error_message_stream;
+
+      // Create an error message
+      error_message_stream
+        << "This function is broken. The block preconditioner "
+        << "needs access to the underlying mesh.\n";
+
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+
+
+    /// \short Linear-algebra-type solver: Takes pointer to a matrix
+    /// and rhs vector and returns the solution of the linear system
+    /// Call the broken base-class version. If you want this, please
+    /// implement it
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
+    {
+      LinearSolver::solve(matrix_pt, rhs, result);
+    }
+
+    /// \short Re-solve the system defined by the last assembled Jacobian
+    /// and the rhs vector specified here. Solution is returned in the
+    /// vector result.
+    void resolve(const DoubleVector& rhs, DoubleVector& result)
+    {
+      // We are re-solving
+      Resolving = true;
+
+#ifdef PARANOID
+      if ((Matrices_storage_pt[0] == 0) || (Matrices_storage_pt[1] == 0))
+      {
+        throw OomphLibError("No matrix was stored -- cannot re-solve",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Set up a dummy matrix. As we're resolving this won't be used in
+      // solve_helper but we need to pass a matrix in to fill the input.
+      // The matrices used in the calculations have already been stored
+      CRDoubleMatrix* matrix_pt = new CRDoubleMatrix;
+
+      // Call the helper function
+      solve_helper(matrix_pt, rhs, result);
+
       // Delete the matrix
-      delete Matrices_storage_pt[0];
+      delete matrix_pt;
 
-      // Assign the associated pointer the value NULL
-      Matrices_storage_pt[0]=0;
-     }
+      // Make it a null pointer
+      matrix_pt = 0;
 
-     // If the real matrix pointer isn't null AND we're allowed to delete
-     // the matrix which is only when we create the matrix ourselves
-     if ((Matrices_storage_pt[1]!=0)&&(Matrix_can_be_deleted))
-     {
-      // Delete the matrix
-      delete Matrices_storage_pt[1];
-
-      // Assign the associated pointer the value NULL
-      Matrices_storage_pt[1]=0;
-     }
+      // Reset re-solving flag
+      Resolving = false;
     }
-   } // End of clean_up_memory
- 
-  /// \short Helper function to calculate a complex matrix-vector product.
-  /// Assumes the matrix has been provided as a Vector of length two; the
-  /// first entry containing the real part of the system matrix and the
-  /// second entry containing the imaginary part
-  void complex_matrix_multiplication(Vector<CRDoubleMatrix*> const matrices_pt,
-				     const Vector<DoubleVector>& x,
-				     Vector<DoubleVector>& soln)
-   {
+
+    /// Number of iterations taken
+    unsigned iterations() const
+    {
+      return Iterations;
+    }
+
+    /// \short Set left preconditioning (the default)
+    void set_preconditioner_LHS()
+    {
+      Preconditioner_LHS = true;
+    }
+
+    /// \short Enable right preconditioning
+    void set_preconditioner_RHS()
+    {
+      Preconditioner_LHS = false;
+    }
+
+  protected:
+    /// General interface to solve function
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
+
+    /// Cleanup data that's stored for resolve (if any has been stored)
+    void clean_up_memory()
+    {
+      // If the matrix storage has been resized
+      if (Matrices_storage_pt.size() > 0)
+      {
+        // If the real matrix pointer isn't null AND we're allowed to delete
+        // the matrix which is only when we create the matrix ourselves
+        if ((Matrices_storage_pt[0] != 0) && (Matrix_can_be_deleted))
+        {
+          // Delete the matrix
+          delete Matrices_storage_pt[0];
+
+          // Assign the associated pointer the value NULL
+          Matrices_storage_pt[0] = 0;
+        }
+
+        // If the real matrix pointer isn't null AND we're allowed to delete
+        // the matrix which is only when we create the matrix ourselves
+        if ((Matrices_storage_pt[1] != 0) && (Matrix_can_be_deleted))
+        {
+          // Delete the matrix
+          delete Matrices_storage_pt[1];
+
+          // Assign the associated pointer the value NULL
+          Matrices_storage_pt[1] = 0;
+        }
+      }
+    } // End of clean_up_memory
+
+    /// \short Helper function to calculate a complex matrix-vector product.
+    /// Assumes the matrix has been provided as a Vector of length two; the
+    /// first entry containing the real part of the system matrix and the
+    /// second entry containing the imaginary part
+    void complex_matrix_multiplication(
+      Vector<CRDoubleMatrix*> const matrices_pt,
+      const Vector<DoubleVector>& x,
+      Vector<DoubleVector>& soln)
+    {
 #ifdef PARANOID
-    // PARANOID check - Make sure the input matrix has the right size
-    if (matrices_pt.size()!=2)
-    {
-     // Create an output stream
-     std::ostringstream error_message_stream;
+      // PARANOID check - Make sure the input matrix has the right size
+      if (matrices_pt.size() != 2)
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
 
-     // Create the error message
-     error_message_stream << "Can only deal with two matrices. You have "
-			  << matrices_pt.size()
-			  << " matrices." << std::endl;
+        // Create the error message
+        error_message_stream << "Can only deal with two matrices. You have "
+                             << matrices_pt.size() << " matrices." << std::endl;
 
-     // Throw an error
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-    // PARANOID check - Make sure the vector x has the right size
-    if (x.size()!=2)
-    {
-     // Create an output stream
-     std::ostringstream error_message_stream;
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // PARANOID check - Make sure the vector x has the right size
+      if (x.size() != 2)
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
 
-     // Create the error message
-     error_message_stream << "Can only deal with two input vectors. You have "
-			  << x.size()
-			  << " vectors." << std::endl;
+        // Create the error message
+        error_message_stream
+          << "Can only deal with two input vectors. You have " << x.size()
+          << " vectors." << std::endl;
 
-     // Throw an error
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-    // PARANOID check - Make sure the vector soln has the right size
-    if (soln.size()!=2)
-    {
-     // Create an output stream
-     std::ostringstream error_message_stream;
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      // PARANOID check - Make sure the vector soln has the right size
+      if (soln.size() != 2)
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
 
-     // Create the error message
-     error_message_stream << "Can only deal with two output vectors. You have "
-			  << soln.size()
-			  << " output vectors." << std::endl;
+        // Create the error message
+        error_message_stream
+          << "Can only deal with two output vectors. You have " << soln.size()
+          << " output vectors." << std::endl;
 
-     // Throw an error
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    // NOTE: We assume all vectors have been distributed at this point but
-    // code can be written at a later time to build the vectors if they're
-    // not already built.
+      // NOTE: We assume all vectors have been distributed at this point but
+      // code can be written at a later time to build the vectors if they're
+      // not already built.
 
-    //-----------------------------------------------------------------------
-    // Suppose we have a complex matrix, A, and two complex vectors, x and
-    // soln. We wish to compute the product A*x=soln (note, * does not mean
-    // we are using complex conjugates here, it is simply used to indicate
-    // a multiplication). To do this we must make use of the fact that we
-    // possess the real and imaginary separately. As a result, it is computed
-    // using:
-    //           soln = A*x,
-    //                = (A_r + i*A_c)*(x_r + i*x_c),
-    //                = [A_r*x_r - A_c*x_c] + i*[A_r*x_c + A_c*x_r],
-    // ==> real(soln) = A_r*x_r - A_c*x_c,
-    //   & imag(soln) = A_r*x_c + A_c*x_r,
-    // where the subscripts _r and _c are used to identify the real and
-    // imaginary part, respectively.
-    //-----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
+      // Suppose we have a complex matrix, A, and two complex vectors, x and
+      // soln. We wish to compute the product A*x=soln (note, * does not mean
+      // we are using complex conjugates here, it is simply used to indicate
+      // a multiplication). To do this we must make use of the fact that we
+      // possess the real and imaginary separately. As a result, it is computed
+      // using:
+      //           soln = A*x,
+      //                = (A_r + i*A_c)*(x_r + i*x_c),
+      //                = [A_r*x_r - A_c*x_c] + i*[A_r*x_c + A_c*x_r],
+      // ==> real(soln) = A_r*x_r - A_c*x_c,
+      //   & imag(soln) = A_r*x_c + A_c*x_r,
+      // where the subscripts _r and _c are used to identify the real and
+      // imaginary part, respectively.
+      //-----------------------------------------------------------------------
 
-    // Store the value of A_r*x_r in the real part of soln
-    matrices_pt[0]->multiply(x[0],soln[0]);
+      // Store the value of A_r*x_r in the real part of soln
+      matrices_pt[0]->multiply(x[0], soln[0]);
 
-    // Store the value of A_r*x_c in the imaginary part of soln
-    matrices_pt[0]->multiply(x[1],soln[1]);
+      // Store the value of A_r*x_c in the imaginary part of soln
+      matrices_pt[0]->multiply(x[1], soln[1]);
 
-    // Create a temporary vector
-    DoubleVector temp(Matrices_storage_pt[0]->distribution_pt(),0.0);
+      // Create a temporary vector
+      DoubleVector temp(Matrices_storage_pt[0]->distribution_pt(), 0.0);
 
-    // Calculate the value of A_c*x_c
-    matrices_pt[1]->multiply(x[1],temp);
+      // Calculate the value of A_c*x_c
+      matrices_pt[1]->multiply(x[1], temp);
 
-    // Subtract the value of temp from soln[0] to get the real part of soln
-    soln[0]-=temp;
+      // Subtract the value of temp from soln[0] to get the real part of soln
+      soln[0] -= temp;
 
-    // Calculate the value of A_c*x_r
-    matrices_pt[1]->multiply(x[0],temp);
+      // Calculate the value of A_c*x_r
+      matrices_pt[1]->multiply(x[0], temp);
 
-    // Add the value of temp to soln[1] to get the imaginary part of soln
-    soln[1]+=temp;
-   } // End of complex_matrix_multiplication
-  
-  /// Helper function to update the result vector
-  void update(const unsigned& k,
-	      const Vector<Vector<std::complex<double> > >& hessenberg,
-	      const Vector<std::complex<double> >& s,
-	      const Vector<Vector<DoubleVector> >& v,
-	      Vector<DoubleVector>& x)
-   {
-    // Make a local copy of s
-    Vector<std::complex<double> > y(s);
-   
-    //-----------------------------------------------------------------
-    // The Hessenberg matrix should be an upper triangular matrix at
-    // this point (although from its storage it would appear to be a
-    // lower triangular matrix since the indexing has been reversed)
-    // so finding the minimiser of J(y)=min||s-R_m*y|| where R_m is
-    // the matrix R in the QR factorisation of the Hessenberg matrix.
-    // Therefore, to obtain y we simply need to use a backwards
-    // substitution. Note: The implementation here may appear to be
-    // somewhat confusing as the indexing in the Hessenberg matrix is
-    // reversed. This implementation of a backwards substitution does
-    // not run along the columns of the triangular matrix but rather
-    // up the rows.
-    //-----------------------------------------------------------------
-    
-    // The outer loop is a loop over the columns of the Hessenberg matrix
-    // since the indexing is reversed
-    for (int i=int(k);i>=0;i--)
-    {     
-     // Divide the i-th entry of y by the i-th diagonal entry of H
-     y[i]/=hessenberg[i][i];
-     
-     // The inner loop is a loop over the rows of the Hessenberg matrix
-     for (int j=i-1;j>=0;j--)
-     {
-      // Update the j-th entry of y
-      y[j]-=hessenberg[i][j]*y[i];
-     }
-    } // for (int i=int(k);i>=0;i--)
+      // Add the value of temp to soln[1] to get the imaginary part of soln
+      soln[1] += temp;
+    } // End of complex_matrix_multiplication
 
-    // Calculate the number of entries in x (simply use the real part as
-    // both the real and imaginary part should have the same length)
-    unsigned n_row=x[0].nrow();
-    
-    // Build a temporary vector with entries initialised to 0.0
-    Vector<DoubleVector> block_z(2);
-    
-    // Build a temporary vector with entries initialised to 0.0
-    Vector<DoubleVector> block_temp(2);
-    
-    // Build the distributions
-    for (unsigned dof_type=0;dof_type<2;dof_type++)
+    /// Helper function to update the result vector
+    void update(const unsigned& k,
+                const Vector<Vector<std::complex<double>>>& hessenberg,
+                const Vector<std::complex<double>>& s,
+                const Vector<Vector<DoubleVector>>& v,
+                Vector<DoubleVector>& x)
     {
-     // Build the (dof_type)-th vector
-     block_z[dof_type].build(x[0].distribution_pt(),0.0);
-      
-     // Build the (dof_type)-th vector
-     block_temp[dof_type].build(x[0].distribution_pt(),0.0);
-    }
-    
-    // Get access to the underlying values
-    double* block_temp_r_pt=block_temp[0].values_pt();
-    
-    // Get access to the underlying values
-    double* block_temp_c_pt=block_temp[1].values_pt();
-    
-    // Calculate x=Vy
-    for (unsigned j=0;j<=k;j++)
+      // Make a local copy of s
+      Vector<std::complex<double>> y(s);
+
+      //-----------------------------------------------------------------
+      // The Hessenberg matrix should be an upper triangular matrix at
+      // this point (although from its storage it would appear to be a
+      // lower triangular matrix since the indexing has been reversed)
+      // so finding the minimiser of J(y)=min||s-R_m*y|| where R_m is
+      // the matrix R in the QR factorisation of the Hessenberg matrix.
+      // Therefore, to obtain y we simply need to use a backwards
+      // substitution. Note: The implementation here may appear to be
+      // somewhat confusing as the indexing in the Hessenberg matrix is
+      // reversed. This implementation of a backwards substitution does
+      // not run along the columns of the triangular matrix but rather
+      // up the rows.
+      //-----------------------------------------------------------------
+
+      // The outer loop is a loop over the columns of the Hessenberg matrix
+      // since the indexing is reversed
+      for (int i = int(k); i >= 0; i--)
+      {
+        // Divide the i-th entry of y by the i-th diagonal entry of H
+        y[i] /= hessenberg[i][i];
+
+        // The inner loop is a loop over the rows of the Hessenberg matrix
+        for (int j = i - 1; j >= 0; j--)
+        {
+          // Update the j-th entry of y
+          y[j] -= hessenberg[i][j] * y[i];
+        }
+      } // for (int i=int(k);i>=0;i--)
+
+      // Calculate the number of entries in x (simply use the real part as
+      // both the real and imaginary part should have the same length)
+      unsigned n_row = x[0].nrow();
+
+      // Build a temporary vector with entries initialised to 0.0
+      Vector<DoubleVector> block_z(2);
+
+      // Build a temporary vector with entries initialised to 0.0
+      Vector<DoubleVector> block_temp(2);
+
+      // Build the distributions
+      for (unsigned dof_type = 0; dof_type < 2; dof_type++)
+      {
+        // Build the (dof_type)-th vector
+        block_z[dof_type].build(x[0].distribution_pt(), 0.0);
+
+        // Build the (dof_type)-th vector
+        block_temp[dof_type].build(x[0].distribution_pt(), 0.0);
+      }
+
+      // Get access to the underlying values
+      double* block_temp_r_pt = block_temp[0].values_pt();
+
+      // Get access to the underlying values
+      double* block_temp_c_pt = block_temp[1].values_pt();
+
+      // Calculate x=Vy
+      for (unsigned j = 0; j <= k; j++)
+      {
+        // Get access to j-th column of Z_m
+        const double* vj_r_pt = v[j][0].values_pt();
+
+        // Get access to j-th column of Z_m
+        const double* vj_c_pt = v[j][1].values_pt();
+
+        // Loop over the entries in x and update them
+        for (unsigned i = 0; i < n_row; i++)
+        {
+          // Update the real part of the i-th entry in x
+          block_temp_r_pt[i] +=
+            (vj_r_pt[i] * y[j].real()) - (vj_c_pt[i] * y[j].imag());
+
+          // Update the imaginary part of the i-th entry in x
+          block_temp_c_pt[i] +=
+            (vj_c_pt[i] * y[j].real()) + (vj_r_pt[i] * y[j].imag());
+        }
+      } // for (unsigned j=0;j<=k;j++)
+
+      // If we're using LHS preconditioning
+      if (Preconditioner_LHS)
+      {
+        // Since we're using LHS preconditioning the preconditioner is applied
+        // to the matrix and RHS vector so we simply update the value of x
+        for (unsigned dof_type = 0; dof_type < 2; dof_type++)
+        {
+          // Update
+          x[dof_type] += block_temp[dof_type];
+        }
+      }
+      // If we're using RHS preconditioning
+      else
+      {
+        // Create a temporary vector
+        DoubleVector temp(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Copy block vectors block_temp back to temp
+        this->return_block_vectors(block_temp, temp);
+
+        // Create a temporary vector
+        DoubleVector z(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Copy block vectors block_z back to z
+        this->return_block_vectors(block_z, z);
+
+        // Since we're using RHS preconditioning the preconditioner is applied
+        // to the solution vector
+        preconditioner_pt()->preconditioner_solve(temp, z);
+
+        // Split up the solution vector into DoubleVectors, whose entries are
+        // arranged to match the matrix blocks and assign it
+        this->get_block_vectors(z, block_z);
+
+        // Use the update: x_m=x_0+inv(M)Vy [see Saad Y,"Iterative methods for
+        // sparse linear systems", p.284]
+        for (unsigned dof_type = 0; dof_type < 2; dof_type++)
+        {
+          // Update
+          x[dof_type] += block_z[dof_type];
+        }
+      } // if(Preconditioner_LHS) else
+    } // End of update
+
+    /// \short Helper function: Generate a plane rotation. This is done by
+    /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
+    /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
+    /// \f[
+    /// \begin{bmatrix}
+    /// \overline{\cos\theta} & \overline{\sin\theta}
+    /// \\ -\sin\theta & \cos\theta
+    /// \end{bmatrix}
+    /// \begin{bmatrix}
+    /// dx
+    /// \\ dy
+    /// \end{bmatrix}
+    /// =
+    /// \begin{bmatrix}
+    /// r
+    /// \\ 0
+    /// \end{bmatrix},
+    /// \f]
+    /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
+    /// are given by:
+    /// The values of dx and dy are given by:
+    /// \f[
+    /// \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}},
+    /// \f]
+    /// and
+    /// \f[
+    /// \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}.
+    /// \f]
+    /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
+    /// We also check to see that sn is always a real (nonnegative) number. See
+    /// pp.193-194 for an explanation.
+    void generate_plane_rotation(std::complex<double>& dx,
+                                 std::complex<double>& dy,
+                                 std::complex<double>& cs,
+                                 std::complex<double>& sn)
     {
-     // Get access to j-th column of Z_m
-     const double* vj_r_pt=v[j][0].values_pt();
-     
-     // Get access to j-th column of Z_m
-     const double* vj_c_pt=v[j][1].values_pt();
+      // If dy=0 then we do not need to apply a rotation
+      if (dy == 0.0)
+      {
+        // Using theta=0 gives cos(theta)=1
+        cs = 1.0;
 
-     // Loop over the entries in x and update them
-     for (unsigned i=0;i<n_row;i++)
-     {
-      // Update the real part of the i-th entry in x
-      block_temp_r_pt[i]+=(vj_r_pt[i]*y[j].real())-(vj_c_pt[i]*y[j].imag());
+        // Using theta=0 gives sin(theta)=0
+        sn = 0.0;
+      }
+      // If dx or dy is large using the original form of calculting cs and sn is
+      // naive since this may overflow or underflow so instead we calculate
+      // r=sqrt(pow(|dx|,2)+pow(|dy|,2)) using r=|dy|sqrt(1+pow(|dx|/|dy|,2)) if
+      // |dy|>|dx| [see <A
+      // HREF=https://en.wikipedia.org/wiki/Hypot">Hypot</A>.].
+      else if (std::abs(dy) > std::abs(dx))
+      {
+        // Since |dy|>|dx| calculate the ratio |dx|/|dy|
+        std::complex<double> temp = dx / dy;
 
-      // Update the imaginary part of the i-th entry in x      
-      block_temp_c_pt[i]+=(vj_c_pt[i]*y[j].real())+(vj_r_pt[i]*y[j].imag());
-     }
-    } // for (unsigned j=0;j<=k;j++)
-        
-    // If we're using LHS preconditioning
-    if(Preconditioner_LHS)
+        // Calculate the value of sin(theta) using:
+        //          sin(theta)=dy/sqrt(pow(|dx|,2)+pow(|dy|,2))
+        //                    =(dy/|dy|)/sqrt(1+pow(|dx|/|dy|,2)).
+        sn = (dy / std::abs(dy)) / sqrt(1.0 + pow(std::abs(temp), 2.0));
+
+        // Calculate the value of cos(theta) using:
+        //            cos(theta)=dx/sqrt(pow(|dy|,2)+pow(|dx|,2))
+        //                      =(dx/|dy|)/sqrt(1+pow(|dx|/|dy|,2))
+        //                      =(dx/dy)*sin(theta).
+        cs = temp * sn;
+      }
+      // Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow
+      // calculate the values of cs and sn using the method above
+      else
+      {
+        // Since |dx|>=|dy| calculate the ratio dy/dx
+        std::complex<double> temp = dy / dx;
+
+        // Calculate the value of cos(theta) using:
+        //          cos(theta)=dx/sqrt(pow(|dx|,2)+pow(|dy|,2))
+        //                    =(dx/|dx|)/sqrt(1+pow(|dy|/|dx|,2)).
+        cs = (dx / std::abs(dx)) / sqrt(1.0 + pow(std::abs(temp), 2.0));
+
+        // Calculate the value of sin(theta) using:
+        //            sin(theta)=dy/sqrt(pow(|dx|,2)+pow(|dy|,2))
+        //                      =(dy/|dx|)/sqrt(1+pow(|dy|/|dx|,2))
+        //                      =(dy/dx)*cos(theta).
+        sn = temp * cs;
+      }
+
+      // Set the tolerance for sin(theta)
+      double tolerance = 1.0e-15;
+
+      // Make sure sn is real and nonnegative (it should be!)
+      if ((std::fabs(sn.imag()) > tolerance) || (sn.real() < 0))
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
+
+        // Create an error message
+        error_message_stream << "The value of sin(theta) is not real "
+                             << "and/or nonnegative. Value is: " << sn
+                             << std::endl;
+
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+    } // End of generate_plane_rotation
+
+    /// \short Helper function: Apply plane rotation. This is done using the
+    /// update:
+    /// \f[
+    /// \begin{bmatrix}
+    /// dx
+    /// \\ dy
+    /// \end{bmatrix}
+    /// \leftarrow
+    /// \begin{bmatrix}
+    /// \overline{\cos\theta} & \overline{\sin\theta}
+    /// \\ -\sin\theta & \cos\theta
+    /// \end{bmatrix}
+    /// \begin{bmatrix}
+    /// dx
+    /// \\ dy
+    /// \end{bmatrix}.
+    /// \f]
+    /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
+    void apply_plane_rotation(std::complex<double>& dx,
+                              std::complex<double>& dy,
+                              std::complex<double>& cs,
+                              std::complex<double>& sn)
     {
-     // Since we're using LHS preconditioning the preconditioner is applied
-     // to the matrix and RHS vector so we simply update the value of x
-     for (unsigned dof_type=0;dof_type<2;dof_type++)
-     {
-      // Update
-      x[dof_type]+=block_temp[dof_type];
-     }
-    }
-    // If we're using RHS preconditioning
-    else
-    {
-     // Create a temporary vector
-     DoubleVector temp(IterativeLinearSolver::distribution_pt(),0.0);
-     
-     // Copy block vectors block_temp back to temp
-     this->return_block_vectors(block_temp,temp);
-     
-     // Create a temporary vector
-     DoubleVector z(IterativeLinearSolver::distribution_pt(),0.0);
-            
-     // Copy block vectors block_z back to z
-     this->return_block_vectors(block_z,z);
-     
-     // Since we're using RHS preconditioning the preconditioner is applied
-     // to the solution vector
-     preconditioner_pt()->preconditioner_solve(temp,z);
-     
-     // Split up the solution vector into DoubleVectors, whose entries are
-     // arranged to match the matrix blocks and assign it
-     this->get_block_vectors(z,block_z);
-    
-     // Use the update: x_m=x_0+inv(M)Vy [see Saad Y,"Iterative methods for
-     // sparse linear systems", p.284]
-     for (unsigned dof_type=0;dof_type<2;dof_type++)
-     {
-      // Update
-      x[dof_type]+=block_z[dof_type];
-     }
-    } // if(Preconditioner_LHS) else
-   } // End of update
- 
-  /// \short Helper function: Generate a plane rotation. This is done by
-  /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
-  /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
-  /// \f[
-  /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} 
-  /// \\ -\sin\theta & \cos\theta
-  /// \end{bmatrix}
-  /// \begin{bmatrix}
-  /// dx
-  /// \\ dy
-  /// \end{bmatrix}
-  /// =
-  /// \begin{bmatrix}
-  /// r
-  /// \\ 0
-  /// \end{bmatrix},
-  /// \f]
-  /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
-  /// are given by:
-  /// The values of dx and dy are given by:
-  /// \f[
-  /// \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}},
-  /// \f]
-  /// and
-  /// \f[
-  /// \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}.
-  /// \f]
-  /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
-  /// We also check to see that sn is always a real (nonnegative) number. See
-  /// pp.193-194 for an explanation.
-  void generate_plane_rotation(std::complex<double>& dx,
-			       std::complex<double>& dy,
-			       std::complex<double>& cs,
-			       std::complex<double>& sn)
-   {
-    // If dy=0 then we do not need to apply a rotation
-    if (dy==0.0)
-    {
-     // Using theta=0 gives cos(theta)=1
-     cs=1.0;
+      // Calculate the value of dx but don't update it yet
+      std::complex<double> temp = std::conj(cs) * dx + std::conj(sn) * dy;
 
-     // Using theta=0 gives sin(theta)=0
-     sn=0.0;
-    }
-    // If dx or dy is large using the original form of calculting cs and sn is
-    // naive since this may overflow or underflow so instead we calculate
-    // r=sqrt(pow(|dx|,2)+pow(|dy|,2)) using r=|dy|sqrt(1+pow(|dx|/|dy|,2)) if
-    // |dy|>|dx| [see <A HREF=https://en.wikipedia.org/wiki/Hypot">Hypot</A>.].
-    else if(std::abs(dy)>std::abs(dx))
-    {
-     // Since |dy|>|dx| calculate the ratio |dx|/|dy|
-     std::complex<double> temp=dx/dy;
-     
-     // Calculate the value of sin(theta) using:
-     //          sin(theta)=dy/sqrt(pow(|dx|,2)+pow(|dy|,2))
-     //                    =(dy/|dy|)/sqrt(1+pow(|dx|/|dy|,2)).
-     sn=(dy/std::abs(dy))/sqrt(1.0+pow(std::abs(temp),2.0));
-     
-     // Calculate the value of cos(theta) using:
-     //            cos(theta)=dx/sqrt(pow(|dy|,2)+pow(|dx|,2))
-     //                      =(dx/|dy|)/sqrt(1+pow(|dx|/|dy|,2))
-     //                      =(dx/dy)*sin(theta).
-     cs=temp*sn;
-    }
-    // Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow
-    // calculate the values of cs and sn using the method above
-    else
-    {
-     // Since |dx|>=|dy| calculate the ratio dy/dx
-     std::complex<double> temp=dy/dx;
+      // Set the value of dy
+      dy = -sn * dx + cs * dy;
 
-     // Calculate the value of cos(theta) using:
-     //          cos(theta)=dx/sqrt(pow(|dx|,2)+pow(|dy|,2))
-     //                    =(dx/|dx|)/sqrt(1+pow(|dy|/|dx|,2)).
-     cs=(dx/std::abs(dx))/sqrt(1.0+pow(std::abs(temp),2.0));
-     
-     // Calculate the value of sin(theta) using:
-     //            sin(theta)=dy/sqrt(pow(|dx|,2)+pow(|dy|,2))
-     //                      =(dy/|dx|)/sqrt(1+pow(|dy|/|dx|,2))
-     //                      =(dy/dx)*cos(theta).
-     sn=temp*cs;
-    }
+      // Set the value of dx using the correct values of dx and dy
+      dx = temp;
+    } // End of apply_plane_rotation
 
-    // Set the tolerance for sin(theta)
-    double tolerance=1.0e-15;
-    
-    // Make sure sn is real and nonnegative (it should be!)
-    if ((std::fabs(sn.imag())>tolerance)||(sn.real()<0))
-    {
-     // Create an output stream
-     std::ostringstream error_message_stream;
+    /// Number of iterations taken
+    unsigned Iterations;
 
-     // Create an error message
-     error_message_stream << "The value of sin(theta) is not real "
-			  << "and/or nonnegative. Value is: "
-			  << sn << std::endl;
+    /// Vector of pointers to the real and imaginary part of the system matrix
+    Vector<CRDoubleMatrix*> Matrices_storage_pt;
 
-     // Throw an error
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }      
-   } // End of generate_plane_rotation
+    /// \short Boolean flag to indicate if the solve is done in re-solve mode,
+    /// bypassing setup of matrix and preconditioner
+    bool Resolving;
 
-  /// \short Helper function: Apply plane rotation. This is done using the
-  /// update:
-  /// \f[
-  /// \begin{bmatrix}
-  /// dx
-  /// \\ dy
-  /// \end{bmatrix}
-  /// \leftarrow
-  /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta}
-  /// \\ -\sin\theta & \cos\theta
-  /// \end{bmatrix}
-  /// \begin{bmatrix}
-  /// dx
-  /// \\ dy
-  /// \end{bmatrix}.
-  /// \f]
-  /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
-  void apply_plane_rotation(std::complex<double>& dx,
-			    std::complex<double>& dy,
-			    std::complex<double>& cs,
-			    std::complex<double>& sn)
-   {
-    // Calculate the value of dx but don't update it yet
-    std::complex<double> temp=std::conj(cs)*dx+std::conj(sn)*dy;
+    /// \short Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// can be deleted.
+    bool Matrix_can_be_deleted;
 
-    // Set the value of dy
-    dy=-sn*dx+cs*dy;
-
-    // Set the value of dx using the correct values of dx and dy
-    dx=temp;
-   } // End of apply_plane_rotation
-
-  /// Number of iterations taken
-  unsigned Iterations;
-
-  /// Vector of pointers to the real and imaginary part of the system matrix
-  Vector<CRDoubleMatrix*> Matrices_storage_pt;
- 
-  /// \short Boolean flag to indicate if the solve is done in re-solve mode,
-  /// bypassing setup of matrix and preconditioner
-  bool Resolving;
-
-  /// \short Boolean flag to indicate if the matrix pointed to be Matrix_pt
-  /// can be deleted.
-  bool Matrix_can_be_deleted;
-
-  /// \short boolean indicating use of left hand preconditioning (if true)
-  /// or right hand preconditioning (if false)
-  bool Preconditioner_LHS;
- };
- 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
- 
-//=============================================================================
-/// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector 
-/// and returns the solution of the linear system.
-/// based on the algorithm presented in Templates for the
-/// Solution of Linear Systems: Building Blocks for Iterative Methods, Barrett,
-/// Berry et al, SIAM, 2006 and the implementation in the IML++ library :
-/// http://math.nist.gov/iml++/ 
-//=============================================================================
- template <typename MATRIX>
- void HelmholtzGMRESMG<MATRIX>::
- solve_helper(DoubleMatrixBase* const &matrix_pt,
-	      const DoubleVector& rhs,
-	      DoubleVector& solution)
- {
-  // Set the number of dof types (real and imaginary for this solver)
-  unsigned n_dof_types=this->ndof_types();
-  
-#ifdef PARANOID
-  // This only works for 2 dof types
-  if (n_dof_types!=2)
-  {
-   // Create an output stream
-   std::stringstream error_message_stream;
-
-   // Create the error message
-   error_message_stream << "This preconditioner only works for problems "
-			<< "with 2 dof types\nYours has " << n_dof_types;
-
-   // Throw the error message
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-  
-  // Get the number of dofs (note, the total number of dofs in the problem
-  // is 2*n_row but if the constituent vectors and matrices were stored in
-  // complex objects there would only be (n_row) rows so we use that)
-  unsigned n_row=Matrices_storage_pt[0]->nrow();  
-  
-  // Make sure Max_iter isn't greater than n_dof. The user cannot use this
-  // many iterations when using Krylov subspace methods
-  if (Max_iter>n_row)
-  {
-   // Create an output string stream
-   std::ostringstream error_message_stream;
-
-   // Create the error message
-   error_message_stream << "The maximum number of iterations cannot exceed "
-			<< "the number of rows in the problem."
-			<< "\nMaximum number of iterations: " << Max_iter
-			<< "\nNumber of rows: " << n_row
-			<< std::endl;
-
-   // Throw the error message
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-  
-#ifdef PARANOID
-  // Loop over the real and imaginary parts
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // PARANOID check that if the matrix is distributable then it should not be
-   // then it should not be distributed
-   if (dynamic_cast<DistributableLinearAlgebraObject*>
-       (Matrices_storage_pt[dof_type])!=0)
-   {
-    if (dynamic_cast<DistributableLinearAlgebraObject*>
-	(Matrices_storage_pt[dof_type])->distributed())
-    {
-     std::ostringstream error_message_stream;
-     error_message_stream << "The matrix must not be distributed.";
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-   }
-  }
-  // PARANOID check that this rhs distribution is setup
-  if (!rhs.built())
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream << "The rhs vector distribution must be setup.";
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-  // PARANOID check that the rhs has the right number of global rows
-  if(rhs.nrow()!=2*n_row)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream << "RHS does not have the same dimension as the"
-			<< " linear system";
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-  // PARANOID check that the rhs is not distributed
-  if (rhs.distribution_pt()->distributed())
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream << "The rhs vector must not be distributed.";
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-  // PARANOID check that if the result is setup it matches the distribution
-  // of the rhs
-  if (solution.built())
-  {
-   if (!(*rhs.distribution_pt()==*solution.distribution_pt()))
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream << "If the result distribution is setup then it "
-			 << "must be the same as the rhs distribution";
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-  } // if (solution[dof_type].built())
-#endif
-   
-  // Set up the solution distribution if it's not already distributed
-  if (!solution.built())
-  {
-   // Build the distribution
-   solution.build(IterativeLinearSolver::distribution_pt(),0.0);
-  }
-  // Otherwise initialise all entries to zero
-  else
-  {
-   // Initialise the entries in the k-th vector in solution to zero
-   solution.initialise(0.0);
-  }
-
-  // Create a vector of DoubleVectors (this is a distributed vector so we have
-  // to create two separate DoubleVector objects to cope with the arithmetic)
-  Vector<DoubleVector> block_solution(n_dof_types);
-
-  // Create a vector of DoubleVectors (this is a distributed vector so we have
-  // to create two separate DoubleVector objects to cope with the arithmetic)
-  Vector<DoubleVector> block_rhs(n_dof_types);
-  
-  // Build the distribution of both vectors
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {  
-   // Build the distribution of the k-th constituent vector
-   block_solution[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-   
-   // Build the distribution of the k-th constituent vector
-   block_rhs[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-  }
-  
-  // Grab the solution vector in block form
-  this->get_block_vectors(solution,block_solution);
-   
-  // Grab the RHS vector in block form
-  this->get_block_vectors(rhs,block_rhs);
-   
-  // Start the solver timer
-  double t_start=TimingHelpers::timer();
-
-  // Storage for the relative residual
-  double resid;
-  
-  // Initialise vectors (since these are not distributed vectors we template
-  // one vector by the type std::complex<double> instead of using two vectors,
-  // each templated by the type double
-
-  // Vector, s, used in the minimisation problem: J(y)=min||s-R_m*y||
-  // [see Saad Y."Iterative methods for sparse linear systems", p.176.]
-  Vector<std::complex<double> > s(n_row+1,std::complex<double>(0.0,0.0));
-
-  // Vector to store the value of cos(theta) when using the Givens rotation
-  Vector<std::complex<double> > cs(n_row+1,std::complex<double>(0.0,0.0));
-
-  // Vector to store the value of sin(theta) when using the Givens rotation
-  Vector<std::complex<double> > sn(n_row+1,std::complex<double>(0.0,0.0));
-
-  // Create a vector of DoubleVectors (this is a distributed vector so we have
-  // to create two separate DoubleVector objects to cope with the arithmetic)
-  Vector<DoubleVector> block_w(n_dof_types);
-
-  // Build the distribution of both vectors
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the distribution of the k-th constituent vector
-   block_w[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-  }
-
-  // Set up the preconditioner only if we're not re-solving
-  if (!Resolving)
-  {
-   // Only set up the preconditioner before solve if required
-   if (Setup_preconditioner_before_solve)
-   {     
-    // Set up the preconditioner from the Jacobian matrix
-    double t_start_prec=TimingHelpers::timer();
-     
-    // Use the setup function in the Preconditioner class
-    preconditioner_pt()->setup(dynamic_cast<MATRIX*>(matrix_pt));
-    
-    // Doc time for setup of preconditioner
-    double t_end_prec=TimingHelpers::timer();
-    Preconditioner_setup_time=t_end_prec-t_start_prec;
-     
-    // If time documentation is enabled
-    if(Doc_time)
-    {
-     // Output the time taken
-     oomph_info << "Time for setup of preconditioner [sec]: "
-		<< Preconditioner_setup_time << std::endl;     
-    }
-   }
-  }
-  else
-  {
-   // If time documentation is enabled
-   if(Doc_time)
-   {
-    // Notify the user
-    oomph_info << "Setup of preconditioner is bypassed in resolve mode" 
-	       << std::endl;
-   }
-  } // if (!Resolving) else
- 
-  // Create a vector of DoubleVectors to store the RHS of b-Jx=Mr. We assume
-  // both x=0 and that a preconditioner is not applied by which we deduce b=r
-  Vector<DoubleVector> block_r(n_dof_types);
-
-  // Build the distribution of both vectors
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the distribution of the k-th constituent vector
-   block_r[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-  }
-
-  // If we're using LHS preconditioning solve b-Jx=Mr for r (assumes x=0)
-  // so calculate r=M^{-1}b otherwise set r=b (RHS prec.)
-  if(Preconditioner_LHS)
-  {
-   // Create a vector of the same size as rhs
-   DoubleVector r(IterativeLinearSolver::distribution_pt(),0.0);
-   
-   // Copy the vectors in r to full_r 
-   this->return_block_vectors(block_r,r);
-   
-   // Use the preconditioner
-   preconditioner_pt()->preconditioner_solve(rhs,r);
-   
-   // Copy the vector full_r into the vectors in r
-   this->get_block_vectors(r,block_r);
-  }
-  else
-  {
-   // Store the value of b (the RHS vector) in r
-   for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-   {
-    // Copy the entries of rhs into r
-    block_r[dof_type]=block_rhs[dof_type];
-   }
-  } // if(Preconditioner_LHS)
-
-  // Calculate the norm of the real part of r
-  double norm_r=block_r[0].norm();
-
-  // Calculate the norm of the imaginary part of r
-  double norm_c=block_r[1].norm();
-
-  // Compute norm(r)
-  double normb=sqrt(pow(norm_r,2.0)+pow(norm_c,2.0));
-  
-  // Set the value of beta (the initial residual)
-  double beta=normb;
-  
-  // Compute the initial relative residual. If the entries of the RHS vector
-  // are all zero then set normb equal to one. This is because we divide the
-  // value of the norm at later stages by normb and dividing by zero is not
-  // definied
-  if (normb==0.0)
-  {
-   // Set the value of normb
-   normb=1.0;
-  }
-
-  // Calculate the ratio between the initial norm and the current norm.
-  // Since we haven't completed an iteration yet this will simply be one
-  // unless normb was zero, in which case resid will have value zero
-  resid=beta/normb;
-
-  // If required, will document convergence history to screen or file (if
-  // stream open)
-  if (Doc_convergence_history)
-  {
-   // If an output file which is open isn't provided then output to screen
-   if (!Output_file_stream.is_open())
-   {
-    // Output the residual value to the screen
-    oomph_info << 0 << " " << resid << std::endl;
-   }
-   // Otherwise, output to file
-   else
-   {
-    // Output the residual value to file
-    Output_file_stream << 0 << " " << resid <<std::endl;
-   }
-  } // if (Doc_convergence_history)
-
-  // If the GMRES algorithm converges immediately
-  if (resid<=Tolerance)
-  {
-   // If time documentation is enabled
-   if(Doc_time)
-   {
-    // Notify the user
-    oomph_info << "GMRES converged immediately. Normalised residual norm: "
-	       << resid << std::endl;
-   }
-
-   // Finish running the solver
-   return;
-  } // if (resid<=Tolerance)
-
-  // Initialise a vector of orthogonal basis vectors
-  Vector<Vector<DoubleVector> > block_v;
-
-  // Resize the number of vectors needed
-  block_v.resize(n_row+1);
-
-  // Resize each Vector of DoubleVectors to store the real and imaginary
-  // part of a given vector
-  for (unsigned dof_type=0;dof_type<n_row+1;dof_type++)
-  {
-   // Create two DoubleVector objects in each Vector
-   block_v[dof_type].resize(n_dof_types);
-  }
-
-  // Initialise the upper hessenberg matrix. Since we are not using
-  // distributed vectors here, the algebra is best done using entries
-  // of the type std::complex<double>. NOTE: For implementation purposes
-  // the upper Hessenberg matrix indices are swapped so the matrix is
-  // effectively transposed
-  Vector<Vector<std::complex<double> > > hessenberg(n_row+1);
-
-  // Build the zeroth basis vector
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
-   // to the real and imaginary part of the zeroth vector, respectively
-   block_v[0][dof_type].build(this->block_distribution_pt(dof_type),0.0);
-  }
-
-  // Loop over the real and imaginary parts of v
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {   
-   // For fast access
-   double* v0_pt=block_v[0][dof_type].values_pt();
-   
-   // For fast access
-   const double* block_r_pt=block_r[dof_type].values_pt();     
-     
-   // Set the zeroth basis vector v[0] to r/beta
-   for (unsigned i=0;i<n_row;i++)
-   {
-    // Assign the i-th entry of the zeroth basis vector
-    v0_pt[i]=block_r_pt[i]/beta;
-   }
-  } // for (unsigned k=0;k<n_dof_types;k++)
-    
-  // Set the first entry in the minimisation problem RHS vector (is meant
-  // to the vector beta*e_1 initially, where e_1 is the unit vector with
-  // one in its first entry)
-  s[0]=beta;
-
-  // Compute the next step of the iterative scheme
-  for (unsigned j=0;j<Max_iter;j++)
-  {
-   // Resize the next column of the upper hessenberg matrix
-   hessenberg[j].resize(j+2,std::complex<double>(0.0,0.0));
-
-   // Calculate w=M^{-1}(Jv[j]) (LHS prec.) or w=JM^{-1}v (RHS prec.)
-   {
-    // Create a temporary vector
-    DoubleVector vj(IterativeLinearSolver::distribution_pt(),0.0);
-    
-    // Create a temporary vector
-    DoubleVector temp(IterativeLinearSolver::distribution_pt(),0.0);
-    
-    // Create a temporary vector
-    DoubleVector w(IterativeLinearSolver::distribution_pt(),0.0);
-        
-    // Create a temporary vector of DoubleVectors
-    Vector<DoubleVector> block_temp(2);
-
-    // Create two DoubleVectors
-    for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-    {
-     block_temp[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-    }
-
-    // If we're using LHS preconditioning
-    if(Preconditioner_LHS)
-    {
-     // Solve Jv[j]=Mw for w. Note, we cannot use inbuilt complex matrix
-     // algebra here as we're using distributed vectors
-     complex_matrix_multiplication(Matrices_storage_pt,block_v[j],block_temp);
-     
-     // Copy block_temp into temp
-     this->return_block_vectors(block_temp,temp);
-     
-     // Copy block_w into w
-     this->return_block_vectors(block_w,w);
-     
-     // Apply the preconditioner
-     this->preconditioner_pt()->preconditioner_solve(temp,w);
-     
-     // Copy w into block_w
-     this->get_block_vectors(w,block_w);   
-    }
-    // If we're using RHS preconditioning
-    else 
-    {
-     // Copy the real and imaginary part of v[j] into one vector, vj
-     this->return_block_vectors(block_v[j],vj);
-     
-     // Use w=JM^{-1}v by saad p270
-     this->preconditioner_pt()->preconditioner_solve(vj,temp);
-     
-     // Copy w into block_w
-     this->get_block_vectors(temp,block_temp);
-     
-     // Solve Jv[j] = Mw for w. Note, we cannot use inbuilt complex matrix
-     // algebra here as we're using distributed vectors
-     complex_matrix_multiplication(Matrices_storage_pt,block_temp,block_w);
-    }
-   } // Calculate w=M^{-1}(Jv[j]) (LHS prec.) or w=JM^{-1}v (RHS prec.)
-           
-   // For fast access
-   double* block_w_r_pt=block_w[0].values_pt();
-   
-   // For fast access
-   double* block_w_c_pt=block_w[1].values_pt();
-   
-   // Loop over all of the entries on and above the principal subdiagonal of
-   // the Hessenberg matrix in the j-th column (remembering that
-   // the indices of the upper Hessenberg matrix are swapped for the purpose
-   // of implementation)
-   for (unsigned i=0;i<j+1;i++)
-   {
-    // For fast access
-    const double* vi_r_pt=block_v[i][0].values_pt();
-   
-    // For fast access
-    const double* vi_c_pt=block_v[i][1].values_pt();
-    
-    // Loop over the entries of v and w
-    for (unsigned k=0;k<n_row;k++)
-    {
-     // Store the appropriate entry in v as a complex value
-     std::complex<double> complex_v(vi_r_pt[k],vi_c_pt[k]);
-     
-     // Store the appropriate entry in w as a complex value
-     std::complex<double> complex_w(block_w_r_pt[k],block_w_c_pt[k]);
-
-     // Update the value of H(i,j) noting we're computing a complex
-     // inner product here (the ordering is very important here!)
-     hessenberg[j][i]+=std::conj(complex_v)*complex_w;
-    }
-   
-    // Orthonormalise w against all previous orthogonal vectors, v_i by
-    // looping over its entries and updating them
-    for (unsigned k=0;k<n_row;k++)
-    {
-     // Update the real part of the k-th entry of w
-     block_w_r_pt[k]-=(hessenberg[j][i].real()*vi_r_pt[k]-
-		       hessenberg[j][i].imag()*vi_c_pt[k]);
-
-     // Update the imaginary part of the k-th entry of w
-     block_w_c_pt[k]-=(hessenberg[j][i].real()*vi_c_pt[k]+
-		       hessenberg[j][i].imag()*vi_r_pt[k]);
-    }
-   } // for (unsigned i=0;i<j+1;i++)
-
-   // Calculate the norm of the real part of w
-   norm_r=block_w[0].norm();
-
-   // Calculate the norm of the imaginary part of w
-   norm_c=block_w[1].norm();
-
-   // Calculate the norm of the vector w using norm_r and norm_c and assign
-   // its value to the appropriate entry in the Hessenberg matrix
-   hessenberg[j][j+1]=sqrt(pow(norm_r,2.0)+pow(norm_c,2.0));
-
-   // Build the (j+1)-th basis vector
-   for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-   {
-    // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
-    // to the real and imaginary part of the zeroth vector, respectively
-    block_v[j+1][dof_type].build(this->block_distribution_pt(dof_type),0.0);
-   }
-   
-   // Check if the value of hessenberg[j][j+1] is zero. If it
-   // isn't then we update the next entries in v
-   if (hessenberg[j][j+1]!=0.0)
-   {    
-    // For fast access
-    double* v_r_pt=block_v[j+1][0].values_pt();
-   
-    // For fast access
-    double* v_c_pt=block_v[j+1][1].values_pt();
-    
-    // For fast access
-    const double* block_w_r_pt=block_w[0].values_pt();
-   
-    // For fast access
-    const double* block_w_c_pt=block_w[1].values_pt();
-
-    // Notice, the value of H(j,j+1), as calculated above, is clearly a real
-    // number. As such, calculating the division
-    //                      v_{j+1}=w_{j}/h_{j+1,j},
-    // here is simple, i.e. we don't need to worry about cross terms in the
-    // algebra. To avoid computing h_{j+1,j} several times we precompute it
-    double h_subdiag_val=hessenberg[j][j+1].real();
-    
-    // Loop over the entries of the new orthogonal vector and set its values
-    for(unsigned k=0;k<n_row;k++)
-    {
-     // The i-th entry of the real component is given by
-     v_r_pt[k]=block_w_r_pt[k]/h_subdiag_val;
-
-     // Similarly, the i-th entry of the imaginary component is given by
-     v_c_pt[k]=block_w_c_pt[k]/h_subdiag_val;
-    }
-   }
-   // Otherwise, we have to jump to the next part of the algorithm; if
-   // the value of hessenberg[j][j+1] is zero then the norm of the latest
-   // orthogonal vector is zero. This is only possible if the entries
-   // in w are all zero. As a result, the Krylov space of A and r_0 has
-   // been spanned by the previously calculated orthogonal vectors
-   else
-   {
-    // Book says "Set m=j and jump to step 11" (p.172)...
-    // Do something here!
-    oomph_info << "Subdiagonal Hessenberg entry is zero. "
-	       << "Do something here..." << std::endl;
-   } // if (hessenberg[j][j+1]!=0.0)
-
-   // Loop over the entries in the Hessenberg matrix and calculate the
-   // entries of the Givens rotation matrices
-   for (unsigned k=0;k<j;k++)
-   {
-    // Apply the plane rotation to all of the previous entries in the
-    // (j)-th column (remembering the indexing is reversed)
-    apply_plane_rotation(hessenberg[j][k],hessenberg[j][k+1],cs[k],sn[k]);
-   }
-
-   // Now calculate the entries of the latest Givens rotation matrix
-   generate_plane_rotation(hessenberg[j][j],hessenberg[j][j+1],cs[j],sn[j]);
-
-   // Apply the plane rotation using the newly calculated entries
-   apply_plane_rotation(hessenberg[j][j],hessenberg[j][j+1],cs[j],sn[j]);
-
-   // Apply a plane rotation to the corresponding entry in the vector
-   // s used in the minimisation problem, J(y)=min||s-R_m*y||
-   apply_plane_rotation(s[j],s[j+1],cs[j],sn[j]);
-
-   // Compute current residual using equation (6.42) in Saad Y, "Iterative
-   // methods for sparse linear systems", p.177.]. Note, since s has complex
-   // entries we have to use std::abs instead of std::fabs
-   beta=std::abs(s[j+1]);
-
-   // Compute the relative residual
-   resid=beta/normb;
-     
-   // If required will document convergence history to screen or file (if
-   // stream open)
-   if (Doc_convergence_history)
-   {
-    // If an output file which is open isn't provided then output to screen
-    if (!Output_file_stream.is_open())
-    {
-     // Output the residual value to the screen
-     oomph_info << j+1 << " " << resid << std::endl;
-    }
-    // Otherwise, output to file
-    else
-    {
-     // Output the residual value to file
-     Output_file_stream << j+1 << " " << resid <<std::endl;
-    }
-   } // if (Doc_convergence_history)
-
-   // If the required tolerance has been met
-   if (resid<Tolerance)
-   {
-    // Store the number of iterations taken
-    Iterations=j+1;
-
-    // Update the result vector using the result, x=x_0+V_m*y (where V_m
-    // is given by v here)
-    update(j,hessenberg,s,block_v,block_solution);
-
-    // Copy the vectors in block_solution to solution
-    this->return_block_vectors(block_solution,solution);
-    
-    // If time documentation was enabled
-    if(Doc_time)
-    {
-     // Output the current normalised residual norm
-     oomph_info << "\nGMRES converged (1). Normalised residual norm: "
-		<< resid << std::endl;
-
-     // Output the number of iterations it took for convergence
-     oomph_info << "Number of iterations to convergence: "
-		<< j+1 << "\n" << std::endl;
-    }
-
-    // Stop the timer
-    double t_end=TimingHelpers::timer();
-
-    // Calculate the time taken to calculate the solution
-    Solution_time=t_end-t_start;
-
-    // If time documentation was enabled
-    if(Doc_time)
-    {
-     // Output the time taken to solve the problem using GMRES
-     oomph_info << "Time for solve with GMRES [sec]: "
-		<< Solution_time << std::endl;
-    }
-
-    // As we've met the tolerance for the solver and everything that should
-    // be documented, has been, finish using the solver
-    return;
-   } // if (resid<Tolerance)
-  } // for (unsigned j=0;j<Max_iter;j++)
-  
-  // Store the number of iterations taken
-  Iterations=Max_iter;
-
-  // Only update if we actually did something
-  if (Max_iter>0)
-  {
-   // Update the result vector using the result, x=x_0+V_m*y (where V_m
-   // is given by v here)
-   update(Max_iter-1,hessenberg,s,block_v,block_solution);
-
-   // Copy the vectors in block_solution to solution
-   this->return_block_vectors(block_solution,solution);
-  }
-   
-  // Solve Mr=(b-Jx) for r
-  {
-   // Create a temporary vector of DoubleVectors
-   Vector<DoubleVector> block_temp(2);
-
-   // Create two DoubleVectors
-   for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-   {
-    // Build the distribution of the (dof_type)-th vector
-    block_temp[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-   }
-
-   // Calculate the value of Jx
-   complex_matrix_multiplication(Matrices_storage_pt,block_solution,block_temp);
-
-   // Get the values pointer of the vector (real)
-   double* block_temp_r_pt=block_temp[0].values_pt();
-   
-   // Get the values pointer of the vector (imaginary)
-   double* block_temp_c_pt=block_temp[1].values_pt();
-
-   // Get the values pointer of the RHS vector (real)
-   const double* block_rhs_r_pt=block_rhs[0].values_pt();
-   
-   // Get the values pointer of the RHS vector (imaginary)
-   const double* block_rhs_c_pt=block_rhs[1].values_pt();
-
-   // Loop over the dofs
-   for (unsigned i=0;i<n_row;i++)
-   {
-    // Calculate b-Jx (real)
-    block_temp_r_pt[i]=block_rhs_r_pt[i]-block_temp_r_pt[i];
-    
-    // Calculate b-Jx (imaginary)
-    block_temp_c_pt[i]=block_rhs_c_pt[i]-block_temp_c_pt[i];
-   }
-
-   // If we're using LHS preconditioning
-   if(Preconditioner_LHS)
-   {
-    // Create a temporary DoubleVectors
-    DoubleVector temp(IterativeLinearSolver::distribution_pt(),0.0);
-    
-    // Create a vector of the same size as rhs
-    DoubleVector r(IterativeLinearSolver::distribution_pt(),0.0);
-   
-    // Copy the vectors in r to full_r 
-    this->return_block_vectors(block_temp,temp);
-    
-    // Copy the vectors in r to full_r 
-    this->return_block_vectors(block_r,r);
-   
-    // Apply the preconditioner
-    preconditioner_pt()->preconditioner_solve(temp,r); 
-   }
-  }
-  
-  // Compute the current residual
-  beta=0.0;
-
-  // Get access to the values pointer (real)
-  norm_r=block_r[0].norm();
-   
-  // Get access to the values pointer (imaginary)
-  norm_c=block_r[1].norm();
-
-  // Calculate the full norm
-  beta=sqrt(pow(norm_r,2.0)+pow(norm_c,2.0));
-
-  // Calculate the relative residual
-  resid=beta/normb;
-  
-  // If the relative residual lies within tolerance
-  if (resid<Tolerance)
-  {
-   // If time documentation is enabled
-   if(Doc_time)
-   {
-    // Notify the user
-    oomph_info << "\nGMRES converged (2). Normalised residual norm: "
-	       << resid
-	       << "\nNumber of iterations to convergence: "
-	       << Iterations << "\n" << std::endl;
-   }
-
-   // End the timer
-   double t_end=TimingHelpers::timer();
-
-   // Calculate the time taken for the solver
-   Solution_time=t_end-t_start;
-
-   // If time documentation is enabled
-   if(Doc_time)
-   {
-    oomph_info << "Time for solve with GMRES [sec]: "
-	       << Solution_time << std::endl;
-   }
-   return;
-  }
-  
-  // Otherwise GMRES failed convergence
-  oomph_info << "\nGMRES did not converge to required tolerance! "
-	     << "\nReturning with normalised residual norm: " << resid 
-	     << "\nafter " << Max_iter << " iterations.\n" << std::endl;
-
-  // Throw an error if requested
-  if(Throw_error_after_max_iter)
-  {
-   std::string err="Solver failed to converge and you requested an error";
-   err+=" on convergence failures.";
-   throw OomphLibError(err,OOMPH_EXCEPTION_LOCATION,
-                       OOMPH_CURRENT_FUNCTION);
-  }
-  
-  // Finish using the solver
-  return;
- } // End of solve_helper
-
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
- 
-//======================================================================
-/// \short The FGMRES method, i.e. the flexible variant of the GMRES
-/// method which allows for nonconstant preconditioners [see Saad Y,
-/// "Iterative methods for sparse linear systems", p.287]. Note, FGMRES
-/// can only cater to right preconditioning; if the user tries to switch
-/// to left preconditioning they will be notified of this
-//======================================================================
-template<typename MATRIX>
-class HelmholtzFGMRESMG : public virtual HelmholtzGMRESMG<MATRIX>
-{
-
- public:
-
- /// Constructor (empty)
- HelmholtzFGMRESMG() : HelmholtzGMRESMG<MATRIX>()
-  {
-   // Can only use RHS preconditioning
-   this->Preconditioner_LHS=false;
+    /// \short boolean indicating use of left hand preconditioning (if true)
+    /// or right hand preconditioning (if false)
+    bool Preconditioner_LHS;
   };
-  
- /// Destructor (cleanup storage)
- virtual ~HelmholtzFGMRESMG()
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  //=============================================================================
+  /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector
+  /// and returns the solution of the linear system.
+  /// based on the algorithm presented in Templates for the
+  /// Solution of Linear Systems: Building Blocks for Iterative Methods,
+  /// Barrett, Berry et al, SIAM, 2006 and the implementation in the IML++
+  /// library : http://math.nist.gov/iml++/
+  //=============================================================================
+  template<typename MATRIX>
+  void HelmholtzGMRESMG<MATRIX>::solve_helper(
+    DoubleMatrixBase* const& matrix_pt,
+    const DoubleVector& rhs,
+    DoubleVector& solution)
   {
-   // Call the clean up function in the base class GMRES
-   this->clean_up_memory();
-  }
- 
- /// Broken copy constructor
- HelmholtzFGMRESMG(const HelmholtzFGMRESMG&) 
-  { 
-   BrokenCopy::broken_copy("HelmholtzFGMRESMG");
-  } 
- 
- /// Broken assignment operator
- void operator=(const HelmholtzFGMRESMG&) 
-  {
-   BrokenCopy::broken_assign("HelmholtzFGMRESMG");
-  }
-  
- /// \short Overloaded function to let the user know that left preconditioning
- /// is not possible with FGMRES, only right preconditioning
- void set_preconditioner_LHS()
-  {
-   // Create an output stream
-   std::ostringstream error_message_stream;
+    // Set the number of dof types (real and imaginary for this solver)
+    unsigned n_dof_types = this->ndof_types();
 
-   // Create an error message
-   error_message_stream << "FGMRES cannot use left preconditioning. It is "
-			<< "only capable of using right preconditioning."
-			<< std::endl;
-
-   // Throw the error message
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  } // End of set_preconditioner_LHS
- 
- /// \short Solver: Takes pointer to problem and returns the results vector
- /// which contains the solution of the linear system defined by
- /// the problem's fully assembled Jacobian and residual vector.
- void solve(Problem* const &problem_pt,DoubleVector &result)
-  { 
-#ifdef OOMPH_HAS_MPI
-  // Make sure that this is running in serial. Can't guarantee it'll
-  // work when the problem is distributed over several processors
-  if (MPI_Helpers::communicator_pt()->nproc()>1)
-  {
-   // Throw a warning
-   OomphLibWarning("Can't guarantee the MG solver will work in parallel!",
-		   OOMPH_CURRENT_FUNCTION,
-		   OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-  
-   // Find # of degrees of freedom (variables)
-   unsigned n_dof=problem_pt->ndof();
- 
-   // Initialise timer
-   double t_start=TimingHelpers::timer();
-
-   // We're not re-solving
-   this->Resolving=false;
-
-   // Get rid of any previously stored data
-   this->clean_up_memory();
-
-   // Grab the communicator from the MGProblem object and assign it
-   this->set_comm_pt(problem_pt->communicator_pt());
-    
-   // Setup the distribution
-   LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_dof,false);
-
-   // Build the internal distribution in this way because both the
-   // IterativeLinearSolver and BlockPreconditioner class have base-
-   // class subobjects of type oomph::DistributableLinearAlgebraObject
-   IterativeLinearSolver::build_distribution(dist);
-
-   // Get Jacobian matrix in format specified by template parameter
-   // and nonlinear residual vector
-   MATRIX* matrix_pt=new MATRIX;
-   DoubleVector f;    
-   if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
-   {
-    if (dynamic_cast<CRDoubleMatrix*>(matrix_pt) != 0)
-    {
-     dynamic_cast<CRDoubleMatrix* >(matrix_pt)->
-      build(IterativeLinearSolver::distribution_pt());
-     f.build(IterativeLinearSolver::distribution_pt(),0.0);
-    }
-   }
-     
-   // Get the Jacobian and residuals vector
-   problem_pt->get_jacobian(f,*matrix_pt);
-    
-   // We've made the matrix, we can delete it...
-   this->Matrix_can_be_deleted=true;
-
-   // Replace the current matrix used in Preconditioner by the new matrix
-   this->set_matrix_pt(matrix_pt);
-
-   // The preconditioner works with one mesh; set it! Since we only use
-   // the block preconditioner on the finest level, we use the mesh from
-   // that level
-   this->set_nmesh(1);
-
-   // Elements in actual pml layer are trivially wrapped versions of
-   // their bulk counterparts. Technically they are different elements
-   // so we have to allow different element types
-   bool allow_different_element_types_in_mesh=true;
-   this->set_mesh(0,problem_pt->mesh_pt(),
-		  allow_different_element_types_in_mesh);
-  
-   // Set up the generic block look up scheme
-   this->block_setup();
-  
-   // Extract the number of blocks.
-   unsigned nblock_types=this->nblock_types();
-  
 #ifdef PARANOID
-   // PARANOID check - there must only be two block types
-   if (nblock_types!=2)
-   {
-    // Create the error message
-    std::stringstream tmp;
-    tmp << "There are supposed to be two block types.\nYours has "
-	<< nblock_types << std::endl;
-
-    // Throw an error
-    throw OomphLibError(tmp.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-  
-   // Resize the storage for the system matrices
-   this->Matrices_storage_pt.resize(2,0);
-
-   // Loop over the rows of the block matrix
-   for (unsigned i=0;i<nblock_types;i++)
-   {
-    // Fix the column index
-    unsigned j=0;
-
-    // Create new CRDoubleMatrix objects
-    this->Matrices_storage_pt[i]=new CRDoubleMatrix;
-   
-    // Extract the required blocks, i.e. the first column
-    this->get_block(i,j,*(this->Matrices_storage_pt[i]));
-   }
-    
-   // Doc time for setup
-   double t_end=TimingHelpers::timer();
-   this->Jacobian_setup_time=t_end-t_start;
-
-   if(this->Doc_time)
-   {
-    oomph_info << "\nTime for setup of block Jacobian [sec]: "
-	       << this->Jacobian_setup_time << std::endl;
-   }
-
-   // Call linear algebra-style solver
-   // If the result distribution is wrong, then redistribute
-   // before the solve and return to original distribution
-   // afterwards
-   if((!(*result.distribution_pt()==*IterativeLinearSolver::distribution_pt()))
-      &&(result.built()))
-   {
-    // Make a distribution object
-    LinearAlgebraDistribution temp_global_dist(result.distribution_pt());
-
-    // Build the result vector distribution
-    result.build(IterativeLinearSolver::distribution_pt(),0.0);
-
-    // Solve the problem
-    solve_helper(matrix_pt,f,result);
-
-    // Redistribute the vector
-    result.redistribute(&temp_global_dist);
-   }
-   // Otherwise just solve
-   else
-   {
-    // Solve
-    solve_helper(matrix_pt,f,result);
-   }
-     
-   // Kill matrix unless it's still required for resolve
-   if (!(this->Enable_resolve))
-   {
-    // Clean up anything left in memory
-    this->clean_up_memory();
-   }
-  } // End of solve
- 
-  private:
-
- /// General interface to solve function 
- void solve_helper(DoubleMatrixBase* const &matrix_pt,
-                   const DoubleVector &rhs,
-                   DoubleVector &solution);
-
- /// Helper function to update the result vector
- void update(const unsigned& k,
-	     const Vector<Vector<std::complex<double> > >& hessenberg,
-	     const Vector<std::complex<double> >& s,
-	     const Vector<Vector<DoubleVector> >& z_m,
-	     Vector<DoubleVector>& x)
-  {
-   // Make a local copy of s
-   Vector<std::complex<double> > y(s);
-   
-   //-----------------------------------------------------------------
-   // The Hessenberg matrix should be an upper triangular matrix at
-   // this point (although from its storage it would appear to be a
-   // lower triangular matrix since the indexing has been reversed)
-   // so finding the minimiser of J(y)=min||s-R_m*y|| where R_m is
-   // the matrix R in the QR factorisation of the Hessenberg matrix.
-   // Therefore, to obtain y we simply need to use a backwards
-   // substitution. Note: The implementation here may appear to be
-   // somewhat confusing as the indexing in the Hessenberg matrix is
-   // reversed. This implementation of a backwards substitution does
-   // not run along the columns of the triangular matrix but rather
-   // up the rows.
-   //-----------------------------------------------------------------
-    
-   // The outer loop is a loop over the columns of the Hessenberg matrix
-   // since the indexing is reversed
-   for (int i=int(k);i>=0;i--)
-   {     
-    // Divide the i-th entry of y by the i-th diagonal entry of H
-    y[i]/=hessenberg[i][i];
-     
-    // The inner loop is a loop over the rows of the Hessenberg matrix
-    for (int j=i-1;j>=0;j--)
+    // This only works for 2 dof types
+    if (n_dof_types != 2)
     {
-     // Update the j-th entry of y
-     y[j]-=hessenberg[i][j]*y[i];
+      // Create an output stream
+      std::stringstream error_message_stream;
+
+      // Create the error message
+      error_message_stream << "This preconditioner only works for problems "
+                           << "with 2 dof types\nYours has " << n_dof_types;
+
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
     }
-   } // for (int i=int(k);i>=0;i--)
+#endif
 
-   // Calculate the number of entries in x (simply use the real part as
-   // both the real and imaginary part should have the same length)
-   unsigned n_row=x[0].nrow();
-   
-   // Build a temporary vector with entries initialised to 0.0
-   Vector<DoubleVector> block_update(2);    
-    
-   // Build the distributions
-   for (unsigned dof_type=0;dof_type<2;dof_type++)
-   {
-    // Build the (dof_type)-th vector of block_update
-    block_update[dof_type].build(x[0].distribution_pt(),0.0);
-   }
-    
-   // Get access to the underlying values
-   double* block_update_r_pt=block_update[0].values_pt();
-    
-   // Get access to the underlying values
-   double* block_update_c_pt=block_update[1].values_pt();
-    
-   // Calculate x=Vy
-   for (unsigned j=0;j<=k;j++)
-   {
-    // Get access to j-th column of Z_m
-    const double* z_mj_r_pt=z_m[j][0].values_pt();
-     
-    // Get access to j-th column of Z_m
-    const double* z_mj_c_pt=z_m[j][1].values_pt();
-     
-    // Loop over the entries in x and update them
-    for (unsigned i=0;i<n_row;i++)
-    {     
-     // Update the real part of the i-th entry in x
-     block_update_r_pt[i]+=(z_mj_r_pt[i]*y[j].real())-(z_mj_c_pt[i]*y[j].imag());
+    // Get the number of dofs (note, the total number of dofs in the problem
+    // is 2*n_row but if the constituent vectors and matrices were stored in
+    // complex objects there would only be (n_row) rows so we use that)
+    unsigned n_row = Matrices_storage_pt[0]->nrow();
 
-     // Update the imaginary part of the i-th entry in x      
-     block_update_c_pt[i]+=(z_mj_c_pt[i]*y[j].real())+(z_mj_r_pt[i]*y[j].imag());
+    // Make sure Max_iter isn't greater than n_dof. The user cannot use this
+    // many iterations when using Krylov subspace methods
+    if (Max_iter > n_row)
+    {
+      // Create an output string stream
+      std::ostringstream error_message_stream;
+
+      // Create the error message
+      error_message_stream << "The maximum number of iterations cannot exceed "
+                           << "the number of rows in the problem."
+                           << "\nMaximum number of iterations: " << Max_iter
+                           << "\nNumber of rows: " << n_row << std::endl;
+
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
     }
-   } // for (unsigned j=0;j<=k;j++)
-   
-   // Use the update: x_m=x_0+inv(M)Vy [see Saad Y,"Iterative methods for
-   // sparse linear systems", p.284]
-   for (unsigned dof_type=0;dof_type<2;dof_type++)
-   {
-    // Update the solution
-    x[dof_type]+=block_update[dof_type];
-   }
-  } // End of update
-};
- 
- 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
 
- 
-//=============================================================================
-/// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector 
-/// and returns the solution of the linear system.
-/// based on the algorithm presented in Templates for the
-/// Solution of Linear Systems: Building Blocks for Iterative Methods, Barrett,
-/// Berry et al, SIAM, 2006 and the implementation in the IML++ library :
-/// http://math.nist.gov/iml++/ 
-//=============================================================================
- template <typename MATRIX>
- void HelmholtzFGMRESMG<MATRIX>::
- solve_helper(DoubleMatrixBase* const &matrix_pt,
-	      const DoubleVector& rhs,
-	      DoubleVector& solution)
- {
-  // Set the number of dof types (real and imaginary for this solver)
-  unsigned n_dof_types=this->ndof_types();
-  
 #ifdef PARANOID
-  // This only works for 2 dof types
-  if (n_dof_types!=2)
-  {
-   // Create an output stream
-   std::stringstream error_message_stream;
-
-   // Create the error message
-   error_message_stream << "This preconditioner only works for problems "
-			<< "with 2 dof types\nYours has " << n_dof_types;
-
-   // Throw the error message
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
+    // Loop over the real and imaginary parts
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // PARANOID check that if the matrix is distributable then it should not
+      // be then it should not be distributed
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(
+            Matrices_storage_pt[dof_type]) != 0)
+      {
+        if (dynamic_cast<DistributableLinearAlgebraObject*>(
+              Matrices_storage_pt[dof_type])
+              ->distributed())
+        {
+          std::ostringstream error_message_stream;
+          error_message_stream << "The matrix must not be distributed.";
+          throw OomphLibError(error_message_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+    // PARANOID check that this rhs distribution is setup
+    if (!rhs.built())
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream << "The rhs vector distribution must be setup.";
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    // PARANOID check that the rhs has the right number of global rows
+    if (rhs.nrow() != 2 * n_row)
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream << "RHS does not have the same dimension as the"
+                           << " linear system";
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    // PARANOID check that the rhs is not distributed
+    if (rhs.distribution_pt()->distributed())
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream << "The rhs vector must not be distributed.";
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    // PARANOID check that if the result is setup it matches the distribution
+    // of the rhs
+    if (solution.built())
+    {
+      if (!(*rhs.distribution_pt() == *solution.distribution_pt()))
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "If the result distribution is setup then it "
+                             << "must be the same as the rhs distribution";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+    } // if (solution[dof_type].built())
 #endif
-   
-  // Get the number of dofs (note, the total number of dofs in the problem
-  // is 2*n_row but if the constituent vectors and matrices were stored in
-  // complex objects there would only be (n_row) rows so we use that)
-  unsigned n_row=this->Matrices_storage_pt[0]->nrow();  
-  
-  // Make sure Max_iter isn't greater than n_dof. The user cannot use this
-  // many iterations when using Krylov subspace methods
-  if (this->Max_iter>n_row)
-  {
-   // Create an output string stream
-   std::ostringstream error_message_stream;
 
-   // Create the error message
-   error_message_stream << "The maximum number of iterations cannot exceed "
-			<< "the number of rows in the problem."
-			<< "\nMaximum number of iterations: " << this->Max_iter
-			<< "\nNumber of rows: " << n_row
-			<< std::endl;
-
-   // Throw the error message
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-  
-#ifdef PARANOID
-  // Loop over the real and imaginary parts
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // PARANOID check that if the matrix is distributable then it should not be
-   // then it should not be distributed
-   if (dynamic_cast<DistributableLinearAlgebraObject*>
-       (this->Matrices_storage_pt[dof_type])!=0)
-   {
-    if (dynamic_cast<DistributableLinearAlgebraObject*>
-	(this->Matrices_storage_pt[dof_type])->distributed())
+    // Set up the solution distribution if it's not already distributed
+    if (!solution.built())
     {
-     std::ostringstream error_message_stream;
-     error_message_stream << "The matrix must not be distributed.";
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
+      // Build the distribution
+      solution.build(IterativeLinearSolver::distribution_pt(), 0.0);
     }
-   }
-  }
-  // PARANOID check that this rhs distribution is setup
-  if (!rhs.built())
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream << "The rhs vector distribution must be setup.";
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-  // PARANOID check that the rhs has the right number of global rows
-  if(rhs.nrow()!=2*n_row)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream << "RHS does not have the same dimension as the"
-			<< " linear system";
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-  // PARANOID check that the rhs is not distributed
-  if (rhs.distribution_pt()->distributed())
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream << "The rhs vector must not be distributed.";
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-  // PARANOID check that if the result is setup it matches the distribution
-  // of the rhs
-  if (solution.built())
-  {
-   if (!(*rhs.distribution_pt()==*solution.distribution_pt()))
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream << "If the result distribution is setup then it "
-			 << "must be the same as the rhs distribution";
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-  } // if (solution[dof_type].built())
-#endif
-   
-  // Set up the solution distribution if it's not already distributed
-  if (!solution.built())
-  {
-   // Build the distribution
-   solution.build(IterativeLinearSolver::distribution_pt(),0.0);
-  }
-  // Otherwise initialise all entries to zero
-  else
-  {
-   // Initialise the entries in the k-th vector in solution to zero
-   solution.initialise(0.0);
-  }
-
-  // Create a vector of DoubleVectors (this is a distributed vector so we have
-  // to create two separate DoubleVector objects to cope with the arithmetic)
-  Vector<DoubleVector> block_solution(n_dof_types);
-
-  // Create a vector of DoubleVectors (this is a distributed vector so we have
-  // to create two separate DoubleVector objects to cope with the arithmetic)
-  Vector<DoubleVector> block_rhs(n_dof_types);
-  
-  // Build the distribution of both vectors
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {  
-   // Build the distribution of the k-th constituent vector
-   block_solution[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-   
-   // Build the distribution of the k-th constituent vector
-   block_rhs[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-  }
-  
-  // Grab the solution vector in block form
-  this->get_block_vectors(solution,block_solution);
-   
-  // Grab the RHS vector in block form
-  this->get_block_vectors(rhs,block_rhs);
-   
-  // Start the solver timer
-  double t_start=TimingHelpers::timer();
-
-  // Storage for the relative residual
-  double resid;
-  
-  // Initialise vectors (since these are not distributed vectors we template
-  // one vector by the type std::complex<double> instead of using two vectors,
-  // each templated by the type double
-
-  // Vector, s, used in the minimisation problem: J(y)=min||s-R_m*y||
-  // [see Saad Y."Iterative methods for sparse linear systems", p.176.]
-  Vector<std::complex<double> > s(n_row+1,std::complex<double>(0.0,0.0));
-
-  // Vector to store the value of cos(theta) when using the Givens rotation
-  Vector<std::complex<double> > cs(n_row+1,std::complex<double>(0.0,0.0));
-
-  // Vector to store the value of sin(theta) when using the Givens rotation
-  Vector<std::complex<double> > sn(n_row+1,std::complex<double>(0.0,0.0));
-
-  // Create a vector of DoubleVectors (this is a distributed vector so we have
-  // to create two separate DoubleVector objects to cope with the arithmetic)
-  Vector<DoubleVector> block_w(n_dof_types);
-
-  // Build the distribution of both vectors
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the distribution of the k-th constituent vector
-   block_w[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-  }
-
-  // Set up the preconditioner only if we're not re-solving
-  if (!(this->Resolving))
-  {
-   // Only set up the preconditioner before solve if required
-   if (this->Setup_preconditioner_before_solve)
-   {     
-    // Set up the preconditioner from the Jacobian matrix
-    double t_start_prec=TimingHelpers::timer();
-     
-    // Use the setup function in the Preconditioner class
-    this->preconditioner_pt()->setup(dynamic_cast<MATRIX*>(matrix_pt));
-    
-    // Doc time for setup of preconditioner
-    double t_end_prec=TimingHelpers::timer();
-    this->Preconditioner_setup_time=t_end_prec-t_start_prec;
-     
-    // If time documentation is enabled
-    if(this->Doc_time)
-    {
-     // Output the time taken
-     oomph_info << "Time for setup of preconditioner [sec]: "
-		<< this->Preconditioner_setup_time << std::endl;     
-    }
-   }
-  }
-  else
-  {
-   // If time documentation is enabled
-   if(this->Doc_time)
-   {
-    // Notify the user
-    oomph_info << "Setup of preconditioner is bypassed in resolve mode" 
-	       << std::endl;
-   }
-  } // if (!Resolving) else
- 
-  // Create a vector of DoubleVectors to store the RHS of b-Jx=Mr. We assume
-  // both x=0 and that a preconditioner is not applied by which we deduce b=r
-  Vector<DoubleVector> block_r(n_dof_types);
-
-  // Build the distribution of both vectors
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the distribution of the k-th constituent vector
-   block_r[dof_type].build(this->block_distribution_pt(dof_type),0.0);
-  }
-
-  // Store the value of b (the RHS vector) in r
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Copy the entries of rhs into r
-   block_r[dof_type]=block_rhs[dof_type];
-  }
-
-  // Calculate the norm of the real part of r
-  double norm_r=block_r[0].norm();
-
-  // Calculate the norm of the imaginary part of r
-  double norm_c=block_r[1].norm();
-
-  // Compute norm(r)
-  double normb=sqrt(pow(norm_r,2.0)+pow(norm_c,2.0));
-  
-  // Set the value of beta (the initial residual)
-  double beta=normb;
-  
-  // Compute the initial relative residual. If the entries of the RHS vector
-  // are all zero then set normb equal to one. This is because we divide the
-  // value of the norm at later stages by normb and dividing by zero is not
-  // definied
-  if (normb==0.0)
-  {
-   // Set the value of normb
-   normb=1.0;
-  }
-
-  // Calculate the ratio between the initial norm and the current norm.
-  // Since we haven't completed an iteration yet this will simply be one
-  // unless normb was zero, in which case resid will have value zero
-  resid=beta/normb;
-
-  // If required, will document convergence history to screen or file (if
-  // stream open)
-  if (this->Doc_convergence_history)
-  {
-   // If an output file which is open isn't provided then output to screen
-   if (!(this->Output_file_stream.is_open()))
-   {
-    // Output the residual value to the screen
-    oomph_info << 0 << " " << resid << std::endl;
-   }
-   // Otherwise, output to file
-   else
-   {
-    // Output the residual value to file
-    this->Output_file_stream << 0 << " " << resid <<std::endl;
-   }
-  } // if (Doc_convergence_history)
-
-  // If the GMRES algorithm converges immediately
-  if (resid<=this->Tolerance)
-  {
-   // If time documentation is enabled
-   if(this->Doc_time)
-   {
-    // Notify the user
-    oomph_info << "FGMRES converged immediately. Normalised residual norm: "
-	       << resid << std::endl;
-   }
-
-   // Finish running the solver
-   return;
-  } // if (resid<=Tolerance)
-
-  // Initialise a vector of orthogonal basis vectors
-  Vector<Vector<DoubleVector> > block_v;
-
-  // Resize the number of vectors needed
-  block_v.resize(n_row+1);
-
-  // Create a vector of DoubleVectors (stores the preconditioned vectors)
-  Vector<Vector<DoubleVector> > block_z;
-
-  // Resize the number of vectors needed
-  block_z.resize(n_row+1);
-  
-  // Resize each Vector of DoubleVectors to store the real and imaginary
-  // part of a given vector
-  for (unsigned i=0;i<n_row+1;i++)
-  {
-   // Create space for two DoubleVector objects in each Vector
-   block_v[i].resize(n_dof_types);
-   
-   // Create space for two DoubleVector objects in each Vector
-   block_z[i].resize(n_dof_types);
-  }
-
-  // Initialise the upper hessenberg matrix. Since we are not using
-  // distributed vectors here, the algebra is best done using entries
-  // of the type std::complex<double>. NOTE: For implementation purposes
-  // the upper Hessenberg matrix indices are swapped so the matrix is
-  // effectively transposed
-  Vector<Vector<std::complex<double> > > hessenberg(n_row+1);
-
-  // Build the zeroth basis vector
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {
-   // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
-   // to the real and imaginary part of the zeroth vector, respectively
-   block_v[0][dof_type].build(this->block_distribution_pt(dof_type),0.0);
-  }
-
-  // Loop over the real and imaginary parts of v
-  for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-  {   
-   // For fast access
-   double* block_v0_pt=block_v[0][dof_type].values_pt();
-   
-   // For fast access
-   const double* block_r_pt=block_r[dof_type].values_pt();     
-     
-   // Set the zeroth basis vector v[0] to r/beta
-   for (unsigned i=0;i<n_row;i++)
-   {
-    // Assign the i-th entry of the zeroth basis vector
-    block_v0_pt[i]=block_r_pt[i]/beta;
-   }
-  } // for (unsigned k=0;k<n_dof_types;k++)
-    
-  // Set the first entry in the minimisation problem RHS vector (is meant
-  // to the vector beta*e_1 initially, where e_1 is the unit vector with
-  // one in its first entry)
-  s[0]=beta;
-
-  // Compute the next step of the iterative scheme
-  for (unsigned j=0;j<this->Max_iter;j++)
-  {
-   // Resize the next column of the upper hessenberg matrix
-   hessenberg[j].resize(j+2,std::complex<double>(0.0,0.0));
-
-   // Calculate w_j=Jz_j where z_j=M^{-1}v_j (RHS prec.) 
-   {
-    // Create a temporary vector
-    DoubleVector vj(IterativeLinearSolver::distribution_pt(),0.0);
-        
-    // Create a temporary vector
-    DoubleVector zj(IterativeLinearSolver::distribution_pt(),0.0);
-    
-    // Create a temporary vector
-    DoubleVector w(IterativeLinearSolver::distribution_pt(),0.0);
-        
-    // Create two DoubleVectors
-    for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-    {
-     // Build the k-th part of the j-th preconditioning result vector
-     block_z[j][dof_type].build(this->block_distribution_pt(dof_type),0.0);
-    }
-    
-    // Copy the real and imaginary part of v[j] into one vector, vj
-    this->return_block_vectors(block_v[j],vj);
-     
-    // Calculate z_j=M^{-1}v_j by saad p270
-    this->preconditioner_pt()->preconditioner_solve(vj,zj);
-     
-    // Copy zj into z[j][0] and z[j][1]
-    this->get_block_vectors(zj,block_z[j]);
-     
-    // Calculate w_j=J*(M^{-1}v_j). Note, we cannot use inbuilt complex matrix
-    // algebra here as we're using distributed vectors
-    this->complex_matrix_multiplication(this->Matrices_storage_pt,block_z[j],block_w);
-   } // Calculate w=JM^{-1}v (RHS prec.)
-           
-   // For fast access
-   double* block_w_r_pt=block_w[0].values_pt();
-   
-   // For fast access
-   double* block_w_c_pt=block_w[1].values_pt();
-   
-   // Loop over all of the entries on and above the principal subdiagonal of
-   // the Hessenberg matrix in the j-th column (remembering that
-   // the indices of the upper Hessenberg matrix are swapped for the purpose
-   // of implementation)
-   for (unsigned i=0;i<j+1;i++)
-   {
-    // For fast access
-    const double* block_vi_r_pt=block_v[i][0].values_pt();
-   
-    // For fast access
-    const double* block_vi_c_pt=block_v[i][1].values_pt();
-    
-    // Loop over the entries of v and w
-    for (unsigned k=0;k<n_row;k++)
-    {
-     // Store the appropriate entry in v as a complex value
-     std::complex<double> complex_v(block_vi_r_pt[k],block_vi_c_pt[k]);
-     
-     // Store the appropriate entry in w as a complex value
-     std::complex<double> complex_w(block_w_r_pt[k],block_w_c_pt[k]);
-
-     // Update the value of H(i,j) noting we're computing a complex
-     // inner product here (the ordering is very important here!)
-     hessenberg[j][i]+=std::conj(complex_v)*complex_w;
-    }
-   
-    // Orthonormalise w against all previous orthogonal vectors, v_i by
-    // looping over its entries and updating them
-    for (unsigned k=0;k<n_row;k++)
-    {
-     // Update the real part of the k-th entry of w
-     block_w_r_pt[k]-=(hessenberg[j][i].real()*block_vi_r_pt[k]-
-		       hessenberg[j][i].imag()*block_vi_c_pt[k]);
-
-     // Update the imaginary part of the k-th entry of w
-     block_w_c_pt[k]-=(hessenberg[j][i].real()*block_vi_c_pt[k]+
-		       hessenberg[j][i].imag()*block_vi_r_pt[k]);
-    }
-   } // for (unsigned i=0;i<j+1;i++)
-
-   // Calculate the norm of the real part of w
-   norm_r=block_w[0].norm();
-
-   // Calculate the norm of the imaginary part of w
-   norm_c=block_w[1].norm();
-
-   // Calculate the norm of the vector w using norm_r and norm_c and assign
-   // its value to the appropriate entry in the Hessenberg matrix
-   hessenberg[j][j+1]=sqrt(pow(norm_r,2.0)+pow(norm_c,2.0));
-   
-   // Build the (j+1)-th basis vector
-   for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
-   {
-    // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
-    // to the real and imaginary part of the zeroth vector, respectively
-    block_v[j+1][dof_type].build(this->block_distribution_pt(dof_type),0.0);
-   }
-   
-   // Check if the value of hessenberg[j][j+1] is zero. If it
-   // isn't then we update the next entries in v
-   if (hessenberg[j][j+1]!=0.0)
-   {    
-    // For fast access
-    double* block_v_r_pt=block_v[j+1][0].values_pt();
-   
-    // For fast access
-    double* block_v_c_pt=block_v[j+1][1].values_pt();
-    
-    // For fast access
-    const double* block_w_r_pt=block_w[0].values_pt();
-   
-    // For fast access
-    const double* block_w_c_pt=block_w[1].values_pt();
-
-    // Notice, the value of H(j,j+1), as calculated above, is clearly a real
-    // number. As such, calculating the division
-    //                      v_{j+1}=w_{j}/h_{j+1,j},
-    // here is simple, i.e. we don't need to worry about cross terms in the
-    // algebra. To avoid computing h_{j+1,j} several times we precompute it
-    double h_subdiag_val=hessenberg[j][j+1].real();
-    
-    // Loop over the entries of the new orthogonal vector and set its values
-    for(unsigned k=0;k<n_row;k++)
-    {
-     // The i-th entry of the real component is given by
-     block_v_r_pt[k]=block_w_r_pt[k]/h_subdiag_val;
-
-     // Similarly, the i-th entry of the imaginary component is given by
-     block_v_c_pt[k]=block_w_c_pt[k]/h_subdiag_val;
-    }
-   }
-   // Otherwise, we have to jump to the next part of the algorithm; if
-   // the value of hessenberg[j][j+1] is zero then the norm of the latest
-   // orthogonal vector is zero. This is only possible if the entries
-   // in w are all zero. As a result, the Krylov space of A and r_0 has
-   // been spanned by the previously calculated orthogonal vectors
-   else
-   {
-    // Book says "Set m=j and jump to step 11" (p.172)...
-    // Do something here!
-    oomph_info << "Subdiagonal Hessenberg entry is zero. "
-	       << "Do something here..." << std::endl;
-   } // if (hessenberg[j][j+1]!=0.0)
-
-   // Loop over the entries in the Hessenberg matrix and calculate the
-   // entries of the Givens rotation matrices
-   for (unsigned k=0;k<j;k++)
-   {
-    // Apply the plane rotation to all of the previous entries in the
-    // (j)-th column (remembering the indexing is reversed)
-    this->apply_plane_rotation(hessenberg[j][k],hessenberg[j][k+1],cs[k],sn[k]);
-   }
-
-   // Now calculate the entries of the latest Givens rotation matrix
-   this->generate_plane_rotation(hessenberg[j][j],hessenberg[j][j+1],cs[j],sn[j]);
-
-   // Apply the plane rotation using the newly calculated entries
-   this->apply_plane_rotation(hessenberg[j][j],hessenberg[j][j+1],cs[j],sn[j]);
-
-   // Apply a plane rotation to the corresponding entry in the vector
-   // s used in the minimisation problem, J(y)=min||s-R_m*y||
-   this->apply_plane_rotation(s[j],s[j+1],cs[j],sn[j]);
-
-   // Compute current residual using equation (6.42) in Saad Y, "Iterative
-   // methods for sparse linear systems", p.177.]. Note, since s has complex
-   // entries we have to use std::abs instead of std::fabs
-   beta=std::abs(s[j+1]);
-
-   // Compute the relative residual
-   resid=beta/normb;
-     
-   // If required will document convergence history to screen or file (if
-   // stream open)
-   if (this->Doc_convergence_history)
-   {
-    // If an output file which is open isn't provided then output to screen
-    if (!(this->Output_file_stream.is_open()))
-    {
-     // Output the residual value to the screen
-     oomph_info << j+1 << " " << resid << std::endl;
-    }
-    // Otherwise, output to file
+    // Otherwise initialise all entries to zero
     else
     {
-     // Output the residual value to file
-     this->Output_file_stream << j+1 << " " << resid <<std::endl;
+      // Initialise the entries in the k-th vector in solution to zero
+      solution.initialise(0.0);
     }
-   } // if (Doc_convergence_history)
 
-   // If the required tolerance has been met
-   if (resid<this->Tolerance)
-   {
+    // Create a vector of DoubleVectors (this is a distributed vector so we have
+    // to create two separate DoubleVector objects to cope with the arithmetic)
+    Vector<DoubleVector> block_solution(n_dof_types);
+
+    // Create a vector of DoubleVectors (this is a distributed vector so we have
+    // to create two separate DoubleVector objects to cope with the arithmetic)
+    Vector<DoubleVector> block_rhs(n_dof_types);
+
+    // Build the distribution of both vectors
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Build the distribution of the k-th constituent vector
+      block_solution[dof_type].build(this->block_distribution_pt(dof_type),
+                                     0.0);
+
+      // Build the distribution of the k-th constituent vector
+      block_rhs[dof_type].build(this->block_distribution_pt(dof_type), 0.0);
+    }
+
+    // Grab the solution vector in block form
+    this->get_block_vectors(solution, block_solution);
+
+    // Grab the RHS vector in block form
+    this->get_block_vectors(rhs, block_rhs);
+
+    // Start the solver timer
+    double t_start = TimingHelpers::timer();
+
+    // Storage for the relative residual
+    double resid;
+
+    // Initialise vectors (since these are not distributed vectors we template
+    // one vector by the type std::complex<double> instead of using two vectors,
+    // each templated by the type double
+
+    // Vector, s, used in the minimisation problem: J(y)=min||s-R_m*y||
+    // [see Saad Y."Iterative methods for sparse linear systems", p.176.]
+    Vector<std::complex<double>> s(n_row + 1, std::complex<double>(0.0, 0.0));
+
+    // Vector to store the value of cos(theta) when using the Givens rotation
+    Vector<std::complex<double>> cs(n_row + 1, std::complex<double>(0.0, 0.0));
+
+    // Vector to store the value of sin(theta) when using the Givens rotation
+    Vector<std::complex<double>> sn(n_row + 1, std::complex<double>(0.0, 0.0));
+
+    // Create a vector of DoubleVectors (this is a distributed vector so we have
+    // to create two separate DoubleVector objects to cope with the arithmetic)
+    Vector<DoubleVector> block_w(n_dof_types);
+
+    // Build the distribution of both vectors
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Build the distribution of the k-th constituent vector
+      block_w[dof_type].build(this->block_distribution_pt(dof_type), 0.0);
+    }
+
+    // Set up the preconditioner only if we're not re-solving
+    if (!Resolving)
+    {
+      // Only set up the preconditioner before solve if required
+      if (Setup_preconditioner_before_solve)
+      {
+        // Set up the preconditioner from the Jacobian matrix
+        double t_start_prec = TimingHelpers::timer();
+
+        // Use the setup function in the Preconditioner class
+        preconditioner_pt()->setup(dynamic_cast<MATRIX*>(matrix_pt));
+
+        // Doc time for setup of preconditioner
+        double t_end_prec = TimingHelpers::timer();
+        Preconditioner_setup_time = t_end_prec - t_start_prec;
+
+        // If time documentation is enabled
+        if (Doc_time)
+        {
+          // Output the time taken
+          oomph_info << "Time for setup of preconditioner [sec]: "
+                     << Preconditioner_setup_time << std::endl;
+        }
+      }
+    }
+    else
+    {
+      // If time documentation is enabled
+      if (Doc_time)
+      {
+        // Notify the user
+        oomph_info << "Setup of preconditioner is bypassed in resolve mode"
+                   << std::endl;
+      }
+    } // if (!Resolving) else
+
+    // Create a vector of DoubleVectors to store the RHS of b-Jx=Mr. We assume
+    // both x=0 and that a preconditioner is not applied by which we deduce b=r
+    Vector<DoubleVector> block_r(n_dof_types);
+
+    // Build the distribution of both vectors
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Build the distribution of the k-th constituent vector
+      block_r[dof_type].build(this->block_distribution_pt(dof_type), 0.0);
+    }
+
+    // If we're using LHS preconditioning solve b-Jx=Mr for r (assumes x=0)
+    // so calculate r=M^{-1}b otherwise set r=b (RHS prec.)
+    if (Preconditioner_LHS)
+    {
+      // Create a vector of the same size as rhs
+      DoubleVector r(IterativeLinearSolver::distribution_pt(), 0.0);
+
+      // Copy the vectors in r to full_r
+      this->return_block_vectors(block_r, r);
+
+      // Use the preconditioner
+      preconditioner_pt()->preconditioner_solve(rhs, r);
+
+      // Copy the vector full_r into the vectors in r
+      this->get_block_vectors(r, block_r);
+    }
+    else
+    {
+      // Store the value of b (the RHS vector) in r
+      for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+      {
+        // Copy the entries of rhs into r
+        block_r[dof_type] = block_rhs[dof_type];
+      }
+    } // if(Preconditioner_LHS)
+
+    // Calculate the norm of the real part of r
+    double norm_r = block_r[0].norm();
+
+    // Calculate the norm of the imaginary part of r
+    double norm_c = block_r[1].norm();
+
+    // Compute norm(r)
+    double normb = sqrt(pow(norm_r, 2.0) + pow(norm_c, 2.0));
+
+    // Set the value of beta (the initial residual)
+    double beta = normb;
+
+    // Compute the initial relative residual. If the entries of the RHS vector
+    // are all zero then set normb equal to one. This is because we divide the
+    // value of the norm at later stages by normb and dividing by zero is not
+    // definied
+    if (normb == 0.0)
+    {
+      // Set the value of normb
+      normb = 1.0;
+    }
+
+    // Calculate the ratio between the initial norm and the current norm.
+    // Since we haven't completed an iteration yet this will simply be one
+    // unless normb was zero, in which case resid will have value zero
+    resid = beta / normb;
+
+    // If required, will document convergence history to screen or file (if
+    // stream open)
+    if (Doc_convergence_history)
+    {
+      // If an output file which is open isn't provided then output to screen
+      if (!Output_file_stream.is_open())
+      {
+        // Output the residual value to the screen
+        oomph_info << 0 << " " << resid << std::endl;
+      }
+      // Otherwise, output to file
+      else
+      {
+        // Output the residual value to file
+        Output_file_stream << 0 << " " << resid << std::endl;
+      }
+    } // if (Doc_convergence_history)
+
+    // If the GMRES algorithm converges immediately
+    if (resid <= Tolerance)
+    {
+      // If time documentation is enabled
+      if (Doc_time)
+      {
+        // Notify the user
+        oomph_info << "GMRES converged immediately. Normalised residual norm: "
+                   << resid << std::endl;
+      }
+
+      // Finish running the solver
+      return;
+    } // if (resid<=Tolerance)
+
+    // Initialise a vector of orthogonal basis vectors
+    Vector<Vector<DoubleVector>> block_v;
+
+    // Resize the number of vectors needed
+    block_v.resize(n_row + 1);
+
+    // Resize each Vector of DoubleVectors to store the real and imaginary
+    // part of a given vector
+    for (unsigned dof_type = 0; dof_type < n_row + 1; dof_type++)
+    {
+      // Create two DoubleVector objects in each Vector
+      block_v[dof_type].resize(n_dof_types);
+    }
+
+    // Initialise the upper hessenberg matrix. Since we are not using
+    // distributed vectors here, the algebra is best done using entries
+    // of the type std::complex<double>. NOTE: For implementation purposes
+    // the upper Hessenberg matrix indices are swapped so the matrix is
+    // effectively transposed
+    Vector<Vector<std::complex<double>>> hessenberg(n_row + 1);
+
+    // Build the zeroth basis vector
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
+      // to the real and imaginary part of the zeroth vector, respectively
+      block_v[0][dof_type].build(this->block_distribution_pt(dof_type), 0.0);
+    }
+
+    // Loop over the real and imaginary parts of v
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // For fast access
+      double* v0_pt = block_v[0][dof_type].values_pt();
+
+      // For fast access
+      const double* block_r_pt = block_r[dof_type].values_pt();
+
+      // Set the zeroth basis vector v[0] to r/beta
+      for (unsigned i = 0; i < n_row; i++)
+      {
+        // Assign the i-th entry of the zeroth basis vector
+        v0_pt[i] = block_r_pt[i] / beta;
+      }
+    } // for (unsigned k=0;k<n_dof_types;k++)
+
+    // Set the first entry in the minimisation problem RHS vector (is meant
+    // to the vector beta*e_1 initially, where e_1 is the unit vector with
+    // one in its first entry)
+    s[0] = beta;
+
+    // Compute the next step of the iterative scheme
+    for (unsigned j = 0; j < Max_iter; j++)
+    {
+      // Resize the next column of the upper hessenberg matrix
+      hessenberg[j].resize(j + 2, std::complex<double>(0.0, 0.0));
+
+      // Calculate w=M^{-1}(Jv[j]) (LHS prec.) or w=JM^{-1}v (RHS prec.)
+      {
+        // Create a temporary vector
+        DoubleVector vj(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Create a temporary vector
+        DoubleVector temp(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Create a temporary vector
+        DoubleVector w(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Create a temporary vector of DoubleVectors
+        Vector<DoubleVector> block_temp(2);
+
+        // Create two DoubleVectors
+        for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+        {
+          block_temp[dof_type].build(this->block_distribution_pt(dof_type),
+                                     0.0);
+        }
+
+        // If we're using LHS preconditioning
+        if (Preconditioner_LHS)
+        {
+          // Solve Jv[j]=Mw for w. Note, we cannot use inbuilt complex matrix
+          // algebra here as we're using distributed vectors
+          complex_matrix_multiplication(
+            Matrices_storage_pt, block_v[j], block_temp);
+
+          // Copy block_temp into temp
+          this->return_block_vectors(block_temp, temp);
+
+          // Copy block_w into w
+          this->return_block_vectors(block_w, w);
+
+          // Apply the preconditioner
+          this->preconditioner_pt()->preconditioner_solve(temp, w);
+
+          // Copy w into block_w
+          this->get_block_vectors(w, block_w);
+        }
+        // If we're using RHS preconditioning
+        else
+        {
+          // Copy the real and imaginary part of v[j] into one vector, vj
+          this->return_block_vectors(block_v[j], vj);
+
+          // Use w=JM^{-1}v by saad p270
+          this->preconditioner_pt()->preconditioner_solve(vj, temp);
+
+          // Copy w into block_w
+          this->get_block_vectors(temp, block_temp);
+
+          // Solve Jv[j] = Mw for w. Note, we cannot use inbuilt complex matrix
+          // algebra here as we're using distributed vectors
+          complex_matrix_multiplication(
+            Matrices_storage_pt, block_temp, block_w);
+        }
+      } // Calculate w=M^{-1}(Jv[j]) (LHS prec.) or w=JM^{-1}v (RHS prec.)
+
+      // For fast access
+      double* block_w_r_pt = block_w[0].values_pt();
+
+      // For fast access
+      double* block_w_c_pt = block_w[1].values_pt();
+
+      // Loop over all of the entries on and above the principal subdiagonal of
+      // the Hessenberg matrix in the j-th column (remembering that
+      // the indices of the upper Hessenberg matrix are swapped for the purpose
+      // of implementation)
+      for (unsigned i = 0; i < j + 1; i++)
+      {
+        // For fast access
+        const double* vi_r_pt = block_v[i][0].values_pt();
+
+        // For fast access
+        const double* vi_c_pt = block_v[i][1].values_pt();
+
+        // Loop over the entries of v and w
+        for (unsigned k = 0; k < n_row; k++)
+        {
+          // Store the appropriate entry in v as a complex value
+          std::complex<double> complex_v(vi_r_pt[k], vi_c_pt[k]);
+
+          // Store the appropriate entry in w as a complex value
+          std::complex<double> complex_w(block_w_r_pt[k], block_w_c_pt[k]);
+
+          // Update the value of H(i,j) noting we're computing a complex
+          // inner product here (the ordering is very important here!)
+          hessenberg[j][i] += std::conj(complex_v) * complex_w;
+        }
+
+        // Orthonormalise w against all previous orthogonal vectors, v_i by
+        // looping over its entries and updating them
+        for (unsigned k = 0; k < n_row; k++)
+        {
+          // Update the real part of the k-th entry of w
+          block_w_r_pt[k] -= (hessenberg[j][i].real() * vi_r_pt[k] -
+                              hessenberg[j][i].imag() * vi_c_pt[k]);
+
+          // Update the imaginary part of the k-th entry of w
+          block_w_c_pt[k] -= (hessenberg[j][i].real() * vi_c_pt[k] +
+                              hessenberg[j][i].imag() * vi_r_pt[k]);
+        }
+      } // for (unsigned i=0;i<j+1;i++)
+
+      // Calculate the norm of the real part of w
+      norm_r = block_w[0].norm();
+
+      // Calculate the norm of the imaginary part of w
+      norm_c = block_w[1].norm();
+
+      // Calculate the norm of the vector w using norm_r and norm_c and assign
+      // its value to the appropriate entry in the Hessenberg matrix
+      hessenberg[j][j + 1] = sqrt(pow(norm_r, 2.0) + pow(norm_c, 2.0));
+
+      // Build the (j+1)-th basis vector
+      for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+      {
+        // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
+        // to the real and imaginary part of the zeroth vector, respectively
+        block_v[j + 1][dof_type].build(this->block_distribution_pt(dof_type),
+                                       0.0);
+      }
+
+      // Check if the value of hessenberg[j][j+1] is zero. If it
+      // isn't then we update the next entries in v
+      if (hessenberg[j][j + 1] != 0.0)
+      {
+        // For fast access
+        double* v_r_pt = block_v[j + 1][0].values_pt();
+
+        // For fast access
+        double* v_c_pt = block_v[j + 1][1].values_pt();
+
+        // For fast access
+        const double* block_w_r_pt = block_w[0].values_pt();
+
+        // For fast access
+        const double* block_w_c_pt = block_w[1].values_pt();
+
+        // Notice, the value of H(j,j+1), as calculated above, is clearly a real
+        // number. As such, calculating the division
+        //                      v_{j+1}=w_{j}/h_{j+1,j},
+        // here is simple, i.e. we don't need to worry about cross terms in the
+        // algebra. To avoid computing h_{j+1,j} several times we precompute it
+        double h_subdiag_val = hessenberg[j][j + 1].real();
+
+        // Loop over the entries of the new orthogonal vector and set its values
+        for (unsigned k = 0; k < n_row; k++)
+        {
+          // The i-th entry of the real component is given by
+          v_r_pt[k] = block_w_r_pt[k] / h_subdiag_val;
+
+          // Similarly, the i-th entry of the imaginary component is given by
+          v_c_pt[k] = block_w_c_pt[k] / h_subdiag_val;
+        }
+      }
+      // Otherwise, we have to jump to the next part of the algorithm; if
+      // the value of hessenberg[j][j+1] is zero then the norm of the latest
+      // orthogonal vector is zero. This is only possible if the entries
+      // in w are all zero. As a result, the Krylov space of A and r_0 has
+      // been spanned by the previously calculated orthogonal vectors
+      else
+      {
+        // Book says "Set m=j and jump to step 11" (p.172)...
+        // Do something here!
+        oomph_info << "Subdiagonal Hessenberg entry is zero. "
+                   << "Do something here..." << std::endl;
+      } // if (hessenberg[j][j+1]!=0.0)
+
+      // Loop over the entries in the Hessenberg matrix and calculate the
+      // entries of the Givens rotation matrices
+      for (unsigned k = 0; k < j; k++)
+      {
+        // Apply the plane rotation to all of the previous entries in the
+        // (j)-th column (remembering the indexing is reversed)
+        apply_plane_rotation(
+          hessenberg[j][k], hessenberg[j][k + 1], cs[k], sn[k]);
+      }
+
+      // Now calculate the entries of the latest Givens rotation matrix
+      generate_plane_rotation(
+        hessenberg[j][j], hessenberg[j][j + 1], cs[j], sn[j]);
+
+      // Apply the plane rotation using the newly calculated entries
+      apply_plane_rotation(
+        hessenberg[j][j], hessenberg[j][j + 1], cs[j], sn[j]);
+
+      // Apply a plane rotation to the corresponding entry in the vector
+      // s used in the minimisation problem, J(y)=min||s-R_m*y||
+      apply_plane_rotation(s[j], s[j + 1], cs[j], sn[j]);
+
+      // Compute current residual using equation (6.42) in Saad Y, "Iterative
+      // methods for sparse linear systems", p.177.]. Note, since s has complex
+      // entries we have to use std::abs instead of std::fabs
+      beta = std::abs(s[j + 1]);
+
+      // Compute the relative residual
+      resid = beta / normb;
+
+      // If required will document convergence history to screen or file (if
+      // stream open)
+      if (Doc_convergence_history)
+      {
+        // If an output file which is open isn't provided then output to screen
+        if (!Output_file_stream.is_open())
+        {
+          // Output the residual value to the screen
+          oomph_info << j + 1 << " " << resid << std::endl;
+        }
+        // Otherwise, output to file
+        else
+        {
+          // Output the residual value to file
+          Output_file_stream << j + 1 << " " << resid << std::endl;
+        }
+      } // if (Doc_convergence_history)
+
+      // If the required tolerance has been met
+      if (resid < Tolerance)
+      {
+        // Store the number of iterations taken
+        Iterations = j + 1;
+
+        // Update the result vector using the result, x=x_0+V_m*y (where V_m
+        // is given by v here)
+        update(j, hessenberg, s, block_v, block_solution);
+
+        // Copy the vectors in block_solution to solution
+        this->return_block_vectors(block_solution, solution);
+
+        // If time documentation was enabled
+        if (Doc_time)
+        {
+          // Output the current normalised residual norm
+          oomph_info << "\nGMRES converged (1). Normalised residual norm: "
+                     << resid << std::endl;
+
+          // Output the number of iterations it took for convergence
+          oomph_info << "Number of iterations to convergence: " << j + 1 << "\n"
+                     << std::endl;
+        }
+
+        // Stop the timer
+        double t_end = TimingHelpers::timer();
+
+        // Calculate the time taken to calculate the solution
+        Solution_time = t_end - t_start;
+
+        // If time documentation was enabled
+        if (Doc_time)
+        {
+          // Output the time taken to solve the problem using GMRES
+          oomph_info << "Time for solve with GMRES [sec]: " << Solution_time
+                     << std::endl;
+        }
+
+        // As we've met the tolerance for the solver and everything that should
+        // be documented, has been, finish using the solver
+        return;
+      } // if (resid<Tolerance)
+    } // for (unsigned j=0;j<Max_iter;j++)
+
     // Store the number of iterations taken
-    this->Iterations=j+1;
+    Iterations = Max_iter;
 
-    // Update the result vector using the result, x=x_0+V_m*y (where V_m
-    // is given by v here)
-    update(j,hessenberg,s,block_z,block_solution);
-
-    // Copy the vectors in block_solution to solution
-    this->return_block_vectors(block_solution,solution);
-        
-    // If time documentation was enabled
-    if(this->Doc_time)
+    // Only update if we actually did something
+    if (Max_iter > 0)
     {
-     // Output the current normalised residual norm
-     oomph_info << "\nFGMRES converged (1). Normalised residual norm: "
-		<< resid << std::endl;
+      // Update the result vector using the result, x=x_0+V_m*y (where V_m
+      // is given by v here)
+      update(Max_iter - 1, hessenberg, s, block_v, block_solution);
 
-     // Output the number of iterations it took for convergence
-     oomph_info << "Number of iterations to convergence: "
-		<< j+1 << "\n" << std::endl;
+      // Copy the vectors in block_solution to solution
+      this->return_block_vectors(block_solution, solution);
     }
 
-    // Stop the timer
-    double t_end=TimingHelpers::timer();
-
-    // Calculate the time taken to calculate the solution
-    this->Solution_time=t_end-t_start;
-
-    // If time documentation was enabled
-    if(this->Doc_time)
+    // Solve Mr=(b-Jx) for r
     {
-     // Output the time taken to solve the problem using GMRES
-     oomph_info << "Time for solve with FGMRES [sec]: "
-		<< this->Solution_time << std::endl;
+      // Create a temporary vector of DoubleVectors
+      Vector<DoubleVector> block_temp(2);
+
+      // Create two DoubleVectors
+      for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+      {
+        // Build the distribution of the (dof_type)-th vector
+        block_temp[dof_type].build(this->block_distribution_pt(dof_type), 0.0);
+      }
+
+      // Calculate the value of Jx
+      complex_matrix_multiplication(
+        Matrices_storage_pt, block_solution, block_temp);
+
+      // Get the values pointer of the vector (real)
+      double* block_temp_r_pt = block_temp[0].values_pt();
+
+      // Get the values pointer of the vector (imaginary)
+      double* block_temp_c_pt = block_temp[1].values_pt();
+
+      // Get the values pointer of the RHS vector (real)
+      const double* block_rhs_r_pt = block_rhs[0].values_pt();
+
+      // Get the values pointer of the RHS vector (imaginary)
+      const double* block_rhs_c_pt = block_rhs[1].values_pt();
+
+      // Loop over the dofs
+      for (unsigned i = 0; i < n_row; i++)
+      {
+        // Calculate b-Jx (real)
+        block_temp_r_pt[i] = block_rhs_r_pt[i] - block_temp_r_pt[i];
+
+        // Calculate b-Jx (imaginary)
+        block_temp_c_pt[i] = block_rhs_c_pt[i] - block_temp_c_pt[i];
+      }
+
+      // If we're using LHS preconditioning
+      if (Preconditioner_LHS)
+      {
+        // Create a temporary DoubleVectors
+        DoubleVector temp(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Create a vector of the same size as rhs
+        DoubleVector r(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Copy the vectors in r to full_r
+        this->return_block_vectors(block_temp, temp);
+
+        // Copy the vectors in r to full_r
+        this->return_block_vectors(block_r, r);
+
+        // Apply the preconditioner
+        preconditioner_pt()->preconditioner_solve(temp, r);
+      }
     }
 
-    // As we've met the tolerance for the solver and everything that should
-    // be documented, has been, finish using the solver
+    // Compute the current residual
+    beta = 0.0;
+
+    // Get access to the values pointer (real)
+    norm_r = block_r[0].norm();
+
+    // Get access to the values pointer (imaginary)
+    norm_c = block_r[1].norm();
+
+    // Calculate the full norm
+    beta = sqrt(pow(norm_r, 2.0) + pow(norm_c, 2.0));
+
+    // Calculate the relative residual
+    resid = beta / normb;
+
+    // If the relative residual lies within tolerance
+    if (resid < Tolerance)
+    {
+      // If time documentation is enabled
+      if (Doc_time)
+      {
+        // Notify the user
+        oomph_info << "\nGMRES converged (2). Normalised residual norm: "
+                   << resid
+                   << "\nNumber of iterations to convergence: " << Iterations
+                   << "\n"
+                   << std::endl;
+      }
+
+      // End the timer
+      double t_end = TimingHelpers::timer();
+
+      // Calculate the time taken for the solver
+      Solution_time = t_end - t_start;
+
+      // If time documentation is enabled
+      if (Doc_time)
+      {
+        oomph_info << "Time for solve with GMRES [sec]: " << Solution_time
+                   << std::endl;
+      }
+      return;
+    }
+
+    // Otherwise GMRES failed convergence
+    oomph_info << "\nGMRES did not converge to required tolerance! "
+               << "\nReturning with normalised residual norm: " << resid
+               << "\nafter " << Max_iter << " iterations.\n"
+               << std::endl;
+
+    // Throw an error if requested
+    if (Throw_error_after_max_iter)
+    {
+      std::string err = "Solver failed to converge and you requested an error";
+      err += " on convergence failures.";
+      throw OomphLibError(
+        err, OOMPH_EXCEPTION_LOCATION, OOMPH_CURRENT_FUNCTION);
+    }
+
+    // Finish using the solver
     return;
-   } // if (resid<Tolerance)
-  } // for (unsigned j=0;j<Max_iter;j++)
-  
-  // Store the number of iterations taken
-  this->Iterations=this->Max_iter;
+  } // End of solve_helper
 
-  // Only update if we actually did something
-  if (this->Max_iter>0)
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+
+  //======================================================================
+  /// \short The FGMRES method, i.e. the flexible variant of the GMRES
+  /// method which allows for nonconstant preconditioners [see Saad Y,
+  /// "Iterative methods for sparse linear systems", p.287]. Note, FGMRES
+  /// can only cater to right preconditioning; if the user tries to switch
+  /// to left preconditioning they will be notified of this
+  //======================================================================
+  template<typename MATRIX>
+  class HelmholtzFGMRESMG : public virtual HelmholtzGMRESMG<MATRIX>
   {
-   // Update the result vector using the result, x=x_0+V_m*y (where V_m
-   // is given by v here)
-   update(this->Max_iter-1,hessenberg,s,block_z,block_solution);
+  public:
+    /// Constructor (empty)
+    HelmholtzFGMRESMG() : HelmholtzGMRESMG<MATRIX>()
+    {
+      // Can only use RHS preconditioning
+      this->Preconditioner_LHS = false;
+    };
 
-   // Copy the vectors in block_solution to solution
-   this->return_block_vectors(block_solution,solution);
-  }
-     
-  // Compute the current residual
-  beta=0.0;
+    /// Destructor (cleanup storage)
+    virtual ~HelmholtzFGMRESMG()
+    {
+      // Call the clean up function in the base class GMRES
+      this->clean_up_memory();
+    }
 
-  // Get access to the values pointer (real)
-  norm_r=block_r[0].norm();
-   
-  // Get access to the values pointer (imaginary)
-  norm_c=block_r[1].norm();
+    /// Broken copy constructor
+    HelmholtzFGMRESMG(const HelmholtzFGMRESMG&)
+    {
+      BrokenCopy::broken_copy("HelmholtzFGMRESMG");
+    }
 
-  // Calculate the full norm
-  beta=sqrt(pow(norm_r,2.0)+pow(norm_c,2.0));
+    /// Broken assignment operator
+    void operator=(const HelmholtzFGMRESMG&)
+    {
+      BrokenCopy::broken_assign("HelmholtzFGMRESMG");
+    }
 
-  // Calculate the relative residual
-  resid=beta/normb;
-  
-  // If the relative residual lies within tolerance
-  if (resid<this->Tolerance)
+    /// \short Overloaded function to let the user know that left
+    /// preconditioning is not possible with FGMRES, only right preconditioning
+    void set_preconditioner_LHS()
+    {
+      // Create an output stream
+      std::ostringstream error_message_stream;
+
+      // Create an error message
+      error_message_stream << "FGMRES cannot use left preconditioning. It is "
+                           << "only capable of using right preconditioning."
+                           << std::endl;
+
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    } // End of set_preconditioner_LHS
+
+    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// which contains the solution of the linear system defined by
+    /// the problem's fully assembled Jacobian and residual vector.
+    void solve(Problem* const& problem_pt, DoubleVector& result)
+    {
+#ifdef OOMPH_HAS_MPI
+      // Make sure that this is running in serial. Can't guarantee it'll
+      // work when the problem is distributed over several processors
+      if (MPI_Helpers::communicator_pt()->nproc() > 1)
+      {
+        // Throw a warning
+        OomphLibWarning("Can't guarantee the MG solver will work in parallel!",
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Find # of degrees of freedom (variables)
+      unsigned n_dof = problem_pt->ndof();
+
+      // Initialise timer
+      double t_start = TimingHelpers::timer();
+
+      // We're not re-solving
+      this->Resolving = false;
+
+      // Get rid of any previously stored data
+      this->clean_up_memory();
+
+      // Grab the communicator from the MGProblem object and assign it
+      this->set_comm_pt(problem_pt->communicator_pt());
+
+      // Setup the distribution
+      LinearAlgebraDistribution dist(
+        problem_pt->communicator_pt(), n_dof, false);
+
+      // Build the internal distribution in this way because both the
+      // IterativeLinearSolver and BlockPreconditioner class have base-
+      // class subobjects of type oomph::DistributableLinearAlgebraObject
+      IterativeLinearSolver::build_distribution(dist);
+
+      // Get Jacobian matrix in format specified by template parameter
+      // and nonlinear residual vector
+      MATRIX* matrix_pt = new MATRIX;
+      DoubleVector f;
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+      {
+        if (dynamic_cast<CRDoubleMatrix*>(matrix_pt) != 0)
+        {
+          dynamic_cast<CRDoubleMatrix*>(matrix_pt)->build(
+            IterativeLinearSolver::distribution_pt());
+          f.build(IterativeLinearSolver::distribution_pt(), 0.0);
+        }
+      }
+
+      // Get the Jacobian and residuals vector
+      problem_pt->get_jacobian(f, *matrix_pt);
+
+      // We've made the matrix, we can delete it...
+      this->Matrix_can_be_deleted = true;
+
+      // Replace the current matrix used in Preconditioner by the new matrix
+      this->set_matrix_pt(matrix_pt);
+
+      // The preconditioner works with one mesh; set it! Since we only use
+      // the block preconditioner on the finest level, we use the mesh from
+      // that level
+      this->set_nmesh(1);
+
+      // Elements in actual pml layer are trivially wrapped versions of
+      // their bulk counterparts. Technically they are different elements
+      // so we have to allow different element types
+      bool allow_different_element_types_in_mesh = true;
+      this->set_mesh(
+        0, problem_pt->mesh_pt(), allow_different_element_types_in_mesh);
+
+      // Set up the generic block look up scheme
+      this->block_setup();
+
+      // Extract the number of blocks.
+      unsigned nblock_types = this->nblock_types();
+
+#ifdef PARANOID
+      // PARANOID check - there must only be two block types
+      if (nblock_types != 2)
+      {
+        // Create the error message
+        std::stringstream tmp;
+        tmp << "There are supposed to be two block types.\nYours has "
+            << nblock_types << std::endl;
+
+        // Throw an error
+        throw OomphLibError(
+          tmp.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Resize the storage for the system matrices
+      this->Matrices_storage_pt.resize(2, 0);
+
+      // Loop over the rows of the block matrix
+      for (unsigned i = 0; i < nblock_types; i++)
+      {
+        // Fix the column index
+        unsigned j = 0;
+
+        // Create new CRDoubleMatrix objects
+        this->Matrices_storage_pt[i] = new CRDoubleMatrix;
+
+        // Extract the required blocks, i.e. the first column
+        this->get_block(i, j, *(this->Matrices_storage_pt[i]));
+      }
+
+      // Doc time for setup
+      double t_end = TimingHelpers::timer();
+      this->Jacobian_setup_time = t_end - t_start;
+
+      if (this->Doc_time)
+      {
+        oomph_info << "\nTime for setup of block Jacobian [sec]: "
+                   << this->Jacobian_setup_time << std::endl;
+      }
+
+      // Call linear algebra-style solver
+      // If the result distribution is wrong, then redistribute
+      // before the solve and return to original distribution
+      // afterwards
+      if ((!(*result.distribution_pt() ==
+             *IterativeLinearSolver::distribution_pt())) &&
+          (result.built()))
+      {
+        // Make a distribution object
+        LinearAlgebraDistribution temp_global_dist(result.distribution_pt());
+
+        // Build the result vector distribution
+        result.build(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Solve the problem
+        solve_helper(matrix_pt, f, result);
+
+        // Redistribute the vector
+        result.redistribute(&temp_global_dist);
+      }
+      // Otherwise just solve
+      else
+      {
+        // Solve
+        solve_helper(matrix_pt, f, result);
+      }
+
+      // Kill matrix unless it's still required for resolve
+      if (!(this->Enable_resolve))
+      {
+        // Clean up anything left in memory
+        this->clean_up_memory();
+      }
+    } // End of solve
+
+  private:
+    /// General interface to solve function
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
+
+    /// Helper function to update the result vector
+    void update(const unsigned& k,
+                const Vector<Vector<std::complex<double>>>& hessenberg,
+                const Vector<std::complex<double>>& s,
+                const Vector<Vector<DoubleVector>>& z_m,
+                Vector<DoubleVector>& x)
+    {
+      // Make a local copy of s
+      Vector<std::complex<double>> y(s);
+
+      //-----------------------------------------------------------------
+      // The Hessenberg matrix should be an upper triangular matrix at
+      // this point (although from its storage it would appear to be a
+      // lower triangular matrix since the indexing has been reversed)
+      // so finding the minimiser of J(y)=min||s-R_m*y|| where R_m is
+      // the matrix R in the QR factorisation of the Hessenberg matrix.
+      // Therefore, to obtain y we simply need to use a backwards
+      // substitution. Note: The implementation here may appear to be
+      // somewhat confusing as the indexing in the Hessenberg matrix is
+      // reversed. This implementation of a backwards substitution does
+      // not run along the columns of the triangular matrix but rather
+      // up the rows.
+      //-----------------------------------------------------------------
+
+      // The outer loop is a loop over the columns of the Hessenberg matrix
+      // since the indexing is reversed
+      for (int i = int(k); i >= 0; i--)
+      {
+        // Divide the i-th entry of y by the i-th diagonal entry of H
+        y[i] /= hessenberg[i][i];
+
+        // The inner loop is a loop over the rows of the Hessenberg matrix
+        for (int j = i - 1; j >= 0; j--)
+        {
+          // Update the j-th entry of y
+          y[j] -= hessenberg[i][j] * y[i];
+        }
+      } // for (int i=int(k);i>=0;i--)
+
+      // Calculate the number of entries in x (simply use the real part as
+      // both the real and imaginary part should have the same length)
+      unsigned n_row = x[0].nrow();
+
+      // Build a temporary vector with entries initialised to 0.0
+      Vector<DoubleVector> block_update(2);
+
+      // Build the distributions
+      for (unsigned dof_type = 0; dof_type < 2; dof_type++)
+      {
+        // Build the (dof_type)-th vector of block_update
+        block_update[dof_type].build(x[0].distribution_pt(), 0.0);
+      }
+
+      // Get access to the underlying values
+      double* block_update_r_pt = block_update[0].values_pt();
+
+      // Get access to the underlying values
+      double* block_update_c_pt = block_update[1].values_pt();
+
+      // Calculate x=Vy
+      for (unsigned j = 0; j <= k; j++)
+      {
+        // Get access to j-th column of Z_m
+        const double* z_mj_r_pt = z_m[j][0].values_pt();
+
+        // Get access to j-th column of Z_m
+        const double* z_mj_c_pt = z_m[j][1].values_pt();
+
+        // Loop over the entries in x and update them
+        for (unsigned i = 0; i < n_row; i++)
+        {
+          // Update the real part of the i-th entry in x
+          block_update_r_pt[i] +=
+            (z_mj_r_pt[i] * y[j].real()) - (z_mj_c_pt[i] * y[j].imag());
+
+          // Update the imaginary part of the i-th entry in x
+          block_update_c_pt[i] +=
+            (z_mj_c_pt[i] * y[j].real()) + (z_mj_r_pt[i] * y[j].imag());
+        }
+      } // for (unsigned j=0;j<=k;j++)
+
+      // Use the update: x_m=x_0+inv(M)Vy [see Saad Y,"Iterative methods for
+      // sparse linear systems", p.284]
+      for (unsigned dof_type = 0; dof_type < 2; dof_type++)
+      {
+        // Update the solution
+        x[dof_type] += block_update[dof_type];
+      }
+    } // End of update
+  };
+
+
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+
+
+  //=============================================================================
+  /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector
+  /// and returns the solution of the linear system.
+  /// based on the algorithm presented in Templates for the
+  /// Solution of Linear Systems: Building Blocks for Iterative Methods,
+  /// Barrett, Berry et al, SIAM, 2006 and the implementation in the IML++
+  /// library : http://math.nist.gov/iml++/
+  //=============================================================================
+  template<typename MATRIX>
+  void HelmholtzFGMRESMG<MATRIX>::solve_helper(
+    DoubleMatrixBase* const& matrix_pt,
+    const DoubleVector& rhs,
+    DoubleVector& solution)
   {
-   // If time documentation is enabled
-   if(this->Doc_time)
-   {
-    // Notify the user
-    oomph_info << "\nFGMRES converged (2). Normalised residual norm: "
-	       << resid
-	       << "\nNumber of iterations to convergence: "
-	       << this->Iterations << "\n" << std::endl;
-   }
+    // Set the number of dof types (real and imaginary for this solver)
+    unsigned n_dof_types = this->ndof_types();
 
-   // End the timer
-   double t_end=TimingHelpers::timer();
+#ifdef PARANOID
+    // This only works for 2 dof types
+    if (n_dof_types != 2)
+    {
+      // Create an output stream
+      std::stringstream error_message_stream;
 
-   // Calculate the time taken for the solver
-   this->Solution_time=t_end-t_start;
+      // Create the error message
+      error_message_stream << "This preconditioner only works for problems "
+                           << "with 2 dof types\nYours has " << n_dof_types;
 
-   // If time documentation is enabled
-   if(this->Doc_time)
-   {
-    oomph_info << "Time for solve with FGMRES [sec]: "
-	       << this->Solution_time << std::endl;
-   }
-   return;
-  }
-  
-  // Otherwise GMRES failed convergence
-  oomph_info << "\nFGMRES did not converge to required tolerance! "
-	     << "\nReturning with normalised residual norm: " << resid 
-	     << "\nafter " << this->Max_iter << " iterations.\n" << std::endl;
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
 
-  // Throw an error if requested
-  if(this->Throw_error_after_max_iter)
-  {
-   std::string err="Solver failed to converge and you requested an error";
-   err+=" on convergence failures.";
-   throw OomphLibError(err,OOMPH_EXCEPTION_LOCATION,
-                       OOMPH_CURRENT_FUNCTION);
-  }
-  
-  // Finish using the solver
-  return;
- } // End of solve_helper 
+    // Get the number of dofs (note, the total number of dofs in the problem
+    // is 2*n_row but if the constituent vectors and matrices were stored in
+    // complex objects there would only be (n_row) rows so we use that)
+    unsigned n_row = this->Matrices_storage_pt[0]->nrow();
+
+    // Make sure Max_iter isn't greater than n_dof. The user cannot use this
+    // many iterations when using Krylov subspace methods
+    if (this->Max_iter > n_row)
+    {
+      // Create an output string stream
+      std::ostringstream error_message_stream;
+
+      // Create the error message
+      error_message_stream << "The maximum number of iterations cannot exceed "
+                           << "the number of rows in the problem."
+                           << "\nMaximum number of iterations: "
+                           << this->Max_iter << "\nNumber of rows: " << n_row
+                           << std::endl;
+
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+
+#ifdef PARANOID
+    // Loop over the real and imaginary parts
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // PARANOID check that if the matrix is distributable then it should not
+      // be then it should not be distributed
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(
+            this->Matrices_storage_pt[dof_type]) != 0)
+      {
+        if (dynamic_cast<DistributableLinearAlgebraObject*>(
+              this->Matrices_storage_pt[dof_type])
+              ->distributed())
+        {
+          std::ostringstream error_message_stream;
+          error_message_stream << "The matrix must not be distributed.";
+          throw OomphLibError(error_message_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+    // PARANOID check that this rhs distribution is setup
+    if (!rhs.built())
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream << "The rhs vector distribution must be setup.";
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    // PARANOID check that the rhs has the right number of global rows
+    if (rhs.nrow() != 2 * n_row)
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream << "RHS does not have the same dimension as the"
+                           << " linear system";
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    // PARANOID check that the rhs is not distributed
+    if (rhs.distribution_pt()->distributed())
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream << "The rhs vector must not be distributed.";
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    // PARANOID check that if the result is setup it matches the distribution
+    // of the rhs
+    if (solution.built())
+    {
+      if (!(*rhs.distribution_pt() == *solution.distribution_pt()))
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream << "If the result distribution is setup then it "
+                             << "must be the same as the rhs distribution";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+    } // if (solution[dof_type].built())
+#endif
+
+    // Set up the solution distribution if it's not already distributed
+    if (!solution.built())
+    {
+      // Build the distribution
+      solution.build(IterativeLinearSolver::distribution_pt(), 0.0);
+    }
+    // Otherwise initialise all entries to zero
+    else
+    {
+      // Initialise the entries in the k-th vector in solution to zero
+      solution.initialise(0.0);
+    }
+
+    // Create a vector of DoubleVectors (this is a distributed vector so we have
+    // to create two separate DoubleVector objects to cope with the arithmetic)
+    Vector<DoubleVector> block_solution(n_dof_types);
+
+    // Create a vector of DoubleVectors (this is a distributed vector so we have
+    // to create two separate DoubleVector objects to cope with the arithmetic)
+    Vector<DoubleVector> block_rhs(n_dof_types);
+
+    // Build the distribution of both vectors
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Build the distribution of the k-th constituent vector
+      block_solution[dof_type].build(this->block_distribution_pt(dof_type),
+                                     0.0);
+
+      // Build the distribution of the k-th constituent vector
+      block_rhs[dof_type].build(this->block_distribution_pt(dof_type), 0.0);
+    }
+
+    // Grab the solution vector in block form
+    this->get_block_vectors(solution, block_solution);
+
+    // Grab the RHS vector in block form
+    this->get_block_vectors(rhs, block_rhs);
+
+    // Start the solver timer
+    double t_start = TimingHelpers::timer();
+
+    // Storage for the relative residual
+    double resid;
+
+    // Initialise vectors (since these are not distributed vectors we template
+    // one vector by the type std::complex<double> instead of using two vectors,
+    // each templated by the type double
+
+    // Vector, s, used in the minimisation problem: J(y)=min||s-R_m*y||
+    // [see Saad Y."Iterative methods for sparse linear systems", p.176.]
+    Vector<std::complex<double>> s(n_row + 1, std::complex<double>(0.0, 0.0));
+
+    // Vector to store the value of cos(theta) when using the Givens rotation
+    Vector<std::complex<double>> cs(n_row + 1, std::complex<double>(0.0, 0.0));
+
+    // Vector to store the value of sin(theta) when using the Givens rotation
+    Vector<std::complex<double>> sn(n_row + 1, std::complex<double>(0.0, 0.0));
+
+    // Create a vector of DoubleVectors (this is a distributed vector so we have
+    // to create two separate DoubleVector objects to cope with the arithmetic)
+    Vector<DoubleVector> block_w(n_dof_types);
+
+    // Build the distribution of both vectors
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Build the distribution of the k-th constituent vector
+      block_w[dof_type].build(this->block_distribution_pt(dof_type), 0.0);
+    }
+
+    // Set up the preconditioner only if we're not re-solving
+    if (!(this->Resolving))
+    {
+      // Only set up the preconditioner before solve if required
+      if (this->Setup_preconditioner_before_solve)
+      {
+        // Set up the preconditioner from the Jacobian matrix
+        double t_start_prec = TimingHelpers::timer();
+
+        // Use the setup function in the Preconditioner class
+        this->preconditioner_pt()->setup(dynamic_cast<MATRIX*>(matrix_pt));
+
+        // Doc time for setup of preconditioner
+        double t_end_prec = TimingHelpers::timer();
+        this->Preconditioner_setup_time = t_end_prec - t_start_prec;
+
+        // If time documentation is enabled
+        if (this->Doc_time)
+        {
+          // Output the time taken
+          oomph_info << "Time for setup of preconditioner [sec]: "
+                     << this->Preconditioner_setup_time << std::endl;
+        }
+      }
+    }
+    else
+    {
+      // If time documentation is enabled
+      if (this->Doc_time)
+      {
+        // Notify the user
+        oomph_info << "Setup of preconditioner is bypassed in resolve mode"
+                   << std::endl;
+      }
+    } // if (!Resolving) else
+
+    // Create a vector of DoubleVectors to store the RHS of b-Jx=Mr. We assume
+    // both x=0 and that a preconditioner is not applied by which we deduce b=r
+    Vector<DoubleVector> block_r(n_dof_types);
+
+    // Build the distribution of both vectors
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Build the distribution of the k-th constituent vector
+      block_r[dof_type].build(this->block_distribution_pt(dof_type), 0.0);
+    }
+
+    // Store the value of b (the RHS vector) in r
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Copy the entries of rhs into r
+      block_r[dof_type] = block_rhs[dof_type];
+    }
+
+    // Calculate the norm of the real part of r
+    double norm_r = block_r[0].norm();
+
+    // Calculate the norm of the imaginary part of r
+    double norm_c = block_r[1].norm();
+
+    // Compute norm(r)
+    double normb = sqrt(pow(norm_r, 2.0) + pow(norm_c, 2.0));
+
+    // Set the value of beta (the initial residual)
+    double beta = normb;
+
+    // Compute the initial relative residual. If the entries of the RHS vector
+    // are all zero then set normb equal to one. This is because we divide the
+    // value of the norm at later stages by normb and dividing by zero is not
+    // definied
+    if (normb == 0.0)
+    {
+      // Set the value of normb
+      normb = 1.0;
+    }
+
+    // Calculate the ratio between the initial norm and the current norm.
+    // Since we haven't completed an iteration yet this will simply be one
+    // unless normb was zero, in which case resid will have value zero
+    resid = beta / normb;
+
+    // If required, will document convergence history to screen or file (if
+    // stream open)
+    if (this->Doc_convergence_history)
+    {
+      // If an output file which is open isn't provided then output to screen
+      if (!(this->Output_file_stream.is_open()))
+      {
+        // Output the residual value to the screen
+        oomph_info << 0 << " " << resid << std::endl;
+      }
+      // Otherwise, output to file
+      else
+      {
+        // Output the residual value to file
+        this->Output_file_stream << 0 << " " << resid << std::endl;
+      }
+    } // if (Doc_convergence_history)
+
+    // If the GMRES algorithm converges immediately
+    if (resid <= this->Tolerance)
+    {
+      // If time documentation is enabled
+      if (this->Doc_time)
+      {
+        // Notify the user
+        oomph_info << "FGMRES converged immediately. Normalised residual norm: "
+                   << resid << std::endl;
+      }
+
+      // Finish running the solver
+      return;
+    } // if (resid<=Tolerance)
+
+    // Initialise a vector of orthogonal basis vectors
+    Vector<Vector<DoubleVector>> block_v;
+
+    // Resize the number of vectors needed
+    block_v.resize(n_row + 1);
+
+    // Create a vector of DoubleVectors (stores the preconditioned vectors)
+    Vector<Vector<DoubleVector>> block_z;
+
+    // Resize the number of vectors needed
+    block_z.resize(n_row + 1);
+
+    // Resize each Vector of DoubleVectors to store the real and imaginary
+    // part of a given vector
+    for (unsigned i = 0; i < n_row + 1; i++)
+    {
+      // Create space for two DoubleVector objects in each Vector
+      block_v[i].resize(n_dof_types);
+
+      // Create space for two DoubleVector objects in each Vector
+      block_z[i].resize(n_dof_types);
+    }
+
+    // Initialise the upper hessenberg matrix. Since we are not using
+    // distributed vectors here, the algebra is best done using entries
+    // of the type std::complex<double>. NOTE: For implementation purposes
+    // the upper Hessenberg matrix indices are swapped so the matrix is
+    // effectively transposed
+    Vector<Vector<std::complex<double>>> hessenberg(n_row + 1);
+
+    // Build the zeroth basis vector
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
+      // to the real and imaginary part of the zeroth vector, respectively
+      block_v[0][dof_type].build(this->block_distribution_pt(dof_type), 0.0);
+    }
+
+    // Loop over the real and imaginary parts of v
+    for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+    {
+      // For fast access
+      double* block_v0_pt = block_v[0][dof_type].values_pt();
+
+      // For fast access
+      const double* block_r_pt = block_r[dof_type].values_pt();
+
+      // Set the zeroth basis vector v[0] to r/beta
+      for (unsigned i = 0; i < n_row; i++)
+      {
+        // Assign the i-th entry of the zeroth basis vector
+        block_v0_pt[i] = block_r_pt[i] / beta;
+      }
+    } // for (unsigned k=0;k<n_dof_types;k++)
+
+    // Set the first entry in the minimisation problem RHS vector (is meant
+    // to the vector beta*e_1 initially, where e_1 is the unit vector with
+    // one in its first entry)
+    s[0] = beta;
+
+    // Compute the next step of the iterative scheme
+    for (unsigned j = 0; j < this->Max_iter; j++)
+    {
+      // Resize the next column of the upper hessenberg matrix
+      hessenberg[j].resize(j + 2, std::complex<double>(0.0, 0.0));
+
+      // Calculate w_j=Jz_j where z_j=M^{-1}v_j (RHS prec.)
+      {
+        // Create a temporary vector
+        DoubleVector vj(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Create a temporary vector
+        DoubleVector zj(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Create a temporary vector
+        DoubleVector w(IterativeLinearSolver::distribution_pt(), 0.0);
+
+        // Create two DoubleVectors
+        for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+        {
+          // Build the k-th part of the j-th preconditioning result vector
+          block_z[j][dof_type].build(this->block_distribution_pt(dof_type),
+                                     0.0);
+        }
+
+        // Copy the real and imaginary part of v[j] into one vector, vj
+        this->return_block_vectors(block_v[j], vj);
+
+        // Calculate z_j=M^{-1}v_j by saad p270
+        this->preconditioner_pt()->preconditioner_solve(vj, zj);
+
+        // Copy zj into z[j][0] and z[j][1]
+        this->get_block_vectors(zj, block_z[j]);
+
+        // Calculate w_j=J*(M^{-1}v_j). Note, we cannot use inbuilt complex
+        // matrix algebra here as we're using distributed vectors
+        this->complex_matrix_multiplication(
+          this->Matrices_storage_pt, block_z[j], block_w);
+      } // Calculate w=JM^{-1}v (RHS prec.)
+
+      // For fast access
+      double* block_w_r_pt = block_w[0].values_pt();
+
+      // For fast access
+      double* block_w_c_pt = block_w[1].values_pt();
+
+      // Loop over all of the entries on and above the principal subdiagonal of
+      // the Hessenberg matrix in the j-th column (remembering that
+      // the indices of the upper Hessenberg matrix are swapped for the purpose
+      // of implementation)
+      for (unsigned i = 0; i < j + 1; i++)
+      {
+        // For fast access
+        const double* block_vi_r_pt = block_v[i][0].values_pt();
+
+        // For fast access
+        const double* block_vi_c_pt = block_v[i][1].values_pt();
+
+        // Loop over the entries of v and w
+        for (unsigned k = 0; k < n_row; k++)
+        {
+          // Store the appropriate entry in v as a complex value
+          std::complex<double> complex_v(block_vi_r_pt[k], block_vi_c_pt[k]);
+
+          // Store the appropriate entry in w as a complex value
+          std::complex<double> complex_w(block_w_r_pt[k], block_w_c_pt[k]);
+
+          // Update the value of H(i,j) noting we're computing a complex
+          // inner product here (the ordering is very important here!)
+          hessenberg[j][i] += std::conj(complex_v) * complex_w;
+        }
+
+        // Orthonormalise w against all previous orthogonal vectors, v_i by
+        // looping over its entries and updating them
+        for (unsigned k = 0; k < n_row; k++)
+        {
+          // Update the real part of the k-th entry of w
+          block_w_r_pt[k] -= (hessenberg[j][i].real() * block_vi_r_pt[k] -
+                              hessenberg[j][i].imag() * block_vi_c_pt[k]);
+
+          // Update the imaginary part of the k-th entry of w
+          block_w_c_pt[k] -= (hessenberg[j][i].real() * block_vi_c_pt[k] +
+                              hessenberg[j][i].imag() * block_vi_r_pt[k]);
+        }
+      } // for (unsigned i=0;i<j+1;i++)
+
+      // Calculate the norm of the real part of w
+      norm_r = block_w[0].norm();
+
+      // Calculate the norm of the imaginary part of w
+      norm_c = block_w[1].norm();
+
+      // Calculate the norm of the vector w using norm_r and norm_c and assign
+      // its value to the appropriate entry in the Hessenberg matrix
+      hessenberg[j][j + 1] = sqrt(pow(norm_r, 2.0) + pow(norm_c, 2.0));
+
+      // Build the (j+1)-th basis vector
+      for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
+      {
+        // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
+        // to the real and imaginary part of the zeroth vector, respectively
+        block_v[j + 1][dof_type].build(this->block_distribution_pt(dof_type),
+                                       0.0);
+      }
+
+      // Check if the value of hessenberg[j][j+1] is zero. If it
+      // isn't then we update the next entries in v
+      if (hessenberg[j][j + 1] != 0.0)
+      {
+        // For fast access
+        double* block_v_r_pt = block_v[j + 1][0].values_pt();
+
+        // For fast access
+        double* block_v_c_pt = block_v[j + 1][1].values_pt();
+
+        // For fast access
+        const double* block_w_r_pt = block_w[0].values_pt();
+
+        // For fast access
+        const double* block_w_c_pt = block_w[1].values_pt();
+
+        // Notice, the value of H(j,j+1), as calculated above, is clearly a real
+        // number. As such, calculating the division
+        //                      v_{j+1}=w_{j}/h_{j+1,j},
+        // here is simple, i.e. we don't need to worry about cross terms in the
+        // algebra. To avoid computing h_{j+1,j} several times we precompute it
+        double h_subdiag_val = hessenberg[j][j + 1].real();
+
+        // Loop over the entries of the new orthogonal vector and set its values
+        for (unsigned k = 0; k < n_row; k++)
+        {
+          // The i-th entry of the real component is given by
+          block_v_r_pt[k] = block_w_r_pt[k] / h_subdiag_val;
+
+          // Similarly, the i-th entry of the imaginary component is given by
+          block_v_c_pt[k] = block_w_c_pt[k] / h_subdiag_val;
+        }
+      }
+      // Otherwise, we have to jump to the next part of the algorithm; if
+      // the value of hessenberg[j][j+1] is zero then the norm of the latest
+      // orthogonal vector is zero. This is only possible if the entries
+      // in w are all zero. As a result, the Krylov space of A and r_0 has
+      // been spanned by the previously calculated orthogonal vectors
+      else
+      {
+        // Book says "Set m=j and jump to step 11" (p.172)...
+        // Do something here!
+        oomph_info << "Subdiagonal Hessenberg entry is zero. "
+                   << "Do something here..." << std::endl;
+      } // if (hessenberg[j][j+1]!=0.0)
+
+      // Loop over the entries in the Hessenberg matrix and calculate the
+      // entries of the Givens rotation matrices
+      for (unsigned k = 0; k < j; k++)
+      {
+        // Apply the plane rotation to all of the previous entries in the
+        // (j)-th column (remembering the indexing is reversed)
+        this->apply_plane_rotation(
+          hessenberg[j][k], hessenberg[j][k + 1], cs[k], sn[k]);
+      }
+
+      // Now calculate the entries of the latest Givens rotation matrix
+      this->generate_plane_rotation(
+        hessenberg[j][j], hessenberg[j][j + 1], cs[j], sn[j]);
+
+      // Apply the plane rotation using the newly calculated entries
+      this->apply_plane_rotation(
+        hessenberg[j][j], hessenberg[j][j + 1], cs[j], sn[j]);
+
+      // Apply a plane rotation to the corresponding entry in the vector
+      // s used in the minimisation problem, J(y)=min||s-R_m*y||
+      this->apply_plane_rotation(s[j], s[j + 1], cs[j], sn[j]);
+
+      // Compute current residual using equation (6.42) in Saad Y, "Iterative
+      // methods for sparse linear systems", p.177.]. Note, since s has complex
+      // entries we have to use std::abs instead of std::fabs
+      beta = std::abs(s[j + 1]);
+
+      // Compute the relative residual
+      resid = beta / normb;
+
+      // If required will document convergence history to screen or file (if
+      // stream open)
+      if (this->Doc_convergence_history)
+      {
+        // If an output file which is open isn't provided then output to screen
+        if (!(this->Output_file_stream.is_open()))
+        {
+          // Output the residual value to the screen
+          oomph_info << j + 1 << " " << resid << std::endl;
+        }
+        // Otherwise, output to file
+        else
+        {
+          // Output the residual value to file
+          this->Output_file_stream << j + 1 << " " << resid << std::endl;
+        }
+      } // if (Doc_convergence_history)
+
+      // If the required tolerance has been met
+      if (resid < this->Tolerance)
+      {
+        // Store the number of iterations taken
+        this->Iterations = j + 1;
+
+        // Update the result vector using the result, x=x_0+V_m*y (where V_m
+        // is given by v here)
+        update(j, hessenberg, s, block_z, block_solution);
+
+        // Copy the vectors in block_solution to solution
+        this->return_block_vectors(block_solution, solution);
+
+        // If time documentation was enabled
+        if (this->Doc_time)
+        {
+          // Output the current normalised residual norm
+          oomph_info << "\nFGMRES converged (1). Normalised residual norm: "
+                     << resid << std::endl;
+
+          // Output the number of iterations it took for convergence
+          oomph_info << "Number of iterations to convergence: " << j + 1 << "\n"
+                     << std::endl;
+        }
+
+        // Stop the timer
+        double t_end = TimingHelpers::timer();
+
+        // Calculate the time taken to calculate the solution
+        this->Solution_time = t_end - t_start;
+
+        // If time documentation was enabled
+        if (this->Doc_time)
+        {
+          // Output the time taken to solve the problem using GMRES
+          oomph_info << "Time for solve with FGMRES [sec]: "
+                     << this->Solution_time << std::endl;
+        }
+
+        // As we've met the tolerance for the solver and everything that should
+        // be documented, has been, finish using the solver
+        return;
+      } // if (resid<Tolerance)
+    } // for (unsigned j=0;j<Max_iter;j++)
+
+    // Store the number of iterations taken
+    this->Iterations = this->Max_iter;
+
+    // Only update if we actually did something
+    if (this->Max_iter > 0)
+    {
+      // Update the result vector using the result, x=x_0+V_m*y (where V_m
+      // is given by v here)
+      update(this->Max_iter - 1, hessenberg, s, block_z, block_solution);
+
+      // Copy the vectors in block_solution to solution
+      this->return_block_vectors(block_solution, solution);
+    }
+
+    // Compute the current residual
+    beta = 0.0;
+
+    // Get access to the values pointer (real)
+    norm_r = block_r[0].norm();
+
+    // Get access to the values pointer (imaginary)
+    norm_c = block_r[1].norm();
+
+    // Calculate the full norm
+    beta = sqrt(pow(norm_r, 2.0) + pow(norm_c, 2.0));
+
+    // Calculate the relative residual
+    resid = beta / normb;
+
+    // If the relative residual lies within tolerance
+    if (resid < this->Tolerance)
+    {
+      // If time documentation is enabled
+      if (this->Doc_time)
+      {
+        // Notify the user
+        oomph_info << "\nFGMRES converged (2). Normalised residual norm: "
+                   << resid << "\nNumber of iterations to convergence: "
+                   << this->Iterations << "\n"
+                   << std::endl;
+      }
+
+      // End the timer
+      double t_end = TimingHelpers::timer();
+
+      // Calculate the time taken for the solver
+      this->Solution_time = t_end - t_start;
+
+      // If time documentation is enabled
+      if (this->Doc_time)
+      {
+        oomph_info << "Time for solve with FGMRES [sec]: "
+                   << this->Solution_time << std::endl;
+      }
+      return;
+    }
+
+    // Otherwise GMRES failed convergence
+    oomph_info << "\nFGMRES did not converge to required tolerance! "
+               << "\nReturning with normalised residual norm: " << resid
+               << "\nafter " << this->Max_iter << " iterations.\n"
+               << std::endl;
+
+    // Throw an error if requested
+    if (this->Throw_error_after_max_iter)
+    {
+      std::string err = "Solver failed to converge and you requested an error";
+      err += " on convergence failures.";
+      throw OomphLibError(
+        err, OOMPH_EXCEPTION_LOCATION, OOMPH_CURRENT_FUNCTION);
+    }
+
+    // Finish using the solver
+    return;
+  } // End of solve_helper
 } // End of namespace oomph
 
 #endif

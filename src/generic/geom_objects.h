@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 #ifndef OOMPH_GEOM_OBJECTS_HEADER
 #define OOMPH_GEOM_OBJECTS_HEADER
 
@@ -32,14 +32,13 @@
 #include <oomph-lib-config.h>
 #endif
 
-//oomph-lib headers
+// oomph-lib headers
 #include "nodes.h"
 #include "timesteppers.h"
 
 
 namespace oomph
 {
-
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   // Geometric object
@@ -82,12 +81,12 @@ namespace oomph
   /// Meshing of moving domains is typically performed by representing the
   /// domain as an object of type Domain and, by default, Domain boundaries are
   /// represented by GeomObjects. In FSI computations, the boundary
-  /// of the fluid domain is represented by a number of solid mechanics elements.
-  /// These elements are, in fact,  GeomObjects via inheritance
-  /// so that the we can use the standard interfaces of the GeomObject class
-  /// for mesh generation. An example is the class \c FSIHermiteBeamElement which
-  /// is derived from the class \c HermiteBeamElement (a `normal' beam element)
-  /// and the \c GeomObject class.
+  /// of the fluid domain is represented by a number of solid mechanics
+  /// elements. These elements are, in fact,  GeomObjects via inheritance so
+  /// that the we can use the standard interfaces of the GeomObject class for
+  /// mesh generation. An example is the class \c FSIHermiteBeamElement which is
+  /// derived from the class \c HermiteBeamElement (a `normal' beam element) and
+  /// the \c GeomObject class.
   ///
   /// The shape of a geometric object can have an explicit time-dependence, for
   /// instance in cases where a domain boundary is performing
@@ -100,32 +99,30 @@ namespace oomph
   //========================================================================
   class GeomObject
   {
-
   public:
-
     /// Default constructor.
-    GeomObject() : NLagrangian(0), Ndim(0), Geom_object_time_stepper_pt(0)
-    { }
+    GeomObject() : NLagrangian(0), Ndim(0), Geom_object_time_stepper_pt(0) {}
 
     /// \short Constructor: Pass dimension of geometric object (# of Eulerian
     /// coords = # of Lagrangian coords; no time history available/needed)
-    GeomObject(const unsigned& ndim) : NLagrangian(ndim), Ndim(ndim),
-      Geom_object_time_stepper_pt(0)
-    { }
+    GeomObject(const unsigned& ndim)
+      : NLagrangian(ndim), Ndim(ndim), Geom_object_time_stepper_pt(0)
+    {
+    }
 
 
     /// \short Constructor: pass # of Eulerian and Lagrangian coordinates.
     /// No time history available/needed
-    GeomObject(const unsigned& nlagrangian, const unsigned& ndim) :
-      NLagrangian(nlagrangian), Ndim(ndim), Geom_object_time_stepper_pt(0)
+    GeomObject(const unsigned& nlagrangian, const unsigned& ndim)
+      : NLagrangian(nlagrangian), Ndim(ndim), Geom_object_time_stepper_pt(0)
     {
 #ifdef PARANOID
-      if (nlagrangian>ndim)
+      if (nlagrangian > ndim)
       {
         std::ostringstream error_message;
         error_message << "# of Lagrangian coordinates " << nlagrangian
-                      << " cannot be bigger than # of Eulerian ones "
-                      << ndim << std::endl;
+                      << " cannot be bigger than # of Eulerian ones " << ndim
+                      << std::endl;
 
         throw OomphLibError(error_message.str(),
                             OOMPH_CURRENT_FUNCTION,
@@ -139,18 +136,20 @@ namespace oomph
     /// position at previous timesteps and allows the evaluation
     /// of veloc/acceleration etc. in cases where the GeomData
     /// varies with time.
-    GeomObject(const unsigned& nlagrangian, const unsigned& ndim,
-               TimeStepper* time_stepper_pt) :
-      NLagrangian(nlagrangian), Ndim(ndim),
-      Geom_object_time_stepper_pt(time_stepper_pt)
+    GeomObject(const unsigned& nlagrangian,
+               const unsigned& ndim,
+               TimeStepper* time_stepper_pt)
+      : NLagrangian(nlagrangian),
+        Ndim(ndim),
+        Geom_object_time_stepper_pt(time_stepper_pt)
     {
 #ifdef PARANOID
-      if (nlagrangian>ndim)
+      if (nlagrangian > ndim)
       {
         std::ostringstream error_message;
         error_message << "# of Lagrangian coordinates " << nlagrangian
-                      << " cannot be bigger than # of Eulerian ones "
-                      << ndim << std::endl;
+                      << " cannot be bigger than # of Eulerian ones " << ndim
+                      << std::endl;
 
         throw OomphLibError(error_message.str(),
                             OOMPH_CURRENT_FUNCTION,
@@ -175,26 +174,38 @@ namespace oomph
     virtual ~GeomObject() {}
 
     /// Access function to # of Lagrangian coordinates
-    unsigned nlagrangian() const {return NLagrangian;}
+    unsigned nlagrangian() const
+    {
+      return NLagrangian;
+    }
 
     /// Access function to # of Eulerian coordinates
-    unsigned ndim() const {return Ndim;}
+    unsigned ndim() const
+    {
+      return Ndim;
+    }
 
     /// Set # of Lagrangian and Eulerian coordinates
     void set_nlagrangian_and_ndim(const unsigned& n_lagrangian,
                                   const unsigned& n_dim)
     {
-      NLagrangian=n_lagrangian;
-      Ndim=n_dim;
+      NLagrangian = n_lagrangian;
+      Ndim = n_dim;
     }
 
-    /// \short Access function for pointer to time stepper: Null if object is not
-    /// time-dependent
-    TimeStepper*& time_stepper_pt() {return Geom_object_time_stepper_pt;}
+    /// \short Access function for pointer to time stepper: Null if object is
+    /// not time-dependent
+    TimeStepper*& time_stepper_pt()
+    {
+      return Geom_object_time_stepper_pt;
+    }
 
-    /// \short Access function for pointer to time stepper: Null if object is not
-    /// time-dependent. Const version
-    TimeStepper* time_stepper_pt() const {return Geom_object_time_stepper_pt;}
+    /// \short Access function for pointer to time stepper: Null if object is
+    /// not time-dependent. Const version
+    TimeStepper* time_stepper_pt() const
+    {
+      return Geom_object_time_stepper_pt;
+    }
 
     /// \short How many items of Data does the shape of the object depend on?
     /// This is implemented as a broken virtual function. You must overload
@@ -205,17 +216,19 @@ namespace oomph
     {
       std::ostringstream error_message;
       error_message
-          << "GeomObject::ngeom_data() is a broken virtual function.\n"
-          << "Please implement it (and its companion GeomObject::geom_data_pt())\n"
-          << "for any GeomObject whose shape depends on Data whose values may \n"
-          << "be unknowns in the global Problem. \n"
-          << "If you have arrived here in a parallel job then it may be the case \n"
-          << "that you have not set the keep_all_elements_as_halos() flag to true \n"
-          << "for the MeshAsGeomObject representing the lower-dimensional mesh \n"
-          << "in a problem with multiple meshes. \n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+        << "GeomObject::ngeom_data() is a broken virtual function.\n"
+        << "Please implement it (and its companion "
+           "GeomObject::geom_data_pt())\n"
+        << "for any GeomObject whose shape depends on Data whose values may \n"
+        << "be unknowns in the global Problem. \n"
+        << "If you have arrived here in a parallel job then it may be the case "
+           "\n"
+        << "that you have not set the keep_all_elements_as_halos() flag to "
+           "true \n"
+        << "for the MeshAsGeomObject representing the lower-dimensional mesh \n"
+        << "in a problem with multiple meshes. \n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
     /// \short Return pointer to the j-th Data item that the object's
@@ -227,38 +240,40 @@ namespace oomph
     {
       std::ostringstream error_message;
       error_message
-          << "GeomObject::geom_data_pt() is a broken virtual function.\n"
-          << "Please implement it (and its companion GeomObject::ngeom_data())\n"
-          << "for any GeomObject whose shape depends on Data whose values may \n"
-          << "be unknowns in the global Problem. \n"
-          << "If you have arrived here in a parallel job then it may be the case \n"
-          << "that you have not set the keep_all_elements_as_halos() flag to true \n"
-          << "for the MeshAsGeomObject representing the lower-dimensional mesh \n"
-          << "in a problem with multiple meshes. \n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+        << "GeomObject::geom_data_pt() is a broken virtual function.\n"
+        << "Please implement it (and its companion GeomObject::ngeom_data())\n"
+        << "for any GeomObject whose shape depends on Data whose values may \n"
+        << "be unknowns in the global Problem. \n"
+        << "If you have arrived here in a parallel job then it may be the case "
+           "\n"
+        << "that you have not set the keep_all_elements_as_halos() flag to "
+           "true \n"
+        << "for the MeshAsGeomObject representing the lower-dimensional mesh \n"
+        << "in a problem with multiple meshes. \n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
     /// Parametrised position on object at current time: r(zeta).
-    virtual void position(const Vector<double>& zeta, Vector<double>& r)
-    const =0;
+    virtual void position(const Vector<double>& zeta,
+                          Vector<double>& r) const = 0;
 
     /// \short Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep. Works for t=0 but needs to be overloaded
     /// if genuine time-dependence is required.
-    virtual void position(const unsigned& t, const Vector<double>& zeta,
+    virtual void position(const unsigned& t,
+                          const Vector<double>& zeta,
                           Vector<double>& r) const
     {
-      if (t!=0)
+      if (t != 0)
       {
         throw OomphLibError(
           "Calling steady position() from discrete unsteady position()",
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
       }
-      position(zeta,r);
+      position(zeta, r);
     }
 
 
@@ -273,35 +288,41 @@ namespace oomph
                     << "Please implement it for any GeomObject whose shape\n"
                     << "is time-dependent and will be used in the extrusion\n"
                     << "of a mesh (in the time direction).\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
 
     /// \short j-th time-derivative on object at current time:
     /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
-    virtual void dposition_dt(const Vector<double>& zeta, const unsigned& j,
+    virtual void dposition_dt(const Vector<double>& zeta,
+                              const unsigned& j,
                               Vector<double>& drdt)
     {
-      //If the index is zero the return the position
-      if (j==0) {position(zeta,drdt);}
-      //Otherwise assume that the geometric object is static
-      //and return zero after throwing a warning
+      // If the index is zero the return the position
+      if (j == 0)
+      {
+        position(zeta, drdt);
+      }
+      // Otherwise assume that the geometric object is static
+      // and return zero after throwing a warning
       else
       {
         std::ostringstream warning_stream;
         warning_stream
-            << "Using default (static) assignment " << j
-            << "-th time derivative in GeomObject::dposition_dt(...) is zero\n"
-            << "Overload for your specific geometric object if this is not \n"
-            << "appropriate. \n";
+          << "Using default (static) assignment " << j
+          << "-th time derivative in GeomObject::dposition_dt(...) is zero\n"
+          << "Overload for your specific geometric object if this is not \n"
+          << "appropriate. \n";
         OomphLibWarning(warning_stream.str(),
                         "GeomObject::dposition_dt()",
                         OOMPH_EXCEPTION_LOCATION);
 
-        unsigned n=drdt.size();
-        for (unsigned i=0; i<n; i++) {drdt[i]=0.0;}
+        unsigned n = drdt.size();
+        for (unsigned i = 0; i < n; i++)
+        {
+          drdt[i] = 0.0;
+        }
       }
     }
 
@@ -310,7 +331,7 @@ namespace oomph
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// Evaluated at current time.
     virtual void dposition(const Vector<double>& zeta,
-                           DenseMatrix<double> &drdzeta) const
+                           DenseMatrix<double>& drdzeta) const
     {
       throw OomphLibError(
         "You must specify dposition() for your own object! \n",
@@ -323,8 +344,8 @@ namespace oomph
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
     /// Evaluated at current time.
-    virtual void d2position(const Vector<double> &zeta,
-                            RankThreeTensor<double> &ddrdzeta) const
+    virtual void d2position(const Vector<double>& zeta,
+                            RankThreeTensor<double>& ddrdzeta) const
     {
       throw OomphLibError(
         "You must specify d2position() for your own object! \n",
@@ -339,9 +360,10 @@ namespace oomph
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
     /// Evaluated at current time.
-    virtual void d2position(const Vector<double>& zeta, Vector<double>& r,
-                            DenseMatrix<double> &drdzeta,
-                            RankThreeTensor<double> &ddrdzeta) const
+    virtual void d2position(const Vector<double>& zeta,
+                            Vector<double>& r,
+                            DenseMatrix<double>& drdzeta,
+                            RankThreeTensor<double>& ddrdzeta) const
     {
       throw OomphLibError(
         "You must specify d2position() for your own object! \n",
@@ -362,14 +384,15 @@ namespace oomph
     /// find the value of zeta, and if true the value of the coordinate
     /// s is used as the initial guess for the method. If the flag is false
     /// (the default) a value of s=0 is used as the initial guess.
-    virtual void locate_zeta(const Vector<double> &zeta,
-                             GeomObject* &sub_geom_object_pt,
-                             Vector<double> &s,
-                             const bool &use_coordinate_as_initial_guess=false)
+    virtual void locate_zeta(
+      const Vector<double>& zeta,
+      GeomObject*& sub_geom_object_pt,
+      Vector<double>& s,
+      const bool& use_coordinate_as_initial_guess = false)
     {
-      //By default, the local coordinate is intrinsic coordinate
+      // By default, the local coordinate is intrinsic coordinate
       s = zeta;
-      //The sub_object is the entire object
+      // The sub_object is the entire object
       sub_geom_object_pt = this;
     }
 
@@ -384,31 +407,29 @@ namespace oomph
     /// it is not overloaded in a derived GeomObject where the default
     /// is not appropriate, we do at least check that s and zeta
     /// have the same size if called in PARANOID mode.
-    virtual void interpolated_zeta(const Vector<double> &s, Vector<double> &zeta)
-    const
+    virtual void interpolated_zeta(const Vector<double>& s,
+                                   Vector<double>& zeta) const
     {
 #ifdef PARANOID
-      if (zeta.size()!=s.size())
+      if (zeta.size() != s.size())
       {
         std::ostringstream error_message;
-        error_message
-            << "You've called the default implementation of "
-            << "GeomObject::interpolated_zeta() \n"
-            << "but zeta.size()=" << zeta.size()
-            << "and s.size()=" << s.size()  << std::endl
-            << "This doesn't make sense! You probably have to \n"
-            << "overload this function in your specific GeomObject\n";
+        error_message << "You've called the default implementation of "
+                      << "GeomObject::interpolated_zeta() \n"
+                      << "but zeta.size()=" << zeta.size()
+                      << "and s.size()=" << s.size() << std::endl
+                      << "This doesn't make sense! You probably have to \n"
+                      << "overload this function in your specific GeomObject\n";
         throw OomphLibError(error_message.str(),
                             OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-      //By default the global intrinsic coordinate is equal to the local one
+      // By default the global intrinsic coordinate is equal to the local one
       zeta = s;
     }
 
   protected:
-
     /// Number of Lagrangian (intrinsic) coordinates
     unsigned NLagrangian;
 
@@ -418,12 +439,7 @@ namespace oomph
     /// \short Timestepper (used to handle access to geometry
     /// at previous timesteps)
     TimeStepper* Geom_object_time_stepper_pt;
-
   };
-
-
-
-
 
 
   ///////////////////////////////////////////////////////////////////////
@@ -433,7 +449,6 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
 
 
-
   //=========================================================================
   /// Steady, straight 1D line in 2D space
   ///  \f[ x = \zeta \f]
@@ -441,23 +456,21 @@ namespace oomph
   //=========================================================================
   class StraightLine : public GeomObject
   {
-
   public:
-
     /// \short Constructor:  One item of geometric data:
     /// \code
     ///  Geom_data_pt[0]->value(0) = height
     /// \endcode
-    StraightLine(const Vector<Data*>& geom_data_pt) : GeomObject(1,2)
+    StraightLine(const Vector<Data*>& geom_data_pt) : GeomObject(1, 2)
     {
 #ifdef PARANOID
-      if (geom_data_pt.size()!=1)
+      if (geom_data_pt.size() != 1)
       {
         std::ostringstream error_message;
         error_message << "geom_data_pt should have size 1, not "
                       << geom_data_pt.size() << std::endl;
 
-        if (geom_data_pt[0]->nvalue()!=1)
+        if (geom_data_pt[0]->nvalue() != 1)
         {
           error_message << "geom_data_pt[0] should have 1 value, not "
                         << geom_data_pt[0]->nvalue() << std::endl;
@@ -469,14 +482,14 @@ namespace oomph
       }
 #endif
       Geom_data_pt.resize(1);
-      Geom_data_pt[0]=geom_data_pt[0];
+      Geom_data_pt[0] = geom_data_pt[0];
 
       // Data has been created externally: Must not clean up
-      Must_clean_up=false;
+      Must_clean_up = false;
     }
 
     /// Constructor:  Pass height (pinned by default)
-    StraightLine(const double& height) : GeomObject(1,2)
+    StraightLine(const double& height) : GeomObject(1, 2)
     {
       // Create Data for straight-line object: The only geometric data is the
       // height which is pinned
@@ -486,13 +499,13 @@ namespace oomph
       Geom_data_pt[0] = new Data(1);
 
       // I've created the data, I need to clean up
-      Must_clean_up=true;
+      Must_clean_up = true;
 
       // Pin the data
       Geom_data_pt[0]->pin(0);
 
       // Give it a value: Initial height
-      Geom_data_pt[0]->set_value(0,height);
+      Geom_data_pt[0]->set_value(0, height);
     }
 
 
@@ -516,7 +529,7 @@ namespace oomph
       if (Must_clean_up)
       {
         delete Geom_data_pt[0];
-        Geom_data_pt[0]=0;
+        Geom_data_pt[0] = 0;
       }
     }
 
@@ -533,11 +546,12 @@ namespace oomph
     /// \short Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep.
-    void position(const unsigned& t, const Vector<double>& zeta,
+    void position(const unsigned& t,
+                  const Vector<double>& zeta,
                   Vector<double>& r) const
     {
 #ifdef PARANOID
-      if (t>Geom_data_pt[0]->time_stepper_pt()->nprev_values())
+      if (t > Geom_data_pt[0]->time_stepper_pt()->nprev_values())
       {
         std::ostringstream error_message;
         error_message << "t > nprev_values() " << t << " "
@@ -552,7 +566,7 @@ namespace oomph
 
       // Position Vector at time level t
       r[0] = zeta[0];
-      r[1] = Geom_data_pt[0]->value(t,0);
+      r[1] = Geom_data_pt[0]->value(t, 0);
     }
 
 
@@ -560,23 +574,23 @@ namespace oomph
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// Evaluated at current time.
     virtual void dposition(const Vector<double>& zeta,
-                           DenseMatrix<double> &drdzeta) const
+                           DenseMatrix<double>& drdzeta) const
     {
       // Tangent vector
-      drdzeta(0,0)=1.0;
-      drdzeta(0,1)=0.0;
+      drdzeta(0, 0) = 1.0;
+      drdzeta(0, 1) = 0.0;
     }
 
 
     /// \short 2nd derivative of position Vector w.r.t. to coordinates:
-    /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ = ddrdzeta(alpha,beta,i).
-    /// Evaluated at current time.
+    /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
+    /// ddrdzeta(alpha,beta,i). Evaluated at current time.
     virtual void d2position(const Vector<double>& zeta,
-                            RankThreeTensor<double> &ddrdzeta) const
+                            RankThreeTensor<double>& ddrdzeta) const
     {
       // Derivative of tangent vector
-      ddrdzeta(0,0,0)=0.0;
-      ddrdzeta(0,0,1)=0.0;
+      ddrdzeta(0, 0, 0) = 0.0;
+      ddrdzeta(0, 0, 1) = 0.0;
     }
 
 
@@ -586,43 +600,45 @@ namespace oomph
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
     /// Evaluated at current time.
-    virtual void d2position(const Vector<double>& zeta, Vector<double>& r,
-                            DenseMatrix<double> &drdzeta,
-                            RankThreeTensor<double> &ddrdzeta) const
+    virtual void d2position(const Vector<double>& zeta,
+                            Vector<double>& r,
+                            DenseMatrix<double>& drdzeta,
+                            RankThreeTensor<double>& ddrdzeta) const
     {
       // Position Vector
       r[0] = zeta[0];
       r[1] = Geom_data_pt[0]->value(0);
 
       // Tangent vector
-      drdzeta(0,0)=1.0;
-      drdzeta(0,1)=0.0;
+      drdzeta(0, 0) = 1.0;
+      drdzeta(0, 1) = 0.0;
 
       // Derivative of tangent vector
-      ddrdzeta(0,0,0)=0.0;
-      ddrdzeta(0,0,1)=0.0;
+      ddrdzeta(0, 0, 0) = 0.0;
+      ddrdzeta(0, 0, 1) = 0.0;
     }
 
 
     /// How many items of Data does the shape of the object depend on?
-    unsigned ngeom_data() const {return Geom_data_pt.size();}
+    unsigned ngeom_data() const
+    {
+      return Geom_data_pt.size();
+    }
 
     /// \short Return pointer to the j-th Data item that the object's
     /// shape depends on
-    Data* geom_data_pt(const unsigned& j) {return Geom_data_pt[j];}
+    Data* geom_data_pt(const unsigned& j)
+    {
+      return Geom_data_pt[j];
+    }
 
   private:
-
     /// \short Vector of pointers to Data items that affects the object's shape
     Vector<Data*> Geom_data_pt;
 
     /// Do I need to clean up?
     bool Must_clean_up;
-
   };
-
-
-
 
 
   ///////////////////////////////////////////////////////////////////////
@@ -632,8 +648,6 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
 
 
-
-
   //=========================================================================
   /// \short Steady ellipse with half axes A and B as geometric object:
   ///  \f[ x = A \cos(\zeta) \f]
@@ -641,26 +655,23 @@ namespace oomph
   //=========================================================================
   class Ellipse : public GeomObject
   {
-
   public:
-
-
     /// \short Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
     /// half axes as Data:
     /// \code
     /// Geom_data_pt[0]->value(0) = A
     /// Geom_data_pt[0]->value(1) = B
     /// \endcode
-    Ellipse(const Vector<Data*>& geom_data_pt) :  GeomObject(1,2)
+    Ellipse(const Vector<Data*>& geom_data_pt) : GeomObject(1, 2)
     {
 #ifdef PARANOID
-      if (geom_data_pt.size()!=1)
+      if (geom_data_pt.size() != 1)
       {
         std::ostringstream error_message;
         error_message << "geom_data_pt should have size 1, not "
                       << geom_data_pt.size() << std::endl;
 
-        if (geom_data_pt[0]->nvalue()!=2)
+        if (geom_data_pt[0]->nvalue() != 2)
         {
           error_message << "geom_data_pt[0] should have 2 values, not "
                         << geom_data_pt[0]->nvalue() << std::endl;
@@ -672,16 +683,16 @@ namespace oomph
       }
 #endif
       Geom_data_pt.resize(1);
-      Geom_data_pt[0]=geom_data_pt[0];
+      Geom_data_pt[0] = geom_data_pt[0];
 
       // Data has been created externally: Must not clean up
-      Must_clean_up=false;
+      Must_clean_up = false;
     }
 
 
     /// \short Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
     /// half axes A and B; both pinned.
-    Ellipse(const double& A, const double& B) :  GeomObject(1,2)
+    Ellipse(const double& A, const double& B) : GeomObject(1, 2)
     {
       // Resize Data for ellipse object:
       Geom_data_pt.resize(1);
@@ -690,15 +701,15 @@ namespace oomph
       Geom_data_pt[0] = new Data(2);
 
       // I've created the data, I need to clean up
-      Must_clean_up=true;
+      Must_clean_up = true;
 
       // Pin the data
       Geom_data_pt[0]->pin(0);
       Geom_data_pt[0]->pin(1);
 
       // Set half axes
-      Geom_data_pt[0]->set_value(0,A);
-      Geom_data_pt[0]->set_value(1,B);
+      Geom_data_pt[0]->set_value(0, A);
+      Geom_data_pt[0]->set_value(1, B);
     }
 
     /// Broken copy constructor
@@ -721,47 +732,62 @@ namespace oomph
       if (Must_clean_up)
       {
         delete Geom_data_pt[0];
-        Geom_data_pt[0]=0;
+        Geom_data_pt[0] = 0;
       }
     }
 
     /// Set horizontal half axis
-    void set_A_ellips(const double& a) {Geom_data_pt[0]->set_value(0,a);}
+    void set_A_ellips(const double& a)
+    {
+      Geom_data_pt[0]->set_value(0, a);
+    }
 
     /// Set vertical half axis
-    void set_B_ellips(const double& b) {Geom_data_pt[0]->set_value(1,b);}
+    void set_B_ellips(const double& b)
+    {
+      Geom_data_pt[0]->set_value(1, b);
+    }
 
     /// Access function for horizontal half axis
-    double a_ellips() {return Geom_data_pt[0]->value(0);}
+    double a_ellips()
+    {
+      return Geom_data_pt[0]->value(0);
+    }
 
     /// Access function for vertical half axis
-    double b_ellips() {return Geom_data_pt[0]->value(1);}
+    double b_ellips()
+    {
+      return Geom_data_pt[0]->value(1);
+    }
 
 
     /// \short Position Vector at Lagrangian coordinate zeta
     void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Position Vector
-      r[0] = Geom_data_pt[0]->value(0)*cos(zeta[0]);
-      r[1] = Geom_data_pt[0]->value(1)*sin(zeta[0]);
+      r[0] = Geom_data_pt[0]->value(0) * cos(zeta[0]);
+      r[1] = Geom_data_pt[0]->value(1) * sin(zeta[0]);
     }
-
-
 
 
     /// \short Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep.
-    void position(const unsigned& t, const Vector<double>& zeta,
+    void position(const unsigned& t,
+                  const Vector<double>& zeta,
                   Vector<double>& r) const
     {
-      //If we have done the construction, it's a Steady Ellipse,
-      //so all time-history values of the position are equal to the position
-      if (Must_clean_up) {position(zeta,r); return;}
+      // If we have done the construction, it's a Steady Ellipse,
+      // so all time-history values of the position are equal to the position
+      if (Must_clean_up)
+      {
+        position(zeta, r);
+        return;
+      }
 
-      //Otherwise check that the value of t is within range
+      // Otherwise check that the value of t is within range
 #ifdef PARANOID
-      if (t>Geom_data_pt[0]->time_stepper_pt()->nprev_values())
+      if (t > Geom_data_pt[0]->time_stepper_pt()->nprev_values())
       {
         std::ostringstream error_message;
         error_message << "t > nprev_values() " << t << " "
@@ -775,21 +801,19 @@ namespace oomph
 #endif
 
       // Position Vector
-      r[0] = Geom_data_pt[0]->value(t,0)*cos(zeta[0]);
-      r[1] = Geom_data_pt[0]->value(t,1)*sin(zeta[0]);
+      r[0] = Geom_data_pt[0]->value(t, 0) * cos(zeta[0]);
+      r[1] = Geom_data_pt[0]->value(t, 1) * sin(zeta[0]);
     }
-
-
 
 
     /// \short Derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     void dposition(const Vector<double>& zeta,
-                   DenseMatrix<double> &drdzeta) const
+                   DenseMatrix<double>& drdzeta) const
     {
       // Components of the single tangent Vector
-      drdzeta(0,0) = - Geom_data_pt[0]->value(0)*sin(zeta[0]);
-      drdzeta(0,1) =   Geom_data_pt[0]->value(1)*cos(zeta[0]);
+      drdzeta(0, 0) = -Geom_data_pt[0]->value(0) * sin(zeta[0]);
+      drdzeta(0, 1) = Geom_data_pt[0]->value(1) * cos(zeta[0]);
     }
 
 
@@ -797,12 +821,12 @@ namespace oomph
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
     /// Evaluated at current time.
-    void d2position(const Vector<double> &zeta,
-                    RankThreeTensor<double> &ddrdzeta) const
+    void d2position(const Vector<double>& zeta,
+                    RankThreeTensor<double>& ddrdzeta) const
     {
       // Components of the derivative of the tangent Vector
-      ddrdzeta(0,0,0) = - Geom_data_pt[0]->value(0)*cos(zeta[0]);
-      ddrdzeta(0,0,1) = - Geom_data_pt[0]->value(1)*sin(zeta[0]);
+      ddrdzeta(0, 0, 0) = -Geom_data_pt[0]->value(0) * cos(zeta[0]);
+      ddrdzeta(0, 0, 1) = -Geom_data_pt[0]->value(1) * sin(zeta[0]);
     }
 
     /// \short Position Vector and 1st and 2nd derivs to coordinates:
@@ -810,45 +834,47 @@ namespace oomph
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
     /// Evaluated at current time.
-    void d2position(const Vector<double>& zeta, Vector<double>& r,
-                    DenseMatrix<double> &drdzeta,
-                    RankThreeTensor<double> &ddrdzeta) const
+    void d2position(const Vector<double>& zeta,
+                    Vector<double>& r,
+                    DenseMatrix<double>& drdzeta,
+                    RankThreeTensor<double>& ddrdzeta) const
     {
       double a = Geom_data_pt[0]->value(0);
       double b = Geom_data_pt[0]->value(1);
       // Position Vector
-      r[0] = a*cos(zeta[0]);
-      r[1] = b*sin(zeta[0]);
+      r[0] = a * cos(zeta[0]);
+      r[1] = b * sin(zeta[0]);
 
       // Components of the single tangent Vector
-      drdzeta(0,0) = - a*sin(zeta[0]);
-      drdzeta(0,1) =   b*cos(zeta[0]);
+      drdzeta(0, 0) = -a * sin(zeta[0]);
+      drdzeta(0, 1) = b * cos(zeta[0]);
 
       // Components of the derivative of the tangent Vector
-      ddrdzeta(0,0,0) = - a*cos(zeta[0]);
-      ddrdzeta(0,0,1) = - b*sin(zeta[0]);
-
+      ddrdzeta(0, 0, 0) = -a * cos(zeta[0]);
+      ddrdzeta(0, 0, 1) = -b * sin(zeta[0]);
     }
 
 
     /// How many items of Data does the shape of the object depend on?
-    unsigned ngeom_data() const {return Geom_data_pt.size();}
+    unsigned ngeom_data() const
+    {
+      return Geom_data_pt.size();
+    }
 
     /// \short Return pointer to the j-th Data item that the object's
     /// shape depends on
-    Data* geom_data_pt(const unsigned& j) {return Geom_data_pt[j];}
+    Data* geom_data_pt(const unsigned& j)
+    {
+      return Geom_data_pt[j];
+    }
 
   private:
-
     /// \short Vector of pointers to Data items that affects the object's shape
     Vector<Data*> Geom_data_pt;
 
     /// Do I need to clean up?
     bool Must_clean_up;
-
-
   };
-
 
 
   ///////////////////////////////////////////////////////////////////////
@@ -858,7 +884,6 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
 
 
-
   //=========================================================================
   /// \short Circle in 2D space.
   /// \f[ x = X_c + R \cos(\zeta)  \f]
@@ -866,86 +891,86 @@ namespace oomph
   //=========================================================================
   class Circle : public GeomObject
   {
-
   public:
-
     /// Constructor:  Pass x and y-coords of centre and radius (all pinned)
-    Circle(const double& x_c, const double& y_c,
-           const double& r) : GeomObject(1,2)
+    Circle(const double& x_c, const double& y_c, const double& r)
+      : GeomObject(1, 2)
     {
       // Create Data:
       Geom_data_pt.resize(1);
       Geom_data_pt[0] = new Data(3);
 
       // No time-dependence
-      Is_time_dependent=false;
+      Is_time_dependent = false;
 
       // Assign data: X_c; no timedependence, free by default
 
       // Pin the data
       Geom_data_pt[0]->pin(0);
       // Give it a value:
-      Geom_data_pt[0]->set_value(0,x_c);
+      Geom_data_pt[0]->set_value(0, x_c);
 
       // Assign data: Y_c; no timedependence, free by default
 
       // Pin the data
       Geom_data_pt[0]->pin(1);
       // Give it a value:
-      Geom_data_pt[0]->set_value(1,y_c);
+      Geom_data_pt[0]->set_value(1, y_c);
 
       // Assign data: R; no timedependence, free by default
 
       // Pin the data
       Geom_data_pt[0]->pin(2);
       // Give it a value:
-      Geom_data_pt[0]->set_value(2,r);
+      Geom_data_pt[0]->set_value(2, r);
 
       // I've created the data, I need to clean up
-      Must_clean_up=true;
+      Must_clean_up = true;
     }
 
 
-    /// \short Constructor:  Pass x and y-coords of centre and radius (all pinned)
-    /// Circle is static but can be used in time-dependent runs with
+    /// \short Constructor:  Pass x and y-coords of centre and radius (all
+    /// pinned) Circle is static but can be used in time-dependent runs with
     /// specified timestepper.
-    Circle(const double& x_c, const double& y_c,
-           const double& r, TimeStepper* time_stepper_pt) :
-      GeomObject(1,2,time_stepper_pt)
+    Circle(const double& x_c,
+           const double& y_c,
+           const double& r,
+           TimeStepper* time_stepper_pt)
+      : GeomObject(1, 2, time_stepper_pt)
     {
       // Create Data:
       Geom_data_pt.resize(1);
-      Geom_data_pt[0] = new Data(time_stepper_pt,3);
+      Geom_data_pt[0] = new Data(time_stepper_pt, 3);
 
       // We have time-dependence
-      Is_time_dependent=true;
+      Is_time_dependent = true;
 
       // Assign data: X_c; no timedependence, free by default
 
       // Pin the data
       Geom_data_pt[0]->pin(0);
       // Give it a value:
-      Geom_data_pt[0]->set_value(0,x_c);
+      Geom_data_pt[0]->set_value(0, x_c);
 
       // Assign data: Y_c; no timedependence, free by default
 
       // Pin the data
       Geom_data_pt[0]->pin(1);
       // Give it a value:
-      Geom_data_pt[0]->set_value(1,y_c);
+      Geom_data_pt[0]->set_value(1, y_c);
 
       // Assign data: R; no timedependence, free by default
 
       // Pin the data
       Geom_data_pt[0]->pin(2);
       // Give it a value:
-      Geom_data_pt[0]->set_value(2,r);
+      Geom_data_pt[0]->set_value(2, r);
 
       // "Impulsive" start because there isn't any time-dependence
       time_stepper_pt->assign_initial_values_impulsive(Geom_data_pt[0]);
 
       // I've created the data, I need to clean up
-      Must_clean_up=true;
+      Must_clean_up = true;
     }
 
 
@@ -956,16 +981,16 @@ namespace oomph
     /// Geom_data_pt[0]->value(1) = Y_c;
     /// Geom_data_pt[0]->value(2) = R;
     /// \endcode
-    Circle(const Vector<Data*>& geom_data_pt) : GeomObject(1,2)
+    Circle(const Vector<Data*>& geom_data_pt) : GeomObject(1, 2)
     {
 #ifdef PARANOID
-      if (geom_data_pt.size()!=1)
+      if (geom_data_pt.size() != 1)
       {
         std::ostringstream error_message;
         error_message << "geom_data_pt should have size 1, not "
                       << geom_data_pt.size() << std::endl;
 
-        if (geom_data_pt[0]->nvalue()!=3)
+        if (geom_data_pt[0]->nvalue() != 3)
         {
           error_message << "geom_data_pt[0] should have 3 values, not "
                         << geom_data_pt[0]->nvalue() << std::endl;
@@ -978,20 +1003,20 @@ namespace oomph
 #endif
 
       // We have time-dependence
-      if (geom_data_pt[0]->time_stepper_pt()->nprev_values()>0)
+      if (geom_data_pt[0]->time_stepper_pt()->nprev_values() > 0)
       {
-        Is_time_dependent=true;
+        Is_time_dependent = true;
       }
       else
       {
-        Is_time_dependent=false;
+        Is_time_dependent = false;
       }
 
       Geom_data_pt.resize(1);
-      Geom_data_pt[0]=geom_data_pt[0];
+      Geom_data_pt[0] = geom_data_pt[0];
 
       // Data has been created externally: Must not clean up
-      Must_clean_up=false;
+      Must_clean_up = false;
     }
 
     /// Broken copy constructor
@@ -1012,11 +1037,11 @@ namespace oomph
       // Do I need to clean up?
       if (Must_clean_up)
       {
-        unsigned ngeom_data=Geom_data_pt.size();
-        for (unsigned i=0; i<ngeom_data; i++)
+        unsigned ngeom_data = Geom_data_pt.size();
+        for (unsigned i = 0; i < ngeom_data; i++)
         {
           delete Geom_data_pt[i];
-          Geom_data_pt[i]=0;
+          Geom_data_pt[i] = 0;
         }
       }
     }
@@ -1025,31 +1050,32 @@ namespace oomph
     void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Extract data
-      double X_c= Geom_data_pt[0]->value(0);
-      double Y_c= Geom_data_pt[0]->value(1);
-      double R= Geom_data_pt[0]->value(2);
+      double X_c = Geom_data_pt[0]->value(0);
+      double Y_c = Geom_data_pt[0]->value(1);
+      double R = Geom_data_pt[0]->value(2);
 
       // Position Vector
-      r[0] = X_c + R*cos(zeta[0]);
-      r[1] = Y_c + R*sin(zeta[0]);
+      r[0] = X_c + R * cos(zeta[0]);
+      r[1] = Y_c + R * sin(zeta[0]);
     }
 
 
     /// \short Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep.
-    void position(const unsigned& t, const Vector<double>& zeta,
+    void position(const unsigned& t,
+                  const Vector<double>& zeta,
                   Vector<double>& r) const
     {
       // Genuine time-dependence?
       if (!Is_time_dependent)
       {
-        position(zeta,r);
+        position(zeta, r);
       }
       else
       {
 #ifdef PARANOID
-        if (t>Geom_data_pt[0]->time_stepper_pt()->nprev_values())
+        if (t > Geom_data_pt[0]->time_stepper_pt()->nprev_values())
         {
           std::ostringstream error_message;
           error_message << "t > nprev_values() " << t << " "
@@ -1063,34 +1089,48 @@ namespace oomph
 #endif
 
         // Extract data
-        double X_c = Geom_data_pt[0]->value(t,0);
-        double Y_c = Geom_data_pt[0]->value(t,1);
-        double R = Geom_data_pt[0]->value(t,2);
+        double X_c = Geom_data_pt[0]->value(t, 0);
+        double Y_c = Geom_data_pt[0]->value(t, 1);
+        double R = Geom_data_pt[0]->value(t, 2);
 
         // Position Vector
-        r[0] = X_c + R*cos(zeta[0]);
-        r[1] = Y_c + R*sin(zeta[0]);
+        r[0] = X_c + R * cos(zeta[0]);
+        r[1] = Y_c + R * sin(zeta[0]);
       }
     }
 
     /// Access function to x-coordinate of centre of circle
-    double& x_c() {return *Geom_data_pt[0]->value_pt(0);}
+    double& x_c()
+    {
+      return *Geom_data_pt[0]->value_pt(0);
+    }
 
     /// Access function to y-coordinate of centre of circle
-    double& y_c() {return *Geom_data_pt[0]->value_pt(1);}
+    double& y_c()
+    {
+      return *Geom_data_pt[0]->value_pt(1);
+    }
 
     /// Access function to radius of circle
-    double& R() {return *Geom_data_pt[0]->value_pt(2);}
+    double& R()
+    {
+      return *Geom_data_pt[0]->value_pt(2);
+    }
 
     /// How many items of Data does the shape of the object depend on?
-    unsigned ngeom_data() const {return Geom_data_pt.size();}
+    unsigned ngeom_data() const
+    {
+      return Geom_data_pt.size();
+    }
 
     /// \short Return pointer to the j-th Data item that the object's
     /// shape depends on
-    Data* geom_data_pt(const unsigned& j) {return Geom_data_pt[j];}
+    Data* geom_data_pt(const unsigned& j)
+    {
+      return Geom_data_pt[j];
+    }
 
   protected:
-
     /// \short Vector of pointers to Data items that affects the object's shape
     Vector<Data*> Geom_data_pt;
 
@@ -1099,7 +1139,6 @@ namespace oomph
 
     /// Genuine time-dependence?
     bool Is_time_dependent;
-
   };
 
 
@@ -1117,10 +1156,11 @@ namespace oomph
   class EllipticalTube : public GeomObject
   {
   public:
-
     /// Constructor: Specify radius
-    EllipticalTube(const double& a, const double& b) :
-      GeomObject(2,3), A(a), B(b) {}
+    EllipticalTube(const double& a, const double& b)
+      : GeomObject(2, 3), A(a), B(b)
+    {
+    }
 
     /// Broken copy constructor
     EllipticalTube(const EllipticalTube& node)
@@ -1135,26 +1175,32 @@ namespace oomph
     }
 
     /// Access function to x-half axis
-    double& a() {return A;}
+    double& a()
+    {
+      return A;
+    }
 
     /// Access function to y-half axis
-    double& b() {return B;}
+    double& b()
+    {
+      return B;
+    }
 
     /// Position vector
-    void position(const Vector<double>& zeta, Vector<double>& r)const
+    void position(const Vector<double>& zeta, Vector<double>& r) const
     {
-      r[0]=A*cos(zeta[1]);
-      r[1]=B*sin(zeta[1]);
-      r[2]=zeta[0];
+      r[0] = A * cos(zeta[1]);
+      r[1] = B * sin(zeta[1]);
+      r[2] = zeta[0];
     }
 
 
     /// Position vector (dummy unsteady version returns steady version)
     void position(const unsigned& t,
                   const Vector<double>& zeta,
-                  Vector<double>& r)const
+                  Vector<double>& r) const
     {
-      position(zeta,r);
+      position(zeta, r);
     }
 
     /// \short How many items of Data does the shape of the object depend on?
@@ -1164,70 +1210,66 @@ namespace oomph
     }
 
     /// \short Position Vector and 1st and 2nd derivs w.r.t. zeta.
-    void d2position(const Vector<double> &zeta,
-                    RankThreeTensor<double> &ddrdzeta) const
+    void d2position(const Vector<double>& zeta,
+                    RankThreeTensor<double>& ddrdzeta) const
     {
-      ddrdzeta(0,0,0) = 0.0;
-      ddrdzeta(0,0,1) = 0.0;
-      ddrdzeta(0,0,2) = 0.0;
+      ddrdzeta(0, 0, 0) = 0.0;
+      ddrdzeta(0, 0, 1) = 0.0;
+      ddrdzeta(0, 0, 2) = 0.0;
 
-      ddrdzeta(1,1,0) = -A*cos(zeta[1]);
-      ddrdzeta(1,1,1) = -B*sin(zeta[1]);
-      ddrdzeta(1,1,2) = 0.0;
+      ddrdzeta(1, 1, 0) = -A * cos(zeta[1]);
+      ddrdzeta(1, 1, 1) = -B * sin(zeta[1]);
+      ddrdzeta(1, 1, 2) = 0.0;
 
-      ddrdzeta(0,1,0) = ddrdzeta(1,0,0) = 0.0;
-      ddrdzeta(0,1,1) = ddrdzeta(1,0,1) = 0.0;
-      ddrdzeta(0,1,2) = ddrdzeta(1,0,2) = 0.0;
+      ddrdzeta(0, 1, 0) = ddrdzeta(1, 0, 0) = 0.0;
+      ddrdzeta(0, 1, 1) = ddrdzeta(1, 0, 1) = 0.0;
+      ddrdzeta(0, 1, 2) = ddrdzeta(1, 0, 2) = 0.0;
     }
 
     /// \short Position Vector and 1st and 2nd derivs w.r.t. zeta.
-    void d2position(const Vector<double>& zeta, Vector<double>& r,
-                    DenseMatrix<double> &drdzeta,
-                    RankThreeTensor<double> &ddrdzeta) const
+    void d2position(const Vector<double>& zeta,
+                    Vector<double>& r,
+                    DenseMatrix<double>& drdzeta,
+                    RankThreeTensor<double>& ddrdzeta) const
     {
-      //Let's just do a simple tube
-      r[0] = A*cos(zeta[1]);
-      r[1] = B*sin(zeta[1]);
+      // Let's just do a simple tube
+      r[0] = A * cos(zeta[1]);
+      r[1] = B * sin(zeta[1]);
       r[2] = zeta[0];
 
-      //Do the azetaal derivatives
-      drdzeta(0,0) = 0.0;
-      drdzeta(0,1) = 0.0;
-      drdzeta(0,2) = 1.0;
+      // Do the azetaal derivatives
+      drdzeta(0, 0) = 0.0;
+      drdzeta(0, 1) = 0.0;
+      drdzeta(0, 2) = 1.0;
 
-      //Do the azimuthal derivatives
-      drdzeta(1,0) = -A*sin(zeta[1]);
-      drdzeta(1,1) =  B*cos(zeta[1]);
-      drdzeta(1,2) = 0.0;
+      // Do the azimuthal derivatives
+      drdzeta(1, 0) = -A * sin(zeta[1]);
+      drdzeta(1, 1) = B * cos(zeta[1]);
+      drdzeta(1, 2) = 0.0;
 
-      //Now let's do the second derivatives
-      ddrdzeta(0,0,0) = 0.0;
-      ddrdzeta(0,0,1) = 0.0;
-      ddrdzeta(0,0,2) = 0.0;
+      // Now let's do the second derivatives
+      ddrdzeta(0, 0, 0) = 0.0;
+      ddrdzeta(0, 0, 1) = 0.0;
+      ddrdzeta(0, 0, 2) = 0.0;
 
-      ddrdzeta(1,1,0) = -A*cos(zeta[1]);
-      ddrdzeta(1,1,1) = -B*sin(zeta[1]);
-      ddrdzeta(1,1,2) = 0.0;
+      ddrdzeta(1, 1, 0) = -A * cos(zeta[1]);
+      ddrdzeta(1, 1, 1) = -B * sin(zeta[1]);
+      ddrdzeta(1, 1, 2) = 0.0;
 
-      //Mixed derivatives
-      ddrdzeta(0,1,0) = ddrdzeta(1,0,0) = 0.0;
-      ddrdzeta(0,1,1) = ddrdzeta(1,0,1) = 0.0;
-      ddrdzeta(0,1,2) = ddrdzeta(1,0,2) = 0.0;
+      // Mixed derivatives
+      ddrdzeta(0, 1, 0) = ddrdzeta(1, 0, 0) = 0.0;
+      ddrdzeta(0, 1, 1) = ddrdzeta(1, 0, 1) = 0.0;
+      ddrdzeta(0, 1, 2) = ddrdzeta(1, 0, 2) = 0.0;
     }
 
   private:
-
     /// x-half axis
     double A;
 
     /// x-half axis
     double B;
-
   };
 
-}
+} // namespace oomph
 
 #endif
-
-
-

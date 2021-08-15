@@ -32,9 +32,8 @@ Alongside the library founders, `oomph-lib` is currently maintained with the
 help of [**Jonathan Deakin**](https://github.com/jondea) and
 [**Puneet Matharu**](https://github.com/PuneetMatharu). However, the library has
 received (and is still receiving) significant contributions from former/current
-project/MSc/PhD students and collaborators who made (or are still making)
-significant contributions to the development of the library. For a more exhaustive
-list, see [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
+project/MSc/PhD students and collaborators. For an exhaustive list, see
+[`CONTRIBUTORS.md`](CONTRIBUTORS.md).
 
 If you're interested in joining the team, get in touch. We're always looking for
 more help!

@@ -1,268 +1,270 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
-//Non-inline functions for triangle/tet NS elements
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// Non-inline functions for triangle/tet NS elements
 
 #include "generalised_newtonian_Tnavier_stokes_elements.h"
 
 
-
 namespace oomph
 {
-
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-
-
-//========================================================================
-/// Unpin all internal pressure dofs.
-//========================================================================
- template<unsigned DIM>
- void GeneralisedNewtonianTCrouzeixRaviartElement<DIM>::
- unpin_all_internal_pressure_dofs()
- {
-  unsigned n_pres = this->npres_nst();
-  // loop over pressure dofs
-  for(unsigned l=0;l<n_pres;l++)
-   {
-    // unpin internal pressure
-    this->internal_data_pt(P_nst_internal_index)->unpin(l);
-   }
- }
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
 
 
-//=========================================================================
-///  Add to the set \c paired_load_data pairs containing
-/// - the pointer to a Data object
-/// and
-/// - the index of the value in that Data object
-/// .
-/// for all values (pressures, velocities) that affect the
-/// load computed in the \c get_load(...) function.
-//=========================================================================
-template<unsigned DIM>
-void GeneralisedNewtonianTCrouzeixRaviartElement<DIM>::
-identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
-{
- //Find the index at which the velocity is stored
- unsigned u_index[DIM];
- for(unsigned i=0;i<DIM;i++) {u_index[i] = this->u_index_nst(i);}
- 
- //Loop over the nodes
- unsigned n_node = this->nnode();
- for(unsigned n=0;n<n_node;n++)
+  //========================================================================
+  /// Unpin all internal pressure dofs.
+  //========================================================================
+  template<unsigned DIM>
+  void GeneralisedNewtonianTCrouzeixRaviartElement<
+    DIM>::unpin_all_internal_pressure_dofs()
   {
-   //Loop over the velocity components and add pointer to their data
-   //and indices to the vectors
-   for(unsigned i=0;i<DIM;i++)
+    unsigned n_pres = this->npres_nst();
+    // loop over pressure dofs
+    for (unsigned l = 0; l < n_pres; l++)
     {
-     paired_load_data.insert(std::make_pair(this->node_pt(n),u_index[i]));
-    }
-  }
- 
- // Identify the pressure data
- identify_pressure_data(paired_load_data);
-}
-
-
-//=========================================================================
-///  Add to the set \c paired_pressue_data pairs containing
-/// - the pointer to a Data object
-/// and
-/// - the index of the value in that Data object
-/// .
-/// for all pressures values that affect the
-/// load computed in the \c get_load(...) function.
-//=========================================================================
-template<unsigned DIM>
-void GeneralisedNewtonianTCrouzeixRaviartElement<DIM>::
-identify_pressure_data(std::set<std::pair<Data*,unsigned> > 
-                       &paired_pressure_data)
-{
- //Loop over the internal data
- unsigned n_internal = this->ninternal_data();
- for(unsigned l=0;l<n_internal;l++)
-  {
-   unsigned nval=this->internal_data_pt(l)->nvalue();
-   //Add internal data
-   for (unsigned j=0;j<nval;j++)
-    {
-     paired_pressure_data.insert(std::make_pair(this->internal_data_pt(l),j));
-    }
-  }
-}      
-
-
-
-
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-
-//2D Taylor--Hood
-
-//Set the data for the number of Variables at each node
-template<>
-const unsigned GeneralisedNewtonianTTaylorHoodElement<2>::
-Initial_Nvalue[6]={3,3,3,2,2,2};
-
-//Set the data for the pressure conversion array
-template<>
-const unsigned GeneralisedNewtonianTTaylorHoodElement<2>::
-Pconv[3]={0,1,2};
-
-//3D Taylor--Hood
-//Set the data for the number of Variables at each node
-template<>
-const unsigned GeneralisedNewtonianTTaylorHoodElement<3>::
-Initial_Nvalue[10]={4,4,4,4,3,3,3,3,3,3};
-
-//Set the data for the pressure conversion array
-template<>
-const unsigned GeneralisedNewtonianTTaylorHoodElement<3>::Pconv[4]={0,1,2,3};
-
-
-//========================================================================
-/// Unpin all pressure dofs, incl the mid-face/side ones where
-/// they have been allocated (e.g. in the refineable version of this
-/// element).
-//========================================================================
-template<unsigned DIM>
-void GeneralisedNewtonianTTaylorHoodElement<DIM>::
-unpin_all_nodal_pressure_dofs()
-{
- unsigned n_node = this->nnode();
- // loop over nodes
- for(unsigned l=0;l<n_node;l++)
-  {
-   if (this->node_pt(l)->nvalue()==DIM+1)
-    {
-     // unpin pressure dof
-     this->node_pt(l)->unpin(DIM);
-    }
-  }
-}
-
-//========================================================================
-/// Pin all nodal pressure dofs, incl the mid-face/side ones where
-/// they have been allocated (e.g. in the refineable version of this
-/// element).
-//========================================================================
-template<unsigned DIM>
-void GeneralisedNewtonianTTaylorHoodElement<DIM>::
-pin_all_nodal_pressure_dofs()
-{
- // Loop over all nodes and pin pressure
- unsigned n_node = this->nnode();
- for(unsigned n=0;n<n_node;n++)
-  {
-  if (this->node_pt(n)->nvalue()==DIM+1)
-    {
-     this->node_pt(n)->pin(DIM);
-    }
-  }
-}
-
-//========================================================================
-/// Unpin the proper nodal pressure dofs which are not hanging.
-//========================================================================
-template<unsigned DIM>
-void GeneralisedNewtonianTTaylorHoodElement<DIM>::
-unpin_proper_nodal_pressure_dofs()
-{
-
- // Loop over all pressure nodes and unpin if they're not hanging
- unsigned n_pres = npres_nst();
- for(unsigned l=0;l<n_pres;l++)
-  {
-   Node* nod_pt = this->node_pt(Pconv[l]);
-   if (!nod_pt->is_hanging(DIM)) {nod_pt->unpin(DIM);}
-  }
-}
-
-
-//=========================================================================
-///  Add to the set \c paired_load_data pairs containing
-/// - the pointer to a Data object
-/// and
-/// - the index of the value in that Data object
-/// .
-/// for all values (pressures, velocities) that affect the
-/// load computed in the \c get_load(...) function.
-//=========================================================================
-template<unsigned DIM>
-void GeneralisedNewtonianTTaylorHoodElement<DIM>::
-identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
-{
- //Loop over the nodes
- unsigned n_node = this->nnode();
- for(unsigned n=0;n<n_node;n++)
-  {
-   //Loop over the velocity components and add pointer to their data
-   //and indices to the vectors
-   for(unsigned i=0;i<DIM;i++)
-    {
-     paired_load_data.insert(std::make_pair(this->node_pt(n),i));
+      // unpin internal pressure
+      this->internal_data_pt(P_nst_internal_index)->unpin(l);
     }
   }
 
- //Add the pressure data
- identify_pressure_data(paired_load_data);
-}
 
-//=========================================================================
-///  Add to the set \c paired_load_data pairs containing
-/// - the pointer to a Data object
-/// and
-/// - the index of the value in that Data object
-/// .
-/// for all values (pressures, velocities) that affect the
-/// load computed in the \c get_load(...) function.
-//=========================================================================
-template<unsigned DIM>
-void GeneralisedNewtonianTTaylorHoodElement<DIM>::
-identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
-{
- //Loop over the pressure data
- unsigned n_pres= npres_nst();
- for(unsigned l=0;l<n_pres;l++)
+  //=========================================================================
+  ///  Add to the set \c paired_load_data pairs containing
+  /// - the pointer to a Data object
+  /// and
+  /// - the index of the value in that Data object
+  /// .
+  /// for all values (pressures, velocities) that affect the
+  /// load computed in the \c get_load(...) function.
+  //=========================================================================
+  template<unsigned DIM>
+  void GeneralisedNewtonianTCrouzeixRaviartElement<DIM>::identify_load_data(
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
-   //The DIMth entry in each nodal data is the pressure, which
-   //affects the traction
-   paired_load_data.insert(std::make_pair(this->node_pt(Pconv[l]),DIM));
+    // Find the index at which the velocity is stored
+    unsigned u_index[DIM];
+    for (unsigned i = 0; i < DIM; i++)
+    {
+      u_index[i] = this->u_index_nst(i);
+    }
+
+    // Loop over the nodes
+    unsigned n_node = this->nnode();
+    for (unsigned n = 0; n < n_node; n++)
+    {
+      // Loop over the velocity components and add pointer to their data
+      // and indices to the vectors
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        paired_load_data.insert(std::make_pair(this->node_pt(n), u_index[i]));
+      }
+    }
+
+    // Identify the pressure data
+    identify_pressure_data(paired_load_data);
   }
-}
 
-//====================================================================
-//// Force build of templates
-//====================================================================
-template class GeneralisedNewtonianTCrouzeixRaviartElement<2>;
-template class GeneralisedNewtonianTTaylorHoodElement<2>;
 
-template class GeneralisedNewtonianTCrouzeixRaviartElement<3>;
-template class GeneralisedNewtonianTTaylorHoodElement<3>;
+  //=========================================================================
+  ///  Add to the set \c paired_pressue_data pairs containing
+  /// - the pointer to a Data object
+  /// and
+  /// - the index of the value in that Data object
+  /// .
+  /// for all pressures values that affect the
+  /// load computed in the \c get_load(...) function.
+  //=========================================================================
+  template<unsigned DIM>
+  void GeneralisedNewtonianTCrouzeixRaviartElement<DIM>::identify_pressure_data(
+    std::set<std::pair<Data*, unsigned>>& paired_pressure_data)
+  {
+    // Loop over the internal data
+    unsigned n_internal = this->ninternal_data();
+    for (unsigned l = 0; l < n_internal; l++)
+    {
+      unsigned nval = this->internal_data_pt(l)->nvalue();
+      // Add internal data
+      for (unsigned j = 0; j < nval; j++)
+      {
+        paired_pressure_data.insert(
+          std::make_pair(this->internal_data_pt(l), j));
+      }
+    }
+  }
 
-}
+
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
+  // 2D Taylor--Hood
+
+  // Set the data for the number of Variables at each node
+  template<>
+  const unsigned GeneralisedNewtonianTTaylorHoodElement<2>::Initial_Nvalue[6] =
+    {3, 3, 3, 2, 2, 2};
+
+  // Set the data for the pressure conversion array
+  template<>
+  const unsigned GeneralisedNewtonianTTaylorHoodElement<2>::Pconv[3] = {
+    0, 1, 2};
+
+  // 3D Taylor--Hood
+  // Set the data for the number of Variables at each node
+  template<>
+  const unsigned GeneralisedNewtonianTTaylorHoodElement<3>::Initial_Nvalue[10] =
+    {4, 4, 4, 4, 3, 3, 3, 3, 3, 3};
+
+  // Set the data for the pressure conversion array
+  template<>
+  const unsigned GeneralisedNewtonianTTaylorHoodElement<3>::Pconv[4] = {
+    0, 1, 2, 3};
+
+
+  //========================================================================
+  /// Unpin all pressure dofs, incl the mid-face/side ones where
+  /// they have been allocated (e.g. in the refineable version of this
+  /// element).
+  //========================================================================
+  template<unsigned DIM>
+  void GeneralisedNewtonianTTaylorHoodElement<
+    DIM>::unpin_all_nodal_pressure_dofs()
+  {
+    unsigned n_node = this->nnode();
+    // loop over nodes
+    for (unsigned l = 0; l < n_node; l++)
+    {
+      if (this->node_pt(l)->nvalue() == DIM + 1)
+      {
+        // unpin pressure dof
+        this->node_pt(l)->unpin(DIM);
+      }
+    }
+  }
+
+  //========================================================================
+  /// Pin all nodal pressure dofs, incl the mid-face/side ones where
+  /// they have been allocated (e.g. in the refineable version of this
+  /// element).
+  //========================================================================
+  template<unsigned DIM>
+  void GeneralisedNewtonianTTaylorHoodElement<
+    DIM>::pin_all_nodal_pressure_dofs()
+  {
+    // Loop over all nodes and pin pressure
+    unsigned n_node = this->nnode();
+    for (unsigned n = 0; n < n_node; n++)
+    {
+      if (this->node_pt(n)->nvalue() == DIM + 1)
+      {
+        this->node_pt(n)->pin(DIM);
+      }
+    }
+  }
+
+  //========================================================================
+  /// Unpin the proper nodal pressure dofs which are not hanging.
+  //========================================================================
+  template<unsigned DIM>
+  void GeneralisedNewtonianTTaylorHoodElement<
+    DIM>::unpin_proper_nodal_pressure_dofs()
+  {
+    // Loop over all pressure nodes and unpin if they're not hanging
+    unsigned n_pres = npres_nst();
+    for (unsigned l = 0; l < n_pres; l++)
+    {
+      Node* nod_pt = this->node_pt(Pconv[l]);
+      if (!nod_pt->is_hanging(DIM))
+      {
+        nod_pt->unpin(DIM);
+      }
+    }
+  }
+
+
+  //=========================================================================
+  ///  Add to the set \c paired_load_data pairs containing
+  /// - the pointer to a Data object
+  /// and
+  /// - the index of the value in that Data object
+  /// .
+  /// for all values (pressures, velocities) that affect the
+  /// load computed in the \c get_load(...) function.
+  //=========================================================================
+  template<unsigned DIM>
+  void GeneralisedNewtonianTTaylorHoodElement<DIM>::identify_load_data(
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
+  {
+    // Loop over the nodes
+    unsigned n_node = this->nnode();
+    for (unsigned n = 0; n < n_node; n++)
+    {
+      // Loop over the velocity components and add pointer to their data
+      // and indices to the vectors
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        paired_load_data.insert(std::make_pair(this->node_pt(n), i));
+      }
+    }
+
+    // Add the pressure data
+    identify_pressure_data(paired_load_data);
+  }
+
+  //=========================================================================
+  ///  Add to the set \c paired_load_data pairs containing
+  /// - the pointer to a Data object
+  /// and
+  /// - the index of the value in that Data object
+  /// .
+  /// for all values (pressures, velocities) that affect the
+  /// load computed in the \c get_load(...) function.
+  //=========================================================================
+  template<unsigned DIM>
+  void GeneralisedNewtonianTTaylorHoodElement<DIM>::identify_pressure_data(
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
+  {
+    // Loop over the pressure data
+    unsigned n_pres = npres_nst();
+    for (unsigned l = 0; l < n_pres; l++)
+    {
+      // The DIMth entry in each nodal data is the pressure, which
+      // affects the traction
+      paired_load_data.insert(std::make_pair(this->node_pt(Pconv[l]), DIM));
+    }
+  }
+
+  //====================================================================
+  //// Force build of templates
+  //====================================================================
+  template class GeneralisedNewtonianTCrouzeixRaviartElement<2>;
+  template class GeneralisedNewtonianTTaylorHoodElement<2>;
+
+  template class GeneralisedNewtonianTCrouzeixRaviartElement<3>;
+  template class GeneralisedNewtonianTTaylorHoodElement<3>;
+
+} // namespace oomph

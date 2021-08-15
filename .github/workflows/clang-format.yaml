@@ -1,0 +1,35 @@
+name: clang-format
+
+on:
+  # Trigger the workflow when a push is made to any branch except 'main'. The
+  # intention here is that this workflow should be triggered in the following
+  # cases:
+  #  1. When a pull request has been merged in to 'development'; a push event
+  #     will be created for the 'development' branch, so the workflow will be
+  #     triggered and run then.
+  #  2. When the user pushes changes to any branch in their own forked
+  #     repository except 'main' and 'development', as these branches should
+  #     never be edited directly by a user.
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Format all files in the src/ directory except cfortran.h, lapack_qz.h,
+      # superlu.c, superlu_dist.c, which sit in the src/generic/ subdirectory.
+      - uses: PuneetMatharu/clang-format-lint-action@v0.13
+        with:
+          files: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|cc)$
+          clangFormatVersion: 12
+          style: file
+          inplace: True
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_user_name: clang-format-bot
+          commit_message: 'Automated commit of clang-format CI changes.'

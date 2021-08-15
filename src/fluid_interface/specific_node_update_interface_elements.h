@@ -1,31 +1,31 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
-//Header file for specific (two-dimensional) fluid free surface elements
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// Header file for specific (two-dimensional) fluid free surface elements
 
-//Include guards, to prevent multiple includes
+// Include guards, to prevent multiple includes
 #ifndef OOMPH_SPECIFIC_NODE_UPDATE_INTERFACE_ELEMENTS_HEADER
 #define OOMPH_SPECIFIC_NODE_UPDATE_INTERFACE_ELEMENTS_HEADER
 
@@ -34,7 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
-//OOMPH-LIB headers
+// OOMPH-LIB headers
 #include "../generic/Qelements.h"
 #include "../generic/spines.h"
 #include "../generic/hijacked_elements.h"
@@ -42,1117 +42,1288 @@
 
 namespace oomph
 {
-
-//=======================================================================
-/// \short This policy class is used to associate specific bounding
-/// elements with specific FluidInterface elements. It must be filled
-/// in for every class that uses the SpineUpdateFluidInterface<...>
-/// or ElasticUpdateFluidInterface<....> generic template classes.
-/// Examples for our default Line, Axisymmetric and Surface types
-/// are included below
-//=======================================================================
- template<class ELEMENT> 
+  //=======================================================================
+  /// \short This policy class is used to associate specific bounding
+  /// elements with specific FluidInterface elements. It must be filled
+  /// in for every class that uses the SpineUpdateFluidInterface<...>
+  /// or ElasticUpdateFluidInterface<....> generic template classes.
+  /// Examples for our default Line, Axisymmetric and Surface types
+  /// are included below
+  //=======================================================================
+  template<class ELEMENT>
   class BoundingElementType
-  {};
+  {
+  };
 
-//======================================================================
-/// \short This policy class is used to allow additional values to be
-/// added to the nodes from new surface equations, for examples of
-/// usage see the SurfactantTransportFluidInterfaceElements.
-/// The use of this class avoids issues with calling virtual
-/// functions in constructors and avoids having a global look-up
-/// able, although it functions in much the same way.
-/// Typically, this will only be filled in by "expert users" and
-/// is only required if you want to write generic surface-element
-/// classes. Specific classes can always be overloaded on a
-/// case-by-case basis.
-//=====================================================================
- template<class ELEMENT>
+  //======================================================================
+  /// \short This policy class is used to allow additional values to be
+  /// added to the nodes from new surface equations, for examples of
+  /// usage see the SurfactantTransportFluidInterfaceElements.
+  /// The use of this class avoids issues with calling virtual
+  /// functions in constructors and avoids having a global look-up
+  /// able, although it functions in much the same way.
+  /// Typically, this will only be filled in by "expert users" and
+  /// is only required if you want to write generic surface-element
+  /// classes. Specific classes can always be overloaded on a
+  /// case-by-case basis.
+  //=====================================================================
+  template<class ELEMENT>
   class FluidInterfaceAdditionalValues
   {
-    private:
-   //Issue an error message if this base class is called
-   void error_message()
-   {
-    std::ostringstream error_message;
-    error_message
-     <<
-     "The generic FluidInterfaceAdditionalValues<ELEMENT> class has been\n"
-     <<
-     "called. This should never happen. If you are creating your own\n"
-     <<
-     "surface equations you must overload the policy class to specify\n"
-     <<
-     "how many additional values are required at the surface nodes.\n"
-     <<
-     "For an example, see src/fluid_interface/surfactant_transport_elements.h\n"
-     << std::endl;
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-     
-    public:
-   
-   ///Empty constructor
-   FluidInterfaceAdditionalValues<ELEMENT>() {}
-   
-   ///\short Specific interface that states how many additional values are
-   ///required for the n-th node. Default is zero, but issue error_message.
-   inline unsigned nadditional_values(const unsigned &n)
-   {error_message(); return 0;}
-   
-   ///\short Specify any additional index setup information that is required;
-   ///i.e. the look-up schemes for the additional values.
-   ///Default is empty with error message
-   inline void setup_equation_indices(ELEMENT* const &element_pt, const unsigned &id)
-   {error_message();}
-  };
- 
+  private:
+    // Issue an error message if this base class is called
+    void error_message()
+    {
+      std::ostringstream error_message;
+      error_message
+        << "The generic FluidInterfaceAdditionalValues<ELEMENT> class has "
+           "been\n"
+        << "called. This should never happen. If you are creating your own\n"
+        << "surface equations you must overload the policy class to specify\n"
+        << "how many additional values are required at the surface nodes.\n"
+        << "For an example, see "
+           "src/fluid_interface/surfactant_transport_elements.h\n"
+        << std::endl;
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
 
-//======================================================================
-/// \short Specific policy class for the FluidInterfaceElemetnts,
-/// which do not require any additional values at the nodes.
- //=====================================================================
- template<>
+  public:
+    /// Empty constructor
+    FluidInterfaceAdditionalValues<ELEMENT>() {}
+
+    ///\short Specific interface that states how many additional values are
+    /// required for the n-th node. Default is zero, but issue error_message.
+    inline unsigned nadditional_values(const unsigned& n)
+    {
+      error_message();
+      return 0;
+    }
+
+    ///\short Specify any additional index setup information that is required;
+    /// i.e. the look-up schemes for the additional values.
+    /// Default is empty with error message
+    inline void setup_equation_indices(ELEMENT* const& element_pt,
+                                       const unsigned& id)
+    {
+      error_message();
+    }
+  };
+
+
+  //======================================================================
+  /// \short Specific policy class for the FluidInterfaceElemetnts,
+  /// which do not require any additional values at the nodes.
+  //=====================================================================
+  template<>
   class FluidInterfaceAdditionalValues<FluidInterfaceElement>
   {
-    public:
-   
-   ///Empty constructor
-   FluidInterfaceAdditionalValues<FluidInterfaceElement>() {}
-   
-   ///\short Specific interface that states how many additional values are
-   ///required for the n-th node. No additional values
-   inline unsigned nadditional_values(const unsigned &n)
-   {return 0;}
-   
-   ///\short Specify any additional index setup information that is required;
-   ///i.e. the look-up schemes for the additional values.
-   ///Empty
-   inline void setup_equation_indices(FluidInterfaceElement* const &element_pt, const unsigned &id)
-   {}
-  };
- 
+  public:
+    /// Empty constructor
+    FluidInterfaceAdditionalValues<FluidInterfaceElement>() {}
 
- 
-//-------------SPINE NODE UPDATE CLASSES-------------------------------
-//---------------------------------------------------------------------
-
-//======================================================================
-/// \short Generic Spine node update interface template class that can
-/// be combined with a given surface equations class and surface
-/// derivative class to provide
-/// a concrete implementation of any surface element that uses spines.
-//======================================================================
- template<class EQUATION_CLASS, class DERIVATIVE_CLASS, class ELEMENT>
-  class SpineUpdateFluidInterfaceElement : 
-  public virtual Hijacked<SpineElement<FaceGeometry<ELEMENT> > >, 
-  public virtual EQUATION_CLASS, public DERIVATIVE_CLASS 
- {
-   private:
-  
-  /// \short In spine elements, the kinematic condition is the equation 
-  /// used to determine the unknown spine heights. Overload the
-  /// function accordingly
-  int kinematic_local_eqn(const unsigned &n) 
-  {return this->spine_local_eqn(n);}
-  
-  /// \short Hijacking the kinematic condition corresponds to hijacking the
-  /// variables associated with the spine heights.
-  void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
-  {
-   //Loop over all the node numbers that are passed in
-   for(Vector<unsigned>::const_iterator it=bulk_node_number.begin();
-       it!=bulk_node_number.end();++it)
+    ///\short Specific interface that states how many additional values are
+    /// required for the n-th node. No additional values
+    inline unsigned nadditional_values(const unsigned& n)
     {
-     //Hijack the spine heights. (and delete the returned data object)
-     delete this->hijack_nodal_spine_value(*it,0);
+      return 0;
     }
-  }
-  
-   protected:
-  
-  ///\short Fill in the specific surface derivative calculations
-  /// by calling the appropriate class function
-  double compute_surface_derivatives(const Shape &psi, const DShape &dpsids,
-                                     const DenseMatrix<double> &interpolated_t,
-                                     const Vector<double> &interpolated_x,
-                                     DShape &surface_gradient,
-                                     DShape &surface_divergence)
-  {return DERIVATIVE_CLASS::compute_surface_derivatives(
-    psi,dpsids,interpolated_t,interpolated_x,surface_gradient,
-    surface_divergence);}
-  
- 
-   public:
- 
- 
-  /// \short Constructor, the arguments are a pointer to the  "bulk" element 
-  /// and the index of the face to be created
-   SpineUpdateFluidInterfaceElement(FiniteElement* const &element_pt, 
-                                    const int &face_index,
-                                    const unsigned &id=0) : 
-  Hijacked<SpineElement<FaceGeometry<ELEMENT> > >(), 
-   EQUATION_CLASS(), DERIVATIVE_CLASS()
-   {
-    //Attach the geometrical information to the element, by
-    //making the face element from the bulk element
-    element_pt->build_face_element(face_index,this);
-    
-#ifdef PARANOID
-    //Is it refineable
-    RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(element_pt);
-    if(ref_el_pt!=0)
-     {
-      if (this->has_hanging_nodes())
-       {
-        throw OomphLibError(
-         "This interface element will not work correctly if nodes are hanging\n",
-         OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
-       }
-     }
-#endif
-    
-    //Find the index at which the velocity unknowns are stored 
-    //from the bulk element and allocate the local storage
-    ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
-    //Find number of momentum equation required
-    const unsigned n_u_index = cast_element_pt->n_u_nst();
-    this->U_index_interface.resize(n_u_index);
-    for(unsigned i=0;i<n_u_index;i++)
-     {
-      this->U_index_interface[i] = cast_element_pt->u_index_nst(i);
-     }
-   
-    //Add any additional values required by the equations class
-    unsigned n_node_face = this->nnode();
-    //Create an instance of the policy class that determines
-    //how many additional values are required
-    FluidInterfaceAdditionalValues<EQUATION_CLASS>
-     *interface_additional_values_pt =
-     new FluidInterfaceAdditionalValues<EQUATION_CLASS>();
-    //Do we need to add any values
-    //By default the spines don't need to so we can save
-    //some effort here
-    bool add_values = false;
-    //Storage for the number of additional values required
-    //for each node
-    Vector<unsigned> additional_data_values(n_node_face);
-    for(unsigned i=0;i<n_node_face;++i)
-     {
-      //Read out additional values for each node
-      additional_data_values[i] = interface_additional_values_pt->nadditional_values(i);
-      //If any of these are non-zero it will set the boolean to true
-      add_values |= additional_data_values[i];
-     }
-   
-    // If storage is needed allocate it and call
-    // the associated local index setup function
-    if(add_values)
-     {
-      this->add_additional_values(additional_data_values,id);
-      //Call any local setup from the interface policy class
-      interface_additional_values_pt->setup_equation_indices(this,id);
-     }
-   
-    //Delete the policy class, it's work is done.
-    delete interface_additional_values_pt; interface_additional_values_pt=0;
-   }
- 
-  /// Calculate the contribution to the residuals and the jacobian
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                        DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   EQUATION_CLASS::fill_in_generic_residual_contribution_interface(residuals,jacobian,1);
-  
-   //Call the generic routine to handle the shape derivatives
-   this->fill_in_jacobian_from_geometric_data(jacobian);
-  }
- 
-  /// \short
-  /// Helper function to calculate the additional contributions
-  /// These are those filled in by the particular equations
-  void add_additional_residual_contributions_interface(
-   Vector<double> &residuals, 
-   DenseMatrix<double> &jacobian,
-   const unsigned &flag,
-   const Shape &psif,
-   const DShape &dpsifds,
-   const DShape &dpsifdS,
-   const DShape &dpsifdS_div,
-   const Vector<double> &s,
-   const Vector<double> &interpolated_x, 
-   const Vector<double> &interpolated_n, 
-   const double &W, 
-   const double &J)
-  {
-   EQUATION_CLASS::add_additional_residual_contributions_interface(
-    residuals,jacobian,flag,psif,dpsifds,dpsifdS,dpsifdS_div,s,interpolated_x,interpolated_n,W,J);
-  }
- 
-  /// Overload the output function
-  void output(std::ostream &outfile) {EQUATION_CLASS::output(outfile);}
- 
-  /// Output the element
-  void output(std::ostream &outfile, const unsigned &n_plot)
-  {EQUATION_CLASS::output(outfile,n_plot);}
- 
-  ///Overload the C-style output function
-  void output(FILE* file_pt) {EQUATION_CLASS::output(file_pt);}
- 
-  ///C-style Output function
-  void output(FILE* file_pt, const unsigned &n_plot)
-  {EQUATION_CLASS::output(file_pt,n_plot);}
-    
- 
-  /// \short Create an "bounding" element of the type
-  /// specified by the BoundingElementType policy class
-  /// Here, this allows
-  /// the application of a contact angle boundary condition on the
-  /// the specified face.
-  virtual FluidInterfaceBoundingElement* make_bounding_element(
-   const int &face_index)
-  {
-   //Create a temporary pointer to the appropriate FaceElement read our from
-   //our policy class
-   BoundingElementType<SpineUpdateFluidInterfaceElement<EQUATION_CLASS,
-    DERIVATIVE_CLASS,ELEMENT> > *face_el_pt =
-    new BoundingElementType<SpineUpdateFluidInterfaceElement<EQUATION_CLASS,
-    DERIVATIVE_CLASS,ELEMENT> >;
-  
-   //Attach the geometrical information to the new element
-   this->build_face_element(face_index,face_el_pt);
-  
-   //Set the index at which the velocity nodes are stored
-   face_el_pt->u_index_interface_boundary() = this->U_index_interface;
-  
-   //Set the value of the nbulk_value, the node is not resized
-   //in this bounding element,
-   //so it will just be the actual nvalue here
-   // There is some ambiguity about what this means (however)
-   // We are interpreting it to mean the number of
-   // values in this FaceElement before creating the new
-   // bounding element.
-   const unsigned n_node_bounding = face_el_pt->nnode();
-   for(unsigned n=0;n<n_node_bounding;n++)
+
+    ///\short Specify any additional index setup information that is required;
+    /// i.e. the look-up schemes for the additional values.
+    /// Empty
+    inline void setup_equation_indices(FluidInterfaceElement* const& element_pt,
+                                       const unsigned& id)
     {
-     face_el_pt->nbulk_value(n) =
-      face_el_pt->node_pt(n)->nvalue();
     }
-  
-   //Set of unique geometric data that is used to update the bulk,
-   //but is not used to update the face
-   std::set<Data*> unique_additional_geom_data;
-  
-   //Get all the geometric data for this (bulk) element
-   this->assemble_set_of_all_geometric_data(unique_additional_geom_data);
-  
-   //Now assemble the set of geometric data for the face element
-   std::set<Data*> unique_face_geom_data_pt;
-   face_el_pt->assemble_set_of_all_geometric_data(unique_face_geom_data_pt);
-  
-   //Erase the face geometric data from the additional data
-   for(std::set<Data*>::iterator it=unique_face_geom_data_pt.begin();
-       it!=unique_face_geom_data_pt.end();++it)
-    {unique_additional_geom_data.erase(*it);}
-  
-   //Finally add all unique additional data as external data
-   for(std::set<Data*>::iterator it = unique_additional_geom_data.begin();
-       it!= unique_additional_geom_data.end();++it)
-    {
-     face_el_pt->add_external_data(*it);
-    }
-  
-   //Return the value of the pointer
-   return face_el_pt;
-  }
- 
- };
- 
-
-//=====================================================================
-///Spine version of the PointFluidInterfaceBoundingElement
-//===================================================================== 
- template<class ELEMENT>
-  class SpinePointFluidInterfaceBoundingElement : 
-  public Hijacked< SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >,
-  public PointFluidInterfaceBoundingElement
-   
-  {
-    public:
- 
-
-   /// Constructor
-    SpinePointFluidInterfaceBoundingElement() : 
-   Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
-    PointFluidInterfaceBoundingElement() {}
- 
-   /// Overload the output function
-   void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
-   /// Output the element
-   void output(std::ostream &outfile, const unsigned &n_plot)
-   {FluidInterfaceBoundingElement::output(outfile,n_plot);}
- 
-   ///Overload the C-style output function
-   void output(FILE* file_pt) {FiniteElement::output(file_pt);}
- 
-   ///C-style Output function
-   void output(FILE* file_pt, const unsigned &n_plot)
-   {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
- 
-   /// Calculate the elemental residual vector and the Jacobian
-   void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                         DenseMatrix<double> &jacobian)
-   {
-    //Call the generic routine with the flag set to 1
-    this->fill_in_generic_residual_contribution_interface_boundary(residuals,
-                                                                   jacobian,1);
-    //Call generic FD routine for the external data
-    this->fill_in_jacobian_from_external_by_fd(jacobian);
-  
-    //Call the generic routine to handle the spine variables
-    this->fill_in_jacobian_from_geometric_data(jacobian);
-   }
- 
-   /// \short Return local equation number associated with the kinematic
-   /// constraint for local node n
-   int kinematic_local_eqn(const unsigned &n) 
-   {return this->spine_local_eqn(n);}
- 
-  }; 
-
-
-
-//=========================================================================
-/// Spine version of the LineFluidInterfaceBoundingElement
-//========================================================================
- template<class ELEMENT>
-  class SpineLineFluidInterfaceBoundingElement : public 
-  Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >,
-  public LineFluidInterfaceBoundingElement
-                                       
-  {
-    public:
- 
-   /// Constructor
-    SpineLineFluidInterfaceBoundingElement() : 
-   Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
-    LineFluidInterfaceBoundingElement() {}
- 
-   /// Overload the output function
-   void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
-   /// Output the element
-   void output(std::ostream &outfile, const unsigned &n_plot)
-   {FluidInterfaceBoundingElement::output(outfile,n_plot);}
- 
-   ///Overload the C-style output function
-   void output(FILE* file_pt) {FiniteElement::output(file_pt);}
- 
-   ///C-style Output function
-   void output(FILE* file_pt, const unsigned &n_plot)
-   {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
- 
- 
-   /// Calculate the jacobian
-   void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                         DenseMatrix<double> &jacobian)
-   {
-    //Call the generic routine with the flag set to 1
-    this->fill_in_generic_residual_contribution_interface_boundary(residuals,
-                                                                   jacobian,1);
-    //Call generic FD routine for the external data
-    this->fill_in_jacobian_from_external_by_fd(jacobian);
-  
-    //Call the generic routine to handle the spine variables
-    this->fill_in_jacobian_from_geometric_data(jacobian);
-   }
- 
-
-   /// Local eqn number of the kinematic bc associated with local node n
-   int kinematic_local_eqn(const unsigned &n) 
-   {
-    //Kinematic bc is always associated with the n-th spine height
-    return this->spine_local_eqn(n);
-   }
- 
-  }; 
-
-
-//============GEOMETRIC SPECIALISATIONS============================
- 
- 
-//Specialise the spine update template class to concrete 1D case
- template<class ELEMENT>
-  class SpineLineFluidInterfaceElement :
-  public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-  LineDerivatives,ELEMENT>
-  {
-    public:
-  
-    SpineLineFluidInterfaceElement(
-     FiniteElement* const &element_pt, 
-     const int &face_index) : 
-   SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-    LineDerivatives,ELEMENT>(element_pt,face_index) {}
   };
 
 
-//Define the BoundingElement type associated with the 1D surface element
- template<class ELEMENT>
-  class BoundingElementType<SpineUpdateFluidInterfaceElement<
-  FluidInterfaceElement,LineDerivatives,ELEMENT> >:
- public SpinePointFluidInterfaceBoundingElement<ELEMENT>
- {
-   public:
- 
-  BoundingElementType<SpineUpdateFluidInterfaceElement<
-   FluidInterfaceElement,LineDerivatives,ELEMENT> >() :
-  SpinePointFluidInterfaceBoundingElement<ELEMENT>() { }
- };
+  //-------------SPINE NODE UPDATE CLASSES-------------------------------
+  //---------------------------------------------------------------------
 
-
-//Specialise Spine update case to concrete axisymmetric case
- template<class ELEMENT>
-  class SpineAxisymmetricFluidInterfaceElement :
-  public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-  AxisymmetricDerivatives,ELEMENT>
+  //======================================================================
+  /// \short Generic Spine node update interface template class that can
+  /// be combined with a given surface equations class and surface
+  /// derivative class to provide
+  /// a concrete implementation of any surface element that uses spines.
+  //======================================================================
+  template<class EQUATION_CLASS, class DERIVATIVE_CLASS, class ELEMENT>
+  class SpineUpdateFluidInterfaceElement
+    : public virtual Hijacked<SpineElement<FaceGeometry<ELEMENT>>>,
+      public virtual EQUATION_CLASS,
+      public DERIVATIVE_CLASS
   {
-    public:
-  
-    SpineAxisymmetricFluidInterfaceElement(
-     FiniteElement* const &element_pt, 
-     const int &face_index) : 
-   SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-    AxisymmetricDerivatives,ELEMENT>(element_pt,face_index) {}
-  };
-
-//Define the bounding element associated with the axisymmetric fluid interface element 
- template<class ELEMENT>
-  class BoundingElementType<SpineUpdateFluidInterfaceElement<
-  FluidInterfaceElement,AxisymmetricDerivatives,ELEMENT> >:
- public SpinePointFluidInterfaceBoundingElement<ELEMENT>
- {
-   public:
- 
-  BoundingElementType<SpineUpdateFluidInterfaceElement<
-   FluidInterfaceElement,AxisymmetricDerivatives,ELEMENT> >() :
-  SpinePointFluidInterfaceBoundingElement<ELEMENT>() { }
- };
-
-//Specialise Spine update case to concrete 2D case 
- template<class ELEMENT>
-  class SpineSurfaceFluidInterfaceElement :
-  public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-  SurfaceDerivatives,ELEMENT>
-  {
-    public:
-  
-    SpineSurfaceFluidInterfaceElement(
-     FiniteElement* const &element_pt, 
-     const int &face_index) : 
-   SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-    SurfaceDerivatives,ELEMENT>(element_pt,face_index) {}
-  };
-
-//Define the bounding element type for the 2D surface 
- template<class ELEMENT>
-  class BoundingElementType<SpineUpdateFluidInterfaceElement<
-  FluidInterfaceElement,SurfaceDerivatives,ELEMENT> >:
- public SpineLineFluidInterfaceBoundingElement<ELEMENT>
- {
-   public:
- 
-  BoundingElementType<SpineUpdateFluidInterfaceElement<
-   FluidInterfaceElement,SurfaceDerivatives,ELEMENT> >() :
-  SpineLineFluidInterfaceBoundingElement<ELEMENT>() { }
- };
-
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
-//-------------ELASTIC NODE UPDATE CLASSES-------------------------------
-//---------------------------------------------------------------------
-
-
-//=======================================================================
-/// \short Generic Elastic node update interface template class that can
-/// be combined with a given surface equations class and surface derivative
-/// class to provide a concrete implementation of any surface element
-/// that uses elastic node updates.
-//======================================================================
- template<class EQUATION_CLASS, class DERIVATIVE_CLASS, class ELEMENT>
-  class ElasticUpdateFluidInterfaceElement : 
-  public virtual Hijacked<FaceGeometry<ELEMENT> >, 
-  public EQUATION_CLASS, public DERIVATIVE_CLASS
- {
-   private:
- 
-  /// \short Storage for the location of the Lagrange multiplier
-  /// (If other additional values have been added we need
-  /// to add the Lagrange multiplier at the end)
-  Vector<unsigned> Lagrange_index;
- 
-  /// \short Return the index at which the lagrange multiplier is
-  ///stored at the n-th node
-  inline unsigned lagrange_index(const unsigned &n)
-  {return this->Lagrange_index[n];}
- 
-  /// \short Equation number of the kinematic BC associated with node j.
-  /// (This is the equation for the Lagrange multiplier) 
-  inline int kinematic_local_eqn(const unsigned &n)
-  {
-   // Get the index of the nodal value associated with Lagrange multiplier
-   return this->nodal_local_eqn(n,this->lagrange_index(n));
-  }
- 
-  /// \short Hijacking the kinematic condition corresponds to hijacking the
-  /// variables associated with the Lagrange multipliers that are assigned
-  /// on construction of this element.
-  void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
-  {    
-   //Loop over all the nodes that are passed in
-   for(Vector<unsigned>::const_iterator it=bulk_node_number.begin();
-       it!=bulk_node_number.end();++it)
+  private:
+    /// \short In spine elements, the kinematic condition is the equation
+    /// used to determine the unknown spine heights. Overload the
+    /// function accordingly
+    int kinematic_local_eqn(const unsigned& n)
     {
-     //Hijack the appropriate value and delete the returned Node
-     delete this->hijack_nodal_value(*it,this->lagrange_index(*it));  
+      return this->spine_local_eqn(n);
     }
-  }
- 
-   protected:
- 
-  ///\short Fill in the specific surface derivative calculations
-  /// by calling the appropriate function from the derivative class
-  double compute_surface_derivatives(const Shape &psi, const DShape &dpsids,
-                                     const DenseMatrix<double> &interpolated_t,
-                                     const Vector<double> &interpolated_x,
-                                     DShape &surface_gradient,
-                                     DShape &surface_divergence)
-  {return DERIVATIVE_CLASS::compute_surface_derivatives(
-    psi,dpsids,interpolated_t,interpolated_x,surface_gradient,
-    surface_divergence);}
- 
- 
-   public:
- 
-  /// \short Constructor, pass a pointer to the bulk element and the face 
-  /// index of the bulk element to which the element is to be attached to.
-  /// The optional identifier can be used
-  /// to distinguish the additional nodal value (Lagr mult) created by 
-  /// this element from those created by other FaceElements.
-   ElasticUpdateFluidInterfaceElement(FiniteElement* const &element_pt, 
-                                      const int &face_index,
-                                      const unsigned &id=0) : 
-  FaceGeometry<ELEMENT>(), EQUATION_CLASS(), DERIVATIVE_CLASS()
-   {
-    //Attach the geometrical information to the element
-    //This function also assigned nbulk_value from required_nvalue of the
-    //bulk element
-    element_pt->build_face_element(face_index,this);
-   
-#ifdef PARANOID
-    //Is it refineable
-    RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(element_pt);
-    if(ref_el_pt!=0)
-     {
-      if (this->has_hanging_nodes())
-       {
-        throw OomphLibError(
-         "This flux element will not work correctly if nodes are hanging\n",
-         OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
-       }
-     }
-#endif
-   
-    //Find the index at which the velocity unknowns are stored 
-    //from the bulk element and resize the local storage scheme
-    ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
-    const unsigned n_u_index = cast_element_pt->n_u_nst();
-    this->U_index_interface.resize(n_u_index);
-    for(unsigned i=0;i<n_u_index;i++)
-     {
-      this->U_index_interface[i] = cast_element_pt->u_index_nst(i);
-     }
-   
-    //Read out the number of nodes on the face
-    unsigned n_node_face = this->nnode();
-   
-    //Create an instance of the policy class that determines
-    //how many additional values are required
-    FluidInterfaceAdditionalValues<EQUATION_CLASS>
-     *interface_additional_values_pt =
-     new FluidInterfaceAdditionalValues<EQUATION_CLASS>();
-   
-    //Set the additional data values in the face
-    //There is always also one additional values at each node --- the Lagrange multiplier
-    Vector<unsigned> additional_data_values(n_node_face);
-    for(unsigned n=0;n<n_node_face;n++)
-     {
-      //Now add one to the addtional values at every single node
-      additional_data_values[n] = interface_additional_values_pt->nadditional_values(n) + 1; 
-     }
-   
-    // Now add storage for Lagrange multipliers and set the map containing 
-    // the position of the first entry of this face element's 
-    // additional values.
-    this->add_additional_values(additional_data_values,id);     
-   
-    //Now I can just store the lagrange index offset to give the storage
-    //location of the nodes
-    Lagrange_index.resize(n_node_face);
-    for(unsigned n=0;n<n_node_face;++n)
-     {
-      Lagrange_index[n] = additional_data_values[n] -1 + 
-       dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))->index_of_first_value_assigned_by_face_element(id);
-     }
 
-    //Call any local setup from the interface policy class
-    interface_additional_values_pt->setup_equation_indices(this,id);
-   
-    //Can now delete the policy class
-    delete interface_additional_values_pt; interface_additional_values_pt=0;
-   }
- 
-  /// \short The "global" intrinsic coordinate of the element when 
-  /// viewed as part of a geometric object should be given by 
-  /// the FaceElement representation, by default
-  double zeta_nodal(const unsigned &n, const unsigned &k,
-                    const unsigned &i) const                              
-  {return FaceElement::zeta_nodal(n,k,i);}  
- 
-  /// Return the lagrange multiplier at local node n
-  double &lagrange(const unsigned &n)
-  {
-   return *this->node_pt(n)->value_pt(this->lagrange_index(n)); 
-  }
- 
- 
-  /// Fill in contribution to residuals and Jacobian
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                        DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   EQUATION_CLASS::fill_in_generic_residual_contribution_interface(residuals,jacobian,1);
-  
-   //Call the generic finite difference routine for the solid variables
-   this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
-  }
- 
-  /// Overload the output function
-  void output(std::ostream &outfile) {EQUATION_CLASS::output(outfile);}
- 
-  /// Output the element
-  void output(std::ostream &outfile, const unsigned &n_plot)
-  {EQUATION_CLASS::output(outfile,n_plot);}
- 
-  ///Overload the C-style output function
-  void output(FILE* file_pt) {EQUATION_CLASS::output(file_pt);}
- 
-  ///C-style Output function
-  void output(FILE* file_pt, const unsigned &n_plot)
-  {EQUATION_CLASS::output(file_pt,n_plot);}
- 
- 
-  /// \short Helper function to calculate the additional contributions
-  /// to be added at each integration point. This deals with 
-  /// Lagrange multiplier contribution, as well as any
-  /// additional contributions by the other equations.
-  void add_additional_residual_contributions_interface(
-   Vector<double> &residuals, 
-   DenseMatrix<double> &jacobian,
-   const unsigned &flag,
-   const Shape &psif,
-   const DShape &dpsifds,
-   const DShape &dpsifdS,
-   const DShape &dpsifdS_div,
-   const Vector<double> &s,
-   const Vector<double> &interpolated_x, 
-   const Vector<double> &interpolated_n, 
-   const double &W, 
-   const double &J)
-  {
-   EQUATION_CLASS::add_additional_residual_contributions_interface(
-    residuals,jacobian,flag,psif,dpsifds,dpsifdS,dpsifdS_div,s,interpolated_x,interpolated_n,W,J);
-  
-   //Assemble Lagrange multiplier by loop over the shape functions
-   const unsigned n_node = this->nnode();
-   //Read out the dimension of the node
-   const unsigned nodal_dimension = this->nodal_dimension();
-  
-   double interpolated_lagrange = 0.0;
-   for(unsigned l=0;l<n_node;l++)
+    /// \short Hijacking the kinematic condition corresponds to hijacking the
+    /// variables associated with the spine heights.
+    void hijack_kinematic_conditions(const Vector<unsigned>& bulk_node_number)
     {
-     //Note same shape functions used for lagrange multiplier field
-     interpolated_lagrange += lagrange(l)*psif(l);
-    }
-  
-   int local_eqn=0, local_unknown = 0;
-  
-   //Loop over the shape functions
-   for(unsigned l=0;l<n_node;l++)
-    {
-     //Loop over the directions
-     for(unsigned i=0;i<nodal_dimension;i++)
+      // Loop over all the node numbers that are passed in
+      for (Vector<unsigned>::const_iterator it = bulk_node_number.begin();
+           it != bulk_node_number.end();
+           ++it)
       {
-       //Now using the same shape functions for the elastic equations,
-       //so we can stay in the loop
-       local_eqn = this->position_local_eqn(l,0,i);
-       if(local_eqn >= 0)
+        // Hijack the spine heights. (and delete the returned data object)
+        delete this->hijack_nodal_spine_value(*it, 0);
+      }
+    }
+
+  protected:
+    ///\short Fill in the specific surface derivative calculations
+    /// by calling the appropriate class function
+    double compute_surface_derivatives(
+      const Shape& psi,
+      const DShape& dpsids,
+      const DenseMatrix<double>& interpolated_t,
+      const Vector<double>& interpolated_x,
+      DShape& surface_gradient,
+      DShape& surface_divergence)
+    {
+      return DERIVATIVE_CLASS::compute_surface_derivatives(psi,
+                                                           dpsids,
+                                                           interpolated_t,
+                                                           interpolated_x,
+                                                           surface_gradient,
+                                                           surface_divergence);
+    }
+
+
+  public:
+    /// \short Constructor, the arguments are a pointer to the  "bulk" element
+    /// and the index of the face to be created
+    SpineUpdateFluidInterfaceElement(FiniteElement* const& element_pt,
+                                     const int& face_index,
+                                     const unsigned& id = 0)
+      : Hijacked<SpineElement<FaceGeometry<ELEMENT>>>(),
+        EQUATION_CLASS(),
+        DERIVATIVE_CLASS()
+    {
+      // Attach the geometrical information to the element, by
+      // making the face element from the bulk element
+      element_pt->build_face_element(face_index, this);
+
+#ifdef PARANOID
+      // Is it refineable
+      RefineableElement* ref_el_pt =
+        dynamic_cast<RefineableElement*>(element_pt);
+      if (ref_el_pt != 0)
+      {
+        if (this->has_hanging_nodes())
         {
-         //Add in the Lagrange multiplier contribution
-         residuals[local_eqn] -= 
-          interpolated_lagrange*interpolated_n[i]*psif(l)*J*W;
-        
-         //Do the Jacobian calculation
-         if(flag)
-          {
-           //Loop over the nodes 
-           for(unsigned l2=0;l2<n_node;l2++)
-            {
-             // Dependence on solid positions will be handled by FDs
-             //That leaves the Lagrange multiplier contribution
-             local_unknown = this->kinematic_local_eqn(l2);
-             if(local_unknown >= 0)
-              {
-               jacobian(local_eqn,local_unknown) -=
-                psif(l2)*interpolated_n[i]*psif(l)*J*W;
-              }
-            }
-          } //End of Jacobian calculation
-        } 
-      } 
-    
-    }
-  }
-    
- 
- 
-  /// \short Create an "bounding" element (here actually a 2D line element
-  /// of type ElasticLineFluidInterfaceBoundingElement<ELEMENT> that allows
-  /// the application of a contact angle boundary condition on the
-  /// the specified face. 
-  virtual FluidInterfaceBoundingElement* make_bounding_element(
-   const int &face_index)
-  {
-   //Create a temporary pointer to the appropriate FaceElement
-   BoundingElementType<ElasticUpdateFluidInterfaceElement<EQUATION_CLASS,
-    DERIVATIVE_CLASS,ELEMENT> > *face_el_pt =
-    new BoundingElementType<ElasticUpdateFluidInterfaceElement<EQUATION_CLASS,DERIVATIVE_CLASS,ELEMENT> >;
-  
-   //Attach the geometrical information to the new element
-   this->build_face_element(face_index,face_el_pt);
-
-   //Set the index at which the velocity nodes are stored
-   face_el_pt->u_index_interface_boundary() = this->U_index_interface;
-  
-   //Set the value of the nbulk_value, the node is not resized
-   //in this bounding element,
-   //so it will just be the actual nvalue here
-   // There is some ambiguity about what this means (however)
-   const unsigned n_node_bounding = face_el_pt->nnode();
-   //Storage for lagrange multiplier index at the face nodes
-   Vector<unsigned> local_lagrange_index(n_node_bounding);
-   for(unsigned n=0;n<n_node_bounding;n++)
-    {
-     face_el_pt->nbulk_value(n) =
-      face_el_pt->node_pt(n)->nvalue();
-     //At the moment the assumption is that it is stored at all nodes, but that is consistent with
-     //the assumption in this element
-     local_lagrange_index[n] = this->Lagrange_index[face_el_pt->bulk_node_number(n)];
-    }
-  
-   //Pass the ID and offset down
-   face_el_pt->set_lagrange_index(local_lagrange_index);
-  
-   //Find the nodes
-   std::set<SolidNode*> set_of_solid_nodes;
-   const unsigned n_node = this->nnode();
-   for(unsigned n=0;n<n_node;n++)
-    {
-     set_of_solid_nodes.insert(static_cast<SolidNode*>(this->node_pt(n)));
-    }
-  
-   //Delete the nodes from the face
-   //n_node = face_el_pt->nnode();
-   for(unsigned n=0;n<n_node_bounding;n++)
-    {
-     //Set the value of the nbulk_value, from the present element
-     face_el_pt->nbulk_value(n) = 
-      this->nbulk_value(face_el_pt->bulk_node_number(n));
-    
-     //Now delete the nodes from the set
-     set_of_solid_nodes.erase(static_cast<SolidNode*>(
-                               face_el_pt->node_pt(n)));
-    }
-  
-   //Now add these as external data
-   for(std::set<SolidNode*>::iterator it=set_of_solid_nodes.begin();
-       it!=set_of_solid_nodes.end();++it)
-    {
-     face_el_pt->add_external_data((*it)->variable_position_pt());
-    }
-  
-  
-   //Return the value of the pointer
-   return face_el_pt;
-  }
- 
- };
-
- 
-//=========================================================================
-/// Pseudo-elasticity version of the PointFluidInterfaceBoundingElement
-//========================================================================
- template<class ELEMENT>
-  class ElasticPointFluidInterfaceBoundingElement : 
-  public  FaceGeometry<FaceGeometry<ELEMENT> > ,
-  public PointFluidInterfaceBoundingElement, public virtual SolidFiniteElement
- 
- {
-   private:
- 
-  /// Short Storage for the index of the Lagrange multiplier at the chosen nodes
-  Vector<unsigned> Lagrange_index;
- 
-   public:
- 
-  ///\short Set the Id and offset
-  void set_lagrange_index(const Vector<unsigned> &lagrange_index)
-  {Lagrange_index = lagrange_index;}
- 
- 
-  /// \short Specify the value of nodal zeta from the face geometry
-  /// The "global" intrinsic coordinate of the element when
-  /// viewed as part of a geometric object should be given by
-  /// the FaceElement representation, by default
-  double zeta_nodal(const unsigned &n, const unsigned &k,           
-                    const unsigned &i) const 
-  {return FaceElement::zeta_nodal(n,k,i);}     
- 
- 
-  /// Constructor
-   ElasticPointFluidInterfaceBoundingElement() : 
-  FaceGeometry<FaceGeometry<ELEMENT> >(),
-   PointFluidInterfaceBoundingElement() {}
- 
-  /// Overload the output function
-  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
-  /// Output the element
-  void output(std::ostream &outfile, const unsigned &n_plot)
-  {FluidInterfaceBoundingElement::output(outfile,n_plot);}
- 
-  ///Overload the C-style output function
-  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-  
-  ///C-style Output function
-  void output(FILE* file_pt, const unsigned &n_plot)
-  {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
- 
-  /// Calculate the element's residual vector and Jacobian
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                        DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution_interface_boundary(residuals,
-                                                            jacobian,1);
-   //Call the generic FD routine to get external data
-   this->fill_in_jacobian_from_external_by_fd(jacobian);
-  
-   //Call the generic finite difference routine to handle the solid variables
-   this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
-  }
- 
-  ///Set the kinematic local equation
-  inline int kinematic_local_eqn(const unsigned &n)
-  {
-   return this->nodal_local_eqn(n,this->Lagrange_index[n]);
-  }
- 
- }; 
- 
-
-//=========================================================================
-/// Pseudo-elasticity version of the LineFluidInterfaceBoundingElement
-//========================================================================
- template<class ELEMENT>
-  class ElasticLineFluidInterfaceBoundingElement : 
-  public  FaceGeometry<FaceGeometry<ELEMENT> > ,
-  public LineFluidInterfaceBoundingElement, public virtual SolidFiniteElement
- 
- {
-
-  /// Short Storage for the index of Lagrange multiplier
-  Vector<unsigned> Lagrange_index;
-  
-   public:
-  
-  ///\short Set the Id
-  void set_lagrange_index(const Vector<unsigned> &lagrange_index)
-  {Lagrange_index = lagrange_index;}
- 
-  /// Constructor
-   ElasticLineFluidInterfaceBoundingElement() : 
-  FaceGeometry<FaceGeometry<ELEMENT> >(),
-   LineFluidInterfaceBoundingElement() {}
- 
-  /// \short Specify the value of nodal zeta from the face geometry
-  /// The "global" intrinsic coordinate of the element when
-  /// viewed as part of a geometric object should be given by
-  /// the FaceElement representation, by default
-  double zeta_nodal(const unsigned &n, const unsigned &k,           
-                    const unsigned &i) const 
-  {return FaceElement::zeta_nodal(n,k,i);}     
-
- 
-  /// Overload the output function
-  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
-  /// Output the element
-  void output(std::ostream &outfile, const unsigned &n_plot)
-  {
-   FluidInterfaceBoundingElement::output(outfile,n_plot);
-  }
- 
-  ///Overload the C-style output function
-  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
- 
-  ///C-style Output function
-  void output(FILE* file_pt, const unsigned &n_plot)
-  {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
- 
-  /// Calculate the elemental residual vector and Jacobian
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                        DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution_interface_boundary(residuals,jacobian,1);
-  
-   //Call the generic FD routine to get externals
-   this->fill_in_jacobian_from_external_by_fd(jacobian);
-
-   //Call the generic finite difference routine to handle the solid variables
-   this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
-  }
- 
-  /// Local eqn number of kinematic bc associated with local node n
-  int kinematic_local_eqn(const unsigned &n) 
-  {
-   //Read out the kinematic constraint from the Id which is passed down
-   //from the constructing element
-   return this->nodal_local_eqn(n,this->Lagrange_index[n]);
-  }
- 
- }; 
-
-
-//==================GEOMETRIC SPECIALISATIONS==========================
- 
-
-///Specialise the elastic update template class to concrete 1D case
- template<class ELEMENT>
-  class ElasticLineFluidInterfaceElement :
-  public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-  LineDerivatives,ELEMENT>
-  {
-    public:
- 
-    ElasticLineFluidInterfaceElement(
-     FiniteElement* const &element_pt, 
-     const int &face_index, const unsigned &id=0) : 
-   ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-    LineDerivatives,ELEMENT>(element_pt,face_index,id) {}
-  };
-
-///Define the BoundingElement type associated with the 1D surface element
- template<class ELEMENT>
-  class BoundingElementType<ElasticUpdateFluidInterfaceElement<
-  FluidInterfaceElement,LineDerivatives,ELEMENT> >:
- public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
- {
-   public:
-  
-  BoundingElementType<ElasticUpdateFluidInterfaceElement<
-   FluidInterfaceElement,LineDerivatives,ELEMENT> >() :
-  ElasticPointFluidInterfaceBoundingElement<ELEMENT>() { }
- };
-
-
-///Specialise the Elastic update case to axisymmetric equations
- template<class ELEMENT>
-  class ElasticAxisymmetricFluidInterfaceElement :
-  public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-  AxisymmetricDerivatives,ELEMENT>
-  {
-    public:
- 
-    ElasticAxisymmetricFluidInterfaceElement(
-     FiniteElement* const &element_pt, 
-     const int &face_index, const unsigned &id=0) : 
-   ElasticUpdateFluidInterfaceElement<
-    FluidInterfaceElement,AxisymmetricDerivatives,ELEMENT>(
-     element_pt,face_index,id) {}
-  };
-
-//Define the bounding element associated with the axsymmetric elastic fluid interface element
- template<class ELEMENT>
-  class BoundingElementType<ElasticUpdateFluidInterfaceElement<
-  FluidInterfaceElement,AxisymmetricDerivatives,ELEMENT> >:
- public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
- {
-   public:
-  
-  BoundingElementType<ElasticUpdateFluidInterfaceElement<
-   FluidInterfaceElement,AxisymmetricDerivatives,ELEMENT> >() :
-  ElasticPointFluidInterfaceBoundingElement<ELEMENT>() { }
- };
-
-
-///Specialise Elastic update case to the concrete 2D case
- template<class ELEMENT>
-  class ElasticSurfaceFluidInterfaceElement :
-  public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-  SurfaceDerivatives,ELEMENT>
-  {
-    public:
- 
-    ElasticSurfaceFluidInterfaceElement(
-     FiniteElement* const &element_pt, 
-     const int &face_index, const unsigned &id=0) : 
-   ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-    SurfaceDerivatives,ELEMENT>(element_pt,face_index,id) {}
-  };
-
-
-//Define the bounding element associated with the 2D surface elements
- template<class ELEMENT>
-  class BoundingElementType<ElasticUpdateFluidInterfaceElement<
-  FluidInterfaceElement,SurfaceDerivatives,ELEMENT> >:
- public ElasticLineFluidInterfaceBoundingElement<ELEMENT>
- {
-   public:
-  
-  BoundingElementType<ElasticUpdateFluidInterfaceElement<
-   FluidInterfaceElement,SurfaceDerivatives,ELEMENT> >() :
-  ElasticLineFluidInterfaceBoundingElement<ELEMENT>() { }
- };
-
-
- 
-}
-
+          throw OomphLibError("This interface element will not work correctly "
+                              "if nodes are hanging\n",
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+      }
 #endif
 
+      // Find the index at which the velocity unknowns are stored
+      // from the bulk element and allocate the local storage
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
+      // Find number of momentum equation required
+      const unsigned n_u_index = cast_element_pt->n_u_nst();
+      this->U_index_interface.resize(n_u_index);
+      for (unsigned i = 0; i < n_u_index; i++)
+      {
+        this->U_index_interface[i] = cast_element_pt->u_index_nst(i);
+      }
+
+      // Add any additional values required by the equations class
+      unsigned n_node_face = this->nnode();
+      // Create an instance of the policy class that determines
+      // how many additional values are required
+      FluidInterfaceAdditionalValues<EQUATION_CLASS>*
+        interface_additional_values_pt =
+          new FluidInterfaceAdditionalValues<EQUATION_CLASS>();
+      // Do we need to add any values
+      // By default the spines don't need to so we can save
+      // some effort here
+      bool add_values = false;
+      // Storage for the number of additional values required
+      // for each node
+      Vector<unsigned> additional_data_values(n_node_face);
+      for (unsigned i = 0; i < n_node_face; ++i)
+      {
+        // Read out additional values for each node
+        additional_data_values[i] =
+          interface_additional_values_pt->nadditional_values(i);
+        // If any of these are non-zero it will set the boolean to true
+        add_values |= additional_data_values[i];
+      }
+
+      // If storage is needed allocate it and call
+      // the associated local index setup function
+      if (add_values)
+      {
+        this->add_additional_values(additional_data_values, id);
+        // Call any local setup from the interface policy class
+        interface_additional_values_pt->setup_equation_indices(this, id);
+      }
+
+      // Delete the policy class, it's work is done.
+      delete interface_additional_values_pt;
+      interface_additional_values_pt = 0;
+    }
+
+    /// Calculate the contribution to the residuals and the jacobian
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
+        residuals, jacobian, 1);
+
+      // Call the generic routine to handle the shape derivatives
+      this->fill_in_jacobian_from_geometric_data(jacobian);
+    }
+
+    /// \short
+    /// Helper function to calculate the additional contributions
+    /// These are those filled in by the particular equations
+    void add_additional_residual_contributions_interface(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
+    {
+      EQUATION_CLASS::add_additional_residual_contributions_interface(
+        residuals,
+        jacobian,
+        flag,
+        psif,
+        dpsifds,
+        dpsifdS,
+        dpsifdS_div,
+        s,
+        interpolated_x,
+        interpolated_n,
+        W,
+        J);
+    }
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      EQUATION_CLASS::output(outfile);
+    }
+
+    /// Output the element
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      EQUATION_CLASS::output(outfile, n_plot);
+    }
+
+    /// Overload the C-style output function
+    void output(FILE* file_pt)
+    {
+      EQUATION_CLASS::output(file_pt);
+    }
+
+    /// C-style Output function
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      EQUATION_CLASS::output(file_pt, n_plot);
+    }
 
 
+    /// \short Create an "bounding" element of the type
+    /// specified by the BoundingElementType policy class
+    /// Here, this allows
+    /// the application of a contact angle boundary condition on the
+    /// the specified face.
+    virtual FluidInterfaceBoundingElement* make_bounding_element(
+      const int& face_index)
+    {
+      // Create a temporary pointer to the appropriate FaceElement read our from
+      // our policy class
+      BoundingElementType<SpineUpdateFluidInterfaceElement<EQUATION_CLASS,
+                                                           DERIVATIVE_CLASS,
+                                                           ELEMENT>>*
+        face_el_pt = new BoundingElementType<
+          SpineUpdateFluidInterfaceElement<EQUATION_CLASS,
+                                           DERIVATIVE_CLASS,
+                                           ELEMENT>>;
+
+      // Attach the geometrical information to the new element
+      this->build_face_element(face_index, face_el_pt);
+
+      // Set the index at which the velocity nodes are stored
+      face_el_pt->u_index_interface_boundary() = this->U_index_interface;
+
+      // Set the value of the nbulk_value, the node is not resized
+      // in this bounding element,
+      // so it will just be the actual nvalue here
+      // There is some ambiguity about what this means (however)
+      // We are interpreting it to mean the number of
+      // values in this FaceElement before creating the new
+      // bounding element.
+      const unsigned n_node_bounding = face_el_pt->nnode();
+      for (unsigned n = 0; n < n_node_bounding; n++)
+      {
+        face_el_pt->nbulk_value(n) = face_el_pt->node_pt(n)->nvalue();
+      }
+
+      // Set of unique geometric data that is used to update the bulk,
+      // but is not used to update the face
+      std::set<Data*> unique_additional_geom_data;
+
+      // Get all the geometric data for this (bulk) element
+      this->assemble_set_of_all_geometric_data(unique_additional_geom_data);
+
+      // Now assemble the set of geometric data for the face element
+      std::set<Data*> unique_face_geom_data_pt;
+      face_el_pt->assemble_set_of_all_geometric_data(unique_face_geom_data_pt);
+
+      // Erase the face geometric data from the additional data
+      for (std::set<Data*>::iterator it = unique_face_geom_data_pt.begin();
+           it != unique_face_geom_data_pt.end();
+           ++it)
+      {
+        unique_additional_geom_data.erase(*it);
+      }
+
+      // Finally add all unique additional data as external data
+      for (std::set<Data*>::iterator it = unique_additional_geom_data.begin();
+           it != unique_additional_geom_data.end();
+           ++it)
+      {
+        face_el_pt->add_external_data(*it);
+      }
+
+      // Return the value of the pointer
+      return face_el_pt;
+    }
+  };
 
 
+  //=====================================================================
+  /// Spine version of the PointFluidInterfaceBoundingElement
+  //=====================================================================
+  template<class ELEMENT>
+  class SpinePointFluidInterfaceBoundingElement
+    : public Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>,
+      public PointFluidInterfaceBoundingElement
 
+  {
+  public:
+    /// Constructor
+    SpinePointFluidInterfaceBoundingElement()
+      : Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>(),
+        PointFluidInterfaceBoundingElement()
+    {
+    }
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      FiniteElement::output(outfile);
+    }
+
+    /// Output the element
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      FluidInterfaceBoundingElement::output(outfile, n_plot);
+    }
+
+    /// Overload the C-style output function
+    void output(FILE* file_pt)
+    {
+      FiniteElement::output(file_pt);
+    }
+
+    /// C-style Output function
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      FluidInterfaceBoundingElement::output(file_pt, n_plot);
+    }
+
+    /// Calculate the elemental residual vector and the Jacobian
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      this->fill_in_generic_residual_contribution_interface_boundary(
+        residuals, jacobian, 1);
+      // Call generic FD routine for the external data
+      this->fill_in_jacobian_from_external_by_fd(jacobian);
+
+      // Call the generic routine to handle the spine variables
+      this->fill_in_jacobian_from_geometric_data(jacobian);
+    }
+
+    /// \short Return local equation number associated with the kinematic
+    /// constraint for local node n
+    int kinematic_local_eqn(const unsigned& n)
+    {
+      return this->spine_local_eqn(n);
+    }
+  };
+
+
+  //=========================================================================
+  /// Spine version of the LineFluidInterfaceBoundingElement
+  //========================================================================
+  template<class ELEMENT>
+  class SpineLineFluidInterfaceBoundingElement
+    : public Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>,
+      public LineFluidInterfaceBoundingElement
+
+  {
+  public:
+    /// Constructor
+    SpineLineFluidInterfaceBoundingElement()
+      : Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>(),
+        LineFluidInterfaceBoundingElement()
+    {
+    }
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      FiniteElement::output(outfile);
+    }
+
+    /// Output the element
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      FluidInterfaceBoundingElement::output(outfile, n_plot);
+    }
+
+    /// Overload the C-style output function
+    void output(FILE* file_pt)
+    {
+      FiniteElement::output(file_pt);
+    }
+
+    /// C-style Output function
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      FluidInterfaceBoundingElement::output(file_pt, n_plot);
+    }
+
+
+    /// Calculate the jacobian
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      this->fill_in_generic_residual_contribution_interface_boundary(
+        residuals, jacobian, 1);
+      // Call generic FD routine for the external data
+      this->fill_in_jacobian_from_external_by_fd(jacobian);
+
+      // Call the generic routine to handle the spine variables
+      this->fill_in_jacobian_from_geometric_data(jacobian);
+    }
+
+
+    /// Local eqn number of the kinematic bc associated with local node n
+    int kinematic_local_eqn(const unsigned& n)
+    {
+      // Kinematic bc is always associated with the n-th spine height
+      return this->spine_local_eqn(n);
+    }
+  };
+
+
+  //============GEOMETRIC SPECIALISATIONS============================
+
+
+  // Specialise the spine update template class to concrete 1D case
+  template<class ELEMENT>
+  class SpineLineFluidInterfaceElement
+    : public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                              LineDerivatives,
+                                              ELEMENT>
+  {
+  public:
+    SpineLineFluidInterfaceElement(FiniteElement* const& element_pt,
+                                   const int& face_index)
+      : SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                         LineDerivatives,
+                                         ELEMENT>(element_pt, face_index)
+    {
+    }
+  };
+
+
+  // Define the BoundingElement type associated with the 1D surface element
+  template<class ELEMENT>
+  class BoundingElementType<
+    SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                     LineDerivatives,
+                                     ELEMENT>>
+    : public SpinePointFluidInterfaceBoundingElement<ELEMENT>
+  {
+  public:
+    BoundingElementType<SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                                         LineDerivatives,
+                                                         ELEMENT>>()
+      : SpinePointFluidInterfaceBoundingElement<ELEMENT>()
+    {
+    }
+  };
+
+
+  // Specialise Spine update case to concrete axisymmetric case
+  template<class ELEMENT>
+  class SpineAxisymmetricFluidInterfaceElement
+    : public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                              AxisymmetricDerivatives,
+                                              ELEMENT>
+  {
+  public:
+    SpineAxisymmetricFluidInterfaceElement(FiniteElement* const& element_pt,
+                                           const int& face_index)
+      : SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                         AxisymmetricDerivatives,
+                                         ELEMENT>(element_pt, face_index)
+    {
+    }
+  };
+
+  // Define the bounding element associated with the axisymmetric fluid
+  // interface element
+  template<class ELEMENT>
+  class BoundingElementType<
+    SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                     AxisymmetricDerivatives,
+                                     ELEMENT>>
+    : public SpinePointFluidInterfaceBoundingElement<ELEMENT>
+  {
+  public:
+    BoundingElementType<
+      SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                       AxisymmetricDerivatives,
+                                       ELEMENT>>()
+      : SpinePointFluidInterfaceBoundingElement<ELEMENT>()
+    {
+    }
+  };
+
+  // Specialise Spine update case to concrete 2D case
+  template<class ELEMENT>
+  class SpineSurfaceFluidInterfaceElement
+    : public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                              SurfaceDerivatives,
+                                              ELEMENT>
+  {
+  public:
+    SpineSurfaceFluidInterfaceElement(FiniteElement* const& element_pt,
+                                      const int& face_index)
+      : SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                         SurfaceDerivatives,
+                                         ELEMENT>(element_pt, face_index)
+    {
+    }
+  };
+
+  // Define the bounding element type for the 2D surface
+  template<class ELEMENT>
+  class BoundingElementType<
+    SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                     SurfaceDerivatives,
+                                     ELEMENT>>
+    : public SpineLineFluidInterfaceBoundingElement<ELEMENT>
+  {
+  public:
+    BoundingElementType<SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                                         SurfaceDerivatives,
+                                                         ELEMENT>>()
+      : SpineLineFluidInterfaceBoundingElement<ELEMENT>()
+    {
+    }
+  };
+
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  //-------------ELASTIC NODE UPDATE CLASSES-------------------------------
+  //---------------------------------------------------------------------
+
+
+  //=======================================================================
+  /// \short Generic Elastic node update interface template class that can
+  /// be combined with a given surface equations class and surface derivative
+  /// class to provide a concrete implementation of any surface element
+  /// that uses elastic node updates.
+  //======================================================================
+  template<class EQUATION_CLASS, class DERIVATIVE_CLASS, class ELEMENT>
+  class ElasticUpdateFluidInterfaceElement
+    : public virtual Hijacked<FaceGeometry<ELEMENT>>,
+      public EQUATION_CLASS,
+      public DERIVATIVE_CLASS
+  {
+  private:
+    /// \short Storage for the location of the Lagrange multiplier
+    /// (If other additional values have been added we need
+    /// to add the Lagrange multiplier at the end)
+    Vector<unsigned> Lagrange_index;
+
+    /// \short Return the index at which the lagrange multiplier is
+    /// stored at the n-th node
+    inline unsigned lagrange_index(const unsigned& n)
+    {
+      return this->Lagrange_index[n];
+    }
+
+    /// \short Equation number of the kinematic BC associated with node j.
+    /// (This is the equation for the Lagrange multiplier)
+    inline int kinematic_local_eqn(const unsigned& n)
+    {
+      // Get the index of the nodal value associated with Lagrange multiplier
+      return this->nodal_local_eqn(n, this->lagrange_index(n));
+    }
+
+    /// \short Hijacking the kinematic condition corresponds to hijacking the
+    /// variables associated with the Lagrange multipliers that are assigned
+    /// on construction of this element.
+    void hijack_kinematic_conditions(const Vector<unsigned>& bulk_node_number)
+    {
+      // Loop over all the nodes that are passed in
+      for (Vector<unsigned>::const_iterator it = bulk_node_number.begin();
+           it != bulk_node_number.end();
+           ++it)
+      {
+        // Hijack the appropriate value and delete the returned Node
+        delete this->hijack_nodal_value(*it, this->lagrange_index(*it));
+      }
+    }
+
+  protected:
+    ///\short Fill in the specific surface derivative calculations
+    /// by calling the appropriate function from the derivative class
+    double compute_surface_derivatives(
+      const Shape& psi,
+      const DShape& dpsids,
+      const DenseMatrix<double>& interpolated_t,
+      const Vector<double>& interpolated_x,
+      DShape& surface_gradient,
+      DShape& surface_divergence)
+    {
+      return DERIVATIVE_CLASS::compute_surface_derivatives(psi,
+                                                           dpsids,
+                                                           interpolated_t,
+                                                           interpolated_x,
+                                                           surface_gradient,
+                                                           surface_divergence);
+    }
+
+
+  public:
+    /// \short Constructor, pass a pointer to the bulk element and the face
+    /// index of the bulk element to which the element is to be attached to.
+    /// The optional identifier can be used
+    /// to distinguish the additional nodal value (Lagr mult) created by
+    /// this element from those created by other FaceElements.
+    ElasticUpdateFluidInterfaceElement(FiniteElement* const& element_pt,
+                                       const int& face_index,
+                                       const unsigned& id = 0)
+      : FaceGeometry<ELEMENT>(), EQUATION_CLASS(), DERIVATIVE_CLASS()
+    {
+      // Attach the geometrical information to the element
+      // This function also assigned nbulk_value from required_nvalue of the
+      // bulk element
+      element_pt->build_face_element(face_index, this);
+
+#ifdef PARANOID
+      // Is it refineable
+      RefineableElement* ref_el_pt =
+        dynamic_cast<RefineableElement*>(element_pt);
+      if (ref_el_pt != 0)
+      {
+        if (this->has_hanging_nodes())
+        {
+          throw OomphLibError(
+            "This flux element will not work correctly if nodes are hanging\n",
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+#endif
+
+      // Find the index at which the velocity unknowns are stored
+      // from the bulk element and resize the local storage scheme
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
+      const unsigned n_u_index = cast_element_pt->n_u_nst();
+      this->U_index_interface.resize(n_u_index);
+      for (unsigned i = 0; i < n_u_index; i++)
+      {
+        this->U_index_interface[i] = cast_element_pt->u_index_nst(i);
+      }
+
+      // Read out the number of nodes on the face
+      unsigned n_node_face = this->nnode();
+
+      // Create an instance of the policy class that determines
+      // how many additional values are required
+      FluidInterfaceAdditionalValues<EQUATION_CLASS>*
+        interface_additional_values_pt =
+          new FluidInterfaceAdditionalValues<EQUATION_CLASS>();
+
+      // Set the additional data values in the face
+      // There is always also one additional values at each node --- the
+      // Lagrange multiplier
+      Vector<unsigned> additional_data_values(n_node_face);
+      for (unsigned n = 0; n < n_node_face; n++)
+      {
+        // Now add one to the addtional values at every single node
+        additional_data_values[n] =
+          interface_additional_values_pt->nadditional_values(n) + 1;
+      }
+
+      // Now add storage for Lagrange multipliers and set the map containing
+      // the position of the first entry of this face element's
+      // additional values.
+      this->add_additional_values(additional_data_values, id);
+
+      // Now I can just store the lagrange index offset to give the storage
+      // location of the nodes
+      Lagrange_index.resize(n_node_face);
+      for (unsigned n = 0; n < n_node_face; ++n)
+      {
+        Lagrange_index[n] =
+          additional_data_values[n] - 1 +
+          dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))
+            ->index_of_first_value_assigned_by_face_element(id);
+      }
+
+      // Call any local setup from the interface policy class
+      interface_additional_values_pt->setup_equation_indices(this, id);
+
+      // Can now delete the policy class
+      delete interface_additional_values_pt;
+      interface_additional_values_pt = 0;
+    }
+
+    /// \short The "global" intrinsic coordinate of the element when
+    /// viewed as part of a geometric object should be given by
+    /// the FaceElement representation, by default
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
+    /// Return the lagrange multiplier at local node n
+    double& lagrange(const unsigned& n)
+    {
+      return *this->node_pt(n)->value_pt(this->lagrange_index(n));
+    }
+
+
+    /// Fill in contribution to residuals and Jacobian
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
+        residuals, jacobian, 1);
+
+      // Call the generic finite difference routine for the solid variables
+      this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+    }
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      EQUATION_CLASS::output(outfile);
+    }
+
+    /// Output the element
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      EQUATION_CLASS::output(outfile, n_plot);
+    }
+
+    /// Overload the C-style output function
+    void output(FILE* file_pt)
+    {
+      EQUATION_CLASS::output(file_pt);
+    }
+
+    /// C-style Output function
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      EQUATION_CLASS::output(file_pt, n_plot);
+    }
+
+
+    /// \short Helper function to calculate the additional contributions
+    /// to be added at each integration point. This deals with
+    /// Lagrange multiplier contribution, as well as any
+    /// additional contributions by the other equations.
+    void add_additional_residual_contributions_interface(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
+    {
+      EQUATION_CLASS::add_additional_residual_contributions_interface(
+        residuals,
+        jacobian,
+        flag,
+        psif,
+        dpsifds,
+        dpsifdS,
+        dpsifdS_div,
+        s,
+        interpolated_x,
+        interpolated_n,
+        W,
+        J);
+
+      // Assemble Lagrange multiplier by loop over the shape functions
+      const unsigned n_node = this->nnode();
+      // Read out the dimension of the node
+      const unsigned nodal_dimension = this->nodal_dimension();
+
+      double interpolated_lagrange = 0.0;
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Note same shape functions used for lagrange multiplier field
+        interpolated_lagrange += lagrange(l) * psif(l);
+      }
+
+      int local_eqn = 0, local_unknown = 0;
+
+      // Loop over the shape functions
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Loop over the directions
+        for (unsigned i = 0; i < nodal_dimension; i++)
+        {
+          // Now using the same shape functions for the elastic equations,
+          // so we can stay in the loop
+          local_eqn = this->position_local_eqn(l, 0, i);
+          if (local_eqn >= 0)
+          {
+            // Add in the Lagrange multiplier contribution
+            residuals[local_eqn] -=
+              interpolated_lagrange * interpolated_n[i] * psif(l) * J * W;
+
+            // Do the Jacobian calculation
+            if (flag)
+            {
+              // Loop over the nodes
+              for (unsigned l2 = 0; l2 < n_node; l2++)
+              {
+                // Dependence on solid positions will be handled by FDs
+                // That leaves the Lagrange multiplier contribution
+                local_unknown = this->kinematic_local_eqn(l2);
+                if (local_unknown >= 0)
+                {
+                  jacobian(local_eqn, local_unknown) -=
+                    psif(l2) * interpolated_n[i] * psif(l) * J * W;
+                }
+              }
+            } // End of Jacobian calculation
+          }
+        }
+      }
+    }
+
+
+    /// \short Create an "bounding" element (here actually a 2D line element
+    /// of type ElasticLineFluidInterfaceBoundingElement<ELEMENT> that allows
+    /// the application of a contact angle boundary condition on the
+    /// the specified face.
+    virtual FluidInterfaceBoundingElement* make_bounding_element(
+      const int& face_index)
+    {
+      // Create a temporary pointer to the appropriate FaceElement
+      BoundingElementType<ElasticUpdateFluidInterfaceElement<EQUATION_CLASS,
+                                                             DERIVATIVE_CLASS,
+                                                             ELEMENT>>*
+        face_el_pt = new BoundingElementType<
+          ElasticUpdateFluidInterfaceElement<EQUATION_CLASS,
+                                             DERIVATIVE_CLASS,
+                                             ELEMENT>>;
+
+      // Attach the geometrical information to the new element
+      this->build_face_element(face_index, face_el_pt);
+
+      // Set the index at which the velocity nodes are stored
+      face_el_pt->u_index_interface_boundary() = this->U_index_interface;
+
+      // Set the value of the nbulk_value, the node is not resized
+      // in this bounding element,
+      // so it will just be the actual nvalue here
+      // There is some ambiguity about what this means (however)
+      const unsigned n_node_bounding = face_el_pt->nnode();
+      // Storage for lagrange multiplier index at the face nodes
+      Vector<unsigned> local_lagrange_index(n_node_bounding);
+      for (unsigned n = 0; n < n_node_bounding; n++)
+      {
+        face_el_pt->nbulk_value(n) = face_el_pt->node_pt(n)->nvalue();
+        // At the moment the assumption is that it is stored at all nodes, but
+        // that is consistent with the assumption in this element
+        local_lagrange_index[n] =
+          this->Lagrange_index[face_el_pt->bulk_node_number(n)];
+      }
+
+      // Pass the ID and offset down
+      face_el_pt->set_lagrange_index(local_lagrange_index);
+
+      // Find the nodes
+      std::set<SolidNode*> set_of_solid_nodes;
+      const unsigned n_node = this->nnode();
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        set_of_solid_nodes.insert(static_cast<SolidNode*>(this->node_pt(n)));
+      }
+
+      // Delete the nodes from the face
+      // n_node = face_el_pt->nnode();
+      for (unsigned n = 0; n < n_node_bounding; n++)
+      {
+        // Set the value of the nbulk_value, from the present element
+        face_el_pt->nbulk_value(n) =
+          this->nbulk_value(face_el_pt->bulk_node_number(n));
+
+        // Now delete the nodes from the set
+        set_of_solid_nodes.erase(
+          static_cast<SolidNode*>(face_el_pt->node_pt(n)));
+      }
+
+      // Now add these as external data
+      for (std::set<SolidNode*>::iterator it = set_of_solid_nodes.begin();
+           it != set_of_solid_nodes.end();
+           ++it)
+      {
+        face_el_pt->add_external_data((*it)->variable_position_pt());
+      }
+
+
+      // Return the value of the pointer
+      return face_el_pt;
+    }
+  };
+
+
+  //=========================================================================
+  /// Pseudo-elasticity version of the PointFluidInterfaceBoundingElement
+  //========================================================================
+  template<class ELEMENT>
+  class ElasticPointFluidInterfaceBoundingElement
+    : public FaceGeometry<FaceGeometry<ELEMENT>>,
+      public PointFluidInterfaceBoundingElement,
+      public virtual SolidFiniteElement
+
+  {
+  private:
+    /// Short Storage for the index of the Lagrange multiplier at the chosen
+    /// nodes
+    Vector<unsigned> Lagrange_index;
+
+  public:
+    ///\short Set the Id and offset
+    void set_lagrange_index(const Vector<unsigned>& lagrange_index)
+    {
+      Lagrange_index = lagrange_index;
+    }
+
+
+    /// \short Specify the value of nodal zeta from the face geometry
+    /// The "global" intrinsic coordinate of the element when
+    /// viewed as part of a geometric object should be given by
+    /// the FaceElement representation, by default
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
+
+    /// Constructor
+    ElasticPointFluidInterfaceBoundingElement()
+      : FaceGeometry<FaceGeometry<ELEMENT>>(),
+        PointFluidInterfaceBoundingElement()
+    {
+    }
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      FiniteElement::output(outfile);
+    }
+
+    /// Output the element
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      FluidInterfaceBoundingElement::output(outfile, n_plot);
+    }
+
+    /// Overload the C-style output function
+    void output(FILE* file_pt)
+    {
+      FiniteElement::output(file_pt);
+    }
+
+    /// C-style Output function
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      FluidInterfaceBoundingElement::output(file_pt, n_plot);
+    }
+
+    /// Calculate the element's residual vector and Jacobian
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution_interface_boundary(
+        residuals, jacobian, 1);
+      // Call the generic FD routine to get external data
+      this->fill_in_jacobian_from_external_by_fd(jacobian);
+
+      // Call the generic finite difference routine to handle the solid
+      // variables
+      this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+    }
+
+    /// Set the kinematic local equation
+    inline int kinematic_local_eqn(const unsigned& n)
+    {
+      return this->nodal_local_eqn(n, this->Lagrange_index[n]);
+    }
+  };
+
+
+  //=========================================================================
+  /// Pseudo-elasticity version of the LineFluidInterfaceBoundingElement
+  //========================================================================
+  template<class ELEMENT>
+  class ElasticLineFluidInterfaceBoundingElement
+    : public FaceGeometry<FaceGeometry<ELEMENT>>,
+      public LineFluidInterfaceBoundingElement,
+      public virtual SolidFiniteElement
+
+  {
+    /// Short Storage for the index of Lagrange multiplier
+    Vector<unsigned> Lagrange_index;
+
+  public:
+    ///\short Set the Id
+    void set_lagrange_index(const Vector<unsigned>& lagrange_index)
+    {
+      Lagrange_index = lagrange_index;
+    }
+
+    /// Constructor
+    ElasticLineFluidInterfaceBoundingElement()
+      : FaceGeometry<FaceGeometry<ELEMENT>>(),
+        LineFluidInterfaceBoundingElement()
+    {
+    }
+
+    /// \short Specify the value of nodal zeta from the face geometry
+    /// The "global" intrinsic coordinate of the element when
+    /// viewed as part of a geometric object should be given by
+    /// the FaceElement representation, by default
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      FiniteElement::output(outfile);
+    }
+
+    /// Output the element
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      FluidInterfaceBoundingElement::output(outfile, n_plot);
+    }
+
+    /// Overload the C-style output function
+    void output(FILE* file_pt)
+    {
+      FiniteElement::output(file_pt);
+    }
+
+    /// C-style Output function
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      FluidInterfaceBoundingElement::output(file_pt, n_plot);
+    }
+
+    /// Calculate the elemental residual vector and Jacobian
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution_interface_boundary(
+        residuals, jacobian, 1);
+
+      // Call the generic FD routine to get externals
+      this->fill_in_jacobian_from_external_by_fd(jacobian);
+
+      // Call the generic finite difference routine to handle the solid
+      // variables
+      this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+    }
+
+    /// Local eqn number of kinematic bc associated with local node n
+    int kinematic_local_eqn(const unsigned& n)
+    {
+      // Read out the kinematic constraint from the Id which is passed down
+      // from the constructing element
+      return this->nodal_local_eqn(n, this->Lagrange_index[n]);
+    }
+  };
+
+
+  //==================GEOMETRIC SPECIALISATIONS==========================
+
+
+  /// Specialise the elastic update template class to concrete 1D case
+  template<class ELEMENT>
+  class ElasticLineFluidInterfaceElement
+    : public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                                LineDerivatives,
+                                                ELEMENT>
+  {
+  public:
+    ElasticLineFluidInterfaceElement(FiniteElement* const& element_pt,
+                                     const int& face_index,
+                                     const unsigned& id = 0)
+      : ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                           LineDerivatives,
+                                           ELEMENT>(element_pt, face_index, id)
+    {
+    }
+  };
+
+  /// Define the BoundingElement type associated with the 1D surface element
+  template<class ELEMENT>
+  class BoundingElementType<
+    ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                       LineDerivatives,
+                                       ELEMENT>>
+    : public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
+  {
+  public:
+    BoundingElementType<
+      ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                         LineDerivatives,
+                                         ELEMENT>>()
+      : ElasticPointFluidInterfaceBoundingElement<ELEMENT>()
+    {
+    }
+  };
+
+
+  /// Specialise the Elastic update case to axisymmetric equations
+  template<class ELEMENT>
+  class ElasticAxisymmetricFluidInterfaceElement
+    : public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                                AxisymmetricDerivatives,
+                                                ELEMENT>
+  {
+  public:
+    ElasticAxisymmetricFluidInterfaceElement(FiniteElement* const& element_pt,
+                                             const int& face_index,
+                                             const unsigned& id = 0)
+      : ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                           AxisymmetricDerivatives,
+                                           ELEMENT>(element_pt, face_index, id)
+    {
+    }
+  };
+
+  // Define the bounding element associated with the axsymmetric elastic fluid
+  // interface element
+  template<class ELEMENT>
+  class BoundingElementType<
+    ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                       AxisymmetricDerivatives,
+                                       ELEMENT>>
+    : public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
+  {
+  public:
+    BoundingElementType<
+      ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                         AxisymmetricDerivatives,
+                                         ELEMENT>>()
+      : ElasticPointFluidInterfaceBoundingElement<ELEMENT>()
+    {
+    }
+  };
+
+
+  /// Specialise Elastic update case to the concrete 2D case
+  template<class ELEMENT>
+  class ElasticSurfaceFluidInterfaceElement
+    : public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                                SurfaceDerivatives,
+                                                ELEMENT>
+  {
+  public:
+    ElasticSurfaceFluidInterfaceElement(FiniteElement* const& element_pt,
+                                        const int& face_index,
+                                        const unsigned& id = 0)
+      : ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                           SurfaceDerivatives,
+                                           ELEMENT>(element_pt, face_index, id)
+    {
+    }
+  };
+
+
+  // Define the bounding element associated with the 2D surface elements
+  template<class ELEMENT>
+  class BoundingElementType<
+    ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                       SurfaceDerivatives,
+                                       ELEMENT>>
+    : public ElasticLineFluidInterfaceBoundingElement<ELEMENT>
+  {
+  public:
+    BoundingElementType<
+      ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                         SurfaceDerivatives,
+                                         ELEMENT>>()
+      : ElasticLineFluidInterfaceBoundingElement<ELEMENT>()
+    {
+    }
+  };
+
+
+} // namespace oomph
+
+#endif

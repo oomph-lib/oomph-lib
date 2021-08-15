@@ -1,7 +1,22 @@
-# oomph-lib's GitHub workflow
+# The `oomph-lib` GitHub workflow
+
 **A guide to working with and contributing to the (now-GitHub-hosted) `oomph-lib` repository.**
 
 _Notation:_ We prefix any command line input with "`>>>`" and generally show the resulting output from Git underneath. Lengthy output is sometimes truncated and omitted parts are then indicated by "`[...]`". Comments for specific commands are prefixed with "`#`".
+
+## Table of contents
+
+  - [Basic setup (only to be done once)](#basic-setup-only-to-be-done-once)
+  - [The workflow](#the-workflow)
+  - [The steps in detail](#the-steps-in-detail)
+  - [Advanced: pulling in upstream changes from the command-line](#advanced-pulling-in-upstream-changes-from-the-command-line)
+  - [Clang-format](#clang-format)
+    - [Pre-commit hook](#pre-commit-hook)
+      - [Installing](#installing)
+        - [Ubuntu](#ubuntu)
+        - [MacOS](#macos)
+      - [Uninstalling](#uninstalling)
+
 ## Basic setup (only to be done once)
 
 We assume that you have created a GitHub account, and for the purpose of this document assume that your GitHub home page is https://github.com/JoeCoolDummy. Unless your name is Joe Cool Dummy, you'll have to change the name to your own.
@@ -38,8 +53,8 @@ Contributing to `oomph-lib` involves three separate repositories:
    ```
    This command will create a new directory, `oomph-lib` which contains all the code and the relevant Git information. Have a look around:
    ```bash
-   cd oomph-lib
-   ls -l
+   >>> cd oomph-lib
+   >>> ls -l
    ```
 
 The official (`upstream`) repository has two key branches: `main` and `development`. These have now made it onto your computer. You can list the branches as follows:
@@ -94,7 +109,7 @@ This involves the following steps:
 8. Once the pull request has been accepted (and your changes have thus been merged into official repository), update your remote forked repository (`origin`) on GitHub.
 9. Update the `development` branch on your computer from your remote forked repository (`origin`).
 
-## The steps in detail:
+## The steps in detail
 
 
 1. Start from the branch you want to work on, e.g. `development`,
@@ -181,7 +196,7 @@ This involves the following steps:
    **IMPORTANT:**
    You can switch between branches at any point (e.g. `git checkout main` will get you onto the `main` branch in your local repository) but if you have not committed your work, the changes will automatically be moved across to the branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate branch to keep our new work isolated from the rest of the code. If you don't want to commit your changes before switching to another branch, you can use
    ```bash
-   git stash
+   >>> git stash
    ```
    to stash away your changes; see `git help stash` for details on how to reapply the stashed changes.
 
@@ -195,7 +210,7 @@ This involves the following steps:
 
    Subsequent pushes will no longer require the `--set-upstream` flag, so you can just do
    ```bash
-   git push origin feature/add-new-important-headers
+   >>> git push origin feature/add-new-important-headers
    ```
 
 6. Now go to the GitHub webpage for your remote forked repository
@@ -268,7 +283,7 @@ This involves the following steps:
    ```
 
 
-## Advanced approach to pulling in upstream changes
+## Advanced: pulling in upstream changes from the command-line
 
 Described below is an alternative way to pull changes from the official repository (`upstream`) into your local forked and remote forked repositories using the command-line.
 
@@ -287,23 +302,145 @@ Described below is an alternative way to pull changes from the official reposito
    >>> git remote
    ```
 
-4. Fetch the upstream changes
+4. Fetch the upstream copy of the `development` branch and immediately merge it into your local copy
    ```bash
-   >>> git fetch upstream
+   >>> git pull upstream
    ```
 
-5. Merge the changes in the upstream `development` branch into your local forked `development` branch
-   ```bash
-   >>> git merge upstream/development
-   ```
-
-6. Resolve any merge conflicts you may have. Strictly speaking, you
+5. Resolve any merge conflicts you may have. Strictly speaking, you
    should only be using the `development` branch to stay in sync with the upstream repository i.e. you shouldn't be adding changes to it directly yourself, so there should never be any merge conflicts.
 
-7. Now push the changes in your local forked repository up to your forked
+6. Now push the changes in your local forked repository up to your forked
    remote repository (`origin`)
    ```bash
    >>> git push origin development
    ```
    Now both your local forked repository and your remote forked repository are in
    sync with the upstream (i.e. official) repository. Hurray!
+
+
+## Clang-format
+To ensure a consistent C++ code style throughout the `oomph-lib` library, we use
+the [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html) code formatter,
+automated through the use of a GitHub Action. The [`.clang-format`](.clang-format)
+file in the root directory provides the style specification to `clang-format` and
+the [`.github/workflows/clang-format.yml`](.github/workflows/clang-format.yml)
+GitHub Action applies the formatting. If you followed the steps in [Basic setup
+(only to be done once)](#basic-setup-only-to-be-done-once), this Action will
+automatically be enabled for you.
+
+Whenever you push to a branch in your GitHub repository, the `clang-format`
+GitHub Action will be triggered and run. (**Note:** this Action does exclude the
+`main` branch and it assumes that you won't touch your `development` branch, but
+it should be clear after reading this guide that you should never push to them
+directly anyway!) After formatting your code it will create an extra commit
+containing any changes that were made. If your code did not require any changes,
+an additional commit will not be created.
+
+Importantly, because of this automation, you should always run
+```bash
+>>> git pull origin <branch-name>
+```
+where `<branch-name>` is the name of your current branch, before you push a
+commit to your GitHub repository, otherwise you may not be able to push your
+commit.
+
+## Pre-commit hooks
+
+A pre-commit hook is something that automatically runs on your local computer
+when you perform a commit. Pre-commit hooks can be useful for pointing out
+issues in code, e.g. missing semi-colons, trailing whitespaces, or incorrect
+formatting.
+
+To manage our hooks, we use the [`pre-commit`](https://pre-commit.com/)
+framework. If you're curious, you can find the specification for these hooks in
+[`.pre-commit-config.yaml`](.pre-commit-config.yaml). The hooks will be run
+automatically when you run `git commit` (see Step 4 of [The steps in
+detail](#the-steps-in-detail)) and only the files that you have staged for the
+commit will be affected. If any changes are made by one of these pre-commit
+hooks, your commit will fail to complete, providing you with the opportunity to
+correct the inadmissible changes.
+
+At the moment, we currently only provide support to run `clang-format` as a
+pre-commit hook. We allow this hook to perform "in-place" editing so when it
+runs it will automatically format your code for you. If changes were made, the
+commit will fail, as mentioned above. However, as the files will be formatted
+for you, all you need to do is simply add the formatted files to the commit.
+When you run `git commit` again, the pre-commit hook tests should pass and your
+commit will complete.
+
+_To use this hook, you need at least version 10.0.0 of `clang-format`._
+
+### Installing
+
+Below are instructions on how to install and use the pre-commit hooks on Ubuntu
+and macOS.
+
+**Ubuntu**
+
+First, make sure you have `pip` available. If you don't, run
+```bash
+>>> sudo apt-get install python3-pip
+```
+Once you have `pip`, you need to download [`pre-commit`](https://pre-commit.com/)
+and install the hooks. To do this, run the following:
+```bash
+>>> pip install pre-commit
+>>> pre-commit install
+```
+
+**macOS**
+
+On macOS, you have a few different options for installation:
+
+  1. **Use Homebrew:**
+
+      If you have [Homebrew](https://brew.sh/) installed, all you need to do is run
+
+      ```bash
+      >>> brew install pre-commit
+      >>> pre-commit install
+      ```
+
+   1. **Use MacPorts**:
+
+      If instead you prefer to use [MacPorts](https://ports.macports.org/), run
+      ```bash
+      >>> sudo port install pre-commit
+      >>> pre-commit install
+      ```
+
+   2. **Use `pip`:**
+
+      Finally, if you do not wish to use either [Homebrew](https://brew.sh/) or
+      [MacPorts](https://ports.macports.org/), you can use `pip`. To install `pip`,
+      run
+      ```bash
+      >>> curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+      >>> python3 get-pip.py
+      >>> rm -f get-pip.py
+      ```
+      then run
+      ```bash
+      >>> pip install pre-commit
+      >>> pre-commit install
+      ```
+      to install the pre-commit hooks.
+
+Done!
+
+### Uninstalling
+
+To uninstall the hooks, simply run
+```bash
+>>> pre-commit uninstall
+```
+
+### Remarks
+
+If, for some reason, you are sure that you need to bypass the pre-commit hooks,
+simply add the `--no-verify` flag when you run `git commit`:
+```bash
+>>> git commit --no-verify -m "...your message here..."
+```
+
