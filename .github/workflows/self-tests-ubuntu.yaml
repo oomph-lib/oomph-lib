@@ -7,12 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Install requirements
       run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++
+
     - name: Build
-      run: ./non_interactive_autogen.sh -s
+      run: ./non_interactive_autogen.sh -s -j2
+
     - name: Validate
-      run: make check -k -s
+      run: ./bin/parallel_self_test.py
+
     - name: Upload validation log file
       uses: actions/upload-artifact@v2
       with:
