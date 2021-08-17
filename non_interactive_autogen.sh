@@ -42,7 +42,7 @@ run_self_tests=0
 while getopts ":hrd:c:b:j:skonS" opt; do
     case $opt in
 
-        S) 
+        S)
             echo "Will run self tests (serially) at end of build"
             run_self_tests=1
             ;;
@@ -105,7 +105,7 @@ while getopts ":hrd:c:b:j:skonS" opt; do
     esac
 done
 
-# and for build dir 
+# and for build dir
 if [[ $build_dir == "" ]]; then
     build_dir=${oomph_root}/build
 fi
@@ -289,7 +289,7 @@ EOF
 # autoconf and configure.
 we_will_need_libtool_for_dealing_with_added_directories=false
 touch "$confdir/makefile_list"
-if ! diff -q "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1; 
+if ! diff -q "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1;
 then
     echo "New/removed directories detected and $confdir/makefile_list updated,"
     echo "./configure will be rerun automatically by make."
@@ -342,7 +342,7 @@ echo "...back from checking linking type for trilinos: "$link_type
 extra_flags_for_linking_against_shared_libraries=""
 if [ "$link_type" == "dynamic" ]; then
     echo "doing dynamic linking for trilinos"
-    # The additional flags needed to link against shared libraries. 
+    # The additional flags needed to link against shared libraries.
     # PM: When building shared third-party libraries, we need to ensure that we
     # can access their code irregardless of the load address. Such code is
     # referred to as position independent code (PIC). To make sure the code is
@@ -366,6 +366,14 @@ do
     InsertExtraFlags "$temporary_configure_options_file" "$i_flag"
 done
 
+# Have to explicitly demand C++11 on macOS; not necessary on Linux
+if [[ $(uname) == "Darwin" ]]; then
+    echo "You're on macOS so I'm going to explicitly add the flag for C++11!"
+
+    # Add the flags required for enabling C++11 features
+    InsertFlagsForEnablingC++11 "$temporary_configure_options_file"
+fi
+
 # Read the options from the files and convert them into a single one-line string
 new_configure_options=$(ProcessOptionsFile < "$temporary_configure_options_file")
 old_configure_options=$(ProcessOptionsFile < config/configure_options/current)
@@ -376,10 +384,10 @@ if [[ "$new_configure_options" != "$old_configure_options" ||
 
     # Check that the options are in the correct order
     configure_options_are_ok="$(CheckOptions $temporary_configure_options_file)"
-    
+
     # Kill the temporary file
     rm -f "$temporary_configure_options_file"
-    
+
     # Check if the options are okay
     if test "$configure_options_are_ok" != ""; then
 
@@ -390,11 +398,11 @@ if [[ "$new_configure_options" != "$old_configure_options" ||
         echo $configure_options_are_ok 1>&2
         echo  1>&2
         echo "===============================================================" 1>&2
-        
+
         # Failed
         exit 4
     fi
-        
+
     # Slight problem here: if we change the options and add a new
     # driver at the same time then configure will end up being re-run twice.
     # Don't think there's anything we can do about it
@@ -410,9 +418,9 @@ if [[ "$new_configure_options" != "$old_configure_options" ||
 
     # Finally run configure itself to convert "Makefile.in"s into "Makefile"s
     echo
-    echo "Running ./configure --prefix $build_dir $new_configure_options $extra_configure_options " 
+    echo "Running ./configure --prefix $build_dir $new_configure_options $extra_configure_options "
     echo
-    /bin/sh -c "./configure --prefix $build_dir $new_configure_options $extra_configure_options " 
+    /bin/sh -c "./configure --prefix $build_dir $new_configure_options $extra_configure_options "
 
     # Test that the mpi commands work with these configure options
     # (automatically passes if no variable MPI_RUN_COMMAND in makefile).
@@ -425,7 +433,7 @@ fi
 
 # If the temporary file still exists
 if [ -f "$temporary_configure_options_file" ]
-then  
+then
     # Kill it
     rm -f "$temporary_configure_options_file"
 fi
@@ -456,7 +464,7 @@ echo " "
 echo "Running make with make_options:"
 echo " "
 echo $make_options
-echo " " 
+echo " "
 
 make $make_options
 
@@ -468,7 +476,7 @@ echo " "
 echo "Running make install with make_options"
 echo " "
 echo $make_options
-echo " " 
+echo " "
 
 make $make_options install
 
