@@ -12,7 +12,7 @@ jobs:
       run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++
 
     - name: Build
-      run: ./non_interactive_autogen.sh -s -j2
+      run: ./non_interactive_autogen.sh -s -j$(nproc)
 
     - name: Validate
       run: ./bin/parallel_self_test.py
