@@ -111,7 +111,7 @@ This involves the following steps:
 ## The steps in detail
 
 
-1. Start from the branch you want to work on, e.g. `development`,
+1. Start from the branch you want to work on, e.g. `development`
    ```bash
    >>> git checkout development
    Switched to branch 'development'
@@ -132,9 +132,9 @@ This involves the following steps:
    >>> git checkout -b feature/add-new-important-headers
    Switched to a new branch 'feature/add-new-important-headers'
    ```
-   (This combines the two separate commands `git branch feature/add-new-important-headers` and `git checkout feature/add-new-important-headers`).
+   (This combines the two separate commands `git branch feature/add-new-important-headers` and `git checkout feature/add-new-important-headers`.)
 
-   **Note:** the "/" is just part of the branch name and doesn't play a special role; it could in principle be replaced by any other character like another hyphen. There's also no need to prefix the branch with "feature", though this is common practice. Using the "/" has the advantage that it can be perceived as a creating a hierarchical subset of branches (so `upstream/feature/*` refers to all the feature branches at `upstream`).
+   **Note:** the "/" is just part of the branch name and doesn't play a special role; it could in principle be replaced by any other character like another hyphen. There's also no need to prefix the branch with "feature", though this is common practice. Using a "/" has the advantage that it can be perceived as a creating a hierarchical subset of branches (so `upstream/feature/*` refers to all the feature branches at `upstream`).
 
    Now check (if you don't believe it) that you're really on the new branch:
    ```bash
@@ -212,18 +212,17 @@ This involves the following steps:
 
 5. Now push the commit to your (GitHub-hosted) remote forked repository (`origin`).
 
-   The first time you do this you have to this explicitly state that you want the branch to be added to the `origin` repository, using the `--set-upstream` flag,
+   The first time you do this you have to this explicitly state that you want the branch to be added to the `origin` repository, using the `--set-upstream` flag (which can be abbreviated to `-u`)
    ```bash
    >>> git push --set-upstream origin feature/add-new-important-headers
    ```
-   (where `--set-upstream` can be abbreviated to `-u`)
 
    Subsequent pushes will no longer require the `--set-upstream` flag, so you can just do
    ```bash
    >>> git push origin feature/add-new-important-headers
    ```
    
-   **IMPORTANT:** During subsequent pushes you may encounter an error from GitHub, 
+   **IMPORTANT:** During subsequent pushes you may encounter an error from GitHub 
    telling you that your push request was rejected because a file that you want to push
    was changed in the remote forked repository. This may come as a surprise since you're 
    (typically) the only person working with this repository and you'd surely remember if you'd 
@@ -237,7 +236,7 @@ This involves the following steps:
    >>> git pull origin feature/add-new-important-headers
    ```
    will pull these formatting changes back into your local repository. To avoid merge conflicts
-   it's a good habit to do this immediately after pushing anything to your remote repository.
+   it's a good habit to do this a few minutes after pushing anything to your remote repository.
 
 6. Now go to the GitHub webpage for your remote forked repository
    (https://github.com/JoeCoolDummy/oomph-lib/) and click on the button with a branch symbol and the text "`main`":
