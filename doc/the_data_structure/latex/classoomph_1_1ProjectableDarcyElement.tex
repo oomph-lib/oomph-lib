@@ -20,9 +20,8 @@ Inheritance diagram for oomph\+::Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_ad32ffacb463b234cc17956c1eb45f222}{Projectable\+Darcy\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_aa430ac36ed6a03558d66cae979b57a3f}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
-\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. ~\newline
- \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_a013be1f20496db40008d6c8dc479fec3}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_ae6daf28fea08e70d77bcdcb5426b0fb9}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 2 (pressure and flux) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_aba5e9617dc6346ca4318baf457445da9}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
@@ -54,7 +53,7 @@ class oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\
 
 Darcy upgraded to become projectable. 
 
-Definition at line 522 of file darcy\+\_\+elements.\+h.
+Definition at line 517 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -72,30 +71,29 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line 531 of file darcy\+\_\+elements.\+h.
+Definition at line 524 of file darcy\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_aa430ac36ed6a03558d66cae979b57a3f}\label{classoomph_1_1ProjectableDarcyElement_aa430ac36ed6a03558d66cae979b57a3f}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_a013be1f20496db40008d6c8dc479fec3}\label{classoomph_1_1ProjectableDarcyElement_a013be1f20496db40008d6c8dc479fec3}} 
 \index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. ~\newline
- 
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. 
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line 536 of file darcy\+\_\+elements.\+h.
+Definition at line 529 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -118,7 +116,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line 696 of file darcy\+\_\+elements.\+h.
+Definition at line 679 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -145,7 +143,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line 628 of file darcy\+\_\+elements.\+h.
+Definition at line 614 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -172,7 +170,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line 765 of file darcy\+\_\+elements.\+h.
+Definition at line 741 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -195,7 +193,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line 594 of file darcy\+\_\+elements.\+h.
+Definition at line 583 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_a32091c680d7793baed0e5294c6143418}\label{classoomph_1_1ProjectableDarcyElement_a32091c680d7793baed0e5294c6143418}} 
 \index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -214,7 +212,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line 621 of file darcy\+\_\+elements.\+h.
+Definition at line 607 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -237,7 +235,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line 601 of file darcy\+\_\+elements.\+h.
+Definition at line 590 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -260,7 +258,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line 734 of file darcy\+\_\+elements.\+h.
+Definition at line 713 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -283,7 +281,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 805 of file darcy\+\_\+elements.\+h.
+Definition at line 777 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -302,7 +300,7 @@ Helper function to pin superfluous dofs; required because we introduce at least 
 
 
 
-Definition at line 820 of file darcy\+\_\+elements.\+h.
+Definition at line 792 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -325,7 +323,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 811 of file darcy\+\_\+elements.\+h.
+Definition at line 783 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -348,7 +346,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ProjectableElement_a1ff7a9207e
 
 
 
-Definition at line 832 of file darcy\+\_\+elements.\+h.
+Definition at line 804 of file darcy\+\_\+elements.\+h.
 
 
 

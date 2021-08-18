@@ -318,9 +318,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a413cbcbea4fb1111703da9ee97429640 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a413cbcbea4fb1111703da9ee97429640">setup_boundary_element_info</a> (std::ostream &amp;outfile)</td></tr>
 <tr class="memdesc:a413cbcbea4fb1111703da9ee97429640 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup lookup schemes which establish whic elements are located next to mesh's boundaries. Doc in outfile (if it's open). (Empty virtual function &ndash; implement this for specific <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> classes)  <a href="classoomph_1_1Mesh.html#a413cbcbea4fb1111703da9ee97429640">More...</a><br /></td></tr>
 <tr class="separator:a413cbcbea4fb1111703da9ee97429640 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37c3944a403f03316324a56a8878813f inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a37c3944a403f03316324a56a8878813f">reset_boundary_element_info</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;ntmp_boundary_elements, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt; &amp;ntmp_boundary_elements_in_region, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> * &gt; &amp;deleted_elements)</td></tr>
-<tr class="memdesc:a37c3944a403f03316324a56a8878813f inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function to perform the reset boundary elements info rutines.  <a href="classoomph_1_1Mesh.html#a37c3944a403f03316324a56a8878813f">More...</a><br /></td></tr>
-<tr class="separator:a37c3944a403f03316324a56a8878813f inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac481de51900d57248dd601b53816891f inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ac481de51900d57248dd601b53816891f">reset_boundary_element_info</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;ntmp_boundary_elements, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&gt; &amp;ntmp_boundary_elements_in_region, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> * &gt; &amp;deleted_elements)</td></tr>
+<tr class="memdesc:ac481de51900d57248dd601b53816891f inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function to perform the reset boundary elements info rutines.  <a href="classoomph_1_1Mesh.html#ac481de51900d57248dd601b53816891f">More...</a><br /></td></tr>
+<tr class="separator:ac481de51900d57248dd601b53816891f inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68cad622b3fe39d306fe367d0fdf4083 inherit pub_methods_classoomph_1_1Mesh"><td class="memTemplParams" colspan="2">template&lt;class BULK_ELEMENT &gt; </td></tr>
 <tr class="memitem:a68cad622b3fe39d306fe367d0fdf4083 inherit pub_methods_classoomph_1_1Mesh"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a68cad622b3fe39d306fe367d0fdf4083">doc_boundary_coordinates</a> (const unsigned &amp;b, std::ofstream &amp;the_file)</td></tr>
 <tr class="memdesc:a68cad622b3fe39d306fe367d0fdf4083 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output boundary coordinates on boundary b &ndash; template argument specifies the bulk element type (needed to create <a class="el" href="classoomph_1_1FaceElement.html">FaceElement</a> of appropriate type on mesh boundary).  <a href="classoomph_1_1Mesh.html#a68cad622b3fe39d306fe367d0fdf4083">More...</a><br /></td></tr>
@@ -346,15 +346,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4773924237488f46fe5ad3fe49138f0 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ab4773924237488f46fe5ad3fe49138f0">flush_node_storage</a> ()</td></tr>
 <tr class="memdesc:ab4773924237488f46fe5ad3fe49138f0 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush storage for nodes (only) by emptying the vectors that store the pointers to them.  <a href="classoomph_1_1Mesh.html#ab4773924237488f46fe5ad3fe49138f0">More...</a><br /></td></tr>
 <tr class="separator:ab4773924237488f46fe5ad3fe49138f0 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebdb699466fe07f2e27aa4404008cde4 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aebdb699466fe07f2e27aa4404008cde4">node_pt</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
-<tr class="memdesc:aebdb699466fe07f2e27aa4404008cde4 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to global node n.  <a href="classoomph_1_1Mesh.html#aebdb699466fe07f2e27aa4404008cde4">More...</a><br /></td></tr>
-<tr class="separator:aebdb699466fe07f2e27aa4404008cde4 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3c2b72c8ef4e9fd35f5998a5e7dc93b inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ab3c2b72c8ef4e9fd35f5998a5e7dc93b">node_pt</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
+<tr class="memdesc:ab3c2b72c8ef4e9fd35f5998a5e7dc93b inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to global node n.  <a href="classoomph_1_1Mesh.html#ab3c2b72c8ef4e9fd35f5998a5e7dc93b">More...</a><br /></td></tr>
+<tr class="separator:ab3c2b72c8ef4e9fd35f5998a5e7dc93b inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a468ab976a9df7c1eb5bade6405a96a72 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a468ab976a9df7c1eb5bade6405a96a72">node_pt</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
 <tr class="memdesc:a468ab976a9df7c1eb5bade6405a96a72 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to global node n (const version)  <a href="classoomph_1_1Mesh.html#a468ab976a9df7c1eb5bade6405a96a72">More...</a><br /></td></tr>
 <tr class="separator:a468ab976a9df7c1eb5bade6405a96a72 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c3b85a1be4d9b01f1c0805142a37966 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a3c3b85a1be4d9b01f1c0805142a37966">element_pt</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
-<tr class="memdesc:a3c3b85a1be4d9b01f1c0805142a37966 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to element e.  <a href="classoomph_1_1Mesh.html#a3c3b85a1be4d9b01f1c0805142a37966">More...</a><br /></td></tr>
-<tr class="separator:a3c3b85a1be4d9b01f1c0805142a37966 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a876faf1f87b24b220ea21a38d6adde5b inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a876faf1f87b24b220ea21a38d6adde5b">element_pt</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
+<tr class="memdesc:a876faf1f87b24b220ea21a38d6adde5b inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to element e.  <a href="classoomph_1_1Mesh.html#a876faf1f87b24b220ea21a38d6adde5b">More...</a><br /></td></tr>
+<tr class="separator:a876faf1f87b24b220ea21a38d6adde5b inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f6428fbd6cb234d04bcef7f1e4fd703 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a3f6428fbd6cb234d04bcef7f1e4fd703">element_pt</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>) const</td></tr>
 <tr class="memdesc:a3f6428fbd6cb234d04bcef7f1e4fd703 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to element e (const version)  <a href="classoomph_1_1Mesh.html#a3f6428fbd6cb234d04bcef7f1e4fd703">More...</a><br /></td></tr>
 <tr class="separator:a3f6428fbd6cb234d04bcef7f1e4fd703 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -367,9 +367,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4f274774435e9454bf77bf70de69367a inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a4f274774435e9454bf77bf70de69367a">finite_element_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>) const</td></tr>
 <tr class="memdesc:a4f274774435e9454bf77bf70de69367a inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upcast (downcast?) to <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a> (needed to access <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a> member functions).  <a href="classoomph_1_1Mesh.html#a4f274774435e9454bf77bf70de69367a">More...</a><br /></td></tr>
 <tr class="separator:a4f274774435e9454bf77bf70de69367a inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e637d80f84092d1d6977a827fceeca5 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a2e637d80f84092d1d6977a827fceeca5">boundary_node_pt</a> (const unsigned &amp;b, const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
-<tr class="memdesc:a2e637d80f84092d1d6977a827fceeca5 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to node n on boundary b.  <a href="classoomph_1_1Mesh.html#a2e637d80f84092d1d6977a827fceeca5">More...</a><br /></td></tr>
-<tr class="separator:a2e637d80f84092d1d6977a827fceeca5 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca0a21f4eab2d6fe8c7fa011b5c33c3c inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aca0a21f4eab2d6fe8c7fa011b5c33c3c">boundary_node_pt</a> (const unsigned &amp;b, const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
+<tr class="memdesc:aca0a21f4eab2d6fe8c7fa011b5c33c3c inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to node n on boundary b.  <a href="classoomph_1_1Mesh.html#aca0a21f4eab2d6fe8c7fa011b5c33c3c">More...</a><br /></td></tr>
+<tr class="separator:aca0a21f4eab2d6fe8c7fa011b5c33c3c inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ab2bf2cf4cca88b7a972d1a659c7e5a inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a0ab2bf2cf4cca88b7a972d1a659c7e5a">boundary_node_pt</a> (const unsigned &amp;b, const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
 <tr class="memdesc:a0ab2bf2cf4cca88b7a972d1a659c7e5a inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to node n on boundary b.  <a href="classoomph_1_1Mesh.html#a0ab2bf2cf4cca88b7a972d1a659c7e5a">More...</a><br /></td></tr>
 <tr class="separator:a0ab2bf2cf4cca88b7a972d1a659c7e5a inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -382,9 +382,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5bf720135d0728907b98c5d31157f569 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a5bf720135d0728907b98c5d31157f569">remove_boundary_nodes</a> (const unsigned &amp;b)</td></tr>
 <tr class="memdesc:a5bf720135d0728907b98c5d31157f569 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all information about nodes stored on the b-th boundary of the mesh.  <a href="classoomph_1_1Mesh.html#a5bf720135d0728907b98c5d31157f569">More...</a><br /></td></tr>
 <tr class="separator:a5bf720135d0728907b98c5d31157f569 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1690e5351ff05b5e47db184f64b1edc4 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a1690e5351ff05b5e47db184f64b1edc4">remove_boundary_node</a> (const unsigned &amp;b, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1Mesh.html#aebdb699466fe07f2e27aa4404008cde4">node_pt</a>)</td></tr>
+<tr class="memitem:a1690e5351ff05b5e47db184f64b1edc4 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a1690e5351ff05b5e47db184f64b1edc4">remove_boundary_node</a> (const unsigned &amp;b, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1Mesh.html#ab3c2b72c8ef4e9fd35f5998a5e7dc93b">node_pt</a>)</td></tr>
 <tr class="separator:a1690e5351ff05b5e47db184f64b1edc4 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a007b102ac8e42328872ad658d7110bfc inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a007b102ac8e42328872ad658d7110bfc">add_boundary_node</a> (const unsigned &amp;b, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1Mesh.html#aebdb699466fe07f2e27aa4404008cde4">node_pt</a>)</td></tr>
+<tr class="memitem:a007b102ac8e42328872ad658d7110bfc inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a007b102ac8e42328872ad658d7110bfc">add_boundary_node</a> (const unsigned &amp;b, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1Mesh.html#ab3c2b72c8ef4e9fd35f5998a5e7dc93b">node_pt</a>)</td></tr>
 <tr class="memdesc:a007b102ac8e42328872ad658d7110bfc inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a (pointer to) a node to the b-th boundary.  <a href="classoomph_1_1Mesh.html#a007b102ac8e42328872ad658d7110bfc">More...</a><br /></td></tr>
 <tr class="separator:a007b102ac8e42328872ad658d7110bfc inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67b93ac3809bcc1fe3220c46f417682f inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a67b93ac3809bcc1fe3220c46f417682f">copy_boundary_node_data_from_nodes</a> ()</td></tr>
@@ -407,10 +407,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a32c8d3d454d3ba912b04985cb63e6a3c inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a32c8d3d454d3ba912b04985cb63e6a3c">nodal_dimension</a> () const</td></tr>
 <tr class="memdesc:a32c8d3d454d3ba912b04985cb63e6a3c inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of nodal dimension in mesh.  <a href="classoomph_1_1Mesh.html#a32c8d3d454d3ba912b04985cb63e6a3c">More...</a><br /></td></tr>
 <tr class="separator:a32c8d3d454d3ba912b04985cb63e6a3c inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac09a9bfeb6d70d8bbefe13c86948a6fc inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ac09a9bfeb6d70d8bbefe13c86948a6fc">add_node_pt</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1Mesh.html#aebdb699466fe07f2e27aa4404008cde4">node_pt</a>)</td></tr>
+<tr class="memitem:ac09a9bfeb6d70d8bbefe13c86948a6fc inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ac09a9bfeb6d70d8bbefe13c86948a6fc">add_node_pt</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1Mesh.html#ab3c2b72c8ef4e9fd35f5998a5e7dc93b">node_pt</a>)</td></tr>
 <tr class="memdesc:ac09a9bfeb6d70d8bbefe13c86948a6fc inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a (pointer to a) node to the mesh.  <a href="classoomph_1_1Mesh.html#ac09a9bfeb6d70d8bbefe13c86948a6fc">More...</a><br /></td></tr>
 <tr class="separator:ac09a9bfeb6d70d8bbefe13c86948a6fc inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafc35b5df26c448b5d5ab26a793eee35 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aafc35b5df26c448b5d5ab26a793eee35">add_element_pt</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;<a class="el" href="classoomph_1_1Mesh.html#a3c3b85a1be4d9b01f1c0805142a37966">element_pt</a>)</td></tr>
+<tr class="memitem:aafc35b5df26c448b5d5ab26a793eee35 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aafc35b5df26c448b5d5ab26a793eee35">add_element_pt</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;<a class="el" href="classoomph_1_1Mesh.html#a876faf1f87b24b220ea21a38d6adde5b">element_pt</a>)</td></tr>
 <tr class="memdesc:aafc35b5df26c448b5d5ab26a793eee35 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a (pointer to) an element to the mesh.  <a href="classoomph_1_1Mesh.html#aafc35b5df26c448b5d5ab26a793eee35">More...</a><br /></td></tr>
 <tr class="separator:aafc35b5df26c448b5d5ab26a793eee35 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95bf112e5e1b3892e70a41f91b3cc523 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a95bf112e5e1b3892e70a41f91b3cc523">node_update</a> (const bool &amp;update_all_solid_nodes=false)</td></tr>
@@ -439,7 +439,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a76adc3fcd3e49d3bd2e3b9d92c854430 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check for inverted elements and report outcome in boolean variable. This visits all elements at their integration points and checks if the Jacobian of the mapping between local and global coordinates is positive &ndash; using the same test that would be carried out (but only in PARANOID mode) during the assembly of the elements' Jacobian matrices. Inverted elements are output in inverted_element_file (if the stream is open).  <a href="classoomph_1_1Mesh.html#a76adc3fcd3e49d3bd2e3b9d92c854430">More...</a><br /></td></tr>
 <tr class="separator:a76adc3fcd3e49d3bd2e3b9d92c854430 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c95ee63b466247e6c57c38fb59c577c inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a5c95ee63b466247e6c57c38fb59c577c">check_inverted_elements</a> (bool &amp;mesh_has_inverted_elements)</td></tr>
-<tr class="memdesc:a5c95ee63b466247e6c57c38fb59c577c inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check for inverted elements and report outcome.  <a href="classoomph_1_1Mesh.html#a5c95ee63b466247e6c57c38fb59c577c">More...</a><br /></td></tr>
+<tr class="memdesc:a5c95ee63b466247e6c57c38fb59c577c inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check for inverted elements and report outcome in boolean variable. This visits all elements at their integration points and checks if the Jacobian of the mapping between local and global coordinates is positive &ndash; using the same test that would be carried out (but only in PARANOID mode) during the assembly of the elements' Jacobian matrices.  <a href="classoomph_1_1Mesh.html#a5c95ee63b466247e6c57c38fb59c577c">More...</a><br /></td></tr>
 <tr class="separator:a5c95ee63b466247e6c57c38fb59c577c inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8229e193565c8de821170d482dfcee2 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aa8229e193565c8de821170d482dfcee2">check_for_repeated_nodes</a> (const double &amp;epsilon=1.0e-12)</td></tr>
 <tr class="memdesc:aa8229e193565c8de821170d482dfcee2 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check for repeated nodes within a given spatial tolerance. Return (0/1) for (pass/fail).  <a href="classoomph_1_1Mesh.html#aa8229e193565c8de821170d482dfcee2">More...</a><br /></td></tr>
@@ -475,16 +475,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac192b41d1a24297ff38854548defd92b inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read solution from restart file.  <a href="classoomph_1_1Mesh.html#ac192b41d1a24297ff38854548defd92b">More...</a><br /></td></tr>
 <tr class="separator:ac192b41d1a24297ff38854548defd92b inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af62d80c53dc07390d8f62ed180ab6d3a inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#af62d80c53dc07390d8f62ed180ab6d3a">output_paraview</a> (std::ofstream &amp;file_out, const unsigned &amp;nplot) const</td></tr>
-<tr class="memdesc:af62d80c53dc07390d8f62ed180ab6d3a inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output in paraview format into specified file. Breaks up each element into sub-elements for plotting purposes. We assume that all elements are of the same type (fct will break break (in paranoid mode) if paraview output fcts of the elements are inconsistent). <br  />
-  <a href="classoomph_1_1Mesh.html#af62d80c53dc07390d8f62ed180ab6d3a">More...</a><br /></td></tr>
+<tr class="memdesc:af62d80c53dc07390d8f62ed180ab6d3a inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output in paraview format into specified file. Breaks up each element into sub-elements for plotting purposes. We assume that all elements are of the same type (fct will break break (in paranoid mode) if paraview output fcts of the elements are inconsistent).  <a href="classoomph_1_1Mesh.html#af62d80c53dc07390d8f62ed180ab6d3a">More...</a><br /></td></tr>
 <tr class="separator:af62d80c53dc07390d8f62ed180ab6d3a inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bba347dea4098f0bf7142db582adc38 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a8bba347dea4098f0bf7142db582adc38">output_fct_paraview</a> (std::ofstream &amp;file_out, const unsigned &amp;nplot, <a class="el" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> exact_soln_pt) const</td></tr>
-<tr class="memdesc:a8bba347dea4098f0bf7142db582adc38 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output in paraview format into specified file. Breaks up each element into sub-elements for plotting purposes. We assume that all elements are of the same type (fct will break break (in paranoid mode) if paraview output fcts of the elements are inconsistent). <br  />
-  <a href="classoomph_1_1Mesh.html#a8bba347dea4098f0bf7142db582adc38">More...</a><br /></td></tr>
+<tr class="memdesc:a8bba347dea4098f0bf7142db582adc38 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output in paraview format into specified file. Breaks up each element into sub-elements for plotting purposes. We assume that all elements are of the same type (fct will break break (in paranoid mode) if paraview output fcts of the elements are inconsistent).  <a href="classoomph_1_1Mesh.html#a8bba347dea4098f0bf7142db582adc38">More...</a><br /></td></tr>
 <tr class="separator:a8bba347dea4098f0bf7142db582adc38 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16157f769019724da979e47445e6c2d2 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a16157f769019724da979e47445e6c2d2">output_fct_paraview</a> (std::ofstream &amp;file_out, const unsigned &amp;nplot, const double &amp;time, <a class="el" href="classoomph_1_1FiniteElement.html#ad4ecf2b61b158a4b4d351a60d23c633e">FiniteElement::UnsteadyExactSolutionFctPt</a> exact_soln_pt) const</td></tr>
-<tr class="memdesc:a16157f769019724da979e47445e6c2d2 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output in paraview format into specified file. Breaks up each element into sub-elements for plotting purposes. We assume that all elements are of the same type (fct will break break (in paranoid mode) if paraview output fcts of the elements are inconsistent). <br  />
-  <a href="classoomph_1_1Mesh.html#a16157f769019724da979e47445e6c2d2">More...</a><br /></td></tr>
+<tr class="memdesc:a16157f769019724da979e47445e6c2d2 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output in paraview format into specified file. Breaks up each element into sub-elements for plotting purposes. We assume that all elements are of the same type (fct will break break (in paranoid mode) if paraview output fcts of the elements are inconsistent).  <a href="classoomph_1_1Mesh.html#a16157f769019724da979e47445e6c2d2">More...</a><br /></td></tr>
 <tr class="separator:a16157f769019724da979e47445e6c2d2 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab74388e8e21325f3ca26f1bd99c26f7 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aab74388e8e21325f3ca26f1bd99c26f7">output</a> (std::ostream &amp;outfile)</td></tr>
 <tr class="memdesc:aab74388e8e21325f3ca26f1bd99c26f7 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output for all elements.  <a href="classoomph_1_1Mesh.html#aab74388e8e21325f3ca26f1bd99c26f7">More...</a><br /></td></tr>
@@ -525,8 +522,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a823b11b11e6a0c3c22ea86dc60a3da65 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate predictions for all <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and positions associated with the mesh, usually used in adaptive time-stepping.  <a href="classoomph_1_1Mesh.html#a823b11b11e6a0c3c22ea86dc60a3da65">More...</a><br /></td></tr>
 <tr class="separator:a823b11b11e6a0c3c22ea86dc60a3da65 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c9a84e7e912c2fef3f513bfcd50fc70 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a6c9a84e7e912c2fef3f513bfcd50fc70">set_nodal_and_elemental_time_stepper</a> (<a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *const &amp;time_stepper_pt, const bool &amp;preserve_existing_data)</td></tr>
-<tr class="memdesc:a6c9a84e7e912c2fef3f513bfcd50fc70 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the timestepper associated with all nodal and elemental data stored in the mesh. <br  />
-  <a href="classoomph_1_1Mesh.html#a6c9a84e7e912c2fef3f513bfcd50fc70">More...</a><br /></td></tr>
+<tr class="memdesc:a6c9a84e7e912c2fef3f513bfcd50fc70 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the timestepper associated with all nodal and elemental data stored in the mesh.  <a href="classoomph_1_1Mesh.html#a6c9a84e7e912c2fef3f513bfcd50fc70">More...</a><br /></td></tr>
 <tr class="separator:a6c9a84e7e912c2fef3f513bfcd50fc70 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52c30b4ebc67038e137a5de1c5d422e5 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a52c30b4ebc67038e137a5de1c5d422e5">set_mesh_level_time_stepper</a> (<a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *const &amp;time_stepper_pt, const bool &amp;preserve_existing_data)</td></tr>
 <tr class="memdesc:a52c30b4ebc67038e137a5de1c5d422e5 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that can be used to set any additional timestepper data stored at the <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> (as opposed to nodal and elemental) levels. This is virtual so that it can be overloaded in the appropriate Meshes. Examples include the SpineMeshes and adaptive triangle and tet meshes.  <a href="classoomph_1_1Mesh.html#a52c30b4ebc67038e137a5de1c5d422e5">More...</a><br /></td></tr>
@@ -636,9 +632,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af4545acc3277128e010ce88609fc21dd inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#af4545acc3277128e010ce88609fc21dd">root_halo_element_pt</a> (const unsigned &amp;p)</td></tr>
 <tr class="memdesc:af4545acc3277128e010ce88609fc21dd inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of pointers to root halo elements in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#af4545acc3277128e010ce88609fc21dd">More...</a><br /></td></tr>
 <tr class="separator:af4545acc3277128e010ce88609fc21dd inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f590ac09a00fbaae856c8f812fc2001 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a4f590ac09a00fbaae856c8f812fc2001">root_halo_element_pt</a> (const unsigned &amp;p, const unsigned &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
-<tr class="memdesc:a4f590ac09a00fbaae856c8f812fc2001 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the e-th root halo element in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a4f590ac09a00fbaae856c8f812fc2001">More...</a><br /></td></tr>
-<tr class="separator:a4f590ac09a00fbaae856c8f812fc2001 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21695ef70344194d0437a161f9581ae7 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a21695ef70344194d0437a161f9581ae7">root_halo_element_pt</a> (const unsigned &amp;p, const unsigned &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
+<tr class="memdesc:a21695ef70344194d0437a161f9581ae7 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the e-th root halo element in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a21695ef70344194d0437a161f9581ae7">More...</a><br /></td></tr>
+<tr class="separator:a21695ef70344194d0437a161f9581ae7 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a1e11514626e7619dfa99acac03ff79 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a7a1e11514626e7619dfa99acac03ff79">add_root_halo_element_pt</a> (const unsigned &amp;p, <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;el_pt)</td></tr>
 <tr class="memdesc:a7a1e11514626e7619dfa99acac03ff79 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add root halo element whose non-halo counterpart is held on processor p to this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a>.  <a href="classoomph_1_1Mesh.html#a7a1e11514626e7619dfa99acac03ff79">More...</a><br /></td></tr>
 <tr class="separator:a7a1e11514626e7619dfa99acac03ff79 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -663,9 +659,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aec21d977c62086890f0ebc8dbc173afe inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aec21d977c62086890f0ebc8dbc173afe">root_haloed_element_pt</a> (const unsigned &amp;p)</td></tr>
 <tr class="memdesc:aec21d977c62086890f0ebc8dbc173afe inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of pointers to root haloed elements in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#aec21d977c62086890f0ebc8dbc173afe">More...</a><br /></td></tr>
 <tr class="separator:aec21d977c62086890f0ebc8dbc173afe inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d69ded77ec61828d6615bab1bd133b3 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a9d69ded77ec61828d6615bab1bd133b3">root_haloed_element_pt</a> (const unsigned &amp;p, const unsigned &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
-<tr class="memdesc:a9d69ded77ec61828d6615bab1bd133b3 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the e-th root haloed element in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a9d69ded77ec61828d6615bab1bd133b3">More...</a><br /></td></tr>
-<tr class="separator:a9d69ded77ec61828d6615bab1bd133b3 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af65ffa224f920cffa155341d9c08c56a inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#af65ffa224f920cffa155341d9c08c56a">root_haloed_element_pt</a> (const unsigned &amp;p, const unsigned &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
+<tr class="memdesc:af65ffa224f920cffa155341d9c08c56a inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the e-th root haloed element in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#af65ffa224f920cffa155341d9c08c56a">More...</a><br /></td></tr>
+<tr class="separator:af65ffa224f920cffa155341d9c08c56a inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ad406db29df11b70df0f497817cc24f inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a5ad406db29df11b70df0f497817cc24f">add_root_haloed_element_pt</a> (const unsigned &amp;p, <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;el_pt)</td></tr>
 <tr class="memdesc:a5ad406db29df11b70df0f497817cc24f inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add root haloed element whose non-halo counterpart is held on processor p to the storage scheme for haloed elements. Note: This does not add the element to the storage scheme for elements as it's understood to naturally live on this processor anyway!  <a href="classoomph_1_1Mesh.html#a5ad406db29df11b70df0f497817cc24f">More...</a><br /></td></tr>
 <tr class="separator:a5ad406db29df11b70df0f497817cc24f inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -735,9 +731,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7fd67d0eb09fb55b911f76100adf9fe inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ab7fd67d0eb09fb55b911f76100adf9fe">nexternal_halo_element</a> (const unsigned &amp;p)</td></tr>
 <tr class="memdesc:ab7fd67d0eb09fb55b911f76100adf9fe inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of external halo elements in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#ab7fd67d0eb09fb55b911f76100adf9fe">More...</a><br /></td></tr>
 <tr class="separator:ab7fd67d0eb09fb55b911f76100adf9fe inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4f7d6d4baaf855aeab9bfe5687f9ab9 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aa4f7d6d4baaf855aeab9bfe5687f9ab9">external_halo_element_pt</a> (const unsigned &amp;p, const unsigned &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
-<tr class="memdesc:aa4f7d6d4baaf855aeab9bfe5687f9ab9 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the e-th external halo element in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#aa4f7d6d4baaf855aeab9bfe5687f9ab9">More...</a><br /></td></tr>
-<tr class="separator:aa4f7d6d4baaf855aeab9bfe5687f9ab9 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6307ddbbfca12c5f7129805f5b932dd7 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a6307ddbbfca12c5f7129805f5b932dd7">external_halo_element_pt</a> (const unsigned &amp;p, const unsigned &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
+<tr class="memdesc:a6307ddbbfca12c5f7129805f5b932dd7 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the e-th external halo element in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a6307ddbbfca12c5f7129805f5b932dd7">More...</a><br /></td></tr>
+<tr class="separator:a6307ddbbfca12c5f7129805f5b932dd7 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35c971cb52e791d82377b6ce299dbaec inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a35c971cb52e791d82377b6ce299dbaec">add_external_halo_element_pt</a> (const unsigned &amp;p, <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;el_pt)</td></tr>
 <tr class="memdesc:a35c971cb52e791d82377b6ce299dbaec inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add external halo element whose non-halo counterpart is held on processor p to this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a>.  <a href="classoomph_1_1Mesh.html#a35c971cb52e791d82377b6ce299dbaec">More...</a><br /></td></tr>
 <tr class="separator:a35c971cb52e791d82377b6ce299dbaec inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -747,16 +743,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a32846269a1902f442314d6a711c64464 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a32846269a1902f442314d6a711c64464">nexternal_haloed_element</a> (const unsigned &amp;p)</td></tr>
 <tr class="memdesc:a32846269a1902f442314d6a711c64464 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of external haloed elements in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a32846269a1902f442314d6a711c64464">More...</a><br /></td></tr>
 <tr class="separator:a32846269a1902f442314d6a711c64464 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98da056d3db6f770e29d3739b6711eae inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a98da056d3db6f770e29d3739b6711eae">external_haloed_element_pt</a> (const unsigned &amp;p, const unsigned &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
-<tr class="memdesc:a98da056d3db6f770e29d3739b6711eae inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the e-th external haloed element in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a98da056d3db6f770e29d3739b6711eae">More...</a><br /></td></tr>
-<tr class="separator:a98da056d3db6f770e29d3739b6711eae inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af012b29281a2975f25e0bc32a663135f inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#af012b29281a2975f25e0bc32a663135f">external_haloed_element_pt</a> (const unsigned &amp;p, const unsigned &amp;<a class="el" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)</td></tr>
+<tr class="memdesc:af012b29281a2975f25e0bc32a663135f inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the e-th external haloed element in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#af012b29281a2975f25e0bc32a663135f">More...</a><br /></td></tr>
+<tr class="separator:af012b29281a2975f25e0bc32a663135f inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85fd3fc85e61062a50cdc56dec197449 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a85fd3fc85e61062a50cdc56dec197449">add_external_haloed_element_pt</a> (const unsigned &amp;p, <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;el_pt)</td></tr>
 <tr class="memdesc:a85fd3fc85e61062a50cdc56dec197449 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add external haloed element whose non-halo counterpart is held on processor p to the storage scheme for haloed elements.  <a href="classoomph_1_1Mesh.html#a85fd3fc85e61062a50cdc56dec197449">More...</a><br /></td></tr>
 <tr class="separator:a85fd3fc85e61062a50cdc56dec197449 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dc1f87191771f18f55e9b44664bc7ea inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a2dc1f87191771f18f55e9b44664bc7ea">nexternal_halo_node</a> ()</td></tr>
 <tr class="memdesc:a2dc1f87191771f18f55e9b44664bc7ea inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of external halo nodes in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a>.  <a href="classoomph_1_1Mesh.html#a2dc1f87191771f18f55e9b44664bc7ea">More...</a><br /></td></tr>
 <tr class="separator:a2dc1f87191771f18f55e9b44664bc7ea inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd71f68171d761023c71c5c99b549997 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#abd71f68171d761023c71c5c99b549997">get_external_halo_node_pt</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;<a class="el" href="classoomph_1_1Mesh.html#a37ba13e88361aa90d5052db4835ddff3">external_halo_node_pt</a>)</td></tr>
+<tr class="memitem:abd71f68171d761023c71c5c99b549997 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#abd71f68171d761023c71c5c99b549997">get_external_halo_node_pt</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;<a class="el" href="classoomph_1_1Mesh.html#a48975043e9f0a75df67a5090332daff0">external_halo_node_pt</a>)</td></tr>
 <tr class="memdesc:abd71f68171d761023c71c5c99b549997 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get vector of pointers to all external halo nodes.  <a href="classoomph_1_1Mesh.html#abd71f68171d761023c71c5c99b549997">More...</a><br /></td></tr>
 <tr class="separator:abd71f68171d761023c71c5c99b549997 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2225d34ba01c6f6b08f60baebab83fb inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ad2225d34ba01c6f6b08f60baebab83fb">nexternal_halo_node</a> (const unsigned &amp;p)</td></tr>
@@ -765,13 +761,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac0b818d3cf5f2eae2816574b6d0a4f07 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ac0b818d3cf5f2eae2816574b6d0a4f07">add_external_halo_node_pt</a> (const unsigned &amp;p, <a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;nod_pt)</td></tr>
 <tr class="memdesc:ac0b818d3cf5f2eae2816574b6d0a4f07 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add external halo node whose non-halo (external) counterpart is held on processor p to the storage scheme for halo nodes.  <a href="classoomph_1_1Mesh.html#ac0b818d3cf5f2eae2816574b6d0a4f07">More...</a><br /></td></tr>
 <tr class="separator:ac0b818d3cf5f2eae2816574b6d0a4f07 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37ba13e88361aa90d5052db4835ddff3 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a37ba13e88361aa90d5052db4835ddff3">external_halo_node_pt</a> (const unsigned &amp;p, const unsigned &amp;j)</td></tr>
-<tr class="memdesc:a37ba13e88361aa90d5052db4835ddff3 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the j-th external halo node in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo external counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a37ba13e88361aa90d5052db4835ddff3">More...</a><br /></td></tr>
-<tr class="separator:a37ba13e88361aa90d5052db4835ddff3 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48975043e9f0a75df67a5090332daff0 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a48975043e9f0a75df67a5090332daff0">external_halo_node_pt</a> (const unsigned &amp;p, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a48975043e9f0a75df67a5090332daff0 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the j-th external halo node in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo external counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a48975043e9f0a75df67a5090332daff0">More...</a><br /></td></tr>
+<tr class="separator:a48975043e9f0a75df67a5090332daff0 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06972b46c50a5a3f88a8a87cd1b54807 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a06972b46c50a5a3f88a8a87cd1b54807">external_halo_node_pt</a> (const unsigned &amp;p)</td></tr>
 <tr class="memdesc:a06972b46c50a5a3f88a8a87cd1b54807 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to vector of external halo node in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo external counterpart is held on processor p. (read only)  <a href="classoomph_1_1Mesh.html#a06972b46c50a5a3f88a8a87cd1b54807">More...</a><br /></td></tr>
 <tr class="separator:a06972b46c50a5a3f88a8a87cd1b54807 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00e8bdf6233681039aaecd63dfa4c30a inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a00e8bdf6233681039aaecd63dfa4c30a">set_external_halo_node_pt</a> (const unsigned &amp;p, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;<a class="el" href="classoomph_1_1Mesh.html#a37ba13e88361aa90d5052db4835ddff3">external_halo_node_pt</a>)</td></tr>
+<tr class="memitem:a00e8bdf6233681039aaecd63dfa4c30a inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a00e8bdf6233681039aaecd63dfa4c30a">set_external_halo_node_pt</a> (const unsigned &amp;p, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;<a class="el" href="classoomph_1_1Mesh.html#a48975043e9f0a75df67a5090332daff0">external_halo_node_pt</a>)</td></tr>
 <tr class="memdesc:a00e8bdf6233681039aaecd63dfa4c30a inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set vector of external halo node in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose non-halo external counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a00e8bdf6233681039aaecd63dfa4c30a">More...</a><br /></td></tr>
 <tr class="separator:a00e8bdf6233681039aaecd63dfa4c30a inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae44a2c10b99136ec7ff3b31e67745d72 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ae44a2c10b99136ec7ff3b31e67745d72">null_external_halo_node</a> (const unsigned &amp;p, <a class="el" href="classoomph_1_1Node.html">Node</a> *nod_pt)</td></tr>
@@ -786,24 +782,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a65eb8d134e9758b28d7fdf178dfad727 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a65eb8d134e9758b28d7fdf178dfad727">nexternal_haloed_node</a> (const unsigned &amp;p)</td></tr>
 <tr class="memdesc:a65eb8d134e9758b28d7fdf178dfad727 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of external haloed nodes in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose halo (external) counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a65eb8d134e9758b28d7fdf178dfad727">More...</a><br /></td></tr>
 <tr class="separator:a65eb8d134e9758b28d7fdf178dfad727 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a438252c1785f8beea0c0ad4cbeb33e37 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a438252c1785f8beea0c0ad4cbeb33e37">external_haloed_node_pt</a> (const unsigned &amp;p, const unsigned &amp;j)</td></tr>
-<tr class="memdesc:a438252c1785f8beea0c0ad4cbeb33e37 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the j-th external haloed node in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose halo external counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a438252c1785f8beea0c0ad4cbeb33e37">More...</a><br /></td></tr>
-<tr class="separator:a438252c1785f8beea0c0ad4cbeb33e37 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7626faf1dc505b0220d6769dbdead901 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a7626faf1dc505b0220d6769dbdead901">external_haloed_node_pt</a> (const unsigned &amp;p, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a7626faf1dc505b0220d6769dbdead901 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to the j-th external haloed node in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose halo external counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a7626faf1dc505b0220d6769dbdead901">More...</a><br /></td></tr>
+<tr class="separator:a7626faf1dc505b0220d6769dbdead901 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cc2600eb480287be5afe6bebf430c00 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a2cc2600eb480287be5afe6bebf430c00">add_external_haloed_node_pt</a> (const unsigned &amp;p, <a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;nod_pt)</td></tr>
 <tr class="memdesc:a2cc2600eb480287be5afe6bebf430c00 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add external haloed node whose halo (external) counterpart is held on processor p to the storage scheme for haloed nodes.  <a href="classoomph_1_1Mesh.html#a2cc2600eb480287be5afe6bebf430c00">More...</a><br /></td></tr>
 <tr class="separator:a2cc2600eb480287be5afe6bebf430c00 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3675ceb40e2b8e8eaaab4a2c2bddd65 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ae3675ceb40e2b8e8eaaab4a2c2bddd65">external_haloed_node_pt</a> (const unsigned &amp;p)</td></tr>
 <tr class="memdesc:ae3675ceb40e2b8e8eaaab4a2c2bddd65 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access fct to vector of external haloed node in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose halo external counterpart is held on processor p. (read only)  <a href="classoomph_1_1Mesh.html#ae3675ceb40e2b8e8eaaab4a2c2bddd65">More...</a><br /></td></tr>
 <tr class="separator:ae3675ceb40e2b8e8eaaab4a2c2bddd65 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7422e9f12bbdcdce7f0193c057a5eb27 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a7422e9f12bbdcdce7f0193c057a5eb27">set_external_haloed_node_pt</a> (const unsigned &amp;p, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;<a class="el" href="classoomph_1_1Mesh.html#a438252c1785f8beea0c0ad4cbeb33e37">external_haloed_node_pt</a>)</td></tr>
+<tr class="memitem:a7422e9f12bbdcdce7f0193c057a5eb27 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a7422e9f12bbdcdce7f0193c057a5eb27">set_external_haloed_node_pt</a> (const unsigned &amp;p, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;<a class="el" href="classoomph_1_1Mesh.html#a7626faf1dc505b0220d6769dbdead901">external_haloed_node_pt</a>)</td></tr>
 <tr class="memdesc:a7422e9f12bbdcdce7f0193c057a5eb27 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set vector of external haloed node in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> whose halo external counterpart is held on processor p.  <a href="classoomph_1_1Mesh.html#a7422e9f12bbdcdce7f0193c057a5eb27">More...</a><br /></td></tr>
 <tr class="separator:a7422e9f12bbdcdce7f0193c057a5eb27 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71aa1c79867a37d5bde740ad9ddae637 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">std::set&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a71aa1c79867a37d5bde740ad9ddae637">external_halo_proc</a> ()</td></tr>
 <tr class="memdesc:a71aa1c79867a37d5bde740ad9ddae637 inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the set of processors that hold external halo nodes. This is required to avoid having to pass a communicator into the node_update functions for Algebraic-based and MacroElement-based Meshes.  <a href="classoomph_1_1Mesh.html#a71aa1c79867a37d5bde740ad9ddae637">More...</a><br /></td></tr>
 <tr class="separator:a71aa1c79867a37d5bde740ad9ddae637 inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78170e61889ad6017c67a0025f15c8ad inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a78170e61889ad6017c67a0025f15c8ad">create_shared_boundaries</a> (<a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *comm_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;element_domain, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> * &gt; &amp;backed_up_el_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> * &gt; &amp;backed_up_f_el_pt, std::map&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> *, std::set&lt; unsigned &gt; &gt; &amp;processors_associated_with_data, const bool &amp;overrule_keep_as_halo_element_status)</td></tr>
-<tr class="memdesc:a78170e61889ad6017c67a0025f15c8ad inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the shared boundaries, only used in unstructured meshes In this case with the "TriangleMesh" class.  <a href="classoomph_1_1Mesh.html#a78170e61889ad6017c67a0025f15c8ad">More...</a><br /></td></tr>
-<tr class="separator:a78170e61889ad6017c67a0025f15c8ad inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5fa0a183d2702723e2e5add4df128dd inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aa5fa0a183d2702723e2e5add4df128dd">create_shared_boundaries</a> (<a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *comm_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;element_domain, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> * &gt; &amp;backed_up_el_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> * &gt; &amp;backed_up_f_el_pt, std::map&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> *, std::set&lt; unsigned &gt;&gt; &amp;processors_associated_with_data, const bool &amp;overrule_keep_as_halo_element_status)</td></tr>
+<tr class="memdesc:aa5fa0a183d2702723e2e5add4df128dd inherit pub_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the shared boundaries, only used in unstructured meshes In this case with the "TriangleMesh" class.  <a href="classoomph_1_1Mesh.html#aa5fa0a183d2702723e2e5add4df128dd">More...</a><br /></td></tr>
+<tr class="separator:aa5fa0a183d2702723e2e5add4df128dd inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafe4f0a71859972be0c7c0957c69d5de inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aafe4f0a71859972be0c7c0957c69d5de">try_to_add_root_haloed_element_pt</a> (const unsigned &amp;p, <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *&amp;el_pt)</td></tr>
 <tr class="separator:aafe4f0a71859972be0c7c0957c69d5de inherit pub_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a261da18d83f808fdf62b8f3c127266b1 inherit pub_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a261da18d83f808fdf62b8f3c127266b1">try_to_add_haloed_node_pt</a> (const unsigned &amp;p, <a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;nod_pt)</td></tr>
@@ -927,7 +923,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a12243d0fee2b1fcee729ee5a4777ea10 inherit pub_static_attribs_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classoomph_1_1Steady.html">Steady</a>&lt; 0 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Default_TimeStepper</a></td></tr>
 <tr class="memdesc:a12243d0fee2b1fcee729ee5a4777ea10 inherit pub_static_attribs_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default <a class="el" href="classoomph_1_1Steady.html">Steady</a> Timestepper, to be used in default arguments to <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> constructors.  <a href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">More...</a><br /></td></tr>
 <tr class="separator:a12243d0fee2b1fcee729ee5a4777ea10 inherit pub_static_attribs_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada6bc12304d1536b747596d1049e48be inherit pub_static_attribs_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ada6bc12304d1536b747596d1049e48be">Suppress_warning_about_empty_mesh_level_time_stepper_function</a> =false</td></tr>
+<tr class="memitem:ada6bc12304d1536b747596d1049e48be inherit pub_static_attribs_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ada6bc12304d1536b747596d1049e48be">Suppress_warning_about_empty_mesh_level_time_stepper_function</a></td></tr>
 <tr class="memdesc:ada6bc12304d1536b747596d1049e48be inherit pub_static_attribs_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean used to control warning about empty mesh level timestepper function.  <a href="classoomph_1_1Mesh.html#ada6bc12304d1536b747596d1049e48be">More...</a><br /></td></tr>
 <tr class="separator:ada6bc12304d1536b747596d1049e48be inherit pub_static_attribs_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classoomph_1_1Mesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1Mesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1Mesh.html">oomph::Mesh</a></td></tr>
@@ -946,10 +942,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ab73d03d38e9b94b15f21b2c12f5dc3bc inherit pro_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#ab73d03d38e9b94b15f21b2c12f5dc3bc">assign_local_eqn_numbers</a> (const bool &amp;store_local_dof_pt)</td></tr>
 <tr class="memdesc:ab73d03d38e9b94b15f21b2c12f5dc3bc inherit pro_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the local equation numbers in all elements If the boolean argument is true then also store pointers to dofs.  <a href="classoomph_1_1Mesh.html#ab73d03d38e9b94b15f21b2c12f5dc3bc">More...</a><br /></td></tr>
 <tr class="separator:ab73d03d38e9b94b15f21b2c12f5dc3bc inherit pro_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa864cbb7f3ff399eef871c63067894df inherit pro_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aa864cbb7f3ff399eef871c63067894df">convert_to_boundary_node</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1Mesh.html#aebdb699466fe07f2e27aa4404008cde4">node_pt</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> * &gt; &amp;<a class="el" href="classoomph_1_1Mesh.html#a4f274774435e9454bf77bf70de69367a">finite_element_pt</a>)</td></tr>
+<tr class="memitem:aa864cbb7f3ff399eef871c63067894df inherit pro_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#aa864cbb7f3ff399eef871c63067894df">convert_to_boundary_node</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1Mesh.html#ab3c2b72c8ef4e9fd35f5998a5e7dc93b">node_pt</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> * &gt; &amp;<a class="el" href="classoomph_1_1Mesh.html#a4f274774435e9454bf77bf70de69367a">finite_element_pt</a>)</td></tr>
 <tr class="memdesc:aa864cbb7f3ff399eef871c63067894df inherit pro_methods_classoomph_1_1Mesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function that upgrades an ordinary node to a boundary node We shouldn't ever really use this, but it does make life that bit easier for the lazy mesh writer. The pointer to the node is replaced by a pointer to the new boundary node in all element look-up schemes and in the mesh's Node_pt vector. The new node is also addressed by node_pt on return from the function.  <a href="classoomph_1_1Mesh.html#aa864cbb7f3ff399eef871c63067894df">More...</a><br /></td></tr>
 <tr class="separator:aa864cbb7f3ff399eef871c63067894df inherit pro_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bdff104c0cc1f2669f9f5cad4a2a1a9 inherit pro_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a2bdff104c0cc1f2669f9f5cad4a2a1a9">convert_to_boundary_node</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1Mesh.html#aebdb699466fe07f2e27aa4404008cde4">node_pt</a>)</td></tr>
+<tr class="memitem:a2bdff104c0cc1f2669f9f5cad4a2a1a9 inherit pro_methods_classoomph_1_1Mesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Mesh.html#a2bdff104c0cc1f2669f9f5cad4a2a1a9">convert_to_boundary_node</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1Mesh.html#ab3c2b72c8ef4e9fd35f5998a5e7dc93b">node_pt</a>)</td></tr>
 <tr class="separator:a2bdff104c0cc1f2669f9f5cad4a2a1a9 inherit pro_methods_classoomph_1_1Mesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -958,7 +954,7 @@ Additional Inherited Members</h2></td></tr>
 <li>Adaptation, based on the elemental error estimates obtained from an error estimator function which is accessed via a function pointer. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00053">53</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00047">47</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2b6e95347d4ffcc916c3d760f6e94a89"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2b6e95347d4ffcc916c3d760f6e94a89">&#9670;&nbsp;</a></span>RefineableMeshBase() <span class="overload">[1/2]</span></h2>
@@ -984,9 +980,9 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Constructor sets default values for refinement targets etc. and initialises pointer to spatial error estimator to NULL. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00061">61</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00057">57</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00306">Adapt_flag</a>, <a class="el" href="refineable__mesh_8h_source.html#l00312">Additional_synchronisation_of_hanging_nodes_not_required</a>, <a class="el" href="refineable__mesh_8h_source.html#l00315">Doc_info_pt</a>, <a class="el" href="refineable__mesh_8h_source.html#l00297">Max_error</a>, <a class="el" href="refineable__mesh_8h_source.html#l00321">Max_keep_unrefined</a>, <a class="el" href="refineable__mesh_8h_source.html#l00288">Max_permitted_error</a>, <a class="el" href="refineable__mesh_8h_source.html#l00294">Min_error</a>, <a class="el" href="refineable__mesh_8h_source.html#l00291">Min_permitted_error</a>, <a class="el" href="refineable__mesh_8h_source.html#l00325">Nrefinement_overruled</a>, <a class="el" href="refineable__mesh_8h_source.html#l00309">P_adapt_flag</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00285">Spatial_error_estimator_pt</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00350">Adapt_flag</a>, <a class="el" href="refineable__mesh_8h_source.html#l00356">Additional_synchronisation_of_hanging_nodes_not_required</a>, <a class="el" href="refineable__mesh_8h_source.html#l00359">Doc_info_pt</a>, <a class="el" href="refineable__mesh_8h_source.html#l00341">Max_error</a>, <a class="el" href="refineable__mesh_8h_source.html#l00365">Max_keep_unrefined</a>, <a class="el" href="refineable__mesh_8h_source.html#l00332">Max_permitted_error</a>, <a class="el" href="refineable__mesh_8h_source.html#l00338">Min_error</a>, <a class="el" href="refineable__mesh_8h_source.html#l00335">Min_permitted_error</a>, <a class="el" href="refineable__mesh_8h_source.html#l00369">Nrefinement_overruled</a>, <a class="el" href="refineable__mesh_8h_source.html#l00353">P_adapt_flag</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00329">Spatial_error_estimator_pt</a>.</p>
 
 </div>
 </div>
@@ -1016,9 +1012,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00096">96</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00092">92</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -1047,7 +1043,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Empty Destructor: </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00108">108</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00104">104</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
 </div>
 </div>
@@ -1105,9 +1101,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00057">57</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00050">50</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00306">Adapt_flag</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00350">Adapt_flag</a>.</p>
 
 </div>
 </div>
@@ -1136,9 +1132,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Disable adaptation. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00177">177</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00201">201</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00306">Adapt_flag</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00350">Adapt_flag</a>.</p>
 
 </div>
 </div>
@@ -1167,9 +1163,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Disable additional synchronisation of hanging nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00190">190</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00225">225</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00312">Additional_synchronisation_of_hanging_nodes_not_required</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00356">Additional_synchronisation_of_hanging_nodes_not_required</a>.</p>
 
 </div>
 </div>
@@ -1198,9 +1194,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Disable adaptation. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00183">183</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00213">213</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00309">P_adapt_flag</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00353">P_adapt_flag</a>.</p>
 
 </div>
 </div>
@@ -1232,9 +1228,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableTriangleMesh.html#a8b04c27cba8938936f73d90e00d70b22">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1RefineableTetMeshBase.html#a2e94ec6d2b35b8f84a38a165d9037908">oomph::RefineableTetMeshBase</a>, and <a class="el" href="classoomph_1_1TreeBasedRefineableMeshBase.html#a885171376e32cff058ab2fa4df6ca3c6">oomph::TreeBasedRefineableMeshBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00129">129</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00135">135</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00321">Max_keep_unrefined</a>, <a class="el" href="refineable__mesh_8h_source.html#l00288">Max_permitted_error</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00291">Min_permitted_error</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00365">Max_keep_unrefined</a>, <a class="el" href="refineable__mesh_8h_source.html#l00332">Max_permitted_error</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00335">Min_permitted_error</a>.</p>
 
 </div>
 </div>
@@ -1263,11 +1259,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access fct for <a class="el" href="classoomph_1_1DocInfo.html" title="Information for documentation of results: Directory and file number to enable output in the form RESL...">DocInfo</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00204">204</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00249">249</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00315">Doc_info_pt</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00359">Doc_info_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00311">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l00894">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00591">oomph::TreeBasedRefineableMeshBase::classify_halo_and_haloed_nodes()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03829">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l04288">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00255">p_refine_uniformly()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l01737">oomph::TreeBasedRefineableMeshBase::p_refine_uniformly()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l05059">oomph::TreeBasedRefineableMeshBase::p_unrefine_uniformly()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00232">refine_uniformly()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l01718">oomph::TreeBasedRefineableMeshBase::refine_uniformly()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00307">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l00926">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00646">oomph::TreeBasedRefineableMeshBase::classify_halo_and_haloed_nodes()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03951">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l04433">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00300">p_refine_uniformly()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l01790">oomph::TreeBasedRefineableMeshBase::p_refine_uniformly()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l05240">oomph::TreeBasedRefineableMeshBase::p_unrefine_uniformly()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00277">refine_uniformly()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l01772">oomph::TreeBasedRefineableMeshBase::refine_uniformly()</a>.</p>
 
 </div>
 </div>
@@ -1296,11 +1292,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access fct for pointer to <a class="el" href="classoomph_1_1DocInfo.html" title="Information for documentation of results: Directory and file number to enable output in the form RESL...">DocInfo</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00171">171</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00189">189</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00315">Doc_info_pt</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00359">Doc_info_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00311">oomph::TreeBasedRefineableMeshBase::adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l03829">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00307">oomph::TreeBasedRefineableMeshBase::adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l03951">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>.</p>
 
 </div>
 </div>
@@ -1329,9 +1325,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Enable adaptation. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00174">174</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00195">195</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00306">Adapt_flag</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00350">Adapt_flag</a>.</p>
 
 </div>
 </div>
@@ -1360,9 +1356,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Enable additional synchronisation of hanging nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00186">186</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00219">219</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00312">Additional_synchronisation_of_hanging_nodes_not_required</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00356">Additional_synchronisation_of_hanging_nodes_not_required</a>.</p>
 
 </div>
 </div>
@@ -1391,9 +1387,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Enable adaptation. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00180">180</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00207">207</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00309">P_adapt_flag</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00353">P_adapt_flag</a>.</p>
 
 </div>
 </div>
@@ -1422,9 +1418,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return whether the mesh is to be adapted. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00194">194</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00231">231</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00306">Adapt_flag</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00350">Adapt_flag</a>.</p>
 
 </div>
 </div>
@@ -1453,9 +1449,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return whether additional synchronisation is enabled. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00200">200</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00243">243</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00312">Additional_synchronisation_of_hanging_nodes_not_required</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00356">Additional_synchronisation_of_hanging_nodes_not_required</a>.</p>
 
 </div>
 </div>
@@ -1484,9 +1480,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return whether the mesh is to be adapted. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00197">197</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00237">237</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00309">P_adapt_flag</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00353">P_adapt_flag</a>.</p>
 
 </div>
 </div>
@@ -1515,11 +1511,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access fct for max. actual error in present solution (i.e. before re-solve on adapted mesh) </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00168">168</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00183">183</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00297">Max_error</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00341">Max_error</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00894">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l04288">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00926">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l04433">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>.</p>
 
 </div>
 </div>
@@ -1548,11 +1544,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Max. number of elements that we allow to remain unrefined if no other mesh adaptation is required (to avoid mesh-adaptations that would only unrefine a few elements and then force a new solve &ndash; this can't be worth our while!) </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00126">126</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00129">129</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00321">Max_keep_unrefined</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00365">Max_keep_unrefined</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00311">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03829">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l02103">oomph::TreeBasedRefineableMeshBase::unrefine_uniformly()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00307">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03951">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l02150">oomph::TreeBasedRefineableMeshBase::unrefine_uniformly()</a>.</p>
 
 </div>
 </div>
@@ -1581,11 +1577,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access fct for max. error (i.e. split elements if their error is larger) </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00160">160</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00169">169</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00288">Max_permitted_error</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00332">Max_permitted_error</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00311">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00883">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03829">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l02103">oomph::TreeBasedRefineableMeshBase::unrefine_uniformly()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00307">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00936">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03951">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l02150">oomph::TreeBasedRefineableMeshBase::unrefine_uniformly()</a>.</p>
 
 </div>
 </div>
@@ -1614,9 +1610,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access fct for min. actual error in present solution (i.e. before re-solve on adapted mesh) </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00164">164</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00176">176</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00294">Min_error</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00338">Min_error</a>.</p>
 
 </div>
 </div>
@@ -1645,11 +1641,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access fct for min. error (i.e. (try to) merge elements if their error is smaller) </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00156">156</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00162">162</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00291">Min_permitted_error</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00335">Min_permitted_error</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00311">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00883">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03829">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l02103">oomph::TreeBasedRefineableMeshBase::unrefine_uniformly()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00307">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00936">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03951">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l02150">oomph::TreeBasedRefineableMeshBase::unrefine_uniformly()</a>.</p>
 
 </div>
 </div>
@@ -1678,9 +1674,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access fct for number of elements that were refined. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00113">113</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00107">107</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00300">Nrefined</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00344">Nrefined</a>.</p>
 
 </div>
 </div>
@@ -1711,9 +1707,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00120">120</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00325">Nrefinement_overruled</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00369">Nrefinement_overruled</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00311">oomph::TreeBasedRefineableMeshBase::adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l03829">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00307">oomph::TreeBasedRefineableMeshBase::adapt()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l03951">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>.</p>
 
 </div>
 </div>
@@ -1742,9 +1738,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access fct for number of elements that were unrefined. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00116">116</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00113">113</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00303">Nunrefined</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00347">Nunrefined</a>.</p>
 
 </div>
 </div>
@@ -1774,9 +1770,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00102">102</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00098">98</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -1808,7 +1804,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1TreeBasedRefineableMeshBase.html#acec4254dc1b7c75870cfa0bd0c4e363e">oomph::TreeBasedRefineableMeshBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00215">215</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00260">260</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
 </div>
 </div>
@@ -1839,11 +1835,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1TreeBasedRefineableMeshBase.html#ae922698aeb358f174c37dac5101c5369">oomph::TreeBasedRefineableMeshBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00255">255</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00300">300</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00515">oomph::DocInfo::directory()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00527">oomph::DocInfo::disable_doc()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00204">doc_info()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00524">oomph::DocInfo::directory()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00542">oomph::DocInfo::disable_doc()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00249">doc_info()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00416">oomph::TreeBasedRefineableMeshBase::p_refine_uniformly()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00454">oomph::TreeBasedRefineableMeshBase::p_refine_uniformly()</a>.</p>
 
 </div>
 </div>
@@ -1875,7 +1871,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1TreeBasedRefineableMeshBase.html#a270d74e0e30f9956c85e4cdcc202c98b">oomph::TreeBasedRefineableMeshBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00241">241</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00286">286</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
 </div>
 </div>
@@ -1905,7 +1901,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>p-unrefine mesh uniformly </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00269">269</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00314">314</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
 </div>
 </div>
@@ -1936,11 +1932,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableQuadFromTriangleMesh.html#a73e88bb8c1cc8464f079e928e89a4a14">oomph::RefineableQuadFromTriangleMesh&lt; ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1TreeBasedRefineableMeshBase.html#a8e67b50fecb03fe1ac93dcb81e4ac6e9">oomph::TreeBasedRefineableMeshBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00232">232</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00277">277</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00515">oomph::DocInfo::directory()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00527">oomph::DocInfo::disable_doc()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00204">doc_info()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00524">oomph::DocInfo::directory()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00542">oomph::DocInfo::disable_doc()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00249">doc_info()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00407">oomph::TreeBasedRefineableMeshBase::refine_uniformly()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00445">oomph::TreeBasedRefineableMeshBase::refine_uniformly()</a>.</p>
 
 </div>
 </div>
@@ -1999,11 +1995,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access to spatial error estimator. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00143">143</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00149">149</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00285">Spatial_error_estimator_pt</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00329">Spatial_error_estimator_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="partitioning_8cc_source.html#l00118">oomph::METIS::partition_mesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="partitioning_8cc_source.html#l00108">oomph::METIS::partition_mesh()</a>.</p>
 
 </div>
 </div>
@@ -2032,9 +2028,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access to spatial error estimator (const version. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00149">149</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00155">155</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00285">Spatial_error_estimator_pt</a>.</p>
+<p class="reference">References <a class="el" href="refineable__mesh_8h_source.html#l00329">Spatial_error_estimator_pt</a>.</p>
 
 </div>
 </div>
@@ -2090,9 +2086,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag that requests adaptation. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00306">306</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00350">350</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00057">adapt_flag()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00177">disable_adaptation()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00174">enable_adaptation()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00194">is_adaptation_enabled()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00050">adapt_flag()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00201">disable_adaptation()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00195">enable_adaptation()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00231">is_adaptation_enabled()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2118,9 +2114,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag that disables additional synchronisation of hanging nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00312">312</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00356">356</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00190">disable_additional_synchronisation_of_hanging_nodes()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00186">enable_additional_synchronisation_of_hanging_nodes()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00200">is_additional_synchronisation_of_hanging_nodes_disabled()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00225">disable_additional_synchronisation_of_hanging_nodes()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00219">enable_additional_synchronisation_of_hanging_nodes()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00243">is_additional_synchronisation_of_hanging_nodes_disabled()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2146,9 +2142,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to <a class="el" href="classoomph_1_1DocInfo.html" title="Information for documentation of results: Directory and file number to enable output in the form RESL...">DocInfo</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00315">315</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00359">359</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00204">doc_info()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00171">doc_info_pt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00347">oomph::TreeBasedRefineableMeshBase::TreeBasedRefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00249">doc_info()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00189">doc_info_pt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00385">oomph::TreeBasedRefineableMeshBase::TreeBasedRefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2174,9 +2170,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Max. actual error. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00297">297</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00341">341</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00168">max_error()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00183">max_error()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2202,9 +2198,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Max. number of elements that can remain unrefined if no other mesh adaptation is required (to avoid mesh-adaptations that would only unrefine a few elements and then force a new solve &ndash; this can't be worth our while!) </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00321">321</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00365">365</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00129">doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00437">oomph::TreeBasedRefineableMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00863">oomph::RefineableTetMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00126">max_keep_unrefined()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00135">doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00478">oomph::TreeBasedRefineableMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00917">oomph::RefineableTetMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00129">max_keep_unrefined()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2230,9 +2226,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Max. error (i.e. split elements if their error is larger) </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00288">288</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00332">332</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00129">doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00437">oomph::TreeBasedRefineableMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00863">oomph::RefineableTetMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00160">max_permitted_error()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00135">doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00478">oomph::TreeBasedRefineableMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00917">oomph::RefineableTetMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00169">max_permitted_error()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2258,9 +2254,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Min.actual error. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00294">294</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00338">338</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00164">min_error()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00176">min_error()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2286,9 +2282,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Min. error (i.e. (try to) merge elements if their error is smaller) </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00291">291</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00335">335</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00129">doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00437">oomph::TreeBasedRefineableMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00863">oomph::RefineableTetMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00156">min_permitted_error()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00135">doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00478">oomph::TreeBasedRefineableMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00917">oomph::RefineableTetMeshBase::doc_adaptivity_targets()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00162">min_permitted_error()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2314,9 +2310,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Stats: Number of elements that were refined. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00300">300</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00344">344</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00311">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00883">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00113">nrefined()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03829">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00347">oomph::TreeBasedRefineableMeshBase::TreeBasedRefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00307">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00936">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00107">nrefined()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03951">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00385">oomph::TreeBasedRefineableMeshBase::TreeBasedRefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2342,9 +2338,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Number of elements that would like to be refined further but can't because they've reached the max. refinement level. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00325">325</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00369">369</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00883">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00120">nrefinement_overruled()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00936">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00120">nrefinement_overruled()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2370,9 +2366,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Stats: Number of elements that were unrefined. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00303">303</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00347">347</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00311">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00883">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00116">nunrefined()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03829">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00347">oomph::TreeBasedRefineableMeshBase::TreeBasedRefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00307">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00936">oomph::RefineableTetMeshBase::compute_volume_target()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00113">nunrefined()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l03951">oomph::TreeBasedRefineableMeshBase::p_adapt()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00385">oomph::TreeBasedRefineableMeshBase::TreeBasedRefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2398,9 +2394,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag that requests p-adaptation. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00309">309</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00353">353</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00183">disable_p_adaptation()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00180">enable_p_adaptation()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00197">is_p_adaptation_enabled()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00213">disable_p_adaptation()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00207">enable_p_adaptation()</a>, <a class="el" href="refineable__mesh_8h_source.html#l00237">is_p_adaptation_enabled()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>.</p>
 
 </div>
 </div>
@@ -2426,9 +2422,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to spatial error estimator. </p>
 
-<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00285">285</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="refineable__mesh_8h_source.html#l00329">329</a> of file <a class="el" href="refineable__mesh_8h_source.html">refineable_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00061">RefineableMeshBase()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00143">spatial_error_estimator_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00057">RefineableMeshBase()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00149">spatial_error_estimator_pt()</a>.</p>
 
 </div>
 </div>
@@ -2463,7 +2459,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:56:59
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:39:45
         </div>
       </div>
     </footer>

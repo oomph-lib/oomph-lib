@@ -18,8 +18,7 @@ Inheritance diagram for oomph\+::Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+:\
 virtual unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_ae7988679549e63ef87fc3f062fb6a559}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at local node n. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_acaa357820f2efb863d442b66e9761c6d}{p\+\_\+axi\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
-\begin{DoxyCompactList}\small\item\em Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a923c2ccbc5bd523118273e63cc18fd5f}{npres\+\_\+axi\+\_\+nst}} () const
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a65e65b5d7dd33b374c259b53dc99a83c}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&pvalue)
@@ -38,9 +37,8 @@ void \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a04743e5
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a85c8740ef4dd17626ae47c9344e15ae8}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity (3 components) and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a83a50021a007f1a932fe841119d93412}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a0b2de0e946fa63b8ce9c424ce21cd074}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -62,7 +60,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a8ec
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a6edd4a05741c3ee8ee1ac82f7c3f9eff}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]} =\{3,3,3,3,3,3,3,3,3\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a6edd4a05741c3ee8ee1ac82f7c3f9eff}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold required number of variables at nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -70,7 +68,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQCrouzeixRaviar
 \doxysubsection{Detailed Description}
 Crouzeix\+\_\+\+Raviart elements are Navier--Stokes elements with quadratic interpolation for velocities and positions, but a discontinuous linear pressure interpolation 
 
-Definition at line 1258 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1335 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -87,7 +85,7 @@ Constructor, there are three internal values (for the pressure)
 
 
 
-Definition at line 1314 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1392 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -114,7 +112,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a2cd
 
 
 
-Definition at line 1445 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1541 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -136,7 +134,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a76e
 
 
 
-Definition at line 1418 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1512 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -158,7 +156,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a8d9
 
 
 
-Definition at line 1394 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1486 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -176,30 +174,29 @@ Function to fix the internal pressure dof idof\+\_\+internal.
 
 
 
-Definition at line 1335 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1418 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
-\mbox{\Hypertarget{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a83a50021a007f1a932fe841119d93412}\label{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a83a50021a007f1a932fe841119d93412}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a0b2de0e946fa63b8ce9c424ce21cd074}\label{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a0b2de0e946fa63b8ce9c424ce21cd074}} 
 \index{oomph::AxisymmetricQCrouzeixRaviartElement@{oomph::AxisymmetricQCrouzeixRaviartElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::AxisymmetricQCrouzeixRaviartElement@{oomph::AxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
-
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
 
 Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 3442 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 3639 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -217,7 +214,7 @@ Compute traction at local coordinate s for outer unit normal N.
 
 
 
-Definition at line 3522 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 3720 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -239,7 +236,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 1369 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1463 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a923c2ccbc5bd523118273e63cc18fd5f}\label{classoomph_1_1AxisymmetricQCrouzeixRaviartElement_a923c2ccbc5bd523118273e63cc18fd5f}} 
 \index{oomph::AxisymmetricQCrouzeixRaviartElement@{oomph::AxisymmetricQCrouzeixRaviartElement}!npres\_axi\_nst@{npres\_axi\_nst}}
@@ -257,7 +254,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a89e
 
 
 
-Definition at line 1332 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1412 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -279,7 +276,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 1360 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1450 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -301,7 +298,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 1364 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1456 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -323,7 +320,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 1351 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1437 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -345,7 +342,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 1355 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1443 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -359,8 +356,7 @@ References oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
 
 
 
-Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). ~\newline
- 
+Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). 
 
 
 
@@ -368,7 +364,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a3aa
 
 
 
-Definition at line 1328 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1406 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -390,7 +386,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_ad6a
 
 
 
-Definition at line 1347 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1431 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -416,7 +412,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a630
 
 
 
-Definition at line 1484 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1582 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -442,7 +438,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a19a
 
 
 
-Definition at line 1494 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1591 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -464,7 +460,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 3517 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 3711 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -477,15 +473,21 @@ References Initial\+\_\+\+Nvalue, and n.
 \index{oomph::AxisymmetricQCrouzeixRaviartElement@{oomph::AxisymmetricQCrouzeixRaviartElement}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::AxisymmetricQCrouzeixRaviartElement@{oomph::AxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+Initial\+\_\+\+Nvalue =\{3,3,3,3,3,3,3,3,3\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    3, 3, 3, 3, 3, 3, 3, 3, 3\}}
+
+\end{DoxyCode}
 
 
 Static array of ints to hold required number of variables at nodes. 
 
 Axisymmetric Crouzeix-\/\+Raviart elements. 
 
-Definition at line 1264 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1341 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -499,7 +501,7 @@ Referenced by required\+\_\+nvalue().
 
 Internal index that indicates at which internal data the pressure is stored 
 
-Definition at line 1270 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1346 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

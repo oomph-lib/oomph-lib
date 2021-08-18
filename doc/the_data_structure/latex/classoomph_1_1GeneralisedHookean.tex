@@ -22,11 +22,9 @@ virtual \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a18794fa4b1750aafa2369
 void \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma)
 \begin{DoxyCompactList}\small\item\em Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the stress tensor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a641d0893e485df52b48b15e189a850ed}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma\+\_\+dev, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G\+\_\+contra, double \&Gdet)
-\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_ad19b5e80755f5d8e5513c4199f62fe03}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma\+\_\+dev, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&Gcontra, double \&gen\+\_\+dil, double \&inv\+\_\+kappa)
-\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a9ed467d8b7c838cb7fed8c861aa652e9}{requires\+\_\+incompressibility\+\_\+constraint}} ()
 \begin{DoxyCompactList}\small\item\em Pure virtual function in which the writer must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in P\+A\+R\+A\+N\+O\+ID mode. False. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -47,14 +45,11 @@ Class for a \char`\"{}non-\/rational\char`\"{} extension of classical linear ela
 We provide three versions of {\ttfamily \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}}\+:
 \begin{DoxyEnumerate}
 \item If $ \nu \ne 1/2 $ (and not close to $ 1/2 $), the constitutive law can be used directly in the above form, using the deformed and undeformed metric tensors as input.
-\item If the material is incompressible ( $ \nu = 1/2 $), the first term in the above expression for $ E^{ijkl} $ is singular. We re-\/write the constitutive equation for this case as ~\newline
- \[ \sigma^{ij} = -p G^{ij} + \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \] where the pressure $ p $ needs to be determined independently via the incompressibility constraint. In this case, the stress returned by {\ttfamily \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}} contains only the deviatoric part of the 2nd Piola Kirchhoff stress, \[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \] ~\newline
- The function also returns the contravariant metric tensor $ G^{ij}$ (since it is needed to form the complete stress tensor), and the determinant of the deformed covariant metric tensor $ {\tt detG} = \det G_{ij} $ (since it is needed in the equation that enforces the incompressibility).
-\item If $ \nu \approx 1/2 $, the original form of the constitutive equation could be used, but the resulting equations tend to be ill-\/conditioned since they contain the product of the large \char`\"{}bulk modulus\char`\"{} \[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \] and the small \char`\"{}generalised dilatation\char`\"{} \[ d = \frac{1}{2} G^{ij} (G_{ij}-g_{ij}). \] \mbox{[} $ d $ represents the actual dilatation in the small strain limit; for large deformations it doesn\textquotesingle{}t have any sensible interpretation (or does it?). It is simply the term that needs to go to zero as $ \kappa \to \infty$.\mbox{]} In this case, the stress returned by {\ttfamily \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}} contains only the deviatoric part of the 2nd Piola Kirchhoff stress, \[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \] ~\newline
- The function also returns the contravariant metric tensor $ G^{ij}$ (since it is needed to form the complete stress tensor), the inverse of the bulk modulus, and the generalised dilatation (since they are needed in the equation that determines the pressure). 
+\item If the material is incompressible ( $ \nu = 1/2 $), the first term in the above expression for $ E^{ijkl} $ is singular. We re-\/write the constitutive equation for this case as \[ \sigma^{ij} = -p G^{ij} + \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \] where the pressure $ p $ needs to be determined independently via the incompressibility constraint. In this case, the stress returned by {\ttfamily \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}} contains only the deviatoric part of the 2nd Piola Kirchhoff stress, \[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \] The function also returns the contravariant metric tensor $ G^{ij}$ (since it is needed to form the complete stress tensor), and the determinant of the deformed covariant metric tensor $ {\tt detG} = \det G_{ij} $ (since it is needed in the equation that enforces the incompressibility).
+\item If $ \nu \approx 1/2 $, the original form of the constitutive equation could be used, but the resulting equations tend to be ill-\/conditioned since they contain the product of the large \char`\"{}bulk modulus\char`\"{} \[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \] and the small \char`\"{}generalised dilatation\char`\"{} \[ d = \frac{1}{2} G^{ij} (G_{ij}-g_{ij}). \] \mbox{[} $ d $ represents the actual dilatation in the small strain limit; for large deformations it doesn\textquotesingle{}t have any sensible interpretation (or does it?). It is simply the term that needs to go to zero as $ \kappa \to \infty$.\mbox{]} In this case, the stress returned by {\ttfamily \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}} contains only the deviatoric part of the 2nd Piola Kirchhoff stress, \[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \] The function also returns the contravariant metric tensor $ G^{ij}$ (since it is needed to form the complete stress tensor), the inverse of the bulk modulus, and the generalised dilatation (since they are needed in the equation that determines the pressure). 
 \end{DoxyEnumerate}
 
-Definition at line 710 of file constitutive\+\_\+laws.\+h.
+Definition at line 719 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -67,7 +62,7 @@ Definition at line 710 of file constitutive\+\_\+laws.\+h.
 
 The constructor takes the pointers to values of material parameters\+: Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus. 
 
-Definition at line 717 of file constitutive\+\_\+laws.\+h.
+Definition at line 724 of file constitutive\+\_\+laws.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedHookean_a470dde76fd6603da69bf4b6f12c50917}\label{classoomph_1_1GeneralisedHookean_a470dde76fd6603da69bf4b6f12c50917}} 
 \index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!GeneralisedHookean@{GeneralisedHookean}}
@@ -77,7 +72,7 @@ Definition at line 717 of file constitutive\+\_\+laws.\+h.
 
 The constructor takes the pointers to value of Poisson\textquotesingle{}s ratio . Young\textquotesingle{}s modulus is set to E=1.\+0, implying that all stresses have been non-\/dimensionalised on on it. 
 
-Definition at line 725 of file constitutive\+\_\+laws.\+h.
+Definition at line 733 of file constitutive\+\_\+laws.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedHookean_a18794fa4b1750aafa2369b2a412a1228}\label{classoomph_1_1GeneralisedHookean_a18794fa4b1750aafa2369b2a412a1228}} 
 \index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!````~GeneralisedHookean@{$\sim$GeneralisedHookean}}
@@ -91,7 +86,7 @@ Virtual destructor.
 
 
 
-Definition at line 731 of file constitutive\+\_\+laws.\+h.
+Definition at line 743 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -116,7 +111,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8
 
 
 
-Definition at line 669 of file constitutive\+\_\+laws.\+cc.
+Definition at line 682 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -134,17 +129,15 @@ Referenced by calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress().
 
 
 
-Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. ~\newline
- 
+Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. 
 
-Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. ~\newline
- 
+Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_ac8178b1b7cd7e6a64942dba9e0997b30}{oomph\+::\+Constitutive\+Law}}.
 
 
 
-Definition at line 797 of file constitutive\+\_\+laws.\+cc.
+Definition at line 811 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -158,17 +151,15 @@ References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant(), oomph
 
 
 
-Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. ~\newline
- 
+Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. 
 
-Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. ~\newline
- 
+Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a26f34355b626bebcad8f498fa5271d20}{oomph\+::\+Constitutive\+Law}}.
 
 
 
-Definition at line 751 of file constitutive\+\_\+laws.\+cc.
+Definition at line 765 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -190,7 +181,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a446452158a8ae9fbc3dde
 
 
 
-Definition at line 779 of file constitutive\+\_\+laws.\+h.
+Definition at line 794 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -207,7 +198,7 @@ Young\textquotesingle{}s modulus.
 
 
 
-Definition at line 787 of file constitutive\+\_\+laws.\+h.
+Definition at line 804 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -225,7 +216,7 @@ Boolean flag to indicate if storage for elastic modulus must be deleted in destr
 
 
 
-Definition at line 791 of file constitutive\+\_\+laws.\+h.
+Definition at line 808 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -243,7 +234,7 @@ Poisson ratio.
 
 
 
-Definition at line 784 of file constitutive\+\_\+laws.\+h.
+Definition at line 801 of file constitutive\+\_\+laws.\+h.
 
 
 

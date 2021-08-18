@@ -24,8 +24,7 @@ Inheritance diagram for oomph\+::Algebraic\+Mesh\+:\begin{figure}[H]
 virtual void \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ab01d6f93354f3c4e5c9d1f0a5885a65b}{algebraic\+\_\+node\+\_\+update}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})=0
 \begin{DoxyCompactList}\small\item\em Update the nodal position posn at time level t (t=0\+: present; t$>$0\+: previous). Must be implemented for every specific algebraic mesh. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_a6c6a35ae2be6e2766f5b80d85693c1ce}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})=0
-\begin{DoxyCompactList}\small\item\em Update the node update info for given node, following mesh adaptation. Must be implemented for every specific algebraic mesh, though it may, of course, be left empty. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Update the node update info for given node, following mesh adaptation. Must be implemented for every specific algebraic mesh, though it may, of course, be left empty. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ad3a5638cacb6df1a47c475bb177b6ed7}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
 \begin{DoxyCompactList}\small\item\em Update all nodal positions via algebraic node update functions \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_adfac67a6cb78db3955e20a241f2f4df4}{self\+\_\+test}} ()
@@ -45,10 +44,9 @@ unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ab6a636ffb928e10e004747988
 
 
 \doxysubsection{Detailed Description}
-Algebraic meshes contain Algebraic\+Elements and Algebraic\+Nodes. They implement the node update functions that are used by the Algebraic\+Nodes to update their positions. ~\newline
- 
+Algebraic meshes contain Algebraic\+Elements and Algebraic\+Nodes. They implement the node update functions that are used by the Algebraic\+Nodes to update their positions. 
 
-Definition at line 631 of file algebraic\+\_\+elements.\+h.
+Definition at line 616 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -61,7 +59,7 @@ Definition at line 631 of file algebraic\+\_\+elements.\+h.
 
 Constructor\+: create a null zeroth entry in the Geom\+\_\+object\+\_\+list\+\_\+pt \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (each \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}}\textquotesingle{}s constructor should add any other geometric objects to this list) 
 
-Definition at line 639 of file algebraic\+\_\+elements.\+h.
+Definition at line 622 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -79,7 +77,7 @@ Broken copy constructor.
 
 
 
-Definition at line 645 of file algebraic\+\_\+elements.\+h.
+Definition at line 628 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -97,7 +95,7 @@ Broken assignment operator.
 
 Surely a proper destructor is required... ? 
 
-Definition at line 657 of file algebraic\+\_\+elements.\+h.
+Definition at line 640 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -114,7 +112,7 @@ Add the specified \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} to t
 
 
 
-Definition at line 863 of file algebraic\+\_\+elements.\+h.
+Definition at line 847 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -136,7 +134,7 @@ Update the nodal position posn at time level t (t=0\+: present; t$>$0\+: previou
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1DummyAlgebraicMesh_ae13a52cb8561a07233851e2d1db7b4e4}{oomph\+::\+Dummy\+Algebraic\+Mesh}}, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af98a0aaff29c54ffa35f72f7dcf6b8c7}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ac591df8f18ad687e1dc9b70b731c2de1}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ae1ea6d9baa12e2ca87d21d4370f41870}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicChannelWithLeafletMesh_a4c01b99ca83286f872c517fc5269a890}{oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_ac66d6542472dac702a7414aa9d7f995f}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a5e1e770e82577e5702470d8b87f8599d}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a56c72b78935e84f7fef3f6b5d85556c3}{oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1DummyAlgebraicMesh_ae13a52cb8561a07233851e2d1db7b4e4}{oomph\+::\+Dummy\+Algebraic\+Mesh}}, \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ae1ea6d9baa12e2ca87d21d4370f41870}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af98a0aaff29c54ffa35f72f7dcf6b8c7}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ac591df8f18ad687e1dc9b70b731c2de1}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicChannelWithLeafletMesh_a4c01b99ca83286f872c517fc5269a890}{oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_ac66d6542472dac702a7414aa9d7f995f}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a5e1e770e82577e5702470d8b87f8599d}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a56c72b78935e84f7fef3f6b5d85556c3}{oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
 
 
 
@@ -154,7 +152,7 @@ Access function to the ith \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Obje
 
 
 
-Definition at line 875 of file algebraic\+\_\+elements.\+h.
+Definition at line 859 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -162,7 +160,7 @@ References Geom\+\_\+object\+\_\+list\+\_\+pt, and i.
 
 
 
-Referenced by oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper().
+Referenced by oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicMesh_ab6a636ffb928e10e004747988fb03404}\label{classoomph_1_1AlgebraicMesh_ab6a636ffb928e10e004747988fb03404}} 
 \index{oomph::AlgebraicMesh@{oomph::AlgebraicMesh}!ngeom\_object\_list\_pt@{ngeom\_object\_list\_pt}}
@@ -176,7 +174,7 @@ Return number of geometric objects associated with \mbox{\hyperlink{classoomph_1
 
 
 
-Definition at line 869 of file algebraic\+\_\+elements.\+h.
+Definition at line 853 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -198,7 +196,7 @@ Return a pointer to the n-\/th global \mbox{\hyperlink{classoomph_1_1AlgebraicNo
 
 
 
-Definition at line 661 of file algebraic\+\_\+elements.\+h.
+Definition at line 644 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -228,11 +226,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh_a812
 
 
 
-Definition at line 695 of file algebraic\+\_\+elements.\+h.
+Definition at line 677 of file algebraic\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Mesh\+::\+External\+\_\+halo\+\_\+node\+\_\+pt, oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), n, oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+node(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Mesh\+::nnode(), node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Node\+::perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Node\+::x().
+References oomph\+::\+Mesh\+::\+External\+\_\+halo\+\_\+node\+\_\+pt, oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), n, oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+node(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Mesh\+::nnode(), node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Node\+::perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Node\+::x().
 
 
 
@@ -250,7 +248,7 @@ Self test\+: check consistentency of multiple node updates.
 
 
 
-Definition at line 830 of file algebraic\+\_\+elements.\+h.
+Definition at line 810 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -258,7 +256,7 @@ References n, oomph\+::\+Mesh\+::nnode(), node\+\_\+pt(), oomph\+::oomph\+\_\+in
 
 
 
-Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::self\+\_\+test(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::self\+\_\+test().
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::self\+\_\+test(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::self\+\_\+test().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicMesh_a6c6a35ae2be6e2766f5b80d85693c1ce}\label{classoomph_1_1AlgebraicMesh_a6c6a35ae2be6e2766f5b80d85693c1ce}} 
 \index{oomph::AlgebraicMesh@{oomph::AlgebraicMesh}!update\_node\_update@{update\_node\_update}}
@@ -268,12 +266,11 @@ Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+
 
 
 
-Update the node update info for given node, following mesh adaptation. Must be implemented for every specific algebraic mesh, though it may, of course, be left empty. ~\newline
- 
+Update the node update info for given node, following mesh adaptation. Must be implemented for every specific algebraic mesh, though it may, of course, be left empty. 
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1DummyAlgebraicMesh_a8797e6bf088b172b5d7e1de8a2dfc326}{oomph\+::\+Dummy\+Algebraic\+Mesh}}, \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh_a4bc2b99f24e5e5dc534fe5906d4f4e6e}{oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a7ed9f4ce0442a6f962a1561318542a67}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a08abc1bf64e0637fc87c36638c41b846}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_abad38fb50d067a126af1161a3a603972}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicChannelWithLeafletMesh_a8ee7168fbb84bb87880a2590dd52eaa8}{oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_a4f992939c299f87abc762c14aab50b5c}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh_a186963cf4b1fc118929e49e012eba4d2}{oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicChannelWithLeafletMesh_ace3a90b4e530c75bec8301e2291151eb}{oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh_aa68685323573763e1ded0cceed5ad14f}{oomph\+::\+Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a9d909de1db84a3b7e42494535b152d92}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a87d34d6cf84c62a9049773451c664176}{oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1DummyAlgebraicMesh_a8797e6bf088b172b5d7e1de8a2dfc326}{oomph\+::\+Dummy\+Algebraic\+Mesh}}, \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh_a4bc2b99f24e5e5dc534fe5906d4f4e6e}{oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a7ed9f4ce0442a6f962a1561318542a67}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a08abc1bf64e0637fc87c36638c41b846}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_abad38fb50d067a126af1161a3a603972}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicChannelWithLeafletMesh_a8ee7168fbb84bb87880a2590dd52eaa8}{oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_a4f992939c299f87abc762c14aab50b5c}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicChannelWithLeafletMesh_ace3a90b4e530c75bec8301e2291151eb}{oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh_a186963cf4b1fc118929e49e012eba4d2}{oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a9d909de1db84a3b7e42494535b152d92}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh_aa68685323573763e1ded0cceed5ad14f}{oomph\+::\+Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a87d34d6cf84c62a9049773451c664176}{oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
 
 
 
@@ -294,7 +291,7 @@ Referenced by oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+n
 
 
 
-Definition at line 885 of file algebraic\+\_\+elements.\+h.
+Definition at line 868 of file algebraic\+\_\+elements.\+h.
 
 
 

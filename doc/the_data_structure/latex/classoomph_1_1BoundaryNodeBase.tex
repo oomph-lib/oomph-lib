@@ -14,7 +14,7 @@ A class that contains the information required by Nodes that are located on \mbo
 \item 
 virtual void \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a2af96b956e59182fe8bfe8e2a87e02ce}{assign\+\_\+additional\+\_\+values\+\_\+with\+\_\+face\+\_\+id}} (const unsigned \&n\+\_\+additional\+\_\+value, const unsigned \&face\+\_\+id=0)=0
 \begin{DoxyCompactList}\small\item\em Member function that allocates storage for a given number of additional degrees of freedom, n\+\_\+additional\+\_\+value, associated with a particular face\+\_\+id to the \mbox{\hyperlink{classoomph_1_1Node}{Node}} node\+\_\+pt. \end{DoxyCompactList}\item 
-std\+::map$<$ unsigned, unsigned $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a2f5dc814c83956b5af7342bbfcca0ef0}{index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}} ()
+std\+::map$<$ unsigned, unsigned $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_ad215f076a8a9c8a44e6663542a095e0e}{index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return pointer to the map giving the index of the first face element value. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a67c470bd15750e91775101b5bce65a58}{index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element}} (const unsigned \&face\+\_\+id=0) const
 \begin{DoxyCompactList}\small\item\em Return the index of the first value associated with the i-\/th face element value. If no argument is specified we return the index associated with the first (and assumed to be only) face element attached to this node. Throws error only in paranoid mode if no values have been set by any Face\+Elements. If you want to catch such cases gracefully in all circumstances (there are examples with complex unstructured 3D meshes where it\textquotesingle{}s not clear a priori if a node has been resized by Face\+Elements) use alternative version (with leading bool arguments) that always checks and throws so exceptions can be caught gracefully. Returns U\+I\+N\+T\+\_\+\+M\+AX if error. \end{DoxyCompactList}\item 
@@ -56,16 +56,14 @@ void \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a45d53bb02ccf50ab551d051b5e
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a335936260b9a5d6ed4e191e4c44ab3a2}{make\+\_\+node\+\_\+periodic}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&original\+\_\+node\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Helper function that is used to turn Boundary\+Nodes into peridic boundary nodes by setting the data values of copied\+\_\+node\+\_\+pt to those of original\+\_\+node\+\_\+pt. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Helper function that is used to turn Boundary\+Nodes into peridic boundary nodes by setting the data values of copied\+\_\+node\+\_\+pt to those of original\+\_\+node\+\_\+pt. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a37f55f9018ae7dcd5cb194f030fccfd6}{make\+\_\+nodes\+\_\+periodic}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ const \&periodic\+\_\+copies\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function that is used to turn Boundary\+Nodes into periodic boundary nodes by setting the data values of the nodes in the vector periodic\+\_\+copies\+\_\+pt to be the same as those in node\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::map$<$ unsigned, unsigned $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a950c7d3ab5b9ee0473b45b2a134728a7}{Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to a map, ~\newline
- indexed by the face element identifier it returns the position of the first face element value. If the \mbox{\hyperlink{classoomph_1_1Node}{Node}} does not lie on a face element this map should never be queried. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Pointer to a map, indexed by the face element identifier it returns the position of the first face element value. If the \mbox{\hyperlink{classoomph_1_1Node}{Node}} does not lie on a face element this map should never be queried. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a4afcc250ee4d601a60f06d0d39ebaca0}{Copied\+\_\+node\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em If the \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} is periodic, this pointer is set to the \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} whose data it shares. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -74,14 +72,13 @@ std\+::map$<$ unsigned, unsigned $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1Bound
 std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ $\ast$ $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a732b1ffccbcd7b79097a1779a94e9497}{Boundary\+\_\+coordinates\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to a map of pointers to intrinsic boundary coordinates of the \mbox{\hyperlink{classoomph_1_1Node}{Node}}, indexed by the boundary number. If the \mbox{\hyperlink{classoomph_1_1Node}{Node}} does not lie on a boundary this map should never be queried because unnecessary storage will then be allocated. Hence, it can only be accessed via the appropriate set and get functions. \end{DoxyCompactList}\item 
 std\+::set$<$ unsigned $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a18163a5bc2e0b6dfc487e249f3c24dd6}{Boundaries\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to set of mesh boundaries occupied by the \mbox{\hyperlink{classoomph_1_1Node}{Node}}; N\+U\+LL if the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is not on any boundaries ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pointer to set of mesh boundaries occupied by the \mbox{\hyperlink{classoomph_1_1Node}{Node}}; N\+U\+LL if the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is not on any boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 A class that contains the information required by Nodes that are located on \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} boundaries. A \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} of a particular type is obtained by combining a given \mbox{\hyperlink{classoomph_1_1Node}{Node}} with this class. By differentiating between Nodes and Boundary\+Nodes we avoid a lot of un-\/necessary storage in the bulk Nodes. 
 
-Definition at line 1850 of file nodes.\+h.
+Definition at line 2026 of file nodes.\+h.
 
 
 
@@ -98,7 +95,7 @@ Default constructor, set the pointers to the storage to N\+U\+LL.
 
 
 
-Definition at line 2013 of file nodes.\+h.
+Definition at line 2183 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNodeBase_acb698db0bafda5e858856d4106614059}\label{classoomph_1_1BoundaryNodeBase_acb698db0bafda5e858856d4106614059}} 
 \index{oomph::BoundaryNodeBase@{oomph::BoundaryNodeBase}!````~BoundaryNodeBase@{$\sim$BoundaryNodeBase}}
@@ -112,7 +109,7 @@ Destructor, clean up any allocated storage for the boundaries.
 
 Destructor to clean up any memory that might have been allocated. 
 
-Definition at line 2890 of file nodes.\+cc.
+Definition at line 2993 of file nodes.\+cc.
 
 
 
@@ -130,7 +127,7 @@ Broken copy constructor.
 
 
 
-Definition at line 2023 of file nodes.\+h.
+Definition at line 2195 of file nodes.\+h.
 
 
 
@@ -151,7 +148,7 @@ Add the node to the mesh boundary b.
 
 
 
-Definition at line 2929 of file nodes.\+cc.
+Definition at line 3028 of file nodes.\+cc.
 
 
 
@@ -183,7 +180,7 @@ Have boundary coordinates been set up?
 
 
 
-Definition at line 2031 of file nodes.\+h.
+Definition at line 2207 of file nodes.\+h.
 
 
 
@@ -205,7 +202,7 @@ Access to pointer to set of mesh boundaries that this node occupies; N\+U\+LL if
 
 
 
-Definition at line 2038 of file nodes.\+h.
+Definition at line 2214 of file nodes.\+h.
 
 
 
@@ -227,7 +224,7 @@ Return the vector of the k-\/th generalised boundary coordinates on mesh boundar
 
 Given the mesh boundary b, return the k-\/th generalised boundary coordinates of the node in the vector boundary\+\_\+zeta 
 
-Definition at line 3063 of file nodes.\+cc.
+Definition at line 3165 of file nodes.\+cc.
 
 
 
@@ -245,7 +242,7 @@ Return the vector of boundary coordinates on mesh boundary b.
 
 
 
-Definition at line 2057 of file nodes.\+h.
+Definition at line 2238 of file nodes.\+h.
 
 
 
@@ -263,7 +260,7 @@ Return the index of the first value associated with the i-\/th face element valu
 
 
 
-Definition at line 1958 of file nodes.\+h.
+Definition at line 2129 of file nodes.\+h.
 
 
 
@@ -281,7 +278,7 @@ Return the index of the first value associated with the i-\/th face element valu
 
 
 
-Definition at line 1920 of file nodes.\+h.
+Definition at line 2092 of file nodes.\+h.
 
 
 
@@ -291,11 +288,11 @@ References Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+
 
 Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+poroelastic\+\_\+fsi(), oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fsi\+\_\+no\+\_\+slip\+\_\+axisym(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error().
 
-\mbox{\Hypertarget{classoomph_1_1BoundaryNodeBase_a2f5dc814c83956b5af7342bbfcca0ef0}\label{classoomph_1_1BoundaryNodeBase_a2f5dc814c83956b5af7342bbfcca0ef0}} 
+\mbox{\Hypertarget{classoomph_1_1BoundaryNodeBase_ad215f076a8a9c8a44e6663542a095e0e}\label{classoomph_1_1BoundaryNodeBase_ad215f076a8a9c8a44e6663542a095e0e}} 
 \index{oomph::BoundaryNodeBase@{oomph::BoundaryNodeBase}!index\_of\_first\_value\_assigned\_by\_face\_element\_pt@{index\_of\_first\_value\_assigned\_by\_face\_element\_pt}}
 \index{index\_of\_first\_value\_assigned\_by\_face\_element\_pt@{index\_of\_first\_value\_assigned\_by\_face\_element\_pt}!oomph::BoundaryNodeBase@{oomph::BoundaryNodeBase}}
 \doxysubsubsection{\texorpdfstring{index\_of\_first\_value\_assigned\_by\_face\_element\_pt()}{index\_of\_first\_value\_assigned\_by\_face\_element\_pt()}}
-{\footnotesize\ttfamily std\+::map$<$unsigned, unsigned$>$$\ast$ \& oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, unsigned$>$$\ast$\& oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -303,7 +300,7 @@ Return pointer to the map giving the index of the first face element value.
 
 
 
-Definition at line 1905 of file nodes.\+h.
+Definition at line 2077 of file nodes.\+h.
 
 
 
@@ -311,7 +308,7 @@ References Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+
 
 
 
-Referenced by oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), and oomph\+::\+Mesh\+::resize\+\_\+halo\+\_\+nodes().
+Referenced by oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Mesh\+::resize\+\_\+halo\+\_\+nodes(), and oomph\+::\+Problem\+::send\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNodeBase_aa977a1295a422bf0bd44944ae056ff96}\label{classoomph_1_1BoundaryNodeBase_aa977a1295a422bf0bd44944ae056ff96}} 
 \index{oomph::BoundaryNodeBase@{oomph::BoundaryNodeBase}!is\_on\_boundary@{is\_on\_boundary}}
@@ -325,7 +322,7 @@ Test whether the node lies on a boundary.
 
 
 
-Definition at line 2048 of file nodes.\+h.
+Definition at line 2226 of file nodes.\+h.
 
 
 
@@ -347,7 +344,7 @@ Test whether the node lies on mesh boundary b.
 
 Test whether the node lies on the mesh boundary b. 
 
-Definition at line 2996 of file nodes.\+cc.
+Definition at line 3099 of file nodes.\+cc.
 
 
 
@@ -361,13 +358,11 @@ References Boundaries\+\_\+pt.
 
 
 
-Helper function that is used to turn Boundary\+Nodes into peridic boundary nodes by setting the data values of copied\+\_\+node\+\_\+pt to those of original\+\_\+node\+\_\+pt. ~\newline
- 
+Helper function that is used to turn Boundary\+Nodes into peridic boundary nodes by setting the data values of copied\+\_\+node\+\_\+pt to those of original\+\_\+node\+\_\+pt. 
 
-Helper function that is used to turn Boundary\+Nodes into peridic boundary nodes by setting the data values of copy\+\_\+of\+\_\+node\+\_\+pt to those of copied\+\_\+node\+\_\+pt. ~\newline
- 
+Helper function that is used to turn Boundary\+Nodes into peridic boundary nodes by setting the data values of copy\+\_\+of\+\_\+node\+\_\+pt to those of copied\+\_\+node\+\_\+pt. 
 
-Definition at line 2847 of file nodes.\+cc.
+Definition at line 2951 of file nodes.\+cc.
 
 
 
@@ -389,7 +384,7 @@ Helper function that is used to turn Boundary\+Nodes into periodic boundary node
 
 Helper function that is used to turn Boundary\+Nodes into periodic boundary nodes by setting the data values of the nodes in the vector periodic\+\_\+copies\+\_\+pt to be the same as those in copied\+\_\+node\+\_\+pt. This function should be used when making doubly periodic sets of nodes. 
 
-Definition at line 2788 of file nodes.\+cc.
+Definition at line 2896 of file nodes.\+cc.
 
 
 
@@ -411,7 +406,7 @@ Get the number of boundary coordinates on mesh boundary b.
 
 
 
-Definition at line 3013 of file nodes.\+cc.
+Definition at line 3119 of file nodes.\+cc.
 
 
 
@@ -443,7 +438,7 @@ Broken assignment operator.
 
 
 
-Definition at line 2027 of file nodes.\+h.
+Definition at line 2201 of file nodes.\+h.
 
 
 
@@ -461,7 +456,7 @@ Remove the node from the mesh boundary b.
 
 
 
-Definition at line 2958 of file nodes.\+cc.
+Definition at line 3062 of file nodes.\+cc.
 
 
 
@@ -483,7 +478,7 @@ Set the vector of the k-\/th generalised boundary coordinates on mesh boundary b
 
 Given the mesh boundary b, set the k-\/th generalised boundary coordinates of the node from the vector boundary\+\_\+zeta 
 
-Definition at line 3135 of file nodes.\+cc.
+Definition at line 3236 of file nodes.\+cc.
 
 
 
@@ -501,7 +496,7 @@ Set the vector of boundary coordinates on mesh boundary b.
 
 
 
-Definition at line 2066 of file nodes.\+h.
+Definition at line 2247 of file nodes.\+h.
 
 
 
@@ -518,12 +513,11 @@ Referenced by oomph\+::\+Boundary\+Node$<$ N\+O\+D\+E\+\_\+\+T\+Y\+P\+E $>$\+::s
 
 
 
-Pointer to set of mesh boundaries occupied by the \mbox{\hyperlink{classoomph_1_1Node}{Node}}; N\+U\+LL if the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is not on any boundaries ~\newline
- 
+Pointer to set of mesh boundaries occupied by the \mbox{\hyperlink{classoomph_1_1Node}{Node}}; N\+U\+LL if the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is not on any boundaries. 
 
 
 
-Definition at line 1864 of file nodes.\+h.
+Definition at line 2039 of file nodes.\+h.
 
 
 
@@ -541,7 +535,7 @@ Pointer to a map of pointers to intrinsic boundary coordinates of the \mbox{\hyp
 
 
 
-Definition at line 1860 of file nodes.\+h.
+Definition at line 2035 of file nodes.\+h.
 
 
 
@@ -559,7 +553,7 @@ If the \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} is periodic
 
 
 
-Definition at line 1878 of file nodes.\+h.
+Definition at line 2052 of file nodes.\+h.
 
 
 
@@ -573,12 +567,11 @@ Referenced by make\+\_\+node\+\_\+periodic(), and make\+\_\+nodes\+\_\+periodic(
 
 
 
-Pointer to a map, ~\newline
- indexed by the face element identifier it returns the position of the first face element value. If the \mbox{\hyperlink{classoomph_1_1Node}{Node}} does not lie on a face element this map should never be queried. 
+Pointer to a map, indexed by the face element identifier it returns the position of the first face element value. If the \mbox{\hyperlink{classoomph_1_1Node}{Node}} does not lie on a face element this map should never be queried. 
 
 
 
-Definition at line 1874 of file nodes.\+h.
+Definition at line 2048 of file nodes.\+h.
 
 
 

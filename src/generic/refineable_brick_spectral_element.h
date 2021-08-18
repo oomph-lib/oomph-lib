@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 #ifndef OOMPH_REFINEABLE_BRICK_SPECTRAL_ELEMENT_HEADER
 #define OOMPH_REFINEABLE_BRICK_SPECTRAL_ELEMENT_HEADER
 
@@ -33,12 +33,11 @@
 #endif
 
 
-//oomph-lib headers
+// oomph-lib headers
 #include "refineable_brick_element.h"
 
 namespace oomph
 {
-
   //=======================================================================
   /// Refineable version of QuadElements that add functionality for spectral
   /// Elements.
@@ -46,14 +45,12 @@ namespace oomph
   template<>
   class RefineableQSpectralElement<3> : public virtual RefineableQElement<3>
   {
-
   public:
-
     /// Constructor
     RefineableQSpectralElement() : RefineableElement()
     {
 #ifdef LEAK_CHECK
-      LeakCheckNames::RefineableQSpectralElement<3>_build+=1;
+      LeakCheckNames::RefineableQSpectralElement<3> _build += 1;
 #endif
     }
 
@@ -65,10 +62,11 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    //Commented out broken assignment operator because this can lead to a conflict warning
-    //when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
-    //realise that two separate implementations of the broken function are the same and so,
-    //quite rightly, it shouts.
+    // Commented out broken assignment operator because this can lead to a
+    // conflict warning when used in the virtual inheritence hierarchy.
+    // Essentially the compiler doesn't realise that two separate
+    // implementations of the broken function are the same and so, quite
+    // rightly, it shouts.
     /*void operator=(const RefineableQSpectralElement<3>&)
       {
       BrokenCopy::broken_assign("RefineableQSpecralElement<3>");
@@ -78,16 +76,16 @@ namespace oomph
     virtual ~RefineableQSpectralElement()
     {
 #ifdef LEAK_CHECK
-      LeakCheckNames::RefineableQSpectralElement<3>_build-=1;
+      LeakCheckNames::RefineableQSpectralElement<3> _build -= 1;
 #endif
     }
 
     /// The only thing to add is rebuild from sons
-    void rebuild_from_sons(Mesh* &mesh_pt)
+    void rebuild_from_sons(Mesh*& mesh_pt)
     {
-      //The timestepper should be the same for all nodes and node 0 should
-      //never be deleted.
-      if (this->node_pt(0)==0)
+      // The timestepper should be the same for all nodes and node 0 should
+      // never be deleted.
+      if (this->node_pt(0) == 0)
       {
         throw OomphLibError("The Corner node (0) does not exist",
                             OOMPH_CURRENT_FUNCTION,
@@ -97,383 +95,396 @@ namespace oomph
       TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
       unsigned ntstorage = time_stepper_pt->ntstorage();
 
-      unsigned jnod=0;
+      unsigned jnod = 0;
       Vector<double> s_fraction(3), s(3);
-      //Loop over the nodes in the element
+      // Loop over the nodes in the element
       unsigned n_p = this->nnode_1d();
-      for (unsigned i0=0; i0<n_p; i0++)
+      for (unsigned i0 = 0; i0 < n_p; i0++)
       {
-        //Get the fractional position of the node
-        s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
-        //Local coordinate
-        s[0] = -1.0 + 2.0*s_fraction[0];
+        // Get the fractional position of the node
+        s_fraction[0] = this->local_one_d_fraction_of_node(i0, 0);
+        // Local coordinate
+        s[0] = -1.0 + 2.0 * s_fraction[0];
 
-        for (unsigned i1=0; i1<n_p; i1++)
+        for (unsigned i1 = 0; i1 < n_p; i1++)
         {
-          //Get the fractional position of the node in the direction of s[1]
-          s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
+          // Get the fractional position of the node in the direction of s[1]
+          s_fraction[1] = this->local_one_d_fraction_of_node(i1, 1);
           // Local coordinate in father element
-          s[1] = -1.0 + 2.0*s_fraction[1];
+          s[1] = -1.0 + 2.0 * s_fraction[1];
 
-          for (unsigned i2=0; i2<n_p; i2++)
+          for (unsigned i2 = 0; i2 < n_p; i2++)
           {
-            //Get the fractional position of the node in the direction of s[1]
-            s_fraction[2] = this->local_one_d_fraction_of_node(i2,2);
+            // Get the fractional position of the node in the direction of s[1]
+            s_fraction[2] = this->local_one_d_fraction_of_node(i2, 2);
             // Local coordinate in father element
-            s[2] = -1.0 + 2.0*s_fraction[2];
+            s[2] = -1.0 + 2.0 * s_fraction[2];
 
-            //Set the local node number
-            jnod = i0 + n_p*i1 + n_p*n_p*i2;
+            // Set the local node number
+            jnod = i0 + n_p * i1 + n_p * n_p * i2;
 
-            //If the node has not been built
-            if (this->node_pt(jnod)==0)
+            // If the node has not been built
+            if (this->node_pt(jnod) == 0)
             {
-              //Has the node been created by one of its neighbours
+              // Has the node been created by one of its neighbours
               bool is_periodic = false;
-              Node* created_node_pt = this->node_created_by_neighbour(s_fraction,
-                                      is_periodic);
+              Node* created_node_pt =
+                this->node_created_by_neighbour(s_fraction, is_periodic);
 
-              //If it has set the pointer
-              if (created_node_pt!=0)
+              // If it has set the pointer
+              if (created_node_pt != 0)
               {
-                //If the node is periodic
+                // If the node is periodic
                 if (is_periodic)
                 {
-                  throw OomphLibError(
-                    "Cannot handle periodic nodes in refineable spectral elements yet",
-                    OOMPH_CURRENT_FUNCTION,
-                    OOMPH_EXCEPTION_LOCATION);
+                  throw OomphLibError("Cannot handle periodic nodes in "
+                                      "refineable spectral elements yet",
+                                      OOMPH_CURRENT_FUNCTION,
+                                      OOMPH_EXCEPTION_LOCATION);
                 }
-                //Non-periodic case, just set the pointer
+                // Non-periodic case, just set the pointer
                 else
                 {
                   this->node_pt(jnod) = created_node_pt;
                 }
               }
-              //Otherwise, we need to build it
+              // Otherwise, we need to build it
               else
               {
-                //First we need to find the pointer to the son that
-                //would contain the node
+                // First we need to find the pointer to the son that
+                // would contain the node
 
-                //Find coordinates in the sons
+                // Find coordinates in the sons
                 Vector<double> s_in_son(3);
                 using namespace OcTreeNames;
-                int son=-10;
-                //If less than one-half on the left side
+                int son = -10;
+                // If less than one-half on the left side
                 if (s_fraction[0] < 0.5)
                 {
-                  //On the down side
+                  // On the down side
                   if (s_fraction[1] < 0.5)
                   {
-                    //On the back side
+                    // On the back side
                     if (s_fraction[2] < 0.5)
                     {
-                      //It's the left down back son
+                      // It's the left down back son
                       son = LDB;
-                      s_in_son[0] = -1.0 + 4.0*s_fraction[0];
-                      s_in_son[1] = -1.0 + 4.0*s_fraction[1];
-                      s_in_son[2] = -1.0 + 4.0*s_fraction[2];
+                      s_in_son[0] = -1.0 + 4.0 * s_fraction[0];
+                      s_in_son[1] = -1.0 + 4.0 * s_fraction[1];
+                      s_in_son[2] = -1.0 + 4.0 * s_fraction[2];
                     }
-                    //On the front side
+                    // On the front side
                     else
                     {
-                      //It's the left down front son
+                      // It's the left down front son
                       son = LDF;
-                      s_in_son[0] = -1.0 + 4.0*s_fraction[0];
-                      s_in_son[1] = -1.0 + 4.0*s_fraction[1];
-                      s_in_son[2] = -1.0 + 4.0*(s_fraction[2]-0.5);
+                      s_in_son[0] = -1.0 + 4.0 * s_fraction[0];
+                      s_in_son[1] = -1.0 + 4.0 * s_fraction[1];
+                      s_in_son[2] = -1.0 + 4.0 * (s_fraction[2] - 0.5);
                     }
-                  } //End of on down side
-                  //else its on the top
+                  } // End of on down side
+                  // else its on the top
                   else
                   {
-                    //On the back
+                    // On the back
                     if (s_fraction[2] < 0.5)
                     {
-                      //It's the left up back son
+                      // It's the left up back son
                       son = LUB;
-                      s_in_son[0] = -1.0 + 4.0*s_fraction[0];
-                      s_in_son[1] = -1.0 + 4.0*(s_fraction[1]-0.5);
-                      s_in_son[2] = -1.0 + 4.0*s_fraction[2];
+                      s_in_son[0] = -1.0 + 4.0 * s_fraction[0];
+                      s_in_son[1] = -1.0 + 4.0 * (s_fraction[1] - 0.5);
+                      s_in_son[2] = -1.0 + 4.0 * s_fraction[2];
                     }
-                    //On the front side
+                    // On the front side
                     else
                     {
-                      //It's the left up front son
+                      // It's the left up front son
                       son = LUF;
-                      s_in_son[0] = -1.0 + 4.0*s_fraction[0];
-                      s_in_son[1] = -1.0 + 4.0*(s_fraction[1]-0.5);
-                      s_in_son[2] = -1.0 + 4.0*(s_fraction[2]-0.5);
+                      s_in_son[0] = -1.0 + 4.0 * s_fraction[0];
+                      s_in_son[1] = -1.0 + 4.0 * (s_fraction[1] - 0.5);
+                      s_in_son[2] = -1.0 + 4.0 * (s_fraction[2] - 0.5);
                     }
-                  } //End of on top
-                } //End of on left
-                //Otherwise its on the right
+                  } // End of on top
+                } // End of on left
+                // Otherwise its on the right
                 else
                 {
-                  //On the down side
+                  // On the down side
                   if (s_fraction[1] < 0.5)
                   {
-                    //On the back side
+                    // On the back side
                     if (s_fraction[2] < 0.5)
                     {
-                      //It's the right down back son
+                      // It's the right down back son
                       son = RDB;
-                      s_in_son[0] = -1.0 + 4.0*(s_fraction[0]-0.5);
-                      s_in_son[1] = -1.0 + 4.0*s_fraction[1];
-                      s_in_son[2] = -1.0 + 4.0*s_fraction[2];
+                      s_in_son[0] = -1.0 + 4.0 * (s_fraction[0] - 0.5);
+                      s_in_son[1] = -1.0 + 4.0 * s_fraction[1];
+                      s_in_son[2] = -1.0 + 4.0 * s_fraction[2];
                     }
-                    //On the front side
+                    // On the front side
                     else
                     {
-                      //It's the right down front son
+                      // It's the right down front son
                       son = RDF;
-                      s_in_son[0] = -1.0 + 4.0*(s_fraction[0]-0.5);
-                      s_in_son[1] = -1.0 + 4.0*s_fraction[1];
-                      s_in_son[2] = -1.0 + 4.0*(s_fraction[2]-0.5);
+                      s_in_son[0] = -1.0 + 4.0 * (s_fraction[0] - 0.5);
+                      s_in_son[1] = -1.0 + 4.0 * s_fraction[1];
+                      s_in_son[2] = -1.0 + 4.0 * (s_fraction[2] - 0.5);
                     }
-                  } //End of on down side
-                  //else its on the top
+                  } // End of on down side
+                  // else its on the top
                   else
                   {
-                    //On the back
+                    // On the back
                     if (s_fraction[2] < 0.5)
                     {
-                      //It's the right up back son
+                      // It's the right up back son
                       son = RUB;
-                      s_in_son[0] = -1.0 + 4.0*(s_fraction[0]-0.5);
-                      s_in_son[1] = -1.0 + 4.0*(s_fraction[1]-0.5);
-                      s_in_son[2] = -1.0 + 4.0*s_fraction[2];
+                      s_in_son[0] = -1.0 + 4.0 * (s_fraction[0] - 0.5);
+                      s_in_son[1] = -1.0 + 4.0 * (s_fraction[1] - 0.5);
+                      s_in_son[2] = -1.0 + 4.0 * s_fraction[2];
                     }
-                    //On the front side
+                    // On the front side
                     else
                     {
-                      //It's the right up front son
+                      // It's the right up front son
                       son = RUF;
-                      s_in_son[0] = -1.0 + 4.0*(s_fraction[0]-0.5);
-                      s_in_son[1] = -1.0 + 4.0*(s_fraction[1]-0.5);
-                      s_in_son[2] = -1.0 + 4.0*(s_fraction[2]-0.5);
+                      s_in_son[0] = -1.0 + 4.0 * (s_fraction[0] - 0.5);
+                      s_in_son[1] = -1.0 + 4.0 * (s_fraction[1] - 0.5);
+                      s_in_son[2] = -1.0 + 4.0 * (s_fraction[2] - 0.5);
                     }
                   }
                 }
 
-                //Get the pointer to the son element
+                // Get the pointer to the son element
                 RefineableQSpectralElement<3>* son_el_pt =
                   dynamic_cast<RefineableQSpectralElement<3>*>(
                     this->tree_pt()->son_pt(son)->object_pt());
 
-                //If we are rebuilding, then worry about the boundary conditions
-                //Find the boundary of the node
-                //Initially none
-                int boundary=Tree::OMEGA;
-                //If we are on the left boundary
-                if (i0==0) {boundary = L;}
-                //If we are on the right boundary
-                else if (i0==n_p-1) {boundary = R;}
-
-                //If we are on the lower boundary
-                if (i1==0)
+                // If we are rebuilding, then worry about the boundary
+                // conditions Find the boundary of the node Initially none
+                int boundary = Tree::OMEGA;
+                // If we are on the left boundary
+                if (i0 == 0)
                 {
-                  //If we already have already set the boundary, we're on an edge
-                  switch (boundary)
-                  {
-                  case L:
-                    boundary = LD;
-                    break;
-                  case R:
-                    boundary = RD;
-                    break;
-                  //Boundary not set
-                  default:
-                    boundary = D;
-                    break;
-                  }
+                  boundary = L;
                 }
-                //If we are the northern bounadry
-                else if (i1==n_p-1)
+                // If we are on the right boundary
+                else if (i0 == n_p - 1)
                 {
-                  //If we already have a boundary
-                  switch (boundary)
-                  {
-                  case L:
-                    boundary = LU;
-                    break;
-                  case R:
-                    boundary = RU;
-                    break;
-                  default:
-                    boundary = U;
-                    break;
-                  }
+                  boundary = R;
                 }
 
-                //If we are on the back face
-                if (i2==0)
+                // If we are on the lower boundary
+                if (i1 == 0)
                 {
-                  //If we already have boundaries
+                  // If we already have already set the boundary, we're on an
+                  // edge
                   switch (boundary)
                   {
-                  case L:
-                    boundary = LB;
-                    break;
-                  case R:
-                    boundary = RB;
-                    break;
-                  case U:
-                    boundary = UB;
-                    break;
-                  case D:
-                    boundary = DB;
-                    break;
-                  case LD:
-                    boundary = LDB;
-                    break;
-                  case RD:
-                    boundary = RDB;
-                    break;
-                  case LU:
-                    boundary = LUB;
-                    break;
-                  case RU:
-                    boundary = RUB;
-                    break;
-                  default:
-                    boundary = B;
-                    break;
+                    case L:
+                      boundary = LD;
+                      break;
+                    case R:
+                      boundary = RD;
+                      break;
+                    // Boundary not set
+                    default:
+                      boundary = D;
+                      break;
                   }
                 }
-                else if (i2==n_p-1)
+                // If we are the northern bounadry
+                else if (i1 == n_p - 1)
                 {
-                  //If we already have boundaries
+                  // If we already have a boundary
                   switch (boundary)
                   {
-                  case L:
-                    boundary = LF;
-                    break;
-                  case R:
-                    boundary = RF;
-                    break;
-                  case U:
-                    boundary = UF;
-                    break;
-                  case D:
-                    boundary = DF;
-                    break;
-                  case LD:
-                    boundary = LDF;
-                    break;
-                  case RD:
-                    boundary = RDF;
-                    break;
-                  case LU:
-                    boundary = LUF;
-                    break;
-                  case RU:
-                    boundary = RUF;
-                    break;
-                  default:
-                    boundary = F;
-                    break;
+                    case L:
+                      boundary = LU;
+                      break;
+                    case R:
+                      boundary = RU;
+                      break;
+                    default:
+                      boundary = U;
+                      break;
+                  }
+                }
+
+                // If we are on the back face
+                if (i2 == 0)
+                {
+                  // If we already have boundaries
+                  switch (boundary)
+                  {
+                    case L:
+                      boundary = LB;
+                      break;
+                    case R:
+                      boundary = RB;
+                      break;
+                    case U:
+                      boundary = UB;
+                      break;
+                    case D:
+                      boundary = DB;
+                      break;
+                    case LD:
+                      boundary = LDB;
+                      break;
+                    case RD:
+                      boundary = RDB;
+                      break;
+                    case LU:
+                      boundary = LUB;
+                      break;
+                    case RU:
+                      boundary = RUB;
+                      break;
+                    default:
+                      boundary = B;
+                      break;
+                  }
+                }
+                else if (i2 == n_p - 1)
+                {
+                  // If we already have boundaries
+                  switch (boundary)
+                  {
+                    case L:
+                      boundary = LF;
+                      break;
+                    case R:
+                      boundary = RF;
+                      break;
+                    case U:
+                      boundary = UF;
+                      break;
+                    case D:
+                      boundary = DF;
+                      break;
+                    case LD:
+                      boundary = LDF;
+                      break;
+                    case RD:
+                      boundary = RDF;
+                      break;
+                    case LU:
+                      boundary = LUF;
+                      break;
+                    case RU:
+                      boundary = RUF;
+                      break;
+                    default:
+                      boundary = F;
+                      break;
                   }
                 }
 
                 // set of boundaries that this edge in the son lives on
                 std::set<unsigned> boundaries;
-                //If we are on a boundary of the Element, find the
-                //mesh boundaries on which we live
-                //The boundaries will be common to the son because there can be
-                //no rotations here
-                if (boundary!=Tree::OMEGA)
+                // If we are on a boundary of the Element, find the
+                // mesh boundaries on which we live
+                // The boundaries will be common to the son because there can be
+                // no rotations here
+                if (boundary != Tree::OMEGA)
                 {
-                  son_el_pt->get_boundaries(boundary,boundaries);
+                  son_el_pt->get_boundaries(boundary, boundaries);
                 }
 
                 // If the node lives on a boundary:
                 // construct a boundary node,
                 // get boundary conditions and
                 // update both lookup schemes
-                if (boundaries.size()>0)
+                if (boundaries.size() > 0)
                 {
-                  //Construct the new node
+                  // Construct the new node
                   this->node_pt(jnod) =
-                    this->construct_boundary_node(jnod,time_stepper_pt);
+                    this->construct_boundary_node(jnod, time_stepper_pt);
 
-                  //Get the boundary conditions from the son
+                  // Get the boundary conditions from the son
                   Vector<int> bound_cons(ncont_interpolated_values());
-                  son_el_pt->get_bcs(boundary,bound_cons);
+                  son_el_pt->get_bcs(boundary, bound_cons);
 
-                  //Loop over the values and pin if necessary
+                  // Loop over the values and pin if necessary
                   unsigned nval = this->node_pt(jnod)->nvalue();
-                  for (unsigned k=0; k<nval; k++)
+                  for (unsigned k = 0; k < nval; k++)
                   {
-                    if (bound_cons[k]) {this->node_pt(jnod)->pin(k);}
+                    if (bound_cons[k])
+                    {
+                      this->node_pt(jnod)->pin(k);
+                    }
                   }
 
                   // Solid node? If so, deal with the positional boundary
                   // conditions:
                   SolidNode* solid_node_pt =
                     dynamic_cast<SolidNode*>(this->node_pt(jnod));
-                  if (solid_node_pt!=0)
+                  if (solid_node_pt != 0)
                   {
-                    //Get the positional boundary conditions from the father:
+                    // Get the positional boundary conditions from the father:
                     unsigned n_dim = this->node_pt(jnod)->ndim();
                     Vector<int> solid_bound_cons(n_dim);
-                    RefineableSolidQElement<3>* son_solid_el_pt=
+                    RefineableSolidQElement<3>* son_solid_el_pt =
                       dynamic_cast<RefineableSolidQElement<3>*>(son_el_pt);
 #ifdef PARANOID
-                    if (son_solid_el_pt==0)
+                    if (son_solid_el_pt == 0)
                     {
-                      std::string error_message =
-                        "We have a SolidNode outside a refineable SolidElement\n";
+                      std::string error_message = "We have a SolidNode outside "
+                                                  "a refineable SolidElement\n";
                       error_message +=
                         "during mesh refinement -- this doesn't make sense\n";
 
-                      throw OomphLibError(
-                        error_message,
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
+                      throw OomphLibError(error_message,
+                                          OOMPH_CURRENT_FUNCTION,
+                                          OOMPH_EXCEPTION_LOCATION);
                     }
 #endif
-                    son_solid_el_pt->get_solid_bcs(boundary,solid_bound_cons);
+                    son_solid_el_pt->get_solid_bcs(boundary, solid_bound_cons);
 
-                    //Loop over the positions and pin, if necessary
-                    for (unsigned k=0; k<n_dim; k++)
+                    // Loop over the positions and pin, if necessary
+                    for (unsigned k = 0; k < n_dim; k++)
                     {
-                      if (solid_bound_cons[k]) {solid_node_pt->pin_position(k);}
+                      if (solid_bound_cons[k])
+                      {
+                        solid_node_pt->pin_position(k);
+                      }
                     }
                   }
 
-                  //Next we update the boundary look-up schemes
-                  //Loop over the boundaries stored in the set
+                  // Next we update the boundary look-up schemes
+                  // Loop over the boundaries stored in the set
                   for (std::set<unsigned>::iterator it = boundaries.begin();
-                       it != boundaries.end(); ++it)
+                       it != boundaries.end();
+                       ++it)
                   {
-                    //Add the node to the boundary
-                    mesh_pt->add_boundary_node(*it,this->node_pt(jnod));
+                    // Add the node to the boundary
+                    mesh_pt->add_boundary_node(*it, this->node_pt(jnod));
 
-                    //If we have set an intrinsic coordinate on this
-                    //mesh boundary then it must also be interpolated on
-                    //the new node
-                    //Now interpolate the intrinsic boundary coordinate
-                    if (mesh_pt->boundary_coordinate_exists(*it)==true)
+                    // If we have set an intrinsic coordinate on this
+                    // mesh boundary then it must also be interpolated on
+                    // the new node
+                    // Now interpolate the intrinsic boundary coordinate
+                    if (mesh_pt->boundary_coordinate_exists(*it) == true)
                     {
                       Vector<double> zeta(2);
-                      son_el_pt->interpolated_zeta_on_face(*it,boundary,
-                                                           s_in_son,zeta);
+                      son_el_pt->interpolated_zeta_on_face(
+                        *it, boundary, s_in_son, zeta);
 
-                      this->node_pt(jnod)->set_coordinates_on_boundary(*it,zeta);
+                      this->node_pt(jnod)->set_coordinates_on_boundary(*it,
+                                                                       zeta);
                     }
                   }
                 }
-                //Otherwise we construct a normal "bulk" node
+                // Otherwise we construct a normal "bulk" node
                 else
                 {
-                  //Construct the new node
+                  // Construct the new node
                   this->node_pt(jnod) =
-                    this->construct_node(jnod,time_stepper_pt);
+                    this->construct_node(jnod, time_stepper_pt);
                 }
 
-                //Now we set the position and values at the newly created node
+                // Now we set the position and values at the newly created node
 
                 // In the first instance use macro element or FE representation
                 // to create past and present nodal positions.
@@ -485,61 +496,60 @@ namespace oomph
                 // ONCE THEY HAVE BEEN GIVEN POSITIONS) BUT WILL
                 // NOT ASSIGN SENSIBLE INITIAL POSITONS!
 
-                //Loop over # of history values
-                for (unsigned t=0; t<ntstorage; t++)
+                // Loop over # of history values
+                for (unsigned t = 0; t < ntstorage; t++)
                 {
-                  //Get the position from the son
+                  // Get the position from the son
                   Vector<double> x_prev(3);
 
-                  //Now let's fill in the value
-                  son_el_pt->get_x(t,s_in_son,x_prev);
-                  for (unsigned i=0; i<3; i++)
+                  // Now let's fill in the value
+                  son_el_pt->get_x(t, s_in_son, x_prev);
+                  for (unsigned i = 0; i < 3; i++)
                   {
-                    this->node_pt(jnod)->x(t,i) = x_prev[i];
+                    this->node_pt(jnod)->x(t, i) = x_prev[i];
                   }
                 }
 
                 // Now set the values
                 // Loop over all history values
-                for (unsigned t=0; t<ntstorage; t++)
+                for (unsigned t = 0; t < ntstorage; t++)
                 {
                   // Get values from father element
                   // Note: get_interpolated_values() sets Vector size itself.
                   Vector<double> prev_values;
-                  son_el_pt->get_interpolated_values(t,s_in_son,prev_values);
+                  son_el_pt->get_interpolated_values(t, s_in_son, prev_values);
 
-                  //Initialise the values at the new node
-                  for (unsigned k=0; k<this->node_pt(jnod)->nvalue(); k++)
+                  // Initialise the values at the new node
+                  for (unsigned k = 0; k < this->node_pt(jnod)->nvalue(); k++)
                   {
-                    this->node_pt(jnod)->set_value(t,k,prev_values[k]);
+                    this->node_pt(jnod)->set_value(t, k, prev_values[k]);
                   }
                 }
 
-                //Add the node to the mesh
+                // Add the node to the mesh
                 mesh_pt->add_node_pt(this->node_pt(jnod));
 
-              } //Node has been constructed
+              } // Node has been constructed
 
-              //Algebraic stuff here
-              //Check whether the element is an algebraic element
+              // Algebraic stuff here
+              // Check whether the element is an algebraic element
               AlgebraicElementBase* alg_el_pt =
                 dynamic_cast<AlgebraicElementBase*>(this);
 
-              //If we do have an algebraic element
-              if (alg_el_pt!=0)
+              // If we do have an algebraic element
+              if (alg_el_pt != 0)
               {
                 std::string error_message =
                   "Have not implemented rebuilding from sons for";
-                error_message +=
-                  "Algebraic Spectral elements yet\n";
+                error_message += "Algebraic Spectral elements yet\n";
 
-                throw
-                OomphLibError(error_message,
-                              "RefineableQSpectralElement::rebuild_from_sons()",
-                              OOMPH_EXCEPTION_LOCATION);
+                throw OomphLibError(
+                  error_message,
+                  "RefineableQSpectralElement::rebuild_from_sons()",
+                  OOMPH_EXCEPTION_LOCATION);
               }
 
-            } //End of the case when the node was not built
+            } // End of the case when the node was not built
           }
         }
       }
@@ -549,17 +559,18 @@ namespace oomph
     virtual bool nodes_built()
     {
       unsigned n_node = this->nnode();
-      for (unsigned n=0; n<n_node; n++)
+      for (unsigned n = 0; n < n_node; n++)
       {
-        if (node_pt(n)==0) {return false;}
+        if (node_pt(n) == 0)
+        {
+          return false;
+        }
       }
-      //If we get to here, OK
+      // If we get to here, OK
       return true;
     }
-
-
   };
 
-}
+} // namespace oomph
 
 #endif

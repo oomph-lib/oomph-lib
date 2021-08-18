@@ -66,7 +66,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquatio
 \item 
 void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_abde2883fb3855ca2e65cdef97176e017}{values\+\_\+to\+\_\+be\+\_\+pinned\+\_\+on\+\_\+outer\+\_\+pml\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&values\+\_\+to\+\_\+pin)
 \begin{DoxyCompactList}\small\item\em Pure virtual function in which we specify the values to be pinned (and set to zero) on the outer edge of the pml layer. All of them! \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} is resized internally. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a6f3fe7c9849eb59099e4669a16419828}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&flux) const
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ae2f36be084f573fa4c88f392a5581408}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i for real and imag part. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_aac3bfd919a04acd6144be1330ce1abd5}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector (wrapper) \end{DoxyCompactList}\item 
@@ -79,13 +79,13 @@ unsigned \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ab23d297f77537244e433eafdf8896a7e}{compute\+\_\+pml\+\_\+coefficients}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&pml\+\_\+laplace\+\_\+factor, std\+::complex$<$ double $>$ \&pml\+\_\+k\+\_\+squared\+\_\+factor)
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ac35da887b1e0c358bbe4a07812bfbb82}{compute\+\_\+pml\+\_\+coefficients}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&pml\+\_\+laplace\+\_\+factor, std\+::complex$<$ double $>$ \&pml\+\_\+k\+\_\+squared\+\_\+factor)
 \begin{DoxyCompactList}\small\item\em Compute pml coefficients at position x and integration point ipt. pml\+\_\+laplace\+\_\+factor is used in the residual contribution from the laplace operator, similarly pml\+\_\+k\+\_\+squared\+\_\+factor is used in the contribution from the k$^\wedge$2 of the Helmholtz operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a47a2b102920421dd806e0d54f7119ee9}{compute\+\_\+complex\+\_\+r}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&complex\+\_\+r)
 \begin{DoxyCompactList}\small\item\em Compute complex variable r at position x\mbox{[}0\mbox{]} and integration point ipt. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate}{P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_aee2481691e720bc3ae304ffc61bbd876}{pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate}{P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ad7588d1c1347fea894ea765af6a7ebb3}{pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the P\+ML Mapping object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate}{P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ae438332c73f3bb757dcdb845fe1782cf}{pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate}{P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a285bc8e92c82bf6c44f6d7c89655942e}{pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the P\+ML Mapping object (const version) \end{DoxyCompactList}\item 
 virtual double \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a437b6db9f1371f3e4e494a376e5c7ebf}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; return Jacobian of mapping. \end{DoxyCompactList}\item 
@@ -119,7 +119,7 @@ static double \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquati
 \doxysubsection{Detailed Description}
 A class for all isoparametric elements that solve the Helmholtz equations with pml capabilities. in Fourier decomposed form (cylindrical polars)\+: \[ U(r,\varphi,z) = \Re( u^{(n)}(r,z) \exp(-i n \varphi)) \] We are solving for $ u^{(n)}(r,z)$ for given parameters $ k^2 $ and $ n $ . This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line 166 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 161 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -136,7 +136,7 @@ Function pointer to source function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line 175 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 168 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -153,7 +153,7 @@ Constructor.
 
 
 
-Definition at line 180 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 172 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -171,7 +171,7 @@ Broken copy constructor.
 
 
 
-Definition at line 193 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 185 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -192,7 +192,7 @@ Get complex shift.
 
 
 
-Definition at line 249 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 243 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -210,7 +210,7 @@ Get pointer to complex shift.
 
 
 
-Definition at line 242 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 236 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -228,11 +228,15 @@ Compute complex variable r at position x\mbox{[}0\mbox{]} and integration point 
 
 The complex r variable is only imaginary on two conditions\+: First, the decaying nature of the pml layers is active. Secondly, the integration point is contained in the right pml layer or the two corner pml layers.
 
-Definition at line 582 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 579 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References k\+\_\+squared(), oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+direction\+\_\+active, oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+inner\+\_\+boundary, oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+is\+\_\+enabled, Pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt, and oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+outer\+\_\+boundary.
+References k\+\_\+squared(), oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+direction\+\_\+active, oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+inner\+\_\+boundary, oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+is\+\_\+enabled, Pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt, oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+outer\+\_\+boundary, and oomph\+::\+P\+M\+L\+Mapping\+And\+Transformed\+Coordinate\+::transformed\+\_\+coordinate().
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a28988f5a2a7591b4f7dbb66484715c20}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a28988f5a2a7591b4f7dbb66484715c20}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!compute\_error@{compute\_error}}
@@ -252,7 +256,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 742 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 715 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -274,7 +278,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 341 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 339 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a959d840ea05472d315b4de5d721dbeca}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a959d840ea05472d315b4de5d721dbeca}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!compute\_norm@{compute\_norm}}
@@ -292,17 +296,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af2025a472d
 
 
 
-Definition at line 824 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 795 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
-References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+References i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
-\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ab23d297f77537244e433eafdf8896a7e}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ab23d297f77537244e433eafdf8896a7e}} 
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ac35da887b1e0c358bbe4a07812bfbb82}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ac35da887b1e0c358bbe4a07812bfbb82}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!compute\_pml\_coefficients@{compute\_pml\_coefficients}}
 \index{compute\_pml\_coefficients@{compute\_pml\_coefficients}!oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}}
 \doxysubsubsection{\texorpdfstring{compute\_pml\_coefficients()}{compute\_pml\_coefficients()}}
-{\footnotesize\ttfamily void oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::compute\+\_\+pml\+\_\+coefficients (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{pml\+\_\+laplace\+\_\+factor,  }\item[{std\+::complex$<$ double $>$ \&}]{pml\+\_\+k\+\_\+squared\+\_\+factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::compute\+\_\+pml\+\_\+coefficients (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{pml\+\_\+laplace\+\_\+factor,  }\item[{std\+::complex$<$ double $>$ \&}]{pml\+\_\+k\+\_\+squared\+\_\+factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -316,11 +320,15 @@ for 2D, in order\+: g\+\_\+y/g\+\_\+x, g\+\_\+x/g\+\_\+y for Laplace bit and g\+
 
 The weights all default to 1.\+0 as if the propagation medium is the physical domain
 
-Definition at line 512 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 511 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References k\+\_\+squared(), oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+direction\+\_\+active, oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+inner\+\_\+boundary, oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+is\+\_\+enabled, Pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt, and oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+outer\+\_\+boundary.
+References oomph\+::\+P\+M\+L\+Mapping\+And\+Transformed\+Coordinate\+::gamma(), k\+\_\+squared(), oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+direction\+\_\+active, oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+inner\+\_\+boundary, oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+is\+\_\+enabled, Pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt, and oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::\+Pml\+\_\+outer\+\_\+boundary.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ad6b38e9ef2bfb8c248db2b02fad4059e}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ad6b38e9ef2bfb8c248db2b02fad4059e}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!dshape\_and\_dtest\_eulerian\_at\_knot\_pml\_fourier\_decomposed\_helmholtz@{dshape\_and\_dtest\_eulerian\_at\_knot\_pml\_fourier\_decomposed\_helmholtz}}
@@ -335,6 +343,10 @@ Shape/test functions and derivs w.\+r.\+t. to global coords at integration point
 
 
 Implemented in \mbox{\hyperlink{classoomph_1_1QPMLFourierDecomposedHelmholtzElement_ae22bd3d3e85c210c380f81dc00b129b7}{oomph\+::\+Q\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a8c84997e3407e8c56537002c3d998416}{oomph\+::\+T\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a437b6db9f1371f3e4e494a376e5c7ebf}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a437b6db9f1371f3e4e494a376e5c7ebf}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!dshape\_and\_dtest\_eulerian\_pml\_fourier\_decomposed\_helmholtz@{dshape\_and\_dtest\_eulerian\_pml\_fourier\_decomposed\_helmholtz}}
@@ -366,7 +378,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 453 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 456 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -388,7 +400,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 441 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 445 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -410,21 +422,21 @@ flag=1\+: compute both flag=0\+: compute only residual \mbox{\hyperlink{classoom
 
 Pure version without hanging nodes 
 
-Definition at line 198 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 192 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
-References interpolated\+\_\+u(), n, residuals(), and oomph\+::\+Quad\+Tree\+Names\+::W.
+References compute\+\_\+complex\+\_\+r(), compute\+\_\+pml\+\_\+coefficients(), dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), get\+\_\+source\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), k\+\_\+squared(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Integral\+::nweight(), pml\+\_\+fourier\+\_\+wavenumber(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value(), residuals(), u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 
 
 Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a6f3fe7c9849eb59099e4669a16419828}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a6f3fe7c9849eb59099e4669a16419828}} 
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ae2f36be084f573fa4c88f392a5581408}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ae2f36be084f573fa4c88f392a5581408}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!get\_flux@{get\_flux}}
 \index{get\_flux@{get\_flux}!oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}}
 \doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
-{\footnotesize\ttfamily void oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{flux }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{flux }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -432,7 +444,7 @@ Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i for real and imag part.
 
 
 
-Definition at line 401 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 405 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -450,11 +462,15 @@ Referenced by oomph\+::\+T\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$ 
 
 Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. 
 
-Definition at line 369 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 373 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
 References Source\+\_\+fct\+\_\+pt.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a0f19afeba02fffada74ec3dc00d2efa3}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a0f19afeba02fffada74ec3dc00d2efa3}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!interpolated\_u\_pml\_fourier\_decomposed\_helmholtz@{interpolated\_u\_pml\_fourier\_decomposed\_helmholtz}}
@@ -468,7 +484,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 465 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 467 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -476,7 +492,7 @@ References interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+
 
 
 
-Referenced by compute\+\_\+error(), and output().
+Referenced by compute\+\_\+error(), compute\+\_\+norm(), output(), and output\+\_\+real().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a7a04cdffb34f103497eeb4d3f791010a}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a7a04cdffb34f103497eeb4d3f791010a}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!k\_squared@{k\_squared}}
@@ -490,7 +506,7 @@ Get k squared.
 
 
 
-Definition at line 227 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 221 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -498,7 +514,7 @@ References K\+\_\+squared\+\_\+pt.
 
 
 
-Referenced by compute\+\_\+complex\+\_\+r(), and compute\+\_\+pml\+\_\+coefficients().
+Referenced by compute\+\_\+complex\+\_\+r(), compute\+\_\+pml\+\_\+coefficients(), and fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ac7693faa7b9eabf41d9eb699af0564a2}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ac7693faa7b9eabf41d9eb699af0564a2}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!k\_squared\_pt@{k\_squared\_pt}}
@@ -512,7 +528,7 @@ Get pointer to frequency.
 
 
 
-Definition at line 220 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 214 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -538,7 +554,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QPMLFourierDecomposedHelmholtzEl
 
 
 
-Definition at line 294 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 289 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -568,7 +584,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QPMLFourierDecomposedHelmholtzEl
 
 
 
-Definition at line 588 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 565 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -594,7 +610,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QPMLFourierDecomposedHelmholtzEl
 
 
 
-Definition at line 275 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 269 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -624,11 +640,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QPMLFourierDecomposedHelmholtzEl
 
 
 
-Definition at line 501 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 489 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
-References i, s, and u().
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, interpolated\+\_\+u\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), u(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a7702d97ca56f4c8a64969ee48f50331e}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a7702d97ca56f4c8a64969ee48f50331e}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!output\_fct@{output\_fct}}
@@ -650,7 +666,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QPMLFourierDecomposedHelmholtzEl
 
 
 
-Definition at line 311 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 307 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a99529254ab80edf5e658e32034344a69}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a99529254ab80edf5e658e32034344a69}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!output\_fct@{output\_fct}}
@@ -674,7 +690,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QPMLFourierDecomposedHelmholtzEl
 
 
 
-Definition at line 634 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 609 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -704,11 +720,11 @@ r,z,u
 
 Output at nplot points in each coordinate direction 
 
-Definition at line 548 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 529 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
-References i, s, and u().
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, interpolated\+\_\+u\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), u(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 
 
@@ -734,7 +750,7 @@ r,z,u
 
 Output at nplot points in each coordinate direction 
 
-Definition at line 689 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 663 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -756,11 +772,15 @@ Get the Fourier wavenumber.
 
 
 
-Definition at line 261 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 255 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
 References N\+\_\+pml\+\_\+fourier\+\_\+pt.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a90cf7c78c2f220696717adcefe9f5776}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a90cf7c78c2f220696717adcefe9f5776}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!pml\_fourier\_wavenumber\_pt@{pml\_fourier\_wavenumber\_pt}}
@@ -774,17 +794,17 @@ Get pointer to Fourier wavenumber.
 
 
 
-Definition at line 255 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 249 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
 References N\+\_\+pml\+\_\+fourier\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_aee2481691e720bc3ae304ffc61bbd876}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_aee2481691e720bc3ae304ffc61bbd876}} 
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ad7588d1c1347fea894ea765af6a7ebb3}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ad7588d1c1347fea894ea765af6a7ebb3}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!pml\_mapping\_and\_transformed\_coordinate\_pt@{pml\_mapping\_and\_transformed\_coordinate\_pt}}
 \index{pml\_mapping\_and\_transformed\_coordinate\_pt@{pml\_mapping\_and\_transformed\_coordinate\_pt}!oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}}
 \doxysubsubsection{\texorpdfstring{pml\_mapping\_and\_transformed\_coordinate\_pt()}{pml\_mapping\_and\_transformed\_coordinate\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate}{P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}}$\ast$ \& oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate}{P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}}$\ast$\& oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -792,17 +812,17 @@ Return a pointer to the P\+ML Mapping object.
 
 
 
-Definition at line 616 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 614 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
 References Pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ae438332c73f3bb757dcdb845fe1782cf}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_ae438332c73f3bb757dcdb845fe1782cf}} 
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a285bc8e92c82bf6c44f6d7c89655942e}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_a285bc8e92c82bf6c44f6d7c89655942e}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!pml\_mapping\_and\_transformed\_coordinate\_pt@{pml\_mapping\_and\_transformed\_coordinate\_pt}}
 \index{pml\_mapping\_and\_transformed\_coordinate\_pt@{pml\_mapping\_and\_transformed\_coordinate\_pt}!oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}}
 \doxysubsubsection{\texorpdfstring{pml\_mapping\_and\_transformed\_coordinate\_pt()}{pml\_mapping\_and\_transformed\_coordinate\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate}{P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}}$\ast$ const \& oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate}{P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}}$\ast$ const\& oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::pml\+\_\+mapping\+\_\+and\+\_\+transformed\+\_\+coordinate\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -810,7 +830,7 @@ Return a pointer to the P\+ML Mapping object (const version)
 
 
 
-Definition at line 623 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 620 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -832,7 +852,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 469 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 460 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -868,7 +888,7 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line 361 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 363 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -886,11 +906,11 @@ Broken assignment operator.
 
 Return the index at which the unknown value is stored\+: Real/imag part of index contains (real) index of real/imag part. 
 
-Definition at line 214 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 206 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-Referenced by get\+\_\+flux(), interpolated\+\_\+u\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element(), and oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element().
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), get\+\_\+flux(), interpolated\+\_\+u\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element(), and oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_abde2883fb3855ca2e65cdef97176e017}\label{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_abde2883fb3855ca2e65cdef97176e017}} 
 \index{oomph::PMLFourierDecomposedHelmholtzEquations@{oomph::PMLFourierDecomposedHelmholtzEquations}!values\_to\_be\_pinned\_on\_outer\_pml\_boundary@{values\_to\_be\_pinned\_on\_outer\_pml\_boundary}}
@@ -908,7 +928,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PMLElementBase_ad63639f1966cd3191fad69
 
 
 
-Definition at line 389 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 393 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -925,7 +945,7 @@ Pointer to wavenumber complex shift.
 
 
 
-Definition at line 672 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 670 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -937,13 +957,19 @@ Referenced by alpha(), alpha\+\_\+pt(), and P\+M\+L\+Fourier\+Decomposed\+Helmho
 \doxysubsubsection{\texorpdfstring{Default\_Physical\_Constant\_Value}{Default\_Physical\_Constant\_Value}}
 {\footnotesize\ttfamily double oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      0.0}
+
+\end{DoxyCode}
 
 
 Static default value for the physical constants (initialised to zero) 
 
+P\+ML Helmholtz equations static data, so that by default we can point to a 0 
 
-
-Definition at line 675 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 673 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -957,7 +983,7 @@ Referenced by P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations().
 
 Static so that the class doesn\textquotesingle{}t need to instantiate a new default everytime it uses it 
 
-Definition at line 631 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 629 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -975,7 +1001,7 @@ Pointer to k$^\wedge$2 (wavenumber squared)
 
 
 
-Definition at line 665 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 662 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -993,7 +1019,7 @@ Pointer to Fourier wave number.
 
 
 
-Definition at line 678 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 676 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -1011,7 +1037,7 @@ Pointer to class which holds the pml mapping function (also known as gamma) and 
 
 
 
-Definition at line 669 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 667 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -1029,7 +1055,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 662 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 659 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 

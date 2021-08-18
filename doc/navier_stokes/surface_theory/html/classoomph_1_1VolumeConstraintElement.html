@@ -190,7 +190,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that is used to implement the constraint that the fluid volume in a region bounded by associated FaceElements (attached, e.g., to the mesh boundaries that enclose a bubble) must take a specific value. This GeneralisedElement is used only to store the desired volume and a pointer to the (usually pressure) freedom that must be traded for the volume constraint. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00066">66</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00065">65</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a641eea5633b1ddd2d9f79e5731947660"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a641eea5633b1ddd2d9f79e5731947660">&#9670;&nbsp;</a></span>VolumeConstraintElement() <span class="overload">[1/2]</span></h2>
@@ -210,9 +210,9 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor: Pass pointer to target volume. "Pressure" value that "traded" for the volume contraint is created internally (as a Data item with a single pressure value) </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8cc_source.html#l00061">61</a> of file <a class="el" href="constrained__volume__elements_8cc_source.html">constrained_volume_elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8cc_source.html#l00060">60</a> of file <a class="el" href="constrained__volume__elements_8cc_source.html">constrained_volume_elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00076">External_or_internal_data_index_of_traded_pressure</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00084">Index_of_traded_pressure_value</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00071">Prescribed_volume_pt</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00080">Traded_pressure_stored_as_internal_data</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00074">External_or_internal_data_index_of_traded_pressure</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00082">Index_of_traded_pressure_value</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00069">Prescribed_volume_pt</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00078">Traded_pressure_stored_as_internal_data</a>.</p>
 
 </div>
 </div>
@@ -250,9 +250,9 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor: Pass pointer to target volume, pointer to Data item whose value specified by index_of_traded_pressure represents the "Pressure" value that "traded" for the volume contraint. The Data is stored as external Data for this element. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8cc_source.html#l00084">84</a> of file <a class="el" href="constrained__volume__elements_8cc_source.html">constrained_volume_elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8cc_source.html#l00083">83</a> of file <a class="el" href="constrained__volume__elements_8cc_source.html">constrained_volume_elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00076">External_or_internal_data_index_of_traded_pressure</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00148">index_of_traded_pressure()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00084">Index_of_traded_pressure_value</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00129">p_traded_data_pt()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00071">Prescribed_volume_pt</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00080">Traded_pressure_stored_as_internal_data</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00074">External_or_internal_data_index_of_traded_pressure</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00145">index_of_traded_pressure()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00082">Index_of_traded_pressure_value</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00124">p_traded_data_pt()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00069">Prescribed_volume_pt</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00078">Traded_pressure_stored_as_internal_data</a>.</p>
 
 </div>
 </div>
@@ -281,7 +281,7 @@ Private Attributes</h2></td></tr>
 
 <p>Empty destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00126">126</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00121">121</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
 </div>
 </div>
@@ -322,9 +322,9 @@ Private Attributes</h2></td></tr>
 
 <p>Fill in the residuals and jacobian for the volume constraint. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00160">160</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00159">159</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8cc_source.html#l00039">fill_in_generic_contribution_to_residuals_volume_constraint()</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8cc_source.html#l00038">fill_in_generic_contribution_to_residuals_volume_constraint()</a>.</p>
 
 </div>
 </div>
@@ -370,9 +370,9 @@ Private Attributes</h2></td></tr>
 
 <p>Fill in the residuals, jacobian and mass matrix for the volume constraint. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00170">170</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00169">169</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8cc_source.html#l00039">fill_in_generic_contribution_to_residuals_volume_constraint()</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8cc_source.html#l00038">fill_in_generic_contribution_to_residuals_volume_constraint()</a>.</p>
 
 </div>
 </div>
@@ -402,9 +402,9 @@ Private Attributes</h2></td></tr>
 
 <p>Fill in the residuals for the volume constraint. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00153">153</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00152">152</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8cc_source.html#l00039">fill_in_generic_contribution_to_residuals_volume_constraint()</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8cc_source.html#l00038">fill_in_generic_contribution_to_residuals_volume_constraint()</a>.</p>
 
 </div>
 </div>
@@ -434,11 +434,11 @@ Private Attributes</h2></td></tr>
 
 <p>Fill in the residuals for the volume constraint. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8cc_source.html#l00039">39</a> of file <a class="el" href="constrained__volume__elements_8cc_source.html">constrained_volume_elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8cc_source.html#l00038">38</a> of file <a class="el" href="constrained__volume__elements_8cc_source.html">constrained_volume_elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00071">Prescribed_volume_pt</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00087">ptraded_local_eqn()</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00069">Prescribed_volume_pt</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00085">ptraded_local_eqn()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00160">fill_in_contribution_to_jacobian()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00170">fill_in_contribution_to_jacobian_and_mass_matrix()</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00153">fill_in_contribution_to_residuals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00159">fill_in_contribution_to_jacobian()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00169">fill_in_contribution_to_jacobian_and_mass_matrix()</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00152">fill_in_contribution_to_residuals()</a>.</p>
 
 </div>
 </div>
@@ -467,11 +467,11 @@ Private Attributes</h2></td></tr>
 
 <p>Return the index of Data object at which the traded pressure is stored. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00148">148</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00145">145</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00084">Index_of_traded_pressure_value</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00082">Index_of_traded_pressure_value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00266">oomph::VolumeConstraintBoundingElement::set_volume_constraint_element()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00084">VolumeConstraintElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00261">oomph::VolumeConstraintBoundingElement::set_volume_constraint_element()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00083">VolumeConstraintElement()</a>.</p>
 
 </div>
 </div>
@@ -500,9 +500,9 @@ Private Attributes</h2></td></tr>
 
 <p>Return the traded pressure value. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00144">144</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00139">139</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00084">Index_of_traded_pressure_value</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00129">p_traded_data_pt()</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00082">Index_of_traded_pressure_value</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00124">p_traded_data_pt()</a>.</p>
 
 </div>
 </div>
@@ -531,11 +531,11 @@ Private Attributes</h2></td></tr>
 
 <p>Access to Data that contains the traded pressure. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00129">129</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00124">124</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00076">External_or_internal_data_index_of_traded_pressure</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00080">Traded_pressure_stored_as_internal_data</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00074">External_or_internal_data_index_of_traded_pressure</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00078">Traded_pressure_stored_as_internal_data</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00144">p_traded()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00266">oomph::VolumeConstraintBoundingElement::set_volume_constraint_element()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00084">VolumeConstraintElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00139">p_traded()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00261">oomph::VolumeConstraintBoundingElement::set_volume_constraint_element()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00083">VolumeConstraintElement()</a>.</p>
 
 </div>
 </div>
@@ -564,11 +564,11 @@ Private Attributes</h2></td></tr>
 
 <p>The local eqn number for the traded pressure. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00087">87</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00085">85</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00076">External_or_internal_data_index_of_traded_pressure</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00084">Index_of_traded_pressure_value</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00080">Traded_pressure_stored_as_internal_data</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00074">External_or_internal_data_index_of_traded_pressure</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00082">Index_of_traded_pressure_value</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00078">Traded_pressure_stored_as_internal_data</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8cc_source.html#l00039">fill_in_generic_contribution_to_residuals_volume_constraint()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8cc_source.html#l00038">fill_in_generic_contribution_to_residuals_volume_constraint()</a>.</p>
 
 </div>
 </div>
@@ -595,9 +595,9 @@ Private Attributes</h2></td></tr>
 
 <p>The Data that contains the traded pressure is stored as external or internal Data for the element. What is its index in these containers? </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00076">76</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00074">74</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00129">p_traded_data_pt()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00087">ptraded_local_eqn()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00061">VolumeConstraintElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00124">p_traded_data_pt()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00085">ptraded_local_eqn()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00060">VolumeConstraintElement()</a>.</p>
 
 </div>
 </div>
@@ -622,9 +622,9 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Index of the value in traded pressure data that corresponds to the traded pressure </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00084">84</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00082">82</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00148">index_of_traded_pressure()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00144">p_traded()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00087">ptraded_local_eqn()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00061">VolumeConstraintElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00145">index_of_traded_pressure()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00139">p_traded()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00085">ptraded_local_eqn()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00060">VolumeConstraintElement()</a>.</p>
 
 </div>
 </div>
@@ -650,9 +650,9 @@ Private Attributes</h2></td></tr>
 
 <p>Pointer to the desired value of the volume. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00071">71</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00069">69</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8cc_source.html#l00039">fill_in_generic_contribution_to_residuals_volume_constraint()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00061">VolumeConstraintElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8cc_source.html#l00038">fill_in_generic_contribution_to_residuals_volume_constraint()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00060">VolumeConstraintElement()</a>.</p>
 
 </div>
 </div>
@@ -678,9 +678,9 @@ Private Attributes</h2></td></tr>
 
 <p>The Data that contains the traded pressure is stored as external or internal Data for the element. Which one? </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00080">80</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00078">78</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00129">p_traded_data_pt()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00087">ptraded_local_eqn()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00061">VolumeConstraintElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00124">p_traded_data_pt()</a>, <a class="el" href="constrained__volume__elements_8h_source.html#l00085">ptraded_local_eqn()</a>, and <a class="el" href="constrained__volume__elements_8cc_source.html#l00060">VolumeConstraintElement()</a>.</p>
 
 </div>
 </div>
@@ -716,7 +716,7 @@ Private Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:11:30
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:52:23
         </div>
       </div>
     </footer>

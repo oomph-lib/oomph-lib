@@ -19,15 +19,13 @@ Inheritance diagram for oomph\+::Advection\+Diffusion\+Reaction\+Equations$<$ N\
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a3443e579e62414ecc50595403982e686}{Advection\+Diffusion\+Reaction\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
-\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a74f8f0492147a5600b075cc64479f850}{Advection\+Diffusion\+Reaction\+Reaction\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&c, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&R)
 \begin{DoxyCompactList}\small\item\em Function pointer to reaction terms. \end{DoxyCompactList}\item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_af7afb472439d8e83b825c0a3c03190a7}{Advection\+Diffusion\+Reaction\+Reaction\+Deriv\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&c, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&d\+RdC)
 \begin{DoxyCompactList}\small\item\em Function pointer to derivative of reaction terms. \end{DoxyCompactList}\item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a2fff621b5b44c64bd5b3f0412201055f}{Advection\+Diffusion\+Reaction\+Wind\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)
-\begin{DoxyCompactList}\small\item\em Function pointer to wind function fct(x,w(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to wind function fct(x,w(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -40,16 +38,13 @@ void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a79994ad
 virtual unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_ad7564620f4b3313b09d2a3e675958e10}{c\+\_\+index\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the unknown i-\/th reagent is stored. The default value, i, is appropriate for single-\/physics problems, when there are only i variables, the values that satisfies the advection-\/diffusion-\/reaction equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_adf47eb6be16a1d42bdb4019fde6f4b82}{dc\+\_\+dt\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&r) const
-\begin{DoxyCompactList}\small\item\em dc\+\_\+r/dt at local node n. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em dc\+\_\+r/dt at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a39154d834bca6581eab17920e8b4e20a}{dc\+\_\+dt\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dc\+\_\+dt) const
-\begin{DoxyCompactList}\small\item\em dc/dt at local node n. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em dc/dt at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_abe712696eb8db1c8b4f2eb5103a54c3f}{disable\+\_\+\+A\+LE}} ()
 \begin{DoxyCompactList}\small\item\em Disable A\+LE, i.\+e. assert the mesh is not moving -- you do this at your own risk! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a8c90c9aa40fbe311742b18a2c979730a}{enable\+\_\+\+A\+LE}} ()
-\begin{DoxyCompactList}\small\item\em (Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em (Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a70be6733b56f27104a4a849c296b5b62}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output with default number of plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a38aa99ed50cc082f0c9c7079a13a11da}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
@@ -86,21 +81,18 @@ void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a4a177ab
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to reaction function. Const version. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_ad59a0d4f89e443358553e4802233dc1d}{diff}} () const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of diffusion coefficients. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a70db4dae4524ac4c2d6af262c4e4d47e}{diff\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a7ba2708db1ab6a5a9b3c2bb520ca94b8}{diff\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to vector of diffusion coefficients. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a8976ed911125695578edfa5c2c23755b}{tau}} () const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of dimensionless timescales. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_ac3e7834f33607cc560e7a1dd08eb9b7a}{tau\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_ad7fee0c3827316b6a4e7b6beb6827e4f}{tau\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to vector of dimensionless timescales. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a2a279f4485b7a46a8684cda2678ae825}{get\+\_\+source\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&source) const
-\begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a2f4bc51e9f535f951f6b1d5827ee3264}{get\+\_\+wind\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind) const
-\begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_afcd57b515d90c0a55406d11ec6316856}{get\+\_\+reaction\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&C, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&R) const
-\begin{DoxyCompactList}\small\item\em Get reaction as a function of the given reagent concentrations This function is virtual to allow overloading in multi-\/physics problems where the reaction function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get reaction as a function of the given reagent concentrations This function is virtual to allow overloading in multi-\/physics problems where the reaction function might be determined by another system of equations. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a14deb197bcb3ddb01798c98b2942f5d0}{get\+\_\+reaction\+\_\+deriv\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&C, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&d\+RdC) const
 \begin{DoxyCompactList}\small\item\em Get the derivatives of the reaction terms with respect to the concentration variables. If no explicit function pointer is set, these will be calculated by finite differences. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a492af587e1c592b0fb9ffe525d6509d2}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
@@ -125,8 +117,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquation
 virtual double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_acd01ced36610cb5e69ee359df778ba09}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a66d61f635f3d733b5e70de9552cdaf6b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+react}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -147,7 +138,7 @@ bool \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a1b28c27
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a4f62236cc1ae06f2f7d8f4463d0796b5}{N\+\_\+reagent}} = N\+R\+E\+A\+G\+E\+NT
+static const unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a4f62236cc1ae06f2f7d8f4463d0796b5}{N\+\_\+reagent}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
@@ -165,7 +156,7 @@ A class for all elements that solve the Advection Diffusion Reaction equations u
 
 \[ \tau_{i} \frac{\partial C_{i}}{\partial t} + w_{j} \frac{\partial C_{i}}{\partial x_{j}} = D_{i}\frac{\partial^2 C_{i}}{\partial x_j^2} = - R_{i}(C_{i}) + f_{i} \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line 58 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 57 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -183,7 +174,7 @@ Function pointer to derivative of reaction terms.
 
 
 
-Definition at line 73 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 70 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_a74f8f0492147a5600b075cc64479f850}\label{classoomph_1_1AdvectionDiffusionReactionEquations_a74f8f0492147a5600b075cc64479f850}} 
 \index{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}!AdvectionDiffusionReactionReactionFctPt@{AdvectionDiffusionReactionReactionFctPt}}
@@ -198,7 +189,7 @@ Function pointer to reaction terms.
 
 
 
-Definition at line 69 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 66 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_a3443e579e62414ecc50595403982e686}\label{classoomph_1_1AdvectionDiffusionReactionEquations_a3443e579e62414ecc50595403982e686}} 
 \index{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}!AdvectionDiffusionReactionSourceFctPt@{AdvectionDiffusionReactionSourceFctPt}}
@@ -209,12 +200,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEqu
 
 
 
-Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- 
+Function pointer to source function fct(x,f(x)) -- x is a Vector! 
 
 
 
-Definition at line 65 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 62 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_a2fff621b5b44c64bd5b3f0412201055f}\label{classoomph_1_1AdvectionDiffusionReactionEquations_a2fff621b5b44c64bd5b3f0412201055f}} 
 \index{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}!AdvectionDiffusionReactionWindFctPt@{AdvectionDiffusionReactionWindFctPt}}
@@ -225,12 +215,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEqu
 
 
 
-Function pointer to wind function fct(x,w(x)) -- x is a Vector! ~\newline
- 
+Function pointer to wind function fct(x,w(x)) -- x is a Vector! 
 
 
 
-Definition at line 79 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 76 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -248,7 +237,7 @@ Constructor\+: Initialise the Source\+\_\+fct\+\_\+pt, Wind\+\_\+fct\+\_\+pt, Re
 
 
 
-Definition at line 87 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 84 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -318,7 +307,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 589 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
+Definition at line 570 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
 
 
 
@@ -341,7 +330,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 251 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 262 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_ad6f43b35555730e68ba361a1898a0304}\label{classoomph_1_1AdvectionDiffusionReactionEquations_ad6f43b35555730e68ba361a1898a0304}} 
 \index{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}!compute\_norm@{compute\_norm}}
@@ -360,7 +349,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af2025a472d
 
 
 
-Definition at line 276 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
+Definition at line 277 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
 
 
 
@@ -375,12 +364,11 @@ double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph
 
 
 
-dc\+\_\+r/dt at local node n. ~\newline
- 
+dc\+\_\+r/dt at local node n. Uses suitably interpolated value for hanging nodes. 
 
-Uses suitably interpolated value for hanging nodes. 
 
-Definition at line 122 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+
+Definition at line 124 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -395,12 +383,11 @@ void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph\+
 
 
 
-dc/dt at local node n. ~\newline
- 
+dc/dt at local node n. Uses suitably interpolated value for hanging nodes. 
 
-Uses suitably interpolated value for hanging nodes. 
 
-Definition at line 149 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+
+Definition at line 152 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -419,18 +406,18 @@ const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyper
 
 
 
-Definition at line 298 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 326 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::\+Diff\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_a70db4dae4524ac4c2d6af262c4e4d47e}\label{classoomph_1_1AdvectionDiffusionReactionEquations_a70db4dae4524ac4c2d6af262c4e4d47e}} 
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_a7ba2708db1ab6a5a9b3c2bb520ca94b8}\label{classoomph_1_1AdvectionDiffusionReactionEquations_a7ba2708db1ab6a5a9b3c2bb520ca94b8}} 
 \index{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}!diff\_pt@{diff\_pt}}
 \index{diff\_pt@{diff\_pt}!oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{diff\_pt()}{diff\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$ \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM $>$\+::diff\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM $>$\+::diff\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -438,7 +425,7 @@ Pointer to vector of diffusion coefficients.
 
 
 
-Definition at line 301 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 332 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -465,7 +452,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line 183 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 191 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -510,8 +497,7 @@ void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph\+
 
 
 
-(Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. ~\newline
- 
+(Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. 
 
 
 
@@ -519,7 +505,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6
 
 
 
-Definition at line 192 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 200 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -542,7 +528,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 490 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 544 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -561,7 +547,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 501 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 555 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -584,7 +570,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 478 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 530 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -599,8 +585,7 @@ void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph\+
 
 
 
-Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix ~\newline
- 
+Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix. 
 
 Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and/or element Jacobian matrix and/or the mass matrix.
 
@@ -612,7 +597,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReac
 
 
 
-Definition at line 57 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
+Definition at line 56 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
 
 
 
@@ -635,7 +620,7 @@ Get flux\+: $\mbox{flux}[DIM r + i] = \mbox{d}C_{r} / \mbox{d}x_i $.
 
 
 
-Definition at line 443 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 492 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -654,12 +639,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}
 
 
 
-Get reaction as a function of the given reagent concentrations This function is virtual to allow overloading in multi-\/physics problems where the reaction function might be determined by another system of equations ~\newline
- 
+Get reaction as a function of the given reagent concentrations This function is virtual to allow overloading in multi-\/physics problems where the reaction function might be determined by another system of equations. 
 
 
 
-Definition at line 360 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 406 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -678,7 +662,7 @@ Get the derivatives of the reaction terms with respect to the concentration vari
 
 
 
-Definition at line 379 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 428 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -693,12 +677,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}
 
 
 
-Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations ~\newline
- 
+Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. 
 
 
 
-Definition at line 313 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 353 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -713,12 +696,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}
 
 
 
-Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
- 
+Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. 
 
 
 
-Definition at line 334 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 377 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -737,7 +719,7 @@ Return the integrated reagent concentrations.
 
 Integrate the reagent concentrations over the element. 
 
-Definition at line 362 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
+Definition at line 357 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
 
 
 
@@ -756,7 +738,7 @@ Return FE representation of function value c\+\_\+i(s) at local coordinate s.
 
 
 
-Definition at line 513 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 567 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -802,7 +784,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionEleme
 
 
 
-Definition at line 211 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 219 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -833,7 +815,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionEleme
 
 
 
-Definition at line 489 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
+Definition at line 479 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
 
 
 
@@ -860,7 +842,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionEleme
 
 
 
-Definition at line 199 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 207 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -891,7 +873,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionEleme
 
 
 
-Definition at line 432 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
+Definition at line 424 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
 
 
 
@@ -918,7 +900,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionEleme
 
 
 
-Definition at line 230 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 238 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_af540c03c411843c566c81af918d620c2}\label{classoomph_1_1AdvectionDiffusionReactionEquations_af540c03c411843c566c81af918d620c2}} 
 \index{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}!output\_fct@{output\_fct}}
@@ -945,7 +927,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionEleme
 
 
 
-Definition at line 533 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
+Definition at line 519 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
 
 
 
@@ -968,7 +950,7 @@ Access function\+: Pointer to reaction derivatives function.
 
 
 
-Definition at line 290 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 314 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -991,7 +973,7 @@ Access function\+: Pointer to reaction function. Const version.
 
 
 
-Definition at line 294 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 320 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1010,7 +992,7 @@ Access function\+: Pointer to reaction function.
 
 
 
-Definition at line 282 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 302 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1033,7 +1015,7 @@ Access function\+: Pointer to reaction function. Const version.
 
 
 
-Definition at line 286 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 308 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1056,7 +1038,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 333 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
+Definition at line 331 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
 
 
 
@@ -1075,7 +1057,7 @@ Access function\+: Pointer to source function.
 
 
 
-Definition at line 264 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 276 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1098,7 +1080,7 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line 269 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 283 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1117,18 +1099,18 @@ const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyper
 
 
 
-Definition at line 304 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 338 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::\+Tau\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_ac3e7834f33607cc560e7a1dd08eb9b7a}\label{classoomph_1_1AdvectionDiffusionReactionEquations_ac3e7834f33607cc560e7a1dd08eb9b7a}} 
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_ad7fee0c3827316b6a4e7b6beb6827e4f}\label{classoomph_1_1AdvectionDiffusionReactionEquations_ad7fee0c3827316b6a4e7b6beb6827e4f}} 
 \index{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}!tau\_pt@{tau\_pt}}
 \index{tau\_pt@{tau\_pt}!oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{tau\_pt()}{tau\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$ \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM $>$\+::tau\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM $>$\+::tau\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1136,7 +1118,7 @@ Pointer to vector of dimensionless timescales.
 
 
 
-Definition at line 307 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 344 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1159,7 +1141,7 @@ Access function\+: Pointer to wind function.
 
 
 
-Definition at line 274 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 290 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1182,7 +1164,7 @@ Access function\+: Pointer to reaction function. Const version.
 
 
 
-Definition at line 278 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 296 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1204,7 +1186,7 @@ Boolean flag to indicate if A\+LE formulation is disabled when time-\/derivative
 
 
 
-Definition at line 599 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 653 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1225,7 +1207,7 @@ Static default value for the dimensionless numbers.
 
 Default value for Peclet number 
 
-Definition at line 604 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 657 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1244,7 +1226,7 @@ Pointer to global diffusion coefficients.
 
 
 
-Definition at line 579 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 633 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1255,11 +1237,17 @@ Referenced by oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A
 \index{N\_reagent@{N\_reagent}!oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{N\_reagent}{N\_reagent}}
 {\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM$>$ \\
-const unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM $>$\+::N\+\_\+reagent = N\+R\+E\+A\+G\+E\+NT\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+const unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM $>$\+::N\+\_\+reagent\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    NREAGENT}
+
+\end{DoxyCode}
 
 
-
-Definition at line 550 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 603 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionReactionEquations_a2544062d28d4f81014474ca9e47fa2ac}\label{classoomph_1_1AdvectionDiffusionReactionEquations_a2544062d28d4f81014474ca9e47fa2ac}} 
 \index{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::AdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}!Reaction\_deriv\_fct\_pt@{Reaction\_deriv\_fct\_pt}}
@@ -1274,7 +1262,7 @@ Pointer to reaction derivatives.
 
 
 
-Definition at line 594 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 648 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1293,7 +1281,7 @@ Pointer to reaction function.
 
 
 
-Definition at line 591 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 645 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1312,7 +1300,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 585 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 639 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1331,7 +1319,7 @@ Pointer to global timescales.
 
 
 
-Definition at line 582 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 636 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -1350,7 +1338,7 @@ Pointer to wind function\+:
 
 
 
-Definition at line 588 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 642 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 

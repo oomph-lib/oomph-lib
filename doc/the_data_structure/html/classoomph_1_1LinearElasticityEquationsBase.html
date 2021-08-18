@@ -164,8 +164,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ada2fc7aa2569c35e28982f93a0749903"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#ada2fc7aa2569c35e28982f93a0749903">BodyForceFctPt</a>) (const double &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;b)</td></tr>
-<tr class="memdesc:ada2fc7aa2569c35e28982f93a0749903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time FCT(t,x,b) &ndash; x and b are Vectors! <br  />
-  <a href="classoomph_1_1LinearElasticityEquationsBase.html#ada2fc7aa2569c35e28982f93a0749903">More...</a><br /></td></tr>
+<tr class="memdesc:ada2fc7aa2569c35e28982f93a0749903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time FCT(t,x,b) &ndash; x and b are Vectors!  <a href="classoomph_1_1LinearElasticityEquationsBase.html#ada2fc7aa2569c35e28982f93a0749903">More...</a><br /></td></tr>
 <tr class="separator:ada2fc7aa2569c35e28982f93a0749903"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classoomph_1_1FiniteElement"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classoomph_1_1FiniteElement')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classoomph_1_1FiniteElement.html">oomph::FiniteElement</a></td></tr>
 <tr class="memitem:a690fd33af26cc3e84f39bba6d5a85202 inherit pub_types_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">SteadyExactSolutionFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;)</td></tr>
@@ -192,18 +191,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af8288b11bc988ad9ef413ea9bee5d535"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#af8288b11bc988ad9ef413ea9bee5d535">LinearElasticityEquationsBase</a> ()</td></tr>
 <tr class="memdesc:af8288b11bc988ad9ef413ea9bee5d535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Set null pointers for constitutive law and for isotropic growth function. Set physical parameter values to default values, switch on inertia and set body force to zero.  <a href="classoomph_1_1LinearElasticityEquationsBase.html#af8288b11bc988ad9ef413ea9bee5d535">More...</a><br /></td></tr>
 <tr class="separator:af8288b11bc988ad9ef413ea9bee5d535"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac12fbacdae9347b1a570dc1a86c893c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ElasticityTensor.html">ElasticityTensor</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#ac12fbacdae9347b1a570dc1a86c893c3">elasticity_tensor_pt</a> ()</td></tr>
-<tr class="memdesc:ac12fbacdae9347b1a570dc1a86c893c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the elasticity_tensor.  <a href="classoomph_1_1LinearElasticityEquationsBase.html#ac12fbacdae9347b1a570dc1a86c893c3">More...</a><br /></td></tr>
-<tr class="separator:ac12fbacdae9347b1a570dc1a86c893c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d6902388208c44c04c653f88360f306"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ElasticityTensor.html">ElasticityTensor</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#a1d6902388208c44c04c653f88360f306">elasticity_tensor_pt</a> ()</td></tr>
+<tr class="memdesc:a1d6902388208c44c04c653f88360f306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the elasticity_tensor.  <a href="classoomph_1_1LinearElasticityEquationsBase.html#a1d6902388208c44c04c653f88360f306">More...</a><br /></td></tr>
+<tr class="separator:a1d6902388208c44c04c653f88360f306"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9171d2f6ee9e0c947bdcfecbac7c1f7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#ad9171d2f6ee9e0c947bdcfecbac7c1f7">E</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</td></tr>
 <tr class="memdesc:ad9171d2f6ee9e0c947bdcfecbac7c1f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the entries in the elasticity tensor.  <a href="classoomph_1_1LinearElasticityEquationsBase.html#ad9171d2f6ee9e0c947bdcfecbac7c1f7">More...</a><br /></td></tr>
 <tr class="separator:ad9171d2f6ee9e0c947bdcfecbac7c1f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a2ba588a8aee3eb327102fd3c0bbaf0"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#a2a2ba588a8aee3eb327102fd3c0bbaf0">lambda_sq</a> () const</td></tr>
 <tr class="memdesc:a2a2ba588a8aee3eb327102fd3c0bbaf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for timescale ratio (nondim density)  <a href="classoomph_1_1LinearElasticityEquationsBase.html#a2a2ba588a8aee3eb327102fd3c0bbaf0">More...</a><br /></td></tr>
 <tr class="separator:a2a2ba588a8aee3eb327102fd3c0bbaf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0109438765421ac09ae6905ccc51642a"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#a0109438765421ac09ae6905ccc51642a">lambda_sq_pt</a> ()</td></tr>
-<tr class="memdesc:a0109438765421ac09ae6905ccc51642a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for pointer to timescale ratio (nondim density)  <a href="classoomph_1_1LinearElasticityEquationsBase.html#a0109438765421ac09ae6905ccc51642a">More...</a><br /></td></tr>
-<tr class="separator:a0109438765421ac09ae6905ccc51642a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a116f2d6627675f78acba8795a383933c"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#a116f2d6627675f78acba8795a383933c">lambda_sq_pt</a> ()</td></tr>
+<tr class="memdesc:a116f2d6627675f78acba8795a383933c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for pointer to timescale ratio (nondim density)  <a href="classoomph_1_1LinearElasticityEquationsBase.html#a116f2d6627675f78acba8795a383933c">More...</a><br /></td></tr>
+<tr class="separator:a116f2d6627675f78acba8795a383933c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf9d9078297a4df99d48862288aecf8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#ada2fc7aa2569c35e28982f93a0749903">BodyForceFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#abf9d9078297a4df99d48862288aecf8e">body_force_fct_pt</a> ()</td></tr>
 <tr class="memdesc:abf9d9078297a4df99d48862288aecf8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to body force function.  <a href="classoomph_1_1LinearElasticityEquationsBase.html#abf9d9078297a4df99d48862288aecf8e">More...</a><br /></td></tr>
 <tr class="separator:abf9d9078297a4df99d48862288aecf8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,10 +233,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adf786bf2d8fe20b864d7f2bf90b20242"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#adf786bf2d8fe20b864d7f2bf90b20242">ndof_types</a> () const</td></tr>
 <tr class="memdesc:adf786bf2d8fe20b864d7f2bf90b20242"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of "DOF types" that degrees of freedom in this element are sub-divided into: for now lump them all into one DOF type. Can be adjusted later.  <a href="classoomph_1_1LinearElasticityEquationsBase.html#adf786bf2d8fe20b864d7f2bf90b20242">More...</a><br /></td></tr>
 <tr class="separator:adf786bf2d8fe20b864d7f2bf90b20242"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add3ab9f1bbd914e5a460bfefb4eff5c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#add3ab9f1bbd914e5a460bfefb4eff5c9">get_dof_numbers_for_unknowns</a> (std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;dof_lookup_list) const</td></tr>
-<tr class="memdesc:add3ab9f1bbd914e5a460bfefb4eff5c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF types" that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) <br  />
-  <a href="classoomph_1_1LinearElasticityEquationsBase.html#add3ab9f1bbd914e5a460bfefb4eff5c9">More...</a><br /></td></tr>
-<tr class="separator:add3ab9f1bbd914e5a460bfefb4eff5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1211abcef7585d5dada67e66a2bed93c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#a1211abcef7585d5dada67e66a2bed93c">get_dof_numbers_for_unknowns</a> (std::list&lt; std::pair&lt; unsigned long, unsigned &gt;&gt; &amp;dof_lookup_list) const</td></tr>
+<tr class="memdesc:a1211abcef7585d5dada67e66a2bed93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF types" that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.)  <a href="classoomph_1_1LinearElasticityEquationsBase.html#a1211abcef7585d5dada67e66a2bed93c">More...</a><br /></td></tr>
+<tr class="separator:a1211abcef7585d5dada67e66a2bed93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classoomph_1_1FiniteElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1FiniteElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1FiniteElement.html">oomph::FiniteElement</a></td></tr>
 <tr class="memitem:a58d0cc43f2c90c11630598e2f795cc1d inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a58d0cc43f2c90c11630598e2f795cc1d">set_dimension</a> (const unsigned &amp;<a class="el" href="classoomph_1_1FiniteElement.html#a5f8fe59f06da1da9f6b7bbcbdb90ef93">dim</a>)</td></tr>
 <tr class="memdesc:a58d0cc43f2c90c11630598e2f795cc1d inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the dimension of the element and initially set the dimension of the nodes to be the same as the dimension of the element.  <a href="classoomph_1_1FiniteElement.html#a58d0cc43f2c90c11630598e2f795cc1d">More...</a><br /></td></tr>
@@ -302,12 +300,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac14a15f09e036608d889e3ab232760d4 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ac14a15f09e036608d889e3ab232760d4">get_x_from_macro_element</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x)</td></tr>
 <tr class="memdesc:ac14a15f09e036608d889e3ab232760d4 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global coordinates as function of local coordinates at previous time "level" t (t=0: present; t&gt;0: previous). using macro element representation (Broken virtual &ndash; overload in specific geometric element class if you want to use this functionality.)  <a href="classoomph_1_1FiniteElement.html#ac14a15f09e036608d889e3ab232760d4">More...</a><br /></td></tr>
 <tr class="separator:ac14a15f09e036608d889e3ab232760d4 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac80983f27f5bcbc08e2eeb6e4d03698b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ac80983f27f5bcbc08e2eeb6e4d03698b">set_integration_scheme</a> (<a class="el" href="classoomph_1_1Integral.html">Integral</a> *const &amp;<a class="el" href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">integral_pt</a>)</td></tr>
+<tr class="memitem:ac80983f27f5bcbc08e2eeb6e4d03698b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ac80983f27f5bcbc08e2eeb6e4d03698b">set_integration_scheme</a> (<a class="el" href="classoomph_1_1Integral.html">Integral</a> *const &amp;<a class="el" href="classoomph_1_1FiniteElement.html#a751dc02ff1325f799840d79ee415753a">integral_pt</a>)</td></tr>
 <tr class="memdesc:ac80983f27f5bcbc08e2eeb6e4d03698b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the spatial integration scheme.  <a href="classoomph_1_1FiniteElement.html#ac80983f27f5bcbc08e2eeb6e4d03698b">More...</a><br /></td></tr>
 <tr class="separator:ac80983f27f5bcbc08e2eeb6e4d03698b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79f1710873332823c47023d370f0596b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Integral.html">Integral</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">integral_pt</a> () const</td></tr>
-<tr class="memdesc:a79f1710873332823c47023d370f0596b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the integration scheme (const version)  <a href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">More...</a><br /></td></tr>
-<tr class="separator:a79f1710873332823c47023d370f0596b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a751dc02ff1325f799840d79ee415753a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Integral.html">Integral</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a751dc02ff1325f799840d79ee415753a">integral_pt</a> () const</td></tr>
+<tr class="memdesc:a751dc02ff1325f799840d79ee415753a inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the integration scheme (const version)  <a href="classoomph_1_1FiniteElement.html#a751dc02ff1325f799840d79ee415753a">More...</a><br /></td></tr>
+<tr class="separator:a751dc02ff1325f799840d79ee415753a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58a25b6859ddd43b7bfe64a19fee5023 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">shape</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Shape.html">Shape</a> &amp;psi) const =0</td></tr>
 <tr class="memdesc:a58a25b6859ddd43b7bfe64a19fee5023 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the geometric shape functions at local coordinate s. This function must be overloaded for each specific geometric element.  <a href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">More...</a><br /></td></tr>
 <tr class="separator:a58a25b6859ddd43b7bfe64a19fee5023 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -365,12 +363,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a564ba080f68132762510b1ec9465b05d inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a564ba080f68132762510b1ec9465b05d">assign_all_generic_local_eqn_numbers</a> (const bool &amp;store_local_dof_pt)</td></tr>
 <tr class="memdesc:a564ba080f68132762510b1ec9465b05d inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded version of the calculation of the local equation numbers. If the boolean argument is true then pointers to the degrees of freedom associated with each equation number are stored locally in the array Dof_pt.  <a href="classoomph_1_1FiniteElement.html#a564ba080f68132762510b1ec9465b05d">More...</a><br /></td></tr>
 <tr class="separator:a564ba080f68132762510b1ec9465b05d inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace0e7fb72a805b5c2c600347bfae7a9b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
-<tr class="memdesc:ace0e7fb72a805b5c2c600347bfae7a9b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the local node n.  <a href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">More...</a><br /></td></tr>
-<tr class="separator:ace0e7fb72a805b5c2c600347bfae7a9b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2faeb30f84c73294a2007ac8d1757af9 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a2faeb30f84c73294a2007ac8d1757af9">node_pt</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
-<tr class="memdesc:a2faeb30f84c73294a2007ac8d1757af9 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the local node n (const version)  <a href="classoomph_1_1FiniteElement.html#a2faeb30f84c73294a2007ac8d1757af9">More...</a><br /></td></tr>
-<tr class="separator:a2faeb30f84c73294a2007ac8d1757af9 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ae3eb7760edc5c9d6427611d8e6fb6 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a28ae3eb7760edc5c9d6427611d8e6fb6">node_pt</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
+<tr class="memdesc:a28ae3eb7760edc5c9d6427611d8e6fb6 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the local node n.  <a href="classoomph_1_1FiniteElement.html#a28ae3eb7760edc5c9d6427611d8e6fb6">More...</a><br /></td></tr>
+<tr class="separator:a28ae3eb7760edc5c9d6427611d8e6fb6 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a967cbf9da397a4600e794df605cf2676 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a967cbf9da397a4600e794df605cf2676">node_pt</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
+<tr class="memdesc:a967cbf9da397a4600e794df605cf2676 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the local node n (const version)  <a href="classoomph_1_1FiniteElement.html#a967cbf9da397a4600e794df605cf2676">More...</a><br /></td></tr>
+<tr class="separator:a967cbf9da397a4600e794df605cf2676 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6219ed269a6d89b5aa14659cce48905a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a> () const</td></tr>
 <tr class="memdesc:a6219ed269a6d89b5aa14659cce48905a inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of nodes.  <a href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">More...</a><br /></td></tr>
 <tr class="separator:a6219ed269a6d89b5aa14659cce48905a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -463,7 +461,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae49607dfdff1f24e9857d5b93d2ebf67 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ae49607dfdff1f24e9857d5b93d2ebf67">construct_boundary_node</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *const &amp;<a class="el" href="classoomph_1_1GeomObject.html#a3c92023891dd4a0e818022f467eeb7f1">time_stepper_pt</a>)</td></tr>
 <tr class="memdesc:ae49607dfdff1f24e9857d5b93d2ebf67 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the local node n, including storage for history values required by timestepper, as a boundary node; that is a node that MAY be placed on a mesh boundary and return a pointer to the newly created node object.  <a href="classoomph_1_1FiniteElement.html#ae49607dfdff1f24e9857d5b93d2ebf67">More...</a><br /></td></tr>
 <tr class="separator:ae49607dfdff1f24e9857d5b93d2ebf67 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb40d7a104d99e6f7d8123e801e53b5b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#aeb40d7a104d99e6f7d8123e801e53b5b">get_node_number</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>) const</td></tr>
+<tr class="memitem:aeb40d7a104d99e6f7d8123e801e53b5b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#aeb40d7a104d99e6f7d8123e801e53b5b">get_node_number</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1FiniteElement.html#a28ae3eb7760edc5c9d6427611d8e6fb6">node_pt</a>) const</td></tr>
 <tr class="memdesc:aeb40d7a104d99e6f7d8123e801e53b5b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of the node *node_pt if this node is in the element, else return -1;.  <a href="classoomph_1_1FiniteElement.html#aeb40d7a104d99e6f7d8123e801e53b5b">More...</a><br /></td></tr>
 <tr class="separator:aeb40d7a104d99e6f7d8123e801e53b5b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ddbb05c5f8bb35b64bec287d653105c inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a2ddbb05c5f8bb35b64bec287d653105c">get_node_at_local_coordinate</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
@@ -532,9 +530,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac27d707cb4f7c1429793c0fdb2fd093b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ac27d707cb4f7c1429793c0fdb2fd093b">node_update</a> ()</td></tr>
 <tr class="memdesc:ac27d707cb4f7c1429793c0fdb2fd093b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the positions of all nodes in the element using each node update function. The default implementation may be overloaded so that more efficient versions can be written.  <a href="classoomph_1_1FiniteElement.html#ac27d707cb4f7c1429793c0fdb2fd093b">More...</a><br /></td></tr>
 <tr class="separator:ac27d707cb4f7c1429793c0fdb2fd093b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee5883ba2e464257c3a9c775d8e24c02 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#aee5883ba2e464257c3a9c775d8e24c02">identify_field_data_for_interactions</a> (std::set&lt; std::pair&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> *, unsigned &gt; &gt; &amp;paired_field_data)</td></tr>
-<tr class="memdesc:aee5883ba2e464257c3a9c775d8e24c02 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The purpose of this function is to identify all possible <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that can affect the fields interpolated by the <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a>. The information will typically be used in interaction problems in which the <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a> provides a forcing term for an <a class="el" href="classoomph_1_1ElementWithExternalElement.html">ElementWithExternalElement</a>. The <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> must be provided as <code>paired_load</code> data containing.  <a href="classoomph_1_1FiniteElement.html#aee5883ba2e464257c3a9c775d8e24c02">More...</a><br /></td></tr>
-<tr class="separator:aee5883ba2e464257c3a9c775d8e24c02 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822208525e17c4e2493c512294fb6fcd inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a822208525e17c4e2493c512294fb6fcd">identify_field_data_for_interactions</a> (std::set&lt; std::pair&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> *, unsigned &gt;&gt; &amp;paired_field_data)</td></tr>
+<tr class="memdesc:a822208525e17c4e2493c512294fb6fcd inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The purpose of this function is to identify all possible <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that can affect the fields interpolated by the <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a>. The information will typically be used in interaction problems in which the <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a> provides a forcing term for an <a class="el" href="classoomph_1_1ElementWithExternalElement.html">ElementWithExternalElement</a>. The <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> must be provided as <code>paired_load</code> data containing.  <a href="classoomph_1_1FiniteElement.html#a822208525e17c4e2493c512294fb6fcd">More...</a><br /></td></tr>
+<tr class="separator:a822208525e17c4e2493c512294fb6fcd inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0eea5ad6500576d7874e471248026c8a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a0eea5ad6500576d7874e471248026c8a">identify_geometric_data</a> (std::set&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> * &gt; &amp;geometric_data_pt)</td></tr>
 <tr class="memdesc:a0eea5ad6500576d7874e471248026c8a inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The purpose of this function is to identify all <code><a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a></code> objects that affect the elements' geometry. This function is implemented as an empty virtual function since it can only be implemented in conjunction with a node-update strategy. A specific implementation is provided in the <a class="el" href="classoomph_1_1ElementWithMovingNodes.html" title="A policy class that serves to establish the common interfaces for elements that contain moving nodes....">ElementWithMovingNodes</a> class.  <a href="classoomph_1_1FiniteElement.html#a0eea5ad6500576d7874e471248026c8a">More...</a><br /></td></tr>
 <tr class="separator:a0eea5ad6500576d7874e471248026c8a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -677,7 +675,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a684fa2b9a5a85530d805e0c0f6e0d3bb inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Range check for face node numbers.  <a href="classoomph_1_1FiniteElement.html#a684fa2b9a5a85530d805e0c0f6e0d3bb">More...</a><br /></td></tr>
 <tr class="separator:a684fa2b9a5a85530d805e0c0f6e0d3bb inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af20f05fb162a90b7d8ae175ec5dfab1a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceoomph.html#afa5c7a93cae1917e874b392601be0bde">CoordinateMappingFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#af20f05fb162a90b7d8ae175ec5dfab1a">face_to_bulk_coordinate_fct_pt</a> (const int &amp;face_index) const</td></tr>
-<tr class="memdesc:af20f05fb162a90b7d8ae175ec5dfab1a inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the function mapping face coordinates to bulk coordinates.  <a href="classoomph_1_1FiniteElement.html#af20f05fb162a90b7d8ae175ec5dfab1a">More...</a><br /></td></tr>
 <tr class="separator:af20f05fb162a90b7d8ae175ec5dfab1a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b29bbf8e20cf2ccf91674ca09ed80aa inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceoomph.html#a0a75fbfa1139f00cf88adeee835c8fe5">BulkCoordinateDerivativesFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a8b29bbf8e20cf2ccf91674ca09ed80aa">bulk_coordinate_derivatives_fct_pt</a> (const int &amp;face_index) const</td></tr>
 <tr class="separator:a8b29bbf8e20cf2ccf91674ca09ed80aa inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -691,15 +688,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a45e32d895d4b3686e0f15fe455f4ed44 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">internal_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
 <tr class="memdesc:a45e32d895d4b3686e0f15fe455f4ed44 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th internal data object.  <a href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">More...</a><br /></td></tr>
 <tr class="separator:a45e32d895d4b3686e0f15fe455f4ed44 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4290f039c30e4a84a391025786cf72f6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a4290f039c30e4a84a391025786cf72f6">internal_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
-<tr class="memdesc:a4290f039c30e4a84a391025786cf72f6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th internal data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a4290f039c30e4a84a391025786cf72f6">More...</a><br /></td></tr>
-<tr class="separator:a4290f039c30e4a84a391025786cf72f6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21ff163046aeaab67983e4c862a78d17 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a21ff163046aeaab67983e4c862a78d17">internal_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a21ff163046aeaab67983e4c862a78d17 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th internal data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a21ff163046aeaab67983e4c862a78d17">More...</a><br /></td></tr>
+<tr class="separator:a21ff163046aeaab67983e4c862a78d17 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ec4e27a7a3d16122b00e2b5be0d1036 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a3ec4e27a7a3d16122b00e2b5be0d1036">external_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
 <tr class="memdesc:a3ec4e27a7a3d16122b00e2b5be0d1036 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th external data object.  <a href="classoomph_1_1GeneralisedElement.html#a3ec4e27a7a3d16122b00e2b5be0d1036">More...</a><br /></td></tr>
 <tr class="separator:a3ec4e27a7a3d16122b00e2b5be0d1036 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d81683e4c8177eff051838175188600 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a7d81683e4c8177eff051838175188600">external_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
-<tr class="memdesc:a7d81683e4c8177eff051838175188600 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th external data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a7d81683e4c8177eff051838175188600">More...</a><br /></td></tr>
-<tr class="separator:a7d81683e4c8177eff051838175188600 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59570d8174b7123613d8cbfe6957a21c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a59570d8174b7123613d8cbfe6957a21c">external_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a59570d8174b7123613d8cbfe6957a21c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th external data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a59570d8174b7123613d8cbfe6957a21c">More...</a><br /></td></tr>
+<tr class="separator:a59570d8174b7123613d8cbfe6957a21c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ac5a1d5234fa931ab710c0c74d55d2 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a37ac5a1d5234fa931ab710c0c74d55d2">eqn_number</a> (const unsigned &amp;ieqn_local) const</td></tr>
 <tr class="memdesc:a37ac5a1d5234fa931ab710c0c74d55d2 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the global equation number corresponding to the ieqn_local-th local equation number.  <a href="classoomph_1_1GeneralisedElement.html#a37ac5a1d5234fa931ab710c0c74d55d2">More...</a><br /></td></tr>
 <tr class="separator:a37ac5a1d5234fa931ab710c0c74d55d2 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -773,7 +770,8 @@ Data", i.e. the <a class="el" href="classoomph_1_1Data.html" title="A class that
 <tr class="memdesc:a53d348ab71c86b53619129a1dd411d30 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the vector of residuals of the equations in the element. By default initialise the vector to zero and then call the <a class="el" href="classoomph_1_1GeneralisedElement.html#a310c97f515e8504a48179c0e72c550d7" title="Add the elemental contribution to the residuals vector. Note that this function will NOT initialise t...">fill_in_contribution_to_residuals()</a> function. Note that this entire function can be overloaded if desired.  <a href="classoomph_1_1GeneralisedElement.html#a53d348ab71c86b53619129a1dd411d30">More...</a><br /></td></tr>
 <tr class="separator:a53d348ab71c86b53619129a1dd411d30 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a6d98bc7cf48e">get_jacobian</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
-<tr class="memdesc:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the elemental Jacobian matrix "d equation / d variable".  <a href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a6d98bc7cf48e">More...</a><br /></td></tr>
+<tr class="memdesc:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the elemental Jacobian matrix "d equation / d
+variable".  <a href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a6d98bc7cf48e">More...</a><br /></td></tr>
 <tr class="separator:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5be9add27c9e4a6bd05e6ccaec6263aa inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a5be9add27c9e4a6bd05e6ccaec6263aa">get_mass_matrix</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;mass_matrix)</td></tr>
 <tr class="memdesc:a5be9add27c9e4a6bd05e6ccaec6263aa inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the residuals and the elemental "mass" matrix, the matrix that multiplies the time derivative terms in a problem.  <a href="classoomph_1_1GeneralisedElement.html#a5be9add27c9e4a6bd05e6ccaec6263aa">More...</a><br /></td></tr>
@@ -793,12 +791,12 @@ Data", i.e. the <a class="el" href="classoomph_1_1Data.html" title="A class that
 <tr class="memitem:a1fbe77c663eefdf38a0c95f62f6e51bb inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a1fbe77c663eefdf38a0c95f62f6e51bb">get_hessian_vector_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;Y, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; const &amp;C, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;product)</td></tr>
 <tr class="memdesc:a1fbe77c663eefdf38a0c95f62f6e51bb inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the product of the Hessian (derivative of Jacobian with respect to all variables) an eigenvector, Y, and other specified vectors, C (d(J_{ij})/d u_{k}) Y_{j} C_{k}.  <a href="classoomph_1_1GeneralisedElement.html#a1fbe77c663eefdf38a0c95f62f6e51bb">More...</a><br /></td></tr>
 <tr class="separator:a1fbe77c663eefdf38a0c95f62f6e51bb inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50091d9dad94bd60d5b6fa6c6e9a6fbc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a50091d9dad94bd60d5b6fa6c6e9a6fbc">get_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt; &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
-<tr class="memdesc:a50091d9dad94bd60d5b6fa6c6e9a6fbc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vector of inner product of the given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#a50091d9dad94bd60d5b6fa6c6e9a6fbc">More...</a><br /></td></tr>
-<tr class="separator:a50091d9dad94bd60d5b6fa6c6e9a6fbc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a464659c067a0bdd21f3314491a429381 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a464659c067a0bdd21f3314491a429381">get_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;inner_product_vector)</td></tr>
-<tr class="memdesc:a464659c067a0bdd21f3314491a429381 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the vectors that when taken as a dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#a464659c067a0bdd21f3314491a429381">More...</a><br /></td></tr>
-<tr class="separator:a464659c067a0bdd21f3314491a429381 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a152745876d82aa34594de9f34e508de0 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a152745876d82aa34594de9f34e508de0">get_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt;&gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
+<tr class="memdesc:a152745876d82aa34594de9f34e508de0 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vector of inner product of the given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#a152745876d82aa34594de9f34e508de0">More...</a><br /></td></tr>
+<tr class="separator:a152745876d82aa34594de9f34e508de0 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa281dbacd944ee6fed56c55d1ba96466 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa281dbacd944ee6fed56c55d1ba96466">get_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;inner_product_vector)</td></tr>
+<tr class="memdesc:aa281dbacd944ee6fed56c55d1ba96466 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the vectors that when taken as a dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#aa281dbacd944ee6fed56c55d1ba96466">More...</a><br /></td></tr>
+<tr class="separator:aa281dbacd944ee6fed56c55d1ba96466 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf790e568048d203a4a954f3f8cd1f24 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acf790e568048d203a4a954f3f8cd1f24">compute_norm</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;norm)</td></tr>
 <tr class="memdesc:acf790e568048d203a4a954f3f8cd1f24 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute norm of solution &ndash; broken virtual can be overloaded by element writer to implement whatever norm is desired for the specific element.  <a href="classoomph_1_1GeneralisedElement.html#acf790e568048d203a4a954f3f8cd1f24">More...</a><br /></td></tr>
 <tr class="separator:acf790e568048d203a4a954f3f8cd1f24 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -920,7 +918,7 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a1e211e506e98ab5f1b0276d0746f4985"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#a1e211e506e98ab5f1b0276d0746f4985">Default_lambda_sq_value</a> =1.0</td></tr>
+<tr class="memitem:a1e211e506e98ab5f1b0276d0746f4985"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#a1e211e506e98ab5f1b0276d0746f4985">Default_lambda_sq_value</a> = 1.0</td></tr>
 <tr class="memdesc:a1e211e506e98ab5f1b0276d0746f4985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static default value for timescale ratio (1.0 &ndash; for natural scaling)  <a href="classoomph_1_1LinearElasticityEquationsBase.html#a1e211e506e98ab5f1b0276d0746f4985">More...</a><br /></td></tr>
 <tr class="separator:a1e211e506e98ab5f1b0276d0746f4985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classoomph_1_1FiniteElement"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1FiniteElement')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1FiniteElement.html">oomph::FiniteElement</a></td></tr>
@@ -930,7 +928,7 @@ Static Protected Attributes</h2></td></tr>
 <tr class="memitem:a56eb1d0614eb76ba1591285e3efed268 inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a56eb1d0614eb76ba1591285e3efed268">Node_location_tolerance</a> = 1.0e-14</td></tr>
 <tr class="memdesc:a56eb1d0614eb76ba1591285e3efed268 inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for the tolerance to be used when locating nodes via local coordinates.  <a href="classoomph_1_1FiniteElement.html#a56eb1d0614eb76ba1591285e3efed268">More...</a><br /></td></tr>
 <tr class="separator:a56eb1d0614eb76ba1591285e3efed268 inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1600b17efbe61db27a4c622af1f28cf inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ad1600b17efbe61db27a4c622af1f28cf">N2deriv</a> [] ={0,1,3,6}</td></tr>
+<tr class="memitem:ad1600b17efbe61db27a4c622af1f28cf inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ad1600b17efbe61db27a4c622af1f28cf">N2deriv</a> [] = {0, 1, 3, 6}</td></tr>
 <tr class="memdesc:ad1600b17efbe61db27a4c622af1f28cf inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static array that holds the number of second derivatives as a function of the dimension of the element.  <a href="classoomph_1_1FiniteElement.html#ad1600b17efbe61db27a4c622af1f28cf">More...</a><br /></td></tr>
 <tr class="separator:ad1600b17efbe61db27a4c622af1f28cf inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
@@ -950,17 +948,17 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ad1caf78fe79a13d517d3eea2e605a84e inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ad1caf78fe79a13d517d3eea2e605a84e">Accept_negative_jacobian</a> = false</td></tr>
 <tr class="memdesc:ad1caf78fe79a13d517d3eea2e605a84e inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean that if set to true allows a negative jacobian in the transform between global and local coordinates (negative surface area = left-handed coordinate system).  <a href="classoomph_1_1FiniteElement.html#ad1caf78fe79a13d517d3eea2e605a84e">More...</a><br /></td></tr>
 <tr class="separator:ad1caf78fe79a13d517d3eea2e605a84e inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ae8357b9337e2148c57267f1d4c32fcfa">Suppress_output_while_checking_for_inverted_elements</a> =false</td></tr>
+<tr class="memitem:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ae8357b9337e2148c57267f1d4c32fcfa">Suppress_output_while_checking_for_inverted_elements</a></td></tr>
 <tr class="memdesc:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress output while checking for inverted elements.  <a href="classoomph_1_1FiniteElement.html#ae8357b9337e2148c57267f1d4c32fcfa">More...</a><br /></td></tr>
 <tr class="separator:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
-<tr class="memitem:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">Suppress_warning_about_repeated_internal_data</a> =false</td></tr>
+<tr class="memitem:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">Suppress_warning_about_repeated_internal_data</a></td></tr>
 <tr class="memdesc:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated internal data. Defaults to false.  <a href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">More...</a><br /></td></tr>
 <tr class="separator:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a1bf8531f4b0ba0a0008e9a25af9b0b8b">Suppress_warning_about_repeated_external_data</a> =true</td></tr>
+<tr class="memitem:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a1bf8531f4b0ba0a0008e9a25af9b0b8b">Suppress_warning_about_repeated_external_data</a> = true</td></tr>
 <tr class="memdesc:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated external data. Defaults to true.  <a href="classoomph_1_1GeneralisedElement.html#a1bf8531f4b0ba0a0008e9a25af9b0b8b">More...</a><br /></td></tr>
 <tr class="separator:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a156163c9f6fbd17548a9fa836616d19b">Default_fd_jacobian_step</a> =1.0e-8</td></tr>
+<tr class="memitem:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a156163c9f6fbd17548a9fa836616d19b">Default_fd_jacobian_step</a> = 1.0e-8</td></tr>
 <tr class="memdesc:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Double used for the default finite difference step in elemental jacobian calculations.  <a href="classoomph_1_1GeneralisedElement.html#a156163c9f6fbd17548a9fa836616d19b">More...</a><br /></td></tr>
 <tr class="separator:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classoomph_1_1FiniteElement"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1FiniteElement')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1FiniteElement.html">oomph::FiniteElement</a></td></tr>
@@ -1055,7 +1053,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ae35b7d576c38a08418d37c055e741c05">invert_jacobian</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;inverse_jacobian) const</td></tr>
-<tr class="memdesc:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Three-d specialisation of function to calculate inverse of jacobian mapping.  <a href="classoomph_1_1FiniteElement.html#ae35b7d576c38a08418d37c055e741c05">More...</a><br /></td></tr>
 <tr class="separator:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bcd6094db5f1ee6d18f7231f22a76e4 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:a6bcd6094db5f1ee6d18f7231f22a76e4 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a6bcd6094db5f1ee6d18f7231f22a76e4">dJ_eulerian_dnodal_coordinates_templated_helper</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, const <a class="el" href="classoomph_1_1DShape.html">DShape</a> &amp;dpsids, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;djacobian_dX) const</td></tr>
@@ -1181,12 +1178,12 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a94e118d65f31ce404963509e462b2d0e inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a94e118d65f31ce404963509e462b2d0e">fill_in_contribution_to_hessian_vector_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;Y, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; const &amp;C, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;product)</td></tr>
 <tr class="memdesc:a94e118d65f31ce404963509e462b2d0e inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in contribution to the product of the Hessian (derivative of Jacobian with respect to all variables) an eigenvector, Y, and other specified vectors, C (d(J_{ij})/d u_{k}) Y_{j} C_{k}.  <a href="classoomph_1_1GeneralisedElement.html#a94e118d65f31ce404963509e462b2d0e">More...</a><br /></td></tr>
 <tr class="separator:a94e118d65f31ce404963509e462b2d0e inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa69127912ea0def7044311c86e5d6eac inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa69127912ea0def7044311c86e5d6eac">fill_in_contribution_to_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt; &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
-<tr class="memdesc:aa69127912ea0def7044311c86e5d6eac inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contribution to the inner products between given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#aa69127912ea0def7044311c86e5d6eac">More...</a><br /></td></tr>
-<tr class="separator:aa69127912ea0def7044311c86e5d6eac inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7bd5d890614037d1023aae753a66957 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa7bd5d890614037d1023aae753a66957">fill_in_contribution_to_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;inner_product_vector)</td></tr>
-<tr class="memdesc:aa7bd5d890614037d1023aae753a66957 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contributions to the vectors that when taken as dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#aa7bd5d890614037d1023aae753a66957">More...</a><br /></td></tr>
-<tr class="separator:aa7bd5d890614037d1023aae753a66957 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8736a0903c1788c58038cd89fa8d2b43 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a8736a0903c1788c58038cd89fa8d2b43">fill_in_contribution_to_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt;&gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
+<tr class="memdesc:a8736a0903c1788c58038cd89fa8d2b43 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contribution to the inner products between given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#a8736a0903c1788c58038cd89fa8d2b43">More...</a><br /></td></tr>
+<tr class="separator:a8736a0903c1788c58038cd89fa8d2b43 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f3906e6ccab35b6c8172ca60efe8e19 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a2f3906e6ccab35b6c8172ca60efe8e19">fill_in_contribution_to_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;inner_product_vector)</td></tr>
+<tr class="memdesc:a2f3906e6ccab35b6c8172ca60efe8e19 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contributions to the vectors that when taken as dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#a2f3906e6ccab35b6c8172ca60efe8e19">More...</a><br /></td></tr>
+<tr class="separator:a2f3906e6ccab35b6c8172ca60efe8e19 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned DIM&gt;<br />
@@ -1210,8 +1207,7 @@ template&lt;unsigned DIM&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time FCT(t,x,b) &ndash; x and b are Vectors! <br  />
- </p>
+<p>Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time FCT(t,x,b) &ndash; x and b are Vectors! </p>
 
 <p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00158">158</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
@@ -1288,9 +1284,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Evaluate body force at Eulerian coordinate x at present time (returns zero vector if no body force function pointer has been set) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00239">239</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00270">270</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00336">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>, <a class="el" href="elements_8h_source.html#l02495">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="timesteppers_8h_source.html#l00126">oomph::Time::time()</a>, <a class="el" href="timesteppers_8h_source.html#l00536">oomph::TimeStepper::time_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00242">oomph::Data::time_stepper_pt()</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00361">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>, <a class="el" href="elements_8h_source.html#l02628">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="timesteppers_8h_source.html#l00129">oomph::Time::time()</a>, <a class="el" href="timesteppers_8h_source.html#l00584">oomph::TimeStepper::time_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00244">oomph::Data::time_stepper_pt()</a>.</p>
 
 </div>
 </div>
@@ -1321,11 +1317,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function: Pointer to body force function. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00186">186</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00201">201</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00336">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00361">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00153">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00157">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
 
 </div>
 </div>
@@ -1356,9 +1352,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function: Pointer to body force function (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00189">189</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00207">207</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00336">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00361">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>.</p>
 
 </div>
 </div>
@@ -1400,9 +1396,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>d^2u/dt^2 at local node n </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00067">67</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00068">68</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="timesteppers_8h_source.html#l00371">oomph::TimeStepper::is_steady()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l02483">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="timesteppers_8h_source.html#l00558">oomph::TimeStepper::ntstorage()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="geom__objects_8h_source.html#l00193">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="nodes_8h_source.html#l00242">oomph::Data::time_stepper_pt()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00063">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::u_index_linear_elasticity()</a>, and <a class="el" href="timesteppers_8h_source.html#l00553">oomph::TimeStepper::weight()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="timesteppers_8h_source.html#l00401">oomph::TimeStepper::is_steady()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l02610">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="timesteppers_8h_source.html#l00613">oomph::TimeStepper::ntstorage()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="geom__objects_8h_source.html#l00198">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="nodes_8h_source.html#l00244">oomph::Data::time_stepper_pt()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00062">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::u_index_linear_elasticity()</a>, and <a class="el" href="timesteppers_8h_source.html#l00606">oomph::TimeStepper::weight()</a>.</p>
 
 </div>
 </div>
@@ -1433,9 +1429,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Switch off solid inertia. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00196">196</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00220">220</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00333">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Unsteady</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00358">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Unsteady</a>.</p>
 
 </div>
 </div>
@@ -1489,14 +1485,14 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function to the entries in the elasticity tensor. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00173">173</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00180">180</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00327">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00352">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
-<a id="ac12fbacdae9347b1a570dc1a86c893c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac12fbacdae9347b1a570dc1a86c893c3">&#9670;&nbsp;</a></span>elasticity_tensor_pt()</h2>
+<a id="a1d6902388208c44c04c653f88360f306"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d6902388208c44c04c653f88360f306">&#9670;&nbsp;</a></span>elasticity_tensor_pt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1507,7 +1503,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1ElasticityTensor.html">ElasticityTensor</a>* &amp; <a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html">oomph::LinearElasticityEquationsBase</a>&lt; DIM &gt;::elasticity_tensor_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1ElasticityTensor.html">ElasticityTensor</a>*&amp; <a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html">oomph::LinearElasticityEquationsBase</a>&lt; DIM &gt;::elasticity_tensor_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1522,11 +1518,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return the pointer to the elasticity_tensor. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00170">170</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00174">174</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00327">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00352">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00153">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00157">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
 
 </div>
 </div>
@@ -1557,14 +1553,14 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Switch on solid inertia. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00193">193</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00214">214</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00333">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Unsteady</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00358">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Unsteady</a>.</p>
 
 </div>
 </div>
-<a id="add3ab9f1bbd914e5a460bfefb4eff5c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add3ab9f1bbd914e5a460bfefb4eff5c9">&#9670;&nbsp;</a></span>get_dof_numbers_for_unknowns()</h2>
+<a id="a1211abcef7585d5dada67e66a2bed93c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1211abcef7585d5dada67e66a2bed93c">&#9670;&nbsp;</a></span>get_dof_numbers_for_unknowns()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1577,7 +1573,7 @@ template&lt;unsigned DIM&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html">oomph::LinearElasticityEquationsBase</a>&lt; DIM &gt;::get_dof_numbers_for_unknowns </td>
           <td>(</td>
-          <td class="paramtype">std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::list&lt; std::pair&lt; unsigned long, unsigned &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_lookup_list</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -1589,14 +1585,13 @@ template&lt;unsigned DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF types" that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) <br  />
- </p>
+<p>Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF types" that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) </p>
 
-<p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a069f59bfc3e607a5bebba52c6314d777">oomph::GeneralisedElement</a>.</p>
+<p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a29c6fb71cd7cabb29b4c289598aec601">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00283">283</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00311">311</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l01399">oomph::FiniteElement::nodal_local_eqn()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00710">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l01438">oomph::FiniteElement::nodal_local_eqn()</a>.</p>
 
 </div>
 </div>
@@ -1632,11 +1627,11 @@ template&lt;unsigned DIM&gt; </div>
 <p>Compute the strain tensor at local coordinate s. </p>
 <p>Now fill in the entries of the strain tensor</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8cc_source.html#l00049">49</a> of file <a class="el" href="linear__elasticity__elements_8cc_source.html">linear_elasticity_elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8cc_source.html#l00047">47</a> of file <a class="el" href="linear__elasticity__elements_8cc_source.html">linear_elasticity_elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00503">oomph::DenseMatrix&lt; T &gt;::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00500">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00503">oomph::DenseMatrix&lt; T &gt;::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00497">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00108">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::get_Z2_flux()</a>, and <a class="el" href="Tlinear__elasticity__elements_8h_source.html#l00141">oomph::TLinearElasticityElement&lt; DIM, NNODE_1D &gt;::get_Z2_flux()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00109">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::get_Z2_flux()</a>, and <a class="el" href="Tlinear__elasticity__elements_8h_source.html#l00147">oomph::TLinearElasticityElement&lt; DIM, NNODE_1D &gt;::get_Z2_flux()</a>.</p>
 
 </div>
 </div>
@@ -1722,7 +1717,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00127">127</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt.html#a5448c72da3359c7796cf0c5f800732a1">interpolated_u()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02483">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00063">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::u_index_linear_elasticity()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt.html#a5448c72da3359c7796cf0c5f800732a1">interpolated_u()</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02610">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00062">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::u_index_linear_elasticity()</a>.</p>
 
 </div>
 </div>
@@ -1764,11 +1759,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Compute vector of FE interpolated displacement u at local coordinate s. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00097">97</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00098">98</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02483">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00063">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::u_index_linear_elasticity()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02610">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00062">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::u_index_linear_elasticity()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00092">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::get_interpolated_values()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00093">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::get_interpolated_values()</a>.</p>
 
 </div>
 </div>
@@ -1799,11 +1794,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function to flag that switches inertia on/off (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00199">199</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00226">226</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00333">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Unsteady</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00358">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Unsteady</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00153">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00157">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
 
 </div>
 </div>
@@ -1834,14 +1829,14 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function for timescale ratio (nondim density) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00180">180</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00189">189</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00330">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Lambda_sq_pt</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00355">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Lambda_sq_pt</a>.</p>
 
 </div>
 </div>
-<a id="a0109438765421ac09ae6905ccc51642a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0109438765421ac09ae6905ccc51642a">&#9670;&nbsp;</a></span>lambda_sq_pt()</h2>
+<a id="a116f2d6627675f78acba8795a383933c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a116f2d6627675f78acba8795a383933c">&#9670;&nbsp;</a></span>lambda_sq_pt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1852,7 +1847,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double* &amp; <a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html">oomph::LinearElasticityEquationsBase</a>&lt; DIM &gt;::lambda_sq_pt </td>
+          <td class="memname">double*&amp; <a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html">oomph::LinearElasticityEquationsBase</a>&lt; DIM &gt;::lambda_sq_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1867,11 +1862,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function for pointer to timescale ratio (nondim density) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00183">183</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00195">195</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00330">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Lambda_sq_pt</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__elements_8h_source.html#l00355">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::Lambda_sq_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00153">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00157">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
 
 </div>
 </div>
@@ -1904,7 +1899,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a0c6037a870597b35dcf1c780710b9a56">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00271">271</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00299">299</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
 </div>
 </div>
@@ -1935,9 +1930,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pin the element's redundant solid pressures (needed for refinement) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00202">202</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00232">232</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00214">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::pin_redundant_nodal_solid_pressures()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00245">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::pin_redundant_nodal_solid_pressures()</a>.</p>
 
 </div>
 </div>
@@ -1971,12 +1966,11 @@ template&lt;unsigned DIM&gt; </div>
 <ul>
 <li><code>LinearElasticityEquationsBase&lt;DIM&gt;::</code> pin_elemental_redundant_nodal_pressure_dofs()</li>
 </ul>
-<p>which is empty by default and should be implemented for elements with nodal solid pressure degrees of freedom <br  />
- (e.g. linear elasticity elements with continuous pressure interpolation.) </p>
+<p>which is empty by default and should be implemented for elements with nodal solid pressure degrees of freedom (e.g. linear elasticity elements with continuous pressure interpolation.) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00214">214</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00245">245</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00202">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::pin_elemental_redundant_nodal_solid_pressures()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00232">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::pin_elemental_redundant_nodal_solid_pressures()</a>.</p>
 
 </div>
 </div>
@@ -2008,11 +2002,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return the index at which the i-th unknown displacement component is stored. The default value, i, is appropriate for single-physics problems. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00063">63</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00062">62</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00067">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::d2u_dt2_linear_elasticity()</a>, <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00063">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::get_interpolated_values()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00097">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::interpolated_u_linear_elasticity()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00068">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::d2u_dt2_linear_elasticity()</a>, <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00063">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::get_interpolated_values()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00098">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::interpolated_u_linear_elasticity()</a>.</p>
 
 </div>
 </div>
@@ -2041,9 +2035,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to body force function. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00336">336</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00361">361</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00239">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::body_force()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00186">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::body_force_fct_pt()</a>, and <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00153">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00270">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::body_force()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00201">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::body_force_fct_pt()</a>, and <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00157">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
 
 </div>
 </div>
@@ -2059,7 +2053,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html">oomph::LinearElasticityEquationsBase</a>&lt; DIM &gt;::Default_lambda_sq_value =1.0</td>
+          <td class="memname">double <a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html">oomph::LinearElasticityEquationsBase</a>&lt; DIM &gt;::Default_lambda_sq_value = 1.0</td>
         </tr>
       </table>
   </td>
@@ -2071,7 +2065,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Static default value for timescale ratio (1.0 &ndash; for natural scaling) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00339">339</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00364">364</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
 </div>
 </div>
@@ -2099,9 +2093,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to the elasticity tensor. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00327">327</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00352">352</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00173">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::E()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00170">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::elasticity_tensor_pt()</a>, and <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00153">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00180">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::E()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00174">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::elasticity_tensor_pt()</a>, and <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00157">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>.</p>
 
 </div>
 </div>
@@ -2129,9 +2123,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Timescale ratio (non-dim. density) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00330">330</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00355">355</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00153">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00180">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::lambda_sq()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00183">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::lambda_sq_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00157">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00189">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::lambda_sq()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00195">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::lambda_sq_pt()</a>.</p>
 
 </div>
 </div>
@@ -2159,9 +2153,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Flag that switches inertia on/off. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00333">333</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__elements_8h_source.html#l00358">358</a> of file <a class="el" href="linear__elasticity__elements_8h_source.html">linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00196">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::disable_inertia()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00193">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::enable_inertia()</a>, <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00153">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00199">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::is_inertia_enabled()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__elasticity__elements_8h_source.html#l00220">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::disable_inertia()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00214">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::enable_inertia()</a>, <a class="el" href="refineable__linear__elasticity__elements_8h_source.html#l00157">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::further_build()</a>, and <a class="el" href="linear__elasticity__elements_8h_source.html#l00226">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::is_inertia_enabled()</a>.</p>
 
 </div>
 </div>
@@ -2197,7 +2191,7 @@ template&lt;unsigned DIM&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:55:41
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:40
         </div>
       </div>
     </footer>

@@ -63,7 +63,7 @@ void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a580ecb70417536ceb112
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a4f1d999320dd5bbece88b33241816e9e}{disable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Do not bypass the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a9e6450d4fff45393640ab3043d17ac96}{is\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data\+\_\+bypassed}} () const
-\begin{DoxyCompactList}\small\item\em Test whether the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data is bypassed. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_acd9274afc02b66bb15b368e359c40a6f}{ngeom\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of geometric data upon which the shape of the element depends. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
@@ -103,7 +103,7 @@ int \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a7b02491715adf7a315631
 \doxysubsection{Detailed Description}
 A policy class that serves to establish the common interfaces for elements that contain moving nodes. This class provides storage for the geometric data that affect the update of all the nodes of the element, i.\+e. U\+S\+U\+A\+L\+LY all data that are using during a call to the Element\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1FiniteElement_ac27d707cb4f7c1429793c0fdb2fd093b}{node\+\_\+update()}} function. In some cases (e.\+g. Fluid\+Interface\+Edge elements), \mbox{\hyperlink{classoomph_1_1FiniteElement_ac27d707cb4f7c1429793c0fdb2fd093b}{node\+\_\+update()}} is overloaded to perform an update of the bulk element, in which case the additional bulk geometric data become external data of the element and the function Generalised\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd(i) is overloaded to also perform the bulk node update. The storage is populated during the assignment of the equation numbers via the \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a6d2fa178f36d4b8413a9ce4f24e9c87e}{complete\+\_\+setup\+\_\+of\+\_\+dependencies()}} function and then local equations numbers are assigned to these data, accessible via geometric\+\_\+data\+\_\+local\+\_\+eqn(n,i). Finally, a function is provided that calculates the terms in the jacobian matrix by due to these geometric data by finite differences. 
 
-Definition at line 71 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 64 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -132,7 +132,7 @@ Shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 76 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 68 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -149,7 +149,7 @@ Constructor.
 
 
 
-Definition at line 81 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 76 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a6b8b065876eeb3e896c4d8108e293942}\label{classoomph_1_1ElementWithMovingNodes_a6b8b065876eeb3e896c4d8108e293942}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!ElementWithMovingNodes@{ElementWithMovingNodes}}
@@ -163,7 +163,7 @@ Broken copy constructor.
 
 
 
-Definition at line 96 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 92 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -181,7 +181,7 @@ Virtual destructor (clean up and allocated memory)
 
 
 
-Definition at line 119 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 115 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -202,7 +202,7 @@ Return whether shape derivatives are evaluated by fd.
 
 
 
-Definition at line 194 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 192 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -220,7 +220,7 @@ Return a set of all geometric data associated with the element.
 
 Return a set of all geometric data associated with the element\textquotesingle{}s node update function 
 
-Definition at line 44 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
+Definition at line 43 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
@@ -248,7 +248,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a
 
 
 
-Definition at line 195 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
+Definition at line 197 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
@@ -278,7 +278,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a
 
 
 
-Definition at line 137 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
+Definition at line 138 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
@@ -308,7 +308,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a
 
 
 
-Definition at line 169 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
+Definition at line 170 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
@@ -330,7 +330,7 @@ Insist that shape derivatives are always evaluated using the overloaded version 
 
 
 
-Definition at line 207 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 210 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -348,7 +348,7 @@ Do not bypass the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\
 
 
 
-Definition at line 274 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 286 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -366,11 +366,15 @@ Insist that shape derivatives are always evaluated by fd (using \mbox{\hyperlink
 
 
 
-Definition at line 199 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 200 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
 References Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd.
+
+
+
+Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), and oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a580ecb70417536ceb1121afd3bea0d54}\label{classoomph_1_1ElementWithMovingNodes_a580ecb70417536ceb1121afd3bea0d54}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!enable\_bypass\_fill\_in\_jacobian\_from\_geometric\_data@{enable\_bypass\_fill\_in\_jacobian\_from\_geometric\_data}}
@@ -384,7 +388,7 @@ Bypass the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data
 
 
 
-Definition at line 270 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 280 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -406,7 +410,7 @@ Evaluate shape derivatives by chain rule. Currently disabled by default because 
 
 
 
-Definition at line 221 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 226 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -424,7 +428,7 @@ Evaluate shape derivatives by direct finite differencing.
 
 
 
-Definition at line 211 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 216 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -442,7 +446,7 @@ Evaluate shape derivatives by (anticipated) fastest method. Currently disabled b
 
 
 
-Definition at line 245 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 251 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -456,7 +460,7 @@ References Method\+\_\+for\+\_\+shape\+\_\+derivs, and Shape\+\_\+derivs\+\_\+by
 
 Calculate the contributions to the Jacobian matrix from the geometric data. This version computes the residuals vector before calculating the Jacobian terms 
 
-Definition at line 310 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 326 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -474,7 +478,7 @@ Calculate the contributions to the Jacobian matrix from the geometric data. This
 
 Calculate the node-\/update--related entries in the Jacobian. The vector passed in residuals has to contain the nonlinear residuals, evaluated for the current values of the unknowns, in case F\+Ding is used to computed the derivatives. 
 
-Definition at line 314 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
+Definition at line 323 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
@@ -482,7 +486,7 @@ References Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+
 
 
 
-Referenced by oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Line\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ E\+L\+E\+M\+E\+N\+T, Macro\+Element\+Node\+Update\+Node $>$\+::get\+\_\+jacobian(), and oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ E\+L\+E\+M\+E\+N\+T, Macro\+Element\+Node\+Update\+Node $>$\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
+Referenced by oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Line\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ E\+L\+E\+M\+E\+N\+T, Macro\+Element\+Node\+Update\+Node $>$\+::get\+\_\+jacobian(), and oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ E\+L\+E\+M\+E\+N\+T, Macro\+Element\+Node\+Update\+Node $>$\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a2005bd9a0f38ad2eab3ec1250c8a7ba4}\label{classoomph_1_1ElementWithMovingNodes_a2005bd9a0f38ad2eab3ec1250c8a7ba4}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!geometric\_data\_local\_eqn@{geometric\_data\_local\_eqn}}
@@ -496,7 +500,7 @@ Return the local equation number corresponding to the i-\/th value at the n-\/th
 
 
 
-Definition at line 133 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 132 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -518,7 +522,7 @@ Compute derivatives of the nodal coordinates w.\+r.\+t. to the geometric dofs. D
 
 
 
-Definition at line 539 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
+Definition at line 538 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
@@ -544,7 +548,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0eea5ad6500576d
 
 
 
-Definition at line 183 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 181 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -556,13 +560,9 @@ References Geom\+\_\+data\+\_\+pt, and n.
 \doxysubsubsection{\texorpdfstring{is\_fill\_in\_jacobian\_from\_geometric\_data\_bypassed()}{is\_fill\_in\_jacobian\_from\_geometric\_data\_bypassed()}}
 {\footnotesize\ttfamily bool oomph\+::\+Element\+With\+Moving\+Nodes\+::is\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data\+\_\+bypassed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
+Test whether the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data is bypassed 
 
-
-Test whether the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data is bypassed. 
-
-
-
-Definition at line 278 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 293 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -580,7 +580,7 @@ Access to method (enumerated flag) for determination of shape derivs.
 
 
 
-Definition at line 267 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 274 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -606,7 +606,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e12
 
 
 
-Definition at line 336 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 351 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -628,7 +628,7 @@ Number of geometric dofs.
 
 
 
-Definition at line 129 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 125 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -646,7 +646,7 @@ Broken assignment operator.
 
 
 
-Definition at line 102 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 98 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -667,7 +667,7 @@ Set flag to true to bypass calculation of Jacobain entries resulting from geomet
 
 
 
-Definition at line 350 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 367 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -685,7 +685,7 @@ Boolean to decide if shape derivatives are to be evaluated by fd (using \mbox{\h
 
 
 
-Definition at line 356 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 373 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -703,7 +703,7 @@ Referenced by are\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+always\+\_\+e
 
 
 
-Definition at line 330 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 346 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -721,7 +721,7 @@ Array to hold local eqn number information for the geometric \mbox{\hyperlink{cl
 
 
 
-Definition at line 342 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 359 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -739,7 +739,7 @@ Choose method for evaluation of shape derivatives (this takes one of the values 
 
 
 
-Definition at line 360 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 377 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -757,7 +757,7 @@ Number of geometric dofs (computed on the fly when equation numbers are set up)
 
 
 
-Definition at line 346 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
+Definition at line 363 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 

@@ -26,7 +26,7 @@ void \mbox{\hyperlink{namespaceoomph_1_1METIS_a9d95103cfa79d38f80b3b0a6db949701}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}} \mbox{\hyperlink{namespaceoomph_1_1METIS_af21fbb8dba025be51b3e27c1822243a5}{Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt}} =\&\mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}}
+\mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}} \mbox{\hyperlink{namespaceoomph_1_1METIS_af21fbb8dba025be51b3e27c1822243a5}{Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt}} = \&\mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}}
 \begin{DoxyCompactList}\small\item\em Function pointer to to function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} partitioning. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -46,7 +46,7 @@ Typedef for function pointer to to function that translates spatial error into w
 
 
 
-Definition at line 90 of file partitioning.\+h.
+Definition at line 80 of file partitioning.\+h.
 
 
 
@@ -63,7 +63,7 @@ Default function that translates spatial error into weight for \mbox{\hyperlink{
 
 Default function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} partitioning (unit weight regardless of input) 
 
-Definition at line 49 of file partitioning.\+cc.
+Definition at line 45 of file partitioning.\+cc.
 
 
 
@@ -139,11 +139,11 @@ Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each eleme
 \item objective=1\+: minimise total communications volume.
 \end{DoxyItemize}Partioning is based on dual graph of mesh. 
 
-Definition at line 118 of file partitioning.\+cc.
+Definition at line 108 of file partitioning.\+cc.
 
 
 
-References default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), elements, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+M\+E\+T\+I\+S\+\_\+\+Part\+Graph\+Kway(), oomph\+::\+M\+E\+T\+I\+S\+\_\+\+Part\+Graph\+V\+Kway(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::nsub\+\_\+mesh(), oomph\+::oomph\+\_\+info, oomph\+::\+Refineable\+Mesh\+Base\+::spatial\+\_\+error\+\_\+estimator\+\_\+pt(), and oomph\+::\+Cumulative\+Timings\+::start().
+References default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), elements, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt, oomph\+::\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+M\+E\+T\+I\+S\+\_\+\+Part\+Graph\+Kway(), oomph\+::\+M\+E\+T\+I\+S\+\_\+\+Part\+Graph\+V\+Kway(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::nsub\+\_\+mesh(), oomph\+::oomph\+\_\+info, oomph\+::\+Refineable\+Mesh\+Base\+::spatial\+\_\+error\+\_\+estimator\+\_\+pt(), and oomph\+::\+Cumulative\+Timings\+::start().
 
 
 
@@ -161,7 +161,7 @@ Partition mesh uniformly by dividing elements equally over the partitions, in th
 
 Partition mesh uniformly by dividing elements equally over the partitions, in the order in which they are returned by problem. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
 
-Definition at line 74 of file partitioning.\+cc.
+Definition at line 68 of file partitioning.\+cc.
 
 
 
@@ -174,7 +174,7 @@ References oomph\+::\+Problem\+::mesh\+\_\+pt(), and oomph\+::\+Mesh\+::nelement
 \index{oomph::METIS@{oomph::METIS}!Error\_to\_weight\_fct\_pt@{Error\_to\_weight\_fct\_pt}}
 \index{Error\_to\_weight\_fct\_pt@{Error\_to\_weight\_fct\_pt}!oomph::METIS@{oomph::METIS}}
 \doxysubsubsection{\texorpdfstring{Error\_to\_weight\_fct\_pt}{Error\_to\_weight\_fct\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}} oomph\+::\+M\+E\+T\+I\+S\+::\+Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt =\&\mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}} oomph\+::\+M\+E\+T\+I\+S\+::\+Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt = \&\mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}}}
 
 
 
@@ -182,7 +182,7 @@ Function pointer to to function that translates spatial error into weight for \m
 
 
 
-Definition at line 59 of file partitioning.\+cc.
+Definition at line 55 of file partitioning.\+cc.
 
 
 

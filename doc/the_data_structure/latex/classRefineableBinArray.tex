@@ -40,7 +40,7 @@ void \mbox{\hyperlink{classRefineableBinArray_a477a68e97b7cb297d38a0b2a844f53a5}
 \begin{DoxyCompactList}\small\item\em Add specified \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} to \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}{locate\+\_\+zeta}} (const Vector$<$ double $>$ \&zeta, Geom\+Object $\ast$\&sub\+\_\+geom\+\_\+object\+\_\+pt, Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
 \begin{DoxyCompactList}\small\item\em Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub\+\_\+geom\+\_\+object\+\_\+pt=0 if point can\textquotesingle{}t be found. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRefineableBinArray_aaf7e968daa598e460269fac55dfb55ca}{get\+\_\+bin\+\_\+boundaries}} (const unsigned \&bin\+\_\+index, Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&\mbox{\hyperlink{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}{min\+\_\+and\+\_\+max\+\_\+coordinates}})
+void \mbox{\hyperlink{classRefineableBinArray_abb9308f34cddb6b01db9240d8e14f850}{get\+\_\+bin\+\_\+boundaries}} (const unsigned \&bin\+\_\+index, Vector$<$ std\+::pair$<$ double, double $>$$>$ \&\mbox{\hyperlink{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}{min\+\_\+and\+\_\+max\+\_\+coordinates}})
 \begin{DoxyCompactList}\small\item\em Boundaries of specified bin in each coordinate direction. $\ast$.first = min; $\ast$.second = max. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classRefineableBinArray_a07632b2aa85958ed406ca980f0cd025b}{depth}} () const
 \begin{DoxyCompactList}\small\item\em Depth of the hierarchical bin\+\_\+array. \end{DoxyCompactList}\item 
@@ -71,7 +71,7 @@ unsigned \& \mbox{\hyperlink{classRefineableBinArray_a517b1704286e6ee44b771af534
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static unsigned \mbox{\hyperlink{classRefineableBinArray_a34a623036985925b9adc0b28c89ad1c2}{Default\+\_\+n\+\_\+bin\+\_\+1d}} =5
+static unsigned \mbox{\hyperlink{classRefineableBinArray_a34a623036985925b9adc0b28c89ad1c2}{Default\+\_\+n\+\_\+bin\+\_\+1d}} = 5
 \begin{DoxyCompactList}\small\item\em Default number of bins (in each coordinate direction) (Note\+: don\textquotesingle{}t move this into a common base class because each derived class has its own value; we\textquotesingle{}ll want far fewer in the refineable version!) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -109,7 +109,7 @@ unsigned \mbox{\hyperlink{classRefineableBinArray_ace7075adbe1606ef0b01cbb14c380
 \doxysubsection{Detailed Description}
 \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} class. 
 
-Definition at line 542 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 545 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -126,7 +126,7 @@ Constructor.
 
 \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} array class 
 
-Definition at line 840 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 841 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -144,7 +144,7 @@ Broken copy constructor.
 
 
 
-Definition at line 551 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 552 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -162,7 +162,7 @@ Destructor.
 
 
 
-Definition at line 563 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 564 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -183,7 +183,7 @@ Add specified \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} to \mbox{\hyper
 
 
 
-Definition at line 640 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 643 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -205,7 +205,7 @@ Is the \mbox{\hyperlink{classBinArray}{Bin\+Array}} recursive?
 
 
 
-Definition at line 687 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 690 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -223,7 +223,7 @@ Pointer to i-\/th bin; can be null if bin is empty.
 
 
 
-Definition at line 583 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 584 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -251,7 +251,7 @@ Depth of the hierarchical bin\+\_\+array.
 
 
 
-Definition at line 669 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 672 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -269,7 +269,7 @@ Fill the bin array with sample points from Finite\+Elements stored in mesh.
 
 For all the sample points we have to create ...
 
-Definition at line 1874 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 1882 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -291,7 +291,7 @@ Fill the bin array with specified Sample\+Points.
 
 
 
-Definition at line 604 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 605 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -309,17 +309,21 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line 741 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 743 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
 References First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
 
-\mbox{\Hypertarget{classRefineableBinArray_aaf7e968daa598e460269fac55dfb55ca}\label{classRefineableBinArray_aaf7e968daa598e460269fac55dfb55ca}} 
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
+
+\mbox{\Hypertarget{classRefineableBinArray_abb9308f34cddb6b01db9240d8e14f850}\label{classRefineableBinArray_abb9308f34cddb6b01db9240d8e14f850}} 
 \index{RefineableBinArray@{RefineableBinArray}!get\_bin\_boundaries@{get\_bin\_boundaries}}
 \index{get\_bin\_boundaries@{get\_bin\_boundaries}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{get\_bin\_boundaries()}{get\_bin\_boundaries()}}
-{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries (\begin{DoxyParamCaption}\item[{const unsigned \&}]{bin\+\_\+index,  }\item[{Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates\+\_\+of\+\_\+bin }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries (\begin{DoxyParamCaption}\item[{const unsigned \&}]{bin\+\_\+index,  }\item[{Vector$<$ std\+::pair$<$ double, double $>$$>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates\+\_\+of\+\_\+bin }\end{DoxyParamCaption})}
 
 
 
@@ -327,7 +331,7 @@ Boundaries of specified bin in each coordinate direction. $\ast$.first = min; $\
 
 Boundaries of specified bin in each coordinate direction. $\ast$.first = min; $\ast$.second = max. 
 
-Definition at line 987 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 995 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -349,11 +353,15 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line 770 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 772 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
 References Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
+
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{classRefineableBinArray_ad8dd347e3f9cd98555ebc96f9c968807}\label{classRefineableBinArray_ad8dd347e3f9cd98555ebc96f9c968807}} 
 \index{RefineableBinArray@{RefineableBinArray}!last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
@@ -367,11 +375,15 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line 749 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 751 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
 References Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
+
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}\label{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}} 
 \index{RefineableBinArray@{RefineableBinArray}!locate\_zeta@{locate\_zeta}}
@@ -389,7 +401,7 @@ Implements \mbox{\hyperlink{classSamplePointContainer_acca8dbae8346d6c8924b1f815
 
 
 
-Definition at line 1997 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 2002 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -407,7 +419,7 @@ Max depth of the hierarchical bin\+\_\+array.
 
 
 
-Definition at line 681 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 684 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -425,7 +437,7 @@ Max depth of the hierarchical bin\+\_\+array; const version.
 
 
 
-Definition at line 675 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 678 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -443,7 +455,7 @@ Maximum number of sample points in bin (before its subdivided recursively)
 
 
 
-Definition at line 694 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 697 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -461,11 +473,15 @@ Every time we\textquotesingle{}ve completed a \char`\"{}spiral\char`\"{}, visiti
 
 
 
-Definition at line 761 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 763 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
 References Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
+
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1}\label{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1}} 
 \index{RefineableBinArray@{RefineableBinArray}!nbin@{nbin}}
@@ -483,7 +499,7 @@ Implements \mbox{\hyperlink{classBinArray_aad085bf99d78162120c419f7504d256b}{Bin
 
 
 
-Definition at line 589 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 590 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -505,7 +521,7 @@ Broken assignment operator.
 
 
 
-Definition at line 557 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 558 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -527,7 +543,7 @@ Implements \mbox{\hyperlink{classBinArray_afc595a05f2ab19e1bb973c5a076b1432}{Bin
 
 
 
-Definition at line 1020 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 1027 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -549,7 +565,7 @@ Implements \mbox{\hyperlink{classBinArray_a66fe7e379a53e3fee81ead7ef4045b40}{Bin
 
 
 
-Definition at line 700 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 703 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -567,7 +583,7 @@ Output neighbouring bins at given \char`\"{}radius\char`\"{} of the specified bi
 
 Output neighbouring bins up to given \char`\"{}radius\char`\"{} of the specified bin. 
 
-Definition at line 1037 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 1044 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -585,7 +601,7 @@ Root bin array.
 
 
 
-Definition at line 577 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 578 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -611,7 +627,7 @@ Implements \mbox{\hyperlink{classSamplePointContainer_ac7bf51a6987a9180c7715d621
 
 
 
-Definition at line 1811 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 1820 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -619,7 +635,7 @@ References Bin\+\_\+pt, i, and nbin().
 
 
 
-Referenced by locate\+\_\+zeta(), and Refineable\+Bin\+Array().
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), locate\+\_\+zeta(), and Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a551adefafd0be9d184c4daa6adf16512}\label{classRefineableBinArray_a551adefafd0be9d184c4daa6adf16512}} 
 \index{RefineableBinArray@{RefineableBinArray}!total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level@{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level}}
@@ -637,11 +653,15 @@ Reimplemented from \mbox{\hyperlink{classSamplePointContainer_af05aff0424680eec1
 
 
 
-Definition at line 724 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 727 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References Depth, Root\+\_\+bin\+\_\+array\+\_\+pt, and Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level.
+References Depth, Root\+\_\+bin\+\_\+array\+\_\+pt, Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level, and total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level().
+
+
+
+Referenced by total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level().
 
 
 
@@ -658,7 +678,7 @@ Variable which stores if the \mbox{\hyperlink{classRefineableBinArray}{Refineabl
 
 
 
-Definition at line 795 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 794 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -676,7 +696,7 @@ Vector of pointers to constituent Refineable\+Bins.
 
 
 
-Definition at line 791 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 790 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -686,7 +706,7 @@ Referenced by add\+\_\+sample\+\_\+point(), bin\+\_\+pt(), fill\+\_\+bin\+\_\+ar
 \index{RefineableBinArray@{RefineableBinArray}!Default\_n\_bin\_1d@{Default\_n\_bin\_1d}}
 \index{Default\_n\_bin\_1d@{Default\_n\_bin\_1d}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{Default\_n\_bin\_1d}{Default\_n\_bin\_1d}}
-{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+Default\+\_\+n\+\_\+bin\+\_\+1d =5\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+Default\+\_\+n\+\_\+bin\+\_\+1d = 5\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -694,7 +714,7 @@ Default number of bins (in each coordinate direction) (Note\+: don\textquotesing
 
 Default number of bins (in each coordinate direction) 
 
-Definition at line 598 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 599 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -712,7 +732,7 @@ Variable which stores the Depth value of the bin\+\_\+array. Useful for debuggin
 
 
 
-Definition at line 800 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 799 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -730,7 +750,7 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line 817 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 816 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -766,7 +786,7 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line 822 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 821 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -784,7 +804,7 @@ Max depth of the hierarchical bin\+\_\+array.
 
 
 
-Definition at line 803 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 802 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -802,7 +822,7 @@ Maximum number of sample points in bin (before it\textquotesingle{}s subdivided 
 
 
 
-Definition at line 807 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 806 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -838,7 +858,7 @@ Pointer to root bin array.
 
 
 
-Definition at line 810 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 809 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 

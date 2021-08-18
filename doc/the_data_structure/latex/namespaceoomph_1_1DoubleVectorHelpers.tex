@@ -48,10 +48,9 @@ then the out\+\_\+vector is
 
 \mbox{[}a0 (on p0) a1\mbox{]} (on p0) \mbox{[}b0\mbox{]} (on p1) b1\mbox{]} (on p1),
 
-Communication is required between processors. The sum of the global number of rows in the in vectors must equal to the global number of rows in the out vector. This condition must be met if one is to supply an out vector with a distribution, otherwise we can let the function generate the out vector distribution itself. ~\newline
- 
+Communication is required between processors. The sum of the global number of rows in the in vectors must equal to the global number of rows in the out vector. This condition must be met if one is to supply an out vector with a distribution, otherwise we can let the function generate the out vector distribution itself. 
 
-Definition at line 989 of file double\+\_\+vector.\+cc.
+Definition at line 983 of file double\+\_\+vector.\+cc.
 
 
 
@@ -73,7 +72,7 @@ Wrapper around the other concatenate(...) function. Be careful with \mbox{\hyper
 
 
 
-Definition at line 1363 of file double\+\_\+vector.\+cc.
+Definition at line 1371 of file double\+\_\+vector.\+cc.
 
 
 
@@ -121,7 +120,7 @@ Note (1)\+: The out vector may not be uniformly distributed even if the the in v
 
 There are no M\+PI send and receive, the data stays on the processor as defined by the distributions from the in vectors. 
 
-Definition at line 1823 of file double\+\_\+vector.\+cc.
+Definition at line 1846 of file double\+\_\+vector.\+cc.
 
 
 
@@ -143,7 +142,7 @@ Wrapper around the other concatenate\+\_\+without\+\_\+communication(...) functi
 
 
 
-Definition at line 2006 of file double\+\_\+vector.\+cc.
+Definition at line 2029 of file double\+\_\+vector.\+cc.
 
 
 
@@ -167,7 +166,7 @@ vec\+\_\+B\+: \mbox{[}a0\mbox{]} (on p0) vec\+\_\+C\+: \mbox{[}a2\mbox{]} (on p0
 
 Communication is required between processors. The out\+\_\+vector\+\_\+pt must contain pointers to \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} which has already been built with the correct distribution; the sum of the number of global row of the out vectors must be the same the the number of global rows of the in vector. 
 
-Definition at line 1396 of file double\+\_\+vector.\+cc.
+Definition at line 1403 of file double\+\_\+vector.\+cc.
 
 
 
@@ -189,7 +188,7 @@ Wrapper around the other split(...) function. Be careful with \mbox{\hyperlink{c
 
 
 
-Definition at line 1771 of file double\+\_\+vector.\+cc.
+Definition at line 1795 of file double\+\_\+vector.\+cc.
 
 
 
@@ -211,7 +210,7 @@ vec\+\_\+B\+: \mbox{[}a0\mbox{]} (on p0) vec\+\_\+C\+: \mbox{[}a1\mbox{]} (on p0
 
 This means that the distribution of the in vector M\+U\+ST be a concatenation of the out vector distributions, refer to Linear\+Algebra\+Distribution\+Helpers\+::concatenate(...) to concatenate distributions. 
 
-Definition at line 2043 of file double\+\_\+vector.\+cc.
+Definition at line 2065 of file double\+\_\+vector.\+cc.
 
 
 
@@ -233,7 +232,7 @@ Wrapper around the other split\+\_\+without\+\_\+communication(...) function. Be
 
 
 
-Definition at line 2183 of file double\+\_\+vector.\+cc.
+Definition at line 2206 of file double\+\_\+vector.\+cc.
 
 
 

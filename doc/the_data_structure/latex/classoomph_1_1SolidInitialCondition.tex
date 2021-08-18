@@ -19,7 +19,7 @@ A class to specify the initial conditions for a solid body. Solid bodies are oft
 void \mbox{\hyperlink{classoomph_1_1SolidInitialCondition_ab746fd596b28c65865a9349b08ca5d6b}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} \&)
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SolidInitialCondition_a441ecb1f0511a77b14d11e1225484a46}{geom\+\_\+object\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em (Reference to) pointer to geom object that specifies the initial condition \end{DoxyCompactList}\item 
+\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1SolidInitialCondition_ad1fcd02e1af7c0d22f871e5f968ee5e0}{ic\+\_\+time\+\_\+deriv}} ()
 \begin{DoxyCompactList}\small\item\em Which time derivative are we currently assigning? \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -34,7 +34,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1SolidInitialCondition_aae8a896ccc0c05659
 \doxysubsection{Detailed Description}
 A class to specify the initial conditions for a solid body. Solid bodies are often discretised with Hermite-\/type elements, for which the assignment of the generalised nodal values is nontrivial since they represent derivatives w.\+r.\+t. to the local coordinates. A \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object specifies initial position (i.\+e. shape), velocity and acceleration of the structure with a geometric object. An integer specifies which time-\/derivative derivative is currently assigned. See example codes for a demonstration of its use. 
 
-Definition at line 3370 of file elements.\+h.
+Definition at line 3520 of file elements.\+h.
 
 
 
@@ -51,7 +51,7 @@ Constructor\+: Pass geometric object; initialise time deriv to 0.
 
 
 
-Definition at line 3376 of file elements.\+h.
+Definition at line 3524 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SolidInitialCondition_aac6769fc4973ea1862c50df8a4ca6536}\label{classoomph_1_1SolidInitialCondition_aac6769fc4973ea1862c50df8a4ca6536}} 
 \index{oomph::SolidInitialCondition@{oomph::SolidInitialCondition}!SolidInitialCondition@{SolidInitialCondition}}
@@ -65,7 +65,7 @@ Broken copy constructor.
 
 
 
-Definition at line 3382 of file elements.\+h.
+Definition at line 3529 of file elements.\+h.
 
 
 
@@ -80,13 +80,9 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \doxysubsubsection{\texorpdfstring{geom\_object\_pt()}{geom\_object\_pt()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$\& oomph\+::\+Solid\+Initial\+Condition\+::geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
-
 (Reference to) pointer to geom object that specifies the initial condition 
 
-
-
-Definition at line 3395 of file elements.\+h.
+Definition at line 3543 of file elements.\+h.
 
 
 
@@ -108,7 +104,7 @@ Which time derivative are we currently assigning?
 
 
 
-Definition at line 3401 of file elements.\+h.
+Definition at line 3549 of file elements.\+h.
 
 
 
@@ -130,7 +126,7 @@ Broken assignment operator.
 
 
 
-Definition at line 3388 of file elements.\+h.
+Definition at line 3535 of file elements.\+h.
 
 
 
@@ -151,7 +147,7 @@ Pointer to the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that sp
 
 
 
-Definition at line 3411 of file elements.\+h.
+Definition at line 3558 of file elements.\+h.
 
 
 
@@ -169,7 +165,7 @@ Which time derivative (0,1,2) are we currently assigning.
 
 
 
-Definition at line 3414 of file elements.\+h.
+Definition at line 3561 of file elements.\+h.
 
 
 

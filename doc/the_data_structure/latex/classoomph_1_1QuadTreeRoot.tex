@@ -20,8 +20,7 @@ Inheritance diagram for oomph\+::Quad\+Tree\+Root\+:\begin{figure}[H]
 void \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_afbf242b23375516d29a087417bb1bf30}{operator=}} (const \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} \&)
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 int \& \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a9b91196bd6112e7f205c0882b163ea2a}{north\+\_\+equivalent}} (const int \&neighbour)
-\begin{DoxyCompactList}\small\item\em Return north equivalent of the neighbours in specified direction\+: When viewed from the current quadtree\textquotesingle{}s {\ttfamily neighbour} neighbour, our northern direction is the neighbour\textquotesingle{}s north\+\_\+equivalent(neighbour) direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily north\+\_\+equivalent(\+W)=N} (read as\+: \char`\"{}in my Western
-neighbour, my North is its North\char`\"{}). If the western neighbour is rotated by 180 degrees relative to the current quadtree, say, we have {\ttfamily north\+\_\+equivalent(\+W)=S} (read as\+: \char`\"{}in my Western
+\begin{DoxyCompactList}\small\item\em Return north equivalent of the neighbours in specified direction\+: When viewed from the current quadtree\textquotesingle{}s {\ttfamily neighbour} neighbour, our northern direction is the neighbour\textquotesingle{}s north\+\_\+equivalent(neighbour) direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily north\+\_\+equivalent(\+W)=N} (read as\+: \char`\"{}in my Western neighbour, my North is its North\char`\"{}). If the western neighbour is rotated by 180 degrees relative to the current quadtree, say, we have {\ttfamily north\+\_\+equivalent(\+W)=S} (read as\+: \char`\"{}in my Western
 neighbour, my North is its South\char`\"{}); etc. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_ac106ae83ae55b7a510d8bad7c5f0db65}{direction\+\_\+of\+\_\+neighbour}} (\mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} $\ast$quadtree\+\_\+root\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em If quadtree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}N/\+S/\+E/W\mbox{]} in which it is found, otherwise return O\+M\+E\+GA. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -38,7 +37,7 @@ neighbour, my North is its South\char`\"{}); etc. \end{DoxyCompactList}\end{Doxy
 \doxysubsection{Detailed Description}
 \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} is a \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} that forms the root of a (recursive) quadtree. The \char`\"{}root node\char`\"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \mbox{\hyperlink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}}). 
 
-Definition at line 286 of file quadtree.\+h.
+Definition at line 298 of file quadtree.\+h.
 
 
 
@@ -51,7 +50,7 @@ Definition at line 286 of file quadtree.\+h.
 
 Constructor for the (empty) root quadtree\+: Pass pointer to associated object, a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4}{Refineable\+Q\+Element$<$2$>$}}. 
 
-Definition at line 305 of file quadtree.\+h.
+Definition at line 315 of file quadtree.\+h.
 
 
 
@@ -69,7 +68,7 @@ Broken copy constructor.
 
 
 
-Definition at line 338 of file quadtree.\+h.
+Definition at line 345 of file quadtree.\+h.
 
 
 
@@ -90,7 +89,7 @@ If quadtree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}N/\+S
 
 
 
-Definition at line 381 of file quadtree.\+h.
+Definition at line 389 of file quadtree.\+h.
 
 
 
@@ -108,13 +107,12 @@ Referenced by oomph\+::\+Quad\+Tree\+Forest\+::construct\+\_\+north\+\_\+equival
 
 
 
-Return north equivalent of the neighbours in specified direction\+: When viewed from the current quadtree\textquotesingle{}s {\ttfamily neighbour} neighbour, our northern direction is the neighbour\textquotesingle{}s north\+\_\+equivalent(neighbour) direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily north\+\_\+equivalent(\+W)=N} (read as\+: \char`\"{}in my Western
-neighbour, my North is its North\char`\"{}). If the western neighbour is rotated by 180 degrees relative to the current quadtree, say, we have {\ttfamily north\+\_\+equivalent(\+W)=S} (read as\+: \char`\"{}in my Western
+Return north equivalent of the neighbours in specified direction\+: When viewed from the current quadtree\textquotesingle{}s {\ttfamily neighbour} neighbour, our northern direction is the neighbour\textquotesingle{}s north\+\_\+equivalent(neighbour) direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily north\+\_\+equivalent(\+W)=N} (read as\+: \char`\"{}in my Western neighbour, my North is its North\char`\"{}). If the western neighbour is rotated by 180 degrees relative to the current quadtree, say, we have {\ttfamily north\+\_\+equivalent(\+W)=S} (read as\+: \char`\"{}in my Western
 neighbour, my North is its South\char`\"{}); etc. 
 
 
 
-Definition at line 359 of file quadtree.\+h.
+Definition at line 366 of file quadtree.\+h.
 
 
 
@@ -136,7 +134,7 @@ Broken assignment operator.
 
 
 
-Definition at line 344 of file quadtree.\+h.
+Definition at line 351 of file quadtree.\+h.
 
 
 
@@ -159,7 +157,7 @@ neighbour, my North is its South\char`\"{}); etc.
 
 
 
-Definition at line 299 of file quadtree.\+h.
+Definition at line 310 of file quadtree.\+h.
 
 
 

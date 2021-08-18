@@ -137,8 +137,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>. SuperLU Project Solver class. This is a combined wrapper for both SuperLU and SuperLU Dist. See <a href="http://crd.lbl.gov/~xiaoye/SuperLU/">http://crd.lbl.gov/~xiaoye/SuperLU/</a> Default Behaviour: If this solver is distributed over more than one processor then SuperLU Dist is used. Member data naming convention: member data associated with the SuperLU Dist solver begins Dist_... and member data associated with the serial SuperLU solver begins Serial_... . <br  />
-  
+<p>. SuperLU Project Solver class. This is a combined wrapper for both SuperLU and SuperLU Dist. See <a href="http://crd.lbl.gov/~xiaoye/SuperLU/">http://crd.lbl.gov/~xiaoye/SuperLU/</a> Default Behaviour: If this solver is distributed over more than one processor then SuperLU Dist is used. Member data naming convention: member data associated with the SuperLU Dist solver begins Dist_... and member data associated with the serial SuperLU solver begins Serial_... .  
  <a href="classoomph_1_1SuperLUSolver.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>&gt;</code></p>
@@ -239,15 +238,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a9b8487741998c97db3f41493ca427c1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Delete_matrix_data flag. SuperLU_dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its <a class="el" href="classoomph_1_1SuperLUSolver.html#aec78b96a8f831a89f9b8fb48b1ce0c68" title="Clean up the memory allocated by the solver.">clean_up_memory()</a> function. Default value is false.  <a href="classoomph_1_1SuperLUSolver.html#a9b8487741998c97db3f41493ca427c1d">More...</a><br /></td></tr>
 <tr class="separator:a9b8487741998c97db3f41493ca427c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a887c4a5fd19034f7a74d91d453d4f425"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SuperLUSolver.html#a887c4a5fd19034f7a74d91d453d4f425">disable_delete_matrix_data_in_superlu_dist</a> ()</td></tr>
-<tr class="memdesc:a887c4a5fd19034f7a74d91d453d4f425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unset Delete_matrix_data flag. SuperLU_dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be <br  />
-  <a href="classoomph_1_1SuperLUSolver.html#a887c4a5fd19034f7a74d91d453d4f425">More...</a><br /></td></tr>
+<tr class="memdesc:a887c4a5fd19034f7a74d91d453d4f425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unset Delete_matrix_data flag. SuperLU_dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be.  <a href="classoomph_1_1SuperLUSolver.html#a887c4a5fd19034f7a74d91d453d4f425">More...</a><br /></td></tr>
 <tr class="separator:a887c4a5fd19034f7a74d91d453d4f425"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9489a249d736316901e1644e73aa55b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SuperLUSolver.html#a9489a249d736316901e1644e73aa55b9">enable_row_and_col_permutations_in_superlu_dist</a> ()</td></tr>
 <tr class="memdesc:a9489a249d736316901e1644e73aa55b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set flag so that SuperLU_DIST is allowed to permute matrix rows and columns during factorisation. This is the default for SuperLU_DIST, and can lead to significantly faster solves.  <a href="classoomph_1_1SuperLUSolver.html#a9489a249d736316901e1644e73aa55b9">More...</a><br /></td></tr>
 <tr class="separator:a9489a249d736316901e1644e73aa55b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3386eb5e27caa80d9c63a6061a304680"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SuperLUSolver.html#a3386eb5e27caa80d9c63a6061a304680">disable_row_and_col_permutations_in_superlu_dist</a> ()</td></tr>
-<tr class="memdesc:a3386eb5e27caa80d9c63a6061a304680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set flag so that SuperLU_DIST is not allowed to permute matrix rows and columns during factorisation. <br  />
-  <a href="classoomph_1_1SuperLUSolver.html#a3386eb5e27caa80d9c63a6061a304680">More...</a><br /></td></tr>
+<tr class="memdesc:a3386eb5e27caa80d9c63a6061a304680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set flag so that SuperLU_DIST is not allowed to permute matrix rows and columns during factorisation.  <a href="classoomph_1_1SuperLUSolver.html#a3386eb5e27caa80d9c63a6061a304680">More...</a><br /></td></tr>
 <tr class="separator:a3386eb5e27caa80d9c63a6061a304680"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4eac19f126f7da82f6af48416410442a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SuperLUSolver.html#a4eac19f126f7da82f6af48416410442a">use_global_solve_in_superlu_dist</a> ()</td></tr>
 <tr class="memdesc:a4eac19f126f7da82f6af48416410442a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calling this method will ensure that when the problem based solve interface is used, a global (serial) jacobian will be assembled. Note: calling this function will delete any distributed solve data.  <a href="classoomph_1_1SuperLUSolver.html#a4eac19f126f7da82f6af48416410442a">More...</a><br /></td></tr>
@@ -290,12 +287,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3000ebd9becb3468d8a6a821a9cc0cd9 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable resolve (i.e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks.  <a href="classoomph_1_1LinearSolver.html#a3000ebd9becb3468d8a6a821a9cc0cd9">More...</a><br /></td></tr>
 <tr class="separator:a3000ebd9becb3468d8a6a821a9cc0cd9 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">solve</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
-<tr class="memdesc:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">More...</a><br /></td></tr>
+<tr class="memdesc:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">More...</a><br /></td></tr>
 <tr class="separator:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">solve_transpose</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
-<tr class="memdesc:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">More...</a><br /></td></tr>
+<tr class="memdesc:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">More...</a><br /></td></tr>
 <tr class="separator:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bc045e20074cb9b45ab3f304d037fc6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a8bc045e20074cb9b45ab3f304d037fc6">disable_computation_of_gradient</a> ()</td></tr>
 <tr class="memdesc:a8bc045e20074cb9b45ab3f304d037fc6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to disable the computation of the gradient required for the globally convergent Newton method  <a href="classoomph_1_1LinearSolver.html#a8bc045e20074cb9b45ab3f304d037fc6">More...</a><br /></td></tr>
@@ -351,7 +346,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a11c89f3138e42a38eb0cd5def128eabf"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SuperLUSolver.html#a11c89f3138e42a38eb0cd5def128eabf">Suppress_incorrect_rhs_distribution_warning_in_resolve</a> =false</td></tr>
+<tr class="memitem:a11c89f3138e42a38eb0cd5def128eabf"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SuperLUSolver.html#a11c89f3138e42a38eb0cd5def128eabf">Suppress_incorrect_rhs_distribution_warning_in_resolve</a></td></tr>
 <tr class="memdesc:a11c89f3138e42a38eb0cd5def128eabf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static flag that determines whether the warning about incorrect distribution of RHSs will be printed or not.  <a href="classoomph_1_1SuperLUSolver.html#a11c89f3138e42a38eb0cd5def128eabf">More...</a><br /></td></tr>
 <tr class="separator:a11c89f3138e42a38eb0cd5def128eabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -472,10 +467,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ad38255ae12611787a857cc5c90ffa9f8 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>. SuperLU Project Solver class. This is a combined wrapper for both SuperLU and SuperLU Dist. See <a href="http://crd.lbl.gov/~xiaoye/SuperLU/">http://crd.lbl.gov/~xiaoye/SuperLU/</a> Default Behaviour: If this solver is distributed over more than one processor then SuperLU Dist is used. Member data naming convention: member data associated with the SuperLU Dist solver begins Dist_... and member data associated with the serial SuperLU solver begins Serial_... . <br  />
- </p>
+<div class="textblock"><p>. SuperLU Project Solver class. This is a combined wrapper for both SuperLU and SuperLU Dist. See <a href="http://crd.lbl.gov/~xiaoye/SuperLU/">http://crd.lbl.gov/~xiaoye/SuperLU/</a> Default Behaviour: If this solver is distributed over more than one processor then SuperLU Dist is used. Member data naming convention: member data associated with the SuperLU Dist solver begins Dist_... and member data associated with the serial SuperLU solver begins Serial_... . </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00484">484</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00503">503</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a55d3709b5e082ecce2b41f9db6716e1a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55d3709b5e082ecce2b41f9db6716e1a">&#9670;&nbsp;</a></span>Type</h2>
@@ -496,7 +490,7 @@ Additional Inherited Members</h2></td></tr>
 <tr><td class="fieldname"><a id="a55d3709b5e082ecce2b41f9db6716e1aa2fe10e60579b07a72fe0126f06e820ce"></a>Distributed&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00493">493</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00510">510</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
 </div>
 </div>
@@ -526,9 +520,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor. Set the defaults. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00496">496</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00518">518</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00493">Default</a>, <a class="el" href="linear__solver_8h_source.html#l00833">Dist_allow_row_and_col_permutations</a>, <a class="el" href="linear__solver_8h_source.html#l00841">Dist_delete_matrix_data</a>, <a class="el" href="linear__solver_8h_source.html#l00815">Dist_distributed_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00812">Dist_global_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00848">Dist_index_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00852">Dist_start_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00809">Dist_use_global_solver</a>, <a class="el" href="linear__solver_8h_source.html#l00844">Dist_value_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00760">Doc_stats</a>, <a class="el" href="linear__solver_8h_source.html#l00784">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00778">Serial_n_dof</a>, <a class="el" href="linear__solver_8h_source.html#l00781">Serial_sign_of_determinant_of_matrix</a>, <a class="el" href="linear__solver_8h_source.html#l00763">Solver_type</a>, <a class="el" href="linear__solver_8h_source.html#l00757">Suppress_solve</a>, and <a class="el" href="linear__solver_8h_source.html#l00766">Using_dist</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00512">Default</a>, <a class="el" href="linear__solver_8h_source.html#l00865">Dist_allow_row_and_col_permutations</a>, <a class="el" href="linear__solver_8h_source.html#l00873">Dist_delete_matrix_data</a>, <a class="el" href="linear__solver_8h_source.html#l00847">Dist_distributed_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00844">Dist_global_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00880">Dist_index_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00850">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00884">Dist_start_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00841">Dist_use_global_solver</a>, <a class="el" href="linear__solver_8h_source.html#l00876">Dist_value_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00794">Doc_stats</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00812">Serial_n_dof</a>, <a class="el" href="linear__solver_8h_source.html#l00815">Serial_sign_of_determinant_of_matrix</a>, <a class="el" href="linear__solver_8h_source.html#l00797">Solver_type</a>, <a class="el" href="linear__solver_8h_source.html#l00791">Suppress_solve</a>, and <a class="el" href="linear__solver_8h_source.html#l00800">Using_dist</a>.</p>
 
 </div>
 </div>
@@ -558,9 +552,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00525">525</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00546">546</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -589,9 +583,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor, clean up the stored matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00537">537</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00558">558</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -625,11 +619,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Do the backsubstitution for SuperLU solver Note: returns the global result <a class="el" href="classoomph_1_1Vector.html">Vector</a>. </p>
 <p>Do the backsubstitution for <a class="el" href="classoomph_1_1SuperLUSolver.html" title=". SuperLU Project Solver class. This is a combined wrapper for both SuperLU and SuperLU Dist....">SuperLUSolver</a>. Note - this method performs no paranoid checks - these are all performed in solve(...) and resolve(...) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02178">2178</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02254">2254</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02227">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02369">backsub_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00766">Using_dist</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02302">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02465">backsub_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00800">Using_dist</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01695">resolve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01014">solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01735">resolve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01056">solve()</a>.</p>
 
 </div>
 </div>
@@ -670,11 +664,11 @@ Additional Inherited Members</h2></td></tr>
 <p>backsub method for SuperLU Dist </p>
 <p>Do the backsubstitution for SuperLU solver. Note - this method performs no paranoid checks - these are all performed in solve(...) and resolve(...) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02227">2227</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02302">2302</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00346">oomph::LinearAlgebraDistribution::built()</a>, <a class="el" href="linear__solver_8h_source.html#l00815">Dist_distributed_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00812">Dist_global_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00827">Dist_info</a>, <a class="el" href="linear__solver_8h_source.html#l00824">Dist_npcol</a>, <a class="el" href="linear__solver_8h_source.html#l00821">Dist_nprow</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Dist_solver_data_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00513">oomph::DistributableLinearAlgebraObject::distribution_built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01213">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00760">Doc_stats</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00189">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="superlu__dist_8c_source.html#l00161">oomph::superlu_dist_distributed_matrix()</a>, <a class="el" href="superlu__dist_8c_source.html#l01236">oomph::superlu_dist_global_matrix()</a>, <a class="el" href="linear__solver_8h_source.html#l00803">Suppress_incorrect_rhs_distribution_warning_in_resolve</a>, and <a class="el" href="double__vector_8h_source.html#l00255">oomph::DoubleVector::values_pt()</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00342">oomph::LinearAlgebraDistribution::built()</a>, <a class="el" href="linear__solver_8h_source.html#l00847">Dist_distributed_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00844">Dist_global_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00859">Dist_info</a>, <a class="el" href="linear__solver_8h_source.html#l00856">Dist_npcol</a>, <a class="el" href="linear__solver_8h_source.html#l00853">Dist_nprow</a>, <a class="el" href="linear__solver_8h_source.html#l00850">Dist_solver_data_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distribution_built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01212">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00794">Doc_stats</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00186">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="superlu__dist_8c_source.html#l00161">oomph::superlu_dist_distributed_matrix()</a>, <a class="el" href="superlu__dist_8c_source.html#l01236">oomph::superlu_dist_global_matrix()</a>, <a class="el" href="linear__solver_8h_source.html#l00835">Suppress_incorrect_rhs_distribution_warning_in_resolve</a>, and <a class="el" href="double__vector_8h_source.html#l00254">oomph::DoubleVector::values_pt()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02178">backsub()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02254">backsub()</a>.</p>
 
 </div>
 </div>
@@ -715,11 +709,11 @@ Additional Inherited Members</h2></td></tr>
 <p>backsub method for SuperLU (serial) </p>
 <p>Do the backsubstitution for SuperLU. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02369">2369</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02465">2465</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00333">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01213">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00760">Doc_stats</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="linear__solver_8h_source.html#l00784">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00772">Serial_f_factors</a>, <a class="el" href="linear__solver_8h_source.html#l00775">Serial_info</a>, <a class="el" href="linear__solver_8h_source.html#l00778">Serial_n_dof</a>, <a class="el" href="namespaceoomph.html#ad3cf4046d72d2de41baaa7505068d9ab">oomph::superlu()</a>, and <a class="el" href="double__vector_8h_source.html#l00255">oomph::DoubleVector::values_pt()</a>.</p>
+<p class="reference">References <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00329">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01212">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00794">Doc_stats</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00806">Serial_f_factors</a>, <a class="el" href="linear__solver_8h_source.html#l00809">Serial_info</a>, <a class="el" href="linear__solver_8h_source.html#l00812">Serial_n_dof</a>, <a class="el" href="namespaceoomph.html#ad3cf4046d72d2de41baaa7505068d9ab">oomph::superlu()</a>, and <a class="el" href="double__vector_8h_source.html#l00254">oomph::DoubleVector::values_pt()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02178">backsub()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02254">backsub()</a>.</p>
 
 </div>
 </div>
@@ -752,11 +746,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Do the back-substitution for transposed system of the SuperLU solver Note: Returns the global result <a class="el" href="classoomph_1_1Vector.html">Vector</a>. </p>
 <p>Do the backsubstitution of the transposed system for <a class="el" href="classoomph_1_1SuperLUSolver.html" title=". SuperLU Project Solver class. This is a combined wrapper for both SuperLU and SuperLU Dist....">SuperLUSolver</a>. Note - this method performs no paranoid checks - these are all performed in solve(...) and resolve(...) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02199">2199</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02274">2274</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02349">backsub_transpose_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02454">backsub_transpose_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00766">Using_dist</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02445">backsub_transpose_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02555">backsub_transpose_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00800">Using_dist</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01718">resolve_transpose()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01485">solve_transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01757">resolve_transpose()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01524">solve_transpose()</a>.</p>
 
 </div>
 </div>
@@ -797,9 +791,9 @@ Additional Inherited Members</h2></td></tr>
 <p>backsub method for SuperLU Dist </p>
 <p>Do the backsubstitution for SuperLU solver. Note - this method performs no paranoid checks - these are all performed in solve(...) and resolve(...) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02349">2349</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02445">2445</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02199">backsub_transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02274">backsub_transpose()</a>.</p>
 
 </div>
 </div>
@@ -840,11 +834,11 @@ Additional Inherited Members</h2></td></tr>
 <p>backsub method for SuperLU (serial) </p>
 <p>Do the backsubstitution for SuperLU. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02454">2454</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02555">2555</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00333">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01213">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00760">Doc_stats</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="linear__solver_8h_source.html#l00784">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00772">Serial_f_factors</a>, <a class="el" href="linear__solver_8h_source.html#l00775">Serial_info</a>, <a class="el" href="linear__solver_8h_source.html#l00778">Serial_n_dof</a>, <a class="el" href="namespaceoomph.html#ad3cf4046d72d2de41baaa7505068d9ab">oomph::superlu()</a>, and <a class="el" href="double__vector_8h_source.html#l00255">oomph::DoubleVector::values_pt()</a>.</p>
+<p class="reference">References <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00329">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01212">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00794">Doc_stats</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00806">Serial_f_factors</a>, <a class="el" href="linear__solver_8h_source.html#l00809">Serial_info</a>, <a class="el" href="linear__solver_8h_source.html#l00812">Serial_n_dof</a>, <a class="el" href="namespaceoomph.html#ad3cf4046d72d2de41baaa7505068d9ab">oomph::superlu()</a>, and <a class="el" href="double__vector_8h_source.html#l00254">oomph::DoubleVector::values_pt()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02199">backsub_transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02274">backsub_transpose()</a>.</p>
 
 </div>
 </div>
@@ -876,11 +870,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a9d66f3262e80ca06a365f98216afd85f">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02539">2539</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02645">2645</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00536">oomph::DistributableLinearAlgebraObject::clear_distribution()</a>, <a class="el" href="linear__solver_8h_source.html#l00815">Dist_distributed_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00812">Dist_global_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00848">Dist_index_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00827">Dist_info</a>, <a class="el" href="linear__solver_8h_source.html#l00824">Dist_npcol</a>, <a class="el" href="linear__solver_8h_source.html#l00821">Dist_nprow</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00852">Dist_start_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00844">Dist_value_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01213">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00760">Doc_stats</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00189">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="linear__solver_8h_source.html#l00784">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00772">Serial_f_factors</a>, <a class="el" href="linear__solver_8h_source.html#l00775">Serial_info</a>, <a class="el" href="linear__solver_8h_source.html#l00778">Serial_n_dof</a>, <a class="el" href="namespaceoomph.html#ad3cf4046d72d2de41baaa7505068d9ab">oomph::superlu()</a>, <a class="el" href="superlu__dist_8c_source.html#l00161">oomph::superlu_dist_distributed_matrix()</a>, and <a class="el" href="superlu__dist_8c_source.html#l01236">oomph::superlu_dist_global_matrix()</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00528">oomph::DistributableLinearAlgebraObject::clear_distribution()</a>, <a class="el" href="linear__solver_8h_source.html#l00847">Dist_distributed_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00844">Dist_global_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00880">Dist_index_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00859">Dist_info</a>, <a class="el" href="linear__solver_8h_source.html#l00856">Dist_npcol</a>, <a class="el" href="linear__solver_8h_source.html#l00853">Dist_nprow</a>, <a class="el" href="linear__solver_8h_source.html#l00850">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00884">Dist_start_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00876">Dist_value_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01212">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00794">Doc_stats</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00186">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00806">Serial_f_factors</a>, <a class="el" href="linear__solver_8h_source.html#l00809">Serial_info</a>, <a class="el" href="linear__solver_8h_source.html#l00812">Serial_n_dof</a>, <a class="el" href="namespaceoomph.html#ad3cf4046d72d2de41baaa7505068d9ab">oomph::superlu()</a>, <a class="el" href="superlu__dist_8c_source.html#l00161">oomph::superlu_dist_distributed_matrix()</a>, and <a class="el" href="superlu__dist_8c_source.html#l01236">oomph::superlu_dist_global_matrix()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00118">oomph::SuperLUPreconditioner::clean_up_memory()</a>, <a class="el" href="linear__solver_8h_source.html#l00552">disable_resolve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01743">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02052">factorise_serial()</a>, <a class="el" href="linear__solver_8h_source.html#l00645">set_solver_type()</a>, <a class="el" href="linear__solver_8cc_source.html#l00759">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01229">solve_transpose()</a>, <a class="el" href="linear__solver_8h_source.html#l00710">use_distributed_solve_in_superlu_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00697">use_global_solve_in_superlu_dist()</a>, and <a class="el" href="linear__solver_8h_source.html#l00537">~SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00113">oomph::SuperLUPreconditioner::clean_up_memory()</a>, <a class="el" href="linear__solver_8h_source.html#l00573">disable_resolve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01782">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02123">factorise_serial()</a>, <a class="el" href="linear__solver_8h_source.html#l00670">set_solver_type()</a>, <a class="el" href="linear__solver_8cc_source.html#l00804">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01271">solve_transpose()</a>, <a class="el" href="linear__solver_8h_source.html#l00747">use_distributed_solve_in_superlu_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00734">use_global_solve_in_superlu_dist()</a>, and <a class="el" href="linear__solver_8h_source.html#l00558">~SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -907,12 +901,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Unset Delete_matrix_data flag. SuperLU_dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be <br  />
- </p>
+<p>Unset Delete_matrix_data flag. SuperLU_dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00679">679</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00710">710</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00841">Dist_delete_matrix_data</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00873">Dist_delete_matrix_data</a>.</p>
 
 </div>
 </div>
@@ -941,11 +934,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Disable documentation of solver statistics. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00609">609</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00633">633</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00760">Doc_stats</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00794">Doc_stats</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00170">oomph::SuperLUPreconditioner::disable_doc_stats()</a>, and <a class="el" href="SuperLU__preconditioner_8h_source.html#l00045">oomph::SuperLUPreconditioner::SuperLUPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00165">oomph::SuperLUPreconditioner::disable_doc_stats()</a>, and <a class="el" href="SuperLU__preconditioner_8h_source.html#l00043">oomph::SuperLUPreconditioner::SuperLUPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -976,9 +969,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#ad61c63af94c5961830bd9807225a48d6">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00552">552</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00573">573</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00134">oomph::LinearSolver::disable_resolve()</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00150">oomph::LinearSolver::disable_resolve()</a>.</p>
 
 </div>
 </div>
@@ -1005,12 +998,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set flag so that SuperLU_DIST is not allowed to permute matrix rows and columns during factorisation. <br  />
- </p>
+<p>Set flag so that SuperLU_DIST is not allowed to permute matrix rows and columns during factorisation. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00690">690</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00725">725</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00833">Dist_allow_row_and_col_permutations</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00865">Dist_allow_row_and_col_permutations</a>.</p>
 
 </div>
 </div>
@@ -1041,9 +1033,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a37f1f8b8c6d45115e649739abd5d2f5d">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00543">543</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00564">564</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00084">oomph::LinearSolver::Compute_gradient</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00081">oomph::LinearSolver::Compute_gradient</a>.</p>
 
 </div>
 </div>
@@ -1072,9 +1064,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set Delete_matrix_data flag. SuperLU_dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its <a class="el" href="classoomph_1_1SuperLUSolver.html#aec78b96a8f831a89f9b8fb48b1ce0c68" title="Clean up the memory allocated by the solver.">clean_up_memory()</a> function. Default value is false. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00673">673</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00702">702</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00841">Dist_delete_matrix_data</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00873">Dist_delete_matrix_data</a>.</p>
 
 </div>
 </div>
@@ -1103,11 +1095,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Enable documentation of solver statistics. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00606">606</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00627">627</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00760">Doc_stats</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00794">Doc_stats</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00163">oomph::SuperLUPreconditioner::enable_doc_stats()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00158">oomph::SuperLUPreconditioner::enable_doc_stats()</a>.</p>
 
 </div>
 </div>
@@ -1136,9 +1128,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set flag so that SuperLU_DIST is allowed to permute matrix rows and columns during factorisation. This is the default for SuperLU_DIST, and can lead to significantly faster solves. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00685">685</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00718">718</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00833">Dist_allow_row_and_col_permutations</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00865">Dist_allow_row_and_col_permutations</a>.</p>
 
 </div>
 </div>
@@ -1161,11 +1153,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Do the factorisation stage Note: if Delete_matrix_data is true the function matrix_pt-&gt;<a class="el" href="classoomph_1_1SuperLUSolver.html#aec78b96a8f831a89f9b8fb48b1ce0c68" title="Clean up the memory allocated by the solver.">clean_up_memory()</a> will be used to wipe the matrix data. </p>
 <p>LU decompose the matrix addressed by matrix_pt by using the SuperLU solver. The resulting matrix factors are stored internally. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01743">1743</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01782">1782</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00493">Default</a>, <a class="el" href="linear__solver_8h_source.html#l00493">Distributed</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02052">factorise_serial()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00817">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="linear__solver_8h_source.html#l00763">Solver_type</a>, and <a class="el" href="linear__solver_8h_source.html#l00766">Using_dist</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00512">Default</a>, <a class="el" href="linear__solver_8h_source.html#l00514">Distributed</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02123">factorise_serial()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00851">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="linear__solver_8h_source.html#l00797">Solver_type</a>, and <a class="el" href="linear__solver_8h_source.html#l00800">Using_dist</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00073">oomph::SuperLUPreconditioner::setup()</a>, <a class="el" href="linear__solver_8cc_source.html#l01014">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01485">solve_transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00070">oomph::SuperLUPreconditioner::setup()</a>, <a class="el" href="linear__solver_8cc_source.html#l01056">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01524">solve_transpose()</a>.</p>
 
 </div>
 </div>
@@ -1196,11 +1188,11 @@ Additional Inherited Members</h2></td></tr>
 <p>factorise method for SuperLU Dist </p>
 <p>LU decompose the matrix addressed by matrix_pt using the SuperLU_DIST solver. The resulting matrix factors are stored internally. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01790">1790</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01827">1827</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00520">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="matrices_8h_source.html#l01173">oomph::CRDoubleMatrix::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="matrices_8h_source.html#l02946">oomph::CCMatrix&lt; T &gt;::clean_up_memory()</a>, <a class="el" href="matrices_8cc_source.html#l01673">oomph::CRDoubleMatrix::clear()</a>, <a class="el" href="matrices_8h_source.html#l01052">oomph::CRDoubleMatrix::column_index()</a>, <a class="el" href="matrices_8h_source.html#l02482">oomph::CCMatrix&lt; T &gt;::column_start()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01041">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00833">Dist_allow_row_and_col_permutations</a>, <a class="el" href="linear__solver_8h_source.html#l00841">Dist_delete_matrix_data</a>, <a class="el" href="linear__solver_8h_source.html#l00815">Dist_distributed_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00812">Dist_global_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00848">Dist_index_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00827">Dist_info</a>, <a class="el" href="linear__solver_8h_source.html#l00824">Dist_npcol</a>, <a class="el" href="linear__solver_8h_source.html#l00821">Dist_nprow</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00852">Dist_start_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00844">Dist_value_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01213">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00760">Doc_stats</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00494">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00626">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::nnz()</a>, <a class="el" href="matrices_8h_source.html#l01064">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00189">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="matrices_8h_source.html#l02606">oomph::CCDoubleMatrix::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00482">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="matrices_8h_source.html#l02488">oomph::CCMatrix&lt; T &gt;::row_index()</a>, <a class="el" href="matrices_8h_source.html#l01046">oomph::CRDoubleMatrix::row_start()</a>, <a class="el" href="superlu__dist_8c_source.html#l00120">oomph::superlu_cr_to_cc()</a>, <a class="el" href="superlu__dist_8c_source.html#l00161">oomph::superlu_dist_distributed_matrix()</a>, <a class="el" href="superlu__dist_8c_source.html#l01236">oomph::superlu_dist_global_matrix()</a>, <a class="el" href="matrices_8h_source.html#l00614">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::value()</a>, and <a class="el" href="matrices_8h_source.html#l01058">oomph::CRDoubleMatrix::value()</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00513">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="matrices_8h_source.html#l01231">oomph::CRDoubleMatrix::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="matrices_8h_source.html#l03208">oomph::CCMatrix&lt; T &gt;::clean_up_memory()</a>, <a class="el" href="matrices_8cc_source.html#l01657">oomph::CRDoubleMatrix::clear()</a>, <a class="el" href="matrices_8h_source.html#l01093">oomph::CRDoubleMatrix::column_index()</a>, <a class="el" href="matrices_8h_source.html#l02724">oomph::CCMatrix&lt; T &gt;::column_start()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00865">Dist_allow_row_and_col_permutations</a>, <a class="el" href="linear__solver_8h_source.html#l00873">Dist_delete_matrix_data</a>, <a class="el" href="linear__solver_8h_source.html#l00847">Dist_distributed_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00844">Dist_global_solve_data_allocated</a>, <a class="el" href="linear__solver_8h_source.html#l00880">Dist_index_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00859">Dist_info</a>, <a class="el" href="linear__solver_8h_source.html#l00856">Dist_npcol</a>, <a class="el" href="linear__solver_8h_source.html#l00853">Dist_nprow</a>, <a class="el" href="linear__solver_8h_source.html#l00850">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00884">Dist_start_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00876">Dist_value_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00499">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01212">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00794">Doc_stats</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00487">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00655">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::nnz()</a>, <a class="el" href="matrices_8h_source.html#l01117">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00186">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="matrices_8h_source.html#l01023">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="matrices_8h_source.html#l02856">oomph::CCDoubleMatrix::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00475">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="matrices_8h_source.html#l02736">oomph::CCMatrix&lt; T &gt;::row_index()</a>, <a class="el" href="matrices_8h_source.html#l01081">oomph::CRDoubleMatrix::row_start()</a>, <a class="el" href="superlu__dist_8c_source.html#l00120">oomph::superlu_cr_to_cc()</a>, <a class="el" href="superlu__dist_8c_source.html#l00161">oomph::superlu_dist_distributed_matrix()</a>, <a class="el" href="superlu__dist_8c_source.html#l01236">oomph::superlu_dist_global_matrix()</a>, <a class="el" href="matrices_8h_source.html#l00631">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::value()</a>, and <a class="el" href="matrices_8h_source.html#l01105">oomph::CRDoubleMatrix::value()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01743">factorise()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01782">factorise()</a>.</p>
 
 </div>
 </div>
@@ -1231,11 +1223,11 @@ Additional Inherited Members</h2></td></tr>
 <p>factorise method for SuperLU (serial) </p>
 <p>LU decompose the matrix addressed by matrix_pt by using the SuperLU solver. The resulting matrix factors are stored internally. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02052">2052</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l02123">2123</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="matrices_8h_source.html#l01052">oomph::CRDoubleMatrix::column_index()</a>, <a class="el" href="matrices_8h_source.html#l02482">oomph::CCMatrix&lt; T &gt;::column_start()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01213">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00760">Doc_stats</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00626">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::nnz()</a>, <a class="el" href="matrices_8h_source.html#l01064">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="matrices_8h_source.html#l02488">oomph::CCMatrix&lt; T &gt;::row_index()</a>, <a class="el" href="matrices_8h_source.html#l01046">oomph::CRDoubleMatrix::row_start()</a>, <a class="el" href="linear__solver_8h_source.html#l00784">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00772">Serial_f_factors</a>, <a class="el" href="linear__solver_8h_source.html#l00775">Serial_info</a>, <a class="el" href="linear__solver_8h_source.html#l00778">Serial_n_dof</a>, <a class="el" href="linear__solver_8h_source.html#l00781">Serial_sign_of_determinant_of_matrix</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00248">oomph::CumulativeTimings::start()</a>, <a class="el" href="namespaceoomph.html#ad3cf4046d72d2de41baaa7505068d9ab">oomph::superlu()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>, <a class="el" href="matrices_8h_source.html#l00614">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::value()</a>, and <a class="el" href="matrices_8h_source.html#l01058">oomph::CRDoubleMatrix::value()</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="matrices_8h_source.html#l01093">oomph::CRDoubleMatrix::column_index()</a>, <a class="el" href="matrices_8h_source.html#l02724">oomph::CCMatrix&lt; T &gt;::column_start()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00499">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01212">oomph::LeakCheckNames::doc()</a>, <a class="el" href="linear__solver_8h_source.html#l00794">Doc_stats</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00655">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::nnz()</a>, <a class="el" href="matrices_8h_source.html#l01117">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="matrices_8h_source.html#l02736">oomph::CCMatrix&lt; T &gt;::row_index()</a>, <a class="el" href="matrices_8h_source.html#l01081">oomph::CRDoubleMatrix::row_start()</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00806">Serial_f_factors</a>, <a class="el" href="linear__solver_8h_source.html#l00809">Serial_info</a>, <a class="el" href="linear__solver_8h_source.html#l00812">Serial_n_dof</a>, <a class="el" href="linear__solver_8h_source.html#l00815">Serial_sign_of_determinant_of_matrix</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00243">oomph::CumulativeTimings::start()</a>, <a class="el" href="namespaceoomph.html#ad3cf4046d72d2de41baaa7505068d9ab">oomph::superlu()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>, <a class="el" href="matrices_8h_source.html#l00631">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::value()</a>, and <a class="el" href="matrices_8h_source.html#l01105">oomph::CRDoubleMatrix::value()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01743">factorise()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01782">factorise()</a>.</p>
 
 </div>
 </div>
@@ -1257,11 +1249,11 @@ Additional Inherited Members</h2></td></tr>
 <p>How much memory do the LU factors take up? In bytes. </p>
 <p>How much memory do the LU factors take up? In bytes NOTE: This has been scraped from dQuerySpace(...) in dmemory.c in external_src/oomph_superlu_4.3. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00703">703</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00748">748</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00818">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00493">Distributed</a>, <a class="el" href="superlu_8c_source.html#l00053">oomph::get_lu_factor_memory_usage_in_bytes()</a>, <a class="el" href="superlu__dist_8c_source.html#l00077">oomph::get_lu_factor_memory_usage_in_bytes_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00772">Serial_f_factors</a>, and <a class="el" href="linear__solver_8h_source.html#l00763">Solver_type</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00850">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00514">Distributed</a>, <a class="el" href="superlu_8c_source.html#l00053">oomph::get_lu_factor_memory_usage_in_bytes()</a>, <a class="el" href="superlu__dist_8c_source.html#l00077">oomph::get_lu_factor_memory_usage_in_bytes_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00806">Serial_f_factors</a>, and <a class="el" href="linear__solver_8h_source.html#l00797">Solver_type</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00125">oomph::SuperLUPreconditioner::get_memory_usage_for_lu_factors()</a>, and <a class="el" href="SuperLU__preconditioner_8h_source.html#l00145">oomph::SuperLUPreconditioner::get_memory_usage_for_superlu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00120">oomph::SuperLUPreconditioner::get_memory_usage_for_lu_factors()</a>, and <a class="el" href="SuperLU__preconditioner_8h_source.html#l00140">oomph::SuperLUPreconditioner::get_memory_usage_for_superlu()</a>.</p>
 
 </div>
 </div>
@@ -1283,11 +1275,11 @@ Additional Inherited Members</h2></td></tr>
 <p>How much memory was allocated by SuperLU? In bytes. </p>
 <p>How much memory was used in total? In bytes NOTE: This has been scraped from dQuerySpace(...) in dmemory.c in external_src/oomph_superlu_4.3. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00731">731</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00776">776</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00818">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00493">Distributed</a>, <a class="el" href="superlu_8c_source.html#l00069">oomph::get_total_memory_usage_in_bytes()</a>, <a class="el" href="superlu__dist_8c_source.html#l00093">oomph::get_total_memory_usage_in_bytes_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00772">Serial_f_factors</a>, and <a class="el" href="linear__solver_8h_source.html#l00763">Solver_type</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00850">Dist_solver_data_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00514">Distributed</a>, <a class="el" href="superlu_8c_source.html#l00069">oomph::get_total_memory_usage_in_bytes()</a>, <a class="el" href="superlu__dist_8c_source.html#l00093">oomph::get_total_memory_usage_in_bytes_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00806">Serial_f_factors</a>, and <a class="el" href="linear__solver_8h_source.html#l00797">Solver_type</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00145">oomph::SuperLUPreconditioner::get_memory_usage_for_superlu()</a>, <a class="el" href="SuperLU__preconditioner_8h_source.html#l00134">oomph::SuperLUPreconditioner::get_total_memory_needed_for_superlu()</a>, <a class="el" href="linear__solver_8cc_source.html#l01014">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01485">solve_transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00140">oomph::SuperLUPreconditioner::get_memory_usage_for_superlu()</a>, <a class="el" href="SuperLU__preconditioner_8h_source.html#l00129">oomph::SuperLUPreconditioner::get_total_memory_needed_for_superlu()</a>, <a class="el" href="linear__solver_8cc_source.html#l01056">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01524">solve_transpose()</a>.</p>
 
 </div>
 </div>
@@ -1318,9 +1310,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a0fedfb9d9855d0e998c0e32140bc56d4">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00613">613</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00640">640</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00751">Jacobian_setup_time</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00785">Jacobian_setup_time</a>.</p>
 
 </div>
 </div>
@@ -1351,9 +1343,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a3c66f77db812a9c196478c7e2f77ef09">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00620">620</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00647">647</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00754">Solution_time</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00788">Solution_time</a>.</p>
 
 </div>
 </div>
@@ -1383,9 +1375,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00531">531</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00552">552</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -1428,11 +1420,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a3b310d08333033edc119b2a5bd7dcbfb">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01695">1695</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01735">1735</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02178">backsub()</a>, <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="linear__solver_8h_source.html#l00754">Solution_time</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02254">backsub()</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="linear__solver_8h_source.html#l00788">Solution_time</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00101">oomph::SuperLUPreconditioner::preconditioner_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00097">oomph::SuperLUPreconditioner::preconditioner_solve()</a>.</p>
 
 </div>
 </div>
@@ -1475,11 +1467,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#acf539c2dd415e22e597fade4c0ca4022">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01718">1718</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01757">1757</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02199">backsub_transpose()</a>, <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="linear__solver_8h_source.html#l00754">Solution_time</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02274">backsub_transpose()</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="linear__solver_8h_source.html#l00788">Solution_time</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00110">oomph::SuperLUPreconditioner::preconditioner_solve_transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SuperLU__preconditioner_8h_source.html#l00105">oomph::SuperLUPreconditioner::preconditioner_solve_transpose()</a>.</p>
 
 </div>
 </div>
@@ -1509,9 +1501,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Specify the solve type. Either default, serial or distributed. See enum SuperLU_solver_type for more details. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00645">645</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00670">670</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8h_source.html#l00763">Solver_type</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8h_source.html#l00797">Solver_type</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
 </div>
 </div>
@@ -1560,9 +1552,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01014">1014</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01056">1056</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02178">backsub()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00520">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00333">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__solver_8h_source.html#l00076">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="linear__solver_8cc_source.html#l01743">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l00731">get_total_needed_memory()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase::ncol()</a>, <a class="el" href="matrices_8h_source.html#l01064">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="linear__solver_8h_source.html#l00754">Solution_time</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02254">backsub()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00513">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00329">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__solver_8h_source.html#l00073">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="linear__solver_8cc_source.html#l01782">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l00776">get_total_needed_memory()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase::ncol()</a>, <a class="el" href="matrices_8h_source.html#l01117">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="matrices_8h_source.html#l01023">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="linear__solver_8h_source.html#l00788">Solution_time</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -1605,9 +1597,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00759">759</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00804">804</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00520">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00084">oomph::LinearSolver::Compute_gradient</a>, <a class="el" href="linear__solver_8h_source.html#l00493">Default</a>, <a class="el" href="linear__solver_8h_source.html#l00841">Dist_delete_matrix_data</a>, <a class="el" href="linear__solver_8h_source.html#l00809">Dist_use_global_solver</a>, <a class="el" href="linear__solver_8h_source.html#l00493">Distributed</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="problem_8cc_source.html#l03854">oomph::Problem::get_jacobian()</a>, <a class="el" href="linear__solver_8h_source.html#l00091">oomph::LinearSolver::Gradient_for_glob_conv_newton_solve</a>, <a class="el" href="linear__solver_8h_source.html#l00087">oomph::LinearSolver::Gradient_has_been_computed</a>, <a class="el" href="linear__solver_8h_source.html#l00751">Jacobian_setup_time</a>, <a class="el" href="matrices_8cc_source.html#l01903">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l00725">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="double__vector_8cc_source.html#l00160">oomph::DoubleVector::redistribute()</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="linear__solver_8h_source.html#l00784">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00781">Serial_sign_of_determinant_of_matrix</a>, <a class="el" href="problem_8h_source.html#l02311">oomph::Problem::sign_of_jacobian()</a>, <a class="el" href="linear__solver_8h_source.html#l00763">Solver_type</a>, <a class="el" href="linear__solver_8h_source.html#l00757">Suppress_solve</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00513">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="problem_8h_source.html#l01246">oomph::Problem::communicator_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00081">oomph::LinearSolver::Compute_gradient</a>, <a class="el" href="linear__solver_8h_source.html#l00512">Default</a>, <a class="el" href="linear__solver_8h_source.html#l00873">Dist_delete_matrix_data</a>, <a class="el" href="linear__solver_8h_source.html#l00841">Dist_use_global_solver</a>, <a class="el" href="linear__solver_8h_source.html#l00514">Distributed</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="problem_8cc_source.html#l03890">oomph::Problem::get_jacobian()</a>, <a class="el" href="linear__solver_8h_source.html#l00088">oomph::LinearSolver::Gradient_for_glob_conv_newton_solve</a>, <a class="el" href="linear__solver_8h_source.html#l00084">oomph::LinearSolver::Gradient_has_been_computed</a>, <a class="el" href="linear__solver_8h_source.html#l00785">Jacobian_setup_time</a>, <a class="el" href="matrices_8cc_source.html#l01882">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l00715">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="problem_8h_source.html#l01681">oomph::Problem::ndof()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="double__vector_8cc_source.html#l00154">oomph::DoubleVector::redistribute()</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00815">Serial_sign_of_determinant_of_matrix</a>, <a class="el" href="problem_8h_source.html#l02431">oomph::Problem::sign_of_jacobian()</a>, <a class="el" href="linear__solver_8h_source.html#l00797">Solver_type</a>, <a class="el" href="linear__solver_8h_source.html#l00791">Suppress_solve</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -1656,9 +1648,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01485">1485</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01524">1524</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02199">backsub_transpose()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00520">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00333">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__solver_8h_source.html#l00076">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="linear__solver_8cc_source.html#l01743">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l00731">get_total_needed_memory()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase::ncol()</a>, <a class="el" href="matrices_8h_source.html#l01064">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="linear__solver_8h_source.html#l00754">Solution_time</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02274">backsub_transpose()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00513">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00329">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__solver_8h_source.html#l00073">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="linear__solver_8cc_source.html#l01782">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l00776">get_total_needed_memory()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase::ncol()</a>, <a class="el" href="matrices_8h_source.html#l01117">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="matrices_8h_source.html#l01023">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="linear__solver_8h_source.html#l00788">Solution_time</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -1701,9 +1693,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a8e970813a1583f6105ee2d677d3e45f3">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01229">1229</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l01271">1271</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00520">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00084">oomph::LinearSolver::Compute_gradient</a>, <a class="el" href="linear__solver_8h_source.html#l00493">Default</a>, <a class="el" href="linear__solver_8h_source.html#l00841">Dist_delete_matrix_data</a>, <a class="el" href="linear__solver_8h_source.html#l00809">Dist_use_global_solver</a>, <a class="el" href="linear__solver_8h_source.html#l00493">Distributed</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="problem_8cc_source.html#l03854">oomph::Problem::get_jacobian()</a>, <a class="el" href="linear__solver_8h_source.html#l00091">oomph::LinearSolver::Gradient_for_glob_conv_newton_solve</a>, <a class="el" href="linear__solver_8h_source.html#l00087">oomph::LinearSolver::Gradient_has_been_computed</a>, <a class="el" href="linear__solver_8h_source.html#l00751">Jacobian_setup_time</a>, <a class="el" href="matrices_8cc_source.html#l01903">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l00725">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="double__vector_8cc_source.html#l00160">oomph::DoubleVector::redistribute()</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="linear__solver_8h_source.html#l00784">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00781">Serial_sign_of_determinant_of_matrix</a>, <a class="el" href="problem_8h_source.html#l02311">oomph::Problem::sign_of_jacobian()</a>, <a class="el" href="linear__solver_8h_source.html#l00763">Solver_type</a>, <a class="el" href="linear__solver_8h_source.html#l00757">Suppress_solve</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00513">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="problem_8h_source.html#l01246">oomph::Problem::communicator_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00081">oomph::LinearSolver::Compute_gradient</a>, <a class="el" href="linear__solver_8h_source.html#l00512">Default</a>, <a class="el" href="linear__solver_8h_source.html#l00873">Dist_delete_matrix_data</a>, <a class="el" href="linear__solver_8h_source.html#l00841">Dist_use_global_solver</a>, <a class="el" href="linear__solver_8h_source.html#l00514">Distributed</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="problem_8cc_source.html#l03890">oomph::Problem::get_jacobian()</a>, <a class="el" href="linear__solver_8h_source.html#l00088">oomph::LinearSolver::Gradient_for_glob_conv_newton_solve</a>, <a class="el" href="linear__solver_8h_source.html#l00084">oomph::LinearSolver::Gradient_has_been_computed</a>, <a class="el" href="linear__solver_8h_source.html#l00785">Jacobian_setup_time</a>, <a class="el" href="matrices_8cc_source.html#l01882">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l00715">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="problem_8h_source.html#l01681">oomph::Problem::ndof()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="double__vector_8cc_source.html#l00154">oomph::DoubleVector::redistribute()</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="linear__solver_8h_source.html#l00818">Serial_compressed_row_flag</a>, <a class="el" href="linear__solver_8h_source.html#l00815">Serial_sign_of_determinant_of_matrix</a>, <a class="el" href="problem_8h_source.html#l02431">oomph::Problem::sign_of_jacobian()</a>, <a class="el" href="linear__solver_8h_source.html#l00797">Solver_type</a>, <a class="el" href="linear__solver_8h_source.html#l00791">Suppress_solve</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -1732,9 +1724,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use the compressed column format in superlu serial. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00659">659</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00686">686</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00784">Serial_compressed_row_flag</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00818">Serial_compressed_row_flag</a>.</p>
 
 </div>
 </div>
@@ -1763,9 +1755,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use the compressed row format in superlu serial. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00655">655</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00680">680</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00784">Serial_compressed_row_flag</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00818">Serial_compressed_row_flag</a>.</p>
 
 </div>
 </div>
@@ -1794,9 +1786,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Calling this method will ensure that when the problem based solve interface is used, a distributed jacobian will be assembled. Note: calling this function will delete any global solve data. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00710">710</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00747">747</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00809">Dist_use_global_solver</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00841">Dist_use_global_solver</a>.</p>
 
 </div>
 </div>
@@ -1825,9 +1817,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Calling this method will ensure that when the problem based solve interface is used, a global (serial) jacobian will be assembled. Note: calling this function will delete any distributed solve data. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00697">697</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00734">734</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00809">Dist_use_global_solver</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00841">Dist_use_global_solver</a>.</p>
 
 </div>
 </div>
@@ -1854,9 +1846,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>If true then SuperLU_DIST is allowed to permute matrix rows and columns during factorisation. This is the default for SuperLU_DIST, and can lead to significantly faster solves, but has been known to fail, hence the default value is 0. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00833">833</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00865">865</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00690">disable_row_and_col_permutations_in_superlu_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00685">enable_row_and_col_permutations_in_superlu_dist()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00725">disable_row_and_col_permutations_in_superlu_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00718">enable_row_and_col_permutations_in_superlu_dist()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -1882,9 +1874,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Delete_matrix_data flag. SuperLU_dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its <a class="el" href="classoomph_1_1SuperLUSolver.html#aec78b96a8f831a89f9b8fb48b1ce0c68" title="Clean up the memory allocated by the solver.">clean_up_memory()</a> function. Default value is false. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00841">841</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00873">873</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00679">disable_delete_matrix_data_in_superlu_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00673">enable_delete_matrix_data_in_superlu_dist()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l00759">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01229">solve_transpose()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00710">disable_delete_matrix_data_in_superlu_dist()</a>, <a class="el" href="linear__solver_8h_source.html#l00702">enable_delete_matrix_data_in_superlu_dist()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l00804">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01271">solve_transpose()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -1910,9 +1902,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag is true if solve data has been generated for distributed matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00815">815</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00847">847</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02227">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02302">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -1938,9 +1930,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag is true if solve data has been generated for a global matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00812">812</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00844">844</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02227">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02302">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -1966,9 +1958,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer for storage of matrix rows or column indices required by SuperLU_DIST. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00848">848</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00880">880</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -1994,9 +1986,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Info flag for the SuperLU solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00827">827</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00859">859</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02227">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02302">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>.</p>
 
 </div>
 </div>
@@ -2022,9 +2014,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Number of columns for the process grid. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00824">824</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00856">856</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02227">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02302">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>.</p>
 
 </div>
 </div>
@@ -2050,9 +2042,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Number of rows for the process grid. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00821">821</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00853">853</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02227">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02302">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>.</p>
 
 </div>
 </div>
@@ -2078,9 +2070,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Storage for the LU factors and other data required by SuperLU. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00818">818</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00850">850</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02227">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l00703">get_memory_usage_for_lu_factors()</a>, <a class="el" href="linear__solver_8cc_source.html#l00731">get_total_needed_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02302">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l00748">get_memory_usage_for_lu_factors()</a>, <a class="el" href="linear__solver_8cc_source.html#l00776">get_total_needed_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -2106,9 +2098,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointers for storage of matrix column or row starts. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00852">852</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00884">884</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -2134,9 +2126,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag that determines whether the MPIProblem based solve function uses the global or distributed version of SuperLU_DIST (default value is false). </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00809">809</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00841">841</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00759">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01229">solve_transpose()</a>, <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>, <a class="el" href="linear__solver_8h_source.html#l00710">use_distributed_solve_in_superlu_dist()</a>, and <a class="el" href="linear__solver_8h_source.html#l00697">use_global_solve_in_superlu_dist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00804">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01271">solve_transpose()</a>, <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>, <a class="el" href="linear__solver_8h_source.html#l00747">use_distributed_solve_in_superlu_dist()</a>, and <a class="el" href="linear__solver_8h_source.html#l00734">use_global_solve_in_superlu_dist()</a>.</p>
 
 </div>
 </div>
@@ -2162,9 +2154,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer for storage of the matrix values required by SuperLU_DIST. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00844">844</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00876">876</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -2190,9 +2182,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set to true to output statistics (false by default). </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00760">760</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00794">794</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02227">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02369">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02454">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8h_source.html#l00609">disable_doc_stats()</a>, <a class="el" href="linear__solver_8h_source.html#l00606">enable_doc_stats()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02052">factorise_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02302">backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02465">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02555">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8h_source.html#l00633">disable_doc_stats()</a>, <a class="el" href="linear__solver_8h_source.html#l00627">enable_doc_stats()</a>, <a class="el" href="linear__solver_8cc_source.html#l01827">factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02123">factorise_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -2218,9 +2210,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Jacobian setup time. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00751">751</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00785">785</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00613">jacobian_setup_time()</a>, <a class="el" href="linear__solver_8cc_source.html#l00759">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01229">solve_transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00640">jacobian_setup_time()</a>, <a class="el" href="linear__solver_8cc_source.html#l00804">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01271">solve_transpose()</a>.</p>
 
 </div>
 </div>
@@ -2246,9 +2238,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use compressed row version? </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00784">784</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00818">818</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02369">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02454">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l02052">factorise_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l00759">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01229">solve_transpose()</a>, <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>, <a class="el" href="linear__solver_8h_source.html#l00659">use_compressed_column_for_superlu_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00655">use_compressed_row_for_superlu_serial()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02465">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02555">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l02123">factorise_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l00804">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01271">solve_transpose()</a>, <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>, <a class="el" href="linear__solver_8h_source.html#l00686">use_compressed_column_for_superlu_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00680">use_compressed_row_for_superlu_serial()</a>.</p>
 
 </div>
 </div>
@@ -2274,9 +2266,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Storage for the LU factors as required by SuperLU. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00772">772</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00806">806</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02369">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02454">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l02052">factorise_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l00703">get_memory_usage_for_lu_factors()</a>, and <a class="el" href="linear__solver_8cc_source.html#l00731">get_total_needed_memory()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02465">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02555">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l02123">factorise_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l00748">get_memory_usage_for_lu_factors()</a>, and <a class="el" href="linear__solver_8cc_source.html#l00776">get_total_needed_memory()</a>.</p>
 
 </div>
 </div>
@@ -2302,9 +2294,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Info flag for the SuperLU solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00775">775</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00809">809</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02369">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02454">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l02052">factorise_serial()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02465">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02555">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l02123">factorise_serial()</a>.</p>
 
 </div>
 </div>
@@ -2330,9 +2322,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The number of unknowns in the linear system. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00778">778</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00812">812</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02369">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02454">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l02052">factorise_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02465">backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02555">backsub_transpose_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02645">clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l02123">factorise_serial()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -2358,9 +2350,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Sign of the determinant of the matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00781">781</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00815">815</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02052">factorise_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l00759">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01229">solve_transpose()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02123">factorise_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l00804">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01271">solve_transpose()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -2386,9 +2378,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Solution time. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00754">754</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00788">788</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00620">linear_solver_solution_time()</a>, <a class="el" href="linear__solver_8cc_source.html#l01695">resolve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01718">resolve_transpose()</a>, <a class="el" href="linear__solver_8cc_source.html#l01014">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01485">solve_transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00647">linear_solver_solution_time()</a>, <a class="el" href="linear__solver_8cc_source.html#l01735">resolve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01757">resolve_transpose()</a>, <a class="el" href="linear__solver_8cc_source.html#l01056">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l01524">solve_transpose()</a>.</p>
 
 </div>
 </div>
@@ -2414,9 +2406,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>the solver type. see SuperLU_solver_type for details. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00763">763</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00797">797</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01743">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l00703">get_memory_usage_for_lu_factors()</a>, <a class="el" href="linear__solver_8cc_source.html#l00731">get_total_needed_memory()</a>, <a class="el" href="linear__solver_8h_source.html#l00645">set_solver_type()</a>, <a class="el" href="linear__solver_8cc_source.html#l00759">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01229">solve_transpose()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01782">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l00748">get_memory_usage_for_lu_factors()</a>, <a class="el" href="linear__solver_8cc_source.html#l00776">get_total_needed_memory()</a>, <a class="el" href="linear__solver_8h_source.html#l00670">set_solver_type()</a>, <a class="el" href="linear__solver_8cc_source.html#l00804">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01271">solve_transpose()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -2430,7 +2422,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool oomph::SuperLUSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve =false</td>
+          <td class="memname">bool oomph::SuperLUSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve</td>
         </tr>
       </table>
   </td>
@@ -2439,13 +2431,15 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">    <span class="keyword">false</span></div>
+</div><!-- fragment -->
 <p>Static flag that determines whether the warning about incorrect distribution of RHSs will be printed or not. </p>
 <p>Static warning to suppress warnings about incorrect distribution of RHS vector. Default is false </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00803">803</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00835">835</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02227">backsub_distributed()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02302">backsub_distributed()</a>.</p>
 
 </div>
 </div>
@@ -2471,9 +2465,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Suppress solve? </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00757">757</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00791">791</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00759">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01229">solve_transpose()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00804">solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01271">solve_transpose()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -2499,9 +2493,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>boolean flag indicating whether superlu dist is being used </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00766">766</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00800">800</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02178">backsub()</a>, <a class="el" href="linear__solver_8cc_source.html#l02199">backsub_transpose()</a>, <a class="el" href="linear__solver_8cc_source.html#l01743">factorise()</a>, and <a class="el" href="linear__solver_8h_source.html#l00496">SuperLUSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l02254">backsub()</a>, <a class="el" href="linear__solver_8cc_source.html#l02274">backsub_transpose()</a>, <a class="el" href="linear__solver_8cc_source.html#l01782">factorise()</a>, and <a class="el" href="linear__solver_8h_source.html#l00518">SuperLUSolver()</a>.</p>
 
 </div>
 </div>
@@ -2537,7 +2531,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:57:43
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:22
         </div>
       </div>
     </footer>

@@ -44,8 +44,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a5db
 void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a63a9aff288190f8d2abb0e985c08c1f0}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Add element\textquotesingle{}s contribution to elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_aa5fb8ebc1a96ed6fc7733c5aaa238582}{fill\+\_\+in\+\_\+generic\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+contribution\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_ac88134acd65f21845e5fc8e83b89c74a}{get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&dresidual\+\_\+dnodal\+\_\+coordinates)
 \begin{DoxyCompactList}\small\item\em Compute derivatives of elemental residual vector with respect to nodal coordinates. Overwrites default implementation in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} base class. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j) = d res(l) / d\+X\+\_\+\{ij\}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -57,7 +56,7 @@ class oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}
 
 Refineable version of the Navier--Stokes equations 
 
-Definition at line 336 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 318 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -75,7 +74,7 @@ Constructor.
 
 
 
-Definition at line 353 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 333 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -97,11 +96,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aa516b52
 
 
 
-Definition at line 496 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 482 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+nst().
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesEquations_aa5fb8ebc1a96ed6fc7733c5aaa238582}\label{classoomph_1_1RefineableNavierStokesEquations_aa5fb8ebc1a96ed6fc7733c5aaa238582}} 
 \index{oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}!fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst@{fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst}}
@@ -112,17 +111,15 @@ void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+
 
 
 
-Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
-Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a50d5b099e2f2c16028682ee48571f8a4}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 302 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 291 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -145,7 +142,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_acaa521c
 
 
 
-Definition at line 586 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 579 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -168,11 +165,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a81987260da356675028c1a3283ddc2f1}{oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement_a869fdfacd269de15b3c1f6d176dc6111}{oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a222c74947a6515041f515bd6c26d1a45}{oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement_a13864a6e25cedbfdd5d22c1058afc8f8}{oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a3129fe3450caf60d2f678024d7bf7f08}{oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement_a96c176f20661f2d18a53a434b0e21b70}{oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement_a869fdfacd269de15b3c1f6d176dc6111}{oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement_a13864a6e25cedbfdd5d22c1058afc8f8}{oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a81987260da356675028c1a3283ddc2f1}{oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a222c74947a6515041f515bd6c26d1a45}{oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a3129fe3450caf60d2f678024d7bf7f08}{oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement_a96c176f20661f2d18a53a434b0e21b70}{oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 459 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 445 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -180,7 +177,7 @@ References oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::\+A\+L\+E\+\_\
 
 
 
-Referenced by oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), and oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build().
+Referenced by oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), and oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesEquations_ac88134acd65f21845e5fc8e83b89c74a}\label{classoomph_1_1RefineableNavierStokesEquations_ac88134acd65f21845e5fc8e83b89c74a}} 
 \index{oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}!get\_dresidual\_dnodal\_coordinates@{get\_dresidual\_dnodal\_coordinates}}
@@ -199,7 +196,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a83d4f26d6f4
 
 
 
-Definition at line 1119 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1130 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -222,7 +219,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2d6e748
 
 
 
-Definition at line 47 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 39 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -245,7 +242,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 417 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 403 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -272,7 +269,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 409 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 395 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -295,7 +292,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_a38
 
 
 
-Definition at line 348 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 329 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -315,10 +312,9 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 
 \begin{DoxyItemize}
 \item {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{Refineable\+Navier\+Stokes\+Equations}}\+:}\+: \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a5dbf8764b44554159043a45df312a7e3}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}
-\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom ~\newline
- (e.\+g. for refineable Taylor-\/\+Hood.) 
+\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom (e.\+g. for refineable Taylor-\/\+Hood.) 
 
-Definition at line 369 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 351 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -341,7 +337,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_a03
 
 
 
-Definition at line 397 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 379 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesEquations_a16a8cdb89718c5253f6f063a733c0de6}\label{classoomph_1_1RefineableNavierStokesEquations_a16a8cdb89718c5253f6f063a733c0de6}} 
 \index{oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}!unpin\_all\_pressure\_dofs@{unpin\_all\_pressure\_dofs}}
@@ -356,7 +352,7 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line 383 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 365 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

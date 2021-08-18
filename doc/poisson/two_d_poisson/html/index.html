@@ -486,31 +486,31 @@ Header files and precompiled meshes</h2>
 <p>While this strategy greatly facilitates code reuse, it can incur significant compile-time overheads as the (possibly very lengthy) mesh sources must be recompiled whenever the driver code is changed. During code development, this overhead can become unacceptable. To avoid the constant re-compilation of the mesh sources, all <code>oomph-lib</code> mesh objects are contained in two separate source files. In the case of the <code>SimpleRectangularMesh</code>, the class definition and function prototypes are contained in the small auxiliary header file <code>simple_rectangular_quadmesh.template.h</code>, while the actual function definitions are contained in <code>simple_rectangular_quadmesh.template.cc</code>. These are the only sources that the mesh-writer has to provide. The header file <code>simple_rectangular_quadmesh.h</code> is generated (automatically) by concatenating the two *.template.* files and all three files are contained in the mesh include directory. This allows the "user" to pre-compile the mesh for a specific element type (or for a range of specific elements) to produce a separate object file that can be linked against when the driver code is built.</p>
 <p>The procedure is illustrated in the alternative source code <br  />
  <a href="../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson2.cc">two_d_poisson2.cc</a> and the associated mesh file, <a href="../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson2_mesh.cc">two_d_poisson2_mesh.cc</a>. In the original version of the code, <a href="../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson.cc">two_d_poisson.cc</a>, the mesh was instantiated with the element type <code>QPoissonElement&lt;2,3&gt;</code> and we will assume that this is the only element type required in the driver code. We force the instantiation of the <code>SimpleRectangularQuadMesh</code> for this element type by employing the C++ "template" statement in the mesh file, <a href="../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson2_mesh.cc">two_d_poisson2_mesh.cc</a>, which is listed in its entirety here:</p>
-<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
-<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
-<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
-<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
-<div class="line"><span class="comment">//LIC// </span></div>
-<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
-<div class="line"><span class="comment">//LIC// </span></div>
-<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
-<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
-<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
-<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
-<div class="line"><span class="comment">//LIC// </span></div>
-<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
-<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
-<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
-<div class="line"><span class="comment">//LIC// </span></div>
-<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
-<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
-<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
-<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
-<div class="line"><span class="comment">//LIC// </span></div>
-<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
-<div class="line"><span class="comment">//LIC// </span></div>
-<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="fragment"><div class="line"><span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">// LIC//</span></div>
+<div class="line"><span class="comment">// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">// LIC//</span></div>
+<div class="line"><span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">// LIC//</span></div>
+<div class="line"><span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">// LIC//</span></div>
+<div class="line"><span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">// LIC//</span></div>
+<div class="line"><span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">// LIC//</span></div>
+<div class="line"><span class="comment">// LIC//====================================================================</span></div>
 <div class="line"><span class="comment">// Mesh builder: This builds the mesh with a specific element</span></div>
 <div class="line"><span class="comment">// so that the mesh sources don&#39;t have to be re-compiled over</span></div>
 <div class="line"><span class="comment">// and over again in the driver code... Useful strategy if</span></div>
@@ -525,13 +525,11 @@ Header files and precompiled meshes</h2>
 <div class="line"><span class="comment">// templated sources)</span></div>
 <div class="line"><span class="preprocessor">#include &quot;meshes/simple_rectangular_quadmesh.h&quot;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">using namespace </span>oomph;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Force build of specific mesh</span></div>
-<div class="line"><span class="keyword">template</span> <span class="keyword">class </span>SimpleRectangularQuadMesh&lt;QPoissonElement&lt;2,3&gt; &gt;;</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Force build of specific mesh</span></div>
+<div class="line">  <span class="keyword">template</span> <span class="keyword">class </span>SimpleRectangularQuadMesh&lt;QPoissonElement&lt;2, 3&gt;&gt;;</div>
+<div class="line">} <span class="comment">// namespace oomph</span></div>
 </div><!-- fragment --><p>This source file can be pre-compiled into an object file, <code>two_d_poisson2_mesh.o</code>, say.</p>
 <p>The driver code only needs to include the templated header file (which contains the class definition and the function prototypes) so that the first few lines of the modified driver code look like this:</p>
  <div class="fragment"><div class="line"><span class="comment">//Driver for a simple 2D poisson problem</span></div>
@@ -589,6 +587,7 @@ PDF file</h1>
 <div class="ttc" id="atwo__d__poisson_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="two__d__poisson_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver code for 2D Poisson problem.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson_8cc_source.html#l00271">two_d_poisson.cc:271</a></div></div>
 <div class="ttc" id="aclassPoissonProblem_html_a2ba5bb705abab012b72bbd7f4016d5fe"><div class="ttname"><a href="classPoissonProblem.html#a2ba5bb705abab012b72bbd7f4016d5fe">PoissonProblem::Source_fct_pt</a></div><div class="ttdeci">PoissonEquations&lt; 2 &gt;::PoissonSourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson_8cc_source.html#l00109">two_d_poisson.cc:109</a></div></div>
 <div class="ttc" id="aclassPoissonProblem_html_ac247e42d2d292200617f4b9db7ed1ab8"><div class="ttname"><a href="classPoissonProblem.html#ac247e42d2d292200617f4b9db7ed1ab8">PoissonProblem::~PoissonProblem</a></div><div class="ttdeci">~PoissonProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson_8cc_source.html#l00093">two_d_poisson.cc:93</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson2__mesh_8cc_source.html#l00040">two_d_poisson2_mesh.cc:40</a></div></div>
 <div class="ttc" id="aclassPoissonProblem_html_a398608a5ff73b74c5a387b3f794c58df"><div class="ttname"><a href="classPoissonProblem.html#a398608a5ff73b74c5a387b3f794c58df">PoissonProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve: Reset boundary conditions to the values from the exact solutio...</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson_8cc_source.html#l00183">two_d_poisson.cc:183</a></div></div>
 <div class="ttc" id="aclassPoissonProblem_html_a9c28346c473d246d8f61022365e742ea"><div class="ttname"><a href="classPoissonProblem.html#a9c28346c473d246d8f61022365e742ea">PoissonProblem::PoissonProblem</a></div><div class="ttdeci">PoissonProblem(PoissonEquations&lt; 2 &gt;::PoissonSourceFctPt source_fct_pt)</div><div class="ttdoc">Constructor: Pass pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson_8cc_source.html#l00121">two_d_poisson.cc:121</a></div></div>
 <div class="ttc" id="anamespaceTanhSolnForPoisson_html_ae676ccd186d5df119cce811596d949c1"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">TanhSolnForPoisson::Alpha</a></div><div class="ttdeci">double Alpha</div><div class="ttdoc">Parameter for steepness of &quot;step&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson_8cc_source.html#l00049">two_d_poisson.cc:49</a></div></div>
@@ -621,7 +620,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:01:21
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:43:18
         </div>
       </div>
     </footer>

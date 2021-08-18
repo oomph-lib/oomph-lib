@@ -51,7 +51,7 @@ The mesh boundaries are numbered as follows\+:
 \item Boundary 2\+: The out flow, represented by $\xi_0 = \xi_0^{hi}$. 
 \end{DoxyItemize}
 
-Definition at line 58 of file tube\+\_\+mesh.\+template.\+h.
+Definition at line 56 of file tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -67,14 +67,13 @@ Definition at line 58 of file tube\+\_\+mesh.\+template.\+h.
 
 Constructor\+: Pass pointer to geometric object that specifies the volume, start and end coordinates for the centreline on the geometric object. Values of theta at which dividing lines are to be placed, fractions of the radius for the central box at the dividing lines, the number of layers and the timestepper. Timestepper defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} dummy timestepper. 
 
-Constructor for deformable quarter tube mesh class. The domain is specified by the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that identifies the entire volume. ~\newline
- 
+Constructor for deformable quarter tube mesh class. The domain is specified by the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that identifies the entire volume. 
 
-Definition at line 42 of file tube\+\_\+mesh.\+template.\+cc.
-
+Definition at line 40 of file tube\+\_\+mesh.\+template.\+cc.
 
 
-References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\+Mesh\+::convert\+\_\+to\+\_\+boundary\+\_\+node(), oomph\+::\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+map(), oomph\+::\+Mesh\+::\+Node\+\_\+pt, oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Mathematical\+Constants\+::\+Pi, s, oomph\+::\+Mesh\+::set\+\_\+nboundary(), oomph\+::\+Brick\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::volume\+\_\+pt(), and oomph\+::\+Node\+::x().
+
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Mesh\+::convert\+\_\+to\+\_\+boundary\+\_\+node(), oomph\+::\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+map(), oomph\+::\+Mesh\+::\+Node\+\_\+pt, oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Mathematical\+Constants\+::\+Pi, s, oomph\+::\+Mesh\+::set\+\_\+nboundary(), oomph\+::\+Brick\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::volume\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1TubeMesh_af77e5d5022c77c3bf7340387258b2d51}\label{classoomph_1_1TubeMesh_af77e5d5022c77c3bf7340387258b2d51}} 
 \index{oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}!````~TubeMesh@{$\sim$TubeMesh}}
@@ -89,7 +88,7 @@ Destructor\+: empty.
 
 
 
-Definition at line 79 of file tube\+\_\+mesh.\+template.\+h.
+Definition at line 74 of file tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -111,7 +110,7 @@ Access function to domain.
 
 
 
-Definition at line 88 of file tube\+\_\+mesh.\+template.\+h.
+Definition at line 86 of file tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -130,7 +129,7 @@ Access function to underlying domain.
 
 
 
-Definition at line 91 of file tube\+\_\+mesh.\+template.\+h.
+Definition at line 92 of file tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -149,7 +148,7 @@ Access function to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} rep
 
 
 
-Definition at line 85 of file tube\+\_\+mesh.\+template.\+h.
+Definition at line 80 of file tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -175,7 +174,7 @@ Pointer to domain.
 
 
 
-Definition at line 96 of file tube\+\_\+mesh.\+template.\+h.
+Definition at line 99 of file tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -194,7 +193,7 @@ Pointer to the geometric object that represents the curved wall.
 
 
 
-Definition at line 99 of file tube\+\_\+mesh.\+template.\+h.
+Definition at line 102 of file tube\+\_\+mesh.\+template.\+h.
 
 
 

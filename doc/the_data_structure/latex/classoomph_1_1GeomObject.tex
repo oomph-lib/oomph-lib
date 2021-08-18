@@ -81,7 +81,7 @@ The shape of a geometric object is usually determined by a number of parameters 
 
 The shape of a geometric object can have an explicit time-\/dependence, for instance in cases where a domain boundary is performing prescribed motions. We provide access to the `global' time by giving the object a pointer to a timestepping scheme. \mbox{[}Note that, within the overall FE code, time is only ever evaluated at discrete instants (which are accessible via the timestepper), never in continuous form\mbox{]}. The timestepper is also needed to evaluate time-\/derivatives if the geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} carries a time history. 
 
-Definition at line 101 of file geom\+\_\+objects.\+h.
+Definition at line 100 of file geom\+\_\+objects.\+h.
 
 
 
@@ -98,7 +98,7 @@ Default constructor.
 
 
 
-Definition at line 107 of file geom\+\_\+objects.\+h.
+Definition at line 104 of file geom\+\_\+objects.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeomObject_a56cd9cb7bb39ff2c30fb56039be83d31}\label{classoomph_1_1GeomObject_a56cd9cb7bb39ff2c30fb56039be83d31}} 
 \index{oomph::GeomObject@{oomph::GeomObject}!GeomObject@{GeomObject}}
@@ -112,7 +112,7 @@ Constructor\+: Pass dimension of geometric object (\# of Eulerian coords = \# of
 
 
 
-Definition at line 112 of file geom\+\_\+objects.\+h.
+Definition at line 108 of file geom\+\_\+objects.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeomObject_ae3fcf14b1bf5d2bc26f64156baecb7da}\label{classoomph_1_1GeomObject_ae3fcf14b1bf5d2bc26f64156baecb7da}} 
 \index{oomph::GeomObject@{oomph::GeomObject}!GeomObject@{GeomObject}}
@@ -126,7 +126,7 @@ Constructor\+: pass \# of Eulerian and Lagrangian coordinates. No time history a
 
 
 
-Definition at line 119 of file geom\+\_\+objects.\+h.
+Definition at line 116 of file geom\+\_\+objects.\+h.
 
 
 
@@ -144,7 +144,7 @@ Constructor\+: pass \# of Eulerian and Lagrangian coordinates and pointer to tim
 
 
 
-Definition at line 142 of file geom\+\_\+objects.\+h.
+Definition at line 139 of file geom\+\_\+objects.\+h.
 
 
 
@@ -162,7 +162,7 @@ Broken copy constructor.
 
 
 
-Definition at line 163 of file geom\+\_\+objects.\+h.
+Definition at line 162 of file geom\+\_\+objects.\+h.
 
 
 
@@ -180,7 +180,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
-Definition at line 175 of file geom\+\_\+objects.\+h.
+Definition at line 174 of file geom\+\_\+objects.\+h.
 
 
 
@@ -201,7 +201,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1EllipticalTube_a8b64fd5235117356
 
 
 
-Definition at line 326 of file geom\+\_\+objects.\+h.
+Definition at line 347 of file geom\+\_\+objects.\+h.
 
 
 
@@ -223,7 +223,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1EllipticalTube_a2fe694a504750371
 
 
 
-Definition at line 342 of file geom\+\_\+objects.\+h.
+Definition at line 363 of file geom\+\_\+objects.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeomObject_a91cd59efcb15971a293914b7b9bd7f75}\label{classoomph_1_1GeomObject_a91cd59efcb15971a293914b7b9bd7f75}} 
 \index{oomph::GeomObject@{oomph::GeomObject}!dposition@{dposition}}
@@ -241,7 +241,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1Ellipse_af8caf51de734dff257fa3db
 
 
 
-Definition at line 312 of file geom\+\_\+objects.\+h.
+Definition at line 333 of file geom\+\_\+objects.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974}\label{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974}} 
 \index{oomph::GeomObject@{oomph::GeomObject}!dposition\_dt@{dposition\_dt}}
@@ -259,11 +259,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FiniteElement_a1444cb95e415d363c
 
 
 
-Definition at line 284 of file geom\+\_\+objects.\+h.
+Definition at line 298 of file geom\+\_\+objects.\+h.
 
 
 
 References i, n, and position().
+
+
+
+Referenced by oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+jacobian\+\_\+for\+\_\+solid\+\_\+ic().
 
 \mbox{\Hypertarget{classoomph_1_1GeomObject_ae1940fc6a3050e645c3882f2f6f3a202}\label{classoomph_1_1GeomObject_ae1940fc6a3050e645c3882f2f6f3a202}} 
 \index{oomph::GeomObject@{oomph::GeomObject}!geom\_data\_pt@{geom\_data\_pt}}
@@ -281,7 +285,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a2457ad75b452
 
 
 
-Definition at line 226 of file geom\+\_\+objects.\+h.
+Definition at line 239 of file geom\+\_\+objects.\+h.
 
 
 
@@ -303,7 +307,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FiniteElement_a4407a4f0fb5bf5b88
 
 
 
-Definition at line 387 of file geom\+\_\+objects.\+h.
+Definition at line 410 of file geom\+\_\+objects.\+h.
 
 
 
@@ -325,7 +329,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a8a9fecb98d4e0a
 
 
 
-Definition at line 365 of file geom\+\_\+objects.\+h.
+Definition at line 387 of file geom\+\_\+objects.\+h.
 
 
 
@@ -347,7 +351,7 @@ Access function to \# of Eulerian coordinates.
 
 
 
-Definition at line 181 of file geom\+\_\+objects.\+h.
+Definition at line 183 of file geom\+\_\+objects.\+h.
 
 
 
@@ -373,7 +377,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a73f387da7f31
 
 
 
-Definition at line 204 of file geom\+\_\+objects.\+h.
+Definition at line 215 of file geom\+\_\+objects.\+h.
 
 
 
@@ -391,7 +395,7 @@ Access function to \# of Lagrangian coordinates.
 
 
 
-Definition at line 178 of file geom\+\_\+objects.\+h.
+Definition at line 177 of file geom\+\_\+objects.\+h.
 
 
 
@@ -413,7 +417,7 @@ Broken assignment operator.
 
 
 
-Definition at line 169 of file geom\+\_\+objects.\+h.
+Definition at line 168 of file geom\+\_\+objects.\+h.
 
 
 
@@ -431,7 +435,7 @@ Parametrised position on object\+: r(zeta). Evaluated at the continuous time val
 
 
 
-Definition at line 267 of file geom\+\_\+objects.\+h.
+Definition at line 282 of file geom\+\_\+objects.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeomObject_ad44a736d23dcd63af163a7d80b5c4dfa}\label{classoomph_1_1GeomObject_ad44a736d23dcd63af163a7d80b5c4dfa}} 
 \index{oomph::GeomObject@{oomph::GeomObject}!position@{position}}
@@ -445,11 +449,11 @@ Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FiniteElement_ad1c757b3ea99bfac2521244a977728ed}{oomph\+::\+Finite\+Element}}, \mbox{\hyperlink{classoomph_1_1EllipticalTube_a01c6372a901d28892cab9e43ba8b3530}{oomph\+::\+Elliptical\+Tube}}, \mbox{\hyperlink{classoomph_1_1Circle_a3d318d67e50a29d7d8916cacc741435b}{oomph\+::\+Circle}}, \mbox{\hyperlink{classoomph_1_1Ellipse_a862ce1f7d6ac7b2c5deb613b49caa30f}{oomph\+::\+Ellipse}}, \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9c86ac02c60541d451ceb50eb49914ed}{oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1StraightLine_adfa84ac4d8342089f0f69eb2efe1108f}{oomph\+::\+Straight\+Line}}, \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_afcc9e5e2c88d05b61006bd432e3aa31b}{oomph\+::\+Warped\+Circular\+Disk}}, \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a027211cc7067efa849e605b456cb5462}{oomph\+::\+Pseudo\+Buckling\+Ring}}, \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_aab712c9f8a51d997c13c00eb1afaf9f4}{oomph\+::\+Mesh\+As\+Geom\+Object}}, \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_ad1bd014b31d75703384be201ab65e80f}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon}}, and \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_aca95759d96758c7a4fc81dece7768e9d}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FiniteElement_ad1c757b3ea99bfac2521244a977728ed}{oomph\+::\+Finite\+Element}}, \mbox{\hyperlink{classoomph_1_1EllipticalTube_a01c6372a901d28892cab9e43ba8b3530}{oomph\+::\+Elliptical\+Tube}}, \mbox{\hyperlink{classoomph_1_1Circle_a3d318d67e50a29d7d8916cacc741435b}{oomph\+::\+Circle}}, \mbox{\hyperlink{classoomph_1_1Ellipse_a862ce1f7d6ac7b2c5deb613b49caa30f}{oomph\+::\+Ellipse}}, \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9c86ac02c60541d451ceb50eb49914ed}{oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1StraightLine_adfa84ac4d8342089f0f69eb2efe1108f}{oomph\+::\+Straight\+Line}}, \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a027211cc7067efa849e605b456cb5462}{oomph\+::\+Pseudo\+Buckling\+Ring}}, \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_afcc9e5e2c88d05b61006bd432e3aa31b}{oomph\+::\+Warped\+Circular\+Disk}}, \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_aab712c9f8a51d997c13c00eb1afaf9f4}{oomph\+::\+Mesh\+As\+Geom\+Object}}, \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_ad1bd014b31d75703384be201ab65e80f}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon}}, and \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_aca95759d96758c7a4fc81dece7768e9d}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}.
 
 
 
-Definition at line 251 of file geom\+\_\+objects.\+h.
+Definition at line 265 of file geom\+\_\+objects.\+h.
 
 
 
@@ -471,7 +475,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1FiniteElement_a1d33f53e2b2813fba8a
 
 
 
-Referenced by oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Channel\+With\+Leaflet\+Domain(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::connect\+\_\+final\+\_\+vertex\+\_\+to\+\_\+curviline(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::connect\+\_\+initial\+\_\+vertex\+\_\+to\+\_\+curviline(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::create\+\_\+vertex\+\_\+coordinates\+\_\+for\+\_\+polyline\+\_\+connections(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::create\+\_\+vertex\+\_\+coordinates\+\_\+for\+\_\+polyline\+\_\+no\+\_\+connections(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::dposition\+\_\+dt(), dposition\+\_\+dt(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::final\+\_\+vertex\+\_\+coordinate(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::initial\+\_\+vertex\+\_\+coordinate(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+\+W(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W(), oomph\+::\+Cylinder\+With\+Flag\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Full\+Circle\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Tube\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Rectangle\+With\+Hole\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+central\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I\+I(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+body(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+fin(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+X(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I\+I(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::output(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::position(), position(), oomph\+::\+Mesh\+As\+Geom\+Object\+::position(), oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::position\+\_\+on\+\_\+boundary(), oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+B(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+B(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+D(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+E(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+F(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+R(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+S(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+U(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+W(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+B(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+D(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+F(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+L(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+R(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+\+S(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+U(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+\+W(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+D(), oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+E\+\_\+collapsible(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+F(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+L(), oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+N\+\_\+collapsible(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+R(), oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+S\+\_\+collapsible(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+B(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+E(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+F(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+L(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+N(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+S(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+U(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+W(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+U(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+E(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+N(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+S(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+W(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+\+N(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+\+S(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+\+W(), oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+W\+\_\+collapsible(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::reposition\+\_\+spines(), oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::slanted\+\_\+bound\+\_\+up(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error(), and oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::zeta\+\_\+on\+\_\+boundary().
+Referenced by oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Channel\+With\+Leaflet\+Domain(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::connect\+\_\+final\+\_\+vertex\+\_\+to\+\_\+curviline(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::connect\+\_\+initial\+\_\+vertex\+\_\+to\+\_\+curviline(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::create\+\_\+vertex\+\_\+coordinates\+\_\+for\+\_\+polyline\+\_\+connections(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::create\+\_\+vertex\+\_\+coordinates\+\_\+for\+\_\+polyline\+\_\+no\+\_\+connections(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::dposition\+\_\+dt(), dposition\+\_\+dt(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::final\+\_\+vertex\+\_\+coordinate(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::initial\+\_\+vertex\+\_\+coordinate(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+\+W(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W(), oomph\+::\+Cylinder\+With\+Flag\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Full\+Circle\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Tube\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Rectangle\+With\+Hole\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+central\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I\+I(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+body(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+fin(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+X(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I\+I(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::output(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::position(), position(), oomph\+::\+Mesh\+As\+Geom\+Object\+::position(), oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::position\+\_\+on\+\_\+boundary(), oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+B(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+B(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+D(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+E(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+F(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+R(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+S(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+U(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+W(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+B(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+D(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+F(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+L(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+R(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+\+S(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+U(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+\+W(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+D(), oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+E\+\_\+collapsible(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+F(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+L(), oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+N\+\_\+collapsible(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+R(), oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+S\+\_\+collapsible(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+B(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+E(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+F(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+L(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+N(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+S(), oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+U(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+W(), oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+U(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+E(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+N(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+S(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+W(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+\+N(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+\+S(), oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+\+W(), oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+W\+\_\+collapsible(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::reposition\+\_\+spines(), oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::slanted\+\_\+bound\+\_\+up(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error().
 
 \mbox{\Hypertarget{classoomph_1_1GeomObject_a375ecd197d0aff695825ad33a35e0d7e}\label{classoomph_1_1GeomObject_a375ecd197d0aff695825ad33a35e0d7e}} 
 \index{oomph::GeomObject@{oomph::GeomObject}!set\_nlagrangian\_and\_ndim@{set\_nlagrangian\_and\_ndim}}
@@ -485,7 +489,7 @@ Set \# of Lagrangian and Eulerian coordinates.
 
 
 
-Definition at line 184 of file geom\+\_\+objects.\+h.
+Definition at line 189 of file geom\+\_\+objects.\+h.
 
 
 
@@ -507,7 +511,7 @@ Access function for pointer to time stepper\+: Null if object is not time-\/depe
 
 
 
-Definition at line 193 of file geom\+\_\+objects.\+h.
+Definition at line 198 of file geom\+\_\+objects.\+h.
 
 
 
@@ -515,7 +519,7 @@ References Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Circle\+::\+Circle(), oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ E\+L\+E\+M\+E\+N\+T, Macro\+Element\+Node\+Update\+Node $>$\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Solid\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+D\+G\+Element\+::construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces(), oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ E\+L\+E\+M\+E\+N\+T, Macro\+Element\+Node\+Update\+Node $>$\+::construct\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Solid\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+lin\+\_\+wave(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+linear\+\_\+elasticity(), oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::dc\+\_\+dt\+\_\+adv\+\_\+diff\+\_\+react(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::dcdt\+\_\+surface(), oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::dposition\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::du\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::du\+\_\+dt(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+adv\+\_\+diff(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Generalised\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+cons\+\_\+adv\+\_\+diff(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+lin\+\_\+wave(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+pnst(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+nst(), oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat(), oomph\+::\+Womersley\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+womersley(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::initialise(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::output\+\_\+centre\+\_\+of\+\_\+gravity(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Straight\+Line\+::position(), oomph\+::\+Ellipse\+::position(), oomph\+::\+Circle\+::position(), oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+directly(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::set\+\_\+q\+\_\+internal\+\_\+timestepper(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::set\+\_\+q\+\_\+internal\+\_\+timestepper(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+static\+\_\+initial\+\_\+condition(), and oomph\+::\+Periodic\+Orbit\+Equations\+::set\+\_\+timestepper\+\_\+weights().
+Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface(), oomph\+::\+Circle\+::\+Circle(), oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ E\+L\+E\+M\+E\+N\+T, Macro\+Element\+Node\+Update\+Node $>$\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Solid\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+D\+G\+Element\+::construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces(), oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ E\+L\+E\+M\+E\+N\+T, Macro\+Element\+Node\+Update\+Node $>$\+::construct\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Solid\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+lin\+\_\+wave(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+linear\+\_\+elasticity(), oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::dc\+\_\+dt\+\_\+adv\+\_\+diff\+\_\+react(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::dcdt\+\_\+surface(), oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::dposition\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::du\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::du\+\_\+dt(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+adv\+\_\+diff(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Generalised\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+cons\+\_\+adv\+\_\+diff(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+lin\+\_\+wave(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+pnst(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+nst(), oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat(), oomph\+::\+Womersley\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+womersley(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::initialise(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::output\+\_\+centre\+\_\+of\+\_\+gravity(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Straight\+Line\+::position(), oomph\+::\+Ellipse\+::position(), oomph\+::\+Circle\+::position(), oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+directly(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::set\+\_\+q\+\_\+internal\+\_\+timestepper(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::set\+\_\+q\+\_\+internal\+\_\+timestepper(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+static\+\_\+initial\+\_\+condition(), and oomph\+::\+Periodic\+Orbit\+Equations\+::set\+\_\+timestepper\+\_\+weights().
 
 \mbox{\Hypertarget{classoomph_1_1GeomObject_a02a503606d959d61acb8ca4b94dbc5e6}\label{classoomph_1_1GeomObject_a02a503606d959d61acb8ca4b94dbc5e6}} 
 \index{oomph::GeomObject@{oomph::GeomObject}!time\_stepper\_pt@{time\_stepper\_pt}}
@@ -529,7 +533,7 @@ Access function for pointer to time stepper\+: Null if object is not time-\/depe
 
 
 
-Definition at line 197 of file geom\+\_\+objects.\+h.
+Definition at line 205 of file geom\+\_\+objects.\+h.
 
 
 
@@ -550,7 +554,7 @@ Timestepper (used to handle access to geometry at previous timesteps)
 
 
 
-Definition at line 420 of file geom\+\_\+objects.\+h.
+Definition at line 441 of file geom\+\_\+objects.\+h.
 
 
 
@@ -568,7 +572,7 @@ Number of Eulerian coordinates.
 
 
 
-Definition at line 416 of file geom\+\_\+objects.\+h.
+Definition at line 437 of file geom\+\_\+objects.\+h.
 
 
 
@@ -586,7 +590,7 @@ Number of Lagrangian (intrinsic) coordinates.
 
 
 
-Definition at line 413 of file geom\+\_\+objects.\+h.
+Definition at line 434 of file geom\+\_\+objects.\+h.
 
 
 

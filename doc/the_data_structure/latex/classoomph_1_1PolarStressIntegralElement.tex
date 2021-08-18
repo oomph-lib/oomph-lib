@@ -15,7 +15,7 @@ Inheritance diagram for oomph\+::Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\
 \item 
 const double \& \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a1a8b2e072b3dbfbfe755e6a6f1d5e051}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Alpha. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a8b0c1571618a9eb746769089d37c2b10}{alpha\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_acf7809d89b1ac0f63f6df363b79425e1}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Alpha. \end{DoxyCompactList}\item 
 const int \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_ad4e54b0d4f9c77c45554d16d4ec79f15}{boundary}} () const
 \begin{DoxyCompactList}\small\item\em Boundary. \end{DoxyCompactList}\item 
@@ -47,8 +47,7 @@ double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_accc1886b4e4d60
 virtual int \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_adbf12bebeb0ffb79b5ab4157fa89a6a9}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a3b78e948b5aec7e6397bb7f2770f6396}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -72,7 +71,7 @@ class oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 A class for elements that allow the imposition of an applied traction to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometery$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class 
 
-Definition at line 52 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 51 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -86,7 +85,7 @@ Definition at line 52 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
 
-Definition at line 120 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 132 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -105,7 +104,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 158 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 170 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -129,12 +128,12 @@ Definition at line 104 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h
 
 References oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a8b0c1571618a9eb746769089d37c2b10}\label{classoomph_1_1PolarStressIntegralElement_a8b0c1571618a9eb746769089d37c2b10}} 
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_acf7809d89b1ac0f63f6df363b79425e1}\label{classoomph_1_1PolarStressIntegralElement_acf7809d89b1ac0f63f6df363b79425e1}} 
 \index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!alpha\_pt@{alpha\_pt}}
 \index{alpha\_pt@{alpha\_pt}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -142,7 +141,7 @@ Pointer to Alpha.
 
 
 
-Definition at line 107 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 110 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -161,7 +160,7 @@ Boundary.
 
 
 
-Definition at line 110 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 116 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -184,7 +183,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 167 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 179 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a2e8896b4e1e698caa3460dd41da55cb8}\label{classoomph_1_1PolarStressIntegralElement_a2e8896b4e1e698caa3460dd41da55cb8}} 
 \index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -203,7 +202,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 175 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 187 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a15e709f5a2763bbc865f9c3060aebca0}\label{classoomph_1_1PolarStressIntegralElement_a15e709f5a2763bbc865f9c3060aebca0}} 
 \index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -222,7 +221,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 161 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 173 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_ae52aa0de04a32c399c59d66154739e3f}\label{classoomph_1_1PolarStressIntegralElement_ae52aa0de04a32c399c59d66154739e3f}} 
 \index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!get\_shear\_stress@{get\_shear\_stress}}
@@ -237,7 +236,7 @@ Function to calculate the shear stress along boundary.
 
 Function that returns the shear stress. 
 
-Definition at line 204 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 224 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -260,7 +259,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 183 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 196 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -283,7 +282,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 186 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 202 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -302,7 +301,7 @@ Function to set boundary.
 
 
 
-Definition at line 113 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 122 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -317,12 +316,11 @@ double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Pol
 
 
 
-Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping. 
 
 
 
-Definition at line 78 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 76 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -341,7 +339,7 @@ local velocities
 
 
 
-Definition at line 190 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 208 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -360,7 +358,7 @@ Access function that returns the local equation numbers for velocity components.
 
 
 
-Definition at line 73 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 69 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -379,7 +377,7 @@ local position
 
 
 
-Definition at line 194 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 214 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -401,7 +399,7 @@ Pointer to the angle alpha.
 
 
 
-Definition at line 93 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 94 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -416,7 +414,7 @@ int \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\
 
 
 
-Definition at line 99 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 100 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -435,7 +433,7 @@ The highest dimension of the problem.
 
 
 
-Definition at line 63 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 61 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 
@@ -454,7 +452,7 @@ Pointer to an imposed traction function.
 
 
 
-Definition at line 59 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+Definition at line 56 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
 
 
 

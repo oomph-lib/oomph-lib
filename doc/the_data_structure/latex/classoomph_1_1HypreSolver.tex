@@ -22,8 +22,7 @@ Inheritance diagram for oomph\+::Hypre\+Solver\+:\begin{figure}[H]
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_aae31cbdfcc5d0cd99849f94537b8331b}{operator=}} (const \mbox{\hyperlink{classoomph_1_1HypreSolver}{Hypre\+Solver}} \&)
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_ae8949856fc75ff767f1ad940a710109f}{disable\+\_\+resolve}} ()
-\begin{DoxyCompactList}\small\item\em Disable resolve function (overloads the \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} disable\+\_\+resolve function). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Disable resolve function (overloads the \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} disable\+\_\+resolve function). \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a1bc71b4c84ca568da53deea0a4fd8db0}{max\+\_\+iter}} ()
 \begin{DoxyCompactList}\small\item\em Access function to Max\+\_\+iter. \end{DoxyCompactList}\item 
 double \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a54945bba18bf066450b85ba21145656a}{tolerance}} ()
@@ -73,10 +72,9 @@ void \mbox{\hyperlink{classoomph_1_1HypreSolver_a8a96671322af214937d924546633648
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_a0cedd83299949fcc877c060e6dd7639f}{disable\+\_\+euclid\+\_\+row\+Scale}} ()
 \begin{DoxyCompactList}\small\item\em Disable euclid row scaling. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_a1d9e7f9f4419b3a2fc12c3cdffb603d0}{enable\+\_\+euclid\+\_\+using\+\_\+\+BJ}} ()
-\begin{DoxyCompactList}\small\item\em Enable use of Block Jacobi as opposed to P\+I\+LU ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Enable use of Block Jacobi as opposed to P\+I\+LU. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_a07def5b52e105be6f19a40f43e41548e}{disable\+\_\+euclid\+\_\+using\+\_\+\+BJ}} ()
-\begin{DoxyCompactList}\small\item\em Disable use of Block Jacobi,. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Disable use of Block Jacobi, so P\+I\+LU will be used. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_ad0206b4977a0e7aa78a386a8803ffcd4}{euclid\+\_\+using\+\_\+\+I\+L\+UK}} ()
 \begin{DoxyCompactList}\small\item\em Function to switch on I\+L\+U(k) factorization for Euclid (default is I\+L\+U(k) factorization) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_a831cd8c7324a117e2949ee734adf95cd}{euclid\+\_\+using\+\_\+\+I\+L\+UT}} ()
@@ -88,13 +86,11 @@ unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a4ed4bf0114bca132a31b8969
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}{enable\+\_\+delete\+\_\+matrix}} ()
 \begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling this function which changes the flag from false (its default) to true. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_ae97158e3b4fca00cc15d0baa4c5444d4}{disable\+\_\+delete\+\_\+matrix}} ()
-\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. Calling this function ensures that the matrix is not deleted. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_a3a42a158a390f24d7d91ee78aa53e960}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
 \begin{DoxyCompactList}\small\item\em Function which uses problem\+\_\+pt\textquotesingle{}s get\+\_\+jacobian(...) function to generate a linear system which is then solved. This function deletes any existing internal data and then generates a new Hypre solver. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_a11265eed48a54ba7dfb148d226cb2130}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
-\begin{DoxyCompactList}\small\item\em Function to solve the linear system defined by matrix\+\_\+pt and rhs. This function will delete any existing internal data and generate a new Hypre solver. ~\newline
- {\bfseries{Note\+:}} The matrix has to be of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. ~\newline
- {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}{enable\+\_\+delete\+\_\+matrix()}} function. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to solve the linear system defined by matrix\+\_\+pt and rhs. This function will delete any existing internal data and generate a new Hypre solver. {\bfseries{Note\+:}} The matrix has to be of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}{enable\+\_\+delete\+\_\+matrix()}} function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_a892df4a9377dfa5ec978a74badb61423}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
 \begin{DoxyCompactList}\small\item\em Function to resolve a linear system using the existing solver data, allowing a solve with a new right hand side vector. This function must be used after a call to solve(...) with enable\+\_\+resolve set to true. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HypreSolver_a5c1a57f1f74c0748a47c1629635ee0fc}{clean\+\_\+up\+\_\+memory}} ()
@@ -118,10 +114,9 @@ The Krylov subspace solvers (\mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyp
 \end{DoxyVerb}
 
 
-By default \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} without preconditioning is used. ~\newline
- 
+By default \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} without preconditioning is used. 
 
-Definition at line 513 of file hypre\+\_\+solver.\+h.
+Definition at line 519 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -138,7 +133,7 @@ Constructor.
 
 
 
-Definition at line 518 of file hypre\+\_\+solver.\+h.
+Definition at line 523 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -156,7 +151,7 @@ Empty destructor.
 
 
 
-Definition at line 535 of file hypre\+\_\+solver.\+h.
+Definition at line 540 of file hypre\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HypreSolver_acb24f66623db84815531ccd791107938}\label{classoomph_1_1HypreSolver_acb24f66623db84815531ccd791107938}} 
 \index{oomph::HypreSolver@{oomph::HypreSolver}!HypreSolver@{HypreSolver}}
@@ -170,7 +165,7 @@ Broken copy constructor.
 
 
 
-Definition at line 538 of file hypre\+\_\+solver.\+h.
+Definition at line 543 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -191,7 +186,7 @@ Access function to A\+M\+G\+\_\+coarsening flag.
 
 
 
-Definition at line 591 of file hypre\+\_\+solver.\+h.
+Definition at line 626 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -209,7 +204,7 @@ Access function to A\+M\+G\+\_\+complex\+\_\+smoother flag.
 
 
 
-Definition at line 582 of file hypre\+\_\+solver.\+h.
+Definition at line 608 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -227,7 +222,7 @@ Access function to A\+M\+G\+\_\+damping parameter.
 
 
 
-Definition at line 597 of file hypre\+\_\+solver.\+h.
+Definition at line 638 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -245,7 +240,7 @@ Access function to A\+M\+G\+\_\+max\+\_\+levels.
 
 
 
-Definition at line 594 of file hypre\+\_\+solver.\+h.
+Definition at line 632 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -263,7 +258,7 @@ Access function to A\+M\+G\+\_\+max\+\_\+row\+\_\+sum.
 
 
 
-Definition at line 603 of file hypre\+\_\+solver.\+h.
+Definition at line 650 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -281,7 +276,7 @@ Access function to A\+M\+G\+\_\+print\+\_\+level.
 
 
 
-Definition at line 585 of file hypre\+\_\+solver.\+h.
+Definition at line 614 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -299,7 +294,7 @@ Access function to A\+M\+G\+\_\+simple\+\_\+smoother flag.
 
 
 
-Definition at line 575 of file hypre\+\_\+solver.\+h.
+Definition at line 595 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -317,7 +312,7 @@ Access function to A\+M\+G\+\_\+smoother\+\_\+iterations.
 
 
 
-Definition at line 588 of file hypre\+\_\+solver.\+h.
+Definition at line 620 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -335,7 +330,7 @@ Access function to A\+M\+G\+\_\+strength.
 
 
 
-Definition at line 600 of file hypre\+\_\+solver.\+h.
+Definition at line 644 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -353,7 +348,7 @@ Access function to A\+M\+G\+\_\+truncation.
 
 
 
-Definition at line 606 of file hypre\+\_\+solver.\+h.
+Definition at line 656 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -371,7 +366,7 @@ Function to select use of \textquotesingle{}complex\textquotesingle{} A\+MG smoo
 
 
 
-Definition at line 579 of file hypre\+\_\+solver.\+h.
+Definition at line 602 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -389,7 +384,7 @@ Function to select use of \textquotesingle{}simple\textquotesingle{} A\+MG smoot
 
 
 
-Definition at line 572 of file hypre\+\_\+solver.\+h.
+Definition at line 589 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -411,7 +406,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 1612 of file hypre\+\_\+solver.\+cc.
+Definition at line 1586 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -429,11 +424,11 @@ Referenced by disable\+\_\+resolve(), and solve().
 
 
 
-Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. 
+Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. Calling this function ensures that the matrix is not deleted. 
 
-or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. Calling this function ensures that the matrix is not deleted. 
 
-Definition at line 674 of file hypre\+\_\+solver.\+h.
+
+Definition at line 772 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -451,7 +446,7 @@ Disable euclid row scaling.
 
 
 
-Definition at line 631 of file hypre\+\_\+solver.\+h.
+Definition at line 705 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -465,11 +460,11 @@ References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale.
 
 
 
-Disable use of Block Jacobi,. 
+Disable use of Block Jacobi, so P\+I\+LU will be used. 
 
-so P\+I\+LU will be used 
 
-Definition at line 639 of file hypre\+\_\+solver.\+h.
+
+Definition at line 719 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -483,8 +478,7 @@ References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+BJ.
 
 
 
-Disable resolve function (overloads the \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} disable\+\_\+resolve function). ~\newline
- 
+Disable resolve function (overloads the \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} disable\+\_\+resolve function). 
 
 
 
@@ -492,7 +486,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line 551 of file hypre\+\_\+solver.\+h.
+Definition at line 556 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -510,7 +504,7 @@ Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{cl
 
 
 
-Definition at line 668 of file hypre\+\_\+solver.\+h.
+Definition at line 763 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -528,7 +522,7 @@ Enable euclid row\+Scaling.
 
 
 
-Definition at line 628 of file hypre\+\_\+solver.\+h.
+Definition at line 699 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -542,12 +536,11 @@ References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale.
 
 
 
-Enable use of Block Jacobi as opposed to P\+I\+LU ~\newline
- 
+Enable use of Block Jacobi as opposed to P\+I\+LU. 
 
 
 
-Definition at line 635 of file hypre\+\_\+solver.\+h.
+Definition at line 712 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -565,7 +558,7 @@ Access function to Euclid drop tolerance parameter.
 
 
 
-Definition at line 621 of file hypre\+\_\+solver.\+h.
+Definition at line 686 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -579,7 +572,7 @@ References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+droptol.
 
 Access function to Euclid level parameter for I\+L\+U(k) factorization 
 
-Definition at line 625 of file hypre\+\_\+solver.\+h.
+Definition at line 693 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -597,7 +590,7 @@ Function to set the level of printing from Euclid when the Euclid destructor is 
 
 
 
-Definition at line 654 of file hypre\+\_\+solver.\+h.
+Definition at line 743 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -615,7 +608,7 @@ Function to switch on I\+L\+U(k) factorization for Euclid (default is I\+L\+U(k)
 
 
 
-Definition at line 643 of file hypre\+\_\+solver.\+h.
+Definition at line 726 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -633,7 +626,7 @@ Function to switch on I\+L\+UT factorization for Euclid (default is I\+L\+U(k) f
 
 
 
-Definition at line 647 of file hypre\+\_\+solver.\+h.
+Definition at line 733 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -651,7 +644,7 @@ Access function to Hypre\+\_\+method flag -- specified via enumeration.
 
 
 
-Definition at line 564 of file hypre\+\_\+solver.\+h.
+Definition at line 575 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -669,7 +662,7 @@ Access function to Internal\+\_\+preconditioner flag -- specified via enumeratio
 
 
 
-Definition at line 568 of file hypre\+\_\+solver.\+h.
+Definition at line 582 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -687,7 +680,7 @@ Access function to Krylov\+\_\+print\+\_\+level.
 
 
 
-Definition at line 657 of file hypre\+\_\+solver.\+h.
+Definition at line 749 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -705,7 +698,7 @@ Access function to Max\+\_\+iter.
 
 
 
-Definition at line 558 of file hypre\+\_\+solver.\+h.
+Definition at line 563 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -723,7 +716,7 @@ Broken assignment operator.
 
 
 
-Definition at line 544 of file hypre\+\_\+solver.\+h.
+Definition at line 549 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -741,7 +734,7 @@ Access function to Para\+Sails filter parameter.
 
 
 
-Definition at line 618 of file hypre\+\_\+solver.\+h.
+Definition at line 680 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -759,7 +752,7 @@ Access function to Para\+Sails nlevel parameter.
 
 
 
-Definition at line 612 of file hypre\+\_\+solver.\+h.
+Definition at line 668 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -777,7 +770,7 @@ Access function to Para\+Sails symmetry flag.
 
 
 
-Definition at line 609 of file hypre\+\_\+solver.\+h.
+Definition at line 662 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -795,7 +788,7 @@ Access function to Para\+Sails thresh parameter.
 
 
 
-Definition at line 615 of file hypre\+\_\+solver.\+h.
+Definition at line 674 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -817,7 +810,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line 1555 of file hypre\+\_\+solver.\+cc.
+Definition at line 1532 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -831,9 +824,7 @@ References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Distributable\+Linea
 
 
 
-Function to solve the linear system defined by matrix\+\_\+pt and rhs. This function will delete any existing internal data and generate a new Hypre solver. ~\newline
- {\bfseries{Note\+:}} The matrix has to be of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. ~\newline
- {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}{enable\+\_\+delete\+\_\+matrix()}} function. 
+Function to solve the linear system defined by matrix\+\_\+pt and rhs. This function will delete any existing internal data and generate a new Hypre solver. {\bfseries{Note\+:}} The matrix has to be of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}{enable\+\_\+delete\+\_\+matrix()}} function. 
 
 Uses Hypre\+Interface\+::hypre\+\_\+solve(...) to solve the linear system for a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or a Distributed\+C\+R\+Double\+Matrix. In the latter case, the rhs needs to be distributed too, i.\+e. the length of the rhs vector must be equal to the number of rows stored locally. Note\+: the returned solution vector is never distributed, i.\+e. all processors hold all values 
 
@@ -841,7 +832,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line 1456 of file hypre\+\_\+solver.\+cc.
+Definition at line 1436 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -863,7 +854,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 1401 of file hypre\+\_\+solver.\+cc.
+Definition at line 1383 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -881,7 +872,7 @@ Access function to Tolerance.
 
 
 
-Definition at line 561 of file hypre\+\_\+solver.\+h.
+Definition at line 569 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -902,7 +893,7 @@ Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{cl
 
 
 
-Definition at line 720 of file hypre\+\_\+solver.\+h.
+Definition at line 818 of file hypre\+\_\+solver.\+h.
 
 
 

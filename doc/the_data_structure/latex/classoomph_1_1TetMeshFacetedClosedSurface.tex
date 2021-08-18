@@ -28,13 +28,11 @@ const double \& \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_abf71
 void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_ae6c1653b9aeef81ae12735e02a1f938d}{set\+\_\+hole\+\_\+for\+\_\+tetgen}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&hole\+\_\+point)
 \begin{DoxyCompactList}\small\item\em Specify coordinate of hole for tetgen. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_ac60fa3591df9cdcfc07521410e986130}{set\+\_\+region\+\_\+for\+\_\+tetgen}} (const unsigned \&region\+\_\+id, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&region\+\_\+point)
-\begin{DoxyCompactList}\small\item\em Specify a region; pass (zero-\/based) region ID and coordinate of point in region for tetgen ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Specify a region; pass (zero-\/based) region ID and coordinate of point in region for tetgen. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a69fbedd3beddfc55c8bcb7f0e186ec38}{ninternal\+\_\+point\+\_\+for\+\_\+tetgen}} ()
 \begin{DoxyCompactList}\small\item\em Number of internal points (identifying either regions or holes) for tetgen. \end{DoxyCompactList}\item 
 const int \& \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a441b6de91c824e29cd10d87bf5264fd7}{region\+\_\+id\+\_\+for\+\_\+tetgen}} (const unsigned \&j) const
-\begin{DoxyCompactList}\small\item\em Return the (zero-\/based) region ID of j-\/th internal point for tetgen. Negative if it\textquotesingle{}s actually a hole. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the (zero-\/based) region ID of j-\/th internal point for tetgen. Negative if it\textquotesingle{}s actually a hole. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_aa37311d590909afc7d0ddb867fadfbbf}{internal\+\_\+point\+\_\+identifies\+\_\+hole\+\_\+for\+\_\+tetgen}} (const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Is j-\/th internal point for tetgen associated with a hole? \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a9152e115fcf854c5974995fd4abc7aa0}{internal\+\_\+point\+\_\+identifies\+\_\+region\+\_\+for\+\_\+tetgen}} (const unsigned \&j)
@@ -42,7 +40,7 @@ bool \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a9152e115fcf854c
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$, int $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_afa2b836eca70e66c33223c0b46761dc5}{Internal\+\_\+point\+\_\+for\+\_\+tetgen}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$, int $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a5bef5b2c588efe6e84ea6ea619081717}{Internal\+\_\+point\+\_\+for\+\_\+tetgen}}
 \item 
 bool \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a375602f98fb808d3f733f651f314fe9b}{Faceted\+\_\+volume\+\_\+represents\+\_\+hole\+\_\+for\+\_\+gmsh}}
 \begin{DoxyCompactList}\small\item\em Does closed surface represent hole for gmsh? \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -52,7 +50,7 @@ bool \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a375602f98fb808d
 \doxysubsection{Detailed Description}
 Base class for closed tet mesh boundary bounded by polygonal planar facets 
 
-Definition at line 553 of file tet\+\_\+mesh.\+h.
+Definition at line 537 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -69,7 +67,7 @@ Constructor\+:
 
 
 
-Definition at line 558 of file tet\+\_\+mesh.\+h.
+Definition at line 541 of file tet\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshFacetedClosedSurface_a5f1a8d02dedbefb9291d5480c146709d}\label{classoomph_1_1TetMeshFacetedClosedSurface_a5f1a8d02dedbefb9291d5480c146709d}} 
 \index{oomph::TetMeshFacetedClosedSurface@{oomph::TetMeshFacetedClosedSurface}!````~TetMeshFacetedClosedSurface@{$\sim$TetMeshFacetedClosedSurface}}
@@ -83,7 +81,7 @@ Empty destructor.
 
 
 
-Definition at line 563 of file tet\+\_\+mesh.\+h.
+Definition at line 547 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -100,7 +98,7 @@ Declare closed surface N\+OT to represent hole for gmsh.
 
 
 
-Definition at line 572 of file tet\+\_\+mesh.\+h.
+Definition at line 556 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -118,7 +116,7 @@ Declare closed surface to represent hole for gmsh.
 
 
 
-Definition at line 566 of file tet\+\_\+mesh.\+h.
+Definition at line 550 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -136,7 +134,7 @@ Does closed surface represent hole for gmsh?
 
 
 
-Definition at line 578 of file tet\+\_\+mesh.\+h.
+Definition at line 562 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -158,7 +156,7 @@ i=th coordinate of the j-\/th internal point for tetgen
 
 
 
-Definition at line 584 of file tet\+\_\+mesh.\+h.
+Definition at line 568 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -180,7 +178,7 @@ Is j-\/th internal point for tetgen associated with a hole?
 
 
 
-Definition at line 620 of file tet\+\_\+mesh.\+h.
+Definition at line 605 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -202,7 +200,7 @@ Is j-\/th internal point for tetgen associated with a region?
 
 
 
-Definition at line 626 of file tet\+\_\+mesh.\+h.
+Definition at line 611 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -224,7 +222,7 @@ Number of internal points (identifying either regions or holes) for tetgen.
 
 
 
-Definition at line 606 of file tet\+\_\+mesh.\+h.
+Definition at line 591 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -242,12 +240,11 @@ Referenced by oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+t
 
 
 
-Return the (zero-\/based) region ID of j-\/th internal point for tetgen. Negative if it\textquotesingle{}s actually a hole. ~\newline
- 
+Return the (zero-\/based) region ID of j-\/th internal point for tetgen. Negative if it\textquotesingle{}s actually a hole. 
 
 
 
-Definition at line 613 of file tet\+\_\+mesh.\+h.
+Definition at line 598 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -269,7 +266,7 @@ Specify coordinate of hole for tetgen.
 
 
 
-Definition at line 591 of file tet\+\_\+mesh.\+h.
+Definition at line 575 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -283,12 +280,11 @@ References Internal\+\_\+point\+\_\+for\+\_\+tetgen.
 
 
 
-Specify a region; pass (zero-\/based) region ID and coordinate of point in region for tetgen ~\newline
- 
+Specify a region; pass (zero-\/based) region ID and coordinate of point in region for tetgen. 
 
 
 
-Definition at line 598 of file tet\+\_\+mesh.\+h.
+Definition at line 582 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -309,21 +305,21 @@ Does closed surface represent hole for gmsh?
 
 
 
-Definition at line 640 of file tet\+\_\+mesh.\+h.
+Definition at line 624 of file tet\+\_\+mesh.\+h.
 
 
 
 Referenced by disable\+\_\+faceted\+\_\+volume\+\_\+represents\+\_\+hole\+\_\+for\+\_\+gmsh(), enable\+\_\+faceted\+\_\+volume\+\_\+represents\+\_\+hole\+\_\+for\+\_\+gmsh(), and faceted\+\_\+volume\+\_\+represents\+\_\+hole\+\_\+for\+\_\+gmsh().
 
-\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedClosedSurface_afa2b836eca70e66c33223c0b46761dc5}\label{classoomph_1_1TetMeshFacetedClosedSurface_afa2b836eca70e66c33223c0b46761dc5}} 
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedClosedSurface_a5bef5b2c588efe6e84ea6ea619081717}\label{classoomph_1_1TetMeshFacetedClosedSurface_a5bef5b2c588efe6e84ea6ea619081717}} 
 \index{oomph::TetMeshFacetedClosedSurface@{oomph::TetMeshFacetedClosedSurface}!Internal\_point\_for\_tetgen@{Internal\_point\_for\_tetgen}}
 \index{Internal\_point\_for\_tetgen@{Internal\_point\_for\_tetgen}!oomph::TetMeshFacetedClosedSurface@{oomph::TetMeshFacetedClosedSurface}}
 \doxysubsubsection{\texorpdfstring{Internal\_point\_for\_tetgen}{Internal\_point\_for\_tetgen}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$,int$>$ $>$ oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+::\+Internal\+\_\+point\+\_\+for\+\_\+tetgen\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$, int$>$ $>$ oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+::\+Internal\+\_\+point\+\_\+for\+\_\+tetgen\hspace{0.3cm}{\ttfamily [private]}}
 
 Storage for internal points for tetgen. Stores pair of\+: -- \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} containing coordinates of internal point -- region ID (negative if it\textquotesingle{}s a hole) 
 
-Definition at line 637 of file tet\+\_\+mesh.\+h.
+Definition at line 621 of file tet\+\_\+mesh.\+h.
 
 
 

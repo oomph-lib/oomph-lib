@@ -27,8 +27,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquat
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_acfd093a30da3a18eb1d86f24b48ab594}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_a097fa9a13ecaebe0c3801c98a057d5ec}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
-\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
- Standard flux.\+from Generalised\+Advection\+Diffusion equations. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Generalised\+Advection\+Diffusion equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_af995cd64e5a189ebfd0565ac931abe1f}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_abee0a8a1988d23678cab1566474c5be2}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
@@ -49,7 +48,7 @@ class oomph\+::\+Refineable\+Generalised\+Advection\+Diffusion\+Equations$<$ D\+
 
 A version of the Generalised\+Advection Diffusion equations that can be used with non-\/uniform mesh refinement. In essence, the class overloads the \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_abd0535533c7133651ac18ad8e025f139}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+adv\+\_\+diff()}} function so that contributions from hanging nodes (or alternatively in-\/compatible function values) are taken into account. 
 
-Definition at line 55 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 54 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -67,7 +66,7 @@ Empty Constructor.
 
 
 
-Definition at line 63 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 61 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_a5b33255a668fd423f26598047d2cb7b9}\label{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_a5b33255a668fd423f26598047d2cb7b9}} 
 \index{oomph::RefineableGeneralisedAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableGeneralisedAdvectionDiffusionEquations$<$ DIM $>$}!RefineableGeneralisedAdvectionDiffusionEquations@{RefineableGeneralisedAdvectionDiffusionEquations}}
@@ -82,7 +81,7 @@ Broken copy constructor.
 
 
 
-Definition at line 71 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 70 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -108,7 +107,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionE
 
 
 
-Definition at line 40 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 38 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -131,7 +130,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Definition at line 159 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 165 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -154,7 +153,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 129 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 134 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -177,7 +176,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 98 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 102 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -192,8 +191,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquat
 
 
 
-Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
- Standard flux.\+from Generalised\+Advection\+Diffusion equations. 
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Generalised\+Advection\+Diffusion equations. 
 
 
 
@@ -201,7 +199,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 90 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 92 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -224,7 +222,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 86 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 85 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_a37d21f46a5f0b726349b42bb0d47b35e}\label{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_a37d21f46a5f0b726349b42bb0d47b35e}} 
 \index{oomph::RefineableGeneralisedAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableGeneralisedAdvectionDiffusionEquations$<$ DIM $>$}!operator=@{operator=}}
@@ -239,7 +237,7 @@ Broken assignment operator.
 
 
 
-Definition at line 79 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 78 of file refineable\+\_\+gen\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

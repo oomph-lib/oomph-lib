@@ -25,7 +25,7 @@ void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a8566c5bed5c87
 \begin{DoxyCompactList}\small\item\em Set a pointer to the desired contact angle. Optional boolean (defaults to true) chooses strong imposition via hijacking (true) or weak imposition via addition to momentum equation (false). The default strong imposition is appropriate for static contact angle problems. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a00fc3fdc8c3b7d149ba2c6de44f4a150}{contact\+\_\+angle\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the pointer specifying the prescribed contact angle. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_acf132633ea7ed6b063c1f2a0a62d0b8c}{ca\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a7f28b9da3f8c6e69f45077fb9811f33d}{ca\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the pointer specifying the capillary number. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_ae5d097813762a2544d0b49c6e2fbaaac}{ca}} ()
 \begin{DoxyCompactList}\small\item\em Return the value of the capillary number. \end{DoxyCompactList}\item 
@@ -36,8 +36,7 @@ void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_acaa709e7a4024
 virtual void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a69fa099e0cbfe8ae028a4edc77fedc60}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, unsigned flag)=0
 \begin{DoxyCompactList}\small\item\em Calculate the generic residuals contribution. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a4510bd81b572d758694715f673080041}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface\+\_\+boundary}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const D\+Shape \&dpsifds, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W)
-\begin{DoxyCompactList}\small\item\em Empty helper function to calculate the additional contributions arising from the node update strategy to the Jacobian within the integration loop. This will be overloaded by elements that require contributions to their underlying equations from boundary integrals. ~\newline
- The shape functions, their derivatives w.\+r.\+t. to the local coordinates, the unit normal and integral weight are passed in so that they do not have to be recalculated. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Empty helper function to calculate the additional contributions arising from the node update strategy to the Jacobian within the integration loop. This will be overloaded by elements that require contributions to their underlying equations from boundary integrals. The shape functions, their derivatives w.\+r.\+t. to the local coordinates, the unit normal and integral weight are passed in so that they do not have to be recalculated. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a81adc5ae89ddfa120f587c61b972622f}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_af2c821d51d506221976a0c17e1615ac3}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
@@ -85,7 +84,7 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_abf47
 \doxysubsection{Detailed Description}
 Base class for elements at the boundary of free surfaces or interfaces, used typically to impose contact angle boundary conditions. The elemental dimensions are one less than those of the surface elements, or two less than those of the original bulk elements. Thus in two-\/dimensional and axi-\/symmetric problems, are points, but in three-\/dimensional problems, they are lines. These boundaries may be in contact with a solid surface, in which case the normal to that surface must be provided. 
 
-Definition at line 54 of file interface\+\_\+elements.\+h.
+Definition at line 53 of file interface\+\_\+elements.\+h.
 
 
 
@@ -102,7 +101,7 @@ Function pointer to a wall unit normal function. Returns the unit normal on the 
 
 
 
-Definition at line 60 of file interface\+\_\+elements.\+h.
+Definition at line 58 of file interface\+\_\+elements.\+h.
 
 
 
@@ -119,7 +118,7 @@ Constructor.
 
 
 
-Definition at line 137 of file interface\+\_\+elements.\+h.
+Definition at line 132 of file interface\+\_\+elements.\+h.
 
 
 
@@ -132,12 +131,11 @@ Definition at line 137 of file interface\+\_\+elements.\+h.
 
 
 
-Empty helper function to calculate the additional contributions arising from the node update strategy to the Jacobian within the integration loop. This will be overloaded by elements that require contributions to their underlying equations from boundary integrals. ~\newline
- The shape functions, their derivatives w.\+r.\+t. to the local coordinates, the unit normal and integral weight are passed in so that they do not have to be recalculated. 
+Empty helper function to calculate the additional contributions arising from the node update strategy to the Jacobian within the integration loop. This will be overloaded by elements that require contributions to their underlying equations from boundary integrals. The shape functions, their derivatives w.\+r.\+t. to the local coordinates, the unit normal and integral weight are passed in so that they do not have to be recalculated. 
 
 
 
-Definition at line 228 of file interface\+\_\+elements.\+h.
+Definition at line 235 of file interface\+\_\+elements.\+h.
 
 
 
@@ -155,7 +153,7 @@ Return the value of the capillary number.
 
 
 
-Definition at line 170 of file interface\+\_\+elements.\+h.
+Definition at line 178 of file interface\+\_\+elements.\+h.
 
 
 
@@ -165,11 +163,11 @@ References Ca\+\_\+pt.
 
 Referenced by oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), and oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary().
 
-\mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_acf132633ea7ed6b063c1f2a0a62d0b8c}\label{classoomph_1_1FluidInterfaceBoundingElement_acf132633ea7ed6b063c1f2a0a62d0b8c}} 
+\mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a7f28b9da3f8c6e69f45077fb9811f33d}\label{classoomph_1_1FluidInterfaceBoundingElement_a7f28b9da3f8c6e69f45077fb9811f33d}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!ca\_pt@{ca\_pt}}
 \index{ca\_pt@{ca\_pt}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{ca\_pt()}{ca\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::ca\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::ca\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -177,7 +175,7 @@ Access function to the pointer specifying the capillary number.
 
 
 
-Definition at line 167 of file interface\+\_\+elements.\+h.
+Definition at line 172 of file interface\+\_\+elements.\+h.
 
 
 
@@ -195,7 +193,7 @@ Return value of the contact angle.
 
 
 
-Definition at line 191 of file interface\+\_\+elements.\+h.
+Definition at line 198 of file interface\+\_\+elements.\+h.
 
 
 
@@ -217,7 +215,7 @@ Access function to the pointer specifying the prescribed contact angle.
 
 
 
-Definition at line 164 of file interface\+\_\+elements.\+h.
+Definition at line 166 of file interface\+\_\+elements.\+h.
 
 
 
@@ -235,7 +233,7 @@ Calculate the residuals.
 
 
 
-Definition at line 208 of file interface\+\_\+elements.\+h.
+Definition at line 214 of file interface\+\_\+elements.\+h.
 
 
 
@@ -289,7 +287,7 @@ Overload the C-\/style output function.
 
 
 
-Definition at line 245 of file interface\+\_\+elements.\+h.
+Definition at line 259 of file interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_ae85ea987a06275a03ad6d0e3710871da}\label{classoomph_1_1FluidInterfaceBoundingElement_ae85ea987a06275a03ad6d0e3710871da}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!output@{output}}
@@ -303,7 +301,7 @@ C-\/style Output function.
 
 
 
-Definition at line 248 of file interface\+\_\+elements.\+h.
+Definition at line 265 of file interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a81adc5ae89ddfa120f587c61b972622f}\label{classoomph_1_1FluidInterfaceBoundingElement_a81adc5ae89ddfa120f587c61b972622f}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!output@{output}}
@@ -317,7 +315,7 @@ Overload the output function.
 
 
 
-Definition at line 238 of file interface\+\_\+elements.\+h.
+Definition at line 247 of file interface\+\_\+elements.\+h.
 
 
 
@@ -335,7 +333,7 @@ Output function.
 
 
 
-Definition at line 241 of file interface\+\_\+elements.\+h.
+Definition at line 253 of file interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a6b0de0d11dfcfc912e2f56fbd6359ebe}\label{classoomph_1_1FluidInterfaceBoundingElement_a6b0de0d11dfcfc912e2f56fbd6359ebe}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!reset\_after\_external\_fd@{reset\_after\_external\_fd}}
@@ -349,7 +347,7 @@ We require a final node update in the bulk element after all finite differencing
 
 
 
-Definition at line 128 of file interface\+\_\+elements.\+h.
+Definition at line 124 of file interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a7347eb5984a18ffb1cfea1f9240badee}\label{classoomph_1_1FluidInterfaceBoundingElement_a7347eb5984a18ffb1cfea1f9240badee}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!reset\_in\_external\_fd@{reset\_in\_external\_fd}}
@@ -363,7 +361,7 @@ The only external data are these geometric data so We can omit the reset functio
 
 
 
-Definition at line 124 of file interface\+\_\+elements.\+h.
+Definition at line 120 of file interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a8566c5bed5c87717fcb155d398ed8c8f}\label{classoomph_1_1FluidInterfaceBoundingElement_a8566c5bed5c87717fcb155d398ed8c8f}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!set\_contact\_angle@{set\_contact\_angle}}
@@ -377,7 +375,7 @@ Set a pointer to the desired contact angle. Optional boolean (defaults to true) 
 
 Set a pointer to the desired contact angle. Optional boolean (defaults to true) chooses strong imposition via hijacking (true) or weak imposition via addition to momentum equation (false). The default strong imposition is appropriate for static contact problems. 
 
-Definition at line 48 of file interface\+\_\+elements.\+cc.
+Definition at line 47 of file interface\+\_\+elements.\+cc.
 
 
 
@@ -395,7 +393,7 @@ Access for nodal index at which the velocity components are stored.
 
 
 
-Definition at line 150 of file interface\+\_\+elements.\+h.
+Definition at line 153 of file interface\+\_\+elements.\+h.
 
 
 
@@ -413,7 +411,7 @@ The geometric data of the parent element is included as external data and so a (
 
 
 
-Definition at line 115 of file interface\+\_\+elements.\+h.
+Definition at line 111 of file interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}\label{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!wall\_unit\_normal@{wall\_unit\_normal}}
@@ -427,7 +425,7 @@ Function that returns the unit normal of the bounding wall directed out of the f
 
 
 
-Definition at line 93 of file interface\+\_\+elements.\+h.
+Definition at line 90 of file interface\+\_\+elements.\+h.
 
 
 
@@ -449,7 +447,7 @@ Access function\+: Pointer to wall unit normal function.
 
 
 
-Definition at line 142 of file interface\+\_\+elements.\+h.
+Definition at line 141 of file interface\+\_\+elements.\+h.
 
 
 
@@ -467,7 +465,7 @@ Access function\+: Pointer to wall unit normal function. Const version.
 
 
 
-Definition at line 146 of file interface\+\_\+elements.\+h.
+Definition at line 147 of file interface\+\_\+elements.\+h.
 
 
 
@@ -488,7 +486,7 @@ Pointer to the desired value of the capillary number.
 
 
 
-Definition at line 72 of file interface\+\_\+elements.\+h.
+Definition at line 70 of file interface\+\_\+elements.\+h.
 
 
 
@@ -506,7 +504,7 @@ Flag used to determine whether the contact angle is to be used (0 if not), and w
 
 
 
-Definition at line 80 of file interface\+\_\+elements.\+h.
+Definition at line 77 of file interface\+\_\+elements.\+h.
 
 
 
@@ -524,7 +522,7 @@ Pointer to the desired value of the contact angle (if any)
 
 
 
-Definition at line 69 of file interface\+\_\+elements.\+h.
+Definition at line 67 of file interface\+\_\+elements.\+h.
 
 
 
@@ -542,7 +540,7 @@ Index at which the i-\/th velocity component is stored in the element\textquotes
 
 
 
-Definition at line 84 of file interface\+\_\+elements.\+h.
+Definition at line 81 of file interface\+\_\+elements.\+h.
 
 
 
@@ -560,7 +558,7 @@ Pointer to a wall normal function that returns the wall unit normal as a functio
 
 
 
-Definition at line 66 of file interface\+\_\+elements.\+h.
+Definition at line 64 of file interface\+\_\+elements.\+h.
 
 
 

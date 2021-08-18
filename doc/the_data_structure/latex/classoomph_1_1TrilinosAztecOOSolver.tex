@@ -41,7 +41,7 @@ void \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a25ba106bb6f1cd4b99dd1
 bool \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_ac17e7d21595ce4b9b854f0207f3b04be}{is\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup\+\_\+enabled}} ()
 \begin{DoxyCompactList}\small\item\em Is workaround for creating of epetra matrix that respects aztecoo\textquotesingle{}s ordering requirements enabled? \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a365a39ae1dec32eb78aa160b70426f59}{clean\+\_\+up\+\_\+memory}} ()
-\begin{DoxyCompactList}\small\item\em Clean up method -\/ deletes the solver, the matrices and the preconditioner. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7dc1ae7f05e8a50416b8df700f832eb9}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
 \begin{DoxyCompactList}\small\item\em Function which uses problem\+\_\+pt\textquotesingle{}s get\+\_\+jacobian(...) function to generate a linear system which is then solved. This function deletes any existing internal data and then generates a new Aztec\+OO solver. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7d2853c49429224fc2deb3260340b190}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
@@ -114,7 +114,7 @@ bool \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a028992b1b3fe1a501590a
 \doxysubsection{Detailed Description}
 An interface to the Trilinos Aztec\+OO classes allowing it to be used as an Oomph-\/lib \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}. The Aztec\+OO solver is a Krylov Subspace solver; the solver type (either \mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} or \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}}) can be set using \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a9169831da7460eec52071e8b3938bf97}{solver\+\_\+type()}}. This solver can be preconditioned with Trilinos Preconditioners (derived from \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}}) or Oomph-\/lib preconditioners (derived from \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}). Preconditioners are set using \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a800f699ec8dda290105807cb91297850}{preconditioner\+\_\+pt()}}. 
 
-Definition at line 290 of file trilinos\+\_\+solver.\+h.
+Definition at line 277 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -145,7 +145,7 @@ Bi\+C\+G\+Stab&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 478 of file trilinos\+\_\+solver.\+h.
+Definition at line 500 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -162,7 +162,7 @@ Constructor.
 
 
 
-Definition at line 295 of file trilinos\+\_\+solver.\+h.
+Definition at line 281 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -180,7 +180,7 @@ Destructor -\/ delete the solver and the matrices.
 
 
 
-Definition at line 329 of file trilinos\+\_\+solver.\+h.
+Definition at line 315 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -198,7 +198,7 @@ Broken copy constructor.
 
 
 
-Definition at line 344 of file trilinos\+\_\+solver.\+h.
+Definition at line 330 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -213,17 +213,13 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
 {\footnotesize\ttfamily void oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
-Clean up method -\/ deletes the solver, the matrices and the preconditioner. 
-
-
+Clean up method -\/ deletes the solver, the matrices and the preconditioner 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Definition at line 371 of file trilinos\+\_\+solver.\+h.
+Definition at line 364 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -245,7 +241,7 @@ Unset the assembly of the serial jacobian.
 
 
 
-Definition at line 465 of file trilinos\+\_\+solver.\+h.
+Definition at line 484 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -263,7 +259,7 @@ Disable workaround for creating of epetra matrix that respects aztecoo\textquote
 
 
 
-Definition at line 362 of file trilinos\+\_\+solver.\+h.
+Definition at line 350 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -281,7 +277,7 @@ References Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_
 
 
 
-Definition at line 440 of file trilinos\+\_\+solver.\+h.
+Definition at line 435 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -303,7 +299,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line 430 of file trilinos\+\_\+solver.\+h.
+Definition at line 422 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -321,7 +317,7 @@ Set the assembly of the serial jacobian when performing a problem-\/based solve.
 
 
 
-Definition at line 462 of file trilinos\+\_\+solver.\+h.
+Definition at line 478 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -339,7 +335,7 @@ Enable workaround for creating of epetra matrix that respects aztecoo\textquotes
 
 
 
-Definition at line 357 of file trilinos\+\_\+solver.\+h.
+Definition at line 343 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -357,7 +353,7 @@ Call if the matrix can be deleted.
 
 
 
-Definition at line 437 of file trilinos\+\_\+solver.\+h.
+Definition at line 429 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -375,7 +371,7 @@ Is workaround for creating of epetra matrix that respects aztecoo\textquotesingl
 
 
 
-Definition at line 367 of file trilinos\+\_\+solver.\+h.
+Definition at line 357 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -397,7 +393,7 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line 446 of file trilinos\+\_\+solver.\+h.
+Definition at line 447 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -415,7 +411,7 @@ Function to return Jacobian\+\_\+setup\+\_\+time;.
 
 
 
-Definition at line 455 of file trilinos\+\_\+solver.\+h.
+Definition at line 465 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -433,7 +429,7 @@ Function to return Linear\+\_\+solver\+\_\+solution\+\_\+time.
 
 
 
-Definition at line 458 of file trilinos\+\_\+solver.\+h.
+Definition at line 471 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -451,7 +447,7 @@ Access function to Max\+\_\+iter.
 
 
 
-Definition at line 443 of file trilinos\+\_\+solver.\+h.
+Definition at line 441 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -469,7 +465,7 @@ Broken assignment operator.
 
 
 
-Definition at line 350 of file trilinos\+\_\+solver.\+h.
+Definition at line 336 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -491,7 +487,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line 501 of file trilinos\+\_\+solver.\+cc.
+Definition at line 489 of file trilinos\+\_\+solver.\+cc.
 
 
 
@@ -513,7 +509,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line 141 of file trilinos\+\_\+solver.\+cc.
+Definition at line 135 of file trilinos\+\_\+solver.\+cc.
 
 
 
@@ -535,7 +531,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 45 of file trilinos\+\_\+solver.\+cc.
+Definition at line 43 of file trilinos\+\_\+solver.\+cc.
 
 
 
@@ -553,7 +549,7 @@ Helper function performs the actual solve once the Aztec\+OO solver is set up.
 
 Helper function performs the actual solve once the Aztec\+OO solver is set up (i.\+e. \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a1d5e7dfc9fe3c890569465a167c2f2fc}{solver\+\_\+setup()}} is called) 
 
-Definition at line 584 of file trilinos\+\_\+solver.\+cc.
+Definition at line 570 of file trilinos\+\_\+solver.\+cc.
 
 
 
@@ -575,7 +571,7 @@ Helper function for setting up the solver. Converts the oomph-\/lib matrices to 
 
 Helper function for setting up the solver. Converts the oomph-\/lib matrices to Epetra matrices, sets up the preconditioner, creates the Trilinos Aztec00 solver and passes in the matrix, preconditioner and parameters. 
 
-Definition at line 292 of file trilinos\+\_\+solver.\+cc.
+Definition at line 283 of file trilinos\+\_\+solver.\+cc.
 
 
 
@@ -597,7 +593,7 @@ Access function to Solver\+\_\+type.
 
 
 
-Definition at line 452 of file trilinos\+\_\+solver.\+h.
+Definition at line 459 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -615,7 +611,7 @@ Access function to Tolerance.
 
 
 
-Definition at line 449 of file trilinos\+\_\+solver.\+h.
+Definition at line 453 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -636,7 +632,7 @@ If true, when performing a problem based solve a serial matrix will be requested
 
 
 
-Definition at line 520 of file trilinos\+\_\+solver.\+h.
+Definition at line 544 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -654,7 +650,7 @@ Pointer to the Aztec\+OO solver.
 
 
 
-Definition at line 502 of file trilinos\+\_\+solver.\+h.
+Definition at line 526 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -672,7 +668,7 @@ Trilinos copies matrix data from oomph-\/lib\textquotesingle{}s own \mbox{\hyper
 
 
 
-Definition at line 516 of file trilinos\+\_\+solver.\+h.
+Definition at line 540 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -690,7 +686,7 @@ A pointer for the linear system matrix in Epetra\+\_\+\+Crs\+Matrix format.
 
 
 
-Definition at line 531 of file trilinos\+\_\+solver.\+h.
+Definition at line 555 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -708,7 +704,7 @@ A pointer to the Epetra\+\_\+\+Operator for the preconditioner. This is only use
 
 
 
-Definition at line 535 of file trilinos\+\_\+solver.\+h.
+Definition at line 559 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -722,7 +718,7 @@ Referenced by clean\+\_\+up\+\_\+memory(), solver\+\_\+setup(), and Trilinos\+Az
 
 if this solver is using an oomph-\/lib preconditioner then the vectors passed to preconditioner\+\_\+solve(...) should be using the values in the epetra vector as external data. If the vectors are using external data then rebuild(...) methods cannot be used. 
 
-Definition at line 549 of file trilinos\+\_\+solver.\+h.
+Definition at line 573 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -740,7 +736,7 @@ Stores number of iterations used.
 
 
 
-Definition at line 499 of file trilinos\+\_\+solver.\+h.
+Definition at line 523 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -758,7 +754,7 @@ Stores set up time for Jacobian.
 
 
 
-Definition at line 505 of file trilinos\+\_\+solver.\+h.
+Definition at line 529 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -776,7 +772,7 @@ Stores time for the solution (excludes time to set up preconditioner)
 
 
 
-Definition at line 508 of file trilinos\+\_\+solver.\+h.
+Definition at line 532 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -794,7 +790,7 @@ Oomph lib matrix pointer.
 
 
 
-Definition at line 538 of file trilinos\+\_\+solver.\+h.
+Definition at line 562 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -812,7 +808,7 @@ A pointer to the underlying problem (N\+U\+LL if M\+A\+T\+R\+IX based solve) The
 
 
 
-Definition at line 543 of file trilinos\+\_\+solver.\+h.
+Definition at line 567 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -830,7 +826,7 @@ Defines which solver is set up -\/ available types are defined in Aztec\+O\+O\+\
 
 
 
-Definition at line 524 of file trilinos\+\_\+solver.\+h.
+Definition at line 548 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -848,7 +844,7 @@ Use workaround for creating of epetra matrix that respects aztecoo\textquotesing
 
 
 
-Definition at line 496 of file trilinos\+\_\+solver.\+h.
+Definition at line 520 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -866,7 +862,7 @@ Helper flag keeping track of whether we called the linear algebra or problem-\/b
 
 
 
-Definition at line 528 of file trilinos\+\_\+solver.\+h.
+Definition at line 552 of file trilinos\+\_\+solver.\+h.
 
 
 

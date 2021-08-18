@@ -48,8 +48,7 @@ unsigned \& \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a6c52f0bc15598
 unsigned \& \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a063dc0162d4e352cbbcbbf72b1171f97}{nbin\+\_\+y\+\_\+for\+\_\+area\+\_\+transfer}} ()
 \begin{DoxyCompactList}\small\item\em Read/write access to number of bins in the y-\/direction when transferring target areas by bin method. Only used if we don\textquotesingle{}t have C\+G\+A\+L! \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a6ba54a6ea103236a3e5c31c2e8a11af9}{max\+\_\+sample\+\_\+points\+\_\+for\+\_\+limited\+\_\+locate\+\_\+zeta\+\_\+during\+\_\+target\+\_\+area\+\_\+transfer}} ()
-\begin{DoxyCompactList}\small\item\em Read/write access to number of sample points from which we try to locate zeta by Newton method when transferring target areas using cgal-\/based sample point container. If Newton method doesn\textquotesingle{}t converge from any of these we use the nearest sample point. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Read/write access to number of sample points from which we try to locate zeta by Newton method when transferring target areas using cgal-\/based sample point container. If Newton method doesn\textquotesingle{}t converge from any of these we use the nearest sample point. \end{DoxyCompactList}\item 
 double \& \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a60fabb7d4e9389f827d6cfd332237c15}{max\+\_\+element\+\_\+size}} ()
 \begin{DoxyCompactList}\small\item\em Max element size allowed during adaptation. \end{DoxyCompactList}\item 
 double \& \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ad25cf23f688c1007b5fbbe41d2ec6cfc}{min\+\_\+element\+\_\+size}} ()
@@ -85,8 +84,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_affc156d32aa40f84479e
 \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_aa78ffa56b66a1371aec25e25f7aaff9e}{Mesh\+Update\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a09e932b9b9b3a42616524dd3fcb35fd3}{mesh\+\_\+update\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access to function pointer to function that updates the mesh following the snapping of boundary nodes to the boundaries (e.\+g. to move boundary nodes very slightly to satisfy volume constraints) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_aa6831f42aa1941f4ae0b9186d01f9d7c}{Internal\+Hole\+Point\+Update\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_af6e60e92bff82e8bf26ffd170125559c}{internal\+\_\+hole\+\_\+point\+\_\+update\+\_\+fct\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Access to function pointer to can be used to generate the internal point for the ihole-\/th hole. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Access to function pointer to can be used to generate the internal point for the ihole-\/th hole. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ad75bed93a7986b69f9bf928d88af294b}{nsorted\+\_\+shared\+\_\+boundary\+\_\+node}} (unsigned \&b)
 \item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ad217a5617c922036481ded0de5e40aec}{flush\+\_\+sorted\+\_\+shared\+\_\+boundary\+\_\+node}} ()
@@ -109,15 +107,15 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_aaffa40b7d036f8ed8639
 \begin{DoxyCompactList}\small\item\em Performs the load balancing for unstructured meshes, the load balancing strategy is based on mesh migration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a89de1c3b1f06e19036b21d8ab222aa4a}{get\+\_\+shared\+\_\+boundary\+\_\+elements\+\_\+and\+\_\+face\+\_\+indexes}} (const Vector$<$ Finite\+Element $\ast$ $>$ \&first\+\_\+element\+\_\+pt, const Vector$<$ Finite\+Element $\ast$ $>$ \&second\+\_\+element\+\_\+pt, Vector$<$ Finite\+Element $\ast$ $>$ \&first\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+pt, Vector$<$ unsigned $>$ \&first\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+face\+\_\+index, Vector$<$ Finite\+Element $\ast$ $>$ \&second\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+pt, Vector$<$ unsigned $>$ \&second\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Use the first and second group of elements to find the intersection between them to get the shared boundary elements from the first and second group. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_aa60bf366d48aa2ddf12b9db67cce445c}{create\+\_\+new\+\_\+shared\+\_\+boundaries}} (std\+::set$<$ Finite\+Element $\ast$ $>$ \&element\+\_\+in\+\_\+processor\+\_\+pt, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&new\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+pt, Vector$<$ Vector$<$ unsigned $>$ $>$ \&new\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+face\+\_\+index)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a7b718bde6cccf4d50445f894ba5ac609}{create\+\_\+new\+\_\+shared\+\_\+boundaries}} (std\+::set$<$ Finite\+Element $\ast$ $>$ \&element\+\_\+in\+\_\+processor\+\_\+pt, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&new\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+pt, Vector$<$ Vector$<$ unsigned $>$$>$ \&new\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Creates the new shared boundaries, this method is also in charge of computing the shared boundaries ids of each processor and send that info. to all the processors. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a68d9f0d8f1a8ae97d2f9d612b855f20b}{compute\+\_\+shared\+\_\+node\+\_\+degree\+\_\+helper}} (Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&unsorted\+\_\+face\+\_\+ele\+\_\+pt, std\+::map$<$ Node $\ast$, unsigned $>$ \&global\+\_\+node\+\_\+degree)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a072b29c462026be1759db992b24969b9}{compute\+\_\+shared\+\_\+node\+\_\+degree\+\_\+helper}} (Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&unsorted\+\_\+face\+\_\+ele\+\_\+pt, std\+::map$<$ Node $\ast$, unsigned $>$ \&global\+\_\+node\+\_\+degree)
 \begin{DoxyCompactList}\small\item\em Computes the degree of the nodes on the shared boundaries, the degree of the node is computed from the global graph created by the shared boundaries of all processors. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ada95baf2f1f84f398002d7288a023906}{create\+\_\+adjacency\+\_\+matrix\+\_\+new\+\_\+shared\+\_\+edges\+\_\+helper}} (Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&unsorted\+\_\+face\+\_\+ele\+\_\+pt, Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ \&tmp\+\_\+sorted\+\_\+shared\+\_\+node\+\_\+pt, std\+::map$<$ Node $\ast$, Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&node\+\_\+alias, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&adjacency\+\_\+matrix)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_adc4b0c239c44409991f821617be53ad6}{create\+\_\+adjacency\+\_\+matrix\+\_\+new\+\_\+shared\+\_\+edges\+\_\+helper}} (Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&unsorted\+\_\+face\+\_\+ele\+\_\+pt, Vector$<$ Vector$<$ Node $\ast$ $>$$>$ \&tmp\+\_\+sorted\+\_\+shared\+\_\+node\+\_\+pt, std\+::map$<$ Node $\ast$, Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&node\+\_\+alias, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&adjacency\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Sort the nodes on the new shared boundaries (after load balancing), computes the alias of the nodes and creates the adjacency matrix that represent the graph created by the shared edges between each pair of processors. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_aa808ccdf085959a788f888fc7f5904e3}{get\+\_\+shared\+\_\+boundary\+\_\+segment\+\_\+nodes\+\_\+helper}} (const unsigned \&shd\+\_\+bnd\+\_\+id, Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ \&tmp\+\_\+segment\+\_\+nodes)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_afc202faf949a6c2e4014110b5eaa7cc8}{get\+\_\+shared\+\_\+boundary\+\_\+segment\+\_\+nodes\+\_\+helper}} (const unsigned \&shd\+\_\+bnd\+\_\+id, Vector$<$ Vector$<$ Node $\ast$ $>$$>$ \&tmp\+\_\+segment\+\_\+nodes)
 \begin{DoxyCompactList}\small\item\em Get the nodes on the shared boundary (b), these are stored in the segment they belong. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a4a1c447c191ac56427673756ed6f448c}{get\+\_\+boundary\+\_\+segment\+\_\+nodes\+\_\+helper}} (const unsigned \&b, Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ \&tmp\+\_\+segment\+\_\+nodes)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a14599cde32f86a804e92b8f651f2bb3d}{get\+\_\+boundary\+\_\+segment\+\_\+nodes\+\_\+helper}} (const unsigned \&b, Vector$<$ Vector$<$ Node $\ast$ $>$$>$ \&tmp\+\_\+segment\+\_\+nodes)
 \begin{DoxyCompactList}\small\item\em Get the nodes on the boundary (b), these are stored in the segment they belong (also used by the load balance method to re-\/set the number of segments per boundary after load balance has taken place) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a2bac2ff237ca916e19d8ed632fef9fa4}{enable\+\_\+boundary\+\_\+unrefinement\+\_\+constrained\+\_\+by\+\_\+target\+\_\+areas}} ()
 \begin{DoxyCompactList}\small\item\em Enable/disable unrefinement/refinement methods for original boundaries. \end{DoxyCompactList}\item 
@@ -140,13 +138,13 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a7c0a6d1e167ae1927555
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a488004263be96473c332468e13e80a83}{Refineable\+Triangle\+Mesh}} (const Vector$<$ double $>$ \&target\+\_\+area, Triangulate\+IO \&triangulate\+\_\+io, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false, const bool \&allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries=true, Oomph\+Communicator $\ast$comm\+\_\+pt=0)
 \begin{DoxyCompactList}\small\item\em Build mesh from specified triangulation and associated target areas for elements in it N\+O\+TE\+: This is used O\+N\+LY during adaptation and should not be used as a method of constructing a \mbox{\hyperlink{classoomph_1_1TriangleMesh}{Triangle\+Mesh}} object in demo drivers! \end{DoxyCompactList}\item 
-const bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a44ebcc99018e3d6795eca66ea20628b0}{boundary\+\_\+connections}} (const unsigned \&b, const unsigned \&c, std\+::set$<$ Vector$<$ double $>$ $>$ \&vertices)
+const bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a6fd42928bc14b8c0dc9a24a069cdd4ba}{boundary\+\_\+connections}} (const unsigned \&b, const unsigned \&c, std\+::set$<$ Vector$<$ double $>$$>$ \&vertices)
 \begin{DoxyCompactList}\small\item\em Verifies if the given boundary receives a connection, and if that is the case then returns the list of vertices that receive the connections. \end{DoxyCompactList}\item 
 const void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ad9966aa29b0174bdddf6b1584a03f59f}{synchronize\+\_\+shared\+\_\+boundary\+\_\+connections}} ()
 \begin{DoxyCompactList}\small\item\em Synchronise the vertices that are marked for non deletion. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ae876bda052e22ece09c21ff531aac8d2}{add\+\_\+vertices\+\_\+for\+\_\+non\+\_\+deletion}} ()
 \begin{DoxyCompactList}\small\item\em Mark the vertices that are not allowed for deletion by the unrefienment/refinement polyline methods. In charge of filling the Boundary\+\_\+chunk\+\_\+connections\+\_\+pt structure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a5bd10260a304b6daa7977de24d3b4117}{add\+\_\+non\+\_\+delete\+\_\+vertices\+\_\+from\+\_\+boundary\+\_\+helper}} (Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ src\+\_\+bound\+\_\+segment\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ dst\+\_\+bound\+\_\+segment\+\_\+node\+\_\+pt, const unsigned \&dst\+\_\+bnd\+\_\+id, const unsigned \&dst\+\_\+bnd\+\_\+chunk)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ab2850b55b33d9b22e4545743896c1f25}{add\+\_\+non\+\_\+delete\+\_\+vertices\+\_\+from\+\_\+boundary\+\_\+helper}} (Vector$<$ Vector$<$ Node $\ast$ $>$$>$ src\+\_\+bound\+\_\+segment\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Node $\ast$ $>$$>$ dst\+\_\+bound\+\_\+segment\+\_\+node\+\_\+pt, const unsigned \&dst\+\_\+bnd\+\_\+id, const unsigned \&dst\+\_\+bnd\+\_\+chunk)
 \begin{DoxyCompactList}\small\item\em Adds the vertices from the sources boundary that are repeated in the destination boundary to the list of non delete-\/able vertices in the destination boundary. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_abdb36266f9e6ab9c63845edf3e667892}{create\+\_\+temporary\+\_\+boundary\+\_\+connections}} (Vector$<$ Triangle\+Mesh\+Polygon $\ast$ $>$ \&tmp\+\_\+outer\+\_\+polygons\+\_\+pt, Vector$<$ Triangle\+Mesh\+Open\+Curve $\ast$ $>$ \&tmp\+\_\+open\+\_\+curves\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em After unrefinement and refinement has taken place compute the new vertices numbers of the temporary representation of the. \end{DoxyCompactList}\item 
@@ -158,19 +156,19 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a68f48396fb3a9cfe8577
 \begin{DoxyCompactList}\small\item\em Resume the boundary connections that may have been suspended because the destination boundary is no part of the domain. The connections are no permanently suspended because if load balance takes place the destination boundary may be part of the new domain representation therefore the connection would exist. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a097fbc660755f2127f575580d086c3aa}{get\+\_\+connected\+\_\+vertex\+\_\+number\+\_\+on\+\_\+dst\+\_\+boundary}} (Vector$<$ double $>$ \&vertex\+\_\+coordinates, const unsigned \&dst\+\_\+b\+\_\+id, unsigned \&vertex\+\_\+number)
 \begin{DoxyCompactList}\small\item\em Computes the associated vertex number on the destination boundary. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a504b89cdb0149dc7cbbf50bc270829fe}{unrefine\+\_\+boundary}} (const unsigned \&b, const unsigned \&c, Vector$<$ Vector$<$ double $>$ $>$ \&vector\+\_\+bnd\+\_\+vertices, double \&unrefinement\+\_\+tolerance, const bool \&check\+\_\+only=false)
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a7cae2fc6014a7e4694ad4793aa206cbc}{unrefine\+\_\+boundary}} (const unsigned \&b, const unsigned \&c, Vector$<$ Vector$<$ double $>$$>$ \&vector\+\_\+bnd\+\_\+vertices, double \&unrefinement\+\_\+tolerance, const bool \&check\+\_\+only=false)
 \begin{DoxyCompactList}\small\item\em Helper function that performs the unrefinement process. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a9bd4d46e9a61131b8b8f2b68579ac972}{refine\+\_\+boundary}} (Mesh $\ast$face\+\_\+mesh\+\_\+pt, Vector$<$ Vector$<$ double $>$ $>$ \&vector\+\_\+bnd\+\_\+vertices, double \&refinement\+\_\+tolerance, const bool \&check\+\_\+only=false)
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a86fb5cd1f918ad07971d6eb60a8b7683}{refine\+\_\+boundary}} (Mesh $\ast$face\+\_\+mesh\+\_\+pt, Vector$<$ Vector$<$ double $>$$>$ \&vector\+\_\+bnd\+\_\+vertices, double \&refinement\+\_\+tolerance, const bool \&check\+\_\+only=false)
 \begin{DoxyCompactList}\small\item\em Helper function that performs the refinement process on the specified boundary by using the provided vertices representation. Optional boolean is used to run it as test only (if true is specified as input) in which case vertex coordinates aren\textquotesingle{}t actually modified. Returned boolean indicates if polyline was (or would have been -- if called with check\+\_\+only=false) changed. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_abcfd90d11b4bc87de160736c0542d65c}{apply\+\_\+max\+\_\+length\+\_\+constraint}} (Mesh $\ast$face\+\_\+mesh\+\_\+pt, Vector$<$ Vector$<$ double $>$ $>$ \&vector\+\_\+bnd\+\_\+vertices, double \&max\+\_\+length\+\_\+constraint)
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_af22bedfeaa83007c9d51d5806eec4e45}{apply\+\_\+max\+\_\+length\+\_\+constraint}} (Mesh $\ast$face\+\_\+mesh\+\_\+pt, Vector$<$ Vector$<$ double $>$$>$ \&vector\+\_\+bnd\+\_\+vertices, double \&max\+\_\+length\+\_\+constraint)
 \item 
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ad06aa82d81a16d5948b4317608a67aae}{unrefine\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area}} (const unsigned \&b, const unsigned \&c, Vector$<$ Vector$<$ double $>$ $>$ \&vector\+\_\+bnd\+\_\+vertices, double \&unrefinement\+\_\+tolerance, Vector$<$ double $>$ \&area\+\_\+constraint)
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a797d1dbb88100d3825aa2f95ffb791b7}{unrefine\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area}} (const unsigned \&b, const unsigned \&c, Vector$<$ Vector$<$ double $>$$>$ \&vector\+\_\+bnd\+\_\+vertices, double \&unrefinement\+\_\+tolerance, Vector$<$ double $>$ \&area\+\_\+constraint)
 \begin{DoxyCompactList}\small\item\em Helper function that performs the unrefinement process on the specified boundary by using the provided vertices representation and the associated target area. Used only when the \textquotesingle{}allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries\textquotesingle{} flag is set to true. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_abd9edf3c6c57a337301abe8828ca0567}{refine\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area}} (Mesh\+As\+Geom\+Object $\ast$mesh\+\_\+geom\+\_\+obj\+\_\+pt, Vector$<$ Vector$<$ double $>$ $>$ \&vector\+\_\+bnd\+\_\+vertices, double \&refinement\+\_\+tolerance, Vector$<$ double $>$ \&area\+\_\+constraint)
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a02c0e5ad8540a67e229dba3e35d34748}{refine\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area}} (Mesh\+As\+Geom\+Object $\ast$mesh\+\_\+geom\+\_\+obj\+\_\+pt, Vector$<$ Vector$<$ double $>$$>$ \&vector\+\_\+bnd\+\_\+vertices, double \&refinement\+\_\+tolerance, Vector$<$ double $>$ \&area\+\_\+constraint)
 \begin{DoxyCompactList}\small\item\em Helper function that performs the refinement process on the specified boundary by using the provided vertices representation and the associated elements target area. Used only when the \textquotesingle{}allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries\textquotesingle{} flag is set to true. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a4631299a76f524bb6bed190836e26bcd}{unrefine\+\_\+shared\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area}} (const unsigned \&b, const unsigned \&c, Vector$<$ Vector$<$ double $>$ $>$ \&vector\+\_\+bnd\+\_\+vertices, Vector$<$ double $>$ \&area\+\_\+constraint)
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a62b889ce9f8253fc45c137c3fe60a1d9}{unrefine\+\_\+shared\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area}} (const unsigned \&b, const unsigned \&c, Vector$<$ Vector$<$ double $>$$>$ \&vector\+\_\+bnd\+\_\+vertices, Vector$<$ double $>$ \&area\+\_\+constraint)
 \begin{DoxyCompactList}\small\item\em Helper function that performs the unrefinement process on the specified boundary by using the provided vertices representation and the associated target area. N\+O\+TE\+: This is the version that applies unrefinement to shared boundaries. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_adf7951948c93e9b0f259a7a05c15f1c5}{refine\+\_\+shared\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area}} (Vector$<$ Vector$<$ double $>$ $>$ \&vector\+\_\+bnd\+\_\+vertices, Vector$<$ double $>$ \&area\+\_\+constraint)
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a8f521d7c9e48693690fe705fadc0312e}{refine\+\_\+shared\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area}} (Vector$<$ Vector$<$ double $>$$>$ \&vector\+\_\+bnd\+\_\+vertices, Vector$<$ double $>$ \&area\+\_\+constraint)
 \begin{DoxyCompactList}\small\item\em Helper function that performs the refinement process on the specified boundary by using the provided vertices representation and the associated elements target area. N\+O\+TE\+: This is the version that applies refinement to shared boundaries. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a29588a5cec8225492e3c5816105c6c49}{initialise\+\_\+boundary\+\_\+refinement\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Set all the flags to true (the default values) \end{DoxyCompactList}\item 
@@ -180,29 +178,29 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a43f080841444e0d08566
 \begin{DoxyCompactList}\small\item\em Re-\/establish the shared boundary elements after the adaptation process (the updating of shared nodes is optional and performed by default) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a9ba5601a6630b8c2c2ee75fe11d2c6be}{reset\+\_\+halo\+\_\+haloed\+\_\+scheme}} ()
 \begin{DoxyCompactList}\small\item\em In charge of. re-\/establish the halo(ed) scheme on all processors. Sends info. to create halo elements and nodes on the processors that need it. It uses and all to all communication strategy therefore must be called on all processors. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ac1c4de3a0d7675b32fbb29c6f1ce3385}{compute\+\_\+global\+\_\+node\+\_\+names\+\_\+and\+\_\+shared\+\_\+nodes}} (Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a30de5d78695bca6daf836e99b4897698}{compute\+\_\+global\+\_\+node\+\_\+names\+\_\+and\+\_\+shared\+\_\+nodes}} (Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Compute the names of the nodes on shared boundaries in this (my\+\_\+rank) processor with other processors. Also compute the names of nodes on shared boundaries of other processors with other processors (useful when there is an element that requires to be sent to this (my\+\_\+rank) processor because there is a shared node between this (my\+\_\+rank) and other processors B\+UT there is not a shared boundary between this and the other processor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a22bb99a8f2cd5f62cd98773f2b402a01}{send\+\_\+boundary\+\_\+node\+\_\+info\+\_\+of\+\_\+shared\+\_\+nodes}} (Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a1384df39371769813491f173f8b0dd7f}{send\+\_\+boundary\+\_\+node\+\_\+info\+\_\+of\+\_\+shared\+\_\+nodes}} (Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Get the original boundaries to which is associated each shared node, and send the info. to the related processors. We need to do this so that at the reset of halo(ed) info. stage, the info. be already updated. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_acf0b49f56b7d0137edf34214ae24df22}{reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper}} (Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ \&iproc\+\_\+currently\+\_\+created\+\_\+nodes\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a7e1e856ce17fb48a336e69610783e1ee}{reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper}} (Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Node $\ast$ $>$$>$ \&iproc\+\_\+currently\+\_\+created\+\_\+nodes\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em In charge of creating additional halo(ed) elements on those processors that have no shared boundaries in common but have shared nodes. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a68a11c309ad5068dfe8b769ee732ca9a}{try\+\_\+to\+\_\+add\+\_\+element\+\_\+pt\+\_\+load\+\_\+balance}} (Vector$<$ Finite\+Element $\ast$ $>$ \&new\+\_\+elements\+\_\+on\+\_\+domain, Finite\+Element $\ast$\&ele\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Check if necessary to add the element to the new domain or if it has been previously added. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a6a3b8303abb40086ab9db6cc3baed13c}{get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper}} (unsigned \&iproc, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&f\+\_\+haloed\+\_\+ele\+\_\+pt, Finite\+Element $\ast$ele\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_aaf21ae4349376a2c71ac99840a66fe89}{get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper}} (unsigned \&iproc, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&f\+\_\+haloed\+\_\+ele\+\_\+pt, Finite\+Element $\ast$ele\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to get the required elemental information from the element to be sent. This info. involves the association of the element to a boundary or region, and if its part of the halo(ed) elements within a processor. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a3a3b775171c860567f869aa5d00fa9b9}{try\+\_\+to\+\_\+add\+\_\+node\+\_\+pt\+\_\+load\+\_\+balance}} (Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Node $\ast$\&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Check if necessary to add the node to the new domain or if it has been already added. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a5c119a1e4e47cb73c8ca10c933786daf}{add\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper}} (unsigned \&iproc, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&f\+\_\+halo\+\_\+ele\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Node $\ast$nod\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a7a6fd6429a15f566bc7bdea28a1ece01}{add\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper}} (unsigned \&iproc, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&f\+\_\+halo\+\_\+ele\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Node $\ast$nod\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to add haloed node. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_acf7e66145b4e79925f7da600a514e8f5}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper}} (Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&f\+\_\+halo\+\_\+ele\+\_\+pt, unsigned \&iproc, Node $\ast$nod\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a1ea9abcf584f04882e07768d0336cd8d}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper}} (Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&f\+\_\+halo\+\_\+ele\+\_\+pt, unsigned \&iproc, Node $\ast$nod\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to get the required nodal information from an haloed node so that a fully-\/functional node (and therefore element) can be created on the receiving process (this is the specific version for the load balance strategy, the difference with the original method is that it checks if the node is on a shared boundary no associated with the current processor --my\+\_\+rank--, or in a haloed element from other processors. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a9e03f061a3b4eab8a05eb36e0f87892f}{create\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper}} (unsigned \&iproc, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&f\+\_\+haloed\+\_\+ele\+\_\+pt, Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$ $>$ $>$ \&received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt, Vector$<$ Finite\+Element $\ast$ $>$ \&new\+\_\+elements\+\_\+on\+\_\+domain, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a32e7c3e59423225c619778c9ecbe66a3}{create\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper}} (unsigned \&iproc, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&f\+\_\+haloed\+\_\+ele\+\_\+pt, Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$$>$$>$ \&received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt, Vector$<$ Finite\+Element $\ast$ $>$ \&new\+\_\+elements\+\_\+on\+\_\+domain, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to create elements on the loop process based on the info received in send\+\_\+and\+\_\+received\+\_\+elements\+\_\+nodes\+\_\+info. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ab441d12ee4ec23db47b89aa9d1f0bc0c}{add\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper}} (const unsigned \&iproc, Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$ $>$ $>$ \&received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt, Finite\+Element $\ast$ele\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ab6e1f2b32fb8feb72f7d386bd8e512b5}{add\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper}} (const unsigned \&iproc, Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$$>$$>$ \&received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt, Finite\+Element $\ast$ele\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to create elements on the loop process based on the info received in send\+\_\+and\+\_\+received\+\_\+elements\+\_\+nodes\+\_\+info This function is in charge of verify if the element is associated to a boundary and associate to it if that is the case. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a02520e2a9bb8b2843d116553b0ceed4c}{add\+\_\+received\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&f\+\_\+haloed\+\_\+ele\+\_\+pt, Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$ $>$ $>$ \&received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, unsigned \&iproc, unsigned \&node\+\_\+index, Finite\+Element $\ast$const \&new\+\_\+el\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a85a5bcaab66f14560a000790e7b84b0b}{add\+\_\+received\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&f\+\_\+haloed\+\_\+ele\+\_\+pt, Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$$>$$>$ \&received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, unsigned \&iproc, unsigned \&node\+\_\+index, Finite\+Element $\ast$const \&new\+\_\+el\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to add a new node from load balance. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a851c408704f034cdfe9dc8451b223c5f}{construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&f\+\_\+haloed\+\_\+ele\+\_\+pt, Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$ $>$ $>$ \&received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, unsigned \&iproc, unsigned \&node\+\_\+index, Finite\+Element $\ast$const \&new\+\_\+el\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a83fac4b81777435c3c21e03fa9760ecb}{construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&f\+\_\+haloed\+\_\+ele\+\_\+pt, Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$$>$$>$ \&received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, unsigned \&iproc, unsigned \&node\+\_\+index, Finite\+Element $\ast$const \&new\+\_\+el\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function which constructs a new node (on an element) with the information sent from the load balance process. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a40ed8992d60508600cb3f3d0b9fb2c46}{try\+\_\+to\+\_\+add\+\_\+root\+\_\+haloed\+\_\+element\+\_\+pt}} (const unsigned \&p, Generalised\+Element $\ast$\&el\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Check if necessary to add the element as haloed or if it has been previously added to the haloed scheme. \end{DoxyCompactList}\item 
@@ -216,24 +214,22 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_abe41b8b8aa2cc51d507c
 \begin{DoxyCompactList}\small\item\em Helper function to add haloed node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a2c0b3b2f5bf635ea8b3cba6554cc96b3}{send\+\_\+and\+\_\+receive\+\_\+elements\+\_\+nodes\+\_\+info}} (int \&send\+\_\+proc, int \&recv\+\_\+proc)
 \begin{DoxyCompactList}\small\item\em Helper function to send back halo and haloed information. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a88c28c2f9a4a4902c42978c048dbbeca}{create\+\_\+halo\+\_\+element}} (unsigned \&iproc, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a1a85be799b728fef02dfd51e5cdc5b88}{create\+\_\+halo\+\_\+element}} (unsigned \&iproc, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to create (halo) elements on the loop process based on the info received in send\+\_\+and\+\_\+received\+\_\+located\+\_\+info. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ad08155d333cd4f57cc23818b6f328b6e}{add\+\_\+halo\+\_\+element\+\_\+helper}} (unsigned \&iproc, Finite\+Element $\ast$ele\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to create (halo) elements on the loop process based on the info received in send\+\_\+and\+\_\+received\+\_\+located\+\_\+info This function is in charge of verify if the element is associated to a boundary. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a30c3d309c0eba36f9d83b6200839f2de}{add\+\_\+halo\+\_\+node\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, unsigned \&iproc, unsigned \&node\+\_\+index, Finite\+Element $\ast$const \&new\+\_\+el\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_af8b0262644353db9f24afea4479ec39f}{add\+\_\+halo\+\_\+node\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, unsigned \&iproc, unsigned \&node\+\_\+index, Finite\+Element $\ast$const \&new\+\_\+el\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to add halo node. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a0100ff82ef698fdf31928a487a6082bb}{construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, unsigned \&iproc, unsigned \&node\+\_\+index, Finite\+Element $\ast$const \&new\+\_\+el\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a07f28421160457b6b97e4a4db7fee025}{construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Node $\ast$ $>$ \&new\+\_\+nodes\+\_\+on\+\_\+domain, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, unsigned \&iproc, unsigned \&node\+\_\+index, Finite\+Element $\ast$const \&new\+\_\+el\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function which constructs a new halo node (on an element) with the information sent from the haloed process. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ad8787784aeed4e41672bfdb9e1e54429}{update\+\_\+other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ unsigned $>$ \&other\+\_\+processor\+\_\+1, Vector$<$ unsigned $>$ \&other\+\_\+processor\+\_\+2, Vector$<$ unsigned $>$ \&other\+\_\+shared\+\_\+boundaries, Vector$<$ unsigned $>$ \&other\+\_\+indexes, Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a0d65126ccfc3b88018a76b7c18c98e9f}{update\+\_\+other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+helper}} (Node $\ast$\&new\+\_\+nod\+\_\+pt, Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt, Vector$<$ unsigned $>$ \&other\+\_\+processor\+\_\+1, Vector$<$ unsigned $>$ \&other\+\_\+processor\+\_\+2, Vector$<$ unsigned $>$ \&other\+\_\+shared\+\_\+boundaries, Vector$<$ unsigned $>$ \&other\+\_\+indexes, Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&global\+\_\+node\+\_\+names, std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&node\+\_\+name\+\_\+to\+\_\+global\+\_\+index, Vector$<$ Node $\ast$ $>$ \&global\+\_\+shared\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function that assigns/updates the references to the node so that it can be found with any other reference. The return value indicates whether or not a node was found on the same reference. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ae089d459099bb928ced9b8a306b99df5}{update\+\_\+polygon\+\_\+using\+\_\+face\+\_\+mesh}} (Triangle\+Mesh\+Polygon $\ast$polygon\+\_\+pt, const bool \&check\+\_\+only=false)
-\begin{DoxyCompactList}\small\item\em Helper function that updates the input polygon\textquotesingle{}s P\+S\+LG by using the end-\/points of elements from Face\+Mesh(es) that are constructed for the boundaries associated with the segments of the polygon. Optional boolean is used to run it as test only (if true is specified as input) in which case polygon isn\textquotesingle{}t actually modified. Returned boolean indicates if polygon was (or would have been -- if called with check\+\_\+only=false) changed. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Helper function that updates the input polygon\textquotesingle{}s P\+S\+LG by using the end-\/points of elements from Face\+Mesh(es) that are constructed for the boundaries associated with the segments of the polygon. Optional boolean is used to run it as test only (if true is specified as input) in which case polygon isn\textquotesingle{}t actually modified. Returned boolean indicates if polygon was (or would have been -- if called with check\+\_\+only=false) changed. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ab8fb7db201e871f082afe3170ddb812f}{update\+\_\+open\+\_\+curve\+\_\+using\+\_\+face\+\_\+mesh}} (Triangle\+Mesh\+Open\+Curve $\ast$open\+\_\+polyline\+\_\+pt, const bool \&check\+\_\+only=false)
 \begin{DoxyCompactList}\small\item\em Helper function that updates the input open curve by using end-\/points of elements from Face\+Mesh(es) that are constructed for the boundaries associated with the polylines. Optional boolean is used to run it as test only (if true is specified as input) in which case the polylines are not actually modified. Returned boolean indicates if polylines were (or would have been -- if called with check\+\_\+only=false) changed. \end{DoxyCompactList}\item 
-virtual bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a7189d208a062fda132f6fa814e4385cf}{surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries}} (Vector$<$ Vector$<$ double $>$ $>$ \&internal\+\_\+point\+\_\+coord, const bool \&check\+\_\+only=false)
-\begin{DoxyCompactList}\small\item\em Generate a new P\+S\+LG representation of the inner hole boundaries. Optional boolean is used to run it as test only (if true is specified as input) in which case P\+S\+LG isn\textquotesingle{}t actually modified. Returned boolean indicates if P\+S\+LG was (or would have been -- if called with check\+\_\+only=false) changed. ~\newline
- \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a88d25daf8d6facae2db5bea73f838ccf}{surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries}} (Vector$<$ Vector$<$ double $>$$>$ \&internal\+\_\+point\+\_\+coord, const bool \&check\+\_\+only=false)
+\begin{DoxyCompactList}\small\item\em Generate a new P\+S\+LG representation of the inner hole boundaries. Optional boolean is used to run it as test only (if true is specified as input) in which case P\+S\+LG isn\textquotesingle{}t actually modified. Returned boolean indicates if P\+S\+LG was (or would have been -- if called with check\+\_\+only=false) changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a3c302af1c17063eb32f56abe9f000360}{snap\+\_\+nodes\+\_\+onto\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$\&new\+\_\+mesh\+\_\+pt, const unsigned \&b)
 \begin{DoxyCompactList}\small\item\em Snap the boundary nodes onto any curvilinear boundaries. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_ab1268ab0f9ea49ef262e51a0e90136b5}{create\+\_\+unsorted\+\_\+face\+\_\+mesh\+\_\+representation}} (const unsigned \&boundary\+\_\+id, Mesh $\ast$face\+\_\+mesh\+\_\+pt)
@@ -324,7 +320,7 @@ class oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 Unstructured refineable Triangle Mesh. 
 
-Definition at line 2154 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2253 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -342,7 +338,7 @@ Function pointer to a function that can generate a point within the ihole-\/th h
 
 
 
-Definition at line 2172 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2269 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aa78ffa56b66a1371aec25e25f7aaff9e}\label{classoomph_1_1RefineableTriangleMesh_aa78ffa56b66a1371aec25e25f7aaff9e}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!MeshUpdateFctPt@{MeshUpdateFctPt}}
@@ -357,7 +353,7 @@ Function pointer to function that updates the mesh following the snapping of bou
 
 
 
-Definition at line 2164 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2261 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -375,7 +371,7 @@ Build mesh, based on the specifications on \mbox{\hyperlink{classoomph_1_1Triang
 
 
 
-Definition at line 2179 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2276 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a72c24c96f89006c905551b650db29cc7}\label{classoomph_1_1RefineableTriangleMesh_a72c24c96f89006c905551b650db29cc7}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!RefineableTriangleMesh@{RefineableTriangleMesh}}
@@ -390,7 +386,7 @@ Build mesh, based on the polyfiles.
 
 
 
-Definition at line 2195 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2291 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a488004263be96473c332468e13e80a83}\label{classoomph_1_1RefineableTriangleMesh_a488004263be96473c332468e13e80a83}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!RefineableTriangleMesh@{RefineableTriangleMesh}}
@@ -405,7 +401,7 @@ Build mesh from specified triangulation and associated target areas for elements
 
 
 
-Definition at line 2226 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2322 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -424,7 +420,7 @@ Empty Destructor.
 
 
 
-Definition at line 2323 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2417 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -442,18 +438,18 @@ Adapt mesh, based on elemental error provided.
 
 Adapt problem based on specified elemental error estimates This function implement serial and parallel mesh adaptation, the sections for parallel mesh adaptation are clearly identified by checking whether the mesh is distributed or not 
 
-Definition at line 29344 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 29595 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
-References oomph\+::\+Triangle\+Mesh\+Parameters\+::disable\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries(), oomph\+::\+Triangle\+Mesh\+Parameters\+::element\+\_\+area(), oomph\+::\+Triangle\+Mesh\+Parameters\+::enable\+\_\+use\+\_\+attributes(), oomph\+::\+Triangle\+Mesh\+Parameters\+::extra\+\_\+holes\+\_\+coordinates(), Geom\+Object, oomph\+::\+Triangle\+Mesh\+Parameters\+::internal\+\_\+closed\+\_\+curve\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Parameters\+::internal\+\_\+open\+\_\+curves\+\_\+pt(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::max\+\_\+element\+\_\+size(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::min\+\_\+element\+\_\+size(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::min\+\_\+permitted\+\_\+angle(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::oomph\+\_\+vertex\+\_\+nodes\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Parameters\+::regions\+\_\+coordinates(), s, oomph\+::\+Triangle\+Mesh\+Parameters\+::set\+\_\+communicator\+\_\+pt(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shared\+\_\+boundaries\+\_\+ids(), and oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shared\+\_\+boundary\+\_\+overlaps\+\_\+internal\+\_\+boundary().
+References oomph\+::\+Triangle\+Mesh\+Parameters\+::disable\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries(), oomph\+::\+Triangle\+Mesh\+Parameters\+::element\+\_\+area(), oomph\+::\+Triangle\+Mesh\+Parameters\+::enable\+\_\+use\+\_\+attributes(), oomph\+::\+Triangle\+Mesh\+Parameters\+::extra\+\_\+holes\+\_\+coordinates(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+boundary\+\_\+elements\+\_\+and\+\_\+nodes\+\_\+for\+\_\+internal\+\_\+boundaries(), Geom\+Object, oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values(), oomph\+::\+Triangle\+Mesh\+Parameters\+::internal\+\_\+closed\+\_\+curve\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Parameters\+::internal\+\_\+open\+\_\+curves\+\_\+pt(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::max\+\_\+element\+\_\+size(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::min\+\_\+element\+\_\+size(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::min\+\_\+permitted\+\_\+angle(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::oomph\+\_\+vertex\+\_\+nodes\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Parameters\+::regions\+\_\+coordinates(), s, oomph\+::\+Triangle\+Mesh\+Parameters\+::set\+\_\+communicator\+\_\+pt(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shared\+\_\+boundaries\+\_\+ids(), and oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shared\+\_\+boundary\+\_\+overlaps\+\_\+internal\+\_\+boundary().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ab441d12ee4ec23db47b89aa9d1f0bc0c}\label{classoomph_1_1RefineableTriangleMesh_ab441d12ee4ec23db47b89aa9d1f0bc0c}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ab6e1f2b32fb8feb72f7d386bd8e512b5}\label{classoomph_1_1RefineableTriangleMesh_ab6e1f2b32fb8feb72f7d386bd8e512b5}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!add\_element\_load\_balance\_helper@{add\_element\_load\_balance\_helper}}
 \index{add\_element\_load\_balance\_helper@{add\_element\_load\_balance\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{add\_element\_load\_balance\_helper()}{add\_element\_load\_balance\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{iproc,  }\item[{Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$ $>$ $>$ \&}]{received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt,  }\item[{Finite\+Element $\ast$}]{ele\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{iproc,  }\item[{Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$$>$$>$ \&}]{received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt,  }\item[{Finite\+Element $\ast$}]{ele\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -461,7 +457,7 @@ Helper function to create elements on the loop process based on the info receive
 
 
 
-Definition at line 27312 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 27584 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ad08155d333cd4f57cc23818b6f328b6e}\label{classoomph_1_1RefineableTriangleMesh_ad08155d333cd4f57cc23818b6f328b6e}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!add\_halo\_element\_helper@{add\_halo\_element\_helper}}
@@ -476,14 +472,14 @@ Helper function to create (halo) elements on the loop process based on the info 
 
 
 
-Definition at line 18959 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 19199 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a30c3d309c0eba36f9d83b6200839f2de}\label{classoomph_1_1RefineableTriangleMesh_a30c3d309c0eba36f9d83b6200839f2de}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_af8b0262644353db9f24afea4479ec39f}\label{classoomph_1_1RefineableTriangleMesh_af8b0262644353db9f24afea4479ec39f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!add\_halo\_node\_helper@{add\_halo\_node\_helper}}
 \index{add\_halo\_node\_helper@{add\_halo\_node\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{add\_halo\_node\_helper()}{add\_halo\_node\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{Finite\+Element $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{Finite\+Element $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -491,7 +487,7 @@ Helper function to add halo node.
 
 
 
-Definition at line 19128 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 19360 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_abe41b8b8aa2cc51d507c5e17957faf38}\label{classoomph_1_1RefineableTriangleMesh_abe41b8b8aa2cc51d507c5e17957faf38}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!add\_haloed\_node\_helper@{add\_haloed\_node\_helper}}
@@ -506,14 +502,14 @@ Helper function to add haloed node.
 
 Helper to add external haloed node that is not a master. 
 
-Definition at line 18696 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 18903 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a5c119a1e4e47cb73c8ca10c933786daf}\label{classoomph_1_1RefineableTriangleMesh_a5c119a1e4e47cb73c8ca10c933786daf}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a7a6fd6429a15f566bc7bdea28a1ece01}\label{classoomph_1_1RefineableTriangleMesh_a7a6fd6429a15f566bc7bdea28a1ece01}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!add\_node\_load\_balance\_helper@{add\_node\_load\_balance\_helper}}
 \index{add\_node\_load\_balance\_helper@{add\_node\_load\_balance\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{add\_node\_load\_balance\_helper()}{add\_node\_load\_balance\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{unsigned \&}]{iproc,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&}]{f\+\_\+halo\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Node $\ast$}]{nod\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{unsigned \&}]{iproc,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&}]{f\+\_\+halo\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Node $\ast$}]{nod\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -521,14 +517,14 @@ Helper function to add haloed node.
 
 Helper function to add nodes on a new domain as a result of load balance. 
 
-Definition at line 26471 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 26752 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a5bd10260a304b6daa7977de24d3b4117}\label{classoomph_1_1RefineableTriangleMesh_a5bd10260a304b6daa7977de24d3b4117}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ab2850b55b33d9b22e4545743896c1f25}\label{classoomph_1_1RefineableTriangleMesh_ab2850b55b33d9b22e4545743896c1f25}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!add\_non\_delete\_vertices\_from\_boundary\_helper@{add\_non\_delete\_vertices\_from\_boundary\_helper}}
 \index{add\_non\_delete\_vertices\_from\_boundary\_helper@{add\_non\_delete\_vertices\_from\_boundary\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{add\_non\_delete\_vertices\_from\_boundary\_helper()}{add\_non\_delete\_vertices\_from\_boundary\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+non\+\_\+delete\+\_\+vertices\+\_\+from\+\_\+boundary\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Node $\ast$ $>$ $>$}]{src\+\_\+bound\+\_\+segment\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$ $>$}]{dst\+\_\+bound\+\_\+segment\+\_\+node\+\_\+pt,  }\item[{const unsigned \&}]{dst\+\_\+bnd\+\_\+id,  }\item[{const unsigned \&}]{dst\+\_\+bnd\+\_\+chunk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+non\+\_\+delete\+\_\+vertices\+\_\+from\+\_\+boundary\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Node $\ast$ $>$$>$}]{src\+\_\+bound\+\_\+segment\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$$>$}]{dst\+\_\+bound\+\_\+segment\+\_\+node\+\_\+pt,  }\item[{const unsigned \&}]{dst\+\_\+bnd\+\_\+id,  }\item[{const unsigned \&}]{dst\+\_\+bnd\+\_\+chunk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -536,14 +532,14 @@ Adds the vertices from the sources boundary that are repeated in the destination
 
 
 
-Definition at line 32321 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 32588 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a02520e2a9bb8b2843d116553b0ceed4c}\label{classoomph_1_1RefineableTriangleMesh_a02520e2a9bb8b2843d116553b0ceed4c}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a85a5bcaab66f14560a000790e7b84b0b}\label{classoomph_1_1RefineableTriangleMesh_a85a5bcaab66f14560a000790e7b84b0b}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!add\_received\_node\_load\_balance\_helper@{add\_received\_node\_load\_balance\_helper}}
 \index{add\_received\_node\_load\_balance\_helper@{add\_received\_node\_load\_balance\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{add\_received\_node\_load\_balance\_helper()}{add\_received\_node\_load\_balance\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+received\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&}]{f\+\_\+haloed\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$ $>$ $>$ \&}]{received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{Finite\+Element $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+received\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&}]{f\+\_\+haloed\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$$>$$>$ \&}]{received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{Finite\+Element $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -551,7 +547,7 @@ Helper function to add a new node from load balance.
 
 
 
-Definition at line 27577 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 27841 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ae876bda052e22ece09c21ff531aac8d2}\label{classoomph_1_1RefineableTriangleMesh_ae876bda052e22ece09c21ff531aac8d2}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!add\_vertices\_for\_non\_deletion@{add\_vertices\_for\_non\_deletion}}
@@ -566,29 +562,29 @@ Mark the vertices that are not allowed for deletion by the unrefienment/refineme
 
 \textbackslash{} short Mark the vertices that are not allowed for deletion by the unrefienment/refinement polyline methods. In charge of filling the Boundary\+\_\+connections\+\_\+pt structure 
 
-Definition at line 31598 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 31877 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_abcfd90d11b4bc87de160736c0542d65c}\label{classoomph_1_1RefineableTriangleMesh_abcfd90d11b4bc87de160736c0542d65c}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_af22bedfeaa83007c9d51d5806eec4e45}\label{classoomph_1_1RefineableTriangleMesh_af22bedfeaa83007c9d51d5806eec4e45}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!apply\_max\_length\_constraint@{apply\_max\_length\_constraint}}
 \index{apply\_max\_length\_constraint@{apply\_max\_length\_constraint}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{apply\_max\_length\_constraint()}{apply\_max\_length\_constraint()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::apply\+\_\+max\+\_\+length\+\_\+constraint (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{face\+\_\+mesh\+\_\+pt,  }\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{max\+\_\+length\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::apply\+\_\+max\+\_\+length\+\_\+constraint (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{face\+\_\+mesh\+\_\+pt,  }\item[{Vector$<$ Vector$<$ double $>$$>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{max\+\_\+length\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 Get the size of the vector that now includes all added nodes
 
-Definition at line 35279 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 35554 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References s.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a44ebcc99018e3d6795eca66ea20628b0}\label{classoomph_1_1RefineableTriangleMesh_a44ebcc99018e3d6795eca66ea20628b0}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a6fd42928bc14b8c0dc9a24a069cdd4ba}\label{classoomph_1_1RefineableTriangleMesh_a6fd42928bc14b8c0dc9a24a069cdd4ba}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!boundary\_connections@{boundary\_connections}}
 \index{boundary\_connections@{boundary\_connections}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{boundary\_connections()}{boundary\_connections()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-const bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::boundary\+\_\+connections (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{c,  }\item[{std\+::set$<$ Vector$<$ double $>$ $>$ \&}]{vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+const bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::boundary\+\_\+connections (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{c,  }\item[{std\+::set$<$ Vector$<$ double $>$$>$ \&}]{vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -596,7 +592,7 @@ Verifies if the given boundary receives a connection, and if that is the case th
 
 
 
-Definition at line 2796 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2938 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a0e2797cd90b0f9afabac4ec28576de05}\label{classoomph_1_1RefineableTriangleMesh_a0e2797cd90b0f9afabac4ec28576de05}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!compute\_area\_target@{compute\_area\_target}}
@@ -611,14 +607,14 @@ Compute target area based on the element\textquotesingle{}s error and the error 
 
 
 
-Definition at line 3572 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3705 of file triangle\+\_\+mesh.\+template.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ac1c4de3a0d7675b32fbb29c6f1ce3385}\label{classoomph_1_1RefineableTriangleMesh_ac1c4de3a0d7675b32fbb29c6f1ce3385}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a30de5d78695bca6daf836e99b4897698}\label{classoomph_1_1RefineableTriangleMesh_a30de5d78695bca6daf836e99b4897698}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!compute\_global\_node\_names\_and\_shared\_nodes@{compute\_global\_node\_names\_and\_shared\_nodes}}
 \index{compute\_global\_node\_names\_and\_shared\_nodes@{compute\_global\_node\_names\_and\_shared\_nodes}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_global\_node\_names\_and\_shared\_nodes()}{compute\_global\_node\_names\_and\_shared\_nodes()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+global\+\_\+node\+\_\+names\+\_\+and\+\_\+shared\+\_\+nodes (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+global\+\_\+node\+\_\+names\+\_\+and\+\_\+shared\+\_\+nodes (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -626,14 +622,14 @@ Compute the names of the nodes on shared boundaries in this (my\+\_\+rank) proce
 
 
 
-Definition at line 15894 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 16061 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a68d9f0d8f1a8ae97d2f9d612b855f20b}\label{classoomph_1_1RefineableTriangleMesh_a68d9f0d8f1a8ae97d2f9d612b855f20b}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a072b29c462026be1759db992b24969b9}\label{classoomph_1_1RefineableTriangleMesh_a072b29c462026be1759db992b24969b9}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!compute\_shared\_node\_degree\_helper@{compute\_shared\_node\_degree\_helper}}
 \index{compute\_shared\_node\_degree\_helper@{compute\_shared\_node\_degree\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_shared\_node\_degree\_helper()}{compute\_shared\_node\_degree\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+shared\+\_\+node\+\_\+degree\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&}]{unsorted\+\_\+face\+\_\+ele\+\_\+pt,  }\item[{std\+::map$<$ Node $\ast$, unsigned $>$ \&}]{global\+\_\+node\+\_\+degree }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+shared\+\_\+node\+\_\+degree\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&}]{unsorted\+\_\+face\+\_\+ele\+\_\+pt,  }\item[{std\+::map$<$ Node $\ast$, unsigned $>$ \&}]{global\+\_\+node\+\_\+degree }\end{DoxyParamCaption})}
 
 
 
@@ -641,14 +637,14 @@ Computes the degree of the nodes on the shared boundaries, the degree of the nod
 
 
 
-Definition at line 24589 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 24845 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a0100ff82ef698fdf31928a487a6082bb}\label{classoomph_1_1RefineableTriangleMesh_a0100ff82ef698fdf31928a487a6082bb}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a07f28421160457b6b97e4a4db7fee025}\label{classoomph_1_1RefineableTriangleMesh_a07f28421160457b6b97e4a4db7fee025}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!construct\_new\_halo\_node\_helper@{construct\_new\_halo\_node\_helper}}
 \index{construct\_new\_halo\_node\_helper@{construct\_new\_halo\_node\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{construct\_new\_halo\_node\_helper()}{construct\_new\_halo\_node\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{Finite\+Element $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{Finite\+Element $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -662,18 +658,18 @@ For the received update\+\_\+id, ref\+\_\+value, geom\+\_\+object call add\+\_\+
 
 Now call update\+\_\+node\+\_\+update
 
-Definition at line 19183 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 19416 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
-References Algebraic\+Mesh, and Time\+Stepper.
+References Algebraic\+Mesh, Time\+Stepper, and oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a851c408704f034cdfe9dc8451b223c5f}\label{classoomph_1_1RefineableTriangleMesh_a851c408704f034cdfe9dc8451b223c5f}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a83fac4b81777435c3c21e03fa9760ecb}\label{classoomph_1_1RefineableTriangleMesh_a83fac4b81777435c3c21e03fa9760ecb}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!construct\_new\_node\_load\_balance\_helper@{construct\_new\_node\_load\_balance\_helper}}
 \index{construct\_new\_node\_load\_balance\_helper@{construct\_new\_node\_load\_balance\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{construct\_new\_node\_load\_balance\_helper()}{construct\_new\_node\_load\_balance\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&}]{f\+\_\+haloed\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$ $>$ $>$ \&}]{received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{Finite\+Element $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&}]{f\+\_\+haloed\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$$>$$>$ \&}]{received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{Finite\+Element $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -687,18 +683,18 @@ For the received update\+\_\+id, ref\+\_\+value, geom\+\_\+object call add\+\_\+
 
 Now call update\+\_\+node\+\_\+update
 
-Definition at line 27648 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 27905 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
-References Algebraic\+Mesh, and Time\+Stepper.
+References Algebraic\+Mesh, Time\+Stepper, and oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ada95baf2f1f84f398002d7288a023906}\label{classoomph_1_1RefineableTriangleMesh_ada95baf2f1f84f398002d7288a023906}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_adc4b0c239c44409991f821617be53ad6}\label{classoomph_1_1RefineableTriangleMesh_adc4b0c239c44409991f821617be53ad6}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!create\_adjacency\_matrix\_new\_shared\_edges\_helper@{create\_adjacency\_matrix\_new\_shared\_edges\_helper}}
 \index{create\_adjacency\_matrix\_new\_shared\_edges\_helper@{create\_adjacency\_matrix\_new\_shared\_edges\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_adjacency\_matrix\_new\_shared\_edges\_helper()}{create\_adjacency\_matrix\_new\_shared\_edges\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+adjacency\+\_\+matrix\+\_\+new\+\_\+shared\+\_\+edges\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&}]{unsorted\+\_\+face\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ \&}]{tmp\+\_\+sorted\+\_\+shared\+\_\+node\+\_\+pt,  }\item[{std\+::map$<$ Node $\ast$, Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{node\+\_\+alias,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{adjacency\+\_\+matrix }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+adjacency\+\_\+matrix\+\_\+new\+\_\+shared\+\_\+edges\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&}]{unsorted\+\_\+face\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$$>$ \&}]{tmp\+\_\+sorted\+\_\+shared\+\_\+node\+\_\+pt,  }\item[{std\+::map$<$ Node $\ast$, Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{node\+\_\+alias,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{adjacency\+\_\+matrix }\end{DoxyParamCaption})}
 
 
 
@@ -706,14 +702,14 @@ Sort the nodes on the new shared boundaries (after load balancing), computes the
 
 
 
-Definition at line 25587 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 25845 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a9e03f061a3b4eab8a05eb36e0f87892f}\label{classoomph_1_1RefineableTriangleMesh_a9e03f061a3b4eab8a05eb36e0f87892f}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a32e7c3e59423225c619778c9ecbe66a3}\label{classoomph_1_1RefineableTriangleMesh_a32e7c3e59423225c619778c9ecbe66a3}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!create\_element\_load\_balance\_helper@{create\_element\_load\_balance\_helper}}
 \index{create\_element\_load\_balance\_helper@{create\_element\_load\_balance\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_element\_load\_balance\_helper()}{create\_element\_load\_balance\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{unsigned \&}]{iproc,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&}]{f\+\_\+haloed\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$ $>$ $>$ \&}]{received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt,  }\item[{Vector$<$ Finite\+Element $\ast$ $>$ \&}]{new\+\_\+elements\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{unsigned \&}]{iproc,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&}]{f\+\_\+haloed\+\_\+ele\+\_\+pt,  }\item[{Vector$<$ Vector$<$ std\+::map$<$ unsigned, Finite\+Element $\ast$ $>$$>$$>$ \&}]{received\+\_\+old\+\_\+haloed\+\_\+element\+\_\+pt,  }\item[{Vector$<$ Finite\+Element $\ast$ $>$ \&}]{new\+\_\+elements\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -721,14 +717,14 @@ Helper function to create elements on the loop process based on the info receive
 
 
 
-Definition at line 27227 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 27501 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a88c28c2f9a4a4902c42978c048dbbeca}\label{classoomph_1_1RefineableTriangleMesh_a88c28c2f9a4a4902c42978c048dbbeca}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a1a85be799b728fef02dfd51e5cdc5b88}\label{classoomph_1_1RefineableTriangleMesh_a1a85be799b728fef02dfd51e5cdc5b88}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!create\_halo\_element@{create\_halo\_element}}
 \index{create\_halo\_element@{create\_halo\_element}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_halo\_element()}{create\_halo\_element()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+halo\+\_\+element (\begin{DoxyParamCaption}\item[{unsigned \&}]{iproc,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+halo\+\_\+element (\begin{DoxyParamCaption}\item[{unsigned \&}]{iproc,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{new\+\_\+nodes\+\_\+on\+\_\+domain,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -736,14 +732,14 @@ Helper function to create (halo) elements on the loop process based on the info 
 
 Creates (halo) element on the loop process based on the information received from each processor 
 
-Definition at line 18867 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 19111 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aa60bf366d48aa2ddf12b9db67cce445c}\label{classoomph_1_1RefineableTriangleMesh_aa60bf366d48aa2ddf12b9db67cce445c}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a7b718bde6cccf4d50445f894ba5ac609}\label{classoomph_1_1RefineableTriangleMesh_a7b718bde6cccf4d50445f894ba5ac609}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!create\_new\_shared\_boundaries@{create\_new\_shared\_boundaries}}
 \index{create\_new\_shared\_boundaries@{create\_new\_shared\_boundaries}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_new\_shared\_boundaries()}{create\_new\_shared\_boundaries()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+new\+\_\+shared\+\_\+boundaries (\begin{DoxyParamCaption}\item[{std\+::set$<$ Finite\+Element $\ast$ $>$ \&}]{element\+\_\+in\+\_\+processor\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&}]{new\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{Vector$<$ Vector$<$ unsigned $>$ $>$ \&}]{new\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+face\+\_\+index }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+new\+\_\+shared\+\_\+boundaries (\begin{DoxyParamCaption}\item[{std\+::set$<$ Finite\+Element $\ast$ $>$ \&}]{element\+\_\+in\+\_\+processor\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&}]{new\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{Vector$<$ Vector$<$ unsigned $>$$>$ \&}]{new\+\_\+shared\+\_\+boundary\+\_\+element\+\_\+face\+\_\+index }\end{DoxyParamCaption})}
 
 
 
@@ -751,7 +747,7 @@ Creates the new shared boundaries, this method is also in charge of computing th
 
 
 
-Definition at line 22462 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 22702 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aeae7ba7543ed8e97d32c7c688da48521}\label{classoomph_1_1RefineableTriangleMesh_aeae7ba7543ed8e97d32c7c688da48521}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!create\_polylines\_from\_polyfiles@{create\_polylines\_from\_polyfiles}}
@@ -766,7 +762,7 @@ Helper function to create polylines and fill associate data.
 
 Create the polylines and fill associate data structures, used when creating from a mesh from polyfiles 
 
-Definition at line 36393 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 36642 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a8ad12ebe7625ff189c1f7beb1eabff04}\label{classoomph_1_1RefineableTriangleMesh_a8ad12ebe7625ff189c1f7beb1eabff04}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!create\_sorted\_face\_mesh\_representation@{create\_sorted\_face\_mesh\_representation}}
@@ -781,7 +777,7 @@ Helper function Creates a sorted face mesh representation of the specified Poly\
 
 Helper function Creates a sorted face mesh representation of the specified Poly\+Line It means that the elements are sorted along the boundary. 
 
-Definition at line 35434 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 35705 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_abdb36266f9e6ab9c63845edf3e667892}\label{classoomph_1_1RefineableTriangleMesh_abdb36266f9e6ab9c63845edf3e667892}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!create\_temporary\_boundary\_connections@{create\_temporary\_boundary\_connections}}
@@ -796,7 +792,7 @@ After unrefinement and refinement has taken place compute the new vertices numbe
 
 
 
-Definition at line 32757 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 33050 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ab1268ab0f9ea49ef262e51a0e90136b5}\label{classoomph_1_1RefineableTriangleMesh_ab1268ab0f9ea49ef262e51a0e90136b5}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!create\_unsorted\_face\_mesh\_representation@{create\_unsorted\_face\_mesh\_representation}}
@@ -811,7 +807,7 @@ Helper function Creates an unsorted face mesh representation from the specified 
 
 
 
-Definition at line 35397 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 35673 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a58d4a0b0d1d72b325d738affcef905e9}\label{classoomph_1_1RefineableTriangleMesh_a58d4a0b0d1d72b325d738affcef905e9}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_boundary\_refinement\_constrained\_by\_target\_areas@{disable\_boundary\_refinement\_constrained\_by\_target\_areas}}
@@ -822,7 +818,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 2767 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2900 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a1c02ef23cd60668f2fa34f13bbc7b5ba}\label{classoomph_1_1RefineableTriangleMesh_a1c02ef23cd60668f2fa34f13bbc7b5ba}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_boundary\_unrefinement\_constrained\_by\_target\_areas@{disable\_boundary\_unrefinement\_constrained\_by\_target\_areas}}
@@ -833,7 +829,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 2761 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2890 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a081ddf29176d5599c6af173f73dd4a8d}\label{classoomph_1_1RefineableTriangleMesh_a081ddf29176d5599c6af173f73dd4a8d}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_iterative\_solver\_for\_projection@{disable\_iterative\_solver\_for\_projection}}
@@ -844,7 +840,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 Enables the use of an iterative solver for the projection problem 
 
-Definition at line 2391 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2516 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aa4c245df63f0fe2feb82bf2bf05e65ef}\label{classoomph_1_1RefineableTriangleMesh_aa4c245df63f0fe2feb82bf2bf05e65ef}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_print\_timings\_adaptation@{disable\_print\_timings\_adaptation}}
@@ -859,7 +855,7 @@ Disables printing of timings for adaptation.
 
 
 
-Definition at line 2399 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2528 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a380e00a99cdcbdf262e1ebfc1af30007}\label{classoomph_1_1RefineableTriangleMesh_a380e00a99cdcbdf262e1ebfc1af30007}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_print\_timings\_load\_balance@{disable\_print\_timings\_load\_balance}}
@@ -874,7 +870,7 @@ Disables printing of timings for load balance.
 
 
 
-Definition at line 2422 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2555 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a6498186dd8e741789fd34f615b785c84}\label{classoomph_1_1RefineableTriangleMesh_a6498186dd8e741789fd34f615b785c84}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_projection@{disable\_projection}}
@@ -889,7 +885,7 @@ Disables the solution projection step during adaptation.
 
 
 
-Definition at line 2340 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2440 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a7c0a6d1e167ae19275556d3bb1a6b232}\label{classoomph_1_1RefineableTriangleMesh_a7c0a6d1e167ae19275556d3bb1a6b232}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_shared\_boundary\_refinement\_constrained\_by\_target\_areas@{disable\_shared\_boundary\_refinement\_constrained\_by\_target\_areas}}
@@ -900,7 +896,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 2781 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2922 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a6f8615dc6e68b6a8fdf0e4f3b5bb1e12}\label{classoomph_1_1RefineableTriangleMesh_a6f8615dc6e68b6a8fdf0e4f3b5bb1e12}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_shared\_boundary\_unrefinement\_constrained\_by\_target\_areas@{disable\_shared\_boundary\_unrefinement\_constrained\_by\_target\_areas}}
@@ -911,7 +907,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 2775 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2912 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a44307109bc432cee8c16bb9d1c921d9e}\label{classoomph_1_1RefineableTriangleMesh_a44307109bc432cee8c16bb9d1c921d9e}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_timings\_projection@{disable\_timings\_projection}}
@@ -926,7 +922,7 @@ Disables info. and timings for projection.
 
 
 
-Definition at line 2348 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2452 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ac40e14bcf3cabbf69bbe7df5896a2c5f}\label{classoomph_1_1RefineableTriangleMesh_ac40e14bcf3cabbf69bbe7df5896a2c5f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!disable\_timings\_tranfering\_target\_areas@{disable\_timings\_tranfering\_target\_areas}}
@@ -941,7 +937,7 @@ Disables info. and timings for tranferring of target areas.
 
 
 
-Definition at line 2332 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2428 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a8b04c27cba8938936f73d90e00d70b22}\label{classoomph_1_1RefineableTriangleMesh_a8b04c27cba8938936f73d90e00d70b22}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!doc\_adaptivity\_targets@{doc\_adaptivity\_targets}}
@@ -956,7 +952,7 @@ Doc the targets for mesh adaptation.
 
 
 
-Definition at line 2441 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2576 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a6aa74a37a5c5416613c8a6d12ad7320c}\label{classoomph_1_1RefineableTriangleMesh_a6aa74a37a5c5416613c8a6d12ad7320c}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_boundary\_refinement\_constrained\_by\_target\_areas@{enable\_boundary\_refinement\_constrained\_by\_target\_areas}}
@@ -967,7 +963,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 2764 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2895 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a2bac2ff237ca916e19d8ed632fef9fa4}\label{classoomph_1_1RefineableTriangleMesh_a2bac2ff237ca916e19d8ed632fef9fa4}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_boundary\_unrefinement\_constrained\_by\_target\_areas@{enable\_boundary\_unrefinement\_constrained\_by\_target\_areas}}
@@ -982,7 +978,7 @@ Enable/disable unrefinement/refinement methods for original boundaries.
 
 
 
-Definition at line 2758 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2885 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aa0e6f48ae67efc2931c03ca22eaa9ca0}\label{classoomph_1_1RefineableTriangleMesh_aa0e6f48ae67efc2931c03ca22eaa9ca0}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_iterative\_solver\_for\_projection@{enable\_iterative\_solver\_for\_projection}}
@@ -993,7 +989,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 Enables the use of an iterative solver for the projection problem 
 
-Definition at line 2386 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2509 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a53f7ac7fbe9fdde0fb52b634d7370221}\label{classoomph_1_1RefineableTriangleMesh_a53f7ac7fbe9fdde0fb52b634d7370221}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_print\_timings\_adaptation@{enable\_print\_timings\_adaptation}}
@@ -1008,7 +1004,7 @@ Enables printing of timings for adaptation.
 
 
 
-Definition at line 2395 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2522 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a262467b16b4d2749230e9ace5649b8cf}\label{classoomph_1_1RefineableTriangleMesh_a262467b16b4d2749230e9ace5649b8cf}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_print\_timings\_load\_balance@{enable\_print\_timings\_load\_balance}}
@@ -1023,7 +1019,7 @@ Enables printing of timings for load balance.
 
 
 
-Definition at line 2418 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2549 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a9cbf49d194c39396c7a6765b1c4520fc}\label{classoomph_1_1RefineableTriangleMesh_a9cbf49d194c39396c7a6765b1c4520fc}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_projection@{enable\_projection}}
@@ -1038,7 +1034,7 @@ Enables the solution projection step during adaptation.
 
 
 
-Definition at line 2336 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2434 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_adc4d8e616b73c6b3805501fe4761b24f}\label{classoomph_1_1RefineableTriangleMesh_adc4d8e616b73c6b3805501fe4761b24f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_shared\_boundary\_refinement\_constrained\_by\_target\_areas@{enable\_shared\_boundary\_refinement\_constrained\_by\_target\_areas}}
@@ -1049,7 +1045,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 2778 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2917 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a3c1e3be7d06a03d0707f4f9f68c168b9}\label{classoomph_1_1RefineableTriangleMesh_a3c1e3be7d06a03d0707f4f9f68c168b9}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_shared\_boundary\_unrefinement\_constrained\_by\_target\_areas@{enable\_shared\_boundary\_unrefinement\_constrained\_by\_target\_areas}}
@@ -1064,7 +1060,7 @@ Enable/disable unrefinement/refinement methods for shared boundaries.
 
 
 
-Definition at line 2772 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2907 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a3228cb1170b25ce7f24fb520b1df184d}\label{classoomph_1_1RefineableTriangleMesh_a3228cb1170b25ce7f24fb520b1df184d}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_timings\_projection@{enable\_timings\_projection}}
@@ -1079,7 +1075,7 @@ Enables info. and timings for projection.
 
 
 
-Definition at line 2344 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2446 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a0f961b7194d4ee2fc4fc5677a46cdb1c}\label{classoomph_1_1RefineableTriangleMesh_a0f961b7194d4ee2fc4fc5677a46cdb1c}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!enable\_timings\_tranfering\_target\_areas@{enable\_timings\_tranfering\_target\_areas}}
@@ -1094,7 +1090,7 @@ Enables info. and timings for tranferring of target areas.
 
 
 
-Definition at line 2327 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2421 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_adeac705bdac96a1fb1f9f75fb5552ef6}\label{classoomph_1_1RefineableTriangleMesh_adeac705bdac96a1fb1f9f75fb5552ef6}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!fill\_boundary\_elements\_and\_nodes\_for\_internal\_boundaries@{fill\_boundary\_elements\_and\_nodes\_for\_internal\_boundaries}}
@@ -1105,7 +1101,11 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 43092 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 43430 of file triangle\+\_\+mesh.\+template.\+cc.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a85db79355838698642937d8dd875970a}\label{classoomph_1_1RefineableTriangleMesh_a85db79355838698642937d8dd875970a}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!fill\_boundary\_elements\_and\_nodes\_for\_internal\_boundaries@{fill\_boundary\_elements\_and\_nodes\_for\_internal\_boundaries}}
@@ -1116,7 +1116,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 43105 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 43443 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ad217a5617c922036481ded0de5e40aec}\label{classoomph_1_1RefineableTriangleMesh_ad217a5617c922036481ded0de5e40aec}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!flush\_sorted\_shared\_boundary\_node@{flush\_sorted\_shared\_boundary\_node}}
@@ -1127,14 +1127,14 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 2532 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2664 of file triangle\+\_\+mesh.\+template.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a4a1c447c191ac56427673756ed6f448c}\label{classoomph_1_1RefineableTriangleMesh_a4a1c447c191ac56427673756ed6f448c}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a14599cde32f86a804e92b8f651f2bb3d}\label{classoomph_1_1RefineableTriangleMesh_a14599cde32f86a804e92b8f651f2bb3d}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!get\_boundary\_segment\_nodes\_helper@{get\_boundary\_segment\_nodes\_helper}}
 \index{get\_boundary\_segment\_nodes\_helper@{get\_boundary\_segment\_nodes\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_boundary\_segment\_nodes\_helper()}{get\_boundary\_segment\_nodes\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+boundary\+\_\+segment\+\_\+nodes\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ \&}]{tmp\+\_\+segment\+\_\+nodes }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+boundary\+\_\+segment\+\_\+nodes\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$$>$ \&}]{tmp\+\_\+segment\+\_\+nodes }\end{DoxyParamCaption})}
 
 
 
@@ -1142,7 +1142,7 @@ Get the nodes on the boundary (b), these are stored in the segment they belong (
 
 
 
-Definition at line 28820 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 29072 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1161,7 +1161,7 @@ Computes the associated vertex number on the destination boundary.
 
 Gets the associated vertex number according to the vertex coordinates on the destination boundary. 
 
-Definition at line 33820 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 34092 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ad935b92b5e2348aff7eb054bbd5dea67}\label{classoomph_1_1RefineableTriangleMesh_ad935b92b5e2348aff7eb054bbd5dea67}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!get\_face\_mesh\_representation@{get\_face\_mesh\_representation}}
@@ -1176,7 +1176,7 @@ Helper function to construct face mesh representation of open curves.
 
 Helper function to construct face mesh representation of all polylines. 
 
-Definition at line 36171 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 36426 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a531fe918233edee299e459a105e9e47d}\label{classoomph_1_1RefineableTriangleMesh_a531fe918233edee299e459a105e9e47d}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!get\_face\_mesh\_representation@{get\_face\_mesh\_representation}}
@@ -1191,7 +1191,7 @@ Helper function to construct face mesh representation of all polylines, possibly
 
 Helper function to construct face mesh representation of all polylines, possibly with segments re-\/distributed between polylines to maintain an approximately even sub-\/division of the polygon 
 
-Definition at line 35631 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 35896 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1210,14 +1210,14 @@ Helper function to get the required elemental information from an haloed element
 
 
 
-Definition at line 17796 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 17993 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a6a3b8303abb40086ab9db6cc3baed13c}\label{classoomph_1_1RefineableTriangleMesh_a6a3b8303abb40086ab9db6cc3baed13c}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aaf21ae4349376a2c71ac99840a66fe89}\label{classoomph_1_1RefineableTriangleMesh_aaf21ae4349376a2c71ac99840a66fe89}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!get\_required\_elemental\_information\_load\_balance\_helper@{get\_required\_elemental\_information\_load\_balance\_helper}}
 \index{get\_required\_elemental\_information\_load\_balance\_helper@{get\_required\_elemental\_information\_load\_balance\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_required\_elemental\_information\_load\_balance\_helper()}{get\_required\_elemental\_information\_load\_balance\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{unsigned \&}]{iproc,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&}]{f\+\_\+haloed\+\_\+ele\+\_\+pt,  }\item[{Finite\+Element $\ast$}]{ele\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{unsigned \&}]{iproc,  }\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&}]{f\+\_\+haloed\+\_\+ele\+\_\+pt,  }\item[{Finite\+Element $\ast$}]{ele\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1225,7 +1225,7 @@ Helper function to get the required elemental information from the element to be
 
 Helper function to get the required elemental information from the element that will be sent to iproc processor. This info. involves the association of the element to a boundary or region. 
 
-Definition at line 26100 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 26361 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_abfe2134892b2f845440947429d54539f}\label{classoomph_1_1RefineableTriangleMesh_abfe2134892b2f845440947429d54539f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}}
@@ -1240,18 +1240,18 @@ Helper function to get the required nodal information from a haloed node so that
 
 Helper function to get the required nodal information from an haloed node so that a fully-\/functional halo node (and therefore element) can be created on the receiving process 
 
-Definition at line 18117 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 18330 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References Algebraic\+Mesh, boundaries, and Geom\+Object.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_acf7e66145b4e79925f7da600a514e8f5}\label{classoomph_1_1RefineableTriangleMesh_acf7e66145b4e79925f7da600a514e8f5}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a1ea9abcf584f04882e07768d0336cd8d}\label{classoomph_1_1RefineableTriangleMesh_a1ea9abcf584f04882e07768d0336cd8d}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!get\_required\_nodal\_information\_load\_balance\_helper@{get\_required\_nodal\_information\_load\_balance\_helper}}
 \index{get\_required\_nodal\_information\_load\_balance\_helper@{get\_required\_nodal\_information\_load\_balance\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_required\_nodal\_information\_load\_balance\_helper()}{get\_required\_nodal\_information\_load\_balance\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$ $>$ \&}]{f\+\_\+halo\+\_\+ele\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{Node $\ast$}]{nod\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Finite\+Element $\ast$ $>$$>$ \&}]{f\+\_\+halo\+\_\+ele\+\_\+pt,  }\item[{unsigned \&}]{iproc,  }\item[{Node $\ast$}]{nod\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1259,7 +1259,7 @@ Helper function to get the required nodal information from an haloed node so tha
 
 Helper function to get the required nodal information from an haloed node so that a fully-\/functional halo node (and therefore element) can be created on the receiving process 
 
-Definition at line 26530 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 26810 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1278,14 +1278,14 @@ Use the first and second group of elements to find the intersection between them
 
 Use the first and second group of elements to find the intersection between them to get the shared boundary elements from the first and second group 
 
-Definition at line 22307 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 22550 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aa808ccdf085959a788f888fc7f5904e3}\label{classoomph_1_1RefineableTriangleMesh_aa808ccdf085959a788f888fc7f5904e3}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_afc202faf949a6c2e4014110b5eaa7cc8}\label{classoomph_1_1RefineableTriangleMesh_afc202faf949a6c2e4014110b5eaa7cc8}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!get\_shared\_boundary\_segment\_nodes\_helper@{get\_shared\_boundary\_segment\_nodes\_helper}}
 \index{get\_shared\_boundary\_segment\_nodes\_helper@{get\_shared\_boundary\_segment\_nodes\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_shared\_boundary\_segment\_nodes\_helper()}{get\_shared\_boundary\_segment\_nodes\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+shared\+\_\+boundary\+\_\+segment\+\_\+nodes\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{shd\+\_\+bnd\+\_\+id,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ \&}]{tmp\+\_\+segment\+\_\+nodes }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+shared\+\_\+boundary\+\_\+segment\+\_\+nodes\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{shd\+\_\+bnd\+\_\+id,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$$>$ \&}]{tmp\+\_\+segment\+\_\+nodes }\end{DoxyParamCaption})}
 
 
 
@@ -1293,7 +1293,7 @@ Get the nodes on the shared boundary (b), these are stored in the segment they b
 
 
 
-Definition at line 25773 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 26031 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a1d3d0ec0b197741f6289e24de549f737}\label{classoomph_1_1RefineableTriangleMesh_a1d3d0ec0b197741f6289e24de549f737}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!initialise\_adaptation\_data@{initialise\_adaptation\_data}}
@@ -1308,7 +1308,7 @@ Helper function to initialise data associated with adaptation.
 
 
 
-Definition at line 3508 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3642 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a29588a5cec8225492e3c5816105c6c49}\label{classoomph_1_1RefineableTriangleMesh_a29588a5cec8225492e3c5816105c6c49}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!initialise\_boundary\_refinement\_data@{initialise\_boundary\_refinement\_data}}
@@ -1323,7 +1323,7 @@ Set all the flags to true (the default values)
 
 
 
-Definition at line 2962 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3109 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_af6e60e92bff82e8bf26ffd170125559c}\label{classoomph_1_1RefineableTriangleMesh_af6e60e92bff82e8bf26ffd170125559c}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!internal\_hole\_point\_update\_fct\_pt@{internal\_hole\_point\_update\_fct\_pt}}
@@ -1334,12 +1334,11 @@ Definition at line 2962 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
-Access to function pointer to can be used to generate the internal point for the ihole-\/th hole. ~\newline
- 
+Access to function pointer to can be used to generate the internal point for the ihole-\/th hole. 
 
 
 
-Definition at line 2507 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2642 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aaffa40b7d036f8ed8639bf9396f1088a}\label{classoomph_1_1RefineableTriangleMesh_aaffa40b7d036f8ed8639bf9396f1088a}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!load\_balance@{load\_balance}}
@@ -1358,7 +1357,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMesh_a712bfd68d4b55e9c
 
 
 
-Definition at line 20241 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 20451 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a60fabb7d4e9389f827d6cfd332237c15}\label{classoomph_1_1RefineableTriangleMesh_a60fabb7d4e9389f827d6cfd332237c15}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!max\_element\_size@{max\_element\_size}}
@@ -1373,7 +1372,7 @@ Max element size allowed during adaptation.
 
 
 
-Definition at line 2371 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2483 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1388,12 +1387,11 @@ unsigned \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refin
 
 
 
-Read/write access to number of sample points from which we try to locate zeta by Newton method when transferring target areas using cgal-\/based sample point container. If Newton method doesn\textquotesingle{}t converge from any of these we use the nearest sample point. ~\newline
- 
+Read/write access to number of sample points from which we try to locate zeta by Newton method when transferring target areas using cgal-\/based sample point container. If Newton method doesn\textquotesingle{}t converge from any of these we use the nearest sample point. 
 
 
 
-Definition at line 2365 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2477 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a09e932b9b9b3a42616524dd3fcb35fd3}\label{classoomph_1_1RefineableTriangleMesh_a09e932b9b9b3a42616524dd3fcb35fd3}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!mesh\_update\_fct\_pt@{mesh\_update\_fct\_pt}}
@@ -1408,7 +1406,7 @@ Access to function pointer to function that updates the mesh following the snapp
 
 
 
-Definition at line 2499 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2634 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ad25cf23f688c1007b5fbbe41d2ec6cfc}\label{classoomph_1_1RefineableTriangleMesh_ad25cf23f688c1007b5fbbe41d2ec6cfc}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!min\_element\_size@{min\_element\_size}}
@@ -1423,7 +1421,7 @@ Min element size allowed during adaptation.
 
 
 
-Definition at line 2374 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2489 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1442,7 +1440,7 @@ Min angle before remesh gets triggered.
 
 
 
-Definition at line 2377 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2495 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1461,7 +1459,7 @@ Read/write access to number of bins in the x-\/direction when transferring targe
 
 
 
-Definition at line 2354 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2460 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a063dc0162d4e352cbbcbbf72b1171f97}\label{classoomph_1_1RefineableTriangleMesh_a063dc0162d4e352cbbcbbf72b1171f97}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!nbin\_y\_for\_area\_transfer@{nbin\_y\_for\_area\_transfer}}
@@ -1476,7 +1474,7 @@ Read/write access to number of bins in the y-\/direction when transferring targe
 
 
 
-Definition at line 2359 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2468 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ad75bed93a7986b69f9bf928d88af294b}\label{classoomph_1_1RefineableTriangleMesh_ad75bed93a7986b69f9bf928d88af294b}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!nsorted\_shared\_boundary\_node@{nsorted\_shared\_boundary\_node}}
@@ -1487,7 +1485,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refin
 
 
 
-Definition at line 2516 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2649 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a3ecdb3b15c3fefbc96f407c4fdf5b155}\label{classoomph_1_1RefineableTriangleMesh_a3ecdb3b15c3fefbc96f407c4fdf5b155}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!reestablish\_distribution\_info\_for\_restart@{reestablish\_distribution\_info\_for\_restart}}
@@ -1502,14 +1500,14 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMesh_aa4b1cfd4537c1e51
 
 
 
-Definition at line 2589 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2721 of file triangle\+\_\+mesh.\+template.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a9bd4d46e9a61131b8b8f2b68579ac972}\label{classoomph_1_1RefineableTriangleMesh_a9bd4d46e9a61131b8b8f2b68579ac972}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a86fb5cd1f918ad07971d6eb60a8b7683}\label{classoomph_1_1RefineableTriangleMesh_a86fb5cd1f918ad07971d6eb60a8b7683}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!refine\_boundary@{refine\_boundary}}
 \index{refine\_boundary@{refine\_boundary}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{refine\_boundary()}{refine\_boundary()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::refine\+\_\+boundary (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{face\+\_\+mesh\+\_\+pt,  }\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{refinement\+\_\+tolerance,  }\item[{const bool \&}]{check\+\_\+only = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::refine\+\_\+boundary (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{face\+\_\+mesh\+\_\+pt,  }\item[{Vector$<$ Vector$<$ double $>$$>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{refinement\+\_\+tolerance,  }\item[{const bool \&}]{check\+\_\+only = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1517,14 +1515,14 @@ Helper function that performs the refinement process on the specified boundary b
 
 Get the size of the vector that now includes all added nodes
 
-Definition at line 35129 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 35408 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_abd9edf3c6c57a337301abe8828ca0567}\label{classoomph_1_1RefineableTriangleMesh_abd9edf3c6c57a337301abe8828ca0567}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a02c0e5ad8540a67e229dba3e35d34748}\label{classoomph_1_1RefineableTriangleMesh_a02c0e5ad8540a67e229dba3e35d34748}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!refine\_boundary\_constrained\_by\_target\_area@{refine\_boundary\_constrained\_by\_target\_area}}
 \index{refine\_boundary\_constrained\_by\_target\_area@{refine\_boundary\_constrained\_by\_target\_area}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{refine\_boundary\_constrained\_by\_target\_area()}{refine\_boundary\_constrained\_by\_target\_area()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::refine\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area (\begin{DoxyParamCaption}\item[{Mesh\+As\+Geom\+Object $\ast$}]{mesh\+\_\+geom\+\_\+obj\+\_\+pt,  }\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{refinement\+\_\+tolerance,  }\item[{Vector$<$ double $>$ \&}]{area\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::refine\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area (\begin{DoxyParamCaption}\item[{Mesh\+As\+Geom\+Object $\ast$}]{mesh\+\_\+geom\+\_\+obj\+\_\+pt,  }\item[{Vector$<$ Vector$<$ double $>$$>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{refinement\+\_\+tolerance,  }\item[{Vector$<$ double $>$ \&}]{area\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1532,18 +1530,18 @@ Helper function that performs the refinement process on the specified boundary b
 
 Helper function that performs the refinement process on the specified boundary by using the provided vertices representation and the associated elements target area. 
 
-Definition at line 40519 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 40816 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References s.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_adf7951948c93e9b0f259a7a05c15f1c5}\label{classoomph_1_1RefineableTriangleMesh_adf7951948c93e9b0f259a7a05c15f1c5}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a8f521d7c9e48693690fe705fadc0312e}\label{classoomph_1_1RefineableTriangleMesh_a8f521d7c9e48693690fe705fadc0312e}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!refine\_shared\_boundary\_constrained\_by\_target\_area@{refine\_shared\_boundary\_constrained\_by\_target\_area}}
 \index{refine\_shared\_boundary\_constrained\_by\_target\_area@{refine\_shared\_boundary\_constrained\_by\_target\_area}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{refine\_shared\_boundary\_constrained\_by\_target\_area()}{refine\_shared\_boundary\_constrained\_by\_target\_area()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::refine\+\_\+shared\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{Vector$<$ double $>$ \&}]{area\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::refine\+\_\+shared\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ double $>$$>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{Vector$<$ double $>$ \&}]{area\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1551,7 +1549,7 @@ Helper function that performs the refinement process on the specified boundary b
 
 
 
-Definition at line 40873 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 41167 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1570,7 +1568,7 @@ Build a new Triangulate\+IO object from previous Triangulate\+IO based on target
 
 Build a new Triangulate\+IO object based on target areas specified. 
 
-Definition at line 14882 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 15054 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a4820744f95d69328dfa4185fff21dd7b}\label{classoomph_1_1RefineableTriangleMesh_a4820744f95d69328dfa4185fff21dd7b}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!refine\_uniformly@{refine\_uniformly}}
@@ -1585,7 +1583,7 @@ Refine mesh uniformly and doc process.
 
 
 
-Definition at line 2457 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2592 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a9ba5601a6630b8c2c2ee75fe11d2c6be}\label{classoomph_1_1RefineableTriangleMesh_a9ba5601a6630b8c2c2ee75fe11d2c6be}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!reset\_halo\_haloed\_scheme@{reset\_halo\_haloed\_scheme}}
@@ -1600,14 +1598,14 @@ In charge of. re-\/establish the halo(ed) scheme on all processors. Sends info. 
 
 
 
-Definition at line 15323 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 15486 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_acf0b49f56b7d0137edf34214ae24df22}\label{classoomph_1_1RefineableTriangleMesh_acf0b49f56b7d0137edf34214ae24df22}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a7e1e856ce17fb48a336e69610783e1ee}\label{classoomph_1_1RefineableTriangleMesh_a7e1e856ce17fb48a336e69610783e1ee}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!reset\_halo\_haloed\_scheme\_helper@{reset\_halo\_haloed\_scheme\_helper}}
 \index{reset\_halo\_haloed\_scheme\_helper@{reset\_halo\_haloed\_scheme\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{reset\_halo\_haloed\_scheme\_helper()}{reset\_halo\_haloed\_scheme\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$ $>$ \&}]{iproc\+\_\+currently\+\_\+created\+\_\+nodes\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Node $\ast$ $>$$>$ \&}]{iproc\+\_\+currently\+\_\+created\+\_\+nodes\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1615,7 +1613,7 @@ In charge of creating additional halo(ed) elements on those processors that have
 
 
 
-Definition at line 17459 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 17655 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a43f080841444e0d085669db4ae580f2f}\label{classoomph_1_1RefineableTriangleMesh_a43f080841444e0d085669db4ae580f2f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!reset\_shared\_boundary\_elements\_and\_nodes@{reset\_shared\_boundary\_elements\_and\_nodes}}
@@ -1630,7 +1628,7 @@ Re-\/establish the shared boundary elements after the adaptation process (the up
 
 
 
-Definition at line 15237 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 15403 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ab8cf55021754cb2d63776cb128517fac}\label{classoomph_1_1RefineableTriangleMesh_ab8cf55021754cb2d63776cb128517fac}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!restore\_boundary\_connections@{restore\_boundary\_connections}}
@@ -1645,7 +1643,7 @@ After unrefinement and refinement has taken place compute the new vertices numbe
 
 After unrefinement and refinement has taken place compute the new vertices numbers of the boundaries to connect (in a distributed scheme it may be possible that the destination boundary does no longer exist, therefore the connection is suspended. It is not permanently deleted because if load balance takes place it may be possible that the boundary to connect be part of the new domain representation, so the connection would exist) 
 
-Definition at line 32884 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 33175 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_af944ed8c29e07330e5c9bfce5f446b28}\label{classoomph_1_1RefineableTriangleMesh_af944ed8c29e07330e5c9bfce5f446b28}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!restore\_polyline\_connections\_helper@{restore\_polyline\_connections\_helper}}
@@ -1660,7 +1658,7 @@ Restore the connections of the specific polyline The vertices numbering on the d
 
 
 
-Definition at line 33008 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 33295 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a68f48396fb3a9cfe8577fa702dd4e482}\label{classoomph_1_1RefineableTriangleMesh_a68f48396fb3a9cfe8577fa702dd4e482}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!resume\_boundary\_connections@{resume\_boundary\_connections}}
@@ -1675,7 +1673,7 @@ Resume the boundary connections that may have been suspended because the destina
 
 
 
-Definition at line 33774 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 34048 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a2c0b3b2f5bf635ea8b3cba6554cc96b3}\label{classoomph_1_1RefineableTriangleMesh_a2c0b3b2f5bf635ea8b3cba6554cc96b3}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!send\_and\_receive\_elements\_nodes\_info@{send\_and\_receive\_elements\_nodes\_info}}
@@ -1690,14 +1688,14 @@ Helper function to send back halo and haloed information.
 
 Send the information of the elements that will be created on the other processor 
 
-Definition at line 18749 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 18955 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a22bb99a8f2cd5f62cd98773f2b402a01}\label{classoomph_1_1RefineableTriangleMesh_a22bb99a8f2cd5f62cd98773f2b402a01}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a1384df39371769813491f173f8b0dd7f}\label{classoomph_1_1RefineableTriangleMesh_a1384df39371769813491f173f8b0dd7f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!send\_boundary\_node\_info\_of\_shared\_nodes@{send\_boundary\_node\_info\_of\_shared\_nodes}}
 \index{send\_boundary\_node\_info\_of\_shared\_nodes@{send\_boundary\_node\_info\_of\_shared\_nodes}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{send\_boundary\_node\_info\_of\_shared\_nodes()}{send\_boundary\_node\_info\_of\_shared\_nodes()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::send\+\_\+boundary\+\_\+node\+\_\+info\+\_\+of\+\_\+shared\+\_\+nodes (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::send\+\_\+boundary\+\_\+node\+\_\+info\+\_\+of\+\_\+shared\+\_\+nodes (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1705,7 +1703,7 @@ Get the original boundaries to which is associated each shared node, and send th
 
 
 
-Definition at line 16894 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 17056 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a3580283bfa7acd135e294051890c62a4}\label{classoomph_1_1RefineableTriangleMesh_a3580283bfa7acd135e294051890c62a4}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!set\_print\_level\_timings\_adaptation@{set\_print\_level\_timings\_adaptation}}
@@ -1720,7 +1718,7 @@ Sets the printing level of timings for adaptation.
 
 
 
-Definition at line 2403 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2534 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a1bde786a756e1a076df48fe11b8640f9}\label{classoomph_1_1RefineableTriangleMesh_a1bde786a756e1a076df48fe11b8640f9}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!set\_print\_level\_timings\_load\_balance@{set\_print\_level\_timings\_load\_balance}}
@@ -1735,7 +1733,7 @@ Sets the printing level of timings for load balance.
 
 
 
-Definition at line 2426 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2561 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a3c302af1c17063eb32f56abe9f000360}\label{classoomph_1_1RefineableTriangleMesh_a3c302af1c17063eb32f56abe9f000360}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!snap\_nodes\_onto\_boundary@{snap\_nodes\_onto\_boundary}}
@@ -1754,7 +1752,7 @@ Move the boundary nodes onto the boundary defined by the old mesh. Correct!? Bec
  \hypertarget{triangle_mesh.template.cc_autotoc_md3}{}\doxysubsubsection{Repositioning of mid-\/side nodes}\label{triangle_mesh.template.cc_autotoc_md3}
 
 
-Definition at line 43318 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 43658 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1773,7 +1771,7 @@ Sort the nodes on shared boundaries so that the processors that share a boundary
 
 
 
-Definition at line 15127 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 15292 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1788,7 +1786,7 @@ Vector$<$Node$\ast$$>$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oo
 
 
 
-Definition at line 2552 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2685 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a83d026092113ef41bd74e4d73928ebef}\label{classoomph_1_1RefineableTriangleMesh_a83d026092113ef41bd74e4d73928ebef}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!sorted\_shared\_boundary\_node\_pt@{sorted\_shared\_boundary\_node\_pt}}
@@ -1799,23 +1797,22 @@ Node$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Ref
 
 
 
-Definition at line 2535 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2669 of file triangle\+\_\+mesh.\+template.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a7189d208a062fda132f6fa814e4385cf}\label{classoomph_1_1RefineableTriangleMesh_a7189d208a062fda132f6fa814e4385cf}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a88d25daf8d6facae2db5bea73f838ccf}\label{classoomph_1_1RefineableTriangleMesh_a88d25daf8d6facae2db5bea73f838ccf}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!surface\_remesh\_for\_inner\_hole\_boundaries@{surface\_remesh\_for\_inner\_hole\_boundaries}}
 \index{surface\_remesh\_for\_inner\_hole\_boundaries@{surface\_remesh\_for\_inner\_hole\_boundaries}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{surface\_remesh\_for\_inner\_hole\_boundaries()}{surface\_remesh\_for\_inner\_hole\_boundaries()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{internal\+\_\+point\+\_\+coord,  }\item[{const bool \&}]{check\+\_\+only = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries (\begin{DoxyParamCaption}\item[{Vector$<$ Vector$<$ double $>$$>$ \&}]{internal\+\_\+point\+\_\+coord,  }\item[{const bool \&}]{check\+\_\+only = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Generate a new P\+S\+LG representation of the inner hole boundaries. Optional boolean is used to run it as test only (if true is specified as input) in which case P\+S\+LG isn\textquotesingle{}t actually modified. Returned boolean indicates if P\+S\+LG was (or would have been -- if called with check\+\_\+only=false) changed. ~\newline
- 
+Generate a new P\+S\+LG representation of the inner hole boundaries. Optional boolean is used to run it as test only (if true is specified as input) in which case P\+S\+LG isn\textquotesingle{}t actually modified. Returned boolean indicates if P\+S\+LG was (or would have been -- if called with check\+\_\+only=false) changed. 
 
 Update the P\+S\+LG that define the inner boundaries of the mesh. Optional boolean is used to run it as test only (if true is specified as input) in which case P\+S\+LG isn\textquotesingle{}t actually modified. Returned boolean indicates if P\+S\+LG was (or would have been -- if called with check\+\_\+only=false) changed. 
 
-Definition at line 36204 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 36453 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ad9966aa29b0174bdddf6b1584a03f59f}\label{classoomph_1_1RefineableTriangleMesh_ad9966aa29b0174bdddf6b1584a03f59f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!synchronize\_shared\_boundary\_connections@{synchronize\_shared\_boundary\_connections}}
@@ -1830,7 +1827,7 @@ Synchronise the vertices that are marked for non deletion.
 
 
 
-Definition at line 32408 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 32675 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a68a11c309ad5068dfe8b769ee732ca9a}\label{classoomph_1_1RefineableTriangleMesh_a68a11c309ad5068dfe8b769ee732ca9a}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!try\_to\_add\_element\_pt\_load\_balance@{try\_to\_add\_element\_pt\_load\_balance}}
@@ -1845,7 +1842,7 @@ Check if necessary to add the element to the new domain or if it has been previo
 
 
 
-Definition at line 3048 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3192 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a0bc1283a0cf4ea45abefea1930ef748a}\label{classoomph_1_1RefineableTriangleMesh_a0bc1283a0cf4ea45abefea1930ef748a}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!try\_to\_add\_haloed\_node\_pt@{try\_to\_add\_haloed\_node\_pt}}
@@ -1860,7 +1857,7 @@ Check if necessary to add the node as haloed or if it has been previously added 
 
 
 
-Definition at line 3293 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3435 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a3a3b775171c860567f869aa5d00fa9b9}\label{classoomph_1_1RefineableTriangleMesh_a3a3b775171c860567f869aa5d00fa9b9}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!try\_to\_add\_node\_pt\_load\_balance@{try\_to\_add\_node\_pt\_load\_balance}}
@@ -1875,7 +1872,7 @@ Check if necessary to add the node to the new domain or if it has been already a
 
 
 
-Definition at line 3098 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3240 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a40ed8992d60508600cb3f3d0b9fb2c46}\label{classoomph_1_1RefineableTriangleMesh_a40ed8992d60508600cb3f3d0b9fb2c46}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!try\_to\_add\_root\_haloed\_element\_pt@{try\_to\_add\_root\_haloed\_element\_pt}}
@@ -1890,14 +1887,14 @@ Check if necessary to add the element as haloed or if it has been previously add
 
 
 
-Definition at line 3255 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3397 of file triangle\+\_\+mesh.\+template.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a504b89cdb0149dc7cbbf50bc270829fe}\label{classoomph_1_1RefineableTriangleMesh_a504b89cdb0149dc7cbbf50bc270829fe}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a7cae2fc6014a7e4694ad4793aa206cbc}\label{classoomph_1_1RefineableTriangleMesh_a7cae2fc6014a7e4694ad4793aa206cbc}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!unrefine\_boundary@{unrefine\_boundary}}
 \index{unrefine\_boundary@{unrefine\_boundary}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{unrefine\_boundary()}{unrefine\_boundary()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unrefine\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{c,  }\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{unrefinement\+\_\+tolerance,  }\item[{const bool \&}]{check\+\_\+only = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unrefine\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{c,  }\item[{Vector$<$ Vector$<$ double $>$$>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{unrefinement\+\_\+tolerance,  }\item[{const bool \&}]{check\+\_\+only = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1909,14 +1906,14 @@ representation. Optional boolean is used to run it as test only (if true is spec
 
 Copy back
 
-Definition at line 34844 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 35113 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ad06aa82d81a16d5948b4317608a67aae}\label{classoomph_1_1RefineableTriangleMesh_ad06aa82d81a16d5948b4317608a67aae}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a797d1dbb88100d3825aa2f95ffb791b7}\label{classoomph_1_1RefineableTriangleMesh_a797d1dbb88100d3825aa2f95ffb791b7}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!unrefine\_boundary\_constrained\_by\_target\_area@{unrefine\_boundary\_constrained\_by\_target\_area}}
 \index{unrefine\_boundary\_constrained\_by\_target\_area@{unrefine\_boundary\_constrained\_by\_target\_area}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{unrefine\_boundary\_constrained\_by\_target\_area()}{unrefine\_boundary\_constrained\_by\_target\_area()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unrefine\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{c,  }\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{unrefinement\+\_\+tolerance,  }\item[{Vector$<$ double $>$ \&}]{area\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unrefine\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{c,  }\item[{Vector$<$ Vector$<$ double $>$$>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{double \&}]{unrefinement\+\_\+tolerance,  }\item[{Vector$<$ double $>$ \&}]{area\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1924,14 +1921,14 @@ Helper function that performs the unrefinement process on the specified boundary
 
 Helper function that performs the unrefinement process on the specified boundary by using the provided vertices representation and the associated target area. 
 
-Definition at line 40264 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 40560 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a4631299a76f524bb6bed190836e26bcd}\label{classoomph_1_1RefineableTriangleMesh_a4631299a76f524bb6bed190836e26bcd}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a62b889ce9f8253fc45c137c3fe60a1d9}\label{classoomph_1_1RefineableTriangleMesh_a62b889ce9f8253fc45c137c3fe60a1d9}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!unrefine\_shared\_boundary\_constrained\_by\_target\_area@{unrefine\_shared\_boundary\_constrained\_by\_target\_area}}
 \index{unrefine\_shared\_boundary\_constrained\_by\_target\_area@{unrefine\_shared\_boundary\_constrained\_by\_target\_area}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{unrefine\_shared\_boundary\_constrained\_by\_target\_area()}{unrefine\_shared\_boundary\_constrained\_by\_target\_area()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unrefine\+\_\+shared\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{c,  }\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{Vector$<$ double $>$ \&}]{area\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unrefine\+\_\+shared\+\_\+boundary\+\_\+constrained\+\_\+by\+\_\+target\+\_\+area (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{c,  }\item[{Vector$<$ Vector$<$ double $>$$>$ \&}]{vector\+\_\+bnd\+\_\+vertices,  }\item[{Vector$<$ double $>$ \&}]{area\+\_\+constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1939,7 +1936,7 @@ Helper function that performs the unrefinement process on the specified boundary
 
 
 
-Definition at line 40663 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 40958 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ae52c6aea299625c683522f00a89ff33d}\label{classoomph_1_1RefineableTriangleMesh_ae52c6aea299625c683522f00a89ff33d}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!unrefine\_uniformly@{unrefine\_uniformly}}
@@ -1954,7 +1951,7 @@ Unrefine mesh uniformly\+: Return 0 for success, 1 for failure (if unrefinement 
 
 
 
-Definition at line 2483 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2618 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a8f136c97cfe472ca5a5a2791f490abf0}\label{classoomph_1_1RefineableTriangleMesh_a8f136c97cfe472ca5a5a2791f490abf0}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_open\_curve\_after\_restart@{update\_open\_curve\_after\_restart}}
@@ -1969,7 +1966,7 @@ Updates the open curve representation after restart.
 
 Use a vector of vector for vertices and target areas to deal with the cases when the boundaries are split bn the distribution process. Internal boundaries may be completely or partially overlapped by shared boundaries
 
-Definition at line 41731 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 42038 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a75a9af063616474dc96e951b5a3025b9}\label{classoomph_1_1RefineableTriangleMesh_a75a9af063616474dc96e951b5a3025b9}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_open\_curve\_using\_elements\_area@{update\_open\_curve\_using\_elements\_area}}
@@ -1984,7 +1981,7 @@ Updates the open curve but using the elements area instead of the default refine
 
 Use a vector of vector for vertices and target areas to deal with the cases when the boundaries are split by the distribution process. Internal boundaries may be completely or partially overlapped by shared boundaries
 
-Definition at line 38363 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 38620 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ab8fb7db201e871f082afe3170ddb812f}\label{classoomph_1_1RefineableTriangleMesh_ab8fb7db201e871f082afe3170ddb812f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_open\_curve\_using\_face\_mesh@{update\_open\_curve\_using\_face\_mesh}}
@@ -1999,14 +1996,14 @@ Helper function that updates the input open curve by using end-\/points of eleme
 
 Refinement
 
-Definition at line 34362 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 34629 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ad8787784aeed4e41672bfdb9e1e54429}\label{classoomph_1_1RefineableTriangleMesh_ad8787784aeed4e41672bfdb9e1e54429}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a0d65126ccfc3b88018a76b7c18c98e9f}\label{classoomph_1_1RefineableTriangleMesh_a0d65126ccfc3b88018a76b7c18c98e9f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_other\_proc\_shd\_bnd\_node\_helper@{update\_other\_proc\_shd\_bnd\_node\_helper}}
 \index{update\_other\_proc\_shd\_bnd\_node\_helper@{update\_other\_proc\_shd\_bnd\_node\_helper}!oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{update\_other\_proc\_shd\_bnd\_node\_helper()}{update\_other\_proc\_shd\_bnd\_node\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::update\+\_\+other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$ $>$ $>$ $>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ unsigned $>$ \&}]{other\+\_\+processor\+\_\+1,  }\item[{Vector$<$ unsigned $>$ \&}]{other\+\_\+processor\+\_\+2,  }\item[{Vector$<$ unsigned $>$ \&}]{other\+\_\+shared\+\_\+boundaries,  }\item[{Vector$<$ unsigned $>$ \&}]{other\+\_\+indexes,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$ $>$ $>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineable\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::update\+\_\+other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{Vector$<$ Vector$<$ Vector$<$ std\+::map$<$ unsigned, Node $\ast$ $>$$>$$>$$>$ \&}]{other\+\_\+proc\+\_\+shd\+\_\+bnd\+\_\+node\+\_\+pt,  }\item[{Vector$<$ unsigned $>$ \&}]{other\+\_\+processor\+\_\+1,  }\item[{Vector$<$ unsigned $>$ \&}]{other\+\_\+processor\+\_\+2,  }\item[{Vector$<$ unsigned $>$ \&}]{other\+\_\+shared\+\_\+boundaries,  }\item[{Vector$<$ unsigned $>$ \&}]{other\+\_\+indexes,  }\item[{Vector$<$ Vector$<$ Vector$<$ unsigned $>$$>$$>$ \&}]{global\+\_\+node\+\_\+names,  }\item[{std\+::map$<$ Vector$<$ unsigned $>$, unsigned $>$ \&}]{node\+\_\+name\+\_\+to\+\_\+global\+\_\+index,  }\item[{Vector$<$ Node $\ast$ $>$ \&}]{global\+\_\+shared\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -2014,7 +2011,7 @@ Helper function that assigns/updates the references to the node so that it can b
 
 
 
-Definition at line 20082 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 20302 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ae1046fa27f50e13ad7081408a341eb20}\label{classoomph_1_1RefineableTriangleMesh_ae1046fa27f50e13ad7081408a341eb20}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_polygon\_after\_restart@{update\_polygon\_after\_restart}}
@@ -2029,7 +2026,7 @@ Updates the polylines representation after restart.
 
 Use a vector of vector for vertices and target areas to deal with the cases when the boundaries are split by the distribution process
 
-Definition at line 40977 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 41269 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aebc1eb8c96cac1b50cacbe317351e3fb}\label{classoomph_1_1RefineableTriangleMesh_aebc1eb8c96cac1b50cacbe317351e3fb}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_polygon\_using\_elements\_area@{update\_polygon\_using\_elements\_area}}
@@ -2044,7 +2041,7 @@ Updates the polylines using the elements area as constraint for the number of po
 
 Updates the polygon but using the elements area instead of the default refinement and unrefinement methods. Use a vector of vector for vertices and target areas to deal with the cases when the boundaries are split by the distribution process
 
-Definition at line 37421 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 37662 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ae089d459099bb928ced9b8a306b99df5}\label{classoomph_1_1RefineableTriangleMesh_ae089d459099bb928ced9b8a306b99df5}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_polygon\_using\_face\_mesh@{update\_polygon\_using\_face\_mesh}}
@@ -2055,12 +2052,11 @@ bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Helper function that updates the input polygon\textquotesingle{}s P\+S\+LG by using the end-\/points of elements from Face\+Mesh(es) that are constructed for the boundaries associated with the segments of the polygon. Optional boolean is used to run it as test only (if true is specified as input) in which case polygon isn\textquotesingle{}t actually modified. Returned boolean indicates if polygon was (or would have been -- if called with check\+\_\+only=false) changed. ~\newline
- 
-
 Helper function that updates the input polygon\textquotesingle{}s P\+S\+LG by using the end-\/points of elements from Face\+Mesh(es) that are constructed for the boundaries associated with the segments of the polygon. Optional boolean is used to run it as test only (if true is specified as input) in which case polygon isn\textquotesingle{}t actually modified. Returned boolean indicates if polygon was (or would have been -- if called with check\+\_\+only=false) changed. 
 
-Definition at line 33876 of file triangle\+\_\+mesh.\+template.\+cc.
+
+
+Definition at line 34138 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a26cdfda4b77158dd24641cb5889ad2ff}\label{classoomph_1_1RefineableTriangleMesh_a26cdfda4b77158dd24641cb5889ad2ff}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_polyline\_representation\_from\_restart@{update\_polyline\_representation\_from\_restart}}
@@ -2075,7 +2071,7 @@ Method used to update the polylines representation after restart.
 
 
 
-Definition at line 2641 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2773 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a2322a972b72344ba1d3945b723cf1317}\label{classoomph_1_1RefineableTriangleMesh_a2322a972b72344ba1d3945b723cf1317}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_shared\_curve\_after\_restart@{update\_shared\_curve\_after\_restart}}
@@ -2090,7 +2086,7 @@ Updates the shared polylines representation after restart.
 
 
 
-Definition at line 42676 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 43014 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a05952334eed68e6105f000341955708a}\label{classoomph_1_1RefineableTriangleMesh_a05952334eed68e6105f000341955708a}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!update\_shared\_curve\_using\_elements\_area@{update\_shared\_curve\_using\_elements\_area}}
@@ -2105,7 +2101,7 @@ Updates the polylines using the elements area as constraint for the number of po
 
 
 
-Definition at line 39607 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 39895 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -2120,7 +2116,7 @@ bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 
 
-Definition at line 2381 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2502 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2138,7 +2134,7 @@ A map that stores the vertices that receive connections, they are identified by 
 
 
 
-Definition at line 2791 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2933 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a5fc09234e6d14789d597b40fd66b3d4f}\label{classoomph_1_1RefineableTriangleMesh_a5fc09234e6d14789d597b40fd66b3d4f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Counter\_for\_flat\_packed\_doubles@{Counter\_for\_flat\_packed\_doubles}}
@@ -2153,7 +2149,7 @@ Counter used when processing vector of flat-\/packed doubles.
 
 
 
-Definition at line 3229 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3371 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a5bb1b8a504779c77968538fe612a157d}\label{classoomph_1_1RefineableTriangleMesh_a5bb1b8a504779c77968538fe612a157d}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Counter\_for\_flat\_packed\_unsigneds@{Counter\_for\_flat\_packed\_unsigneds}}
@@ -2168,7 +2164,7 @@ Counter used when processing vector of flat-\/packed unsigneds.
 
 
 
-Definition at line 3237 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3379 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a7825ce22a479fecd30361ae09750f15a}\label{classoomph_1_1RefineableTriangleMesh_a7825ce22a479fecd30361ae09750f15a}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Disable\_projection@{Disable\_projection}}
@@ -2183,7 +2179,7 @@ Enable/disable solution projection during adaptation.
 
 
 
-Definition at line 3725 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3860 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aae4994b1d7eaf5f408dffa1376c1a743}\label{classoomph_1_1RefineableTriangleMesh_aae4994b1d7eaf5f408dffa1376c1a743}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Do\_boundary\_refinement\_constrained\_by\_target\_areas@{Do\_boundary\_refinement\_constrained\_by\_target\_areas}}
@@ -2198,7 +2194,7 @@ Flag that enables or disables boundary refinement (true by default)
 
 
 
-Definition at line 2953 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3100 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a859abc98c895069efdd3af5c578e993e}\label{classoomph_1_1RefineableTriangleMesh_a859abc98c895069efdd3af5c578e993e}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Do\_boundary\_unrefinement\_constrained\_by\_target\_areas@{Do\_boundary\_unrefinement\_constrained\_by\_target\_areas}}
@@ -2213,7 +2209,7 @@ Flag that enables or disables boundary unrefinement (true by default)
 
 
 
-Definition at line 2950 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3097 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ab6a6a7aa732c31a8895ad502466ab242}\label{classoomph_1_1RefineableTriangleMesh_ab6a6a7aa732c31a8895ad502466ab242}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Do\_shared\_boundary\_refinement\_constrained\_by\_target\_areas@{Do\_shared\_boundary\_refinement\_constrained\_by\_target\_areas}}
@@ -2228,7 +2224,7 @@ Flag that enables or disables boundary unrefinement (true by default)
 
 
 
-Definition at line 2959 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3106 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a33354e28a1dc5f457f7e22ae19c1db4f}\label{classoomph_1_1RefineableTriangleMesh_a33354e28a1dc5f457f7e22ae19c1db4f}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Do\_shared\_boundary\_unrefinement\_constrained\_by\_target\_areas@{Do\_shared\_boundary\_unrefinement\_constrained\_by\_target\_areas}}
@@ -2243,7 +2239,7 @@ Flag that enables or disables boundary unrefinement (true by default)
 
 
 
-Definition at line 2956 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3103 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_afd370f91590e5f7e21194d58c00b6ba0}\label{classoomph_1_1RefineableTriangleMesh_afd370f91590e5f7e21194d58c00b6ba0}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Flat\_packed\_doubles@{Flat\_packed\_doubles}}
@@ -2258,7 +2254,7 @@ Vector of flat-\/packed doubles to be communicated with other processors.
 
 
 
-Definition at line 3225 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3367 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a162fd7e805e4899cf4590cb5245849f2}\label{classoomph_1_1RefineableTriangleMesh_a162fd7e805e4899cf4590cb5245849f2}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Flat\_packed\_unsigneds@{Flat\_packed\_unsigneds}}
@@ -2273,7 +2269,7 @@ Vector of flat-\/packed unsigneds to be communicated with other processors.
 
 
 
-Definition at line 3233 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3375 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_aff72d905fab5ad211c1f7d4b77d24149}\label{classoomph_1_1RefineableTriangleMesh_aff72d905fab5ad211c1f7d4b77d24149}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Flat\_packed\_unsigneds\_string@{Flat\_packed\_unsigneds\_string}}
@@ -2288,7 +2284,7 @@ Temporary vector of strings to enable full annotation of \mbox{\hyperlink{classo
 
 
 
-Definition at line 3242 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3384 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a64228789345c2ef62942f66058c96a5e}\label{classoomph_1_1RefineableTriangleMesh_a64228789345c2ef62942f66058c96a5e}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Internal\_hole\_point\_update\_fct\_pt@{Internal\_hole\_point\_update\_fct\_pt}}
@@ -2303,7 +2299,7 @@ Function pointer to function that can be set to update the position of the centr
 
 
 
-Definition at line 3752 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3887 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a35205d1ccdc32f0242f75941162f982e}\label{classoomph_1_1RefineableTriangleMesh_a35205d1ccdc32f0242f75941162f982e}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Max\_element\_size@{Max\_element\_size}}
@@ -2318,7 +2314,7 @@ Max permitted element size.
 
 
 
-Definition at line 3716 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3851 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a8b3f579874e42d3480734d8e98d689e5}\label{classoomph_1_1RefineableTriangleMesh_a8b3f579874e42d3480734d8e98d689e5}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Max\_sample\_points\_for\_limited\_locate\_zeta\_during\_target\_area\_transfer@{Max\_sample\_points\_for\_limited\_locate\_zeta\_during\_target\_area\_transfer}}
@@ -2333,7 +2329,7 @@ Default value for max. number of sample points used for locate\+\_\+zeta when tr
 
 
 
-Definition at line 3713 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3848 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a4fbf41991a5b25054d43d6cd9af599a8}\label{classoomph_1_1RefineableTriangleMesh_a4fbf41991a5b25054d43d6cd9af599a8}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Mesh\_update\_fct\_pt@{Mesh\_update\_fct\_pt}}
@@ -2348,7 +2344,7 @@ Function pointer to function that updates the mesh following the snapping of bou
 
 
 
-Definition at line 3747 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3882 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ab242d22770f3248b35553a3eaf08f877}\label{classoomph_1_1RefineableTriangleMesh_ab242d22770f3248b35553a3eaf08f877}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Min\_element\_size@{Min\_element\_size}}
@@ -2363,7 +2359,7 @@ Min permitted element size.
 
 
 
-Definition at line 3719 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3854 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a7b7b3acbda9a79f8a1f0cc195dc72cb9}\label{classoomph_1_1RefineableTriangleMesh_a7b7b3acbda9a79f8a1f0cc195dc72cb9}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Min\_permitted\_angle@{Min\_permitted\_angle}}
@@ -2378,7 +2374,7 @@ Min angle before remesh gets triggered.
 
 
 
-Definition at line 3722 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3857 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a3a9e90149a6ccc80f1bccca77f46fb2e}\label{classoomph_1_1RefineableTriangleMesh_a3a9e90149a6ccc80f1bccca77f46fb2e}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Nbin\_x\_for\_area\_transfer@{Nbin\_x\_for\_area\_transfer}}
@@ -2393,7 +2389,7 @@ Number of bins in the x-\/direction when transferring target areas by bin method
 
 
 
-Definition at line 3704 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3837 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_af2c7213f1094f8e81e7dbd28b60cff18}\label{classoomph_1_1RefineableTriangleMesh_af2c7213f1094f8e81e7dbd28b60cff18}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Nbin\_y\_for\_area\_transfer@{Nbin\_y\_for\_area\_transfer}}
@@ -2408,7 +2404,7 @@ Number of bins in the y-\/direction when transferring target areas by bin method
 
 
 
-Definition at line 3709 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3842 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a0b8c7af317c5279a00a13aa39ea896f2}\label{classoomph_1_1RefineableTriangleMesh_a0b8c7af317c5279a00a13aa39ea896f2}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Print\_timings\_level\_adaptation@{Print\_timings\_level\_adaptation}}
@@ -2423,7 +2419,7 @@ The printing level for adaptation.
 
 
 
-Definition at line 3738 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3873 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ad2abc4d856b22d59ecc5640669700b31}\label{classoomph_1_1RefineableTriangleMesh_ad2abc4d856b22d59ecc5640669700b31}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Print\_timings\_level\_load\_balance@{Print\_timings\_level\_load\_balance}}
@@ -2438,7 +2434,7 @@ The printing level for load balance.
 
 
 
-Definition at line 3741 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3876 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ac0e10dae151eb6c03f90be0bc3462f8d}\label{classoomph_1_1RefineableTriangleMesh_ac0e10dae151eb6c03f90be0bc3462f8d}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Print\_timings\_projection@{Print\_timings\_projection}}
@@ -2453,7 +2449,7 @@ Enable/disable printing timings for projection.
 
 
 
-Definition at line 3735 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3870 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_acd5c63891d8a4052ce629610697561b6}\label{classoomph_1_1RefineableTriangleMesh_acd5c63891d8a4052ce629610697561b6}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Print\_timings\_transfering\_target\_areas@{Print\_timings\_transfering\_target\_areas}}
@@ -2468,7 +2464,7 @@ Enable/disable printing timings for transfering target areas.
 
 
 
-Definition at line 3732 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3867 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_ab22bada72171b4403ce2424a3f36b0d3}\label{classoomph_1_1RefineableTriangleMesh_ab22bada72171b4403ce2424a3f36b0d3}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Sorted\_shared\_boundary\_node\_pt@{Sorted\_shared\_boundary\_node\_pt}}
@@ -2483,7 +2479,7 @@ Stores the nodes in the boundaries in the same order in all the processors Sorte
 
 
 
-Definition at line 2977 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3124 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTriangleMesh_a6b38d79f86053e7acb8f92efe06d9c9a}\label{classoomph_1_1RefineableTriangleMesh_a6b38d79f86053e7acb8f92efe06d9c9a}} 
 \index{oomph::RefineableTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableTriangleMesh$<$ ELEMENT $>$}!Use\_iterative\_solver\_for\_projection@{Use\_iterative\_solver\_for\_projection}}
@@ -2494,7 +2490,7 @@ bool \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\+::\+Refineabl
 
 Flag to indicate whether to use or not an iterative solver (CG with diagonal preconditioned) for the projection problem 
 
-Definition at line 3729 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 3864 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 

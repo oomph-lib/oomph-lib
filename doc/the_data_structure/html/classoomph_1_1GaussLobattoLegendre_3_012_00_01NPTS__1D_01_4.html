@@ -157,8 +157,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0dee3143e486b59326d774682332812f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deafault constructor. Calculates and stores GLL nodes.  <a href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#a0dee3143e486b59326d774682332812f">More...</a><br /></td></tr>
 <tr class="separator:a0dee3143e486b59326d774682332812f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d7de3fd70cc8684195a2d7de253eb69"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#a1d7de3fd70cc8684195a2d7de253eb69">nweight</a> () const</td></tr>
-<tr class="memdesc:a1d7de3fd70cc8684195a2d7de253eb69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of integration points of the scheme <br  />
-  <a href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#a1d7de3fd70cc8684195a2d7de253eb69">More...</a><br /></td></tr>
+<tr class="memdesc:a1d7de3fd70cc8684195a2d7de253eb69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of integration points of the scheme.  <a href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#a1d7de3fd70cc8684195a2d7de253eb69">More...</a><br /></td></tr>
 <tr class="separator:a1d7de3fd70cc8684195a2d7de253eb69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3194b6f3d9bf6d0448cf3d055ed57d1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#ae3194b6f3d9bf6d0448cf3d055ed57d1">knot</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j) const</td></tr>
 <tr class="memdesc:ae3194b6f3d9bf6d0448cf3d055ed57d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return coordinate s[j] (j=0) of integration point i.  <a href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#ae3194b6f3d9bf6d0448cf3d055ed57d1">More...</a><br /></td></tr>
@@ -193,7 +192,7 @@ Private Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
-<tr class="memitem:ad7b67b90f29484aff0f1567467aaf9bc"><td class="memItemLeft" align="right" valign="top">static const unsigned long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#ad7b67b90f29484aff0f1567467aaf9bc">Npts</a> =NPTS_1D*NPTS_1D</td></tr>
+<tr class="memitem:ad7b67b90f29484aff0f1567467aaf9bc"><td class="memItemLeft" align="right" valign="top">static const unsigned long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#ad7b67b90f29484aff0f1567467aaf9bc">Npts</a> = NPTS_1D * NPTS_1D</td></tr>
 <tr class="memdesc:ad7b67b90f29484aff0f1567467aaf9bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of integration points in scheme.  <a href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#ad7b67b90f29484aff0f1567467aaf9bc">More...</a><br /></td></tr>
 <tr class="separator:ad7b67b90f29484aff0f1567467aaf9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -203,7 +202,7 @@ class oomph::GaussLobattoLegendre&lt; 2, NPTS_1D &gt;</h3>
 
 <p>2D <a class="el" href="classoomph_1_1Gauss.html">Gauss</a> Lobatto Legendre integration class </p>
 
-<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01397">1397</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01505">1505</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0dee3143e486b59326d774682332812f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0dee3143e486b59326d774682332812f">&#9670;&nbsp;</a></span>GaussLobattoLegendre()</h2>
@@ -222,9 +221,9 @@ template&lt;unsigned NPTS_1D&gt; </div>
 <p>Deafault constructor. Calculates and stores GLL nodes. </p>
 <p>Calculate positions and weights for the 2D <a class="el" href="classoomph_1_1Gauss.html">Gauss</a> Lobatto Legendre integration class </p>
 
-<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01432">1432</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01545">1545</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
 
-<p class="reference">References <a class="el" href="orthpoly_8cc_source.html#l00034">oomph::Orthpoly::gll_nodes()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+<p class="reference">References <a class="el" href="orthpoly_8cc_source.html#l00033">oomph::Orthpoly::gll_nodes()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
@@ -269,7 +268,7 @@ template&lt;unsigned NPTS_1D&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01418">1418</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01527">1527</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
@@ -300,12 +299,11 @@ template&lt;unsigned NPTS_1D&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Number of integration points of the scheme <br  />
- </p>
+<p>Number of integration points of the scheme. </p>
 
 <p>Implements <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01415">1415</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01521">1521</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
 
 </div>
 </div>
@@ -339,7 +337,7 @@ template&lt;unsigned NPTS_1D&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01422">1422</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01533">1533</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
@@ -370,7 +368,7 @@ template&lt;unsigned NPTS_1D&gt; </div>
 
 <p>Array to hold weight and knot points. </p>
 
-<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01405">1405</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01512">1512</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
 
 </div>
 </div>
@@ -386,7 +384,7 @@ template&lt;unsigned NPTS_1D&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const unsigned long int <a class="el" href="classoomph_1_1GaussLobattoLegendre.html">oomph::GaussLobattoLegendre</a>&lt; 2, NPTS_1D &gt;::Npts =NPTS_1D*NPTS_1D</td>
+          <td class="memname">const unsigned long int <a class="el" href="classoomph_1_1GaussLobattoLegendre.html">oomph::GaussLobattoLegendre</a>&lt; 2, NPTS_1D &gt;::Npts = NPTS_1D * NPTS_1D</td>
         </tr>
       </table>
   </td>
@@ -398,7 +396,7 @@ template&lt;unsigned NPTS_1D&gt; </div>
 
 <p>Number of integration points in scheme. </p>
 
-<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01402">1402</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01509">1509</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
 
 </div>
 </div>
@@ -424,7 +422,7 @@ template&lt;unsigned NPTS_1D&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01406">1406</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l01513">1513</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
 
 </div>
 </div>
@@ -459,7 +457,7 @@ template&lt;unsigned NPTS_1D&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:55:22
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:23
         </div>
       </div>
     </footer>

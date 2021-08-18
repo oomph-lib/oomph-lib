@@ -33,9 +33,9 @@ unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_afdaae310f7879fb9191b730cdf81ade1}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a93fa12a6111a676cb6e7ac2528266d07}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ab26cbb023f3e3dabcd49597584a86f63}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a369b7a71e40d491ea34858e940431492}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a6eba9e3a52e76c1d0f0e8065388afcf3}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ac1e132d67adcf473addf1d85eabd1e1c}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -47,7 +47,7 @@ void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a8128
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a526d20c2aaa5f0ba68436a06de012443}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ab88a4e14c48864239def0f2ae164528e}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ad7102618933a097927ed64526a8b8f64}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a46c8e63606e8001442289cec8ba56957}{pshape\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \item 
@@ -102,7 +102,7 @@ class oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$
 
 Taylor--Hood elements are Navier--Stokes elements with quadratic interpolation for velocities and positions and continuous linear pressure interpolation. They can be used within oomph-\/lib\textquotesingle{}s block-\/preconditioning framework. 
 
-Definition at line 1766 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1863 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -120,7 +120,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line 1823 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1919 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -152,7 +152,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 1984 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2105 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -170,7 +170,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 2176 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2293 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -205,7 +205,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 2053 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2170 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -225,7 +225,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 2101 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2220 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -248,7 +248,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 1961 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2080 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a0a9108e22aaa3d647f58929e19b488a0}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a0a9108e22aaa3d647f58929e19b488a0}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_nst@{dshape\_and\_dtest\_eulerian\_nst}}
@@ -267,7 +267,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 1936 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2055 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -290,18 +290,18 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 1861 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1973 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
-\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ab88a4e14c48864239def0f2ae164528e}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ab88a4e14c48864239def0f2ae164528e}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ad7102618933a097927ed64526a8b8f64}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ad7102618933a097927ed64526a8b8f64}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -309,22 +309,22 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 Create a list of pairs for all unknowns in this element, so the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 2869 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2839 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
 References n.
 
-\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a93fa12a6111a676cb6e7ac2528266d07}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a93fa12a6111a676cb6e7ac2528266d07}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ab26cbb023f3e3dabcd49597584a86f63}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ab26cbb023f3e3dabcd49597584a86f63}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -342,26 +342,26 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianQTaylorHoodElement_a1ac7edfbc1114f039d4ed73ad9234be3}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianQTaylorHoodElement_a1ab1408fbc105e8f73724cef4797e526}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 2808 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2775 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
 References i, and n.
 
-\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a369b7a71e40d491ea34858e940431492}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a369b7a71e40d491ea34858e940431492}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a6eba9e3a52e76c1d0f0e8065388afcf3}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a6eba9e3a52e76c1d0f0e8065388afcf3}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -377,14 +377,13 @@ Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing
 \begin{DoxyItemize}
 \item the pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
-\end{DoxyItemize}for pressure values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function., ~\newline
- 
+\end{DoxyItemize}for pressure values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function., 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
-
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
 
 
-Definition at line 2842 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+
+Definition at line 2811 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a276c7dbe4b05d3b94432284a27e02ce7}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a276c7dbe4b05d3b94432284a27e02ce7}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -394,7 +393,7 @@ Definition at line 2842 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stok
 
 
 
-Definition at line 2790 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2756 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a365948d448fc0bb1b711b2d472f0dfa5}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a365948d448fc0bb1b711b2d472f0dfa5}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -404,7 +403,7 @@ Definition at line 2790 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stok
 
 
 
-Definition at line 2780 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2745 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a526d20c2aaa5f0ba68436a06de012443}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a526d20c2aaa5f0ba68436a06de012443}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!ndof\_types@{ndof\_types}}
@@ -423,7 +422,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 1910 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2031 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ab52245df561c368a6f0709374dba7136}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ab52245df561c368a6f0709374dba7136}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
@@ -442,7 +441,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 1857 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1967 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -465,7 +464,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStok
 
 
 
-Definition at line 1900 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2017 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -488,7 +487,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStok
 
 
 
-Definition at line 1904 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2023 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -511,7 +510,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStok
 
 
 
-Definition at line 1892 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2005 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -534,7 +533,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStok
 
 
 
-Definition at line 1896 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2011 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -557,7 +556,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTemplateFreeNavier
 
 
 
-Definition at line 1843 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1947 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -580,7 +579,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStok
 
 
 
-Definition at line 1840 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1941 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -603,7 +602,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 1848 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1954 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -626,7 +625,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 1853 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1961 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -640,7 +639,7 @@ References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Generali
 
 
 
-Definition at line 2784 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2750 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a009a79e312afa58b6532ec51a59ae81c}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a009a79e312afa58b6532ec51a59ae81c}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!Pconv@{Pconv}}
@@ -650,7 +649,7 @@ Definition at line 2784 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stok
 
 
 
-Definition at line 2795 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2762 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a7ec2ae0068b4c02cca984dfb549b083e}\label{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a7ec2ae0068b4c02cca984dfb549b083e}} 
 \index{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$@{oomph::GeneralisedNewtonianQTaylorHoodElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -683,7 +682,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 2145 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2264 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -701,7 +700,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 2243 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2357 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -724,7 +723,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquati
 
 
 
-Definition at line 2277 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2388 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -751,7 +750,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianQT
 
 
 
-Definition at line 1828 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1926 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -773,7 +772,7 @@ Static array of ints to hold number of variables at node.
 
 
 
-Definition at line 1772 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1869 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -792,7 +791,7 @@ Static array of ints to hold conversion from pressure node numbers to actual nod
 
 
 
-Definition at line 1778 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1874 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

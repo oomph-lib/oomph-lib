@@ -28,7 +28,7 @@ unsigned long \mbox{\hyperlink{classoomph_1_1FoldHandler_a30f2973860c13a183d5647
 void \mbox{\hyperlink{classoomph_1_1FoldHandler_abfbec6da3dffeaf3b4df0ee4955101fd}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Get the residuals. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FoldHandler_ad1bec54a2e0c5bd483ff0bf633bd6542}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation 
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FoldHandler_ad98b98488b683fa3ad9497b662e6e5b6}{get\+\_\+dresiduals\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam)
 \begin{DoxyCompactList}\small\item\em Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system. \end{DoxyCompactList}\item 
@@ -70,8 +70,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1FoldHandler_aa3f143846245ecea5967ba7c79b
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}{Y}}
 \begin{DoxyCompactList}\small\item\em Storage for the null vector. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1FoldHandler_a302fed88ed8dad865616a3d050d385ad}{Count}}
-\begin{DoxyCompactList}\small\item\em A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. \end{DoxyCompactList}\item 
 double $\ast$ \mbox{\hyperlink{classoomph_1_1FoldHandler_ae32fb6242e77a273f82de2c491d36314}{Parameter\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Storage for the pointer to the parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
@@ -82,11 +81,9 @@ class \mbox{\hyperlink{classoomph_1_1FoldHandler_a29d9c39e6a14d2a4cc4e0d7c716579
 
 
 \doxysubsection{Detailed Description}
-A class that is used to assemble the augmented system that defines a fold (saddle-\/node) or limit point. The \char`\"{}standard\char`\"{} problem must be a function of a global paramter $\lambda$, and a ~\newline
- solution is $R(u,\lambda) = 0 $ , where $ u $ are the unknowns in the problem. A limit point is formally specified by the augmented system of size $ 2N+1 $ \[ R(u,\lambda) = 0, \] \[ Jy = 0, \] \[\phi\cdot y = 1. \] In the above $ J $ is the usual Jacobian matrix, $ dR/du $, and $ \phi $ is a constant vector that is chosen to ensure that the null vector, $ y $, is not trivial. ~\newline
- 
+A class that is used to assemble the augmented system that defines a fold (saddle-\/node) or limit point. The \char`\"{}standard\char`\"{} problem must be a function of a global paramter $\lambda$, and a solution is $R(u,\lambda) = 0 $ , where $ u $ are the unknowns in the problem. A limit point is formally specified by the augmented system of size $ 2N+1 $ \[ R(u,\lambda) = 0, \] \[ Jy = 0, \] \[\phi\cdot y = 1. \] In the above $ J $ is the usual Jacobian matrix, $ dR/du $, and $ \phi $ is a constant vector that is chosen to ensure that the null vector, $ y $, is not trivial. 
 
-Definition at line 457 of file assembly\+\_\+handler.\+h.
+Definition at line 472 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -111,7 +108,7 @@ Block\+\_\+augmented\+\_\+J&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 463 of file assembly\+\_\+handler.\+h.
+Definition at line 478 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -128,7 +125,7 @@ Constructor\+: initialise the fold handler, by setting initial guesses for Y, Ph
 
 Constructor\+: Initialise the fold handler, by setting initial guesses for Y, Phi and calculating Count. If the system changes, a new handler must be constructed. 
 
-Definition at line 812 of file assembly\+\_\+handler.\+cc.
+Definition at line 864 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -146,7 +143,7 @@ Constructor in which initial eigenvector can be passed.
 
 Constructor in which the eigenvector is passed as an initial guess 
 
-Definition at line 915 of file assembly\+\_\+handler.\+cc.
+Definition at line 970 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -162,7 +159,7 @@ Constructor in which initial eigenvector and normalisation can be passed
 
 Constructor in which the eigenvector and normalisation vector are passed as an initial guess 
 
-Definition at line 980 of file assembly\+\_\+handler.\+cc.
+Definition at line 1036 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -180,7 +177,7 @@ Destructor, return the problem to its original state before the augmented system
 
 Destructor return the problem to its original (non-\/augmented) state. 
 
-Definition at line 1521 of file assembly\+\_\+handler.\+cc.
+Definition at line 1573 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -205,7 +202,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692c3d
 
 
 
-Definition at line 563 of file assembly\+\_\+handler.\+h.
+Definition at line 584 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -227,7 +224,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a22c5f240674e4
 
 
 
-Definition at line 559 of file assembly\+\_\+handler.\+h.
+Definition at line 577 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_a30f2973860c13a183d5647a63b0c2ead}\label{classoomph_1_1FoldHandler_a30f2973860c13a183d5647a63b0c2ead}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!eqn\_number@{eqn\_number}}
@@ -245,7 +242,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559
 
 
 
-Definition at line 1082 of file assembly\+\_\+handler.\+cc.
+Definition at line 1138 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -271,7 +268,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_aefc0c13a65342
 
 
 
-Definition at line 1457 of file assembly\+\_\+handler.\+cc.
+Definition at line 1512 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_ad98b98488b683fa3ad9497b662e6e5b6}\label{classoomph_1_1FoldHandler_ad98b98488b683fa3ad9497b662e6e5b6}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}}
@@ -289,7 +286,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0a
 
 
 
-Definition at line 1388 of file assembly\+\_\+handler.\+cc.
+Definition at line 1442 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -311,7 +308,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d
 
 
 
-Definition at line 1502 of file assembly\+\_\+handler.\+cc.
+Definition at line 1555 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -333,7 +330,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a296bef49838d2
 
 
 
-Definition at line 1479 of file assembly\+\_\+handler.\+cc.
+Definition at line 1533 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_ad1bec54a2e0c5bd483ff0bf633bd6542}\label{classoomph_1_1FoldHandler_ad1bec54a2e0c5bd483ff0bf633bd6542}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!get\_jacobian@{get\_jacobian}}
@@ -343,7 +340,7 @@ Definition at line 1479 of file assembly\+\_\+handler.\+cc.
 
 
 
-Calculate the elemental Jacobian matrix \char`\"{}d equation 
+Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{}. 
 
 Calculate the elemental Jacobian matrix \char`\"{}d equation
@@ -355,7 +352,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0
 
 
 
-Definition at line 1185 of file assembly\+\_\+handler.\+cc.
+Definition at line 1244 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -381,7 +378,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90d
 
 
 
-Definition at line 1114 of file assembly\+\_\+handler.\+cc.
+Definition at line 1171 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -407,7 +404,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa0
 
 
 
-Definition at line 1049 of file assembly\+\_\+handler.\+cc.
+Definition at line 1105 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -429,7 +426,7 @@ Set to solve the augmented block system.
 
 Set to solve the augmented-\/by-\/one block system. 
 
-Definition at line 1548 of file assembly\+\_\+handler.\+cc.
+Definition at line 1600 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -451,7 +448,7 @@ Set to solve the block system.
 
 Set to solve the block system. The boolean flag specifies whether the block decomposition should use exactly the same jacobian 
 
-Definition at line 1577 of file assembly\+\_\+handler.\+cc.
+Definition at line 1629 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -469,7 +466,7 @@ Solve non-\/block system.
 
 Set to Solve non-\/block system. 
 
-Definition at line 1597 of file assembly\+\_\+handler.\+cc.
+Definition at line 1649 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -490,7 +487,7 @@ Referenced by oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), an
 
 
 
-Definition at line 459 of file assembly\+\_\+handler.\+h.
+Definition at line 474 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -503,12 +500,11 @@ Definition at line 459 of file assembly\+\_\+handler.\+h.
 
 
 
-A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. ~\newline
- 
+A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. 
 
 
 
-Definition at line 489 of file assembly\+\_\+handler.\+h.
+Definition at line 509 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -526,7 +522,7 @@ Store the number of degrees of freedom in the non-\/augmented problem.
 
 
 
-Definition at line 477 of file assembly\+\_\+handler.\+h.
+Definition at line 497 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -544,7 +540,7 @@ Storage for the pointer to the parameter.
 
 
 
-Definition at line 492 of file assembly\+\_\+handler.\+h.
+Definition at line 512 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -562,7 +558,7 @@ A constant vector used to ensure that the null vector is not trivial.
 
 
 
-Definition at line 481 of file assembly\+\_\+handler.\+h.
+Definition at line 501 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -580,7 +576,7 @@ Pointer to the problem.
 
 
 
-Definition at line 473 of file assembly\+\_\+handler.\+h.
+Definition at line 493 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -598,7 +594,7 @@ Integer flag to indicate which system should be assembled. There are three possi
 
 
 
-Definition at line 470 of file assembly\+\_\+handler.\+h.
+Definition at line 490 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -616,7 +612,7 @@ Storage for the null vector.
 
 
 
-Definition at line 484 of file assembly\+\_\+handler.\+h.
+Definition at line 504 of file assembly\+\_\+handler.\+h.
 
 
 

@@ -19,11 +19,9 @@ Inheritance diagram for oomph\+::Advection\+Diffusion\+Equations$<$ D\+IM $>$\+:
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aa892578e0cffe209775da9f5ac84bd03}{Advection\+Diffusion\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)
-\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a341db90b2eaf704f3286a9fcde7c614a}{Advection\+Diffusion\+Wind\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)
-\begin{DoxyCompactList}\small\item\em Function pointer to wind function fct(x,w(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to wind function fct(x,w(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -36,15 +34,13 @@ void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aa80b72531531a91
 virtual unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aadffa26c42be5d4a1156a7467de48fb8}{u\+\_\+index\+\_\+adv\+\_\+diff}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. The default value, 0, is appropriate for single-\/physics problems, when there is only one variable, the value that satisfies the advection-\/diffusion equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a2c94e14a6b53e3cce43b83d8c8329174}{du\+\_\+dt\+\_\+adv\+\_\+diff}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
-\begin{DoxyCompactList}\small\item\em du/dt at local node n. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em du/dt at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aa635388e5e1139e0a1eae97ca89279d0}{disable\+\_\+\+A\+LE}} ()
 \begin{DoxyCompactList}\small\item\em Disable A\+LE, i.\+e. assert the mesh is not moving -- you do this at your own risk! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a949dd5a3eb9803c993c1f4506cfd5d82}{enable\+\_\+\+A\+LE}} ()
-\begin{DoxyCompactList}\small\item\em (Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em (Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a70205e9d39d7ff9660a53402d5636c1f}{nscalar\+\_\+paraview}} () const
-\begin{DoxyCompactList}\small\item\em Number of scalars/fields output by this element. Reimplements. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of scalars/fields output by this element. Reimplements broken virtual function in base class. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a7e4c60334ef457e6155e84a9d24062cf}{scalar\+\_\+value\+\_\+paraview}} (std\+::ofstream \&file\+\_\+out, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&nplot) const
 \begin{DoxyCompactList}\small\item\em Write values of the i-\/th scalar field at the plot points. Needs to be implemented for each new specific element type. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a37c30bb64389d12ffef51f046d846886}{scalar\+\_\+name\+\_\+paraview}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
@@ -75,18 +71,16 @@ void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a87c8c4e8ff5ea6e
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to wind function. Const version. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ae1dd3fb5d07e98ad2a6b1e38f2f4dc3c}{pe}} () const
 \begin{DoxyCompactList}\small\item\em Peclet number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a6757b4e9313b562812a21b49f167a114}{pe\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a42ecfcb539c6e5b016c2e16092197615}{pe\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Peclet number. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ad23f5906cc0b088d778e1694719138e0}{pe\+\_\+st}} () const
 \begin{DoxyCompactList}\small\item\em Peclet number multiplied by Strouhal number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aab0fe6d25a1506aea517e359e0e5e807}{pe\+\_\+st\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_af6a135e972a161c62c6d9f50617a7758}{pe\+\_\+st\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Peclet number multipled by Strouha number. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a3b8feaba7519dee3ed4a056c5dcf2bc2}{get\+\_\+source\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
-\begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a32cb2f977b32fabfc23d1134749371ed}{get\+\_\+wind\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind) const
-\begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a9c0fdde918adc761bb6f212cd9625e64}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: $\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i $. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ae56ee6b085c75be438a598244c527fb5}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
@@ -109,8 +103,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ac3c3b
 virtual double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a354827df2a149258310ffdd0e4c0d40b}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a399995609ea6d997496e3bcbdc5383f7}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -127,7 +120,7 @@ bool \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a049fe0ee23a9dda
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a7760f126f92f6926928263b9c7831764}{Default\+\_\+peclet\+\_\+number}} =0.\+0
+static double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a7760f126f92f6926928263b9c7831764}{Default\+\_\+peclet\+\_\+number}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for the Peclet number. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -140,7 +133,7 @@ A class for all elements that solve the Advection Diffusion equations using isop
 
 \[ \frac{\partial^2 u}{\partial x_i^2} = Pe w_i(x_k) \frac{\partial u}{\partial x_i} + f(x_j) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line 55 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 54 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -154,12 +147,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{
 
 
 
-Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- 
+Function pointer to source function fct(x,f(x)) -- x is a Vector! 
 
 
 
-Definition at line 62 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 59 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_a341db90b2eaf704f3286a9fcde7c614a}\label{classoomph_1_1AdvectionDiffusionEquations_a341db90b2eaf704f3286a9fcde7c614a}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!AdvectionDiffusionWindFctPt@{AdvectionDiffusionWindFctPt}}
@@ -170,12 +162,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{
 
 
 
-Function pointer to wind function fct(x,w(x)) -- x is a Vector! ~\newline
- 
+Function pointer to wind function fct(x,w(x)) -- x is a Vector! 
 
 
 
-Definition at line 68 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 65 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -193,7 +184,7 @@ Constructor\+: Initialise the Source\+\_\+fct\+\_\+pt and Wind\+\_\+fct\+\_\+pt 
 
 
 
-Definition at line 74 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 71 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -212,7 +203,7 @@ Broken copy constructor.
 
 
 
-Definition at line 84 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 81 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -244,7 +235,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 410 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 396 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -271,7 +262,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 287 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 285 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_a7b264e70255fa420e443e60cbd8d7dbc}\label{classoomph_1_1AdvectionDiffusionEquations_a7b264e70255fa420e443e60cbd8d7dbc}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!dinterpolated\_u\_adv\_diff\_ddata@{dinterpolated\_u\_adv\_diff\_ddata}}
@@ -290,7 +281,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEqua
 
 
 
-Definition at line 463 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 498 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -317,7 +308,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 132 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 133 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -366,10 +357,9 @@ double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+Ad
 
 
 
-du/dt at local node n. ~\newline
- 
+du/dt at local node n. Uses suitably interpolated value for hanging nodes. 
 
-Uses suitably interpolated value for hanging nodes. 
+
 
 Definition at line 106 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
@@ -386,8 +376,7 @@ void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+Adve
 
 
 
-(Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. ~\newline
- 
+(Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. 
 
 
 
@@ -399,7 +388,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 142 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 143 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -430,7 +419,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 409 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 443 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -438,7 +427,7 @@ References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Ad
 
 
 
-Referenced by oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
+Referenced by oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_aed50fe00556434c01bc855766edeb564}\label{classoomph_1_1AdvectionDiffusionEquations_aed50fe00556434c01bc855766edeb564}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -457,15 +446,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 420 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 454 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff(), and residuals().
-
-
-
-Referenced by oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_ae56ee6b085c75be438a598244c527fb5}\label{classoomph_1_1AdvectionDiffusionEquations_ae56ee6b085c75be438a598244c527fb5}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -488,7 +473,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 397 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 429 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -496,7 +481,7 @@ References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Ad
 
 
 
-Referenced by oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd().
+Referenced by oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_a399995609ea6d997496e3bcbdc5383f7}\label{classoomph_1_1AdvectionDiffusionEquations_a399995609ea6d997496e3bcbdc5383f7}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_adv\_diff@{fill\_in\_generic\_residual\_contribution\_adv\_diff}}
@@ -507,8 +492,7 @@ void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+Adve
 
 
 
-Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix ~\newline
- 
+Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix. 
 
 Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and/or element Jacobian matrix.
 
@@ -520,7 +504,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEqua
 
 
 
-Definition at line 49 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 48 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -543,7 +527,7 @@ Get flux\+: $\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i $.
 
 
 
-Definition at line 366 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 395 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -562,12 +546,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+
 
 
 
-Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations ~\newline
- 
+Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. 
 
 
 
-Definition at line 330 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 353 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -582,8 +565,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+
 
 
 
-Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
- 
+Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. 
 
 
 
@@ -591,7 +573,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 348 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 374 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -614,7 +596,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 431 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 466 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -622,7 +604,7 @@ References interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+
 
 
 
-Referenced by oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::get\+\_\+body\+\_\+force\+\_\+nst(), oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::get\+\_\+body\+\_\+force\+\_\+nst(), oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::output(), oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::output(), oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::output(), and oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::scalar\+\_\+value\+\_\+paraview().
+Referenced by oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::get\+\_\+body\+\_\+force\+\_\+nst(), oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::get\+\_\+body\+\_\+force\+\_\+nst(), oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::output(), oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::output(), oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::output(), and oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::scalar\+\_\+value\+\_\+paraview().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_a70205e9d39d7ff9660a53402d5636c1f}\label{classoomph_1_1AdvectionDiffusionEquations_a70205e9d39d7ff9660a53402d5636c1f}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!nscalar\_paraview@{nscalar\_paraview}}
@@ -633,9 +615,9 @@ unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+
 
 
 
-Number of scalars/fields output by this element. Reimplements. 
+Number of scalars/fields output by this element. Reimplements broken virtual function in base class. 
 
-broken virtual function in base class. 
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba80babdbe26a77fe8c}{oomph\+::\+Finite\+Element}}.
 
@@ -645,7 +627,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 149 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 150 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_aa80b72531531a916f3b0691b679d5b2a}\label{classoomph_1_1AdvectionDiffusionEquations_aa80b72531531a916f3b0691b679d5b2a}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!operator=@{operator=}}
@@ -660,7 +642,7 @@ Broken assignment operator.
 
 
 
-Definition at line 90 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 87 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -687,7 +669,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 250 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 245 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -718,7 +700,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 314 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 308 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -745,7 +727,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 238 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 233 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -772,11 +754,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a36bc6dc9052947f0932a605dd4d0e8f0}{oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a9055a63b9b8c9f3bf606192e52413326}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a855783400ac22a61e151d1611ad8e47e}{oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, 3 $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a36bc6dc9052947f0932a605dd4d0e8f0}{oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a855783400ac22a61e151d1611ad8e47e}{oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a9055a63b9b8c9f3bf606192e52413326}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, 3 $>$}}.
 
 
 
-Definition at line 260 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 256 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -803,7 +785,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 269 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 264 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_ab1d0f6bc8d3c9c9826ac1d71f1fd148f}\label{classoomph_1_1AdvectionDiffusionEquations_ab1d0f6bc8d3c9c9826ac1d71f1fd148f}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -830,7 +812,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 355 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 345 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -853,7 +835,7 @@ Peclet number.
 
 
 
-Definition at line 315 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 326 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -863,12 +845,12 @@ References oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::\+Pe\+\_
 
 Referenced by oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::compute\+\_\+stabilisation\+\_\+parameter(), oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic(), and oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic().
 
-\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_a6757b4e9313b562812a21b49f167a114}\label{classoomph_1_1AdvectionDiffusionEquations_a6757b4e9313b562812a21b49f167a114}} 
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_a42ecfcb539c6e5b016c2e16092197615}\label{classoomph_1_1AdvectionDiffusionEquations_a42ecfcb539c6e5b016c2e16092197615}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!pe\_pt@{pe\_pt}}
 \index{pe\_pt@{pe\_pt}!oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pe\_pt()}{pe\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::pe\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::pe\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -876,7 +858,7 @@ Pointer to Peclet number.
 
 
 
-Definition at line 318 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 332 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -899,18 +881,18 @@ Peclet number multiplied by Strouhal number.
 
 
 
-Definition at line 321 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 338 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::\+Pe\+St\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_aab0fe6d25a1506aea517e359e0e5e807}\label{classoomph_1_1AdvectionDiffusionEquations_aab0fe6d25a1506aea517e359e0e5e807}} 
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionEquations_af6a135e972a161c62c6d9f50617a7758}\label{classoomph_1_1AdvectionDiffusionEquations_af6a135e972a161c62c6d9f50617a7758}} 
 \index{oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}!pe\_st\_pt@{pe\_st\_pt}}
 \index{pe\_st\_pt@{pe\_st\_pt}!oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pe\_st\_pt()}{pe\_st\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::pe\+\_\+st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::pe\+\_\+st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -918,7 +900,7 @@ Pointer to Peclet number multipled by Strouha number.
 
 
 
-Definition at line 324 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 344 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -949,7 +931,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 209 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 207 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -976,7 +958,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 156 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 157 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -999,7 +981,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 227 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 226 of file advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -1018,7 +1000,7 @@ Access function\+: Pointer to source function.
 
 
 
-Definition at line 300 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 299 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1041,7 +1023,7 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line 304 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 306 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1064,7 +1046,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 102 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 99 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1083,7 +1065,7 @@ Access function\+: Pointer to wind function.
 
 
 
-Definition at line 308 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 313 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1106,7 +1088,7 @@ Access function\+: Pointer to wind function. Const version.
 
 
 
-Definition at line 312 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 320 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1128,7 +1110,7 @@ Boolean flag to indicate if A\+LE formulation is disabled when time-\/derivative
 
 
 
-Definition at line 557 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 596 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1139,7 +1121,7 @@ Referenced by oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::disab
 \index{Default\_peclet\_number@{Default\_peclet\_number}!oomph::AdvectionDiffusionEquations$<$ DIM $>$@{oomph::AdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_peclet\_number}{Default\_peclet\_number}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+peclet\+\_\+number =0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{oomph\+::\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+peclet\+\_\+number = 0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -1149,7 +1131,7 @@ Static default value for the Peclet number.
 
 Default value for Peclet number 
 
-Definition at line 562 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 600 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1168,7 +1150,7 @@ Pointer to global Peclet number.
 
 
 
-Definition at line 543 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 582 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1187,7 +1169,7 @@ Pointer to global Peclet number multiplied by Strouhal number.
 
 
 
-Definition at line 546 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 585 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1206,7 +1188,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 549 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 588 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -1225,7 +1207,7 @@ Pointer to wind function\+:
 
 
 
-Definition at line 552 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 591 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

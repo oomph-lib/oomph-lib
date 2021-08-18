@@ -35,8 +35,7 @@ void \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNOD
 void \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a4960e6e81844b8387096c3f1679055ef}{d2shape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psids) const
 \item 
 void \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a73d08f7b72685de1d8dd9ac30b8ddfec}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
-\begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations for the pressure in Taylor Hood). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations for the pressure in Taylor Hood). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_ad272711d69364c090fd332937ac6428c}{nnode\+\_\+1d}} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of nodes along each edge of the element. Overloaded to return the (variable) p-\/order rather than the template argument. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_af5792fe3ee774090f759b0a7dac6fddc}{initial\+\_\+p\+\_\+order}} () const
@@ -71,7 +70,7 @@ class oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N
 
 p-\/refineable version of Refineable\+Q\+Element$<$2,\+I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D$>$. 
 
-Definition at line 135 of file hp\+\_\+refineable\+\_\+elements.\+h.
+Definition at line 142 of file hp\+\_\+refineable\+\_\+elements.\+h.
 
 
 
@@ -89,7 +88,7 @@ Constructor.
 
 
 
-Definition at line 142 of file hp\+\_\+refineable\+\_\+elements.\+h.
+Definition at line 149 of file hp\+\_\+refineable\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a4f90a667998d7826a7be2b089ac76c03}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a4f90a667998d7826a7be2b089ac76c03}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!````~PRefineableQElement@{$\sim$PRefineableQElement}}
@@ -104,7 +103,7 @@ Destructor.
 
 
 
-Definition at line 146 of file hp\+\_\+refineable\+\_\+elements.\+h.
+Definition at line 152 of file hp\+\_\+refineable\+\_\+elements.\+h.
 
 
 
@@ -130,11 +129,11 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ae665f2d2eb0b6410ddc
 
 
 
-Definition at line 3665 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 3748 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::E, e, oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Refineable\+Element\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::nsons(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, t, values, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
+References oomph\+::\+Quad\+Tree\+Names\+::E, e, oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Refineable\+Element\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::nsons(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, t, values, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a4960e6e81844b8387096c3f1679055ef}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a4960e6e81844b8387096c3f1679055ef}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!d2shape\_local@{d2shape\_local}}
@@ -149,7 +148,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da0
 
 
 
-Definition at line 3119 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 3192 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a068e2fc2edfe459b07c373d8d1546c51}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a068e2fc2edfe459b07c373d8d1546c51}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!dshape\_local@{dshape\_local}}
@@ -168,7 +167,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line 2954 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 3028 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
@@ -183,8 +182,7 @@ void \mbox{\hyperlink{classoomph_1_1PRefineableQElement}{oomph\+::\+P\+Refineabl
 
 
 
-Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations for the pressure in Taylor Hood). ~\newline
- 
+Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations for the pressure in Taylor Hood). 
 
 
 
@@ -192,7 +190,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb0
 
 
 
-Definition at line 173 of file hp\+\_\+refineable\+\_\+elements.\+h.
+Definition at line 182 of file hp\+\_\+refineable\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a50a41c20cf1ab02ed17e1b74f571fd22}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a50a41c20cf1ab02ed17e1b74f571fd22}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!get\_node\_at\_local\_coordinate@{get\_node\_at\_local\_coordinate}}
@@ -211,7 +209,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ddbb05c5f8bb35
 
 
 
-Definition at line 1301 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 1317 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
@@ -238,7 +236,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PRefineableElement_a6babd48e981414ad54
 
 
 
-Definition at line 181 of file hp\+\_\+refineable\+\_\+elements.\+h.
+Definition at line 193 of file hp\+\_\+refineable\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a8f5e49dc263238c79f8f924fdb6d035d}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a8f5e49dc263238c79f8f924fdb6d035d}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!initial\_setup@{initial\_setup}}
@@ -257,7 +255,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a61ae74d94be
 
 
 
-Definition at line 1613 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 1667 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
@@ -280,7 +278,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22bc4ee35e4f948
 
 
 
-Definition at line 1200 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 1210 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
@@ -303,7 +301,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f646
 
 
 
-Definition at line 1253 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 1263 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
@@ -326,7 +324,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adb8ec7d2ceda375
 
 
 
-Definition at line 1262 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 1272 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
@@ -349,7 +347,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab65c7a94dda80c1
 
 
 
-Definition at line 178 of file hp\+\_\+refineable\+\_\+elements.\+h.
+Definition at line 187 of file hp\+\_\+refineable\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_aaaef5f28edec53e201f87c3c9f2c0f61}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_aaaef5f28edec53e201f87c3c9f2c0f61}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!node\_created\_by\_neighbour@{node\_created\_by\_neighbour}}
@@ -364,11 +362,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_
 
 
 
-Definition at line 1366 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 1382 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), i, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_abe1f777a74c6996aaa3cfbdb2dee1c72}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_abe1f777a74c6996aaa3cfbdb2dee1c72}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!node\_created\_by\_son\_of\_neighbour@{node\_created\_by\_son\_of\_neighbour}}
@@ -383,11 +381,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_
 
 
 
-Definition at line 1471 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 1507 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::E, i, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Tree\+::nsons(), oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Tree\+::son\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, and oomph\+::\+Quad\+Tree\+Names\+::W.
+References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Tree\+::nsons(), oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Tree\+::son\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_aa74bd994a95736da7c0c92297959b026}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_aa74bd994a95736da7c0c92297959b026}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!p\_refine@{p\_refine}}
@@ -406,11 +404,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PRefineableElement_a706db9352965197a21
 
 
 
-Definition at line 1931 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 1990 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), boundaries, oomph\+::\+Mesh\+::boundary\+\_\+coordinate\+\_\+exists(), oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::get\+\_\+bcs(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::get\+\_\+boundaries(), oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), i, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::interpolated\+\_\+zeta\+\_\+on\+\_\+edge(), oomph\+::\+Quad\+Tree\+Names\+::N, n, oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+P\+Refineable\+Element\+::p\+\_\+order(), oomph\+::\+Data\+::pin(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), oomph\+::\+Quad\+Tree\+Names\+::S, s, oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), boundaries, oomph\+::\+Mesh\+::boundary\+\_\+coordinate\+\_\+exists(), oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::get\+\_\+bcs(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::get\+\_\+boundaries(), oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 2 $>$\+::get\+\_\+solid\+\_\+bcs(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), i, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::interpolated\+\_\+zeta\+\_\+on\+\_\+edge(), oomph\+::\+Node\+::make\+\_\+periodic(), oomph\+::\+Quad\+Tree\+Names\+::N, n, oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+P\+Refineable\+Element\+::p\+\_\+order(), oomph\+::\+Data\+::pin(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), oomph\+::\+Quad\+Tree\+Names\+::S, s, oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a1bb8bcd4562fcdfbac80f4db0f38ed76}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a1bb8bcd4562fcdfbac80f4db0f38ed76}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!pre\_build@{pre\_build}}
@@ -429,7 +427,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a3968e7b77a0
 
 
 
-Definition at line 1703 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 1757 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
@@ -468,11 +466,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_
 
 
 
-Definition at line 3957 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 4051 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
-References oomph\+::\+Orthpoly\+::ddlegendre(), oomph\+::\+Orthpoly\+::dlegendre(), oomph\+::\+Quad\+Tree\+Names\+::E, e, oomph\+::\+Orthpoly\+::gll\+\_\+nodes(), i, oomph\+::\+Refineable\+Element\+::interpolating\+\_\+basis(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+node\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::N, n, oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node(), oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node\+\_\+1d(), oomph\+::\+Tree\+::nsons(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Quad\+Tree\+Names\+::S, s, oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt(), and oomph\+::\+Quad\+Tree\+Names\+::W.
+References oomph\+::\+Orthpoly\+::ddlegendre(), oomph\+::\+Orthpoly\+::dlegendre(), oomph\+::\+Quad\+Tree\+Names\+::E, e, oomph\+::\+Orthpoly\+::gll\+\_\+nodes(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Refineable\+Element\+::interpolating\+\_\+basis(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+node\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::N, n, oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node(), oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node\+\_\+1d(), oomph\+::\+Tree\+::nsons(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Quad\+Tree\+Names\+::S, s, oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt(), and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a53d48e7e3310a02a315562ed628bd4b5}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a53d48e7e3310a02a315562ed628bd4b5}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!rebuild\_from\_sons@{rebuild\_from\_sons}}
@@ -489,11 +487,11 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line 3135 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 3207 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), boundaries, oomph\+::\+Mesh\+::boundary\+\_\+coordinate\+\_\+exists(), oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::get\+\_\+bcs(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::get\+\_\+boundaries(), oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), i, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::interpolated\+\_\+zeta\+\_\+on\+\_\+edge(), oomph\+::\+Quad\+Tree\+Names\+::N, n, oomph\+::\+Node\+::ndim(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+P\+Refineable\+Element\+::p\+\_\+order(), oomph\+::\+Data\+::pin(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), oomph\+::\+Quad\+Tree\+Names\+::S, s, oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, t, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), boundaries, oomph\+::\+Mesh\+::boundary\+\_\+coordinate\+\_\+exists(), oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::get\+\_\+bcs(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::get\+\_\+boundaries(), oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 2 $>$\+::get\+\_\+solid\+\_\+bcs(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), i, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::interpolated\+\_\+zeta\+\_\+on\+\_\+edge(), oomph\+::\+Quad\+Tree\+Names\+::N, n, oomph\+::\+Node\+::ndim(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+P\+Refineable\+Element\+::p\+\_\+order(), oomph\+::\+Data\+::pin(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), oomph\+::\+Quad\+Tree\+Names\+::S, s, oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, t, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a2ec50a2b731e5e8b969f116606cab6ca}\label{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a2ec50a2b731e5e8b969f116606cab6ca}} 
 \index{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$@{oomph::PRefineableQElement$<$ 2, INITIAL\_NNODE\_1D $>$}!shape@{shape}}
@@ -512,7 +510,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line 2832 of file hp\+\_\+refineable\+\_\+elements.\+cc.
+Definition at line 2907 of file hp\+\_\+refineable\+\_\+elements.\+cc.
 
 
 

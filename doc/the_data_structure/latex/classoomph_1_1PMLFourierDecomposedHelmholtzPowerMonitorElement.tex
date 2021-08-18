@@ -61,7 +61,7 @@ class oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Elemen
 
 A class for elements that allow postprocessing of the results -- currently computes radiated power over domain boundaries. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 408 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 413 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -79,11 +79,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index. 
 
-Definition at line 703 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 711 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), and oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz.
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a21abbcb51942dec4b8458c31045dc644}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a21abbcb51942dec4b8458c31045dc644}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!PMLFourierDecomposedHelmholtzPowerMonitorElement@{PMLFourierDecomposedHelmholtzPowerMonitorElement}}
@@ -98,7 +98,7 @@ Broken empty constructor.
 
 
 
-Definition at line 421 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 424 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a3b31144a461294982bfe1d35ed658eda}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a3b31144a461294982bfe1d35ed658eda}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!PMLFourierDecomposedHelmholtzPowerMonitorElement@{PMLFourierDecomposedHelmholtzPowerMonitorElement}}
@@ -113,7 +113,7 @@ Broken copy constructor.
 
 
 
-Definition at line 431 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 433 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -135,7 +135,7 @@ Function to compute the shape, test functions and derivates and to return the Ja
 
 
 
-Definition at line 661 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 670 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -154,7 +154,7 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line 489 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 504 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a87edcf6c7adc8de31c1054e15f3d8a9b}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a87edcf6c7adc8de31c1054e15f3d8a9b}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -169,7 +169,7 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line 501 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 516 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -188,7 +188,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 466 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 477 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -211,7 +211,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 471 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 485 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -230,7 +230,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 457 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 463 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -253,7 +253,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 461 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 470 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -272,7 +272,7 @@ Function to compute the test functions and to return the Jacobian of mapping bet
 
 
 
-Definition at line 641 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 649 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -291,7 +291,7 @@ Return the index at which the real/imag unknown value is stored.
 
 
 
-Definition at line 477 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 492 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -318,7 +318,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 450 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 453 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -340,11 +340,11 @@ The index at which the real and imag part of the unknown is stored at the nodes.
 
 
 
-Definition at line 687 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 697 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
+Referenced by oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element(), and oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 
 

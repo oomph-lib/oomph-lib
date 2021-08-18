@@ -310,9 +310,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ab8e2478caa8370dd12462f17e1cc8082">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse)</td></tr>
 <tr class="memdesc:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ab8e2478caa8370dd12462f17e1cc8082">More...</a><br /></td></tr>
 <tr class="separator:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ae9282acaaf19fa2cdb703d49f1a8de25">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt; &amp;doftype_coarsen_map_coarse)</td></tr>
-<tr class="memdesc:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ae9282acaaf19fa2cdb703d49f1a8de25">More...</a><br /></td></tr>
-<tr class="separator:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ac0d2887082cf856b680b4ae61b510d29">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&gt; &amp;doftype_coarsen_map_coarse)</td></tr>
+<tr class="memdesc:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ac0d2887082cf856b680b4ae61b510d29">More...</a><br /></td></tr>
+<tr class="separator:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#af704c4816469cef4fed9d35a9ad651ec">block_setup</a> ()</td></tr>
 <tr class="memdesc:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their "blocks" and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the internal blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if the identity dof-to-block mapping is okay, i.e. dof number 0 corresponds to block number 0 dof number 1 corresponds to block number 1 dof number 2 corresponds to block number 2 etc...  <a href="classoomph_1_1BlockPreconditioner.html#af704c4816469cef4fed9d35a9ad651ec">More...</a><br /></td></tr>
 <tr class="separator:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -444,9 +444,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a50b76a374797805f64e2af34d581cdc2">nfine_grain_dof_types_in</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
 <tr class="memdesc:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the number of most fine grain dof types in a (possibly coarsened) dof type.  <a href="classoomph_1_1BlockPreconditioner.html#a50b76a374797805f64e2af34d581cdc2">More...</a><br /></td></tr>
 <tr class="separator:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">replacement_dof_block_pt</a> () const</td></tr>
-<tr class="memdesc:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the replaced dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">More...</a><br /></td></tr>
-<tr class="separator:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">replacement_dof_block_pt</a> () const</td></tr>
+<tr class="memdesc:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the replaced dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">More...</a><br /></td></tr>
+<tr class="separator:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#adbe1ae854ee9831649249d50162bb6a9">setup_matrix_vector_product</a> (<a class="el" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a> *matvec_prod_pt, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *block_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;block_col_indices)</td></tr>
 <tr class="memdesc:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup a matrix vector product. matvec_prod_pt is a pointer to the MatrixVectorProduct, block_pt is a pointer to the block matrix, block_col_indices is a vector indicating which block indices does the RHS vector we want to multiply the matrix by.  <a href="classoomph_1_1BlockPreconditioner.html#adbe1ae854ee9831649249d50162bb6a9">More...</a><br /></td></tr>
 <tr class="separator:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -472,8 +472,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae3cf61f61e1aa50e2315e999827e7d59 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper function, takes the naturally ordered vector, v, and extracts the n-th block vector, b. Here n is the block number in the current preconditioner. NOTE: The ordering of the vector b is the same as the ordering of the block matrix from internal_get_block(...).  <a href="classoomph_1_1BlockPreconditioner.html#ae3cf61f61e1aa50e2315e999827e7d59">More...</a><br /></td></tr>
 <tr class="separator:ae3cf61f61e1aa50e2315e999827e7d59 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">internal_get_block_vectors</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;block_vec_number, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
-<tr class="memdesc:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. <br  />
-  <a href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">More...</a><br /></td></tr>
+<tr class="memdesc:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors.  <a href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">More...</a><br /></td></tr>
 <tr class="separator:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cde8af922cd8054dbf352527dd682b1 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a0cde8af922cd8054dbf352527dd682b1">internal_get_block_vectors</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
 <tr class="memdesc:a0cde8af922cd8054dbf352527dd682b1 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper function, takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. This is simply a wrapper around the other internal_get_block_vectors(...) function with the identity block_vec_number vector.  <a href="classoomph_1_1BlockPreconditioner.html#a0cde8af922cd8054dbf352527dd682b1">More...</a><br /></td></tr>
@@ -600,8 +599,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:aedd9102297d40354bd8d769ca2c343cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do the actual solve &ndash; this is called through the pure virtual solve function in the <a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> base class. The function is stored as protected to allow the <a class="el" href="classoomph_1_1HelmholtzMGPreconditioner.html">HelmholtzMGPreconditioner</a> derived class to use the solver.  <a href="classoomph_1_1HelmholtzMGPreconditioner.html#aedd9102297d40354bd8d769ca2c343cb">More...</a><br /></td></tr>
 <tr class="separator:aedd9102297d40354bd8d769ca2c343cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a935a8245757bc2bd7bf29f1ce029af77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzMGPreconditioner.html#a935a8245757bc2bd7bf29f1ce029af77">block_preconditioner_self_test</a> ()</td></tr>
-<tr class="memdesc:a935a8245757bc2bd7bf29f1ce029af77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to ensure the block form of the Jacobian matches the form described, i.e. we should have: <br  />
- |--&mdash;|---&mdash;| | A_r | -A_c | A = |--&mdash;|---&mdash;|. | A_c | A_r | |--&mdash;|---&mdash;|.  <a href="classoomph_1_1HelmholtzMGPreconditioner.html#a935a8245757bc2bd7bf29f1ce029af77">More...</a><br /></td></tr>
+<tr class="memdesc:a935a8245757bc2bd7bf29f1ce029af77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to ensure the block form of the Jacobian matches the form described, i.e. we should have: |--&mdash;|---&mdash;| | A_r | -A_c | A = |--&mdash;|---&mdash;|. | A_c | A_r | |--&mdash;|---&mdash;|.  <a href="classoomph_1_1HelmholtzMGPreconditioner.html#a935a8245757bc2bd7bf29f1ce029af77">More...</a><br /></td></tr>
 <tr class="separator:a935a8245757bc2bd7bf29f1ce029af77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba7a7fb0549452ac56c7e97bd5557c3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzMGPreconditioner.html#aba7a7fb0549452ac56c7e97bd5557c3f">setup</a> ()</td></tr>
 <tr class="memdesc:aba7a7fb0549452ac56c7e97bd5557c3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to set up the hierachy of levels. Creates a vector of pointers to each MG level.  <a href="classoomph_1_1HelmholtzMGPreconditioner.html#aba7a7fb0549452ac56c7e97bd5557c3f">More...</a><br /></td></tr>
@@ -727,7 +725,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#af97821621b570d409e6662939e5f818d">set_mesh</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *const <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3c0e92cb77c3e3179007fe9fd99b6428">mesh_pt</a>, const bool &amp;allow_multiple_element_type_in_mesh=false)</td></tr>
 <tr class="memdesc:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the i-th mesh for this block preconditioner. Note: The method set_nmesh(...) must be called before this method to specify the number of meshes. By default, it is assumed that each mesh only contains elements of the same type. This condition may be relaxed by setting the boolean allow_multiple_element_type_in_mesh to true, however, each mesh must only contain elements with the same number of dof types.  <a href="classoomph_1_1BlockPreconditioner.html#af97821621b570d409e6662939e5f818d">More...</a><br /></td></tr>
 <tr class="separator:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">set_replacement_dof_block</a> (const unsigned &amp;block_i, const unsigned &amp;block_j, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *<a class="el" href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">replacement_dof_block_pt</a>)</td></tr>
+<tr class="memitem:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">set_replacement_dof_block</a> (const unsigned &amp;block_i, const unsigned &amp;block_j, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *<a class="el" href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">replacement_dof_block_pt</a>)</td></tr>
 <tr class="memdesc:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set replacement dof-level blocks. Only dof-level blocks can be set. This is important due to how the dof type coarsening feature operates.  <a href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">More...</a><br /></td></tr>
 <tr class="separator:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fb68db9e79048615984b005f8aa43b3 inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a6fb68db9e79048615984b005f8aa43b3">any_mesh_distributed</a> () const</td></tr>
@@ -762,9 +760,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">More...</a><br /></td></tr>
 <tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classoomph_1_1BlockPreconditioner"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1BlockPreconditioner')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1BlockPreconditioner.html">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;</a></td></tr>
-<tr class="memitem:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a6816cfc4c9d74a39aca7401f751bb235">Replacement_dof_block_pt</a></td></tr>
-<tr class="memdesc:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The replacement dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a6816cfc4c9d74a39aca7401f751bb235">More...</a><br /></td></tr>
-<tr class="separator:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ad2cd49c5c823c4202046e97038f6e080">Replacement_dof_block_pt</a></td></tr>
+<tr class="memdesc:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The replacement dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#ad2cd49c5c823c4202046e97038f6e080">More...</a><br /></td></tr>
+<tr class="separator:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a59e83eca59e3cdc41a93668539e138f1">Block_distribution_pt</a></td></tr>
 <tr class="memdesc:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The distribution for the blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a59e83eca59e3cdc41a93668539e138f1">More...</a><br /></td></tr>
 <tr class="separator:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -814,7 +812,7 @@ Additional Inherited Members</h2></td></tr>
 class oomph::HelmholtzMGPreconditioner&lt; DIM &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00087">87</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00082">82</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a3405bc1f75c5e1e83601cd9b0e02634b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3405bc1f75c5e1e83601cd9b0e02634b">&#9670;&nbsp;</a></span>PostSmootherFactoryFctPt</h2>
@@ -832,7 +830,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>typedef for a function that returns a pointer to an object of the class <a class="el" href="classoomph_1_1HelmholtzSmoother.html">HelmholtzSmoother</a> to be used as the post-smoother </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00098">98</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00091">91</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -852,7 +850,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>typedef for a function that returns a pointer to an object of the class <a class="el" href="classoomph_1_1HelmholtzSmoother.html">HelmholtzSmoother</a> to be used as the pre-smoother </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00094">94</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00087">87</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -885,9 +883,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Constructor: Set up default values for number of V-cycles and pre- and post-smoothing steps. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00118">118</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00111">111</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00618">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Mg_hierarchy_pt</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00615">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Mg_problem_pt</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00607">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Mg_hierarchy_pt</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00604">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Mg_problem_pt</a>.</p>
 
 </div>
 </div>
@@ -918,9 +916,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Delete any dynamically allocated data. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">141</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00134">134</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -952,9 +950,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Function to change the value of the shift. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00218">218</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00211">211</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00731">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Alpha_shift</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00720">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Alpha_shift</a>.</p>
 
 </div>
 </div>
@@ -980,13 +978,12 @@ template&lt;unsigned DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Function to ensure the block form of the Jacobian matches the form described, i.e. we should have: <br  />
- |--&mdash;|---&mdash;| | A_r | -A_c | A = |--&mdash;|---&mdash;|. | A_c | A_r | |--&mdash;|---&mdash;|. </p>
+<p>Function to ensure the block form of the Jacobian matches the form described, i.e. we should have: |--&mdash;|---&mdash;| | A_r | -A_c | A = |--&mdash;|---&mdash;|. | A_c | A_r | |--&mdash;|---&mdash;|. </p>
 <p>Check the block preconditioner framework returns the correct system matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00884">884</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00873">873</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00500">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00497">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
 </div>
 </div>
@@ -1019,11 +1016,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1Preconditioner.html#a46c31c416829bedcd9db238431262027">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">148</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">141</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00636">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_matrix_mg_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00721">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Has_been_setup</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00659">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00626">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00697">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Nlevel</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00683">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Post_smoothers_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00680">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Pre_smoothers_storage_pt</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00662">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Restriction_matrices_storage_pt</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00625">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_matrix_mg_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00710">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Has_been_setup</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00648">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00615">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00686">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Nlevel</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00672">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Post_smoothers_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00669">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Pre_smoothers_storage_pt</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00651">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Restriction_matrices_storage_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::~HelmholtzMGPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00134">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::~HelmholtzMGPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1054,9 +1051,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Call the direct solver (SuperLU) to solve the problem exactly. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00384">384</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00375">375</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00636">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_matrix_mg_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00656">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_rhs_mg</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00646">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_x_mg</a>, <a class="el" href="double__vector_8cc_source.html#l00989">oomph::DoubleVectorHelpers::concatenate()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00697">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Nlevel</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00673">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, <a class="el" href="matrices_8cc_source.html#l00051">oomph::DoubleMatrixBase::solve()</a>, <a class="el" href="double__vector_8cc_source.html#l01396">oomph::DoubleVectorHelpers::split()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00669">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00625">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_matrix_mg_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00645">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_rhs_mg</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00635">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_x_mg</a>, <a class="el" href="double__vector_8cc_source.html#l00983">oomph::DoubleVectorHelpers::concatenate()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00686">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Nlevel</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00662">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, <a class="el" href="matrices_8cc_source.html#l00050">oomph::DoubleMatrixBase::solve()</a>, <a class="el" href="double__vector_8cc_source.html#l01403">oomph::DoubleVectorHelpers::split()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00658">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
 
 </div>
 </div>
@@ -1087,9 +1084,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Disable time documentation. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00225">225</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00218">218</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00712">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00701">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>.</p>
 
 </div>
 </div>
@@ -1120,9 +1117,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Suppress anything that can be suppressed, i.e. any timings. Things like mesh adaptation can not however be silenced using this. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00244">244</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00237">237</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00712">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00316">oomph::oomph_nullstream</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00728">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00718">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00715">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00701">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00313">oomph::oomph_nullstream</a>, <a class="el" href="oomph__definitions_8h_source.html#l00464">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00717">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00707">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00704">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
 
 </div>
 </div>
@@ -1153,9 +1150,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Suppress the output of both smoothers and SuperLU. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00294">294</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00287">287</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00636">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_matrix_mg_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00118">oomph::LinearSolver::disable_doc_time()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00315">oomph::DoubleMatrixBase::linear_solver_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00697">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Nlevel</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00683">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Post_smoothers_storage_pt</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00680">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Pre_smoothers_storage_pt</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00625">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Coarsest_matrix_mg_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00122">oomph::LinearSolver::disable_doc_time()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00308">oomph::DoubleMatrixBase::linear_solver_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00686">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Nlevel</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00672">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Post_smoothers_storage_pt</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00669">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Pre_smoothers_storage_pt</a>.</p>
 
 </div>
 </div>
@@ -1186,9 +1183,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Disable all output from mg_solve apart from the number of V-cycles used to solve the problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00233">233</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00226">226</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00712">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00715">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00701">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00704">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
 
 </div>
 </div>
@@ -1219,9 +1216,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Enable time documentation. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00264">264</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00257">257</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00712">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00701">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>.</p>
 
 </div>
 </div>
@@ -1252,9 +1249,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Enable the output from anything that could have been suppressed. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00281">281</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00274">274</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00712">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00718">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00715">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00701">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00707">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00704">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
 
 </div>
 </div>
@@ -1285,9 +1282,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Enable the output of the V-cycle timings and other output. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00271">271</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00264">264</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00712">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00715">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00701">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Doc_time</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00704">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
 
 </div>
 </div>
@@ -1308,11 +1305,11 @@ template&lt;unsigned DIM&gt; </div>
 <p>Do a full setup (assumes everything will be setup around the <a class="el" href="classoomph_1_1HelmholtzMGProblem.html" title="HelmholtzMGProblem class; subclass of Problem.">HelmholtzMGProblem</a> pointer given in the constructor) </p>
 <p>Runs a full setup of the MG solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01138">1138</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01103">1103</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00090">oomph::TerminateHelper::clean_up_memory()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01041">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="elements_8h_source.html#l02495">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00086">oomph::TerminateHelper::clean_up_memory()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="elements_8h_source.html#l02628">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00584">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00573">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup()</a>.</p>
 
 </div>
 </div>
@@ -1336,9 +1333,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Interpolate solution at current level onto next finer mesh and correct the solution x at that level. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03616">3616</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03595">3595</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>.</p>
 
 </div>
 </div>
@@ -1404,9 +1401,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Builds a <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> that is used to interpolate the residual between levels. The transpose can be used as the full weighting restriction. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00404">404</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00396">396</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00659">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00648">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
 </div>
 </div>
@@ -1472,9 +1469,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Builds a <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> that is used to interpolate the residual between levels. The transpose can be used as the full weighting restriction. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00423">423</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00415">415</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00659">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00618">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Mg_hierarchy_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00648">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00607">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Mg_hierarchy_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
 </div>
 </div>
@@ -1505,9 +1502,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Number of iterations. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00549">549</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00539">539</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00709">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::V_cycle_counter</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00698">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::V_cycle_counter</a>.</p>
 
 </div>
 </div>
@@ -1571,9 +1568,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Given the son type of the element and the local coordinate s of a given node in the son element, return the local coordinate s in its father element. 3D case. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03462">3462</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03441">3441</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::LDB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::LDF</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::LUB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::LUF</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::RDB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::RDF</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::RUB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::RUF</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00049">oomph::OcTreeNames::LDB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LDF</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::LUB</a>, <a class="el" href="octree_8h_source.html#l00055">oomph::OcTreeNames::LUF</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::RDB</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::RDF</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::RUB</a>, <a class="el" href="octree_8h_source.html#l00056">oomph::OcTreeNames::RUF</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
@@ -1605,9 +1602,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Given the son type of the element and the local coordinate s of a given node in the son element, return the local coordinate s in its father element. 2D case. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03529">3529</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03508">3508</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::NE</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::NW</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::SE</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::SW</a>.</p>
+<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00059">oomph::QuadTreeNames::NE</a>, <a class="el" href="quadtree_8h_source.html#l00058">oomph::QuadTreeNames::NW</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="quadtree_8h_source.html#l00057">oomph::QuadTreeNames::SE</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::SW</a>.</p>
 
 </div>
 </div>
@@ -1688,9 +1685,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Find the value of the parameters h on the level-th problem in the hierarchy. The value of h is determined by looping over each element in the mesh and calculating the length of each side and take the maximum value.Note, this is a heuristic calculation; if the mesh is nonuniform or adaptive refinement is used then the value of h, is not the same everywhere so we find the maximum edge width instead. If, however, uniform refinement is used on a uniform mesh (using quad elements) then this will return the correct value of h. </p>
 <p>This is the explicit template specialisation of the case DIM=2. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02251">2251</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02222">2222</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00455">oomph::Mesh::element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -1729,12 +1726,11 @@ template&lt;unsigned DIM&gt; </div>
 </div><div class="memdoc">
 
 <p>Find the value of the parameters h on the level-th problem in the hierarchy. The value of h is determined by looping over each element in the mesh and calculating the length of each side and take the maximum value. Note, this is a heuristic calculation; if the mesh is non-uniform or adaptive refinement is used then the value of h, is not the same everywhere so we find the maximum edge width instead. If, however, uniform refinement is used on a uniform mesh (using quad elements) then this will return the correct value of h. </p>
-<p>This is the explicit template specialisation of the case DIM=3. The calculation of h is different here. In 2D we were able to loop over each pair of nodes in an anti-clockwise manner since the only node pairs were {(C0,C1),(C1,C2),(C2,C3),(C3,C0)} where CN denotes the N-th corner in the element. In 3D this method cannot be used since we have 12 edges to consider. <br  />
- </p>
+<p>This is the explicit template specialisation of the case DIM=3. The calculation of h is different here. In 2D we were able to loop over each pair of nodes in an anti-clockwise manner since the only node pairs were {(C0,C1),(C1,C2),(C2,C3),(C3,C0)} where CN denotes the N-th corner in the element. In 3D this method cannot be used since we have 12 edges to consider. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02382">2382</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02354">2354</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::LDB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::LDF</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::LUB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::LUF</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::RDB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::RDF</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::RUB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::RUF</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00455">oomph::Mesh::element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="octree_8h_source.html#l00049">oomph::OcTreeNames::LDB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LDF</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::LUB</a>, <a class="el" href="octree_8h_source.html#l00055">oomph::OcTreeNames::LUF</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::RDB</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::RDF</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::RUB</a>, <a class="el" href="octree_8h_source.html#l00056">oomph::OcTreeNames::RUF</a>, <a class="el" href="octree_8cc_source.html#l00414">oomph::OcTree::vertex_to_node_number()</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -1767,11 +1763,11 @@ template&lt;unsigned DIM&gt; </div>
 <p>Do the actual solve &ndash; this is called through the pure virtual solve function in the <a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> base class. The function is stored as protected to allow the <a class="el" href="classoomph_1_1HelmholtzMGPreconditioner.html">HelmholtzMGPreconditioner</a> derived class to use the solver. </p>
 <p>Linear solver. This is where the general V-cycle algorithm is implemented. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03656">3656</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03638">3638</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00514">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00504">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>.</p>
 
 </div>
 </div>
@@ -1802,9 +1798,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return the number of post-smoothing iterations (lvalue) </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00312">312</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00305">305</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00703">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Npost_smooth</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00692">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Npost_smooth</a>.</p>
 
 </div>
 </div>
@@ -1835,9 +1831,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return the number of pre-smoothing iterations (lvalue) </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00320">320</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00313">313</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00700">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Npre_smooth</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00689">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Npre_smooth</a>.</p>
 
 </div>
 </div>
@@ -1869,9 +1865,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Post-smoother: Perform max_iter smoothing steps on the linear system Ax=b with current RHS vector, b, starting with current solution vector, x. Uses the default smoother (set in the <a class="el" href="classoomph_1_1HelmholtzMGProblem.html" title="HelmholtzMGProblem class; subclass of Problem.">HelmholtzMGProblem</a> constructor) which can be overloaded for specific problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00348">348</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00340">340</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00683">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Post_smoothers_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00361">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::residual_norm()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00673">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00669">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00672">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Post_smoothers_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00352">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::residual_norm()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00662">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00658">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
 
 </div>
 </div>
@@ -1903,9 +1899,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pre-smoother: Perform 'max_iter' smoothing steps on the linear system Ax=b with current RHS vector, b, starting with current solution vector, x. Return the residual vector r=b-Ax. Uses the default smoother (set in the <a class="el" href="classoomph_1_1HelmholtzMGProblem.html" title="HelmholtzMGProblem class; subclass of Problem.">HelmholtzMGProblem</a> constructor) which can be overloaded for a specific problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00332">332</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00325">325</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00680">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Pre_smoothers_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00361">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::residual_norm()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00673">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00669">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00669">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Pre_smoothers_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00352">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::residual_norm()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00662">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00658">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
 
 </div>
 </div>
@@ -1949,9 +1945,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00514">514</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00504">504</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8cc_source.html#l02913">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vectors()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03656">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::mg_solve()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="block__preconditioner_8cc_source.html#l03404">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vectors()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00673">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00728">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00718">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_all_output</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00715">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00669">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8cc_source.html#l02939">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vectors()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03638">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::mg_solve()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="block__preconditioner_8cc_source.html#l03443">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vectors()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00662">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, <a class="el" href="oomph__definitions_8h_source.html#l00464">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00717">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00707">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_all_output</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00704">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_v_cycle_output</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00658">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
 
 </div>
 </div>
@@ -1983,11 +1979,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return norm of residual r=b-Ax and the residual vector itself on the level-th level. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00361">361</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00352">352</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00677">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Residual_mg_vectors_storage</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00666">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Residual_mg_vectors_storage</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00348">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::post_smooth()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00332">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::pre_smooth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00340">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::post_smooth()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00325">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::pre_smooth()</a>.</p>
 
 </div>
 </div>
@@ -2022,9 +2018,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Calculate the norm of the residual vector, r=b-Ax. </p>
 <p>Calculating the residual r=b-Ax in the complex case requires more care than the real case. To calculate the residual vector we split A, x and b into their complex components: r = b - A*x, = (b_r + i*b_c) - (A_r + i*A_c)*(x_r + i*x_c), = [b_r - A_r*x_r + A_c*x_c] + i*[b_c - A_r*x_c - A_c*x_r], ==&gt; real(r) = b_r - A_r*x_r + A_c*x_c, &amp; imag(r) = b_c - A_r*x_c - A_c*x_r. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00746">746</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00734">734</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="Vector_8h_source.html#l00160">oomph::Vector&lt; _Tp &gt;::initialise()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>.</p>
 
 </div>
 </div>
@@ -2047,12 +2043,11 @@ template&lt;unsigned DIM&gt; </div>
 </div><div class="memdoc">
 
 <p>Restrict residual (computed on level-th MG level) to the next coarser mesh and stick it into the coarse mesh RHS vector. </p>
-<p>Restrict residual (computed on current MG level) to next coarser mesh and stick it into the coarse mesh RHS vector using the restriction matrix (if restrict_flag=1) or the transpose of the interpolation matrix (if restrict_flag=2) <br  />
- </p>
+<p>Restrict residual (computed on current MG level) to next coarser mesh and stick it into the coarse mesh RHS vector using the restriction matrix (if restrict_flag=1) or the transpose of the interpolation matrix (if restrict_flag=2) </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03583">3583</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03563">3563</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>.</p>
 
 </div>
 </div>
@@ -2084,9 +2079,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function to set the post-smoother creation function. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00109">109</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00102">102</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00565">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Post_smoother_factory_function_pt</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00554">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Post_smoother_factory_function_pt</a>.</p>
 
 </div>
 </div>
@@ -2118,9 +2113,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function to set the pre-smoother creation function. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00101">101</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00094">94</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00562">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Pre_smoother_factory_function_pt</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00551">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Pre_smoother_factory_function_pt</a>.</p>
 
 </div>
 </div>
@@ -2151,9 +2146,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Builds a <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> on each level that is used to restrict the residual between levels. The transpose can be used as the interpolation matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00470">470</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00461">461</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00659">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00697">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Nlevel</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00662">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Restriction_matrices_storage_pt</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00648">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00686">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Nlevel</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00651">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Restriction_matrices_storage_pt</a>.</p>
 
 </div>
 </div>
@@ -2186,9 +2181,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#af4886f4efe510e5c9b0eb19422943588">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00584">584</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00573">573</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01138">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::full_setup()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00728">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Stream_pt</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00718">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_all_output</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01103">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::full_setup()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8h_source.html#l00464">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00717">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Stream_pt</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00707">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Suppress_all_output</a>.</p>
 
 </div>
 </div>
@@ -2234,7 +2229,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Use the version in the <a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a> base class for the alternative setup function that takes a matrix pointer as an argument. </p>
 
-<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00124">124</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00126">126</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
 
 </div>
 </div>
@@ -2262,7 +2257,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Use the version in the <a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a> base class for the alternative setup function that takes a matrix pointer as an argument. </p>
 
-<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00098">98</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00100">100</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
 
 </div>
 </div>
@@ -2283,9 +2278,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Function to create the fully expanded system matrix on the coarsest level. </p>
 <p>Function to set up structures on the coarsest level of the MG hierarchy. This includes setting up the <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> version of the coarsest level system matrix. This would otherwise be stored as a vector of pointers to the constituent <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> objects which has the form: |--&mdash;| | A_r | Matrix_mg_pt = |--&mdash;| | A_i | |--&mdash;| and we want to construct: |--&mdash;|---&mdash;| | A_r | -A_c | Coarse_matrix_mg_pt = |--&mdash;|---&mdash;| | A_c | A_r | |--&mdash;|---&mdash;| Once this is done we have to set up the distributions of the vectors associated with Coarse_matrix_mg_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02006">2006</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01980">1980</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l01052">oomph::CRDoubleMatrix::column_index()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00994">oomph::CRDoubleMatrix::ncol()</a>, <a class="el" href="matrices_8h_source.html#l01064">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="matrices_8h_source.html#l01046">oomph::CRDoubleMatrix::row_start()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>, and <a class="el" href="matrices_8h_source.html#l01058">oomph::CRDoubleMatrix::value()</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l01093">oomph::CRDoubleMatrix::column_index()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l01029">oomph::CRDoubleMatrix::ncol()</a>, <a class="el" href="matrices_8h_source.html#l01117">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="matrices_8h_source.html#l01023">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="matrices_8h_source.html#l01081">oomph::CRDoubleMatrix::row_start()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>, and <a class="el" href="matrices_8h_source.html#l01105">oomph::CRDoubleMatrix::value()</a>.</p>
 
 </div>
 </div>
@@ -2306,9 +2301,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Setup the interpolation matrix on each level. </p>
 <p>Set up the interpolation matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02771">2771</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02744">2744</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l00361">oomph::Data::eqn_number()</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="mesh__as__geometric__object_8h_source.html#l00375">oomph::MeshAsGeomObject::locate_zeta()</a>, <a class="el" href="nodes_8h_source.html#l00731">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00748">oomph::HangInfo::master_weight()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00728">oomph::HangInfo::nmaster()</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00373">oomph::Data::eqn_number()</a>, <a class="el" href="mesh_8h_source.html#l00480">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="mesh__as__geometric__object_8h_source.html#l00379">oomph::MeshAsGeomObject::locate_zeta()</a>, <a class="el" href="nodes_8h_source.html#l00809">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00826">oomph::HangInfo::master_weight()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00803">oomph::HangInfo::nmaster()</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
 </div>
 </div>
@@ -2329,9 +2324,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Setup the interpolation matrix on each level (used for unstructured meshes) </p>
 <p>Setup the interpolation matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03265">3265</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03243">3243</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l00361">oomph::Data::eqn_number()</a>, <a class="el" href="nodes_8h_source.html#l01143">oomph::Node::hanging_pt()</a>, <a class="el" href="nodes_8h_source.html#l01202">oomph::Node::is_hanging()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="mesh__as__geometric__object_8h_source.html#l00375">oomph::MeshAsGeomObject::locate_zeta()</a>, <a class="el" href="nodes_8h_source.html#l00731">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00748">oomph::HangInfo::master_weight()</a>, <a class="el" href="nodes_8h_source.html#l00728">oomph::HangInfo::nmaster()</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8cc_source.html#l02409">oomph::Node::position()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00373">oomph::Data::eqn_number()</a>, <a class="el" href="nodes_8h_source.html#l01253">oomph::Node::hanging_pt()</a>, <a class="el" href="nodes_8h_source.html#l01310">oomph::Node::is_hanging()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="mesh__as__geometric__object_8h_source.html#l00379">oomph::MeshAsGeomObject::locate_zeta()</a>, <a class="el" href="nodes_8h_source.html#l00809">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00826">oomph::HangInfo::master_weight()</a>, <a class="el" href="nodes_8h_source.html#l00803">oomph::HangInfo::nmaster()</a>, <a class="el" href="mesh_8h_source.html#l00603">oomph::Mesh::nnode()</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00443">oomph::Mesh::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8cc_source.html#l02499">oomph::Node::position()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
 </div>
 </div>
@@ -2360,9 +2355,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Function to set up the hierachy of levels. Creates a vector of pointers to each MG level. </p>
 <p>Set up the MG hierarchy. Creates a vector of pointers to each MG level and resizes internal storage for multigrid data. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01296">1296</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01263">1263</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l01010">oomph::Problem::actions_after_adapt()</a>, <a class="el" href="problem_8h_source.html#l01007">oomph::Problem::actions_before_adapt()</a>, <a class="el" href="problem_8cc_source.html#l01968">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="classoomph_1_1HelmholtzMGProblem.html#aba0155964004b8fea5975957e0892863">oomph::HelmholtzMGProblem::make_new_problem()</a>, <a class="el" href="classoomph_1_1HelmholtzMGProblem.html#aeae03594fd61961d0f62aef58ae97a92">oomph::HelmholtzMGProblem::mg_bulk_mesh_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01025">oomph::Problem::actions_after_adapt()</a>, <a class="el" href="problem_8h_source.html#l01022">oomph::Problem::actions_before_adapt()</a>, <a class="el" href="problem_8cc_source.html#l01989">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="classoomph_1_1HelmholtzMGProblem.html#aba0155964004b8fea5975957e0892863">oomph::HelmholtzMGProblem::make_new_problem()</a>, <a class="el" href="classoomph_1_1HelmholtzMGProblem.html#aeae03594fd61961d0f62aef58ae97a92">oomph::HelmholtzMGProblem::mg_bulk_mesh_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="refineable__mesh_8cc_source.html#l01907">oomph::TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh_minus_one()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -2391,9 +2386,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Function to set up the hierachy of levels. Creates a vector of pointers to each MG level. </p>
 <p>Set up the MG structures on each level. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01504">1504</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01476">1476</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__helmholtz__elements_8h_source.html#l00126">oomph::PMLHelmholtzEquations&lt; DIM &gt;::alpha_pt()</a>, <a class="el" href="matrices_8cc_source.html#l01688">oomph::CRDoubleMatrix::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="pml__helmholtz__elements_8h_source.html#l00108">oomph::PMLHelmholtzEquations&lt; DIM &gt;::k_squared()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="pml__helmholtz__elements_8h_source.html#l00131">oomph::PMLHelmholtzEquations&lt; DIM &gt;::alpha_pt()</a>, <a class="el" href="matrices_8cc_source.html#l01672">oomph::CRDoubleMatrix::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="pml__helmholtz__elements_8h_source.html#l00110">oomph::PMLHelmholtzEquations&lt; DIM &gt;::k_squared()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -2422,9 +2417,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Function to set up all of the smoothers once the system matrices have been set up. </p>
 <p>Set up the smoothers on all levels. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02568">2568</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02541">2541</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l00345">oomph::ComplexDampedJacobi&lt; MATRIX &gt;::calculate_omega()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l00112">oomph::IterativeLinearSolver::tolerance()</a>.</p>
+<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l00339">oomph::ComplexDampedJacobi&lt; MATRIX &gt;::calculate_omega()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l00113">oomph::IterativeLinearSolver::tolerance()</a>.</p>
 
 </div>
 </div>
@@ -2445,9 +2440,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Setup the transfer matrices on each level. </p>
 <p>Set up the transfer matrices. Both the pure injection and full weighting method have been implemented here but it is highly recommended that full weighting is used in general. In both methods the transpose of the transfer matrix is used to transfer a vector back. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01452">1452</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01422">1422</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -2478,9 +2473,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function for the variable Tolerance (lvalue) </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00211">211</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00204">204</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00694">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Tolerance</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00683">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::Tolerance</a>.</p>
 
 </div>
 </div>
@@ -2509,9 +2504,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Temporary version of the shift &ndash; to run bash scripts. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00731">731</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00720">720</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00218">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::alpha_shift()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00211">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::alpha_shift()</a>.</p>
 
 </div>
 </div>
@@ -2539,9 +2534,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Stores the system matrix on the coarest level in the fully expanded format: |--&mdash;|---&mdash;| | A_r | -A_c | A = |--&mdash;|---&mdash;|. | A_c | A_r | |--&mdash;|---&mdash;| Note: this is NOT the same as A = A_r + iA_c. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00636">636</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00625">625</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00384">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00294">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00375">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00287">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>.</p>
 
 </div>
 </div>
@@ -2569,9 +2564,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Assuming we're solving the system Ax=b, this vector will contain the expanded solution vector on the coarsest level of the heirarchy. This will have the form: |--&mdash;| | b_r | b = |--&mdash;|. | b_c | |--&mdash;|. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00656">656</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00645">645</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00384">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00375">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>.</p>
 
 </div>
 </div>
@@ -2599,9 +2594,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Assuming we're solving the system Ax=b, this vector will contain the expanded solution vector on the coarsest level of the heirarchy. This will have the form: |--&mdash;| | x_r | x = |--&mdash;|. | x_c | |--&mdash;|. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00646">646</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00635">635</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00384">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00375">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>.</p>
 
 </div>
 </div>
@@ -2629,9 +2624,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Indicates whether or not time documentation should be used. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00712">712</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00701">701</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00225">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_doc_time()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00244">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00233">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_v_cycle_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00264">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_doc_time()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00281">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_output()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00271">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_v_cycle_output()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00218">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_doc_time()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00237">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00226">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_v_cycle_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00257">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_doc_time()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00274">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_output()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00264">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_v_cycle_output()</a>.</p>
 
 </div>
 </div>
@@ -2659,9 +2654,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Boolean variable to indicate whether or not the solver has been setup. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00721">721</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00710">710</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -2689,7 +2684,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Boolean variable to indicate whether or not the problem was successfully solved. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00725">725</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00714">714</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -2717,9 +2712,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the interpolation matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00659">659</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00648">648</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00404">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::interpolation_matrix_set()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00470">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00396">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::interpolation_matrix_set()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00461">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
 
 </div>
 </div>
@@ -2747,7 +2742,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to storage the maximum edge width of each mesh. We only need the maximum edge width on levels where we use a smoother to determine the value of kh. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00688">688</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00677">677</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -2775,9 +2770,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> containing pointers to problems in hierarchy. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00618">618</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00607">607</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00118">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::HelmholtzMGPreconditioner()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00423">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::interpolation_matrix_set()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00111">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::HelmholtzMGPreconditioner()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00415">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::interpolation_matrix_set()</a>.</p>
 
 </div>
 </div>
@@ -2805,9 +2800,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> of vectors to store the system matrices. The i-th entry in this vector contains a vector of length two. The first entry of which contains the real part of the system matrix which we refer to as A_r and the second entry contains the imaginary part of the system matrix which we refer to as A_c. That is to say, the true system matrix is given by A = A_r + iA_c. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00626">626</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00615">615</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -2835,9 +2830,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to the MG problem (deep copy) </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00615">615</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00604">604</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00118">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::HelmholtzMGPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00111">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::HelmholtzMGPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -2865,9 +2860,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>The number of levels in the multigrid heirachy. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00697">697</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00686">686</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00384">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00294">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00470">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00375">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00287">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00461">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
 
 </div>
 </div>
@@ -2895,9 +2890,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Number of post-smoothing steps. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00703">703</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00692">692</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00312">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::npost_smooth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00305">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::npost_smooth()</a>.</p>
 
 </div>
 </div>
@@ -2925,9 +2920,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Number of pre-smoothing steps. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00700">700</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00689">689</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00320">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::npre_smooth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00313">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::npre_smooth()</a>.</p>
 
 </div>
 </div>
@@ -2955,7 +2950,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Maximum number of V-cycles. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00706">706</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00695">695</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -2983,9 +2978,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Function to create post-smoothers. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00565">565</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00554">554</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00109">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_post_smoother_factory_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00102">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_post_smoother_factory_function()</a>.</p>
 
 </div>
 </div>
@@ -3013,9 +3008,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the post-smoothers. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00683">683</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00672">672</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00294">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00348">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::post_smooth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00287">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00340">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::post_smooth()</a>.</p>
 
 </div>
 </div>
@@ -3043,9 +3038,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Function to create pre-smoothers. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00562">562</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00551">551</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00101">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_pre_smoother_factory_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00094">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_pre_smoother_factory_function()</a>.</p>
 
 </div>
 </div>
@@ -3073,9 +3068,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the pre-smoothers. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00680">680</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00669">669</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00294">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00332">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::pre_smooth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00287">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00325">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::pre_smooth()</a>.</p>
 
 </div>
 </div>
@@ -3103,9 +3098,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to vectors to store the residual vectors. This uses the same format as the X_mg_vectors_storage vector. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00677">677</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00666">666</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00361">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::residual_norm()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00352">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::residual_norm()</a>.</p>
 
 </div>
 </div>
@@ -3133,9 +3128,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the restriction matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00662">662</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00651">651</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00148">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00470">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00141">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::clean_up_memory()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00461">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
 
 </div>
 </div>
@@ -3163,9 +3158,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> of vectors to store the RHS vectors. This uses the same format as the X_mg_vectors_storage vector. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00673">673</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00662">662</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00384">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00348">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::post_smooth()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00332">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00514">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00375">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00340">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::post_smooth()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00325">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00504">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>.</p>
 
 </div>
 </div>
@@ -3193,9 +3188,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to the output stream &ndash; defaults to std::cout. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00728">728</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00717">717</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00244">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00514">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00584">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00237">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00504">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00573">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup()</a>.</p>
 
 </div>
 </div>
@@ -3223,9 +3218,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>If this is set to true then all output from the solver is suppressed. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00718">718</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00707">707</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00244">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00281">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00514">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00584">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00237">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00274">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00504">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00573">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup()</a>.</p>
 
 </div>
 </div>
@@ -3253,9 +3248,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Indicates whether or not the V-cycle output should be suppressed. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00715">715</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00704">704</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00244">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00233">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_v_cycle_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00281">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00271">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_v_cycle_output()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00514">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00237">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00226">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::disable_v_cycle_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00274">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_output()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00264">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::enable_v_cycle_output()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00504">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>.</p>
 
 </div>
 </div>
@@ -3283,9 +3278,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>The tolerance of the multigrid preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00694">694</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00683">683</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00211">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::tolerance()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00204">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::tolerance()</a>.</p>
 
 </div>
 </div>
@@ -3313,9 +3308,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to counter for V-cycles. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00709">709</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00698">698</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00549">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::iterations()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00539">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::iterations()</a>.</p>
 
 </div>
 </div>
@@ -3343,7 +3338,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>The value of the wavenumber, k. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00691">691</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00680">680</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -3371,9 +3366,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> of vectors to store the solution vectors (X_mg) in two parts; the real and imaginary. To access the real part of the solution vector on the i-th level we need to access X_mg_vectors_storage[i][0] while accessing X_mg_vectors_storage[i][1] will give us the corresponding imaginary part. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00669">669</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00658">658</a> of file <a class="el" href="helmholtz__geometric__multigrid_8h_source.html">helmholtz_geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00384">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00348">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::post_smooth()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00332">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00514">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00375">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00340">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::post_smooth()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00325">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00504">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>.</p>
 
 </div>
 </div>
@@ -3408,7 +3403,7 @@ template&lt;unsigned DIM&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:55:32
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:32
         </div>
       </div>
     </footer>

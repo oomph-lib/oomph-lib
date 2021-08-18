@@ -13,9 +13,9 @@ Inheritance diagram for oomph\+::Young\+Laplace\+Equations\+:\begin{figure}[H]
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a5e09288f5d3b710f23e8e57401a48ccc}{Spine\+Base\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine\+\_\+base, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&dspine\+\_\+base)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1e9c7641db4e58ef2c39b1a50538ece1}{Spine\+Base\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine\+\_\+base, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&dspine\+\_\+base)
 \begin{DoxyCompactList}\small\item\em Function pointer to \char`\"{}spine base\char`\"{} function. \end{DoxyCompactList}\item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a97448cfb2f6361e986d363d9e4463f9f}{Spine\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&dspine)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a99853ee50864a3e31d3ac0d74506cd7d}{Spine\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&dspine)
 \begin{DoxyCompactList}\small\item\em Function pointer to \char`\"{}spine\char`\"{} function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -44,9 +44,9 @@ void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a488ccd6f86ba5516726af
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that stores kappa (const version -- kappa must be set with \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a2f1e916b64e50292e47827ea7ba41db5}{set\+\_\+kappa()}} which also ensures that the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object is added to the element\textquotesingle{}s external \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aaf07cfa70e0de1b388290d2e1f63a7b7}{use\+\_\+spines}} () const
 \begin{DoxyCompactList}\small\item\em Use spines or not? (Based on availability of function pointers to to spine and spine base vector fields) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a5e09288f5d3b710f23e8e57401a48ccc}{Spine\+Base\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a123ecf6aeb497b78e6db88995aa22472}{spine\+\_\+base\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1e9c7641db4e58ef2c39b1a50538ece1}{Spine\+Base\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a123ecf6aeb497b78e6db88995aa22472}{spine\+\_\+base\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to function pointer that specifies spine base vector field. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a97448cfb2f6361e986d363d9e4463f9f}{Spine\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a8dbe47fba62678dba689f1f0202d9c96}{spine\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a99853ee50864a3e31d3ac0d74506cd7d}{Spine\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a8dbe47fba62678dba689f1f0202d9c96}{spine\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to function pointer that specifies spine vector field. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a2f1e916b64e50292e47827ea7ba41db5}{set\+\_\+kappa}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_af77f2f14be61aa0bd4f28c5df4fc712a}{kappa\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set curvature data (and add it to the element\textquotesingle{}s external \mbox{\hyperlink{classoomph_1_1Data}{Data}}) \end{DoxyCompactList}\item 
@@ -54,9 +54,9 @@ double \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aa4144104f99e731a0e4
 \begin{DoxyCompactList}\small\item\em Get curvature. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_ae0cc35d476be29d1c6395f227bb323e4}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i\+: Mainly used for error estimation. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a4f9bb4d4617839296397c07cb2f2349c}{get\+\_\+spine\+\_\+base}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine\+\_\+base, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&dspine\+\_\+base) const
+virtual void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aa28cd77a0377765bf0056da6f6c3a841}{get\+\_\+spine\+\_\+base}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine\+\_\+base, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&dspine\+\_\+base) const
 \begin{DoxyCompactList}\small\item\em Get spine base vector field\+: Defaults to standard cartesian representation if no spine base fct pointers have been set. dspine\+\_\+B\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\+\_\+B\mbox{[}j\mbox{]} / dx\+\_\+i. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a08376fdfe31361bee2ba0d21f9b132ec}{get\+\_\+spine}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&dspine) const
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aa7c2e605dda07d63c5c6056e81e13a7a}{get\+\_\+spine}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&dspine) const
 \begin{DoxyCompactList}\small\item\em Get spine vector field\+: Defaults to standard cartesian representation if no spine base fct pointers have been set. dspine\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\mbox{[}j\mbox{]} / dx\+\_\+i. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_ab1b3d09214a0985a331564135fe14053}{position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Get position vector to meniscus at local coordinate s. \end{DoxyCompactList}\item 
@@ -71,9 +71,8 @@ unsigned \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a5856fb3002cc7e9c8
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a3a618a00109c733bc38eee0623386d2b}{allocate\+\_\+vector\+\_\+of\+\_\+vectors}} (unsigned n\+\_\+rows, unsigned n\+\_\+cols, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&v)
-\begin{DoxyCompactList}\small\item\em Helper fct\+: Allocate storage for a vector of vectors of doubles to v(n\+\_\+rows,n\+\_\+cols) and initialise each component to 0.\+0. ~\newline
- \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a58e52f4a5204f1075dd826a6a7c1e424}{allocate\+\_\+vector\+\_\+of\+\_\+vectors}} (unsigned n\+\_\+rows, unsigned n\+\_\+cols, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&v)
+\begin{DoxyCompactList}\small\item\em Helper fct\+: Allocate storage for a vector of vectors of doubles to v(n\+\_\+rows,n\+\_\+cols) and initialise each component to 0.\+0. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\+\_\+times\+\_\+vector}} (const double \&lambda, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&lambda\+\_\+times\+\_\+v)
 \begin{DoxyCompactList}\small\item\em Multiply a vector by a scalar. \end{DoxyCompactList}\item 
 static double \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a16a1e5407993539ac48a690215ebd13e}{two\+\_\+norm}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&v)
@@ -94,9 +93,9 @@ virtual int \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a60c1e853d0f034
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_ab64b10fcc80fe799f20c2dd04c8cef81}{Kappa\+\_\+index}}
 \begin{DoxyCompactList}\small\item\em Index of Kappa\+\_\+pt in the element\textquotesingle{}s storage of external \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a5e09288f5d3b710f23e8e57401a48ccc}{Spine\+Base\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_af40879c321f957ff4fb450abcb61a78f}{Spine\+\_\+base\+\_\+fct\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1e9c7641db4e58ef2c39b1a50538ece1}{Spine\+Base\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_af40879c321f957ff4fb450abcb61a78f}{Spine\+\_\+base\+\_\+fct\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to spine base function\+: \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a97448cfb2f6361e986d363d9e4463f9f}{Spine\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aceae254105250eef19e75751fdbf45b9}{Spine\+\_\+fct\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a99853ee50864a3e31d3ac0d74506cd7d}{Spine\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aceae254105250eef19e75751fdbf45b9}{Spine\+\_\+fct\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to spine function\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -109,16 +108,16 @@ unsigned \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_ab64b10fcc80fe799f
 \doxysubsection{Detailed Description}
 A class for all isoparametric elements that solve the Young\+Laplace equations. \[ div (\frac{1}{W} \nabla u) = \kappa \] with \[ W^2=1+\|\nabla u\|^2 \] These equations can either be solved in the above (cartesian) form, or in a parametric representation using the method of spines. See the theory write-\/up in the documentation for details. This class contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line 65 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 61 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Typedef Documentation}
-\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a5e09288f5d3b710f23e8e57401a48ccc}\label{classoomph_1_1YoungLaplaceEquations_a5e09288f5d3b710f23e8e57401a48ccc}} 
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a1e9c7641db4e58ef2c39b1a50538ece1}\label{classoomph_1_1YoungLaplaceEquations_a1e9c7641db4e58ef2c39b1a50538ece1}} 
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!SpineBaseFctPt@{SpineBaseFctPt}}
 \index{SpineBaseFctPt@{SpineBaseFctPt}!oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}}
 \doxysubsubsection{\texorpdfstring{SpineBaseFctPt}{SpineBaseFctPt}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Young\+Laplace\+Equations\+::\+Spine\+Base\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine\+\_\+base, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&dspine\+\_\+base)}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Young\+Laplace\+Equations\+::\+Spine\+Base\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine\+\_\+base, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&dspine\+\_\+base)}
 
 
 
@@ -126,13 +125,13 @@ Function pointer to \char`\"{}spine base\char`\"{} function.
 
 
 
-Definition at line 72 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 65 of file young\+\_\+laplace\+\_\+elements.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a97448cfb2f6361e986d363d9e4463f9f}\label{classoomph_1_1YoungLaplaceEquations_a97448cfb2f6361e986d363d9e4463f9f}} 
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a99853ee50864a3e31d3ac0d74506cd7d}\label{classoomph_1_1YoungLaplaceEquations_a99853ee50864a3e31d3ac0d74506cd7d}} 
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!SpineFctPt@{SpineFctPt}}
 \index{SpineFctPt@{SpineFctPt}!oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}}
 \doxysubsubsection{\texorpdfstring{SpineFctPt}{SpineFctPt}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Young\+Laplace\+Equations\+::\+Spine\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&dspine)}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Young\+Laplace\+Equations\+::\+Spine\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&dspine)}
 
 
 
@@ -140,7 +139,7 @@ Function pointer to \char`\"{}spine\char`\"{} function.
 
 
 
-Definition at line 77 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 70 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -153,7 +152,7 @@ Definition at line 77 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 Constructor\+: Initialise pointers to N\+U\+LL, so by default prescribed kappa evaluates to zero, and no spines are used. 
 
-Definition at line 83 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 76 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a5002b4fe54384d6a393c8af4b8dc8a4c}\label{classoomph_1_1YoungLaplaceEquations_a5002b4fe54384d6a393c8af4b8dc8a4c}} 
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!YoungLaplaceEquations@{YoungLaplaceEquations}}
@@ -167,7 +166,7 @@ Broken copy constructor.
 
 
 
-Definition at line 88 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 81 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -176,20 +175,19 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a3a618a00109c733bc38eee0623386d2b}\label{classoomph_1_1YoungLaplaceEquations_a3a618a00109c733bc38eee0623386d2b}} 
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a58e52f4a5204f1075dd826a6a7c1e424}\label{classoomph_1_1YoungLaplaceEquations_a58e52f4a5204f1075dd826a6a7c1e424}} 
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!allocate\_vector\_of\_vectors@{allocate\_vector\_of\_vectors}}
 \index{allocate\_vector\_of\_vectors@{allocate\_vector\_of\_vectors}!oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}}
 \doxysubsubsection{\texorpdfstring{allocate\_vector\_of\_vectors()}{allocate\_vector\_of\_vectors()}}
-{\footnotesize\ttfamily static void oomph\+::\+Young\+Laplace\+Equations\+::allocate\+\_\+vector\+\_\+of\+\_\+vectors (\begin{DoxyParamCaption}\item[{unsigned}]{n\+\_\+rows,  }\item[{unsigned}]{n\+\_\+cols,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily static void oomph\+::\+Young\+Laplace\+Equations\+::allocate\+\_\+vector\+\_\+of\+\_\+vectors (\begin{DoxyParamCaption}\item[{unsigned}]{n\+\_\+rows,  }\item[{unsigned}]{n\+\_\+cols,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
-Helper fct\+: Allocate storage for a vector of vectors of doubles to v(n\+\_\+rows,n\+\_\+cols) and initialise each component to 0.\+0. ~\newline
- 
+Helper fct\+: Allocate storage for a vector of vectors of doubles to v(n\+\_\+rows,n\+\_\+cols) and initialise each component to 0.\+0. 
 
 
 
-Definition at line 339 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 349 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -219,7 +217,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 563 of file young\+\_\+laplace\+\_\+elements.\+cc.
+Definition at line 542 of file young\+\_\+laplace\+\_\+elements.\+cc.
 
 
 
@@ -241,7 +239,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 140 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 139 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_abca184b7f327333dc4284096d94e4771}\label{classoomph_1_1YoungLaplaceEquations_abca184b7f327333dc4284096d94e4771}} 
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!cross\_product@{cross\_product}}
@@ -255,7 +253,7 @@ Cross-\/product\+: v\+\_\+cross= v1 x v2.
 
 
 
-Definition at line 396 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 404 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -275,7 +273,7 @@ Get exact position vector to meniscus. Get spines values
 
 Global Eulerian cooordinates
 
-Definition at line 49 of file young\+\_\+laplace\+\_\+elements.\+cc.
+Definition at line 48 of file young\+\_\+laplace\+\_\+elements.\+cc.
 
 
 
@@ -295,15 +293,15 @@ Referenced by compute\+\_\+error(), and output\+\_\+fct().
 
 Add the element\textquotesingle{}s contribution to its residual vector. 
 
-Compute element residual vector. Pure version without hanging nodes. \hypertarget{young_laplace_elements.cc_autotoc_md41}{}\doxysubsubsection{\char`\"{}\+Simple\char`\"{} case}\label{young_laplace_elements.cc_autotoc_md41}
-\hypertarget{young_laplace_elements.cc_autotoc_md42}{}\doxysubsubsection{Spine case}\label{young_laplace_elements.cc_autotoc_md42}
+Compute element residual vector. Pure version without hanging nodes. \hypertarget{young_laplace_elements.cc_autotoc_md42}{}\doxysubsubsection{\char`\"{}\+Simple\char`\"{} case}\label{young_laplace_elements.cc_autotoc_md42}
+\hypertarget{young_laplace_elements.cc_autotoc_md43}{}\doxysubsubsection{Spine case}\label{young_laplace_elements.cc_autotoc_md43}
 Get the unnormalized normal
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 140 of file young\+\_\+laplace\+\_\+elements.\+cc.
+Definition at line 136 of file young\+\_\+laplace\+\_\+elements.\+cc.
 
 
 
@@ -321,7 +319,7 @@ Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i\+: Mainly used for error estima
 
 
 
-Definition at line 208 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 218 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -343,7 +341,7 @@ Get curvature.
 
 No kappa has been set\+: return zero (the default)
 
-Definition at line 192 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 202 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -353,11 +351,11 @@ References Kappa\+\_\+pt, and oomph\+::\+Data\+::value().
 
 Referenced by oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a08376fdfe31361bee2ba0d21f9b132ec}\label{classoomph_1_1YoungLaplaceEquations_a08376fdfe31361bee2ba0d21f9b132ec}} 
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_aa7c2e605dda07d63c5c6056e81e13a7a}\label{classoomph_1_1YoungLaplaceEquations_aa7c2e605dda07d63c5c6056e81e13a7a}} 
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!get\_spine@{get\_spine}}
 \index{get\_spine@{get\_spine}!oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}}
 \doxysubsubsection{\texorpdfstring{get\_spine()}{get\_spine()}}
-{\footnotesize\ttfamily void oomph\+::\+Young\+Laplace\+Equations\+::get\+\_\+spine (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{spine,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{dspine }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Young\+Laplace\+Equations\+::get\+\_\+spine (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{spine,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{dspine }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -365,7 +363,7 @@ Get spine vector field\+: Defaults to standard cartesian representation if no sp
 
 
 
-Definition at line 269 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 279 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -375,11 +373,11 @@ References i, and Spine\+\_\+fct\+\_\+pt.
 
 Referenced by exact\+\_\+position(), oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), output(), and position().
 
-\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a4f9bb4d4617839296397c07cb2f2349c}\label{classoomph_1_1YoungLaplaceEquations_a4f9bb4d4617839296397c07cb2f2349c}} 
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_aa28cd77a0377765bf0056da6f6c3a841}\label{classoomph_1_1YoungLaplaceEquations_aa28cd77a0377765bf0056da6f6c3a841}} 
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!get\_spine\_base@{get\_spine\_base}}
 \index{get\_spine\_base@{get\_spine\_base}!oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}}
 \doxysubsubsection{\texorpdfstring{get\_spine\_base()}{get\_spine\_base()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Young\+Laplace\+Equations\+::get\+\_\+spine\+\_\+base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{spine\+\_\+base,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{dspine\+\_\+base }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Young\+Laplace\+Equations\+::get\+\_\+spine\+\_\+base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{spine\+\_\+base,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{dspine\+\_\+base }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -387,7 +385,7 @@ Get spine base vector field\+: Defaults to standard cartesian representation if 
 
 
 
-Definition at line 241 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 251 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -409,7 +407,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 309 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 319 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -431,7 +429,7 @@ Access function\+: Pointer \mbox{\hyperlink{classoomph_1_1Data}{Data}} object th
 
 
 
-Definition at line 153 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 154 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -453,7 +451,7 @@ Broken assignment operator.
 
 
 
-Definition at line 94 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 87 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -479,7 +477,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QYoungLaplaceElement_acd3dd1655f
 
 
 
-Definition at line 105 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 100 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -505,7 +503,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QYoungLaplaceElement_a4cbc12fd3e
 
 
 
-Definition at line 404 of file young\+\_\+laplace\+\_\+elements.\+cc.
+Definition at line 392 of file young\+\_\+laplace\+\_\+elements.\+cc.
 
 
 
@@ -531,7 +529,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QYoungLaplaceElement_adfb6168982
 
 
 
-Definition at line 124 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 120 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1YoungLaplaceEquations_a7938b426803efb21be5d7b7e78be16c5}\label{classoomph_1_1YoungLaplaceEquations_a7938b426803efb21be5d7b7e78be16c5}} 
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!output\_fct@{output\_fct}}
@@ -555,7 +553,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QYoungLaplaceElement_a617863102f
 
 
 
-Definition at line 507 of file young\+\_\+laplace\+\_\+elements.\+cc.
+Definition at line 489 of file young\+\_\+laplace\+\_\+elements.\+cc.
 
 
 
@@ -583,7 +581,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a1d33f53e2b2813f
 
 
 
-Definition at line 94 of file young\+\_\+laplace\+\_\+elements.\+cc.
+Definition at line 93 of file young\+\_\+laplace\+\_\+elements.\+cc.
 
 
 
@@ -605,7 +603,7 @@ Scalar product between two vectors.
 
 
 
-Definition at line 383 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 391 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -627,7 +625,7 @@ Multiply a vector by a scalar.
 
 
 
-Definition at line 356 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 365 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -653,7 +651,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 376 of file young\+\_\+laplace\+\_\+elements.\+cc.
+Definition at line 367 of file young\+\_\+laplace\+\_\+elements.\+cc.
 
 
 
@@ -671,7 +669,7 @@ Set curvature data (and add it to the element\textquotesingle{}s external \mbox{
 
 
 
-Definition at line 172 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 182 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -685,7 +683,7 @@ Referenced by oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::further\+\_\+b
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!spine\_base\_fct\_pt@{spine\_base\_fct\_pt}}
 \index{spine\_base\_fct\_pt@{spine\_base\_fct\_pt}!oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}}
 \doxysubsubsection{\texorpdfstring{spine\_base\_fct\_pt()}{spine\_base\_fct\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a5e09288f5d3b710f23e8e57401a48ccc}{Spine\+Base\+Fct\+Pt}}\& oomph\+::\+Young\+Laplace\+Equations\+::spine\+\_\+base\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1e9c7641db4e58ef2c39b1a50538ece1}{Spine\+Base\+Fct\+Pt}}\& oomph\+::\+Young\+Laplace\+Equations\+::spine\+\_\+base\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -693,7 +691,7 @@ Access function to function pointer that specifies spine base vector field.
 
 
 
-Definition at line 164 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 168 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -707,7 +705,7 @@ Referenced by oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::further\+\_\+b
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!spine\_fct\_pt@{spine\_fct\_pt}}
 \index{spine\_fct\_pt@{spine\_fct\_pt}!oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}}
 \doxysubsubsection{\texorpdfstring{spine\_fct\_pt()}{spine\_fct\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a97448cfb2f6361e986d363d9e4463f9f}{Spine\+Fct\+Pt}}\& oomph\+::\+Young\+Laplace\+Equations\+::spine\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a99853ee50864a3e31d3ac0d74506cd7d}{Spine\+Fct\+Pt}}\& oomph\+::\+Young\+Laplace\+Equations\+::spine\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -715,7 +713,7 @@ Access function to function pointer that specifies spine vector field.
 
 
 
-Definition at line 169 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 176 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -737,7 +735,7 @@ Referenced by oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::further\+\_\+b
 
 
 
-Definition at line 370 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 378 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -755,7 +753,7 @@ Referenced by oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::fill\+\_\+in\+
 
 Access function\+: Nodal function value at local node n Uses suitably interpolated value for hanging nodes. 
 
-Definition at line 101 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 94 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -777,7 +775,7 @@ Get the local equation number of the (one and only) unknown stored at local node
 
 
 
-Definition at line 432 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 437 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -799,7 +797,7 @@ Use spines or not? (Based on availability of function pointers to to spine and s
 
 
 
-Definition at line 157 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 161 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -821,7 +819,7 @@ Vectorial sum of two vectors.
 
 
 
-Definition at line 416 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 422 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -846,7 +844,7 @@ Index of Kappa\+\_\+pt in the element\textquotesingle{}s storage of external \mb
 
 
 
-Definition at line 436 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 443 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -864,7 +862,7 @@ Pointer to \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that stores kappa as
 
 
 
-Definition at line 450 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 456 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -874,7 +872,7 @@ Referenced by get\+\_\+kappa(), kappa\+\_\+pt(), and set\+\_\+kappa().
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!Spine\_base\_fct\_pt@{Spine\_base\_fct\_pt}}
 \index{Spine\_base\_fct\_pt@{Spine\_base\_fct\_pt}!oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}}
 \doxysubsubsection{\texorpdfstring{Spine\_base\_fct\_pt}{Spine\_base\_fct\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a5e09288f5d3b710f23e8e57401a48ccc}{Spine\+Base\+Fct\+Pt}} oomph\+::\+Young\+Laplace\+Equations\+::\+Spine\+\_\+base\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1e9c7641db4e58ef2c39b1a50538ece1}{Spine\+Base\+Fct\+Pt}} oomph\+::\+Young\+Laplace\+Equations\+::\+Spine\+\_\+base\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -882,7 +880,7 @@ Pointer to spine base function\+:
 
 
 
-Definition at line 439 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 446 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 
@@ -892,7 +890,7 @@ Referenced by oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::further\+\_\+b
 \index{oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}!Spine\_fct\_pt@{Spine\_fct\_pt}}
 \index{Spine\_fct\_pt@{Spine\_fct\_pt}!oomph::YoungLaplaceEquations@{oomph::YoungLaplaceEquations}}
 \doxysubsubsection{\texorpdfstring{Spine\_fct\_pt}{Spine\_fct\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a97448cfb2f6361e986d363d9e4463f9f}{Spine\+Fct\+Pt}} oomph\+::\+Young\+Laplace\+Equations\+::\+Spine\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a99853ee50864a3e31d3ac0d74506cd7d}{Spine\+Fct\+Pt}} oomph\+::\+Young\+Laplace\+Equations\+::\+Spine\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -900,7 +898,7 @@ Pointer to spine function\+:
 
 
 
-Definition at line 442 of file young\+\_\+laplace\+\_\+elements.\+h.
+Definition at line 449 of file young\+\_\+laplace\+\_\+elements.\+h.
 
 
 

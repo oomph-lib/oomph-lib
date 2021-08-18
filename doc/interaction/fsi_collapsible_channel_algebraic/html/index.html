@@ -179,187 +179,27 @@ The implementation</h1>
 <h2><a class="anchor" id="mesh"></a>
 The AlgebraicCollapsibleChannelMesh</h2>
 <p>We construct the mesh by multiple inheritance, combining the already existing <code>CollapsibleChannelMesh</code> with the <code>AlgebraicMesh</code> base class:</p>
- <div class="fragment"><div class="line"><span class="comment">//========start_of_algebraic_collapsible_channel_mesh==============</span></div>
-<div class="line"><span class="comment">/// Collapsible channel mesh with algebraic node update</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=================================================================</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
-<div class="line"><span class="keyword">class </span><a class="code" href="fsi__chan__alg_8txt.html#a2eb1f6b91aaf3fcc2ea27a0b39ab52fe">AlgebraicCollapsibleChannelMesh</a> : </div>
-<div class="line">  <span class="keyword">public</span> <span class="keyword">virtual</span> CollapsibleChannelMesh&lt;ELEMENT&gt;,</div>
-<div class="line">  <span class="keyword">public</span> AlgebraicMesh</div>
-<div class="line">{ </div>
+ <div class="fragment"><div class="line">  <span class="comment">//========start_of_algebraic_collapsible_channel_mesh==============</span></div>
+<div class="line"><span class="comment">  /// Collapsible channel mesh with algebraic node update</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//=================================================================</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line">  <span class="keyword">class </span><a class="code" href="fsi__chan__alg_8txt.html#a2eb1f6b91aaf3fcc2ea27a0b39ab52fe">AlgebraicCollapsibleChannelMesh</a></div>
+<div class="line">    : <span class="keyword">public</span> <span class="keyword">virtual</span> CollapsibleChannelMesh&lt;ELEMENT&gt;,</div>
+<div class="line">      <span class="keyword">public</span> AlgebraicMesh</div>
+<div class="line">  {</div>
 </div><!-- fragment --><p>The constructor calls the constructor of the underlying <code>CollapsibleChannelMesh</code> and then calls the private member function <code>setup_algebraic_node_update()</code> to initialise the data for the algebraic node update procedures. (The initialisation is implemented in a separate function so it can be called from additional mesh constructors that are not discussed here.) The destructor remains empty.</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line"><span class="keyword">public</span>: </div>
-<div class="line"> </div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// \short Constructor: Pass number of elements in upstream/collapsible/</span></div>
-<div class="line"><span class="comment"> /// downstream segment and across the channel; lengths of upstream/</span></div>
-<div class="line"><span class="comment"> /// collapsible/downstream segments and width of channel, pointer to </span></div>
-<div class="line"><span class="comment"> /// GeomObject that defines the collapsible segment and pointer to </span></div>
-<div class="line"><span class="comment"> /// TimeStepper (defaults to the default timestepper, Steady). </span></div>
-<div class="line"><span class="comment"></span> <a class="code" href="fsi__chan__alg_8txt.html#a2eb1f6b91aaf3fcc2ea27a0b39ab52fe">AlgebraicCollapsibleChannelMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nup, </div>
-<div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ncollapsible, </div>
-<div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ndown, </div>
-<div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ny, </div>
-<div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lup, </div>
-<div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lcollapsible, </div>
-<div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ldown, </div>
-<div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ly,</div>
-<div class="line">                                 GeomObject* wall_pt,</div>
-<div class="line">                                 TimeStepper* time_stepper_pt=</div>
-<div class="line">                                 &amp;Mesh::Default_TimeStepper) :</div>
-<div class="line">  CollapsibleChannelMesh&lt;ELEMENT&gt;(nup, ncollapsible, ndown, ny,</div>
-<div class="line">                                  lup, lcollapsible, ldown, ly,</div>
-<div class="line">                                  wall_pt,</div>
-<div class="line">                                  time_stepper_pt)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Add the geometric object to the list associated with this AlgebraicMesh</span></div>
-<div class="line">   AlgebraicMesh::add_geom_object_list_pt(wall_pt);</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">// Setup algebraic node update operations</span></div>
-<div class="line">   setup_algebraic_node_update();</div>
-<div class="line">  }</div>
-<div class="line"> <span class="comment"></span></div>
-<div class="line"><span class="comment"> /// \short Destructor: empty</span></div>
-<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> ~<a class="code" href="fsi__chan__alg_8txt.html#a2eb1f6b91aaf3fcc2ea27a0b39ab52fe">AlgebraicCollapsibleChannelMesh</a>(){}</div>
-</div><!-- fragment --><p>The function <code>algebraic_node_update(...)</code> is defined as a pure virtual function in the <code>AlgebraicMesh</code> base class and therefore must be implemented, whereas the virtual function <code>update_node_update(...)</code> is only required for refineable meshes and can remain empty.</p>
-<div class="fragment"><div class="line"> <span class="comment">/// \short Update nodal position at time level t (t=0: present; </span></div>
-<div class="line"><span class="comment"> /// t&gt;0: previous)</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> algebraic_node_update(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, AlgebraicNode*&amp; node_pt);</div>
-<div class="line"> <span class="comment"></span></div>
-<div class="line"><span class="comment"> /// \short Update the node-udate data after mesh adaptation.</span></div>
-<div class="line"><span class="comment"> /// Empty -- no update of node update required as this is </span></div>
-<div class="line"><span class="comment"> /// non-refineable mesh.</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> update_node_update(AlgebraicNode*&amp; node_pt){}</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">protected</span>:</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Function to setup the algebraic node update</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> setup_algebraic_node_update();</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Dummy function pointer </span></div>
-<div class="line"><span class="comment"></span> CollapsibleChannelDomain::BLSquashFctPt Dummy_fct_pt;</div>
-<div class="line"> </div>
-<div class="line">};</div>
-</div><!-- fragment --><p>The setup of the algebraic node update is very similar to that used in the <a href="../../../navier_stokes/algebraic_collapsible_channel/html/index.html">non-FSI example discussed earlier.</a> The main difference between the two versions of the mesh is that we use the function <code>GeomObject::locate_zeta(...)</code> to determine the sub-<code>GeomObject</code> within which the reference point on the wall is located. As discussed above, the default implementation of this function in the <code>GeomObject</code> base class ensures that the mesh can be used with compound and non-compound <code>GeomObjects</code>.</p>
+<div class="fragment"></div><!-- fragment --><p>The function <code>algebraic_node_update(...)</code> is defined as a pure virtual function in the <code>AlgebraicMesh</code> base class and therefore must be implemented, whereas the virtual function <code>update_node_update(...)</code> is only required for refineable meshes and can remain empty.</p>
+<div class="fragment"></div><!-- fragment --><p>The setup of the algebraic node update is very similar to that used in the <a href="../../../navier_stokes/algebraic_collapsible_channel/html/index.html">non-FSI example discussed earlier.</a> The main difference between the two versions of the mesh is that we use the function <code>GeomObject::locate_zeta(...)</code> to determine the sub-<code>GeomObject</code> within which the reference point on the wall is located. As discussed above, the default implementation of this function in the <code>GeomObject</code> base class ensures that the mesh can be used with compound and non-compound <code>GeomObjects</code>.</p>
 <p>We start by determining the x and y-coordinates of the nodes and decide if they are located in the collapsible part of the mesh. (The positions of nodes that are located in the rigid upstream and downstream channel segments do not have to be updated; for such nodes we skip the assignment of the node-update data. See the discussion in the <a href="../../../navier_stokes/algebraic_collapsible_channel/html/index.html">non-FSI example</a> for details.)</p>
- <div class="fragment"><div class="line"><span class="comment">//=====start_setup=================================================</span></div>
-<div class="line"><span class="comment">/// Setup algebraic mesh update -- assumes that mesh has</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// initially been set up with a flush upper wall</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=================================================================</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
-<div class="line"><span class="keywordtype">void</span> AlgebraicCollapsibleChannelMesh&lt;ELEMENT&gt;::setup_algebraic_node_update()</div>
-<div class="line">{</div>
-<div class="line"> <span class="comment">// Shorthand for some geometric data:</span></div>
-<div class="line"> <span class="keywordtype">double</span> l_up=this-&gt;domain_pt()-&gt;l_up();</div>
-<div class="line"> <span class="keywordtype">double</span> l_collapsible=this-&gt;domain_pt()-&gt;l_collapsible();</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Loop over all nodes in mesh</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> nnod=this-&gt;nnode();</div>
-<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;nnod;j++)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Get pointer to node -- recall that that Mesh::node_pt(...) has been</span></div>
-<div class="line">   <span class="comment">// overloaded in the AlgebraicMesh class to return a pointer to </span></div>
-<div class="line">   <span class="comment">// an AlgebraicNode.</span></div>
-<div class="line">   AlgebraicNode* nod_pt=node_pt(j);</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">// Get coordinates</span></div>
-<div class="line">   <span class="keywordtype">double</span> x=nod_pt-&gt;x(0);</div>
-<div class="line">   <span class="keywordtype">double</span> y=nod_pt-&gt;x(1);</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">// Check if it&#39;s in the collapsible part:</span></div>
-<div class="line">   <span class="keywordflow">if</span> ( (x&gt;=l_up) &amp;&amp; (x&lt;=(l_up+l_collapsible)) )</div>
+ <div class="fragment"><div class="line">  <span class="comment">//=====start_setup=================================================</span></div>
 </div><!-- fragment --><p> <br  />
 </p>
 <p>Assuming that the wall is in its undeformed position (we'll check this in a second...), we determine the intrinsic coordinate of the reference point on the upper wall (taking the offset between <img class="formulaInl" alt="$ x$" src="form_7.png"/> and <img class="formulaInl" alt="$ \zeta$" src="form_8.png"/> into account: The left end of the elastic wall is located at <img class="formulaInl" alt="$ \zeta=0$" src="form_9.png"/> and at <img class="formulaInl" alt="$ x = L_{up} $" src="form_10.png"/> ), and identify the sub - <code>GeomObject</code> within which the reference point is located.</p>
-<div class="fragment"><div class="line">    {</div>
-<div class="line"> </div>
-<div class="line">     <span class="comment">// Get zeta coordinate on the undeformed wall</span></div>
-<div class="line">     Vector&lt;double&gt; zeta(1);</div>
-<div class="line">     zeta[0]=x-l_up;</div>
-<div class="line"> </div>
-<div class="line">     <span class="comment">// Get pointer to geometric (sub-)object and Lagrangian coordinate</span></div>
-<div class="line">     <span class="comment">// on that sub-object. For a wall that is represented by </span></div>
-<div class="line">     <span class="comment">// a single geom object, this simply returns the input.</span></div>
-<div class="line">     <span class="comment">// If the geom object consists of sub-objects (e.g. </span></div>
-<div class="line">     <span class="comment">// if it is a finite element mesh representing a wall,</span></div>
-<div class="line">     <span class="comment">// then we&#39;ll obtain the pointer to the finite element</span></div>
-<div class="line">     <span class="comment">// (in its incarnation as a GeomObject) and the</span></div>
-<div class="line">     <span class="comment">// local coordinate in that element.</span></div>
-<div class="line">     GeomObject* geom_obj_pt;</div>
-<div class="line">     Vector&lt;double&gt; s(1);</div>
-<div class="line">     this-&gt;Wall_pt-&gt;locate_zeta(zeta,geom_obj_pt,s);</div>
-</div><!-- fragment --><p>Just to be on the safe side, we double check that the wall is still in its undeformed position:</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line">     <span class="comment">// Get position vector to wall:</span></div>
-<div class="line">     Vector&lt;double&gt; r_wall(2);</div>
-<div class="line">     geom_obj_pt-&gt;position(s,r_wall);</div>
-<div class="line"> </div>
-<div class="line">     <span class="comment">// Sanity check: Confirm that the wall is in its undeformed position</span></div>
-<div class="line"><span class="preprocessor">#ifdef PARANOID</span></div>
-<div class="line">     <span class="keywordflow">if</span> ((std::fabs(r_wall[0]-x)&gt;1.0e-15)&amp;&amp;(std::fabs(r_wall[1]-y)&gt;1.0e-15))</div>
-<div class="line">      {</div>
-<div class="line">       std::ostringstream error_stream;</div>
-<div class="line">       error_stream </div>
-<div class="line">        &lt;&lt; <span class="stringliteral">&quot;Wall must be in its undeformed position when\n&quot;</span></div>
-<div class="line">        &lt;&lt; <span class="stringliteral">&quot;algebraic node update information is set up!\n &quot;</span></div>
-<div class="line">        &lt;&lt; <span class="stringliteral">&quot;x-discrepancy: &quot;</span> &lt;&lt; std::fabs(r_wall[0]-x) &lt;&lt; std::endl</div>
-<div class="line">        &lt;&lt; <span class="stringliteral">&quot;y-discrepancy: &quot;</span> &lt;&lt; std::fabs(r_wall[1]-y) &lt;&lt; std::endl;</div>
-<div class="line">       </div>
-<div class="line">       <span class="keywordflow">throw</span> OomphLibError(</div>
-<div class="line">        error_stream.str(),</div>
-<div class="line">        OOMPH_CURRENT_FUNCTION,</div>
-<div class="line">        OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line">      }</div>
-<div class="line"><span class="preprocessor">#endif </span></div>
-</div><!-- fragment --><p>Now we can create the node update data for the present <code>AlgebraicNode</code>. The node update function involves a single <code>GeomObject:</code> The (sub-)<code>GeomObject</code> within which the reference point on the upper wall is located.</p>
-<div class="fragment"><div class="line">     </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">     <span class="comment">// One geometric object is involved in update operation</span></div>
-<div class="line">     Vector&lt;GeomObject*&gt; geom_object_pt(1);</div>
-<div class="line"> </div>
-<div class="line">     <span class="comment">// The actual geometric object (If the wall is simple GeomObject</span></div>
-<div class="line">     <span class="comment">// this is the same as Wall_pt; if it&#39;s a compound GeomObject</span></div>
-<div class="line">     <span class="comment">// this points to the sub-object)</span></div>
-<div class="line">     geom_object_pt[0]=geom_obj_pt;</div>
-</div><!-- fragment --><p>As in the mesh used in the <a href="../../../navier_stokes/algebraic_collapsible_channel/html/index.html">non-FSI example</a> we store the x-coordinate of the reference point on the lower wall, the fractional height of the node, and its intrinsic coordinate in the (sub-)<code>GeomObject</code> on the upper wall. We also store the intrinsic coordinate of the reference point in the compound <code>GeomObject</code> (i.e. the Lagrangian coordinate of the reference point in the continuous beam). This will turn out to be useful in the refineable version of this mesh, to be discussed in <a href="../../fsi_collapsible_channel_adapt/html/index.html">the next example.</a></p>
-<div class="fragment"><div class="line"> </div>
-<div class="line">     <span class="comment">// The update function requires four  parameters:</span></div>
-<div class="line">     Vector&lt;double&gt; ref_value(4);</div>
-<div class="line">     </div>
-<div class="line">     <span class="comment">// First reference value: Original x-position </span></div>
-<div class="line">     ref_value[0]=r_wall[0];</div>
-<div class="line">     </div>
-<div class="line">     <span class="comment">// Second  reference value: fractional position along </span></div>
-<div class="line">     <span class="comment">// straight line from the bottom (at the original x position)</span></div>
-<div class="line">     <span class="comment">// to the point on the wall)</span></div>
-<div class="line">     ref_value[1]=y/r_wall[1];</div>
-<div class="line">     </div>
-<div class="line">     <span class="comment">// Third reference value: Reference local coordinate</span></div>
-<div class="line">     <span class="comment">// in wall element (local coordinate in FE if we&#39;re dealing</span></div>
-<div class="line">     <span class="comment">// with a wall mesh)</span></div>
-<div class="line">     ref_value[2]=s[0];   </div>
-<div class="line"> </div>
-<div class="line">     <span class="comment">// Fourth reference value: zeta coordinate on wall</span></div>
-<div class="line">     <span class="comment">// If the wall is a simple GeomObject, zeta[0]=s[0]</span></div>
-<div class="line">     <span class="comment">// but if it&#39;s a compound GeomObject (e.g. a finite element mesh)</span></div>
-<div class="line">     <span class="comment">// zeta scales during mesh refinement, whereas s[0] and the</span></div>
-<div class="line">     <span class="comment">// pointer to the geom object have to be re-computed.</span></div>
-<div class="line">     ref_value[3]=zeta[0];     </div>
-</div><!-- fragment --><p>Finally, we create the node update information by passing the pointer to the mesh, the pointer to the <code>GeomObject</code> and the reference values to the <code>AlgebraicNode</code>.</p>
-<div class="fragment"><div class="line">  </div>
-<div class="line">     <span class="comment">// Setup algebraic update for node: Pass update information</span></div>
-<div class="line">     nod_pt-&gt;add_node_update_info(</div>
-<div class="line">      <span class="keyword">this</span>,               <span class="comment">// mesh</span></div>
-<div class="line">      geom_object_pt,     <span class="comment">// vector of geom objects</span></div>
-<div class="line">      ref_value);         <span class="comment">// vector of  ref. values</span></div>
-<div class="line">    }</div>
-<div class="line">   </div>
-<div class="line">  }</div>
-<div class="line"> </div>
-<div class="line">} <span class="comment">//end of setup_algebraic_node_update </span></div>
-</div><!-- fragment --><hr  />
+<div class="fragment"></div><!-- fragment --><p>Just to be on the safe side, we double check that the wall is still in its undeformed position:</p>
+<div class="fragment"></div><!-- fragment --><p>Now we can create the node update data for the present <code>AlgebraicNode</code>. The node update function involves a single <code>GeomObject:</code> The (sub-)<code>GeomObject</code> within which the reference point on the upper wall is located.</p>
+<div class="fragment"></div><!-- fragment --><p>As in the mesh used in the <a href="../../../navier_stokes/algebraic_collapsible_channel/html/index.html">non-FSI example</a> we store the x-coordinate of the reference point on the lower wall, the fractional height of the node, and its intrinsic coordinate in the (sub-)<code>GeomObject</code> on the upper wall. We also store the intrinsic coordinate of the reference point in the compound <code>GeomObject</code> (i.e. the Lagrangian coordinate of the reference point in the continuous beam). This will turn out to be useful in the refineable version of this mesh, to be discussed in <a href="../../fsi_collapsible_channel_adapt/html/index.html">the next example.</a></p>
+<div class="fragment"></div><!-- fragment --><p>Finally, we create the node update information by passing the pointer to the mesh, the pointer to the <code>GeomObject</code> and the reference values to the <code>AlgebraicNode</code>.</p>
+<div class="fragment"></div><!-- fragment --><hr  />
 <h1><a class="anchor" id="driver"></a>
 The driver code</h1>
 <p>Since <code>oomph-lib's</code> various node update procedures use the same interfaces, changing the node update strategy from the <code>Domain/MacroElement</code> - based procedure, discussed in the <a href="../../fsi_collapsible_channel/html/index.html">previous example,</a> to the procedure implemented in the <code>AlgebraicCollapsibleChannelMesh</code>, only requires minimal changes to the driver code. In fact, the changes are so trivial, that both versions are implemented in the same driver code, <a href="../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc">fsi_collapsible_channel.cc</a>, using compiler flags to switch from one version to the other. If the code is compiled with the flag <code>-DMACRO_ELEMENT_NODE_UPDATE</code> the <code>Domain/MacroElement</code> - based node-update procedure, implemented in the <code>MacroElementNodeUpdateCollapsibleChannelMesh</code> is used, otherwise the code uses the <code>AlgebraicCollapsibleChannelMesh</code>, discussed above. Here is one of the few portions of the code where the distinction between the two versions is required: The access function to the "bulk" (fluid) mesh in the problem class.</p>
@@ -487,7 +327,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:20:20
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:00:11
         </div>
       </div>
     </footer>

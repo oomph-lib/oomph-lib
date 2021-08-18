@@ -139,8 +139,7 @@ Inheritance diagram for oomph::ElasticAxisymmetricVolumeConstraintBoundingElemen
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a533376e1f314fabc4c014f9c7547f5e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement.html#a533376e1f314fabc4c014f9c7547f5e8">ElasticAxisymmetricVolumeConstraintBoundingElement</a> (FiniteElement *const &amp;element_pt, const int &amp;face_index)</td></tr>
-<tr class="memdesc:a533376e1f314fabc4c014f9c7547f5e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contructor: Specify bulk element and index of face to which this face element is to be attached <br  />
-  <a href="classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement.html#a533376e1f314fabc4c014f9c7547f5e8">More...</a><br /></td></tr>
+<tr class="memdesc:a533376e1f314fabc4c014f9c7547f5e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contructor: Specify bulk element and index of face to which this face element is to be attached.  <a href="classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement.html#a533376e1f314fabc4c014f9c7547f5e8">More...</a><br /></td></tr>
 <tr class="separator:a533376e1f314fabc4c014f9c7547f5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc7f5296f867251fe4b97b01f40c11e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement.html#adc7f5296f867251fe4b97b01f40c11e7">fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
 <tr class="separator:adc7f5296f867251fe4b97b01f40c11e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,7 +199,7 @@ class oomph::ElasticAxisymmetricVolumeConstraintBoundingElement&lt; ELEMENT &gt;
 
 <p>The axisymmetric (one-dimensional) interface elements that allow imposition of a volume constraint specialised for the case when the nodal positions of the bulk elements are treated as solid degrees of freedom. To enforce that a fluid volume has a certain volume, attach these elements to all faces of the (2D axisymmetric) bulk fluid elements (of type ELEMENT) that bound that region and then specify the "pressure" value that is traded for the constraint. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00608">608</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00602">602</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a533376e1f314fabc4c014f9c7547f5e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a533376e1f314fabc4c014f9c7547f5e8">&#9670;&nbsp;</a></span>ElasticAxisymmetricVolumeConstraintBoundingElement()</h2>
@@ -238,10 +237,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Contructor: Specify bulk element and index of face to which this face element is to be attached <br  />
- </p>
+<p>Contructor: Specify bulk element and index of face to which this face element is to be attached. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00617">617</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00609">609</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
 </div>
 </div>
@@ -283,9 +281,9 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 <p>Fill in contribution to residuals and Jacobian. This is specific to solid-based elements in which derivatives w.r.t. to nodal positions are evaluated by finite differencing </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00631">631</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00621">621</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="constrained__volume__elements_8cc_source.html#l00355">oomph::AxisymmetricVolumeConstraintBoundingElement::fill_in_generic_residual_contribution_volume_constraint()</a>.</p>
+<p class="reference">References <a class="el" href="constrained__volume__elements_8cc_source.html#l00352">oomph::AxisymmetricVolumeConstraintBoundingElement::fill_in_generic_residual_contribution_volume_constraint()</a>.</p>
 
 </div>
 </div>
@@ -333,7 +331,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The "global" intrinsic coordinate of the element when viewed as part of a geometric object should be given by the FaceElement representation, by default. </p>
 
-<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00645">645</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00635">635</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
 
 </div>
 </div>
@@ -368,7 +366,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:24:21
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:03:51
         </div>
       </div>
     </footer>

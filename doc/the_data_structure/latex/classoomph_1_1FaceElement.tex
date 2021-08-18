@@ -59,9 +59,9 @@ void \mbox{\hyperlink{classoomph_1_1FaceElement_a025b2cae37ba7d8067bf87f885cd11f
 \begin{DoxyCompactList}\small\item\em Turn on warning for when there may be discontinuous tangent vectors from continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(...) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FaceElement_a4c3159cad8dd11618c201d8b66651cd3}{turn\+\_\+off\+\_\+warning\+\_\+for\+\_\+discontinuous\+\_\+tangent}} ()
 \begin{DoxyCompactList}\small\item\em Turn off warning for when there may be discontinuous tangent vectors from continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(...) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FaceElement_a182997beb4a64fde40a47007344913f1}{continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&tang\+\_\+vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&unit\+\_\+normal) const
+void \mbox{\hyperlink{classoomph_1_1FaceElement_acdff52a7785073d40163d3fa5f5adb13}{continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&tang\+\_\+vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&unit\+\_\+normal) const
 \begin{DoxyCompactList}\small\item\em Compute the tangent vector(s) and the outer unit normal vector at the specified local coordinate. In two spatial dimensions, a \char`\"{}tangent direction\char`\"{} is not required. In three spatial dimensions, a tangent direction is required (set via set\+\_\+tangent\+\_\+direction(...)), and we project the tanent direction on to the surface. The second tangent vector is taken to be the cross product of the projection and the unit normal. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FaceElement_a2114d937858d142142ea4f4e2342e7b9}{continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&tang\+\_\+vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&unit\+\_\+normal) const
+void \mbox{\hyperlink{classoomph_1_1FaceElement_ab8fa9909257f37d309470001e2f8ac37}{continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&tang\+\_\+vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&unit\+\_\+normal) const
 \begin{DoxyCompactList}\small\item\em Compute the tangent vector(s) and the outer unit normal vector at the ipt-\/th integration point. This is a wrapper around continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(...) with the integration points converted into local coordinates. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FaceElement_a49cf44d89e80926635d2a26abfbbf3b0}{outer\+\_\+unit\+\_\+normal}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&unit\+\_\+normal) const
 \begin{DoxyCompactList}\small\item\em Compute outer unit normal at the specified local coordinate. \end{DoxyCompactList}\item 
@@ -126,7 +126,7 @@ bool \mbox{\hyperlink{classoomph_1_1FaceElement_a113a0f8d3d26af5e684b549e9a44a37
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1FaceElement_abd04b85066da626341294b5f0b97516e}{Nbulk\+\_\+value}}
 \begin{DoxyCompactList}\small\item\em A vector that will hold the number of data values at the nodes that are associated with the \char`\"{}bulk\char`\"{} element. i.\+e. not including any additional degrees of freedom that might be required for extra equations that are being solved by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1FaceElement_a6be4abd12fb4edbd94b7613f62de3593}{Tangent\+\_\+direction\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em A general direction pointer for the tangent vectors. This is used in the function \mbox{\hyperlink{classoomph_1_1FaceElement_a182997beb4a64fde40a47007344913f1}{continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal()}} for creating continuous tangent vectors in spatial dimensions. The general direction is projected on to the surface. This technique is not required in two spatial dimensions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A general direction pointer for the tangent vectors. This is used in the function \mbox{\hyperlink{classoomph_1_1FaceElement_acdff52a7785073d40163d3fa5f5adb13}{continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal()}} for creating continuous tangent vectors in spatial dimensions. The general direction is projected on to the surface. This technique is not required in two spatial dimensions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -158,7 +158,7 @@ static bool \mbox{\hyperlink{classoomph_1_1FaceElement_a95ac8141871cfe5353667b64
 \doxysubsection{Detailed Description}
 Face\+Elements are elements that coincide with the faces of higher-\/dimensional \char`\"{}bulk\char`\"{} elements. They are used on boundaries where additional non-\/trivial boundary conditions need to be applied. Examples include free surfaces, and applied traction conditions. In many cases, Face\+Elements need to evaluate to quantities in the associated bulk elements. For instance, the evaluation of a shear stresses on 2D \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} requires the evaluation of velocity derivatives in the associated 3D volume element etc. Therefore we store a pointer to the associated bulk element, and information about the relation between the local coordinates in the face and bulk elements. 
 
-Definition at line 4215 of file elements.\+h.
+Definition at line 4397 of file elements.\+h.
 
 
 
@@ -175,7 +175,7 @@ Typedef for the function that returns the partial derivative of the local coordi
 
 
 
-Definition at line 4227 of file elements.\+h.
+Definition at line 4409 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_aaa3af8b5d2e9584bdcd9b133990d7591}\label{classoomph_1_1FaceElement_aaa3af8b5d2e9584bdcd9b133990d7591}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!CoordinateMappingFctPt@{CoordinateMappingFctPt}}
@@ -189,7 +189,7 @@ Typedef for the function that translates the face coordinate to the coordinate i
 
 
 
-Definition at line 4219 of file elements.\+h.
+Definition at line 4401 of file elements.\+h.
 
 
 
@@ -206,7 +206,7 @@ Constructor\+: Initialise all appropriate member data.
 
 
 
-Definition at line 4327 of file elements.\+h.
+Definition at line 4506 of file elements.\+h.
 
 
 
@@ -224,7 +224,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 4341 of file elements.\+h.
+Definition at line 4525 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a21acf2a56f732a3378674f74525effbf}\label{classoomph_1_1FaceElement_a21acf2a56f732a3378674f74525effbf}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!FaceElement@{FaceElement}}
@@ -238,7 +238,7 @@ Broken copy constructor.
 
 
 
-Definition at line 4345 of file elements.\+h.
+Definition at line 4529 of file elements.\+h.
 
 
 
@@ -259,7 +259,7 @@ Helper function adding additional values for the unknowns associated with the \m
 
 
 
-Definition at line 4307 of file elements.\+h.
+Definition at line 4488 of file elements.\+h.
 
 
 
@@ -281,7 +281,7 @@ Broken assignment operator.
 
 Access function for the boundary number in bulk mesh 
 
-Definition at line 4357 of file elements.\+h.
+Definition at line 4541 of file elements.\+h.
 
 
 
@@ -303,7 +303,7 @@ Return the pointer to the function that returns the derivatives of the bulk coor
 
 
 
-Definition at line 4625 of file elements.\+h.
+Definition at line 4836 of file elements.\+h.
 
 
 
@@ -311,7 +311,7 @@ References Bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a42c2096f5c785657c3a09edce458296a}\label{classoomph_1_1FaceElement_a42c2096f5c785657c3a09edce458296a}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!bulk\_coordinate\_derivatives\_fct\_pt@{bulk\_coordinate\_derivatives\_fct\_pt}}
@@ -325,7 +325,7 @@ Return the pointer to the function that returns the derivatives of the bulk coor
 
 
 
-Definition at line 4630 of file elements.\+h.
+Definition at line 4843 of file elements.\+h.
 
 
 
@@ -343,7 +343,7 @@ Pointer to higher-\/dimensional \char`\"{}bulk\char`\"{} element.
 
 
 
-Definition at line 4600 of file elements.\+h.
+Definition at line 4801 of file elements.\+h.
 
 
 
@@ -351,7 +351,7 @@ References Bulk\+\_\+element\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+D\+G\+Face\+Element\+::add\+\_\+flux\+\_\+contributions(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+volume\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Helmholtz\+Absorbing\+B\+C\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+solid(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), interpolated\+\_\+dxdt(), interpolated\+\_\+x(), oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::lagrangian\+\_\+eulerian\+\_\+translation\+\_\+factor(), oomph\+::\+Problem\+::load\+\_\+balance(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), oomph\+::\+Refineable\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::numerical\+\_\+flux(), oomph\+::\+D\+G\+Euler\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::numerical\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Problem\+::read(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::reset\+\_\+after\+\_\+external\+\_\+fd(), oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::set\+\_\+contact\+\_\+angle(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+D\+G\+Face\+Element\+::setup\+\_\+neighbour\+\_\+info(), oomph\+::\+D\+G\+Element\+::slope\+\_\+limit(), and oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd().
+Referenced by oomph\+::\+D\+G\+Face\+Element\+::add\+\_\+flux\+\_\+contributions(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+volume\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Helmholtz\+Absorbing\+B\+C\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+solid(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), interpolated\+\_\+dxdt(), interpolated\+\_\+x(), oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::lagrangian\+\_\+eulerian\+\_\+translation\+\_\+factor(), oomph\+::\+Problem\+::load\+\_\+balance(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), oomph\+::\+Refineable\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::numerical\+\_\+flux(), oomph\+::\+D\+G\+Euler\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::numerical\+\_\+flux(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Problem\+::read(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::reset\+\_\+after\+\_\+external\+\_\+fd(), oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::set\+\_\+contact\+\_\+angle(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+D\+G\+Face\+Element\+::setup\+\_\+neighbour\+\_\+info(), oomph\+::\+D\+G\+Element\+::slope\+\_\+limit(), and oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a8d2cf880d94b4b23ca2a25a6afaf7146}\label{classoomph_1_1FaceElement_a8d2cf880d94b4b23ca2a25a6afaf7146}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!bulk\_element\_pt@{bulk\_element\_pt}}
@@ -365,7 +365,7 @@ Pointer to higher-\/dimensional \char`\"{}bulk\char`\"{} element (const version)
 
 
 
-Definition at line 4604 of file elements.\+h.
+Definition at line 4808 of file elements.\+h.
 
 
 
@@ -383,7 +383,7 @@ Return the bulk node number that corresponds to the n-\/th local node number.
 
 
 
-Definition at line 4669 of file elements.\+h.
+Definition at line 4891 of file elements.\+h.
 
 
 
@@ -391,7 +391,7 @@ References Bulk\+\_\+node\+\_\+number, and n.
 
 
 
-Referenced by oomph\+::\+D\+G\+Face\+Element\+::add\+\_\+flux\+\_\+contributions(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
+Referenced by oomph\+::\+D\+G\+Face\+Element\+::add\+\_\+flux\+\_\+contributions(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_ad520ea8561262ec0adc5d9cb8bd2797e}\label{classoomph_1_1FaceElement_ad520ea8561262ec0adc5d9cb8bd2797e}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!bulk\_node\_number@{bulk\_node\_number}}
@@ -405,7 +405,7 @@ Return the bulk node number that corresponds to the n-\/th local node number (co
 
 
 
-Definition at line 4673 of file elements.\+h.
+Definition at line 4898 of file elements.\+h.
 
 
 
@@ -423,7 +423,7 @@ Resize the storage for the bulk node numbers.
 
 
 
-Definition at line 4665 of file elements.\+h.
+Definition at line 4884 of file elements.\+h.
 
 
 
@@ -431,7 +431,7 @@ References Bulk\+\_\+node\+\_\+number, and i.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a0800385f7d11703d4bbae06e1c322b04}\label{classoomph_1_1FaceElement_a0800385f7d11703d4bbae06e1c322b04}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!bulk\_position\_type@{bulk\_position\_type}}
@@ -445,7 +445,7 @@ Return the position type in the \char`\"{}bulk\char`\"{} element that correspond
 
 
 
-Definition at line 4656 of file elements.\+h.
+Definition at line 4871 of file elements.\+h.
 
 
 
@@ -453,7 +453,7 @@ References Bulk\+\_\+position\+\_\+type, and i.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), check\+\_\+\+J\+\_\+eulerian\+\_\+at\+\_\+knots(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element(), J\+\_\+eulerian(), J\+\_\+eulerian\+\_\+at\+\_\+knot(), and outer\+\_\+unit\+\_\+normal().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), check\+\_\+\+J\+\_\+eulerian\+\_\+at\+\_\+knots(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element(), continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), J\+\_\+eulerian(), J\+\_\+eulerian\+\_\+at\+\_\+knot(), and outer\+\_\+unit\+\_\+normal().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_aa99f478e771d753e93cc748caf0e5302}\label{classoomph_1_1FaceElement_aa99f478e771d753e93cc748caf0e5302}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!bulk\_position\_type@{bulk\_position\_type}}
@@ -467,7 +467,7 @@ Return the position type in the \char`\"{}bulk\char`\"{} element that correspond
 
 
 
-Definition at line 4661 of file elements.\+h.
+Definition at line 4878 of file elements.\+h.
 
 
 
@@ -485,7 +485,7 @@ Resize the storage for bulk\+\_\+position\+\_\+type to i entries.
 
 
 
-Definition at line 4677 of file elements.\+h.
+Definition at line 4904 of file elements.\+h.
 
 
 
@@ -493,7 +493,7 @@ References Bulk\+\_\+position\+\_\+type, and i.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_aabfb54314baeb47bb56f8de8e4dfe513}\label{classoomph_1_1FaceElement_aabfb54314baeb47bb56f8de8e4dfe513}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!check\_J\_eulerian\_at\_knots@{check\_J\_eulerian\_at\_knots}}
@@ -507,17 +507,17 @@ Check that Jacobian of mapping between local and Eulerian coordinates at all int
 
 
 
-Definition at line 5284 of file elements.\+cc.
+Definition at line 5414 of file elements.\+cc.
 
 
 
 References bulk\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::dshape\+\_\+local\+\_\+at\+\_\+knot(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen(), and oomph\+::\+Integral\+::nweight().
 
-\mbox{\Hypertarget{classoomph_1_1FaceElement_a2114d937858d142142ea4f4e2342e7b9}\label{classoomph_1_1FaceElement_a2114d937858d142142ea4f4e2342e7b9}} 
+\mbox{\Hypertarget{classoomph_1_1FaceElement_ab8fa9909257f37d309470001e2f8ac37}\label{classoomph_1_1FaceElement_ab8fa9909257f37d309470001e2f8ac37}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!continuous\_tangent\_and\_outer\_unit\_normal@{continuous\_tangent\_and\_outer\_unit\_normal}}
 \index{continuous\_tangent\_and\_outer\_unit\_normal@{continuous\_tangent\_and\_outer\_unit\_normal}!oomph::FaceElement@{oomph::FaceElement}}
 \doxysubsubsection{\texorpdfstring{continuous\_tangent\_and\_outer\_unit\_normal()}{continuous\_tangent\_and\_outer\_unit\_normal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{tang\+\_\+vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{unit\+\_\+normal }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{tang\+\_\+vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{unit\+\_\+normal }\end{DoxyParamCaption}) const}
 
 
 
@@ -525,17 +525,17 @@ Compute the tangent vector(s) and the outer unit normal vector at the ipt-\/th i
 
 
 
-Definition at line 5857 of file elements.\+cc.
+Definition at line 5990 of file elements.\+cc.
 
 
 
-References i, and s.
+References continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Integral\+::knot(), and s.
 
-\mbox{\Hypertarget{classoomph_1_1FaceElement_a182997beb4a64fde40a47007344913f1}\label{classoomph_1_1FaceElement_a182997beb4a64fde40a47007344913f1}} 
+\mbox{\Hypertarget{classoomph_1_1FaceElement_acdff52a7785073d40163d3fa5f5adb13}\label{classoomph_1_1FaceElement_acdff52a7785073d40163d3fa5f5adb13}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!continuous\_tangent\_and\_outer\_unit\_normal@{continuous\_tangent\_and\_outer\_unit\_normal}}
 \index{continuous\_tangent\_and\_outer\_unit\_normal@{continuous\_tangent\_and\_outer\_unit\_normal}!oomph::FaceElement@{oomph::FaceElement}}
 \doxysubsubsection{\texorpdfstring{continuous\_tangent\_and\_outer\_unit\_normal()}{continuous\_tangent\_and\_outer\_unit\_normal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{tang\+\_\+vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{unit\+\_\+normal }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{tang\+\_\+vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{unit\+\_\+normal }\end{DoxyParamCaption}) const}
 
 
 
@@ -543,15 +543,15 @@ Compute the tangent vector(s) and the outer unit normal vector at the specified 
 
 
 
-Definition at line 5388 of file elements.\+cc.
+Definition at line 5516 of file elements.\+cc.
 
 
 
-References a(), oomph\+::\+Vector\+Helpers\+::angle(), oomph\+::\+Vector\+Helpers\+::cross(), oomph\+::\+Vector\+Helpers\+::dot(), i, Ignore\+\_\+discontinuous\+\_\+tangent\+\_\+warning, oomph\+::\+Vector\+Helpers\+::magnitude(), oomph\+::\+Mathematical\+Constants\+::\+Pi, and s.
+References a(), oomph\+::\+Vector\+Helpers\+::angle(), Bulk\+\_\+element\+\_\+pt, bulk\+\_\+position\+\_\+type(), oomph\+::\+Vector\+Helpers\+::cross(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Vector\+Helpers\+::dot(), oomph\+::\+Finite\+Element\+::dshape\+\_\+local(), get\+\_\+ds\+\_\+bulk\+\_\+ds\+\_\+face(), get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, Ignore\+\_\+discontinuous\+\_\+tangent\+\_\+warning, oomph\+::\+Vector\+Helpers\+::magnitude(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen(), Normal\+\_\+sign, oomph\+::\+Mathematical\+Constants\+::\+Pi, s, oomph\+::\+Finite\+Element\+::size(), and Tangent\+\_\+direction\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier().
+Referenced by continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), and oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}\label{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!face\_index@{face\_index}}
@@ -565,7 +565,7 @@ Index of the face (a number that uniquely identifies the face in the element)
 
 
 
-Definition at line 4497 of file elements.\+h.
+Definition at line 4692 of file elements.\+h.
 
 
 
@@ -573,7 +573,7 @@ References Face\+\_\+index.
 
 
 
-Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Advection\+Diffusion\+Flux\+Element(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element(), oomph\+::\+Axisymmetric\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Axisymmetric\+Solid\+Traction\+Element(), oomph\+::\+Biharmonic\+Flux\+Element$<$ D\+I\+M $>$\+::\+Biharmonic\+Flux\+Element(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element(), oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element(), oomph\+::\+Darcy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Darcy\+Face\+Element(), oomph\+::\+D\+G\+Euler\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+D\+G\+Euler\+Face\+Element(), oomph\+::\+D\+G\+Euler\+Face\+Reflection\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+D\+G\+Euler\+Face\+Reflection\+Element(), oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+D\+G\+Scalar\+Advection\+Face\+Element(), oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dummy\+Face\+Element(), oomph\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Elastic\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Line\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Elastic\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Surface\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Face\+Element\+As\+Geom\+Object(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element(), oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element(), oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element(), oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element(), oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Space\+Time\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Space\+Time\+Element(), oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Helmholtz\+B\+C\+Element\+Base(), oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Helmholtz\+Flux\+Element(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Impenetrability\+Element(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Parallel\+Outflow\+Element(), oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element(), oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Linear\+Wave\+Flux\+Element(), oomph\+::\+Problem\+::load\+\_\+balance(), oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Surface\+Power\+Element(), oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Traction\+Element(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Helmholtz\+Flux\+Element(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Helmholtz\+Power\+Element(), oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Poisson\+Flux\+Element(), oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Polar\+Navier\+Stokes\+Traction\+Element(), oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Polar\+Stress\+Integral\+Element(), oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Poroelasticity\+Face\+Element(), oomph\+::\+D\+G\+Face\+Element\+::setup\+\_\+neighbour\+\_\+info(), oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Solid\+Traction\+Element(), oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element(), oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Unsteady\+Heat\+Flux\+Element(), and oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Young\+Laplace\+Contact\+Angle\+Element().
+Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Advection\+Diffusion\+Flux\+Element(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element(), oomph\+::\+Axisymmetric\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Axisymmetric\+Solid\+Traction\+Element(), oomph\+::\+Biharmonic\+Flux\+Element$<$ D\+I\+M $>$\+::\+Biharmonic\+Flux\+Element(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element(), oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element(), oomph\+::\+Darcy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Darcy\+Face\+Element(), oomph\+::\+D\+G\+Euler\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+D\+G\+Euler\+Face\+Element(), oomph\+::\+D\+G\+Euler\+Face\+Reflection\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+D\+G\+Euler\+Face\+Reflection\+Element(), oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+D\+G\+Scalar\+Advection\+Face\+Element(), oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dummy\+Face\+Element(), oomph\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Elastic\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Line\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Elastic\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Surface\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Face\+Element\+As\+Geom\+Object(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element(), oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element(), oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element(), oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element(), oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Space\+Time\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Space\+Time\+Element(), oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Helmholtz\+B\+C\+Element\+Base(), oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Helmholtz\+Flux\+Element(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Impenetrability\+Element(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Parallel\+Outflow\+Element(), oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element(), oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Linear\+Wave\+Flux\+Element(), oomph\+::\+Problem\+::load\+\_\+balance(), oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Surface\+Power\+Element(), oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Traction\+Element(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Helmholtz\+Flux\+Element(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Helmholtz\+Power\+Element(), oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Poisson\+Flux\+Element(), oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Polar\+Navier\+Stokes\+Traction\+Element(), oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Polar\+Stress\+Integral\+Element(), oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Poroelasticity\+Face\+Element(), oomph\+::\+D\+G\+Face\+Element\+::setup\+\_\+neighbour\+\_\+info(), oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Solid\+Traction\+Element(), oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element(), oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Unsteady\+Heat\+Flux\+Element(), and oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Young\+Laplace\+Contact\+Angle\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a387bc31caaf8c6a8c2f8b287823bfd85}\label{classoomph_1_1FaceElement_a387bc31caaf8c6a8c2f8b287823bfd85}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!face\_index@{face\_index}}
@@ -587,7 +587,7 @@ Index of the face (a number that uniquely identifies the face in the element) (c
 
 
 
-Definition at line 4501 of file elements.\+h.
+Definition at line 4699 of file elements.\+h.
 
 
 
@@ -605,7 +605,7 @@ Return the pointer to the function that maps the face coordinate to the bulk coo
 
 
 
-Definition at line 4614 of file elements.\+h.
+Definition at line 4821 of file elements.\+h.
 
 
 
@@ -613,7 +613,7 @@ References Face\+\_\+to\+\_\+bulk\+\_\+coordinate\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a2168997e5ea9064d74e1c9ad220eba69}\label{classoomph_1_1FaceElement_a2168997e5ea9064d74e1c9ad220eba69}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!face\_to\_bulk\_coordinate\_fct\_pt@{face\_to\_bulk\_coordinate\_fct\_pt}}
@@ -627,7 +627,7 @@ Return the pointer to the function that maps the face coordinate to the bulk coo
 
 
 
-Definition at line 4619 of file elements.\+h.
+Definition at line 4828 of file elements.\+h.
 
 
 
@@ -645,7 +645,7 @@ Calculate the derivatives of the local coordinates in the bulk element with resp
 
 Calculate the derivatives of the local coordinates in the bulk element with respect to the local coordinates in this \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. In addition return the index of a bulk local coordinate that varies away from the face. 
 
-Definition at line 6266 of file elements.\+cc.
+Definition at line 6413 of file elements.\+cc.
 
 
 
@@ -653,7 +653,7 @@ References Bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt, and s.
 
 
 
-Referenced by outer\+\_\+unit\+\_\+normal().
+Referenced by continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), and outer\+\_\+unit\+\_\+normal().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_aced9ec5b182220c0f50b1714638ee8f3}\label{classoomph_1_1FaceElement_aced9ec5b182220c0f50b1714638ee8f3}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!get\_local\_coordinate\_in\_bulk@{get\_local\_coordinate\_in\_bulk}}
@@ -667,7 +667,7 @@ Calculate the vector of local coordinate in the bulk element given the local coo
 
 Calculate the vector of local coordinates in bulk element, given the local coordinates in this \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} 
 
-Definition at line 6241 of file elements.\+cc.
+Definition at line 6388 of file elements.\+cc.
 
 
 
@@ -675,7 +675,7 @@ References Face\+\_\+to\+\_\+bulk\+\_\+coordinate\+\_\+fct\+\_\+pt, and s.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), outer\+\_\+unit\+\_\+normal(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), and oomph\+::\+D\+G\+Face\+Element\+::setup\+\_\+neighbour\+\_\+info().
+Referenced by continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), outer\+\_\+unit\+\_\+normal(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), and oomph\+::\+D\+G\+Face\+Element\+::setup\+\_\+neighbour\+\_\+info().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a0bd0b6164be27b3e959de84c609ca0ff}\label{classoomph_1_1FaceElement_a0bd0b6164be27b3e959de84c609ca0ff}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!interpolated\_dxdt@{interpolated\_dxdt}}
@@ -693,7 +693,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7e5ddde616cfd7f
 
 
 
-Definition at line 4460 of file elements.\+h.
+Definition at line 4649 of file elements.\+h.
 
 
 
@@ -715,7 +715,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a60cfd1dabcc51fa
 
 
 
-Definition at line 4475 of file elements.\+h.
+Definition at line 4664 of file elements.\+h.
 
 
 
@@ -737,7 +737,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aba7e6f4acad38c5
 
 
 
-Definition at line 4420 of file elements.\+h.
+Definition at line 4607 of file elements.\+h.
 
 
 
@@ -759,7 +759,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af099c245fe3e3ec
 
 
 
-Definition at line 4446 of file elements.\+h.
+Definition at line 4634 of file elements.\+h.
 
 
 
@@ -781,7 +781,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd1
 
 
 
-Definition at line 4407 of file elements.\+h.
+Definition at line 4594 of file elements.\+h.
 
 
 
@@ -789,7 +789,7 @@ References bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), i, 
 
 
 
-Referenced by oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+volume\+\_\+flux(), oomph\+::\+Mesh\+::doc\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Fluid\+Interface\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Surface\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+helmholtz(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+solid(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::integrate\+\_\+c(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::lagrangian\+\_\+eulerian\+\_\+translation\+\_\+factor(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Fluid\+Interface\+Element\+::output(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), output\+\_\+zeta(), oomph\+::\+D\+G\+Face\+Element\+::report\+\_\+info(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::scalar\+\_\+value\+\_\+paraview(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
+Referenced by oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+volume\+\_\+flux(), oomph\+::\+Mesh\+::doc\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Fluid\+Interface\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Surface\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+helmholtz(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+solid(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::integrate\+\_\+c(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::lagrangian\+\_\+eulerian\+\_\+translation\+\_\+factor(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Fluid\+Interface\+Element\+::output(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), output\+\_\+zeta(), oomph\+::\+D\+G\+Face\+Element\+::report\+\_\+info(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::scalar\+\_\+value\+\_\+paraview(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a01b07e01c23777ed539a6b6d37f069ee}\label{classoomph_1_1FaceElement_a01b07e01c23777ed539a6b6d37f069ee}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!interpolated\_x@{interpolated\_x}}
@@ -807,7 +807,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8a14a32734ecc92
 
 
 
-Definition at line 4433 of file elements.\+h.
+Definition at line 4621 of file elements.\+h.
 
 
 
@@ -833,7 +833,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_acf685857a
 
 
 
-Definition at line 5112 of file elements.\+cc.
+Definition at line 5246 of file elements.\+cc.
 
 
 
@@ -841,7 +841,7 @@ References bulk\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::dim(), 
 
 
 
-Referenced by oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+helmholtz(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+solid(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), and oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::test\+\_\+only().
+Referenced by oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+helmholtz(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+solid(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), and oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::test\+\_\+only().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_aa6380a08afc18bd4f35e337a1131a9d8}\label{classoomph_1_1FaceElement_aa6380a08afc18bd4f35e337a1131a9d8}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!J\_eulerian\_at\_knot@{J\_eulerian\_at\_knot}}
@@ -859,7 +859,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa8a201e448a9200
 
 
 
-Definition at line 5200 of file elements.\+cc.
+Definition at line 5332 of file elements.\+cc.
 
 
 
@@ -867,7 +867,7 @@ References bulk\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::dim(), 
 
 
 
-Referenced by oomph\+::\+D\+G\+Face\+Element\+::add\+\_\+flux\+\_\+contributions(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output(), oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), and oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot().
+Referenced by oomph\+::\+D\+G\+Face\+Element\+::add\+\_\+flux\+\_\+contributions(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output(), oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), and oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a5dd56d5b438c316aca9efa815441b74d}\label{classoomph_1_1FaceElement_a5dd56d5b438c316aca9efa815441b74d}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!local\_coordinate\_in\_bulk@{local\_coordinate\_in\_bulk}}
@@ -881,7 +881,7 @@ Return vector of local coordinates in bulk element, given the local coordinates 
 
 Return vector of local coordinates in bulk element, given the local coordinates in this \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} 
 
-Definition at line 6209 of file elements.\+cc.
+Definition at line 6357 of file elements.\+cc.
 
 
 
@@ -903,7 +903,7 @@ Return the number of values originally stored at local node n (before the \mbox{
 
 
 
-Definition at line 4682 of file elements.\+h.
+Definition at line 4911 of file elements.\+h.
 
 
 
@@ -911,7 +911,7 @@ References n, and Nbulk\+\_\+value.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a1045ac3ff9a56b0e4bd86b8e62f9d80c}\label{classoomph_1_1FaceElement_a1045ac3ff9a56b0e4bd86b8e62f9d80c}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!nbulk\_value@{nbulk\_value}}
@@ -925,7 +925,7 @@ Return the number of values originally stored at local node n (before the \mbox{
 
 
 
-Definition at line 4687 of file elements.\+h.
+Definition at line 4919 of file elements.\+h.
 
 
 
@@ -943,7 +943,7 @@ Resize the storage for the number of values originally stored at the local nodes
 
 
 
-Definition at line 4692 of file elements.\+h.
+Definition at line 4926 of file elements.\+h.
 
 
 
@@ -951,7 +951,7 @@ References i, and Nbulk\+\_\+value.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_add995e91979ad663e21cc2b63dd710d9}\label{classoomph_1_1FaceElement_add995e91979ad663e21cc2b63dd710d9}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!normal\_sign@{normal\_sign}}
@@ -965,7 +965,7 @@ Sign of outer unit normal (relative to cross-\/products of tangent vectors in th
 
 
 
-Definition at line 4489 of file elements.\+h.
+Definition at line 4678 of file elements.\+h.
 
 
 
@@ -973,7 +973,7 @@ References Normal\+\_\+sign.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Surface\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Surface\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a7a3b1effe068221ac39c14a9ed71d34d}\label{classoomph_1_1FaceElement_a7a3b1effe068221ac39c14a9ed71d34d}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!normal\_sign@{normal\_sign}}
@@ -987,7 +987,7 @@ Return sign of outer unit normal (relative to cross-\/products of tangent vector
 
 
 
-Definition at line 4493 of file elements.\+h.
+Definition at line 4685 of file elements.\+h.
 
 
 
@@ -1005,7 +1005,7 @@ Compute outer unit normal at ipt-\/th integration point.
 
 Compute the outer unit normal at the ipt-\/th integration point. 
 
-Definition at line 6191 of file elements.\+cc.
+Definition at line 6337 of file elements.\+cc.
 
 
 
@@ -1023,7 +1023,7 @@ Compute outer unit normal at the specified local coordinate.
 
 Compute the outer unit normal at the specified local coordinate. 
 
-Definition at line 5872 of file elements.\+cc.
+Definition at line 6010 of file elements.\+cc.
 
 
 
@@ -1031,7 +1031,7 @@ References Bulk\+\_\+element\+\_\+pt, bulk\+\_\+position\+\_\+type(), oomph\+::\
 
 
 
-Referenced by oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+volume\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Fluid\+Interface\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+pressure(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+helmholtz(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+solid(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+D\+G\+Euler\+Face\+Reflection\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::interpolated\+\_\+u(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::lagrangian\+\_\+eulerian\+\_\+translation\+\_\+factor(), oomph\+::\+D\+G\+Face\+Element\+::numerical\+\_\+flux\+\_\+at\+\_\+knot(), outer\+\_\+unit\+\_\+normal(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::output(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::scalar\+\_\+value\+\_\+paraview(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
+Referenced by oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+volume\+\_\+flux(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::drag\+\_\+force(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Fluid\+Interface\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+pressure(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+helmholtz(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+solid(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), oomph\+::\+D\+G\+Euler\+Face\+Reflection\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::interpolated\+\_\+u(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::lagrangian\+\_\+eulerian\+\_\+translation\+\_\+factor(), oomph\+::\+D\+G\+Face\+Element\+::numerical\+\_\+flux\+\_\+at\+\_\+knot(), outer\+\_\+unit\+\_\+normal(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+P\+M\+L\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::output(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::output\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::scalar\+\_\+value\+\_\+paraview(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_adf2632a515afa6efdc884e6def8a4163}\label{classoomph_1_1FaceElement_adf2632a515afa6efdc884e6def8a4163}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!output\_zeta@{output\_zeta}}
@@ -1045,7 +1045,7 @@ Output boundary coordinate zeta.
 
 
 
-Definition at line 5070 of file elements.\+cc.
+Definition at line 5204 of file elements.\+cc.
 
 
 
@@ -1063,7 +1063,7 @@ Provide additional storage for a specified number of values at the nodes of the 
 
 
 
-Definition at line 4711 of file elements.\+h.
+Definition at line 4948 of file elements.\+h.
 
 
 
@@ -1085,7 +1085,7 @@ Set function for the boundary number in bulk mesh.
 
 
 
-Definition at line 4362 of file elements.\+h.
+Definition at line 4548 of file elements.\+h.
 
 
 
@@ -1107,7 +1107,7 @@ Set the tangent direction vector.
 
 
 
-Definition at line 4510 of file elements.\+h.
+Definition at line 4711 of file elements.\+h.
 
 
 
@@ -1125,7 +1125,7 @@ Public access function for the tangent direction pointer.
 
 
 
-Definition at line 4504 of file elements.\+h.
+Definition at line 4705 of file elements.\+h.
 
 
 
@@ -1147,7 +1147,7 @@ Turn off warning for when there may be discontinuous tangent vectors from contin
 
 
 
-Definition at line 4567 of file elements.\+h.
+Definition at line 4766 of file elements.\+h.
 
 
 
@@ -1165,7 +1165,7 @@ Turn on warning for when there may be discontinuous tangent vectors from continu
 
 
 
-Definition at line 4560 of file elements.\+h.
+Definition at line 4759 of file elements.\+h.
 
 
 
@@ -1187,11 +1187,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1DummyFaceElement_a2ee49bd3158d30c0c84c63dbd25e7196}{oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SolidFaceElement_a28526b0f7a7daa2ab90348e16cf6a529}{oomph\+::\+Solid\+Face\+Element}}, \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a3be6b5b3152e35c76339a5de6ec1e93a}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+N\+T, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionFluxElement_ab7dc1526807ada4b9189526b69653c91}{oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_a0aee153365d2f5e3cefac8b0ff38150b}{oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxElement_a660d5d2b8d4b49a504b0f6c95348891a}{oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a4618f13a3a0d53cc95a2f4951f7e40e9}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityTractionElement_a8c215f2c9d8b8e66513397b102b1e4aa}{oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_af8381ad4d2c26cbc397d571ff56bc85f}{oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSurfaceDragTorqueElement_af864929a9dbd0ed1d464db1a1d9a93b9}{oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a66defe3dfc1150d37015c43c08fd93b1}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a035a8fcd22c01966f16e83e7c3517569}{oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityTractionElement_a6477822c4cd242cccaacaea672155b8f}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a1e9b037926aad0682fd195bb5a9d4f55}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityTractionElement_aac54793d84bff0a227ee5fefa279b7ad}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a51874f9c60a2025f00998dc2dab65464}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a02ce0bfabe6ce7ef3901bb4155806d86}{oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6fb1a0846c91406e86f598c8eb0fafb2}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ImposeParallelOutflowElement_afa3691d3309b635967e81461b7db8173}{oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_ac6e3f26da35682eb715693755b661a5c}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_a5ee386604e4a99eb2daa220c98f17513}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_aa5971a8b6d24780bfc3c05be7a88852d}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_acd1ef4e239729447691ba0b973e395ae}{oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a5ee9ddb45e780e47245fc31b7f38ba19}{oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_acf4651fa89a7f6c5a23c1960423dc8e6}{oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_add4a49170201b878ed97449dd3d55a42}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a8ddd7c891c2654ea277fc569b4a0725a}{oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1DummyFaceElement_a2ee49bd3158d30c0c84c63dbd25e7196}{oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SolidFaceElement_a28526b0f7a7daa2ab90348e16cf6a529}{oomph\+::\+Solid\+Face\+Element}}, \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a3be6b5b3152e35c76339a5de6ec1e93a}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+N\+T, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionFluxElement_ab7dc1526807ada4b9189526b69653c91}{oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_a0aee153365d2f5e3cefac8b0ff38150b}{oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxElement_a660d5d2b8d4b49a504b0f6c95348891a}{oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a4618f13a3a0d53cc95a2f4951f7e40e9}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityTractionElement_a8c215f2c9d8b8e66513397b102b1e4aa}{oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_af8381ad4d2c26cbc397d571ff56bc85f}{oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSurfaceDragTorqueElement_af864929a9dbd0ed1d464db1a1d9a93b9}{oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a66defe3dfc1150d37015c43c08fd93b1}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a1e9b037926aad0682fd195bb5a9d4f55}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a035a8fcd22c01966f16e83e7c3517569}{oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityTractionElement_a6477822c4cd242cccaacaea672155b8f}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityTractionElement_aac54793d84bff0a227ee5fefa279b7ad}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a51874f9c60a2025f00998dc2dab65464}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a02ce0bfabe6ce7ef3901bb4155806d86}{oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6fb1a0846c91406e86f598c8eb0fafb2}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ImposeParallelOutflowElement_afa3691d3309b635967e81461b7db8173}{oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_a5ee386604e4a99eb2daa220c98f17513}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_ac6e3f26da35682eb715693755b661a5c}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_aa5971a8b6d24780bfc3c05be7a88852d}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_acd1ef4e239729447691ba0b973e395ae}{oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a5ee9ddb45e780e47245fc31b7f38ba19}{oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_acf4651fa89a7f6c5a23c1960423dc8e6}{oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_add4a49170201b878ed97449dd3d55a42}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a8ddd7c891c2654ea277fc569b4a0725a}{oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
 
 
 
-Definition at line 4377 of file elements.\+h.
+Definition at line 4563 of file elements.\+h.
 
 
 
@@ -1199,7 +1199,7 @@ References Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh, oomph\+::\+Finite\+
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Biharmonic\+Flux\+Element$<$ D\+I\+M $>$\+::zeta\+\_\+nodal(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Darcy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+D\+G\+Euler\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+D\+G\+Euler\+Face\+Reflection\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Point\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Solid\+Face\+Element\+::zeta\+\_\+nodal(), and oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal().
+Referenced by oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Poisson\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+P\+M\+L\+Helmholtz\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Biharmonic\+Flux\+Element$<$ D\+I\+M $>$\+::zeta\+\_\+nodal(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Darcy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+D\+G\+Euler\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+D\+G\+Euler\+Face\+Reflection\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Spherical\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Point\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal(), oomph\+::\+Solid\+Face\+Element\+::zeta\+\_\+nodal(), and oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal().
 
 
 
@@ -1216,7 +1216,7 @@ The boundary number in the bulk mesh to which this element is attached.
 
 
 
-Definition at line 4267 of file elements.\+h.
+Definition at line 4448 of file elements.\+h.
 
 
 
@@ -1234,7 +1234,7 @@ Has the Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh been set? Only included
 
 
 
-Definition at line 4273 of file elements.\+h.
+Definition at line 4454 of file elements.\+h.
 
 
 
@@ -1252,7 +1252,7 @@ Pointer to a function that returns the derivatives of the local \char`\"{}bulk\c
 
 
 
-Definition at line 4239 of file elements.\+h.
+Definition at line 4421 of file elements.\+h.
 
 
 
@@ -1270,11 +1270,11 @@ Pointer to the associated higher-\/dimensional \char`\"{}bulk\char`\"{} element.
 
 
 
-Definition at line 4278 of file elements.\+h.
+Definition at line 4459 of file elements.\+h.
 
 
 
-Referenced by bulk\+\_\+element\+\_\+pt(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), local\+\_\+coordinate\+\_\+in\+\_\+bulk(), and outer\+\_\+unit\+\_\+normal().
+Referenced by bulk\+\_\+element\+\_\+pt(), continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Impose\+Parallel\+Outflow\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), local\+\_\+coordinate\+\_\+in\+\_\+bulk(), and outer\+\_\+unit\+\_\+normal().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a27a8a3240049a53c7fac20ebde716846}\label{classoomph_1_1FaceElement_a27a8a3240049a53c7fac20ebde716846}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!Bulk\_node\_number@{Bulk\_node\_number}}
@@ -1288,7 +1288,7 @@ List of indices of the local node numbers in the \char`\"{}bulk\char`\"{} elemen
 
 
 
-Definition at line 4282 of file elements.\+h.
+Definition at line 4463 of file elements.\+h.
 
 
 
@@ -1306,7 +1306,7 @@ Referenced by bulk\+\_\+node\+\_\+number(), bulk\+\_\+node\+\_\+number\+\_\+resi
 
 
 
-Definition at line 4248 of file elements.\+h.
+Definition at line 4430 of file elements.\+h.
 
 
 
@@ -1324,7 +1324,7 @@ Index of the face.
 
 
 
-Definition at line 4255 of file elements.\+h.
+Definition at line 4437 of file elements.\+h.
 
 
 
@@ -1342,7 +1342,7 @@ Pointer to a function that translates the face coordinate to the coordinate in t
 
 
 
-Definition at line 4235 of file elements.\+h.
+Definition at line 4417 of file elements.\+h.
 
 
 
@@ -1360,7 +1360,7 @@ Ignores the warning when the tangent vectors from continuous\+\_\+tangent\+\_\+a
 
 
 
-Definition at line 4262 of file elements.\+h.
+Definition at line 4444 of file elements.\+h.
 
 
 
@@ -1378,7 +1378,7 @@ A vector that will hold the number of data values at the nodes that are associat
 
 
 
-Definition at line 4292 of file elements.\+h.
+Definition at line 4473 of file elements.\+h.
 
 
 
@@ -1396,11 +1396,11 @@ Sign of outer unit normal (relative to cross-\/products of tangent vectors in th
 
 
 
-Definition at line 4252 of file elements.\+h.
+Definition at line 4434 of file elements.\+h.
 
 
 
-Referenced by normal\+\_\+sign(), and outer\+\_\+unit\+\_\+normal().
+Referenced by continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), normal\+\_\+sign(), and outer\+\_\+unit\+\_\+normal().
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_a6be4abd12fb4edbd94b7613f62de3593}\label{classoomph_1_1FaceElement_a6be4abd12fb4edbd94b7613f62de3593}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!Tangent\_direction\_pt@{Tangent\_direction\_pt}}
@@ -1410,15 +1410,15 @@ Referenced by normal\+\_\+sign(), and outer\+\_\+unit\+\_\+normal().
 
 
 
-A general direction pointer for the tangent vectors. This is used in the function \mbox{\hyperlink{classoomph_1_1FaceElement_a182997beb4a64fde40a47007344913f1}{continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal()}} for creating continuous tangent vectors in spatial dimensions. The general direction is projected on to the surface. This technique is not required in two spatial dimensions. 
+A general direction pointer for the tangent vectors. This is used in the function \mbox{\hyperlink{classoomph_1_1FaceElement_acdff52a7785073d40163d3fa5f5adb13}{continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal()}} for creating continuous tangent vectors in spatial dimensions. The general direction is projected on to the surface. This technique is not required in two spatial dimensions. 
 
 
 
-Definition at line 4299 of file elements.\+h.
+Definition at line 4480 of file elements.\+h.
 
 
 
-Referenced by set\+\_\+tangent\+\_\+direction(), and tangent\+\_\+direction\+\_\+pt().
+Referenced by continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), set\+\_\+tangent\+\_\+direction(), and tangent\+\_\+direction\+\_\+pt().
 
 
 

@@ -147,21 +147,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af05fe6ff520986d7794c467fc1885f92"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrickFromTetMesh.html#af05fe6ff520986d7794c467fc1885f92">BrickFromTetMesh</a> (const std::string &amp;node_file_name, const std::string &amp;element_file_name, const std::string &amp;face_file_name, const bool &amp;split_corner_elements, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
 <tr class="memdesc:af05fe6ff520986d7794c467fc1885f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass the files required for the tetgen mesh.  <a href="classoomph_1_1BrickFromTetMesh.html#af05fe6ff520986d7794c467fc1885f92">More...</a><br /></td></tr>
 <tr class="separator:af05fe6ff520986d7794c467fc1885f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49d6a583221a04f2997dae4509592350"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrickFromTetMesh.html#a49d6a583221a04f2997dae4509592350">BrickFromTetMesh</a> (const std::string xda_file_name, <a class="el" href="classoomph_1_1XdaTetMesh.html">XdaTetMesh</a>&lt; TElement&lt; 3, 3 &gt; &gt; *&amp;xda_tet_mesh_pt, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
-<tr class="memdesc:a49d6a583221a04f2997dae4509592350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass xda file name. This returns a pointer to the internally built <a class="el" href="classoomph_1_1XdaTetMesh.html" title="Tet mesh made of quadratic (ten node) tets built from xda input file.">XdaTetMesh</a> for external use. Note that YOU are responsible for deleting this mesh.  <a href="classoomph_1_1BrickFromTetMesh.html#a49d6a583221a04f2997dae4509592350">More...</a><br /></td></tr>
-<tr class="separator:a49d6a583221a04f2997dae4509592350"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6933534a7c0b2a06596cffbeafde15a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrickFromTetMesh.html#a6933534a7c0b2a06596cffbeafde15a8">BrickFromTetMesh</a> (const std::string xda_file_name, <a class="el" href="classoomph_1_1XdaTetMesh.html">XdaTetMesh</a>&lt; TElement&lt; 3, 3 &gt;&gt; *&amp;xda_tet_mesh_pt, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a6933534a7c0b2a06596cffbeafde15a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass xda file name. This returns a pointer to the internally built <a class="el" href="classoomph_1_1XdaTetMesh.html" title="Tet mesh made of quadratic (ten node) tets built from xda input file.">XdaTetMesh</a> for external use. Note that YOU are responsible for deleting this mesh.  <a href="classoomph_1_1BrickFromTetMesh.html#a6933534a7c0b2a06596cffbeafde15a8">More...</a><br /></td></tr>
+<tr class="separator:a6933534a7c0b2a06596cffbeafde15a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeca8c8e899bdafb9eb24f36c500c7df6"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrickFromTetMesh.html#aeca8c8e899bdafb9eb24f36c500c7df6">oomph_lib_boundary_ids</a> (const unsigned &amp;xda_boundary_id)</td></tr>
 <tr class="memdesc:aeca8c8e899bdafb9eb24f36c500c7df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access functions to the Vector of oomph-lib boundary ids that make up boundary b in the original xda enumeration.  <a href="classoomph_1_1BrickFromTetMesh.html#aeca8c8e899bdafb9eb24f36c500c7df6">More...</a><br /></td></tr>
 <tr class="separator:aeca8c8e899bdafb9eb24f36c500c7df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a9b81e29d3b000f02764bf367fa762bfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrickFromTetMesh.html#a9b81e29d3b000f02764bf367fa762bfb">build_mesh</a> (<a class="el" href="classoomph_1_1XdaTetMesh.html">XdaTetMesh</a>&lt; TElement&lt; 3, 3 &gt; &gt; *tet_mesh_pt, TimeStepper *time_stepper_pt)</td></tr>
-<tr class="memdesc:a9b81e29d3b000f02764bf367fa762bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build fct: Pass pointer to existing tet mesh.  <a href="classoomph_1_1BrickFromTetMesh.html#a9b81e29d3b000f02764bf367fa762bfb">More...</a><br /></td></tr>
-<tr class="separator:a9b81e29d3b000f02764bf367fa762bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd36d1606f796e926c61b1112b3b6117"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrickFromTetMesh.html#afd36d1606f796e926c61b1112b3b6117">build_mesh</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a>&lt; TElement&lt; 3, 3 &gt; &gt; *tet_mesh_pt, TimeStepper *time_stepper_pt)</td></tr>
-<tr class="memdesc:afd36d1606f796e926c61b1112b3b6117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build fct: Pass pointer to existing tet mesh.  <a href="classoomph_1_1BrickFromTetMesh.html#afd36d1606f796e926c61b1112b3b6117">More...</a><br /></td></tr>
-<tr class="separator:afd36d1606f796e926c61b1112b3b6117"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1514f6a7f830d1f3c562a7eb10ff90b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrickFromTetMesh.html#a1514f6a7f830d1f3c562a7eb10ff90b3">build_mesh</a> (<a class="el" href="classoomph_1_1XdaTetMesh.html">XdaTetMesh</a>&lt; TElement&lt; 3, 3 &gt;&gt; *tet_mesh_pt, TimeStepper *time_stepper_pt)</td></tr>
+<tr class="memdesc:a1514f6a7f830d1f3c562a7eb10ff90b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build fct: Pass pointer to existing tet mesh.  <a href="classoomph_1_1BrickFromTetMesh.html#a1514f6a7f830d1f3c562a7eb10ff90b3">More...</a><br /></td></tr>
+<tr class="separator:a1514f6a7f830d1f3c562a7eb10ff90b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29fd9197e43adcfca7c89ff6499820d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrickFromTetMesh.html#a29fd9197e43adcfca7c89ff6499820d9">build_mesh</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a>&lt; TElement&lt; 3, 3 &gt;&gt; *tet_mesh_pt, TimeStepper *time_stepper_pt)</td></tr>
+<tr class="memdesc:a29fd9197e43adcfca7c89ff6499820d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build fct: Pass pointer to existing tet mesh.  <a href="classoomph_1_1BrickFromTetMesh.html#a29fd9197e43adcfca7c89ff6499820d9">More...</a><br /></td></tr>
+<tr class="separator:a29fd9197e43adcfca7c89ff6499820d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -175,7 +175,7 @@ class oomph::BrickFromTetMesh&lt; ELEMENT &gt;</h3>
 
 <p>Brick mesh built by brickifying an existing tet mesh &ndash; each tet gets split into four bricks. Can only be built with quadratic (27 node) elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00062">62</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00060">60</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abed00a445cc3c6b6cc00d32e0db4a366"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abed00a445cc3c6b6cc00d32e0db4a366">&#9670;&nbsp;</a></span>BrickFromTetMesh() <span class="overload">[1/3]</span></h2>
@@ -215,9 +215,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor: Pass xda file name. </p>
 
-<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00068">68</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00064">64</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l00041">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l00039">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
 
 </div>
 </div>
@@ -283,14 +283,14 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor: Pass the files required for the tetgen mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00087">87</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00083">83</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l00041">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l00039">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
 
 </div>
 </div>
-<a id="a49d6a583221a04f2997dae4509592350"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49d6a583221a04f2997dae4509592350">&#9670;&nbsp;</a></span>BrickFromTetMesh() <span class="overload">[3/3]</span></h2>
+<a id="a6933534a7c0b2a06596cffbeafde15a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6933534a7c0b2a06596cffbeafde15a8">&#9670;&nbsp;</a></span>BrickFromTetMesh() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,7 +309,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1XdaTetMesh.html">XdaTetMesh</a>&lt; TElement&lt; 3, 3 &gt; &gt; *&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1XdaTetMesh.html">XdaTetMesh</a>&lt; TElement&lt; 3, 3 &gt;&gt; *&amp;&#160;</td>
           <td class="paramname"><em>xda_tet_mesh_pt</em>, </td>
         </tr>
         <tr>
@@ -333,15 +333,15 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor: Pass xda file name. This returns a pointer to the internally built <a class="el" href="classoomph_1_1XdaTetMesh.html" title="Tet mesh made of quadratic (ten node) tets built from xda input file.">XdaTetMesh</a> for external use. Note that YOU are responsible for deleting this mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00118">118</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00114">114</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l00041">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l00039">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="afd36d1606f796e926c61b1112b3b6117"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd36d1606f796e926c61b1112b3b6117">&#9670;&nbsp;</a></span>build_mesh() <span class="overload">[1/2]</span></h2>
+<a id="a29fd9197e43adcfca7c89ff6499820d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29fd9197e43adcfca7c89ff6499820d9">&#9670;&nbsp;</a></span>build_mesh() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -354,7 +354,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1BrickFromTetMesh.html">oomph::BrickFromTetMesh</a>&lt; ELEMENT &gt;::build_mesh </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a>&lt; TElement&lt; 3, 3 &gt; &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a>&lt; TElement&lt; 3, 3 &gt;&gt; *&#160;</td>
           <td class="paramname"><em>tet_mesh_pt</em>, </td>
         </tr>
         <tr>
@@ -379,12 +379,12 @@ template&lt;class ELEMENT &gt; </div>
 <p>Build fct: Pass pointer to existing tet mesh. </p>
 <p>Build fct: Pass pointer to existing tet mesh and timestepper Specialisation for <a class="el" href="classoomph_1_1TetgenMesh.html" title="Unstructured tet mesh based on output from Tetgen: http://wias-berlin.de/software/tetgen/.">TetgenMesh</a>&lt;TElement&lt;3,3&gt; &gt; </p>
 
-<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l04940">4940</a> of file <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html">brick_from_tet_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l04896">4896</a> of file <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html">brick_from_tet_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="a9b81e29d3b000f02764bf367fa762bfb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b81e29d3b000f02764bf367fa762bfb">&#9670;&nbsp;</a></span>build_mesh() <span class="overload">[2/2]</span></h2>
+<a id="a1514f6a7f830d1f3c562a7eb10ff90b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1514f6a7f830d1f3c562a7eb10ff90b3">&#9670;&nbsp;</a></span>build_mesh() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -397,7 +397,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1BrickFromTetMesh.html">oomph::BrickFromTetMesh</a>&lt; ELEMENT &gt;::build_mesh </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1XdaTetMesh.html">XdaTetMesh</a>&lt; TElement&lt; 3, 3 &gt; &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1XdaTetMesh.html">XdaTetMesh</a>&lt; TElement&lt; 3, 3 &gt;&gt; *&#160;</td>
           <td class="paramname"><em>tet_mesh_pt</em>, </td>
         </tr>
         <tr>
@@ -422,9 +422,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Build fct: Pass pointer to existing tet mesh. </p>
 <p>Build fct: Pass pointer to existing tet mesh and timestepper Specialisation for <a class="el" href="classoomph_1_1XdaTetMesh.html" title="Tet mesh made of quadratic (ten node) tets built from xda input file.">XdaTetMesh</a>&lt;TElement&lt;3,3&gt; &gt; </p>
 
-<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l00041">41</a> of file <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html">brick_from_tet_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l00039">39</a> of file <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html">brick_from_tet_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00068">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::BrickFromTetMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00064">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::BrickFromTetMesh()</a>.</p>
 
 </div>
 </div>
@@ -456,9 +456,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Access functions to the Vector of oomph-lib boundary ids that make up boundary b in the original xda enumeration. </p>
 
-<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00138">138</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00134">134</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00156">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::Boundary_id</a>.</p>
+<p class="reference">References <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00151">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::Boundary_id</a>.</p>
 
 </div>
 </div>
@@ -487,9 +487,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Vector of vectors containing the boundary IDs of the overall boundary specified in the xda file. </p>
 
-<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00156">156</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00151">151</a> of file <a class="el" href="brick__from__tet__mesh_8template_8h_source.html">brick_from_tet_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00138">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::oomph_lib_boundary_ids()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="brick__from__tet__mesh_8template_8h_source.html#l00134">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::oomph_lib_boundary_ids()</a>.</p>
 
 </div>
 </div>
@@ -525,7 +525,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:51:44
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:35:19
         </div>
       </div>
     </footer>

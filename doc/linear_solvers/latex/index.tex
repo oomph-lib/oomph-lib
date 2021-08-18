@@ -20,7 +20,6 @@ As discussed in the \href{../../the_data_structure/html/index.html}{\texttt{ bot
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} solve(Problem* \textcolor{keyword}{const} \&problem\_pt, DoubleVector \&result)=0;}
 
 \end{DoxyCodeInclude}
 
@@ -157,77 +156,11 @@ Specific preconditioners may be implemented by deriving from the {\ttfamily Prec
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  \textcolor{comment}{/// \(\backslash\)short Apply the preconditioner. Pure virtual generic interface}}
-\DoxyCodeLine{\textcolor{comment}{  /// function. This method should apply the preconditioner operator to the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// vector r and return the vector z.}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} preconditioner\_solve(\textcolor{keyword}{const} DoubleVector \&r, DoubleVector \&z)=0;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Apply the preconditioner. Pure virtual generic interface}}
-\DoxyCodeLine{\textcolor{comment}{  /// function. This method should apply the preconditioner operator to the}}
-\DoxyCodeLine{\textcolor{comment}{  /// vector r and return the vector z. (broken virtual)}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} preconditioner\_solve\_transpose(\textcolor{keyword}{const} DoubleVector \&r,}
-\DoxyCodeLine{                                              DoubleVector \&z)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// Throw an error}}
-\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"This function hasn't been implemented yet!"},}
-\DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
-\DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Setup the preconditioner: store the matrix pointer and the}}
-\DoxyCodeLine{\textcolor{comment}{  /// communicator pointer then call preconditioner specific setup()}}
-\DoxyCodeLine{\textcolor{comment}{  /// function.}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} setup(DoubleMatrixBase* matrix\_pt)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// Store matrix pointer}}
-\DoxyCodeLine{   set\_matrix\_pt(matrix\_pt);}
-\DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{// Extract and store communicator pointer}}
-\DoxyCodeLine{   DistributableLinearAlgebraObject* dist\_obj\_pt=}
-\DoxyCodeLine{    \textcolor{keyword}{dynamic\_cast<}DistributableLinearAlgebraObject*\textcolor{keyword}{>}(matrix\_pt);}
-\DoxyCodeLine{   \textcolor{keywordflow}{if} (dist\_obj\_pt!=0)}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{     set\_comm\_pt(dist\_obj\_pt-\/>distribution\_pt()-\/>communicator\_pt());}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{else}}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{     set\_comm\_pt(0);}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} setup\_time\_start = TimingHelpers::timer();}
-\DoxyCodeLine{   setup();}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} setup\_time\_finish = TimingHelpers::timer();}
-\DoxyCodeLine{   Setup\_time = setup\_time\_finish -\/ setup\_time\_start;}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Compatability layer for old preconditioners where problem}}
-\DoxyCodeLine{\textcolor{comment}{  /// pointers were needed. The problem pointer is only used to get a}}
-\DoxyCodeLine{\textcolor{comment}{  /// communicator pointer.}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} setup(\textcolor{keyword}{const} Problem* problem\_pt, DoubleMatrixBase* matrix\_pt)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   ObsoleteCode::obsolete();}
-\DoxyCodeLine{   setup(matrix\_pt);}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// Set up the block preconditioner quietly!}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} enable\_silent\_preconditioner\_setup()}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// Set the appropriate (silencing) boolean to true}}
-\DoxyCodeLine{   Silent\_preconditioner\_setup=\textcolor{keyword}{true};}
-\DoxyCodeLine{  \} \textcolor{comment}{// End of enable\_silent\_preconditioner\_setup}}
-\DoxyCodeLine{}
-\DoxyCodeLine{  \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// Be verbose in the block preconditioner setup }}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} disable\_silent\_preconditioner\_setup()}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// Set the appropriate (silencing) boolean to false}}
-\DoxyCodeLine{   Silent\_preconditioner\_setup=\textcolor{keyword}{false};}
-\DoxyCodeLine{  \} \textcolor{comment}{// End of disable\_silent\_preconditioner\_setup}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Setup the preconditioner. Pure virtual generic interface}}
-\DoxyCodeLine{\textcolor{comment}{  /// function.}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setup() = 0;}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Apply the preconditioner. Pure virtual generic interface}}
+\DoxyCodeLine{\textcolor{comment}{    /// function. This method should apply the preconditioner operator to the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// vector r and return the vector z.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} preconditioner\_solve(\textcolor{keyword}{const} DoubleVector\& r,}
+\DoxyCodeLine{                                      DoubleVector\& z) = 0;}
 
 \end{DoxyCodeInclude}
 
@@ -236,9 +169,9 @@ and
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  \textcolor{comment}{/// \(\backslash\)short Setup the preconditioner. Pure virtual generic interface}}
-\DoxyCodeLine{\textcolor{comment}{  /// function.}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setup() = 0;}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Setup the preconditioner. Pure virtual generic interface}}
+\DoxyCodeLine{\textcolor{comment}{    /// function.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setup() = 0;}
 
 \end{DoxyCodeInclude}
 

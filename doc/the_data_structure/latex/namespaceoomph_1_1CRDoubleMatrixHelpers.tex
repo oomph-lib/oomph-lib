@@ -44,7 +44,7 @@ Distribution of the result matrix\+: If the result matrix does not have a distri
 
 N\+O\+TE\+: A\+LL the matrices pointed to by matrix\+\_\+pt has to be built. This is not the case with concatenate\+\_\+without\+\_\+communication(...) 
 
-Definition at line 4305 of file matrices.\+cc.
+Definition at line 4349 of file matrices.\+cc.
 
 
 
@@ -66,7 +66,7 @@ Concatenate \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}
 
 
 
-Definition at line 5812 of file matrices.\+cc.
+Definition at line 5885 of file matrices.\+cc.
 
 
 
@@ -92,7 +92,7 @@ The matrix manipulation functions C\+R\+Double\+Matrix\+Helpers\+::concatenate(.
 
 Distribution of the result matrix\+: If the result matrix does not have a distribution built, then it will be given a distribution built from the concatenation of the distributions from row\+\_\+distribution\+\_\+pt, see Linear\+Algebra\+Distribution\+Helpers\+::concatenate(...) for more detail. Otherwise we use the existing distribution. If there is an existing distribution then it must be the same as the distribution from the concatenation of row distributions as described above. Why don\textquotesingle{}t we always compute the distribution \char`\"{}on the fly\char`\"{}? Because a non-\/uniform distribution requires communication. All block preconditioner distributions are concatenations of the distributions of the individual blocks. 
 
-Definition at line 5160 of file matrices.\+cc.
+Definition at line 5223 of file matrices.\+cc.
 
 
 
@@ -114,7 +114,7 @@ Builds a uniformly distributed matrix. A locally replicated matrix is constructe
 
 Builds a uniformly distributed matrix. A locally replicated matrix is constructed then redistributed using O\+O\+M\+P\+H-\/\+L\+IB\textquotesingle{}s default uniform row distribution. This is memory intensive thus should be used for testing or small problems only. The resulting matrix (mat\+\_\+out) must not have been built. 
 
-Definition at line 3654 of file matrices.\+cc.
+Definition at line 3676 of file matrices.\+cc.
 
 
 
@@ -132,7 +132,7 @@ Create a deep copy of the matrix pointed to by in\+\_\+matrix\+\_\+pt.
 
 
 
-Definition at line 3240 of file matrices.\+h.
+Definition at line 3529 of file matrices.\+h.
 
 
 
@@ -166,7 +166,7 @@ Calculates the largest Gershgorin disc whilst preserving the sign. Let A be an n
 ~\newline
  The \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} of C\+R\+Double\+Matrices are treated as if they are one large matrix. Therefore the dimensions of the sub matrices has to \char`\"{}make sense\char`\"{}, there is a paranoid check for this. 
 
-Definition at line 3971 of file matrices.\+cc.
+Definition at line 4003 of file matrices.\+cc.
 
 
 
@@ -184,7 +184,7 @@ Compute infinity (maximum) norm of sub blocks as if it was one matrix.
 
 Calculates the infinity (maximum) norm of a Dense\+Martrix of C\+R\+Double\+Matrices as if it was one large matrix. This avoids creating a concatenation of the sub-\/blocks just to calculate the infinity norm. 
 
-Definition at line 3704 of file matrices.\+cc.
+Definition at line 3731 of file matrices.\+cc.
 
 
 

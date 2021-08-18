@@ -2,8 +2,7 @@
 \label{classoomph_1_1SolidNode}\index{oomph::SolidNode@{oomph::SolidNode}}
 
 
-A Class for nodes that deform elastically (i.\+e. position is an unknown in the problem). The idea is that the Eulerian positions are stored in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the Lagrangian coordinates are stored in addition. The pointer that addresses the Eulerian positions is set to the pointer to Value in the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. Hence, \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} uses knowledge of the internal structure of \mbox{\hyperlink{classoomph_1_1Data}{Data}} and must be a friend of the \mbox{\hyperlink{classoomph_1_1Data}{Data}} class. In order to allow a mesh to deform via an elastic-\/style equation in deforming-\/domain problems, the positions are stored separately from the values, so that elastic problems may be combined with any other type of problem. ~\newline
-  
+A Class for nodes that deform elastically (i.\+e. position is an unknown in the problem). The idea is that the Eulerian positions are stored in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the Lagrangian coordinates are stored in addition. The pointer that addresses the Eulerian positions is set to the pointer to Value in the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. Hence, \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} uses knowledge of the internal structure of \mbox{\hyperlink{classoomph_1_1Data}{Data}} and must be a friend of the \mbox{\hyperlink{classoomph_1_1Data}{Data}} class. In order to allow a mesh to deform via an elastic-\/style equation in deforming-\/domain problems, the positions are stored separately from the values, so that elastic problems may be combined with any other type of problem.  
 
 
 
@@ -24,9 +23,7 @@ Inheritance diagram for oomph\+::Solid\+Node\+:\begin{figure}[H]
 \mbox{\hyperlink{classoomph_1_1SolidNode_ad8f4ed97c7124e7e55f1089bab99b9d7}{Solid\+Node}} (const unsigned \&n\+\_\+lagrangian, const unsigned \&n\+\_\+lagrangian\+\_\+type, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.). The Eulerian dimension of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is n\+\_\+dim and we have n\+\_\+position\+\_\+type (generalised) Eulerian coordinates. There are initial\+\_\+n\+\_\+value values stored at this node. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SolidNode_a439c1ce56488d9fdc9c9511e1df9152d}{Solid\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}{time\+\_\+stepper\+\_\+pt}}, const unsigned \&n\+\_\+lagrangian, const unsigned \&n\+\_\+lagrangian\+\_\+type, const unsigned \&n\+\_\+dim, const unsigned \&\mbox{\hyperlink{classoomph_1_1Node_aa5419b3f46cb65976e1e1311eed9419d}{Nposition\+\_\+type}}, const unsigned \&initial\+\_\+n\+\_\+value)
-\begin{DoxyCompactList}\small\item\em Unsteady constructor. ~\newline
- Allocates storage for initial\+\_\+n\+\_\+value nodal values with history values as required by timestepper. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is n\+\_\+dim and we have n\+\_\+position\+\_\+type generalised Eulerian coordinates. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unsteady constructor. Allocates storage for initial\+\_\+n\+\_\+value nodal values with history values as required by timestepper. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is n\+\_\+dim and we have n\+\_\+position\+\_\+type generalised Eulerian coordinates. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1SolidNode_a8dd2dcdf8f2585a30da22e391fcb7888}{$\sim$\+Solid\+Node}} ()
 \begin{DoxyCompactList}\small\item\em Destructor that cleans up the additional memory allocated in Solid\+Nodes. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SolidNode_ad482755fd691e0888768e99d1c422439}{Solid\+Node}} (const \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} \&solid\+\_\+node)
@@ -41,11 +38,11 @@ void \mbox{\hyperlink{classoomph_1_1SolidNode_ac4614b9f9c2222cb40cb004f85a66e57}
 \begin{DoxyCompactList}\small\item\em Read nodal positions (variable and fixed) and associated data from file for restart. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \& \mbox{\hyperlink{classoomph_1_1SolidNode_a5142f381e58a87e20c7292aebdd7cc19}{variable\+\_\+position}} () const
 \begin{DoxyCompactList}\small\item\em Return the variable\+\_\+position data (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1SolidNode_a1d420ed7d7516478bcbc53581bf60be3}{variable\+\_\+position\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1SolidNode_ae9a8abd197728f5555730131fa0f6971}{variable\+\_\+position\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Pointer to variable\+\_\+position data (const version) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SolidNode_abd91751e0695df391ecd0e8a9249eb4f}{set\+\_\+external\+\_\+variable\+\_\+position\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set the variable position data from an external data object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SolidNode_a12b206264401d5b2ff6aefff386bdca4}{set\+\_\+position\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Node_a89175b154594ba5b1a6cdde6f385dc71}{position\+\_\+time\+\_\+stepper\+\_\+pt}}, const bool \&preserve\+\_\+existing\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1SolidNode_a12b206264401d5b2ff6aefff386bdca4}{set\+\_\+position\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Node_a9e3bfae8bca41f38047d14546d3a1aab}{position\+\_\+time\+\_\+stepper\+\_\+pt}}, const bool \&preserve\+\_\+existing\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Set a new position timestepper be resizing the appropriate storage Overloaded from the basic implementation to take into account the fact that position is now \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SolidNode_a33be0ea0fc6c0575d20f303b19a7d4b5}{does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+position\+\_\+data}} (double $\ast$const \&parameter\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the check whether the pointer parameter\+\_\+pt addresses position data values. \end{DoxyCompactList}\item 
@@ -54,8 +51,7 @@ bool \mbox{\hyperlink{classoomph_1_1SolidNode_aa8d9a8e77ccc142be77767b33c09532a}
 bool \mbox{\hyperlink{classoomph_1_1SolidNode_aa20d88cc797c6635bfd634376c177d87}{position\+\_\+is\+\_\+a\+\_\+copy}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return whether the position coordinate i has been copied. \end{DoxyCompactList}\item 
 const long \& \mbox{\hyperlink{classoomph_1_1SolidNode_a8c95f20a479d12604eb083cb01149711}{position\+\_\+eqn\+\_\+number}} (const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
-\begin{DoxyCompactList}\small\item\em Return the equation number for generalised Eulerian coordinate\+: type of coordinate\+: k, coordinate direction\+: i. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the equation number for generalised Eulerian coordinate\+: type of coordinate\+: k, coordinate direction\+: i. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SolidNode_afd8204156be2ff0fa40834ca35daf243}{position\+\_\+is\+\_\+pinned}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Test whether the i-\/th coordinate is pinned, 0\+: false; 1\+: true. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SolidNode_af7254744691474f94df8ae3f4b75da38}{position\+\_\+is\+\_\+pinned}} (const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
@@ -128,10 +124,9 @@ void \mbox{\hyperlink{classoomph_1_1SolidNode_a0c5b916610af540ccc98a09584b8f34f}
 
 
 \doxysubsection{Detailed Description}
-A Class for nodes that deform elastically (i.\+e. position is an unknown in the problem). The idea is that the Eulerian positions are stored in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the Lagrangian coordinates are stored in addition. The pointer that addresses the Eulerian positions is set to the pointer to Value in the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. Hence, \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} uses knowledge of the internal structure of \mbox{\hyperlink{classoomph_1_1Data}{Data}} and must be a friend of the \mbox{\hyperlink{classoomph_1_1Data}{Data}} class. In order to allow a mesh to deform via an elastic-\/style equation in deforming-\/domain problems, the positions are stored separately from the values, so that elastic problems may be combined with any other type of problem. ~\newline
- 
+A Class for nodes that deform elastically (i.\+e. position is an unknown in the problem). The idea is that the Eulerian positions are stored in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the Lagrangian coordinates are stored in addition. The pointer that addresses the Eulerian positions is set to the pointer to Value in the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. Hence, \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} uses knowledge of the internal structure of \mbox{\hyperlink{classoomph_1_1Data}{Data}} and must be a friend of the \mbox{\hyperlink{classoomph_1_1Data}{Data}} class. In order to allow a mesh to deform via an elastic-\/style equation in deforming-\/domain problems, the positions are stored separately from the values, so that elastic problems may be combined with any other type of problem. 
 
-Definition at line 1564 of file nodes.\+h.
+Definition at line 1710 of file nodes.\+h.
 
 
 
@@ -148,7 +143,7 @@ Default Constructor.
 
 
 
-Definition at line 1590 of file nodes.\+h.
+Definition at line 1733 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SolidNode_ad8f4ed97c7124e7e55f1089bab99b9d7}\label{classoomph_1_1SolidNode_ad8f4ed97c7124e7e55f1089bab99b9d7}} 
 \index{oomph::SolidNode@{oomph::SolidNode}!SolidNode@{SolidNode}}
@@ -162,7 +157,7 @@ Definition at line 1590 of file nodes.\+h.
 
 \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor. The node has N\+Lgrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.). The Eulerian dimension of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is n\+\_\+dim and we have n\+\_\+position\+\_\+type (generalised) Eulerian coordinates. There are initial\+\_\+n\+\_\+value values stored at this node and N\+Additional\+\_\+solid additional values associated with the solid equations are stored in a separate \mbox{\hyperlink{classoomph_1_1Data}{Data}} object at the node. 
 
-Definition at line 3251 of file nodes.\+cc.
+Definition at line 3348 of file nodes.\+cc.
 
 
 
@@ -176,15 +171,11 @@ References oomph\+::\+Data\+::\+Data(), oomph\+::\+Node\+::\+Ndim, oomph\+::\+No
 
 
 
-Unsteady constructor. ~\newline
- Allocates storage for initial\+\_\+n\+\_\+value nodal values with history values as required by timestepper. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is n\+\_\+dim and we have n\+\_\+position\+\_\+type generalised Eulerian coordinates. ~\newline
- 
+Unsteady constructor. Allocates storage for initial\+\_\+n\+\_\+value nodal values with history values as required by timestepper. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is n\+\_\+dim and we have n\+\_\+position\+\_\+type generalised Eulerian coordinates. 
 
-Unsteady constructor. ~\newline
- Allocates storage for initial\+\_\+n\+\_\+value nodal values with history values as required by timestepper. The node has N\+Lgrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is n\+\_\+dim and we have n\+\_\+position\+\_\+type generalised Eulerian coordinates. ~\newline
- 
+Unsteady constructor. Allocates storage for initial\+\_\+n\+\_\+value nodal values with history values as required by timestepper. The node has N\+Lgrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is n\+\_\+dim and we have n\+\_\+position\+\_\+type generalised Eulerian coordinates. 
 
-Definition at line 3283 of file nodes.\+cc.
+Definition at line 3384 of file nodes.\+cc.
 
 
 
@@ -202,7 +193,7 @@ Destructor that cleans up the additional memory allocated in Solid\+Nodes.
 
 Destructor to clean up the memory allocated for nodal positions and additional solid variables 
 
-Definition at line 3311 of file nodes.\+cc.
+Definition at line 3416 of file nodes.\+cc.
 
 
 
@@ -220,7 +211,7 @@ Broken copy constructor.
 
 
 
-Definition at line 1623 of file nodes.\+h.
+Definition at line 1766 of file nodes.\+h.
 
 
 
@@ -245,7 +236,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a1d3f7c4200506d11fea3c647
 
 
 
-Definition at line 3691 of file nodes.\+cc.
+Definition at line 3799 of file nodes.\+cc.
 
 
 
@@ -267,11 +258,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a314ae9723424aa30d1275ab2
 
 
 
-Definition at line 3585 of file nodes.\+cc.
+Definition at line 3693 of file nodes.\+cc.
 
 
 
-References oomph\+::\+Data\+::add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map().
+References oomph\+::\+Data\+::add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), and Variable\+\_\+position\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SolidNode_a20562ea5133c1150b6999a73badb63e8}\label{classoomph_1_1SolidNode_a20562ea5133c1150b6999a73badb63e8}} 
 \index{oomph::SolidNode@{oomph::SolidNode}!add\_values\_to\_vector@{add\_values\_to\_vector}}
@@ -289,7 +280,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a11400682e1fd2851777234a7
 
 
 
-Definition at line 3599 of file nodes.\+cc.
+Definition at line 3708 of file nodes.\+cc.
 
 
 
@@ -315,7 +306,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a5f727227a1c8fdc7d5d42249
 
 
 
-Definition at line 3542 of file nodes.\+cc.
+Definition at line 3652 of file nodes.\+cc.
 
 
 
@@ -337,7 +328,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a8758650a2e6d7312ad070bb8
 
 
 
-Definition at line 1722 of file nodes.\+h.
+Definition at line 1888 of file nodes.\+h.
 
 
 
@@ -355,7 +346,7 @@ Copy nodal positions and associated data from specified node object.
 
 Copy nodal positions and associated data from specified node object 
 
-Definition at line 3326 of file nodes.\+cc.
+Definition at line 3433 of file nodes.\+cc.
 
 
 
@@ -381,7 +372,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a2dae16e2dcff9a40029f834c
 
 
 
-Definition at line 3561 of file nodes.\+cc.
+Definition at line 3671 of file nodes.\+cc.
 
 
 
@@ -407,7 +398,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_ab5d4bea7ffc69a82fde5720a
 
 
 
-Definition at line 3469 of file nodes.\+cc.
+Definition at line 3573 of file nodes.\+cc.
 
 
 
@@ -429,7 +420,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_acd8bb142619d639d9bbfe813
 
 
 
-Definition at line 3366 of file nodes.\+cc.
+Definition at line 3470 of file nodes.\+cc.
 
 
 
@@ -447,7 +438,7 @@ Return lagrangian coordinate either directly or via hanging node representation.
 
 Return lagrangian coordinate either directly or via hanging node representation. 
 
-Definition at line 3483 of file nodes.\+cc.
+Definition at line 3586 of file nodes.\+cc.
 
 
 
@@ -469,7 +460,7 @@ Return generalised lagrangian coordinate either directly or via hanging node rep
 
 Return generalised lagrangian coordinate either directly or via hanging node representation. 
 
-Definition at line 3512 of file nodes.\+cc.
+Definition at line 3619 of file nodes.\+cc.
 
 
 
@@ -487,7 +478,7 @@ Return number of lagrangian coordinates.
 
 
 
-Definition at line 1729 of file nodes.\+h.
+Definition at line 1901 of file nodes.\+h.
 
 
 
@@ -495,7 +486,7 @@ References Nlagrangian.
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), add\+\_\+values\+\_\+to\+\_\+vector(), oomph\+::\+Solid\+Q\+Hermite\+Element$<$ 2 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+Q\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+Q\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), copy(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), read\+\_\+values\+\_\+from\+\_\+vector(), and oomph\+::\+Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates().
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), add\+\_\+values\+\_\+to\+\_\+vector(), oomph\+::\+Solid\+Q\+Hermite\+Element$<$ 2 $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+T\+Bubble\+Enriched\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+Q\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+Q\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+T\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Solid\+T\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), copy(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Dummy\+Error\+Estimator\+::\+Dummy\+Error\+Estimator(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), read\+\_\+values\+\_\+from\+\_\+vector(), and oomph\+::\+Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates().
 
 \mbox{\Hypertarget{classoomph_1_1SolidNode_a3c1e52e4b6dde53b98228d621f7fcb0a}\label{classoomph_1_1SolidNode_a3c1e52e4b6dde53b98228d621f7fcb0a}} 
 \index{oomph::SolidNode@{oomph::SolidNode}!nlagrangian\_type@{nlagrangian\_type}}
@@ -509,7 +500,7 @@ Number of types of Lagrangian coordinates used to interpolate the Lagrangian coo
 
 
 
-Definition at line 1733 of file nodes.\+h.
+Definition at line 1908 of file nodes.\+h.
 
 
 
@@ -535,7 +526,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_aecf8c979266300d3609de2b4
 
 
 
-Definition at line 1834 of file nodes.\+h.
+Definition at line 2012 of file nodes.\+h.
 
 
 
@@ -553,7 +544,7 @@ Broken assignment operator.
 
 
 
-Definition at line 1629 of file nodes.\+h.
+Definition at line 1772 of file nodes.\+h.
 
 
 
@@ -575,7 +566,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a3f0d0e77ba866ce8ad3c5c01
 
 
 
-Definition at line 1707 of file nodes.\+h.
+Definition at line 1873 of file nodes.\+h.
 
 
 
@@ -593,7 +584,7 @@ Pin the nodal position.
 
 
 
-Definition at line 1689 of file nodes.\+h.
+Definition at line 1847 of file nodes.\+h.
 
 
 
@@ -615,7 +606,7 @@ Pin the generalised nodal position. `Type'\+: k; Coordinate direction\+: i.
 
 
 
-Definition at line 1694 of file nodes.\+h.
+Definition at line 1854 of file nodes.\+h.
 
 
 
@@ -629,12 +620,11 @@ References i, oomph\+::\+Node\+::\+Nposition\+\_\+type, oomph\+::\+Data\+::pin()
 
 
 
-Return the equation number for generalised Eulerian coordinate\+: type of coordinate\+: k, coordinate direction\+: i. ~\newline
- 
+Return the equation number for generalised Eulerian coordinate\+: type of coordinate\+: k, coordinate direction\+: i. 
 
 
 
-Definition at line 1675 of file nodes.\+h.
+Definition at line 1828 of file nodes.\+h.
 
 
 
@@ -660,7 +650,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a80fe9192b35baa5321e8d0ff
 
 
 
-Definition at line 1667 of file nodes.\+h.
+Definition at line 1815 of file nodes.\+h.
 
 
 
@@ -682,7 +672,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a0e1ad244c2b109fb54a2fa64
 
 
 
-Definition at line 1670 of file nodes.\+h.
+Definition at line 1821 of file nodes.\+h.
 
 
 
@@ -700,7 +690,7 @@ Test whether the i-\/th coordinate is pinned, 0\+: false; 1\+: true.
 
 
 
-Definition at line 1680 of file nodes.\+h.
+Definition at line 1834 of file nodes.\+h.
 
 
 
@@ -722,7 +712,7 @@ Test whether the k-\/th type of the i-\/th coordinate is pinned 0\+: false; 1\+:
 
 
 
-Definition at line 1685 of file nodes.\+h.
+Definition at line 1841 of file nodes.\+h.
 
 
 
@@ -740,7 +730,7 @@ Read nodal positions (variable and fixed) and associated data from file for rest
 
 Read nodal positions and associated data to file for restart. 
 
-Definition at line 3386 of file nodes.\+cc.
+Definition at line 3490 of file nodes.\+cc.
 
 
 
@@ -766,7 +756,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_ae958e52df6ede2a08f957db4
 
 
 
-Definition at line 3703 of file nodes.\+cc.
+Definition at line 3811 of file nodes.\+cc.
 
 
 
@@ -788,7 +778,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_accb033ab8ed4f96331014f7c
 
 
 
-Definition at line 3646 of file nodes.\+cc.
+Definition at line 3755 of file nodes.\+cc.
 
 
 
@@ -810,7 +800,7 @@ Set the variable position data from an external data object.
 
 Set the variable position data from an external source. This is mainly used when setting periodic solid problems. 
 
-Definition at line 3431 of file nodes.\+cc.
+Definition at line 3532 of file nodes.\+cc.
 
 
 
@@ -832,7 +822,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a15d3962d66d92de44e32edc9
 
 
 
-Definition at line 3447 of file nodes.\+cc.
+Definition at line 3548 of file nodes.\+cc.
 
 
 
@@ -854,7 +844,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_ac23aaa36891269f3c9a83261
 
 
 
-Definition at line 1726 of file nodes.\+h.
+Definition at line 1895 of file nodes.\+h.
 
 
 
@@ -876,7 +866,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a8ef38470acf00f344c9567bc
 
 
 
-Definition at line 1714 of file nodes.\+h.
+Definition at line 1880 of file nodes.\+h.
 
 
 
@@ -894,7 +884,7 @@ Unpin the nodal position.
 
 
 
-Definition at line 1698 of file nodes.\+h.
+Definition at line 1860 of file nodes.\+h.
 
 
 
@@ -916,7 +906,7 @@ Unpin the generalised nodal position. `Type'\+: k; Coordinate direction\+: i.
 
 
 
-Definition at line 1703 of file nodes.\+h.
+Definition at line 1867 of file nodes.\+h.
 
 
 
@@ -934,17 +924,17 @@ Return the variable\+\_\+position data (const version)
 
 
 
-Definition at line 1647 of file nodes.\+h.
+Definition at line 1790 of file nodes.\+h.
 
 
 
 References Variable\+\_\+position\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SolidNode_a1d420ed7d7516478bcbc53581bf60be3}\label{classoomph_1_1SolidNode_a1d420ed7d7516478bcbc53581bf60be3}} 
+\mbox{\Hypertarget{classoomph_1_1SolidNode_ae9a8abd197728f5555730131fa0f6971}\label{classoomph_1_1SolidNode_ae9a8abd197728f5555730131fa0f6971}} 
 \index{oomph::SolidNode@{oomph::SolidNode}!variable\_position\_pt@{variable\_position\_pt}}
 \index{variable\_position\_pt@{variable\_position\_pt}!oomph::SolidNode@{oomph::SolidNode}}
 \doxysubsubsection{\texorpdfstring{variable\_position\_pt()}{variable\_position\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ const \& oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ const\& oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -952,7 +942,7 @@ Pointer to variable\+\_\+position data (const version)
 
 
 
-Definition at line 1650 of file nodes.\+h.
+Definition at line 1796 of file nodes.\+h.
 
 
 
@@ -974,7 +964,7 @@ Reference to i-\/th Lagrangian position.
 
 
 
-Definition at line 1736 of file nodes.\+h.
+Definition at line 1914 of file nodes.\+h.
 
 
 
@@ -996,7 +986,7 @@ Reference to i-\/th Lagrangian position (const version)
 
 
 
-Definition at line 1745 of file nodes.\+h.
+Definition at line 1923 of file nodes.\+h.
 
 
 
@@ -1014,7 +1004,7 @@ Reference to the generalised Lagrangian position. `Type'\+: k; \textquotesingle{
 
 
 
-Definition at line 1755 of file nodes.\+h.
+Definition at line 1933 of file nodes.\+h.
 
 
 
@@ -1036,7 +1026,7 @@ Reference to the generalised Lagrangian position. `Type'\+: k; \textquotesingle{
 
 
 
-Definition at line 1765 of file nodes.\+h.
+Definition at line 1943 of file nodes.\+h.
 
 
 
@@ -1054,7 +1044,7 @@ Private function to check that the arguments to the position functions are in ra
 
 Private function to check that the argument is within the range of stored Lagrangain coordinates and position types. 
 
-Definition at line 3212 of file nodes.\+cc.
+Definition at line 3312 of file nodes.\+cc.
 
 
 
@@ -1079,7 +1069,7 @@ Number of Lagrangian coordinates of the node.
 
 
 
-Definition at line 1575 of file nodes.\+h.
+Definition at line 1719 of file nodes.\+h.
 
 
 
@@ -1097,7 +1087,7 @@ Number of types of Lagrangian coordinates used to interpolate the Lagrangian coo
 
 
 
-Definition at line 1579 of file nodes.\+h.
+Definition at line 1723 of file nodes.\+h.
 
 
 
@@ -1115,11 +1105,11 @@ Pointer to data that will hold variable positions in elastic nodes.
 
 
 
-Definition at line 1582 of file nodes.\+h.
+Definition at line 1726 of file nodes.\+h.
 
 
 
-Referenced by add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), assign\+\_\+eqn\+\_\+numbers(), constrain\+\_\+positions(), copy(), describe\+\_\+dofs(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+position\+\_\+data(), pin\+\_\+all(), pin\+\_\+position(), position\+\_\+eqn\+\_\+number(), position\+\_\+is\+\_\+a\+\_\+copy(), position\+\_\+is\+\_\+pinned(), read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), set\+\_\+external\+\_\+variable\+\_\+position\+\_\+pt(), set\+\_\+position\+\_\+time\+\_\+stepper(), Solid\+Node(), unconstrain\+\_\+positions(), unpin\+\_\+all(), unpin\+\_\+position(), variable\+\_\+position(), variable\+\_\+position\+\_\+pt(), and $\sim$\+Solid\+Node().
+Referenced by add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), assign\+\_\+eqn\+\_\+numbers(), constrain\+\_\+positions(), copy(), describe\+\_\+dofs(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+position\+\_\+data(), pin\+\_\+all(), pin\+\_\+position(), position\+\_\+eqn\+\_\+number(), position\+\_\+is\+\_\+a\+\_\+copy(), position\+\_\+is\+\_\+pinned(), read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), set\+\_\+external\+\_\+variable\+\_\+position\+\_\+pt(), set\+\_\+position\+\_\+time\+\_\+stepper(), Solid\+Node(), unconstrain\+\_\+positions(), unpin\+\_\+all(), unpin\+\_\+position(), variable\+\_\+position(), variable\+\_\+position\+\_\+pt(), and $\sim$\+Solid\+Node().
 
 \mbox{\Hypertarget{classoomph_1_1SolidNode_ac8ed3701effa80f70d817ee171559d1f}\label{classoomph_1_1SolidNode_ac8ed3701effa80f70d817ee171559d1f}} 
 \index{oomph::SolidNode@{oomph::SolidNode}!Xi\_position@{Xi\_position}}
@@ -1133,7 +1123,7 @@ Storage for the Lagrangian positions.
 
 
 
-Definition at line 1585 of file nodes.\+h.
+Definition at line 1729 of file nodes.\+h.
 
 
 

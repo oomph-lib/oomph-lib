@@ -25,7 +25,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_a73e8
 void \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_ab78f50c13f9ccf7d1f359bc443fe2a9d}{refine\+\_\+uniformly}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&\mbox{\hyperlink{classoomph_1_1RefineableMeshBase_a266f8b2a1499cc2ae7b24b19813923ee}{doc\+\_\+info}})
 \begin{DoxyCompactList}\small\item\em Refine mesh uniformly and doc process. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_a7d2efa292dd5dd4930e661fd32e42eec}{adapt}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&elem\+\_\+error)
-\begin{DoxyCompactList}\small\item\em Overload the adapt function (to ensure nodes are snapped to the boundary) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Adapt problem based on specified elemental error estimates. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_aa2607a703a228947cc65d9edf0ca8b0e}{Refineable\+Quad\+From\+Triangle\+Mesh}} (const std\+::string \&node\+\_\+file\+\_\+name, const std\+::string \&element\+\_\+file\+\_\+name, const std\+::string \&poly\+\_\+file\+\_\+name, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Build mesh, based on the polyfiles. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_aaa5c1de240765e38b30f2a10613faf59}{$\sim$\+Refineable\+Quad\+From\+Triangle\+Mesh}} ()
@@ -39,7 +39,7 @@ class oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $
 
 Unstructured refineable \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}}. 
 
-Definition at line 577 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 582 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -57,7 +57,7 @@ Build mesh, based on the specifications on \mbox{\hyperlink{classoomph_1_1Triang
 
 
 
-Definition at line 588 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 591 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh_aa2607a703a228947cc65d9edf0ca8b0e}\label{classoomph_1_1RefineableQuadFromTriangleMesh_aa2607a703a228947cc65d9edf0ca8b0e}} 
 \index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}!RefineableQuadFromTriangleMesh@{RefineableQuadFromTriangleMesh}}
@@ -72,7 +72,7 @@ Build mesh, based on the polyfiles.
 
 
 
-Definition at line 625 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 628 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh_aaa5c1de240765e38b30f2a10613faf59}\label{classoomph_1_1RefineableQuadFromTriangleMesh_aaa5c1de240765e38b30f2a10613faf59}} 
 \index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}!````~RefineableQuadFromTriangleMesh@{$\sim$RefineableQuadFromTriangleMesh}}
@@ -87,7 +87,7 @@ Empty Destructor.
 
 
 
-Definition at line 639 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 640 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -101,15 +101,15 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh}{oomph\+::\+R
 
 
 
-Overload the adapt function (to ensure nodes are snapped to the boundary) 
-
 Adapt problem based on specified elemental error estimates. 
+
+Overload the adapt function (to ensure nodes are snapped to the boundary) 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_ac98d4120b99d5c6cbcf7225a9ee5648d}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base}}.
 
 
 
-Definition at line 1014 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 1032 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh_a73e88bb8c1cc8464f079e928e89a4a14}\label{classoomph_1_1RefineableQuadFromTriangleMesh_a73e88bb8c1cc8464f079e928e89a4a14}} 
 \index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}!refine\_uniformly@{refine\_uniformly}}
@@ -128,7 +128,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a8
 
 
 
-Definition at line 600 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 602 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -151,7 +151,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_ae
 
 
 
-Definition at line 609 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
+Definition at line 611 of file quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+h.
 
 
 

@@ -28,7 +28,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_a0d4062b2db66d2a14eaa9c270eb034d6}{scalar\+\_\+value\+\_\+paraview}} (std\+::ofstream \&file\+\_\+out, const unsigned \&k, const unsigned \&nplot) const
 \begin{DoxyCompactList}\small\item\em Write values of the k-\/th scalar field at the plot points. Needs to be implemented for each new specific element type. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_a4ca57102287a03de1ee8c4f7f9ef1072}{scalar\+\_\+name\+\_\+paraview}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
-\begin{DoxyCompactList}\small\item\em Name of the i-\/th scalar field. Default implementation. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Name of the i-\/th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. Can (should!) be overloaded with more meaningful names in specific elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_a903801e976db27eb831a17349838877d}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_aa264b6b88ec62adffd928382c82e93b4}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
@@ -40,7 +40,7 @@ void \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_a467
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_a467d411cab5179a2437fa762a0df2a02}{traction}}) \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_abed4930a57bc16a6187c7ff011e57ea3}{traction\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_a467d411cab5179a2437fa762a0df2a02}{traction}}) \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_a00a268abbe7c4c8603f793de37dee3be}{traction\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Reference to the traction function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -65,7 +65,7 @@ class oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+
 
 A class for elements that allow the imposition of an applied traction in the axisym Navier Stokes eqns. The geometrical information can be read from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class. 
 
-Definition at line 74 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 71 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -83,7 +83,7 @@ Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the
 
 
 
-Definition at line 123 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 116 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -109,7 +109,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 166 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 160 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -132,7 +132,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 158 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 153 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -151,7 +151,7 @@ Helper function that actually calculates the residuals.
 
 Return the residuals for the \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement}{Axisymmetric\+Navier\+Stokes\+Traction\+Element}} equations 
 
-Definition at line 452 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 447 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -174,7 +174,7 @@ Get the traction vector\+: Pass number of integration point (dummy), Eulerian co
 
 
 
-Definition at line 100 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 95 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -201,7 +201,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba
 
 
 
-Definition at line 191 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 188 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -224,7 +224,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 397 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 390 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -247,7 +247,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 401 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 396 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -270,7 +270,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 183 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 180 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricNavierStokesTractionElement_a903801e976db27eb831a17349838877d}\label{classoomph_1_1AxisymmetricNavierStokesTractionElement_a903801e976db27eb831a17349838877d}} 
 \index{oomph::AxisymmetricNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricNavierStokesTractionElement$<$ ELEMENT $>$}!output@{output}}
@@ -289,7 +289,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 316 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 310 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -304,15 +304,15 @@ std\+::string \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionEle
 
 
 
-Name of the i-\/th scalar field. Default implementation. 
+Name of the i-\/th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. Can (should!) be overloaded with more meaningful names in specific elements. 
 
-returns V1 for the first one, V2 for the second etc. Can (should!) be overloaded with more meaningful names in specific elements. 
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a49cc2d4f7ed5772bbc96f06760372b51}{oomph\+::\+Finite\+Element}}.
 
 
 
-Definition at line 286 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 282 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -335,7 +335,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a02cf8832a5e2886
 
 
 
-Definition at line 201 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 198 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -354,7 +354,7 @@ Compute traction vector at specified local coordinate Should only be used for po
 
 Compute traction vector at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! 
 
-Definition at line 425 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 420 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -381,7 +381,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07
 
 
 
-Definition at line 178 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 172 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -390,12 +390,12 @@ References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1AxisymmetricNavierStokesTractionElement_abed4930a57bc16a6187c7ff011e57ea3}\label{classoomph_1_1AxisymmetricNavierStokesTractionElement_abed4930a57bc16a6187c7ff011e57ea3}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymmetricNavierStokesTractionElement_a00a268abbe7c4c8603f793de37dee3be}\label{classoomph_1_1AxisymmetricNavierStokesTractionElement_a00a268abbe7c4c8603f793de37dee3be}} 
 \index{oomph::AxisymmetricNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricNavierStokesTractionElement$<$ ELEMENT $>$}!traction\_fct\_pt@{traction\_fct\_pt}}
 \index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::AxisymmetricNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void($\ast$ \&)(const double\& time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_a467d411cab5179a2437fa762a0df2a02}{traction}}) \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+void($\ast$\&)(const double\& time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement_a467d411cab5179a2437fa762a0df2a02}{traction}}) \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesTractionElement}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -403,7 +403,7 @@ Reference to the traction function pointer.
 
 
 
-Definition at line 150 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 143 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricNavierStokesTractionElement_a58840e83c766a6e7d653f389c2c54dfc}\label{classoomph_1_1AxisymmetricNavierStokesTractionElement_a58840e83c766a6e7d653f389c2c54dfc}} 
 \index{oomph::AxisymmetricNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricNavierStokesTractionElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
@@ -418,7 +418,7 @@ Pointer to an imposed traction function. Arguments\+: Eulerian coordinate; outer
 
 
 
-Definition at line 88 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 84 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -437,7 +437,7 @@ Index at which the i-\/th velocity component is stored.
 
 
 
-Definition at line 81 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 77 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 

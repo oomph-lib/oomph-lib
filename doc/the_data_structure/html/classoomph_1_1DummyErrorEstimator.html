@@ -202,7 +202,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Dummy error estimator, allows manual specification of refinement pattern by forcing refinement in regions defined by elements in a reference mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00467">467</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00472">472</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a32f15a763f800e451cc9ddec074cd25c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a32f15a763f800e451cc9ddec074cd25c">&#9670;&nbsp;</a></span>DummyErrorEstimator() <span class="overload">[1/3]</span></h2>
@@ -252,9 +252,9 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor. Provide mesh and number of the elements that define the regions within which elements are to be refined subsequently. Also specify the node number of a central node within elements &ndash; it's used to determine if an element is in the region where refinement is supposed to take place. Optional boolean flag (defaulting to false) indicates that refinement decision is based on Lagrangian coordinates &ndash; only applicable to solid meshes. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00480">480</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00483">483</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="mesh_8h_source.html#l01536">oomph::Mesh::is_mesh_distributed()</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="error__estimator_8h_source.html#l00691">Region_low_bound</a>, <a class="el" href="error__estimator_8h_source.html#l00688">Region_upp_bound</a>, <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>, and <a class="el" href="nodes_8h_source.html#l01736">oomph::SolidNode::xi()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00480">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="mesh_8h_source.html#l01595">oomph::Mesh::is_mesh_distributed()</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l01901">oomph::SolidNode::nlagrangian()</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="error__estimator_8h_source.html#l00688">Region_low_bound</a>, <a class="el" href="error__estimator_8h_source.html#l00685">Region_upp_bound</a>, <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>, and <a class="el" href="nodes_8h_source.html#l01914">oomph::SolidNode::xi()</a>.</p>
 
 </div>
 </div>
@@ -312,9 +312,9 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor. Provide vectors to "lower left" and "upper right" vertices of refinement region Also specify the node number of a central node within elements &ndash; it's used to determine if an element is in the region where refinement is supposed to take place. Optional boolean flag (defaulting to false) indicates that refinement decision is based on Lagrangian coordinates &ndash; only applicable to solid meshes. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00565">565</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00568">568</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="error__estimator_8h_source.html#l00691">Region_low_bound</a>, and <a class="el" href="error__estimator_8h_source.html#l00688">Region_upp_bound</a>.</p>
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="error__estimator_8h_source.html#l00688">Region_low_bound</a>, and <a class="el" href="error__estimator_8h_source.html#l00685">Region_upp_bound</a>.</p>
 
 </div>
 </div>
@@ -344,9 +344,9 @@ Private Attributes</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00598">598</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00595">595</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -375,7 +375,7 @@ Private Attributes</h2></td></tr>
 
 <p>Empty virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00612">612</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00609">609</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
 </div>
 </div>
@@ -424,9 +424,9 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1ErrorEstimator.html#a77e85262d309d6e7da0ca71e98b7afff">oomph::ErrorEstimator</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00617">617</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00614">614</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00685">Central_node_number</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__utilities_8h_source.html#l00530">oomph::DocInfo::is_doc_enabled()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="error__estimator_8h_source.html#l00691">Region_low_bound</a>, <a class="el" href="error__estimator_8h_source.html#l00688">Region_upp_bound</a>, <a class="el" href="error__estimator_8h_source.html#l00681">Use_lagrangian_coordinates</a>, <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>, and <a class="el" href="nodes_8h_source.html#l01736">oomph::SolidNode::xi()</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00682">Central_node_number</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00480">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__utilities_8h_source.html#l00548">oomph::DocInfo::is_doc_enabled()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="error__estimator_8h_source.html#l00688">Region_low_bound</a>, <a class="el" href="error__estimator_8h_source.html#l00685">Region_upp_bound</a>, <a class="el" href="error__estimator_8h_source.html#l00678">Use_lagrangian_coordinates</a>, <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>, and <a class="el" href="nodes_8h_source.html#l01914">oomph::SolidNode::xi()</a>.</p>
 
 </div>
 </div>
@@ -456,9 +456,9 @@ Private Attributes</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00605">605</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00602">602</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -485,9 +485,9 @@ Private Attributes</h2></td></tr>
 
 <p>Number of local node that is used to identify if an element is located in the refinement region. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00685">685</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00682">682</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00617">get_element_errors()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00614">get_element_errors()</a>.</p>
 
 </div>
 </div>
@@ -513,9 +513,9 @@ Private Attributes</h2></td></tr>
 
 <p>Lower bounds for the coordinates of the refinement regions. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00691">691</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00688">688</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00480">DummyErrorEstimator()</a>, and <a class="el" href="error__estimator_8h_source.html#l00617">get_element_errors()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00483">DummyErrorEstimator()</a>, and <a class="el" href="error__estimator_8h_source.html#l00614">get_element_errors()</a>.</p>
 
 </div>
 </div>
@@ -541,9 +541,9 @@ Private Attributes</h2></td></tr>
 
 <p>Upper bounds for the coordinates of the refinement regions. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00688">688</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00685">685</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00480">DummyErrorEstimator()</a>, and <a class="el" href="error__estimator_8h_source.html#l00617">get_element_errors()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00483">DummyErrorEstimator()</a>, and <a class="el" href="error__estimator_8h_source.html#l00614">get_element_errors()</a>.</p>
 
 </div>
 </div>
@@ -569,9 +569,9 @@ Private Attributes</h2></td></tr>
 
 <p>Use Lagrangian coordinates to decide which element is to be refined. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00681">681</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00678">678</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00617">get_element_errors()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00614">get_element_errors()</a>.</p>
 
 </div>
 </div>
@@ -606,7 +606,7 @@ Private Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:54
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:37:10
         </div>
       </div>
     </footer>

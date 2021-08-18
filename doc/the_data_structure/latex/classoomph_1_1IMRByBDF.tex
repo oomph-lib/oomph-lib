@@ -20,8 +20,7 @@ virtual \mbox{\hyperlink{classoomph_1_1IMRByBDF_aaa70e7e8090f3e454bc392e733b3185
 void \mbox{\hyperlink{classoomph_1_1IMRByBDF_a6060b6098113085753083a2dc53723ee}{set\+\_\+weights}} ()
 \begin{DoxyCompactList}\small\item\em Setup weights for time derivative calculations. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1IMRByBDF_a4fb7f902b1a266b19cfdfe640d4c78d5}{nprev\+\_\+values\+\_\+for\+\_\+value\+\_\+at\+\_\+evaluation\+\_\+time}} () const
-\begin{DoxyCompactList}\small\item\em Number of history values to interpolate over to get the \char`\"{}current\char`\"{} value. Evaluation time is the end of the bdf1 \char`\"{}half-\/step\char`\"{}, so only need one value as normal. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of history values to interpolate over to get the \char`\"{}current\char`\"{} value. Evaluation time is the end of the bdf1 \char`\"{}half-\/step\char`\"{}, so only need one value as normal. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IMRByBDF_abc155a68889d297f732a083d911b4627}{actions\+\_\+before\+\_\+timestep}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Half the timestep before starting solve. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IMRByBDF_a1eb1b47643bf37e27c478c6987c7716d}{actions\+\_\+after\+\_\+timestep}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
@@ -46,7 +45,7 @@ Implementation of implicit midpoint rule by taking half a step of bdf1 then appl
 
 The exception is when multiple different time steppers are being used simultaneously for different parts of the problem. In this case the \mbox{\hyperlink{classoomph_1_1IMR}{I\+MR}} class should be used. 
 
-Definition at line 210 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line 219 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 
 
 
@@ -63,7 +62,7 @@ Constructor with initialisation.
 
 
 
-Definition at line 214 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line 223 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 
 
 
@@ -81,7 +80,7 @@ Destructor.
 
 
 
-Definition at line 220 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line 229 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1IMRByBDF_a736422b80df5286da0a56301da073b16}\label{classoomph_1_1IMRByBDF_a736422b80df5286da0a56301da073b16}} 
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!IMRByBDF@{IMRByBDF}}
@@ -95,7 +94,7 @@ Inaccessible copy constructor.
 
 
 
-Definition at line 249 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line 260 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 
 
 
@@ -148,8 +147,7 @@ References oomph\+::\+Problem\+::dof(), oomph\+::\+Time\+::dt(), oomph\+::\+Prob
 
 
 
-Number of history values to interpolate over to get the \char`\"{}current\char`\"{} value. Evaluation time is the end of the bdf1 \char`\"{}half-\/step\char`\"{}, so only need one value as normal. ~\newline
- 
+Number of history values to interpolate over to get the \char`\"{}current\char`\"{} value. Evaluation time is the end of the bdf1 \char`\"{}half-\/step\char`\"{}, so only need one value as normal. 
 
 
 
@@ -157,7 +155,7 @@ Implements \mbox{\hyperlink{classoomph_1_1IMRBase_a93df756c834f8ba27956b8efb2af3
 
 
 
-Definition at line 234 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line 243 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1IMRByBDF_a0a1aec8458acb8cd8285f7b6d69fca4a}\label{classoomph_1_1IMRByBDF_a0a1aec8458acb8cd8285f7b6d69fca4a}} 
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!operator=@{operator=}}
@@ -171,7 +169,7 @@ Inaccessible assignment operator.
 
 
 
-Definition at line 252 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line 263 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1IMRByBDF_a6060b6098113085753083a2dc53723ee}\label{classoomph_1_1IMRByBDF_a6060b6098113085753083a2dc53723ee}} 
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!set\_weights@{set\_weights}}
@@ -189,7 +187,7 @@ Implements \mbox{\hyperlink{classoomph_1_1IMRBase_a36b8a37b4c0bb9e8cca821bfb74fd
 
 
 
-Definition at line 223 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line 232 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 
 
 
@@ -214,7 +212,7 @@ Should we update pinned variables after the half-\/step?
 
 
 
-Definition at line 244 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line 256 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 
 
 

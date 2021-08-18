@@ -141,9 +141,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3318acc1306c60bd13b3bfe8e15a2fa5"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1NavierStokesBoussinesqElement.html#a3318acc1306c60bd13b3bfe8e15a2fa5">ra</a> () const</td></tr>
 <tr class="memdesc:a3318acc1306c60bd13b3bfe8e15a2fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the Rayleigh number (const version)  <a href="classoomph_1_1NavierStokesBoussinesqElement.html#a3318acc1306c60bd13b3bfe8e15a2fa5">More...</a><br /></td></tr>
 <tr class="separator:a3318acc1306c60bd13b3bfe8e15a2fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac822ef74e7bc0e55c917e58f2cd5a6fe"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1NavierStokesBoussinesqElement.html#ac822ef74e7bc0e55c917e58f2cd5a6fe">ra_pt</a> ()</td></tr>
-<tr class="memdesc:ac822ef74e7bc0e55c917e58f2cd5a6fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to the Rayleigh number.  <a href="classoomph_1_1NavierStokesBoussinesqElement.html#ac822ef74e7bc0e55c917e58f2cd5a6fe">More...</a><br /></td></tr>
-<tr class="separator:ac822ef74e7bc0e55c917e58f2cd5a6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5d07badf8b30cc14340bed51450842c"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1NavierStokesBoussinesqElement.html#ad5d07badf8b30cc14340bed51450842c">ra_pt</a> ()</td></tr>
+<tr class="memdesc:ad5d07badf8b30cc14340bed51450842c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to the Rayleigh number.  <a href="classoomph_1_1NavierStokesBoussinesqElement.html#ad5d07badf8b30cc14340bed51450842c">More...</a><br /></td></tr>
+<tr class="separator:ad5d07badf8b30cc14340bed51450842c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ff5be3155df975541a25444d43c1ca8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1NavierStokesBoussinesqElement.html#a2ff5be3155df975541a25444d43c1ca8">get_body_force_nst</a> (const double &amp;time, const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;s, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;result)</td></tr>
 <tr class="memdesc:a2ff5be3155df975541a25444d43c1ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload get_body_force_nst to get the temperature "body force" from the "source" AdvectionDiffusion element via current integration point.  <a href="classoomph_1_1NavierStokesBoussinesqElement.html#a2ff5be3155df975541a25444d43c1ca8">More...</a><br /></td></tr>
 <tr class="separator:a2ff5be3155df975541a25444d43c1ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,7 +172,7 @@ class oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;</h3>
 
 <p>Build <a class="el" href="classoomph_1_1NavierStokesBoussinesqElement.html">NavierStokesBoussinesqElement</a> that inherits from ElementWithExternalElement so that it can "communicate" with AdvectionDiffusionElementWithExternalElement </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00805">805</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00815">815</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad0ebb74a3963c0715e6e3e34ba8b1d7f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad0ebb74a3963c0715e6e3e34ba8b1d7f">&#9670;&nbsp;</a></span>NavierStokesBoussinesqElement()</h2>
@@ -201,9 +201,9 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
 
 <p>Constructor: call the underlying constructors and initialise the pointer to the Rayleigh number to point to the default value of 0.0. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00819">819</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00827">827</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00051">oomph::MultiDomainBoussinesqHelper::Default_Physical_Constant_Value</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00812">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00048">oomph::MultiDomainBoussinesqHelper::Default_Physical_Constant_Value</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00821">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
 
 </div>
 </div>
@@ -246,9 +246,9 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
 
 <p>Compute the element's residual vector and the Jacobian matrix. Jacobian is computed by finite-differencing or analytically. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00848">848</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00867">867</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refine__b__convect_8txt.html#afb1ff8cf837bf38120135bebec006cd4">fill_in_contribution_to_jacobian()</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00883">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
+<p class="reference">References <a class="el" href="refine__b__convect_8txt.html#afb1ff8cf837bf38120135bebec006cd4">fill_in_contribution_to_jacobian()</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00903">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
 
 </div>
 </div>
@@ -296,7 +296,7 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
 
 <p>Add the element's contribution to its residuals vector, jacobian matrix and mass matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00870">870</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00889">889</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
 </div>
 </div>
@@ -338,11 +338,11 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
 
 <p>Compute the contribution of the external degrees of freedom (temperatures) on the Navier-Stokes equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00883">883</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00903">903</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01343">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::get_dbody_force_nst_dexternal_element_data()</a>.</p>
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01377">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::get_dbody_force_nst_dexternal_element_data()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00848">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00867">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>.</p>
 
 </div>
 </div>
@@ -395,7 +395,7 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
 <p>Overload get_body_force_nst to get the temperature "body force" from the "source" AdvectionDiffusion element via current integration point. </p>
 <p>Overload get_body_force_nst to get the temperature "body force" from the "source" AdvectionDiffusion element via current integration point </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00983">983</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01003">1003</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
 </div>
 </div>
@@ -436,9 +436,9 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
 <p>Fill in the derivatives of the body force with respect to the external unknowns. </p>
 <p>Fill in the derivatives of the body force with respect to the external unknowns in the Navier&ndash;Stokes equations </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01343">1343</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01377">1377</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00883">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00903">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
 
 </div>
 </div>
@@ -469,14 +469,14 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
 
 <p>Access function for the Rayleigh number (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00828">828</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00837">837</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00812">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00821">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
 
 </div>
 </div>
-<a id="ac822ef74e7bc0e55c917e58f2cd5a6fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac822ef74e7bc0e55c917e58f2cd5a6fe">&#9670;&nbsp;</a></span>ra_pt()</h2>
+<a id="ad5d07badf8b30cc14340bed51450842c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5d07badf8b30cc14340bed51450842c">&#9670;&nbsp;</a></span>ra_pt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -487,7 +487,7 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double* &amp; <a class="el" href="classoomph_1_1NavierStokesBoussinesqElement.html">oomph::NavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra_pt </td>
+          <td class="memname">double*&amp; <a class="el" href="classoomph_1_1NavierStokesBoussinesqElement.html">oomph::NavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -502,9 +502,9 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
 
 <p>Access function for the pointer to the Rayleigh number. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00831">831</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00843">843</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00812">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00821">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
 
 </div>
 </div>
@@ -533,9 +533,9 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
 
 <p>Pointer to a private data member, the Rayleigh number. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00812">812</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00821">821</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00819">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::NavierStokesBoussinesqElement()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00828">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra()</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00831">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00827">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::NavierStokesBoussinesqElement()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00837">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra()</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00843">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra_pt()</a>.</p>
 
 </div>
 </div>
@@ -570,7 +570,7 @@ template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:23:52
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:03:25
         </div>
       </div>
     </footer>

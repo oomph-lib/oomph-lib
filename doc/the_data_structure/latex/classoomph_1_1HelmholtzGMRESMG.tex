@@ -55,7 +55,7 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5ca
 \begin{DoxyCompactList}\small\item\em Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_aa94abd65000a9fac33a29a1ae2f9ec73}{complex\+\_\+matrix\+\_\+multiplication}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ const matrices\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Helper function to calculate a complex matrix-\/vector product. Assumes the matrix has been provided as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of length two; the first entry containing the real part of the system matrix and the second entry containing the imaginary part. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a7c1c50d1a0a7bdd8a3c5dc9bb777e9b3}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$$>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$$>$ \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Helper function to update the result vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_afc666c19cb09f252e63e43c3e126fb9a}{generate\+\_\+plane\+\_\+rotation}} (std\+::complex$<$ double $>$ \&dx, std\+::complex$<$ double $>$ \&dy, std\+::complex$<$ double $>$ \&cs, std\+::complex$<$ double $>$ \&sn)
 \begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
@@ -83,7 +83,7 @@ class oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}
 
 The \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} method for the Helmholtz solver. 
 
-Definition at line 1787 of file complex\+\_\+smoother.\+h.
+Definition at line 1782 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -101,7 +101,7 @@ Constructor.
 
 
 
-Definition at line 1793 of file complex\+\_\+smoother.\+h.
+Definition at line 1787 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -120,7 +120,7 @@ Destructor (cleanup storage)
 
 
 
-Definition at line 1803 of file complex\+\_\+smoother.\+h.
+Definition at line 1797 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -139,7 +139,7 @@ Broken copy constructor.
 
 
 
-Definition at line 1809 of file complex\+\_\+smoother.\+h.
+Definition at line 1803 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -161,7 +161,7 @@ Helper function\+: Apply plane rotation. This is done using the update\+:
 
 \[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. 
 
-Definition at line 2487 of file complex\+\_\+smoother.\+h.
+Definition at line 2492 of file complex\+\_\+smoother.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}\label{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
@@ -180,7 +180,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 2105 of file complex\+\_\+smoother.\+h.
+Definition at line 2107 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -203,7 +203,7 @@ Helper function to calculate a complex matrix-\/vector product. Assumes the matr
 
 
 
-Definition at line 2138 of file complex\+\_\+smoother.\+h.
+Definition at line 2140 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -226,7 +226,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line 1821 of file complex\+\_\+smoother.\+h.
+Definition at line 1815 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -245,7 +245,7 @@ Helper function\+: Generate a plane rotation. This is done by finding the value 
 
 \[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \] where $ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} $. The values of a and b are given by\+: The values of dx and dy are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. We also check to see that sn is always a real (nonnegative) number. See pp.\+193-\/194 for an explanation. 
 
-Definition at line 2395 of file complex\+\_\+smoother.\+h.
+Definition at line 2399 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -268,7 +268,7 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line 2086 of file complex\+\_\+smoother.\+h.
+Definition at line 2083 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -287,7 +287,7 @@ Broken assignment operator.
 
 
 
-Definition at line 1815 of file complex\+\_\+smoother.\+h.
+Definition at line 1809 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -310,7 +310,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 1830 of file complex\+\_\+smoother.\+h.
+Definition at line 1824 of file complex\+\_\+smoother.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ad6937ea7f72719eb9e33c28c002fa380}\label{classoomph_1_1HelmholtzGMRESMG_ad6937ea7f72719eb9e33c28c002fa380}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!resolve@{resolve}}
@@ -329,7 +329,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line 2052 of file complex\+\_\+smoother.\+h.
+Definition at line 2050 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -348,7 +348,7 @@ Set left preconditioning (the default)
 
 
 
-Definition at line 2092 of file complex\+\_\+smoother.\+h.
+Definition at line 2089 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -390,7 +390,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 1848 of file complex\+\_\+smoother.\+h.
+Definition at line 1842 of file complex\+\_\+smoother.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a3e6405af2506c7b789ba3208d0a9cf6d}\label{classoomph_1_1HelmholtzGMRESMG_a3e6405af2506c7b789ba3208d0a9cf6d}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!solve@{solve}}
@@ -409,7 +409,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line 2022 of file complex\+\_\+smoother.\+h.
+Definition at line 2017 of file complex\+\_\+smoother.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a14ba0370fbc782fa7ab9364a035a7513}\label{classoomph_1_1HelmholtzGMRESMG_a14ba0370fbc782fa7ab9364a035a7513}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!solve@{solve}}
@@ -428,7 +428,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Definition at line 2044 of file complex\+\_\+smoother.\+h.
+Definition at line 2040 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -455,7 +455,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df
 
 
 
-Definition at line 1866 of file complex\+\_\+smoother.\+h.
+Definition at line 1860 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -472,10 +472,9 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M
 
 General interface to solve function. 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. based on the algorithm presented in Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, Barrett, Berry et al, S\+I\+AM, 2006 and the implementation in the I\+M\+L++ library \+: \href{http://math.nist.gov/iml++/}{\texttt{ http\+://math.\+nist.\+gov/iml++/}} ~\newline
- 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. based on the algorithm presented in Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, Barrett, Berry et al, S\+I\+AM, 2006 and the implementation in the I\+M\+L++ library \+: \href{http://math.nist.gov/iml++/}{\texttt{ http\+://math.\+nist.\+gov/iml++/}} 
 
-Definition at line 2535 of file complex\+\_\+smoother.\+h.
+Definition at line 2539 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -485,12 +484,12 @@ References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::bu
 
 Referenced by oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::resolve(), and oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
 
-\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}\label{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a7c1c50d1a0a7bdd8a3c5dc9bb777e9b3}\label{classoomph_1_1HelmholtzGMRESMG_a7c1c50d1a0a7bdd8a3c5dc9bb777e9b3}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!update@{update}}
 \index{update@{update}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
 {\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&}]{hessenberg,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$$>$ \&}]{hessenberg,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$$>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -498,7 +497,7 @@ Helper function to update the result vector.
 
 
 
-Definition at line 2236 of file complex\+\_\+smoother.\+h.
+Definition at line 2238 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -520,7 +519,7 @@ Number of iterations taken.
 
 
 
-Definition at line 2503 of file complex\+\_\+smoother.\+h.
+Definition at line 2508 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -539,7 +538,7 @@ Referenced by oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\
 
 
 
-Definition at line 2506 of file complex\+\_\+smoother.\+h.
+Definition at line 2511 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -558,7 +557,7 @@ Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be delet
 
 
 
-Definition at line 2514 of file complex\+\_\+smoother.\+h.
+Definition at line 2519 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -577,7 +576,7 @@ boolean indicating use of left hand preconditioning (if true) or right hand prec
 
 
 
-Definition at line 2518 of file complex\+\_\+smoother.\+h.
+Definition at line 2523 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -596,7 +595,7 @@ Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setu
 
 
 
-Definition at line 2510 of file complex\+\_\+smoother.\+h.
+Definition at line 2515 of file complex\+\_\+smoother.\+h.
 
 
 

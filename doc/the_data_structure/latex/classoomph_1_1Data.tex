@@ -23,8 +23,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1Data_a409e3140829def2b1e738a24cc1f48
 \mbox{\hyperlink{classoomph_1_1Data_acbecfbd1dd3af51da9facdd897b64e74}{Data}} ()
 \begin{DoxyCompactList}\small\item\em Default\+: Just set pointer to (steady) timestepper. No storage for values is allocated. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Data_a352ab3876876780d366866704a29dbb0}{Data}} (const unsigned \&initial\+\_\+n\+\_\+value)
-\begin{DoxyCompactList}\small\item\em Default constructor for steady problems\+: assign memory for initial\+\_\+n\+\_\+value values. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Default constructor for steady problems\+: assign memory for initial\+\_\+n\+\_\+value values. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Data_afe56d22d0dba308e33191e922993c5ee}{Data}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}{time\+\_\+stepper\+\_\+pt}}, const unsigned \&initial\+\_\+n\+\_\+value, const bool \&allocate\+\_\+storage=true)
 \begin{DoxyCompactList}\small\item\em Constructor for unsteady problems\+: assign memory for initial\+\_\+n\+\_\+value values and any memory required by the Timestepper for the storage of history values. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Data_a196816030b33f26c011cb45bce2f6897}{Data}} (const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&data)
@@ -37,7 +36,7 @@ void \mbox{\hyperlink{classoomph_1_1Data_acd22fabfb127ff4ea37a5bc60c61b414}{set\
 \begin{DoxyCompactList}\small\item\em Set a new timestepper by resizing the appropriate storage. If already assigned the equation numbering will not be altered. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\& \mbox{\hyperlink{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}{time\+\_\+stepper\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to the timestepper. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1Data_a1c862c3ff907f78f2c1da03f753ca5f4}{time\+\_\+stepper\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1Data_acd3e933171913b8cf3f4f0c4020ad449}{time\+\_\+stepper\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return the pointer to the timestepper (const version). \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}{is\+\_\+a\+\_\+copy}} () const
 \begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the \mbox{\hyperlink{classoomph_1_1Data}{Data}} objact contains any copied values. A base \mbox{\hyperlink{classoomph_1_1Data}{Data}} object can never be a copy so the default implementation always returns false. \end{DoxyCompactList}\item 
@@ -96,8 +95,7 @@ void \mbox{\hyperlink{classoomph_1_1Data_a5e6a0d030f5e3230908f8a5eaf607082}{unco
 bool \mbox{\hyperlink{classoomph_1_1Data_ac3169455e25c1dc8fd2d3de458c5e101}{is\+\_\+constrained}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Test whether the i-\/th variable is constrained (1\+: true; 0\+: false). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Data_ae43b63b56afb8574db6da68f85802f80}{self\+\_\+test}} ()
-\begin{DoxyCompactList}\small\item\em Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}} () const
 \begin{DoxyCompactList}\small\item\em Return number of values stored in data object (incl pinned ones). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}} () const
@@ -129,13 +127,13 @@ virtual void \mbox{\hyperlink{classoomph_1_1Data_ae958e52df6ede2a08f957db4ee685c
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static long \mbox{\hyperlink{classoomph_1_1Data_a3f351624d334f1babf55170d539b36fa}{Is\+\_\+pinned}} =-\/1
+static long \mbox{\hyperlink{classoomph_1_1Data_a3f351624d334f1babf55170d539b36fa}{Is\+\_\+pinned}} = -\/1
 \begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to indicate that the value is pinned. \end{DoxyCompactList}\item 
-static long \mbox{\hyperlink{classoomph_1_1Data_ad83f76cbcd76d8ed96aca53dd04d5abf}{Is\+\_\+segregated\+\_\+solve\+\_\+pinned}} =-\/3
+static long \mbox{\hyperlink{classoomph_1_1Data_ad83f76cbcd76d8ed96aca53dd04d5abf}{Is\+\_\+segregated\+\_\+solve\+\_\+pinned}} = -\/3
 \begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to indicate that the value is pinned, but only for the duration of a segregated solve. \end{DoxyCompactList}\item 
-static long \mbox{\hyperlink{classoomph_1_1Data_ac56011da9a923069793ecc3cb54f5e20}{Is\+\_\+unclassified}} =-\/10
+static long \mbox{\hyperlink{classoomph_1_1Data_ac56011da9a923069793ecc3cb54f5e20}{Is\+\_\+unclassified}} = -\/10
 \begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to denote a value that hasn\textquotesingle{}t been classified as pinned or free. \end{DoxyCompactList}\item 
-static long \mbox{\hyperlink{classoomph_1_1Data_a71225ddbb54744f6fe662af5a5520ab8}{Is\+\_\+constrained}} =-\/2
+static long \mbox{\hyperlink{classoomph_1_1Data_a71225ddbb54744f6fe662af5a5520ab8}{Is\+\_\+constrained}} = -\/2
 \begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to indicate that the value is constrained because it is associated with non-\/conforming element boundaries --- a hanging node --- (and is therefore pinned) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -152,7 +150,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1Data_a7e8dbdf96bf78658e85c1d7f81ff10dd}{
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ \mbox{\hyperlink{classoomph_1_1Data_a05936a16f5fca1612ad3f47b4e87d267}{Default\+\_\+static\+\_\+time\+\_\+stepper\+\_\+pt}} =new \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$0$>$()
+static \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ \mbox{\hyperlink{classoomph_1_1Data_a05936a16f5fca1612ad3f47b4e87d267}{Default\+\_\+static\+\_\+time\+\_\+stepper\+\_\+pt}} = new \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$0$>$()
 \begin{DoxyCompactList}\small\item\em Default (static) timestepper used in steady problems. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -169,11 +167,9 @@ void \mbox{\hyperlink{classoomph_1_1Data_a3fd7b4d0cc8ac713572f04ffda5a92c7}{remo
 \begin{DoxyCompactItemize}
 \item 
 double $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1Data_aa69aab29cca43c9be329904807203ef1}{Value}}
-\begin{DoxyCompactList}\small\item\em C-\/style array of pointers to data values and possible history values. The data must be ordered in such a way that Value\mbox{[}i\mbox{]}\mbox{[}t\mbox{]} gives the i-\/th data value at the time value t. The ordering is chosen so that all the time levels of a particular value can be access from a single pointer to a double. This is required for copying/hijacking functionality. The data should be accessed by using the member functions value(time,ival) and set\+\_\+value(time,ival,value), where time=0\+: present. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style array of pointers to data values and possible history values. The data must be ordered in such a way that Value\mbox{[}i\mbox{]}\mbox{[}t\mbox{]} gives the i-\/th data value at the time value t. The ordering is chosen so that all the time levels of a particular value can be access from a single pointer to a double. This is required for copying/hijacking functionality. The data should be accessed by using the member functions value(time,ival) and set\+\_\+value(time,ival,value), where time=0\+: present. \end{DoxyCompactList}\item 
 long $\ast$ \mbox{\hyperlink{classoomph_1_1Data_a1863d191b66fc4b22fa282ef357c0513}{Eqn\+\_\+number}}
-\begin{DoxyCompactList}\small\item\em C-\/style array of pointers to the (global) equation numbers of the values. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style array of pointers to the (global) equation numbers of the values. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ \mbox{\hyperlink{classoomph_1_1Data_a63442f4cabaff13e7116e0b80d350d92}{Time\+\_\+stepper\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to a Timestepper. The inclusion of a Timestepper pointer in the \mbox{\hyperlink{classoomph_1_1Data}{Data}} class, ensures that time-\/derivatives can be calculated and storage can be managed at the low (\mbox{\hyperlink{classoomph_1_1Data}{Data}}) level. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Data_a379d45fb0d0170fcdec06dbbc97a504d}{Nvalue}}
@@ -200,8 +196,7 @@ std\+::ostream \& \mbox{\hyperlink{classoomph_1_1Data_abad7fa6bf4988e5a0336ba3ce
 \doxysubsection{Detailed Description}
 A class that represents a collection of data; each \mbox{\hyperlink{classoomph_1_1Data}{Data}} object may contain many different individual values, as would be natural in non-\/scalar problems. \mbox{\hyperlink{classoomph_1_1Data}{Data}} provides storage for auxiliary `history' values that are used by \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} objects to calculate the time derivatives of the stored data and also stores a pointer to the appropriate \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} object. In addition, an associated (global) equation number is stored for each value. 
 
-The \mbox{\hyperlink{classoomph_1_1Data}{Data}} class permits copies of the stored data values and equation numbers into another \mbox{\hyperlink{classoomph_1_1Data}{Data}} object using the \mbox{\hyperlink{classoomph_1_1Data_a57889a9db7ca009434f0268173fcf3f8}{copy()}} function. Shallow (pointer based) copies of the values can be obtained by using specific derived classes. In such cases pointers to the objects that contain the pointer-\/based copies should be stored in the original \mbox{\hyperlink{classoomph_1_1Data}{Data}} class (in the array Copy\+\_\+of\+\_\+data\+\_\+pt) so that resize and destruction operations can be performed safely. ~\newline
- 
+The \mbox{\hyperlink{classoomph_1_1Data}{Data}} class permits copies of the stored data values and equation numbers into another \mbox{\hyperlink{classoomph_1_1Data}{Data}} object using the \mbox{\hyperlink{classoomph_1_1Data_a57889a9db7ca009434f0268173fcf3f8}{copy()}} function. Shallow (pointer based) copies of the values can be obtained by using specific derived classes. In such cases pointers to the objects that contain the pointer-\/based copies should be stored in the original \mbox{\hyperlink{classoomph_1_1Data}{Data}} class (in the array Copy\+\_\+of\+\_\+data\+\_\+pt) so that resize and destruction operations can be performed safely. 
 
 Definition at line 85 of file nodes.\+h.
 
@@ -222,7 +217,7 @@ Default constructor.
 
 Default constructor for steady problems. Memory is assigned for a given number of values, which are assumed to be free (not pinned) Constructor for unsteady problems. Memory is assigned for a given number of values; and the additional storage required by the Timestepper. The values are assumed to be free (not pinned). \mbox{\hyperlink{classoomph_1_1Data}{Data}} output operator\+: output equation numbers and values at all times, along with any extra information stored for the timestepper. 
 
-Definition at line 231 of file nodes.\+cc.
+Definition at line 237 of file nodes.\+cc.
 
 
 
@@ -236,8 +231,7 @@ Referenced by oomph\+::\+Solid\+Node\+::\+Solid\+Node().
 
 
 
-Default constructor for steady problems\+: assign memory for initial\+\_\+n\+\_\+value values. ~\newline
- 
+Default constructor for steady problems\+: assign memory for initial\+\_\+n\+\_\+value values. 
 
 \mbox{\Hypertarget{classoomph_1_1Data_afe56d22d0dba308e33191e922993c5ee}\label{classoomph_1_1Data_afe56d22d0dba308e33191e922993c5ee}} 
 \index{oomph::Data@{oomph::Data}!Data@{Data}}
@@ -261,7 +255,7 @@ Broken copy constructor.
 
 
 
-Definition at line 224 of file nodes.\+h.
+Definition at line 220 of file nodes.\+h.
 
 
 
@@ -279,7 +273,7 @@ Destructor, deallocates memory assigned for data.
 
 Virtual destructor, deallocates memory assigned for data. 
 
-Definition at line 450 of file nodes.\+cc.
+Definition at line 483 of file nodes.\+cc.
 
 
 
@@ -300,7 +294,7 @@ Add the pointer data\+\_\+pt to the array Copy\+\_\+of\+\_\+data\+\_\+pt. This s
 
 Add the pointer data\+\_\+pt to the internal storage used to keep track of copies of the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
 
-Definition at line 80 of file nodes.\+cc.
+Definition at line 76 of file nodes.\+cc.
 
 
 
@@ -326,7 +320,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_ad875a778d7d3bc32a847d
 
 
 
-Definition at line 1177 of file nodes.\+cc.
+Definition at line 1236 of file nodes.\+cc.
 
 
 
@@ -334,7 +328,7 @@ References Eqn\+\_\+number, eqn\+\_\+number\+\_\+pt(), i, and nvalue().
 
 
 
-Referenced by oomph\+::\+Solid\+Node\+::add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), and oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector().
+Referenced by oomph\+::\+Solid\+Node\+::add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), and oomph\+::\+Problem\+::copy\+\_\+haloed\+\_\+eqn\+\_\+numbers\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1Data_a314ae9723424aa30d1275ab213d38936}\label{classoomph_1_1Data_a314ae9723424aa30d1275ab213d38936}} 
 \index{oomph::Data@{oomph::Data}!add\_value\_pt\_to\_map@{add\_value\_pt\_to\_map}}
@@ -352,7 +346,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a5f40df8654ff95575da7a
 
 
 
-Definition at line 1037 of file nodes.\+cc.
+Definition at line 1089 of file nodes.\+cc.
 
 
 
@@ -378,7 +372,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a20562ea5133c1150b6999
 
 
 
-Definition at line 1061 of file nodes.\+cc.
+Definition at line 1112 of file nodes.\+cc.
 
 
 
@@ -410,7 +404,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_ae0f41fc05338192c3e9d4
 
 
 
-Definition at line 857 of file nodes.\+cc.
+Definition at line 896 of file nodes.\+cc.
 
 
 
@@ -436,7 +430,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1CopiedData_a675b1811d9c6b1ba1ce4
 
 
 
-Definition at line 175 of file nodes.\+cc.
+Definition at line 176 of file nodes.\+cc.
 
 
 
@@ -454,7 +448,7 @@ Constrain the i-\/th stored variable when making hanging data If the data is alr
 
 
 
-Definition at line 412 of file nodes.\+h.
+Definition at line 438 of file nodes.\+h.
 
 
 
@@ -476,7 +470,7 @@ Constrain all the stored variables when the data is made hanging.
 
 
 
-Definition at line 421 of file nodes.\+h.
+Definition at line 457 of file nodes.\+h.
 
 
 
@@ -498,7 +492,7 @@ Copy \mbox{\hyperlink{classoomph_1_1Data}{Data}} values from specified \mbox{\hy
 
 
 
-Definition at line 557 of file nodes.\+cc.
+Definition at line 601 of file nodes.\+cc.
 
 
 
@@ -520,7 +514,7 @@ Delete all storage allocated by the \mbox{\hyperlink{classoomph_1_1Data}{Data}} 
 
 Delete all the storage allocated by the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and set its pointers to N\+U\+LL 
 
-Definition at line 186 of file nodes.\+cc.
+Definition at line 187 of file nodes.\+cc.
 
 
 
@@ -546,7 +540,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a93ba15b4ab3ccd1d00301
 
 
 
-Definition at line 901 of file nodes.\+cc.
+Definition at line 939 of file nodes.\+cc.
 
 
 
@@ -568,7 +562,7 @@ Check whether the pointer parameter\+\_\+pt addresses internal data values.
 
 If pointer parameter\+\_\+pt addresses internal data values then return return true, otherwise return false 
 
-Definition at line 529 of file nodes.\+cc.
+Definition at line 568 of file nodes.\+cc.
 
 
 
@@ -590,7 +584,7 @@ Dump the data object to a file.
 
 Dump data object to a file. 
 
-Definition at line 604 of file nodes.\+cc.
+Definition at line 645 of file nodes.\+cc.
 
 
 
@@ -612,7 +606,7 @@ Return the equation number of the i-\/th stored variable.
 
 
 
-Definition at line 361 of file nodes.\+h.
+Definition at line 373 of file nodes.\+h.
 
 
 
@@ -620,7 +614,7 @@ References Eqn\+\_\+number, i, and range\+\_\+check().
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+N\+T, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::add\+\_\+element\+\_\+contribution\+\_\+to\+\_\+aux\+\_\+integral(), add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers(), constrain(), oomph\+::\+Added\+Main\+Numbering\+Lookup\+::construct\+\_\+added\+\_\+to\+\_\+main\+\_\+mapping(), describe\+\_\+dofs(), oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+N\+T, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Problem\+::get\+\_\+dofs(), pin(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), oomph\+::\+Solid\+Node\+::position\+\_\+eqn\+\_\+number(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset\+\_\+pin\+\_\+status(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::reset\+\_\+pin\+\_\+status(), oomph\+::\+Problem\+::set\+\_\+dofs(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::set\+\_\+self\+\_\+test\+\_\+vector(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+Problem\+::synchronise\+\_\+eqn\+\_\+numbers(), unconstrain(), and unpin().
+Referenced by oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+N\+T, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::add\+\_\+element\+\_\+contribution\+\_\+to\+\_\+aux\+\_\+integral(), add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+External\+Element\+::assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers(), constrain(), oomph\+::\+Added\+Main\+Numbering\+Lookup\+::construct\+\_\+added\+\_\+to\+\_\+main\+\_\+mapping(), describe\+\_\+dofs(), oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+N\+T, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Problem\+::get\+\_\+dofs(), pin(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), oomph\+::\+Solid\+Node\+::position\+\_\+eqn\+\_\+number(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset\+\_\+pin\+\_\+status(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::reset\+\_\+pin\+\_\+status(), oomph\+::\+Problem\+::set\+\_\+dofs(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::set\+\_\+self\+\_\+test\+\_\+vector(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+Problem\+::synchronise\+\_\+eqn\+\_\+numbers(), unconstrain(), and unpin().
 
 \mbox{\Hypertarget{classoomph_1_1Data_a0181614ab39e3b02d28acba40bb33cb2}\label{classoomph_1_1Data_a0181614ab39e3b02d28acba40bb33cb2}} 
 \index{oomph::Data@{oomph::Data}!eqn\_number@{eqn\_number}}
@@ -634,7 +628,7 @@ Return the equation number of the i-\/th stored variable.
 
 
 
-Definition at line 370 of file nodes.\+h.
+Definition at line 382 of file nodes.\+h.
 
 
 
@@ -652,7 +646,7 @@ Return the pointer to the equation number of the i-\/th stored variable.
 
 
 
-Definition at line 352 of file nodes.\+h.
+Definition at line 364 of file nodes.\+h.
 
 
 
@@ -660,7 +654,7 @@ References Eqn\+\_\+number, i, and range\+\_\+check().
 
 
 
-Referenced by add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::hijack\+\_\+nodal\+\_\+position\+\_\+value(), read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), and oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::set\+\_\+volume\+\_\+constraint\+\_\+element().
+Referenced by add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::hijack\+\_\+nodal\+\_\+position\+\_\+value(), oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::hijack\+\_\+nodal\+\_\+spine\+\_\+value(), read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), and oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::set\+\_\+volume\+\_\+constraint\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}\label{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}} 
 \index{oomph::Data@{oomph::Data}!is\_a\_copy@{is\_a\_copy}}
@@ -678,7 +672,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1CopiedData_ac76cb0c286daa39b501b
 
 
 
-Definition at line 251 of file nodes.\+h.
+Definition at line 259 of file nodes.\+h.
 
 
 
@@ -700,7 +694,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1CopiedData_a80b677702e0cb94c5356
 
 
 
-Definition at line 256 of file nodes.\+h.
+Definition at line 267 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Data_ac3169455e25c1dc8fd2d3de458c5e101}\label{classoomph_1_1Data_ac3169455e25c1dc8fd2d3de458c5e101}} 
 \index{oomph::Data@{oomph::Data}!is\_constrained@{is\_constrained}}
@@ -714,7 +708,7 @@ Test whether the i-\/th variable is constrained (1\+: true; 0\+: false).
 
 
 
-Definition at line 435 of file nodes.\+h.
+Definition at line 478 of file nodes.\+h.
 
 
 
@@ -736,7 +730,7 @@ Is this \mbox{\hyperlink{classoomph_1_1Data}{Data}} a halo?
 
 
 
-Definition at line 486 of file nodes.\+h.
+Definition at line 538 of file nodes.\+h.
 
 
 
@@ -758,7 +752,7 @@ Test whether the i-\/th variable is pinned (1\+: true; 0\+: false).
 
 
 
-Definition at line 399 of file nodes.\+h.
+Definition at line 423 of file nodes.\+h.
 
 
 
@@ -780,7 +774,7 @@ Test whether the i-\/th variable is temporaily pinned for a segregated solve.
 
 
 
-Definition at line 404 of file nodes.\+h.
+Definition at line 430 of file nodes.\+h.
 
 
 
@@ -802,7 +796,7 @@ ID of processor ID that holds non-\/halo counterpart of halo node; negative if n
 
 
 
-Definition at line 490 of file nodes.\+h.
+Definition at line 545 of file nodes.\+h.
 
 
 
@@ -824,7 +818,7 @@ Return total number of doubles stored per value to record time history of each v
 
 Return the total number of doubles stored per value to record the time history of ecah value. The information is read from the time stepper 
 
-Definition at line 843 of file nodes.\+cc.
+Definition at line 879 of file nodes.\+cc.
 
 
 
@@ -832,7 +826,7 @@ References oomph\+::\+Time\+Stepper\+::ntstorage(), and Time\+\_\+stepper\+\_\+p
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), add\+\_\+values\+\_\+to\+\_\+vector(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), copy(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+value(), dump(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux(), oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Linear\+Elasticity\+Element$<$ L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Poisson\+Element$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ A\+D\+R\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+M\+E\+T\+R\+I\+C\+\_\+\+P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms(), oomph\+::operator$<$$<$(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), range\+\_\+check(), read(), read\+\_\+values\+\_\+from\+\_\+vector(), resize(), set\+\_\+time\+\_\+stepper(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+nonhanging\+\_\+nodes().
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), add\+\_\+values\+\_\+to\+\_\+vector(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), copy(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+value(), dump(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux(), oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Linear\+Elasticity\+Element$<$ L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Poisson\+Element$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ A\+D\+R\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+M\+E\+T\+R\+I\+C\+\_\+\+P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms(), oomph\+::operator$<$$<$(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), range\+\_\+check(), read(), read\+\_\+values\+\_\+from\+\_\+vector(), resize(), set\+\_\+time\+\_\+stepper(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+nonhanging\+\_\+nodes().
 
 \mbox{\Hypertarget{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}\label{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}} 
 \index{oomph::Data@{oomph::Data}!nvalue@{nvalue}}
@@ -846,7 +840,7 @@ Return number of values stored in data object (incl pinned ones).
 
 
 
-Definition at line 444 of file nodes.\+h.
+Definition at line 489 of file nodes.\+h.
 
 
 
@@ -868,7 +862,7 @@ Broken assignment operator.
 
 
 
-Definition at line 227 of file nodes.\+h.
+Definition at line 226 of file nodes.\+h.
 
 
 
@@ -886,7 +880,7 @@ Pin the i-\/th stored variable.
 
 
 
-Definition at line 379 of file nodes.\+h.
+Definition at line 391 of file nodes.\+h.
 
 
 
@@ -894,7 +888,7 @@ References eqn\+\_\+number(), i, and Is\+\_\+pinned.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Polar\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Projection\+Problem$<$ P\+R\+O\+J\+E\+C\+T\+A\+B\+L\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+spines(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::pin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate(), oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+edge\+\_\+value(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::pin\+\_\+real\+\_\+or\+\_\+imag(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::pin\+\_\+rotation\+\_\+angle(), oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+smoothed\+\_\+vorticity(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+superfluous\+\_\+darcy\+\_\+dofs(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Solid\+I\+C\+Problem\+::setup\+\_\+problem(), oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::use\+\_\+linear\+\_\+bending\+\_\+model(), oomph\+::\+Foepplvon\+Karman\+Equations\+::use\+\_\+linear\+\_\+bending\+\_\+model(), oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::use\+\_\+linear\+\_\+bending\+\_\+model(), and oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh().
+Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Polar\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Projection\+Problem$<$ P\+R\+O\+J\+E\+C\+T\+A\+B\+L\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+spines(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::pin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate(), oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+edge\+\_\+value(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::pin\+\_\+real\+\_\+or\+\_\+imag(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::pin\+\_\+rotation\+\_\+angle(), oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+smoothed\+\_\+vorticity(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+superfluous\+\_\+darcy\+\_\+dofs(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Solid\+I\+C\+Problem\+::setup\+\_\+problem(), oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::use\+\_\+linear\+\_\+bending\+\_\+model(), oomph\+::\+Foepplvon\+Karman\+Equations\+::use\+\_\+linear\+\_\+bending\+\_\+model(), oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::use\+\_\+linear\+\_\+bending\+\_\+model(), and oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1Data_a16277ea5b41cd9b09739b21a379d7eb4}\label{classoomph_1_1Data_a16277ea5b41cd9b09739b21a379d7eb4}} 
 \index{oomph::Data@{oomph::Data}!pin\_all@{pin\_all}}
@@ -908,7 +902,7 @@ Pin all the stored variables.
 
 
 
-Definition at line 385 of file nodes.\+h.
+Definition at line 403 of file nodes.\+h.
 
 
 
@@ -930,7 +924,7 @@ Check that the arguments are within the range of the stored data values and time
 
 Private function to check that the arguments are within the range of the stored data values and timesteps. 
 
-Definition at line 48 of file nodes.\+cc.
+Definition at line 47 of file nodes.\+cc.
 
 
 
@@ -952,7 +946,7 @@ Read data object from a file.
 
 Read data object from file. 
 
-Definition at line 631 of file nodes.\+cc.
+Definition at line 672 of file nodes.\+cc.
 
 
 
@@ -978,7 +972,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a38bede9e51c7d6355969d
 
 
 
-Definition at line 1212 of file nodes.\+cc.
+Definition at line 1274 of file nodes.\+cc.
 
 
 
@@ -986,7 +980,7 @@ References Eqn\+\_\+number, eqn\+\_\+number\+\_\+pt(), i, and nvalue().
 
 
 
-Referenced by oomph\+::\+Solid\+Node\+::read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), and oomph\+::\+Generalised\+Element\+::read\+\_\+internal\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector().
+Referenced by oomph\+::\+Problem\+::copy\+\_\+haloed\+\_\+eqn\+\_\+numbers\+\_\+helper(), oomph\+::\+Solid\+Node\+::read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), and oomph\+::\+Generalised\+Element\+::read\+\_\+internal\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector().
 
 \mbox{\Hypertarget{classoomph_1_1Data_a6b8bc02debd1bce8e1bfc68cd9a54695}\label{classoomph_1_1Data_a6b8bc02debd1bce8e1bfc68cd9a54695}} 
 \index{oomph::Data@{oomph::Data}!read\_values\_from\_vector@{read\_values\_from\_vector}}
@@ -1004,7 +998,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a8884dfe9e2808883e90c7
 
 
 
-Definition at line 1125 of file nodes.\+cc.
+Definition at line 1182 of file nodes.\+cc.
 
 
 
@@ -1026,7 +1020,7 @@ Remove the pointer data\+\_\+pt from the array Copy\+\_\+of\+\_\+data\+\_\+pt. T
 
 Remove the pointer data\+\_\+pt from the internal storage used to keep track of copies 
 
-Definition at line 104 of file nodes.\+cc.
+Definition at line 102 of file nodes.\+cc.
 
 
 
@@ -1046,14 +1040,13 @@ Referenced by oomph\+::\+Copied\+Data\+::$\sim$\+Copied\+Data(), and oomph\+::\+
 
 Helper function that should be overloaded in derived classes that can contain copies of \mbox{\hyperlink{classoomph_1_1Data}{Data}}. The function must reset the internal pointers to the copied data. This is used when resizing data to ensure that all the pointers remain valid. The default implementation throws an error beacause \mbox{\hyperlink{classoomph_1_1Data}{Data}} cannot be a copy. 
 
-Helper function that should be overloaded in classes that contain copies of \mbox{\hyperlink{classoomph_1_1Data}{Data}}. The function must reset the internal pointers to the copied data. This is used when resizing data to ensure that all the pointers remain valid. The base \mbox{\hyperlink{classoomph_1_1Data}{Data}} class cannot be a copy, so throw an error ~\newline
- 
+Helper function that should be overloaded in classes that contain copies of \mbox{\hyperlink{classoomph_1_1Data}{Data}}. The function must reset the internal pointers to the copied data. This is used when resizing data to ensure that all the pointers remain valid. The base \mbox{\hyperlink{classoomph_1_1Data}{Data}} class cannot be a copy, so throw an error. 
 
 Reimplemented in \mbox{\hyperlink{classoomph_1_1CopiedData_a7e29b2bb1cf0ebad16afac2e5d7342d8}{oomph\+::\+Copied\+Data}}, and \mbox{\hyperlink{classoomph_1_1HijackedData_ae8253ed64e04771ea3d45c3d84d614d7}{oomph\+::\+Hijacked\+Data}}.
 
 
 
-Definition at line 161 of file nodes.\+cc.
+Definition at line 162 of file nodes.\+cc.
 
 
 
@@ -1075,7 +1068,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1Node_ae6598da29d403889020ccd47a2
 
 
 
-Definition at line 957 of file nodes.\+cc.
+Definition at line 1002 of file nodes.\+cc.
 
 
 
@@ -1093,13 +1086,11 @@ Referenced by oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Rav
 
 
 
-Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. ~\newline
- 
+Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. 
 
-Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. ~\newline
- 
+Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. 
 
-Definition at line 926 of file nodes.\+cc.
+Definition at line 965 of file nodes.\+cc.
 
 
 
@@ -1121,7 +1112,7 @@ Label the node as halo and specify processor that holds non-\/halo counterpart.
 
 
 
-Definition at line 477 of file nodes.\+h.
+Definition at line 526 of file nodes.\+h.
 
 
 
@@ -1143,7 +1134,7 @@ Label the node as not being a halo.
 
 
 
-Definition at line 483 of file nodes.\+h.
+Definition at line 532 of file nodes.\+h.
 
 
 
@@ -1165,7 +1156,7 @@ Set a new timestepper by resizing the appropriate storage. If already assigned t
 
 Set a new \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} be resizing the appropriate storage. Equation numbering (if already performed) will be unaffected. The current (zero) values will be unaffected, but all other entries will be set to zero. 
 
-Definition at line 388 of file nodes.\+cc.
+Definition at line 406 of file nodes.\+cc.
 
 
 
@@ -1187,7 +1178,7 @@ Set the i-\/th stored data value to specified value. The only reason that we req
 
 
 
-Definition at line 263 of file nodes.\+h.
+Definition at line 277 of file nodes.\+h.
 
 
 
@@ -1195,7 +1186,7 @@ References i, range\+\_\+check(), and Value.
 
 
 
-Referenced by oomph\+::\+Womersley\+Problem$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+F\+S\+I\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall(), oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), copy(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::copy\+\_\+efunction\+\_\+to\+\_\+normalisation(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Foepplvon\+Karman\+Volume\+Constraint\+Element$<$ E\+L\+E\+M\+E\+N\+T, M\+E\+S\+H $>$\+::\+Foepplvon\+Karman\+Volume\+Constraint\+Element(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ D\+I\+M $>$\+::\+Impose\+Flux\+For\+Womersley\+Element(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+edge\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), read(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::recover\+\_\+vorticity(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), oomph\+::\+Problem\+::set\+\_\+dofs(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+p\+\_\+value(), oomph\+::\+Problem\+::set\+\_\+pinned\+\_\+values\+\_\+to\+\_\+zero(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+edge(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+edge(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+internal(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+internal(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::set\+\_\+solid\+\_\+p(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::set\+\_\+solid\+\_\+p(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::set\+\_\+solid\+\_\+p(), oomph\+::\+I\+M\+R\+Base\+::shift\+\_\+time\+\_\+values(), oomph\+::\+T\+R\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), and oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values().
+Referenced by oomph\+::\+Womersley\+Problem$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+F\+S\+I\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall(), oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), copy(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::copy\+\_\+efunction\+\_\+to\+\_\+normalisation(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Foepplvon\+Karman\+Volume\+Constraint\+Element$<$ E\+L\+E\+M\+E\+N\+T, M\+E\+S\+H $>$\+::\+Foepplvon\+Karman\+Volume\+Constraint\+Element(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ D\+I\+M $>$\+::\+Impose\+Flux\+For\+Womersley\+Element(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+edge\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), read(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Vorticity\+Smoother$<$ E\+L\+E\+M\+E\+N\+T $>$\+::recover\+\_\+vorticity(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), oomph\+::\+Problem\+::set\+\_\+dofs(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+p\+\_\+value(), oomph\+::\+Problem\+::set\+\_\+pinned\+\_\+values\+\_\+to\+\_\+zero(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+edge(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+edge(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+internal(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+internal(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::set\+\_\+solid\+\_\+p(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::set\+\_\+solid\+\_\+p(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::set\+\_\+solid\+\_\+p(), oomph\+::\+I\+M\+R\+Base\+::shift\+\_\+time\+\_\+values(), oomph\+::\+T\+R\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), and oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values().
 
 \mbox{\Hypertarget{classoomph_1_1Data_a39c1ab8b0a45af29101c606b965bed07}\label{classoomph_1_1Data_a39c1ab8b0a45af29101c606b965bed07}} 
 \index{oomph::Data@{oomph::Data}!set\_value@{set\_value}}
@@ -1209,7 +1200,7 @@ Set the t-\/th history value of the i-\/th stored data value to specified value.
 
 
 
-Definition at line 273 of file nodes.\+h.
+Definition at line 287 of file nodes.\+h.
 
 
 
@@ -1227,7 +1218,7 @@ Return the pointer to the timestepper.
 
 
 
-Definition at line 242 of file nodes.\+h.
+Definition at line 244 of file nodes.\+h.
 
 
 
@@ -1235,13 +1226,13 @@ References Time\+\_\+stepper\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Mesh\+::convert\+\_\+to\+\_\+boundary\+\_\+node(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+lin\+\_\+wave(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+linear\+\_\+elasticity(), oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::dc\+\_\+dt\+\_\+adv\+\_\+diff\+\_\+react(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::dcdt\+\_\+surface(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::dposition\+\_\+dt(), oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::dposition\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::du\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::du\+\_\+dt(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+adv\+\_\+diff(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Generalised\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+cons\+\_\+adv\+\_\+diff(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+lin\+\_\+wave(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+pnst(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+nst(), oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat(), oomph\+::\+Womersley\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+womersley(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic(), oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff\+\_\+react(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::output\+\_\+centre\+\_\+of\+\_\+gravity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::scalar\+\_\+value\+\_\+paraview(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), and set\+\_\+time\+\_\+stepper().
+Referenced by oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Mesh\+::convert\+\_\+to\+\_\+boundary\+\_\+node(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+lin\+\_\+wave(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+linear\+\_\+elasticity(), oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::dc\+\_\+dt\+\_\+adv\+\_\+diff\+\_\+react(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::dcdt\+\_\+surface(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::dposition\+\_\+dt(), oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::dposition\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::du\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::du\+\_\+dt(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+adv\+\_\+diff(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Generalised\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+cons\+\_\+adv\+\_\+diff(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+lin\+\_\+wave(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+pnst(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+nst(), oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat(), oomph\+::\+Womersley\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+womersley(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic(), oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff\+\_\+react(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::output\+\_\+centre\+\_\+of\+\_\+gravity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::scalar\+\_\+value\+\_\+paraview(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), and set\+\_\+time\+\_\+stepper().
 
-\mbox{\Hypertarget{classoomph_1_1Data_a1c862c3ff907f78f2c1da03f753ca5f4}\label{classoomph_1_1Data_a1c862c3ff907f78f2c1da03f753ca5f4}} 
+\mbox{\Hypertarget{classoomph_1_1Data_acd3e933171913b8cf3f4f0c4020ad449}\label{classoomph_1_1Data_acd3e933171913b8cf3f4f0c4020ad449}} 
 \index{oomph::Data@{oomph::Data}!time\_stepper\_pt@{time\_stepper\_pt}}
 \index{time\_stepper\_pt@{time\_stepper\_pt}!oomph::Data@{oomph::Data}}
 \doxysubsubsection{\texorpdfstring{time\_stepper\_pt()}{time\_stepper\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}$\ast$ const \& oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}$\ast$ const\& oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1249,7 +1240,7 @@ Return the pointer to the timestepper (const version).
 
 
 
-Definition at line 245 of file nodes.\+h.
+Definition at line 250 of file nodes.\+h.
 
 
 
@@ -1267,7 +1258,7 @@ Unconstrain the i-\/th stored variable when make the data nonhanging. Only uncon
 
 
 
-Definition at line 417 of file nodes.\+h.
+Definition at line 448 of file nodes.\+h.
 
 
 
@@ -1289,7 +1280,7 @@ Unconstrain all the stored variables when the data is made nonhanging.
 
 
 
-Definition at line 428 of file nodes.\+h.
+Definition at line 467 of file nodes.\+h.
 
 
 
@@ -1311,7 +1302,7 @@ Unpin the i-\/th stored variable.
 
 
 
-Definition at line 382 of file nodes.\+h.
+Definition at line 397 of file nodes.\+h.
 
 
 
@@ -1319,7 +1310,7 @@ References eqn\+\_\+number(), i, and Is\+\_\+unclassified.
 
 
 
-Referenced by oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures(), oomph\+::\+Solid\+I\+C\+Problem\+::reset\+\_\+original\+\_\+state(), oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unfix\+\_\+pressure(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+all\+\_\+internal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+all\+\_\+internal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::unpin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Solid\+Node\+::unpin\+\_\+position(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+real\+\_\+or\+\_\+imag(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::unpin\+\_\+rotation\+\_\+angle(), and oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh().
+Referenced by oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures(), oomph\+::\+Solid\+I\+C\+Problem\+::reset\+\_\+original\+\_\+state(), oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unfix\+\_\+pressure(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+all\+\_\+internal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+all\+\_\+internal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::unpin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate(), oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Solid\+Node\+::unpin\+\_\+position(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+real\+\_\+or\+\_\+imag(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::unpin\+\_\+rotation\+\_\+angle(), and oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1Data_a590a3262e33167e464bb5d34c90a88ef}\label{classoomph_1_1Data_a590a3262e33167e464bb5d34c90a88ef}} 
 \index{oomph::Data@{oomph::Data}!unpin\_all@{unpin\_all}}
@@ -1333,7 +1324,7 @@ Unpin all the stored variables.
 
 
 
-Definition at line 392 of file nodes.\+h.
+Definition at line 413 of file nodes.\+h.
 
 
 
@@ -1355,7 +1346,7 @@ Return i-\/th stored value. This function is not virtual so that it can be inlin
 
 
 
-Definition at line 287 of file nodes.\+h.
+Definition at line 299 of file nodes.\+h.
 
 
 
@@ -1363,7 +1354,7 @@ References i, range\+\_\+check(), and Value.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::apply\+\_\+rigid\+\_\+body\+\_\+motion(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+of\+\_\+gravity(), copy(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::copy\+\_\+efunction\+\_\+to\+\_\+normalisation(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::dposition\+\_\+dt(), dump(), oomph\+::\+Linearised\+Navier\+Stokes\+Eigenfunction\+Normalisation\+Element\+::eigenvalue(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Problem\+::get\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Young\+Laplace\+Equations\+::get\+\_\+kappa(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::output\+\_\+centre\+\_\+of\+\_\+gravity(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+linearised\+\_\+nst(), oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::p\+\_\+spherical\+\_\+nst(), oomph\+::\+Volume\+Constraint\+Element\+::p\+\_\+traded(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::p\+\_\+value(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Fluid\+Interface\+Element\+::pext(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::q\+\_\+internal(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::q\+\_\+internal(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::q\+\_\+internal(), oomph\+::\+Node\+::raw\+\_\+value(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::reference\+\_\+pressure(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+I\+M\+R\+Base\+::shift\+\_\+time\+\_\+values(), oomph\+::\+T\+R\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::solid\+\_\+p(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::solid\+\_\+p(), oomph\+::\+I\+M\+R\+Base\+::temporal\+\_\+error\+\_\+in\+\_\+value(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::temporal\+\_\+error\+\_\+in\+\_\+value(), oomph\+::\+T\+R\+::temporal\+\_\+error\+\_\+in\+\_\+value(), oomph\+::\+Time\+Stepper\+::time\+\_\+derivative(), and value().
+Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::apply\+\_\+rigid\+\_\+body\+\_\+motion(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+of\+\_\+gravity(), copy(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::copy\+\_\+efunction\+\_\+to\+\_\+normalisation(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::dposition\+\_\+dt(), dump(), oomph\+::\+Linearised\+Navier\+Stokes\+Eigenfunction\+Normalisation\+Element\+::eigenvalue(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Problem\+::get\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Young\+Laplace\+Equations\+::get\+\_\+kappa(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::output\+\_\+centre\+\_\+of\+\_\+gravity(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+linearised\+\_\+nst(), oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::p\+\_\+spherical\+\_\+nst(), oomph\+::\+Volume\+Constraint\+Element\+::p\+\_\+traded(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::p\+\_\+value(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Fluid\+Interface\+Element\+::pext(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::q\+\_\+internal(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::q\+\_\+internal(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::q\+\_\+internal(), oomph\+::\+Node\+::raw\+\_\+value(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::reference\+\_\+pressure(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+I\+M\+R\+Base\+::shift\+\_\+time\+\_\+values(), oomph\+::\+T\+R\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::solid\+\_\+p(), oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::solid\+\_\+p(), oomph\+::\+I\+M\+R\+Base\+::temporal\+\_\+error\+\_\+in\+\_\+value(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::temporal\+\_\+error\+\_\+in\+\_\+value(), oomph\+::\+T\+R\+::temporal\+\_\+error\+\_\+in\+\_\+value(), oomph\+::\+Time\+Stepper\+::time\+\_\+derivative(), and value().
 
 \mbox{\Hypertarget{classoomph_1_1Data_a3fad35eda2f9e1c69f163f1cd4d104ea}\label{classoomph_1_1Data_a3fad35eda2f9e1c69f163f1cd4d104ea}} 
 \index{oomph::Data@{oomph::Data}!value@{value}}
@@ -1377,7 +1368,7 @@ Return i-\/th value at time level t (t=0\+: present, t$>$0\+: previous) This fun
 
 
 
-Definition at line 299 of file nodes.\+h.
+Definition at line 311 of file nodes.\+h.
 
 
 
@@ -1395,7 +1386,7 @@ Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinne
 
 Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinned) at this node at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 480 of file nodes.\+cc.
+Definition at line 517 of file nodes.\+cc.
 
 
 
@@ -1413,7 +1404,7 @@ Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values for the \mbox{
 
 Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinned) at this \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
 
-Definition at line 469 of file nodes.\+cc.
+Definition at line 503 of file nodes.\+cc.
 
 
 
@@ -1431,7 +1422,7 @@ Return the pointer to the i-\/the stored value. Typically this is required when 
 
 
 
-Definition at line 318 of file nodes.\+h.
+Definition at line 330 of file nodes.\+h.
 
 
 
@@ -1439,7 +1430,7 @@ References i, range\+\_\+check(), and Value.
 
 
 
-Referenced by add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), oomph\+::\+Problem\+::arc\+\_\+length\+\_\+step\+\_\+solve(), oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+rotation\+\_\+angle(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+x\+\_\+displacement(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+y\+\_\+displacement(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Polar\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::p\+\_\+pnst(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st\+\_\+pt(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::set\+\_\+eigenfunction\+\_\+normalisation\+\_\+element(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::st(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::st\+\_\+pt(), and oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::u().
+Referenced by add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), oomph\+::\+Problem\+::arc\+\_\+length\+\_\+step\+\_\+solve(), oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+rotation\+\_\+angle(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+x\+\_\+displacement(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+y\+\_\+displacement(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd(), oomph\+::\+Element\+With\+External\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd(), oomph\+::\+Element\+With\+External\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Polar\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::p\+\_\+pnst(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st\+\_\+pt(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::set\+\_\+eigenfunction\+\_\+normalisation\+\_\+element(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::st(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::st\+\_\+pt(), and oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::u().
 
 \mbox{\Hypertarget{classoomph_1_1Data_ae96cadc48ab7d39aa6ed7bd91abe2e47}\label{classoomph_1_1Data_ae96cadc48ab7d39aa6ed7bd91abe2e47}} 
 \index{oomph::Data@{oomph::Data}!value\_pt@{value\_pt}}
@@ -1453,7 +1444,7 @@ Return the pointer to the i-\/th stored value, or any of its history values (con
 
 
 
-Definition at line 331 of file nodes.\+h.
+Definition at line 343 of file nodes.\+h.
 
 
 
@@ -1481,7 +1472,7 @@ Definition at line 97 of file nodes.\+h.
 
 
 
-Definition at line 96 of file nodes.\+h.
+Definition at line 95 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Data_a68cfdb0f861066a7be74be2524466388}\label{classoomph_1_1Data_a68cfdb0f861066a7be74be2524466388}} 
 \index{oomph::Data@{oomph::Data}!CopiedData@{CopiedData}}
@@ -1491,7 +1482,7 @@ Definition at line 96 of file nodes.\+h.
 
 
 
-Definition at line 95 of file nodes.\+h.
+Definition at line 94 of file nodes.\+h.
 
 
 
@@ -1505,7 +1496,7 @@ Referenced by oomph\+::\+Solid\+Node\+::set\+\_\+external\+\_\+variable\+\_\+pos
 
 
 
-Definition at line 94 of file nodes.\+h.
+Definition at line 93 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Data_abad7fa6bf4988e5a0336ba3ce71b5147}\label{classoomph_1_1Data_abad7fa6bf4988e5a0336ba3ce71b5147}} 
 \index{oomph::Data@{oomph::Data}!operator$<$$<$@{operator$<$$<$}}
@@ -1538,7 +1529,7 @@ C-\/style array of any \mbox{\hyperlink{classoomph_1_1Data}{Data}} objects that 
 
 
 
-Definition at line 128 of file nodes.\+h.
+Definition at line 127 of file nodes.\+h.
 
 
 
@@ -1548,7 +1539,7 @@ Referenced by add\+\_\+copy(), remove\+\_\+copy(), resize(), set\+\_\+time\+\_\+
 \index{oomph::Data@{oomph::Data}!Default\_static\_time\_stepper\_pt@{Default\_static\_time\_stepper\_pt}}
 \index{Default\_static\_time\_stepper\_pt@{Default\_static\_time\_stepper\_pt}!oomph::Data@{oomph::Data}}
 \doxysubsubsection{\texorpdfstring{Default\_static\_time\_stepper\_pt}{Default\_static\_time\_stepper\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ oomph\+::\+Data\+::\+Default\+\_\+static\+\_\+time\+\_\+stepper\+\_\+pt =new \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$0$>$()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ oomph\+::\+Data\+::\+Default\+\_\+static\+\_\+time\+\_\+stepper\+\_\+pt = new \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$0$>$()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -1556,7 +1547,7 @@ Default (static) timestepper used in steady problems.
 
 Default (steady) timestepper for steady \mbox{\hyperlink{classoomph_1_1Data}{Data}}. 
 
-Definition at line 165 of file nodes.\+h.
+Definition at line 162 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Data_a1863d191b66fc4b22fa282ef357c0513}\label{classoomph_1_1Data_a1863d191b66fc4b22fa282ef357c0513}} 
 \index{oomph::Data@{oomph::Data}!Eqn\_number@{Eqn\_number}}
@@ -1566,8 +1557,7 @@ Definition at line 165 of file nodes.\+h.
 
 
 
-C-\/style array of pointers to the (global) equation numbers of the values. ~\newline
- 
+C-\/style array of pointers to the (global) equation numbers of the values. 
 
 
 
@@ -1581,7 +1571,7 @@ Referenced by add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), assign\+\_\+eqn\+
 \index{oomph::Data@{oomph::Data}!Is\_constrained@{Is\_constrained}}
 \index{Is\_constrained@{Is\_constrained}!oomph::Data@{oomph::Data}}
 \doxysubsubsection{\texorpdfstring{Is\_constrained}{Is\_constrained}}
-{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+constrained =-\/2\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+constrained = -\/2\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -1589,7 +1579,7 @@ Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number t
 
 Static \char`\"{}\+Magic number\char`\"{} to indicate that the value is constrained, usually because is it associated with non-\/conforming data, otherwise known as hanging nodes 
 
-Definition at line 203 of file nodes.\+h.
+Definition at line 198 of file nodes.\+h.
 
 
 
@@ -1599,7 +1589,7 @@ Referenced by constrain(), is\+\_\+constrained(), and unconstrain().
 \index{oomph::Data@{oomph::Data}!Is\_pinned@{Is\_pinned}}
 \index{Is\_pinned@{Is\_pinned}!oomph::Data@{oomph::Data}}
 \doxysubsubsection{\texorpdfstring{Is\_pinned}{Is\_pinned}}
-{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+pinned =-\/1\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+pinned = -\/1\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -1607,7 +1597,7 @@ Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number t
 
 Static \char`\"{}\+Magic number\char`\"{} to indicate pinned values. 
 
-Definition at line 188 of file nodes.\+h.
+Definition at line 183 of file nodes.\+h.
 
 
 
@@ -1617,7 +1607,7 @@ Referenced by oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+
 \index{oomph::Data@{oomph::Data}!Is\_segregated\_solve\_pinned@{Is\_segregated\_solve\_pinned}}
 \index{Is\_segregated\_solve\_pinned@{Is\_segregated\_solve\_pinned}!oomph::Data@{oomph::Data}}
 \doxysubsubsection{\texorpdfstring{Is\_segregated\_solve\_pinned}{Is\_segregated\_solve\_pinned}}
-{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+segregated\+\_\+solve\+\_\+pinned =-\/3\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+segregated\+\_\+solve\+\_\+pinned = -\/3\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -1625,7 +1615,7 @@ Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number t
 
 
 
-Definition at line 193 of file nodes.\+h.
+Definition at line 188 of file nodes.\+h.
 
 
 
@@ -1635,7 +1625,7 @@ Referenced by is\+\_\+segregated\+\_\+solve\+\_\+pinned().
 \index{oomph::Data@{oomph::Data}!Is\_unclassified@{Is\_unclassified}}
 \index{Is\_unclassified@{Is\_unclassified}!oomph::Data@{oomph::Data}}
 \doxysubsubsection{\texorpdfstring{Is\_unclassified}{Is\_unclassified}}
-{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+unclassified =-\/10\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+unclassified = -\/10\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -1643,7 +1633,7 @@ Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number t
 
 Static \char`\"{}\+Magic number\char`\"{} to indicate values that haven\textquotesingle{}t been classified as pinned or free. 
 
-Definition at line 197 of file nodes.\+h.
+Definition at line 192 of file nodes.\+h.
 
 
 
@@ -1661,7 +1651,7 @@ Number of \mbox{\hyperlink{classoomph_1_1Data}{Data}} that contain copies of thi
 
 
 
-Definition at line 132 of file nodes.\+h.
+Definition at line 131 of file nodes.\+h.
 
 
 
@@ -1679,7 +1669,7 @@ Non-\/halo processor ID for \mbox{\hyperlink{classoomph_1_1Data}{Data}}; -\/1 if
 
 
 
-Definition at line 142 of file nodes.\+h.
+Definition at line 140 of file nodes.\+h.
 
 
 
@@ -1697,7 +1687,7 @@ Number of values stored in the data object.
 
 
 
-Definition at line 137 of file nodes.\+h.
+Definition at line 135 of file nodes.\+h.
 
 
 
@@ -1729,8 +1719,7 @@ Referenced by ntstorage(), set\+\_\+time\+\_\+stepper(), and time\+\_\+stepper\+
 
 
 
-C-\/style array of pointers to data values and possible history values. The data must be ordered in such a way that Value\mbox{[}i\mbox{]}\mbox{[}t\mbox{]} gives the i-\/th data value at the time value t. The ordering is chosen so that all the time levels of a particular value can be access from a single pointer to a double. This is required for copying/hijacking functionality. The data should be accessed by using the member functions value(time,ival) and set\+\_\+value(time,ival,value), where time=0\+: present. ~\newline
- 
+C-\/style array of pointers to data values and possible history values. The data must be ordered in such a way that Value\mbox{[}i\mbox{]}\mbox{[}t\mbox{]} gives the i-\/th data value at the time value t. The ordering is chosen so that all the time levels of a particular value can be access from a single pointer to a double. This is required for copying/hijacking functionality. The data should be accessed by using the member functions value(time,ival) and set\+\_\+value(time,ival,value), where time=0\+: present. 
 
 
 

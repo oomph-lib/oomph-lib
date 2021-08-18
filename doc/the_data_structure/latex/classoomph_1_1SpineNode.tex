@@ -17,7 +17,7 @@ Inheritance diagram for oomph\+::Spine\+Node\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} Constructor, initialise pointers to zero. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SpineNode_a35d835d5f7b549f45b69669044e30545}{Spine\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}{time\+\_\+stepper\+\_\+pt}}, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+nvalue)
 \begin{DoxyCompactList}\small\item\em Unsteady Constructor, initialise pointers to zero. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineNode_a047fd6368eb9140f51128723a9e07dba}{spine\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineNode_acb15e93d53f62e899a3c126736b41079}{spine\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to spine. \end{DoxyCompactList}\item 
 double \& \mbox{\hyperlink{classoomph_1_1SpineNode_aea50ab25f54e35d2121b090ae7b0c313}{fraction}} ()
 \begin{DoxyCompactList}\small\item\em Set reference to fraction along spine. \end{DoxyCompactList}\item 
@@ -54,7 +54,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1SpineNode_ac68d55d54018e5d908c5f81ab4b05
 \doxysubsection{Detailed Description}
 Class for nodes that live on spines. The assumption is that each \mbox{\hyperlink{classoomph_1_1Node}{Node}} lies at a fixed fraction on a single spine (although more complex behaviour could be included by adding more variables to the spine). In general, more complex node updating should be handled by the classes implemented for algebraic node updates. 
 
-Definition at line 305 of file spines.\+h.
+Definition at line 327 of file spines.\+h.
 
 
 
@@ -71,7 +71,7 @@ Definition at line 305 of file spines.\+h.
 
 
 
-Definition at line 330 of file spines.\+h.
+Definition at line 347 of file spines.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpineNode_a35d835d5f7b549f45b69669044e30545}\label{classoomph_1_1SpineNode_a35d835d5f7b549f45b69669044e30545}} 
 \index{oomph::SpineNode@{oomph::SpineNode}!SpineNode@{SpineNode}}
@@ -85,7 +85,7 @@ Unsteady Constructor, initialise pointers to zero.
 
 
 
-Definition at line 336 of file spines.\+h.
+Definition at line 359 of file spines.\+h.
 
 
 
@@ -106,7 +106,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a76d3081bdc3407744e6d8631
 
 
 
-Definition at line 378 of file spines.\+h.
+Definition at line 433 of file spines.\+h.
 
 
 
@@ -128,7 +128,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a2e05b79b6b3249e3ebd9096a
 
 
 
-Definition at line 382 of file spines.\+h.
+Definition at line 439 of file spines.\+h.
 
 
 
@@ -146,7 +146,7 @@ Set reference to fraction along spine.
 
 
 
-Definition at line 346 of file spines.\+h.
+Definition at line 378 of file spines.\+h.
 
 
 
@@ -168,7 +168,7 @@ Access function to spine height.
 
 
 
-Definition at line 359 of file spines.\+h.
+Definition at line 397 of file spines.\+h.
 
 
 
@@ -194,7 +194,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_ad20302b7992437075d3ca423
 
 
 
-Definition at line 366 of file spines.\+h.
+Definition at line 407 of file spines.\+h.
 
 
 
@@ -216,7 +216,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a2c0fb79493f94d2ce1973673
 
 
 
-Definition at line 372 of file spines.\+h.
+Definition at line 420 of file spines.\+h.
 
 
 
@@ -238,7 +238,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_aecf8c979266300d3609de2b4
 
 
 
-Definition at line 46 of file spines.\+cc.
+Definition at line 44 of file spines.\+cc.
 
 
 
@@ -256,7 +256,7 @@ Access function to ID of node update function (within specific mesh)
 
 
 
-Definition at line 349 of file spines.\+h.
+Definition at line 384 of file spines.\+h.
 
 
 
@@ -278,7 +278,7 @@ Access function to Pointer to \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+M
 
 
 
-Definition at line 353 of file spines.\+h.
+Definition at line 391 of file spines.\+h.
 
 
 
@@ -288,11 +288,11 @@ References Spine\+\_\+mesh\+\_\+pt.
 
 Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh(), oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+horizontal\+\_\+single\+\_\+layer\+\_\+mesh(), oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+single\+\_\+layer\+\_\+mesh(), oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+single\+\_\+layer\+\_\+mesh(), and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh().
 
-\mbox{\Hypertarget{classoomph_1_1SpineNode_a047fd6368eb9140f51128723a9e07dba}\label{classoomph_1_1SpineNode_a047fd6368eb9140f51128723a9e07dba}} 
+\mbox{\Hypertarget{classoomph_1_1SpineNode_acb15e93d53f62e899a3c126736b41079}\label{classoomph_1_1SpineNode_acb15e93d53f62e899a3c126736b41079}} 
 \index{oomph::SpineNode@{oomph::SpineNode}!spine\_pt@{spine\_pt}}
 \index{spine\_pt@{spine\_pt}!oomph::SpineNode@{oomph::SpineNode}}
 \doxysubsubsection{\texorpdfstring{spine\_pt()}{spine\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Spine}{Spine}}$\ast$ \& oomph\+::\+Spine\+Node\+::spine\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Spine}{Spine}}$\ast$\& oomph\+::\+Spine\+Node\+::spine\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -300,7 +300,7 @@ Access function to spine.
 
 
 
-Definition at line 343 of file spines.\+h.
+Definition at line 372 of file spines.\+h.
 
 
 
@@ -325,7 +325,7 @@ Private double that represents the fixed fraction along the spine.
 
 
 
-Definition at line 315 of file spines.\+h.
+Definition at line 334 of file spines.\+h.
 
 
 
@@ -339,7 +339,7 @@ Referenced by fraction().
 
 ID of node update function (within specific mesh -- useful if there are multiple node update functions, e.\+g. in two-\/layer problems. 
 
-Definition at line 323 of file spines.\+h.
+Definition at line 342 of file spines.\+h.
 
 
 
@@ -357,7 +357,7 @@ Pointer to \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}} that this nod
 
 
 
-Definition at line 319 of file spines.\+h.
+Definition at line 338 of file spines.\+h.
 
 
 
@@ -375,7 +375,7 @@ Private internal data pointer to a spine.
 
 
 
-Definition at line 312 of file spines.\+h.
+Definition at line 331 of file spines.\+h.
 
 
 

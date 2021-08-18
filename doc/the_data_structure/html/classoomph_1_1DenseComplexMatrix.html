@@ -135,8 +135,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class of matrices containing double complex, and stored as a <a class="el" href="classoomph_1_1DenseMatrix.html" title="Class for dense matrices, storing all the values of the matrix as a pointer to a pointer with assorte...">DenseMatrix</a>&lt;complex&lt;double&gt; &gt;, but with solving functionality inherited from the abstract ComplexMatrix class. <br  />
-  
+<p>Class of matrices containing double complex, and stored as a <a class="el" href="classoomph_1_1DenseMatrix.html" title="Class for dense matrices, storing all the values of the matrix as a pointer to a pointer with assorte...">DenseMatrix</a>&lt;complex&lt;double&gt; &gt;, but with solving functionality inherited from the abstract ComplexMatrix class.  
  <a href="classoomph_1_1DenseComplexMatrix.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>&gt;</code></p>
@@ -191,18 +190,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8503c0e46409613c58261ce6136f88b9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a8503c0e46409613c58261ce6136f88b9">ludecompose</a> ()</td></tr>
 <tr class="memdesc:a8503c0e46409613c58261ce6136f88b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the LU decomposition. For this storage scheme the matrix storage will be over-writeen by its LU decomposition.  <a href="classoomph_1_1DenseComplexMatrix.html#a8503c0e46409613c58261ce6136f88b9">More...</a><br /></td></tr>
 <tr class="separator:a8503c0e46409613c58261ce6136f88b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcd909e71bdcae1059eb8779de72a99d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#abcd909e71bdcae1059eb8779de72a99d">lubksub</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:abcd909e71bdcae1059eb8779de72a99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the LU back substitution. Note that the rhs will be overwritten with the solution vector.  <a href="classoomph_1_1DenseComplexMatrix.html#abcd909e71bdcae1059eb8779de72a99d">More...</a><br /></td></tr>
-<tr class="separator:abcd909e71bdcae1059eb8779de72a99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76146afe81a055af475a107231468afb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a76146afe81a055af475a107231468afb">residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;residual)</td></tr>
-<tr class="memdesc:a76146afe81a055af475a107231468afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the residual of Ax=b, ie r=b-Ax for the "solution" x.  <a href="classoomph_1_1DenseComplexMatrix.html#a76146afe81a055af475a107231468afb">More...</a><br /></td></tr>
-<tr class="separator:a76146afe81a055af475a107231468afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcc47dd450a1ab37d2790b5d0279cadf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#afcc47dd450a1ab37d2790b5d0279cadf">multiply</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;soln)</td></tr>
-<tr class="memdesc:afcc47dd450a1ab37d2790b5d0279cadf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the matrix by the vector x: soln=Ax.  <a href="classoomph_1_1DenseComplexMatrix.html#afcc47dd450a1ab37d2790b5d0279cadf">More...</a><br /></td></tr>
-<tr class="separator:afcc47dd450a1ab37d2790b5d0279cadf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaf8f0589e011bf720791058711fa952"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#aaaf8f0589e011bf720791058711fa952">multiply_transpose</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;soln)</td></tr>
-<tr class="memdesc:aaaf8f0589e011bf720791058711fa952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the transposed matrix by the vector x: soln=A^T x.  <a href="classoomph_1_1DenseComplexMatrix.html#aaaf8f0589e011bf720791058711fa952">More...</a><br /></td></tr>
-<tr class="separator:aaaf8f0589e011bf720791058711fa952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be350659466e46db23ce926c2acb959"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a0be350659466e46db23ce926c2acb959">lubksub</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a0be350659466e46db23ce926c2acb959"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the LU back substitution. Note that the rhs will be overwritten with the solution vector.  <a href="classoomph_1_1DenseComplexMatrix.html#a0be350659466e46db23ce926c2acb959">More...</a><br /></td></tr>
+<tr class="separator:a0be350659466e46db23ce926c2acb959"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b285b43e6afd8c825322d0de30351ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a4b285b43e6afd8c825322d0de30351ab">residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;residual)</td></tr>
+<tr class="memdesc:a4b285b43e6afd8c825322d0de30351ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the residual of Ax=b, ie r=b-Ax for the "solution" x.  <a href="classoomph_1_1DenseComplexMatrix.html#a4b285b43e6afd8c825322d0de30351ab">More...</a><br /></td></tr>
+<tr class="separator:a4b285b43e6afd8c825322d0de30351ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77f901f23531551596ddd03725b27fcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a77f901f23531551596ddd03725b27fcf">multiply</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;soln)</td></tr>
+<tr class="memdesc:a77f901f23531551596ddd03725b27fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the matrix by the vector x: soln=Ax.  <a href="classoomph_1_1DenseComplexMatrix.html#a77f901f23531551596ddd03725b27fcf">More...</a><br /></td></tr>
+<tr class="separator:a77f901f23531551596ddd03725b27fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1109c8719d047682157145bb95af487"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#af1109c8719d047682157145bb95af487">multiply_transpose</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;soln)</td></tr>
+<tr class="memdesc:af1109c8719d047682157145bb95af487"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the transposed matrix by the vector x: soln=A^T x.  <a href="classoomph_1_1DenseComplexMatrix.html#af1109c8719d047682157145bb95af487">More...</a><br /></td></tr>
+<tr class="separator:af1109c8719d047682157145bb95af487"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classoomph_1_1ComplexMatrixBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1ComplexMatrixBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1ComplexMatrixBase.html">oomph::ComplexMatrixBase</a></td></tr>
 <tr class="memitem:aecfeaf77e3e03743b0b87f677470c56d inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#aecfeaf77e3e03743b0b87f677470c56d">ComplexMatrixBase</a> ()</td></tr>
 <tr class="memdesc:aecfeaf77e3e03743b0b87f677470c56d inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) constructor.  <a href="classoomph_1_1ComplexMatrixBase.html#aecfeaf77e3e03743b0b87f677470c56d">More...</a><br /></td></tr>
@@ -216,15 +215,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5b6bb3011ea7b08dead73e943fd74b15 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a5b6bb3011ea7b08dead73e943fd74b15">~ComplexMatrixBase</a> ()</td></tr>
 <tr class="memdesc:a5b6bb3011ea7b08dead73e943fd74b15 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual (empty) destructor  <a href="classoomph_1_1ComplexMatrixBase.html#a5b6bb3011ea7b08dead73e943fd74b15">More...</a><br /></td></tr>
 <tr class="separator:a5b6bb3011ea7b08dead73e943fd74b15 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a131e601fd0e82e811b26a3c11a455d0e inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a131e601fd0e82e811b26a3c11a455d0e">solve</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:a131e601fd0e82e811b26a3c11a455d0e inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <a href="classoomph_1_1ComplexMatrixBase.html#a131e601fd0e82e811b26a3c11a455d0e">More...</a><br /></td></tr>
-<tr class="separator:a131e601fd0e82e811b26a3c11a455d0e inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a223cef84c48a2aa9fb387ed4ffaaf48a inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a223cef84c48a2aa9fb387ed4ffaaf48a">solve</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;soln)</td></tr>
-<tr class="memdesc:a223cef84c48a2aa9fb387ed4ffaaf48a inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <a href="classoomph_1_1ComplexMatrixBase.html#a223cef84c48a2aa9fb387ed4ffaaf48a">More...</a><br /></td></tr>
-<tr class="separator:a223cef84c48a2aa9fb387ed4ffaaf48a inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5ad285a4cb503c9c962ff7e8d89857f inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#ab5ad285a4cb503c9c962ff7e8d89857f">max_residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:ab5ad285a4cb503c9c962ff7e8d89857f inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum residual r=b-Ax &ndash; generic version, can be overloaded for specific derived classes where the max. can be determined "on the fly".  <a href="classoomph_1_1ComplexMatrixBase.html#ab5ad285a4cb503c9c962ff7e8d89857f">More...</a><br /></td></tr>
-<tr class="separator:ab5ad285a4cb503c9c962ff7e8d89857f inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af74c169df7a5bee5f481686e066487d1 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#af74c169df7a5bee5f481686e066487d1">solve</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;rhs)</td></tr>
+<tr class="memdesc:af74c169df7a5bee5f481686e066487d1 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <a href="classoomph_1_1ComplexMatrixBase.html#af74c169df7a5bee5f481686e066487d1">More...</a><br /></td></tr>
+<tr class="separator:af74c169df7a5bee5f481686e066487d1 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f9224c589327ef00378b27486d660b4 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a3f9224c589327ef00378b27486d660b4">solve</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;soln)</td></tr>
+<tr class="memdesc:a3f9224c589327ef00378b27486d660b4 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <a href="classoomph_1_1ComplexMatrixBase.html#a3f9224c589327ef00378b27486d660b4">More...</a><br /></td></tr>
+<tr class="separator:a3f9224c589327ef00378b27486d660b4 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a716a8b0da3a475169c2847e4d7d9d776 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a716a8b0da3a475169c2847e4d7d9d776">max_residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a716a8b0da3a475169c2847e4d7d9d776 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum residual r=b-Ax &ndash; generic version, can be overloaded for specific derived classes where the max. can be determined "on the fly".  <a href="classoomph_1_1ComplexMatrixBase.html#a716a8b0da3a475169c2847e4d7d9d776">More...</a><br /></td></tr>
+<tr class="separator:a716a8b0da3a475169c2847e4d7d9d776 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classoomph_1_1DenseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DenseMatrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;</a></td></tr>
 <tr class="memitem:aecfca835918b50b607e080fc706b6fcf inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aecfca835918b50b607e080fc706b6fcf">DenseMatrix</a> ()</td></tr>
 <tr class="memdesc:aecfca835918b50b607e080fc706b6fcf inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor, simply assign the lengths N and M to 0.  <a href="classoomph_1_1DenseMatrix.html#aecfca835918b50b607e080fc706b6fcf">More...</a><br /></td></tr>
@@ -319,10 +318,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aa36631ee95fe55afe697377b03d05d6a inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class of matrices containing double complex, and stored as a <a class="el" href="classoomph_1_1DenseMatrix.html" title="Class for dense matrices, storing all the values of the matrix as a pointer to a pointer with assorte...">DenseMatrix</a>&lt;complex&lt;double&gt; &gt;, but with solving functionality inherited from the abstract ComplexMatrix class. <br  />
- </p>
+<div class="textblock"><p>Class of matrices containing double complex, and stored as a <a class="el" href="classoomph_1_1DenseMatrix.html" title="Class for dense matrices, storing all the values of the matrix as a pointer to a pointer with assorte...">DenseMatrix</a>&lt;complex&lt;double&gt; &gt;, but with solving functionality inherited from the abstract ComplexMatrix class. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00164">164</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00159">159</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad199664c8603ef3da91c76c3347d84d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad199664c8603ef3da91c76c3347d84d4">&#9670;&nbsp;</a></span>DenseComplexMatrix() <span class="overload">[1/5]</span></h2>
@@ -349,7 +347,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Empty constructor, simply assign the lengths N and M to 0. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00186">186</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00179">179</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
 </div>
 </div>
@@ -379,7 +377,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor to build a square n by n matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00191">191</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00188">188</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
 </div>
 </div>
@@ -419,7 +417,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor to build a matrix with n rows and m columns. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00196">196</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00197">197</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
 </div>
 </div>
@@ -465,7 +463,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor to build a matrix with n rows and m columns, with initial value initial_val. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00202">202</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00207">207</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
 </div>
 </div>
@@ -495,9 +493,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00210">210</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00219">219</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -527,9 +525,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Destructor, delete the storage for Index vector and LU storage (if any) </p>
 <p>Destructor clean up the LU factors that have been allocated. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00106">106</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00104">104</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00170">Index</a>, and <a class="el" href="complex__matrices_8h_source.html#l00173">LU_factors</a>.</p>
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00164">Index</a>, and <a class="el" href="complex__matrices_8h_source.html#l00167">LU_factors</a>.</p>
 
 </div>
 </div>
@@ -559,16 +557,16 @@ Additional Inherited Members</h2></td></tr>
 <p>Function that deletes the storage for the LU_factors, if it is not the same as the matrix storage</p>
 <p>Delete the storage that has been allocated for the LU factors, if the matrix data is not itself being overwritten. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00088">88</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00087">87</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00173">LU_factors</a>, and <a class="el" href="complex__matrices_8h_source.html#l00177">Overwrite_matrix_storage</a>.</p>
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00167">LU_factors</a>, and <a class="el" href="complex__matrices_8h_source.html#l00171">Overwrite_matrix_storage</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00124">ludecompose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00121">ludecompose()</a>.</p>
 
 </div>
 </div>
-<a id="abcd909e71bdcae1059eb8779de72a99d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcd909e71bdcae1059eb8779de72a99d">&#9670;&nbsp;</a></span>lubksub()</h2>
+<a id="a0be350659466e46db23ce926c2acb959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0be350659466e46db23ce926c2acb959">&#9670;&nbsp;</a></span>lubksub()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -579,7 +577,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void oomph::DenseComplexMatrix::lubksub </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -594,11 +592,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Overload the LU back substitution. Note that the rhs will be overwritten with the solution vector. </p>
 <p>Back substitute an LU decomposed matrix. </p>
 
-<p>Reimplemented from <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa0e444d60d4ec9e35a6903ab88baaf62">oomph::ComplexMatrixBase</a>.</p>
+<p>Reimplemented from <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a97f5b56fd405e9a288879c256529568c">oomph::ComplexMatrixBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00366">366</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00374">374</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="complex__matrices_8h_source.html#l00170">Index</a>, <a class="el" href="complex__matrices_8h_source.html#l00173">LU_factors</a>, <a class="el" href="matrices_8h_source.html#l00413">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, and <a class="el" href="matrices_8h_source.html#l00410">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="complex__matrices_8h_source.html#l00164">Index</a>, <a class="el" href="complex__matrices_8h_source.html#l00167">LU_factors</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, and <a class="el" href="matrices_8h_source.html#l00404">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>.</p>
 
 </div>
 </div>
@@ -630,14 +628,14 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a11e1beeb7767e9bc5e511c17f80f097f">oomph::ComplexMatrixBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00124">124</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00121">121</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__matrices_8cc_source.html#l00088">delete_lu_factors()</a>, <a class="el" href="matrices_8h_source.html#l00466">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::entry()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="complex__matrices_8h_source.html#l00170">Index</a>, <a class="el" href="complex__matrices_8h_source.html#l00173">LU_factors</a>, <a class="el" href="matrices_8h_source.html#l00413">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l00410">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>, and <a class="el" href="complex__matrices_8h_source.html#l00177">Overwrite_matrix_storage</a>.</p>
+<p class="reference">References <a class="el" href="complex__matrices_8cc_source.html#l00087">delete_lu_factors()</a>, <a class="el" href="matrices_8h_source.html#l00459">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::entry()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="complex__matrices_8h_source.html#l00164">Index</a>, <a class="el" href="complex__matrices_8h_source.html#l00167">LU_factors</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00401">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l00404">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>, and <a class="el" href="complex__matrices_8h_source.html#l00171">Overwrite_matrix_storage</a>.</p>
 
 </div>
 </div>
-<a id="afcc47dd450a1ab37d2790b5d0279cadf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcc47dd450a1ab37d2790b5d0279cadf">&#9670;&nbsp;</a></span>multiply()</h2>
+<a id="a77f901f23531551596ddd03725b27fcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77f901f23531551596ddd03725b27fcf">&#9670;&nbsp;</a></span>multiply()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -648,13 +646,13 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void oomph::DenseComplexMatrix::multiply </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>soln</em>&#160;</td>
         </tr>
         <tr>
@@ -672,16 +670,16 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Multiply the matrix by the vector x: soln=Ax. </p>
 
-<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a730c106643464a29ebf0660a6921ebaa">oomph::ComplexMatrixBase</a>.</p>
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a95d43a8daf989523467c1a70c005bf37">oomph::ComplexMatrixBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00503">503</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00507">507</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00413">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, and <a class="el" href="matrices_8h_source.html#l00410">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00401">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, and <a class="el" href="matrices_8h_source.html#l00404">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>.</p>
 
 </div>
 </div>
-<a id="aaaf8f0589e011bf720791058711fa952"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaaf8f0589e011bf720791058711fa952">&#9670;&nbsp;</a></span>multiply_transpose()</h2>
+<a id="af1109c8719d047682157145bb95af487"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1109c8719d047682157145bb95af487">&#9670;&nbsp;</a></span>multiply_transpose()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -692,13 +690,13 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void oomph::DenseComplexMatrix::multiply_transpose </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>soln</em>&#160;</td>
         </tr>
         <tr>
@@ -716,11 +714,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Multiply the transposed matrix by the vector x: soln=A^T x. </p>
 
-<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a90c7832bad84aad3d0f437925efb089a">oomph::ComplexMatrixBase</a>.</p>
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa6541eade56b7c4ea786f6d1a80c22e3">oomph::ComplexMatrixBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00544">544</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00545">545</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00413">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, and <a class="el" href="matrices_8h_source.html#l00410">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00401">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, and <a class="el" href="matrices_8h_source.html#l00404">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>.</p>
 
 </div>
 </div>
@@ -751,7 +749,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a849b63e50dad36ca8b20b7bdefd34b8d">oomph::ComplexMatrixBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00227">227</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00238">238</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
 </div>
 </div>
@@ -782,7 +780,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#adcbdf19bc82c61c0a4fbfd8c8de97b3b">oomph::ComplexMatrixBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00223">223</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00232">232</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
 </div>
 </div>
@@ -822,9 +820,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Overload the non-const version of the round-bracket access operator for read-write access. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00238">238</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00253">253</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l00466">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00459">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
@@ -866,9 +864,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a78d1185ec8249fec5855d01129a1c870">oomph::ComplexMatrixBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00232">232</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00245">245</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l00476">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::get_entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00469">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::get_entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
@@ -898,14 +896,14 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00216">216</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00225">225</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
-<a id="a76146afe81a055af475a107231468afb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76146afe81a055af475a107231468afb">&#9670;&nbsp;</a></span>residual()</h2>
+<a id="a4b285b43e6afd8c825322d0de30351ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b285b43e6afd8c825322d0de30351ab">&#9670;&nbsp;</a></span>residual()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -916,19 +914,19 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void oomph::DenseComplexMatrix::residual </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>residual</em>&#160;</td>
         </tr>
         <tr>
@@ -947,11 +945,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Find the residual of Ax=b, ie r=b-Ax for the "solution" x. </p>
 <p>Find the residual of Ax=b, i.e. r=b-Ax. </p>
 
-<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aec72875402b9ba387e0724d6c2597430">oomph::ComplexMatrixBase</a>.</p>
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa33932d1eb105818a9ccfd3857b26d25">oomph::ComplexMatrixBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00442">442</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00450">450</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00413">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, and <a class="el" href="matrices_8h_source.html#l00410">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00401">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, and <a class="el" href="matrices_8h_source.html#l00404">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>.</p>
 
 </div>
 </div>
@@ -978,9 +976,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to storage for the index of permutations in the LU solve. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00170">170</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00164">164</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00366">lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00124">ludecompose()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00106">~DenseComplexMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00374">lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00121">ludecompose()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00104">~DenseComplexMatrix()</a>.</p>
 
 </div>
 </div>
@@ -1006,9 +1004,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to storage for the LU decomposition. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00173">173</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00167">167</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00088">delete_lu_factors()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00366">lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00124">ludecompose()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00106">~DenseComplexMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00087">delete_lu_factors()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00374">lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00121">ludecompose()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00104">~DenseComplexMatrix()</a>.</p>
 
 </div>
 </div>
@@ -1033,9 +1031,9 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Boolean flag used to decided whether the LU decomposition is stored separately, or not </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00177">177</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00171">171</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00088">delete_lu_factors()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00124">ludecompose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00087">delete_lu_factors()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00121">ludecompose()</a>.</p>
 
 </div>
 </div>
@@ -1071,7 +1069,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:47
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:37:04
         </div>
       </div>
     </footer>

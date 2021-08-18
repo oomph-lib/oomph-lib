@@ -19,11 +19,9 @@ Inheritance diagram for oomph\+::Spherical\+Advection\+Diffusion\+Flux\+Element$
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionFluxElement_a1fe86f85817dd5621ab510d37b3a8ce8}{Spherical\+Advection\+Diffusion\+Prescribed\+Beta\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&beta)
-\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/beta function fct(x,beta(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/beta function fct(x,beta(x)) -- x is a Vector! \end{DoxyCompactList}\item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionFluxElement_aabc503a4eeac639334283e7297b88423}{Spherical\+Advection\+Diffusion\+Prescribed\+Alpha\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&alpha)
-\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/alpha function fct(x,alpha(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/alpha function fct(x,alpha(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -64,8 +62,7 @@ void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionFluxElement_a1e3a
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionFluxElement_a7dd7a4627052f615642c64eea143e4c5}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -86,7 +83,7 @@ A class for elements that allow the imposition of an applied Robin boundary cond
 
 \[ -\Delta u \cdot \mathbf{n} + \alpha(r,z) u = \beta(r,z) \] The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 679 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 685 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -100,12 +97,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionFl
 
 
 
-Function pointer to the prescribed-\/alpha function fct(x,alpha(x)) -- x is a Vector! ~\newline
- 
+Function pointer to the prescribed-\/alpha function fct(x,alpha(x)) -- x is a Vector! 
 
 
 
-Definition at line 695 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 697 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SphericalAdvectionDiffusionFluxElement_a1fe86f85817dd5621ab510d37b3a8ce8}\label{classoomph_1_1SphericalAdvectionDiffusionFluxElement_a1fe86f85817dd5621ab510d37b3a8ce8}} 
 \index{oomph::SphericalAdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::SphericalAdvectionDiffusionFluxElement$<$ ELEMENT $>$}!SphericalAdvectionDiffusionPrescribedBetaFctPt@{SphericalAdvectionDiffusionPrescribedBetaFctPt}}
@@ -116,12 +112,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionFl
 
 
 
-Function pointer to the prescribed-\/beta function fct(x,beta(x)) -- x is a Vector! ~\newline
- 
+Function pointer to the prescribed-\/beta function fct(x,beta(x)) -- x is a Vector! 
 
 
 
-Definition at line 689 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 692 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -137,10 +132,9 @@ Definition at line 689 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elem
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. 
 
-Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created ~\newline
- 
 
-Definition at line 902 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+Definition at line 900 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -159,7 +153,7 @@ Broken empty constructor.
 
 
 
-Definition at line 707 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 708 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SphericalAdvectionDiffusionFluxElement_a85e2f9e5a93f978b21cbf6d425d8c991}\label{classoomph_1_1SphericalAdvectionDiffusionFluxElement_a85e2f9e5a93f978b21cbf6d425d8c991}} 
 \index{oomph::SphericalAdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::SphericalAdvectionDiffusionFluxElement$<$ ELEMENT $>$}!SphericalAdvectionDiffusionFluxElement@{SphericalAdvectionDiffusionFluxElement}}
@@ -174,7 +168,7 @@ Broken copy constructor.
 
 
 
-Definition at line 716 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 717 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -196,7 +190,7 @@ Access function for the prescribed-\/alpha function pointer.
 
 
 
-Definition at line 735 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 736 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -215,7 +209,7 @@ Access function for the prescribed-\/beta function pointer.
 
 
 
-Definition at line 729 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 730 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -261,7 +255,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 742 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 743 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -276,14 +270,13 @@ void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionFluxElement}{oomp
 
 
 
-Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix for the Robin boundary condition\+:
 
 \[ \Delta u \cdot \mathbf{n} + \alpha (\mathbf{x}) = \beta (\mathbf{x}) \] 
 
-Definition at line 986 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 981 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -306,7 +299,7 @@ Function to calculate the prescribed alpha at a given spatial position.
 
 
 
-Definition at line 854 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 855 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -325,7 +318,7 @@ Function to calculate the prescribed beta at a given spatial position.
 
 
 
-Definition at line 838 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 839 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -344,7 +337,7 @@ Broken assignment operator.
 
 
 
-Definition at line 723 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 724 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -367,7 +360,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 774 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 776 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -390,7 +383,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 781 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 783 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -409,7 +402,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 792 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 793 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -428,7 +421,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 816 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 817 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -451,7 +444,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 768 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 767 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -473,7 +466,7 @@ Function pointer to the (global) prescribed-\/alpha function.
 
 
 
-Definition at line 882 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 880 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -492,7 +485,7 @@ Function pointer to the (global) prescribed-\/beta function.
 
 
 
-Definition at line 879 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 877 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -511,7 +504,7 @@ The index at which the unknown is stored at the nodes.
 
 
 
-Definition at line 885 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 883 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

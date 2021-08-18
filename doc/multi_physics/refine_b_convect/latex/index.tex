@@ -416,31 +416,31 @@ As in the \href{../../b_convection/html/index.html}{\texttt{ non-\/refineable ve
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//============start\_element\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{///A RefineableElement class that solves the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///Boussinesq approximation of the Navier-\/-\/Stokes}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///and energy equations by coupling two pre-\/existing classes. }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///The RefineableQAdvectionDiffusionElement }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///with bi-\/quadratic interpolation for the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///scalar variable (temperature) and}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///RefineableQCrouzeixRaviartElement which solves the Navier-\/-\/Stokes equations}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///using bi-\/quadratic interpolation for the velocities and a discontinuous}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///bi-\/linear interpolation for the pressure. Note that we are free to }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///choose the order in which we store the variables at the nodes. In this}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///case we choose to store the variables in the order fluid velocities}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///followed by temperature. We must, therefore, overload the function}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///AdvectionDiffusionEquations<DIM>::u\_index\_adv\_diff() to indicate that}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///the temperature is stored at the DIM-\/th position not the 0-\/th. We do not}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///need to overload the corresponding function in the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///NavierStokesEquations<DIM> class because the velocities are stored}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///first. Finally, we choose to use the flux-\/recovery calculation from the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///fluid velocities to provide the error used in the mesh adaptation.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==========================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\textcolor{keyword}{class }RefineableBuoyantQCrouzeixRaviartElement: }
-\DoxyCodeLine{\textcolor{keyword}{public} \textcolor{keyword}{virtual} RefineableQAdvectionDiffusionElement<DIM,3>,}
-\DoxyCodeLine{\textcolor{keyword}{public} \textcolor{keyword}{virtual} RefineableQCrouzeixRaviartElement<DIM>}
-\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{comment}{//============start\_element\_class============================================}}
+\DoxyCodeLine{\textcolor{comment}{  /// A RefineableElement class that solves the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// Boussinesq approximation of the Navier-\/-\/Stokes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// and energy equations by coupling two pre-\/existing classes.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// The RefineableQAdvectionDiffusionElement}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// with bi-\/quadratic interpolation for the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// scalar variable (temperature) and}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// RefineableQCrouzeixRaviartElement which solves the Navier-\/-\/Stokes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// equations using bi-\/quadratic interpolation for the velocities and a}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// discontinuous bi-\/linear interpolation for the pressure. Note that we are}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// free to choose the order in which we store the variables at the nodes. In}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// this case we choose to store the variables in the order fluid velocities}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// followed by temperature. We must, therefore, overload the function}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// AdvectionDiffusionEquations<DIM>::u\_index\_adv\_diff() to indicate that}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// the temperature is stored at the DIM-\/th position not the 0-\/th. We do not}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// need to overload the corresponding function in the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// NavierStokesEquations<DIM> class because the velocities are stored}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// first. Finally, we choose to use the flux-\/recovery calculation from the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// fluid velocities to provide the error used in the mesh adaptation.}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
+\DoxyCodeLine{  \textcolor{keyword}{class }RefineableBuoyantQCrouzeixRaviartElement}
+\DoxyCodeLine{    : \textcolor{keyword}{public} \textcolor{keyword}{virtual} RefineableQAdvectionDiffusionElement<DIM, 3>,}
+\DoxyCodeLine{      \textcolor{keyword}{public} \textcolor{keyword}{virtual} RefineableQCrouzeixRaviartElement<DIM>}
+\DoxyCodeLine{  \{}
 
 \end{DoxyCodeInclude}
 
@@ -460,45 +460,48 @@ Both constituent elements are derived from the {\ttfamily Element\+With\+Z2\+Err
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// The recovery order is that of the NavierStokes elements.}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nrecovery\_order() }
-\DoxyCodeLine{  \{\textcolor{keywordflow}{return} RefineableQCrouzeixRaviartElement<DIM>::nrecovery\_order();\}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short The number of Z2 flux terms is the same as that in }}
-\DoxyCodeLine{\textcolor{comment}{ /// the fluid element plus that in the advection-\/diffusion element}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} num\_Z2\_flux\_terms()}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} (RefineableQCrouzeixRaviartElement<DIM>::num\_Z2\_flux\_terms() +}
-\DoxyCodeLine{           RefineableQAdvectionDiffusionElement<DIM,3>::num\_Z2\_flux\_terms());}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Get the Z2 flux by concatenating the fluxes from the fluid and}}
-\DoxyCodeLine{\textcolor{comment}{ /// the advection diffusion elements.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} get\_Z2\_flux(\textcolor{keyword}{const} Vector<double>\& s, Vector<double>\& flux)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{//Find the number of fluid fluxes}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_fluid\_flux = }
-\DoxyCodeLine{    RefineableQCrouzeixRaviartElement<DIM>::num\_Z2\_flux\_terms();}
-\DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Fill in the first flux entries as the velocity entries}}
-\DoxyCodeLine{   RefineableQCrouzeixRaviartElement<DIM>::get\_Z2\_flux(s,flux);}
-\DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Find the number of temperature fluxes}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_temp\_flux =  }
-\DoxyCodeLine{    RefineableQAdvectionDiffusionElement<DIM,3>::num\_Z2\_flux\_terms();}
-\DoxyCodeLine{   Vector<double> temp\_flux(n\_temp\_flux);}
-\DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Get the temperature flux}}
-\DoxyCodeLine{   RefineableQAdvectionDiffusionElement<DIM,3>::get\_Z2\_flux(s,temp\_flux);}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{//Add the temperature flux to the end of the flux vector}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_temp\_flux;i++)}
+\DoxyCodeLine{    \textcolor{comment}{/// The recovery order is that of the NavierStokes elements.}}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} nrecovery\_order()}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     flux[n\_fluid\_flux+i] = temp\_flux[i];}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} RefineableQCrouzeixRaviartElement<DIM>::nrecovery\_order();}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short The number of Z2 flux terms is the same as that in}}
+\DoxyCodeLine{\textcolor{comment}{    /// the fluid element plus that in the advection-\/diffusion element}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{unsigned} num\_Z2\_flux\_terms()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} (}
+\DoxyCodeLine{        RefineableQCrouzeixRaviartElement<DIM>::num\_Z2\_flux\_terms() +}
+\DoxyCodeLine{        RefineableQAdvectionDiffusionElement<DIM, 3>::num\_Z2\_flux\_terms());}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{  \} \textcolor{comment}{//end of get\_Z2\_flux}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Get the Z2 flux by concatenating the fluxes from the fluid and}}
+\DoxyCodeLine{\textcolor{comment}{    /// the advection diffusion elements.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_Z2\_flux(\textcolor{keyword}{const} Vector<double>\& s, Vector<double>\& flux)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// Find the number of fluid fluxes}}
+\DoxyCodeLine{      \textcolor{keywordtype}{unsigned} n\_fluid\_flux =}
+\DoxyCodeLine{        RefineableQCrouzeixRaviartElement<DIM>::num\_Z2\_flux\_terms();}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Fill in the first flux entries as the velocity entries}}
+\DoxyCodeLine{      RefineableQCrouzeixRaviartElement<DIM>::get\_Z2\_flux(s, flux);}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Find the number of temperature fluxes}}
+\DoxyCodeLine{      \textcolor{keywordtype}{unsigned} n\_temp\_flux =}
+\DoxyCodeLine{        RefineableQAdvectionDiffusionElement<DIM, 3>::num\_Z2\_flux\_terms();}
+\DoxyCodeLine{      Vector<double> temp\_flux(n\_temp\_flux);}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Get the temperature flux}}
+\DoxyCodeLine{      RefineableQAdvectionDiffusionElement<DIM, 3>::get\_Z2\_flux(s, temp\_flux);}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Add the temperature flux to the end of the flux vector}}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_temp\_flux; i++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        flux[n\_fluid\_flux + i] = temp\_flux[i];}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \} \textcolor{comment}{// end of get\_Z2\_flux}}
 
 \end{DoxyCodeInclude}
 
@@ -507,30 +510,39 @@ The default behaviour of the Z2 error estimator is to combine all components of 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short The number of compound fluxes is two (one for the fluid and}}
-\DoxyCodeLine{\textcolor{comment}{ /// one for the temperature)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} ncompound\_fluxes() \{\textcolor{keywordflow}{return} 2;\}}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short The number of compound fluxes is two (one for the fluid and}}
+\DoxyCodeLine{\textcolor{comment}{    /// one for the temperature)}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{unsigned} ncompound\_fluxes()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} 2;}
+\DoxyCodeLine{    \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Fill in which flux components are associated with the fluid}}
-\DoxyCodeLine{\textcolor{comment}{ /// measure and which are associated with the temperature measure}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} get\_Z2\_compound\_flux\_indices(Vector<unsigned> \&flux\_index) }
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{//Find the number of fluid fluxes}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_fluid\_flux = }
-\DoxyCodeLine{    RefineableQCrouzeixRaviartElement<DIM>::num\_Z2\_flux\_terms();}
-\DoxyCodeLine{   \textcolor{comment}{//Find the number of temperature fluxes}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_temp\_flux =  }
-\DoxyCodeLine{    RefineableQAdvectionDiffusionElement<DIM,3>::num\_Z2\_flux\_terms();}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Fill in which flux components are associated with the fluid}}
+\DoxyCodeLine{\textcolor{comment}{    /// measure and which are associated with the temperature measure}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_Z2\_compound\_flux\_indices(Vector<unsigned>\& flux\_index)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// Find the number of fluid fluxes}}
+\DoxyCodeLine{      \textcolor{keywordtype}{unsigned} n\_fluid\_flux =}
+\DoxyCodeLine{        RefineableQCrouzeixRaviartElement<DIM>::num\_Z2\_flux\_terms();}
+\DoxyCodeLine{      \textcolor{comment}{// Find the number of temperature fluxes}}
+\DoxyCodeLine{      \textcolor{keywordtype}{unsigned} n\_temp\_flux =}
+\DoxyCodeLine{        RefineableQAdvectionDiffusionElement<DIM, 3>::num\_Z2\_flux\_terms();}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//The fluid fluxes are first }}
-\DoxyCodeLine{   \textcolor{comment}{//The values of the flux\_index vector are zero on entry, so we}}
-\DoxyCodeLine{   \textcolor{comment}{//could omit this line}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_fluid\_flux;i++) \{flux\_index[i] = 0;\}}
+\DoxyCodeLine{      \textcolor{comment}{// The fluid fluxes are first}}
+\DoxyCodeLine{      \textcolor{comment}{// The values of the flux\_index vector are zero on entry, so we}}
+\DoxyCodeLine{      \textcolor{comment}{// could omit this line}}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_fluid\_flux; i++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        flux\_index[i] = 0;}
+\DoxyCodeLine{      \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Set the temperature fluxes (the last set of fluxes}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_temp\_flux;i++) \{flux\_index[n\_fluid\_flux + i] = 1;\}}
+\DoxyCodeLine{      \textcolor{comment}{// Set the temperature fluxes (the last set of fluxes}}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_temp\_flux; i++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        flux\_index[n\_fluid\_flux + i] = 1;}
+\DoxyCodeLine{      \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{  \} \textcolor{comment}{//end of get\_Z2\_compound\_flux\_indices}}
+\DoxyCodeLine{    \} \textcolor{comment}{// end of get\_Z2\_compound\_flux\_indices}}
 
 \end{DoxyCodeInclude}
 
@@ -542,28 +554,34 @@ The vertex nodes are defined by the underlying geometric element, but require a 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Number of vertex nodes in the element is obtained from the}}
-\DoxyCodeLine{\textcolor{comment}{ /// geometric element.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} nvertex\_node()\textcolor{keyword}{ const}}
-\DoxyCodeLine{\textcolor{keyword}{  }\{\textcolor{keywordflow}{return} QElement<DIM,3>::nvertex\_node();\}}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Number of vertex nodes in the element is obtained from the}}
+\DoxyCodeLine{\textcolor{comment}{    /// geometric element.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{unsigned} nvertex\_node()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keyword}{    }\{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} QElement<DIM, 3>::nvertex\_node();}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Pointer to the j-\/th vertex node in the element,}}
-\DoxyCodeLine{\textcolor{comment}{ /// Call the geometric element's function.}}
-\DoxyCodeLine{\textcolor{comment}{} Node* vertex\_node\_pt(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
-\DoxyCodeLine{\textcolor{keyword}{  }\{\textcolor{keywordflow}{return} QElement<DIM,3>::vertex\_node\_pt(j);\}}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Pointer to the j-\/th vertex node in the element,}}
+\DoxyCodeLine{\textcolor{comment}{    /// Call the geometric element's function.}}
+\DoxyCodeLine{\textcolor{comment}{}    Node* vertex\_node\_pt(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keyword}{    }\{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} QElement<DIM, 3>::vertex\_node\_pt(j);}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
 
 The number of continuously interpolated values is {\ttfamily D\+IM} {\ttfamily +} {\ttfamily 1}\+: {\ttfamily D\+IM} velocity components and one temperature.  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ncont\_interpolated\_values() const }
-\DoxyCodeLine{  \{\textcolor{keywordflow}{return} DIM+1;\}}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} ncont\_interpolated\_values() const}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} DIM + 1;}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -572,62 +590,69 @@ The two versions of the {\ttfamily get\+\_\+interpolated\+\_\+values(...)} funct
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Get the continuously interpolated values at the local coordinate s.}}
-\DoxyCodeLine{\textcolor{comment}{ /// We choose to put the fluid velocities first, followed by the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// temperature.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} get\_interpolated\_values(\textcolor{keyword}{const} Vector<double>\&s,  Vector<double>\& values)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{//Storage for the fluid velocities}}
-\DoxyCodeLine{   Vector<double> nst\_values;}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Get the continuously interpolated values at the local coordinate}}
+\DoxyCodeLine{\textcolor{comment}{    /// s. We choose to put the fluid velocities first, followed by the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// temperature.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_interpolated\_values(\textcolor{keyword}{const} Vector<double>\& s,}
+\DoxyCodeLine{                                 Vector<double>\& values)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// Storage for the fluid velocities}}
+\DoxyCodeLine{      Vector<double> nst\_values;}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Get the fluid velocities from the fluid element}}
-\DoxyCodeLine{   RefineableQCrouzeixRaviartElement<DIM>::}
-\DoxyCodeLine{    get\_interpolated\_values(s,nst\_values);}
+\DoxyCodeLine{      \textcolor{comment}{// Get the fluid velocities from the fluid element}}
+\DoxyCodeLine{      RefineableQCrouzeixRaviartElement<DIM>::get\_interpolated\_values(}
+\DoxyCodeLine{        s, nst\_values);}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Storage for the temperature}}
-\DoxyCodeLine{   Vector<double> advection\_values;}
+\DoxyCodeLine{      \textcolor{comment}{// Storage for the temperature}}
+\DoxyCodeLine{      Vector<double> advection\_values;}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Get the temperature from the advection-\/diffusion element}}
-\DoxyCodeLine{   RefineableQAdvectionDiffusionElement<DIM,3>::}
-\DoxyCodeLine{    get\_interpolated\_values(s,advection\_values);}
-\DoxyCodeLine{ }
-\DoxyCodeLine{   \textcolor{comment}{//Add the fluid velocities to the values vector}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<DIM;i++) \{values.push\_back(nst\_values[i]);\}  }
+\DoxyCodeLine{      \textcolor{comment}{// Get the temperature from the advection-\/diffusion element}}
+\DoxyCodeLine{      RefineableQAdvectionDiffusionElement<DIM, 3>::get\_interpolated\_values(}
+\DoxyCodeLine{        s, advection\_values);}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Add the concentration to the end}}
-\DoxyCodeLine{   values.push\_back(advection\_values[0]);}
-\DoxyCodeLine{  \}}
+\DoxyCodeLine{      \textcolor{comment}{// Add the fluid velocities to the values vector}}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < DIM; i++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        values.push\_back(nst\_values[i]);}
+\DoxyCodeLine{      \}}
 \DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Add the concentration to the end}}
+\DoxyCodeLine{      values.push\_back(advection\_values[0]);}
+\DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Get all continuously interpolated values at the local }}
-\DoxyCodeLine{\textcolor{comment}{ /// coordinate s at time level t (t=0: present; t>0: previous).}}
-\DoxyCodeLine{\textcolor{comment}{ /// We choose to put the fluid velocities first, followed by the}}
-\DoxyCodeLine{\textcolor{comment}{ /// temperature}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} get\_interpolated\_values(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, \textcolor{keyword}{const} Vector<double>\&s,}
-\DoxyCodeLine{                              Vector<double>\& values)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{//Storage for the fluid velocities}}
-\DoxyCodeLine{   Vector<double> nst\_values;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Get all continuously interpolated values at the local}}
+\DoxyCodeLine{\textcolor{comment}{    /// coordinate s at time level t (t=0: present; t>0: previous).}}
+\DoxyCodeLine{\textcolor{comment}{    /// We choose to put the fluid velocities first, followed by the}}
+\DoxyCodeLine{\textcolor{comment}{    /// temperature}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_interpolated\_values(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
+\DoxyCodeLine{                                 \textcolor{keyword}{const} Vector<double>\& s,}
+\DoxyCodeLine{                                 Vector<double>\& values)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// Storage for the fluid velocities}}
+\DoxyCodeLine{      Vector<double> nst\_values;}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Get the fluid velocities from the fluid element}}
-\DoxyCodeLine{   RefineableQCrouzeixRaviartElement<DIM>::}
-\DoxyCodeLine{    get\_interpolated\_values(t,s,nst\_values);}
+\DoxyCodeLine{      \textcolor{comment}{// Get the fluid velocities from the fluid element}}
+\DoxyCodeLine{      RefineableQCrouzeixRaviartElement<DIM>::get\_interpolated\_values(}
+\DoxyCodeLine{        t, s, nst\_values);}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Storage for the temperature}}
-\DoxyCodeLine{   Vector<double> advection\_values;}
+\DoxyCodeLine{      \textcolor{comment}{// Storage for the temperature}}
+\DoxyCodeLine{      Vector<double> advection\_values;}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Get the temperature from the advection-\/diffusion element}}
-\DoxyCodeLine{   RefineableQAdvectionDiffusionElement<DIM,3>::}
-\DoxyCodeLine{    get\_interpolated\_values(s,advection\_values);}
+\DoxyCodeLine{      \textcolor{comment}{// Get the temperature from the advection-\/diffusion element}}
+\DoxyCodeLine{      RefineableQAdvectionDiffusionElement<DIM, 3>::get\_interpolated\_values(}
+\DoxyCodeLine{        s, advection\_values);}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Add the fluid velocities to the values vector}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<DIM;i++) \{values.push\_back(nst\_values[i]);\}   }
+\DoxyCodeLine{      \textcolor{comment}{// Add the fluid velocities to the values vector}}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < DIM; i++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        values.push\_back(nst\_values[i]);}
+\DoxyCodeLine{      \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Add the concentration to the end}}
-\DoxyCodeLine{   values.push\_back(advection\_values[0]);}
+\DoxyCodeLine{      \textcolor{comment}{// Add the concentration to the end}}
+\DoxyCodeLine{      values.push\_back(advection\_values[0]);}
 \DoxyCodeLine{}
-\DoxyCodeLine{  \} \textcolor{comment}{// end of get\_interpolated\_values}}
+\DoxyCodeLine{    \} \textcolor{comment}{// end of get\_interpolated\_values}}
 
 \end{DoxyCodeInclude}
 
@@ -636,44 +661,43 @@ Finally, the setup and build functions must call the build functions of the two 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short The additional hanging node information must be set up}}
-\DoxyCodeLine{\textcolor{comment}{ /// for both single-\/physics elements.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} further\_setup\_hanging\_nodes()}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   RefineableQCrouzeixRaviartElement<DIM>::further\_setup\_hanging\_nodes();}
-\DoxyCodeLine{   RefineableQAdvectionDiffusionElement<DIM,3>::further\_setup\_hanging\_nodes();}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Call the rebuild\_from\_sons functions for each of the}}
-\DoxyCodeLine{\textcolor{comment}{ /// constituent multi-\/physics elements.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} rebuild\_from\_sons(Mesh* \&mesh\_pt) }
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   RefineableQAdvectionDiffusionElement<DIM,3>::rebuild\_from\_sons(mesh\_pt);}
-\DoxyCodeLine{   RefineableQCrouzeixRaviartElement<DIM>::rebuild\_from\_sons(mesh\_pt);}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{  }
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short The additional hanging node information must be set up}}
+\DoxyCodeLine{\textcolor{comment}{    /// for both single-\/physics elements.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} further\_setup\_hanging\_nodes()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      RefineableQCrouzeixRaviartElement<DIM>::further\_setup\_hanging\_nodes();}
+\DoxyCodeLine{      RefineableQAdvectionDiffusionElement<DIM,}
+\DoxyCodeLine{                                           3>::further\_setup\_hanging\_nodes();}
+\DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Call the underlying single-\/physics element's further\_build()}}
-\DoxyCodeLine{\textcolor{comment}{ /// functions and make sure that the pointer to the Rayleigh number}}
-\DoxyCodeLine{\textcolor{comment}{ /// is passed to the sons}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} further\_build()}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   RefineableQCrouzeixRaviartElement<DIM>::further\_build();}
-\DoxyCodeLine{   RefineableQAdvectionDiffusionElement<DIM,3>::further\_build();}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Call the rebuild\_from\_sons functions for each of the}}
+\DoxyCodeLine{\textcolor{comment}{    /// constituent multi-\/physics elements.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} rebuild\_from\_sons(Mesh*\& mesh\_pt)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      RefineableQAdvectionDiffusionElement<DIM, 3>::rebuild\_from\_sons(mesh\_pt);}
+\DoxyCodeLine{      RefineableQCrouzeixRaviartElement<DIM>::rebuild\_from\_sons(mesh\_pt);}
+\DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Cast the pointer to the father element to the specific}}
-\DoxyCodeLine{   \textcolor{comment}{//element type}}
-\DoxyCodeLine{   RefineableBuoyantQCrouzeixRaviartElement<DIM>* cast\_father\_element\_pt}
-\DoxyCodeLine{    = \textcolor{keyword}{dynamic\_cast<}RefineableBuoyantQCrouzeixRaviartElement<DIM>*\textcolor{keyword}{>}(}
-\DoxyCodeLine{     this-\/>father\_element\_pt());}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Call the underlying single-\/physics element's further\_build()}}
+\DoxyCodeLine{\textcolor{comment}{    /// functions and make sure that the pointer to the Rayleigh number}}
+\DoxyCodeLine{\textcolor{comment}{    /// is passed to the sons}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} further\_build()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      RefineableQCrouzeixRaviartElement<DIM>::further\_build();}
+\DoxyCodeLine{      RefineableQAdvectionDiffusionElement<DIM, 3>::further\_build();}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Set the pointer to the Rayleigh number to be the same as that in}}
-\DoxyCodeLine{   \textcolor{comment}{//the father}}
-\DoxyCodeLine{   this-\/>Ra\_pt = cast\_father\_element\_pt-\/>ra\_pt();}
-\DoxyCodeLine{  \} \textcolor{comment}{//end of further build}}
+\DoxyCodeLine{      \textcolor{comment}{// Cast the pointer to the father element to the specific}}
+\DoxyCodeLine{      \textcolor{comment}{// element type}}
+\DoxyCodeLine{      RefineableBuoyantQCrouzeixRaviartElement<DIM>* cast\_father\_element\_pt =}
+\DoxyCodeLine{        \textcolor{keyword}{dynamic\_cast<}RefineableBuoyantQCrouzeixRaviartElement<DIM>*\textcolor{keyword}{>}(}
+\DoxyCodeLine{          this-\/>father\_element\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Set the pointer to the Rayleigh number to be the same as that in}}
+\DoxyCodeLine{      \textcolor{comment}{// the father}}
+\DoxyCodeLine{      this-\/>Ra\_pt = cast\_father\_element\_pt-\/>ra\_pt();}
+\DoxyCodeLine{    \} \textcolor{comment}{// end of further build}}
 
 \end{DoxyCodeInclude}
 

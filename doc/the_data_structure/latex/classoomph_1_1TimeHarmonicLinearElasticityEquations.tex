@@ -21,7 +21,7 @@ void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_aed703
 \begin{DoxyCompactList}\small\item\em Return the residuals for the solid equations (the discretised principle of virtual displacements) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a546ed8d0a485289fa94c0835be57a771}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a46807604989766db0dd54dd8ff457021}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&sigma) const
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_adb792f37ee12a0f482a2ef4c43113cf7}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$$>$ \&sigma) const
 \begin{DoxyCompactList}\small\item\em Return the Cauchy stress tensor, as calculated from the elasticity tensor at specified local coordinate. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a9b7deca877e8fbb4b20d0f3e9f732e69}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output exact solution x,y,\mbox{[}z\mbox{]},u\+\_\+r,v\+\_\+r,\mbox{[}w\+\_\+r\mbox{]},u\+\_\+i,v\+\_\+i,\mbox{[}w\+\_\+i\mbox{]}. \end{DoxyCompactList}\item 
@@ -49,7 +49,7 @@ class oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$}
 
 A class for elements that solve the equations of linear elasticity in cartesian coordinates. 
 
-Definition at line 302 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 314 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -67,7 +67,7 @@ Constructor.
 
 
 
-Definition at line 308 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 319 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -108,11 +108,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 325 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 339 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity().
+References residuals().
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicLinearElasticityEquations_aed703e899b784e5bb2a0c7b9d8291d42}\label{classoomph_1_1TimeHarmonicLinearElasticityEquations_aed703e899b784e5bb2a0c7b9d8291d42}} 
 \index{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -131,7 +131,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 315 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 329 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -154,7 +154,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableTimeHarmonicLinearElas
 
 
 
-Definition at line 202 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 195 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -162,14 +162,14 @@ References a(), oomph\+::\+Quad\+Tree\+Names\+::E, i, interpolated\+\_\+u(), res
 
 
 
-Referenced by oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1TimeHarmonicLinearElasticityEquations_a46807604989766db0dd54dd8ff457021}\label{classoomph_1_1TimeHarmonicLinearElasticityEquations_a46807604989766db0dd54dd8ff457021}} 
+\mbox{\Hypertarget{classoomph_1_1TimeHarmonicLinearElasticityEquations_adb792f37ee12a0f482a2ef4c43113cf7}\label{classoomph_1_1TimeHarmonicLinearElasticityEquations_adb792f37ee12a0f482a2ef4c43113cf7}} 
 \index{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}!get\_stress@{get\_stress}}
 \index{get\_stress@{get\_stress}!oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_stress()}{get\_stress()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ D\+IM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{stress }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ D\+IM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$$>$ \&}]{stress }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -177,11 +177,11 @@ Return the Cauchy stress tensor, as calculated from the elasticity tensor at spe
 
 Compute the Cauchy stress tensor at local coordinate s for displacement formulation. 
 
-Implements \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquationsBase_a292db17379dfd457f5cc103acc3c5163}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$}}.
+Implements \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquationsBase_a0bd77318a41933a860ce2f8df2dbe6b2}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 156 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 150 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -208,7 +208,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTimeHarmonicLinearElasticityEle
 
 
 
-Definition at line 355 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 370 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -235,7 +235,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTimeHarmonicLinearElasticityEle
 
 
 
-Definition at line 559 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 556 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -262,7 +262,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTimeHarmonicLinearElasticityEle
 
 
 
-Definition at line 344 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 359 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -289,7 +289,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityEle
 
 
 
-Definition at line 510 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 504 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -312,7 +312,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee
 
 
 
-Definition at line 456 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 453 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -335,7 +335,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 311 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 322 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 

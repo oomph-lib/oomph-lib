@@ -78,8 +78,7 @@ void \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a4522f1751b81
 \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a78adac085b81bd6efed96c43f9c1f8a2}{North\+\_\+boundary\+\_\+fn\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Function pointer to prescribe the north boundary of this topologically rectangular domain. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_ac6f1166ec8fd2e62704512bfb612dfb4}{East\+\_\+boundary\+\_\+fn\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the east boundary of this topologically rectangular domain ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the east boundary of this topologically rectangular domain. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a48aa6d308f504b63b6f080ed486a1248}{South\+\_\+boundary\+\_\+fn\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Function pointer to prescribe the north boundary of this topologically rectangular domain. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_ab565242c7de0d10b36ec0a2e7a219bf9}{West\+\_\+boundary\+\_\+fn\+\_\+pt}}
@@ -110,7 +109,7 @@ void \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a4522f1751b81
 \doxysubsection{Detailed Description}
 Topologically Rectangular \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} -\/ a domain dexcribing a topologically rectangular problem -\/ primarily contains functions to access the position of the global boundary relative to the macro element boundary, as well as first and second derivates of the global boundary wrt the macro element boundary N\+O\+TE \+: suitable for Hermite\+Element\+Quad\+Mesh. 
 
-Definition at line 52 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 50 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
@@ -127,7 +126,7 @@ boundary function pointer -\/ for a given boundary takes the macro element coord
 
 
 
-Definition at line 62 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 57 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
@@ -144,7 +143,11 @@ Constructor -\/ domain boundaries are described with four boundary function poin
 
 
 
-Definition at line 39 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 36 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+
+
+
+References d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt, d\+East\+\_\+boundary\+\_\+fn\+\_\+pt, d\+North\+\_\+boundary\+\_\+fn\+\_\+pt, d\+South\+\_\+boundary\+\_\+fn\+\_\+pt, d\+West\+\_\+boundary\+\_\+fn\+\_\+pt, East\+\_\+boundary\+\_\+fn\+\_\+pt, oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt, North\+\_\+boundary\+\_\+fn\+\_\+pt, South\+\_\+boundary\+\_\+fn\+\_\+pt, and West\+\_\+boundary\+\_\+fn\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a2b21567d1c94ec14df12c9390a9dd195}\label{classoomph_1_1TopologicallyRectangularDomain_a2b21567d1c94ec14df12c9390a9dd195}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!TopologicallyRectangularDomain@{TopologicallyRectangularDomain}}
@@ -158,7 +161,11 @@ Constructor -\/ takes length of domain in x and y direction as arguements. Assum
 
 
 
-Definition at line 157 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 152 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+
+
+
+References d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt, d\+East\+\_\+boundary\+\_\+fn\+\_\+pt, d\+North\+\_\+boundary\+\_\+fn\+\_\+pt, d\+South\+\_\+boundary\+\_\+fn\+\_\+pt, d\+West\+\_\+boundary\+\_\+fn\+\_\+pt, East\+\_\+boundary\+\_\+fn\+\_\+pt, oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt, North\+\_\+boundary\+\_\+fn\+\_\+pt, South\+\_\+boundary\+\_\+fn\+\_\+pt, West\+\_\+boundary\+\_\+fn\+\_\+pt, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a6b00e4df8a228538f9beac85e2927033}\label{classoomph_1_1TopologicallyRectangularDomain_a6b00e4df8a228538f9beac85e2927033}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!TopologicallyRectangularDomain@{TopologicallyRectangularDomain}}
@@ -172,7 +179,11 @@ Constructor -\/ takes the minimum and maximum coordinates of the of an assumed r
 
 
 
-Definition at line 201 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 196 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+
+
+
+References d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt, d\+East\+\_\+boundary\+\_\+fn\+\_\+pt, d\+North\+\_\+boundary\+\_\+fn\+\_\+pt, d\+South\+\_\+boundary\+\_\+fn\+\_\+pt, d\+West\+\_\+boundary\+\_\+fn\+\_\+pt, East\+\_\+boundary\+\_\+fn\+\_\+pt, oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt, North\+\_\+boundary\+\_\+fn\+\_\+pt, South\+\_\+boundary\+\_\+fn\+\_\+pt, West\+\_\+boundary\+\_\+fn\+\_\+pt, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a31181fa9d4032d7a1f3aa93fa011b85c}\label{classoomph_1_1TopologicallyRectangularDomain_a31181fa9d4032d7a1f3aa93fa011b85c}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!TopologicallyRectangularDomain@{TopologicallyRectangularDomain}}
@@ -186,7 +197,7 @@ Broken copy constructor.
 
 
 
-Definition at line 85 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 84 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
@@ -204,7 +215,7 @@ Destructor -\/ empty; clean up done in base class.
 
 
 
-Definition at line 99 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 98 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
@@ -221,11 +232,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Domain_afeeb40f9179abe710f14ef
 
 
 
-Definition at line 359 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 364 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+References d2r\+\_\+\+E(), d2r\+\_\+\+N(), d2r\+\_\+\+S(), d2r\+\_\+\+W(), oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ab40347c05811cfa8a76394204fd0611a}\label{classoomph_1_1TopologicallyRectangularDomain_ab40347c05811cfa8a76394204fd0611a}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2r\_E@{d2r\_E}}
@@ -239,11 +250,15 @@ takes the macro element coordinate position along the east boundary and returns 
 
 
 
-Definition at line 663 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 675 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt, d\+East\+\_\+boundary\+\_\+fn\+\_\+pt, e, East\+\_\+boundary\+\_\+fn\+\_\+pt, and s.
+
+
+
+Referenced by d2macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a6cc86191b0085c8d7b3f05985cf647c8}\label{classoomph_1_1TopologicallyRectangularDomain_a6cc86191b0085c8d7b3f05985cf647c8}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2r\_N@{d2r\_N}}
@@ -257,11 +272,15 @@ takes the macro element coordinate position along the north boundary and returns
 
 
 
-Definition at line 610 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 622 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt, d\+North\+\_\+boundary\+\_\+fn\+\_\+pt, e, North\+\_\+boundary\+\_\+fn\+\_\+pt, and s.
+
+
+
+Referenced by d2macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ae3bc22aeb952c657f3b3672068243197}\label{classoomph_1_1TopologicallyRectangularDomain_ae3bc22aeb952c657f3b3672068243197}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2r\_S@{d2r\_S}}
@@ -275,11 +294,15 @@ takes the macro element coordinate position along the south boundary and returns
 
 
 
-Definition at line 716 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 728 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt, d\+South\+\_\+boundary\+\_\+fn\+\_\+pt, e, s, and South\+\_\+boundary\+\_\+fn\+\_\+pt.
+
+
+
+Referenced by d2macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a4522f1751b8105bb7da4e1a14a75c05a}\label{classoomph_1_1TopologicallyRectangularDomain_a4522f1751b8105bb7da4e1a14a75c05a}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2r\_W@{d2r\_W}}
@@ -293,11 +316,15 @@ takes the macro element coordinate position along the west boundary and returns 
 
 
 
-Definition at line 769 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 781 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt, d\+West\+\_\+boundary\+\_\+fn\+\_\+pt, e, s, and West\+\_\+boundary\+\_\+fn\+\_\+pt.
+
+
+
+Referenced by d2macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a218b22a016e2f330d6b90354597d9786}\label{classoomph_1_1TopologicallyRectangularDomain_a218b22a016e2f330d6b90354597d9786}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dmacro\_element\_boundary@{dmacro\_element\_boundary}}
@@ -311,11 +338,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Domain_ae573c54363a8e9d33951e5
 
 
 
-Definition at line 325 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 328 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+References dr\+\_\+\+E(), dr\+\_\+\+N(), dr\+\_\+\+S(), dr\+\_\+\+W(), oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a22b9364ef22563bea32aad2ff9e6851f}\label{classoomph_1_1TopologicallyRectangularDomain_a22b9364ef22563bea32aad2ff9e6851f}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dr\_E@{dr\_E}}
@@ -329,11 +356,15 @@ takes the macro element coordinate position along the E boundary and returns the
 
 
 
-Definition at line 502 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 514 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References d\+East\+\_\+boundary\+\_\+fn\+\_\+pt, e, East\+\_\+boundary\+\_\+fn\+\_\+pt, s, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
+
+
+
+Referenced by dmacro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ad37cd9d2ee8eb90125d66be63d5b97c7}\label{classoomph_1_1TopologicallyRectangularDomain_ad37cd9d2ee8eb90125d66be63d5b97c7}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dr\_N@{dr\_N}}
@@ -347,11 +378,15 @@ takes the macro element coordinate position along the north boundary and returns
 
 
 
-Definition at line 466 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 478 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References d\+North\+\_\+boundary\+\_\+fn\+\_\+pt, e, North\+\_\+boundary\+\_\+fn\+\_\+pt, s, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
+
+
+
+Referenced by dmacro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a24a20bc9749166ca61bd4373bc381680}\label{classoomph_1_1TopologicallyRectangularDomain_a24a20bc9749166ca61bd4373bc381680}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dr\_S@{dr\_S}}
@@ -365,11 +400,15 @@ takes the macro element coordinate position along the south boundary and returns
 
 
 
-Definition at line 538 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 550 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References d\+South\+\_\+boundary\+\_\+fn\+\_\+pt, e, s, South\+\_\+boundary\+\_\+fn\+\_\+pt, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
+
+
+
+Referenced by dmacro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a91b92399343513aed5cfa65a8377b01a}\label{classoomph_1_1TopologicallyRectangularDomain_a91b92399343513aed5cfa65a8377b01a}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dr\_W@{dr\_W}}
@@ -383,11 +422,15 @@ takes the macro element coordinate position along the W boundary and returns the
 
 
 
-Definition at line 574 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 586 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References d\+West\+\_\+boundary\+\_\+fn\+\_\+pt, e, s, West\+\_\+boundary\+\_\+fn\+\_\+pt, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
+
+
+
+Referenced by dmacro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a4de4d505233303cee0690ee87e45b4cf}\label{classoomph_1_1TopologicallyRectangularDomain_a4de4d505233303cee0690ee87e45b4cf}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
@@ -401,11 +444,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac910
 
 
 
-Definition at line 291 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 292 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, r\+\_\+\+E(), r\+\_\+\+N(), r\+\_\+\+S(), r\+\_\+\+W(), oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ab04f175b5baff51c457c51252880b1ff}\label{classoomph_1_1TopologicallyRectangularDomain_ab04f175b5baff51c457c51252880b1ff}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!operator=@{operator=}}
@@ -419,7 +462,7 @@ Broken assignment operator.
 
 
 
-Definition at line 92 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 91 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
@@ -437,11 +480,15 @@ takes the macro element coordinate position along the east boundary and returns 
 
 
 
-Definition at line 410 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 419 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References East\+\_\+boundary\+\_\+fn\+\_\+pt, s, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a6adb9d87f5dcedd2ede5a8da494930e5}\label{classoomph_1_1TopologicallyRectangularDomain_a6adb9d87f5dcedd2ede5a8da494930e5}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!r\_N@{r\_N}}
@@ -455,11 +502,15 @@ takes the macro element coordinate position along the north boundary and returns
 
 
 
-Definition at line 392 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 400 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References North\+\_\+boundary\+\_\+fn\+\_\+pt, s, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a76ea308be7a90143fe728fc4799d584b}\label{classoomph_1_1TopologicallyRectangularDomain_a76ea308be7a90143fe728fc4799d584b}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!r\_S@{r\_S}}
@@ -473,11 +524,15 @@ takes the macro element coordinate position along the south boundary and returns
 
 
 
-Definition at line 428 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 438 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References s, South\+\_\+boundary\+\_\+fn\+\_\+pt, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_aa56f73a53b028997929605e71eab6e2d}\label{classoomph_1_1TopologicallyRectangularDomain_aa56f73a53b028997929605e71eab6e2d}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!r\_W@{r\_W}}
@@ -491,11 +546,15 @@ takes the macro element coordinate position along the west boundary and returns 
 
 
 
-Definition at line 447 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 458 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
 
 
 
 References s, West\+\_\+boundary\+\_\+fn\+\_\+pt, x\+\_\+north\+\_\+east, and x\+\_\+south\+\_\+west.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a86e606d9635f02462fd4f1ef07cd09d4}\label{classoomph_1_1TopologicallyRectangularDomain_a86e606d9635f02462fd4f1ef07cd09d4}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!set\_boundary\_derivative\_functions@{set\_boundary\_derivative\_functions}}
@@ -509,7 +568,11 @@ allows the boundary derivate function pointers to be set. To compute the derivat
 
 
 
-Definition at line 251 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 248 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+
+
+
+References d\+East\+\_\+boundary\+\_\+fn\+\_\+pt, d\+North\+\_\+boundary\+\_\+fn\+\_\+pt, d\+South\+\_\+boundary\+\_\+fn\+\_\+pt, and d\+West\+\_\+boundary\+\_\+fn\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a69d21da2d4dff225943aab99fb4f1f10}\label{classoomph_1_1TopologicallyRectangularDomain_a69d21da2d4dff225943aab99fb4f1f10}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!set\_boundary\_second\_derivative\_functions@{set\_boundary\_second\_derivative\_functions}}
@@ -523,7 +586,11 @@ allows the boundary second derivate function pointers to be set. To compute the 
 
 
 
-Definition at line 275 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+Definition at line 274 of file topologically\+\_\+rectangular\+\_\+domain.\+cc.
+
+
+
+References d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt, d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt, and d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt.
 
 
 
@@ -540,11 +607,11 @@ Function pointer to prescribe the second derivates of global coordinates wrt to 
 
 
 
-Definition at line 206 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 203 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+E().
+Referenced by d2r\+\_\+\+E(), set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a18674c5ad527a43b1fd3e3bdc15fff8f}\label{classoomph_1_1TopologicallyRectangularDomain_a18674c5ad527a43b1fd3e3bdc15fff8f}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2North\_boundary\_fn\_pt@{d2North\_boundary\_fn\_pt}}
@@ -558,11 +625,11 @@ Function pointer to prescribe the second derivates of global coordinates wrt to 
 
 
 
-Definition at line 201 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 198 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+N().
+Referenced by d2r\+\_\+\+N(), set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a71020e52d5dd8cc0be51b9b466a294dc}\label{classoomph_1_1TopologicallyRectangularDomain_a71020e52d5dd8cc0be51b9b466a294dc}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2South\_boundary\_fn\_pt@{d2South\_boundary\_fn\_pt}}
@@ -576,11 +643,11 @@ Function pointer to prescribe the second derivates of global coordinates wrt to 
 
 
 
-Definition at line 211 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 208 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+S().
+Referenced by d2r\+\_\+\+S(), set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a55aaf2cfce3da535d9dd9ac5e990be3b}\label{classoomph_1_1TopologicallyRectangularDomain_a55aaf2cfce3da535d9dd9ac5e990be3b}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2West\_boundary\_fn\_pt@{d2West\_boundary\_fn\_pt}}
@@ -594,11 +661,11 @@ Function pointer to prescribe the second derivates of global coordinates wrt to 
 
 
 
-Definition at line 216 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 213 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+W().
+Referenced by d2r\+\_\+\+W(), set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a535ff2d7f9561425d9fd4b0d57bbc769}\label{classoomph_1_1TopologicallyRectangularDomain_a535ff2d7f9561425d9fd4b0d57bbc769}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dEast\_boundary\_fn\_pt@{dEast\_boundary\_fn\_pt}}
@@ -612,11 +679,11 @@ Function pointer to prescribe the derivates of global coordinates wrt to the mac
 
 
 
-Definition at line 187 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 184 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+E(), and dr\+\_\+\+E().
+Referenced by d2r\+\_\+\+E(), dr\+\_\+\+E(), set\+\_\+boundary\+\_\+derivative\+\_\+functions(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_afda00e0273ae8dacbd3626bfd363fcc3}\label{classoomph_1_1TopologicallyRectangularDomain_afda00e0273ae8dacbd3626bfd363fcc3}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dNorth\_boundary\_fn\_pt@{dNorth\_boundary\_fn\_pt}}
@@ -630,11 +697,11 @@ Function pointer to prescribe the derivates of global coordinates wrt to the mac
 
 
 
-Definition at line 183 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 180 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+N(), and dr\+\_\+\+N().
+Referenced by d2r\+\_\+\+N(), dr\+\_\+\+N(), set\+\_\+boundary\+\_\+derivative\+\_\+functions(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_aeaea9592b94d26a6a23f4f425ee7cd37}\label{classoomph_1_1TopologicallyRectangularDomain_aeaea9592b94d26a6a23f4f425ee7cd37}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dSouth\_boundary\_fn\_pt@{dSouth\_boundary\_fn\_pt}}
@@ -648,11 +715,11 @@ Function pointer to prescribe the derivates of global coordinates wrt to the mac
 
 
 
-Definition at line 191 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 188 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+S(), and dr\+\_\+\+S().
+Referenced by d2r\+\_\+\+S(), dr\+\_\+\+S(), set\+\_\+boundary\+\_\+derivative\+\_\+functions(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a8e3abcbc75bab984017cb974d81db41e}\label{classoomph_1_1TopologicallyRectangularDomain_a8e3abcbc75bab984017cb974d81db41e}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dWest\_boundary\_fn\_pt@{dWest\_boundary\_fn\_pt}}
@@ -666,11 +733,11 @@ Function pointer to prescribe the derivates of global coordinates wrt to the mac
 
 
 
-Definition at line 195 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 192 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+W(), and dr\+\_\+\+W().
+Referenced by d2r\+\_\+\+W(), dr\+\_\+\+W(), set\+\_\+boundary\+\_\+derivative\+\_\+functions(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ac6f1166ec8fd2e62704512bfb612dfb4}\label{classoomph_1_1TopologicallyRectangularDomain_ac6f1166ec8fd2e62704512bfb612dfb4}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!East\_boundary\_fn\_pt@{East\_boundary\_fn\_pt}}
@@ -680,16 +747,15 @@ Referenced by d2r\+\_\+\+W(), and dr\+\_\+\+W().
 
 
 
-Function pointer to prescribe the east boundary of this topologically rectangular domain ~\newline
- 
+Function pointer to prescribe the east boundary of this topologically rectangular domain. 
 
 
 
-Definition at line 170 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 167 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+E(), dr\+\_\+\+E(), and r\+\_\+\+E().
+Referenced by d2r\+\_\+\+E(), dr\+\_\+\+E(), r\+\_\+\+E(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a78adac085b81bd6efed96c43f9c1f8a2}\label{classoomph_1_1TopologicallyRectangularDomain_a78adac085b81bd6efed96c43f9c1f8a2}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!North\_boundary\_fn\_pt@{North\_boundary\_fn\_pt}}
@@ -703,11 +769,11 @@ Function pointer to prescribe the north boundary of this topologically rectangul
 
 
 
-Definition at line 166 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 163 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+N(), dr\+\_\+\+N(), and r\+\_\+\+N().
+Referenced by d2r\+\_\+\+N(), dr\+\_\+\+N(), r\+\_\+\+N(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a48aa6d308f504b63b6f080ed486a1248}\label{classoomph_1_1TopologicallyRectangularDomain_a48aa6d308f504b63b6f080ed486a1248}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!South\_boundary\_fn\_pt@{South\_boundary\_fn\_pt}}
@@ -721,11 +787,11 @@ Function pointer to prescribe the north boundary of this topologically rectangul
 
 
 
-Definition at line 174 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 171 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+S(), dr\+\_\+\+S(), and r\+\_\+\+S().
+Referenced by d2r\+\_\+\+S(), dr\+\_\+\+S(), r\+\_\+\+S(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ab565242c7de0d10b36ec0a2e7a219bf9}\label{classoomph_1_1TopologicallyRectangularDomain_ab565242c7de0d10b36ec0a2e7a219bf9}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!West\_boundary\_fn\_pt@{West\_boundary\_fn\_pt}}
@@ -739,11 +805,11 @@ Function pointer to prescribe the west boundary of this topologically rectangula
 
 
 
-Definition at line 178 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 175 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by d2r\+\_\+\+W(), dr\+\_\+\+W(), and r\+\_\+\+W().
+Referenced by d2r\+\_\+\+W(), dr\+\_\+\+W(), r\+\_\+\+W(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_aea8383a0d263080b49c3cbaee4af7833}\label{classoomph_1_1TopologicallyRectangularDomain_aea8383a0d263080b49c3cbaee4af7833}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!x\_north\_east@{x\_north\_east}}
@@ -757,11 +823,11 @@ coordinate position of north east corner of domain (only used if boundary functi
 
 
 
-Definition at line 225 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 222 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by dr\+\_\+\+E(), dr\+\_\+\+N(), dr\+\_\+\+S(), dr\+\_\+\+W(), r\+\_\+\+E(), r\+\_\+\+N(), r\+\_\+\+S(), and r\+\_\+\+W().
+Referenced by dr\+\_\+\+E(), dr\+\_\+\+N(), dr\+\_\+\+S(), dr\+\_\+\+W(), r\+\_\+\+E(), r\+\_\+\+N(), r\+\_\+\+S(), r\+\_\+\+W(), and Topologically\+Rectangular\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a2e58acf65777d33e580b4953b7753b45}\label{classoomph_1_1TopologicallyRectangularDomain_a2e58acf65777d33e580b4953b7753b45}} 
 \index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!x\_south\_west@{x\_south\_west}}
@@ -775,11 +841,11 @@ coordinate position of south west corner of domain (only used if boundary functi
 
 
 
-Definition at line 221 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
+Definition at line 218 of file topologically\+\_\+rectangular\+\_\+domain.\+h.
 
 
 
-Referenced by dr\+\_\+\+E(), dr\+\_\+\+N(), dr\+\_\+\+S(), dr\+\_\+\+W(), r\+\_\+\+E(), r\+\_\+\+N(), r\+\_\+\+S(), and r\+\_\+\+W().
+Referenced by dr\+\_\+\+E(), dr\+\_\+\+N(), dr\+\_\+\+S(), dr\+\_\+\+W(), r\+\_\+\+E(), r\+\_\+\+N(), r\+\_\+\+S(), r\+\_\+\+W(), and Topologically\+Rectangular\+Domain().
 
 
 

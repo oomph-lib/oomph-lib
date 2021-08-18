@@ -33,7 +33,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a46c57c6a2f4b54e27d2aacc
 \begin{DoxyCompactList}\small\item\em Toggles off the debug flag. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab8e2478caa8370dd12462f17e1cc8082}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$ $\ast$master\+\_\+block\+\_\+prec\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse)
 \begin{DoxyCompactList}\small\item\em Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.\+g. a Navier-\/\+Stokes 2x2 block preconditioner dealing with the fluid sub-\/blocks within a 3x3 F\+SI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. {\bfseries{1}}. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. {\bfseries{2}}. block\+\_\+setup(...) should be called in the master preconditioner before this method is called. {\bfseries{3}}. block\+\_\+setup(...) should be called in the corresponding subsidiary preconditioner after this method is called. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ae9282acaaf19fa2cdb703d49f1a8de25}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$ $\ast$master\+\_\+block\+\_\+prec\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&doftype\+\_\+coarsen\+\_\+map\+\_\+coarse)
+void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ac0d2887082cf856b680b4ae61b510d29}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$ $\ast$master\+\_\+block\+\_\+prec\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&doftype\+\_\+coarsen\+\_\+map\+\_\+coarse)
 \begin{DoxyCompactList}\small\item\em Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.\+g. a Navier-\/\+Stokes 2x2 block preconditioner dealing with the fluid sub-\/blocks within a 3x3 F\+SI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. {\bfseries{1}}. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. {\bfseries{2}}. block\+\_\+setup(...) should be called in the master preconditioner before this method is called. {\bfseries{3}}. block\+\_\+setup(...) should be called in the corresponding subsidiary preconditioner after this method is called. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af704c4816469cef4fed9d35a9ad651ec}{block\+\_\+setup}} ()
 \begin{DoxyCompactList}\small\item\em Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their \char`\"{}blocks\char`\"{} and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the internal blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if the identity dof-\/to-\/block mapping is okay, i.\+e. dof number 0 corresponds to block number 0 dof number 1 corresponds to block number 1 dof number 2 corresponds to block number 2 etc... \end{DoxyCompactList}\item 
@@ -121,7 +121,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a289db176ccafcc3719367fa
 \begin{DoxyCompactList}\small\item\em Returns the most fine grain dof types in a (possibly coarsened) dof type. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a50b76a374797805f64e2af34d581cdc2}{nfine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Access function for the number of most fine grain dof types in a (possibly coarsened) dof type. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ unsigned, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ac8ef0e69b712d9ab7902d277a14ed8f5}{replacement\+\_\+dof\+\_\+block\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ unsigned, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a571824cedc7e458a612111b51f20e5fb}{replacement\+\_\+dof\+\_\+block\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function to the replaced dof-\/level blocks. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9}{setup\+\_\+matrix\+\_\+vector\+\_\+product}} (\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} $\ast$matvec\+\_\+prod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$block\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&block\+\_\+col\+\_\+indices)
 \begin{DoxyCompactList}\small\item\em Setup a matrix vector product. matvec\+\_\+prod\+\_\+pt is a pointer to the \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}}, block\+\_\+pt is a pointer to the block matrix, block\+\_\+col\+\_\+indices is a vector indicating which block indices does the R\+HS vector we want to multiply the matrix by. \end{DoxyCompactList}\item 
@@ -140,8 +140,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a04e260cc4160a952db2d410
 void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ae3cf61f61e1aa50e2315e999827e7d59}{internal\+\_\+get\+\_\+block\+\_\+vector}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&v, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b) const
 \begin{DoxyCompactList}\small\item\em A helper function, takes the naturally ordered vector, v, and extracts the n-\/th block vector, b. Here n is the block number in the current preconditioner. N\+O\+TE\+: The ordering of the vector b is the same as the ordering of the block matrix from internal\+\_\+get\+\_\+block(...). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ace6e9dbdfe9a1c3571452e2cd6ec9780}{internal\+\_\+get\+\_\+block\+\_\+vectors}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&block\+\_\+vec\+\_\+number, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
-\begin{DoxyCompactList}\small\item\em Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()}} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()}} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a0cde8af922cd8054dbf352527dd682b1}{internal\+\_\+get\+\_\+block\+\_\+vectors}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
 \begin{DoxyCompactList}\small\item\em A helper function, takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()}} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. This is simply a wrapper around the other internal\+\_\+get\+\_\+block\+\_\+vectors(...) function with the identity block\+\_\+vec\+\_\+number vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a2ca7f125e50493073d116ba8da271af5}{internal\+\_\+return\+\_\+block\+\_\+vectors}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&block\+\_\+vec\+\_\+number, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&v) const
@@ -173,7 +172,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ae055f998f6145656352aaca
 \begin{DoxyCompactList}\small\item\em Specify the number of meshes required by this block preconditioner. Note\+: elements in different meshes correspond to different types of D\+OF. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af97821621b570d409e6662939e5f818d}{set\+\_\+mesh}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3c0e92cb77c3e3179007fe9fd99b6428}{mesh\+\_\+pt}}, const bool \&allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh=false)
 \begin{DoxyCompactList}\small\item\em Set the i-\/th mesh for this block preconditioner. Note\+: The method set\+\_\+nmesh(...) must be called before this method to specify the number of meshes. By default, it is assumed that each mesh only contains elements of the same type. This condition may be relaxed by setting the boolean allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh to true, however, each mesh must only contain elements with the same number of dof types. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a8a0ae880f098d5b1e9df78fc74c31dbf}{set\+\_\+replacement\+\_\+dof\+\_\+block}} (const unsigned \&block\+\_\+i, const unsigned \&block\+\_\+j, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ac8ef0e69b712d9ab7902d277a14ed8f5}{replacement\+\_\+dof\+\_\+block\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a8a0ae880f098d5b1e9df78fc74c31dbf}{set\+\_\+replacement\+\_\+dof\+\_\+block}} (const unsigned \&block\+\_\+i, const unsigned \&block\+\_\+j, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a571824cedc7e458a612111b51f20e5fb}{replacement\+\_\+dof\+\_\+block\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set replacement dof-\/level blocks. Only dof-\/level blocks can be set. This is important due to how the dof type coarsening feature operates. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6fb68db9e79048615984b005f8aa43b3}{any\+\_\+mesh\+\_\+distributed}} () const
 \begin{DoxyCompactList}\small\item\em Check if any of the meshes are distributed. This is equivalent to problem.\+distributed() and is used as a replacement. \end{DoxyCompactList}\item 
@@ -192,11 +191,11 @@ unsigned \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7297e4d24c2c7ae7af6
 const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3a16de88bd5369e729d761a6498fdd3f}{internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em access function to the internal preconditioner matrix distribution pt. preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt always returns the concatenation of the internal block distributions. Since the writer of the preconditioner does not need to concern themselves with the internal dof/block, please use \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a74eeff188f842dd8abdff1b7d9801d44}{preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a74eeff188f842dd8abdff1b7d9801d44}{preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}} () const
-\begin{DoxyCompactList}\small\item\em Access function to the preconditioner matrix distribution pointer. This is the concatenation of the block distributions with the identity ordering. I.\+e. if this preconditioner has three block types, with the three associated block distributions dist\+\_\+b0, dist\+\_\+b1 and dist\+\_\+b2, then this distribution is\+: Linear\+Algebra\+Distribution\+Helpers\+::concatenate(dist\+\_\+b0, dist\+\_\+b1, dist\+\_\+b2). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Access function to the preconditioner matrix distribution pointer. This is the concatenation of the block distributions with the identity ordering. I.\+e. if this preconditioner has three block types, with the three associated block distributions dist\+\_\+b0, dist\+\_\+b1 and dist\+\_\+b2, then this distribution is\+: \mbox{\hyperlink{namespaceoomph_1_1LinearAlgebraDistributionHelpers_af11187289196182ce650da88cfe37fc2}{Linear\+Algebra\+Distribution\+Helpers\+::concatenate}}(dist\+\_\+b0, dist\+\_\+b1, dist\+\_\+b2). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ unsigned, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6816cfc4c9d74a39aca7401f751bb235}{Replacement\+\_\+dof\+\_\+block\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ unsigned, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ad2cd49c5c823c4202046e97038f6e080}{Replacement\+\_\+dof\+\_\+block\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em The replacement dof-\/level blocks. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a59e83eca59e3cdc41a93668539e138f1}{Block\+\_\+distribution\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em The distribution for the blocks. \end{DoxyCompactList}\item 
@@ -229,7 +228,7 @@ bool \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ae6ce543de76eedb34a2562e
 \begin{DoxyCompactList}\small\item\em Debugging variable. Set true or false via the access functions turn\+\_\+on\+\_\+recursive\+\_\+debug\+\_\+flag(...) turn\+\_\+off\+\_\+recursive\+\_\+debug\+\_\+flag(...) These will turn on/off the debug flag up the hierarchy. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab4647ea06ca7cf44c8de695ba35f3e97}{Debug\+\_\+flag}}
 \begin{DoxyCompactList}\small\item\em Debugging variable. Set true or false via the access functions turn\+\_\+on\+\_\+debug\+\_\+flag(...) turn\+\_\+off\+\_\+debug\+\_\+flag(...) \end{DoxyCompactList}\item 
-std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$, \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a555ed672f4bcc8fcf72806154fd3ce0b}{Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$, \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab295a391e32dc00c4e56dfb0527ea354}{Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Stores any block-\/level distributions / concatenation of block-\/level distributions required. The first in the pair (\mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$unsigned$>$}}) represents the block numbers of the distributions concatenated to get the second in the pair (Linear\+Algebra\+Distribution$\ast$). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a4aa232afd2a76adac97fb7d484a18c5e}{Nrow}}
 \begin{DoxyCompactList}\small\item\em Number of D\+O\+Fs (\# of rows or columns in the matrix) in this preconditioner. Note that this information is maintained if used as a subsidiary or stand-\/alone block preconditioner, in the latter case it stores the number of rows within the subsidiary preconditioner. \end{DoxyCompactList}\item 
@@ -284,7 +283,7 @@ std\+::string \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a915ff2775ccef6
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static bool \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6e6a40988711a64c622c2fd9104c56cf}{Run\+\_\+block\+\_\+matrix\+\_\+test}} =false
+static bool \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6e6a40988711a64c622c2fd9104c56cf}{Run\+\_\+block\+\_\+matrix\+\_\+test}} = false
 \begin{DoxyCompactList}\small\item\em Static boolean to allow block\+\_\+matrix\+\_\+test(...) to be run. Defaults to false. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -300,7 +299,7 @@ This class can function in one of two ways. Either it acts as a stand-\/alone bl
 
 In cases where a {\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}} contains elements of different element types (e.\+g. fluid and solid elements in a fluid-\/structure interaction problem), access to the elements of the same type must be provided via pointers to (possibly auxiliary) {\ttfamily Meshes} that only contain elements of a single type. The block preconditioner will then create global block numbers by concatenating the block types. Consider, e.\+g. a fluid-\/structure interaction problem in which the first {\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}} contains (fluid) elements whose degrees of freedom have been subdivided into types \char`\"{}0\char`\"{} (the velocity, say) and \char`\"{}1\char`\"{} (the pressure say), while the second {\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}} contains (solid) elements whose degrees of freedom are the nodal displacements, classified as its type \char`\"{}0\char`\"{}. The combined block preconditioner then has three \char`\"{}block types\char`\"{}\+: \char`\"{}0\char`\"{}\+: Fluid velocity, \char`\"{}1\char`\"{}\+: Fluid pressure, \char`\"{}2\char`\"{}\+: Solid nodal positions. N\+O\+TE\+: currently this preconditioner uses the same communicator as the underlying problem. We may need to change this in the future. 
 
-Definition at line 424 of file block\+\_\+preconditioner.\+h.
+Definition at line 421 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -318,7 +317,7 @@ Constructor.
 
 
 
-Definition at line 429 of file block\+\_\+preconditioner.\+h.
+Definition at line 425 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a78c33fc6f29101f027e22d64d158d567}\label{classoomph_1_1BlockPreconditioner_a78c33fc6f29101f027e22d64d158d567}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!````~BlockPreconditioner@{$\sim$BlockPreconditioner}}
@@ -333,7 +332,7 @@ Destructor.
 
 
 
-Definition at line 511 of file block\+\_\+preconditioner.\+h.
+Definition at line 506 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a9652c8d4fb3cdbd8216f13c356324170}\label{classoomph_1_1BlockPreconditioner_a9652c8d4fb3cdbd8216f13c356324170}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!BlockPreconditioner@{BlockPreconditioner}}
@@ -348,7 +347,7 @@ Broken copy constructor.
 
 
 
-Definition at line 517 of file block\+\_\+preconditioner.\+h.
+Definition at line 512 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -366,7 +365,7 @@ Check if any of the meshes are distributed. This is equivalent to problem.\+dist
 
 
 
-Definition at line 3066 of file block\+\_\+preconditioner.\+h.
+Definition at line 3031 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a77ac0b71404620e7be8b15ac2d588495}\label{classoomph_1_1BlockPreconditioner_a77ac0b71404620e7be8b15ac2d588495}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!block\_distribution\_pt@{block\_distribution\_pt}}
@@ -381,7 +380,7 @@ Access function to the block distributions (const version).
 
 
 
-Definition at line 1924 of file block\+\_\+preconditioner.\+h.
+Definition at line 1909 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -400,7 +399,7 @@ Access function to the block distributions (non-\/const version).
 
 
 
-Definition at line 1955 of file block\+\_\+preconditioner.\+h.
+Definition at line 1939 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a4d8ff67e34e85a71c0f9bb68c0b10496}\label{classoomph_1_1BlockPreconditioner_a4d8ff67e34e85a71c0f9bb68c0b10496}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!block\_matrix\_test@{block\_matrix\_test}}
@@ -415,7 +414,7 @@ Private helper function to check that every element in the block matrix (i,j) ma
 
 test function to check that every element in the block matrix (block\+\_\+i,block\+\_\+j) matches the corresponding element in the original matrix 
 
-Definition at line 5749 of file block\+\_\+preconditioner.\+cc.
+Definition at line 5839 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a8a64cfc57ffd16b92ac78499de515138}\label{classoomph_1_1BlockPreconditioner_a8a64cfc57ffd16b92ac78499de515138}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!block\_number@{block\_number}}
@@ -430,7 +429,7 @@ Return the block number corresponding to a global index i\+\_\+dof.
 
 
 
-Definition at line 1843 of file block\+\_\+preconditioner.\+h.
+Definition at line 1828 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -449,7 +448,7 @@ Test if output of blocks is on or not.
 
 
 
-Definition at line 2115 of file block\+\_\+preconditioner.\+h.
+Definition at line 2094 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_af704c4816469cef4fed9d35a9ad651ec}\label{classoomph_1_1BlockPreconditioner_af704c4816469cef4fed9d35a9ad651ec}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!block\_setup@{block\_setup}}
@@ -464,7 +463,7 @@ Determine the size of the matrix blocks and setup the lookup schemes relating th
 
 Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their \char`\"{}blocks\char`\"{} and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if each D\+OF type corresponds to a unique block type. 
 
-Definition at line 2433 of file block\+\_\+preconditioner.\+cc.
+Definition at line 2483 of file block\+\_\+preconditioner.\+cc.
 
 
 
@@ -485,7 +484,7 @@ dof\+\_\+to\+\_\+block\+\_\+map\mbox{[}dof\+\_\+number\mbox{]} = block\+\_\+numb
 
 Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their \char`\"{}blocks\char`\"{} and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if any block contains more than one type of D\+OF. The argument vector dof\+\_\+to\+\_\+block\+\_\+map should be of length ndof. Each element should contain an integer indicating the block number corresponding to that type of D\+OF. 
 
-Definition at line 52 of file block\+\_\+preconditioner.\+cc.
+Definition at line 50 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a7845d9301918e3f5cbecd729ec1e309b}\label{classoomph_1_1BlockPreconditioner_a7845d9301918e3f5cbecd729ec1e309b}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!clear\_block\_preconditioner\_base@{clear\_block\_preconditioner\_base}}
@@ -500,7 +499,7 @@ Clears all \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditi
 
 
 
-Definition at line 2185 of file block\+\_\+preconditioner.\+h.
+Definition at line 2165 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -519,7 +518,7 @@ Turn off output of blocks (by clearing the basefilename string).
 
 
 
-Definition at line 2109 of file block\+\_\+preconditioner.\+h.
+Definition at line 2088 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a289db176ccafcc3719367fa98340f94d}\label{classoomph_1_1BlockPreconditioner_a289db176ccafcc3719367fa98340f94d}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!document@{document}}
@@ -534,7 +533,7 @@ debugging method to document the setup. Should only be called after block\+\_\+s
 
 
 
-Definition at line 2297 of file block\+\_\+preconditioner.\+h.
+Definition at line 2275 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a1ee4a9fcf226e8c4438fb25747cb6e93}\label{classoomph_1_1BlockPreconditioner_a1ee4a9fcf226e8c4438fb25747cb6e93}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!dof\_block\_distribution\_pt@{dof\_block\_distribution\_pt}}
@@ -549,7 +548,7 @@ Access function to the dof-\/level block distributions.
 
 
 
-Definition at line 1986 of file block\+\_\+preconditioner.\+h.
+Definition at line 1968 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -568,7 +567,7 @@ Access function for the Doftype\+\_\+coarsen\+\_\+map\+\_\+fine variable.
 
 
 
-Definition at line 2360 of file block\+\_\+preconditioner.\+h.
+Definition at line 2340 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a4c37f469646c689b5f1e79d0953bd588}\label{classoomph_1_1BlockPreconditioner_a4c37f469646c689b5f1e79d0953bd588}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_block@{get\_block}}
@@ -583,7 +582,7 @@ Return block (i,j). If the optional argument ignore\+\_\+replacement\+\_\+block 
 
 
 
-Definition at line 1000 of file block\+\_\+preconditioner.\+h.
+Definition at line 994 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}\label{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_block@{get\_block}}
@@ -598,7 +597,7 @@ Put block (i,j) into output\+\_\+matrix. This block accounts for any coarsening 
 
 
 
-Definition at line 688 of file block\+\_\+preconditioner.\+h.
+Definition at line 679 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -627,7 +626,7 @@ This function has been re-\/written to work with the new dof type coarsening fea
 
 This function should be used. 
 
-Definition at line 4732 of file block\+\_\+preconditioner.\+cc.
+Definition at line 4793 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a9dae351352d344321ea82999d7003e17}\label{classoomph_1_1BlockPreconditioner_a9dae351352d344321ea82999d7003e17}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_block\_other\_matrix@{get\_block\_other\_matrix}}
@@ -642,7 +641,7 @@ Get a block from a different matrix using the blocking scheme that has already b
 
 
 
-Definition at line 1024 of file block\+\_\+preconditioner.\+h.
+Definition at line 1018 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}\label{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_block\_vector@{get\_block\_vector}}
@@ -657,7 +656,7 @@ Takes the naturally ordered vector, v and returns the n-\/th block vector, b. He
 
 
 
-Definition at line 4132 of file block\+\_\+preconditioner.\+cc.
+Definition at line 4186 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a0517a3678def8b89ae69840345a8f838}\label{classoomph_1_1BlockPreconditioner_a0517a3678def8b89ae69840345a8f838}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_block\_vectors@{get\_block\_vectors}}
@@ -672,7 +671,7 @@ Takes the naturally ordered vector and rearranges it into a vector of sub vector
 
 
 
-Definition at line 3081 of file block\+\_\+preconditioner.\+cc.
+Definition at line 3102 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ad356946d5de4f0817cdf8793fa3cdc74}\label{classoomph_1_1BlockPreconditioner_ad356946d5de4f0817cdf8793fa3cdc74}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_block\_vectors@{get\_block\_vectors}}
@@ -687,7 +686,7 @@ Takes the naturally ordered vector and rearranges it into a vector of sub vector
 
 
 
-Definition at line 2913 of file block\+\_\+preconditioner.\+cc.
+Definition at line 2939 of file block\+\_\+preconditioner.\+cc.
 
 
 
@@ -710,7 +709,7 @@ W\+A\+R\+N\+I\+NG 2\+: the matrix pointers in block\+\_\+matrix\+\_\+pt M\+U\+ST
 
 Get the block matrices required for the block preconditioner. Takes a pointer to a matrix of bools that indicate if a specified sub-\/block is required for the preconditioning operation. Computes the required block matrices, and stores pointers to them in the matrix block\+\_\+matrix\+\_\+pt. If an entry in block\+\_\+matrix\+\_\+pt is equal to N\+U\+LL that sub-\/block has not been requested and is therefore not available. 
 
-Definition at line 2491 of file block\+\_\+preconditioner.\+cc.
+Definition at line 2537 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a51636746e5921ee2845daf60b1c322dc}\label{classoomph_1_1BlockPreconditioner_a51636746e5921ee2845daf60b1c322dc}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_concatenated\_block@{get\_concatenated\_block}}
@@ -766,7 +765,7 @@ Then we can call\+:
 
 N\+O\+TE\+: It is important to set the row and column indices even if you do not want the block. This is because, if we allow the row and column indices to be \char`\"{}not set\char`\"{}, then we can have a whole empty block row without any indices. But concatenation of blocks without communication requires both the row and column distributions, so we know how to permute the rows and columns. So in short, we require that the column and row indices to always be set for every entry in the Vector\+Matrix$<$\+Block\+Selector$>$ object for convenience and consistency checks. 
 
-Definition at line 1142 of file block\+\_\+preconditioner.\+h.
+Definition at line 1140 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_af9321cdab3f506ab95fe51cd9b93deab}\label{classoomph_1_1BlockPreconditioner_af9321cdab3f506ab95fe51cd9b93deab}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_concatenated\_block\_vector@{get\_concatenated\_block\_vector}}
@@ -781,7 +780,7 @@ Takes the naturally ordered vector and extracts the blocks indicated by the bloc
 
 Takes the naturally ordered vector and extracts the blocks indicated by the block number (the values) in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} block\+\_\+vec\+\_\+number all at once, then concatenates them without communication. Here, the values in block\+\_\+vec\+\_\+number is the block number in the current preconditioner. This is a non-\/const function because distributions may be created and stored in Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt for future use. 
 
-Definition at line 2565 of file block\+\_\+preconditioner.\+cc.
+Definition at line 2608 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a1df550d281ec99914115edfa1a40b982}\label{classoomph_1_1BlockPreconditioner_a1df550d281ec99914115edfa1a40b982}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_dof\_level\_block@{get\_dof\_level\_block}}
@@ -795,7 +794,7 @@ Gets dof-\/level block (i,j). If Replacement\+\_\+dof\+\_\+block\+\_\+pt(i,j) is
 
 Otherwise if this is the uppermost block preconditioner then it calls internal\+\_\+get\+\_\+block(i,j), else if it is a subsidiary block preconditioner, it will call it\textquotesingle{}s master block preconditioners\textquotesingle{} get\+\_\+dof\+\_\+level\+\_\+block function. 
 
-Definition at line 5589 of file block\+\_\+preconditioner.\+cc.
+Definition at line 5671 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a314fc14d95f2833be66067cd5b45e093}\label{classoomph_1_1BlockPreconditioner_a314fc14d95f2833be66067cd5b45e093}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_dof\_level\_block@{get\_dof\_level\_block}}
@@ -825,7 +824,7 @@ Returns the most fine grain dof types in a (possibly coarsened) dof type.
 
 
 
-Definition at line 2367 of file block\+\_\+preconditioner.\+h.
+Definition at line 2347 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_acac55e8dea1a0f63fcf32b7b058b0979}\label{classoomph_1_1BlockPreconditioner_acac55e8dea1a0f63fcf32b7b058b0979}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_index\_of\_value@{get\_index\_of\_value}}
@@ -841,7 +840,7 @@ Get the index of first occurrence of value in a vector. If the element does not 
 
 
 
-Definition at line 2858 of file block\+\_\+preconditioner.\+h.
+Definition at line 2833 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a75742d54177935fb22e59d045209b11e}\label{classoomph_1_1BlockPreconditioner_a75742d54177935fb22e59d045209b11e}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!index\_in\_block@{index\_in\_block}}
@@ -856,7 +855,7 @@ Given a global dof number, returns the index in the block it belongs to. This is
 
 
 
-Definition at line 1871 of file block\+\_\+preconditioner.\+h.
+Definition at line 1856 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a9b3c4072be2bf4f0dfdd18f56a5d51bf}\label{classoomph_1_1BlockPreconditioner_a9b3c4072be2bf4f0dfdd18f56a5d51bf}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!insert\_auxiliary\_block\_distribution@{insert\_auxiliary\_block\_distribution}}
@@ -871,7 +870,7 @@ insert a \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$unsigned$>$}} and Linea
 
 
 
-Definition at line 2796 of file block\+\_\+preconditioner.\+h.
+Definition at line 2775 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -890,7 +889,7 @@ Return the number of degrees of freedom in block b. Note that if this preconditi
 
 
 
-Definition at line 3203 of file block\+\_\+preconditioner.\+h.
+Definition at line 3171 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a19f8ca9f40ab804262cf95c1d5eb598c}\label{classoomph_1_1BlockPreconditioner_a19f8ca9f40ab804262cf95c1d5eb598c}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_block\_distribution\_pt@{internal\_block\_distribution\_pt}}
@@ -905,7 +904,7 @@ Access function to the internal block distributions.
 
 
 
-Definition at line 2761 of file block\+\_\+preconditioner.\+h.
+Definition at line 2740 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -924,7 +923,7 @@ Return the block number corresponding to a global index i\+\_\+dof. This returns
 
 
 
-Definition at line 2713 of file block\+\_\+preconditioner.\+h.
+Definition at line 2695 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -943,7 +942,7 @@ Return the size of the dof \char`\"{}block\char`\"{} i, i.\+e. how many degrees 
 
 
 
-Definition at line 3226 of file block\+\_\+preconditioner.\+h.
+Definition at line 3193 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -962,7 +961,7 @@ Return the number of the block associated with global unknown i\+\_\+dof. If thi
 
 
 
-Definition at line 3083 of file block\+\_\+preconditioner.\+h.
+Definition at line 3051 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -980,7 +979,7 @@ Gets block (i,j) from the matrix pointed to by Matrix\+\_\+pt and returns it in 
 
 
 
-Definition at line 5037 of file block\+\_\+preconditioner.\+cc.
+Definition at line 5101 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_abe001ffe270c96e761ec5205364976a7}\label{classoomph_1_1BlockPreconditioner_abe001ffe270c96e761ec5205364976a7}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_get\_block@{internal\_get\_block}}
@@ -1016,7 +1015,7 @@ Furthermore, it does not take into account the new dof type coarsening feature. 
 
 This has been superseded by the function get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(...) which does the correct thing. 
 
-Definition at line 4545 of file block\+\_\+preconditioner.\+cc.
+Definition at line 4599 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ae3cf61f61e1aa50e2315e999827e7d59}\label{classoomph_1_1BlockPreconditioner_ae3cf61f61e1aa50e2315e999827e7d59}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_get\_block\_vector@{internal\_get\_block\_vector}}
@@ -1031,7 +1030,7 @@ A helper function, takes the naturally ordered vector, v, and extracts the n-\/t
 
 
 
-Definition at line 3962 of file block\+\_\+preconditioner.\+cc.
+Definition at line 4009 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a0cde8af922cd8054dbf352527dd682b1}\label{classoomph_1_1BlockPreconditioner_a0cde8af922cd8054dbf352527dd682b1}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_get\_block\_vectors@{internal\_get\_block\_vectors}}
@@ -1046,7 +1045,7 @@ A helper function, takes the naturally ordered vector and rearranges it into a v
 
 
 
-Definition at line 3381 of file block\+\_\+preconditioner.\+cc.
+Definition at line 3420 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ace6e9dbdfe9a1c3571452e2cd6ec9780}\label{classoomph_1_1BlockPreconditioner_ace6e9dbdfe9a1c3571452e2cd6ec9780}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_get\_block\_vectors@{internal\_get\_block\_vectors}}
@@ -1057,15 +1056,11 @@ void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preco
 
 
 
-Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()}} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. ~\newline
- 
+Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()}} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. 
 
-Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the.
 
-sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()}} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. ~\newline
- 
 
-Definition at line 3109 of file block\+\_\+preconditioner.\+cc.
+Definition at line 3131 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_affcfd24c1ba15bf9cac712ffd46dc283}\label{classoomph_1_1BlockPreconditioner_affcfd24c1ba15bf9cac712ffd46dc283}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_index\_in\_block@{internal\_index\_in\_block}}
@@ -1080,7 +1075,7 @@ Return the index in the block corresponding to a global block number i\+\_\+dof.
 
 
 
-Definition at line 2729 of file block\+\_\+preconditioner.\+h.
+Definition at line 2711 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a1e0a33327b5042dfba04baf46c045373}\label{classoomph_1_1BlockPreconditioner_a1e0a33327b5042dfba04baf46c045373}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_index\_in\_dof@{internal\_index\_in\_dof}}
@@ -1095,7 +1090,7 @@ Return the row/column number of global unknown i\+\_\+dof within it\textquotesin
 
 
 
-Definition at line 3150 of file block\+\_\+preconditioner.\+h.
+Definition at line 3119 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1114,7 +1109,7 @@ Takes the block number within this preconditioner and returns the corresponding 
 
 
 
-Definition at line 3277 of file block\+\_\+preconditioner.\+h.
+Definition at line 3244 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1137,7 +1132,7 @@ This is legacy code from before the coarsening dof type functionality was added.
 
 The function nblock\+\_\+types(...) should be used if the number of block types is required. 
 
-Definition at line 2550 of file block\+\_\+preconditioner.\+h.
+Definition at line 2528 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1156,7 +1151,7 @@ Return the number of internal dof types. This is the number of most fine grain d
 
 
 
-Definition at line 2592 of file block\+\_\+preconditioner.\+h.
+Definition at line 2570 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1175,7 +1170,7 @@ access function to the internal preconditioner matrix distribution pt. precondit
 
 
 
-Definition at line 3292 of file block\+\_\+preconditioner.\+h.
+Definition at line 3257 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1198,7 +1193,7 @@ get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(...) and return\+\_\
 
 Thus this function is moved to the private section of the code. 
 
-Definition at line 4790 of file block\+\_\+preconditioner.\+cc.
+Definition at line 4850 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a04e260cc4160a952db2d410109fb2684}\label{classoomph_1_1BlockPreconditioner_a04e260cc4160a952db2d410109fb2684}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_return\_block\_vector@{internal\_return\_block\_vector}}
@@ -1213,7 +1208,7 @@ Takes the n-\/th block ordered vector, b, and copies its entries to the appropri
 
 This version works with the internal block types. This is legacy code but is kept alive, hence moved to private. Please use the function \char`\"{}return\+\_\+block\+\_\+vector(...)\char`\"{}. 
 
-Definition at line 4241 of file block\+\_\+preconditioner.\+cc.
+Definition at line 4293 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a9e2ce77e3efbcdd465f7ad7252936dfd}\label{classoomph_1_1BlockPreconditioner_a9e2ce77e3efbcdd465f7ad7252936dfd}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_return\_block\_vectors@{internal\_return\_block\_vectors}}
@@ -1228,7 +1223,7 @@ A helper function, takes the vector of block vectors, s, and copies its entries 
 
 A helper function, takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()}} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. This is simply a wrapper around the other internal\+\_\+get\+\_\+block\+\_\+vectors(...) function with the identity block\+\_\+vec\+\_\+number vector. 
 
-Definition at line 3940 of file block\+\_\+preconditioner.\+cc.
+Definition at line 3987 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a2ca7f125e50493073d116ba8da271af5}\label{classoomph_1_1BlockPreconditioner_a2ca7f125e50493073d116ba8da271af5}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_return\_block\_vectors@{internal\_return\_block\_vectors}}
@@ -1241,10 +1236,9 @@ void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preco
 
 A helper function, takes the vector of block vectors, s, and copies its entries into the naturally ordered vector, v. If this is a subsidiary block preconditioner only those entries in v that are associated with its blocks are affected. 
 
-Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()}} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. ~\newline
- 
+Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()}} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. 
 
-Definition at line 3655 of file block\+\_\+preconditioner.\+cc.
+Definition at line 3684 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a804e1975f170d2ad941b3b7d2dd50407}\label{classoomph_1_1BlockPreconditioner_a804e1975f170d2ad941b3b7d2dd50407}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!is\_master\_block\_preconditioner@{is\_master\_block\_preconditioner}}
@@ -1259,7 +1253,7 @@ Return true if this preconditioner is the master block preconditioner.
 
 
 
-Definition at line 2095 of file block\+\_\+preconditioner.\+h.
+Definition at line 2074 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1278,7 +1272,7 @@ Return true if this preconditioner is a subsidiary preconditioner.
 
 
 
-Definition at line 2088 of file block\+\_\+preconditioner.\+h.
+Definition at line 2067 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1297,7 +1291,7 @@ Access function to the master block preconditioner pt.
 
 
 
-Definition at line 2168 of file block\+\_\+preconditioner.\+h.
+Definition at line 2147 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1316,7 +1310,7 @@ Access function to the distribution of the master preconditioner. If this precon
 
 
 
-Definition at line 2044 of file block\+\_\+preconditioner.\+h.
+Definition at line 2023 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1335,7 +1329,7 @@ Return the number of dofs (number of rows or columns) in the overall problem. Th
 
 
 
-Definition at line 3261 of file block\+\_\+preconditioner.\+h.
+Definition at line 3228 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}\label{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!matrix\_pt@{matrix\_pt}}
@@ -1354,7 +1348,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a66726e9df31365
 
 
 
-Definition at line 531 of file block\+\_\+preconditioner.\+h.
+Definition at line 526 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1373,7 +1367,7 @@ Access to i-\/th mesh (of the various meshes that contain block preconditionable
 
 W\+A\+R\+N\+I\+NG\+: This should only be used if the derived class is the upper-\/most master block preconditioner. An error is thrown is this function is called from a subsidiary preconditioner. They (and since every block preconditioner can in principle be used as s subsidiary preconditioner\+: all block preconditioners) should store local copies of \char`\"{}their meshes\char`\"{} (if they\textquotesingle{}re needed for anything) 
 
-Definition at line 1801 of file block\+\_\+preconditioner.\+h.
+Definition at line 1788 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1392,7 +1386,7 @@ Return the number of block types.
 
 
 
-Definition at line 1687 of file block\+\_\+preconditioner.\+h.
+Definition at line 1676 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1411,7 +1405,7 @@ Return the total number of D\+OF types.
 
 
 
-Definition at line 1711 of file block\+\_\+preconditioner.\+h.
+Definition at line 1700 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1430,7 +1424,7 @@ Return the number of D\+OF types in mesh i. W\+A\+R\+N\+I\+NG\+: This should onl
 
 
 
-Definition at line 2064 of file block\+\_\+preconditioner.\+h.
+Definition at line 2043 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1449,7 +1443,7 @@ Access function for the number of most fine grain dof types in a (possibly coars
 
 
 
-Definition at line 2388 of file block\+\_\+preconditioner.\+h.
+Definition at line 2367 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a193776a271f7c23d20d2102de0ff1cb9}\label{classoomph_1_1BlockPreconditioner_a193776a271f7c23d20d2102de0ff1cb9}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!nmesh@{nmesh}}
@@ -1464,7 +1458,7 @@ Return the number of meshes in Mesh\+\_\+pt.
 
 W\+A\+R\+N\+I\+NG\+: This should only be used if the derived class is the upper-\/most master block preconditioner. All block preconditioners) should store local copies of \char`\"{}their meshes\char`\"{} (if they\textquotesingle{}re needed for anything) 
 
-Definition at line 1837 of file block\+\_\+preconditioner.\+h.
+Definition at line 1822 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1483,7 +1477,7 @@ Broken assignment operator.
 
 
 
-Definition at line 523 of file block\+\_\+preconditioner.\+h.
+Definition at line 518 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_adec848504d36ebcd8e27ec60f52f75a6}\label{classoomph_1_1BlockPreconditioner_adec848504d36ebcd8e27ec60f52f75a6}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!output\_blocks\_to\_files@{output\_blocks\_to\_files}}
@@ -1494,7 +1488,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preco
 
 Output all blocks to numbered files. Called at the end of get blocks if an output filename has been set. 
 
-Definition at line 2122 of file block\+\_\+preconditioner.\+h.
+Definition at line 2101 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_aa760ae71a5aae488547ccf721d412b1e}\label{classoomph_1_1BlockPreconditioner_aa760ae71a5aae488547ccf721d412b1e}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!post\_block\_matrix\_assembly\_partial\_clear@{post\_block\_matrix\_assembly\_partial\_clear}}
@@ -1509,7 +1503,7 @@ A helper method to reduce the memory requirements of block preconditioners. Once
 
 
 
-Definition at line 2147 of file block\+\_\+preconditioner.\+h.
+Definition at line 2126 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1524,22 +1518,22 @@ const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\
 
 
 
-Access function to the preconditioner matrix distribution pointer. This is the concatenation of the block distributions with the identity ordering. I.\+e. if this preconditioner has three block types, with the three associated block distributions dist\+\_\+b0, dist\+\_\+b1 and dist\+\_\+b2, then this distribution is\+: Linear\+Algebra\+Distribution\+Helpers\+::concatenate(dist\+\_\+b0, dist\+\_\+b1, dist\+\_\+b2). 
+Access function to the preconditioner matrix distribution pointer. This is the concatenation of the block distributions with the identity ordering. I.\+e. if this preconditioner has three block types, with the three associated block distributions dist\+\_\+b0, dist\+\_\+b1 and dist\+\_\+b2, then this distribution is\+: \mbox{\hyperlink{namespaceoomph_1_1LinearAlgebraDistributionHelpers_af11187289196182ce650da88cfe37fc2}{Linear\+Algebra\+Distribution\+Helpers\+::concatenate}}(dist\+\_\+b0, dist\+\_\+b1, dist\+\_\+b2). 
 
 
 
-Definition at line 3307 of file block\+\_\+preconditioner.\+h.
+Definition at line 3273 of file block\+\_\+preconditioner.\+h.
 
 
 
 Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::document().
 
-\mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ac8ef0e69b712d9ab7902d277a14ed8f5}\label{classoomph_1_1BlockPreconditioner_ac8ef0e69b712d9ab7902d277a14ed8f5}} 
+\mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a571824cedc7e458a612111b51f20e5fb}\label{classoomph_1_1BlockPreconditioner_a571824cedc7e458a612111b51f20e5fb}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!replacement\_dof\_block\_pt@{replacement\_dof\_block\_pt}}
 \index{replacement\_dof\_block\_pt@{replacement\_dof\_block\_pt}!oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{replacement\_dof\_block\_pt()}{replacement\_dof\_block\_pt()}}
 {\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$unsigned,\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::replacement\+\_\+dof\+\_\+block\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$unsigned, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::replacement\+\_\+dof\+\_\+block\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1547,7 +1541,7 @@ Access function to the replaced dof-\/level blocks.
 
 
 
-Definition at line 2409 of file block\+\_\+preconditioner.\+h.
+Definition at line 2387 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1568,7 +1562,7 @@ This is the return function for the function get\+\_\+block\+\_\+ordered\+\_\+pr
 
 It calls the function return\+\_\+concatenated\+\_\+block\+\_\+vector(...) with the identity block number ordering. 
 
-Definition at line 4977 of file block\+\_\+preconditioner.\+cc.
+Definition at line 5046 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}\label{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!return\_block\_vector@{return\_block\_vector}}
@@ -1583,7 +1577,7 @@ Takes the n-\/th block ordered vector, b, and copies its entries to the appropri
 
 
 
-Definition at line 4432 of file block\+\_\+preconditioner.\+cc.
+Definition at line 4489 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a628f3ab6c3c41ccb449da642fb7e1feb}\label{classoomph_1_1BlockPreconditioner_a628f3ab6c3c41ccb449da642fb7e1feb}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!return\_block\_vectors@{return\_block\_vectors}}
@@ -1598,7 +1592,7 @@ Takes the vector of block vectors, s, and copies its entries into the naturally 
 
 
 
-Definition at line 3627 of file block\+\_\+preconditioner.\+cc.
+Definition at line 3655 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a71d48d8a70151ef0febd4537a2214c53}\label{classoomph_1_1BlockPreconditioner_a71d48d8a70151ef0febd4537a2214c53}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!return\_block\_vectors@{return\_block\_vectors}}
@@ -1613,7 +1607,7 @@ Takes the vector of block vectors, s, and copies its entries into the naturally 
 
 
 
-Definition at line 3404 of file block\+\_\+preconditioner.\+cc.
+Definition at line 3443 of file block\+\_\+preconditioner.\+cc.
 
 
 
@@ -1632,7 +1626,7 @@ Takes concatenated block ordered vector, b, and copies its entries to the approp
 
 Takes concatenated block ordered vector, b, and copies its. 
 
-Definition at line 2738 of file block\+\_\+preconditioner.\+cc.
+Definition at line 2774 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ab36e905f7da268328709d62951d64ace}\label{classoomph_1_1BlockPreconditioner_ab36e905f7da268328709d62951d64ace}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!set\_block\_output\_to\_files@{set\_block\_output\_to\_files}}
@@ -1647,7 +1641,7 @@ Set the base part of the filename to output blocks to. If it is set then all blo
 
 
 
-Definition at line 2103 of file block\+\_\+preconditioner.\+h.
+Definition at line 2082 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a748e2ad8836bc8edf5b9a42373a7ad61}\label{classoomph_1_1BlockPreconditioner_a748e2ad8836bc8edf5b9a42373a7ad61}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!set\_master\_matrix\_pt@{set\_master\_matrix\_pt}}
@@ -1662,7 +1656,7 @@ Set the matrix\+\_\+pt in the upper-\/most master preconditioner.
 
 
 
-Definition at line 1009 of file block\+\_\+preconditioner.\+h.
+Definition at line 1004 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1681,7 +1675,7 @@ Set the i-\/th mesh for this block preconditioner. Note\+: The method set\+\_\+n
 
 
 
-Definition at line 2899 of file block\+\_\+preconditioner.\+h.
+Definition at line 2872 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1700,7 +1694,7 @@ Specify the number of meshes required by this block preconditioner. Note\+: elem
 
 
 
-Definition at line 2884 of file block\+\_\+preconditioner.\+h.
+Definition at line 2857 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1719,7 +1713,7 @@ Set replacement dof-\/level blocks. Only dof-\/level blocks can be set. This is 
 
 I\+M\+P\+O\+R\+T\+A\+NT\+: The block indices (block\+\_\+i, block\+\_\+j) is the dof-\/level ordering, N\+OT the block-\/ordering. The block-\/ordering is determined by the parameters given to block\+\_\+setup(...). The D\+O\+F-\/ordering is determined by the two-\/level ordering scheme of first the elements, then the meshes. 
 
-Definition at line 2946 of file block\+\_\+preconditioner.\+h.
+Definition at line 2917 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a65059c036724814a0e490716fa6eaf0a}\label{classoomph_1_1BlockPreconditioner_a65059c036724814a0e490716fa6eaf0a}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!setup\_matrix\_vector\_product@{setup\_matrix\_vector\_product}}
@@ -1734,7 +1728,7 @@ Setup matrix vector product. This is simply a wrapper around the other setup\+\_
 
 
 
-Definition at line 2466 of file block\+\_\+preconditioner.\+h.
+Definition at line 2444 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9}\label{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!setup\_matrix\_vector\_product@{setup\_matrix\_vector\_product}}
@@ -1749,7 +1743,7 @@ Setup a matrix vector product. matvec\+\_\+prod\+\_\+pt is a pointer to the \mbo
 
 The distribution of the block column must be the same as the R\+HS vector being solved. By default, O\+O\+M\+P\+H-\/\+L\+IB\textquotesingle{}s uniform row distribution is employed. When block matrices are concatenated without communication, the columns are permuted, as a result, the distribution of the columns may no longer be uniform. 
 
-Definition at line 2425 of file block\+\_\+preconditioner.\+h.
+Definition at line 2403 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1770,18 +1764,18 @@ Function to turn this preconditioner into a subsidiary preconditioner that opera
 
 This calls the other turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner function with the identity mapping for doftype\+\_\+coarsen\+\_\+map\+\_\+coarse vector. 
 
-Definition at line 2326 of file block\+\_\+preconditioner.\+cc.
+Definition at line 2376 of file block\+\_\+preconditioner.\+cc.
 
 
 
-Referenced by oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::setup(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::setup(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup(), and oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup().
+Referenced by oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::setup(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::setup(), oomph\+::\+F\+S\+I\+Preconditioner\+::setup(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::setup(), oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::setup(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup(), and oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::setup().
 
-\mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ae9282acaaf19fa2cdb703d49f1a8de25}\label{classoomph_1_1BlockPreconditioner_ae9282acaaf19fa2cdb703d49f1a8de25}} 
+\mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ac0d2887082cf856b680b4ae61b510d29}\label{classoomph_1_1BlockPreconditioner_ac0d2887082cf856b680b4ae61b510d29}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!turn\_into\_subsidiary\_block\_preconditioner@{turn\_into\_subsidiary\_block\_preconditioner}}
 \index{turn\_into\_subsidiary\_block\_preconditioner@{turn\_into\_subsidiary\_block\_preconditioner}!oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{turn\_into\_subsidiary\_block\_preconditioner()}{turn\_into\_subsidiary\_block\_preconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$ $\ast$}]{master\+\_\+block\+\_\+prec\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&}]{doftype\+\_\+coarsen\+\_\+map\+\_\+coarse }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$ $\ast$}]{master\+\_\+block\+\_\+prec\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&}]{doftype\+\_\+coarsen\+\_\+map\+\_\+coarse }\end{DoxyParamCaption})}
 
 
 
@@ -1813,7 +1807,7 @@ The doftype\+\_\+coarsen\+\_\+map vector (in this case) might be \mbox{[}\mbox{[
 
 If no doftype\+\_\+coarsen\+\_\+map vector is provided, then the identity is used automatically (see the turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(...) function with only two arguments). In the above case, the identity doftype\+\_\+coarsen\+\_\+map vector for the subsidiary block preconditioner would be the 2D vector \mbox{[}\mbox{[}0\mbox{]}, \mbox{[}1\mbox{]}, \mbox{[}2\mbox{]}, \mbox{[}3\mbox{]}\mbox{]} which means dof type 0 is treated as dof type 0, dof type 1 is treated as dof type 1, dof type 2 is treated as dof type 2, and dof type 3 is treated as dof type 3. 
 
-Definition at line 2404 of file block\+\_\+preconditioner.\+cc.
+Definition at line 2455 of file block\+\_\+preconditioner.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a46c57c6a2f4b54e27d2aaccc4ec90665}\label{classoomph_1_1BlockPreconditioner_a46c57c6a2f4b54e27d2aaccc4ec90665}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!turn\_off\_debug\_flag@{turn\_off\_debug\_flag}}
@@ -1828,7 +1822,7 @@ Toggles off the debug flag.
 
 
 
-Definition at line 582 of file block\+\_\+preconditioner.\+h.
+Definition at line 574 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a8ed741a5fbf514fc29f0a332a211255f}\label{classoomph_1_1BlockPreconditioner_a8ed741a5fbf514fc29f0a332a211255f}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!turn\_off\_recursive\_debug\_flag@{turn\_off\_recursive\_debug\_flag}}
@@ -1843,7 +1837,7 @@ Toggles off the recursive debug flag. The change goes up the block preconditioni
 
 
 
-Definition at line 567 of file block\+\_\+preconditioner.\+h.
+Definition at line 560 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a271bf5ea70579e43797187498d98f9a9}\label{classoomph_1_1BlockPreconditioner_a271bf5ea70579e43797187498d98f9a9}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!turn\_on\_debug\_flag@{turn\_on\_debug\_flag}}
@@ -1858,7 +1852,7 @@ Toggles on the debug flag.
 
 
 
-Definition at line 576 of file block\+\_\+preconditioner.\+h.
+Definition at line 568 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a0d977a81515458e59b94438a215e93e1}\label{classoomph_1_1BlockPreconditioner_a0d977a81515458e59b94438a215e93e1}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!turn\_on\_recursive\_debug\_flag@{turn\_on\_recursive\_debug\_flag}}
@@ -1873,7 +1867,7 @@ Toggles on the recursive debug flag. The change goes up the block preconditionin
 
 
 
-Definition at line 557 of file block\+\_\+preconditioner.\+h.
+Definition at line 551 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1891,18 +1885,18 @@ Definition at line 557 of file block\+\_\+preconditioner.\+h.
 
 
 
-Definition at line 3384 of file block\+\_\+preconditioner.\+h.
+Definition at line 3351 of file block\+\_\+preconditioner.\+h.
 
 
 
 Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+mesh(), and oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+nmesh().
 
-\mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a555ed672f4bcc8fcf72806154fd3ce0b}\label{classoomph_1_1BlockPreconditioner_a555ed672f4bcc8fcf72806154fd3ce0b}} 
+\mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ab295a391e32dc00c4e56dfb0527ea354}\label{classoomph_1_1BlockPreconditioner_ab295a391e32dc00c4e56dfb0527ea354}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Auxiliary\_block\_distribution\_pt@{Auxiliary\_block\_distribution\_pt}}
 \index{Auxiliary\_block\_distribution\_pt@{Auxiliary\_block\_distribution\_pt}!oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Auxiliary\_block\_distribution\_pt}{Auxiliary\_block\_distribution\_pt}}
 {\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-std\+::map$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$,\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+std\+::map$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$, \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1910,7 +1904,7 @@ Stores any block-\/level distributions / concatenation of block-\/level distribu
 
 
 
-Definition at line 3427 of file block\+\_\+preconditioner.\+h.
+Definition at line 3393 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1929,7 +1923,7 @@ The distribution for the blocks.
 
 
 
-Definition at line 3316 of file block\+\_\+preconditioner.\+h.
+Definition at line 3283 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1948,7 +1942,7 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::bl
 
 
 
-Definition at line 3508 of file block\+\_\+preconditioner.\+h.
+Definition at line 3474 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1967,7 +1961,7 @@ Mapping for block types to dof types. These are the dof types the writer of the 
 
 
 
-Definition at line 3324 of file block\+\_\+preconditioner.\+h.
+Definition at line 3291 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -1986,7 +1980,7 @@ Mapping for the block types to the most fine grain dof types.
 
 
 
-Definition at line 3327 of file block\+\_\+preconditioner.\+h.
+Definition at line 3294 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2005,7 +1999,7 @@ Debugging variable. Set true or false via the access functions turn\+\_\+on\+\_\
 
 
 
-Definition at line 3420 of file block\+\_\+preconditioner.\+h.
+Definition at line 3386 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2024,7 +2018,7 @@ Storage for the default distribution for each dof block at this level.
 
 
 
-Definition at line 3380 of file block\+\_\+preconditioner.\+h.
+Definition at line 3347 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2043,7 +2037,7 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::\+
 
 
 
-Definition at line 3497 of file block\+\_\+preconditioner.\+h.
+Definition at line 3463 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2062,7 +2056,7 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::in
 
 
 
-Definition at line 3460 of file block\+\_\+preconditioner.\+h.
+Definition at line 3426 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2081,7 +2075,7 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::in
 
 
 
-Definition at line 3490 of file block\+\_\+preconditioner.\+h.
+Definition at line 3456 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2100,7 +2094,7 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::in
 
 
 
-Definition at line 3511 of file block\+\_\+preconditioner.\+h.
+Definition at line 3477 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2125,7 +2119,7 @@ Doftype\+\_\+coarsen\+\_\+map\+\_\+fine = \mbox{[}\mbox{[}0,1\mbox{]}\mbox{[}2,3
 
 In the case of the top most master block preconditioner, the block\+\_\+setup(...) function fills the vector with the identity mapping. 
 
-Definition at line 3365 of file block\+\_\+preconditioner.\+h.
+Definition at line 3332 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2144,7 +2138,7 @@ Mapping the dof types within this preconditioner. The values in here refers to t
 
 
 
-Definition at line 3373 of file block\+\_\+preconditioner.\+h.
+Definition at line 3340 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2163,7 +2157,7 @@ The map between the dof types in this preconditioner and the master precondition
 
 
 
-Definition at line 3451 of file block\+\_\+preconditioner.\+h.
+Definition at line 3417 of file block\+\_\+preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ae8c06ce4f4baf8480a2f25b152031dad}\label{classoomph_1_1BlockPreconditioner_ae8c06ce4f4baf8480a2f25b152031dad}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Doftype\_in\_master\_preconditioner\_fine@{Doftype\_in\_master\_preconditioner\_fine}}
@@ -2178,7 +2172,7 @@ The map between the dof types in this preconditioner and the master precondition
 
 
 
-Definition at line 3444 of file block\+\_\+preconditioner.\+h.
+Definition at line 3410 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2197,7 +2191,7 @@ Vectors of vectors for the mapping from block number and block row to global row
 
 
 
-Definition at line 3503 of file block\+\_\+preconditioner.\+h.
+Definition at line 3469 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2220,7 +2214,7 @@ For global indices outside of the range this-\/$>$\mbox{\hyperlink{classoomph_1_
 \item Dof\+\_\+number\+\_\+sparse; The corresponding global indices are stored in this vector. 
 \end{DoxyItemize}
 
-Definition at line 3473 of file block\+\_\+preconditioner.\+h.
+Definition at line 3439 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2239,7 +2233,7 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::in
 
 
 
-Definition at line 3455 of file block\+\_\+preconditioner.\+h.
+Definition at line 3421 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2258,7 +2252,7 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::in
 
 
 
-Definition at line 3482 of file block\+\_\+preconditioner.\+h.
+Definition at line 3448 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2277,7 +2271,7 @@ Storage for the default distribution for each internal block.
 
 
 
-Definition at line 3376 of file block\+\_\+preconditioner.\+h.
+Definition at line 3343 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2296,7 +2290,7 @@ Number of different block types in this preconditioner. Note that this informati
 
 
 
-Definition at line 3401 of file block\+\_\+preconditioner.\+h.
+Definition at line 3368 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2315,7 +2309,7 @@ Number of different D\+OF types in this preconditioner. Note that this informati
 
 
 
-Definition at line 3407 of file block\+\_\+preconditioner.\+h.
+Definition at line 3374 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2337,7 +2331,7 @@ The distribution of the (internal) preconditioner matrix. This is formed by conc
 \item only used if this preconditioner is a master preconditioner. Warning\+: always use the access function \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3a16de88bd5369e729d761a6498fdd3f}{internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}. 
 \end{DoxyItemize}
 
-Definition at line 3560 of file block\+\_\+preconditioner.\+h.
+Definition at line 3525 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2356,7 +2350,7 @@ If the block preconditioner is acting a subsidiary block preconditioner then a p
 
 
 
-Definition at line 3439 of file block\+\_\+preconditioner.\+h.
+Definition at line 3405 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2375,7 +2369,7 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::\+
 
 
 
-Definition at line 3391 of file block\+\_\+preconditioner.\+h.
+Definition at line 3358 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2394,7 +2388,7 @@ Number of types of degree of freedom associated with each block.
 
 
 
-Definition at line 3514 of file block\+\_\+preconditioner.\+h.
+Definition at line 3480 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2413,7 +2407,7 @@ Storage for number of types of degree of freedom of the elements in each mesh.
 
 
 
-Definition at line 3395 of file block\+\_\+preconditioner.\+h.
+Definition at line 3362 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2432,7 +2426,7 @@ Number of D\+O\+Fs (\# of rows or columns in the matrix) in this preconditioner.
 
 
 
-Definition at line 3433 of file block\+\_\+preconditioner.\+h.
+Definition at line 3399 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2451,7 +2445,7 @@ The number of block rows to be received from processor p for block b (matrix ind
 
 
 
-Definition at line 3533 of file block\+\_\+preconditioner.\+h.
+Definition at line 3498 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2470,7 +2464,7 @@ The number of preconditioner rows to be received from processor p for get\+\_\+b
 
 
 
-Definition at line 3549 of file block\+\_\+preconditioner.\+h.
+Definition at line 3514 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2489,7 +2483,7 @@ The number of global rows to be sent of block b to processor p (matrix indexed \
 
 
 
-Definition at line 3525 of file block\+\_\+preconditioner.\+h.
+Definition at line 3490 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2508,7 +2502,7 @@ The number global rows to be sent to processor p for get\+\_\+block\+\_\+ordered
 
 
 
-Definition at line 3541 of file block\+\_\+preconditioner.\+h.
+Definition at line 3506 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2527,7 +2521,7 @@ String giving the base of the files to write block data into. If empty then do n
 
 
 
-Definition at line 3572 of file block\+\_\+preconditioner.\+h.
+Definition at line 3537 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2546,7 +2540,7 @@ The distribution of the preconditioner matrix. This is the concatenation of the 
 
 
 
-Definition at line 3564 of file block\+\_\+preconditioner.\+h.
+Definition at line 3529 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2565,18 +2559,18 @@ Debugging variable. Set true or false via the access functions turn\+\_\+on\+\_\
 
 
 
-Definition at line 3415 of file block\+\_\+preconditioner.\+h.
+Definition at line 3381 of file block\+\_\+preconditioner.\+h.
 
 
 
 Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::\+Block\+Preconditioner(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::turn\+\_\+off\+\_\+recursive\+\_\+debug\+\_\+flag(), and oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::turn\+\_\+on\+\_\+recursive\+\_\+debug\+\_\+flag().
 
-\mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_a6816cfc4c9d74a39aca7401f751bb235}\label{classoomph_1_1BlockPreconditioner_a6816cfc4c9d74a39aca7401f751bb235}} 
+\mbox{\Hypertarget{classoomph_1_1BlockPreconditioner_ad2cd49c5c823c4202046e97038f6e080}\label{classoomph_1_1BlockPreconditioner_ad2cd49c5c823c4202046e97038f6e080}} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Replacement\_dof\_block\_pt@{Replacement\_dof\_block\_pt}}
 \index{Replacement\_dof\_block\_pt@{Replacement\_dof\_block\_pt}!oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Replacement\_dof\_block\_pt}{Replacement\_dof\_block\_pt}}
 {\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$unsigned,\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Replacement\+\_\+dof\+\_\+block\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$unsigned, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Replacement\+\_\+dof\+\_\+block\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -2584,7 +2578,7 @@ The replacement dof-\/level blocks.
 
 
 
-Definition at line 3313 of file block\+\_\+preconditioner.\+h.
+Definition at line 3280 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2603,7 +2597,7 @@ The block rows to be received from processor p for block b (matrix indexed \mbox
 
 
 
-Definition at line 3529 of file block\+\_\+preconditioner.\+h.
+Definition at line 3494 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2622,7 +2616,7 @@ The preconditioner rows to be received from processor p for get\+\_\+block\+\_\+
 
 
 
-Definition at line 3545 of file block\+\_\+preconditioner.\+h.
+Definition at line 3510 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2641,7 +2635,7 @@ The global rows to be sent of block b to processor p (matrix indexed \mbox{[}b\m
 
 
 
-Definition at line 3521 of file block\+\_\+preconditioner.\+h.
+Definition at line 3486 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2660,7 +2654,7 @@ The global rows to be sent to processor p for get\+\_\+block\+\_\+ordered\+\_\+.
 
 
 
-Definition at line 3537 of file block\+\_\+preconditioner.\+h.
+Definition at line 3502 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -2671,7 +2665,7 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::cl
 \index{Run\_block\_matrix\_test@{Run\_block\_matrix\_test}!oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Run\_block\_matrix\_test}{Run\_block\_matrix\_test}}
 {\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Run\+\_\+block\+\_\+matrix\+\_\+test =false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+bool \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Run\+\_\+block\+\_\+matrix\+\_\+test = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -2679,7 +2673,7 @@ Static boolean to allow block\+\_\+matrix\+\_\+test(...) to be run. Defaults to 
 
 
 
-Definition at line 3568 of file block\+\_\+preconditioner.\+h.
+Definition at line 3533 of file block\+\_\+preconditioner.\+h.
 
 
 

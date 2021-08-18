@@ -67,9 +67,9 @@ void \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f98838061871
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_ab0656b67b21335203eb7fbce8c7c7535}{Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve}} =false
+static bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_ab0656b67b21335203eb7fbce8c7c7535}{Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve}}
 \begin{DoxyCompactList}\small\item\em Static flag that determines whether the warning about incorrect distribution of R\+H\+Ss will be printed or not. \end{DoxyCompactList}\item 
-static int \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad6bd1660c9c62b039b9cdd8074169a25}{Default\+\_\+workspace\+\_\+scaling\+\_\+factor}} =5
+static int \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad6bd1660c9c62b039b9cdd8074169a25}{Default\+\_\+workspace\+\_\+scaling\+\_\+factor}} = 5
 \begin{DoxyCompactList}\small\item\em Default factor for workspace -- static so it can be overwritten globally. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -90,7 +90,7 @@ bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_a851b95821f3adce5545e7abe238b3cc
 bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_a8dc51b4b7e2b121773aea1ed7820ea16}{Doc\+\_\+stats}}
 \begin{DoxyCompactList}\small\item\em Set to true for \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} to output statistics (false by default). \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_a4a770886867c62d2eff6afe4b091fabd}{Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD}}
-\begin{DoxyCompactList}\small\item\em Boolean to suppress warning about communicator not equal to M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD. \end{DoxyCompactList}\item 
+\item 
 bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_acfc51e1ed214d9d2dc5a83b04a08d1f7}{Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}}
 \begin{DoxyCompactList}\small\item\em Boolean to suppress info being printed to screen during M\+U\+M\+PS solve. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_a3512c04b1bfcf11064c0da453ba34806}{Mumps\+\_\+is\+\_\+initialised}}
@@ -113,7 +113,7 @@ D\+M\+U\+M\+P\+S\+\_\+\+S\+T\+R\+U\+C\+\_\+C $\ast$ \mbox{\hyperlink{classoomph_
 \doxysubsection{Detailed Description}
 Wrapper to Mumps solver. 
 
-Definition at line 56 of file mumps\+\_\+solver.\+h.
+Definition at line 54 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -130,7 +130,7 @@ Constructor\+: Call setup.
 
 
 
-Definition at line 73 of file mumps\+\_\+solver.\+cc.
+Definition at line 69 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -148,7 +148,7 @@ Broken copy constructor.
 
 
 
-Definition at line 69 of file mumps\+\_\+solver.\+h.
+Definition at line 65 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -166,7 +166,7 @@ Destructor\+: Cleanup.
 
 Destructor\+: Shutdown mumps. 
 
-Definition at line 170 of file mumps\+\_\+solver.\+cc.
+Definition at line 163 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -187,7 +187,7 @@ Do the backsubstitution for mumps solver Note\+: returns the global result \mbox
 
 Do the backsubstitution for mumps solver. This does not make any assumption about the distribution of the vectors 
 
-Definition at line 483 of file mumps\+\_\+solver.\+cc.
+Definition at line 476 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -213,7 +213,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 659 of file mumps\+\_\+solver.\+cc.
+Definition at line 658 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -235,7 +235,7 @@ Unset Delete\+\_\+matrix\+\_\+data flag. \mbox{\hyperlink{classoomph_1_1MumpsSol
 
 
 
-Definition at line 170 of file mumps\+\_\+solver.\+h.
+Definition at line 189 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -253,7 +253,7 @@ Disable documentation of statistics.
 
 
 
-Definition at line 131 of file mumps\+\_\+solver.\+h.
+Definition at line 138 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -275,7 +275,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line 84 of file mumps\+\_\+solver.\+h.
+Definition at line 80 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -293,7 +293,7 @@ Don\textquotesingle{}t suppress info being printed to screen during M\+U\+M\+PS 
 
 
 
-Definition at line 105 of file mumps\+\_\+solver.\+h.
+Definition at line 107 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -311,7 +311,7 @@ Unset the flag so that the system is actually solved again This is the default (
 
 
 
-Definition at line 154 of file mumps\+\_\+solver.\+h.
+Definition at line 167 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -329,7 +329,7 @@ Don\textquotesingle{}t suppress warning about communicator not equal to M\+P\+I\
 
 
 
-Definition at line 96 of file mumps\+\_\+solver.\+h.
+Definition at line 94 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -347,7 +347,7 @@ Set Delete\+\_\+matrix\+\_\+data flag. \mbox{\hyperlink{classoomph_1_1MumpsSolve
 
 
 
-Definition at line 162 of file mumps\+\_\+solver.\+h.
+Definition at line 178 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -365,7 +365,7 @@ Enable documentation of statistics.
 
 
 
-Definition at line 128 of file mumps\+\_\+solver.\+h.
+Definition at line 132 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -401,7 +401,7 @@ Set the flag to avoid solution of the system, so just assemble the Jacobian and 
 
 
 
-Definition at line 150 of file mumps\+\_\+solver.\+h.
+Definition at line 160 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -419,7 +419,7 @@ Set boolean to suppress warning about communicator not equal to M\+P\+I\+\_\+\+C
 
 
 
-Definition at line 92 of file mumps\+\_\+solver.\+h.
+Definition at line 88 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -437,7 +437,7 @@ Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the f
 
 LU decompose the matrix addressed by matrix\+\_\+pt using mumps. The resulting matrix factors are stored internally. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
 
-Definition at line 182 of file mumps\+\_\+solver.\+cc.
+Definition at line 175 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -459,7 +459,7 @@ Initialise instance of mumps data structure.
 
 
 
-Definition at line 89 of file mumps\+\_\+solver.\+cc.
+Definition at line 85 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -481,7 +481,7 @@ Returns the time taken to assemble the Jacobian matrix and residual vector.
 
 
 
-Definition at line 135 of file mumps\+\_\+solver.\+h.
+Definition at line 145 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -499,7 +499,7 @@ Return the time taken to solve the linear system (needs to be overloaded for eac
 
 
 
-Definition at line 142 of file mumps\+\_\+solver.\+h.
+Definition at line 152 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -517,7 +517,7 @@ Broken assignment operator.
 
 
 
-Definition at line 75 of file mumps\+\_\+solver.\+h.
+Definition at line 71 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -539,7 +539,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line 946 of file mumps\+\_\+solver.\+cc.
+Definition at line 947 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -561,7 +561,7 @@ Shutdown mumps.
 
 
 
-Definition at line 141 of file mumps\+\_\+solver.\+cc.
+Definition at line 136 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -587,7 +587,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line 673 of file mumps\+\_\+solver.\+cc.
+Definition at line 672 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -609,7 +609,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 841 of file mumps\+\_\+solver.\+cc.
+Definition at line 840 of file mumps\+\_\+solver.\+cc.
 
 
 
@@ -626,7 +626,7 @@ References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Linear\+Algebra\+Dis
 
 
 
-Definition at line 236 of file mumps\+\_\+solver.\+h.
+Definition at line 257 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -636,7 +636,7 @@ Referenced by factorise(), and shutdown\+\_\+mumps().
 \index{oomph::MumpsSolver@{oomph::MumpsSolver}!Default\_workspace\_scaling\_factor@{Default\_workspace\_scaling\_factor}}
 \index{Default\_workspace\_scaling\_factor@{Default\_workspace\_scaling\_factor}!oomph::MumpsSolver@{oomph::MumpsSolver}}
 \doxysubsubsection{\texorpdfstring{Default\_workspace\_scaling\_factor}{Default\_workspace\_scaling\_factor}}
-{\footnotesize\ttfamily int oomph\+::\+Mumps\+Solver\+::\+Default\+\_\+workspace\+\_\+scaling\+\_\+factor =5\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily int oomph\+::\+Mumps\+Solver\+::\+Default\+\_\+workspace\+\_\+scaling\+\_\+factor = 5\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -644,7 +644,7 @@ Default factor for workspace -- static so it can be overwritten globally.
 
 
 
-Definition at line 187 of file mumps\+\_\+solver.\+h.
+Definition at line 208 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -662,7 +662,7 @@ Delete\+\_\+matrix\+\_\+data flag. \mbox{\hyperlink{classoomph_1_1MumpsSolver}{M
 
 
 
-Definition at line 227 of file mumps\+\_\+solver.\+h.
+Definition at line 248 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -680,7 +680,7 @@ Set to true for \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} to o
 
 
 
-Definition at line 207 of file mumps\+\_\+solver.\+h.
+Definition at line 227 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -698,7 +698,7 @@ Referenced by backsub(), disable\+\_\+doc\+\_\+stats(), enable\+\_\+doc\+\_\+sta
 
 
 
-Definition at line 230 of file mumps\+\_\+solver.\+h.
+Definition at line 251 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -716,7 +716,7 @@ Jacobian setup time.
 
 
 
-Definition at line 198 of file mumps\+\_\+solver.\+h.
+Definition at line 218 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -730,7 +730,7 @@ Referenced by jacobian\+\_\+setup\+\_\+time(), and solve().
 
 
 
-Definition at line 233 of file mumps\+\_\+solver.\+h.
+Definition at line 254 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -748,7 +748,7 @@ Has mumps been initialised?
 
 
 
-Definition at line 216 of file mumps\+\_\+solver.\+h.
+Definition at line 237 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -766,7 +766,7 @@ Pointer to M\+U\+M\+PS struct that contains the solver data.
 
 
 
-Definition at line 239 of file mumps\+\_\+solver.\+h.
+Definition at line 260 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -784,7 +784,7 @@ Solution time.
 
 
 
-Definition at line 201 of file mumps\+\_\+solver.\+h.
+Definition at line 221 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -794,15 +794,21 @@ Referenced by linear\+\_\+solver\+\_\+solution\+\_\+time(), resolve(), and solve
 \index{oomph::MumpsSolver@{oomph::MumpsSolver}!Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
 \index{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
 \doxysubsubsection{\texorpdfstring{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
-{\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve =false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve\hspace{0.3cm}{\ttfamily [static]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    \textcolor{keyword}{false}}
+
+\end{DoxyCode}
 
 
 Static flag that determines whether the warning about incorrect distribution of R\+H\+Ss will be printed or not. 
 
 Static warning to suppress warnings about incorrect distribution of R\+HS vector. Default is false 
 
-Definition at line 63 of file mumps\+\_\+solver.\+h.
+Definition at line 59 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -820,7 +826,7 @@ Boolean to suppress info being printed to screen during M\+U\+M\+PS solve.
 
 
 
-Definition at line 213 of file mumps\+\_\+solver.\+h.
+Definition at line 234 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -838,7 +844,7 @@ Suppress solve?
 
 
 
-Definition at line 204 of file mumps\+\_\+solver.\+h.
+Definition at line 224 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -850,13 +856,9 @@ Referenced by disable\+\_\+suppress\+\_\+solve(), enable\+\_\+suppress\+\_\+solv
 \doxysubsubsection{\texorpdfstring{Suppress\_warning\_about\_MPI\_COMM\_WORLD}{Suppress\_warning\_about\_MPI\_COMM\_WORLD}}
 {\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD\hspace{0.3cm}{\ttfamily [private]}}
 
+Boolean to suppress warning about communicator not equal to M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD 
 
-
-Boolean to suppress warning about communicator not equal to M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD. 
-
-
-
-Definition at line 210 of file mumps\+\_\+solver.\+h.
+Definition at line 231 of file mumps\+\_\+solver.\+h.
 
 
 
@@ -870,7 +872,7 @@ Referenced by backsub(), disable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+M\
 
 
 
-Definition at line 219 of file mumps\+\_\+solver.\+h.
+Definition at line 240 of file mumps\+\_\+solver.\+h.
 
 
 

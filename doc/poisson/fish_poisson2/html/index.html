@@ -148,60 +148,59 @@ Plot of the mesh adaptation without MacroElements </div></div>
 <p>The different-coloured, shaded regions in the above sketch represent the four two-dimensional <code>QMacroElements</code> by which the <code>FishDomain</code> represents the fish-shaped domain <img class="formulaInl" alt="$ D_{fish} $" src="form_4.png"/>. For instance, <code>MacroElement</code> 0 (shown in orange) represents the lower half of the fish's body; within this <code>MacroElement</code>, the curved "belly" is represented by the line <img class="formulaInl" alt="$ {\bf r}_{macro}(s_0,s_1=-1)$" src="form_5.png"/> for <img class="formulaInl" alt="$s_0\in[-1,1]$" src="form_6.png"/>; the lower "jaw" is represented by <img class="formulaInl" alt="$ {\bf r}_{macro}(s_0=-1,s_1)$" src="form_7.png"/> for <img class="formulaInl" alt="$s_1\in[-1,1]$" src="form_8.png"/>; etc.</p>
 <p>To illustrate the use of <code>MacroElements</code> / <code>Domains</code>, the following code fragment (from <br  />
  <a href="../../../../src/meshes/fish_mesh.template.cc">fish_mesh.template.cc </a>) demonstrates how the constructor of the original, non-refineable <code>FishMesh</code> assigns the nodal positions. Each of the <code>FishDomain's</code> four <code>QMacroElements</code> is associated with one of the four finite elements in the mesh. Since both types of elements are parametrised by the same local coordinate systems, we determine the position of the node that is located at <img class="formulaInl" alt="$(s_0, s_1)$" src="form_9.png"/> (in the finite element's local coordinate system) from the corresponding <code>MacroElement</code> mapping, <img class="formulaInl" alt="${\bf r}_{macro}(s_0, s_1)$" src="form_10.png"/>:</p>
- <div class="fragment"><div class="line"> <span class="comment">// Create elements and all nodes in element</span></div>
-<div class="line"> <span class="comment">//-----------------------------------------</span></div>
-<div class="line"> <span class="comment">// (ignore repetitions for now -- we&#39;ll clean them up later)</span></div>
-<div class="line"> <span class="comment">//----------------------------------------------------------</span></div>
-<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nelem;e++)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Create element</span></div>
-<div class="line">   Element_pt[e] = <span class="keyword">new</span> ELEMENT;</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Loop over rows in y/s_1-direction</span></div>
-<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i1=0;i1&lt;n_node_1d;i1++)</div>
+ <div class="fragment"><div class="line">    <span class="comment">// Create elements and all nodes in element</span></div>
+<div class="line">    <span class="comment">//-----------------------------------------</span></div>
+<div class="line">    <span class="comment">// (ignore repetitions for now -- we&#39;ll clean them up later)</span></div>
+<div class="line">    <span class="comment">//----------------------------------------------------------</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e = 0; e &lt; nelem; e++)</div>
 <div class="line">    {</div>
-<div class="line">     </div>
-<div class="line">     <span class="comment">// Loop over rows in x/s_0-direction</span></div>
-<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i0=0;i0&lt;n_node_1d;i0++)</div>
+<div class="line">      <span class="comment">// Create element</span></div>
+<div class="line">      Element_pt[e] = <span class="keyword">new</span> ELEMENT;</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Loop over rows in y/s_1-direction</span></div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i1 = 0; i1 &lt; n_node_1d; i1++)</div>
 <div class="line">      {</div>
-<div class="line">       <span class="comment">// Local node number</span></div>
-<div class="line">       <span class="keywordtype">unsigned</span> j_local=i0+i1*n_node_1d;</div>
-<div class="line">       </div>
-<div class="line">       <span class="comment">// Create the node and store pointer to it</span></div>
-<div class="line">       Node* node_pt=finite_element_pt(e)-&gt;</div>
-<div class="line">        construct_node(j_local,time_stepper_pt);</div>
+<div class="line">        <span class="comment">// Loop over rows in x/s_0-direction</span></div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i0 = 0; i0 &lt; n_node_1d; i0++)</div>
+<div class="line">        {</div>
+<div class="line">          <span class="comment">// Local node number</span></div>
+<div class="line">          <span class="keywordtype">unsigned</span> j_local = i0 + i1 * n_node_1d;</div>
 <div class="line"> </div>
-<div class="line">       <span class="comment">// Work out the node&#39;s coordinates in the finite element&#39;s local</span></div>
-<div class="line">       <span class="comment">// coordinate system:</span></div>
-<div class="line">       finite_element_pt(e)-&gt;local_fraction_of_node(j_local,s_fraction);</div>
-<div class="line">       </div>
-<div class="line">       s[0]=-1.0+2.0*s_fraction[0];</div>
-<div class="line">       s[1]=-1.0+2.0*s_fraction[1];</div>
+<div class="line">          <span class="comment">// Create the node and store pointer to it</span></div>
+<div class="line">          Node* node_pt =</div>
+<div class="line">            finite_element_pt(e)-&gt;construct_node(j_local, time_stepper_pt);</div>
 <div class="line"> </div>
-<div class="line">       <span class="comment">// Get the global position of the node from macro element mapping</span></div>
-<div class="line">       Domain_pt-&gt;macro_element_pt(e)-&gt;macro_map(s,r);</div>
-<div class="line">       </div>
-<div class="line">       <span class="comment">// Set the nodal position</span></div>
-<div class="line">       node_pt-&gt;x(0) = r[0];</div>
-<div class="line">       node_pt-&gt;x(1) = r[1];</div>
+<div class="line">          <span class="comment">// Work out the node&#39;s coordinates in the finite element&#39;s local</span></div>
+<div class="line">          <span class="comment">// coordinate system:</span></div>
+<div class="line">          finite_element_pt(e)-&gt;local_fraction_of_node(j_local, s_fraction);</div>
+<div class="line"> </div>
+<div class="line">          s[0] = -1.0 + 2.0 * s_fraction[0];</div>
+<div class="line">          s[1] = -1.0 + 2.0 * s_fraction[1];</div>
+<div class="line"> </div>
+<div class="line">          <span class="comment">// Get the global position of the node from macro element mapping</span></div>
+<div class="line">          Domain_pt-&gt;macro_element_pt(e)-&gt;macro_map(s, r);</div>
+<div class="line"> </div>
+<div class="line">          <span class="comment">// Set the nodal position</span></div>
+<div class="line">          node_pt-&gt;x(0) = r[0];</div>
+<div class="line">          node_pt-&gt;x(1) = r[1];</div>
+<div class="line">        }</div>
 <div class="line">      }</div>
-<div class="line">    }</div>
-<div class="line">  } <span class="comment">// end of loop over elements</span></div>
+<div class="line">    } <span class="comment">// end of loop over elements</span></div>
 </div><!-- fragment --><p>This technique ensures that the mesh's boundary nodes are placed on the exact domain boundary when the mesh is created.</p>
 <p>To retain this functionality during the mesh adaptation, each <code>FiniteElement</code> provides storage for a pointer to an associated <code>MacroElement</code>. By default, the <code>MacroElement</code> pointer is set to <code>NULL</code>, indicating that the element is not associated with a <code>MacroElement</code>. In that case, the coordinates of newly created nodes are determined by interpolation from the father element, as discussed above. If the <code>MacroElement</code> pointer is non-<code>NULL</code>, the refinement process refers to the element's <code>MacroElement</code> representation to determine the new nodal positions.</p>
-<p>To enable the mesh adaptation process to respect the domain's curvilinear boundaries, each element in the coarse base mesh must therefore be given a pointer to its associated <code>MacroElement</code>, e.g. by using the following loop:  </p><div class="fragment"><div class="line"> <span class="comment">// Loop over all elements and set macro element pointer</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_element=this-&gt;nelement();</div>
-<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Get pointer to element</span></div>
-<div class="line">   FiniteElement* el_pt=this-&gt;finite_element_pt(e);</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Set pointer to macro element to enable MacroElement-based</span></div>
-<div class="line">   <span class="comment">// remesh. Also enables the curvlinear boundaries</span></div>
-<div class="line">   <span class="comment">// of the mesh/domain get picked up during adaptive</span></div>
-<div class="line">   <span class="comment">// mesh refinement in derived classes.</span></div>
-<div class="line">   el_pt-&gt;set_macro_elem_pt(this-&gt;Domain_pt-&gt;macro_element_pt(e));</div>
-<div class="line">  }</div>
+<p>To enable the mesh adaptation process to respect the domain's curvilinear boundaries, each element in the coarse base mesh must therefore be given a pointer to its associated <code>MacroElement</code>, e.g. by using the following loop:  </p><div class="fragment"><div class="line">    <span class="comment">// Loop over all elements and set macro element pointer</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> n_element = this-&gt;nelement();</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e = 0; e &lt; n_element; e++)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Get pointer to element</span></div>
+<div class="line">      FiniteElement* el_pt = this-&gt;finite_element_pt(e);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Set pointer to macro element to enable MacroElement-based</span></div>
+<div class="line">      <span class="comment">// remesh. Also enables the curvlinear boundaries</span></div>
+<div class="line">      <span class="comment">// of the mesh/domain get picked up during adaptive</span></div>
+<div class="line">      <span class="comment">// mesh refinement in derived classes.</span></div>
+<div class="line">      el_pt-&gt;set_macro_elem_pt(this-&gt;Domain_pt-&gt;macro_element_pt(e));</div>
+<div class="line">    }</div>
 </div><!-- fragment --><p>Once the mesh is aware of the curvilinear boundaries, each level of mesh refinement produces a better representation of the curvilinear domain, ensuring the convergence to the exact solution:</p>
 <div class="image">
 <img src="fish_poisson_adapt_soln.gif" alt=""/>
@@ -287,31 +286,31 @@ The fish-shaped domain and its MacroElement-based representation by the FishDoma
 <div class="line"><span class="keywordtype">double</span> <a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>=0.4; </div>
 <div class="line"><a class="code" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a>* <a class="code" href="fish__poisson2_8txt.html#af5f8290ba6539fcd5dd8fb6357487caa">domain_pt</a>=<span class="keyword">new</span> FishDomain(<a class="code" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>,xi_nose,<a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>);</div>
 </div><!-- fragment --><p>To see how this works internally, let us have a look at the <code>FishDomain</code> constructor. The constructor stores the pointer to the fish's "back", and the start and end values of the Lagrangian coordinates in the private data members <code>Back_pt</code>, <code>Xi_nose</code> and <code>Xi_tail</code>. Next we set some additional parameters, that define the geometry (the mouth is located at the origin; the fin is a vertical line at <img class="formulaInl" alt="$ x=1.7$" src="form_22.png"/>, ranging from <img class="formulaInl" alt="$ y=-0.9$" src="form_23.png"/> to <img class="formulaInl" alt="$ y=+0.9$" src="form_24.png"/>). Finally, we allocate storage for the four <code>MacroElements</code> and build them. Note that the constructor of the <code>MacroElement</code> takes a pointer to the Domain, and the <code>MacroElement's</code> number within that <code>Domain:</code> </p>
- <div class="fragment"><div class="line"> <span class="comment">/// \short Constructor: Pass pointer to GeomObject that represents the</span></div>
-<div class="line"><span class="comment"> /// (upper) curved boundary of the fish&#39;s body, and the start and end values</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// of the Lagrangian coordinates along the GeomObject. </span></div>
-<div class="line"><span class="comment"></span> FishDomain(<a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a>* <a class="code" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>, </div>
-<div class="line">            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xi_nose,  </div>
-<div class="line">            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>) :  </div>
-<div class="line">  Xi_nose(xi_nose),  Xi_tail(<a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>), <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>(<a class="code" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Set values for private data members that are describe</span></div>
-<div class="line">   <span class="comment">// geometric features of the fish: x-coordinate of the fin,</span></div>
-<div class="line">   <span class="comment">// (half-)height of the fin, and x-position of the mouth.</span></div>
-<div class="line">   X_fin=1.7;</div>
-<div class="line">   Y_fin=0.9;</div>
-<div class="line">   X_mouth=0.0;</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">// There are four macro elements</span></div>
-<div class="line">   <span class="keywordtype">unsigned</span> nmacro=4;</div>
-<div class="line">   Macro_element_pt.resize(nmacro); </div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">// Build them</span></div>
-<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>=0;<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>&lt;nmacro;<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>++)</div>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short Constructor: Pass pointer to GeomObject that represents the</span></div>
+<div class="line"><span class="comment">    /// (upper) curved boundary of the fish&#39;s body, and the start and end values</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// of the Lagrangian coordinates along the GeomObject.</span></div>
+<div class="line"><span class="comment"></span>    FishDomain(<a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a>* <a class="code" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>,</div>
+<div class="line">               <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xi_nose,</div>
+<div class="line">               <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>)</div>
+<div class="line">      : Xi_nose(xi_nose), Xi_tail(<a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>), <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>(<a class="code" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>)</div>
 <div class="line">    {</div>
-<div class="line">     Macro_element_pt[<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>]= <span class="keyword">new</span> QMacroElement&lt;2&gt;(<span class="keyword">this</span>,<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>);</div>
-<div class="line">    }</div>
-<div class="line">  } <span class="comment">// end of constructor</span></div>
+<div class="line">      <span class="comment">// Set values for private data members that are describe</span></div>
+<div class="line">      <span class="comment">// geometric features of the fish: x-coordinate of the fin,</span></div>
+<div class="line">      <span class="comment">// (half-)height of the fin, and x-position of the mouth.</span></div>
+<div class="line">      X_fin = 1.7;</div>
+<div class="line">      Y_fin = 0.9;</div>
+<div class="line">      X_mouth = 0.0;</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// There are four macro elements</span></div>
+<div class="line">      <span class="keywordtype">unsigned</span> nmacro = 4;</div>
+<div class="line">      Macro_element_pt.resize(nmacro);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Build them</span></div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a> = 0; <a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a> &lt; nmacro; <a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>++)</div>
+<div class="line">      {</div>
+<div class="line">        Macro_element_pt[<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>] = <span class="keyword">new</span> QMacroElement&lt;2&gt;(<span class="keyword">this</span>, <a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>);</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="comment">// end of constructor</span></div>
 </div><!-- fragment --><p>Most of the remaining public member functions are equally straightforward. We provide various access functions to the geometric parameters such as <code>X_mouth</code>, etc &ndash; we will not list these explicitly. All the "real work" is done in the implementation of the pure virtual function <code>Domain::macro_element_boundary(...)</code>. Given</p><ul>
 <li>the number of the <code>MacroElement</code> in its <code>Domain</code> </li>
 <li>the direction of its boundary (N[orth], S[outh], E[ast], W[est], enumerated in the namespace <code>QuadTreeNames</code>)</li>
@@ -322,302 +321,294 @@ The fish-shaped domain and its MacroElement-based representation by the FishDoma
 <div class="caption">
 Sketch illustrating the parametrisation of the MacroElement's four boundaries. </div></div>
  <p>Since the shape of the domain can evolve in time, the full interface for the function includes an additional parameter, <code>t</code>, which indicates the (discrete) time level at which the domain shape is to be evaluated. If <code>t=0</code> the function computes the domain shape at the current time; if <code>t&gt;0</code> it computes the shape at the <code>t</code> -th previous timestep. (<a href="../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html">Another example</a> in which we solve the unsteady heat equation in a moving domain, provides a a more detailed discussion of this aspect.) Here is the full interface for the <code>FishDomain::macro_element_boundary(...)</code> function:</p>
-<div class="fragment"><div class="line"> <span class="comment">/// \short Vector representation of the  i_macro-th macro element</span></div>
-<div class="line"><span class="comment"> /// boundary i_direct (N/S/W/E) at the discrete time level t </span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// (t=0: present; t&gt;0: previous): \f$ {\bf r}({\bf zeta}) \f$</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// Note that the local coordinate \b zeta is a 1D</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// Vector rather than a scalar -- this is unavoidable because</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// this function implements the pure virtual function in the</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// Domain base class.</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> macro_element_boundary(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
-<div class="line">                             <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; i_macro,</div>
-<div class="line">                             <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; i_direct,</div>
-<div class="line">                             <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
-<div class="line">                             Vector&lt;double&gt;&amp; r);</div>
+<div class="fragment"><div class="line">    <span class="comment">/// \short Vector representation of the  i_macro-th macro element</span></div>
+<div class="line"><span class="comment">    /// boundary i_direct (N/S/W/E) at the discrete time level t</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// (t=0: present; t&gt;0: previous): \f$ {\bf r}({\bf zeta}) \f$</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// Note that the local coordinate \b zeta is a 1D</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// Vector rather than a scalar -- this is unavoidable because</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// this function implements the pure virtual function in the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// Domain base class.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> macro_element_boundary(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
+<div class="line">                                <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; i_macro,</div>
+<div class="line">                                <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; i_direct,</div>
+<div class="line">                                <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                Vector&lt;double&gt;&amp; r);</div>
 </div><!-- fragment --><p>The implementation of this function is the only tedious task that needs to be performed by the "mesh writer". Once <code>Domain::macro_element_boundary(...)</code> is implemented, the <code>Domain's</code> constituent <code>MacroElements</code> can refer to this function to establish the positions of their boundaries (recall that we passed the pointer to the <code>Domain</code> and the <code>MacroElement's</code> number in the <code>Domain</code> to the <code>MacroElement</code> constructor). The <code>MacroElement::macro_map(...)</code> functions interpolate the position of the <code>MacroElement's</code> boundaries into their interior.</p>
 <p>To illustrate the general procedure, here is the complete listing of the <code>FishDomain::macro_element_boundary(...)</code> function. The function employs switch statements to identify the private member functions that provide the parametrisation of individual <code>MacroElement</code> boundaries. Some of these functions are listed below.</p>
- <div class="fragment"><div class="line"><span class="comment">//==========start_of_macro_element_boundary========================</span></div>
-<div class="line"><span class="comment">/// \short Vector representation of the  imacro-th macro element</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// boundary idirect (N/S/W/E) at time level t </span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// (t=0: present; t&gt;0: previous): \f$ {\bf r}({\bf zeta}) \f$</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// Note that the local coordinate \b zeta is a 1D</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// Vector rather than a scalar -- this is unavoidable because</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// this function implements the pure virtual function in the</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// Domain base class.</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=================================================================</span></div>
-<div class="line"><span class="keywordtype">void</span> FishDomain::macro_element_boundary(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
-<div class="line">                                        <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; imacro,</div>
-<div class="line">                                        <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; idirect,</div>
-<div class="line">                                        <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
-<div class="line">                                        Vector&lt;double&gt;&amp; r)</div>
-<div class="line">{</div>
-<div class="line"> </div>
-<div class="line"> <span class="keyword">using namespace </span>QuadTreeNames;</div>
+ <div class="fragment"><div class="line">  <span class="comment">//==========start_of_macro_element_boundary========================</span></div>
+<div class="line"><span class="comment">  /// \short Vector representation of the  imacro-th macro element</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// boundary idirect (N/S/W/E) at time level t</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// (t=0: present; t&gt;0: previous): \f$ {\bf r}({\bf zeta}) \f$</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// Note that the local coordinate \b zeta is a 1D</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// Vector rather than a scalar -- this is unavoidable because</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// this function implements the pure virtual function in the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// Domain base class.</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//=================================================================</span></div>
+<div class="line">  <span class="keywordtype">void</span> FishDomain::macro_element_boundary(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
+<div class="line">                                          <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; imacro,</div>
+<div class="line">                                          <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; idirect,</div>
+<div class="line">                                          <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                          Vector&lt;double&gt;&amp; r)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="keyword">using namespace </span>QuadTreeNames;</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES</span></div>
-<div class="line">   <span class="comment">// Warn about time argument being moved to the front</span></div>
-<div class="line">   OomphLibWarning(</div>
-<div class="line">    <span class="stringliteral">&quot;Order of function arguments has changed between versions 0.8 and 0.85&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;FishDomain::macro_element_boundary(...)&quot;</span>,</div>
-<div class="line">    OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    <span class="comment">// Warn about time argument being moved to the front</span></div>
+<div class="line">    OomphLibWarning(</div>
+<div class="line">      <span class="stringliteral">&quot;Order of function arguments has changed between versions 0.8 and 0.85&quot;</span>,</div>
+<div class="line">      <span class="stringliteral">&quot;FishDomain::macro_element_boundary(...)&quot;</span>,</div>
+<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
-<div class="line"> <span class="comment">// Which macro element?</span></div>
-<div class="line"> <span class="comment">// --------------------</span></div>
-<div class="line"> <span class="keywordflow">switch</span>(imacro)</div>
-<div class="line">  {</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Macro element 0: Lower body</span></div>
-<div class="line">  <span class="keywordflow">case</span> 0:</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Which direction?</span></div>
-<div class="line">   <span class="keywordflow">if</span> (idirect==N)</div>
+<div class="line">    <span class="comment">// Which macro element?</span></div>
+<div class="line">    <span class="comment">// --------------------</span></div>
+<div class="line">    <span class="keywordflow">switch</span> (imacro)</div>
 <div class="line">    {</div>
-<div class="line">     FishDomain::r_lower_body_N(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#af82e9c1ad3f168acfc9694f88e672b77">S</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_lower_body_S(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#ab5e75af9bd71f640a1c5a41a65b85099">W</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_lower_body_W(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#ac3e00526534ae96f709b8a3ec072ea4e">E</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_lower_body_E(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span></div>
-<div class="line">    {</div>
-<div class="line">     std::ostringstream error_stream;</div>
-<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect </div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span> &lt;&lt;  std::endl;</div>
-<div class="line">     </div>
-<div class="line">     <span class="keywordflow">throw</span> OomphLibError(</div>
-<div class="line">      error_stream.str(),</div>
-<div class="line">      OOMPH_CURRENT_FUNCTION,</div>
-<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line">    }</div>
-<div class="line">   </div>
-<div class="line">   <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="comment">// Macro element 0: Lower body</span></div>
+<div class="line">      <span class="keywordflow">case</span> 0:</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">// Macro element 1: Lower Fin</span></div>
-<div class="line">  <span class="keywordflow">case</span> 1:</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Which direction?</span></div>
-<div class="line">   <span class="keywordflow">if</span> (idirect==N)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_lower_fin_N(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#af82e9c1ad3f168acfc9694f88e672b77">S</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_lower_fin_S(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#ab5e75af9bd71f640a1c5a41a65b85099">W</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_lower_fin_W(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#ac3e00526534ae96f709b8a3ec072ea4e">E</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_lower_fin_E(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span></div>
-<div class="line">    {</div>
-<div class="line">     std::ostringstream error_stream;</div>
-<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect </div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span> &lt;&lt;  std::endl;</div>
+<div class="line">        <span class="comment">// Which direction?</span></div>
+<div class="line">        <span class="keywordflow">if</span> (idirect == N)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_lower_body_N(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#af82e9c1ad3f168acfc9694f88e672b77">S</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_lower_body_S(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#ab5e75af9bd71f640a1c5a41a65b85099">W</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_lower_body_W(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#ac3e00526534ae96f709b8a3ec072ea4e">E</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_lower_body_E(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">          std::ostringstream error_stream;</div>
+<div class="line">          error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span></div>
+<div class="line">                       &lt;&lt; std::endl;</div>
 <div class="line"> </div>
-<div class="line">     <span class="keywordflow">throw</span> OomphLibError(</div>
-<div class="line">      error_stream.str(),</div>
-<div class="line">      OOMPH_CURRENT_FUNCTION,</div>
-<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line">    }</div>
-<div class="line">   </div>
-<div class="line">   <span class="keywordflow">break</span>;   </div>
-<div class="line">   </div>
+<div class="line">          <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                              OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                              OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">// Macro element 2: Upper body</span></div>
-<div class="line">  <span class="keywordflow">case</span> 2:</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Which direction?</span></div>
-<div class="line">   <span class="keywordflow">if</span> (idirect==N)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_upper_body_N(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#af82e9c1ad3f168acfc9694f88e672b77">S</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_upper_body_S(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#ab5e75af9bd71f640a1c5a41a65b85099">W</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_upper_body_W(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#ac3e00526534ae96f709b8a3ec072ea4e">E</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_upper_body_E(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span></div>
-<div class="line">    {</div>
-<div class="line">     std::ostringstream error_stream;</div>
-<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect </div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span> &lt;&lt;  std::endl;</div>
+<div class="line">        <span class="keywordflow">break</span>;</div>
 <div class="line"> </div>
-<div class="line">     <span class="keywordflow">throw</span> OomphLibError(</div>
-<div class="line">      error_stream.str(),</div>
-<div class="line">      OOMPH_CURRENT_FUNCTION,</div>
-<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line">    }</div>
-<div class="line">   </div>
-<div class="line">   <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="comment">// Macro element 1: Lower Fin</span></div>
+<div class="line">      <span class="keywordflow">case</span> 1:</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Which direction?</span></div>
+<div class="line">        <span class="keywordflow">if</span> (idirect == N)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_lower_fin_N(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#af82e9c1ad3f168acfc9694f88e672b77">S</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_lower_fin_S(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#ab5e75af9bd71f640a1c5a41a65b85099">W</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_lower_fin_W(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#ac3e00526534ae96f709b8a3ec072ea4e">E</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_lower_fin_E(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">          std::ostringstream error_stream;</div>
+<div class="line">          error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span></div>
+<div class="line">                       &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">          <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                              OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                              OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">break</span>;</div>
 <div class="line"> </div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">// Macro element 3: Upper Fin</span></div>
-<div class="line">  <span class="keywordflow">case</span> 3:</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Which direction?</span></div>
-<div class="line">   <span class="keywordflow">if</span> (idirect==N)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_upper_fin_N(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#af82e9c1ad3f168acfc9694f88e672b77">S</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_upper_fin_S(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#ab5e75af9bd71f640a1c5a41a65b85099">W</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_upper_fin_W(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#ac3e00526534ae96f709b8a3ec072ea4e">E</a>)</div>
-<div class="line">    {</div>
-<div class="line">     FishDomain::r_upper_fin_E(t,zeta,r);</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span></div>
-<div class="line">    {</div>
-<div class="line">     std::ostringstream error_stream;</div>
-<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect </div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span> &lt;&lt;  std::endl;</div>
+<div class="line">        <span class="comment">// Macro element 2: Upper body</span></div>
+<div class="line">      <span class="keywordflow">case</span> 2:</div>
 <div class="line"> </div>
-<div class="line">     <span class="keywordflow">throw</span> OomphLibError(</div>
-<div class="line">      error_stream.str(),</div>
-<div class="line">      OOMPH_CURRENT_FUNCTION,</div>
-<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">        <span class="comment">// Which direction?</span></div>
+<div class="line">        <span class="keywordflow">if</span> (idirect == N)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_upper_body_N(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#af82e9c1ad3f168acfc9694f88e672b77">S</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_upper_body_S(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#ab5e75af9bd71f640a1c5a41a65b85099">W</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_upper_body_W(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#ac3e00526534ae96f709b8a3ec072ea4e">E</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_upper_body_E(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">          std::ostringstream error_stream;</div>
+<div class="line">          error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span></div>
+<div class="line">                       &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">          <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                              OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                              OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Macro element 3: Upper Fin</span></div>
+<div class="line">      <span class="keywordflow">case</span> 3:</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Which direction?</span></div>
+<div class="line">        <span class="keywordflow">if</span> (idirect == N)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_upper_fin_N(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#af82e9c1ad3f168acfc9694f88e672b77">S</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_upper_fin_S(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#ab5e75af9bd71f640a1c5a41a65b85099">W</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_upper_fin_W(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect == <a class="code" href="fish__poisson2_8txt.html#ac3e00526534ae96f709b8a3ec072ea4e">E</a>)</div>
+<div class="line">        {</div>
+<div class="line">          FishDomain::r_upper_fin_E(t, zeta, r);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">          std::ostringstream error_stream;</div>
+<div class="line">          error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span></div>
+<div class="line">                       &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">          <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                              OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                              OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">default</span>:</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Error</span></div>
+<div class="line">        std::ostringstream error_stream;</div>
+<div class="line">        error_stream &lt;&lt; <span class="stringliteral">&quot;Wrong imacro &quot;</span> &lt;&lt; imacro &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">throw</span> OomphLibError(</div>
+<div class="line">          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);</div>
 <div class="line">    }</div>
-<div class="line">   </div>
-<div class="line">   <span class="keywordflow">break</span>;   </div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">default</span>:</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Error</span></div>
-<div class="line">   std::ostringstream error_stream;</div>
-<div class="line">   error_stream &lt;&lt; <span class="stringliteral">&quot;Wrong imacro &quot;</span> &lt;&lt; imacro &lt;&lt; std::endl;</div>
-<div class="line"> </div>
-<div class="line">   <span class="keywordflow">throw</span> OomphLibError(</div>
-<div class="line">    error_stream.str(),</div>
-<div class="line">    OOMPH_CURRENT_FUNCTION,</div>
-<div class="line">    OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line">  }</div>
-<div class="line"> </div>
-<div class="line">} <span class="comment">// end of macro_element_boundary</span></div>
+<div class="line">  } <span class="comment">// end of macro_element_boundary</span></div>
 </div><!-- fragment --><p>Here are a few of the private member functions that define individual <code>MacroElement</code> boundaries:</p>
 <ul>
-<li>The N[orthern] boundary of macro element 2 (which represents the upper body) coincides with the domain boundary that is parametrised by the geometric object pointed to by <code>Back_pt</code>. The function translates the coordinate <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_28.png"/> to the Lagrangian coordinate <img class="formulaInl" alt="$ \xi \in [\xi_{nose}, \xi_{tail}] $" src="form_29.png"/> along the geometric object. We use this Lagrangian coordinate to obtain the position vector to the domain boundary via a call to the <code>GeomObject::position(...)</code> function of the geometric object pointed to by <code>Back_pt:</code>  <div class="fragment"><div class="line"><span class="comment">//===============start_of_r_upper_body_N==============================</span></div>
-<div class="line"><span class="comment">/// Northern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
-<div class="line"><span class="keywordtype">void</span> FishDomain::r_upper_body_N(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
-<div class="line">                                <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
-<div class="line">                                Vector&lt;double&gt;&amp; r)</div>
-<div class="line">{                                   </div>
-<div class="line"> <span class="comment">// Lagrangian coordinate along curved &quot;back&quot;</span></div>
-<div class="line"> Vector&lt;double&gt; x(1);</div>
-<div class="line"> x[0]=Xi_nose+(Xi_tail-Xi_nose)*0.5*(zeta[0]+1.0);</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Get position on curved back</span></div>
-<div class="line"> <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t,x,r);</div>
-<div class="line"> </div>
-<div class="line">}  <span class="comment">// end of r_upper_body_N                                       </span></div>
-</div><!-- fragment --></li>
-<li>The E[astern] boundary of macro element 2 is a straight vertical line from the "tail end" of the curved fish back to the x-axis:  <div class="fragment"><div class="line"><span class="comment">//================start_of_r_upper_body_E=============================</span></div>
-<div class="line"><span class="comment">/// Eastern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
-<div class="line"><span class="keywordtype">void</span> FishDomain::r_upper_body_E(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
-<div class="line">                                <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
-<div class="line">                                Vector&lt;double&gt;&amp; r)</div>
-<div class="line">{                                   </div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Top right corner (tail end) of body</span></div>
-<div class="line"> Vector&lt;double&gt; r_top(2);</div>
-<div class="line"> Vector&lt;double&gt; x(1);</div>
-<div class="line"> x[0]=Xi_tail;</div>
-<div class="line"> <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t,x,r_top);</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Corresponding point on the x-axis</span></div>
-<div class="line"> Vector&lt;double&gt; <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>(2);</div>
-<div class="line"> <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[0]=r_top[0];</div>
-<div class="line"> <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[1]=0.0;</div>
-<div class="line"> </div>
-<div class="line"> r[0]=<a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[0]+(r_top[0]-<a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[0])*0.5*(zeta[0]+1.0);</div>
-<div class="line"> r[1]=<a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[1]+(r_top[1]-<a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[1])*0.5*(zeta[0]+1.0);</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">} <span class="comment">// end of r_upper_body_E</span></div>
-</div><!-- fragment --></li>
-<li>The S[outhern] boundary of macro element 2 is a straight horizontal line from the "mouth" to the end of the body:  <div class="fragment"><div class="line"><span class="comment">//==================start_of_r_upper_body_S============================</span></div>
-<div class="line"><span class="comment">/// Southern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
-<div class="line"><span class="keywordtype">void</span> FishDomain::r_upper_body_S(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
-<div class="line">                                <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
-<div class="line">                                Vector&lt;double&gt;&amp; r)</div>
-<div class="line">{                                   </div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Top right (tail) corner of fish body</span></div>
-<div class="line"> Vector&lt;double&gt; r_top(2);</div>
-<div class="line"> Vector&lt;double&gt; x(1);</div>
-<div class="line"> x[0]=Xi_tail;</div>
-<div class="line"> <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t,x,r_top);</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Straight line from mouth to start of fin (=end of body)</span></div>
-<div class="line"> r[0]=X_mouth+(r_top[0]-X_mouth)*0.5*(zeta[0]+1.0);</div>
-<div class="line"> r[1]=0.0;</div>
-<div class="line"> </div>
-<div class="line">} <span class="comment">// end of r_upper_body_S                                          </span></div>
-</div><!-- fragment --></li>
-<li>The W[estern] boundary of macro element 2 is a straight line from the "mouth" to the "mouth" end of the curved upper boundary of the body:  <div class="fragment"><div class="line"><span class="comment">//===============start_of_r_upper_body_W==============================</span></div>
-<div class="line"><span class="comment">/// Western edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
-<div class="line"><span class="keywordtype">void</span> FishDomain::r_upper_body_W(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
-<div class="line">                                <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
-<div class="line">                                Vector&lt;double&gt;&amp; r)</div>
-<div class="line">{                                   </div>
-<div class="line"> <span class="comment">// Top left (mouth) corner of curved boundary of upper body</span></div>
-<div class="line"> Vector&lt;double&gt; r_top(2);</div>
-<div class="line"> Vector&lt;double&gt; x(1);</div>
-<div class="line"> x[0]=Xi_nose;</div>
-<div class="line"> <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t,x,r_top);</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// The &quot;mouth&quot;</span></div>
-<div class="line"> Vector&lt;double&gt; r_mouth(2);</div>
-<div class="line"> r_mouth[0]=X_mouth;</div>
-<div class="line"> r_mouth[1]=0.0;</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Straight line from mouth to leftmost corner on curved boundary</span></div>
-<div class="line"> <span class="comment">// of upper body</span></div>
-<div class="line"> r[0]=r_mouth[0]+(r_top[0]-r_mouth[0])*0.5*(zeta[0]+1.0);</div>
-<div class="line"> r[1]=r_mouth[1]+(r_top[1]-r_mouth[1])*0.5*(zeta[0]+1.0);</div>
-<div class="line"> </div>
-<div class="line">}  <span class="comment">// end of r_upper_body_W                                   </span></div>
-</div><!-- fragment --></li>
-<li>The S[outhern] boundary of macro element 0 (which represents the lower body) is simply a reflection of the N[orthern] boundary of macro element 2:  <div class="fragment"><div class="line"> <span class="comment">///\short Southern boundary of lower body macro element zeta \f$\in [-1,1] \f$</span></div>
-<div class="line"> <span class="keywordtype">void</span> r_lower_body_S(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta, </div>
-<div class="line">                     Vector&lt;double&gt;&amp; <a class="code" href="namespacef.html">f</a>)</div>
+<li>The N[orthern] boundary of macro element 2 (which represents the upper body) coincides with the domain boundary that is parametrised by the geometric object pointed to by <code>Back_pt</code>. The function translates the coordinate <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_28.png"/> to the Lagrangian coordinate <img class="formulaInl" alt="$ \xi \in [\xi_{nose}, \xi_{tail}] $" src="form_29.png"/> along the geometric object. We use this Lagrangian coordinate to obtain the position vector to the domain boundary via a call to the <code>GeomObject::position(...)</code> function of the geometric object pointed to by <code>Back_pt:</code>  <div class="fragment"><div class="line">  <span class="comment">//===============start_of_r_upper_body_N==============================</span></div>
+<div class="line"><span class="comment">  /// Northern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//=====================================================================</span></div>
+<div class="line">  <span class="keywordtype">void</span> FishDomain::r_upper_body_N(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
+<div class="line">                                  <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                  Vector&lt;double&gt;&amp; r)</div>
 <div class="line">  {</div>
-<div class="line">   <span class="comment">// South of lower body is element is north of upper one.</span></div>
-<div class="line">   <span class="comment">// Direction of the coordinate stays the same.</span></div>
-<div class="line">   r_upper_body_N(t,zeta,<a class="code" href="namespacef.html">f</a>);</div>
-<div class="line">   <span class="comment">// Reflect vertical position</span></div>
-<div class="line">   <a class="code" href="namespacef.html">f</a>[1]=-<a class="code" href="namespacef.html">f</a>[1];</div>
-<div class="line">  }</div>
+<div class="line">    <span class="comment">// Lagrangian coordinate along curved &quot;back&quot;</span></div>
+<div class="line">    Vector&lt;double&gt; x(1);</div>
+<div class="line">    x[0] = Xi_nose + (Xi_tail - Xi_nose) * 0.5 * (zeta[0] + 1.0);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Get position on curved back</span></div>
+<div class="line">    <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t, x, r);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of r_upper_body_N</span></div>
+</div><!-- fragment --></li>
+<li>The E[astern] boundary of macro element 2 is a straight vertical line from the "tail end" of the curved fish back to the x-axis:  <div class="fragment"><div class="line">  <span class="comment">//================start_of_r_upper_body_E=============================</span></div>
+<div class="line"><span class="comment">  /// Eastern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//=====================================================================</span></div>
+<div class="line">  <span class="keywordtype">void</span> FishDomain::r_upper_body_E(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
+<div class="line">                                  <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                  Vector&lt;double&gt;&amp; r)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Top right corner (tail end) of body</span></div>
+<div class="line">    Vector&lt;double&gt; r_top(2);</div>
+<div class="line">    Vector&lt;double&gt; x(1);</div>
+<div class="line">    x[0] = Xi_tail;</div>
+<div class="line">    <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t, x, r_top);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Corresponding point on the x-axis</span></div>
+<div class="line">    Vector&lt;double&gt; <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>(2);</div>
+<div class="line">    <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[0] = r_top[0];</div>
+<div class="line">    <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[1] = 0.0;</div>
+<div class="line"> </div>
+<div class="line">    r[0] = <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[0] + (r_top[0] - <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[0]) * 0.5 * (zeta[0] + 1.0);</div>
+<div class="line">    r[1] = <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[1] + (r_top[1] - <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[1]) * 0.5 * (zeta[0] + 1.0);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of r_upper_body_E</span></div>
+</div><!-- fragment --></li>
+<li>The S[outhern] boundary of macro element 2 is a straight horizontal line from the "mouth" to the end of the body:  <div class="fragment"><div class="line">  <span class="comment">//==================start_of_r_upper_body_S============================</span></div>
+<div class="line"><span class="comment">  /// Southern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//=====================================================================</span></div>
+<div class="line">  <span class="keywordtype">void</span> FishDomain::r_upper_body_S(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
+<div class="line">                                  <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                  Vector&lt;double&gt;&amp; r)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Top right (tail) corner of fish body</span></div>
+<div class="line">    Vector&lt;double&gt; r_top(2);</div>
+<div class="line">    Vector&lt;double&gt; x(1);</div>
+<div class="line">    x[0] = Xi_tail;</div>
+<div class="line">    <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t, x, r_top);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Straight line from mouth to start of fin (=end of body)</span></div>
+<div class="line">    r[0] = X_mouth + (r_top[0] - X_mouth) * 0.5 * (zeta[0] + 1.0);</div>
+<div class="line">    r[1] = 0.0;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of r_upper_body_S</span></div>
+</div><!-- fragment --></li>
+<li>The W[estern] boundary of macro element 2 is a straight line from the "mouth" to the "mouth" end of the curved upper boundary of the body:  <div class="fragment"><div class="line">  <span class="comment">//===============start_of_r_upper_body_W==============================</span></div>
+<div class="line"><span class="comment">  /// Western edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//====================================================================</span></div>
+<div class="line">  <span class="keywordtype">void</span> FishDomain::r_upper_body_W(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
+<div class="line">                                  <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                  Vector&lt;double&gt;&amp; r)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Top left (mouth) corner of curved boundary of upper body</span></div>
+<div class="line">    Vector&lt;double&gt; r_top(2);</div>
+<div class="line">    Vector&lt;double&gt; x(1);</div>
+<div class="line">    x[0] = Xi_nose;</div>
+<div class="line">    <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t, x, r_top);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// The &quot;mouth&quot;</span></div>
+<div class="line">    Vector&lt;double&gt; r_mouth(2);</div>
+<div class="line">    r_mouth[0] = X_mouth;</div>
+<div class="line">    r_mouth[1] = 0.0;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Straight line from mouth to leftmost corner on curved boundary</span></div>
+<div class="line">    <span class="comment">// of upper body</span></div>
+<div class="line">    r[0] = r_mouth[0] + (r_top[0] - r_mouth[0]) * 0.5 * (zeta[0] + 1.0);</div>
+<div class="line">    r[1] = r_mouth[1] + (r_top[1] - r_mouth[1]) * 0.5 * (zeta[0] + 1.0);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of r_upper_body_W</span></div>
+</div><!-- fragment --></li>
+<li>The S[outhern] boundary of macro element 0 (which represents the lower body) is simply a reflection of the N[orthern] boundary of macro element 2:  <div class="fragment"><div class="line">    <span class="comment">///\short Southern boundary of lower body macro element zeta \f$\in [-1,1]</span></div>
+<div class="line"><span class="comment">    ///\f$</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> r_lower_body_S(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
+<div class="line">                        <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                        Vector&lt;double&gt;&amp; <a class="code" href="namespacef.html">f</a>)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// South of lower body is element is north of upper one.</span></div>
+<div class="line">      <span class="comment">// Direction of the coordinate stays the same.</span></div>
+<div class="line">      r_upper_body_N(t, zeta, <a class="code" href="namespacef.html">f</a>);</div>
+<div class="line">      <span class="comment">// Reflect vertical position</span></div>
+<div class="line">      <a class="code" href="namespacef.html">f</a>[1] = -<a class="code" href="namespacef.html">f</a>[1];</div>
+<div class="line">    }</div>
 </div><!-- fragment --></li>
 <li>etc.</li>
 </ul>
@@ -759,7 +750,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:02:12
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:44:04
         </div>
       </div>
     </footer>

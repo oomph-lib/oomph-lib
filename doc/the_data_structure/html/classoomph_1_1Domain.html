@@ -239,7 +239,7 @@ Protected Attributes</h2></td></tr>
 <p> Any instantiation of a specific <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> needs to implement the pure virtual member function </p><div class="fragment"><div class="line"><a class="code" href="classoomph_1_1Domain.html#a95f3e00d28ea37e6c4d3027bfac91096">Domain::macro_element_boundary</a>(...) </div>
 </div><!-- fragment --><p> which returns a <a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of each of the <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> s' boundaries, parametrised by the coordinate(s) along this boundary. For instance, in the above example, the eastern boundary of <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> 1 is given by the appropriate fraction of the curvilinear boundary; its northern boundary (which coincides with the southern boundary of <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> 2) is given by the straight line emanating from the curvilinear boundary, etc. The <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> s obtain their boundary positions via member function pointers to <code>Domain::macro_element_boundary(...)</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00067">67</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00066">66</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a091982333107142c3ac71a02fbdb6ac8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a091982333107142c3ac71a02fbdb6ac8">&#9670;&nbsp;</a></span>Domain() <span class="overload">[1/2]</span></h2>
@@ -266,7 +266,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00073">73</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00070">70</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 <p class="reference">References <a class="el" href="domain_8h_source.html#l00307">Macro_element_pt</a>.</p>
 
@@ -298,9 +298,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00080">80</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00077">77</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -329,7 +329,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Destructor: Strictly speaking, whoever creates an object dynamically should be responsible for the cleanup of said object but it makes sense here for the <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> to generically kill any MacroElements left over in the <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> container (if it hasn't already been done in the derived class) to avoid memory leaks. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00096">96</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00093">93</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="domain_8h_source.html#l00307">Macro_element_pt</a>.</p>
 
@@ -442,9 +442,9 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary second derivatives i_direct (e.g. N/S/W/E in 2D) at current time: f(s). </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00293">293</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00294">294</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
-<p class="reference">References <a class="el" href="domain_8h_source.html#l00265">d2macro_element_boundary()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+<p class="reference">References <a class="el" href="domain_8h_source.html#l00264">d2macro_element_boundary()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
 </div>
 </div>
@@ -504,9 +504,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a0b882a9e660cab447c6be8cbeb8c9c18">oomph::TopologicallyRectangularDomain</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00265">265</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00264">264</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="macro__element_8cc_source.html#l00336">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian2()</a>, and <a class="el" href="domain_8h_source.html#l00293">d2macro_element_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="macro__element_8cc_source.html#l00334">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian2()</a>, and <a class="el" href="domain_8h_source.html#l00294">d2macro_element_boundary()</a>.</p>
 
 </div>
 </div>
@@ -564,7 +564,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary derivatives i_direct (e.g. N/S/W/E in 2D) at continuous time level t. Broken virtual. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00237">237</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00234">234</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 </div>
 </div>
@@ -616,9 +616,9 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary derivatives i_direct (e.g. N/S/W/E in 2D) at current time: f(s). </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00251">251</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00250">250</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
-<p class="reference">References <a class="el" href="domain_8h_source.html#l00222">dmacro_element_boundary()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+<p class="reference">References <a class="el" href="domain_8h_source.html#l00218">dmacro_element_boundary()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
 </div>
 </div>
@@ -678,9 +678,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a218b22a016e2f330d6b90354597d9786">oomph::TopologicallyRectangularDomain</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00222">222</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00218">218</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="macro__element_8cc_source.html#l00240">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian()</a>, <a class="el" href="macro__element_8cc_source.html#l00336">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian2()</a>, and <a class="el" href="domain_8h_source.html#l00251">dmacro_element_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="macro__element_8cc_source.html#l00238">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian()</a>, <a class="el" href="macro__element_8cc_source.html#l00334">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian2()</a>, and <a class="el" href="domain_8h_source.html#l00250">dmacro_element_boundary()</a>.</p>
 
 </div>
 </div>
@@ -740,7 +740,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a6993f80b22b9418c93254ba6791dd2a5">oomph::RectangleWithHoleAndAnnularRegionDomain</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00169">169</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00166">166</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 </div>
 </div>
@@ -792,7 +792,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary i_direct (e.g. N/S/W/E in 2D) at current time: f(s). </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00184">184</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00181">181</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 <p class="reference">References <a class="el" href="classoomph_1_1Domain.html#a95f3e00d28ea37e6c4d3027bfac91096">macro_element_boundary()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
@@ -852,9 +852,9 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary i_direct (e.g. N/S/W/E in 2D) at time level t (t=0: present; t&gt;0: previous): f(s) </p>
 
-<p>Implemented in <a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ad36aee594ee03f7947c2bcd4e2198284">oomph::RectangleWithHoleAndAnnularRegionDomain</a>, <a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a514085f80059aa9f0cc3334a3cb408c1">oomph::RectangleWithHoleDomain</a>, <a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a40bca9a30f1f874c043e68621b28de74">oomph::CylinderWithFlagDomain</a>, <a class="el" href="classoomph_1_1ExtrudedDomain.html#a10a824075e2d2ee6efcf3485966dbadc">oomph::ExtrudedDomain</a>, <a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a2c0a5bd21e12fbcc1cdd753c0f205da2">oomph::CollapsibleChannelDomain</a>, <a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ae4b123847f4ab6e242a0409d72fe5cbd">oomph::ChannelWithLeafletDomain</a>, <a class="el" href="classoomph_1_1EighthSphereDomain.html#a281727105819669ea9dab9fec120ea63">oomph::EighthSphereDomain</a>, <a class="el" href="classoomph_1_1FishDomain.html#a383b0fb396d605932ba6fb0779dacbf9">oomph::FishDomain</a>, <a class="el" href="classoomph_1_1WarpedCubeDomain.html#a4e021719488897307d141fe4df327e49">oomph::WarpedCubeDomain</a>, <a class="el" href="classoomph_1_1QuarterTubeDomain.html#afacee4fe8a6fbc33618643398f5b8ab1">oomph::QuarterTubeDomain</a>, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a4de4d505233303cee0690ee87e45b4cf">oomph::TopologicallyRectangularDomain</a>, <a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a9faddf9d13e0a7633f732bac1ddda80b">oomph::QuarterCircleSectorDomain</a>, <a class="el" href="classoomph_1_1TubeDomain.html#a1f16dde7ad082e2557dff9c737dae6c0">oomph::TubeDomain</a>, <a class="el" href="classoomph_1_1FullCircleDomain.html#a93253d6c878c3ab40a582e0d2070a69d">oomph::FullCircleDomain</a>, <a class="el" href="classoomph_1_1QuarterPipeDomain.html#ae8cc6433c58dcfb265335744ed8a330a">oomph::QuarterPipeDomain</a>, and <a class="el" href="classoomph_1_1AnnularDomain.html#ade8cfa0e6f2d41e7d3877250321bfff3">oomph::AnnularDomain</a>.</p>
+<p>Implemented in <a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ad36aee594ee03f7947c2bcd4e2198284">oomph::RectangleWithHoleAndAnnularRegionDomain</a>, <a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a514085f80059aa9f0cc3334a3cb408c1">oomph::RectangleWithHoleDomain</a>, <a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a40bca9a30f1f874c043e68621b28de74">oomph::CylinderWithFlagDomain</a>, <a class="el" href="classoomph_1_1ExtrudedDomain.html#a10a824075e2d2ee6efcf3485966dbadc">oomph::ExtrudedDomain</a>, <a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a2c0a5bd21e12fbcc1cdd753c0f205da2">oomph::CollapsibleChannelDomain</a>, <a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ae4b123847f4ab6e242a0409d72fe5cbd">oomph::ChannelWithLeafletDomain</a>, <a class="el" href="classoomph_1_1EighthSphereDomain.html#a281727105819669ea9dab9fec120ea63">oomph::EighthSphereDomain</a>, <a class="el" href="classoomph_1_1FishDomain.html#a383b0fb396d605932ba6fb0779dacbf9">oomph::FishDomain</a>, <a class="el" href="classoomph_1_1WarpedCubeDomain.html#a4e021719488897307d141fe4df327e49">oomph::WarpedCubeDomain</a>, <a class="el" href="classoomph_1_1QuarterTubeDomain.html#afacee4fe8a6fbc33618643398f5b8ab1">oomph::QuarterTubeDomain</a>, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a4de4d505233303cee0690ee87e45b4cf">oomph::TopologicallyRectangularDomain</a>, <a class="el" href="classoomph_1_1TubeDomain.html#a1f16dde7ad082e2557dff9c737dae6c0">oomph::TubeDomain</a>, <a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a9faddf9d13e0a7633f732bac1ddda80b">oomph::QuarterCircleSectorDomain</a>, <a class="el" href="classoomph_1_1QuarterPipeDomain.html#ae8cc6433c58dcfb265335744ed8a330a">oomph::QuarterPipeDomain</a>, <a class="el" href="classoomph_1_1FullCircleDomain.html#a93253d6c878c3ab40a582e0d2070a69d">oomph::FullCircleDomain</a>, and <a class="el" href="classoomph_1_1AnnularDomain.html#ade8cfa0e6f2d41e7d3877250321bfff3">oomph::AnnularDomain</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="macro__element_8cc_source.html#l00240">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian()</a>, <a class="el" href="macro__element_8cc_source.html#l00336">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian2()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00146">oomph::ExtrudedDomain::macro_element_boundary()</a>, <a class="el" href="domain_8h_source.html#l00184">macro_element_boundary()</a>, <a class="el" href="macro__element_8cc_source.html#l00035">oomph::QMacroElement&lt; 2 &gt;::macro_map()</a>, <a class="el" href="macro__element_8cc_source.html#l00446">oomph::QMacroElement&lt; 3 &gt;::macro_map()</a>, <a class="el" href="macro__element_8cc_source.html#l00211">oomph::QMacroElement&lt; 2 &gt;::output_macro_element_boundaries()</a>, and <a class="el" href="macro__element_8cc_source.html#l00667">oomph::QMacroElement&lt; 3 &gt;::output_macro_element_boundaries()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="macro__element_8cc_source.html#l00238">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian()</a>, <a class="el" href="macro__element_8cc_source.html#l00334">oomph::QMacroElement&lt; 2 &gt;::assemble_macro_to_eulerian_jacobian2()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00148">oomph::ExtrudedDomain::macro_element_boundary()</a>, <a class="el" href="domain_8h_source.html#l00181">macro_element_boundary()</a>, <a class="el" href="macro__element_8cc_source.html#l00035">oomph::QMacroElement&lt; 2 &gt;::macro_map()</a>, <a class="el" href="macro__element_8cc_source.html#l00440">oomph::QMacroElement&lt; 3 &gt;::macro_map()</a>, <a class="el" href="macro__element_8cc_source.html#l00211">oomph::QMacroElement&lt; 2 &gt;::output_macro_element_boundaries()</a>, and <a class="el" href="macro__element_8cc_source.html#l00659">oomph::QMacroElement&lt; 3 &gt;::output_macro_element_boundaries()</a>.</p>
 
 </div>
 </div>
@@ -884,11 +884,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Access to i-th macro element. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00125">125</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00122">122</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="domain_8h_source.html#l00307">Macro_element_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__mesh_8template_8cc_source.html#l00050">oomph::ChannelWithLeafletMesh&lt; ELEMENT &gt;::ChannelWithLeafletMesh()</a>, <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html#l00044">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::CollapsibleChannelMesh()</a>, <a class="el" href="missing__masters_8template_8cc_source.html#l00245">oomph::Missing_masters_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="multi__domain_8template_8cc_source.html#l02046">oomph::Multi_domain_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="eighth__sphere__mesh_8template_8cc_source.html#l00040">oomph::EighthSphereMesh&lt; ELEMENT &gt;::EighthSphereMesh()</a>, <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00222">oomph::ElasticRefineableQuarterPipeMesh&lt; ELEMENT &gt;::ElasticRefineableQuarterPipeMesh()</a>, <a class="el" href="full__circle__mesh_8template_8cc_source.html#l00041">oomph::FullCircleMesh&lt; ELEMENT &gt;::FullCircleMesh()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00146">oomph::ExtrudedDomain::macro_element_boundary()</a>, <a class="el" href="domain_8h_source.html#l00207">output_macro_element_boundaries()</a>, <a class="el" href="quarter__circle__sector__mesh_8template_8cc_source.html#l00045">oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;::QuarterCircleSectorMesh()</a>, <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00041">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::QuarterPipeMesh()</a>, <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l00046">oomph::QuarterTubeMesh&lt; ELEMENT &gt;::QuarterTubeMesh()</a>, <a class="el" href="rectangle__with__hole__mesh_8template_8h_source.html#l00062">oomph::RectangleWithHoleMesh&lt; ELEMENT &gt;::RectangleWithHoleMesh()</a>, <a class="el" href="eighth__sphere__mesh_8template_8h_source.html#l00106">oomph::RefineableEighthSphereMesh&lt; ELEMENT &gt;::RefineableEighthSphereMesh()</a>, <a class="el" href="full__circle__mesh_8template_8h_source.html#l00127">oomph::RefineableFullCircleMesh&lt; ELEMENT &gt;::RefineableFullCircleMesh()</a>, <a class="el" href="quarter__tube__mesh_8template_8h_source.html#l00176">oomph::RefineableQuarterTubeMesh&lt; ELEMENT &gt;::RefineableQuarterTubeMesh()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00280">oomph::RefineableRectangleWithHoleAndAnnularRegionMesh&lt; ELEMENT &gt;::RefineableRectangleWithHoleAndAnnularRegionMesh()</a>, <a class="el" href="rectangle__with__hole__mesh_8template_8h_source.html#l00271">oomph::RefineableRectangleWithHoleMesh&lt; ELEMENT &gt;::RefineableRectangleWithHoleMesh()</a>, <a class="el" href="tube__mesh_8template_8h_source.html#l00142">oomph::RefineableTubeMesh&lt; ELEMENT &gt;::RefineableTubeMesh()</a>, <a class="el" href="annular__mesh_8template_8h_source.html#l00113">oomph::RefineableTwoDAnnularMesh&lt; ELEMENT &gt;::RefineableTwoDAnnularMesh()</a>, and <a class="el" href="tube__mesh_8template_8cc_source.html#l00042">oomph::TubeMesh&lt; ELEMENT &gt;::TubeMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__mesh_8template_8cc_source.html#l00048">oomph::ChannelWithLeafletMesh&lt; ELEMENT &gt;::ChannelWithLeafletMesh()</a>, <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html#l00043">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::CollapsibleChannelMesh()</a>, <a class="el" href="missing__masters_8template_8cc_source.html#l00251">oomph::Missing_masters_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="multi__domain_8template_8cc_source.html#l02068">oomph::Multi_domain_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="multi__domain_8template_8cc_source.html#l01677">oomph::Multi_domain_functions::create_external_halo_elements()</a>, <a class="el" href="eighth__sphere__mesh_8template_8cc_source.html#l00039">oomph::EighthSphereMesh&lt; ELEMENT &gt;::EighthSphereMesh()</a>, <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00218">oomph::ElasticRefineableQuarterPipeMesh&lt; ELEMENT &gt;::ElasticRefineableQuarterPipeMesh()</a>, <a class="el" href="full__circle__mesh_8template_8cc_source.html#l00040">oomph::FullCircleMesh&lt; ELEMENT &gt;::FullCircleMesh()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00148">oomph::ExtrudedDomain::macro_element_boundary()</a>, <a class="el" href="domain_8h_source.html#l00203">output_macro_element_boundaries()</a>, <a class="el" href="quarter__circle__sector__mesh_8template_8cc_source.html#l00044">oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;::QuarterCircleSectorMesh()</a>, <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00039">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::QuarterPipeMesh()</a>, <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l00044">oomph::QuarterTubeMesh&lt; ELEMENT &gt;::QuarterTubeMesh()</a>, <a class="el" href="rectangle__with__hole__mesh_8template_8h_source.html#l00056">oomph::RectangleWithHoleMesh&lt; ELEMENT &gt;::RectangleWithHoleMesh()</a>, <a class="el" href="eighth__sphere__mesh_8template_8h_source.html#l00095">oomph::RefineableEighthSphereMesh&lt; ELEMENT &gt;::RefineableEighthSphereMesh()</a>, <a class="el" href="full__circle__mesh_8template_8h_source.html#l00124">oomph::RefineableFullCircleMesh&lt; ELEMENT &gt;::RefineableFullCircleMesh()</a>, <a class="el" href="quarter__tube__mesh_8template_8h_source.html#l00171">oomph::RefineableQuarterTubeMesh&lt; ELEMENT &gt;::RefineableQuarterTubeMesh()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00280">oomph::RefineableRectangleWithHoleAndAnnularRegionMesh&lt; ELEMENT &gt;::RefineableRectangleWithHoleAndAnnularRegionMesh()</a>, <a class="el" href="rectangle__with__hole__mesh_8template_8h_source.html#l00265">oomph::RefineableRectangleWithHoleMesh&lt; ELEMENT &gt;::RefineableRectangleWithHoleMesh()</a>, <a class="el" href="tube__mesh_8template_8h_source.html#l00137">oomph::RefineableTubeMesh&lt; ELEMENT &gt;::RefineableTubeMesh()</a>, <a class="el" href="annular__mesh_8template_8h_source.html#l00111">oomph::RefineableTwoDAnnularMesh&lt; ELEMENT &gt;::RefineableTwoDAnnularMesh()</a>, and <a class="el" href="tube__mesh_8template_8cc_source.html#l00040">oomph::TubeMesh&lt; ELEMENT &gt;::TubeMesh()</a>.</p>
 
 </div>
 </div>
@@ -917,11 +917,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Number of macro elements in domain. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00132">132</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00129">129</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 <p class="reference">References <a class="el" href="domain_8h_source.html#l00307">Macro_element_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source.html#l00100">oomph::ExtrudedCubeMeshFromQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00035">oomph::ExtrudedDomain::ExtrudedDomain()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00146">oomph::ExtrudedDomain::macro_element_boundary()</a>, <a class="el" href="domain_8h_source.html#l00207">output_macro_element_boundaries()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00865">oomph::RectangleWithHoleAndAnnularRegionMesh&lt; ELEMENT &gt;::RectangleWithHoleAndAnnularRegionMesh()</a>, <a class="el" href="rectangle__with__hole__mesh_8template_8h_source.html#l00062">oomph::RectangleWithHoleMesh&lt; ELEMENT &gt;::RectangleWithHoleMesh()</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00280">oomph::RefineableRectangleWithHoleAndAnnularRegionMesh&lt; ELEMENT &gt;::RefineableRectangleWithHoleAndAnnularRegionMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source.html#l00099">oomph::ExtrudedCubeMeshFromQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00035">oomph::ExtrudedDomain::ExtrudedDomain()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00148">oomph::ExtrudedDomain::macro_element_boundary()</a>, <a class="el" href="domain_8h_source.html#l00203">output_macro_element_boundaries()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00913">oomph::RectangleWithHoleAndAnnularRegionMesh&lt; ELEMENT &gt;::RectangleWithHoleAndAnnularRegionMesh()</a>, <a class="el" href="rectangle__with__hole__mesh_8template_8h_source.html#l00056">oomph::RectangleWithHoleMesh&lt; ELEMENT &gt;::RectangleWithHoleMesh()</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00280">oomph::RefineableRectangleWithHoleAndAnnularRegionMesh&lt; ELEMENT &gt;::RefineableRectangleWithHoleAndAnnularRegionMesh()</a>.</p>
 
 </div>
 </div>
@@ -951,9 +951,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00086">86</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00083">83</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -993,7 +993,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Output macro elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00138">138</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00135">135</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 </div>
 </div>
@@ -1033,7 +1033,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Output macro elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00147">147</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00144">144</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 <p class="reference">References <a class="el" href="domain_8h_source.html#l00307">Macro_element_pt</a>.</p>
 
@@ -1075,7 +1075,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Output all macro element boundaries as tecplot zones. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00197">197</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00193">193</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
 </div>
 </div>
@@ -1115,9 +1115,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Output all macro element boundaries as tecplot zones. </p>
 
-<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00207">207</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00203">203</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="domain_8h_source.html#l00125">macro_element_pt()</a>, <a class="el" href="domain_8h_source.html#l00132">nmacro_element()</a>, and <a class="el" href="classoomph_1_1MacroElement.html#a748b561313e952c9767d278d0e99be4e">oomph::MacroElement::output_macro_element_boundaries()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="domain_8h_source.html#l00122">macro_element_pt()</a>, <a class="el" href="domain_8h_source.html#l00129">nmacro_element()</a>, and <a class="el" href="classoomph_1_1MacroElement.html#a748b561313e952c9767d278d0e99be4e">oomph::MacroElement::output_macro_element_boundaries()</a>.</p>
 
 </div>
 </div>
@@ -1146,7 +1146,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="domain_8h_source.html#l00307">307</a> of file <a class="el" href="domain_8h_source.html">domain.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="annular__domain_8h_source.html#l00048">oomph::AnnularDomain::AnnularDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">oomph::ChannelWithLeafletDomain::ChannelWithLeafletDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">oomph::CollapsibleChannelDomain::CollapsibleChannelDomain()</a>, <a class="el" href="cylinder__with__flag__domain_8cc_source.html#l00039">oomph::CylinderWithFlagDomain::CylinderWithFlagDomain()</a>, <a class="el" href="domain_8h_source.html#l00073">Domain()</a>, <a class="el" href="eighth__sphere__domain_8h_source.html#l00049">oomph::EighthSphereDomain::EighthSphereDomain()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00035">oomph::ExtrudedDomain::ExtrudedDomain()</a>, <a class="el" href="fish__domain_8h_source.html#l00053">oomph::FishDomain::FishDomain()</a>, <a class="el" href="full__circle__domain_8h_source.html#l00080">oomph::FullCircleDomain::FullCircleDomain()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00130">oomph::ExtrudedDomain::macro_element_pt()</a>, <a class="el" href="domain_8h_source.html#l00125">macro_element_pt()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00120">oomph::ExtrudedDomain::nmacro_element()</a>, <a class="el" href="domain_8h_source.html#l00132">nmacro_element()</a>, <a class="el" href="domain_8h_source.html#l00147">output()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00055">oomph::QuarterCircleSectorDomain::QuarterCircleSectorDomain()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00049">oomph::QuarterPipeDomain::QuarterPipeDomain()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00054">oomph::QuarterTubeDomain::QuarterTubeDomain()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">oomph::RectangleWithHoleAndAnnularRegionDomain::RectangleWithHoleAndAnnularRegionDomain()</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00056">oomph::RectangleWithHoleDomain::RectangleWithHoleDomain()</a>, <a class="el" href="tube__domain_8h_source.html#l00082">oomph::TubeDomain::TubeDomain()</a>, <a class="el" href="domain_8h_source.html#l00333">oomph::WarpedCubeDomain::WarpedCubeDomain()</a>, and <a class="el" href="domain_8h_source.html#l00096">~Domain()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="annular__domain_8h_source.html#l00045">oomph::AnnularDomain::AnnularDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00052">oomph::ChannelWithLeafletDomain::ChannelWithLeafletDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00047">oomph::CollapsibleChannelDomain::CollapsibleChannelDomain()</a>, <a class="el" href="cylinder__with__flag__domain_8cc_source.html#l00037">oomph::CylinderWithFlagDomain::CylinderWithFlagDomain()</a>, <a class="el" href="domain_8h_source.html#l00070">Domain()</a>, <a class="el" href="eighth__sphere__domain_8h_source.html#l00045">oomph::EighthSphereDomain::EighthSphereDomain()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00035">oomph::ExtrudedDomain::ExtrudedDomain()</a>, <a class="el" href="fish__domain_8h_source.html#l00048">oomph::FishDomain::FishDomain()</a>, <a class="el" href="full__circle__domain_8h_source.html#l00077">oomph::FullCircleDomain::FullCircleDomain()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00132">oomph::ExtrudedDomain::macro_element_pt()</a>, <a class="el" href="domain_8h_source.html#l00122">macro_element_pt()</a>, <a class="el" href="extruded__domain_8cc_source.html#l00122">oomph::ExtrudedDomain::nmacro_element()</a>, <a class="el" href="domain_8h_source.html#l00129">nmacro_element()</a>, <a class="el" href="domain_8h_source.html#l00144">output()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00047">oomph::QuarterCircleSectorDomain::QuarterCircleSectorDomain()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00045">oomph::QuarterPipeDomain::QuarterPipeDomain()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00048">oomph::QuarterTubeDomain::QuarterTubeDomain()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00061">oomph::RectangleWithHoleAndAnnularRegionDomain::RectangleWithHoleAndAnnularRegionDomain()</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00050">oomph::RectangleWithHoleDomain::RectangleWithHoleDomain()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00036">oomph::TopologicallyRectangularDomain::TopologicallyRectangularDomain()</a>, <a class="el" href="tube__domain_8h_source.html#l00079">oomph::TubeDomain::TubeDomain()</a>, <a class="el" href="domain_8h_source.html#l00326">oomph::WarpedCubeDomain::WarpedCubeDomain()</a>, and <a class="el" href="domain_8h_source.html#l00093">~Domain()</a>.</p>
 
 </div>
 </div>
@@ -1182,7 +1182,7 @@ Protected Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:53
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:37:09
         </div>
       </div>
     </footer>

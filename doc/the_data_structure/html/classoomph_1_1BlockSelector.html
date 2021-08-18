@@ -209,7 +209,7 @@ Private Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:aae471ca00fb73dad738500975f46071b"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockSelector.html#aae471ca00fb73dad738500975f46071b">operator&lt;&lt;</a> (std::ostream &amp;o_stream, const <a class="el" href="classoomph_1_1BlockSelector.html">BlockSelector</a> &amp;block_selector)</td></tr>
-<tr class="memdesc:aae471ca00fb73dad738500975f46071b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function, outputs the Row_index, Column_index, Wanted and the address of the Replacement_block_pt.  <a href="classoomph_1_1BlockSelector.html#aae471ca00fb73dad738500975f46071b">More...</a><br /></td></tr>
+<tr class="memdesc:aae471ca00fb73dad738500975f46071b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function, outputs the Row_index, Column_index, Wanted and the address of the Replacement_block_pt. P.M.: The address of a null pointer on a Mac is 0x0 but for self-tests the address needs to be simply 0. Easy (but hacky) check sorts that out...  <a href="classoomph_1_1BlockSelector.html#aae471ca00fb73dad738500975f46071b">More...</a><br /></td></tr>
 <tr class="separator:aae471ca00fb73dad738500975f46071b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -235,7 +235,7 @@ Friends</h2></td></tr>
 <p>then the resulting concatenated matrix would contain</p>
 <p>[ R , J_00 J_21 , 0 ] </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00124">124</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00123">123</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aaed92a7e9c7845821e616e744611cc7c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaed92a7e9c7845821e616e744611cc7c">&#9670;&nbsp;</a></span>BlockSelector() <span class="overload">[1/2]</span></h2>
@@ -262,9 +262,9 @@ Friends</h2></td></tr>
 
 <p>Default constructor, initialise block index i, j to 0 and bool to false. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00130">130</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00128">128</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00371">Replacement_block_pt</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00369">Replacement_block_pt</a>.</p>
 
 </div>
 </div>
@@ -316,9 +316,9 @@ Friends</h2></td></tr>
 
 <p>Constructor, takes the row and column indices and a boolean indicating if the block is required or not. The optional parameter replacement_block_pt is set to null. If the block is not required a block of the correct dimensions full of 0s is used. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00142">142</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00141">141</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00294">column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00270">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00371">Replacement_block_pt</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00300">wanted()</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00290">column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00266">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00369">Replacement_block_pt</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00296">wanted()</a>.</p>
 
 </div>
 </div>
@@ -347,9 +347,9 @@ Friends</h2></td></tr>
 
 <p>Default destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00169">169</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00168">168</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00365">Column_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00371">Replacement_block_pt</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00362">Row_index</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00363">Column_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00369">Replacement_block_pt</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00360">Row_index</a>.</p>
 
 </div>
 </div>
@@ -401,11 +401,11 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 <p>Build function, sets the Row_index, Column_index and Wanted variables. the Replacement_block_pt is only set if it is not null. Otherwise it is left alone. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00329">329</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00326">326</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00294">column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00365">Column_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00270">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00371">Replacement_block_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00282">row_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00362">Row_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00300">wanted()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00368">Wanted</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00290">column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00363">Column_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00266">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00369">Replacement_block_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00278">row_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00360">Row_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00296">wanted()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00366">Wanted</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00130">BlockSelector()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00190">select_block()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00128">BlockSelector()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00188">select_block()</a>.</p>
 
 </div>
 </div>
@@ -434,11 +434,11 @@ Friends</h2></td></tr>
 
 <p>returns the column index. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00294">294</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00290">290</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00365">Column_index</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00363">Column_index</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00142">BlockSelector()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00190">select_block()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00288">set_column_index()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00141">BlockSelector()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00188">select_block()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00284">set_column_index()</a>.</p>
 
 </div>
 </div>
@@ -467,9 +467,9 @@ Friends</h2></td></tr>
 
 <p>Indicate that we do not want the block (set Wanted to false). </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00221">221</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00218">218</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00365">Column_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00244">null_replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00371">Replacement_block_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00362">Row_index</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00368">Wanted</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00363">Column_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00241">null_replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00369">Replacement_block_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00360">Row_index</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00366">Wanted</a>.</p>
 
 </div>
 </div>
@@ -498,11 +498,11 @@ Friends</h2></td></tr>
 
 <p>Set Replacement_block_pt to null. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00244">244</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00241">241</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00371">Replacement_block_pt</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00369">Replacement_block_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00221">do_not_want_block()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00218">do_not_want_block()</a>.</p>
 
 </div>
 </div>
@@ -531,11 +531,11 @@ Friends</h2></td></tr>
 
 <p>Returns Replacement_block_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00270">270</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00266">266</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00371">Replacement_block_pt</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00369">Replacement_block_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00142">BlockSelector()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00190">select_block()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00250">set_replacement_block_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00141">BlockSelector()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00188">select_block()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00247">set_replacement_block_pt()</a>.</p>
 
 </div>
 </div>
@@ -564,11 +564,11 @@ Friends</h2></td></tr>
 
 <p>returns the row index. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00282">282</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00278">278</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00362">Row_index</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00360">Row_index</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00190">select_block()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00276">set_row_index()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00188">select_block()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00272">set_row_index()</a>.</p>
 
 </div>
 </div>
@@ -620,9 +620,9 @@ Friends</h2></td></tr>
 
 <p>Select a block. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00190">190</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00188">188</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00294">column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00270">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00282">row_index()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00300">wanted()</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00290">column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00266">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00278">row_index()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00296">wanted()</a>.</p>
 
 </div>
 </div>
@@ -652,9 +652,9 @@ Friends</h2></td></tr>
 
 <p>Set the column index. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00288">288</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00284">284</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00294">column_index()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00365">Column_index</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00290">column_index()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00363">Column_index</a>.</p>
 
 </div>
 </div>
@@ -684,9 +684,9 @@ Friends</h2></td></tr>
 
 <p>set Replacement_block_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00250">250</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00247">247</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00365">Column_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00270">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00371">Replacement_block_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00362">Row_index</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00368">Wanted</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00363">Column_index</a>, <a class="el" href="block__preconditioner_8h_source.html#l00266">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00369">Replacement_block_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00360">Row_index</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00366">Wanted</a>.</p>
 
 </div>
 </div>
@@ -716,9 +716,9 @@ Friends</h2></td></tr>
 
 <p>Set the row index. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00276">276</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00272">272</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00282">row_index()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00362">Row_index</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00278">row_index()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00360">Row_index</a>.</p>
 
 </div>
 </div>
@@ -747,9 +747,9 @@ Friends</h2></td></tr>
 
 <p>Indicate that we require the block (set Wanted to true). </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00215">215</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00212">212</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00368">Wanted</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00366">Wanted</a>.</p>
 
 </div>
 </div>
@@ -778,11 +778,11 @@ Friends</h2></td></tr>
 
 <p>returns whether the block is wanted or not. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00300">300</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00296">296</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00368">Wanted</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l00366">Wanted</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00142">BlockSelector()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00190">select_block()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00141">BlockSelector()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00188">select_block()</a>.</p>
 
 </div>
 </div>
@@ -821,10 +821,9 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Output function, outputs the Row_index, Column_index, Wanted and the address of the Replacement_block_pt. </p>
-<p>P.M.: The address of a null pointer on a Mac is 0x0 but for self-tests the address needs to be simply 0. Easy (but hacky) check sorts that out... </p>
+<p>Output function, outputs the Row_index, Column_index, Wanted and the address of the Replacement_block_pt. P.M.: The address of a null pointer on a Mac is 0x0 but for self-tests the address needs to be simply 0. Easy (but hacky) check sorts that out... </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00310">310</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00307">307</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
 </div>
 </div>
@@ -851,9 +850,9 @@ Friends</h2></td></tr>
 
 <p>Column index of the block. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00365">365</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00363">363</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00294">column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00221">do_not_want_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00288">set_column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00250">set_replacement_block_pt()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00169">~BlockSelector()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00290">column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00218">do_not_want_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00284">set_column_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00247">set_replacement_block_pt()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00168">~BlockSelector()</a>.</p>
 
 </div>
 </div>
@@ -879,9 +878,9 @@ Friends</h2></td></tr>
 
 <p>Pointer to the block. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00371">371</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00369">369</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00130">BlockSelector()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00221">do_not_want_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00244">null_replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00270">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00250">set_replacement_block_pt()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00169">~BlockSelector()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00128">BlockSelector()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00218">do_not_want_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00241">null_replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00266">replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00247">set_replacement_block_pt()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00168">~BlockSelector()</a>.</p>
 
 </div>
 </div>
@@ -907,9 +906,9 @@ Friends</h2></td></tr>
 
 <p>Row index of the block. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00362">362</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00360">360</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00221">do_not_want_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00282">row_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00250">set_replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00276">set_row_index()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00169">~BlockSelector()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00218">do_not_want_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00278">row_index()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00247">set_replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00272">set_row_index()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00168">~BlockSelector()</a>.</p>
 
 </div>
 </div>
@@ -935,9 +934,9 @@ Friends</h2></td></tr>
 
 <p>Bool to indicate if we require this block. </p>
 
-<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00368">368</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block__preconditioner_8h_source.html#l00366">366</a> of file <a class="el" href="block__preconditioner_8h_source.html">block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00329">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00221">do_not_want_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00250">set_replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00215">want_block()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00300">wanted()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l00326">build()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00218">do_not_want_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00247">set_replacement_block_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00212">want_block()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l00296">wanted()</a>.</p>
 
 </div>
 </div>
@@ -972,7 +971,7 @@ Friends</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:36
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:55
         </div>
       </div>
     </footer>

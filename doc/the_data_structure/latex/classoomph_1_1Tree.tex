@@ -33,8 +33,7 @@ void \mbox{\hyperlink{classoomph_1_1Tree_a96a95bd9942e906fde87194845a1868c}{flus
 \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1Tree_ab2ca6416d7a368e29da6a6a998f460c7}{son\+\_\+pt}} (const int \&son\+\_\+index) const
 \begin{DoxyCompactList}\small\item\em Return pointer to the son for a given index. Note that to aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Tree_ab7026d14ead1a8d91ce417dfd0cd9478}{set\+\_\+son\+\_\+pt}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1Tree_ab2ca6416d7a368e29da6a6a998f460c7}{son\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Tree_a31e4123b40f6fb52d180a154c9123e85}{nsons}} () const
 \begin{DoxyCompactList}\small\item\em Return number of sons (zero if it\textquotesingle{}s a leaf node) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Tree_a34df656d2f298dbbdf60e7890a3dff2f}{flush\+\_\+sons}} ()
@@ -58,8 +57,7 @@ void \mbox{\hyperlink{classoomph_1_1Tree_a3caab39c8bee6fb65bbafed523aa6d3d}{trav
 void \mbox{\hyperlink{classoomph_1_1Tree_af5c67186ca9c87eef9ce7eaa0af41057}{traverse\+\_\+all}} (\mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Tree\+::\+Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}} member\+\_\+function, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Traverse the tree and excute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes a pointer to a mesh as an argument. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Tree_aef175445b09edb47624c4b88c6d548bc}{traverse\+\_\+all\+\_\+but\+\_\+leaves}} (\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}} member\+\_\+function)
-\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function member\+\_\+function() at all its \char`\"{}nodes\char`\"{} aparat from the leaves. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Tree_a22e0e3695dd8986e439927b7657ff741}{traverse\+\_\+leaves}} (\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}} member\+\_\+function)
 \begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function member\+\_\+function() only at its leaves. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Tree_a914e74ef473b7e82299ea9337d37830d}{traverse\+\_\+leaves}} (\mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Tree\+::\+Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}} member\+\_\+function, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
@@ -86,7 +84,7 @@ static double \& \mbox{\hyperlink{classoomph_1_1Tree_affbae3271da943dfc23645ade9
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const int \mbox{\hyperlink{classoomph_1_1Tree_a9e532196340dcd859ff8207eea2ddbbc}{O\+M\+E\+GA}} =26
+static const int \mbox{\hyperlink{classoomph_1_1Tree_a9e532196340dcd859ff8207eea2ddbbc}{O\+M\+E\+GA}} = 26
 \begin{DoxyCompactList}\small\item\em Default value for an unassigned neighbour. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -94,11 +92,9 @@ static const int \mbox{\hyperlink{classoomph_1_1Tree_a9e532196340dcd859ff8207eea
 \mbox{\hyperlink{classoomph_1_1Tree_ada92f1aa44ee6ef5b52ec5ad0af00359}{Tree}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Tree_a6e78c3a130add917de182ab5f1674531}{Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Tree_a9d611dde1f429500330f28e56ee71883}{Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
-\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -117,7 +113,7 @@ int \mbox{\hyperlink{classoomph_1_1Tree_a83fe7895af25c9f60062c081fc51967c}{Son\+
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}} =1.\+0e-\/14
+static double \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}} = 1.\+0e-\/14
 \begin{DoxyCompactList}\small\item\em Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -134,7 +130,7 @@ Finally, the leaf \char`\"{}nodes\char`\"{} can be split depending on a criteria
 
 Note that Trees are only generated by splitting existing Trees. Therefore, the constructors are protected. The only \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} that \char`\"{}\+Joe User\char`\"{} can create is the (derived) class \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}. 
 
-Definition at line 75 of file tree.\+h.
+Definition at line 73 of file tree.\+h.
 
 
 
@@ -151,7 +147,7 @@ Function pointer to argument-\/free void \mbox{\hyperlink{classoomph_1_1Tree}{Tr
 
 
 
-Definition at line 169 of file tree.\+h.
+Definition at line 184 of file tree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}\label{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}} 
 \index{oomph::Tree@{oomph::Tree}!VoidMeshPtArgumentMemberFctPt@{VoidMeshPtArgumentMemberFctPt}}
@@ -161,7 +157,7 @@ Definition at line 169 of file tree.\+h.
 
 Function pointer to a void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes a pointer to a mesh as its argument 
 
-Definition at line 173 of file tree.\+h.
+Definition at line 188 of file tree.\+h.
 
 
 
@@ -176,10 +172,9 @@ Definition at line 173 of file tree.\+h.
 
 Destructor. Note\+: Deleting a tree also deletes the objects associated with its non-\/leave nodes. 
 
-Destructor for \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Recursively kill all sons and the associated objects of the non-\/leaf nodes. However, the objects of the leaf nodes are not destroyed. Their destruction is handled by the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} destructor. ~\newline
- 
+Destructor for \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Recursively kill all sons and the associated objects of the non-\/leaf nodes. However, the objects of the leaf nodes are not destroyed. Their destruction is handled by the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} destructor. 
 
-Definition at line 124 of file tree.\+cc.
+Definition at line 122 of file tree.\+cc.
 
 
 
@@ -197,7 +192,7 @@ Broken copy constructor.
 
 
 
-Definition at line 85 of file tree.\+h.
+Definition at line 81 of file tree.\+h.
 
 
 
@@ -215,7 +210,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line 242 of file tree.\+h.
+Definition at line 272 of file tree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Tree_a6e78c3a130add917de182ab5f1674531}\label{classoomph_1_1Tree_a6e78c3a130add917de182ab5f1674531}} 
 \index{oomph::Tree@{oomph::Tree}!Tree@{Tree}}
@@ -225,13 +220,11 @@ Definition at line 242 of file tree.\+h.
 
 
 
-Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. ~\newline
- 
+Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. 
 
-Constructor for empty (root) \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: No father, no sons. Pass pointer to the object that this tree (root) contains. Protected because Trees can only be created internally, during the split operation. ~\newline
- 
+Constructor for empty (root) \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: No father, no sons. Pass pointer to the object that this tree (root) contains. Protected because Trees can only be created internally, during the split operation. 
 
-Definition at line 65 of file tree.\+cc.
+Definition at line 63 of file tree.\+cc.
 
 
 
@@ -245,12 +238,11 @@ References Father\+\_\+pt, Level, object\+\_\+pt(), O\+M\+E\+GA, Root\+\_\+pt, o
 
 
 
-Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. ~\newline
- 
+Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. 
 
 Constructor for \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: This one has a father and is a son of a certain type, but has no sons of its own (just yet), so it\textquotesingle{}s a leaf node. Protected because Trees can only be created internally, during the split operation. 
 
-Definition at line 95 of file tree.\+cc.
+Definition at line 92 of file tree.\+cc.
 
 
 
@@ -289,7 +281,7 @@ Call the \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}
 
 Call the \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}\textquotesingle{}s deactivate\+\_\+element() function that is used to perform any final changes to internal data storage of deactivated objects. 
 
-Definition at line 334 of file tree.\+cc.
+Definition at line 341 of file tree.\+cc.
 
 
 
@@ -311,7 +303,7 @@ Return pointer to father\+: N\+U\+LL if it\textquotesingle{}s a root node.
 
 
 
-Definition at line 217 of file tree.\+h.
+Definition at line 241 of file tree.\+h.
 
 
 
@@ -333,7 +325,7 @@ Flush the object represented by the tree.
 
 
 
-Definition at line 101 of file tree.\+h.
+Definition at line 100 of file tree.\+h.
 
 
 
@@ -355,7 +347,7 @@ Flush the sons.
 
 
 
-Definition at line 133 of file tree.\+h.
+Definition at line 141 of file tree.\+h.
 
 
 
@@ -377,7 +369,7 @@ Return true if the tree is a leaf node.
 
 
 
-Definition at line 208 of file tree.\+h.
+Definition at line 226 of file tree.\+h.
 
 
 
@@ -399,7 +391,7 @@ Return the level of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} (root=0)
 
 
 
-Definition at line 226 of file tree.\+h.
+Definition at line 253 of file tree.\+h.
 
 
 
@@ -417,7 +409,7 @@ Max. allowed discrepancy in neighbour finding routine (distance between points w
 
 
 
-Definition at line 231 of file tree.\+h.
+Definition at line 261 of file tree.\+h.
 
 
 
@@ -443,10 +435,9 @@ Unrefinement is performed if \begin{DoxyVerb} object_pt()->sons_to_be_unrefined(
 \end{DoxyVerb}
 
 
-returns true. ~\newline
- 
+returns true. 
 
-Definition at line 295 of file tree.\+cc.
+Definition at line 302 of file tree.\+cc.
 
 
 
@@ -468,7 +459,7 @@ Return number of sons (zero if it\textquotesingle{}s a leaf node)
 
 
 
-Definition at line 130 of file tree.\+h.
+Definition at line 135 of file tree.\+h.
 
 
 
@@ -490,7 +481,7 @@ Return the pointer to the object (\mbox{\hyperlink{classoomph_1_1RefineableEleme
 
 
 
-Definition at line 98 of file tree.\+h.
+Definition at line 94 of file tree.\+h.
 
 
 
@@ -512,7 +503,7 @@ Broken assignment operator.
 
 
 
-Definition at line 91 of file tree.\+h.
+Definition at line 87 of file tree.\+h.
 
 
 
@@ -541,13 +532,13 @@ returns true. p-\/unrefinement is performed if \begin{DoxyVerb} object_pt()->to_
 
 returns true.
 
-If this is the case, then we execute \begin{DoxyVerb} object_pt()->p_refine(+/-1,mesh_pt,clone_pt) 
+If this is the case, then we execute \begin{DoxyVerb} object_pt()->p_refine(+/-1,mesh_pt,clone_pt)
 \end{DoxyVerb}
 
 
 to p-\/refine the element, where mesh\+\_\+pt is a pointer to the mesh that the element lives in, and clone\+\_\+pt is a pointer to a \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} that has all the information that would be needed from the father element during h-\/refinement. 
 
-Definition at line 155 of file tree.\+template.\+cc.
+Definition at line 149 of file tree.\+template.\+cc.
 
 
 
@@ -565,7 +556,7 @@ Return pointer to root of the tree.
 
 
 
-Definition at line 139 of file tree.\+h.
+Definition at line 147 of file tree.\+h.
 
 
 
@@ -573,7 +564,7 @@ References Root\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), oomph\+::\+Oc\+Tree\+::doc\+\_\+face\+\_\+neighbours(), oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Quad\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+::doc\+\_\+true\+\_\+edge\+\_\+neighbours(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Problem\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Refineable\+Element\+::root\+\_\+element\+\_\+pt(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
+Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), oomph\+::\+Oc\+Tree\+::doc\+\_\+face\+\_\+neighbours(), oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Quad\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+::doc\+\_\+true\+\_\+edge\+\_\+neighbours(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Problem\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+Refineable\+Element\+::root\+\_\+element\+\_\+pt(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
 
 \mbox{\Hypertarget{classoomph_1_1Tree_a3e4dee01da0a463c4a3a5be574943632}\label{classoomph_1_1Tree_a3e4dee01da0a463c4a3a5be574943632}} 
 \index{oomph::Tree@{oomph::Tree}!root\_pt@{root\_pt}}
@@ -587,7 +578,7 @@ Return pointer to root of the tree (const version)
 
 
 
-Definition at line 142 of file tree.\+h.
+Definition at line 153 of file tree.\+h.
 
 
 
@@ -605,7 +596,7 @@ Set the father.
 
 
 
-Definition at line 220 of file tree.\+h.
+Definition at line 247 of file tree.\+h.
 
 
 
@@ -623,12 +614,11 @@ Referenced by oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::s
 
 
 
-Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). ~\newline
- 
+Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). 
 
 
 
-Definition at line 124 of file tree.\+h.
+Definition at line 129 of file tree.\+h.
 
 
 
@@ -650,7 +640,7 @@ Return pointer to the son for a given index. Note that to aid code readability s
 
 
 
-Definition at line 110 of file tree.\+h.
+Definition at line 109 of file tree.\+h.
 
 
 
@@ -672,7 +662,7 @@ Return son type.
 
 
 
-Definition at line 205 of file tree.\+h.
+Definition at line 220 of file tree.\+h.
 
 
 
@@ -701,13 +691,13 @@ Split is performed if \begin{DoxyVerb} object_pt()->to_be_refined()
 
 returns true.
 
-If this is the case, then we execute \begin{DoxyVerb} object_pt()->split(new_elements_pt) 
+If this is the case, then we execute \begin{DoxyVerb} object_pt()->split(new_elements_pt)
 \end{DoxyVerb}
 
 
 to create the sons. Pointers to the son objects are then inserted into the son pointers of the present element. This turns the present element into a \char`\"{}grey\char`\"{} (=non-\/leaf) node. 
 
-Definition at line 63 of file tree.\+template.\+cc.
+Definition at line 61 of file tree.\+template.\+cc.
 
 
 
@@ -725,7 +715,7 @@ Traverse and stick pointers to all \char`\"{}nodes\char`\"{} into \mbox{\hyperli
 
 Traverse \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Preorder traverse and stick pointer to all nodes (incl. \char`\"{}grey\char`\"{}=non-\/leaf ones) into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} 
 
-Definition at line 272 of file tree.\+cc.
+Definition at line 277 of file tree.\+cc.
 
 
 
@@ -733,7 +723,7 @@ References i, and Son\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Problem\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Binary\+Tree\+::self\+\_\+test(), oomph\+::\+Quad\+Tree\+::self\+\_\+test(), oomph\+::\+Oc\+Tree\+::self\+\_\+test(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
+Referenced by oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Problem\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Binary\+Tree\+::self\+\_\+test(), oomph\+::\+Quad\+Tree\+::self\+\_\+test(), oomph\+::\+Oc\+Tree\+::self\+\_\+test(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest(), and oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector().
 
 \mbox{\Hypertarget{classoomph_1_1Tree_accfbeb9178ce92a8a51e3a15293a86d1}\label{classoomph_1_1Tree_accfbeb9178ce92a8a51e3a15293a86d1}} 
 \index{oomph::Tree@{oomph::Tree}!stick\_leaves\_into\_vector@{stick\_leaves\_into\_vector}}
@@ -747,7 +737,7 @@ Traverse tree and stick pointers to leaf \char`\"{}nodes\char`\"{} (only) into \
 
 Traverse \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Preorder traverse and stick pointers to leaf nodes (only) into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} 
 
-Definition at line 251 of file tree.\+cc.
+Definition at line 255 of file tree.\+cc.
 
 
 
@@ -755,7 +745,7 @@ References i, and Son\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Mesh\+::get\+\_\+all\+\_\+halo\+\_\+data(), oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt(), and oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector().
+Referenced by oomph\+::\+Mesh\+::get\+\_\+all\+\_\+halo\+\_\+data(), oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt(), oomph\+::\+Problem\+::send\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), and oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector().
 
 \mbox{\Hypertarget{classoomph_1_1Tree_a3caab39c8bee6fb65bbafed523aa6d3d}\label{classoomph_1_1Tree_a3caab39c8bee6fb65bbafed523aa6d3d}} 
 \index{oomph::Tree@{oomph::Tree}!traverse\_all@{traverse\_all}}
@@ -769,7 +759,7 @@ Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} m
 
 Preorder traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function at all nodes 
 
-Definition at line 147 of file tree.\+cc.
+Definition at line 145 of file tree.\+cc.
 
 
 
@@ -777,7 +767,7 @@ References i, and Son\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh().
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh().
 
 \mbox{\Hypertarget{classoomph_1_1Tree_af5c67186ca9c87eef9ce7eaa0af41057}\label{classoomph_1_1Tree_af5c67186ca9c87eef9ce7eaa0af41057}} 
 \index{oomph::Tree@{oomph::Tree}!traverse\_all@{traverse\_all}}
@@ -791,7 +781,7 @@ Traverse the tree and excute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} me
 
 Preorder traverse the tree and execute a void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes one argument at all nodes. 
 
-Definition at line 166 of file tree.\+cc.
+Definition at line 164 of file tree.\+cc.
 
 
 
@@ -805,19 +795,19 @@ References i, and Son\+\_\+pt.
 
 
 
-Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function ~\newline
- 
+Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function member\+\_\+function() at all its \char`\"{}nodes\char`\"{} aparat from the leaves. 
 
-member\+\_\+function() at all its \char`\"{}nodes\char`\"{} aparat from the leaves
-
-Preorder traverse the tree and execute a void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function for all elements that are not leaf elements. ~\newline
- 
+Preorder traverse the tree and execute a void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function for all elements that are not leaf elements. 
 
 Definition at line 184 of file tree.\+cc.
 
 
 
 References i, and Son\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh().
 
 \mbox{\Hypertarget{classoomph_1_1Tree_a22e0e3695dd8986e439927b7657ff741}\label{classoomph_1_1Tree_a22e0e3695dd8986e439927b7657ff741}} 
 \index{oomph::Tree@{oomph::Tree}!traverse\_leaves@{traverse\_leaves}}
@@ -837,6 +827,10 @@ Definition at line 207 of file tree.\+cc.
 
 References i, and Son\+\_\+pt.
 
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::p\+\_\+refine\+\_\+elements\+\_\+if\+\_\+required(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::split\+\_\+elements\+\_\+if\+\_\+required().
+
 \mbox{\Hypertarget{classoomph_1_1Tree_a914e74ef473b7e82299ea9337d37830d}\label{classoomph_1_1Tree_a914e74ef473b7e82299ea9337d37830d}} 
 \index{oomph::Tree@{oomph::Tree}!traverse\_leaves@{traverse\_leaves}}
 \index{traverse\_leaves@{traverse\_leaves}!oomph::Tree@{oomph::Tree}}
@@ -849,7 +843,7 @@ Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} m
 
 Preorder traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes one argument at the leaves only (ignore \char`\"{}grey\char`\"{} = non-\/leaf nodes) 
 
-Definition at line 229 of file tree.\+cc.
+Definition at line 231 of file tree.\+cc.
 
 
 
@@ -870,7 +864,7 @@ Pointer to the Father of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}.
 
 
 
-Definition at line 271 of file tree.\+h.
+Definition at line 302 of file tree.\+h.
 
 
 
@@ -888,7 +882,7 @@ Level of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} (level 0 = root)
 
 
 
-Definition at line 277 of file tree.\+h.
+Definition at line 308 of file tree.\+h.
 
 
 
@@ -898,7 +892,7 @@ Referenced by oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\
 \index{oomph::Tree@{oomph::Tree}!Max\_neighbour\_finding\_tolerance@{Max\_neighbour\_finding\_tolerance}}
 \index{Max\_neighbour\_finding\_tolerance@{Max\_neighbour\_finding\_tolerance}!oomph::Tree@{oomph::Tree}}
 \doxysubsubsection{\texorpdfstring{Max\_neighbour\_finding\_tolerance}{Max\_neighbour\_finding\_tolerance}}
-{\footnotesize\ttfamily double oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance =1.\+0e-\/14\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily double oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance = 1.\+0e-\/14\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -906,7 +900,7 @@ Max. allowed discrepancy in neighbour finding routine (distance between points w
 
 Maximum tolerance for neighbour finding (distance between points when identified from the two neighbours) 
 
-Definition at line 288 of file tree.\+h.
+Definition at line 319 of file tree.\+h.
 
 
 
@@ -924,7 +918,7 @@ Pointer to the object represented by the tree.
 
 
 
-Definition at line 283 of file tree.\+h.
+Definition at line 314 of file tree.\+h.
 
 
 
@@ -934,7 +928,7 @@ Referenced by flush\+\_\+object(), merge\+\_\+sons\+\_\+if\+\_\+required(), obje
 \index{oomph::Tree@{oomph::Tree}!OMEGA@{OMEGA}}
 \index{OMEGA@{OMEGA}!oomph::Tree@{oomph::Tree}}
 \doxysubsubsection{\texorpdfstring{OMEGA}{OMEGA}}
-{\footnotesize\ttfamily const int oomph\+::\+Tree\+::\+O\+M\+E\+GA =26\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily const int oomph\+::\+Tree\+::\+O\+M\+E\+GA = 26\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -942,7 +936,7 @@ Default value for an unassigned neighbour.
 
 Static value used to represent unassigned quantities. This has to remain consistent with the enumerations in the Octree and Quadtree namespaces! 
 
-Definition at line 237 of file tree.\+h.
+Definition at line 268 of file tree.\+h.
 
 
 
@@ -960,7 +954,7 @@ Pointer to the root of the tree.
 
 
 
-Definition at line 266 of file tree.\+h.
+Definition at line 298 of file tree.\+h.
 
 
 
@@ -978,7 +972,7 @@ Referenced by oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\
 
 
 
-Definition at line 274 of file tree.\+h.
+Definition at line 305 of file tree.\+h.
 
 
 
@@ -996,7 +990,7 @@ Son type (e.\+g. S\+W/\+S\+E/\+N\+W/\+NE in a quadtree)
 
 
 
-Definition at line 280 of file tree.\+h.
+Definition at line 311 of file tree.\+h.
 
 
 

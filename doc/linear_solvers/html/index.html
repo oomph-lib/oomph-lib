@@ -134,8 +134,7 @@
 Overview</h1>
 <p>As discussed in the <a href="../../the_data_structure/html/index.html">bottom-up discussion of <code>oomph-lib's</code> data structure</a>, by default <code>oomph-lib's</code> Newton solver, <code>Problem::newton_solve(...)</code> solves the linear systems arising during the Newton iteration with its default linear solver, <a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html"><code> SuperLUSolver</code></a>, a wrapper to Demmel, Eistenstat, Gilbert, Li &amp; Liu's sparse direct solver <a href="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</a></p>
 <p><code>oomph-lib</code> provides a large number of alternative linear solvers that may be used instead. All linear solvers within the library are derived from the base class <a href="../../the_data_structure/html/classoomph_1_1LinearSolver.html"><code> LinearSolver</code></a> which contains a single pure virtual function</p>
- <div class="fragment"><div class="line"> <span class="keyword">virtual</span> <span class="keywordtype">void</span> solve(Problem* <span class="keyword">const</span> &amp;problem_pt, DoubleVector &amp;result)=0;</div>
-</div><!-- fragment --><p>whose task it is to compute the solution <img class="formulaInl" alt="$ \delta {\bf x} $" src="form_0.png"/> (returned in the vector <code>result</code>) of the linear system </p><p class="formulaDsp">
+ <div class="fragment"></div><!-- fragment --><p>whose task it is to compute the solution <img class="formulaInl" alt="$ \delta {\bf x} $" src="form_0.png"/> (returned in the vector <code>result</code>) of the linear system </p><p class="formulaDsp">
 <img class="formulaDsp" alt="\[ {\cal J} \delta {\bf x} = -{\bf r} \]" src="form_1.png"/>
 </p>
 <p> where <img class="formulaInl" alt="$ {\bf r} $" src="form_2.png"/> and <img class="formulaInl" alt="$ {\cal J} $" src="form_3.png"/> are the global Jacobian and the residual vector, computed by the <code>Problem</code> pointed to by <code>problem_pt</code>. The <a href="../../the_data_structure/html/classoomph_1_1LinearSolver.html"><code> LinearSolver</code></a> class also defines linear-algebra-type interfaces that allow the solution of linear systems with matrices other than the <code>Problem's</code> Jacobian matrix. However, these methods may not be implemented for all linear solvers.</p>
@@ -248,81 +247,15 @@ Iterative linear solvers and preconditioners</h2>
 <div class="line"> linear_solver_pt()=solver_pt;</div>
 </div><!-- fragment --><p>to the problem constructor. We note that, by default, <code>oomph-lib's</code> <code>IterativeLinearSolvers</code> perform the preconditioning using the trivial "identity preconditioner". Most Krylov subspace solvers perform very poorly without some sort of preconditioning.</p>
 <p>Specific preconditioners may be implemented by deriving from the <code>Preconditioner</code> base class, by implementing its two pure virtual functions</p>
- <div class="fragment"><div class="line">  <span class="comment">/// \short Apply the preconditioner. Pure virtual generic interface</span></div>
-<div class="line"><span class="comment">  /// function. This method should apply the preconditioner operator to the</span></div>
-<div class="line"><span class="comment"></span><span class="comment">  /// vector r and return the vector z.</span></div>
-<div class="line"><span class="comment"></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> preconditioner_solve(<span class="keyword">const</span> DoubleVector &amp;r, DoubleVector &amp;z)=0;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">  /// \short Apply the preconditioner. Pure virtual generic interface</span></div>
-<div class="line"><span class="comment">  /// function. This method should apply the preconditioner operator to the</span></div>
-<div class="line"><span class="comment">  /// vector r and return the vector z. (broken virtual)</span></div>
-<div class="line"><span class="comment"></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> preconditioner_solve_transpose(<span class="keyword">const</span> DoubleVector &amp;r,</div>
-<div class="line">                                              DoubleVector &amp;z)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Throw an error</span></div>
-<div class="line">   <span class="keywordflow">throw</span> OomphLibError(<span class="stringliteral">&quot;This function hasn&#39;t been implemented yet!&quot;</span>,</div>
-<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
-<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line">  }</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">  /// \short Setup the preconditioner: store the matrix pointer and the</span></div>
-<div class="line"><span class="comment">  /// communicator pointer then call preconditioner specific setup()</span></div>
-<div class="line"><span class="comment">  /// function.</span></div>
-<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> setup(DoubleMatrixBase* matrix_pt)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Store matrix pointer</span></div>
-<div class="line">   set_matrix_pt(matrix_pt);</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">// Extract and store communicator pointer</span></div>
-<div class="line">   DistributableLinearAlgebraObject* dist_obj_pt=</div>
-<div class="line">    <span class="keyword">dynamic_cast&lt;</span>DistributableLinearAlgebraObject*<span class="keyword">&gt;</span>(matrix_pt);</div>
-<div class="line">   <span class="keywordflow">if</span> (dist_obj_pt!=0)</div>
-<div class="line">    {</div>
-<div class="line">     set_comm_pt(dist_obj_pt-&gt;distribution_pt()-&gt;communicator_pt());</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">else</span></div>
-<div class="line">    {</div>
-<div class="line">     set_comm_pt(0);</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">   <span class="keywordtype">double</span> setup_time_start = TimingHelpers::timer();</div>
-<div class="line">   setup();</div>
-<div class="line">   <span class="keywordtype">double</span> setup_time_finish = TimingHelpers::timer();</div>
-<div class="line">   Setup_time = setup_time_finish - setup_time_start;</div>
-<div class="line">  }</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">  /// \short Compatability layer for old preconditioners where problem</span></div>
-<div class="line"><span class="comment">  /// pointers were needed. The problem pointer is only used to get a</span></div>
-<div class="line"><span class="comment">  /// communicator pointer.</span></div>
-<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> setup(<span class="keyword">const</span> Problem* problem_pt, DoubleMatrixBase* matrix_pt)</div>
-<div class="line">  {</div>
-<div class="line">   ObsoleteCode::obsolete();</div>
-<div class="line">   setup(matrix_pt);</div>
-<div class="line">  }</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">  /// Set up the block preconditioner quietly!</span></div>
-<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> enable_silent_preconditioner_setup()</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Set the appropriate (silencing) boolean to true</span></div>
-<div class="line">   Silent_preconditioner_setup=<span class="keyword">true</span>;</div>
-<div class="line">  } <span class="comment">// End of enable_silent_preconditioner_setup</span></div>
-<div class="line"> </div>
-<div class="line">  <span class="comment"></span></div>
-<div class="line"><span class="comment">  /// Be verbose in the block preconditioner setup </span></div>
-<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> disable_silent_preconditioner_setup()</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Set the appropriate (silencing) boolean to false</span></div>
-<div class="line">   Silent_preconditioner_setup=<span class="keyword">false</span>;</div>
-<div class="line">  } <span class="comment">// End of disable_silent_preconditioner_setup</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">  /// \short Setup the preconditioner. Pure virtual generic interface</span></div>
-<div class="line"><span class="comment">  /// function.</span></div>
-<div class="line"><span class="comment"></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setup() = 0;</div>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short Apply the preconditioner. Pure virtual generic interface</span></div>
+<div class="line"><span class="comment">    /// function. This method should apply the preconditioner operator to the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// vector r and return the vector z.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> preconditioner_solve(<span class="keyword">const</span> DoubleVector&amp; r,</div>
+<div class="line">                                      DoubleVector&amp; z) = 0;</div>
 </div><!-- fragment --><p>and</p>
- <div class="fragment"><div class="line">  <span class="comment">/// \short Setup the preconditioner. Pure virtual generic interface</span></div>
-<div class="line"><span class="comment">  /// function.</span></div>
-<div class="line"><span class="comment"></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setup() = 0;</div>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short Setup the preconditioner. Pure virtual generic interface</span></div>
+<div class="line"><span class="comment">    /// function.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setup() = 0;</div>
 </div><!-- fragment --><p>Note that, by default, <code>oomph-lib's</code> <code>IterativeLinearSolvers</code> employ left preconditioning.</p>
 <p><code>oomph-lib</code> provides fully-functional implementations of several general-purpose preconditioners. For instance, the zero-fill-in incomplete LU factorisation preconditioner ILU(0) may be employed by adding the lines</p>
  <div class="fragment"><div class="line"> <span class="comment">// Specify preconditioner</span></div>
@@ -478,7 +411,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:25:06
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:04:28
         </div>
       </div>
     </footer>

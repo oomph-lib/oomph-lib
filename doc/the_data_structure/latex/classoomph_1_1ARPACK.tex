@@ -32,7 +32,7 @@ void \mbox{\hyperlink{classoomph_1_1ARPACK_a9945e2656f93850112f8836a585b32b0}{en
 \begin{DoxyCompactList}\small\item\em Set to enable the computation of the eigenvectors (default) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ARPACK_adfd771b9ef52ec5b0ee78918027679c0}{disable\+\_\+compute\+\_\+eigenvectors}} ()
 \begin{DoxyCompactList}\small\item\em Set to disable the computation of the eigenvectors. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ARPACK_ac644213623ea3d91a42cf1ea4608cdf3}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector)
+void \mbox{\hyperlink{classoomph_1_1ARPACK_a22a914045a51a8ad89158cffd81127fe}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector)
 \begin{DoxyCompactList}\small\item\em Solve the eigen problem. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ARPACK_a513c4cadda58eb9a0f1319f8b3159852}{get\+\_\+eigenvalues\+\_\+left\+\_\+of\+\_\+shift}} ()
 \begin{DoxyCompactList}\small\item\em Use the eigensolver to find the eigenvalues of a given matrix. \end{DoxyCompactList}\item 
@@ -44,9 +44,9 @@ void \mbox{\hyperlink{classoomph_1_1ARPACK_a41e0454599dbf2db541fc66280ea60e3}{tr
 \begin{DoxyCompactList}\small\item\em Set the imaginary part fo the quantity of interest. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ARPACK_a94e5065868bc3c3187f15e9220314383}{track\+\_\+eigenvalue\+\_\+magnitude}} ()
 \begin{DoxyCompactList}\small\item\em Set the magnitude to be the quantity of interest. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ARPACK_a2118c6975be7d72dada95331201d518a}{linear\+\_\+solver\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ARPACK_aa73ca96ed5bff72dc7f0663b4d140e74}{linear\+\_\+solver\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1ARPACK_a7baf11f887ffcda8eccea09a64d7d4d4}{linear\+\_\+solver\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1ARPACK_a48d9a6ff92914c0126dbfa85815b7d1f}{linear\+\_\+solver\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -69,7 +69,7 @@ bool \mbox{\hyperlink{classoomph_1_1ARPACK_af8a6dba4dca423fd67488e34970886df}{Co
 \doxysubsection{Detailed Description}
 Class for the \mbox{\hyperlink{classoomph_1_1ARPACK}{A\+R\+P\+A\+CK}} eigensolver. 
 
-Definition at line 99 of file eigen\+\_\+solver.\+h.
+Definition at line 103 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -104,7 +104,7 @@ Empty copy constructor.
 
 
 
-Definition at line 132 of file eigen\+\_\+solver.\+h.
+Definition at line 135 of file eigen\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ARPACK_a67b999708483787f4211a15feb71ed11}\label{classoomph_1_1ARPACK_a67b999708483787f4211a15feb71ed11}} 
 \index{oomph::ARPACK@{oomph::ARPACK}!````~ARPACK@{$\sim$ARPACK}}
@@ -118,7 +118,7 @@ Destructor, delete the linear solver.
 
 Destructor, delete the default linear solver. 
 
-Definition at line 56 of file eigen\+\_\+solver.\+cc.
+Definition at line 62 of file eigen\+\_\+solver.\+cc.
 
 
 
@@ -139,7 +139,7 @@ Set to disable the computation of the eigenvectors.
 
 
 
-Definition at line 147 of file eigen\+\_\+solver.\+h.
+Definition at line 159 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -157,7 +157,7 @@ Set to enable the computation of the eigenvectors (default)
 
 
 
-Definition at line 144 of file eigen\+\_\+solver.\+h.
+Definition at line 153 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -175,7 +175,7 @@ Use the eigensolver to find the eigenvalues of a given matrix.
 
 Set the desired eigenvalues to be left of the shift 
 
-Definition at line 162 of file eigen\+\_\+solver.\+h.
+Definition at line 177 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -193,17 +193,17 @@ Set the desired eigenvalues to be right of the shift.
 
 
 
-Definition at line 165 of file eigen\+\_\+solver.\+h.
+Definition at line 183 of file eigen\+\_\+solver.\+h.
 
 
 
 References Small.
 
-\mbox{\Hypertarget{classoomph_1_1ARPACK_a2118c6975be7d72dada95331201d518a}\label{classoomph_1_1ARPACK_a2118c6975be7d72dada95331201d518a}} 
+\mbox{\Hypertarget{classoomph_1_1ARPACK_aa73ca96ed5bff72dc7f0663b4d140e74}\label{classoomph_1_1ARPACK_aa73ca96ed5bff72dc7f0663b4d140e74}} 
 \index{oomph::ARPACK@{oomph::ARPACK}!linear\_solver\_pt@{linear\_solver\_pt}}
 \index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::ARPACK@{oomph::ARPACK}}
 \doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ \& oomph\+::\+A\+R\+P\+A\+C\+K\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$\& oomph\+::\+A\+R\+P\+A\+C\+K\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -211,17 +211,17 @@ Return a pointer to the linear solver object.
 
 
 
-Definition at line 177 of file eigen\+\_\+solver.\+h.
+Definition at line 207 of file eigen\+\_\+solver.\+h.
 
 
 
 References Linear\+\_\+solver\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1ARPACK_a7baf11f887ffcda8eccea09a64d7d4d4}\label{classoomph_1_1ARPACK_a7baf11f887ffcda8eccea09a64d7d4d4}} 
+\mbox{\Hypertarget{classoomph_1_1ARPACK_a48d9a6ff92914c0126dbfa85815b7d1f}\label{classoomph_1_1ARPACK_a48d9a6ff92914c0126dbfa85815b7d1f}} 
 \index{oomph::ARPACK@{oomph::ARPACK}!linear\_solver\_pt@{linear\_solver\_pt}}
 \index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::ARPACK@{oomph::ARPACK}}
 \doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ const \& oomph\+::\+A\+R\+P\+A\+C\+K\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ const\& oomph\+::\+A\+R\+P\+A\+C\+K\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -229,7 +229,7 @@ Return a pointer to the linear solver object (const version)
 
 
 
-Definition at line 180 of file eigen\+\_\+solver.\+h.
+Definition at line 213 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -247,7 +247,7 @@ Access function for the number of Arnoldi vectors.
 
 
 
-Definition at line 138 of file eigen\+\_\+solver.\+h.
+Definition at line 141 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -265,17 +265,17 @@ Access function for the number of Arnoldi vectors (const version)
 
 
 
-Definition at line 141 of file eigen\+\_\+solver.\+h.
+Definition at line 147 of file eigen\+\_\+solver.\+h.
 
 
 
 References N\+Arnoldi.
 
-\mbox{\Hypertarget{classoomph_1_1ARPACK_ac644213623ea3d91a42cf1ea4608cdf3}\label{classoomph_1_1ARPACK_ac644213623ea3d91a42cf1ea4608cdf3}} 
+\mbox{\Hypertarget{classoomph_1_1ARPACK_a22a914045a51a8ad89158cffd81127fe}\label{classoomph_1_1ARPACK_a22a914045a51a8ad89158cffd81127fe}} 
 \index{oomph::ARPACK@{oomph::ARPACK}!solve\_eigenproblem@{solve\_eigenproblem}}
 \index{solve\_eigenproblem@{solve\_eigenproblem}!oomph::ARPACK@{oomph::ARPACK}}
 \doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}}
-{\footnotesize\ttfamily void oomph\+::\+A\+R\+P\+A\+C\+K\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+A\+R\+P\+A\+C\+K\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -283,11 +283,11 @@ Solve the eigen problem.
 
 Use \mbox{\hyperlink{classoomph_1_1ARPACK}{A\+R\+P\+A\+CK}} to solve an eigen problem that is assembled by elements in a mesh in a \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} object. 
 
-Implements \mbox{\hyperlink{classoomph_1_1EigenSolver_a6a6b09612ce16457b26fa0cfe996fa71}{oomph\+::\+Eigen\+Solver}}.
+Implements \mbox{\hyperlink{classoomph_1_1EigenSolver_a67b1178450cd4b229432d1b497299b73}{oomph\+::\+Eigen\+Solver}}.
 
 
 
-Definition at line 63 of file eigen\+\_\+solver.\+cc.
+Definition at line 72 of file eigen\+\_\+solver.\+cc.
 
 
 
@@ -305,7 +305,7 @@ Set the imaginary part fo the quantity of interest.
 
 
 
-Definition at line 171 of file eigen\+\_\+solver.\+h.
+Definition at line 195 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -323,7 +323,7 @@ Set the magnitude to be the quantity of interest.
 
 
 
-Definition at line 174 of file eigen\+\_\+solver.\+h.
+Definition at line 201 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -341,7 +341,7 @@ Set the real part to be the quantity of interest (default)
 
 
 
-Definition at line 168 of file eigen\+\_\+solver.\+h.
+Definition at line 189 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -362,7 +362,7 @@ Boolean to indicate whether or not to compute the eigenvectors.
 
 
 
-Definition at line 123 of file eigen\+\_\+solver.\+h.
+Definition at line 127 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -380,7 +380,7 @@ Pointer to a default linear solver.
 
 
 
-Definition at line 107 of file eigen\+\_\+solver.\+h.
+Definition at line 110 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -398,7 +398,7 @@ Pointer to a linear solver.
 
 
 
-Definition at line 104 of file eigen\+\_\+solver.\+h.
+Definition at line 107 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -416,7 +416,7 @@ Number of Arnoldi vectors to compute.
 
 
 
-Definition at line 115 of file eigen\+\_\+solver.\+h.
+Definition at line 119 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -434,7 +434,7 @@ Boolean to set which part of the spectrum left (default) or right of the shifted
 
 
 
-Definition at line 120 of file eigen\+\_\+solver.\+h.
+Definition at line 124 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -452,7 +452,7 @@ Integer to set whether the real, imaginary or magnitude is required to be small 
 
 
 
-Definition at line 111 of file eigen\+\_\+solver.\+h.
+Definition at line 115 of file eigen\+\_\+solver.\+h.
 
 
 

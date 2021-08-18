@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1ElasticRefineableRectangularQuadMesh_aa3d9df728974ce172bf942bc4f6c1a2d}{Elastic\+Refineable\+Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx, const double \&ly, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
-\begin{DoxyCompactList}\small\item\em Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-\/free one and assign boundary coordinates (variable Lagrangian coordinates along the relevant boundaries). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-\/free one and assign boundary coordinates (variable Lagrangian coordinates along the relevant boundaries). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ElasticRefineableRectangularQuadMesh_a8925d6c0eb669afc420564a4610b34bd}{Elastic\+Refineable\+Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx, const double \&ly, const bool \&periodic\+\_\+in\+\_\+x, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-\/free one and assign boundary coordinates. This includes a boolean flag to specify if the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ElasticRefineableRectangularQuadMesh_a1cea0e91f2d8687182a8f5de6737a511}{Elastic\+Refineable\+Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx, const double \&ly, const Vector$<$ double $>$ \&origin, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
@@ -29,7 +28,7 @@ class oomph\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+
 
 Elastic refineable quad mesh with functionality to attach traction elements to the specified boundaries. We \char`\"{}upgrade\char`\"{} the \mbox{\hyperlink{classoomph_1_1RefineableRectangularQuadMesh}{Refineable\+Rectangular\+Quad\+Mesh}} to become an Solid\+Mesh and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-\/free configuration. We also move the mesh \char`\"{}down\char`\"{} by half the the \char`\"{}height\char`\"{} so x=0 is located on the centreline -- appropriate for the beam-\/type problems for which this mesh was developed. 
 
-Definition at line 533 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 570 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -43,12 +42,11 @@ Definition at line 533 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
-Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-\/free one and assign boundary coordinates (variable Lagrangian coordinates along the relevant boundaries). ~\newline
- 
+Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-\/free one and assign boundary coordinates (variable Lagrangian coordinates along the relevant boundaries). 
 
 
 
-Definition at line 544 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 579 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticRefineableRectangularQuadMesh_a8925d6c0eb669afc420564a4610b34bd}\label{classoomph_1_1ElasticRefineableRectangularQuadMesh_a8925d6c0eb669afc420564a4610b34bd}} 
 \index{oomph::ElasticRefineableRectangularQuadMesh$<$ ELEMENT $>$@{oomph::ElasticRefineableRectangularQuadMesh$<$ ELEMENT $>$}!ElasticRefineableRectangularQuadMesh@{ElasticRefineableRectangularQuadMesh}}
@@ -63,7 +61,7 @@ Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that th
 
 
 
-Definition at line 564 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 599 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticRefineableRectangularQuadMesh_a1cea0e91f2d8687182a8f5de6737a511}\label{classoomph_1_1ElasticRefineableRectangularQuadMesh_a1cea0e91f2d8687182a8f5de6737a511}} 
 \index{oomph::ElasticRefineableRectangularQuadMesh$<$ ELEMENT $>$@{oomph::ElasticRefineableRectangularQuadMesh$<$ ELEMENT $>$}!ElasticRefineableRectangularQuadMesh@{ElasticRefineableRectangularQuadMesh}}
@@ -78,7 +76,7 @@ Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that th
 
 
 
-Definition at line 586 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 622 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 

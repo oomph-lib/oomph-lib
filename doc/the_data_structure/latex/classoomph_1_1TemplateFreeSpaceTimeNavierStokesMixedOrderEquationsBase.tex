@@ -27,7 +27,7 @@ virtual int \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixe
 \begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or $<$ 0 if pinned. \end{DoxyCompactList}\item 
 virtual int \& \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_a448a8ce9641f2039b4d9f54ae7f32005}{pinned\+\_\+fp\+\_\+pressure\+\_\+eqn}} ()=0
 \begin{DoxyCompactList}\small\item\em Global eqn number of pressure dof that\textquotesingle{}s pinned in pressure adv diff problem. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_af8c5ac949019b2b3fc44c9160c6b27b4}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&eqn\+\_\+number\+\_\+backup)=0
+virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_a06c8c937139b8d55e6a3007b23c65247}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&eqn\+\_\+number\+\_\+backup)=0
 \begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_aa234035fc65024bb2cc26f596d720027}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)=0
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
@@ -41,7 +41,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMix
 \doxysubsection{Detailed Description}
 Template-\/free base class for Navier-\/\+Stokes equations to avoid casting problems 
 
-Definition at line 367 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 366 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -58,7 +58,7 @@ Constructor (empty)
 
 
 
-Definition at line 375 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 372 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_a14d7defeacef0a5b946f43cbf7c7cb23}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_a14d7defeacef0a5b946f43cbf7c7cb23}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase}!````~TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase@{$\sim$TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase}}
@@ -72,7 +72,7 @@ Virtual destructor (empty)
 
 
 
-Definition at line 379 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 376 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -179,11 +179,11 @@ Return the index at which the pressure is stored if it is stored at the nodes. I
 
 Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodMixedOrderSpaceTimeElement_ad117b85534874361ed3fb71fdc2cbf4f}{oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderEquations_a88a88b5ec9788677c9c934613b1c14c2}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_af8c5ac949019b2b3fc44c9160c6b27b4}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_af8c5ac949019b2b3fc44c9160c6b27b4}} 
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_a06c8c937139b8d55e6a3007b23c65247}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_a06c8c937139b8d55e6a3007b23c65247}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
 \index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -191,7 +191,7 @@ Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{class
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderEquations_ac2b29076da960720e9811e756698fcf8}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderEquations_a00b3743bb75e490a441b69ae05ae72ce}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_a448a8ce9641f2039b4d9f54ae7f32005}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_a448a8ce9641f2039b4d9f54ae7f32005}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase}!pinned\_fp\_pressure\_eqn@{pinned\_fp\_pressure\_eqn}}

@@ -129,63 +129,65 @@ $(function() {
 <div class="title">axisym_solid_elements.cc</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="axisym__solid__elements_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//Non-inline functions for axisymmetric solid mechanics elements</span></div>
+<a href="axisym__solid__elements_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Non-inline functions for axisymmetric solid mechanics elements</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="axisym__solid__elements_8h.html">axisym_solid_elements.h</a>&quot;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//==================================================================</span><span class="comment"></span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/// Solid pressure shape function evaluated at integration point</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span><span class="comment">//==================================================================</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#a2c423c3bfbc0debcf041f11fc24d1510">AxisymmetricPVDEquationsWithPressure::</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#a2c423c3bfbc0debcf041f11fc24d1510">   37</a></span>&#160;<a class="code" href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#a2c423c3bfbc0debcf041f11fc24d1510">solid_pshape_at_knot</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ipt, <a class="code" href="classoomph_1_1Shape.html">Shape</a> &amp;psi)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; <span class="comment">//Storage for local coordinates of the integration point</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(2);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; <span class="comment">//Set the local coordinates</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;2;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++) {<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">integral_pt</a>()-&gt;<a class="code" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">knot</a>(ipt,<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; <span class="comment">//Get the shape function</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; <a class="code" href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#ab93f05b37f8bee3a8f390e33cbcd3a6e">solid_pshape</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,psi);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  /// Solid pressure shape function evaluated at integration point</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span>  <span class="comment">//==================================================================</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#a2c423c3bfbc0debcf041f11fc24d1510">   35</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#a2c423c3bfbc0debcf041f11fc24d1510">AxisymmetricPVDEquationsWithPressure::solid_pshape_at_knot</a>(</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ipt, <a class="code" href="classoomph_1_1Shape.html">Shape</a>&amp; psi)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// Storage for local coordinates of the integration point</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(2);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// Set the local coordinates</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; 2; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a751dc02ff1325f799840d79ee415753a">integral_pt</a>()-&gt;<a class="code" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">knot</a>(ipt, <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Get the shape function</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#ab93f05b37f8bee3a8f390e33cbcd3a6e">solid_pshape</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, psi);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// namespace oomph</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aaxisym__solid__elements_8h_html"><div class="ttname"><a href="axisym__solid__elements_8h.html">axisym_solid_elements.h</a></div></div>
-<div class="ttc" id="aclassoomph_1_1AxisymmetricPVDEquationsWithPressure_html_a2c423c3bfbc0debcf041f11fc24d1510"><div class="ttname"><a href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#a2c423c3bfbc0debcf041f11fc24d1510">oomph::AxisymmetricPVDEquationsWithPressure::solid_pshape_at_knot</a></div><div class="ttdeci">void solid_pshape_at_knot(const unsigned &amp;ipt, Shape &amp;psi) const</div><div class="ttdoc">Return the stored solid shape functions at the knots.</div><div class="ttdef"><b>Definition:</b> <a href="axisym__solid__elements_8cc_source.html#l00037">axisym_solid_elements.cc:37</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AxisymmetricPVDEquationsWithPressure_html_a2c423c3bfbc0debcf041f11fc24d1510"><div class="ttname"><a href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#a2c423c3bfbc0debcf041f11fc24d1510">oomph::AxisymmetricPVDEquationsWithPressure::solid_pshape_at_knot</a></div><div class="ttdeci">void solid_pshape_at_knot(const unsigned &amp;ipt, Shape &amp;psi) const</div><div class="ttdoc">Return the stored solid shape functions at the knots.</div><div class="ttdef"><b>Definition:</b> <a href="axisym__solid__elements_8cc_source.html#l00035">axisym_solid_elements.cc:35</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a751dc02ff1325f799840d79ee415753a"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a751dc02ff1325f799840d79ee415753a">oomph::FiniteElement::integral_pt</a></div><div class="ttdeci">Integral *const  &amp; integral_pt() const</div><div class="ttdoc">Return the pointer to the integration scheme (const version)</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01980">elements.h:1980</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Integral_html_a1a2122f99a87c18649bafdd9ed739758"><div class="ttname"><a href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot</a></div><div class="ttdeci">virtual double knot(const unsigned &amp;i, const unsigned &amp;j) const =0</div><div class="ttdoc">Return local coordinate s[j] of i-th integration point.</div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a79f1710873332823c47023d370f0596b"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">oomph::FiniteElement::integral_pt</a></div><div class="ttdeci">Integral *const &amp; integral_pt() const</div><div class="ttdoc">Return the pointer to the integration scheme (const version)</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01921">elements.h:1921</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
 <div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
 <div class="ttc" id="aclassoomph_1_1AxisymmetricPVDEquationsWithPressure_html_ab93f05b37f8bee3a8f390e33cbcd3a6e"><div class="ttname"><a href="classoomph_1_1AxisymmetricPVDEquationsWithPressure.html#ab93f05b37f8bee3a8f390e33cbcd3a6e">oomph::AxisymmetricPVDEquationsWithPressure::solid_pshape</a></div><div class="ttdeci">virtual void solid_pshape(const Vector&lt; double &gt; &amp;s, Shape &amp;psi) const =0</div><div class="ttdoc">Return the solid pressure shape functions.</div></div>
-<div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00077">shape.h:77</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00075">shape.h:75</a></div></div>
 <div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -214,7 +216,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:52:59
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:23
         </div>
       </div>
     </footer>

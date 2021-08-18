@@ -27,16 +27,15 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElemen
 \begin{DoxyCompactList}\small\item\em Overload the wind function in the advection-\/diffusion equations. This provides the coupling from the Navier--Stokes equations to the advection-\/diffusion equations because the wind is the fluid velocity, obtained from the \char`\"{}external\char`\"{} element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a89bbdff66fd1fe24f4ae1d681a88d583}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual vector and the Jacobian matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a025d5b61839fa15d926fb8f4a277a9ae}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+interaction\+\_\+data)
-\begin{DoxyCompactList}\small\item\em Overload the function that must return all field data involved in the interaction with the external (Navier Stokes) element. Only the velocity dofs in the Navier Stokes element affect the interaction with the current element. ~\newline
- \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a097dc0bbbe304b6c2650c78cfb863f13}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+interaction\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Overload the function that must return all field data involved in the interaction with the external (Navier Stokes) element. Only the velocity dofs in the Navier Stokes element affect the interaction with the current element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a25627bf0853bda6c520a2b1c2c602af4}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a560911c835c054a25b5e5d8390cc422c}{get\+\_\+dwind\+\_\+adv\+\_\+diff\+\_\+dexternal\+\_\+element\+\_\+data}} (const unsigned \&ipt, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&global\+\_\+eqn\+\_\+number)
 \begin{DoxyCompactList}\small\item\em Fill in the derivatives of the wind with respect to the external unknowns. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_ac787480832d09daf1bd1f14715dc6820}{fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the contribution of the external degrees of freedom (velocities) on the advection-\/diffusion equations. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a9b48b8a752432bce03a4bc51785d0151}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a0398c3b926ecf9a70644e25d1f145852}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Classify dofs for use in block preconditioner. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_adee164161a19b307d37831c98d256d58}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em Specify number of dof types for use in block preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -49,7 +48,7 @@ class oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ A\+D\+
 
 Build an Advection\+Diffusion\+Element that inherits from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element}} so that it can \char`\"{}communicate\char`\"{} with the a Navier\+Stokes\+Element that provides its wind. 
 
-Definition at line 377 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 375 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -67,7 +66,7 @@ Constructor\+: call the underlying constructors.
 
 
 
-Definition at line 384 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 381 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -93,7 +92,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae5
 
 
 
-Definition at line 468 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 476 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -116,7 +115,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 499 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 507 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -135,7 +134,7 @@ Compute the contribution of the external degrees of freedom (velocities) on the 
 
 
 
-Definition at line 535 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 548 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -145,12 +144,12 @@ References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Refineable\+Advection
 
 Referenced by oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a9b48b8a752432bce03a4bc51785d0151}\label{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a9b48b8a752432bce03a4bc51785d0151}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a0398c3b926ecf9a70644e25d1f145852}\label{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a0398c3b926ecf9a70644e25d1f145852}} 
 \index{oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$class A\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+NT, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+NT, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -158,11 +157,11 @@ Classify dofs for use in block preconditioner.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 689 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 702 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -181,7 +180,7 @@ Fill in the derivatives of the wind with respect to the external unknowns.
 
 
 
-Definition at line 513 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 522 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -204,32 +203,30 @@ Overload the wind function in the advection-\/diffusion equations. This provides
 
 
 
-Definition at line 450 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 456 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord(), and oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a025d5b61839fa15d926fb8f4a277a9ae}\label{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a025d5b61839fa15d926fb8f4a277a9ae}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a097dc0bbbe304b6c2650c78cfb863f13}\label{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a097dc0bbbe304b6c2650c78cfb863f13}} 
 \index{oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!identify\_all\_field\_data\_for\_external\_interaction@{identify\_all\_field\_data\_for\_external\_interaction}}
 \index{identify\_all\_field\_data\_for\_external\_interaction@{identify\_all\_field\_data\_for\_external\_interaction}!oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_all\_field\_data\_for\_external\_interaction()}{identify\_all\_field\_data\_for\_external\_interaction()}}
 {\footnotesize\ttfamily template$<$class A\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+NT, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+interaction\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+NT, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+interaction\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Overload the function that must return all field data involved in the interaction with the external (Navier Stokes) element. Only the velocity dofs in the Navier Stokes element affect the interaction with the current element. ~\newline
- 
+Overload the function that must return all field data involved in the interaction with the external (Navier Stokes) element. Only the velocity dofs in the Navier Stokes element affect the interaction with the current element. 
 
-Overload the function that must return all field data involved in the interaction with the external (Navier Stokes) element. Only the velocity dofs in the Navier Stokes element affect the interaction with the current element. ~\newline
- 
+Overload the function that must return all field data involved in the interaction with the external (Navier Stokes) element. Only the velocity dofs in the Navier Stokes element affect the interaction with the current element. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_aa6bbfc084b5f4654cc7f8c61a6f7a81b}{oomph\+::\+Element\+With\+External\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_acd9b05781cb87ada3c5cd6d57a1b58b1}{oomph\+::\+Element\+With\+External\+Element}}.
 
 
 
-Definition at line 753 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 764 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -252,7 +249,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 731 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 744 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_ac8fa2a491b9c5bda7bcfdd93d0a00b11}\label{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_ac8fa2a491b9c5bda7bcfdd93d0a00b11}} 
 \index{oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::RefineableAdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!output@{output}}
@@ -271,7 +268,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 438 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 440 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -294,7 +291,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 442 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 446 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -317,7 +314,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 435 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 434 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -340,7 +337,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 403 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 400 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 

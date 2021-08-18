@@ -194,18 +194,18 @@ class oomph::VectorMatrix&lt; VALUE_TYPE &gt;</h3>
 <p><a class="el" href="classoomph_1_1VectorMatrix.html">VectorMatrix</a> is a generalised, STL-map-based, matrix based on a <a class="el" href="classoomph_1_1Vector.html">Vector</a> of Vectors.</p>
 <p>Example of usage: </p><div class="fragment"><div class="line">     <span class="comment">// Assume we have a Vector of pointers to objects:</span></div>
 <div class="line">     VectorMatrix&lt;int&gt; vector_matrix(4,5,-1);</div>
-<div class="line">    </div>
+<div class="line">   </div>
 <div class="line">     <span class="comment">// This is a 4 by 5 matrix with all entries set to -1.</span></div>
 <div class="line">   </div>
 <div class="line">     std::cout &lt;&lt; vector_matrix[3][3] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
 <div class="line"><span class="comment">//             &lt;&lt; vector_matrix.nrow() &lt;&lt; &quot; &quot;</span></div>
 <div class="line"><span class="comment">//             &lt;&lt; vector_matrix.col() &lt;&lt; std::endl;</span></div>
-<div class="line">     </div>
+<div class="line">   </div>
 <div class="line">     <span class="comment">// Output:</span></div>
 <div class="line">     <span class="comment">// -1 4 5</span></div>
-<div class="line">     </div>
+<div class="line">   </div>
 <div class="line">     vector_matrix[3][3] = 42;</div>
-<div class="line">     </div>
+<div class="line">   </div>
 <div class="line">     std::cout &lt;&lt; vector_matrix[3][3] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
 <div class="line">               &lt;&lt; vector_matrix.nrow() &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
 <div class="line">               &lt;&lt; vector_matrix.col() &lt;&lt; std::endl;</div>
@@ -242,9 +242,9 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>Default constructor - constructs an empty matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00084">84</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00082">82</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
 </div>
 </div>
@@ -292,9 +292,9 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>Constructor - constructs an n by m matrix with value val. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00090">90</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00088">88</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00247">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::build_vectors_and_value()</a>.</p>
+<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00240">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::build_vectors_and_value()</a>.</p>
 
 </div>
 </div>
@@ -336,9 +336,9 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>Constructor - constructs an n by m matrix, the value is defined by the default initialisation of VALUE_TYPE. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00097">97</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00095">95</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00241">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::build_vectors()</a>.</p>
+<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00234">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::build_vectors()</a>.</p>
 
 </div>
 </div>
@@ -369,9 +369,9 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>Default virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00103">103</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00101">101</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00205">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::clear()</a>.</p>
+<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00201">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::clear()</a>.</p>
 
 </div>
 </div>
@@ -420,9 +420,9 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>Any elements held in the container before the call are destroyed and replaced by newly constructed elements (no assignments of elements take place). This causes an automatic reallocation of the allocated storage space if -and only if- the new vector size surpasses the current vector capacity. This invokes std::assign on both the outer vector and the inner vectors. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00231">231</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00226">226</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
 </div>
 </div>
@@ -464,11 +464,11 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>Builds an n by m <a class="el" href="classoomph_1_1VectorMatrix.html">VectorMatrix</a> with default VALUE_TYPE. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00241">241</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00234">234</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vector__matrix_8h_source.html#l00097">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::VectorMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vector__matrix_8h_source.html#l00095">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::VectorMatrix()</a>.</p>
 
 </div>
 </div>
@@ -516,11 +516,11 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>Build an m by n <a class="el" href="classoomph_1_1VectorMatrix.html">VectorMatrix</a> with VALUE_TYPE val. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00247">247</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00240">240</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vector__matrix_8h_source.html#l00090">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::VectorMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vector__matrix_8h_source.html#l00088">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::VectorMatrix()</a>.</p>
 
 </div>
 </div>
@@ -551,11 +551,11 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>Clears the outer vector. Calling Vector::clear() will invoke the destructor of all the inner Vectors. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00205">205</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00201">201</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vector__matrix_8h_source.html#l00103">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::~VectorMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vector__matrix_8h_source.html#l00101">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::~VectorMatrix()</a>.</p>
 
 </div>
 </div>
@@ -586,11 +586,11 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>return the number of columns. This is the size of the first inner vectors, or returns 0 if the outer vector is of size 0 (this-&gt;<a class="el" href="classoomph_1_1VectorMatrix.html#a9beb051515fea3a264843aae9783e386" title="returns the number of rows. This is the outer Vector size.">nrow()</a> is 0). </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00149">149</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00146">146</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00109">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::nrow()</a>, and <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00107">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::nrow()</a>, and <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l01142">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_concatenated_block()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l01140">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_concatenated_block()</a>.</p>
 
 </div>
 </div>
@@ -621,11 +621,11 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>returns the number of rows. This is the outer <a class="el" href="classoomph_1_1Vector.html">Vector</a> size. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00109">109</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00107">107</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l01142">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_concatenated_block()</a>, and <a class="el" href="vector__matrix_8h_source.html#l00149">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::ncol()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="block__preconditioner_8h_source.html#l01140">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_concatenated_block()</a>, and <a class="el" href="vector__matrix_8h_source.html#l00146">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::ncol()</a>.</p>
 
 </div>
 </div>
@@ -657,9 +657,9 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>[] access function to the i-th inner vector. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00191">191</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00187">187</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
 </div>
 </div>
@@ -691,9 +691,9 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>[] access function to the i-th inner vector const version </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00197">197</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00193">193</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
 </div>
 </div>
@@ -741,9 +741,9 @@ template&lt;class VALUE_TYPE &gt; </div>
 
 <p>Resize the existing <a class="el" href="classoomph_1_1VectorMatrix.html">VectorMatrix</a>. WARNING: This invokes the resize function in std::vector, as such, only new values are assigned, old values as kept. e.g. if vec = [2,2,2], then vec.resize(5,3) gives vec = [2, 2, 2, 3, 3]. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00215">215</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00211">211</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="vector__matrix_8h_source.html#l00256">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="vector__matrix_8h_source.html#l00249">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::Vector_matrix</a>.</p>
 
 </div>
 </div>
@@ -771,9 +771,9 @@ template&lt;class VALUE_TYPE &gt; </div>
 </div><div class="memdoc">
 <p>Here's the generalised matrix structure: A <a class="el" href="classoomph_1_1Vector.html">Vector</a> of <a class="el" href="classoomph_1_1Vector.html">Vector</a> to templated by VALUE_TYPE. </p>
 
-<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00256">256</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vector__matrix_8h_source.html#l00249">249</a> of file <a class="el" href="vector__matrix_8h_source.html">vector_matrix.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vector__matrix_8h_source.html#l00231">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::assign()</a>, <a class="el" href="vector__matrix_8h_source.html#l00241">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::build_vectors()</a>, <a class="el" href="vector__matrix_8h_source.html#l00247">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::build_vectors_and_value()</a>, <a class="el" href="vector__matrix_8h_source.html#l00205">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::clear()</a>, <a class="el" href="vector__matrix_8h_source.html#l00149">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::ncol()</a>, <a class="el" href="vector__matrix_8h_source.html#l00109">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::nrow()</a>, <a class="el" href="vector__matrix_8h_source.html#l00191">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::operator[]()</a>, <a class="el" href="vector__matrix_8h_source.html#l00215">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::resize()</a>, and <a class="el" href="vector__matrix_8h_source.html#l00084">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::VectorMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vector__matrix_8h_source.html#l00226">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::assign()</a>, <a class="el" href="vector__matrix_8h_source.html#l00234">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::build_vectors()</a>, <a class="el" href="vector__matrix_8h_source.html#l00240">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::build_vectors_and_value()</a>, <a class="el" href="vector__matrix_8h_source.html#l00201">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::clear()</a>, <a class="el" href="vector__matrix_8h_source.html#l00146">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::ncol()</a>, <a class="el" href="vector__matrix_8h_source.html#l00107">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::nrow()</a>, <a class="el" href="vector__matrix_8h_source.html#l00187">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::operator[]()</a>, <a class="el" href="vector__matrix_8h_source.html#l00211">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::resize()</a>, and <a class="el" href="vector__matrix_8h_source.html#l00082">oomph::VectorMatrix&lt; VALUE_TYPE &gt;::VectorMatrix()</a>.</p>
 
 </div>
 </div>
@@ -808,7 +808,7 @@ template&lt;class VALUE_TYPE &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:58:07
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:42
         </div>
       </div>
     </footer>

@@ -26,12 +26,11 @@ virtual \mbox{\hyperlink{classoomph_1_1OcTreeForest_ab38c7c43f9eb8caa898b4908630
 void \mbox{\hyperlink{classoomph_1_1OcTreeForest_a762eaa5790197e03146d42957c03b33e}{check\+\_\+all\+\_\+neighbours}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)
 \begin{DoxyCompactList}\small\item\em Document and check all the neighbours of all the nodes in the forest. \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object specifies the output directory and file numbers for the various files. If {\ttfamily doc\+\_\+info.\+disable\+\_\+doc()} has been called, no output is created. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1OcTreeForest_a34523b415aa855786831bca37f48d4cb}{open\+\_\+hanging\+\_\+node\+\_\+files}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::ofstream $\ast$ $>$ \&output\+\_\+stream)
-\begin{DoxyCompactList}\small\item\em Open output files that will store any hanging nodes in. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Open output files that will store any hanging nodes in the forest and return a vector of the streams. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1OcTreeForest_ac9517c21654bbbe1aa59af28455a40e4}{self\+\_\+test}} ()
 \begin{DoxyCompactList}\small\item\em Self-\/test\+: Check all neighbours. Return success (0) if the max. distance between corresponding points in the neighbours is less than the tolerance specified in the static value \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} $\ast$ \mbox{\hyperlink{classoomph_1_1OcTreeForest_aa51c75e4ffadde74c38511e21c0081e4}{octree\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
-\begin{DoxyCompactList}\small\item\em Return pointer to i-\/th \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} in forest (Performs a dynamic cast from the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}}). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return pointer to i-\/th \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} in forest (Performs a dynamic cast from the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}}). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} $\ast$ \mbox{\hyperlink{classoomph_1_1OcTreeForest_a796fe9ebeefb043d7b6d5ddacd9e234c}{oc\+\_\+face\+\_\+neigh\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&direction)
 \begin{DoxyCompactList}\small\item\em Given the number i of the root octree in this forest, return pointer to its face neighbour in the specified direction. N\+U\+LL if neighbour doesn\textquotesingle{}t exist. (This does the dynamic cast from a \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} internally). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1OcTreeForest_a503eb3fe79030997e6e46da15b69b316}{oc\+\_\+edge\+\_\+neigh\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&direction)
@@ -47,10 +46,9 @@ void \mbox{\hyperlink{classoomph_1_1OcTreeForest_a2c65565b1b9c673147d96f0d8f1a50
 
 
 \doxysubsection{Detailed Description}
-An \mbox{\hyperlink{classoomph_1_1OcTreeForest}{Oc\+Tree\+Forest}} consists of a collection of Oc\+Tree\+Roots. Each member tree can have neighbours to its L/\+R/\+U/\+D/\+F/B and D\+B/\+U\+P/... and the orientation of their compasses can differ, allowing for complex, unstructured meshes. ~\newline
- 
+An \mbox{\hyperlink{classoomph_1_1OcTreeForest}{Oc\+Tree\+Forest}} consists of a collection of Oc\+Tree\+Roots. Each member tree can have neighbours to its L/\+R/\+U/\+D/\+F/B and D\+B/\+U\+P/... and the orientation of their compasses can differ, allowing for complex, unstructured meshes. 
 
-Definition at line 880 of file octree.\+h.
+Definition at line 941 of file octree.\+h.
 
 
 
@@ -72,7 +70,7 @@ Pass\+:
 \item trees\+\_\+pt\mbox{[}\mbox{]}, the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the constituent trees (\mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} objects) 
 \end{DoxyItemize}
 
-Definition at line 4849 of file octree.\+cc.
+Definition at line 4875 of file octree.\+cc.
 
 
 
@@ -90,7 +88,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line 890 of file octree.\+h.
+Definition at line 949 of file octree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeForest_ab28c40f3d62a80f3061bacfdd0485445}\label{classoomph_1_1OcTreeForest_ab28c40f3d62a80f3061bacfdd0485445}} 
 \index{oomph::OcTreeForest@{oomph::OcTreeForest}!OcTreeForest@{OcTreeForest}}
@@ -104,7 +102,7 @@ Broken copy constructor.
 
 
 
-Definition at line 898 of file octree.\+h.
+Definition at line 957 of file octree.\+h.
 
 
 
@@ -122,7 +120,7 @@ Destructor\+: Delete the constituent octrees (and thus the associated objects!)
 
 
 
-Definition at line 911 of file octree.\+h.
+Definition at line 970 of file octree.\+h.
 
 
 
@@ -143,7 +141,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeForest_a0e6a7f821d9f14374c6d23d876
 
 
 
-Definition at line 5739 of file octree.\+cc.
+Definition at line 5749 of file octree.\+cc.
 
 
 
@@ -161,7 +159,7 @@ Construct the rotation schemes.
 
 Construct the rotation scheme for the octree forest. Note that all pointers to neighbours must have been allocated for this to work. 
 
-Definition at line 5230 of file octree.\+cc.
+Definition at line 5255 of file octree.\+cc.
 
 
 
@@ -183,7 +181,7 @@ Construct the neighbour scheme.
 
 setup the neighbour scheme \+: tells to each element in the forest which (if any) element is its \{R,L,U,D,B,F\} face neighbour and which is its \{LB,RB,...,UF\} edge neighbour. 
 
-Definition at line 4889 of file octree.\+cc.
+Definition at line 4913 of file octree.\+cc.
 
 
 
@@ -205,7 +203,7 @@ Given the number i of the root octree in this forest, return the vector of point
 
 
 
-Definition at line 965 of file octree.\+h.
+Definition at line 1022 of file octree.\+h.
 
 
 
@@ -227,7 +225,7 @@ Given the number i of the root octree in this forest, return pointer to its face
 
 
 
-Definition at line 942 of file octree.\+h.
+Definition at line 1002 of file octree.\+h.
 
 
 
@@ -245,12 +243,11 @@ Referenced by construct\+\_\+up\+\_\+right\+\_\+equivalents().
 
 
 
-Return pointer to i-\/th \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} in forest (Performs a dynamic cast from the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}}). ~\newline
- 
+Return pointer to i-\/th \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} in forest (Performs a dynamic cast from the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}}). 
 
 
 
-Definition at line 935 of file octree.\+h.
+Definition at line 993 of file octree.\+h.
 
 
 
@@ -268,9 +265,7 @@ Referenced by construct\+\_\+up\+\_\+right\+\_\+equivalents().
 
 
 
-Open output files that will store any hanging nodes in. 
-
-the forest and return a vector of the streams.
+Open output files that will store any hanging nodes in the forest and return a vector of the streams. 
 
 Open output files that will stored any hanging nodes that are \hypertarget{classoomph_1_1OcTreeForest_autotoc_md4}{}\doxysubsection{created in the mesh refinement process.}\label{classoomph_1_1OcTreeForest_autotoc_md4}
 
@@ -279,7 +274,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeForest_a635443274eaa2fb1afa889e4e7
 
 
 
-Definition at line 5885 of file octree.\+cc.
+Definition at line 5894 of file octree.\+cc.
 
 
 
@@ -297,7 +292,7 @@ Broken assignment operator.
 
 
 
-Definition at line 904 of file octree.\+h.
+Definition at line 963 of file octree.\+h.
 
 
 
@@ -315,7 +310,7 @@ Self-\/test\+: Check all neighbours. Return success (0) if the max. distance bet
 
 Self test\+: Check neighbour finding routine. 
 
-Definition at line 5669 of file octree.\+cc.
+Definition at line 5678 of file octree.\+cc.
 
 
 

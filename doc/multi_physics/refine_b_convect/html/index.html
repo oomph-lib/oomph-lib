@@ -450,31 +450,31 @@ The function doc_solution(...)</h2>
 <h1><a class="anchor" id="element"></a>
 Creating the new RefineableBouyantQCrouzeixRaviartElement class</h1>
 <p>As in the <a href="../../b_convection/html/index.html">non-refineable version of the problem</a> we create the refineable element <code>RefineableBuoyantQCrouzeixRaviartElement</code> by multiple inheritance from the <code>RefineableQCrouzeixRaviartElement</code> and <code>RefineableQAdvectionDiffusionElement:</code> </p>
- <div class="fragment"><div class="line"><span class="comment">//============start_element_class============================================</span></div>
-<div class="line"><span class="comment">///A RefineableElement class that solves the </span></div>
-<div class="line"><span class="comment"></span><span class="comment">///Boussinesq approximation of the Navier--Stokes</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///and energy equations by coupling two pre-existing classes. </span></div>
-<div class="line"><span class="comment"></span><span class="comment">///The RefineableQAdvectionDiffusionElement </span></div>
-<div class="line"><span class="comment"></span><span class="comment">///with bi-quadratic interpolation for the</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///scalar variable (temperature) and</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///RefineableQCrouzeixRaviartElement which solves the Navier--Stokes equations</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///using bi-quadratic interpolation for the velocities and a discontinuous</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///bi-linear interpolation for the pressure. Note that we are free to </span></div>
-<div class="line"><span class="comment"></span><span class="comment">///choose the order in which we store the variables at the nodes. In this</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///case we choose to store the variables in the order fluid velocities</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///followed by temperature. We must, therefore, overload the function</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///AdvectionDiffusionEquations&lt;DIM&gt;::u_index_adv_diff() to indicate that</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///the temperature is stored at the DIM-th position not the 0-th. We do not</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///need to overload the corresponding function in the </span></div>
-<div class="line"><span class="comment"></span><span class="comment">///NavierStokesEquations&lt;DIM&gt; class because the velocities are stored</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///first. Finally, we choose to use the flux-recovery calculation from the</span></div>
-<div class="line"><span class="comment"></span><span class="comment">///fluid velocities to provide the error used in the mesh adaptation.</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//==========================================================================</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><span class="keyword">class </span>RefineableBuoyantQCrouzeixRaviartElement: </div>
-<div class="line"><span class="keyword">public</span> <span class="keyword">virtual</span> RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;,</div>
-<div class="line"><span class="keyword">public</span> <span class="keyword">virtual</span> RefineableQCrouzeixRaviartElement&lt;DIM&gt;</div>
-<div class="line">{</div>
+ <div class="fragment"><div class="line">  <span class="comment">//============start_element_class============================================</span></div>
+<div class="line"><span class="comment">  /// A RefineableElement class that solves the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// Boussinesq approximation of the Navier--Stokes</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// and energy equations by coupling two pre-existing classes.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// The RefineableQAdvectionDiffusionElement</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// with bi-quadratic interpolation for the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// scalar variable (temperature) and</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// RefineableQCrouzeixRaviartElement which solves the Navier--Stokes</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// equations using bi-quadratic interpolation for the velocities and a</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// discontinuous bi-linear interpolation for the pressure. Note that we are</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// free to choose the order in which we store the variables at the nodes. In</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// this case we choose to store the variables in the order fluid velocities</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// followed by temperature. We must, therefore, overload the function</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// AdvectionDiffusionEquations&lt;DIM&gt;::u_index_adv_diff() to indicate that</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// the temperature is stored at the DIM-th position not the 0-th. We do not</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// need to overload the corresponding function in the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// NavierStokesEquations&lt;DIM&gt; class because the velocities are stored</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// first. Finally, we choose to use the flux-recovery calculation from the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// fluid velocities to provide the error used in the mesh adaptation.</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//==========================================================================</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
+<div class="line">  <span class="keyword">class </span>RefineableBuoyantQCrouzeixRaviartElement</div>
+<div class="line">    : <span class="keyword">public</span> <span class="keyword">virtual</span> RefineableQAdvectionDiffusionElement&lt;DIM, 3&gt;,</div>
+<div class="line">      <span class="keyword">public</span> <span class="keyword">virtual</span> RefineableQCrouzeixRaviartElement&lt;DIM&gt;</div>
+<div class="line">  {</div>
 </div><!-- fragment --><p>Many of the additional member functions required in the combined multi-physics element are identical to those in the non-refineable version:</p><ul>
 <li>the access function to (the pointer to the) Rayleigh number, <code>ra_pt()</code>,</li>
 <li>the output functions, <code>output(...)</code>,</li>
@@ -486,179 +486,203 @@ Creating the new RefineableBouyantQCrouzeixRaviartElement class</h1>
 </ul>
 <p>We shall only discuss those additional functions that are required in the refineable version of the combined multi-physics element.</p>
 <p>Both constituent elements are derived from the <code>ElementWithZ2ErrorEstimator</code> base class and each element provides its own definition of the "Z2-flux" that is used by the Z2 error estimator to compute elemental error estimates. We must decide on a single error estimator for the combined element. We could base the error estimation entirely on the fluid flow, or the temperature field, but instead we shall choose our single error estimate to be the maximum of the fluid and temperature error estimates. The functions required by the <code>Z2ErrorEstimator</code> are overloaded to return all the flux terms associated with both the velocity and temperature fields, with the velocity field terms stored first.</p>
- <div class="fragment"><div class="line"> <span class="comment">/// The recovery order is that of the NavierStokes elements.</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> nrecovery_order() </div>
-<div class="line">  {<span class="keywordflow">return</span> RefineableQCrouzeixRaviartElement&lt;DIM&gt;::nrecovery_order();}</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// \short The number of Z2 flux terms is the same as that in </span></div>
-<div class="line"><span class="comment"> /// the fluid element plus that in the advection-diffusion element</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> num_Z2_flux_terms()</div>
-<div class="line">  {</div>
-<div class="line">   <span class="keywordflow">return</span> (RefineableQCrouzeixRaviartElement&lt;DIM&gt;::num_Z2_flux_terms() +</div>
-<div class="line">           RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;::num_Z2_flux_terms());</div>
-<div class="line">  }</div>
-<div class="line"> </div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// \short Get the Z2 flux by concatenating the fluxes from the fluid and</span></div>
-<div class="line"><span class="comment"> /// the advection diffusion elements.</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> get_Z2_flux(<span class="keyword">const</span> Vector&lt;double&gt;&amp; s, Vector&lt;double&gt;&amp; flux)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">//Find the number of fluid fluxes</span></div>
-<div class="line">   <span class="keywordtype">unsigned</span> n_fluid_flux = </div>
-<div class="line">    RefineableQCrouzeixRaviartElement&lt;DIM&gt;::num_Z2_flux_terms();</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//Fill in the first flux entries as the velocity entries</span></div>
-<div class="line">   RefineableQCrouzeixRaviartElement&lt;DIM&gt;::get_Z2_flux(s,flux);</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//Find the number of temperature fluxes</span></div>
-<div class="line">   <span class="keywordtype">unsigned</span> n_temp_flux =  </div>
-<div class="line">    RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;::num_Z2_flux_terms();</div>
-<div class="line">   Vector&lt;double&gt; temp_flux(n_temp_flux);</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//Get the temperature flux</span></div>
-<div class="line">   RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;::get_Z2_flux(s,temp_flux);</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">//Add the temperature flux to the end of the flux vector</span></div>
-<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_temp_flux;i++)</div>
+ <div class="fragment"><div class="line">    <span class="comment">/// The recovery order is that of the NavierStokes elements.</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> nrecovery_order()</div>
 <div class="line">    {</div>
-<div class="line">     flux[n_fluid_flux+i] = temp_flux[i];</div>
+<div class="line">      <span class="keywordflow">return</span> RefineableQCrouzeixRaviartElement&lt;DIM&gt;::nrecovery_order();</div>
+<div class="line">    }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// \short The number of Z2 flux terms is the same as that in</span></div>
+<div class="line"><span class="comment">    /// the fluid element plus that in the advection-diffusion element</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">unsigned</span> num_Z2_flux_terms()</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keywordflow">return</span> (</div>
+<div class="line">        RefineableQCrouzeixRaviartElement&lt;DIM&gt;::num_Z2_flux_terms() +</div>
+<div class="line">        RefineableQAdvectionDiffusionElement&lt;DIM, 3&gt;::num_Z2_flux_terms());</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">  } <span class="comment">//end of get_Z2_flux</span></div>
-</div><!-- fragment --><p>The default behaviour of the Z2 error estimator is to combine all components of the flux vector into a single compound flux. In the present multi-physics element, we instead define two compound fluxes: one corresponding to the combined temperature fluxes and the other to the combined velocity field fluxes. The flux components associated with each compound flux must specified by overloading the function <code>get_Z2_compound_flux_indices</code> which returns a vector of the same length as the number of flux components, containing the index of the compound flux to which the flux component contributes.</p>
- <div class="fragment"><div class="line"> <span class="comment">/// \short The number of compound fluxes is two (one for the fluid and</span></div>
-<div class="line"><span class="comment"> /// one for the temperature)</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> ncompound_fluxes() {<span class="keywordflow">return</span> 2;}</div>
 <div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// \short Fill in which flux components are associated with the fluid</span></div>
-<div class="line"><span class="comment"> /// measure and which are associated with the temperature measure</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> get_Z2_compound_flux_indices(Vector&lt;unsigned&gt; &amp;flux_index) </div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">//Find the number of fluid fluxes</span></div>
-<div class="line">   <span class="keywordtype">unsigned</span> n_fluid_flux = </div>
-<div class="line">    RefineableQCrouzeixRaviartElement&lt;DIM&gt;::num_Z2_flux_terms();</div>
-<div class="line">   <span class="comment">//Find the number of temperature fluxes</span></div>
-<div class="line">   <span class="keywordtype">unsigned</span> n_temp_flux =  </div>
-<div class="line">    RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;::num_Z2_flux_terms();</div>
+<div class="line"><span class="comment">    /// \short Get the Z2 flux by concatenating the fluxes from the fluid and</span></div>
+<div class="line"><span class="comment">    /// the advection diffusion elements.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> get_Z2_flux(<span class="keyword">const</span> Vector&lt;double&gt;&amp; s, Vector&lt;double&gt;&amp; flux)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Find the number of fluid fluxes</span></div>
+<div class="line">      <span class="keywordtype">unsigned</span> n_fluid_flux =</div>
+<div class="line">        RefineableQCrouzeixRaviartElement&lt;DIM&gt;::num_Z2_flux_terms();</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">//The fluid fluxes are first </span></div>
-<div class="line">   <span class="comment">//The values of the flux_index vector are zero on entry, so we</span></div>
-<div class="line">   <span class="comment">//could omit this line</span></div>
-<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_fluid_flux;i++) {flux_index[i] = 0;}</div>
+<div class="line">      <span class="comment">// Fill in the first flux entries as the velocity entries</span></div>
+<div class="line">      RefineableQCrouzeixRaviartElement&lt;DIM&gt;::get_Z2_flux(s, flux);</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">//Set the temperature fluxes (the last set of fluxes</span></div>
-<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_temp_flux;i++) {flux_index[n_fluid_flux + i] = 1;}</div>
+<div class="line">      <span class="comment">// Find the number of temperature fluxes</span></div>
+<div class="line">      <span class="keywordtype">unsigned</span> n_temp_flux =</div>
+<div class="line">        RefineableQAdvectionDiffusionElement&lt;DIM, 3&gt;::num_Z2_flux_terms();</div>
+<div class="line">      Vector&lt;double&gt; temp_flux(n_temp_flux);</div>
 <div class="line"> </div>
-<div class="line">  } <span class="comment">//end of get_Z2_compound_flux_indices</span></div>
+<div class="line">      <span class="comment">// Get the temperature flux</span></div>
+<div class="line">      RefineableQAdvectionDiffusionElement&lt;DIM, 3&gt;::get_Z2_flux(s, temp_flux);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Add the temperature flux to the end of the flux vector</span></div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; n_temp_flux; i++)</div>
+<div class="line">      {</div>
+<div class="line">        flux[n_fluid_flux + i] = temp_flux[i];</div>
+<div class="line">      }</div>
+<div class="line"> </div>
+<div class="line">    } <span class="comment">// end of get_Z2_flux</span></div>
+</div><!-- fragment --><p>The default behaviour of the Z2 error estimator is to combine all components of the flux vector into a single compound flux. In the present multi-physics element, we instead define two compound fluxes: one corresponding to the combined temperature fluxes and the other to the combined velocity field fluxes. The flux components associated with each compound flux must specified by overloading the function <code>get_Z2_compound_flux_indices</code> which returns a vector of the same length as the number of flux components, containing the index of the compound flux to which the flux component contributes.</p>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short The number of compound fluxes is two (one for the fluid and</span></div>
+<div class="line"><span class="comment">    /// one for the temperature)</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">unsigned</span> ncompound_fluxes()</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keywordflow">return</span> 2;</div>
+<div class="line">    }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// \short Fill in which flux components are associated with the fluid</span></div>
+<div class="line"><span class="comment">    /// measure and which are associated with the temperature measure</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> get_Z2_compound_flux_indices(Vector&lt;unsigned&gt;&amp; flux_index)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Find the number of fluid fluxes</span></div>
+<div class="line">      <span class="keywordtype">unsigned</span> n_fluid_flux =</div>
+<div class="line">        RefineableQCrouzeixRaviartElement&lt;DIM&gt;::num_Z2_flux_terms();</div>
+<div class="line">      <span class="comment">// Find the number of temperature fluxes</span></div>
+<div class="line">      <span class="keywordtype">unsigned</span> n_temp_flux =</div>
+<div class="line">        RefineableQAdvectionDiffusionElement&lt;DIM, 3&gt;::num_Z2_flux_terms();</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// The fluid fluxes are first</span></div>
+<div class="line">      <span class="comment">// The values of the flux_index vector are zero on entry, so we</span></div>
+<div class="line">      <span class="comment">// could omit this line</span></div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; n_fluid_flux; i++)</div>
+<div class="line">      {</div>
+<div class="line">        flux_index[i] = 0;</div>
+<div class="line">      }</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Set the temperature fluxes (the last set of fluxes</span></div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; n_temp_flux; i++)</div>
+<div class="line">      {</div>
+<div class="line">        flux_index[n_fluid_flux + i] = 1;</div>
+<div class="line">      }</div>
+<div class="line"> </div>
+<div class="line">    } <span class="comment">// end of get_Z2_compound_flux_indices</span></div>
 </div><!-- fragment --><p>The <code>Z2ErrorEstimator</code> calculates the error estimates for each compound flux. The individual error estimates are then combined to a single error estimate by the function <code>Z2ErrorEstimator::get_combined_error_estimate()</code>. By default the single error estimate is chosen to be the maximum of all calculated error estimates. Alternative user-defined functions can be specified via the function pointer <code>Z2ErrorEstimator::CombinedErrorEstimateFctPt&amp;</code> <code>combined_error_fct_pt()</code>, see <a class="el" href="index.html#comments">Comments</a> for a more detailed discussion of this aspect. <br  />
 </p>
 <p>The vertex nodes are defined by the underlying geometric element, but require a final overload to prevent ambiguities:</p>
- <div class="fragment"><div class="line"> <span class="comment">/// \short Number of vertex nodes in the element is obtained from the</span></div>
-<div class="line"><span class="comment"> /// geometric element.</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> nvertex_node()<span class="keyword"> const</span></div>
-<div class="line"><span class="keyword">  </span>{<span class="keywordflow">return</span> QElement&lt;DIM,3&gt;::nvertex_node();}</div>
-</div><!-- fragment --> <div class="fragment"><div class="line"> <span class="comment">/// \short Pointer to the j-th vertex node in the element,</span></div>
-<div class="line"><span class="comment"> /// Call the geometric element&#39;s function.</span></div>
-<div class="line"><span class="comment"></span> Node* vertex_node_pt(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; j)<span class="keyword"> const</span></div>
-<div class="line"><span class="keyword">  </span>{<span class="keywordflow">return</span> QElement&lt;DIM,3&gt;::vertex_node_pt(j);}</div>
-</div><!-- fragment --><p>The number of continuously interpolated values is <code>DIM</code> <code>+</code> <code>1</code>: <code>DIM</code> velocity components and one temperature.  </p><div class="fragment"><div class="line"> <span class="keywordtype">unsigned</span> ncont_interpolated_values() const </div>
-<div class="line">  {<span class="keywordflow">return</span> DIM+1;}</div>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short Number of vertex nodes in the element is obtained from the</span></div>
+<div class="line"><span class="comment">    /// geometric element.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">unsigned</span> nvertex_node()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">      <span class="keywordflow">return</span> QElement&lt;DIM, 3&gt;::nvertex_node();</div>
+<div class="line">    }</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">    <span class="comment">/// \short Pointer to the j-th vertex node in the element,</span></div>
+<div class="line"><span class="comment">    /// Call the geometric element&#39;s function.</span></div>
+<div class="line"><span class="comment"></span>    Node* vertex_node_pt(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; j)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">      <span class="keywordflow">return</span> QElement&lt;DIM, 3&gt;::vertex_node_pt(j);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The number of continuously interpolated values is <code>DIM</code> <code>+</code> <code>1</code>: <code>DIM</code> velocity components and one temperature.  </p><div class="fragment"><div class="line">    <span class="keywordtype">unsigned</span> ncont_interpolated_values() const</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keywordflow">return</span> DIM + 1;</div>
+<div class="line">    }</div>
 </div><!-- fragment --><p>The two versions of the <code>get_interpolated_values(...)</code> function must return the continuously interpolated variables at a specified position within the element:</p>
- <div class="fragment"><div class="line"> <span class="comment">/// \short Get the continuously interpolated values at the local coordinate s.</span></div>
-<div class="line"><span class="comment"> /// We choose to put the fluid velocities first, followed by the</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// temperature.</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> get_interpolated_values(<span class="keyword">const</span> Vector&lt;double&gt;&amp;s,  Vector&lt;double&gt;&amp; values)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">//Storage for the fluid velocities</span></div>
-<div class="line">   Vector&lt;double&gt; nst_values;</div>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short Get the continuously interpolated values at the local coordinate</span></div>
+<div class="line"><span class="comment">    /// s. We choose to put the fluid velocities first, followed by the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// temperature.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> get_interpolated_values(<span class="keyword">const</span> Vector&lt;double&gt;&amp; s,</div>
+<div class="line">                                 Vector&lt;double&gt;&amp; values)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Storage for the fluid velocities</span></div>
+<div class="line">      Vector&lt;double&gt; nst_values;</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">//Get the fluid velocities from the fluid element</span></div>
-<div class="line">   RefineableQCrouzeixRaviartElement&lt;DIM&gt;::</div>
-<div class="line">    get_interpolated_values(s,nst_values);</div>
+<div class="line">      <span class="comment">// Get the fluid velocities from the fluid element</span></div>
+<div class="line">      RefineableQCrouzeixRaviartElement&lt;DIM&gt;::get_interpolated_values(</div>
+<div class="line">        s, nst_values);</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">//Storage for the temperature</span></div>
-<div class="line">   Vector&lt;double&gt; advection_values;</div>
+<div class="line">      <span class="comment">// Storage for the temperature</span></div>
+<div class="line">      Vector&lt;double&gt; advection_values;</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">//Get the temperature from the advection-diffusion element</span></div>
-<div class="line">   RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;::</div>
-<div class="line">    get_interpolated_values(s,advection_values);</div>
+<div class="line">      <span class="comment">// Get the temperature from the advection-diffusion element</span></div>
+<div class="line">      RefineableQAdvectionDiffusionElement&lt;DIM, 3&gt;::get_interpolated_values(</div>
+<div class="line">        s, advection_values);</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">//Add the fluid velocities to the values vector</span></div>
-<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;DIM;i++) {values.push_back(nst_values[i]);}  </div>
+<div class="line">      <span class="comment">// Add the fluid velocities to the values vector</span></div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; DIM; i++)</div>
+<div class="line">      {</div>
+<div class="line">        values.push_back(nst_values[i]);</div>
+<div class="line">      }</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">//Add the concentration to the end</span></div>
-<div class="line">   values.push_back(advection_values[0]);</div>
-<div class="line">  }</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> <span class="comment"></span></div>
-<div class="line"><span class="comment"> /// \short Get all continuously interpolated values at the local </span></div>
-<div class="line"><span class="comment"> /// coordinate s at time level t (t=0: present; t&gt;0: previous).</span></div>
-<div class="line"><span class="comment"> /// We choose to put the fluid velocities first, followed by the</span></div>
-<div class="line"><span class="comment"> /// temperature</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> get_interpolated_values(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp;s,</div>
-<div class="line">                              Vector&lt;double&gt;&amp; values)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">//Storage for the fluid velocities</span></div>
-<div class="line">   Vector&lt;double&gt; nst_values;</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//Get the fluid velocities from the fluid element</span></div>
-<div class="line">   RefineableQCrouzeixRaviartElement&lt;DIM&gt;::</div>
-<div class="line">    get_interpolated_values(t,s,nst_values);</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//Storage for the temperature</span></div>
-<div class="line">   Vector&lt;double&gt; advection_values;</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//Get the temperature from the advection-diffusion element</span></div>
-<div class="line">   RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;::</div>
-<div class="line">    get_interpolated_values(s,advection_values);</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//Add the fluid velocities to the values vector</span></div>
-<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;DIM;i++) {values.push_back(nst_values[i]);}   </div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//Add the concentration to the end</span></div>
-<div class="line">   values.push_back(advection_values[0]);</div>
-<div class="line"> </div>
-<div class="line">  } <span class="comment">// end of get_interpolated_values</span></div>
-</div><!-- fragment --><p>Finally, the setup and build functions must call the build functions of the two constituent elements. In addition, the pointer to the Rayleigh number must be passed to the sons after refinement.</p>
- <div class="fragment"><div class="line"> <span class="comment">/// \short The additional hanging node information must be set up</span></div>
-<div class="line"><span class="comment"> /// for both single-physics elements.</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> further_setup_hanging_nodes()</div>
-<div class="line">  {</div>
-<div class="line">   RefineableQCrouzeixRaviartElement&lt;DIM&gt;::further_setup_hanging_nodes();</div>
-<div class="line">   RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;::further_setup_hanging_nodes();</div>
-<div class="line">  }</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> <span class="comment"></span></div>
-<div class="line"><span class="comment"> /// \short Call the rebuild_from_sons functions for each of the</span></div>
-<div class="line"><span class="comment"> /// constituent multi-physics elements.</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> rebuild_from_sons(Mesh* &amp;mesh_pt) </div>
-<div class="line">  {</div>
-<div class="line">   RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;::rebuild_from_sons(mesh_pt);</div>
-<div class="line">   RefineableQCrouzeixRaviartElement&lt;DIM&gt;::rebuild_from_sons(mesh_pt);</div>
-<div class="line">  }</div>
-<div class="line">  </div>
+<div class="line">      <span class="comment">// Add the concentration to the end</span></div>
+<div class="line">      values.push_back(advection_values[0]);</div>
+<div class="line">    }</div>
 <div class="line"> </div>
 <div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// \short Call the underlying single-physics element&#39;s further_build()</span></div>
-<div class="line"><span class="comment"> /// functions and make sure that the pointer to the Rayleigh number</span></div>
-<div class="line"><span class="comment"> /// is passed to the sons</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> further_build()</div>
-<div class="line">  {</div>
-<div class="line">   RefineableQCrouzeixRaviartElement&lt;DIM&gt;::further_build();</div>
-<div class="line">   RefineableQAdvectionDiffusionElement&lt;DIM,3&gt;::further_build();</div>
+<div class="line"><span class="comment">    /// \short Get all continuously interpolated values at the local</span></div>
+<div class="line"><span class="comment">    /// coordinate s at time level t (t=0: present; t&gt;0: previous).</span></div>
+<div class="line"><span class="comment">    /// We choose to put the fluid velocities first, followed by the</span></div>
+<div class="line"><span class="comment">    /// temperature</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> get_interpolated_values(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
+<div class="line">                                 <span class="keyword">const</span> Vector&lt;double&gt;&amp; s,</div>
+<div class="line">                                 Vector&lt;double&gt;&amp; values)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Storage for the fluid velocities</span></div>
+<div class="line">      Vector&lt;double&gt; nst_values;</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">//Cast the pointer to the father element to the specific</span></div>
-<div class="line">   <span class="comment">//element type</span></div>
-<div class="line">   RefineableBuoyantQCrouzeixRaviartElement&lt;DIM&gt;* cast_father_element_pt</div>
-<div class="line">    = <span class="keyword">dynamic_cast&lt;</span>RefineableBuoyantQCrouzeixRaviartElement&lt;DIM&gt;*<span class="keyword">&gt;</span>(</div>
-<div class="line">     this-&gt;father_element_pt());</div>
+<div class="line">      <span class="comment">// Get the fluid velocities from the fluid element</span></div>
+<div class="line">      RefineableQCrouzeixRaviartElement&lt;DIM&gt;::get_interpolated_values(</div>
+<div class="line">        t, s, nst_values);</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">//Set the pointer to the Rayleigh number to be the same as that in</span></div>
-<div class="line">   <span class="comment">//the father</span></div>
-<div class="line">   this-&gt;Ra_pt = cast_father_element_pt-&gt;ra_pt();</div>
-<div class="line">  } <span class="comment">//end of further build</span></div>
+<div class="line">      <span class="comment">// Storage for the temperature</span></div>
+<div class="line">      Vector&lt;double&gt; advection_values;</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get the temperature from the advection-diffusion element</span></div>
+<div class="line">      RefineableQAdvectionDiffusionElement&lt;DIM, 3&gt;::get_interpolated_values(</div>
+<div class="line">        s, advection_values);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Add the fluid velocities to the values vector</span></div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; DIM; i++)</div>
+<div class="line">      {</div>
+<div class="line">        values.push_back(nst_values[i]);</div>
+<div class="line">      }</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Add the concentration to the end</span></div>
+<div class="line">      values.push_back(advection_values[0]);</div>
+<div class="line"> </div>
+<div class="line">    } <span class="comment">// end of get_interpolated_values</span></div>
+</div><!-- fragment --><p>Finally, the setup and build functions must call the build functions of the two constituent elements. In addition, the pointer to the Rayleigh number must be passed to the sons after refinement.</p>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short The additional hanging node information must be set up</span></div>
+<div class="line"><span class="comment">    /// for both single-physics elements.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> further_setup_hanging_nodes()</div>
+<div class="line">    {</div>
+<div class="line">      RefineableQCrouzeixRaviartElement&lt;DIM&gt;::further_setup_hanging_nodes();</div>
+<div class="line">      RefineableQAdvectionDiffusionElement&lt;DIM,</div>
+<div class="line">                                           3&gt;::further_setup_hanging_nodes();</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// \short Call the rebuild_from_sons functions for each of the</span></div>
+<div class="line"><span class="comment">    /// constituent multi-physics elements.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> rebuild_from_sons(Mesh*&amp; mesh_pt)</div>
+<div class="line">    {</div>
+<div class="line">      RefineableQAdvectionDiffusionElement&lt;DIM, 3&gt;::rebuild_from_sons(mesh_pt);</div>
+<div class="line">      RefineableQCrouzeixRaviartElement&lt;DIM&gt;::rebuild_from_sons(mesh_pt);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// \short Call the underlying single-physics element&#39;s further_build()</span></div>
+<div class="line"><span class="comment">    /// functions and make sure that the pointer to the Rayleigh number</span></div>
+<div class="line"><span class="comment">    /// is passed to the sons</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> further_build()</div>
+<div class="line">    {</div>
+<div class="line">      RefineableQCrouzeixRaviartElement&lt;DIM&gt;::further_build();</div>
+<div class="line">      RefineableQAdvectionDiffusionElement&lt;DIM, 3&gt;::further_build();</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Cast the pointer to the father element to the specific</span></div>
+<div class="line">      <span class="comment">// element type</span></div>
+<div class="line">      RefineableBuoyantQCrouzeixRaviartElement&lt;DIM&gt;* cast_father_element_pt =</div>
+<div class="line">        <span class="keyword">dynamic_cast&lt;</span>RefineableBuoyantQCrouzeixRaviartElement&lt;DIM&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">          this-&gt;father_element_pt());</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Set the pointer to the Rayleigh number to be the same as that in</span></div>
+<div class="line">      <span class="comment">// the father</span></div>
+<div class="line">      this-&gt;Ra_pt = cast_father_element_pt-&gt;ra_pt();</div>
+<div class="line">    } <span class="comment">// end of further build</span></div>
 </div><!-- fragment --><hr  />
  <hr  />
 <h1><a class="anchor" id="comm_and_exercises"></a>
@@ -764,7 +788,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:23:57
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:03:29
         </div>
       </div>
     </footer>

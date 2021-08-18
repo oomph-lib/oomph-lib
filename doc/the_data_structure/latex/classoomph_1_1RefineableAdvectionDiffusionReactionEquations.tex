@@ -27,8 +27,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquation
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquations_a3d19d1247a3ba838a67263b75d6341a0}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquations_aaebce9418da050917be3deb004adf7c7}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
-\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
- Standard flux.\+from Advection\+Diffusion\+Reaction equations. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Advection\+Diffusion\+Reaction equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquations_ab68dd4feee2b6e4d268e464686254199}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
 \begin{DoxyCompactList}\small\item\em Get the function values c in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquations_aa73aae12983b44f1adb2ef19819abf19}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
@@ -39,8 +38,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquation
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquations_ac00be5fb705024129d006f2ed2d80eab}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+react}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to the elemental residual vector ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -50,7 +48,7 @@ class oomph\+::\+Refineable\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+
 
 A version of the Advection Diffusion Reaction equations that can be used with non-\/uniform mesh refinement. In essence, the class overloads the \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquations_ac00be5fb705024129d006f2ed2d80eab}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+react()}} function so that contributions from hanging nodes (or alternatively in-\/compatible function values) are taken into account. 
 
-Definition at line 55 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 54 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -68,7 +66,7 @@ Empty Constructor.
 
 
 
-Definition at line 63 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 61 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionReactionEquations_ae284d628aa8678d5c74af6132442a8f6}\label{classoomph_1_1RefineableAdvectionDiffusionReactionEquations_ae284d628aa8678d5c74af6132442a8f6}} 
 \index{oomph::RefineableAdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$@{oomph::RefineableAdvectionDiffusionReactionEquations$<$ NREAGENT, DIM $>$}!RefineableAdvectionDiffusionReactionEquations@{RefineableAdvectionDiffusionReactionEquations}}
@@ -83,7 +81,7 @@ Broken copy constructor.
 
 
 
-Definition at line 71 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 70 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -101,10 +99,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquation
 
 
 
-Add the element\textquotesingle{}s contribution to the elemental residual vector ~\newline
- 
-
-and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector
+Add the element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. 
 
 Add the element\textquotesingle{}s contribution to the elemental residual vector and/or elemental jacobian matrix. This function overloads the standard version so that the possible presence of hanging nodes is taken into account. 
 
@@ -112,7 +107,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEqua
 
 
 
-Definition at line 40 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
+Definition at line 38 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+cc.
 
 
 
@@ -131,7 +126,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Definition at line 164 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 171 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -154,7 +149,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 131 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 137 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -177,7 +172,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 97 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 102 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -192,8 +187,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionReactionEquation
 
 
 
-Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
- Standard flux.\+from Advection\+Diffusion\+Reaction equations. 
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Advection\+Diffusion\+Reaction equations. 
 
 
 
@@ -201,7 +195,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 89 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 92 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -239,7 +233,7 @@ Broken assignment operator.
 
 
 
-Definition at line 78 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 77 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 

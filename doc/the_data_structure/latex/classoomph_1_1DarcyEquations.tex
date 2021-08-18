@@ -78,7 +78,7 @@ virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1836d0919835cd1
 virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae4098060d7311ceab8ad7673876f070c}{get\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const =0
 \begin{DoxyCompactList}\small\item\em Returns the local form of the q basis at local coordinate s. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1d3676060924184befea1157a0735cd}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) const =0
-\begin{DoxyCompactList}\small\item\em Returns the local form of the q basis and dbasis/ds at local coordinate s. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4d92638d654ee061508dbd2a6b1c5e95}{get\+\_\+q\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Returns the transformed basis at local coordinate s. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4e09bc2cc0d08dc6dd43580c2a45d5c4}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () const =0
@@ -86,7 +86,7 @@ virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4e09bc2cc0d08dc6
 virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a250719cbe94e97c88996b5b4f5553649}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x) const =0
 \begin{DoxyCompactList}\small\item\em Compute the global coordinates of the flux\+\_\+interpolation point associated with the j-\/th edge-\/based q basis fct. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_aebfe04cc9fedf1ba024b4db2b1d44de5}{edge\+\_\+flux\+\_\+interpolation\+\_\+point}} (const unsigned \&edge, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const =0
-\begin{DoxyCompactList}\small\item\em Returns the local coordinate of nth flux interpolation point along an edge. \end{DoxyCompactList}\item 
+\item 
 virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a46a2b8488be8bb249852b4771b25c30a}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (const unsigned \&edge, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x) const =0
 \begin{DoxyCompactList}\small\item\em Returns the global coordinates of the nth flux interpolation point along an edge. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7731ceb6bd31bfd6cc6c8fa1ee369779}{pin\+\_\+q\+\_\+internal\+\_\+value}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})=0
@@ -166,7 +166,7 @@ class oomph\+::\+Darcy\+Equations$<$ D\+I\+M $>$}
 
 Class implementing the generic maths of the Darcy equations using Raviart-\/\+Thomas elements with both edge and internal degrees of freedom. 
 
-Definition at line 48 of file darcy\+\_\+elements.\+h.
+Definition at line 47 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -184,7 +184,7 @@ Mass source function pointer typedef.
 
 
 
-Definition at line 58 of file darcy\+\_\+elements.\+h.
+Definition at line 55 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_adcf88d9573b0f1c1988bdae6234eb7f8}\label{classoomph_1_1DarcyEquations_adcf88d9573b0f1c1988bdae6234eb7f8}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!SourceFctPt@{SourceFctPt}}
@@ -199,7 +199,7 @@ Source function pointer typedef.
 
 
 
-Definition at line 54 of file darcy\+\_\+elements.\+h.
+Definition at line 52 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -217,7 +217,7 @@ Constructor.
 
 
 
-Definition at line 62 of file darcy\+\_\+elements.\+h.
+Definition at line 58 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -239,7 +239,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a745d818aa291fe6
 
 
 
-Definition at line 257 of file darcy\+\_\+elements.\+cc.
+Definition at line 254 of file darcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_aebfe04cc9fedf1ba024b4db2b1d44de5}\label{classoomph_1_1DarcyEquations_aebfe04cc9fedf1ba024b4db2b1d44de5}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!edge\_flux\_interpolation\_point@{edge\_flux\_interpolation\_point}}
@@ -248,11 +248,7 @@ Definition at line 257 of file darcy\+\_\+elements.\+cc.
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ D\+IM $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
-
-
-Returns the local coordinate of nth flux interpolation point along an edge. 
-
-
+Returns the local coordinate of nth flux interpolation point along an edge 
 
 Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_adde4a19355d0a4142c462d2271e5cbcf}{oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$}}.
 
@@ -348,7 +344,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 257 of file darcy\+\_\+elements.\+h.
+Definition at line 258 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a3ca52cedfaf3579f2854c3f9b57de622}\label{classoomph_1_1DarcyEquations_a3ca52cedfaf3579f2854c3f9b57de622}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution@{fill\_in\_generic\_residual\_contribution}}
@@ -363,7 +359,7 @@ Fill in residuals and, if flag==true, jacobian.
 
 
 
-Definition at line 349 of file darcy\+\_\+elements.\+cc.
+Definition at line 346 of file darcy\+\_\+elements.\+cc.
 
 
 
@@ -376,11 +372,7 @@ Referenced by oomph\+::\+Darcy\+Equations$<$ 2 $>$\+::fill\+\_\+in\+\_\+contribu
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ D\+IM $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
-
-
-Returns the local form of the q basis and dbasis/ds at local coordinate s. 
-
-
+Returns the local form of the q basis and dbasis/ds at local coordinate s 
 
 Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac59bd0feebba18b34f49b0398eaa26c1}{oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$}}, \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a6cbe24cce6930993cba8200964816919}{oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$}}, and \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_af5828b15b9b21faabbd165672bca60c5}{oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$}}.
 
@@ -420,7 +412,7 @@ Returns the transformed basis at local coordinate s.
 
 
 
-Definition at line 189 of file darcy\+\_\+elements.\+h.
+Definition at line 193 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -462,7 +454,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 466 of file darcy\+\_\+elements.\+h.
+Definition at line 465 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a1a01360c1c30124f862f85c411afa016}\label{classoomph_1_1DarcyEquations_a1a01360c1c30124f862f85c411afa016}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!interpolated\_div\_q@{interpolated\_div\_q}}
@@ -492,7 +484,7 @@ Calculate the FE representation of div q.
 
 
 
-Definition at line 318 of file darcy\+\_\+elements.\+h.
+Definition at line 317 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -511,7 +503,7 @@ Calculate the FE representation of p and return it.
 
 
 
-Definition at line 398 of file darcy\+\_\+elements.\+h.
+Definition at line 397 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a800717c69f8a472d98ad0d9714a9598b}\label{classoomph_1_1DarcyEquations_a800717c69f8a472d98ad0d9714a9598b}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!interpolated\_p@{interpolated\_p}}
@@ -560,7 +552,7 @@ Calculate the FE representation of q.
 
 
 
-Definition at line 271 of file darcy\+\_\+elements.\+h.
+Definition at line 272 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -579,7 +571,7 @@ Indirect access to the mass source function -\/ returns 0 if no mass source func
 
 
 
-Definition at line 102 of file darcy\+\_\+elements.\+h.
+Definition at line 107 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_ac037d03df5b7530cf9048160a6601fd6}\label{classoomph_1_1DarcyEquations_ac037d03df5b7530cf9048160a6601fd6}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!mass\_source\_fct\_pt@{mass\_source\_fct\_pt}}
@@ -609,7 +601,7 @@ Access function\+: Pointer to mass source function (const version)
 
 
 
-Definition at line 76 of file darcy\+\_\+elements.\+h.
+Definition at line 79 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a4e09bc2cc0d08dc6dd43580c2a45d5c4}\label{classoomph_1_1DarcyEquations_a4e09bc2cc0d08dc6dd43580c2a45d5c4}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!nedge\_flux\_interpolation\_point@{nedge\_flux\_interpolation\_point}}
@@ -650,7 +642,7 @@ Return the total number of computational basis functions for q.
 
 
 
-Definition at line 169 of file darcy\+\_\+elements.\+h.
+Definition at line 172 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -703,7 +695,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 460 of file darcy\+\_\+elements.\+h.
+Definition at line 459 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_ac523da40b92a26e3d32c1a5e985e0d40}\label{classoomph_1_1DarcyEquations_ac523da40b92a26e3d32c1a5e985e0d40}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!output@{output}}
@@ -722,7 +714,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 424 of file darcy\+\_\+elements.\+h.
+Definition at line 423 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -745,7 +737,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 159 of file darcy\+\_\+elements.\+cc.
+Definition at line 156 of file darcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a2b072036a9fba0dfcf682f9a5d2fa2b6}\label{classoomph_1_1DarcyEquations_a2b072036a9fba0dfcf682f9a5d2fa2b6}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -764,7 +756,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee
 
 
 
-Definition at line 205 of file darcy\+\_\+elements.\+cc.
+Definition at line 202 of file darcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a386bf5d62e4ad7dc8df9e0a55bc9d158}\label{classoomph_1_1DarcyEquations_a386bf5d62e4ad7dc8df9e0a55bc9d158}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!output\_with\_projected\_flux@{output\_with\_projected\_flux}}
@@ -779,7 +771,7 @@ Output incl. projection of fluxes into direction of the specified unit vector.
 
 Output FE representation of soln\+: x,y,q1,q2,div\+\_\+q,p,q \textbackslash{}cdot n. 
 
-Definition at line 99 of file darcy\+\_\+elements.\+cc.
+Definition at line 98 of file darcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_adf8414eb7fe79be0adf62d26e1b361fb}\label{classoomph_1_1DarcyEquations_adf8414eb7fe79be0adf62d26e1b361fb}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!p\_data\_pt@{p\_data\_pt}}
@@ -869,7 +861,7 @@ Helper function to pin superfluous dofs (empty; can be overloaded in projectable
 
 
 
-Definition at line 414 of file darcy\+\_\+elements.\+h.
+Definition at line 413 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_ab66fb06e7f90655229b0eb2b96cf3f1e}\label{classoomph_1_1DarcyEquations_ab66fb06e7f90655229b0eb2b96cf3f1e}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!q\_edge@{q\_edge}}
@@ -1053,7 +1045,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 418 of file darcy\+\_\+elements.\+h.
+Definition at line 417 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a7c950999d5108350bd8a44f4ab286b2c}\label{classoomph_1_1DarcyEquations_a7c950999d5108350bd8a44f4ab286b2c}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!set\_p\_value@{set\_p\_value}}
@@ -1143,7 +1135,7 @@ Indirect access to the source function -\/ returns 0 if no source function has b
 
 
 
-Definition at line 80 of file darcy\+\_\+elements.\+h.
+Definition at line 86 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_abe4a6fd3c37700bcf18a51a71e2d3c0d}\label{classoomph_1_1DarcyEquations_abe4a6fd3c37700bcf18a51a71e2d3c0d}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
@@ -1158,7 +1150,7 @@ Access function\+: Pointer to body force function.
 
 
 
-Definition at line 67 of file darcy\+\_\+elements.\+h.
+Definition at line 61 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a670893e19f2ac6f7f02f0d5b03ca0b16}\label{classoomph_1_1DarcyEquations_a670893e19f2ac6f7f02f0d5b03ca0b16}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
@@ -1173,7 +1165,7 @@ Access function\+: Pointer to body force function (const version)
 
 
 
-Definition at line 70 of file darcy\+\_\+elements.\+h.
+Definition at line 67 of file darcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a7baf04e00b11ce49b04ff78022b5e382}\label{classoomph_1_1DarcyEquations_a7baf04e00b11ce49b04ff78022b5e382}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!transform\_basis@{transform\_basis}}
@@ -1188,7 +1180,7 @@ Performs a div-\/conserving transformation of the vector basis functions from th
 
 
 
-Definition at line 36 of file darcy\+\_\+elements.\+cc.
+Definition at line 35 of file darcy\+\_\+elements.\+cc.
 
 
 
@@ -1210,7 +1202,7 @@ Pointer to the mass source function.
 
 
 
-Definition at line 508 of file darcy\+\_\+elements.\+h.
+Definition at line 504 of file darcy\+\_\+elements.\+h.
 
 
 
@@ -1229,7 +1221,7 @@ Pointer to body force function.
 
 
 
-Definition at line 505 of file darcy\+\_\+elements.\+h.
+Definition at line 501 of file darcy\+\_\+elements.\+h.
 
 
 

@@ -20,17 +20,13 @@ Inheritance diagram for oomph\+::T\+Unsteady\+Heat\+Element$<$ D\+IM, N\+N\+O\+D
 unsigned \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_af3e705367ab5d37d0016ad00a8b81592}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a03456d7b303e01a92f634a99fad1eacf}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a2602a84d853cda483fd52abadb524da9}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a278bcf1033d234317dd3a0f8ed306e89}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_ae557037d0c9eef1143aef52decb559ca}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_ab96efdf223b23caa747ca79dae88c847}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_af550a3be2cd261c495ee0c97a3ca29a7}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
@@ -39,9 +35,9 @@ void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_af550a3be2cd261c495ee0c
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_ab957ee8223e82d47e75eafde43c1a3e3}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a45a721e6148650c201f6aed6a5f38702}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping (J). Also compute derivatives of dpsidx, dtestdx and J w.\+r.\+t. nodal coordinates. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a5216b9570896508b5fd6063ca46223a5}{nrecovery\+\_\+order}} ()
@@ -68,7 +64,7 @@ class oomph\+::\+T\+Unsteady\+Heat\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D 
 
 T\+Unsteady\+Heat\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are isoparametric triangular D\+I\+M-\/dimensional Unsteady\+Heat elements with N\+N\+O\+D\+E\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{Unsteady\+Heat\+Equations}} 
 
-Definition at line 61 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 59 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -86,7 +82,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\
 
 
 
-Definition at line 70 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 66 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TUnsteadyHeatElement_a151aad04a5236dc5cf86576b179278c8}\label{classoomph_1_1TUnsteadyHeatElement_a151aad04a5236dc5cf86576b179278c8}} 
 \index{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!TUnsteadyHeatElement@{TUnsteadyHeatElement}}
@@ -101,7 +97,7 @@ Broken copy constructor.
 
 
 
-Definition at line 75 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 73 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -125,7 +121,7 @@ Define the shape functions (psi) and test functions (test) and their derivatives
 
 Galerkin\+: Test functions = shape functions 
 
-Definition at line 283 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 290 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}\label{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}} 
 \index{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat@{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}
@@ -134,9 +130,7 @@ Definition at line 283 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 {\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{oomph\+::\+T\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -146,7 +140,7 @@ Implements \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_aa6ab5a2e2bbf383
 
 
 
-Definition at line 251 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 262 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TUnsteadyHeatElement_ab957ee8223e82d47e75eafde43c1a3e3}\label{classoomph_1_1TUnsteadyHeatElement_ab957ee8223e82d47e75eafde43c1a3e3}} 
 \index{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_ust\_heat@{dshape\_and\_dtest\_eulerian\_ust\_heat}}
@@ -155,9 +149,7 @@ Definition at line 251 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 {\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{oomph\+::\+T\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -167,7 +159,7 @@ Implements \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a70c72c1d6e71665
 
 
 
-Definition at line 216 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 229 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -190,7 +182,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 184 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 195 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -213,7 +205,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 177 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 182 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TUnsteadyHeatElement_a864e7ce7dae3e1db65650970d890273d}\label{classoomph_1_1TUnsteadyHeatElement_a864e7ce7dae3e1db65650970d890273d}} 
 \index{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -232,7 +224,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 180 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 188 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TUnsteadyHeatElement_a8fb6b9483f1e78e21144e1443a6f0f4d}\label{classoomph_1_1TUnsteadyHeatElement_a8fb6b9483f1e78e21144e1443a6f0f4d}} 
 \index{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
@@ -251,7 +243,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 188 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 201 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TUnsteadyHeatElement_a278bcf1033d234317dd3a0f8ed306e89}\label{classoomph_1_1TUnsteadyHeatElement_a278bcf1033d234317dd3a0f8ed306e89}} 
 \index{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::TUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -262,8 +254,7 @@ void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{oomph\+::\+T\+Unsteady
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. 
+C-\/style output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -271,7 +262,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 112 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 113 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -286,8 +277,7 @@ void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{oomph\+::\+T\+Unsteady
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -295,7 +285,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 120 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 121 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -310,8 +300,7 @@ void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{oomph\+::\+T\+Unsteady
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -319,7 +308,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 97 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 98 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -334,8 +323,7 @@ void \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{oomph\+::\+T\+Unsteady
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -343,7 +331,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 104 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 105 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -366,7 +354,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ab6f0a3d
 
 
 
-Definition at line 137 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 139 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -389,7 +377,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee
 
 
 
-Definition at line 128 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 129 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -412,7 +400,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 92 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 91 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -435,7 +423,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 192 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 207 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -453,7 +441,7 @@ Static unsigned that holds the (same) number of variables at every node.
 
 
 
-Definition at line 198 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 214 of file Tunsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 

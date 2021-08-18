@@ -43,9 +43,9 @@ void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_aa605
 void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_ac653ab28abf52506f54b1306272390ce}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Call \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_ac653ab28abf52506f54b1306272390ce}{rebuild\+\_\+from\+\_\+sons()}} for both of the underlying element types. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a0d92d0ec7145da660fdbf5f2a46814fd}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
-\begin{DoxyCompactList}\small\item\em Call get\+\_\+interpolated\+\_\+values(...) for both of the underlying element types. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a031d296b43e300b84278e93757741735}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
-\begin{DoxyCompactList}\small\item\em Call get\+\_\+interpolated\+\_\+values(...) for both of the underlying element types. \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a1f46fe5667a761f7a68ede0b40ef4f4a}{interpolating\+\_\+node\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em We must compose the underlying interpolating nodes from the B\+A\+S\+IC and S\+O\+L\+ID equations, the B\+A\+S\+IC ones are first. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a8e1c7e4695dec50813227ceafa340ada}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (const unsigned \&n1d, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&value\+\_\+id)
@@ -94,7 +94,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a
 \begin{DoxyCompactList}\small\item\em return the number of D\+OF types associated with the B\+A\+S\+IC elements in this combined element \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a5361a31f5a74d4779dbf1e074e08a4f2}{nsolid\+\_\+dof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em return the number of D\+OF types associated with the S\+O\+L\+ID elements in this combined element \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a4b59bb716a54bc8d174d68f2ed70e151}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a57aa7049440d5bb42fd94d39178075de}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. This method combines the get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(...) method for the B\+A\+S\+IC and S\+O\+L\+ID elements. The basic elements retain their D\+OF type numbering and the S\+O\+L\+ID elements D\+OF type numbers are incremented by \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a029f632bdb246c67eb49b7803fd40ab1}{nbasic\+\_\+dof\+\_\+types()}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -104,7 +104,7 @@ class oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element$<$ B\+A\+S\+I\
 
 Refineable version of the Pseudo\+Solid\+Node\+Update\+E\+Lement. 
 
-Definition at line 554 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 583 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -122,7 +122,7 @@ Constructor, call the B\+A\+S\+IC and S\+O\+L\+ID elements\textquotesingle{} con
 
 
 
-Definition at line 562 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 589 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -144,7 +144,7 @@ Final override for the assign\+\_\+\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+num
 
 
 
-Definition at line 1042 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1093 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -163,7 +163,7 @@ Build function\+: Call the one for the S\+O\+L\+ID element since it calls the on
 
 
 
-Definition at line 1259 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1323 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a9997600d809a1fb258ca8958d2f43f15}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a9997600d809a1fb258ca8958d2f43f15}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!build@{build}}
@@ -178,7 +178,7 @@ Build function\+: Call the one for the S\+O\+L\+ID element since it calls the on
 
 
 
-Definition at line 1248 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1312 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a566d35b215a97e63ce6ebba0e94631b9}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a566d35b215a97e63ce6ebba0e94631b9}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!compute\_exact\_Z2\_error@{compute\_exact\_Z2\_error}}
@@ -193,7 +193,7 @@ Plot the error when compared against a given exact flux. Also calculates the nor
 
 
 
-Definition at line 1291 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1360 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a2a7fb32ce6b9b442f7b328d382ff017a}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a2a7fb32ce6b9b442f7b328d382ff017a}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!compute\_norm@{compute\_norm}}
@@ -208,7 +208,7 @@ Compute norm of solution. Use version in B\+A\+S\+IC element.
 
 
 
-Definition at line 1283 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1352 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_ae8d1530df547c5d697c640d45cb6c941}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_ae8d1530df547c5d697c640d45cb6c941}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!describe\_local\_dofs@{describe\_local\_dofs}}
@@ -223,7 +223,7 @@ Function to describe the local dofs of the element. The ostream specifies the ou
 
 
 
-Definition at line 577 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 603 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a56a4edc264874dc8673dccd92672b608}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a56a4edc264874dc8673dccd92672b608}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -238,7 +238,7 @@ Final override for jacobian function\+: Calls get\+\_\+jacobian() for both of th
 
 
 
-Definition at line 621 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 656 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -257,7 +257,7 @@ Final override for mass matrix function\+: contributions are included from both 
 
 
 
-Definition at line 636 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 671 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -276,7 +276,7 @@ Final override for residuals function\+: adds contributions from both underlying
 
 
 
-Definition at line 611 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 646 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -295,7 +295,7 @@ Fill in the derivatives of the B\+A\+S\+IC equations w.\+r.\+t. to the solid pos
 
 
 
-Definition at line 656 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 691 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -314,7 +314,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement}{oomp
 
 Further build\+: Done for both of the underlying element types. 
 
-Definition at line 1267 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1332 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a7f2375e2097699d5a175db3bc9f6b868}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a7f2375e2097699d5a175db3bc9f6b868}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
@@ -329,14 +329,14 @@ Perform additional hanging node procedures for variables that are not interpolat
 
 
 
-Definition at line 1239 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1303 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a4b59bb716a54bc8d174d68f2ed70e151}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a4b59bb716a54bc8d174d68f2ed70e151}} 
+\mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a57aa7049440d5bb42fd94d39178075de}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a57aa7049440d5bb42fd94d39178075de}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$class B\+A\+S\+IC , class S\+O\+L\+ID $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement}{oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element}}$<$ B\+A\+S\+IC, S\+O\+L\+ID $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement}{oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element}}$<$ B\+A\+S\+IC, S\+O\+L\+ID $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -344,7 +344,7 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 
 
-Definition at line 1347 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1429 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -357,13 +357,9 @@ References oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element$<$ B\+A\+
 {\footnotesize\ttfamily template$<$class B\+A\+S\+IC , class S\+O\+L\+ID $>$ \\
 void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement}{oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element}}$<$ B\+A\+S\+IC, S\+O\+L\+ID $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+Call get\+\_\+interpolated\+\_\+values(...) for both of the underlying element types 
 
-
-Call get\+\_\+interpolated\+\_\+values(...) for both of the underlying element types. 
-
-
-
-Definition at line 1056 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1108 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -376,13 +372,9 @@ References s, t, and values.
 {\footnotesize\ttfamily template$<$class B\+A\+S\+IC , class S\+O\+L\+ID $>$ \\
 void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement}{oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element}}$<$ B\+A\+S\+IC, S\+O\+L\+ID $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+Call get\+\_\+interpolated\+\_\+values(...) for both of the underlying element types 
 
-
-Call get\+\_\+interpolated\+\_\+values(...) for both of the underlying element types. 
-
-
-
-Definition at line 1080 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1136 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -401,7 +393,7 @@ The velocity nodes are the same as the geometric nodes. The pressure nodes must 
 
 
 
-Definition at line 1145 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1207 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -416,7 +408,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement}{oomp
 
 \textquotesingle{}Flux\textquotesingle{} vector for Z2 error estimation\+: Error estimation is based on error in B\+A\+S\+IC element 
 
-Definition at line 1231 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1295 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -435,7 +427,7 @@ Specify \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects the geometry of
 
 
 
-Definition at line 1001 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1054 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -454,7 +446,7 @@ The basis interpolating the pressure is given by pshape(). / The basis interpola
 
 
 
-Definition at line 1205 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1266 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -473,7 +465,7 @@ We must compose the underlying interpolating nodes from the B\+A\+S\+IC and S\+O
 
 
 
-Definition at line 1103 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1162 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -492,7 +484,7 @@ The pressure nodes are the corner nodes, so when value\+\_\+id==0, the fraction 
 
 
 
-Definition at line 1119 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1181 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -511,7 +503,7 @@ return the number of D\+OF types associated with the B\+A\+S\+IC elements in thi
 
 
 
-Definition at line 1327 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1409 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -530,7 +522,7 @@ The number of continuously interpolated values is the sum of the S\+O\+L\+ID and
 
 
 
-Definition at line 590 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 618 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a04cbdc63d7d79c04ed80b7a0903e8199}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a04cbdc63d7d79c04ed80b7a0903e8199}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!ndof\_types@{ndof\_types}}
@@ -545,7 +537,7 @@ The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in thi
 
 
 
-Definition at line 1320 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1402 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_ab73207cdcfb40fbd04de408d4f9cc10d}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_ab73207cdcfb40fbd04de408d4f9cc10d}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!ninterpolating\_node@{ninterpolating\_node}}
@@ -560,7 +552,7 @@ The number of pressure nodes is 2$^\wedge$\+D\+IM. The number of velocity nodes 
 
 
 
-Definition at line 1186 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1247 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a65f9d660a500017d25fc2e2375049274}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a65f9d660a500017d25fc2e2375049274}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!ninterpolating\_node\_1d@{ninterpolating\_node\_1d}}
@@ -575,7 +567,7 @@ The number of 1d pressure nodes is 2, otherwise we have the positional nodes.
 
 
 
-Definition at line 1167 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1228 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a3947be55246e7cbaa127057db8881858}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a3947be55246e7cbaa127057db8881858}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -590,7 +582,7 @@ Order of recovery shape functions for Z2 error estimation\+: Done for B\+A\+S\+I
 
 
 
-Definition at line 1302 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1371 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a5361a31f5a74d4779dbf1e074e08a4f2}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a5361a31f5a74d4779dbf1e074e08a4f2}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!nsolid\_dof\_types@{nsolid\_dof\_types}}
@@ -605,7 +597,7 @@ return the number of D\+OF types associated with the S\+O\+L\+ID elements in thi
 
 
 
-Definition at line 1334 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1416 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a577241e74df25b8548f475bf4a9fffa7}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a577241e74df25b8548f475bf4a9fffa7}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -620,7 +612,7 @@ Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation
 
 
 
-Definition at line 1227 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1288 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a2d8820cdbca56cf4c913b8d1baab7102}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a2d8820cdbca56cf4c913b8d1baab7102}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!nvertex\_node@{nvertex\_node}}
@@ -635,7 +627,7 @@ Number of vertex nodes in the element.
 
 
 
-Definition at line 1275 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1340 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a1fc357bd2adafd81683163f42e2dfd61}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_a1fc357bd2adafd81683163f42e2dfd61}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!output@{output}}
@@ -650,7 +642,7 @@ Overload the output function\+: Use that of the B\+A\+S\+IC element.
 
 
 
-Definition at line 1312 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1389 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -669,7 +661,7 @@ Output function\+: Use that of the B\+A\+S\+IC element.
 
 
 
-Definition at line 1315 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1395 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -688,7 +680,7 @@ Overload the output function\+: Use that of the B\+A\+S\+IC element.
 
 
 
-Definition at line 1305 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1377 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -707,7 +699,7 @@ Output function, plotting at n\+\_\+p points\+: Use that of the B\+A\+S\+IC elem
 
 
 
-Definition at line 1308 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1383 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -726,7 +718,7 @@ Call \mbox{\hyperlink{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_ac653
 
 
 
-Definition at line 1049 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1100 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_af1d5e0fb32d61d553eba93b705ec0052}\label{classoomph_1_1RefineablePseudoSolidNodeUpdateElement_af1d5e0fb32d61d553eba93b705ec0052}} 
 \index{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$@{oomph::RefineablePseudoSolidNodeUpdateElement$<$ BASIC, SOLID $>$}!required\_nvalue@{required\_nvalue}}
@@ -741,7 +733,7 @@ The required number of values is the sum of the two.
 
 
 
-Definition at line 585 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 611 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -760,7 +752,7 @@ We assume that the solid stuff is stored at the end of the nodes, i.\+e. its ind
 
 
 
-Definition at line 597 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 627 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 
@@ -779,7 +771,7 @@ Pointer to the j-\/th vertex node in the element.
 
 
 
-Definition at line 1279 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
+Definition at line 1346 of file pseudosolid\+\_\+node\+\_\+update\+\_\+elements.\+h.
 
 
 

@@ -43,8 +43,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_aa8ea5cf2c9fee
 void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_ab1300b5bdb62b11aeb88df3268c6ba92}{setup\+\_\+hanging\+\_\+nodes}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::ofstream $\ast$ $>$ \&output\+\_\+stream)
 \begin{DoxyCompactList}\small\item\em Markup all hanging nodes \& document the results in the output streams contained in the vector output\+\_\+stream, if they are open. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_aae91537ebb3f511bf48397b3324f424a}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()=0
-\begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations as for the pressure in Taylor Hood). ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations as for the pressure in Taylor Hood). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -57,8 +56,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_ac61083ce6abe6
 void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_aac2601ff8f740680675e5e6ba5c35e9d}{get\+\_\+bcs}} (int bound, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&bound\+\_\+cons) const
 \begin{DoxyCompactList}\small\item\em Determine \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of boundary conditions along the element\textquotesingle{}s boundary (or vertex) bound (S/\+W/\+N/\+E/\+S\+W/\+S\+E/\+N\+W/\+NE). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_aa0feadb4fbbe8861366a77373b122293}{interpolated\+\_\+zeta\+\_\+on\+\_\+face}} (const unsigned \&boundary, const int \&face, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta)
-\begin{DoxyCompactList}\small\item\em Return the value of the intrinsic boundary coordinate interpolated along the face ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the value of the intrinsic boundary coordinate interpolated along the face. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_a3d38b1cfacb055140a330e3d251b601f}{setup\+\_\+hang\+\_\+for\+\_\+value}} (const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Internal helper function that is used to construct the hanging node schemes for the value\+\_\+id-\/th interpolated value. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_abde04c6b8616bd2551b24ac1abade563}{oc\+\_\+hang\+\_\+helper}} (const int \&value\+\_\+id, const int \&my\+\_\+edge, std\+::ofstream \&output\+\_\+hangfile)
@@ -67,8 +65,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_abde04
 \begin{DoxyCompactItemize}
 \item 
 static std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_a0c02f69b5f451db97099acb1e2960738}{Father\+\_\+bound}}
-\begin{DoxyCompactList}\small\item\em Coincidence between son nodal points and father boundaries\+: ~\newline
- Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type)=\{R\+U/\+R\+F/\+R\+D/\+R\+B/.../ O\+M\+E\+GA\} so that node nnode\+\_\+son in element of type son\+\_\+type lies on boundary/vertex Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type) in its father element. If the node doesn\textquotesingle{}t lie on a boundary the value is O\+M\+E\+GA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Coincidence between son nodal points and father boundaries\+: Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type)=\{R\+U/\+R\+F/\+R\+D/\+R\+B/.../ O\+M\+E\+GA\} so that node nnode\+\_\+son in element of type son\+\_\+type lies on boundary/vertex Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type) in its father element. If the node doesn\textquotesingle{}t lie on a boundary the value is O\+M\+E\+GA. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -89,7 +86,7 @@ Refinement is performed by octree procedures. When the element is subdivided, th
 
 The class provides a generic \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_ac085ca58b7eefb81628275e2b7ab07ce}{Refineable\+Q\+Element$<$3$>$\+::build()}} function which deals with generic isoparametric Q\+Elements in which all values are associated with nodes. The \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36dfad028686adeb4694a9ef3}{Refineable\+Q\+Element$<$3$>$\+::further\+\_\+build()}} function provides an interface for any element-\/specific non-\/generic build operations. 
 
-Definition at line 67 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 66 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 
 
@@ -106,7 +103,7 @@ Shorthand for pointer to an argument-\/free void member function of the refineab
 
 
 
-Definition at line 75 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 72 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 
 
@@ -123,7 +120,7 @@ Constructor\+: Pass refinement level (default 0 = root)
 
 
 
-Definition at line 78 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 75 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 
 
@@ -141,7 +138,7 @@ Broken copy constructor.
 
 
 
-Definition at line 86 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 83 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 
 
@@ -159,7 +156,7 @@ Broken assignment operator.
 
 Destructor 
 
-Definition at line 102 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 100 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 
 
@@ -201,11 +198,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01
 
 
 
-Definition at line 1229 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 1293 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), boundaries, oomph\+::\+Mesh\+::boundary\+\_\+coordinate\+\_\+exists(), oomph\+::\+Element\+With\+Moving\+Nodes\+::enable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), get\+\_\+bcs(), get\+\_\+boundaries(), oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), i, interpolated\+\_\+zeta\+\_\+on\+\_\+face(), oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Node\+::make\+\_\+periodic(), oomph\+::\+Element\+With\+Moving\+Nodes\+::method\+\_\+for\+\_\+shape\+\_\+derivs(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+Data\+::pin(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), s, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Node\+::x().
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), boundaries, oomph\+::\+Mesh\+::boundary\+\_\+coordinate\+\_\+exists(), oomph\+::\+Element\+With\+Moving\+Nodes\+::enable\+\_\+always\+\_\+evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd(), oomph\+::\+Element\+With\+Moving\+Nodes\+::enable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), get\+\_\+bcs(), get\+\_\+boundaries(), oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 3 $>$\+::get\+\_\+solid\+\_\+bcs(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), i, interpolated\+\_\+zeta\+\_\+on\+\_\+face(), oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Node\+::make\+\_\+periodic(), oomph\+::\+Element\+With\+Moving\+Nodes\+::method\+\_\+for\+\_\+shape\+\_\+derivs(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+Data\+::pin(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), s, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_013_01_4_ac956bd05c434861ba65b0431024c1072}\label{classoomph_1_1RefineableQElement_3_013_01_4_ac956bd05c434861ba65b0431024c1072}} 
 \index{oomph::RefineableQElement$<$ 3 $>$@{oomph::RefineableQElement$<$ 3 $>$}!check\_integrity@{check\_integrity}}
@@ -227,11 +224,11 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ae665f2d2eb0b6410ddc
 
 
 
-Definition at line 2427 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 2509 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
-References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, e, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Binary\+Tree\+Names\+::L, n, oomph\+::\+Refineable\+Element\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Tree\+::root\+\_\+pt(), s, t, oomph\+::\+Oc\+Tree\+Names\+::U, and values.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, e, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Binary\+Tree\+Names\+::L, n, oomph\+::\+Refineable\+Element\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Tree\+::root\+\_\+pt(), s, t, oomph\+::\+Oc\+Tree\+Names\+::U, and values.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_013_01_4_aae91537ebb3f511bf48397b3324f424a}\label{classoomph_1_1RefineableQElement_3_013_01_4_aae91537ebb3f511bf48397b3324f424a}} 
 \index{oomph::RefineableQElement$<$ 3 $>$@{oomph::RefineableQElement$<$ 3 $>$}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
@@ -241,8 +238,7 @@ References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, e, 
 
 
 
-Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations as for the pressure in Taylor Hood). ~\newline
- 
+Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations as for the pressure in Taylor Hood). 
 
 
 
@@ -280,7 +276,7 @@ Usual convention\+:
 \item bound\+\_\+cons\mbox{[}ival\mbox{]}=1 if value ival on this boundary is pinned 
 \end{DoxyItemize}
 
-Definition at line 220 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 238 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
@@ -300,7 +296,7 @@ Given an element edge/vertex, return a \mbox{\hyperlink{classoomph_1_1Vector}{Ve
 
 For proper edges, the boundary is the one (if any) that is shared by both vertex nodes). For vertex nodes, we just return their boundaries. 
 
-Definition at line 406 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 424 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
@@ -334,7 +330,7 @@ Usual convention\+:
 \item bound\+\_\+cons\mbox{[}ival\mbox{]}=1 if value ival on this boundary is pinned 
 \end{DoxyItemize}
 
-Definition at line 318 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 337 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
@@ -348,12 +344,11 @@ References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oom
 
 
 
-Return the value of the intrinsic boundary coordinate interpolated along the face ~\newline
- 
+Return the value of the intrinsic boundary coordinate interpolated along the face. 
 
 Return the value of the intrinsic boundary coordinate interpolated along the face 
 
-Definition at line 561 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 582 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
@@ -379,11 +374,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_013_00_01I
 
 
 
-Definition at line 973 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 992 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
-References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Oc\+Tree\+::faces\+\_\+of\+\_\+common\+\_\+edge(), oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), i, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, s, oomph\+::\+Oc\+Tree\+Names\+::U, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Oc\+Tree\+::faces\+\_\+of\+\_\+common\+\_\+edge(), oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, s, oomph\+::\+Oc\+Tree\+Names\+::U, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_013_01_4_aba1fb9ba01bbf6eaa478203d0d2403d0}\label{classoomph_1_1RefineableQElement_3_013_01_4_aba1fb9ba01bbf6eaa478203d0d2403d0}} 
 \index{oomph::RefineableQElement$<$ 3 $>$@{oomph::RefineableQElement$<$ 3 $>$}!node\_created\_by\_son\_of\_neighbour@{node\_created\_by\_son\_of\_neighbour}}
@@ -401,7 +396,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_013_00_01I
 
 
 
-Definition at line 123 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 124 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_013_01_4_abde04c6b8616bd2551b24ac1abade563}\label{classoomph_1_1RefineableQElement_3_013_01_4_abde04c6b8616bd2551b24ac1abade563}} 
 \index{oomph::RefineableQElement$<$ 3 $>$@{oomph::RefineableQElement$<$ 3 $>$}!oc\_hang\_helper@{oc\_hang\_helper}}
@@ -419,11 +414,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_013_00_01I
 
 
 
-Definition at line 2059 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 2142 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
-References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+basis(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+node\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Finite\+Element\+::s\+\_\+max(), oomph\+::\+Finite\+Element\+::s\+\_\+min(), oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), oomph\+::\+Oc\+Tree\+Names\+::U, and oomph\+::\+Node\+::x().
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Refineable\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+basis(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+node\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Finite\+Element\+::s\+\_\+max(), oomph\+::\+Finite\+Element\+::s\+\_\+min(), oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt(), oomph\+::\+Oc\+Tree\+Names\+::U, and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_013_01_4_ae80b5899ce103e76f1ccea34d371c2ed}\label{classoomph_1_1RefineableQElement_3_013_01_4_ae80b5899ce103e76f1ccea34d371c2ed}} 
 \index{oomph::RefineableQElement$<$ 3 $>$@{oomph::RefineableQElement$<$ 3 $>$}!octree\_pt@{octree\_pt}}
@@ -437,7 +432,7 @@ Pointer to octree representation of this element.
 
 
 
-Definition at line 148 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 150 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_013_01_4_a58e295694d08140d1060f79005129fb9}\label{classoomph_1_1RefineableQElement_3_013_01_4_a58e295694d08140d1060f79005129fb9}} 
 \index{oomph::RefineableQElement$<$ 3 $>$@{oomph::RefineableQElement$<$ 3 $>$}!octree\_pt@{octree\_pt}}
@@ -451,7 +446,7 @@ Pointer to octree representation of this element.
 
 
 
-Definition at line 151 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 156 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_013_01_4_aa8ea5cf2c9fee8ff9a1c52505e736bbb}\label{classoomph_1_1RefineableQElement_3_013_01_4_aa8ea5cf2c9fee8ff9a1c52505e736bbb}} 
 \index{oomph::RefineableQElement$<$ 3 $>$@{oomph::RefineableQElement$<$ 3 $>$}!output\_corners@{output\_corners}}
@@ -487,7 +482,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a9761852271f
 
 
 
-Definition at line 110 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 108 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_013_01_4_a8e9be85046f3898ece0a328512392ca8}\label{classoomph_1_1RefineableQElement_3_013_01_4_a8e9be85046f3898ece0a328512392ca8}} 
 \index{oomph::RefineableQElement$<$ 3 $>$@{oomph::RefineableQElement$<$ 3 $>$}!setup\_father\_bounds@{setup\_father\_bounds}}
@@ -505,7 +500,7 @@ Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type)=\{R
 
 so that node nnode\+\_\+son in element of type son\+\_\+type lies on boundary/vertex Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type) in its father element. If the node doesn\textquotesingle{}t lie on a boundary the value is O\+M\+E\+GA. 
 
-Definition at line 130 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 126 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
@@ -523,7 +518,7 @@ Internal helper function that is used to construct the hanging node schemes for 
 
 Internal function that sets up the hanging node scheme for a particular value 
 
-Definition at line 2040 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 2124 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
@@ -547,7 +542,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a54806551f79
 
 
 
-Definition at line 2013 of file refineable\+\_\+brick\+\_\+element.\+cc.
+Definition at line 2097 of file refineable\+\_\+brick\+\_\+element.\+cc.
 
 
 
@@ -564,12 +559,11 @@ References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oom
 
 
 
-Coincidence between son nodal points and father boundaries\+: ~\newline
- Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type)=\{R\+U/\+R\+F/\+R\+D/\+R\+B/.../ O\+M\+E\+GA\} so that node nnode\+\_\+son in element of type son\+\_\+type lies on boundary/vertex Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type) in its father element. If the node doesn\textquotesingle{}t lie on a boundary the value is O\+M\+E\+GA. 
+Coincidence between son nodal points and father boundaries\+: Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type)=\{R\+U/\+R\+F/\+R\+D/\+R\+B/.../ O\+M\+E\+GA\} so that node nnode\+\_\+son in element of type son\+\_\+type lies on boundary/vertex Father\+\_\+bound\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type) in its father element. If the node doesn\textquotesingle{}t lie on a boundary the value is O\+M\+E\+GA. 
 
 Static matrix for coincidence between son nodal points and father boundaries 
 
-Definition at line 171 of file refineable\+\_\+brick\+\_\+element.\+h.
+Definition at line 178 of file refineable\+\_\+brick\+\_\+element.\+h.
 
 
 

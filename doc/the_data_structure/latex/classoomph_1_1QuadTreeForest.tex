@@ -46,7 +46,7 @@ void \mbox{\hyperlink{classoomph_1_1QuadTreeForest_a835592b97a235b8dd31ea54d440b
 \doxysubsection{Detailed Description}
 A \mbox{\hyperlink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}} consists of a collection of Quad\+Tree\+Roots. Each member tree can have neighbours to its S/\+W/\+N/E and the orientation of their compasses can differ, allowing for complex, unstructured meshes. 
 
-Definition at line 402 of file quadtree.\+h.
+Definition at line 420 of file quadtree.\+h.
 
 
 
@@ -63,7 +63,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line 407 of file quadtree.\+h.
+Definition at line 424 of file quadtree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QuadTreeForest_adc6e1e5e288d06b519c3eb3a3fcbdb7a}\label{classoomph_1_1QuadTreeForest_adc6e1e5e288d06b519c3eb3a3fcbdb7a}} 
 \index{oomph::QuadTreeForest@{oomph::QuadTreeForest}!QuadTreeForest@{QuadTreeForest}}
@@ -82,10 +82,9 @@ Pass\+:
 \item trees\+\_\+pt\mbox{[}\mbox{]}, the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the constituent trees (\mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} objects)
 \end{DoxyItemize}
 
-Note that the pointers to the neighbour\textquotesingle{}s of each tree must have been allocated before the constructor is called, otherwise the relative rotation scheme will not be constructed correctly. ~\newline
- 
+Note that the pointers to the neighbour\textquotesingle{}s of each tree must have been allocated before the constructor is called, otherwise the relative rotation scheme will not be constructed correctly. 
 
-Definition at line 842 of file quadtree.\+cc.
+Definition at line 863 of file quadtree.\+cc.
 
 
 
@@ -103,7 +102,7 @@ Broken copy constructor.
 
 
 
-Definition at line 420 of file quadtree.\+h.
+Definition at line 438 of file quadtree.\+h.
 
 
 
@@ -121,7 +120,7 @@ Destructor\+: Delete the constituent quadtrees (and thus the objects associated 
 
 
 
-Definition at line 433 of file quadtree.\+h.
+Definition at line 451 of file quadtree.\+h.
 
 
 
@@ -142,7 +141,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeForest_a0e6a7f821d9f14374c6d23d876
 
 
 
-Definition at line 1223 of file quadtree.\+cc.
+Definition at line 1245 of file quadtree.\+cc.
 
 
 
@@ -160,7 +159,7 @@ Construct the rotation schemes.
 
 Construct the rotation scheme for the quadtree forest. Note that all pointers to neighbours must have been allocated for this to work. 
 
-Definition at line 1045 of file quadtree.\+cc.
+Definition at line 1067 of file quadtree.\+cc.
 
 
 
@@ -182,7 +181,7 @@ Construct the neighbour lookup scheme.
 
 Setup the neighbour lookup schemes for all constituent quadtrees. 
 
-Definition at line 870 of file quadtree.\+cc.
+Definition at line 891 of file quadtree.\+cc.
 
 
 
@@ -209,7 +208,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeForest_a635443274eaa2fb1afa889e4e7
 
 
 
-Definition at line 1296 of file quadtree.\+cc.
+Definition at line 1318 of file quadtree.\+cc.
 
 
 
@@ -227,7 +226,7 @@ Broken assignment operator.
 
 
 
-Definition at line 426 of file quadtree.\+h.
+Definition at line 444 of file quadtree.\+h.
 
 
 
@@ -245,7 +244,7 @@ Given the number i of the root quadtree in this forest, return pointer to its ne
 
 
 
-Definition at line 470 of file quadtree.\+h.
+Definition at line 489 of file quadtree.\+h.
 
 
 
@@ -261,10 +260,9 @@ Referenced by construct\+\_\+north\+\_\+equivalents().
 \doxysubsubsection{\texorpdfstring{quadtree\_pt()}{quadtree\_pt()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}}$\ast$ oomph\+::\+Quad\+Tree\+Forest\+::quadtree\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Return pointer to i-\/th root quadtree in this forest. (Performs a dynamic cast from the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}}). ~\newline
- 
+Return pointer to i-\/th root quadtree in this forest. (Performs a dynamic cast from the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}}). 
 
-Definition at line 463 of file quadtree.\+h.
+Definition at line 480 of file quadtree.\+h.
 
 
 
@@ -286,7 +284,7 @@ Self-\/test\+: Check all neighbours. Return success (0) if the max. distance bet
 
 Self test\+: Check neighbour finding routine. For each element in the tree and for each vertex, determine the distance between the vertex and its position in the neigbour. If the difference is less than \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}. return success (0), otherwise failure (1) 
 
-Definition at line 1334 of file quadtree.\+cc.
+Definition at line 1357 of file quadtree.\+cc.
 
 
 

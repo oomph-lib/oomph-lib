@@ -73,7 +73,7 @@ class \mbox{\hyperlink{classoomph_1_1DenseLU_a6140531810d729d53113b6ac65193197}{
 \doxysubsection{Detailed Description}
 Dense LU decomposition-\/based solve of full assembled linear system. V\+E\+RY inefficient but useful to illustrate the principle. Only suitable for use with Serial matrices and vectors. This solver will only work with non-\/distributed matrices and vectors (note\+: \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} is not distributable) 
 
-Definition at line 319 of file linear\+\_\+solver.\+h.
+Definition at line 339 of file linear\+\_\+solver.\+h.
 
 
 
@@ -90,7 +90,7 @@ Constructor, initialise storage.
 
 
 
-Definition at line 327 of file linear\+\_\+solver.\+h.
+Definition at line 346 of file linear\+\_\+solver.\+h.
 
 
 
@@ -108,7 +108,7 @@ Broken copy constructor.
 
 
 
-Definition at line 337 of file linear\+\_\+solver.\+h.
+Definition at line 358 of file linear\+\_\+solver.\+h.
 
 
 
@@ -126,7 +126,7 @@ Destructor, clean up the stored LU factors.
 
 
 
-Definition at line 349 of file linear\+\_\+solver.\+h.
+Definition at line 370 of file linear\+\_\+solver.\+h.
 
 
 
@@ -147,7 +147,7 @@ Do the backsubstitution step to solve the system LU result = rhs.
 
 Do the backsubstitution for the \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} solver. W\+A\+R\+N\+I\+NG\+: this class does not perform any P\+A\+R\+A\+N\+O\+ID checks on the vectors -\/ these are all performed in the solve(...) method. 
 
-Definition at line 309 of file linear\+\_\+solver.\+cc.
+Definition at line 317 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -169,7 +169,7 @@ perform back substitution using \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$
 
 Do the backsubstitution for the \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} solver. W\+A\+R\+N\+I\+NG\+: this class does not perform any P\+A\+R\+A\+N\+O\+ID checks on the vectors -\/ these are all performed in the solve(...) method. So, if you call backsub directly, you have been warned... 
 
-Definition at line 362 of file linear\+\_\+solver.\+cc.
+Definition at line 369 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -239,7 +239,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a0fedfb9d9855d0e9
 
 
 
-Definition at line 370 of file linear\+\_\+solver.\+h.
+Definition at line 394 of file linear\+\_\+solver.\+h.
 
 
 
@@ -261,7 +261,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3c66f77db812a9c1
 
 
 
-Definition at line 377 of file linear\+\_\+solver.\+h.
+Definition at line 401 of file linear\+\_\+solver.\+h.
 
 
 
@@ -279,7 +279,7 @@ Broken assignment operator.
 
 
 
-Definition at line 343 of file linear\+\_\+solver.\+h.
+Definition at line 364 of file linear\+\_\+solver.\+h.
 
 
 
@@ -305,7 +305,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FD__LU_ab8c9d6006352d0ea61a721b9
 
 
 
-Definition at line 410 of file linear\+\_\+solver.\+cc.
+Definition at line 416 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -331,7 +331,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc8
 
 
 
-Definition at line 525 of file linear\+\_\+solver.\+cc.
+Definition at line 536 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -357,7 +357,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FD__LU_a6fd251bef9cdb7efbed4927f
 
 
 
-Definition at line 53 of file linear\+\_\+solver.\+cc.
+Definition at line 51 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -382,7 +382,7 @@ The \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} cl
 
 
 
-Definition at line 322 of file linear\+\_\+solver.\+h.
+Definition at line 342 of file linear\+\_\+solver.\+h.
 
 
 
@@ -399,7 +399,7 @@ Pointer to storage for the index of permutations in the LU solve.
 
 
 
-Definition at line 410 of file linear\+\_\+solver.\+h.
+Definition at line 431 of file linear\+\_\+solver.\+h.
 
 
 
@@ -417,7 +417,7 @@ Jacobian setup time.
 
 
 
-Definition at line 398 of file linear\+\_\+solver.\+h.
+Definition at line 420 of file linear\+\_\+solver.\+h.
 
 
 
@@ -435,7 +435,7 @@ Pointer to storage for the LU decomposition.
 
 
 
-Definition at line 413 of file linear\+\_\+solver.\+h.
+Definition at line 434 of file linear\+\_\+solver.\+h.
 
 
 
@@ -453,7 +453,7 @@ Sign of the determinant of the matrix (obtained during the LU decomposition)
 
 
 
-Definition at line 405 of file linear\+\_\+solver.\+h.
+Definition at line 427 of file linear\+\_\+solver.\+h.
 
 
 
@@ -471,7 +471,7 @@ Solution time.
 
 
 
-Definition at line 401 of file linear\+\_\+solver.\+h.
+Definition at line 423 of file linear\+\_\+solver.\+h.
 
 
 

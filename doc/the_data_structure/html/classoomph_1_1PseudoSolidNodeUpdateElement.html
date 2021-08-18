@@ -183,8 +183,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6f5600cb23d1e26816ae36ae8195c01e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the derivatives of the BASIC equations w.r.t. the solid position dofs.  <a href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a6f5600cb23d1e26816ae36ae8195c01e">More...</a><br /></td></tr>
 <tr class="separator:a6f5600cb23d1e26816ae36ae8195c01e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfbae74b4fefc2a3916bb792fbde4fa0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoSolidNodeUpdateElement.html#adfbae74b4fefc2a3916bb792fbde4fa0">identify_geometric_data</a> (std::set&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> * &gt; &amp;geometric_data_pt)</td></tr>
-<tr class="memdesc:adfbae74b4fefc2a3916bb792fbde4fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that affects the geometry of the element by adding the position <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> to the set that's passed in. (This functionality is required in FSI problems; set is used to avoid double counting). <br  />
-  <a href="classoomph_1_1PseudoSolidNodeUpdateElement.html#adfbae74b4fefc2a3916bb792fbde4fa0">More...</a><br /></td></tr>
+<tr class="memdesc:adfbae74b4fefc2a3916bb792fbde4fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that affects the geometry of the element by adding the position <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> to the set that's passed in. (This functionality is required in FSI problems; set is used to avoid double counting).  <a href="classoomph_1_1PseudoSolidNodeUpdateElement.html#adfbae74b4fefc2a3916bb792fbde4fa0">More...</a><br /></td></tr>
 <tr class="separator:adfbae74b4fefc2a3916bb792fbde4fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41addbcf4a1ed2711e24632c8a122dcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a41addbcf4a1ed2711e24632c8a122dcb">output</a> (std::ostream &amp;outfile)</td></tr>
 <tr class="memdesc:a41addbcf4a1ed2711e24632c8a122dcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the output function: Call that of the basic element.  <a href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a41addbcf4a1ed2711e24632c8a122dcb">More...</a><br /></td></tr>
@@ -224,9 +223,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a20d4f8be49920f8599b60981b1b1775f"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a20d4f8be49920f8599b60981b1b1775f">nsolid_dof_types</a> () const</td></tr>
 <tr class="memdesc:a20d4f8be49920f8599b60981b1b1775f"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the number of DOF types associated with the SOLID elements in this combined element  <a href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a20d4f8be49920f8599b60981b1b1775f">More...</a><br /></td></tr>
 <tr class="separator:a20d4f8be49920f8599b60981b1b1775f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18101610910f61e68da44e0fedf68c2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a18101610910f61e68da44e0fedf68c2c">get_dof_numbers_for_unknowns</a> (std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;dof_lookup_list) const</td></tr>
-<tr class="memdesc:a18101610910f61e68da44e0fedf68c2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF type" that this unknown is associated with. This method combines the get_dof_numbers_for_unknowns(...) method for the BASIC and SOLID elements. The basic elements retain their DOF type numbering and the SOLID elements DOF type numbers are incremented by <a class="el" href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a6fbeab78f1f6ebe9fc76625d88009e61" title="return the number of DOF types associated with the BASIC elements in this combined element">nbasic_dof_types()</a>.  <a href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a18101610910f61e68da44e0fedf68c2c">More...</a><br /></td></tr>
-<tr class="separator:a18101610910f61e68da44e0fedf68c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7ba53196a8fc9505da30341943384a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoSolidNodeUpdateElement.html#ae7ba53196a8fc9505da30341943384a3">get_dof_numbers_for_unknowns</a> (std::list&lt; std::pair&lt; unsigned long, unsigned &gt;&gt; &amp;dof_lookup_list) const</td></tr>
+<tr class="memdesc:ae7ba53196a8fc9505da30341943384a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF type" that this unknown is associated with. This method combines the get_dof_numbers_for_unknowns(...) method for the BASIC and SOLID elements. The basic elements retain their DOF type numbering and the SOLID elements DOF type numbers are incremented by <a class="el" href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a6fbeab78f1f6ebe9fc76625d88009e61" title="return the number of DOF types associated with the BASIC elements in this combined element">nbasic_dof_types()</a>.  <a href="classoomph_1_1PseudoSolidNodeUpdateElement.html#ae7ba53196a8fc9505da30341943384a3">More...</a><br /></td></tr>
+<tr class="separator:ae7ba53196a8fc9505da30341943384a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -240,7 +239,7 @@ class oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;</h3>
 
 <p>A templated class that permits combination two different element types, for the solution of problems in deforming domains. The first template paremter BASIC is the standard element and the second SOLID solves the equations that are used to control the mesh deformation. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00058">58</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00055">55</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afd44332410c5956938614b5899f85cb8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd44332410c5956938614b5899f85cb8">&#9670;&nbsp;</a></span>PseudoSolidNodeUpdateElement()</h2>
@@ -269,9 +268,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Constructor, call the BASIC and SOLID elements' constructors and set the "density" parameter for solid element to zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00069">69</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00065">65</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8cc_source.html#l00039">oomph::PseudoSolidHelper::Zero</a>.</p>
+<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8cc_source.html#l00035">oomph::PseudoSolidHelper::Zero</a>.</p>
 
 </div>
 </div>
@@ -326,7 +325,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Plot the error when compared against a given exact flux. Also calculates the norm of the error and that of the exact flux. Use version in BASIC element. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00434">434</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00463">463</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -358,7 +357,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Compute norm of solution: use the version in the BASIC class if there's any ambiguity. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00092">92</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00088">88</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -400,7 +399,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data::describe_dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem::describe_dofs(...) </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00083">83</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00079">79</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -431,9 +430,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Evaluate shape derivatives by chain rule. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00166">166</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00167">167</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00063">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::Shape_derivs_by_direct_fd</a>.</p>
+<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00060">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::Shape_derivs_by_direct_fd</a>.</p>
 
 </div>
 </div>
@@ -464,9 +463,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Evaluate shape derivatives by direct finite differencing. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00162">162</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00161">161</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00063">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::Shape_derivs_by_direct_fd</a>.</p>
+<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00060">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::Shape_derivs_by_direct_fd</a>.</p>
 
 </div>
 </div>
@@ -508,9 +507,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Final override for jacobian function: Contributions are included from both the underlying element types. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00131">131</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00129">129</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt.html#af81c63b6a6a317202ae084901ea01119">fill_in_contribution_to_jacobian()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00172">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#af81c63b6a6a317202ae084901ea01119">fill_in_contribution_to_jacobian()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00175">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
 
 </div>
 </div>
@@ -558,9 +557,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Final override for mass matrix function: contributions are included from both the underlying element types. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00145">145</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00143">143</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00490">oomph::fill_in_contribution_to_jacobian_and_mass_matrix()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00172">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00552">oomph::fill_in_contribution_to_jacobian_and_mass_matrix()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00175">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
 
 </div>
 </div>
@@ -592,7 +591,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Final override for the residuals function. Contributions are added from both underlying element types. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00121">121</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00119">119</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="the__data__structure_8txt.html#a74a99b2ddb5919974c6edd5550b6d953">fill_in_contribution_to_residuals()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
 
@@ -626,11 +625,11 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Fill in the shape derivatives of the BASIC equations w.r.t. the solid position dofs. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00172">172</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00175">175</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00240">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives_by_fd()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00063">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::Shape_derivs_by_direct_fd</a>.</p>
+<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00246">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives_by_fd()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00060">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::Shape_derivs_by_direct_fd</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00131">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00145">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_contribution_to_jacobian_and_mass_matrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00129">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00143">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_contribution_to_jacobian_and_mass_matrix()</a>.</p>
 
 </div>
 </div>
@@ -662,16 +661,16 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Fill in the derivatives of the BASIC equations w.r.t. the solid position dofs. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00240">240</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00246">246</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="the__data__structure_8txt.html#a74a99b2ddb5919974c6edd5550b6d953">fill_in_contribution_to_residuals()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00172">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00175">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives()</a>.</p>
 
 </div>
 </div>
-<a id="a18101610910f61e68da44e0fedf68c2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18101610910f61e68da44e0fedf68c2c">&#9670;&nbsp;</a></span>get_dof_numbers_for_unknowns()</h2>
+<a id="ae7ba53196a8fc9505da30341943384a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7ba53196a8fc9505da30341943384a3">&#9670;&nbsp;</a></span>get_dof_numbers_for_unknowns()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -684,7 +683,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1PseudoSolidNodeUpdateElement.html">oomph::PseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::get_dof_numbers_for_unknowns </td>
           <td>(</td>
-          <td class="paramtype">std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::list&lt; std::pair&lt; unsigned long, unsigned &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_lookup_list</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -698,9 +697,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF type" that this unknown is associated with. This method combines the get_dof_numbers_for_unknowns(...) method for the BASIC and SOLID elements. The basic elements retain their DOF type numbering and the SOLID elements DOF type numbers are incremented by <a class="el" href="classoomph_1_1PseudoSolidNodeUpdateElement.html#a6fbeab78f1f6ebe9fc76625d88009e61" title="return the number of DOF types associated with the BASIC elements in this combined element">nbasic_dof_types()</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00492">492</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00528">528</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00472">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::nbasic_dof_types()</a>.</p>
+<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00508">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::nbasic_dof_types()</a>.</p>
 
 </div>
 </div>
@@ -741,7 +740,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 </div><div class="memdoc">
 <p>'Flux' vector for Z2 error estimation: Error estimation is based on error in BASIC element </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00445">445</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00474">474</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
@@ -773,10 +772,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Specify <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that affects the geometry of the element by adding the position <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> to the set that's passed in. (This functionality is required in FSI problems; set is used to avoid double counting). <br  />
- </p>
+<p>Specify <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that affects the geometry of the element by adding the position <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> to the set that's passed in. (This functionality is required in FSI problems; set is used to avoid double counting). </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00399">399</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00415">415</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -807,9 +805,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>return the number of DOF types associated with the BASIC elements in this combined element </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00472">472</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00508">508</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00492">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::get_dof_numbers_for_unknowns()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00528">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::get_dof_numbers_for_unknowns()</a>.</p>
 
 </div>
 </div>
@@ -840,7 +838,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>The number of "DOF types" that degrees of freedom in this element are sub-divided into. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00465">465</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00501">501</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -871,7 +869,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Order of recovery shape functions for Z2 error estimation: Done for BASIC element since it determines the refinement. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00460">460</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00493">493</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -902,7 +900,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>return the number of DOF types associated with the SOLID elements in this combined element </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00479">479</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00515">515</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -933,7 +931,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Number of 'flux' terms for Z2 error estimation: Error estimation is based on error in BASIC element. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00428">428</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00454">454</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -964,7 +962,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Number of vertex nodes in the element. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00451">451</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00480">480</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -996,9 +994,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Overload the output function: Call that of the basic element. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00420">420</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00441">441</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00160">oomph::output()</a>.</p>
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00166">oomph::output()</a>.</p>
 
 </div>
 </div>
@@ -1040,9 +1038,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Output function is just the same as the basic equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00423">423</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00447">447</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00160">oomph::output()</a>.</p>
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00166">oomph::output()</a>.</p>
 
 </div>
 </div>
@@ -1074,9 +1072,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Overload the output function: Call that of the basic element. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00412">412</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00428">428</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00160">oomph::output()</a>.</p>
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00166">oomph::output()</a>.</p>
 
 </div>
 </div>
@@ -1118,9 +1116,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Output function: Plot at n_p plot points using the basic element's output function. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00416">416</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00435">435</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00160">oomph::output()</a>.</p>
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00166">oomph::output()</a>.</p>
 
 </div>
 </div>
@@ -1152,7 +1150,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>The required number of values is the sum of the two. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00098">98</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00094">94</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>.</p>
 
@@ -1185,7 +1183,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>We assume that the solid stuff is stored at the end of the nodes, i.e. its index is the number of continuously interplated values in the BASIC equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00104">104</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00102">102</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -1217,7 +1215,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Pointer to the j-th vertex node in the element. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00455">455</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00486">486</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
 </div>
 </div>
@@ -1246,9 +1244,9 @@ template&lt;class BASIC , class SOLID &gt; </div>
 
 <p>Boolean flag to indicate shape derivative method. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00063">63</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00060">60</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00166">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::evaluate_shape_derivs_by_chain_rule()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00162">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::evaluate_shape_derivs_by_direct_fd()</a>, and <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00172">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00167">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::evaluate_shape_derivs_by_chain_rule()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00161">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::evaluate_shape_derivs_by_direct_fd()</a>, and <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00175">oomph::PseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives()</a>.</p>
 
 </div>
 </div>
@@ -1283,7 +1281,7 @@ template&lt;class BASIC , class SOLID &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:56:27
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:39:17
         </div>
       </div>
     </footer>

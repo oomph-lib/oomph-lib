@@ -26,13 +26,12 @@ unsigned \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_ada42257a8f26546b4
 void \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a1042b589f6b086f5485214057f255678}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector\+: i.\+e. the flux constraint. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a7b7d3a32fcad5b06fe6a49f05f2c01a9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals, but adds nothing to the Jacobian as this element\textquotesingle{}s Jacobian contributions are calculated by the Navier\+Stokes\+Flux\+Control\+Elements which impose the traction used to control the flux. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This function returns the residuals, but adds nothing to the Jacobian as this element\textquotesingle{}s Jacobian contributions are calculated by the Navier\+Stokes\+Flux\+Control\+Elements which impose the traction used to control the flux. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a16809a8ad123ba41f826d9e920aba9e0}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into -\/ it\textquotesingle{}s set to Dof\+\_\+number\+\_\+for\+\_\+unknown+1 because it\textquotesingle{}s expected this element is added to a fluid mesh containing navier stokes elements. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a43142408a4d2cea51b26d0c641bb0f51}{dof\+\_\+number\+\_\+for\+\_\+unknown}} ()
 \begin{DoxyCompactList}\small\item\em Function to set / get the nodal value of the \char`\"{}\+D\+O\+F type\char`\"{} to which the degree of freedom in this element (the pressure that enforces the required volume flux!) is added to. This should be set to the Navier-\/\+Stokes pressure D\+OF type (usually the dimension of the problem, for example, in 3D, the D\+OF types for single-\/physics Navier-\/\+Stokes elements are usually labelled 0, 1, 2, 3 for u, v and w velocities and pressure respectively. It is important to note that this is dimension dependent, so should not be hard coded in!! In particularly, this should not simply be set to the dimension of the problem if there is further splitting of the velocity D\+OF types) if this element is added to a fluid mesh containing Navier-\/\+Stokes elements. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_ac4eedd635a016d29fd9e6da5ae0f8707}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a2dc0b16e8ee37a63a38957c1f17383c6}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) The single degree of freedom is given the D\+OF type number of Dof\+\_\+number\+\_\+for\+\_\+unknown since it\textquotesingle{}s expected this unknown is added to the Navier-\/\+Stokes pressure D\+OF block (it is also assumed that the user has set the Dof\+\_\+number\+\_\+for\+\_\+unknown variable to the velocity D\+OF type using the function \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a43142408a4d2cea51b26d0c641bb0f51}{dof\+\_\+number\+\_\+for\+\_\+unknown()}}). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -58,7 +57,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a1ae25acba7d703f73
 \doxysubsection{Detailed Description}
 A class for an element that controls the net fluid flux across a boundary by the imposition of an unknown applied pressure to the Navier-\/\+Stokes equations. This element is used with a mesh of \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element}} elements which are attached to the boundary. Note\+: \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a7b7d3a32fcad5b06fe6a49f05f2c01a9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}} does not calculate Jacobian contributions for this element as they are calculated by Navier\+Stokes\+Flux\+Control\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...) 
 
-Definition at line 107 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 103 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -75,7 +74,7 @@ Constructor takes a mesh of \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierSto
 
 
 
-Definition at line 115 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 110 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -93,7 +92,7 @@ Empty Destructor -\/ \mbox{\hyperlink{classoomph_1_1Data}{Data}} gets deleted au
 
 
 
-Definition at line 152 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 148 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a3ee9cdd9d404f577db1d18bf4c5e1ae1}\label{classoomph_1_1NetFluxControlElement_a3ee9cdd9d404f577db1d18bf4c5e1ae1}} 
 \index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!NetFluxControlElement@{NetFluxControlElement}}
@@ -107,7 +106,7 @@ Broken copy constructor.
 
 
 
-Definition at line 155 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 151 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -128,7 +127,7 @@ Broken assignment operator.
 
 Spatial dimension of the problem 
 
-Definition at line 172 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 169 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -146,7 +145,7 @@ Function to set / get the nodal value of the \char`\"{}\+D\+O\+F type\char`\"{} 
 
 
 
-Definition at line 234 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 236 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -160,8 +159,7 @@ References Dof\+\_\+number\+\_\+for\+\_\+unknown.
 
 
 
-This function returns the residuals, but adds nothing to the Jacobian as this element\textquotesingle{}s Jacobian contributions are calculated by the Navier\+Stokes\+Flux\+Control\+Elements which impose the traction used to control the flux. ~\newline
- 
+This function returns the residuals, but adds nothing to the Jacobian as this element\textquotesingle{}s Jacobian contributions are calculated by the Navier\+Stokes\+Flux\+Control\+Elements which impose the traction used to control the flux. 
 
 
 
@@ -169,7 +167,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 192 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 195 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -191,7 +189,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 182 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 185 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -209,7 +207,7 @@ This function returns the residuals for the flux control master element.
 
 
 
-Definition at line 276 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 280 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -219,11 +217,11 @@ References e, oomph\+::\+Mesh\+::element\+\_\+pt(), Flux\+\_\+control\+\_\+mesh\
 
 Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_ac4eedd635a016d29fd9e6da5ae0f8707}\label{classoomph_1_1NetFluxControlElement_ac4eedd635a016d29fd9e6da5ae0f8707}} 
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a2dc0b16e8ee37a63a38957c1f17383c6}\label{classoomph_1_1NetFluxControlElement_a2dc0b16e8ee37a63a38957c1f17383c6}} 
 \index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Net\+Flux\+Control\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Net\+Flux\+Control\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -231,15 +229,15 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a63f6761cad384044fae2c8339422c9df}{oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_afe708ff5fde07d527f4868f8e7272101}{oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}}.
 
 
 
-Definition at line 246 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 251 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -265,7 +263,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersle
 
 
 
-Definition at line 204 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 207 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -304,7 +302,7 @@ spatial dim of NS system
 
 
 
-Definition at line 334 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 336 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -322,7 +320,7 @@ The id number of the \char`\"{}\+D\+O\+F type\char`\"{} to which the degree of f
 
 
 
-Definition at line 331 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 333 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -340,7 +338,7 @@ Referenced by dof\+\_\+number\+\_\+for\+\_\+unknown(), get\+\_\+dof\+\_\+numbers
 
 
 
-Definition at line 321 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 323 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -358,7 +356,7 @@ Pointer to the value that stores the prescribed flux.
 
 
 
-Definition at line 324 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 326 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -376,7 +374,7 @@ Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flu
 
 
 
-Definition at line 317 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 319 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 

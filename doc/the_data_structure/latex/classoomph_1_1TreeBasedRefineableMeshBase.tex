@@ -58,9 +58,9 @@ unsigned \& \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a18bf2291
 unsigned \& \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_af3974421171e1bb10daf6864f0749675}{min\+\_\+refinement\+\_\+level}} ()
 \begin{DoxyCompactList}\small\item\em Access fct for min. permissible refinement level (relative to base mesh) \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a957a33d2b7dd59f8789f4d0e9c6357c2}{max\+\_\+p\+\_\+refinement\+\_\+level}} ()
-\begin{DoxyCompactList}\small\item\em Access fct for max. permissible p-\/refinement level (relative to base mesh) \end{DoxyCompactList}\item 
+\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a42486bb8abcb77663adc361eaa442a3b}{min\+\_\+p\+\_\+refinement\+\_\+level}} ()
-\begin{DoxyCompactList}\small\item\em Access fct for min. permissible p-\/refinement level (relative to base mesh) \end{DoxyCompactList}\item 
+\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_acef8ac2f0f2cffe938031db1499c598b}{adapt\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&\mbox{\hyperlink{classoomph_1_1RefineableMeshBase_a266f8b2a1499cc2ae7b24b19813923ee}{doc\+\_\+info}})
 \begin{DoxyCompactList}\small\item\em Perform the actual tree-\/based mesh adaptation, documenting the progress in the directory specified in \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a64608ddedb7eb56e11bee2805aa01360}{adapt\+\_\+mesh}} ()
@@ -87,15 +87,15 @@ virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a937e432
 \begin{DoxyCompactList}\small\item\em Get max/min refinement levels in mesh. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a0d5d1cfce0db7953c21eef213049c433}{get\+\_\+elements\+\_\+at\+\_\+refinement\+\_\+level}} (unsigned \&refinement\+\_\+level, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$ $>$ \&level\+\_\+elements)
 \begin{DoxyCompactList}\small\item\em Extract the elements at a particular refinement level in the refinement pattern -\/ used in Mesh\+::redistribute or whatever it\textquotesingle{}s going to be called (Refineable\+Mesh\+Base\+::reduce\+\_\+halo\+\_\+layers or something) \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a6dba989c0d0735d8fe34ceb231425401}{get\+\_\+refinement\+\_\+pattern}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&to\+\_\+be\+\_\+refined)
+virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_ae61cbe29fa2aa644af32e73854d5cab3}{get\+\_\+refinement\+\_\+pattern}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&to\+\_\+be\+\_\+refined)
 \begin{DoxyCompactList}\small\item\em Extract refinement pattern\+: Consider the hypothetical mesh obtained by truncating the refinement of the current mesh to a given level (where {\ttfamily level=0} is the un-\/refined base mesh). To advance to the next refinement level, we need to refine (split) the {\ttfamily to\+\_\+be\+\_\+refined}\mbox{[}level\mbox{]}.size() elements identified by the element numbers contained in {\ttfamily vector} to\+\_\+be\+\_\+refined\mbox{[}level\mbox{]}\mbox{[}...\mbox{]}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a77c2eb2c650ba34c79cf3b156204ee3b}{refine\+\_\+base\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&to\+\_\+be\+\_\+refined)
+void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a13548e57b680c5e7466d1deeb8f12ff0}{refine\+\_\+base\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&to\+\_\+be\+\_\+refined)
 \begin{DoxyCompactList}\small\item\em Refine base mesh according to specified refinement pattern. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a5753ea33897c77342d00644bef86ba74}{refine}} (std\+::ifstream \&restart\+\_\+file)
 \begin{DoxyCompactList}\small\item\em Refine mesh according to refinement pattern in restart file. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a2398683f533e5ba0960fbbe9ff545fb2}{dump\+\_\+refinement}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Dump refinement pattern to allow for rebuild. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a0c601c4e58e2d7dcfe587739f17e44e9}{read\+\_\+refinement}} (std\+::ifstream \&restart\+\_\+file, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&to\+\_\+be\+\_\+refined)
+virtual void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a429d5beeb3c44d4310647c805883ea30}{read\+\_\+refinement}} (std\+::ifstream \&restart\+\_\+file, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&to\+\_\+be\+\_\+refined)
 \begin{DoxyCompactList}\small\item\em Read refinement pattern to allow for rebuild. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a1ee27bd5bd3c2eded38103b9161af719}{uniform\+\_\+refinement\+\_\+level\+\_\+when\+\_\+pruned}} () const
 \begin{DoxyCompactList}\small\item\em Level to which the mesh was uniformly refined when it was pruned (const version) \end{DoxyCompactList}\item 
@@ -143,7 +143,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_abd9b33d333c
 \doxysubsection{Detailed Description}
 Base class for tree-\/based refineable meshes. 
 
-Definition at line 341 of file refineable\+\_\+mesh.\+h.
+Definition at line 381 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -160,7 +160,7 @@ Constructor.
 
 
 
-Definition at line 347 of file refineable\+\_\+mesh.\+h.
+Definition at line 385 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -178,7 +178,7 @@ Broken copy constructor.
 
 
 
-Definition at line 373 of file refineable\+\_\+mesh.\+h.
+Definition at line 411 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -196,7 +196,7 @@ Empty Destructor\+:
 
 
 
-Definition at line 385 of file refineable\+\_\+mesh.\+h.
+Definition at line 423 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -233,11 +233,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_a
 
 
 
-Definition at line 311 of file refineable\+\_\+mesh.\+cc.
+Definition at line 307 of file refineable\+\_\+mesh.\+cc.
 
 
 
-References adapt\+\_\+mesh(), classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), oomph\+::\+Mesh\+::\+Comm\+\_\+pt, oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Refineable\+Element\+::deselect\+\_\+for\+\_\+refinement(), oomph\+::\+Doc\+Info\+::disable\+\_\+doc(), oomph\+::\+Refineable\+Mesh\+Base\+::doc\+\_\+info(), oomph\+::\+Refineable\+Mesh\+Base\+::doc\+\_\+info\+\_\+pt(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt(), oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Tree\+::is\+\_\+leaf(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Oc\+Tree\+Names\+::\+L\+DB, oomph\+::\+Refineable\+Mesh\+Base\+::max\+\_\+keep\+\_\+unrefined(), oomph\+::\+Refineable\+Mesh\+Base\+::max\+\_\+permitted\+\_\+error(), max\+\_\+refinement\+\_\+level(), oomph\+::\+Refineable\+Mesh\+Base\+::min\+\_\+permitted\+\_\+error(), min\+\_\+refinement\+\_\+level(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Refineable\+Mesh\+Base\+::\+Nrefined, oomph\+::\+Refineable\+Mesh\+Base\+::nrefinement\+\_\+overruled(), oomph\+::\+Tree\+::nsons(), oomph\+::\+Refineable\+Mesh\+Base\+::\+Nunrefined, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Refineable\+Element\+::refinement\+\_\+is\+\_\+enabled(), oomph\+::\+Refineable\+Element\+::refinement\+\_\+level(), oomph\+::\+Mesh\+::reorder\+\_\+nodes(), oomph\+::\+Refineable\+Element\+::select\+\_\+for\+\_\+refinement(), oomph\+::\+Tree\+::son\+\_\+pt(), oomph\+::\+Tree\+::son\+\_\+type(), and oomph\+::\+Refineable\+Element\+::tree\+\_\+pt().
+References adapt\+\_\+mesh(), classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), oomph\+::\+Mesh\+::\+Comm\+\_\+pt, oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Refineable\+Element\+::deselect\+\_\+for\+\_\+refinement(), oomph\+::\+Refineable\+Element\+::deselect\+\_\+sons\+\_\+for\+\_\+unrefinement(), oomph\+::\+Doc\+Info\+::disable\+\_\+doc(), oomph\+::\+Refineable\+Mesh\+Base\+::doc\+\_\+info(), oomph\+::\+Refineable\+Mesh\+Base\+::doc\+\_\+info\+\_\+pt(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt(), oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Tree\+::is\+\_\+leaf(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Oc\+Tree\+Names\+::\+L\+DB, oomph\+::\+Refineable\+Mesh\+Base\+::max\+\_\+keep\+\_\+unrefined(), oomph\+::\+Refineable\+Mesh\+Base\+::max\+\_\+permitted\+\_\+error(), max\+\_\+refinement\+\_\+level(), oomph\+::\+Refineable\+Mesh\+Base\+::min\+\_\+permitted\+\_\+error(), min\+\_\+refinement\+\_\+level(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Refineable\+Mesh\+Base\+::\+Nrefined, oomph\+::\+Refineable\+Mesh\+Base\+::nrefinement\+\_\+overruled(), oomph\+::\+Tree\+::nsons(), oomph\+::\+Refineable\+Mesh\+Base\+::\+Nunrefined, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Refineable\+Element\+::refinement\+\_\+is\+\_\+enabled(), oomph\+::\+Refineable\+Element\+::refinement\+\_\+level(), oomph\+::\+Mesh\+::reorder\+\_\+nodes(), oomph\+::\+Refineable\+Element\+::select\+\_\+for\+\_\+refinement(), oomph\+::\+Refineable\+Element\+::select\+\_\+sons\+\_\+for\+\_\+unrefinement(), oomph\+::\+Tree\+::son\+\_\+pt(), oomph\+::\+Tree\+::son\+\_\+type(), and oomph\+::\+Refineable\+Element\+::tree\+\_\+pt().
 
 
 
@@ -255,7 +255,7 @@ Perform the actual tree-\/based mesh adaptation. A simple wrapper to call the fu
 
 
 
-Definition at line 473 of file refineable\+\_\+mesh.\+h.
+Definition at line 528 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -331,11 +331,11 @@ can be viewed with
 \end{DoxyItemize}
 \end{DoxyItemize}Update the boundary element info -- this can be a costly procedure and for this reason the mesh writer might have decided not to set up this scheme. If so, we won\textquotesingle{}t change this and suppress its creation...
 
-Definition at line 894 of file refineable\+\_\+mesh.\+cc.
+Definition at line 926 of file refineable\+\_\+mesh.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt(), oomph\+::\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), oomph\+::\+Tree\+Forest\+::close\+\_\+hanging\+\_\+node\+\_\+files(), complete\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+::deactivate\+\_\+object(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Doc\+Info\+::directory(), oomph\+::\+Global\+\_\+timings\+::\+Doc\+\_\+comprehensive\+\_\+timings, oomph\+::\+Refineable\+Mesh\+Base\+::doc\+\_\+info(), e, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), Forest\+\_\+pt, oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::get\+\_\+x\+\_\+and\+\_\+xi(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Data\+::is\+\_\+pinned(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Mesh\+::\+Lookup\+\_\+for\+\_\+elements\+\_\+next\+\_\+boundary\+\_\+is\+\_\+setup, oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Refineable\+Mesh\+Base\+::max\+\_\+error(), oomph\+::\+Refineable\+Element\+::max\+\_\+integrity\+\_\+tolerance(), oomph\+::\+Tree\+::merge\+\_\+sons\+\_\+if\+\_\+required(), n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+element(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Tree\+Forest\+::ntree(), oomph\+::\+Data\+::ntstorage(), oomph\+::\+Doc\+Info\+::number(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), position, oomph\+::\+Node\+::position(), oomph\+::\+Mesh\+::prune\+\_\+dead\+\_\+nodes(), oomph\+::\+Node\+::raw\+\_\+value(), oomph\+::\+Mesh\+::reorder\+\_\+nodes(), s, oomph\+::\+Node\+::set\+\_\+non\+\_\+obsolete(), oomph\+::\+Node\+::set\+\_\+nonhanging(), oomph\+::\+Node\+::set\+\_\+obsolete(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Mesh\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), split\+\_\+elements\+\_\+if\+\_\+required(), oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector(), t, oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Tree\+::traverse\+\_\+all(), oomph\+::\+Tree\+Forest\+::tree\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::undeformed\+\_\+macro\+\_\+elem\+\_\+pt(), oomph\+::\+Node\+::value(), values, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
+References oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt(), oomph\+::\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), oomph\+::\+Tree\+Forest\+::close\+\_\+hanging\+\_\+node\+\_\+files(), complete\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+::deactivate\+\_\+object(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Doc\+Info\+::directory(), oomph\+::\+Global\+\_\+timings\+::\+Doc\+\_\+comprehensive\+\_\+timings, oomph\+::\+Refineable\+Mesh\+Base\+::doc\+\_\+info(), e, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), Forest\+\_\+pt, oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::get\+\_\+x\+\_\+and\+\_\+xi(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Data\+::is\+\_\+pinned(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Mesh\+::\+Lookup\+\_\+for\+\_\+elements\+\_\+next\+\_\+boundary\+\_\+is\+\_\+setup, oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Refineable\+Mesh\+Base\+::max\+\_\+error(), oomph\+::\+Refineable\+Element\+::max\+\_\+integrity\+\_\+tolerance(), oomph\+::\+Tree\+::merge\+\_\+sons\+\_\+if\+\_\+required(), n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+element(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Tree\+Forest\+::ntree(), oomph\+::\+Data\+::ntstorage(), oomph\+::\+Doc\+Info\+::number(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), position, oomph\+::\+Node\+::position(), oomph\+::\+Mesh\+::prune\+\_\+dead\+\_\+nodes(), oomph\+::\+Node\+::raw\+\_\+value(), oomph\+::\+Mesh\+::reorder\+\_\+nodes(), s, oomph\+::\+Node\+::set\+\_\+non\+\_\+obsolete(), oomph\+::\+Node\+::set\+\_\+nonhanging(), oomph\+::\+Node\+::set\+\_\+obsolete(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Mesh\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), split\+\_\+elements\+\_\+if\+\_\+required(), oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector(), t, oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Tree\+::traverse\+\_\+all(), oomph\+::\+Tree\+::traverse\+\_\+all\+\_\+but\+\_\+leaves(), oomph\+::\+Tree\+Forest\+::tree\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::undeformed\+\_\+macro\+\_\+elem\+\_\+pt(), oomph\+::\+Node\+::value(), values, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
 
 \mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_a59d0404f8e5ebd7199f25c794c5c715c}\label{classoomph_1_1TreeBasedRefineableMeshBase_a59d0404f8e5ebd7199f25c794c5c715c}} 
 \index{oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}!additional\_synchronise\_hanging\_nodes@{additional\_synchronise\_hanging\_nodes}}
@@ -346,6 +346,10 @@ References oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt(), oomph\+::\+Tree\+
 Additional synchronisation of hanging nodes Required for reconcilliation of hanging nodes on the outer edge of the halo layer when using elements with nonuniformly spaced nodes Must be implemented in templated derived class because E\+L\+E\+M\+E\+NT template parameter is required for the node-\/creation functions in the \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions}{Missing\+\_\+masters\+\_\+functions}} namespace 
 
 Implemented in \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_a1af8d6a53048bd0d376f6a56bbd4c125}{oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_a1af8d6a53048bd0d376f6a56bbd4c125}{oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$}}.
+
+
+
+Referenced by synchronise\+\_\+hanging\+\_\+nodes().
 
 \mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_a0f155de75a38d3356fb925629c3ae7ad}\label{classoomph_1_1TreeBasedRefineableMeshBase_a0f155de75a38d3356fb925629c3ae7ad}} 
 \index{oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}!classify\_halo\_and\_haloed\_nodes@{classify\_halo\_and\_haloed\_nodes}}
@@ -363,7 +367,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_af2a6ebabea8704acadffb735
 
 
 
-Definition at line 653 of file refineable\+\_\+mesh.\+h.
+Definition at line 710 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -381,7 +385,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a595cfa652d75d9fbfc72a825
 
 
 
-Definition at line 591 of file refineable\+\_\+mesh.\+h.
+Definition at line 646 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -403,7 +407,7 @@ Complete the hanging node scheme recursively.
 
 Complete the hanging node scheme recursively. After the initial markup scheme, hanging nodes can depend on other hanging nodes ---$>$ A\+A\+A\+A\+A\+A\+A\+A\+A\+R\+G\+H! Need to translate this into a scheme where all hanging nodes only depend on non-\/hanging nodes... 
 
-Definition at line 2228 of file refineable\+\_\+mesh.\+cc.
+Definition at line 2271 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -425,7 +429,7 @@ Auxiliary routine for recursive hanging node completion.
 
 Given a node, return a vector of pointers to master nodes and a vector of the associated weights. This is done recursively, so if a node is not hanging, the node is regarded as its own master node which has weight 1.\+0. 
 
-Definition at line 2170 of file refineable\+\_\+mesh.\+cc.
+Definition at line 2214 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -451,7 +455,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableMeshBase_a9f54bbde6f
 
 
 
-Definition at line 437 of file refineable\+\_\+mesh.\+h.
+Definition at line 478 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -469,7 +473,7 @@ Dump refinement pattern to allow for rebuild.
 
 Dump refinement pattern to allow for rebuild 
 
-Definition at line 219 of file refineable\+\_\+mesh.\+cc.
+Definition at line 218 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -487,7 +491,7 @@ Return pointer to the Forest represenation of the mesh.
 
 
 
-Definition at line 433 of file refineable\+\_\+mesh.\+h.
+Definition at line 471 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -509,7 +513,7 @@ Extract the elements at a particular refinement level in the refinement pattern 
 
 Extract the elements at a particular refinement level in the refinement pattern (used in Mesh\+::redistribute or whatever it\textquotesingle{}s going to be called (Refineable\+Mesh\+Base\+::reduce\+\_\+halo\+\_\+layers or something) 
 
-Definition at line 114 of file refineable\+\_\+mesh.\+cc.
+Definition at line 113 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -531,7 +535,7 @@ Get max/min refinement levels in mesh.
 
 Get max/min refinement level. 
 
-Definition at line 797 of file refineable\+\_\+mesh.\+cc.
+Definition at line 830 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -541,11 +545,11 @@ References e, oomph\+::\+Mesh\+::element\+\_\+pt(), level, max\+\_\+refinement\+
 
 Referenced by oomph\+::\+Problem\+::load\+\_\+balance(), oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Problem\+::read(), refine\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh(), refine\+\_\+base\+\_\+mesh(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
 
-\mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_a6dba989c0d0735d8fe34ceb231425401}\label{classoomph_1_1TreeBasedRefineableMeshBase_a6dba989c0d0735d8fe34ceb231425401}} 
+\mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_ae61cbe29fa2aa644af32e73854d5cab3}\label{classoomph_1_1TreeBasedRefineableMeshBase_ae61cbe29fa2aa644af32e73854d5cab3}} 
 \index{oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}!get\_refinement\_pattern@{get\_refinement\_pattern}}
 \index{get\_refinement\_pattern@{get\_refinement\_pattern}!oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}}
 \doxysubsubsection{\texorpdfstring{get\_refinement\_pattern()}{get\_refinement\_pattern()}}
-{\footnotesize\ttfamily void oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::get\+\_\+refinement\+\_\+pattern (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&}]{to\+\_\+be\+\_\+refined }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::get\+\_\+refinement\+\_\+pattern (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&}]{to\+\_\+be\+\_\+refined }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -553,7 +557,7 @@ Extract refinement pattern\+: Consider the hypothetical mesh obtained by truncat
 
 Get refinement pattern of mesh\+: Consider the hypothetical mesh obtained by truncating the refinement of the current mesh to a given level (where {\ttfamily level=0} is the un-\/refined base mesh). To advance to the next refinement level, we need to refine (split) the {\ttfamily to\+\_\+be\+\_\+refined}\mbox{[}level\mbox{]}.size() elements identified by the element numbers contained in {\ttfamily vector} to\+\_\+be\+\_\+refined\mbox{[}level\mbox{]}\mbox{[}...\mbox{]} 
 
-Definition at line 51 of file refineable\+\_\+mesh.\+cc.
+Definition at line 50 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -569,13 +573,9 @@ Referenced by dump\+\_\+refinement(), oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+el
 \doxysubsubsection{\texorpdfstring{max\_p\_refinement\_level()}{max\_p\_refinement\_level()}}
 {\footnotesize\ttfamily unsigned\& oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::max\+\_\+p\+\_\+refinement\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
-
 Access fct for max. permissible p-\/refinement level (relative to base mesh) 
 
-
-
-Definition at line 462 of file refineable\+\_\+mesh.\+h.
+Definition at line 510 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -597,7 +597,7 @@ Access fct for max. permissible refinement level (relative to base mesh)
 
 
 
-Definition at line 456 of file refineable\+\_\+mesh.\+h.
+Definition at line 497 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -613,13 +613,9 @@ Referenced by adapt(), and get\+\_\+refinement\+\_\+levels().
 \doxysubsubsection{\texorpdfstring{min\_p\_refinement\_level()}{min\_p\_refinement\_level()}}
 {\footnotesize\ttfamily unsigned\& oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::min\+\_\+p\+\_\+refinement\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
-
 Access fct for min. permissible p-\/refinement level (relative to base mesh) 
 
-
-
-Definition at line 465 of file refineable\+\_\+mesh.\+h.
+Definition at line 517 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -637,7 +633,7 @@ Access fct for min. permissible refinement level (relative to base mesh)
 
 
 
-Definition at line 459 of file refineable\+\_\+mesh.\+h.
+Definition at line 503 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -659,7 +655,7 @@ Broken assignment operator.
 
 
 
-Definition at line 379 of file refineable\+\_\+mesh.\+h.
+Definition at line 417 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -686,7 +682,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableMeshBase_a03222065e7
 
 
 
-Definition at line 3829 of file refineable\+\_\+mesh.\+cc.
+Definition at line 3951 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -704,7 +700,7 @@ Perform the actual tree-\/based mesh p-\/adaptation. A simple wrapper to call th
 
 
 
-Definition at line 489 of file refineable\+\_\+mesh.\+h.
+Definition at line 544 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -776,11 +772,11 @@ can be viewed with
 \end{DoxyItemize}
 \end{DoxyItemize}Update the boundary element info -- this can be a costly procedure and for this reason the mesh writer might have decided not to set up this scheme. If so, we won\textquotesingle{}t change this and suppress its creation...
 
-Definition at line 4288 of file refineable\+\_\+mesh.\+cc.
+Definition at line 4433 of file refineable\+\_\+mesh.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt(), oomph\+::\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), oomph\+::\+Tree\+Forest\+::close\+\_\+hanging\+\_\+node\+\_\+files(), complete\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+::deactivate\+\_\+object(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+P\+Refineable\+Element\+::deselect\+\_\+for\+\_\+p\+\_\+refinement(), oomph\+::\+P\+Refineable\+Element\+::deselect\+\_\+for\+\_\+p\+\_\+unrefinement(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Doc\+Info\+::directory(), oomph\+::\+Global\+\_\+timings\+::\+Doc\+\_\+comprehensive\+\_\+timings, oomph\+::\+Refineable\+Mesh\+Base\+::doc\+\_\+info(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), forest\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::get\+\_\+x\+\_\+and\+\_\+xi(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Data\+::is\+\_\+pinned(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Mesh\+::\+Lookup\+\_\+for\+\_\+elements\+\_\+next\+\_\+boundary\+\_\+is\+\_\+setup, oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Refineable\+Mesh\+Base\+::max\+\_\+error(), oomph\+::\+Refineable\+Element\+::max\+\_\+integrity\+\_\+tolerance(), n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+element(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Tree\+Forest\+::ntree(), oomph\+::\+Data\+::ntstorage(), oomph\+::\+Doc\+Info\+::number(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), p\+\_\+refine\+\_\+elements\+\_\+if\+\_\+required(), position, oomph\+::\+Node\+::position(), oomph\+::\+Mesh\+::prune\+\_\+dead\+\_\+nodes(), oomph\+::\+Node\+::raw\+\_\+value(), oomph\+::\+Mesh\+::reorder\+\_\+nodes(), s, oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Node\+::set\+\_\+non\+\_\+obsolete(), oomph\+::\+Node\+::set\+\_\+nonhanging(), oomph\+::\+Node\+::set\+\_\+obsolete(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Mesh\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector(), t, oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Tree\+Forest\+::tree\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::undeformed\+\_\+macro\+\_\+elem\+\_\+pt(), oomph\+::\+Node\+::value(), values, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
+References oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt(), oomph\+::\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), oomph\+::\+Tree\+Forest\+::close\+\_\+hanging\+\_\+node\+\_\+files(), complete\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+::deactivate\+\_\+object(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+P\+Refineable\+Element\+::deselect\+\_\+for\+\_\+p\+\_\+refinement(), oomph\+::\+P\+Refineable\+Element\+::deselect\+\_\+for\+\_\+p\+\_\+unrefinement(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Doc\+Info\+::directory(), oomph\+::\+Global\+\_\+timings\+::\+Doc\+\_\+comprehensive\+\_\+timings, oomph\+::\+Refineable\+Mesh\+Base\+::doc\+\_\+info(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), forest\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::get\+\_\+x\+\_\+and\+\_\+xi(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Data\+::is\+\_\+pinned(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Mesh\+::\+Lookup\+\_\+for\+\_\+elements\+\_\+next\+\_\+boundary\+\_\+is\+\_\+setup, oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Refineable\+Mesh\+Base\+::max\+\_\+error(), oomph\+::\+Refineable\+Element\+::max\+\_\+integrity\+\_\+tolerance(), n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+element(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Tree\+Forest\+::ntree(), oomph\+::\+Data\+::ntstorage(), oomph\+::\+Doc\+Info\+::number(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), p\+\_\+refine\+\_\+elements\+\_\+if\+\_\+required(), position, oomph\+::\+Node\+::position(), oomph\+::\+Mesh\+::prune\+\_\+dead\+\_\+nodes(), oomph\+::\+Node\+::raw\+\_\+value(), oomph\+::\+Mesh\+::reorder\+\_\+nodes(), s, oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Node\+::set\+\_\+non\+\_\+obsolete(), oomph\+::\+Node\+::set\+\_\+nonhanging(), oomph\+::\+Node\+::set\+\_\+obsolete(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Mesh\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector(), t, oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Tree\+::traverse\+\_\+all(), oomph\+::\+Tree\+Forest\+::tree\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::undeformed\+\_\+macro\+\_\+elem\+\_\+pt(), oomph\+::\+Node\+::value(), values, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
 
 \mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_a9a2f26f447d6386505bdbdd0ac518321}\label{classoomph_1_1TreeBasedRefineableMeshBase_a9a2f26f447d6386505bdbdd0ac518321}} 
 \index{oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}!p\_refine\_elements\_if\_required@{p\_refine\_elements\_if\_required}}
@@ -812,7 +808,7 @@ p-\/refine mesh by refining the elements identified by their pointers.
 
 
 
-Definition at line 5125 of file refineable\+\_\+mesh.\+cc.
+Definition at line 5304 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -830,7 +826,7 @@ p-\/refine mesh by refining the elements identified by their numbers.
 
 
 
-Definition at line 5083 of file refineable\+\_\+mesh.\+cc.
+Definition at line 5264 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -852,7 +848,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableMeshBase_a648a6fd1b1
 
 
 
-Definition at line 416 of file refineable\+\_\+mesh.\+h.
+Definition at line 454 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -874,7 +870,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableMeshBase_a443bfce758
 
 
 
-Definition at line 1737 of file refineable\+\_\+mesh.\+cc.
+Definition at line 1790 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -892,17 +888,17 @@ p-\/unrefine mesh uniformly
 
 p-\/unrefine mesh uniformly Unlike in h-\/refinement, we can simply p-\/unrefine each element in the mesh 
 
-Definition at line 5059 of file refineable\+\_\+mesh.\+cc.
+Definition at line 5240 of file refineable\+\_\+mesh.\+cc.
 
 
 
 References oomph\+::\+Refineable\+Mesh\+Base\+::doc\+\_\+info(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::nelement(), p\+\_\+adapt\+\_\+mesh(), and oomph\+::\+P\+Refineable\+Element\+::select\+\_\+for\+\_\+p\+\_\+unrefinement().
 
-\mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_a0c601c4e58e2d7dcfe587739f17e44e9}\label{classoomph_1_1TreeBasedRefineableMeshBase_a0c601c4e58e2d7dcfe587739f17e44e9}} 
+\mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_a429d5beeb3c44d4310647c805883ea30}\label{classoomph_1_1TreeBasedRefineableMeshBase_a429d5beeb3c44d4310647c805883ea30}} 
 \index{oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}!read\_refinement@{read\_refinement}}
 \index{read\_refinement@{read\_refinement}!oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}}
 \doxysubsubsection{\texorpdfstring{read\_refinement()}{read\_refinement()}}
-{\footnotesize\ttfamily void oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::read\+\_\+refinement (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{restart\+\_\+file,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&}]{to\+\_\+be\+\_\+refined }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::read\+\_\+refinement (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{restart\+\_\+file,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&}]{to\+\_\+be\+\_\+refined }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -910,7 +906,7 @@ Read refinement pattern to allow for rebuild.
 
 Read refinement pattern to allow for rebuild 
 
-Definition at line 252 of file refineable\+\_\+mesh.\+cc.
+Definition at line 251 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -932,7 +928,7 @@ Refine mesh according to refinement pattern in restart file.
 
 Refine base mesh according to refinement pattern in restart file. 
 
-Definition at line 202 of file refineable\+\_\+mesh.\+cc.
+Definition at line 201 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -950,17 +946,17 @@ Refine mesh once so that its topology etc becomes that of the (finer!) reference
 
 Refine mesh once so that its topology etc becomes that of the (finer!) reference mesh -- if possible! Useful for meshes in multigrid hierarchies. If the meshes are too different and the conversion cannot be performed, the code dies (provided P\+A\+R\+A\+N\+O\+ID is enabled). 
 
-Definition at line 1898 of file refineable\+\_\+mesh.\+cc.
+Definition at line 1947 of file refineable\+\_\+mesh.\+cc.
 
 
 
-References e, oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), forest\+\_\+pt(), get\+\_\+refinement\+\_\+levels(), i, oomph\+::\+Tree\+::is\+\_\+leaf(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Tree\+::nsons(), oomph\+::oomph\+\_\+info, oomph\+::\+Mesh\+::output(), oomph\+::pause(), refine\+\_\+selected\+\_\+elements(), oomph\+::\+Tree\+::son\+\_\+pt(), and oomph\+::\+Node\+::x().
+References e, oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), forest\+\_\+pt(), get\+\_\+refinement\+\_\+levels(), i, oomph\+::\+Tree\+::is\+\_\+leaf(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Tree\+::nsons(), oomph\+::oomph\+\_\+info, oomph\+::\+Mesh\+::output(), oomph\+::pause(), refine\+\_\+selected\+\_\+elements(), oomph\+::\+Tree\+::son\+\_\+pt(), oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector(), and oomph\+::\+Node\+::x().
 
-\mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_a77c2eb2c650ba34c79cf3b156204ee3b}\label{classoomph_1_1TreeBasedRefineableMeshBase_a77c2eb2c650ba34c79cf3b156204ee3b}} 
+\mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_a13548e57b680c5e7466d1deeb8f12ff0}\label{classoomph_1_1TreeBasedRefineableMeshBase_a13548e57b680c5e7466d1deeb8f12ff0}} 
 \index{oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}!refine\_base\_mesh@{refine\_base\_mesh}}
 \index{refine\_base\_mesh@{refine\_base\_mesh}!oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}}
 \doxysubsubsection{\texorpdfstring{refine\_base\_mesh()}{refine\_base\_mesh()}}
-{\footnotesize\ttfamily void oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+base\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&}]{to\+\_\+be\+\_\+refined }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+base\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&}]{to\+\_\+be\+\_\+refined }\end{DoxyParamCaption})}
 
 
 
@@ -968,7 +964,7 @@ Refine base mesh according to specified refinement pattern.
 
 Refine original, unrefined mesh according to specified refinement pattern (relative to original, unrefined mesh). 
 
-Definition at line 140 of file refineable\+\_\+mesh.\+cc.
+Definition at line 137 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -990,7 +986,7 @@ Refine base mesh to same degree as reference mesh (relative to original unrefine
 
 Refine to same degree as the reference mesh. 
 
-Definition at line 1836 of file refineable\+\_\+mesh.\+cc.
+Definition at line 1885 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -1008,11 +1004,15 @@ Refine base mesh to same degree as reference mesh minus one level of refinement 
 
 Refine to same degree as the reference mesh minus one. Useful function for multigrid solvers; allows the easy copy of a mesh to the level of refinement just below the current one. Returns a boolean variable which indicates if the reference mesh has not been refined at all. 
 
-Definition at line 1858 of file refineable\+\_\+mesh.\+cc.
+Definition at line 1907 of file refineable\+\_\+mesh.\+cc.
 
 
 
 References get\+\_\+refinement\+\_\+pattern(), and refine\+\_\+base\+\_\+mesh().
+
+
+
+Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+hierarchy(), and oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+hierarchy().
 
 \mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMeshBase_a6d88d6365af7f92bf766b73b115bcf3f}\label{classoomph_1_1TreeBasedRefineableMeshBase_a6d88d6365af7f92bf766b73b115bcf3f}} 
 \index{oomph::TreeBasedRefineableMeshBase@{oomph::TreeBasedRefineableMeshBase}!refine\_selected\_elements@{refine\_selected\_elements}}
@@ -1026,7 +1026,7 @@ Refine mesh by splitting the elements identified by their pointers.
 
 Refine mesh by splitting the elements identified by their pointers 
 
-Definition at line 1801 of file refineable\+\_\+mesh.\+cc.
+Definition at line 1852 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -1044,7 +1044,7 @@ Refine mesh by splitting the elements identified by their numbers.
 
 Refine mesh by splitting the elements identified by their numbers. 
 
-Definition at line 1763 of file refineable\+\_\+mesh.\+cc.
+Definition at line 1816 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -1074,7 +1074,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_a
 
 
 
-Definition at line 407 of file refineable\+\_\+mesh.\+h.
+Definition at line 445 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -1100,7 +1100,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_a
 
 
 
-Definition at line 1718 of file refineable\+\_\+mesh.\+cc.
+Definition at line 1772 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -1158,11 +1158,11 @@ Synchronise the hanging nodes if the mesh is distributed.
 
 Deal with nodes that are hanging on one process but not another (i.\+e. the hanging status of the haloed and halo layers disagrees) 
 
-Definition at line 2333 of file refineable\+\_\+mesh.\+cc.
+Definition at line 2375 of file refineable\+\_\+mesh.\+cc.
 
 
 
-References oomph\+::\+Global\+\_\+timings\+::\+Doc\+\_\+comprehensive\+\_\+timings, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Hang\+\_\+pt, oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::icont, oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Master\+\_\+node\+\_\+index, oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), n, oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Node\+\_\+pt, oomph\+::\+Data\+::non\+\_\+halo\+\_\+proc\+\_\+\+I\+D(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Sending\+\_\+processor, oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Shared\+\_\+node\+\_\+id\+\_\+on\+\_\+sending\+\_\+processor, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Shared\+\_\+node\+\_\+proc, oomph\+::\+Timing\+Helpers\+::timer(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Weight.
+References additional\+\_\+synchronise\+\_\+hanging\+\_\+nodes(), oomph\+::\+Mesh\+::\+Comm\+\_\+pt, oomph\+::\+Global\+\_\+timings\+::\+Doc\+\_\+comprehensive\+\_\+timings, oomph\+::\+Mesh\+::halo\+\_\+node\+\_\+pt(), oomph\+::\+Mesh\+::haloed\+\_\+node\+\_\+pt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Hang\+\_\+pt, oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::icont, oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Master\+\_\+node\+\_\+index, oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), n, oomph\+::\+Mesh\+::nhalo\+\_\+node(), oomph\+::\+Mesh\+::nhaloed\+\_\+node(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Node\+\_\+pt, oomph\+::\+Data\+::non\+\_\+halo\+\_\+proc\+\_\+\+I\+D(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Sending\+\_\+processor, oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Shared\+\_\+node\+\_\+id\+\_\+on\+\_\+sending\+\_\+processor, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Shared\+\_\+node\+\_\+proc, oomph\+::\+Mesh\+::\+Shared\+\_\+node\+\_\+pt, oomph\+::\+Mesh\+::shared\+\_\+node\+\_\+pt(), oomph\+::\+Timing\+Helpers\+::timer(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct\+::\+Weight.
 
 
 
@@ -1176,7 +1176,7 @@ Referenced by classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes().
 
 Synchronise the positions of non-\/hanging nodes that depend on non-\/existent neighbours (e.\+g. h-\/refinement of neighbouring elements with different p-\/orders where the shared edge is on the outer edge of the halo layer) 
 
-Definition at line 3559 of file refineable\+\_\+mesh.\+cc.
+Definition at line 3650 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -1198,7 +1198,7 @@ Level to which the mesh was uniformly refined when it was pruned.
 
 
 
-Definition at line 581 of file refineable\+\_\+mesh.\+h.
+Definition at line 636 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -1216,7 +1216,7 @@ Level to which the mesh was uniformly refined when it was pruned (const version)
 
 
 
-Definition at line 574 of file refineable\+\_\+mesh.\+h.
+Definition at line 629 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -1242,7 +1242,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableMeshBase_a5bbd5c85e7c5c9e75c
 
 
 
-Definition at line 2103 of file refineable\+\_\+mesh.\+cc.
+Definition at line 2150 of file refineable\+\_\+mesh.\+cc.
 
 
 
@@ -1267,7 +1267,7 @@ Forest representation of the mesh.
 
 
 
-Definition at line 723 of file refineable\+\_\+mesh.\+h.
+Definition at line 779 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -1285,7 +1285,7 @@ Max. permissible p-\/refinement level (relative to base mesh)
 
 
 
-Definition at line 717 of file refineable\+\_\+mesh.\+h.
+Definition at line 773 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -1303,7 +1303,7 @@ Max. permissible refinement level (relative to base mesh)
 
 
 
-Definition at line 711 of file refineable\+\_\+mesh.\+h.
+Definition at line 767 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -1321,7 +1321,7 @@ Min. permissible p-\/refinement level (relative to base mesh)
 
 
 
-Definition at line 720 of file refineable\+\_\+mesh.\+h.
+Definition at line 776 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -1339,7 +1339,7 @@ Min. permissible refinement level (relative to base mesh)
 
 
 
-Definition at line 714 of file refineable\+\_\+mesh.\+h.
+Definition at line 770 of file refineable\+\_\+mesh.\+h.
 
 
 
@@ -1357,7 +1357,7 @@ Level to which the mesh was uniformly refined when it was pruned.
 
 
 
-Definition at line 708 of file refineable\+\_\+mesh.\+h.
+Definition at line 764 of file refineable\+\_\+mesh.\+h.
 
 
 

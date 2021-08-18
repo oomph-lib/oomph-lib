@@ -44,7 +44,7 @@ void \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_a01845fafe6ef29f11226bf11e0
 \doxysubsection{Detailed Description}
 A \mbox{\hyperlink{classoomph_1_1BinaryTreeForest}{Binary\+Tree\+Forest}} consists of a collection of Binary\+Tree\+Roots. Each member tree can have neighbours to its left and right. 
 
-Definition at line 289 of file binary\+\_\+tree.\+h.
+Definition at line 297 of file binary\+\_\+tree.\+h.
 
 
 
@@ -61,7 +61,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line 295 of file binary\+\_\+tree.\+h.
+Definition at line 301 of file binary\+\_\+tree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a534e8527d8701034afb5a8d6ab343de2}\label{classoomph_1_1BinaryTreeForest_a534e8527d8701034afb5a8d6ab343de2}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!BinaryTreeForest@{BinaryTreeForest}}
@@ -80,7 +80,7 @@ Pass\+:
 \item trees\+\_\+pt\mbox{[}\mbox{]}, the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the constituent trees (\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} objects) 
 \end{DoxyItemize}
 
-Definition at line 435 of file binary\+\_\+tree.\+cc.
+Definition at line 438 of file binary\+\_\+tree.\+cc.
 
 
 
@@ -98,7 +98,7 @@ Broken copy constructor.
 
 
 
-Definition at line 308 of file binary\+\_\+tree.\+h.
+Definition at line 315 of file binary\+\_\+tree.\+h.
 
 
 
@@ -116,7 +116,7 @@ Destructor\+: Delete the constituent binary trees (and thus the objects associat
 
 
 
-Definition at line 321 of file binary\+\_\+tree.\+h.
+Definition at line 328 of file binary\+\_\+tree.\+h.
 
 
 
@@ -133,7 +133,7 @@ Given the number i of the root binary tree in this forest, return a pointer to i
 
 
 
-Definition at line 353 of file binary\+\_\+tree.\+h.
+Definition at line 363 of file binary\+\_\+tree.\+h.
 
 
 
@@ -147,7 +147,7 @@ References i.
 
 Return pointer to i-\/th root binary tree in this forest (performs a dynamic cast from the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}}). 
 
-Definition at line 346 of file binary\+\_\+tree.\+h.
+Definition at line 354 of file binary\+\_\+tree.\+h.
 
 
 
@@ -169,7 +169,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeForest_a0e6a7f821d9f14374c6d23d876
 
 
 
-Definition at line 543 of file binary\+\_\+tree.\+cc.
+Definition at line 548 of file binary\+\_\+tree.\+cc.
 
 
 
@@ -187,7 +187,7 @@ Construct the neighbour lookup scheme.
 
 Set up the neighbour lookup schemes for all constituent binary trees. 
 
-Definition at line 451 of file binary\+\_\+tree.\+cc.
+Definition at line 454 of file binary\+\_\+tree.\+cc.
 
 
 
@@ -213,7 +213,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeForest_a635443274eaa2fb1afa889e4e7
 
 
 
-Definition at line 330 of file binary\+\_\+tree.\+h.
+Definition at line 337 of file binary\+\_\+tree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a85517fbf448db0f571972d9c389ce6dd}\label{classoomph_1_1BinaryTreeForest_a85517fbf448db0f571972d9c389ce6dd}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!operator=@{operator=}}
@@ -227,7 +227,7 @@ Broken assignment operator.
 
 
 
-Definition at line 314 of file binary\+\_\+tree.\+h.
+Definition at line 321 of file binary\+\_\+tree.\+h.
 
 
 
@@ -245,7 +245,7 @@ Self-\/test\+: Check all neighbours. Return success (0) if the maximum distance 
 
 Self test\+: Check neighbour finding routine. For each element in the tree and for each vertex, determine the distance between the vertex and its position in the neighbour. If the difference is less than \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}} return success (0), otherwise failure (1). 
 
-Definition at line 620 of file binary\+\_\+tree.\+cc.
+Definition at line 624 of file binary\+\_\+tree.\+cc.
 
 
 

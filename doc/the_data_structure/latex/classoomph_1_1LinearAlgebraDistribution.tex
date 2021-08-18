@@ -91,7 +91,7 @@ std\+::ostream \& \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a30dc
 \doxysubsection{Detailed Description}
 Describes the distribution of a distributable linear algebra type object. Typically this is a container (such as a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}) or an operator (e.\+g \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} or \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}). This object is used in both serial and parallel implementations. In the serial context (no M\+PI) this just contains an integer indicating the number of rows. In parallel either each processor holds a subset of the set of global rows. (each processor contains only a single continuous block of rows -\/ parametised with variables denoting the first row and the number of local rows) or, all rows are be duplicated across all processors. In parallel this object also contains an \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} object which primarily contains the M\+P\+I\+\_\+\+Comm communicator associated with this object. 
 
-Definition at line 64 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 63 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -108,7 +108,7 @@ Default Constructor -\/ creates a Distribution that has not been setup.
 
 
 
-Definition at line 71 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 68 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_ae8714449bcd3d63c7bb7ebe7e6e01c7a}\label{classoomph_1_1LinearAlgebraDistribution_ae8714449bcd3d63c7bb7ebe7e6e01c7a}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!LinearAlgebraDistribution@{LinearAlgebraDistribution}}
@@ -122,7 +122,7 @@ Constructor. Takes the first\+\_\+row, nrow\+\_\+local (both for this processor)
 
 
 
-Definition at line 76 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 73 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -140,7 +140,7 @@ Constructor. Takes the number of global rows and uniformly distributes them over
 
 
 
-Definition at line 88 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 85 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -158,7 +158,7 @@ Constructor. Takes the first\+\_\+row, nrow\+\_\+local (both for this processor)
 
 
 
-Definition at line 99 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 96 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -176,7 +176,7 @@ Constructor. Takes the number of global rows and uniformly distributes them over
 
 
 
-Definition at line 111 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 108 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -194,7 +194,7 @@ Copy Constructor.
 
 
 
-Definition at line 120 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 117 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -212,7 +212,7 @@ pointer based copy constructor
 
 
 
-Definition at line 127 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 124 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -230,7 +230,7 @@ Destructor.
 
 
 
-Definition at line 134 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 131 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -251,7 +251,7 @@ Copy the argument distribution. Also a helper method for the =assignment operato
 
 helper method for the =assignment operator and copy constructor 
 
-Definition at line 218 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+Definition at line 226 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
 
 
 
@@ -269,7 +269,7 @@ Copy the argument distribution. Also a helper method for the =assignment operato
 
 
 
-Definition at line 168 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 165 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -287,7 +287,7 @@ Sets the distribution. Takes first\+\_\+row, nrow\+\_\+local and nrow as argumen
 
 Sets the distribution. Takes first\+\_\+row, local\+\_\+nrow and global\+\_\+nrow as arguments. If global\+\_\+nrow is not provided or equal to 0 then it is computed automatically 
 
-Definition at line 37 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+Definition at line 35 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
 
 
 
@@ -309,7 +309,7 @@ Build the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Alge
 
 Uniformly distribute global\+\_\+nrow over all processors where processors 0 holds approximately the first global\+\_\+nrow/n\+\_\+proc, processor 1 holds the next global\+\_\+nrow/n\+\_\+proc and so on... 
 
-Definition at line 166 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+Definition at line 176 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
 
 
 
@@ -323,7 +323,7 @@ References Comm\+\_\+pt, Distributed, First\+\_\+row, Nrow, and Nrow\+\_\+local.
 
 if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true 
 
-Definition at line 346 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 342 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -345,7 +345,7 @@ clears the distribution
 
 
 
-Definition at line 174 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 171 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -367,7 +367,7 @@ const access to the communicator pointer
 
 
 
-Definition at line 339 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 335 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -375,7 +375,7 @@ References Comm\+\_\+pt.
 
 
 
-Referenced by build(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd\+\_\+helper(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+C\+R\+Double\+Matrix\+::global\+\_\+matrix(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::interpolation\+\_\+matrix\+\_\+set(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::interpolation\+\_\+matrix\+\_\+set(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Double\+Vector\+::output(), oomph\+::\+Double\+Multi\+Vector\+::output(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::self\+\_\+test(), oomph\+::\+Matrix\+Vector\+Product\+::setup(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::setup(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+structures(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+structures(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+smoothers(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+smoothers(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::split(), and oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication().
+Referenced by build(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd\+\_\+helper(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+C\+R\+Double\+Matrix\+::global\+\_\+matrix(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::interpolation\+\_\+matrix\+\_\+set(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::interpolation\+\_\+matrix\+\_\+set(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), operator==(), oomph\+::\+Double\+Vector\+::output(), oomph\+::\+Double\+Multi\+Vector\+::output(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::self\+\_\+test(), oomph\+::\+Matrix\+Vector\+Product\+::setup(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::setup(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+structures(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+structures(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+smoothers(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+smoothers(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::split(), and oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication().
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a05842d032d28880ae37951deae804ad8}\label{classoomph_1_1LinearAlgebraDistribution_a05842d032d28880ae37951deae804ad8}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!distributed@{distributed}}
@@ -389,7 +389,7 @@ access function to the distributed -\/ indicates whether the distribution is ser
 
 
 
-Definition at line 333 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 329 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -397,7 +397,7 @@ References Distributed.
 
 
 
-Referenced by oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+serial(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose\+\_\+serial(), build(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd\+\_\+helper(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::operator$<$$<$(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Matrix\+Vector\+Product\+::setup(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
+Referenced by oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+serial(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose\+\_\+serial(), build(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd\+\_\+helper(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::operator$<$$<$(), operator==(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Matrix\+Vector\+Product\+::setup(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}\label{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!first\_row@{first\_row}}
@@ -411,7 +411,7 @@ access function for the first row on this processor. If not distributed then thi
 
 
 
-Definition at line 264 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 261 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -419,7 +419,7 @@ References Comm\+\_\+pt, Distributed, and First\+\_\+row.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), build(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::index\+\_\+in\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+dof\+\_\+number(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof(), oomph\+::operator$<$$<$(), oomph\+::\+Problem\+::parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), rank\+\_\+of\+\_\+global\+\_\+row(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), and oomph\+::\+C\+R\+Double\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset().
+Referenced by oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), build(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::index\+\_\+in\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+dof\+\_\+number(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof(), oomph\+::operator$<$$<$(), operator==(), oomph\+::\+Problem\+::parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), rank\+\_\+of\+\_\+global\+\_\+row(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), and oomph\+::\+C\+R\+Double\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset().
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a128e0a982fdbfd658b261981c9740b20}\label{classoomph_1_1LinearAlgebraDistribution_a128e0a982fdbfd658b261981c9740b20}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!first\_row@{first\_row}}
@@ -433,7 +433,7 @@ access function for the first row on the p-\/th processor
 
 
 
-Definition at line 293 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 289 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -451,7 +451,7 @@ return the first\+\_\+row \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}
 
 
 
-Definition at line 408 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 404 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -473,7 +473,7 @@ return the local index corresponding to the global index
 
 
 
-Definition at line 369 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 365 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -491,7 +491,7 @@ access function to the number of global rows.
 
 
 
-Definition at line 189 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 186 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -499,7 +499,7 @@ References Nrow.
 
 
 
-Referenced by oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::apply\+\_\+schur\+\_\+complement\+\_\+preconditioner(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed(), build(), oomph\+::\+Super\+L\+U\+Solver\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::operator$<$$<$(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block(), and oomph\+::\+Problem\+::synchronise\+\_\+eqn\+\_\+numbers().
+Referenced by oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::apply\+\_\+schur\+\_\+complement\+\_\+preconditioner(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed(), build(), oomph\+::\+Super\+L\+U\+Solver\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::operator$<$$<$(), operator==(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block(), and oomph\+::\+Problem\+::synchronise\+\_\+eqn\+\_\+numbers().
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}\label{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!nrow\_local@{nrow\_local}}
@@ -513,7 +513,7 @@ access function for the num of local rows on this processor. If no M\+PI then Nr
 
 
 
-Definition at line 196 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 193 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -521,7 +521,7 @@ References Comm\+\_\+pt, Distributed, Nrow, and Nrow\+\_\+local.
 
 
 
-Referenced by oomph\+::\+Problem\+::adapt(), oomph\+::\+Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse(), oomph\+::\+Problem\+::arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd\+\_\+helper(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Problem\+::get\+\_\+residuals(), oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt(), global\+\_\+to\+\_\+local\+\_\+row\+\_\+map(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::index\+\_\+in\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+dof\+\_\+number(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), oomph\+::operator$<$$<$(), oomph\+::\+Problem\+::parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), rank\+\_\+of\+\_\+global\+\_\+row(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Problem\+::restore\+\_\+dof\+\_\+values(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+block\+\_\+system(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Problem\+::store\+\_\+current\+\_\+dof\+\_\+values(), and oomph\+::\+Pitch\+Fork\+Handler\+::$\sim$\+Pitch\+Fork\+Handler().
+Referenced by oomph\+::\+Problem\+::adapt(), oomph\+::\+Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse(), oomph\+::\+Problem\+::arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd\+\_\+helper(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Problem\+::get\+\_\+residuals(), oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt(), global\+\_\+to\+\_\+local\+\_\+row\+\_\+map(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::index\+\_\+in\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+dof\+\_\+number(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), oomph\+::operator$<$$<$(), operator==(), oomph\+::\+Problem\+::parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), rank\+\_\+of\+\_\+global\+\_\+row(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Problem\+::restore\+\_\+dof\+\_\+values(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+block\+\_\+system(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Problem\+::store\+\_\+current\+\_\+dof\+\_\+values(), and oomph\+::\+Pitch\+Fork\+Handler\+::$\sim$\+Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_aa58810320f461524a5e1181be3477fe7}\label{classoomph_1_1LinearAlgebraDistribution_aa58810320f461524a5e1181be3477fe7}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!nrow\_local@{nrow\_local}}
@@ -535,7 +535,7 @@ access function for the num of local rows on this processor. If no M\+PI the nro
 
 
 
-Definition at line 225 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 222 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -553,7 +553,7 @@ return the nrow\+\_\+local \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}
 
 
 
-Definition at line 402 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 398 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -575,7 +575,7 @@ Referenced by build().
 
 
 
-Definition at line 359 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 355 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a0339adfd0ac99e1a443b7313063beaa9}\label{classoomph_1_1LinearAlgebraDistribution_a0339adfd0ac99e1a443b7313063beaa9}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!operator=@{operator=}}
@@ -589,7 +589,7 @@ Assignment Operator.
 
 
 
-Definition at line 140 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 137 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -607,11 +607,11 @@ References build().
 
 operator== 
 
-Definition at line 262 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+Definition at line 268 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
 
 
 
-References i.
+References Comm\+\_\+pt, communicator\+\_\+pt(), distributed(), Distributed, first\+\_\+row(), First\+\_\+row, i, nrow(), Nrow, nrow\+\_\+local(), and Nrow\+\_\+local.
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_acd5ffc5ff4b91a8e63677f9677cd0039}\label{classoomph_1_1LinearAlgebraDistribution_acd5ffc5ff4b91a8e63677f9677cd0039}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!rank\_of\_global\_row@{rank\_of\_global\_row}}
@@ -625,7 +625,7 @@ return the processor rank of the global row number i
 
 
 
-Definition at line 391 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 387 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
@@ -650,7 +650,7 @@ $<$$<$ operator
 
 
 
-Definition at line 311 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+Definition at line 318 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
 
 
 
@@ -667,11 +667,11 @@ the pointer to the M\+PI communicator object in this distribution
 
 
 
-Definition at line 430 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 425 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
-Referenced by build(), built(), clear(), communicator\+\_\+pt(), first\+\_\+row(), nrow\+\_\+local(), and $\sim$\+Linear\+Algebra\+Distribution().
+Referenced by build(), built(), clear(), communicator\+\_\+pt(), first\+\_\+row(), nrow\+\_\+local(), operator==(), and $\sim$\+Linear\+Algebra\+Distribution().
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a94492939a554e3415a477a13d0eb11c0}\label{classoomph_1_1LinearAlgebraDistribution_a94492939a554e3415a477a13d0eb11c0}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!Distributed@{Distributed}}
@@ -681,11 +681,11 @@ Referenced by build(), built(), clear(), communicator\+\_\+pt(), first\+\_\+row(
 
 flag to indicate whether this distribution describes an object that is distributed over the processors of Comm\+\_\+pt (true) or duplicated over the processors of Comm\+\_\+pt (false) 
 
-Definition at line 427 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 422 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
-Referenced by build(), distributed(), first\+\_\+row(), and nrow\+\_\+local().
+Referenced by build(), distributed(), first\+\_\+row(), nrow\+\_\+local(), and operator==().
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a6dfae7ca9376aee99ca97d490a79dd9b}\label{classoomph_1_1LinearAlgebraDistribution_a6dfae7ca9376aee99ca97d490a79dd9b}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!First\_row@{First\_row}}
@@ -699,11 +699,11 @@ the first row on this processor
 
 
 
-Definition at line 422 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 417 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
-Referenced by build(), clear(), first\+\_\+row(), and first\+\_\+row\+\_\+vector().
+Referenced by build(), clear(), first\+\_\+row(), first\+\_\+row\+\_\+vector(), and operator==().
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a59d82db90a05edbf0444a31cc6b8f0b2}\label{classoomph_1_1LinearAlgebraDistribution_a59d82db90a05edbf0444a31cc6b8f0b2}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!Nrow@{Nrow}}
@@ -717,11 +717,11 @@ the number of global rows
 
 
 
-Definition at line 416 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 411 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
-Referenced by build(), clear(), global\+\_\+to\+\_\+local\+\_\+row\+\_\+map(), nrow(), and nrow\+\_\+local().
+Referenced by build(), clear(), global\+\_\+to\+\_\+local\+\_\+row\+\_\+map(), nrow(), nrow\+\_\+local(), and operator==().
 
 \mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a3b9b16db35836dc06b160c0ddaa8e3fc}\label{classoomph_1_1LinearAlgebraDistribution_a3b9b16db35836dc06b160c0ddaa8e3fc}} 
 \index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!Nrow\_local@{Nrow\_local}}
@@ -735,11 +735,11 @@ the number of local rows on the processor
 
 
 
-Definition at line 419 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+Definition at line 414 of file linear\+\_\+algebra\+\_\+distribution.\+h.
 
 
 
-Referenced by build(), clear(), nrow\+\_\+local(), and nrow\+\_\+local\+\_\+vector().
+Referenced by build(), clear(), nrow\+\_\+local(), nrow\+\_\+local\+\_\+vector(), and operator==().
 
 
 

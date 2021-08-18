@@ -25,7 +25,7 @@ Inheritance diagram for oomph\+::Double\+Vector\+:\begin{figure}[H]
 \mbox{\hyperlink{classoomph_1_1DoubleVector_a29d22a13eeaa61d5467d5cfa37e1f38f}{Double\+Vector}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&dist, const double \&v=0.\+0)
 \begin{DoxyCompactList}\small\item\em Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DoubleVector_a53441aa63f3acfa65dc4556ffa0b5573}{$\sim$\+Double\+Vector}} ()
-\begin{DoxyCompactList}\small\item\em Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()}} to delete the distribution and data. \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{classoomph_1_1DoubleVector_af547ee3b90c4a5598b655ed57ed78b2f}{Double\+Vector}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&new\+\_\+vector)
 \begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleVector_ab5f56f41d86a18bba358912b1c4f2dac}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&old\+\_\+vector)
@@ -43,8 +43,7 @@ void \mbox{\hyperlink{classoomph_1_1DoubleVector_a4e6219936d6b23265b46dd3a25acb7
 void \mbox{\hyperlink{classoomph_1_1DoubleVector_a180c1057a29f4ed721da46040a619ecd}{initialise}} (const double \&v)
 \begin{DoxyCompactList}\small\item\em initialise the whole vector with value v \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleVector_ae3ce2b88e72d8b084e9be8e9af10c487}{initialise}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ v)
-\begin{DoxyCompactList}\small\item\em initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}} ()
 \begin{DoxyCompactList}\small\item\em wipes the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}} () const
@@ -130,7 +129,7 @@ Constructor for an uninitialized \mbox{\hyperlink{classoomph_1_1DoubleVector}{Do
 
 
 
-Definition at line 63 of file double\+\_\+vector.\+h.
+Definition at line 61 of file double\+\_\+vector.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a21f824524cd7bc779af3cbdbfe1d3ef8}\label{classoomph_1_1DoubleVector_a21f824524cd7bc779af3cbdbfe1d3ef8}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!DoubleVector@{DoubleVector}}
@@ -144,7 +143,7 @@ Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Ve
 
 
 
-Definition at line 70 of file double\+\_\+vector.\+h.
+Definition at line 66 of file double\+\_\+vector.\+h.
 
 
 
@@ -162,7 +161,7 @@ Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Ve
 
 
 
-Definition at line 80 of file double\+\_\+vector.\+h.
+Definition at line 76 of file double\+\_\+vector.\+h.
 
 
 
@@ -174,13 +173,9 @@ References build().
 \doxysubsubsection{\texorpdfstring{$\sim$DoubleVector()}{~DoubleVector()}}
 {\footnotesize\ttfamily oomph\+::\+Double\+Vector\+::$\sim$\+Double\+Vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()}} to delete the distribution and data 
 
-
-Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()}} to delete the distribution and data. 
-
-
-
-Definition at line 88 of file double\+\_\+vector.\+h.
+Definition at line 84 of file double\+\_\+vector.\+h.
 
 
 
@@ -198,7 +193,7 @@ Copy constructor.
 
 
 
-Definition at line 94 of file double\+\_\+vector.\+h.
+Definition at line 90 of file double\+\_\+vector.\+h.
 
 
 
@@ -219,7 +214,7 @@ Just copys the argument \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vec
 
 
 
-Definition at line 36 of file double\+\_\+vector.\+cc.
+Definition at line 35 of file double\+\_\+vector.\+cc.
 
 
 
@@ -227,7 +222,7 @@ References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_
 
 
 
-Referenced by oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse(), build(), oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+solve\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), Double\+Vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block\+\_\+vector(), oomph\+::\+Problem\+::get\+\_\+dofs(), oomph\+::\+Problem\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector(), oomph\+::\+Matrix\+Vector\+Product\+::multiply(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), operator=(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::operator=(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Dummy\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::resolve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Problem\+::setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose(), and oomph\+::\+Low\+Storage\+Runge\+Kutta$<$ O\+R\+D\+E\+R $>$\+::timestep().
+Referenced by oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse(), build(), oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+solve\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), Double\+Vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block\+\_\+vector(), oomph\+::\+Problem\+::get\+\_\+dofs(), oomph\+::\+Problem\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector(), oomph\+::\+Matrix\+Vector\+Product\+::multiply(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), operator=(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::operator=(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Dummy\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::resolve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Problem\+::setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose(), and oomph\+::\+Low\+Storage\+Runge\+Kutta$<$ O\+R\+D\+E\+R $>$\+::timestep().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_ad22d075ba35995e26f40209de1b25746}\label{classoomph_1_1DoubleVector_ad22d075ba35995e26f40209de1b25746}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
@@ -241,7 +236,7 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with d
 
 
 
-Definition at line 112 of file double\+\_\+vector.\+h.
+Definition at line 110 of file double\+\_\+vector.\+h.
 
 
 
@@ -259,7 +254,7 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with a
 
 
 
-Definition at line 126 of file double\+\_\+vector.\+h.
+Definition at line 123 of file double\+\_\+vector.\+h.
 
 
 
@@ -277,7 +272,7 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with d
 
 Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with distribution dist, if v is specified each row is set to v 
 
-Definition at line 62 of file double\+\_\+vector.\+cc.
+Definition at line 59 of file double\+\_\+vector.\+cc.
 
 
 
@@ -295,7 +290,7 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with a
 
 
 
-Definition at line 94 of file double\+\_\+vector.\+cc.
+Definition at line 91 of file double\+\_\+vector.\+cc.
 
 
 
@@ -309,7 +304,7 @@ References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distr
 
 
 
-Definition at line 158 of file double\+\_\+vector.\+h.
+Definition at line 154 of file double\+\_\+vector.\+h.
 
 
 
@@ -317,7 +312,7 @@ References Built.
 
 
 
-Referenced by oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+serial(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose\+\_\+serial(), oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data(), dot(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block\+\_\+vector(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+return\+\_\+block\+\_\+vectors(), oomph\+::\+C\+R\+Double\+Matrix\+::lubksub(), oomph\+::\+Matrix\+Vector\+Product\+::multiply(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), norm(), operator+=(), operator-\/=(), operator==(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Identity\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+C\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Hypre\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+concatenated\+\_\+block\+\_\+vector(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+F\+D\+\_\+\+L\+U\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose(), oomph\+::\+Double\+Vector\+Helpers\+::split(), and oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication().
+Referenced by oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+serial(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose\+\_\+serial(), oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data(), dot(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block\+\_\+vector(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+return\+\_\+block\+\_\+vectors(), oomph\+::\+C\+R\+Double\+Matrix\+::lubksub(), oomph\+::\+Matrix\+Vector\+Product\+::multiply(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), norm(), operator+=(), operator-\/=(), operator==(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+C\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Identity\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Hypre\+Solver\+::resolve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+concatenated\+\_\+block\+\_\+vector(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+F\+D\+\_\+\+L\+U\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose(), oomph\+::\+Double\+Vector\+Helpers\+::split(), and oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}\label{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!clear@{clear}}
@@ -331,7 +326,7 @@ wipes the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}
 
 
 
-Definition at line 146 of file double\+\_\+vector.\+h.
+Definition at line 142 of file double\+\_\+vector.\+h.
 
 
 
@@ -353,7 +348,7 @@ compute the dot product of this vector with the vector vec.
 
 compute the dot product of this vector with the vector vec 
 
-Definition at line 802 of file double\+\_\+vector.\+cc.
+Definition at line 795 of file double\+\_\+vector.\+cc.
 
 
 
@@ -375,7 +370,7 @@ initialise the whole vector with value v
 
 
 
-Definition at line 116 of file double\+\_\+vector.\+cc.
+Definition at line 113 of file double\+\_\+vector.\+cc.
 
 
 
@@ -393,12 +388,11 @@ Referenced by build(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\
 
 
 
-initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length ~\newline
- 
-
 initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length 
 
-Definition at line 131 of file double\+\_\+vector.\+cc.
+
+
+Definition at line 128 of file double\+\_\+vector.\+cc.
 
 
 
@@ -416,7 +410,7 @@ returns the maximum coefficient
 
 
 
-Definition at line 610 of file double\+\_\+vector.\+cc.
+Definition at line 594 of file double\+\_\+vector.\+cc.
 
 
 
@@ -438,7 +432,7 @@ compute the 2 norm of this vector
 
 
 
-Definition at line 863 of file double\+\_\+vector.\+cc.
+Definition at line 857 of file double\+\_\+vector.\+cc.
 
 
 
@@ -460,7 +454,7 @@ compute the A-\/norm using the matrix at matrix\+\_\+pt
 
 
 
-Definition at line 907 of file double\+\_\+vector.\+cc.
+Definition at line 904 of file double\+\_\+vector.\+cc.
 
 
 
@@ -478,7 +472,7 @@ multiply by a double
 
 Multiply by double. 
 
-Definition at line 553 of file double\+\_\+vector.\+cc.
+Definition at line 540 of file double\+\_\+vector.\+cc.
 
 
 
@@ -500,7 +494,7 @@ Referenced by operator/=().
 
 += operator 
 
-Definition at line 456 of file double\+\_\+vector.\+cc.
+Definition at line 449 of file double\+\_\+vector.\+cc.
 
 
 
@@ -518,7 +512,7 @@ References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distrib
 
 -\/= operator 
 
-Definition at line 504 of file double\+\_\+vector.\+cc.
+Definition at line 494 of file double\+\_\+vector.\+cc.
 
 
 
@@ -536,7 +530,7 @@ divide by a double
 
 Divide by double. 
 
-Definition at line 577 of file double\+\_\+vector.\+cc.
+Definition at line 563 of file double\+\_\+vector.\+cc.
 
 
 
@@ -554,7 +548,7 @@ assignment operator
 
 
 
-Definition at line 102 of file double\+\_\+vector.\+h.
+Definition at line 100 of file double\+\_\+vector.\+h.
 
 
 
@@ -572,7 +566,7 @@ References build().
 
 
 
-Definition at line 423 of file double\+\_\+vector.\+cc.
+Definition at line 416 of file double\+\_\+vector.\+cc.
 
 
 
@@ -590,7 +584,7 @@ References built(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow
 
 
 
-Definition at line 403 of file double\+\_\+vector.\+cc.
+Definition at line 398 of file double\+\_\+vector.\+cc.
 
 
 
@@ -608,7 +602,7 @@ References i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+loc
 
 
 
-Definition at line 590 of file double\+\_\+vector.\+cc.
+Definition at line 576 of file double\+\_\+vector.\+cc.
 
 
 
@@ -626,7 +620,7 @@ output the global contents of the vector
 
 output the contents of the vector 
 
-Definition at line 655 of file double\+\_\+vector.\+cc.
+Definition at line 643 of file double\+\_\+vector.\+cc.
 
 
 
@@ -648,7 +642,7 @@ output the global contents of the vector
 
 
 
-Definition at line 264 of file double\+\_\+vector.\+h.
+Definition at line 269 of file double\+\_\+vector.\+h.
 
 
 
@@ -666,7 +660,7 @@ output the local contents of the vector
 
 
 
-Definition at line 739 of file double\+\_\+vector.\+cc.
+Definition at line 732 of file double\+\_\+vector.\+cc.
 
 
 
@@ -688,7 +682,7 @@ output the local contents of the vector
 
 
 
-Definition at line 278 of file double\+\_\+vector.\+h.
+Definition at line 283 of file double\+\_\+vector.\+h.
 
 
 
@@ -706,7 +700,7 @@ output the local contents of the vector
 
 output the local contents of the vector with the first row offset. 
 
-Definition at line 769 of file double\+\_\+vector.\+cc.
+Definition at line 762 of file double\+\_\+vector.\+cc.
 
 
 
@@ -728,7 +722,7 @@ output the local contents of the vector
 
 
 
-Definition at line 293 of file double\+\_\+vector.\+h.
+Definition at line 298 of file double\+\_\+vector.\+h.
 
 
 
@@ -746,7 +740,7 @@ The contents of the vector are redistributed to match the new distribution. In a
 
 The contents of the vector are redistributed to match the new distribution. In a non-\/\+M\+PI build this method works, but does nothing. {\bfseries{N\+O\+TE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{N\+O\+TE}} 2\+: The current distribution and the new distribution must have the same Communicator. 
 
-Definition at line 160 of file double\+\_\+vector.\+cc.
+Definition at line 154 of file double\+\_\+vector.\+cc.
 
 
 
@@ -773,7 +767,7 @@ Allows are external data to be used by this vector. W\+A\+R\+N\+I\+NG\+: The siz
 \item External values are only deleted by this vector if delete\+\_\+external\+\_\+values = true. 
 \end{DoxyEnumerate}
 
-Definition at line 168 of file double\+\_\+vector.\+h.
+Definition at line 167 of file double\+\_\+vector.\+h.
 
 
 
@@ -800,7 +794,7 @@ Allows are external data to be used by this vector. W\+A\+R\+N\+I\+NG\+: The siz
 \item External values are only deleted by this vector if delete\+\_\+external\+\_\+values = true. 
 \end{DoxyEnumerate}
 
-Definition at line 192 of file double\+\_\+vector.\+h.
+Definition at line 191 of file double\+\_\+vector.\+h.
 
 
 
@@ -818,7 +812,7 @@ access function to the underlying values
 
 
 
-Definition at line 255 of file double\+\_\+vector.\+h.
+Definition at line 254 of file double\+\_\+vector.\+h.
 
 
 
@@ -840,7 +834,7 @@ access function to the underlying values (const version)
 
 
 
-Definition at line 258 of file double\+\_\+vector.\+h.
+Definition at line 260 of file double\+\_\+vector.\+h.
 
 
 
@@ -861,7 +855,7 @@ Ouput operator for \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}
 
 
 
-Definition at line 945 of file double\+\_\+vector.\+cc.
+Definition at line 939 of file double\+\_\+vector.\+cc.
 
 
 
@@ -878,7 +872,7 @@ indicates that the vector has been built and is usable
 
 
 
-Definition at line 322 of file double\+\_\+vector.\+h.
+Definition at line 326 of file double\+\_\+vector.\+h.
 
 
 
@@ -896,7 +890,7 @@ Boolean flag to indicate whether the vector\textquotesingle{}s data (values\+\_\
 
 
 
-Definition at line 319 of file double\+\_\+vector.\+h.
+Definition at line 323 of file double\+\_\+vector.\+h.
 
 
 
@@ -914,7 +908,7 @@ the local vector
 
 
 
-Definition at line 315 of file double\+\_\+vector.\+h.
+Definition at line 319 of file double\+\_\+vector.\+h.
 
 
 

@@ -147,8 +147,7 @@ Inheritance diagram for oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4e0b14ef4b4531f043b588150ca3c0f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelMesh.html#a4e0b14ef4b4531f043b588150ca3c0f1">CollapsibleChannelMesh</a> (const unsigned &amp;nup, const unsigned &amp;ncollapsible, const unsigned &amp;ndown, const unsigned &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html#a45011f22dedd480392b1f376e4269921">ny</a>, const double &amp;lup, const double &amp;lcollapsible, const double &amp;ldown, const double &amp;ly, GeomObject *<a class="el" href="classoomph_1_1CollapsibleChannelMesh.html#a04ffeb61678763dfd250962ea9ba614b">wall_pt</a>, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
-<tr class="memdesc:a4e0b14ef4b4531f043b588150ca3c0f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to GeomObject that defines the collapsible segment and pointer to TimeStepper (defaults to the default timestepper, Steady). <br  />
-  <a href="classoomph_1_1CollapsibleChannelMesh.html#a4e0b14ef4b4531f043b588150ca3c0f1">More...</a><br /></td></tr>
+<tr class="memdesc:a4e0b14ef4b4531f043b588150ca3c0f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to GeomObject that defines the collapsible segment and pointer to TimeStepper (defaults to the default timestepper, Steady).  <a href="classoomph_1_1CollapsibleChannelMesh.html#a4e0b14ef4b4531f043b588150ca3c0f1">More...</a><br /></td></tr>
 <tr class="separator:a4e0b14ef4b4531f043b588150ca3c0f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c9b2ab27f1fb2f764ae2dc6f9f7a429"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelMesh.html#a1c9b2ab27f1fb2f764ae2dc6f9f7a429">~CollapsibleChannelMesh</a> ()</td></tr>
 <tr class="memdesc:a1c9b2ab27f1fb2f764ae2dc6f9f7a429"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor  <a href="classoomph_1_1CollapsibleChannelMesh.html#a1c9b2ab27f1fb2f764ae2dc6f9f7a429">More...</a><br /></td></tr>
@@ -209,7 +208,7 @@ class oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;</h3>
 
 <p>Basic collapsible channel mesh. The mesh is derived from the <code><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">SimpleRectangularQuadMesh</a></code> so it's node and element numbering scheme is the same as in that mesh. Only the boundaries are numbered differently to allow the easy identification of the "collapsible" segment. Boundary coordinates are set up for all nodes located on boundary 3 (the collapsible segment). The curvilinear ("collapsible") segment is defined by a <code>GeomObject</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00066">66</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00064">64</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4e0b14ef4b4531f043b588150ca3c0f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e0b14ef4b4531f043b588150ca3c0f1">&#9670;&nbsp;</a></span>CollapsibleChannelMesh()</h2>
@@ -287,14 +286,12 @@ template&lt;class ELEMENT &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to GeomObject that defines the collapsible segment and pointer to TimeStepper (defaults to the default timestepper, Steady). <br  />
- </p>
-<p>Constructor: Pass number of elements in upstream/collapsible/downstream segment and across the channel; lengths of upstream/collapsible/downstream segments and width of channel, pointer to GeomObject that defines the collapsible segment and pointer to TimeStepper (defaults to the default timestepper, Steady). <br  />
- </p>
+<p>Constructor: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to GeomObject that defines the collapsible segment and pointer to TimeStepper (defaults to the default timestepper, Steady). </p>
+<p>Constructor: Pass number of elements in upstream/collapsible/downstream segment and across the channel; lengths of upstream/collapsible/downstream segments and width of channel, pointer to GeomObject that defines the collapsible segment and pointer to TimeStepper (defaults to the default timestepper, Steady). </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html#l00044">44</a> of file <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html">collapsible_channel_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html#l00043">43</a> of file <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html">collapsible_channel_mesh.template.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00146">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>, <a class="el" href="simple__rectangular__quadmesh_8template_8h_source.html#l00075">oomph::SimpleRectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00095">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::wall_pt()</a>.</p>
+<p class="reference">References <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00147">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>, <a class="el" href="simple__rectangular__quadmesh_8template_8h_source.html#l00077">oomph::SimpleRectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00091">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::wall_pt()</a>.</p>
 
 </div>
 </div>
@@ -325,9 +322,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>destructor </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00089">89</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00085">85</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00146">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+<p class="reference">References <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00147">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
 
 </div>
 </div>
@@ -361,9 +358,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1AlgebraicCollapsibleChannelMesh.html#afa53bd526ff0903526afbdf5e6f4f532">oomph::AlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00128">128</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00130">130</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00183">oomph::CollapsibleChannelDomain::axial_spacing_fct_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00146">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00186">oomph::CollapsibleChannelDomain::axial_spacing_fct_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00147">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
 
 </div>
 </div>
@@ -394,9 +391,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Function pointer for function that redistributes the elements in the axial direction. Const version. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00136">136</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00138">138</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00183">oomph::CollapsibleChannelDomain::axial_spacing_fct_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00146">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00186">oomph::CollapsibleChannelDomain::axial_spacing_fct_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00147">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
 
 </div>
 </div>
@@ -429,9 +426,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1AlgebraicCollapsibleChannelMesh.html#abf1848b49f57419af4379a637464587d">oomph::AlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00107">107</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00109">109</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00162">oomph::CollapsibleChannelDomain::bl_squash_fct_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00146">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00165">oomph::CollapsibleChannelDomain::bl_squash_fct_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00147">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
 
 </div>
 </div>
@@ -462,9 +459,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Function pointer for function that squashes the mesh near the walls. Default trivial mapping (the identity) leaves vertical nodal positions unchanged. Mapping is used in underlying <a class="el" href="classoomph_1_1CollapsibleChannelDomain.html" title="Collapsible channel domain.">CollapsibleChannelDomain</a>. Const version. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00117">117</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00119">119</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00162">oomph::CollapsibleChannelDomain::bl_squash_fct_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00146">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00165">oomph::CollapsibleChannelDomain::bl_squash_fct_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00147">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
 
 </div>
 </div>
@@ -495,11 +492,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Access function to domain. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00098">98</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00097">97</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00146">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+<p class="reference">References <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00147">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00250">oomph::MacroElementNodeUpdateCollapsibleChannelMesh&lt; ELEMENT &gt;::MacroElementNodeUpdateCollapsibleChannelMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00247">oomph::MacroElementNodeUpdateCollapsibleChannelMesh&lt; ELEMENT &gt;::MacroElementNodeUpdateCollapsibleChannelMesh()</a>.</p>
 
 </div>
 </div>
@@ -530,11 +527,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Access function to GeomObject representing wall. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00095">95</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00091">91</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00161">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Wall_pt</a>.</p>
+<p class="reference">References <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00162">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Wall_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00443">oomph::AlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt;::AlgebraicCollapsibleChannelMesh()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html#l00044">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::CollapsibleChannelMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00436">oomph::AlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt;::AlgebraicCollapsibleChannelMesh()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html#l00043">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::CollapsibleChannelMesh()</a>.</p>
 
 </div>
 </div>
@@ -563,9 +560,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Pointer to domain. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00146">146</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00147">147</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00475">oomph::AlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt;::AlgebraicCollapsibleChannelMesh()</a>, <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00128">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::axial_spacing_fct_pt()</a>, <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00107">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::bl_squash_fct_pt()</a>, <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html#l00044">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::CollapsibleChannelMesh()</a>, <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00098">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::domain_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00089">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::~CollapsibleChannelMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00474">oomph::AlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt;::AlgebraicCollapsibleChannelMesh()</a>, <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00130">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::axial_spacing_fct_pt()</a>, <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00109">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::bl_squash_fct_pt()</a>, <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html#l00043">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::CollapsibleChannelMesh()</a>, <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00097">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::domain_pt()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00085">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::~CollapsibleChannelMesh()</a>.</p>
 
 </div>
 </div>
@@ -593,7 +590,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of element columns in collapsible part. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00152">152</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00153">153</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -621,7 +618,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of element columns in downstream part. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00155">155</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00156">156</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -649,7 +646,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of element columns in upstream part. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00149">149</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00150">150</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -677,7 +674,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of element rows across channel. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00158">158</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00159">159</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -705,9 +702,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Pointer to geometric object that represents the moving wall. </p>
 
-<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00161">161</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00162">162</a> of file <a class="el" href="collapsible__channel__mesh_8template_8h_source.html">collapsible_channel_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00250">oomph::MacroElementNodeUpdateCollapsibleChannelMesh&lt; ELEMENT &gt;::MacroElementNodeUpdateCollapsibleChannelMesh()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00095">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::wall_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00247">oomph::MacroElementNodeUpdateCollapsibleChannelMesh&lt; ELEMENT &gt;::MacroElementNodeUpdateCollapsibleChannelMesh()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00091">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::wall_pt()</a>.</p>
 
 </div>
 </div>
@@ -743,7 +740,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:52:17
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:35:46
         </div>
       </div>
     </footer>

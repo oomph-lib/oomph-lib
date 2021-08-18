@@ -20,18 +20,13 @@ Inheritance diagram for oomph\+::T\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Ele
 unsigned \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a81b6f433e44b410c729dbe1a40471710}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a13871dec8364ce80f71853b9713101bb}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- r,z,u ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: r,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a01c521f1ce16fa2b2f96cc42ffee5eb5}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- r,z,u n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: r,z,u n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a3052682b4364d0889e378797c5b5e56e}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- r,z,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,z,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_af951c2e2fdf1077cd6ac1eb42a99a7c6}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a504e11e747e5711585c1a289c4d74384}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: r,z,u\+\_\+exact. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_acadbbb92f324dcf8feb56863796678a8}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
@@ -40,9 +35,9 @@ void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_acadbb
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_aea2d56a954ff4e0cb2f73a23f3478ad3}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a8c84997e3407e8c56537002c3d998416}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a0d608398d3372fb04df08d06bad9ac60}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a8e744cb8960f8d20b8e28c708da4a562}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
@@ -67,7 +62,7 @@ class oomph\+::\+T\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$ N\+N\+O\
 
 T\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are isoparametric triangular P\+M\+L\+Fourier\+Decomposed\+Helmholtz elements with N\+N\+O\+D\+E\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations}} 
 
-Definition at line 63 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 61 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -85,7 +80,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\
 
 
 
-Definition at line 73 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 69 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_ac805c939410f7175b68085dae0c7b967}\label{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_ac805c939410f7175b68085dae0c7b967}} 
 \index{oomph::TPMLFourierDecomposedHelmholtzElement$<$ NNODE\_1D $>$@{oomph::TPMLFourierDecomposedHelmholtzElement$<$ NNODE\_1D $>$}!TPMLFourierDecomposedHelmholtzElement@{TPMLFourierDecomposedHelmholtzElement}}
@@ -100,7 +95,7 @@ Broken copy constructor.
 
 
 
-Definition at line 79 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 76 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -116,9 +111,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement}{oomph\+::\+T\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -128,7 +121,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations
 
 
 
-Definition at line 260 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 264 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_aea2d56a954ff4e0cb2f73a23f3478ad3}\label{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_aea2d56a954ff4e0cb2f73a23f3478ad3}} 
 \index{oomph::TPMLFourierDecomposedHelmholtzElement$<$ NNODE\_1D $>$@{oomph::TPMLFourierDecomposedHelmholtzElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_pml\_fourier\_decomposed\_helmholtz@{dshape\_and\_dtest\_eulerian\_pml\_fourier\_decomposed\_helmholtz}}
@@ -137,9 +130,7 @@ Definition at line 260 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement}{oomph\+::\+T\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -149,7 +140,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations
 
 
 
-Definition at line 225 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 230 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -172,7 +163,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 183 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 189 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -214,7 +205,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 179 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 182 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a135052ab7e368351f2c32a7957b9eab7}\label{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a135052ab7e368351f2c32a7957b9eab7}} 
 \index{oomph::TPMLFourierDecomposedHelmholtzElement$<$ NNODE\_1D $>$@{oomph::TPMLFourierDecomposedHelmholtzElement$<$ NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
@@ -233,7 +224,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 196 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 202 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a3052682b4364d0889e378797c5b5e56e}\label{classoomph_1_1TPMLFourierDecomposedHelmholtzElement_a3052682b4364d0889e378797c5b5e56e}} 
 \index{oomph::TPMLFourierDecomposedHelmholtzElement$<$ NNODE\_1D $>$@{oomph::TPMLFourierDecomposedHelmholtzElement$<$ NNODE\_1D $>$}!output@{output}}
@@ -244,8 +235,7 @@ void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement}{oomph
 
 
 
-C-\/style output function\+: ~\newline
- r,z,u or x,y,z,u. 
+C-\/style output function\+: r,z,u or x,y,z,u. 
 
 
 
@@ -268,8 +258,7 @@ void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement}{oomph
 
 
 
-C-\/style output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
+C-\/style output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
 
 
 
@@ -292,9 +281,7 @@ void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement}{oomph
 
 
 
-Output function\+: ~\newline
- r,z,u ~\newline
- 
+Output function\+: r,z,u. 
 
 
 
@@ -317,8 +304,7 @@ void \mbox{\hyperlink{classoomph_1_1TPMLFourierDecomposedHelmholtzElement}{oomph
 
 
 
-Output function\+: ~\newline
- r,z,u n\+\_\+plot$^\wedge$2 plot points. 
+Output function\+: r,z,u n\+\_\+plot$^\wedge$2 plot points. 
 
 
 
@@ -349,7 +335,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzE
 
 
 
-Definition at line 143 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 144 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -395,7 +381,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 97 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 95 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -418,7 +404,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 200 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 208 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -436,7 +422,7 @@ Static unsigned that holds the (same) number of variables at every node.
 
 (real and imag part) in every case 
 
-Definition at line 206 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 215 of file Tpml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 

@@ -36,8 +36,7 @@ void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aab7e1485ecaaebc2846da2882cb9
 virtual \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a27c30b4faf3d2328f3b9ce9c590f43a4}{$\sim$\+C\+R\+Double\+Matrix}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a80c3342b36dbcdf60bb21676fda66c97}{get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries}} () const
-\begin{DoxyCompactList}\small\item\em Access function\+: returns the vector Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of the vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Access function\+: returns the vector Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of the vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ae35fbae1702bbf75601c2a1026df103e}{entries\+\_\+are\+\_\+sorted}} (const bool \&doc\+\_\+unordered\+\_\+entries=false) const
 \begin{DoxyCompactList}\small\item\em Runs through the column index vector and checks if the entries follow the regular lexicographical ordering of matrix entries, i.\+e. it will check (at the i-\/th row of the matrix) if the entries in the column index vector associated with this row are in increasing order. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a2107875787d4dfa1cf007c05a041b078}{sort\+\_\+entries}} ()
@@ -45,7 +44,7 @@ void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a2107875787d4dfa1cf007c05a041
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}{build}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a603105384d60c9a3710378af39f538b9}{distribution\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}{row\+\_\+start}})
 \begin{DoxyCompactList}\small\item\em build method\+: vector of values, vector of column indices, vector of row starts and number of rows and columns. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a7fc397b91a7289df8ee64287ae20e132}{build}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a603105384d60c9a3710378af39f538b9}{distribution\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em rebuild the matrix -\/ assembles an empty matrix will a defined distribution \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Rebuild the matrix -\/ assembles an empty matrix with a defined distribution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ac04c0787a123256b3dbaf6acf40df4e2}{build}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}{row\+\_\+start}})
 \begin{DoxyCompactList}\small\item\em keeps the existing distribution and just matrix that is stored \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060}{build\+\_\+without\+\_\+copy}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}{nnz}}, double $\ast$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}{value}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}{column\+\_\+index}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}{row\+\_\+start}})
@@ -91,8 +90,7 @@ void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343f
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af08fd73a7edbdbde9facf47b913e3e43}{multiply}} (const \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} \&matrix\+\_\+in, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} \&result) const
 \begin{DoxyCompactList}\small\item\em Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} matrix\+\_\+in. In a serial matrix, there are 4 methods available\+: Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply. Method 5\+: Trilinox Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} Mulitply (ml based) If Trilinos is installed then Method 4 is employed by default, otherwise Method 2 is employed by default. In a distributed matrix, only Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply is available. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a3853068b7fce9e83bc817930262e9ca1}{matrix\+\_\+reduction}} (const double \&alpha, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} \&reduced\+\_\+matrix)
-\begin{DoxyCompactList}\small\item\em For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aa09d92094d0ccf281dded547edfc981e}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} ()
 \begin{DoxyCompactList}\small\item\em Access function to Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for serial matrices. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply. Method 5\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply (ML based). \end{DoxyCompactList}\item 
 const unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ae8eff79ad9ac6e399ef4b677b6e0e1e5}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} () const
@@ -126,20 +124,18 @@ struct \mbox{\hyperlink{structoomph_1_1CRDoubleMatrix_1_1CRDoubleMatrixCompariso
 unsigned \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ac8fab9824a0766b6bb6361a6b25df9ce}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}
 \begin{DoxyCompactList}\small\item\em Flag to determine which matrix-\/matrix multiplication method is used (for serial (or global) matrices) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ab4056eff376d383c613a11082651cb}{Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}
-\begin{DoxyCompactList}\small\item\em Flag to determine which matrix-\/matrix multiplication method is used (for distributed matrices) ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Flag to determine which matrix-\/matrix multiplication method is used (for distributed matrices) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CRMatrix}{C\+R\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f}{C\+R\+\_\+matrix}}
 \begin{DoxyCompactList}\small\item\em Storage for the \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} in CR Format. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a63afd9976f0970a4e6ffee3755d21540}{Built}}
-\begin{DoxyCompactList}\small\item\em Flag to indicate whether the matrix has been built -\/ i.\+e. the distribution has been setup A\+ND the matrix has been assembled. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Flag to indicate whether the matrix has been built -\/ i.\+e. the distribution has been setup A\+ND the matrix has been assembled. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 A class for compressed row matrices. This is a distributable object. 
 
-Definition at line 868 of file matrices.\+h.
+Definition at line 903 of file matrices.\+h.
 
 
 
@@ -156,7 +152,7 @@ Default constructor.
 
 
 
-Definition at line 1234 of file matrices.\+cc.
+Definition at line 1214 of file matrices.\+cc.
 
 
 
@@ -178,7 +174,7 @@ Constructor\+: vector of values, vector of column indices, vector of row starts 
 
 Constructor\+: Takes the distribution and the number of columns, as well as the vector of values, vector of column indices,vector of row starts. 
 
-Definition at line 1332 of file matrices.\+cc.
+Definition at line 1311 of file matrices.\+cc.
 
 
 
@@ -196,7 +192,7 @@ Constructor\+: just stores the distribution but does not build the matrix.
 
 Constructor\+: just stores the distribution but does not build the matrix 
 
-Definition at line 1306 of file matrices.\+cc.
+Definition at line 1286 of file matrices.\+cc.
 
 
 
@@ -214,7 +210,7 @@ Copy constructor.
 
 
 
-Definition at line 1254 of file matrices.\+cc.
+Definition at line 1234 of file matrices.\+cc.
 
 
 
@@ -232,7 +228,7 @@ Destructor.
 
 
 
-Definition at line 1363 of file matrices.\+cc.
+Definition at line 1343 of file matrices.\+cc.
 
 
 
@@ -253,7 +249,7 @@ element-\/wise addition of this matrix with matrix\+\_\+in.
 
 Element-\/wise addition of this matrix with matrix\+\_\+in. 
 
-Definition at line 3491 of file matrices.\+cc.
+Definition at line 3515 of file matrices.\+cc.
 
 
 
@@ -267,11 +263,11 @@ References build(), oomph\+::\+Linear\+Algebra\+Distribution\+::built(), built()
 
 
 
-rebuild the matrix -\/ assembles an empty matrix will a defined distribution 
-
 Rebuild the matrix -\/ assembles an empty matrix with a defined distribution. 
 
-Definition at line 1373 of file matrices.\+cc.
+rebuild the matrix -\/ assembles an empty matrix will a defined distribution 
+
+Definition at line 1353 of file matrices.\+cc.
 
 
 
@@ -289,7 +285,7 @@ build method\+: vector of values, vector of column indices, vector of row starts
 
 build method\+: Takes the distribution and the number of columns, as well as the vector of values, vector of column indices,vector of row starts. 
 
-Definition at line 1688 of file matrices.\+cc.
+Definition at line 1672 of file matrices.\+cc.
 
 
 
@@ -311,7 +307,7 @@ keeps the existing distribution and just matrix that is stored
 
 method to rebuild the matrix, but not the distribution 
 
-Definition at line 1710 of file matrices.\+cc.
+Definition at line 1694 of file matrices.\+cc.
 
 
 
@@ -329,7 +325,7 @@ keeps the existing distribution and just matrix that is stored without copying t
 
 method to rebuild the matrix, but not the distribution 
 
-Definition at line 1727 of file matrices.\+cc.
+Definition at line 1710 of file matrices.\+cc.
 
 
 
@@ -351,7 +347,7 @@ access function to the Built flag -\/ indicates whether the matrix has been buil
 
 
 
-Definition at line 1173 of file matrices.\+h.
+Definition at line 1231 of file matrices.\+h.
 
 
 
@@ -373,7 +369,7 @@ clear
 
 Clean method. 
 
-Definition at line 1673 of file matrices.\+cc.
+Definition at line 1657 of file matrices.\+cc.
 
 
 
@@ -395,7 +391,7 @@ Access to C-\/style column index array.
 
 
 
-Definition at line 1052 of file matrices.\+h.
+Definition at line 1093 of file matrices.\+h.
 
 
 
@@ -417,7 +413,7 @@ Access to C-\/style column index array (const version)
 
 
 
-Definition at line 1055 of file matrices.\+h.
+Definition at line 1099 of file matrices.\+h.
 
 
 
@@ -435,7 +431,7 @@ returns a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of diagonal entries of
 
 Return the diagonal entries of the matrix. This only works with square matrices. This condition may be relaxed in the future if need be. 
 
-Definition at line 3438 of file matrices.\+cc.
+Definition at line 3465 of file matrices.\+cc.
 
 
 
@@ -457,7 +453,7 @@ Access function to Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method
 
 
 
-Definition at line 1154 of file matrices.\+h.
+Definition at line 1212 of file matrices.\+h.
 
 
 
@@ -479,7 +475,7 @@ Read only access function (const version) to Distributed\+\_\+matrix\+\_\+matrix
 
 
 
-Definition at line 1165 of file matrices.\+h.
+Definition at line 1223 of file matrices.\+h.
 
 
 
@@ -497,7 +493,7 @@ Runs through the column index vector and checks if the entries follow the regula
 
 Runs through the column index vector and checks if the entries are arranged arbitrarily or if they follow the regular lexicographical of matrices. If a boolean argument is provided with the assignment T\+R\+UE then information on the first entry which is not in the correct position will also be given. 
 
-Definition at line 1386 of file matrices.\+cc.
+Definition at line 1366 of file matrices.\+cc.
 
 
 
@@ -511,12 +507,11 @@ References column\+\_\+index(), oomph\+::\+Distributable\+Linear\+Algebra\+Objec
 
 
 
-Access function\+: returns the vector Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of the vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. ~\newline
- 
+Access function\+: returns the vector Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of the vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. 
 
 
 
-Definition at line 908 of file matrices.\+h.
+Definition at line 941 of file matrices.\+h.
 
 
 
@@ -534,7 +529,7 @@ Returns the transpose of this matrix.
 
 Compute transpose of matrix. 
 
-Definition at line 3246 of file matrices.\+cc.
+Definition at line 3271 of file matrices.\+cc.
 
 
 
@@ -552,7 +547,7 @@ if this matrix is distributed then a the equivalent global matrix is built using
 
 if this matrix is distributed then the equivalent global matrix is built using new and returned. The calling method is responsible for the destruction of the new matrix. 
 
-Definition at line 2454 of file matrices.\+cc.
+Definition at line 2431 of file matrices.\+cc.
 
 
 
@@ -574,7 +569,7 @@ returns the inf-\/norm of this matrix
 
 Compute infinity (maximum) norm of matrix. 
 
-Definition at line 3388 of file matrices.\+cc.
+Definition at line 3412 of file matrices.\+cc.
 
 
 
@@ -596,7 +591,7 @@ LU back solve for given R\+HS.
 
 Do back-\/substitution. 
 
-Definition at line 1768 of file matrices.\+cc.
+Definition at line 1749 of file matrices.\+cc.
 
 
 
@@ -614,7 +609,7 @@ LU decomposition using Super\+LU if matrix is not distributed or distributed ont
 
 Do LU decomposition. 
 
-Definition at line 1745 of file matrices.\+cc.
+Definition at line 1728 of file matrices.\+cc.
 
 
 
@@ -628,12 +623,11 @@ References Built, and oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+
 
 
 
-For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
- 
+For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. 
 
 For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. 
 
-Definition at line 2388 of file matrices.\+cc.
+Definition at line 2365 of file matrices.\+cc.
 
 
 
@@ -651,7 +645,7 @@ Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CRDoubleM
 
 Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} matrix\+\_\+in. In a serial matrix, there are 4 methods available\+: Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply. Method 5\+: Trilinox Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} Mulitply (ml based) If Trilinos is installed then Method 4 is employed by default, otherwise Method 2 is employed by default. In a distributed matrix, only Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply is available. 
 
-Definition at line 2013 of file matrices.\+cc.
+Definition at line 1992 of file matrices.\+cc.
 
 
 
@@ -673,7 +667,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618
 
 
 
-Definition at line 1801 of file matrices.\+cc.
+Definition at line 1782 of file matrices.\+cc.
 
 
 
@@ -699,7 +693,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b4
 
 
 
-Definition at line 1903 of file matrices.\+cc.
+Definition at line 1882 of file matrices.\+cc.
 
 
 
@@ -725,7 +719,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd8
 
 
 
-Definition at line 994 of file matrices.\+h.
+Definition at line 1029 of file matrices.\+h.
 
 
 
@@ -747,7 +741,7 @@ Return the number of nonzero entries (the local nnz)
 
 
 
-Definition at line 1064 of file matrices.\+h.
+Definition at line 1117 of file matrices.\+h.
 
 
 
@@ -773,7 +767,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2
 
 
 
-Definition at line 988 of file matrices.\+h.
+Definition at line 1023 of file matrices.\+h.
 
 
 
@@ -789,14 +783,13 @@ Referenced by add(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::augmented\+
 \doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
 {\footnotesize\ttfamily double oomph\+::\+C\+R\+Double\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-Overload the round-\/bracket access operator for read-\/only access. In a distributed matrix i refers to the local row index. ~\newline
- 
+Overload the round-\/bracket access operator for read-\/only access. In a distributed matrix i refers to the local row index. 
 
 Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f0846fede2d77}{oomph\+::\+Double\+Matrix\+Base}}.
 
 
 
-Definition at line 1041 of file matrices.\+h.
+Definition at line 1074 of file matrices.\+h.
 
 
 
@@ -814,7 +807,7 @@ Broken assignment operator.
 
 
 
-Definition at line 894 of file matrices.\+h.
+Definition at line 927 of file matrices.\+h.
 
 
 
@@ -836,7 +829,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea042
 
 
 
-Definition at line 1002 of file matrices.\+h.
+Definition at line 1037 of file matrices.\+h.
 
 
 
@@ -850,7 +843,7 @@ References C\+R\+\_\+matrix, and oomph\+::\+C\+R\+Matrix$<$ T $>$\+::output\+\_\
 
 The contents of the matrix are redistributed to match the new distribution. In a non-\/\+M\+PI build this method does nothing. {\bfseries{N\+O\+TE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{N\+O\+TE}} 2\+: The current distribution and the new distribution must have the same Communicator. 
 
-Definition at line 2576 of file matrices.\+cc.
+Definition at line 2575 of file matrices.\+cc.
 
 
 
@@ -872,7 +865,7 @@ Access to C-\/style row\+\_\+start array.
 
 
 
-Definition at line 1046 of file matrices.\+h.
+Definition at line 1081 of file matrices.\+h.
 
 
 
@@ -894,7 +887,7 @@ Access to C-\/style row\+\_\+start array (const version)
 
 
 
-Definition at line 1049 of file matrices.\+h.
+Definition at line 1087 of file matrices.\+h.
 
 
 
@@ -912,7 +905,7 @@ Access function to Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the
 
 
 
-Definition at line 1123 of file matrices.\+h.
+Definition at line 1180 of file matrices.\+h.
 
 
 
@@ -934,7 +927,7 @@ Read only access function (const version) to Serial\+\_\+matrix\+\_\+matrix\+\_\
 
 
 
-Definition at line 1144 of file matrices.\+h.
+Definition at line 1202 of file matrices.\+h.
 
 
 
@@ -952,7 +945,7 @@ Sorts the entries associated with each row of the matrix in the column index vec
 
 This helper function sorts the entries in the column index vector and the value vector. During the construction of the matrix the entries were most likely assigned in an arbitrary order. As a result, it cannot be assumed that the entries in the column index vector corresponding to each row of the matrix have been arranged in increasing order. During the setup an additional vector will be set up; Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of this vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. 
 
-Definition at line 1469 of file matrices.\+cc.
+Definition at line 1449 of file matrices.\+cc.
 
 
 
@@ -974,7 +967,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615
 
 
 
-Definition at line 1009 of file matrices.\+h.
+Definition at line 1044 of file matrices.\+h.
 
 
 
@@ -992,7 +985,7 @@ Indexed output function to print a matrix to a file as i,j,a(i,j) for a(i,j)!=0 
 
 
 
-Definition at line 1017 of file matrices.\+h.
+Definition at line 1052 of file matrices.\+h.
 
 
 
@@ -1014,7 +1007,7 @@ Access to C-\/style value array.
 
 
 
-Definition at line 1058 of file matrices.\+h.
+Definition at line 1105 of file matrices.\+h.
 
 
 
@@ -1036,7 +1029,7 @@ Access to C-\/style value array (const version)
 
 
 
-Definition at line 1061 of file matrices.\+h.
+Definition at line 1111 of file matrices.\+h.
 
 
 
@@ -1053,12 +1046,11 @@ References C\+R\+\_\+matrix, and oomph\+::\+Sparse\+Matrix$<$ T, M\+A\+T\+R\+I\+
 
 
 
-Flag to indicate whether the matrix has been built -\/ i.\+e. the distribution has been setup A\+ND the matrix has been assembled. ~\newline
- 
+Flag to indicate whether the matrix has been built -\/ i.\+e. the distribution has been setup A\+ND the matrix has been assembled. 
 
 
 
-Definition at line 1213 of file matrices.\+h.
+Definition at line 1274 of file matrices.\+h.
 
 
 
@@ -1086,7 +1078,7 @@ Storage for the \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} in CR Format.
 
 
 
-Definition at line 1209 of file matrices.\+h.
+Definition at line 1270 of file matrices.\+h.
 
 
 
@@ -1100,12 +1092,11 @@ Referenced by build(), build\+\_\+without\+\_\+copy(), clear(), column\+\_\+inde
 
 
 
-Flag to determine which matrix-\/matrix multiplication method is used (for distributed matrices) ~\newline
- 
+Flag to determine which matrix-\/matrix multiplication method is used (for distributed matrices) 
 
 
 
-Definition at line 1206 of file matrices.\+h.
+Definition at line 1267 of file matrices.\+h.
 
 
 
@@ -1123,7 +1114,7 @@ Referenced by distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method().
 
 
 
-Definition at line 1198 of file matrices.\+h.
+Definition at line 1259 of file matrices.\+h.
 
 
 
@@ -1141,7 +1132,7 @@ Flag to determine which matrix-\/matrix multiplication method is used (for seria
 
 
 
-Definition at line 1202 of file matrices.\+h.
+Definition at line 1263 of file matrices.\+h.
 
 
 

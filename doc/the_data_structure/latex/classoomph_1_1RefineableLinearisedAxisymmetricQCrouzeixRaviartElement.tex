@@ -34,7 +34,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRav
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_a46c6b74a900afc0038bcd4f6c33c6c47}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
 \begin{DoxyCompactList}\small\item\em Get all function values \mbox{[}U$^\wedge$C,U$^\wedge$S,...,P$^\wedge$S\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). ~\newline
- Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
+Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
 Note\+: No pressure history is kept, so pressure is always the current value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_ad2ea85dbb9ac3434f4314a020b45861f}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. Empty. \end{DoxyCompactList}\item 
@@ -51,7 +51,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRav
 \doxysubsection{Detailed Description}
 Refineable version of linearised axisymmetric quadratic Crouzeix-\/\+Raviart elements. 
 
-Definition at line 223 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 228 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -68,7 +68,7 @@ Constructor.
 
 
 
-Definition at line 249 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 252 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -85,11 +85,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetr
 
 
 
-Definition at line 426 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 471 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::further\+\_\+build(), i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+P\+\_\+linearised\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, press, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quadtree\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, and value.
+References oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::further\+\_\+build(), i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+P\+\_\+linearised\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, press, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quadtree\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, and value.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_ad2ea85dbb9ac3434f4314a020b45861f}\label{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_ad2ea85dbb9ac3434f4314a020b45861f}} 
 \index{oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
@@ -107,7 +107,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb0
 
 
 
-Definition at line 420 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 465 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_a46c6b74a900afc0038bcd4f6c33c6c47}\label{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_a46c6b74a900afc0038bcd4f6c33c6c47}} 
 \index{oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -118,7 +118,7 @@ Definition at line 420 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navie
 
 
 Get all function values \mbox{[}U$^\wedge$C,U$^\wedge$S,...,P$^\wedge$S\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). ~\newline
- Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
+Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
 Note\+: No pressure history is kept, so pressure is always the current value. 
 
 
@@ -127,7 +127,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 388 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 429 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -149,7 +149,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 360 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 401 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -171,7 +171,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db9
 
 
 
-Definition at line 256 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 261 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_ae56c7659e171cf0774b843d7db3ed270}\label{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_ae56c7659e171cf0774b843d7db3ed270}} 
 \index{oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement}!nrecovery\_order@{nrecovery\_order}}
@@ -189,7 +189,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 344 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 380 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_a49c1a3a0ec108edf45d9b81c02807469}\label{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_a49c1a3a0ec108edf45d9b81c02807469}} 
 \index{oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement}!nvertex\_node@{nvertex\_node}}
@@ -207,7 +207,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 347 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 386 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -229,7 +229,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line 259 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 267 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -251,7 +251,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetricNavier
 
 
 
-Definition at line 231 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 235 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -273,7 +273,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 351 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 392 of file refineable\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

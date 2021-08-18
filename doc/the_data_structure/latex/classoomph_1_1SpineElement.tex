@@ -2,8 +2,7 @@
 \label{classoomph_1_1SpineElement}\index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
 
 
-The Spine\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ class takes an existing element as a template parameter and adds the necessary additional functionality to allow the element to be update using the Method of Spines. A vector of pointers to spines and storage for the local equation numbers associated with the spines are added to the element. ~\newline
-  
+The Spine\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ class takes an existing element as a template parameter and adds the necessary additional functionality to allow the element to be update using the Method of Spines. A vector of pointers to spines and storage for the local equation numbers associated with the spines are added to the element.  
 
 
 
@@ -31,7 +30,7 @@ int \mbox{\hyperlink{classoomph_1_1SpineElement_aaee520873e49100368ac2362e3d1632
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1SpineElement_a867b5e4eb64d60da9585f8a791fbac36}{complete\+\_\+setup\+\_\+of\+\_\+dependencies}} ()
-\begin{DoxyCompactList}\small\item\em Complete the setup of additional dependencies. Overloads empty virtual function in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} to determine the \char`\"{}geometric 
+\begin{DoxyCompactList}\small\item\em Complete the setup of additional dependencies. Overloads empty virtual function in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} to determine the \char`\"{}geometric
 \+Data\char`\"{}, i.\+e. the \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects the element\textquotesingle{}s shape. This function is called (for all elements) at the very beginning of the equation numbering procedure to ensure that all dependencies are accounted for. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -45,10 +44,9 @@ unsigned $\ast$ \mbox{\hyperlink{classoomph_1_1SpineElement_a222c05c78bc15766a81
 \subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
 class oomph\+::\+Spine\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
-The Spine\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ class takes an existing element as a template parameter and adds the necessary additional functionality to allow the element to be update using the Method of Spines. A vector of pointers to spines and storage for the local equation numbers associated with the spines are added to the element. ~\newline
- 
+The Spine\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ class takes an existing element as a template parameter and adds the necessary additional functionality to allow the element to be update using the Method of Spines. A vector of pointers to spines and storage for the local equation numbers associated with the spines are added to the element. 
 
-Definition at line 419 of file spines.\+h.
+Definition at line 474 of file spines.\+h.
 
 
 
@@ -66,7 +64,7 @@ Constructor, call the constructor of the base element.
 
 
 
-Definition at line 441 of file spines.\+h.
+Definition at line 494 of file spines.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpineElement_aaf749916e9365affb7bed85dcc129e74}\label{classoomph_1_1SpineElement_aaf749916e9365affb7bed85dcc129e74}} 
 \index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}!SpineElement@{SpineElement}}
@@ -81,7 +79,7 @@ Constructor used for spine face elements.
 
 
 
-Definition at line 447 of file spines.\+h.
+Definition at line 502 of file spines.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpineElement_a54acf4222f3807c53075beedd25ed824}\label{classoomph_1_1SpineElement_a54acf4222f3807c53075beedd25ed824}} 
 \index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}!````~SpineElement@{$\sim$SpineElement}}
@@ -96,7 +94,7 @@ Destructor, clean up the storage allocated to the local equation numbers.
 
 
 
-Definition at line 453 of file spines.\+h.
+Definition at line 511 of file spines.\+h.
 
 
 
@@ -110,7 +108,7 @@ void \mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$
 
 
 
-Complete the setup of additional dependencies. Overloads empty virtual function in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} to determine the \char`\"{}geometric 
+Complete the setup of additional dependencies. Overloads empty virtual function in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} to determine the \char`\"{}geometric
 \+Data\char`\"{}, i.\+e. the \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects the element\textquotesingle{}s shape. This function is called (for all elements) at the very beginning of the equation numbering procedure to ensure that all dependencies are accounted for. 
 
 Construct and fill the node\+\_\+update\+\_\+data vector. 
@@ -119,7 +117,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a6d2fa1
 
 
 
-Definition at line 721 of file spines.\+h.
+Definition at line 781 of file spines.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpineElement_aaee520873e49100368ac2362e3d16324}\label{classoomph_1_1SpineElement_aaee520873e49100368ac2362e3d16324}} 
 \index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}!spine\_local\_eqn@{spine\_local\_eqn}}
@@ -134,7 +132,7 @@ Return the local equation number corresponding to the height of the spine at the
 
 
 
-Definition at line 463 of file spines.\+h.
+Definition at line 521 of file spines.\+h.
 
 
 
@@ -152,7 +150,7 @@ Array to hold the index of the geometric data associated with the spine height o
 
 
 
-Definition at line 427 of file spines.\+h.
+Definition at line 481 of file spines.\+h.
 
 
 

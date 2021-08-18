@@ -68,7 +68,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_adab9
 void \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a77621158dba7ea8d2095e4162c76583c}{get\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Returns the local form of the q basis at local coordinate s. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a9d5dc0246e71dce2e217a45754d05472}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) const
-\begin{DoxyCompactList}\small\item\em Returns the local form of the q basis and dbasis/ds at local coordinate s. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_abe8ce45bd70932c365623a1919c69e5d}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of flux\+\_\+interpolation points along each edge of the element. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a2e9c7f4c54eb8e2ef7c1a6f7b058fc0a}{edge\+\_\+flux\+\_\+interpolation\+\_\+point}} (const unsigned \&edge, const unsigned \&j) const
@@ -126,7 +126,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a0ce8
 void \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a480096718751ad8f4d2ceb321e84701d}{get\+\_\+p\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Return the pressure basis. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a588c088e3a89b63f5878d4f174bc19b9}{T\+Axisymmetric\+Poroelasticity\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Second-\/order\+Raviart-\/\+Thomas based Darcy/axisym lin elast equation element ////////////////////////////////////////////////////////////////////////. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor. Order 1 elements have 3 pressure dofs and 2 internal velocity dofs. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_ab17aa9b74f54492302d814443e6a7212}{$\sim$\+T\+Axisymmetric\+Poroelasticity\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a8cb5b6d2aa7c1c5b0013934dee429995}{nq\+\_\+basis\+\_\+edge}} () const
@@ -155,17 +155,25 @@ double \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_acc7a87
 \item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_afa1c2a01bd17a61c86a672410a69f949}{Initial\+\_\+\+Nvalue}} \mbox{[}6\mbox{]}
 \begin{DoxyCompactList}\small\item\em The number of values stored at each node. \end{DoxyCompactList}\item 
+const unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_af7991c7b1de732ad99def009ce2c8f5e}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Face index associated with edge flux degree of freedom. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a6ac5d1648ac4fa381194091361208670}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
 \item 
+const double \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_ad85e114c40726205ee4dfa013f07cb0b}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}1\mbox{]}
+\begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are taken to be. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a4ac767242cdc990b9617e24ed82f9498}{Initial\+\_\+\+Nvalue}} \mbox{[}6\mbox{]}
 \begin{DoxyCompactList}\small\item\em The number of values stored at each node. \end{DoxyCompactList}\item 
+const unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a1b9647b96c4416db7d2d13027b197647}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Face index associated with edge flux degree of freedom. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a0dcd9244044156ea10955d1386b50125}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
-\begin{DoxyCompactList}\small\item\em Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+const double \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a1e83a49d3d720f24a2d12d3e9f6e7036}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are taken to be. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a22ed2100966da5e73fd7d38d58bee36c}{Q\+\_\+internal\+\_\+data\+\_\+index}}
-\begin{DoxyCompactList}\small\item\em The internal data index where the internal q degrees of freedom are stored. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a439e9489d185eeae1b1085dde8ae0e7d}{P\+\_\+internal\+\_\+data\+\_\+index}}
 \begin{DoxyCompactList}\small\item\em The internal data index where the p degrees of freedom are stored. \end{DoxyCompactList}\item 
 std\+::vector$<$ short $>$ \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement_a19992fa82fa97f7f16aad3209d8bd8a0}{Sign\+\_\+edge}}
@@ -191,7 +199,7 @@ class oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$}
 ================================================================= Element which solves the Darcy/linear elasticity equations using T\+Elements Geometrically the element is always a six noded triangle. We use the mid-\/side nodes to store edge-\/based flux degrees of freedom and internal data for the discontinuous pressure \hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_autotoc_md1}{}\doxysubsection{and internal flux dofs.}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_autotoc_md1}
 
 
-Definition at line 49 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 48 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -230,7 +238,7 @@ Constructor. Order 0 elements have 1 pressure dof and no internal flux dofs.
 
 Lowest-\/order Raviart-\/\+Thomas based Darcy/axisym lin elast equation element 
 
-Definition at line 42 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 41 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 
 
@@ -248,7 +256,7 @@ Destructor.
 
 
 
-Definition at line 54 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 51 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a588c088e3a89b63f5878d4f174bc19b9}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a588c088e3a89b63f5878d4f174bc19b9}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!TAxisymmetricPoroelasticityElement@{TAxisymmetricPoroelasticityElement}}
@@ -258,11 +266,11 @@ Definition at line 54 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 
 
-Second-\/order\+Raviart-\/\+Thomas based Darcy/axisym lin elast equation element ////////////////////////////////////////////////////////////////////////. 
+Constructor. Order 1 elements have 3 pressure dofs and 2 internal velocity dofs. 
 
-Constructor. Order 1 elements have 3 pressure dofs and 2 internal velocity dofs 
+Second-\/order\+Raviart-\/\+Thomas based Darcy/axisym lin elast equation element 
 
-Definition at line 186 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 181 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 
 
@@ -280,7 +288,7 @@ Destructor.
 
 
 
-Definition at line 200 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 193 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 
 
@@ -302,7 +310,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ad
 
 
 
-Definition at line 387 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 376 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -329,7 +337,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a9
 
 
 
-Definition at line 419 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 407 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -348,7 +356,7 @@ Get pointer to node that stores the edge flux dofs for specified edge.
 
 
 
-Definition at line 254 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 245 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -371,7 +379,35 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a7
 
 
 
-Definition at line 93 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 91 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_af7991c7b1de732ad99def009ce2c8f5e}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_af7991c7b1de732ad99def009ce2c8f5e}} 
+\index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}}
+\index{Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}!oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{Face\_index\_of\_edge\_flux()}{Face\_index\_of\_edge\_flux()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement}{oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element}}$<$ 0 $>$\+::Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Face index associated with edge flux degree of freedom. 
+
+
+
+Definition at line 150 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a1b9647b96c4416db7d2d13027b197647}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a1b9647b96c4416db7d2d13027b197647}} 
+\index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}}
+\index{Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}!oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{Face\_index\_of\_edge\_flux()}{Face\_index\_of\_edge\_flux()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement}{oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element}}$<$ 1 $>$\+::Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Face index associated with edge flux degree of freedom. 
+
+
+
+Definition at line 351 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_ac7f6238d6a5734895b6b04812873e66a}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_ac7f6238d6a5734895b6b04812873e66a}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!face\_index\_of\_q\_edge\_basis\_fct@{face\_index\_of\_q\_edge\_basis\_fct}}
@@ -390,7 +426,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a6
 
 
 
-Definition at line 131 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 127 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -413,11 +449,39 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a5
 
 
 
-Definition at line 100 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 98 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point(), n, oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::\+Q\+\_\+edge\+\_\+conv, and s.
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_ad85e114c40726205ee4dfa013f07cb0b}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_ad85e114c40726205ee4dfa013f07cb0b}} 
+\index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!Flux\_interpolation\_point@{Flux\_interpolation\_point}}
+\index{Flux\_interpolation\_point@{Flux\_interpolation\_point}!oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{Flux\_interpolation\_point()}{Flux\_interpolation\_point()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement}{oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element}}$<$ 0 $>$\+::Flux\+\_\+interpolation\+\_\+point\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The points along each edge where the fluxes are taken to be. 
+
+
+
+Definition at line 167 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a1e83a49d3d720f24a2d12d3e9f6e7036}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a1e83a49d3d720f24a2d12d3e9f6e7036}} 
+\index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!Flux\_interpolation\_point@{Flux\_interpolation\_point}}
+\index{Flux\_interpolation\_point@{Flux\_interpolation\_point}!oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{Flux\_interpolation\_point()}{Flux\_interpolation\_point()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement}{oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element}}$<$ 1 $>$\+::Flux\+\_\+interpolation\+\_\+point\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The points along each edge where the fluxes are taken to be. 
+
+
+
+Definition at line 368 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_ab441679b6aa6ec20486fb23aee9e2c80}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_ab441679b6aa6ec20486fb23aee9e2c80}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}}
@@ -435,7 +499,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ab
 
 
 
-Definition at line 99 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 95 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a138a9d4ac957cda0434f7de467b7ecbe}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a138a9d4ac957cda0434f7de467b7ecbe}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}}
@@ -453,7 +517,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ab
 
 
 
-Definition at line 274 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 271 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 
 
@@ -466,11 +530,7 @@ References s.
 {\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
 void \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement}{oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element}}$<$ O\+R\+D\+ER $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
-
-
-Returns the local form of the q basis and dbasis/ds at local coordinate s. 
-
-
+Returns the local form of the q basis and dbasis/ds at local coordinate s 
 
 Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_abe3e6e28eb58ae719a6180d0d57b1815}{oomph\+::\+Axisymmetric\+Poroelasticity\+Equations}}.
 
@@ -494,7 +554,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ae
 
 
 
-Definition at line 136 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 131 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_aa7a5194879f253b184a3082131fdc881}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_aa7a5194879f253b184a3082131fdc881}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!get\_p\_basis@{get\_p\_basis}}
@@ -512,7 +572,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ae
 
 
 
-Definition at line 333 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 330 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 
 
@@ -553,7 +613,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_af
 
 
 
-Definition at line 80 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 77 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 
 
@@ -575,7 +635,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_af
 
 
 
-Definition at line 225 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 219 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 
 
@@ -612,7 +672,7 @@ The number of values stored at each node.
 
 
 
-Definition at line 147 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 141 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a4ac767242cdc990b9617e24ed82f9498}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a4ac767242cdc990b9617e24ed82f9498}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -626,7 +686,7 @@ The number of values stored at each node.
 
 
 
-Definition at line 346 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 342 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_acd4d1c40b922904e04e28999eb5fb28f}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_acd4d1c40b922904e04e28999eb5fb28f}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!nedge\_flux\_interpolation\_point@{nedge\_flux\_interpolation\_point}}
@@ -640,7 +700,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a1
 
 
 
-Definition at line 118 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 113 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a061e97b842af857c2f001e6cf52b3331}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a061e97b842af857c2f001e6cf52b3331}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!nedge\_flux\_interpolation\_point@{nedge\_flux\_interpolation\_point}}
@@ -654,7 +714,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a1
 
 
 
-Definition at line 315 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 312 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_abe8ce45bd70932c365623a1919c69e5d}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_abe8ce45bd70932c365623a1919c69e5d}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!nedge\_flux\_interpolation\_point@{nedge\_flux\_interpolation\_point}}
@@ -691,7 +751,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a8
 
 
 
-Definition at line 127 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 122 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_ae4988eeb635e17360e5a25cf319e6acf}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_ae4988eeb635e17360e5a25cf319e6acf}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!np\_basis@{np\_basis}}
@@ -709,7 +769,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a8
 
 
 
-Definition at line 324 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 321 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_ae1fdf6e051bbc93b8c485f1d3f9fb9c6}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_ae1fdf6e051bbc93b8c485f1d3f9fb9c6}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!np\_basis@{np\_basis}}
@@ -746,7 +806,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_aa
 
 
 
-Definition at line 62 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 59 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a8cb5b6d2aa7c1c5b0013934dee429995}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a8cb5b6d2aa7c1c5b0013934dee429995}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!nq\_basis\_edge@{nq\_basis\_edge}}
@@ -764,7 +824,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_aa
 
 
 
-Definition at line 207 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 201 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a55279875613735471b7b925116e85292}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a55279875613735471b7b925116e85292}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!nq\_basis\_edge@{nq\_basis\_edge}}
@@ -801,7 +861,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_af
 
 
 
-Definition at line 71 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 68 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a42a143c622c2ad61c4ecbf7998da17c6}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a42a143c622c2ad61c4ecbf7998da17c6}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!nq\_basis\_internal@{nq\_basis\_internal}}
@@ -819,7 +879,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_af
 
 
 
-Definition at line 216 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 210 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_adab98934a20e65055bdc477824c8c5ef}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_adab98934a20e65055bdc477824c8c5ef}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!nq\_basis\_internal@{nq\_basis\_internal}}
@@ -857,7 +917,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 647 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 634 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a0ca2892eb086103a351bcd202f10f98d}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a0ca2892eb086103a351bcd202f10f98d}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!nvertex\_node@{nvertex\_node}}
@@ -876,7 +936,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3
 
 
 
-Definition at line 639 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 622 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_ab7754062a0e98148d1a1bdf153353772}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_ab7754062a0e98148d1a1bdf153353772}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!output@{output}}
@@ -895,7 +955,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEqua
 
 
 
-Definition at line 625 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 608 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -918,7 +978,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEqua
 
 
 
-Definition at line 632 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 615 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -941,7 +1001,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a5
 
 
 
-Definition at line 561 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 543 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -964,7 +1024,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_af
 
 
 
-Definition at line 499 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 485 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -987,7 +1047,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_aa
 
 
 
-Definition at line 517 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 502 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1010,7 +1070,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_aa
 
 
 
-Definition at line 542 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 525 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1033,7 +1093,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ac
 
 
 
-Definition at line 334 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 321 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1056,7 +1116,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a7
 
 
 
-Definition at line 480 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 467 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1079,7 +1139,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ad
 
 
 
-Definition at line 260 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 251 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1102,7 +1162,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a8
 
 
 
-Definition at line 279 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 269 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1116,7 +1176,7 @@ References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+T\+Axisy
 
 Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at 
 
-Definition at line 163 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 158 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a0dcd9244044156ea10955d1386b50125}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a0dcd9244044156ea10955d1386b50125}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!Q\_edge\_conv@{Q\_edge\_conv}}
@@ -1124,13 +1184,9 @@ Definition at line 163 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 \doxysubsubsection{\texorpdfstring{Q\_edge\_conv()}{Q\_edge\_conv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement}{oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element}}$<$ 1 $>$\+::Q\+\_\+edge\+\_\+conv\hspace{0.3cm}{\ttfamily [private]}}
 
+Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at 
 
-
-Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at. 
-
-
-
-Definition at line 362 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
+Definition at line 360 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_af13ce25c9c2d1a907690319576631b87}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_af13ce25c9c2d1a907690319576631b87}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!q\_edge\_data\_pt@{q\_edge\_data\_pt}}
@@ -1149,7 +1205,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a2
 
 
 
-Definition at line 193 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 186 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1172,7 +1228,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a5
 
 
 
-Definition at line 217 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 210 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1199,7 +1255,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a2
 
 
 
-Definition at line 156 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 151 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1222,7 +1278,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a3
 
 
 
-Definition at line 235 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 227 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1249,7 +1305,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_aa
 
 
 
-Definition at line 297 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 286 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1272,7 +1328,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ac
 
 
 
-Definition at line 316 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 304 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1295,7 +1351,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ad
 
 
 
-Definition at line 204 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 197 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1318,7 +1374,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a0
 
 
 
-Definition at line 211 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 204 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1345,7 +1401,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a3
 
 
 
-Definition at line 174 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 168 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1368,7 +1424,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a9
 
 
 
-Definition at line 87 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 85 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1391,7 +1447,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a2
 
 
 
-Definition at line 573 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 555 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1414,7 +1470,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a9
 
 
 
-Definition at line 567 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 549 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1437,7 +1493,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a4
 
 
 
-Definition at line 341 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 328 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1460,7 +1516,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a3
 
 
 
-Definition at line 348 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 335 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1483,7 +1539,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a5
 
 
 
-Definition at line 355 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 342 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1506,7 +1562,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_af
 
 
 
-Definition at line 362 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 349 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1529,7 +1585,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a5
 
 
 
-Definition at line 656 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 642 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1556,7 +1612,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a3
 
 
 
-Definition at line 695 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 681 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1575,7 +1631,7 @@ Accessor for the unit normal sign of edge n.
 
 
 
-Definition at line 619 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 602 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1594,7 +1650,7 @@ Accessor for the unit normal sign of edge n (const version)
 
 
 
-Definition at line 613 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 596 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1621,7 +1677,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a2
 
 
 
-Definition at line 138 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 134 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TAxisymmetricPoroelasticityElement_a1749e03cc97bca4463870f4640e444b0}\label{classoomph_1_1TAxisymmetricPoroelasticityElement_a1749e03cc97bca4463870f4640e444b0}} 
 \index{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$@{oomph::TAxisymmetricPoroelasticityElement$<$ ORDER $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
@@ -1640,7 +1696,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a863c4382c879a77
 
 
 
-Definition at line 643 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 628 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1658,7 +1714,7 @@ Face index associated with edge flux degree of freedom.
 
 
 
-Definition at line 59 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 57 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1677,7 +1733,7 @@ The points along each edge where the fluxes are taken to be.
 
 
 
-Definition at line 66 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 64 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1696,7 +1752,7 @@ The number of values stored at each node.
 
 
 
-Definition at line 56 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 54 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1715,7 +1771,7 @@ The internal data index where the p degrees of freedom are stored.
 
 
 
-Definition at line 72 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 71 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1734,7 +1790,7 @@ Conversion scheme from an edge degree of freedom to the node it\textquotesingle{
 
 
 
-Definition at line 63 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 61 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1747,13 +1803,9 @@ Referenced by oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\
 {\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
 unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement}{oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element}}$<$ O\+R\+D\+ER $>$\+::Q\+\_\+internal\+\_\+data\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
 
+The internal data index where the internal q degrees of freedom are stored 
 
-
-The internal data index where the internal q degrees of freedom are stored. 
-
-
-
-Definition at line 69 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 68 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -1772,7 +1824,7 @@ Unit normal signs associated with each edge to ensure inter-\/element continuity
 
 
 
-Definition at line 76 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
+Definition at line 75 of file Taxisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 

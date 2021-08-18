@@ -176,16 +176,17 @@ We use multiple inheritance to upgrade an existing refineable Navier-\/\+Stokes 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//======================nst\_bous\_class=================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Build a refineable Navier Stokes element that inherits from }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// ElementWithExternalElement so that it can "communicate" with }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// an advection diffusion element that provides the temperature}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// in the body force term.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT, \textcolor{keyword}{class} AD\_ELEMENT>}
-\DoxyCodeLine{\textcolor{keyword}{class }RefineableNavierStokesBoussinesqElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} NST\_ELEMENT,}
-\DoxyCodeLine{\textcolor{keyword}{public} \textcolor{keyword}{virtual} ElementWithExternalElement}
-\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{comment}{//======================nst\_bous\_class=================================}}
+\DoxyCodeLine{\textcolor{comment}{  /// Build a refineable Navier Stokes element that inherits from}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// ElementWithExternalElement so that it can "communicate" with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// an advection diffusion element that provides the temperature}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// in the body force term.}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT, \textcolor{keyword}{class} AD\_ELEMENT>}
+\DoxyCodeLine{  \textcolor{keyword}{class }RefineableNavierStokesBoussinesqElement}
+\DoxyCodeLine{    : \textcolor{keyword}{public} \textcolor{keyword}{virtual} NST\_ELEMENT,}
+\DoxyCodeLine{      \textcolor{keyword}{public} \textcolor{keyword}{virtual} ElementWithExternalElement}
+\DoxyCodeLine{  \{}
 
 \end{DoxyCodeInclude}
 
@@ -194,21 +195,19 @@ The constructor calls the constructors of the underlying elements, initialises t
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ }
-\DoxyCodeLine{  \textcolor{keyword}{public}: }
-\DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: call the underlying constructors and }}
-\DoxyCodeLine{\textcolor{comment}{ /// initialise the pointer to the Rayleigh number to point}}
-\DoxyCodeLine{\textcolor{comment}{ /// to the default value of 0.0.}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableNavierStokesBoussinesqElement() : }
-\DoxyCodeLine{  NST\_ELEMENT(), ElementWithExternalElement()}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   Ra\_pt = \&\mbox{\hyperlink{namespaceoomph_1_1MultiDomainBoussinesqHelper_ae77c07b69cffe295ac07e2c25c31a8aa}{MultiDomainBoussinesqHelper::Default\_Physical\_Constant\_Value}};}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{//There is one interaction: The effect of the advection-\/diffusion}}
-\DoxyCodeLine{   \textcolor{comment}{//element onto the buoyancy term}}
-\DoxyCodeLine{   this-\/>set\_ninteraction(1);}
-\DoxyCodeLine{  \} }
+\DoxyCodeLine{  \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Constructor: call the underlying constructors and}}
+\DoxyCodeLine{\textcolor{comment}{    /// initialise the pointer to the Rayleigh number to point}}
+\DoxyCodeLine{\textcolor{comment}{    /// to the default value of 0.0.}}
+\DoxyCodeLine{\textcolor{comment}{}    RefineableNavierStokesBoussinesqElement()}
+\DoxyCodeLine{      : NST\_ELEMENT(), ElementWithExternalElement()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      Ra\_pt = \&\mbox{\hyperlink{namespaceoomph_1_1MultiDomainBoussinesqHelper_ae77c07b69cffe295ac07e2c25c31a8aa}{MultiDomainBoussinesqHelper::Default\_Physical\_Constant\_Value}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// There is one interaction: The effect of the advection-\/diffusion}}
+\DoxyCodeLine{      \textcolor{comment}{// element onto the buoyancy term}}
+\DoxyCodeLine{      this-\/>set\_ninteraction(1);}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -217,12 +216,6 @@ We provide access functions to the Rayleigh number
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  ///Access function for the Rayleigh number (const version)}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ra()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} *Ra\_pt;\}}
-\DoxyCodeLine{  \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  ///Access function for the pointer to the Rayleigh number}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{double}* \&ra\_pt() \{\textcolor{keywordflow}{return} Ra\_pt;\}}
 
 \end{DoxyCodeInclude}
 
@@ -231,32 +224,6 @@ and, given that we are dealing with a refineable element, make sure that the poi
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Call the underlying single-\/physics element's further\_build()}}
-\DoxyCodeLine{\textcolor{comment}{  /// functions and make sure that the pointer to the Rayleigh number}}
-\DoxyCodeLine{\textcolor{comment}{  /// is passed to the sons. Also make sure that if the external geometric}}
-\DoxyCodeLine{\textcolor{comment}{  /// Data was ignored in the father it's also ignored in the sons}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} further\_build()}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   NST\_ELEMENT::further\_build();}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{//Cast the pointer to the father element to the specific}}
-\DoxyCodeLine{   \textcolor{comment}{//element type}}
-\DoxyCodeLine{   RefineableNavierStokesBoussinesqElement<NST\_ELEMENT,AD\_ELEMENT>* }
-\DoxyCodeLine{    cast\_father\_element\_pt}
-\DoxyCodeLine{    = \textcolor{keyword}{dynamic\_cast<}RefineableNavierStokesBoussinesqElement}
-\DoxyCodeLine{    <NST\_ELEMENT,AD\_ELEMENT\textcolor{keyword}{>}*>(}
-\DoxyCodeLine{     this-\/>father\_element\_pt());}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{//Set the pointer to the Rayleigh number to be the same as that in}}
-\DoxyCodeLine{   \textcolor{comment}{//the father}}
-\DoxyCodeLine{   this-\/>Ra\_pt = cast\_father\_element\_pt-\/>ra\_pt();}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Retain ignorance about external geometric data...}}
-\DoxyCodeLine{   \textcolor{keywordflow}{if} (!cast\_father\_element\_pt-\/>external\_geometric\_data\_is\_included())}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{     this-\/>ignore\_external\_geometric\_data();}
-\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -265,39 +232,40 @@ The most important step is to overload the function that computes the body force
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  \textcolor{comment}{/// \(\backslash\)short Overload get\_body\_force\_nst() to return the temperature-\/dependent}}
-\DoxyCodeLine{\textcolor{comment}{  /// buoyancy force, using the temperature computed by the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// "external" advection diffusion element associated with }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// integration point \(\backslash\)c ipt.}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt, }
-\DoxyCodeLine{                          \textcolor{keyword}{const} Vector<double> \&s, \textcolor{keyword}{const} Vector<double> \&x, }
-\DoxyCodeLine{                          Vector<double> \&body\_force)}
-\DoxyCodeLine{  \{   }
-\DoxyCodeLine{   \textcolor{comment}{// Set interaction index -\/-\/ there's only one interaction...}}
-\DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} interaction=0;}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Get a pointer to the external element that computes the}}
-\DoxyCodeLine{   \textcolor{comment}{// the temperature -\/-\/ we know it's an advection diffusion element.}}
-\DoxyCodeLine{   \textcolor{keyword}{const} AD\_ELEMENT* adv\_diff\_el\_pt=}
-\DoxyCodeLine{    \textcolor{keyword}{dynamic\_cast<}AD\_ELEMENT*\textcolor{keyword}{>}(}
-\DoxyCodeLine{     external\_element\_pt(interaction,ipt));}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Get the temperature interpolated from the external element}}
-\DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{double} interpolated\_t =adv\_diff\_el\_pt-\/>}
-\DoxyCodeLine{    interpolated\_u\_adv\_diff(external\_element\_local\_coord(interaction,ipt));}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Get vector that indicates the direction of gravity from}}
-\DoxyCodeLine{   \textcolor{comment}{// the Navier-\/Stokes equations}}
-\DoxyCodeLine{   Vector<double> gravity(NST\_ELEMENT::g());}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Set the temperature-\/dependent body force:}}
-\DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim=this-\/>dim();}
-\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<n\_dim;i++)}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Overload get\_body\_force\_nst() to return the temperature-\/dependent}}
+\DoxyCodeLine{\textcolor{comment}{    /// buoyancy force, using the temperature computed by the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// "external" advection diffusion element associated with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// integration point \(\backslash\)c ipt.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
+\DoxyCodeLine{                            \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
+\DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double>\& s,}
+\DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double>\& x,}
+\DoxyCodeLine{                            Vector<double>\& body\_force)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     body\_force[i] = -\/gravity[i]*interpolated\_t*ra();}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{   }
-\DoxyCodeLine{  \} \textcolor{comment}{// end overloaded body force}}
+\DoxyCodeLine{      \textcolor{comment}{// Set interaction index -\/-\/ there's only one interaction...}}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} interaction = 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Get a pointer to the external element that computes the}}
+\DoxyCodeLine{      \textcolor{comment}{// the temperature -\/-\/ we know it's an advection diffusion element.}}
+\DoxyCodeLine{      \textcolor{keyword}{const} AD\_ELEMENT* adv\_diff\_el\_pt =}
+\DoxyCodeLine{        \textcolor{keyword}{dynamic\_cast<}AD\_ELEMENT*\textcolor{keyword}{>}(external\_element\_pt(interaction, ipt));}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Get the temperature interpolated from the external element}}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{double} interpolated\_t = adv\_diff\_el\_pt-\/>interpolated\_u\_adv\_diff(}
+\DoxyCodeLine{        external\_element\_local\_coord(interaction, ipt));}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Get vector that indicates the direction of gravity from}}
+\DoxyCodeLine{      \textcolor{comment}{// the Navier-\/Stokes equations}}
+\DoxyCodeLine{      Vector<double> gravity(NST\_ELEMENT::g());}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Set the temperature-\/dependent body force:}}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim = this-\/>dim();}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_dim; i++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        body\_force[i] = -\/gravity[i] * interpolated\_t * ra();}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \} \textcolor{comment}{// end overloaded body force}}
 
 \end{DoxyCodeInclude}
 
@@ -309,13 +277,7 @@ Finally, we have to compute the element\textquotesingle{}s Jacobian matrix. The 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Compute the element's residual vector and the Jacobian matrix.}}
-\DoxyCodeLine{  \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double> \&residuals,}
-\DoxyCodeLine{                                        DenseMatrix<double> \&jacobian)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{//Get the analytical contribution from the basic Navier-\/Stokes element}}
-\DoxyCodeLine{   NST\_ELEMENT::fill\_in\_contribution\_to\_jacobian(residuals,jacobian);}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Compute the element's residual vector and the Jacobian matrix.}}
 
 \end{DoxyCodeInclude}
 
@@ -325,13 +287,6 @@ elements\char`\"{} by finite differencing\+:
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{   }
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef USE\_FD\_FOR\_DERIVATIVES\_WRT\_EXTERNAL\_DATA\_IN\_MULTI\_DOMAIN\_BOUSSINESQ}}
-\DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Get the off-\/diagonal terms by finite differencing}}
-\DoxyCodeLine{   this-\/>fill\_in\_jacobian\_from\_external\_interaction\_by\_fd(residuals,jacobian);}
-\DoxyCodeLine{   }
-\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 
 \end{DoxyCodeInclude}
 
@@ -340,13 +295,6 @@ If this is deemed to be too inefficient, we can provide a function that computes
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{//Get the off-\/diagonal terms analytically}}
-\DoxyCodeLine{   this-\/>fill\_in\_off\_diagonal\_block\_analytic(residuals,jacobian);}
-\DoxyCodeLine{   }
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{   }
-\DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
 
@@ -364,25 +312,24 @@ Upgrading the advection-\/diffusion element to an {\ttfamily Element\+With\+Exte
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//======================ad\_bous\_class==================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Build an AdvectionDiffusionElement that inherits from }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// ElementWithExternalElement so that it can "communicate" with the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// a NavierStokesElement that provides its wind.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} AD\_ELEMENT, \textcolor{keyword}{class} NST\_ELEMENT>}
-\DoxyCodeLine{\textcolor{keyword}{class }RefineableAdvectionDiffusionBoussinesqElement : }
-\DoxyCodeLine{\textcolor{keyword}{public} \textcolor{keyword}{virtual} AD\_ELEMENT, \textcolor{keyword}{public} \textcolor{keyword}{virtual} ElementWithExternalElement}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{public}:}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: call the underlying constructors}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableAdvectionDiffusionBoussinesqElement() : }
-\DoxyCodeLine{  AD\_ELEMENT(), ElementWithExternalElement() }
-\DoxyCodeLine{  \{ }
-\DoxyCodeLine{   \textcolor{comment}{//There is one interaction}}
-\DoxyCodeLine{   this-\/>set\_ninteraction(1);}
-\DoxyCodeLine{  \}}
+\DoxyCodeLine{  \textcolor{comment}{//======================ad\_bous\_class==================================}}
+\DoxyCodeLine{\textcolor{comment}{  /// Build an AdvectionDiffusionElement that inherits from}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// ElementWithExternalElement so that it can "communicate" with the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// a NavierStokesElement that provides its wind.}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} AD\_ELEMENT, \textcolor{keyword}{class} NST\_ELEMENT>}
+\DoxyCodeLine{  \textcolor{keyword}{class }RefineableAdvectionDiffusionBoussinesqElement}
+\DoxyCodeLine{    : \textcolor{keyword}{public} \textcolor{keyword}{virtual} AD\_ELEMENT,}
+\DoxyCodeLine{      \textcolor{keyword}{public} \textcolor{keyword}{virtual} ElementWithExternalElement}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{  \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Constructor: call the underlying constructors}}
+\DoxyCodeLine{\textcolor{comment}{}    RefineableAdvectionDiffusionBoussinesqElement()}
+\DoxyCodeLine{      : AD\_ELEMENT(), ElementWithExternalElement()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// There is one interaction}}
+\DoxyCodeLine{      this-\/>set\_ninteraction(1);}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -391,25 +338,7 @@ We overload the function that computes the \char`\"{}wind\char`\"{} for the adve
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Overload the wind function in the advection-\/diffusion equations.}}
-\DoxyCodeLine{\textcolor{comment}{ /// This provides the coupling from the Navier-\/-\/Stokes equations to the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// advection-\/diffusion equations because the wind is the fluid velocity,}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// obtained from the "external" element}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} get\_wind\_adv\_diff(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt, \textcolor{keyword}{const} Vector<double> \&s, }
-\DoxyCodeLine{                        \textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& wind)\textcolor{keyword}{ const}}
-\DoxyCodeLine{\textcolor{keyword}{ }\{}
-\DoxyCodeLine{  \textcolor{comment}{// There is only one interaction}}
-\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} interaction=0;}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{// Dynamic cast "external" element to Navier Stokes element}}
-\DoxyCodeLine{  NST\_ELEMENT* nst\_el\_pt= \textcolor{keyword}{dynamic\_cast<}NST\_ELEMENT*\textcolor{keyword}{>}}
-\DoxyCodeLine{   (external\_element\_pt(interaction,ipt));}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{//Wind is given by the velocity in the Navier Stokes element}}
-\DoxyCodeLine{  nst\_el\_pt-\/>interpolated\_u\_nst}
-\DoxyCodeLine{   (external\_element\_local\_coord(interaction,ipt),wind);}
-\DoxyCodeLine{  }
-\DoxyCodeLine{ \}  \textcolor{comment}{//end of get\_wind\_adv\_diff}}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Overload the wind function in the advection-\/diffusion equations.}}
 
 \end{DoxyCodeInclude}
 
@@ -420,26 +349,6 @@ The element\textquotesingle{}s Jacobian matrix can be computed by the same metho
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{///\(\backslash\)short Compute the element's residual vector and the Jacobian matrix.}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double> \&residuals,}
-\DoxyCodeLine{                                       DenseMatrix<double> \&jacobian)}
-\DoxyCodeLine{ \{}
-\DoxyCodeLine{  \textcolor{comment}{//Get the contribution from the basic advection diffusion element}}
-\DoxyCodeLine{  AD\_ELEMENT::fill\_in\_contribution\_to\_jacobian(residuals,jacobian);}
-\DoxyCodeLine{  }
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef USE\_FD\_FOR\_DERIVATIVES\_WRT\_EXTERNAL\_DATA\_IN\_MULTI\_DOMAIN\_BOUSSINESQ}}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{//Get the off-\/diagonal terms by finite differencing}}
-\DoxyCodeLine{  this-\/>fill\_in\_jacobian\_from\_external\_interaction\_by\_fd(residuals,jacobian);}
-\DoxyCodeLine{  }
-\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{//Get the off-\/diagonal terms analytically}}
-\DoxyCodeLine{  this-\/>fill\_in\_off\_diagonal\_block\_analytic(residuals,jacobian);}
-\DoxyCodeLine{  }
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{  }
-\DoxyCodeLine{ \}}
 
 \end{DoxyCodeInclude}
 
@@ -846,53 +755,52 @@ The function {\ttfamily Element\+With\+External\+Element\+::identify\+\_\+all\+\
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//================optimised\_identification\_of\_field\_data==================}}
-\DoxyCodeLine{\textcolor{comment}{/// Overload the function that must return all field data involved}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// in the interaction with the external (Navier Stokes) element. }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Only the velocity dofs in the Navier Stokes element affect the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// interaction with the current element. }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} AD\_ELEMENT, \textcolor{keyword}{class} NST\_ELEMENT>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} RefineableAdvectionDiffusionBoussinesqElement<AD\_ELEMENT,NST\_ELEMENT>::}
-\DoxyCodeLine{identify\_all\_field\_data\_for\_external\_interaction(}
-\DoxyCodeLine{ Vector<std::set<FiniteElement*> > \textcolor{keyword}{const} \&external\_elements\_pt,}
-\DoxyCodeLine{ std::set<std::pair<Data*,unsigned> > \&paired\_interaction\_data)}
-\DoxyCodeLine{ \{}
-\DoxyCodeLine{  \textcolor{comment}{//There's only one interaction}}
-\DoxyCodeLine{  \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} interaction = 0;}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{// Loop over each Navier Stokes element in the set of external elements that}}
-\DoxyCodeLine{  \textcolor{comment}{// affect the current element}}
-\DoxyCodeLine{  \textcolor{keywordflow}{for}(std::set<FiniteElement*>::iterator it=}
-\DoxyCodeLine{       external\_elements\_pt[interaction].begin();}
-\DoxyCodeLine{      it != external\_elements\_pt[interaction].end(); it++)}
-\DoxyCodeLine{   \{}
-\DoxyCodeLine{    }
-\DoxyCodeLine{    \textcolor{comment}{//Cast the external element to a fluid element}}
-\DoxyCodeLine{    NST\_ELEMENT* external\_fluid\_el\_pt =}
-\DoxyCodeLine{     \textcolor{keyword}{dynamic\_cast<}NST\_ELEMENT*\textcolor{keyword}{>}(*it);}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Loop over the nodes}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} nnod=external\_fluid\_el\_pt-\/>nnode();}
-\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j=0;j<nnod;j++)}
+\DoxyCodeLine{  \textcolor{comment}{//================optimised\_identification\_of\_field\_data==================}}
+\DoxyCodeLine{\textcolor{comment}{  /// Overload the function that must return all field data involved}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// in the interaction with the external (Navier Stokes) element.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// Only the velocity dofs in the Navier Stokes element affect the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// interaction with the current element.}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} AD\_ELEMENT, \textcolor{keyword}{class} NST\_ELEMENT>}
+\DoxyCodeLine{  \textcolor{keywordtype}{void} RefineableAdvectionDiffusionBoussinesqElement<AD\_ELEMENT, NST\_ELEMENT>::}
+\DoxyCodeLine{    identify\_all\_field\_data\_for\_external\_interaction(}
+\DoxyCodeLine{      Vector<std::set<FiniteElement*>> \textcolor{keyword}{const}\& external\_elements\_pt,}
+\DoxyCodeLine{      std::set<std::pair<Data*, unsigned>>\& paired\_interaction\_data)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{    \textcolor{comment}{// There's only one interaction}}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} interaction = 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Loop over each Navier Stokes element in the set of external elements that}}
+\DoxyCodeLine{    \textcolor{comment}{// affect the current element}}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (std::set<FiniteElement*>::iterator it =}
+\DoxyCodeLine{           external\_elements\_pt[interaction].begin();}
+\DoxyCodeLine{         it != external\_elements\_pt[interaction].end();}
+\DoxyCodeLine{         it++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     \textcolor{comment}{// Pointer to node (in its incarnation as Data)}}
-\DoxyCodeLine{     Data* veloc\_data\_pt=external\_fluid\_el\_pt-\/>node\_pt(j);}
-\DoxyCodeLine{     }
-\DoxyCodeLine{     \textcolor{comment}{// Get all velocity dofs}}
-\DoxyCodeLine{     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim=this-\/>dim();}
-\DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<n\_dim;i++)}
+\DoxyCodeLine{      \textcolor{comment}{// Cast the external element to a fluid element}}
+\DoxyCodeLine{      NST\_ELEMENT* external\_fluid\_el\_pt = \textcolor{keyword}{dynamic\_cast<}NST\_ELEMENT*\textcolor{keyword}{>}(*it);}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Loop over the nodes}}
+\DoxyCodeLine{      \textcolor{keywordtype}{unsigned} nnod = external\_fluid\_el\_pt-\/>nnode();}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       \textcolor{comment}{// Which value corresponds to the i-\/th velocity?}}
-\DoxyCodeLine{       \textcolor{keywordtype}{unsigned} val=external\_fluid\_el\_pt-\/>u\_index\_nst(i);}
-\DoxyCodeLine{       }
-\DoxyCodeLine{       \textcolor{comment}{// Turn pointer to Data and index of value into pair}}
-\DoxyCodeLine{       \textcolor{comment}{// and add to the set}}
-\DoxyCodeLine{       paired\_interaction\_data.insert(std::make\_pair(veloc\_data\_pt,val));}
+\DoxyCodeLine{        \textcolor{comment}{// Pointer to node (in its incarnation as Data)}}
+\DoxyCodeLine{        Data* veloc\_data\_pt = external\_fluid\_el\_pt-\/>node\_pt(j);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Get all velocity dofs}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim = this-\/>dim();}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_dim; i++)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{          \textcolor{comment}{// Which value corresponds to the i-\/th velocity?}}
+\DoxyCodeLine{          \textcolor{keywordtype}{unsigned} val = external\_fluid\_el\_pt-\/>u\_index\_nst(i);}
+\DoxyCodeLine{}
+\DoxyCodeLine{          \textcolor{comment}{// Turn pointer to Data and index of value into pair}}
+\DoxyCodeLine{          \textcolor{comment}{// and add to the set}}
+\DoxyCodeLine{          paired\_interaction\_data.insert(std::make\_pair(veloc\_data\_pt, val));}
+\DoxyCodeLine{        \}}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{\} \textcolor{comment}{// done}}
+\DoxyCodeLine{  \} \textcolor{comment}{// done}}
 
 \end{DoxyCodeInclude}
 

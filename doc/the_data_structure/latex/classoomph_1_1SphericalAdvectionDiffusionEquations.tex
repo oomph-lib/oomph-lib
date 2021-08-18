@@ -19,11 +19,9 @@ Inheritance diagram for oomph\+::Spherical\+Advection\+Diffusion\+Equations\+:\b
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_aa02d787c43f88e46ad5e21c7b299b5cb}{Spherical\+Advection\+Diffusion\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)
-\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_adef9c036e9f80c134078d8d78049199e}{Spherical\+Advection\+Diffusion\+Wind\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)
-\begin{DoxyCompactList}\small\item\em Function pointer to wind function fct(x,w(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to wind function fct(x,w(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -36,8 +34,7 @@ void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_ac1df4b
 virtual unsigned \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a9a2928db14dc07aa3af1ee2dd7901dc5}{u\+\_\+index\+\_\+spherical\+\_\+adv\+\_\+diff}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. The default value, 0, is appropriate for single-\/physics problems, when there is only one variable, the value that satisfies the spherical advection-\/diffusion equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a5159b68db86351eba5efa89f4c922745}{du\+\_\+dt\+\_\+spherical\+\_\+adv\+\_\+diff}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
-\begin{DoxyCompactList}\small\item\em du/dt at local node n. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em du/dt at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a097613909cb9b016e55190df3c7b3d2f}{disable\+\_\+\+A\+LE}} ()
 \begin{DoxyCompactList}\small\item\em Disable A\+LE -- empty overload to suppress warning. A\+LE isn\textquotesingle{}t implemented anyway. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a4b4f59d82dd7b2e1641eba4b91d54d40}{output}} (std\+::ostream \&outfile)
@@ -62,18 +59,16 @@ void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a92998b
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to wind function. Const version. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a33f78b13bf746a2d0b21d3675c4c4d95}{pe}} () const
 \begin{DoxyCompactList}\small\item\em Peclet number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_aefe9930f320bf5931f853461253951ef}{pe\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_adac085821cd32cebce16d059a116f72a}{pe\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Peclet number. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a7f7a29ec80961ed10841bd5e2ba9f51c}{pe\+\_\+st}} () const
 \begin{DoxyCompactList}\small\item\em Peclet number multiplied by Strouhal number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_ab70b9505075279b1dc935a620407df1f}{pe\+\_\+st\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a7f77a5bfa6030cb2a516913b55534b45}{pe\+\_\+st\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Peclet number multipled by Strouha number. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a139999156e95fba4e789d7b72def465e}{get\+\_\+source\+\_\+spherical\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
-\begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_afbea24565ef0db2546b804233a114a86}{get\+\_\+wind\+\_\+spherical\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind) const
-\begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a52e4a713aa779de8cd57ec5faa60a709}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a57068b61f67c6aa99f3339cf852fa696}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
@@ -96,8 +91,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquatio
 virtual double \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_a2b61d50b166871a64507ee13b8e94f54}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+spherical\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_ad97d019b2b4715d379adca3320262d29}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -122,7 +116,7 @@ A class for all elements that solve the Advection Diffusion equations in a spher
 
 \[ Pe \mathbf{w}\cdot(\mathbf{x}) \nabla u = \nabla \cdot \left( \nabla u \right) + f(\mathbf{x}) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line 57 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 56 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -135,12 +129,11 @@ Definition at line 57 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+eleme
 
 
 
-Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- 
+Function pointer to source function fct(x,f(x)) -- x is a Vector! 
 
 
 
-Definition at line 65 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 61 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SphericalAdvectionDiffusionEquations_adef9c036e9f80c134078d8d78049199e}\label{classoomph_1_1SphericalAdvectionDiffusionEquations_adef9c036e9f80c134078d8d78049199e}} 
 \index{oomph::SphericalAdvectionDiffusionEquations@{oomph::SphericalAdvectionDiffusionEquations}!SphericalAdvectionDiffusionWindFctPt@{SphericalAdvectionDiffusionWindFctPt}}
@@ -150,12 +143,11 @@ Definition at line 65 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+eleme
 
 
 
-Function pointer to wind function fct(x,w(x)) -- x is a Vector! ~\newline
- 
+Function pointer to wind function fct(x,w(x)) -- x is a Vector! 
 
 
 
-Definition at line 70 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 67 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -172,7 +164,7 @@ Constructor\+: Initialise the Source\+\_\+fct\+\_\+pt and Wind\+\_\+fct\+\_\+pt 
 
 
 
-Definition at line 76 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 73 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -190,7 +182,7 @@ Broken copy constructor.
 
 
 
-Definition at line 84 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 81 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -217,7 +209,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 401 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 390 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -239,7 +231,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiff
 
 
 
-Definition at line 363 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 379 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -261,7 +253,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line 138 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 136 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SphericalAdvectionDiffusionEquations_a2b61d50b166871a64507ee13b8e94f54}\label{classoomph_1_1SphericalAdvectionDiffusionEquations_a2b61d50b166871a64507ee13b8e94f54}} 
 \index{oomph::SphericalAdvectionDiffusionEquations@{oomph::SphericalAdvectionDiffusionEquations}!dshape\_and\_dtest\_eulerian\_at\_knot\_spherical\_adv\_diff@{dshape\_and\_dtest\_eulerian\_at\_knot\_spherical\_adv\_diff}}
@@ -303,12 +295,11 @@ Implemented in \mbox{\hyperlink{classoomph_1_1QSphericalAdvectionDiffusionElemen
 
 
 
-du/dt at local node n. ~\newline
- 
+du/dt at local node n. Uses suitably interpolated value for hanging nodes. 
 
-Uses suitably interpolated value for hanging nodes. 
 
-Definition at line 111 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+Definition at line 108 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -334,7 +325,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 304 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 324 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -356,7 +347,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 316 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 334 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -378,7 +369,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 290 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 310 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -392,8 +383,7 @@ References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, fill\+\_\+in\
 
 
 
-Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix ~\newline
- 
+Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix. 
 
 Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and/or element Jacobian matrix.
 
@@ -405,7 +395,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiff
 
 
 
-Definition at line 49 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 47 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -427,7 +417,7 @@ Get flux\+:
 
 \[ \mbox{flux}[i] = \nabla u = \mbox{d}u / \mbox{d} r + 1/r \mbox{d}u / \mbox{d} \theta \] 
 
-Definition at line 259 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 276 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -445,12 +435,11 @@ Referenced by oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\
 
 
 
-Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations ~\newline
- 
+Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. 
 
 
 
-Definition at line 213 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 230 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -468,12 +457,11 @@ Referenced by oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\
 
 
 
-Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
- 
+Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. 
 
 
 
-Definition at line 234 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 251 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -495,7 +483,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 331 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 346 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -517,7 +505,7 @@ Broken assignment operator.
 
 
 
-Definition at line 91 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 88 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -543,7 +531,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSphericalAdvectionDiffusionElem
 
 
 
-Definition at line 153 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 151 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -573,7 +561,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSphericalAdvectionDiffusionElem
 
 
 
-Definition at line 305 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 298 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -599,7 +587,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSphericalAdvectionDiffusionElem
 
 
 
-Definition at line 141 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 139 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -629,7 +617,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSphericalAdvectionDiffusionElem
 
 
 
-Definition at line 248 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 243 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -659,7 +647,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSphericalAdvectionDiffusionElem
 
 
 
-Definition at line 348 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 339 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -681,7 +669,7 @@ Peclet number.
 
 
 
-Definition at line 198 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 203 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -691,11 +679,11 @@ References Pe\+\_\+pt.
 
 Referenced by oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), and fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff().
 
-\mbox{\Hypertarget{classoomph_1_1SphericalAdvectionDiffusionEquations_aefe9930f320bf5931f853461253951ef}\label{classoomph_1_1SphericalAdvectionDiffusionEquations_aefe9930f320bf5931f853461253951ef}} 
+\mbox{\Hypertarget{classoomph_1_1SphericalAdvectionDiffusionEquations_adac085821cd32cebce16d059a116f72a}\label{classoomph_1_1SphericalAdvectionDiffusionEquations_adac085821cd32cebce16d059a116f72a}} 
 \index{oomph::SphericalAdvectionDiffusionEquations@{oomph::SphericalAdvectionDiffusionEquations}!pe\_pt@{pe\_pt}}
 \index{pe\_pt@{pe\_pt}!oomph::SphericalAdvectionDiffusionEquations@{oomph::SphericalAdvectionDiffusionEquations}}
 \doxysubsubsection{\texorpdfstring{pe\_pt()}{pe\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::pe\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::pe\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -703,7 +691,7 @@ Pointer to Peclet number.
 
 
 
-Definition at line 201 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 209 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -725,7 +713,7 @@ Peclet number multiplied by Strouhal number.
 
 
 
-Definition at line 204 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 215 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -735,11 +723,11 @@ References Pe\+St\+\_\+pt.
 
 Referenced by oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), and fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff().
 
-\mbox{\Hypertarget{classoomph_1_1SphericalAdvectionDiffusionEquations_ab70b9505075279b1dc935a620407df1f}\label{classoomph_1_1SphericalAdvectionDiffusionEquations_ab70b9505075279b1dc935a620407df1f}} 
+\mbox{\Hypertarget{classoomph_1_1SphericalAdvectionDiffusionEquations_a7f77a5bfa6030cb2a516913b55534b45}\label{classoomph_1_1SphericalAdvectionDiffusionEquations_a7f77a5bfa6030cb2a516913b55534b45}} 
 \index{oomph::SphericalAdvectionDiffusionEquations@{oomph::SphericalAdvectionDiffusionEquations}!pe\_st\_pt@{pe\_st\_pt}}
 \index{pe\_st\_pt@{pe\_st\_pt}!oomph::SphericalAdvectionDiffusionEquations@{oomph::SphericalAdvectionDiffusionEquations}}
 \doxysubsubsection{\texorpdfstring{pe\_st\_pt()}{pe\_st\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::pe\+\_\+st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::pe\+\_\+st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -747,7 +735,7 @@ Pointer to Peclet number multipled by Strouha number.
 
 
 
-Definition at line 207 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 221 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -773,7 +761,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 216 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 214 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -791,7 +779,7 @@ Access function\+: Pointer to source function.
 
 
 
-Definition at line 177 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 174 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -813,7 +801,7 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line 182 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 181 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -831,7 +819,7 @@ Return the index at which the unknown value is stored. The default value, 0, is 
 
 
 
-Definition at line 103 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 100 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -849,7 +837,7 @@ Access function\+: Pointer to wind function.
 
 
 
-Definition at line 187 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 188 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -871,7 +859,7 @@ Access function\+: Pointer to wind function. Const version.
 
 
 
-Definition at line 192 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 195 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -894,7 +882,7 @@ Static default value for the Peclet number.
 
 Default value for Peclet number 
 
-Definition at line 464 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 478 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -912,7 +900,7 @@ Pointer to global Peclet number.
 
 
 
-Definition at line 450 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 465 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -930,7 +918,7 @@ Pointer to global Peclet number multiplied by Strouhal number.
 
 
 
-Definition at line 453 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 468 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -948,7 +936,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 456 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 471 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -966,7 +954,7 @@ Pointer to wind function\+:
 
 
 
-Definition at line 459 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 474 of file spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

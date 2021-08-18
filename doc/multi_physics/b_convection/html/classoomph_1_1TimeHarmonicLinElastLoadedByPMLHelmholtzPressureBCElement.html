@@ -149,9 +149,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9a010f4abd0ef1d311841b1a80b89495"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a9a010f4abd0ef1d311841b1a80b89495">q</a> () const</td></tr>
 <tr class="memdesc:a9a010f4abd0ef1d311841b1a80b89495"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the ratio of the stress scales used to non-dimensionalise the fluid and elasticity equations. E.g. <img class="formulaInl" alt="$ Q = (\omega a)^2 \rho/E $" src="form_56.png"/>, i.e. the ratio between the inertial fluid stress and the solid's elastic modulus E.  <a href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a9a010f4abd0ef1d311841b1a80b89495">More...</a><br /></td></tr>
 <tr class="separator:a9a010f4abd0ef1d311841b1a80b89495"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acec17c9c893e15d4d680d92f81a7f758"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#acec17c9c893e15d4d680d92f81a7f758">q_pt</a> ()</td></tr>
-<tr class="memdesc:acec17c9c893e15d4d680d92f81a7f758"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer the ratio of stress scales used to non-dimensionalise the fluid and solid equations.  <a href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#acec17c9c893e15d4d680d92f81a7f758">More...</a><br /></td></tr>
-<tr class="separator:acec17c9c893e15d4d680d92f81a7f758"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1face26771a1c06d134f6e24bdda126e"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a1face26771a1c06d134f6e24bdda126e">q_pt</a> ()</td></tr>
+<tr class="memdesc:a1face26771a1c06d134f6e24bdda126e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer the ratio of stress scales used to non-dimensionalise the fluid and solid equations.  <a href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a1face26771a1c06d134f6e24bdda126e">More...</a><br /></td></tr>
+<tr class="separator:a1face26771a1c06d134f6e24bdda126e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af349037cacaedb53f60de79415b83ac2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#af349037cacaedb53f60de79415b83ac2">output</a> (std::ostream &amp;outfile)</td></tr>
 <tr class="memdesc:af349037cacaedb53f60de79415b83ac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function.  <a href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#af349037cacaedb53f60de79415b83ac2">More...</a><br /></td></tr>
 <tr class="separator:af349037cacaedb53f60de79415b83ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,7 +194,7 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a0f3bb2e8a6d9efe816f766b5e946f9c7"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a0f3bb2e8a6d9efe816f766b5e946f9c7">Default_Q_Value</a> =1.0</td></tr>
+<tr class="memitem:a0f3bb2e8a6d9efe816f766b5e946f9c7"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a0f3bb2e8a6d9efe816f766b5e946f9c7">Default_Q_Value</a> = 1.0</td></tr>
 <tr class="memdesc:a0f3bb2e8a6d9efe816f766b5e946f9c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.0)  <a href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a0f3bb2e8a6d9efe816f766b5e946f9c7">More...</a><br /></td></tr>
 <tr class="separator:a0f3bb2e8a6d9efe816f766b5e946f9c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -204,7 +204,7 @@ class oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELAST
 
 <p>A class for elements that allow the imposition of an applied traction in the equations of time-harmonic linear elasticity from a PMLHelmholtz potential (interpreted as a displacement potential for the fluid in a quasi-steady, linearised FSI problem.) The geometrical information can be read from the FaceGeometry&lt;ELEMENT&gt; class and thus, we can be generic enough without the need to have a separate equations class. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00049">49</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00047">47</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa22755297b70b0733797902787ffdcb1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa22755297b70b0733797902787ffdcb1">&#9670;&nbsp;</a></span>TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement()</h2>
@@ -244,9 +244,9 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Constructor, which takes a "bulk" element and the value of the index and its limit. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00081">81</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00076">76</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00068">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::U_index_time_harmonic_linear_elasticity_helmholtz_traction</a>.</p>
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00064">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::U_index_time_harmonic_linear_elasticity_helmholtz_traction</a>.</p>
 
 </div>
 </div>
@@ -289,9 +289,9 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Fill in contribution from Jacobian. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00146">146</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00140">140</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00513">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction()</a>.</p>
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00507">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction()</a>.</p>
 
 </div>
 </div>
@@ -323,9 +323,9 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Return the residuals. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00138">138</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00133">133</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00513">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction()</a>.</p>
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00507">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction()</a>.</p>
 
 </div>
 </div>
@@ -358,9 +358,9 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 <p>Helper function that actually calculates the residuals. </p>
 <p>Return the residuals. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00513">513</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00507">507</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00146">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00138">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00140">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00133">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
 
 </div>
 </div>
@@ -423,7 +423,7 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Compute the element's contribution to the integral of the flux over the artificial boundary. Also output the flux in the specified output file if it's open. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00358">358</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00357">357</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 </div>
 </div>
@@ -454,7 +454,7 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Compute the global_flux_contribution through the template elasticity elements : we compute u.n. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00254">254</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00256">256</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 </div>
 </div>
@@ -486,7 +486,7 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Compute the element's contribution to the integral of the flux over the artificial boundary. Also output the flux in the specified output file if it's open. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00265">265</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00266">266</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 <p class="reference">References <a class="el" href="b__convection_8txt_source.html#l00051">u</a>.</p>
 
@@ -520,7 +520,7 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>C_style output function. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00245">245</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00243">243</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 </div>
 </div>
@@ -639,7 +639,7 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00178">178</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00161">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q()</a>.</p>
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00155">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q()</a>.</p>
 
 </div>
 </div>
@@ -670,16 +670,16 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Return the ratio of the stress scales used to non-dimensionalise the fluid and elasticity equations. E.g. <img class="formulaInl" alt="$ Q = (\omega a)^2 \rho/E $" src="form_56.png"/>, i.e. the ratio between the inertial fluid stress and the solid's elastic modulus E. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00161">161</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00155">155</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00060">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00056">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00178">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output()</a>.</p>
 
 </div>
 </div>
-<a id="acec17c9c893e15d4d680d92f81a7f758"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acec17c9c893e15d4d680d92f81a7f758">&#9670;&nbsp;</a></span>q_pt()</h2>
+<a id="a1face26771a1c06d134f6e24bdda126e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1face26771a1c06d134f6e24bdda126e">&#9670;&nbsp;</a></span>q_pt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -690,7 +690,7 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double* &amp; <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q_pt </td>
+          <td class="memname">double*&amp; <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -705,9 +705,9 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Return a pointer the ratio of stress scales used to non-dimensionalise the fluid and solid equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00165">165</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00162">162</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00060">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00056">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</a>.</p>
 
 </div>
 </div>
@@ -724,7 +724,7 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Default_Q_Value =1.0</td>
+          <td class="memname">double <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Default_Q_Value = 1.0</td>
         </tr>
       </table>
   </td>
@@ -737,7 +737,7 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 <p>Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.0) </p>
 <p>Static default value for the ragoogletio of stress scales used in the fluid and solid equations (default is 1.0) </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00064">64</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00060">60</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 </div>
 </div>
@@ -765,9 +765,9 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Pointer to the ratio, <img class="formulaInl" alt="$ Q $" src="form_55.png"/> , of the stress used to non-dimensionalise the fluid stresses to the stress used to non-dimensionalise the solid stresses. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00060">60</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00056">56</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00161">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q()</a>, and <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00165">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00155">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q()</a>, and <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00162">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q_pt()</a>.</p>
 
 </div>
 </div>
@@ -795,9 +795,9 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
 
 <p>Index at which the i-th displacement component is stored. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00068">68</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00064">64</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00081">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00076">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement()</a>.</p>
 
 </div>
 </div>
@@ -832,7 +832,7 @@ template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:23:25
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:03:02
         </div>
       </div>
     </footer>

@@ -40,14 +40,12 @@ void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisp
 double \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement_ae9aa741774cfc14e95ff9113844119f5}{shape\+\_\+and\+\_\+test}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement_ab9f53637a61bc8a089170011596e5184}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement_a15c86be276d382c3b948f5f8115d3261}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -64,7 +62,7 @@ class oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacemen
 
 A class for elements that allow the imposition of an prescribed flux (determined from the normal displacements of an adjacent linearly elastic solid. Normal derivative for displacement potential is given by normal displacement of adjacent solid multiplies by F\+SI parameter (q = k$^\wedge$2 B/E). The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 448 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 451 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -82,7 +80,7 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the f
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, and the face index that identifies the face of the bulk element to which this face element is to be attached. 
 
-Definition at line 655 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 660 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -101,7 +99,7 @@ Broken copy constructor.
 
 
 
-Definition at line 464 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 463 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -127,7 +125,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae5
 
 
 
-Definition at line 496 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 497 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -150,7 +148,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 485 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 486 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -165,12 +163,11 @@ void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisp
 
 
 
-Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. ~\newline
- 
+Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. 
 
 Helper function to compute the element\textquotesingle{}s residual vector and the Jacobian matrix. 
 
-Definition at line 747 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 748 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -220,7 +217,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 573 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 575 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -243,7 +240,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 508 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 509 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement_ac69b78e1f4cf73d3dbe07d8e1dbfe0b1}\label{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement_ac69b78e1f4cf73d3dbe07d8e1dbfe0b1}} 
 \index{oomph::FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!output@{output}}
@@ -262,7 +259,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 516 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 517 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -281,7 +278,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 583 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 585 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -296,12 +293,11 @@ double \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDi
 
 
 
-Function to compute the shape and test functions and to return ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
 
-the Jacobian of mapping between local and global (Eulerian) coordinates 
 
-Definition at line 603 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+
+Definition at line 609 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -323,7 +319,7 @@ The spatial dimension of the problem.
 
 
 
-Definition at line 633 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 640 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -342,7 +338,7 @@ The index at which the unknown is stored at the nodes.
 
 
 
-Definition at line 636 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 643 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 

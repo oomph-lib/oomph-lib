@@ -29,7 +29,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElemen
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a7ac03518bc3b2941916e4306e83f4f48}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
 \begin{DoxyCompactList}\small\item\em Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). ~\newline
- Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
+Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
 Note\+: No pressure history is kept, so pressure is always the current value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a00d870c55a1a8e6596895d4efb5b3db5}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. Empty. \end{DoxyCompactList}\item 
@@ -46,7 +46,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElemen
 \doxysubsection{Detailed Description}
 Refineable version of Axisymmetric Quad Crouzeix Raviart elements (note that unlike the cartesian version this is not scale-\/able to higher dimensions!) 
 
-Definition at line 703 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 761 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -63,7 +63,7 @@ Constructor\+:
 
 
 
-Definition at line 722 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 780 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -80,11 +80,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierSt
 
 
 
-Definition at line 884 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 984 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::further\+\_\+build(), oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+axi\+\_\+nst(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, press, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quadtree\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, and value.
+References oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::further\+\_\+build(), oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+axi\+\_\+nst(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, press, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quadtree\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a00d870c55a1a8e6596895d4efb5b3db5}\label{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a00d870c55a1a8e6596895d4efb5b3db5}} 
 \index{oomph::RefineableAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableAxisymmetricQCrouzeixRaviartElement}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
@@ -102,7 +102,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb0
 
 
 
-Definition at line 878 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 978 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a7ac03518bc3b2941916e4306e83f4f48}\label{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a7ac03518bc3b2941916e4306e83f4f48}} 
 \index{oomph::RefineableAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableAxisymmetricQCrouzeixRaviartElement}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -113,7 +113,7 @@ Definition at line 878 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\
 
 
 Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). ~\newline
- Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
+Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
 Note\+: No pressure history is kept, so pressure is always the current value. 
 
 
@@ -122,7 +122,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 846 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 942 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -144,7 +144,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 826 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 918 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -166,7 +166,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db9
 
 
 
-Definition at line 729 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 789 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a644f9d24915f1fb952b8746581f69ee3}\label{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a644f9d24915f1fb952b8746581f69ee3}} 
 \index{oomph::RefineableAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableAxisymmetricQCrouzeixRaviartElement}!nrecovery\_order@{nrecovery\_order}}
@@ -184,7 +184,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 809 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 897 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a45ed9a2e816c20c88fd9f375899657c3}\label{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a45ed9a2e816c20c88fd9f375899657c3}} 
 \index{oomph::RefineableAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableAxisymmetricQCrouzeixRaviartElement}!nvertex\_node@{nvertex\_node}}
@@ -202,7 +202,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 815 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 903 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -224,7 +224,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line 732 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 795 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -246,7 +246,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierStokesEqua
 
 
 
-Definition at line 711 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 768 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -268,7 +268,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 819 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 909 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

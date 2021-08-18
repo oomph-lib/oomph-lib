@@ -426,27 +426,27 @@ When combining the two single-\/physics elements to a multi-\/physics element, w
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//======================class definition==============================}}
-\DoxyCodeLine{\textcolor{comment}{///A class that solves the Boussinesq approximation of the Navier-\/-\/Stokes}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///and energy equations by coupling two pre-\/existing classes. }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///The QAdvectionDiffusionElement with bi-\/quadratic interpolation for the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///scalar variable (temperature) and}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///QCrouzeixRaviartElement which solves the Navier-\/-\/Stokes equations}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///using bi-\/quadratic interpolation for the velocities and a discontinuous}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///bi-\/linear interpolation for the pressure. Note that we are free to }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///choose the order in which we store the variables at the nodes. In this}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///case we choose to store the variables in the order fluid velocities}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///followed by temperature. We must, therefore, overload the function}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///AdvectionDiffusionEquations<DIM>::u\_index\_adv\_diff() to indicate that}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///the temperature is stored at the DIM-\/th position not the 0-\/th. We do not}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///need to overload the corresponding function in the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///NavierStokesEquations<DIM> class because the velocities are stored}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///first.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\textcolor{keyword}{class }BuoyantQCrouzeixRaviartElement :}
-\DoxyCodeLine{ \textcolor{keyword}{public} \textcolor{keyword}{virtual} QAdvectionDiffusionElement<DIM,3>,}
-\DoxyCodeLine{ \textcolor{keyword}{public} \textcolor{keyword}{virtual} QCrouzeixRaviartElement<DIM>}
+\DoxyCodeLine{  \textcolor{comment}{//======================class definition==============================}}
+\DoxyCodeLine{\textcolor{comment}{  /// A class that solves the Boussinesq approximation of the Navier-\/-\/Stokes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// and energy equations by coupling two pre-\/existing classes.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// The QAdvectionDiffusionElement with bi-\/quadratic interpolation for the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// scalar variable (temperature) and}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// QCrouzeixRaviartElement which solves the Navier-\/-\/Stokes equations}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// using bi-\/quadratic interpolation for the velocities and a discontinuous}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// bi-\/linear interpolation for the pressure. Note that we are free to}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// choose the order in which we store the variables at the nodes. In this}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// case we choose to store the variables in the order fluid velocities}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// followed by temperature. We must, therefore, overload the function}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// AdvectionDiffusionEquations<DIM>::u\_index\_adv\_diff() to indicate that}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// the temperature is stored at the DIM-\/th position not the 0-\/th. We do not}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// need to overload the corresponding function in the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// NavierStokesEquations<DIM> class because the velocities are stored}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// first.}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
+\DoxyCodeLine{  \textcolor{keyword}{class }BuoyantQCrouzeixRaviartElement}
+\DoxyCodeLine{    : \textcolor{keyword}{public} \textcolor{keyword}{virtual} QAdvectionDiffusionElement<DIM, 3>,}
+\DoxyCodeLine{      \textcolor{keyword}{public} \textcolor{keyword}{virtual} QCrouzeixRaviartElement<DIM>}
 
 \end{DoxyCodeInclude}
 
@@ -455,8 +455,8 @@ The class contains a single new physical parameter, the Rayleigh number, as usua
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Pointer to a private data member, the Rayleigh number}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double}* Ra\_pt;}
+\DoxyCodeLine{    \textcolor{comment}{/// Pointer to a private data member, the Rayleigh number}}
+\DoxyCodeLine{    \textcolor{keywordtype}{double}* Ra\_pt;}
 
 \end{DoxyCodeInclude}
 
@@ -465,11 +465,14 @@ with suitable access functions.
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{///Access function for the Rayleigh number (const version)}}
-\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ra()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} *Ra\_pt;\}}
+\DoxyCodeLine{    \textcolor{comment}{/// Access function for the Rayleigh number (const version)}}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& ra()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keyword}{    }\{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} *Ra\_pt;}
+\DoxyCodeLine{    \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Access function for the pointer to the Rayleigh number}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}* \&ra\_pt() \{\textcolor{keywordflow}{return} Ra\_pt;\}}
+\DoxyCodeLine{\textcolor{comment}{    /// Access function for the pointer to the Rayleigh number}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{double}*\& ra\_pt()}
 
 \end{DoxyCodeInclude}
 
@@ -478,14 +481,14 @@ The constructor calls the constructors of the component classes ({\ttfamily Q\+C
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Constructor: call the underlying constructors and }}
-\DoxyCodeLine{\textcolor{comment}{ /// initialise the pointer to the Rayleigh number to point}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// to the default value of 0.0.}}
-\DoxyCodeLine{\textcolor{comment}{} BuoyantQCrouzeixRaviartElement() : QAdvectionDiffusionElement<DIM,3>(),}
-\DoxyCodeLine{                                   QCrouzeixRaviartElement<DIM>() }
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   Ra\_pt = \&\mbox{\hyperlink{namespaceoomph_1_1MultiDomainBoussinesqHelper_ae77c07b69cffe295ac07e2c25c31a8aa}{Default\_Physical\_Constant\_Value}};}
-\DoxyCodeLine{  \}}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Constructor: call the underlying constructors and}}
+\DoxyCodeLine{\textcolor{comment}{    /// initialise the pointer to the Rayleigh number to point}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// to the default value of 0.0.}}
+\DoxyCodeLine{\textcolor{comment}{}    BuoyantQCrouzeixRaviartElement()}
+\DoxyCodeLine{      : QAdvectionDiffusionElement<DIM, 3>(), QCrouzeixRaviartElement<DIM>()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      Ra\_pt = \&\mbox{\hyperlink{namespaceoomph_1_1MultiDomainBoussinesqHelper_ae77c07b69cffe295ac07e2c25c31a8aa}{Default\_Physical\_Constant\_Value}};}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -494,12 +497,13 @@ We must overload the function {\ttfamily Finite\+Element\+::required\+\_\+nvalue
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{///\(\backslash\)short The required number of values stored at the nodes is the sum of the}}
-\DoxyCodeLine{\textcolor{comment}{ ///required values of the two single-\/physics  elements. Note that this step is}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ ///generic for any multi-\/physics element of this type.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} required\_nvalue(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n)\textcolor{keyword}{ const}}
-\DoxyCodeLine{\textcolor{keyword}{  }\{\textcolor{keywordflow}{return} (QAdvectionDiffusionElement<DIM,3>::required\_nvalue(n) +}
-\DoxyCodeLine{           QCrouzeixRaviartElement<DIM>::required\_nvalue(n));\}}
+\DoxyCodeLine{    \textcolor{comment}{///\(\backslash\)short The required number of values stored at the nodes is the sum of}}
+\DoxyCodeLine{\textcolor{comment}{    /// the required values of the two single-\/physics  elements. Note that this}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// step is generic for any multi-\/physics element of this type.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{unsigned} required\_nvalue(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keyword}{    }\{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} (QAdvectionDiffusionElement<DIM, 3>::required\_nvalue(n) +}
+\DoxyCodeLine{              QCrouzeixRaviartElement<DIM>::required\_nvalue(n));}
 
 \end{DoxyCodeInclude}
 
@@ -508,9 +512,12 @@ In the standard single-\/physics advection-\/diffusion elements the temperature 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{///\(\backslash\)short Overload the index at which the temperature }}
-\DoxyCodeLine{\textcolor{comment}{ ///variable is stored. We choose to store it after the fluid velocities.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} u\_index\_adv\_diff()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} DIM;\}}
+\DoxyCodeLine{    \textcolor{comment}{///\(\backslash\)short Overload the index at which the temperature}}
+\DoxyCodeLine{\textcolor{comment}{    /// variable is stored. We choose to store it after the fluid velocities.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} u\_index\_adv\_diff()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keyword}{    }\{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} DIM;}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -521,43 +528,46 @@ The coupling between the two sets of single-\/physics equations is achieved by o
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Overload the wind function in the advection-\/diffusion equations.}}
-\DoxyCodeLine{\textcolor{comment}{ /// This provides the coupling from the Navier-\/-\/Stokes equations to the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// advection-\/diffusion equations because the wind is the fluid velocity.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} get\_wind\_adv\_diff(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
-\DoxyCodeLine{                        \textcolor{keyword}{const} Vector<double> \&s, \textcolor{keyword}{const} Vector<double>\& x,}
-\DoxyCodeLine{                        Vector<double>\& wind)\textcolor{keyword}{ const}}
-\DoxyCodeLine{\textcolor{keyword}{ }\{}
-\DoxyCodeLine{   \textcolor{comment}{//The wind function is simply the velocity at the points}}
-\DoxyCodeLine{   this-\/>interpolated\_u\_nst(s,wind);}
-\DoxyCodeLine{ \}}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Overload the wind function in the advection-\/diffusion equations.}}
+\DoxyCodeLine{\textcolor{comment}{    /// This provides the coupling from the Navier-\/-\/Stokes equations to the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// advection-\/diffusion equations because the wind is the fluid velocity.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_wind\_adv\_diff(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} Vector<double>\& s,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} Vector<double>\& x,}
+\DoxyCodeLine{                           Vector<double>\& wind)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keyword}{    }\{}
+\DoxyCodeLine{      \textcolor{comment}{// The wind function is simply the velocity at the points}}
+\DoxyCodeLine{      this-\/>interpolated\_u\_nst(s, wind);}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Overload the body force in the Navier-\/Stokes equations}}
-\DoxyCodeLine{\textcolor{comment}{ /// This provides the coupling from the advection-\/diffusion equations}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// to the Navier-\/-\/Stokes equations, the body force is the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// temperature multiplied by the Rayleigh number acting in the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// direction opposite to gravity. }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} Vector<double> \&s, \textcolor{keyword}{const} Vector<double> \&x,}
-\DoxyCodeLine{                         Vector<double> \&result)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{//Get the temperature}}
-\DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{double} interpolated\_t = this-\/>interpolated\_u\_adv\_diff(s);}
-\DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{// Get vector that indicates the direction of gravity from}}
-\DoxyCodeLine{   \textcolor{comment}{// the Navier-\/Stokes equations}}
-\DoxyCodeLine{   Vector<double> gravity(NavierStokesEquations<DIM>::g());}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Temperature-\/dependent body force:}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<DIM;i++)}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Overload the body force in the Navier-\/Stokes equations}}
+\DoxyCodeLine{\textcolor{comment}{    /// This provides the coupling from the advection-\/diffusion equations}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// to the Navier-\/-\/Stokes equations, the body force is the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// temperature multiplied by the Rayleigh number acting in the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// direction opposite to gravity.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
+\DoxyCodeLine{                            \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
+\DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double>\& s,}
+\DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double>\& x,}
+\DoxyCodeLine{                            Vector<double>\& result)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     result[i] = -\/gravity[i]*interpolated\_t*ra();}
-\DoxyCodeLine{    \}}
+\DoxyCodeLine{      \textcolor{comment}{// Get the temperature}}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{double} interpolated\_t = this-\/>interpolated\_u\_adv\_diff(s);}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Get vector that indicates the direction of gravity from}}
+\DoxyCodeLine{      \textcolor{comment}{// the Navier-\/Stokes equations}}
+\DoxyCodeLine{      Vector<double> gravity(NavierStokesEquations<DIM>::g());}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Temperature-\/dependent body force:}}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < DIM; i++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        result[i] = -\/gravity[i] * interpolated\_t * ra();}
+\DoxyCodeLine{      \}}
 
 \end{DoxyCodeInclude}
 
@@ -566,20 +576,20 @@ The elemental residual vector is composed of the residuals from the two single-\
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Calculate the element's contribution to the residual vector.}}
-\DoxyCodeLine{\textcolor{comment}{ /// Recall that fill\_in\_* functions MUST NOT initialise the entries }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// in the vector to zero. This allows us to call the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// fill\_in\_* functions of the constituent single-\/physics elements}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// sequentially, without wiping out any previously computed entries.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_residuals(Vector<double> \&residuals)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{//Fill in the residuals of the Navier-\/Stokes equations}}
-\DoxyCodeLine{   NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_residuals(residuals);}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Calculate the element's contribution to the residual vector.}}
+\DoxyCodeLine{\textcolor{comment}{    /// Recall that fill\_in\_* functions MUST NOT initialise the entries}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// in the vector to zero. This allows us to call the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// fill\_in\_* functions of the constituent single-\/physics elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// sequentially, without wiping out any previously computed entries.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_residuals(Vector<double>\& residuals)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// Fill in the residuals of the Navier-\/Stokes equations}}
+\DoxyCodeLine{      NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_residuals(residuals);}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//Fill in the residuals of the advection-\/diffusion eqautions}}
-\DoxyCodeLine{   AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_residuals(}
-\DoxyCodeLine{    residuals);}
-\DoxyCodeLine{  \}}
+\DoxyCodeLine{      \textcolor{comment}{// Fill in the residuals of the advection-\/diffusion eqautions}}
+\DoxyCodeLine{      AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_residuals(}
+\DoxyCodeLine{        residuals);}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -588,14 +598,14 @@ Finally, we compute the Jacobian matrix by finite-\/differencing the element\tex
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{///\(\backslash\)short Compute the element's residual vector and the Jacobian matrix.}}
-\DoxyCodeLine{\textcolor{comment}{ /// Jacobian is computed by finite-\/differencing.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double> \&residuals,}
-\DoxyCodeLine{                                   DenseMatrix<double> \&jacobian)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// This function computes the Jacobian by finite-\/differencing}}
-\DoxyCodeLine{   FiniteElement::fill\_in\_contribution\_to\_jacobian(residuals,jacobian);}
-\DoxyCodeLine{  \}}
+\DoxyCodeLine{    \textcolor{comment}{///\(\backslash\)short Compute the element's residual vector and the Jacobian matrix.}}
+\DoxyCodeLine{\textcolor{comment}{    /// Jacobian is computed by finite-\/differencing.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double>\& residuals,}
+\DoxyCodeLine{                                          DenseMatrix<double>\& jacobian)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// This function computes the Jacobian by finite-\/differencing}}
+\DoxyCodeLine{      FiniteElement::fill\_in\_contribution\_to\_jacobian(residuals, jacobian);}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -604,41 +614,45 @@ Finally, we overload the output function to print the fluid velocities, the flui
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Start of output function}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} output(std::ostream \&outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nplot)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{//vector of local coordinates}}
-\DoxyCodeLine{   Vector<double> s(DIM);}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Tecplot header info}}
-\DoxyCodeLine{   outfile << this-\/>tecplot\_zone\_string(nplot);}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Loop over plot points}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_plot\_points=this-\/>nplot\_points(nplot);}
-\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iplot=0;iplot<num\_plot\_points;iplot++)}
+\DoxyCodeLine{    \textcolor{comment}{// Start of output function}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} output(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     \textcolor{comment}{// Get local coordinates of plot point}}
-\DoxyCodeLine{     this-\/>get\_s\_plot(iplot,nplot,s);}
-\DoxyCodeLine{     }
-\DoxyCodeLine{     \textcolor{comment}{// Output the position of the plot point}}
-\DoxyCodeLine{     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<DIM;i++) }
-\DoxyCodeLine{      \{outfile << this-\/>interpolated\_x(s,i) << \textcolor{stringliteral}{" "};\}}
-\DoxyCodeLine{     }
-\DoxyCodeLine{     \textcolor{comment}{// Output the fluid velocities at the plot point}}
-\DoxyCodeLine{     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<DIM;i++) }
-\DoxyCodeLine{      \{outfile << this-\/>interpolated\_u\_nst(s,i) << \textcolor{stringliteral}{" "};\}}
-\DoxyCodeLine{     }
-\DoxyCodeLine{     \textcolor{comment}{// Output the fluid pressure at the plot point}}
-\DoxyCodeLine{     outfile << this-\/>interpolated\_p\_nst(s)  << \textcolor{stringliteral}{" "};}
-\DoxyCodeLine{  }
-\DoxyCodeLine{     \textcolor{comment}{// Output the temperature (the advected variable) at the plot point}}
-\DoxyCodeLine{     outfile << this-\/>interpolated\_u\_adv\_diff(s) << std::endl;   }
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{   outfile << std::endl;}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Write tecplot footer (e.g. FE connectivity lists)}}
-\DoxyCodeLine{   this-\/>write\_tecplot\_zone\_footer(outfile,nplot);}
-\DoxyCodeLine{  \} \textcolor{comment}{//End of output function}}
+\DoxyCodeLine{      \textcolor{comment}{// vector of local coordinates}}
+\DoxyCodeLine{      Vector<double> s(DIM);}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Tecplot header info}}
+\DoxyCodeLine{      outfile << this-\/>tecplot\_zone\_string(nplot);}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Loop over plot points}}
+\DoxyCodeLine{      \textcolor{keywordtype}{unsigned} num\_plot\_points = this-\/>nplot\_points(nplot);}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iplot = 0; iplot < num\_plot\_points; iplot++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        \textcolor{comment}{// Get local coordinates of plot point}}
+\DoxyCodeLine{        this-\/>get\_s\_plot(iplot, nplot, s);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Output the position of the plot point}}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < DIM; i++)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{          outfile << this-\/>interpolated\_x(s, i) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Output the fluid velocities at the plot point}}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < DIM; i++)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{          outfile << this-\/>interpolated\_u\_nst(s, i) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Output the fluid pressure at the plot point}}
+\DoxyCodeLine{        outfile << this-\/>interpolated\_p\_nst(s) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Output the temperature (the advected variable) at the plot point}}
+\DoxyCodeLine{        outfile << this-\/>interpolated\_u\_adv\_diff(s) << std::endl;}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{      outfile << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Write tecplot footer (e.g. FE connectivity lists)}}
+\DoxyCodeLine{      this-\/>write\_tecplot\_zone\_footer(outfile, nplot);}
+\DoxyCodeLine{    \} \textcolor{comment}{// End of output function}}
 
 \end{DoxyCodeInclude}
 

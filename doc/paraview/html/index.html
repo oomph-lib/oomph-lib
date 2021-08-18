@@ -131,25 +131,24 @@
 <div class="line"> some_file.close();</div>
 </div><!-- fragment --><p>where the unsigned integer <code>npts</code> controls the number of plot points per element (just as in the tecplot-based output functions). If <code>npts</code> is set to 2, the solution is output at the elements' vertices. For larger values of <code>npts</code> the solution is sampled at greater number of (equally spaced) plot points within the element &ndash; this makes sense for higher-order elements, i.e. elements in which the finite-element solution is not interpolated linearly between the vertex nodes. It is important to note that when displaying such a solution in paraview's "Surface with Edges" mode, the "mesh" that is displayed does not represent the actual finite element mesh but is a finer auxiliary mesh that is created merely to establish the connectivity between the plot points.</p>
 <p>Paraview makes it possible to animate sequences of plots from time-dependent simulations. To correctly animate results from temporally adaptive simulations (where the timestep varies) paraview can operate on pvd files which provide a list of filenames and the associated time. These can be written automatically from within <code>oomph-lib</code>, using the functions in the <code>ParaviewHelper</code> namespace:</p>
- <div class="fragment"><div class="line"><span class="comment">//=================paraview_helper=================================</span></div>
-<div class="line"><span class="comment">/// Namespace for paraview-style output helper functions </span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=================================================================</span></div>
-<div class="line"><span class="keyword">namespace </span>ParaviewHelper</div>
-<div class="line">{</div>
+ <div class="fragment"><div class="line">  <span class="comment">//=================paraview_helper=================================</span></div>
+<div class="line"><span class="comment">  /// Namespace for paraview-style output helper functions</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//=================================================================</span></div>
+<div class="line">  <span class="keyword">namespace </span>ParaviewHelper</div>
+<div class="line">  {<span class="comment"></span></div>
+<div class="line"><span class="comment">    /// Write the pvd file header</span></div>
+<div class="line"><span class="comment"></span>    <span class="keyword">extern</span> <span class="keywordtype">void</span> write_pvd_header(std::ofstream&amp; pvd_file);</div>
 <div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Write the pvd file header</span></div>
-<div class="line"><span class="comment"></span> <span class="keyword">extern</span> <span class="keywordtype">void</span> write_pvd_header(std::ofstream &amp;pvd_file);</div>
-<div class="line"> <span class="comment"></span></div>
-<div class="line"><span class="comment"> /// \short Add name of output file and associated continuous time</span></div>
-<div class="line"><span class="comment"> /// to pvd file.</span></div>
-<div class="line"><span class="comment"></span> <span class="keyword">extern</span> <span class="keywordtype">void</span> write_pvd_information(std::ofstream &amp;pvd_file,</div>
-<div class="line">                                   <span class="keyword">const</span> std::string&amp; output_filename,</div>
-<div class="line">                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time);</div>
-<div class="line"> <span class="comment"></span></div>
-<div class="line"><span class="comment"> /// Write the pvd file footer</span></div>
-<div class="line"><span class="comment"></span> <span class="keyword">extern</span> <span class="keywordtype">void</span> write_pvd_footer(std::ofstream &amp;pvd_file);</div>
+<div class="line"><span class="comment">    /// \short Add name of output file and associated continuous time</span></div>
+<div class="line"><span class="comment">    /// to pvd file.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keyword">extern</span> <span class="keywordtype">void</span> write_pvd_information(std::ofstream&amp; pvd_file,</div>
+<div class="line">                                      <span class="keyword">const</span> std::string&amp; output_filename,</div>
+<div class="line">                                      <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Write the pvd file footer</span></div>
+<div class="line"><span class="comment"></span>    <span class="keyword">extern</span> <span class="keywordtype">void</span> write_pvd_footer(std::ofstream&amp; pvd_file);</div>
 <div class="line"> </div>
-<div class="line">}</div>
+<div class="line">  } <span class="comment">// namespace ParaviewHelper</span></div>
 </div><!-- fragment --><p>Once the pvd file is opened, call <code>ParaviewHelper::write_pvd_header(...)</code> to write the header information required by paraview; then add the name of each output file and the value of the associated value of the continuous time, using <code>ParaviewHelper::write_pvd_information(...)</code>. When the simulation is complete write the footer information using <code>ParaviewHelper::write_pvd_footer(...)</code>, then close to the pvd file.</p>
 <p>Currently, the paraview output functions are only implemented for a relatively small number of elements but it is straightforward to implement them for others.</p>
 <p>The <a href="../../FAQ/html/index.html">FAQ</a> contain an entry that discusses how to display <code>oomph-lib's</code> output with <a href="http://www.gnuplot.info">gnuplot</a> and <a href="../../FAQ/html/index.html#tecplot">how to adjust <code>oomph-lib's</code> output functions to different formats.</a></p>
@@ -504,7 +503,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:26:27
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:05:48
         </div>
       </div>
     </footer>

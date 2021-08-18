@@ -11,7 +11,7 @@
 \begin{DoxyCompactList}\small\item\em Constructor that sets up the required information communicating between all processors. Requires two \char`\"{}all to all\char`\"{} communications. Arguments are the distribution of the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} and a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of global unknowns required on this processor. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a490138b2ae077bc6630d13057217105b}{n\+\_\+halo\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of halo values. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\& \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a269dd2eab9a60bfc4c6cf80a2689f6d6}{distribution\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\& \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a384d5485423108add22f8d539d6a3e3e}{distribution\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to the distirbution used to setup the halo information. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_aa630dd65e7a97e5609426baffcb6eca9}{setup\+\_\+halo\+\_\+dofs}} (const std\+::map$<$ unsigned, double $\ast$ $>$ \&halo\+\_\+data\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&halo\+\_\+dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function that sets up a vector of pointers to halo data, index using the scheme in Local\+\_\+index. \end{DoxyCompactList}\item 
@@ -20,7 +20,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_ad589a203cdd37bc2
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::map$<$ unsigned, unsigned $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_aa7dd736a03c4a605e7e4c0e9499154d4}{Local\+\_\+index}}
+std\+::map$<$ unsigned, unsigned $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a796210b483850bd17f09a0ba85033a1b}{Local\+\_\+index}}
 \begin{DoxyCompactList}\small\item\em Storage for the translation scheme from global unknown to local index in the additional storage vector. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_aac79c7fe19ec6fae41e2528a540d0eae}{Haloed\+\_\+eqns}}
 \begin{DoxyCompactList}\small\item\em The haloed entries that will be sent in a format compatible with M\+P\+I\+\_\+\+Alltoallv i.\+e. (send\+\_\+to\+\_\+proc0,send\+\_\+to\+\_\+proc1 ... send\+\_\+to\+\_\+procn) \end{DoxyCompactList}\item 
@@ -63,7 +63,7 @@ Constructor that sets up the required information communicating between all proc
 
 
 
-Definition at line 37 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+cc.
+Definition at line 36 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+cc.
 
 
 
@@ -72,11 +72,11 @@ References oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), o
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a269dd2eab9a60bfc4c6cf80a2689f6d6}\label{classoomph_1_1DoubleVectorHaloScheme_a269dd2eab9a60bfc4c6cf80a2689f6d6}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a384d5485423108add22f8d539d6a3e3e}\label{classoomph_1_1DoubleVectorHaloScheme_a384d5485423108add22f8d539d6a3e3e}} 
 \index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!distribution\_pt@{distribution\_pt}}
 \index{distribution\_pt@{distribution\_pt}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
 \doxysubsubsection{\texorpdfstring{distribution\_pt()}{distribution\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}$\ast$ \& oomph\+::\+Double\+Vector\+Halo\+Scheme\+::distribution\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}$\ast$\& oomph\+::\+Double\+Vector\+Halo\+Scheme\+::distribution\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -84,7 +84,7 @@ Return the pointer to the distirbution used to setup the halo information.
 
 
 
-Definition at line 104 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+h.
+Definition at line 106 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+h.
 
 
 
@@ -106,7 +106,7 @@ Return the local index associated with the global equation.
 
 
 
-Definition at line 113 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+h.
+Definition at line 118 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+h.
 
 
 
@@ -128,7 +128,7 @@ Return the number of halo values.
 
 
 
-Definition at line 100 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+h.
+Definition at line 99 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+h.
 
 
 
@@ -146,7 +146,7 @@ Function that sets up a vector of pointers to halo data, index using the scheme 
 
 Function that sets up a vector of pointers to halo data, index using the scheme in Local\+\_\+index. The first arguement is a map of pointers to all halo data index by the global equation number. 
 
-Definition at line 206 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+cc.
+Definition at line 225 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+cc.
 
 
 
@@ -302,11 +302,11 @@ Definition at line 67 of file double\+\_\+vector\+\_\+with\+\_\+halo.\+h.
 
 Referenced by Double\+Vector\+Halo\+Scheme(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values(), and oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise().
 
-\mbox{\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_aa7dd736a03c4a605e7e4c0e9499154d4}\label{classoomph_1_1DoubleVectorHaloScheme_aa7dd736a03c4a605e7e4c0e9499154d4}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a796210b483850bd17f09a0ba85033a1b}\label{classoomph_1_1DoubleVectorHaloScheme_a796210b483850bd17f09a0ba85033a1b}} 
 \index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!Local\_index@{Local\_index}}
 \index{Local\_index@{Local\_index}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
 \doxysubsubsection{\texorpdfstring{Local\_index}{Local\_index}}
-{\footnotesize\ttfamily std\+::map$<$unsigned,unsigned$>$ oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Local\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, unsigned$>$ oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Local\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

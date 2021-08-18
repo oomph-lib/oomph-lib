@@ -45,7 +45,7 @@ void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a946b88bc1392180c56909b739bfa7b
 \begin{DoxyCompactList}\small\item\em Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a848721022a08fde4b2182a143f287ded}{complex\+\_\+solve\+\_\+helper}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&solution)
 \begin{DoxyCompactList}\small\item\em This is where the actual work is done. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a0c6df8b6c50a0ccd344a62654b1411d0}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a6da3ecc74d6367da7553641cba048886}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$$>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$$>$ \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Helper function to update the result vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a07183636586d7d30fcde380ef88e5fe6}{generate\+\_\+plane\+\_\+rotation}} (std\+::complex$<$ double $>$ \&dx, std\+::complex$<$ double $>$ \&dy, std\+::complex$<$ double $>$ \&cs, std\+::complex$<$ double $>$ \&sn)
 \begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
@@ -71,7 +71,7 @@ class oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}
 
 The \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} method rewritten for complex matrices. 
 
-Definition at line 869 of file complex\+\_\+smoother.\+h.
+Definition at line 864 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -89,7 +89,7 @@ Constructor.
 
 
 
-Definition at line 875 of file complex\+\_\+smoother.\+h.
+Definition at line 868 of file complex\+\_\+smoother.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ComplexGMRES_ade91020000a1b6bf316ff9753ac6498b}\label{classoomph_1_1ComplexGMRES_ade91020000a1b6bf316ff9753ac6498b}} 
 \index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!````~ComplexGMRES@{$\sim$ComplexGMRES}}
@@ -104,7 +104,7 @@ Empty destructor.
 
 
 
-Definition at line 883 of file complex\+\_\+smoother.\+h.
+Definition at line 877 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -123,7 +123,7 @@ Broken copy constructor.
 
 
 
-Definition at line 890 of file complex\+\_\+smoother.\+h.
+Definition at line 884 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -145,7 +145,7 @@ Helper function\+: Apply plane rotation. This is done using the update\+:
 
 \[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. 
 
-Definition at line 1240 of file complex\+\_\+smoother.\+h.
+Definition at line 1233 of file complex\+\_\+smoother.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a946b88bc1392180c56909b739bfa7b3c}\label{classoomph_1_1ComplexGMRES_a946b88bc1392180c56909b739bfa7b3c}} 
 \index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
@@ -164,7 +164,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 1023 of file complex\+\_\+smoother.\+h.
+Definition at line 1015 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -191,7 +191,7 @@ Implements \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a7c46336fdc3b386b0ba
 
 
 
-Definition at line 948 of file complex\+\_\+smoother.\+h.
+Definition at line 941 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -214,7 +214,7 @@ Implements \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a8ec748270df3e1199f1
 
 
 
-Definition at line 1010 of file complex\+\_\+smoother.\+h.
+Definition at line 1003 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -233,7 +233,7 @@ This is where the actual work is done.
 
 
 
-Definition at line 1275 of file complex\+\_\+smoother.\+h.
+Definition at line 1267 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -260,7 +260,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line 902 of file complex\+\_\+smoother.\+h.
+Definition at line 896 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -279,7 +279,7 @@ Helper function\+: Generate a plane rotation. This is done by finding the value 
 
 \[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \cr -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \] where $ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} $. The values of a and b are given by\+: The values of dx and dy are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. We also check to see that sn is always a real (nonnegative) number. See pp.\+193-\/194 for an explanation. 
 
-Definition at line 1148 of file complex\+\_\+smoother.\+h.
+Definition at line 1140 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -302,7 +302,7 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line 941 of file complex\+\_\+smoother.\+h.
+Definition at line 934 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -321,7 +321,7 @@ Broken assignment operator.
 
 
 
-Definition at line 896 of file complex\+\_\+smoother.\+h.
+Definition at line 890 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -344,7 +344,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Definition at line 933 of file complex\+\_\+smoother.\+h.
+Definition at line 926 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -367,18 +367,18 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 914 of file complex\+\_\+smoother.\+h.
+Definition at line 908 of file complex\+\_\+smoother.\+h.
 
 
 
 References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
-\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a0c6df8b6c50a0ccd344a62654b1411d0}\label{classoomph_1_1ComplexGMRES_a0c6df8b6c50a0ccd344a62654b1411d0}} 
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a6da3ecc74d6367da7553641cba048886}\label{classoomph_1_1ComplexGMRES_a6da3ecc74d6367da7553641cba048886}} 
 \index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!update@{update}}
 \index{update@{update}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
 {\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&}]{hessenberg,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$$>$ \&}]{hessenberg,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$$>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -386,7 +386,7 @@ Helper function to update the result vector.
 
 
 
-Definition at line 1053 of file complex\+\_\+smoother.\+h.
+Definition at line 1045 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -408,7 +408,7 @@ Number of iterations taken.
 
 
 
-Definition at line 1256 of file complex\+\_\+smoother.\+h.
+Definition at line 1249 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -427,7 +427,7 @@ Referenced by oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::itera
 
 
 
-Definition at line 1259 of file complex\+\_\+smoother.\+h.
+Definition at line 1252 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -446,7 +446,7 @@ Boolean flag to indicate if the real and imaginary system matrices can be delete
 
 
 
-Definition at line 1267 of file complex\+\_\+smoother.\+h.
+Definition at line 1260 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -465,7 +465,7 @@ Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setu
 
 
 
-Definition at line 1263 of file complex\+\_\+smoother.\+h.
+Definition at line 1256 of file complex\+\_\+smoother.\+h.
 
 
 

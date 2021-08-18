@@ -21,7 +21,7 @@ void \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedB
 \begin{DoxyCompactList}\small\item\em Fill in contribution from Jacobian. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a874a6bc7470c0ba4de2b39f8444ed4e2}{q}} () const
 \begin{DoxyCompactList}\small\item\em Return the ratio of the stress scales used to non-\/dimensionalise the fluid and elasticity equations. E.\+g. $ Q = (\omega a)^2 \rho/E $, i.\+e. the ratio between the inertial fluid stress and the solid\textquotesingle{}s elastic modulus E. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a3495996a8cdf7bb6e5ff5e3d9dcafa7e}{q\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a8c9dca51bccec1ccbef099b28a4884b1}{q\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer the ratio of stress scales used to non-\/dimensionalise the fluid and solid equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_af1db6d117e79ceb536932adf64ea4752}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
@@ -46,7 +46,7 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinEla
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a6a24eef8286abb640d8edf3fa0f71e2c}{Default\+\_\+\+Q\+\_\+\+Value}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a6a24eef8286abb640d8edf3fa0f71e2c}{Default\+\_\+\+Q\+\_\+\+Value}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.\+0) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -57,7 +57,7 @@ class oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+He
 
 A class for elements that allow the imposition of an applied traction in the equations of time-\/harmonic linear elasticity from a Helmholtz potential (interpreted as a displacement potential for the fluid in a quasi-\/steady, linearised F\+SI problem.) The geometrical information can be read from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class. 
 
-Definition at line 50 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 47 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -75,11 +75,11 @@ Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the
 
 
 
-Definition at line 82 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 76 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
-References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), i, oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Element\+With\+External\+Element\+::set\+\_\+ninteraction(), and oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+helmholtz\+\_\+traction.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), i, oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), and oomph\+::\+Element\+With\+External\+Element\+::set\+\_\+ninteraction().
 
 
 
@@ -101,7 +101,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae5
 
 
 
-Definition at line 146 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 143 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -124,7 +124,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 138 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 136 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -143,7 +143,7 @@ Helper function that actually calculates the residuals.
 
 Return the residuals. 
 
-Definition at line 265 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 270 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -193,7 +193,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 239 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 241 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -216,7 +216,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 169 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 172 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a2c55e922cbc2a9f901356a47f696c0d6}\label{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a2c55e922cbc2a9f901356a47f696c0d6}} 
 \index{oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!output@{output}}
@@ -235,7 +235,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 178 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 181 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -254,7 +254,7 @@ Return the ratio of the stress scales used to non-\/dimensionalise the fluid and
 
 
 
-Definition at line 161 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 158 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -264,12 +264,12 @@ References oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+B
 
 Referenced by oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output().
 
-\mbox{\Hypertarget{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a3495996a8cdf7bb6e5ff5e3d9dcafa7e}\label{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a3495996a8cdf7bb6e5ff5e3d9dcafa7e}} 
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a8c9dca51bccec1ccbef099b28a4884b1}\label{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a8c9dca51bccec1ccbef099b28a4884b1}} 
 \index{oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!q\_pt@{q\_pt}}
 \index{q\_pt@{q\_pt}!oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{q\_pt()}{q\_pt()}}
 {\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT , class H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::q\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::q\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -291,7 +291,7 @@ References oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+B
 \index{Default\_Q\_Value@{Default\_Q\_Value}!oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_Q\_Value}{Default\_Q\_Value}}
 {\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT , class H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Default\+\_\+\+Q\+\_\+\+Value =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Default\+\_\+\+Q\+\_\+\+Value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -299,7 +299,7 @@ Static default value for the ratio of stress scales used in the fluid and solid 
 
 Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.\+0) 
 
-Definition at line 65 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 60 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_ae9ffef6c7b99dcac84a59345b88e2938}\label{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_ae9ffef6c7b99dcac84a59345b88e2938}} 
 \index{oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!Q\_pt@{Q\_pt}}
@@ -314,7 +314,7 @@ Pointer to the ratio, $ Q $ , of the stress used to non-\/dimensionalise the flu
 
 
 
-Definition at line 61 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 56 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -333,11 +333,7 @@ Index at which the i-\/th displacement component is stored.
 
 
 
-Definition at line 69 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
-
-
-
-Referenced by oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Element().
+Definition at line 64 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 

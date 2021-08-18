@@ -120,31 +120,31 @@
 <div class="title">geompack_mesh.template.cc</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="geompack__mesh_8template_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<a href="geompack__mesh_8template_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// LIC//====================================================================</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#ifndef OOMPH_GEOMPACK_MESH_TEMPLATE_CC</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define OOMPH_GEOMPACK_MESH_TEMPLATE_CC</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
@@ -153,148 +153,145 @@
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/// Quadrilateral mesh generator; Uses input from Geompack++.</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/// See: http://members.shaw.ca/bjoe/</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/// Currently only for four-noded quads -- extension to higher-order</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/// quads should be trivial (see the corresponding classes for</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/// triangular meshes).</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeompackQuadMesh.html#a714ee07999e06676f08080bac8c024db">GeompackQuadMesh&lt;ELEMENT&gt;::</a></div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classoomph_1_1GeompackQuadMesh.html#a714ee07999e06676f08080bac8c024db">   45</a></span>&#160;<a class="code" href="classoomph_1_1GeompackQuadMesh.html#a714ee07999e06676f08080bac8c024db">build_from_scaffold</a>(TimeStepper* time_stepper_pt)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{   </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; <span class="comment">// Mesh can only be built with four-noded 2D Qelements.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; MeshChecker::assert_geometric_element&lt;QElementGeometricBase,ELEMENT&gt;(2,2);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; <span class="comment">// Create space for elements</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; <span class="keywordtype">unsigned</span> nelem=Tmp_mesh_pt-&gt;nelement();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; Element_pt.resize(nelem);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;   </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; <span class="comment">// Create space for nodes</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; <span class="keywordtype">unsigned</span> nnod=Tmp_mesh_pt-&gt;nnode();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; Node_pt.resize(nnod);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;   </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; <span class="comment">// Set number of boundaries</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; <span class="keywordtype">unsigned</span> nbound=Tmp_mesh_pt-&gt;nboundary();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; set_nboundary(nbound);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; <span class="comment">// Loop over elements in scaffold mesh, visit their nodes</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nelem;e++)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;   Element_pt[e]=<span class="keyword">new</span> ELEMENT;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;   </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; <span class="comment">// At the moment we can only do four-noded quads</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; <span class="keywordflow">if</span> (finite_element_pt(0)-&gt;nnode()!=4)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   std::string error_message =</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="stringliteral">&quot;GeompackQuadMesh can currently only deal with\n&quot;</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;   error_message += <span class="stringliteral">&quot;four noded quads! \n&quot;</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;   error_message += <span class="stringliteral">&quot;Generalisation to higher-order elements should be \n&quot;</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;   error_message += <span class="stringliteral">&quot;straightforward but hasn&#39;t been done yet.\n&quot;</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;   error_message += <span class="stringliteral">&quot;Do you want to volunteer? \n&quot;</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;   </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;   <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                       OOMPH_CURRENT_FUNCTION,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                       OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">  /// Quadrilateral mesh generator; Uses input from Geompack++.</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">  /// See: http://members.shaw.ca/bjoe/</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">  /// Currently only for four-noded quads -- extension to higher-order</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">  /// quads should be trivial (see the corresponding classes for</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">  /// triangular meshes).</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span>  <span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classoomph_1_1GeompackQuadMesh.html#a714ee07999e06676f08080bac8c024db">   42</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeompackQuadMesh.html#a714ee07999e06676f08080bac8c024db">GeompackQuadMesh&lt;ELEMENT&gt;::build_from_scaffold</a>(</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    TimeStepper* time_stepper_pt)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Mesh can only be built with four-noded 2D Qelements.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    MeshChecker::assert_geometric_element&lt;QElementGeometricBase, ELEMENT&gt;(2, 2);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// Create space for elements</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">unsigned</span> nelem = Tmp_mesh_pt-&gt;nelement();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    Element_pt.resize(nelem);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Create space for nodes</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">unsigned</span> nnod = Tmp_mesh_pt-&gt;nnode();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    Node_pt.resize(nnod);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// Set number of boundaries</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">unsigned</span> nbound = Tmp_mesh_pt-&gt;nboundary();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    set_nboundary(nbound);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// Loop over elements in scaffold mesh, visit their nodes</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e = 0; e &lt; nelem; e++)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      Element_pt[e] = <span class="keyword">new</span> ELEMENT;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// At the moment we can only do four-noded quads</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">if</span> (finite_element_pt(0)-&gt;nnode() != 4)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      std::string error_message =</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="stringliteral">&quot;GeompackQuadMesh can currently only deal with\n&quot;</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      error_message += <span class="stringliteral">&quot;four noded quads! \n&quot;</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      error_message += <span class="stringliteral">&quot;Generalisation to higher-order elements should be \n&quot;</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      error_message += <span class="stringliteral">&quot;straightforward but hasn&#39;t been done yet.\n&quot;</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      error_message += <span class="stringliteral">&quot;Do you want to volunteer? \n&quot;</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keywordflow">throw</span> OomphLibError(</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">// In the first instance build all nodes from within all the elements</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">unsigned</span> nnod_el = Tmp_mesh_pt-&gt;finite_element_pt(0)-&gt;nnode();</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; <span class="comment">// In the first instance build all nodes from within all the elements</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; <span class="keywordtype">unsigned</span> nnod_el=Tmp_mesh_pt-&gt;finite_element_pt(0)-&gt;nnode();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; <span class="comment">// Loop over elements in scaffold mesh, visit their nodes</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nelem;e++)</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;   <span class="comment">// Loop over all nodes in element</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;nnod_el;j++)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;     <span class="comment">// Create new node, using the NEW element&#39;s construct_node</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;     <span class="comment">// member function</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;     finite_element_pt(e)-&gt;construct_node(j,time_stepper_pt); </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;   </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;   </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; std::map&lt;Node*,unsigned&gt; global_number;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; <span class="keywordtype">unsigned</span> global_count=0;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; <span class="comment">// Loop over elements in scaffold mesh, visit their nodes</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nelem;e++)</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;   <span class="comment">// Loop over all nodes in element</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;nnod_el;j++)</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    {</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;     <span class="comment">// Pointer to node in the scaffold mesh</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;     Node* scaffold_node_pt=Tmp_mesh_pt-&gt;finite_element_pt(e)-&gt;node_pt(j);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">// Loop over elements in scaffold mesh, visit their nodes</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e = 0; e &lt; nelem; e++)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="comment">// Loop over all nodes in element</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j = 0; j &lt; nnod_el; j++)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="comment">// Create new node, using the NEW element&#39;s construct_node</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="comment">// member function</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        finite_element_pt(e)-&gt;construct_node(j, time_stepper_pt);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    std::map&lt;Node*, unsigned&gt; global_number;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">unsigned</span> global_count = 0;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="comment">// Loop over elements in scaffold mesh, visit their nodes</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e = 0; e &lt; nelem; e++)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="comment">// Loop over all nodes in element</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j = 0; j &lt; nnod_el; j++)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="comment">// Pointer to node in the scaffold mesh</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        Node* scaffold_node_pt = Tmp_mesh_pt-&gt;finite_element_pt(e)-&gt;node_pt(j);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="comment">// Get the (pseudo-)global node number in scaffold mesh</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="comment">// (It&#39;s zero [=default] if not visited this one yet)</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordtype">unsigned</span> j_global = global_number[scaffold_node_pt];</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;     <span class="comment">// Get the (pseudo-)global node number in scaffold mesh</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;     <span class="comment">// (It&#39;s zero [=default] if not visited this one yet)</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;     <span class="keywordtype">unsigned</span> j_global=global_number[scaffold_node_pt];</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;     <span class="comment">// Haven&#39;t done this one yet</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;     <span class="keywordflow">if</span> (j_global==0)</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;       <span class="comment">// Give it a number (not necessarily the global node </span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;       <span class="comment">// number in the scaffold mesh -- we just need something</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;       <span class="comment">// to keep track...)</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;       global_count++;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;       global_number[scaffold_node_pt]=global_count;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;       <span class="comment">// Copy new node, created using the NEW element&#39;s construct_node</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;       <span class="comment">// function into global storage, using the same global</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;       <span class="comment">// node number that we&#39;ve just associated with the </span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;       <span class="comment">// corresponding node in the scaffold mesh</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;       Node_pt[global_count-1]=finite_element_pt(e)-&gt;node_pt(j);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="comment">// Haven&#39;t done this one yet</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordflow">if</span> (j_global == 0)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;          <span class="comment">// Give it a number (not necessarily the global node</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;          <span class="comment">// number in the scaffold mesh -- we just need something</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;          <span class="comment">// to keep track...)</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;          global_count++;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;          global_number[scaffold_node_pt] = global_count;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;          <span class="comment">// Copy new node, created using the NEW element&#39;s construct_node</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;          <span class="comment">// function into global storage, using the same global</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;          <span class="comment">// node number that we&#39;ve just associated with the</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;          <span class="comment">// corresponding node in the scaffold mesh</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;          Node_pt[global_count - 1] = finite_element_pt(e)-&gt;node_pt(j);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;          <span class="comment">// Assign coordinates</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;          Node_pt[global_count - 1]-&gt;x(0) = scaffold_node_pt-&gt;x(0);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;          Node_pt[global_count - 1]-&gt;x(1) = scaffold_node_pt-&gt;x(1);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;       <span class="comment">// Assign coordinates</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;       Node_pt[global_count-1]-&gt;x(0)=scaffold_node_pt-&gt;x(0);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;       Node_pt[global_count-1]-&gt;x(1)=scaffold_node_pt-&gt;x(1);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;         </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;       <span class="comment">// Get pointer to set of mesh boundaries that this </span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;       <span class="comment">// scaffold node occupies; NULL if the node is not on any boundary</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;       std::set&lt;unsigned&gt;* boundaries_pt;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;       scaffold_node_pt-&gt;get_boundaries_pt(boundaries_pt);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;       <span class="comment">// Loop over the mesh boundaries that the node in the scaffold mesh</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;       <span class="comment">// occupies and assign new node to the same ones.</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;       <span class="keywordflow">if</span> (boundaries_pt!=0)</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        {</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;         <span class="comment">//Convert it to a boundary node</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;         this-&gt;convert_to_boundary_node(Node_pt[global_count-1]);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;         <span class="comment">//Add the node to the boundaries</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;         <span class="keywordflow">for</span>(std::set&lt;unsigned&gt;::iterator it=boundaries_pt-&gt;begin();</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;             it!=boundaries_pt-&gt;end();++it)</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;          {</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;           add_boundary_node(*it,Node_pt[global_count-1]);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;          }</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;      }</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;     <span class="comment">// This one has already been done: Kill it</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;     <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;      {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;       <span class="comment">// Kill it</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;       <span class="keyword">delete</span> finite_element_pt(e)-&gt;node_pt(j);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;       <span class="comment">// Overwrite the element&#39;s pointer to local node by</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;       <span class="comment">// pointer to the already existing node -- identified by</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;       <span class="comment">// the number kept in the map</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;       finite_element_pt(e)-&gt;node_pt(j)=Node_pt[j_global-1];         </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;      }</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    }</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  }</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;}</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;          <span class="comment">// Get pointer to set of mesh boundaries that this</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;          <span class="comment">// scaffold node occupies; NULL if the node is not on any boundary</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;          std::set&lt;unsigned&gt;* boundaries_pt;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;          scaffold_node_pt-&gt;get_boundaries_pt(boundaries_pt);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;          <span class="comment">// Loop over the mesh boundaries that the node in the scaffold mesh</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;          <span class="comment">// occupies and assign new node to the same ones.</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;          <span class="keywordflow">if</span> (boundaries_pt != 0)</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;          {</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="comment">// Convert it to a boundary node</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            this-&gt;convert_to_boundary_node(Node_pt[global_count - 1]);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="comment">// Add the node to the boundaries</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="keywordflow">for</span> (std::set&lt;unsigned&gt;::iterator it = boundaries_pt-&gt;begin();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                 it != boundaries_pt-&gt;end();</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                 ++it)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;              add_boundary_node(*it, Node_pt[global_count - 1]);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            }</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;          }</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="comment">// This one has already been done: Kill it</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;          <span class="comment">// Kill it</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;          <span class="keyword">delete</span> finite_element_pt(e)-&gt;node_pt(j);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;          <span class="comment">// Overwrite the element&#39;s pointer to local node by</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;          <span class="comment">// pointer to the already existing node -- identified by</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;          <span class="comment">// the number kept in the map</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;          finite_element_pt(e)-&gt;node_pt(j) = Node_pt[j_global - 1];</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  }</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;} <span class="comment">// namespace oomph</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="ageompack__mesh_8template_8h_html"><div class="ttname"><a href="geompack__mesh_8template_8h.html">geompack_mesh.template.h</a></div></div>
-<div class="ttc" id="aclassoomph_1_1GeompackQuadMesh_html_a714ee07999e06676f08080bac8c024db"><div class="ttname"><a href="classoomph_1_1GeompackQuadMesh.html#a714ee07999e06676f08080bac8c024db">oomph::GeompackQuadMesh::build_from_scaffold</a></div><div class="ttdeci">void build_from_scaffold(TimeStepper *time_stepper_pt)</div><div class="ttdoc">Build mesh from scaffold.</div><div class="ttdef"><b>Definition:</b> <a href="geompack__mesh_8template_8cc_source.html#l00045">geompack_mesh.template.cc:45</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeompackQuadMesh_html_a714ee07999e06676f08080bac8c024db"><div class="ttname"><a href="classoomph_1_1GeompackQuadMesh.html#a714ee07999e06676f08080bac8c024db">oomph::GeompackQuadMesh::build_from_scaffold</a></div><div class="ttdeci">void build_from_scaffold(TimeStepper *time_stepper_pt)</div><div class="ttdoc">Build mesh from scaffold.</div><div class="ttdef"><b>Definition:</b> <a href="geompack__mesh_8template_8cc_source.html#l00042">geompack_mesh.template.cc:42</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition:</b> <a href="annular__domain_8h_source.html#l00034">annular_domain.h:34</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -323,7 +320,7 @@
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:48:58
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:32:38
         </div>
       </div>
     </footer>

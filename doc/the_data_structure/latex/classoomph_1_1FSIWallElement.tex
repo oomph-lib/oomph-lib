@@ -31,9 +31,8 @@ virtual \mbox{\hyperlink{classoomph_1_1FSIWallElement_a498254a4b31cfee252a2015a7
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a487a050241512f3979c4d67bb40b2a63}{setup\+\_\+fsi\+\_\+wall\+\_\+element}} (const unsigned \&nlagr\+\_\+solid, const unsigned \&ndim\+\_\+fluid)
 \begin{DoxyCompactList}\small\item\em Setup\+: Assign storage -- pass the Eulerian dimension of the \char`\"{}adjacent\char`\"{} fluid elements and the number of local coordinates required to parametrise the wall element. E.\+g. for a F\+S\+I\+Kirchhoff\+Love\+Beam, bounding a 2D fluid domain ndim\+\_\+fluid=2 and nlagr\+\_\+solid=1. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1FSIWallElement_abfc3907362f9cd1a852631f87cbff7aa}{q}} () const
-\begin{DoxyCompactList}\small\item\em Return the ratio of the stress scales used to non-\/dimensionalise the fluid and solid equations. E.\+g. $ Q = \mu U/(LE) $ if the fluid mechanics stresses (pressures) are scaled on the viscous scale $ \mu U / L$ and the solid mechanics stresses on the solid\textquotesingle{}s Young\textquotesingle{}s modulus $ E $. ~\newline
- \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1FSIWallElement_ab407513775b5250b016ab91fa98dc1a0}{q\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return the ratio of the stress scales used to non-\/dimensionalise the fluid and solid equations. E.\+g. $ Q = \mu U/(LE) $ if the fluid mechanics stresses (pressures) are scaled on the viscous scale $ \mu U / L$ and the solid mechanics stresses on the solid\textquotesingle{}s Young\textquotesingle{}s modulus $ E $. \end{DoxyCompactList}\item 
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1FSIWallElement_ada65c21f470f10c04c9bb66209466a86}{q\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer the ratio of stress scales used to non-\/dimensionalise the fluid and solid equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a0dc3efdeb5d0abf0ba473c0145652358}{enable\+\_\+fluid\+\_\+loading\+\_\+on\+\_\+both\+\_\+sides}} ()
 \begin{DoxyCompactList}\small\item\em Allow element to be loaded by fluid on both sides. (Resizes containers for lookup schemes and initialises data associated with elements at the \char`\"{}back\char`\"{} of the \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}} to N\+U\+LL. \end{DoxyCompactList}\item 
@@ -54,7 +53,7 @@ void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c24540d3757cb1a1194
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static bool \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae7bc07beb09c423ac625a1419644519b}{Dont\+\_\+warn\+\_\+about\+\_\+missing\+\_\+adjacent\+\_\+fluid\+\_\+elements}} =false
+static bool \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae7bc07beb09c423ac625a1419644519b}{Dont\+\_\+warn\+\_\+about\+\_\+missing\+\_\+adjacent\+\_\+fluid\+\_\+elements}} = false
 \begin{DoxyCompactList}\small\item\em Static flag that allows the suppression of warning messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -100,9 +99,9 @@ void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a4b6eacec41f41006a3884ee0dbda
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a16256fcbc5ddc279db3ab776b92b46a1}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+iteraction\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ab35aeda12ebf581ab65586d4d2f6818b}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+iteraction\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Overload the function that must return all field data involved in the interactions from the external (fluid) element. It allows the velocity degrees of freedom to be ignored if we want to ignore the shear stresses when computing the Jacobian. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a27ef2e85f3486083f7c0577f33327d22}{identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&external\+\_\+geometric\+\_\+data\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a71a4db4c74bc6eeac246f55026878aee}{identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&external\+\_\+geometric\+\_\+data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function that must return all geometric data involved in the desired interactions from the external element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -112,12 +111,11 @@ bool \mbox{\hyperlink{classoomph_1_1FSIWallElement_afaa82ab6ab3c4813c3d5342d3de9
 double $\ast$ \mbox{\hyperlink{classoomph_1_1FSIWallElement_ab476ed3f14e4ffe9711d597b2703a3bc}{Q\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the ratio, $ Q $ , of the stress used to non-\/dimensionalise the fluid stresses to the stress used to non-\/dimensionalise the solid stresses. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1FSIWallElement_a5eb4d9f6c1d9c7745b4313a0a832fbb0}{Ignore\+\_\+shear\+\_\+stress\+\_\+in\+\_\+jacobian}}
-\begin{DoxyCompactList}\small\item\em Set this flag to true to ignore shear stress component of load when calculating the Jacobian, i.\+e. to ignore fluid velocity \mbox{\hyperlink{classoomph_1_1Data}{Data}} in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} and \char`\"{}far away\char`\"{} geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects nodal positions in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}, also to bypass node updates in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set this flag to true to ignore shear stress component of load when calculating the Jacobian, i.\+e. to ignore fluid velocity \mbox{\hyperlink{classoomph_1_1Data}{Data}} in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} and \char`\"{}far away\char`\"{} geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects nodal positions in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}, also to bypass node updates in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1FSIWallElement_ac55ce8829f73fe16f4245fa7c0f2cd54}{Default\+\_\+\+Q\+\_\+\+Value}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1FSIWallElement_ac55ce8829f73fe16f4245fa7c0f2cd54}{Default\+\_\+\+Q\+\_\+\+Value}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.\+0) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -141,9 +139,9 @@ Since the fluid traction can involve derivatives of the velocity (think of Newto
 
 Finally, since oomph-\/lib\textquotesingle{}s fluid and solid elements tend to employ different non-\/dimensionalisations for the stresses, the fluid traction (computed by the adjacent fluid element, on the fluid stress-\/scale) may have to be scaled by the ratio $ Q $ of the stresses used to non-\/dimensionalise the two sets of stresses. For instance, for a fluid stress non-\/dimensionalisation based on the viscous scale $ \mu U / L$ (as in oomph-\/lib\textquotesingle{}s Navier-\/\+Stokes elements) and a non-\/dimensionalisation of the solid mechanics stresses, based on a Young\textquotesingle{}s modulus $ E $, as in oomph-\/lib\textquotesingle{}s Kirchhoff\+Love\+Beam\+Elements, the stress ratio is given by \[ Q=\frac{\mu U}{LE} \] For other wall/fluid element combinations the definition of $ Q $ will differ -- check the documentation and/or implementation to see which parameters are used to non-\/dimensionalise the stresses in the respective elements!
 
-The function F\+S\+I\+Wall\+Element\+::fluid\+\_\+load\+\_\+vector(...) computes the fluid traction on the wall on the wall stress-\/scale. This function may be called in the get\+\_\+load (say) function of a specific \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}} to add the fluid load to the other tractions that may already be applied to the element by other means. By default a stress-\/ratio of $ Q = 1 $ is used but this may be overwritten with the access function \mbox{\hyperlink{classoomph_1_1FSIWallElement_ab407513775b5250b016ab91fa98dc1a0}{F\+S\+I\+Wall\+Element\+::q\+\_\+pt()}}. 
+The function F\+S\+I\+Wall\+Element\+::fluid\+\_\+load\+\_\+vector(...) computes the fluid traction on the wall on the wall stress-\/scale. This function may be called in the get\+\_\+load (say) function of a specific \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}} to add the fluid load to the other tractions that may already be applied to the element by other means. By default a stress-\/ratio of $ Q = 1 $ is used but this may be overwritten with the access function \mbox{\hyperlink{classoomph_1_1FSIWallElement_ada65c21f470f10c04c9bb66209466a86}{F\+S\+I\+Wall\+Element\+::q\+\_\+pt()}}. 
 
-Definition at line 206 of file fsi.\+h.
+Definition at line 198 of file fsi.\+h.
 
 
 
@@ -160,7 +158,7 @@ Constructor. Note that element is not fully-\/functional until its \mbox{\hyperl
 
 
 
-Definition at line 228 of file fsi.\+h.
+Definition at line 218 of file fsi.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_a57f70b2c656281853592a0163fa16268}\label{classoomph_1_1FSIWallElement_a57f70b2c656281853592a0163fa16268}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!FSIWallElement@{FSIWallElement}}
@@ -174,7 +172,7 @@ Broken copy constructor.
 
 
 
-Definition at line 232 of file fsi.\+h.
+Definition at line 226 of file fsi.\+h.
 
 
 
@@ -192,7 +190,7 @@ Empty virtual destructor for safety.
 
 
 
-Definition at line 244 of file fsi.\+h.
+Definition at line 238 of file fsi.\+h.
 
 
 
@@ -213,7 +211,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a2a
 
 
 
-Definition at line 80 of file fsi.\+cc.
+Definition at line 78 of file fsi.\+cc.
 
 
 
@@ -231,7 +229,7 @@ Call this function to ignore shear stress component of load when calculating the
 
 
 
-Definition at line 310 of file fsi.\+h.
+Definition at line 315 of file fsi.\+h.
 
 
 
@@ -263,7 +261,7 @@ References Only\+\_\+front\+\_\+is\+\_\+loaded\+\_\+by\+\_\+fluid, and oomph\+::
 
 Call thi function to re-\/enable calculation of the shear stress componnent of load when calculating the Jacobian (the default) 
 
-Definition at line 315 of file fsi.\+h.
+Definition at line 322 of file fsi.\+h.
 
 
 
@@ -281,7 +279,7 @@ Do not include any external data that affects the load in the computation of ele
 
 
 
-Definition at line 292 of file fsi.\+h.
+Definition at line 294 of file fsi.\+h.
 
 
 
@@ -303,7 +301,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElemen
 
 
 
-Definition at line 326 of file fsi.\+h.
+Definition at line 335 of file fsi.\+h.
 
 
 
@@ -319,11 +317,9 @@ References oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_
 
 Get FE Jacobian by systematic finite differencing w.\+r.\+t. nodal positition \mbox{\hyperlink{classoomph_1_1Data}{Data}}, internal and external \mbox{\hyperlink{classoomph_1_1Data}{Data}} and any load \mbox{\hyperlink{classoomph_1_1Data}{Data}} that is not included in the previous categories. This is a re-\/implementation of the generic FD routines with they key difference being that any updates of values are followed by a node update in the adjacent fluid elements since their position (and hence the shear stresses they exert onto the solid) may be indirectly affected by these. For greater efficiency this may be overloaded in derived classes, e.\+g. if it is known that for a specific \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}}, the internal \mbox{\hyperlink{classoomph_1_1Data}{Data}} does not affect the nodal positions in adjacent fluid elements. 
 
-Get the contribution to the load vector provided by the adjacent fluid element\+: Pass number of integration point in solid element, and the unit normal vector (pointing into the fluid!) and return the load vector. Note that the load is non-\/dimensionalised on the wall-\/stress scale, i.\+e. it is obtained by computing the traction (on the fluid stress-\/scale) from the adjacent fluid element and then multiplying it by the stress-\/scale-\/ratio $ Q. $. ~\newline
+Get the contribution to the load vector provided by the adjacent fluid element\+: Pass number of integration point in solid element, and the unit normal vector (pointing into the fluid!) and return the load vector. Note that the load is non-\/dimensionalised on the wall-\/stress scale, i.\+e. it is obtained by computing the traction (on the fluid stress-\/scale) from the adjacent fluid element and then multiplying it by the stress-\/scale-\/ratio $ Q. $.
 
-
-Get the contribution to the load vector provided by the adjacent fluid element\+: Pass number of integration point in solid element, and the unit normal vector (pointing into the fluid on the \char`\"{}front\char`\"{} of the \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}}) and return the load vector. Note that the load is non-\/dimensionalised on the wall-\/stress scale, i.\+e. it is obtained by computing the traction (on the fluid stress-\/scale) from the adjacent fluid element and then multiplying it by the stress-\/scale-\/ratio $ Q. $. ~\newline
- If element is loaded on both sides, the fluid load computed from the reverse element is {\bfseries{subtracted}}, because it\textquotesingle{}s computed with the same normal vector. 
+Get the contribution to the load vector provided by the adjacent fluid element\+: Pass number of integration point in solid element, and the unit normal vector (pointing into the fluid on the \char`\"{}front\char`\"{} of the \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}}) and return the load vector. Note that the load is non-\/dimensionalised on the wall-\/stress scale, i.\+e. it is obtained by computing the traction (on the fluid stress-\/scale) from the adjacent fluid element and then multiplying it by the stress-\/scale-\/ratio $ Q. $. If element is loaded on both sides, the fluid load computed from the reverse element is {\bfseries{subtracted}}, because it\textquotesingle{}s computed with the same normal vector. 
 
 Definition at line 162 of file fsi.\+cc.
 
@@ -335,11 +331,11 @@ References Dont\+\_\+warn\+\_\+about\+\_\+missing\+\_\+adjacent\+\_\+fluid\+\_\+
 
 Referenced by oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::get\+\_\+traction(), oomph\+::\+F\+S\+I\+Hermite\+Beam\+Element\+::load\+\_\+vector(), oomph\+::\+F\+S\+I\+Diag\+Hermite\+Shell\+Element\+::load\+\_\+vector(), and oomph\+::\+F\+S\+I\+Diag\+Hermite\+Shell\+Element\+::load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation().
 
-\mbox{\Hypertarget{classoomph_1_1FSIWallElement_a16256fcbc5ddc279db3ab776b92b46a1}\label{classoomph_1_1FSIWallElement_a16256fcbc5ddc279db3ab776b92b46a1}} 
+\mbox{\Hypertarget{classoomph_1_1FSIWallElement_ab35aeda12ebf581ab65586d4d2f6818b}\label{classoomph_1_1FSIWallElement_ab35aeda12ebf581ab65586d4d2f6818b}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!identify\_all\_field\_data\_for\_external\_interaction@{identify\_all\_field\_data\_for\_external\_interaction}}
 \index{identify\_all\_field\_data\_for\_external\_interaction@{identify\_all\_field\_data\_for\_external\_interaction}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{identify\_all\_field\_data\_for\_external\_interaction()}{identify\_all\_field\_data\_for\_external\_interaction()}}
-{\footnotesize\ttfamily void oomph\+::\+F\+S\+I\+Wall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+interaction\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+F\+S\+I\+Wall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+interaction\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -347,21 +343,21 @@ Overload the function that must return all field data involved in the interactio
 
 Overload the function that must return all field data involved in the interactions from the external (fluid) element. It allows the velocity degrees of freedom to be ignored if we want to ignore the shear stresses when computing the Jacobian. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_aa6bbfc084b5f4654cc7f8c61a6f7a81b}{oomph\+::\+Element\+With\+External\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_acd9b05781cb87ada3c5cd6d57a1b58b1}{oomph\+::\+Element\+With\+External\+Element}}.
 
 
 
-Definition at line 282 of file fsi.\+cc.
+Definition at line 279 of file fsi.\+cc.
 
 
 
 References i, oomph\+::\+F\+S\+I\+Fluid\+Element\+::identify\+\_\+load\+\_\+data(), oomph\+::\+F\+S\+I\+Fluid\+Element\+::identify\+\_\+pressure\+\_\+data(), Ignore\+\_\+shear\+\_\+stress\+\_\+in\+\_\+jacobian, and oomph\+::\+Element\+With\+External\+Element\+::ninteraction().
 
-\mbox{\Hypertarget{classoomph_1_1FSIWallElement_a27ef2e85f3486083f7c0577f33327d22}\label{classoomph_1_1FSIWallElement_a27ef2e85f3486083f7c0577f33327d22}} 
+\mbox{\Hypertarget{classoomph_1_1FSIWallElement_a71a4db4c74bc6eeac246f55026878aee}\label{classoomph_1_1FSIWallElement_a71a4db4c74bc6eeac246f55026878aee}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!identify\_all\_geometric\_data\_for\_external\_interaction@{identify\_all\_geometric\_data\_for\_external\_interaction}}
 \index{identify\_all\_geometric\_data\_for\_external\_interaction@{identify\_all\_geometric\_data\_for\_external\_interaction}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{identify\_all\_geometric\_data\_for\_external\_interaction()}{identify\_all\_geometric\_data\_for\_external\_interaction()}}
-{\footnotesize\ttfamily void oomph\+::\+F\+S\+I\+Wall\+Element\+::identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&}]{external\+\_\+geometric\+\_\+data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+F\+S\+I\+Wall\+Element\+::identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&}]{external\+\_\+geometric\+\_\+data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -369,11 +365,11 @@ Function that must return all geometric data involved in the desired interaction
 
 Function that must return all geometric data involved in the desired interactions from the external element 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a47aa0ca3b37d885d8432815c3418b769}{oomph\+::\+Element\+With\+External\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a3cf75e1289d1a09b113fde7da01a61a5}{oomph\+::\+Element\+With\+External\+Element}}.
 
 
 
-Definition at line 319 of file fsi.\+cc.
+Definition at line 317 of file fsi.\+cc.
 
 
 
@@ -391,7 +387,7 @@ Include all external fluid data that affects the load in the computation of the 
 
 
 
-Definition at line 297 of file fsi.\+h.
+Definition at line 302 of file fsi.\+h.
 
 
 
@@ -409,7 +405,7 @@ Update the nodal positions in all fluid elements that affect the traction on thi
 
 Update the nodal positions in all fluid elements that affect the traction on this \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}} 
 
-Definition at line 232 of file fsi.\+cc.
+Definition at line 230 of file fsi.\+cc.
 
 
 
@@ -453,7 +449,7 @@ Broken assignment operator.
 
 
 
-Definition at line 238 of file fsi.\+h.
+Definition at line 232 of file fsi.\+h.
 
 
 
@@ -467,12 +463,11 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 
-Return the ratio of the stress scales used to non-\/dimensionalise the fluid and solid equations. E.\+g. $ Q = \mu U/(LE) $ if the fluid mechanics stresses (pressures) are scaled on the viscous scale $ \mu U / L$ and the solid mechanics stresses on the solid\textquotesingle{}s Young\textquotesingle{}s modulus $ E $. ~\newline
- 
+Return the ratio of the stress scales used to non-\/dimensionalise the fluid and solid equations. E.\+g. $ Q = \mu U/(LE) $ if the fluid mechanics stresses (pressures) are scaled on the viscous scale $ \mu U / L$ and the solid mechanics stresses on the solid\textquotesingle{}s Young\textquotesingle{}s modulus $ E $. 
 
 
 
-Definition at line 259 of file fsi.\+h.
+Definition at line 253 of file fsi.\+h.
 
 
 
@@ -482,11 +477,11 @@ References Q\+\_\+pt.
 
 Referenced by fluid\+\_\+load\+\_\+vector().
 
-\mbox{\Hypertarget{classoomph_1_1FSIWallElement_ab407513775b5250b016ab91fa98dc1a0}\label{classoomph_1_1FSIWallElement_ab407513775b5250b016ab91fa98dc1a0}} 
+\mbox{\Hypertarget{classoomph_1_1FSIWallElement_ada65c21f470f10c04c9bb66209466a86}\label{classoomph_1_1FSIWallElement_ada65c21f470f10c04c9bb66209466a86}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!q\_pt@{q\_pt}}
 \index{q\_pt@{q\_pt}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{q\_pt()}{q\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+F\+S\+I\+Wall\+Element\+::q\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+F\+S\+I\+Wall\+Element\+::q\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -494,7 +489,7 @@ Return a pointer the ratio of stress scales used to non-\/dimensionalise the flu
 
 
 
-Definition at line 263 of file fsi.\+h.
+Definition at line 260 of file fsi.\+h.
 
 
 
@@ -516,7 +511,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a10210277ae
 
 
 
-Definition at line 388 of file fsi.\+h.
+Definition at line 398 of file fsi.\+h.
 
 
 
@@ -538,7 +533,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a38
 
 
 
-Definition at line 431 of file fsi.\+h.
+Definition at line 441 of file fsi.\+h.
 
 
 
@@ -560,7 +555,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a90
 
 
 
-Definition at line 453 of file fsi.\+h.
+Definition at line 464 of file fsi.\+h.
 
 
 
@@ -582,7 +577,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_ab3e2e13d21
 
 
 
-Definition at line 366 of file fsi.\+h.
+Definition at line 376 of file fsi.\+h.
 
 
 
@@ -604,7 +599,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a913ae545a274b36
 
 
 
-Definition at line 410 of file fsi.\+h.
+Definition at line 420 of file fsi.\+h.
 
 
 
@@ -626,7 +621,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_afab2124e07
 
 
 
-Definition at line 475 of file fsi.\+h.
+Definition at line 486 of file fsi.\+h.
 
 
 
@@ -648,7 +643,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a027a9213e9
 
 
 
-Definition at line 385 of file fsi.\+h.
+Definition at line 395 of file fsi.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_adc6d07122f1624e2b66ce1a12b530e27}\label{classoomph_1_1FSIWallElement_adc6d07122f1624e2b66ce1a12b530e27}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_external\_interaction\_field\_fd@{reset\_in\_external\_interaction\_field\_fd}}
@@ -666,7 +661,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a4e
 
 
 
-Definition at line 428 of file fsi.\+h.
+Definition at line 438 of file fsi.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_aa0b511d7c276578c95d26550576a9be0}\label{classoomph_1_1FSIWallElement_aa0b511d7c276578c95d26550576a9be0}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_external\_interaction\_geometric\_fd@{reset\_in\_external\_interaction\_geometric\_fd}}
@@ -684,7 +679,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a2b
 
 
 
-Definition at line 450 of file fsi.\+h.
+Definition at line 461 of file fsi.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_aed714993ced295b7ddb5f014ffc2ba6a}\label{classoomph_1_1FSIWallElement_aed714993ced295b7ddb5f014ffc2ba6a}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_internal\_fd@{reset\_in\_internal\_fd}}
@@ -702,7 +697,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a89c6c5cf8b
 
 
 
-Definition at line 363 of file fsi.\+h.
+Definition at line 373 of file fsi.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_afb13bbbad0afbf83b45bac82ac7f50b5}\label{classoomph_1_1FSIWallElement_afb13bbbad0afbf83b45bac82ac7f50b5}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_nodal\_fd@{reset\_in\_nodal\_fd}}
@@ -720,7 +715,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a6d2bd49de1b5a4d
 
 
 
-Definition at line 407 of file fsi.\+h.
+Definition at line 417 of file fsi.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_aa7a250a0958768f5393484ea3c528a37}\label{classoomph_1_1FSIWallElement_aa7a250a0958768f5393484ea3c528a37}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_solid\_position\_fd@{reset\_in\_solid\_position\_fd}}
@@ -738,7 +733,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a99e4613b1a
 
 
 
-Definition at line 472 of file fsi.\+h.
+Definition at line 483 of file fsi.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_a487a050241512f3979c4d67bb40b2a63}\label{classoomph_1_1FSIWallElement_a487a050241512f3979c4d67bb40b2a63}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!setup\_fsi\_wall\_element@{setup\_fsi\_wall\_element}}
@@ -752,7 +747,7 @@ Setup\+: Assign storage -- pass the Eulerian dimension of the \char`\"{}adjacent
 
 Compete build of element\+: Assign storage -- pass the Eulerian dimension of the \char`\"{}adjacent\char`\"{} fluid elements and the number of local coordinates required to parametrise the wall element. E.\+g. for a F\+S\+I\+Kirchhoff\+Love\+Beam, bounding a 2D fluid domain ndim\+\_\+fluid=2 and nlagr\+\_\+solid=1. Note that, by default, we\textquotesingle{}re only providing storage for fluid loading on the \char`\"{}front\char`\"{} of the element. Call \mbox{\hyperlink{classoomph_1_1FSIWallElement_a0dc3efdeb5d0abf0ba473c0145652358}{F\+S\+I\+Wall\+Element\+::enable\+\_\+fluid\+\_\+loading\+\_\+on\+\_\+both\+\_\+sides()}} to enable fluid loading on the back, too. 
 
-Definition at line 120 of file fsi.\+cc.
+Definition at line 121 of file fsi.\+cc.
 
 
 
@@ -778,7 +773,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af740b8c507
 
 
 
-Definition at line 376 of file fsi.\+h.
+Definition at line 386 of file fsi.\+h.
 
 
 
@@ -800,7 +795,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae8
 
 
 
-Definition at line 419 of file fsi.\+h.
+Definition at line 429 of file fsi.\+h.
 
 
 
@@ -822,7 +817,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ab3
 
 
 
-Definition at line 441 of file fsi.\+h.
+Definition at line 452 of file fsi.\+h.
 
 
 
@@ -844,7 +839,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c94ccb2ca
 
 
 
-Definition at line 354 of file fsi.\+h.
+Definition at line 364 of file fsi.\+h.
 
 
 
@@ -866,7 +861,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a4557238570f3252
 
 
 
-Definition at line 398 of file fsi.\+h.
+Definition at line 408 of file fsi.\+h.
 
 
 
@@ -888,7 +883,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a84d5c177b2
 
 
 
-Definition at line 463 of file fsi.\+h.
+Definition at line 474 of file fsi.\+h.
 
 
 
@@ -901,7 +896,7 @@ References Ignore\+\_\+shear\+\_\+stress\+\_\+in\+\_\+jacobian, and node\+\_\+up
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!Default\_Q\_Value@{Default\_Q\_Value}}
 \index{Default\_Q\_Value@{Default\_Q\_Value}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{Default\_Q\_Value}{Default\_Q\_Value}}
-{\footnotesize\ttfamily double oomph\+::\+F\+S\+I\+Wall\+Element\+::\+Default\+\_\+\+Q\+\_\+\+Value =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily double oomph\+::\+F\+S\+I\+Wall\+Element\+::\+Default\+\_\+\+Q\+\_\+\+Value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -909,13 +904,13 @@ Static default value for the ratio of stress scales used in the fluid and solid 
 
 Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.\+0) 
 
-Definition at line 530 of file fsi.\+h.
+Definition at line 540 of file fsi.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_ae7bc07beb09c423ac625a1419644519b}\label{classoomph_1_1FSIWallElement_ae7bc07beb09c423ac625a1419644519b}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!Dont\_warn\_about\_missing\_adjacent\_fluid\_elements@{Dont\_warn\_about\_missing\_adjacent\_fluid\_elements}}
 \index{Dont\_warn\_about\_missing\_adjacent\_fluid\_elements@{Dont\_warn\_about\_missing\_adjacent\_fluid\_elements}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{Dont\_warn\_about\_missing\_adjacent\_fluid\_elements}{Dont\_warn\_about\_missing\_adjacent\_fluid\_elements}}
-{\footnotesize\ttfamily bool oomph\+::\+F\+S\+I\+Wall\+Element\+::\+Dont\+\_\+warn\+\_\+about\+\_\+missing\+\_\+adjacent\+\_\+fluid\+\_\+elements =false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool oomph\+::\+F\+S\+I\+Wall\+Element\+::\+Dont\+\_\+warn\+\_\+about\+\_\+missing\+\_\+adjacent\+\_\+fluid\+\_\+elements = false\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -923,7 +918,7 @@ Static flag that allows the suppression of warning messages.
 
 Flag that allows the suppression of warning messages. 
 
-Definition at line 224 of file fsi.\+h.
+Definition at line 214 of file fsi.\+h.
 
 
 
@@ -937,12 +932,11 @@ Referenced by fluid\+\_\+load\+\_\+vector().
 
 
 
-Set this flag to true to ignore shear stress component of load when calculating the Jacobian, i.\+e. to ignore fluid velocity \mbox{\hyperlink{classoomph_1_1Data}{Data}} in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} and \char`\"{}far away\char`\"{} geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects nodal positions in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}, also to bypass node updates in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}. ~\newline
- 
+Set this flag to true to ignore shear stress component of load when calculating the Jacobian, i.\+e. to ignore fluid velocity \mbox{\hyperlink{classoomph_1_1Data}{Data}} in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} and \char`\"{}far away\char`\"{} geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects nodal positions in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}, also to bypass node updates in the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}. 
 
 
 
-Definition at line 549 of file fsi.\+h.
+Definition at line 559 of file fsi.\+h.
 
 
 
@@ -960,7 +954,7 @@ Is the element exposed to (and hence loaded by) fluid only on its \char`\"{}fron
 
 
 
-Definition at line 537 of file fsi.\+h.
+Definition at line 547 of file fsi.\+h.
 
 
 
@@ -978,7 +972,7 @@ Pointer to the ratio, $ Q $ , of the stress used to non-\/dimensionalise the flu
 
 
 
-Definition at line 542 of file fsi.\+h.
+Definition at line 552 of file fsi.\+h.
 
 
 

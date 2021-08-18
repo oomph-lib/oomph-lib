@@ -405,8 +405,6 @@ To begin, we create a new class templated by a element and inheriting from {\ttf
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{\textcolor{keyword}{class }ChannelSpineMesh : \textcolor{keyword}{public} RectangularQuadMesh<ELEMENT >, \textcolor{keyword}{public} SpineMesh}
 
 \end{DoxyCodeInclude}
 
@@ -415,10 +413,6 @@ All Spine\+Meshs must include a function {\ttfamily spine\+\_\+node\+\_\+update}
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} spine\_node\_update(SpineNode* spine\_node\_pt)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// Get spine node's fraction along the spine}}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} W = spine\_node\_pt-\/>fraction();}
 
 \end{DoxyCodeInclude}
 
@@ -427,10 +421,6 @@ We then get the local coordinate on the geometric object that defines the upper 
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Get local coordinates}}
-\DoxyCodeLine{   Vector<double> s\_wall(1);}
-\DoxyCodeLine{   s\_wall[0] = spine\_node\_pt-\/>spine\_pt()-\/>geom\_parameter(0);}
 
 \end{DoxyCodeInclude}
 
@@ -439,14 +429,6 @@ Finally we use the use the local coordinate to get the position of the geometric
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Get position vector to wall}}
-\DoxyCodeLine{   Vector<double> position(2);}
-\DoxyCodeLine{   spine\_node\_pt-\/>spine\_pt()-\/>geom\_object\_pt(0)-\/>position(s\_wall,position);}
-\DoxyCodeLine{     }
-\DoxyCodeLine{   \textcolor{comment}{//Set the value of y}}
-\DoxyCodeLine{   spine\_node\_pt-\/>x(1) = this-\/>Ymin + W*position[1];}
-\DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
 
@@ -455,38 +437,6 @@ We store the number of elements in the x direction in each region, the number of
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Number of elements in the left region}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} Nx0;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Number of elements in the centre region}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Nx1;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Number of elements in the right region}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Nx2;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Length of left region}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Lx0;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Length of centre region}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Lx1;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Length of right region}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Lx2;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Number of spines in left region}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Nleft\_spine;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Number of spines in centre region}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Ncentre\_spine;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Number of spines in right region}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Nright\_spine;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// GeomObject for upper wall}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* Wall\_pt;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// GeomObject for the straight upper wall}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* Straight\_wall\_pt;}
 
 \end{DoxyCodeInclude}
 
@@ -495,23 +445,33 @@ All these details are passed to the constructor, except for the pointer to the g
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{ChannelSpineMesh<ELEMENT>::ChannelSpineMesh(}
-\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx0,}
-\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx1,}
-\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx2,}
-\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny,}
-\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx0,}
-\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx1,}
-\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx2,}
-\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&h,}
-\DoxyCodeLine{ GeomObject* wall\_pt, }
-\DoxyCodeLine{ TimeStepper* time\_stepper\_pt) :  }
-\DoxyCodeLine{ RectangularQuadMesh<ELEMENT >(nx0+nx1+nx2,ny,0.0,lx0+lx1+lx2,}
-\DoxyCodeLine{                               0.0,h,false,false,time\_stepper\_pt),}
-\DoxyCodeLine{ Nx0(nx0), Nx1(nx1), Nx2(nx2), }
-\DoxyCodeLine{ Lx0(lx0), Lx1(lx1), Lx2(lx2), }
-\DoxyCodeLine{ Wall\_pt(wall\_pt)}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{  ChannelSpineMesh<ELEMENT>::ChannelSpineMesh(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx0,}
+\DoxyCodeLine{                                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx1,}
+\DoxyCodeLine{                                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx2,}
+\DoxyCodeLine{                                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ny,}
+\DoxyCodeLine{                                              \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lx0,}
+\DoxyCodeLine{                                              \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lx1,}
+\DoxyCodeLine{                                              \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lx2,}
+\DoxyCodeLine{                                              \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& h,}
+\DoxyCodeLine{                                              GeomObject* wall\_pt,}
+\DoxyCodeLine{                                              TimeStepper* time\_stepper\_pt)}
+\DoxyCodeLine{    : RectangularQuadMesh<ELEMENT>(nx0 + nx1 + nx2,}
+\DoxyCodeLine{                                   ny,}
+\DoxyCodeLine{                                   0.0,}
+\DoxyCodeLine{                                   lx0 + lx1 + lx2,}
+\DoxyCodeLine{                                   0.0,}
+\DoxyCodeLine{                                   h,}
+\DoxyCodeLine{                                   false,}
+\DoxyCodeLine{                                   false,}
+\DoxyCodeLine{                                   time\_stepper\_pt),}
+\DoxyCodeLine{      Nx0(nx0),}
+\DoxyCodeLine{      Nx1(nx1),}
+\DoxyCodeLine{      Nx2(nx2),}
+\DoxyCodeLine{      Lx0(lx0),}
+\DoxyCodeLine{      Lx1(lx1),}
+\DoxyCodeLine{      Lx2(lx2),}
+\DoxyCodeLine{      Wall\_pt(wall\_pt)}
 
 \end{DoxyCodeInclude}
 
@@ -520,24 +480,22 @@ We then assign all the parameters for the {\ttfamily Rectangular\+Quad\+Mesh$<$\
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\{}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{    \textcolor{comment}{// Mesh can only be built with 2D Qelements.}}
+\DoxyCodeLine{    MeshChecker::assert\_geometric\_element<QElementGeometricBase, ELEMENT>(2);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Mesh can only be built with 2D Qelements.}}
-\DoxyCodeLine{ MeshChecker::assert\_geometric\_element<QElementGeometricBase,ELEMENT>(2);}
+\DoxyCodeLine{    \textcolor{comment}{// Mesh can only be built with spine elements}}
+\DoxyCodeLine{    MeshChecker::assert\_geometric\_element<SpineFiniteElement, ELEMENT>(2);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{//Mesh can only be built with spine elements}}
-\DoxyCodeLine{ MeshChecker::assert\_geometric\_element<SpineFiniteElement,ELEMENT>(2);}
+\DoxyCodeLine{    \textcolor{comment}{// We've called the "generic" constructor for the RectangularQuadMesh}}
+\DoxyCodeLine{    \textcolor{comment}{// which doesn't do much...}}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// We've called the "generic" constructor for the RectangularQuadMesh}}
-\DoxyCodeLine{ \textcolor{comment}{// which doesn't do much...}}
+\DoxyCodeLine{    \textcolor{comment}{// Build the straight line object}}
+\DoxyCodeLine{    Straight\_wall\_pt = \textcolor{keyword}{new} StraightLine(h);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Build the straight line object}}
-\DoxyCodeLine{ Straight\_wall\_pt = \textcolor{keyword}{new} StraightLine(h);}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Now build the mesh: }}
-\DoxyCodeLine{ \mbox{\hyperlink{spine__channel_8txt_af6dd20913b6f4c7abd5a0823c3ad7134}{build\_channel\_spine\_mesh}}(time\_stepper\_pt);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\}}
+\DoxyCodeLine{    \textcolor{comment}{// Now build the mesh:}}
+\DoxyCodeLine{    \mbox{\hyperlink{spine__channel_8txt_af6dd20913b6f4c7abd5a0823c3ad7134}{build\_channel\_spine\_mesh}}(time\_stepper\_pt);}
+\DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
 
@@ -546,19 +504,19 @@ When we call the function {\ttfamily \mbox{\hyperlink{spine__channel_8txt_af6dd2
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{spine__channel_8txt_af6dd20913b6f4c7abd5a0823c3ad7134}{ChannelSpineMesh<ELEMENT>::build\_channel\_spine\_mesh}}(}
-\DoxyCodeLine{ TimeStepper* time\_stepper\_pt) }
-\DoxyCodeLine{\{}
-\DoxyCodeLine{ \textcolor{comment}{// Build the underlying quad mesh: }}
-\DoxyCodeLine{ RectangularQuadMesh<ELEMENT >::build\_mesh(time\_stepper\_pt);}
+\DoxyCodeLine{  \textcolor{keywordtype}{void} \mbox{\hyperlink{spine__channel_8txt_af6dd20913b6f4c7abd5a0823c3ad7134}{ChannelSpineMesh<ELEMENT>::build\_channel\_spine\_mesh}}(}
+\DoxyCodeLine{    TimeStepper* time\_stepper\_pt)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{    \textcolor{comment}{// Build the underlying quad mesh:}}
+\DoxyCodeLine{    RectangularQuadMesh<ELEMENT>::build\_mesh(time\_stepper\_pt);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Read out the number of elements in the x-\/direction and y-\/direction}}
-\DoxyCodeLine{ \textcolor{comment}{// and in each of the left, centre and right regions}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_x = this-\/>Nx;}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_y = this-\/>Ny;}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_x0 = this-\/>Nx0;}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_x1 = this-\/>Nx1;}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_x2 = this-\/>Nx2;}
+\DoxyCodeLine{    \textcolor{comment}{// Read out the number of elements in the x-\/direction and y-\/direction}}
+\DoxyCodeLine{    \textcolor{comment}{// and in each of the left, centre and right regions}}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} n\_x = this-\/>Nx;}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} n\_y = this-\/>Ny;}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} n\_x0 = this-\/>Nx0;}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} n\_x1 = this-\/>Nx1;}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} n\_x2 = this-\/>Nx2;}
 
 \end{DoxyCodeInclude}
 
@@ -568,72 +526,74 @@ We then allocate memory for the elements and spines in each region in each regio
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Set up the pointers to elements in the left region}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nleft=n\_x0*n\_y;;}
-\DoxyCodeLine{ Left\_element\_pt.reserve(nleft);}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ncentre=n\_x1*n\_y;;}
-\DoxyCodeLine{ Centre\_element\_pt.reserve(ncentre);}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nright=n\_x2*n\_y;;}
-\DoxyCodeLine{ Right\_element\_pt.reserve(nright); }
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} irow=0;irow<n\_y;irow++)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<n\_x0;e++)}
+\DoxyCodeLine{    \textcolor{comment}{// Set up the pointers to elements in the left region}}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} nleft = n\_x0 * n\_y;}
+\DoxyCodeLine{    ;}
+\DoxyCodeLine{    Left\_element\_pt.reserve(nleft);}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} ncentre = n\_x1 * n\_y;}
+\DoxyCodeLine{    ;}
+\DoxyCodeLine{    Centre\_element\_pt.reserve(ncentre);}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} nright = n\_x2 * n\_y;}
+\DoxyCodeLine{    ;}
+\DoxyCodeLine{    Right\_element\_pt.reserve(nright);}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} irow = 0; irow < n\_y; irow++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     Left\_element\_pt.push\_back(}
-\DoxyCodeLine{      this-\/>finite\_element\_pt(irow*n\_x+e));}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < n\_x0; e++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        Left\_element\_pt.push\_back(this-\/>finite\_element\_pt(irow * n\_x + e));}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < n\_x1; e++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        Centre\_element\_pt.push\_back(}
+\DoxyCodeLine{          this-\/>finite\_element\_pt(irow * n\_x + (n\_x0 + e)));}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < n\_x2; e++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        Right\_element\_pt.push\_back(}
+\DoxyCodeLine{          this-\/>finite\_element\_pt(irow * n\_x + (n\_x0 + n\_x1 + e)));}
+\DoxyCodeLine{      \}}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<n\_x1;e++)}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{     Centre\_element\_pt.push\_back(}
-\DoxyCodeLine{      this-\/>finite\_element\_pt(irow*n\_x+(n\_x0+e)));}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<n\_x2;e++)}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{     Right\_element\_pt.push\_back(}
-\DoxyCodeLine{      this-\/>finite\_element\_pt(irow*n\_x+(n\_x0+n\_x1+e)));}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{ }
+\DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{ \textcolor{comment}{// Check that we have the correct number of elements}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (nelement()!=nleft+ncentre+nright)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"Incorrect number of element pointers!"},}
-\DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
-\DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
-\DoxyCodeLine{  \}}
+\DoxyCodeLine{    \textcolor{comment}{// Check that we have the correct number of elements}}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (nelement() != nleft + ncentre + nright)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"Incorrect number of element pointers!"},}
+\DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{    \}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Allocate memory for the spines and fractions along spines}}
-\DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{    \textcolor{comment}{// Allocate memory for the spines and fractions along spines}}
+\DoxyCodeLine{    \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Read out number of linear points in the element}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_p = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(finite\_element\_pt(0))-\/>nnode\_1d();}
-\DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nspine;}
-\DoxyCodeLine{ \textcolor{comment}{// Allocate store for the spines:}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (this-\/>Xperiodic)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   nspine = (n\_p-\/1)*n\_x;}
-\DoxyCodeLine{   Spine\_pt.reserve(nspine);}
-\DoxyCodeLine{   \textcolor{comment}{// Number of spines in each region}}
-\DoxyCodeLine{   \textcolor{comment}{// NOTE that boundary spines are in both regions}}
-\DoxyCodeLine{   Nleft\_spine = (n\_p-\/1)*n\_x0+1;}
-\DoxyCodeLine{   Ncentre\_spine = (n\_p-\/1)*n\_x1+1;}
-\DoxyCodeLine{   Nright\_spine = (n\_p-\/1)*n\_x2;}
-\DoxyCodeLine{  \}}
-\DoxyCodeLine{ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   nspine = (n\_p-\/1)*n\_x+1;}
-\DoxyCodeLine{   Spine\_pt.reserve(nspine);}
-\DoxyCodeLine{   \textcolor{comment}{// Number of spines in each region}}
-\DoxyCodeLine{   \textcolor{comment}{// NOTE that boundary spines are in both regions}}
-\DoxyCodeLine{   Nleft\_spine = (n\_p-\/1)*n\_x0+1;}
-\DoxyCodeLine{   Ncentre\_spine = (n\_p-\/1)*n\_x1+1;}
-\DoxyCodeLine{   Nright\_spine = (n\_p-\/1)*n\_x2+1;}
-\DoxyCodeLine{  \}}
+\DoxyCodeLine{    \textcolor{comment}{// Read out number of linear points in the element}}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} n\_p = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(finite\_element\_pt(0))-\/>nnode\_1d();}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// end Allocating memory}}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} nspine;}
+\DoxyCodeLine{    \textcolor{comment}{// Allocate store for the spines:}}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (this-\/>Xperiodic)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      nspine = (n\_p -\/ 1) * n\_x;}
+\DoxyCodeLine{      Spine\_pt.reserve(nspine);}
+\DoxyCodeLine{      \textcolor{comment}{// Number of spines in each region}}
+\DoxyCodeLine{      \textcolor{comment}{// NOTE that boundary spines are in both regions}}
+\DoxyCodeLine{      Nleft\_spine = (n\_p -\/ 1) * n\_x0 + 1;}
+\DoxyCodeLine{      Ncentre\_spine = (n\_p -\/ 1) * n\_x1 + 1;}
+\DoxyCodeLine{      Nright\_spine = (n\_p -\/ 1) * n\_x2;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      nspine = (n\_p -\/ 1) * n\_x + 1;}
+\DoxyCodeLine{      Spine\_pt.reserve(nspine);}
+\DoxyCodeLine{      \textcolor{comment}{// Number of spines in each region}}
+\DoxyCodeLine{      \textcolor{comment}{// NOTE that boundary spines are in both regions}}
+\DoxyCodeLine{      Nleft\_spine = (n\_p -\/ 1) * n\_x0 + 1;}
+\DoxyCodeLine{      Ncentre\_spine = (n\_p -\/ 1) * n\_x1 + 1;}
+\DoxyCodeLine{      Nright\_spine = (n\_p -\/ 1) * n\_x2 + 1;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// end Allocating memory}}
 
 \end{DoxyCodeInclude}
 
@@ -642,24 +602,6 @@ Now we allocate storage for the parameters used to build the spines.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// set up the vectors of geometric data \& objects for building spines}}
-\DoxyCodeLine{ Vector<double> r\_wall(2), zeta(1), s\_wall(1);}
-\DoxyCodeLine{ GeomObject* geometric\_object\_pt=0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// LEFT REGION}}
-\DoxyCodeLine{ \textcolor{comment}{// ===========}}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// SPINES IN LEFT REGION}}
-\DoxyCodeLine{ \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Set up zeta increments}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} zeta\_lo=0.0;}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} dzeta=Lx0/n\_x0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Initialise number of elements in previous regions:}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_prev\_elements=0;}
 
 \end{DoxyCodeInclude}
 
@@ -668,17 +610,6 @@ Now we create the first Spine with unit length, pin the height (since it is not 
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{//FIRST SPINE}}
-\DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{//Element 0}}
-\DoxyCodeLine{ \textcolor{comment}{//Node 0}}
-\DoxyCodeLine{ \textcolor{comment}{//Assign the new spine with unit length}}
-\DoxyCodeLine{ \mbox{\hyperlink{spine__channel_8txt_a914410aeeaf61a0d6c75c43ec26ecbaa}{Spine}}* new\_spine\_pt=\textcolor{keyword}{new} \mbox{\hyperlink{spine__channel_8txt_a914410aeeaf61a0d6c75c43ec26ecbaa}{Spine}}(1.0);}
-\DoxyCodeLine{ new\_spine\_pt-\/>spine\_height\_pt()-\/>pin(0);}
-\DoxyCodeLine{ Spine\_pt.push\_back(new\_spine\_pt);}
 
 \end{DoxyCodeInclude}
 
@@ -687,15 +618,6 @@ We then set the {\ttfamily spine\+\_\+pt()} of the first node to the Spine we ju
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Get pointer to node}}
-\DoxyCodeLine{ SpineNode* nod\_pt=element\_node\_pt(0,0);}
-\DoxyCodeLine{ \textcolor{comment}{//Set the pointer to the spine}}
-\DoxyCodeLine{ nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
-\DoxyCodeLine{ \textcolor{comment}{//Set the fraction}}
-\DoxyCodeLine{ nod\_pt-\/>fraction() = 0.0;}
-\DoxyCodeLine{ \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
-\DoxyCodeLine{ nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this}; }
 
 \end{DoxyCodeInclude}
 
@@ -704,8 +626,6 @@ We then mark the node as part of the left (0) region.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Set update fct id}}
-\DoxyCodeLine{ nod\_pt-\/>node\_update\_fct\_id()=0;}
 
 \end{DoxyCodeInclude}
 
@@ -716,15 +636,6 @@ First we set the value of $\zeta$ and get the geometric object and the local coo
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Provide spine with additional storage for wall coordinate }}
-\DoxyCodeLine{ \textcolor{comment}{// and wall geom object:}}
-\DoxyCodeLine{ }
-\DoxyCodeLine{ \{}
-\DoxyCodeLine{  \textcolor{comment}{// Get the Lagrangian coordinate in the Lower Wall}}
-\DoxyCodeLine{  zeta[0] =  0.0;}
-\DoxyCodeLine{  \textcolor{comment}{//Get the geometric object and local coordinate}}
-\DoxyCodeLine{  Straight\_wall\_pt-\/>locate\_zeta(zeta,geometric\_object\_pt,s\_wall);}
 
 \end{DoxyCodeInclude}
 
@@ -733,12 +644,6 @@ Then we store these geometric parameters in the Spine.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{//The local coordinate is a geometric parameter}}
-\DoxyCodeLine{  \textcolor{comment}{//This needs to be set (rather than added) because the}}
-\DoxyCodeLine{  \textcolor{comment}{//same spine may be visited more than once}}
-\DoxyCodeLine{  Vector<double> parameters(1,s\_wall[0]);}
-\DoxyCodeLine{  nod\_pt-\/>spine\_pt()-\/>set\_geom\_parameter(parameters);}
 
 \end{DoxyCodeInclude}
 
@@ -747,12 +652,6 @@ We then set the height of the Spine according to the geometric object.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{// Get position of wall}}
-\DoxyCodeLine{  Straight\_wall\_pt-\/>position(s\_wall,r\_wall);}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{// Adjust spine height}}
-\DoxyCodeLine{  nod\_pt-\/>spine\_pt()-\/>height()=r\_wall[1];}
 
 \end{DoxyCodeInclude}
 
@@ -761,15 +660,6 @@ Finally we set the Spines\textquotesingle{} pointer to the geometric object.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{// The sub geom object is one (and only) geom object}}
-\DoxyCodeLine{  \textcolor{comment}{// for spine:}}
-\DoxyCodeLine{  Vector<GeomObject*> geom\_object\_pt(1);}
-\DoxyCodeLine{  geom\_object\_pt[0] = geometric\_object\_pt;}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  \textcolor{comment}{// Pass geom object(s) to spine}}
-\DoxyCodeLine{  nod\_pt-\/>spine\_pt()-\/>set\_geom\_object\_pt(geom\_object\_pt);}
-\DoxyCodeLine{ \}}
 
 \end{DoxyCodeInclude}
 
@@ -778,26 +668,6 @@ Now we loop vertically along the spine, adding a pointer to the spine to each el
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{//Loop vertically along the spine}}
-\DoxyCodeLine{ \textcolor{comment}{//Loop over the elements }}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} i=0;i<n\_y;i++)}
-\DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{//Loop over the vertical nodes, apart from the first}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} l1=1;l1<n\_p;l1++)}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{     \textcolor{comment}{// Get pointer to node}}
-\DoxyCodeLine{     SpineNode* nod\_pt=element\_node\_pt(i*n\_x,l1*n\_p);}
-\DoxyCodeLine{     \textcolor{comment}{//Set the pointer to the spine}}
-\DoxyCodeLine{     nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
-\DoxyCodeLine{     \textcolor{comment}{//Set the fraction}}
-\DoxyCodeLine{     nod\_pt-\/>fraction()=(double(i)+double(l1)/double(n\_p-\/1))/\textcolor{keywordtype}{double}(n\_y);}
-\DoxyCodeLine{     \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
-\DoxyCodeLine{     nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this}; }
-\DoxyCodeLine{     \textcolor{comment}{// Set update fct id}}
-\DoxyCodeLine{     nod\_pt-\/>node\_update\_fct\_id()=0;}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{  \} \textcolor{comment}{// end loop over elements}}
 
 \end{DoxyCodeInclude}
 

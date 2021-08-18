@@ -139,8 +139,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ac1a95cf31d719f6aeceb72554ee75868"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1FSI__functions.html#ac1a95cf31d719f6aeceb72554ee75868">apply_no_slip_on_moving_wall</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *node_pt)</td></tr>
-<tr class="memdesc:ac1a95cf31d719f6aeceb72554ee75868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply no-slip condition for N.St. on a moving wall node, u = St dR/dt, where the Strouhal number St = a/(UT) is defined by <a class="el" href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8" title="Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1....">FSI_functions::Strouhal_for_no_slip</a> and is initialised to 1.0. Note: This requires the x,y,[z] velocity components to be stored in nodal values 0,1,[2]. This is the default for all currently existing Navier-Stokes elements. If you use any others, use this function at your own risk. <br  />
-  <a href="namespaceoomph_1_1FSI__functions.html#ac1a95cf31d719f6aeceb72554ee75868">More...</a><br /></td></tr>
+<tr class="memdesc:ac1a95cf31d719f6aeceb72554ee75868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply no-slip condition for N.St. on a moving wall node, u = St dR/dt, where the Strouhal number St = a/(UT) is defined by <a class="el" href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8" title="Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1....">FSI_functions::Strouhal_for_no_slip</a> and is initialised to 1.0. Note: This requires the x,y,[z] velocity components to be stored in nodal values 0,1,[2]. This is the default for all currently existing Navier-Stokes elements. If you use any others, use this function at your own risk.  <a href="namespaceoomph_1_1FSI__functions.html#ac1a95cf31d719f6aeceb72554ee75868">More...</a><br /></td></tr>
 <tr class="separator:ac1a95cf31d719f6aeceb72554ee75868"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac71732700aad0d671fa1285d173d5b27"><td class="memTemplParams" colspan="2">template&lt;class FLUID_ELEMENT , unsigned DIM_FLUID&gt; </td></tr>
 <tr class="memitem:ac71732700aad0d671fa1285d173d5b27"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1FSI__functions.html#ac71732700aad0d671fa1285d173d5b27">setup_fluid_load_info_for_solid_elements</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;boundary_in_fluid_mesh, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *const &amp;fluid_mesh_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> * &gt; &amp;solid_mesh_pt, const unsigned &amp;face=0)</td></tr>
@@ -156,8 +155,7 @@ Functions</h2></td></tr>
 <tr class="separator:aacfff5c6e8f9ee75e7d2ae490d28fb7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad638257ef97a089f5367edf5d2911e60"><td class="memTemplParams" colspan="2">template&lt;class SOLID_ELEMENT , unsigned DIM_SOLID&gt; </td></tr>
 <tr class="memitem:ad638257ef97a089f5367edf5d2911e60"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1FSI__functions.html#ad638257ef97a089f5367edf5d2911e60">setup_solid_elements_for_displacement_bc</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt, const unsigned &amp;b_solid_fsi, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *const &amp;solid_mesh_pt, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *const &amp;lagrange_multiplier_mesh_pt)</td></tr>
-<tr class="memdesc:ad638257ef97a089f5367edf5d2911e60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup multi-domain interaction required for imposition of solid displacements onto the pseudo-solid fluid mesh by Lagrange multipliers: This function locates the bulk solid elements next to boundary b_solid_fsi (the FSI boundary) in the solid mesh pointed to by Solid_mesh_pt. The deformation of these elements drives the deformation of the pseudo-solid fluid mesh via the Lagrange multiplier elements stored in l lagrange_multiplier_mesh_pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. <br  />
-  <a href="namespaceoomph_1_1FSI__functions.html#ad638257ef97a089f5367edf5d2911e60">More...</a><br /></td></tr>
+<tr class="memdesc:ad638257ef97a089f5367edf5d2911e60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup multi-domain interaction required for imposition of solid displacements onto the pseudo-solid fluid mesh by Lagrange multipliers: This function locates the bulk solid elements next to boundary b_solid_fsi (the FSI boundary) in the solid mesh pointed to by Solid_mesh_pt. The deformation of these elements drives the deformation of the pseudo-solid fluid mesh via the Lagrange multiplier elements stored in l lagrange_multiplier_mesh_pt. The template parameters specify the type of the bulk solid elements and their spatial dimension.  <a href="namespaceoomph_1_1FSI__functions.html#ad638257ef97a089f5367edf5d2911e60">More...</a><br /></td></tr>
 <tr class="separator:ad638257ef97a089f5367edf5d2911e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc4e716b0325ab47465bd6c312c829fe"><td class="memTemplParams" colspan="2">template&lt;class NODE &gt; </td></tr>
 <tr class="memitem:afc4e716b0325ab47465bd6c312c829fe"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1FSI__functions.html#afc4e716b0325ab47465bd6c312c829fe">doc_fsi</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *fluid_mesh_pt, <a class="el" href="classoomph_1_1SolidMesh.html">SolidMesh</a> *wall_mesh_pt, <a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;doc_info)</td></tr>
@@ -165,7 +163,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:aa213854665524b0720b63a115ef57fd8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8">Strouhal_for_no_slip</a> =1.0</td></tr>
+<tr class="memitem:aa213854665524b0720b63a115ef57fd8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8">Strouhal_for_no_slip</a> = 1.0</td></tr>
 <tr class="memdesc:aa213854665524b0720b63a115ef57fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1.0.  <a href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8">More...</a><br /></td></tr>
 <tr class="separator:aa213854665524b0720b63a115ef57fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -188,14 +186,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Apply no-slip condition for N.St. on a moving wall node, u = St dR/dt, where the Strouhal number St = a/(UT) is defined by <a class="el" href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8" title="Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1....">FSI_functions::Strouhal_for_no_slip</a> and is initialised to 1.0. Note: This requires the x,y,[z] velocity components to be stored in nodal values 0,1,[2]. This is the default for all currently existing Navier-Stokes elements. If you use any others, use this function at your own risk. <br  />
- </p>
-<p>Apply no-slip condition for N.St. on a moving wall node u = St dR/dt, where the Strouhal number St = a/(UT) is defined by <a class="el" href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8" title="Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1....">FSI_functions::Strouhal_for_no_slip</a> and is initialised to 1.0. Note: This requires the x,y,[z] velocity components to be stored in nodal values 0,1,[2]. This is the default for all currently existing Navier-Stokes elements. If you use any others, use this function at your own risk. <br  />
- </p>
+<p>Apply no-slip condition for N.St. on a moving wall node, u = St dR/dt, where the Strouhal number St = a/(UT) is defined by <a class="el" href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8" title="Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1....">FSI_functions::Strouhal_for_no_slip</a> and is initialised to 1.0. Note: This requires the x,y,[z] velocity components to be stored in nodal values 0,1,[2]. This is the default for all currently existing Navier-Stokes elements. If you use any others, use this function at your own risk. </p>
+<p>Apply no-slip condition for N.St. on a moving wall node u = St dR/dt, where the Strouhal number St = a/(UT) is defined by <a class="el" href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8" title="Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1....">FSI_functions::Strouhal_for_no_slip</a> and is initialised to 1.0. Note: This requires the x,y,[z] velocity components to be stored in nodal values 0,1,[2]. This is the default for all currently existing Navier-Stokes elements. If you use any others, use this function at your own risk. </p>
 
-<p class="definition">Definition at line <a class="el" href="fsi_8cc_source.html#l00050">50</a> of file <a class="el" href="fsi_8cc_source.html">fsi.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fsi_8cc_source.html#l00048">48</a> of file <a class="el" href="fsi_8cc_source.html">fsi.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8cc_source.html#l02552">oomph::Node::dposition_dt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, and <a class="el" href="fsi_8cc_source.html#l00041">Strouhal_for_no_slip</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8cc_source.html#l02659">oomph::Node::dposition_dt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, and <a class="el" href="fsi_8cc_source.html#l00039">Strouhal_for_no_slip</a>.</p>
 
 </div>
 </div>
@@ -239,9 +235,9 @@ template&lt;class NODE &gt; </div>
 <p>Output is in tecplot readable form: Use fs1.mcr and fsi2.mcr (or straightforward modifications thereof), stored in doc/interaction/fsi_collapsible_channel/nondist_figures to process.</p>
 <p>Pass pointer to fluid and solid meshes and pointer to the <a class="el" href="classoomph_1_1DocInfo.html" title="Information for documentation of results: Directory and file number to enable output in the form RESL...">DocInfo</a> object that specifies the directory and the overall step number. Template parameter specifies the type of node that is used to implement the node update strategy. </p>
 
-<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00747">747</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00736">736</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02495">oomph::FiniteElement::dim()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00515">oomph::DocInfo::directory()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00142">oomph::ElementWithExternalElement::external_element_local_coord()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00113">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="mesh_8h_source.html#l02172">oomph::Mesh::external_halo_element_pt()</a>, <a class="el" href="mesh_8h_source.html#l02391">oomph::Mesh::external_halo_proc()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00212">oomph::ElementWithExternalElement::external_interaction_field_data_pt()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00243">oomph::ElementWithExternalElement::external_interaction_geometric_data_pt()</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01921">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8h_source.html#l00619">oomph::GeneralisedElement::internal_data_pt()</a>, <a class="el" href="elements_8cc_source.html#l03877">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="elements_8h_source.html#l01154">oomph::GeneralisedElement::is_halo()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="mesh_8h_source.html#l02144">oomph::Mesh::nexternal_halo_element()</a>, <a class="el" href="elements_8h_source.html#l00824">oomph::GeneralisedElement::ninternal_data()</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="elements_8h_source.html#l02383">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="mesh_8h_source.html#l02525">oomph::SolidMesh::node_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00533">oomph::DocInfo::number()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="fsi_8h_source.html#l00281">oomph::FSIWallElement::only_front_is_loaded_by_fluid()</a>, <a class="el" href="mesh_8cc_source.html#l02120">oomph::Mesh::output()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="elements_8h_source.html#l02667">oomph::FiniteElement::s_max()</a>, <a class="el" href="elements_8h_source.html#l02656">oomph::FiniteElement::s_min()</a>, <a class="el" href="nodes_8h_source.html#l01650">oomph::SolidNode::variable_position_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02628">oomph::FiniteElement::dim()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00524">oomph::DocInfo::directory()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00455">oomph::Mesh::element_pt()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00143">oomph::ElementWithExternalElement::external_element_local_coord()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00114">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="mesh_8h_source.html#l02258">oomph::Mesh::external_halo_element_pt()</a>, <a class="el" href="mesh_8h_source.html#l02482">oomph::Mesh::external_halo_proc()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00219">oomph::ElementWithExternalElement::external_interaction_field_data_pt()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00258">oomph::ElementWithExternalElement::external_interaction_geometric_data_pt()</a>, <a class="el" href="mesh_8h_source.html#l00480">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01980">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8h_source.html#l00628">oomph::GeneralisedElement::internal_data_pt()</a>, <a class="el" href="elements_8cc_source.html#l03966">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="elements_8h_source.html#l01169">oomph::GeneralisedElement::is_halo()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="mesh_8h_source.html#l02229">oomph::Mesh::nexternal_halo_element()</a>, <a class="el" href="elements_8h_source.html#l00829">oomph::GeneralisedElement::ninternal_data()</a>, <a class="el" href="mesh_8h_source.html#l00603">oomph::Mesh::nnode()</a>, <a class="el" href="elements_8h_source.html#l02501">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="mesh_8h_source.html#l00443">oomph::Mesh::node_pt()</a>, <a class="el" href="mesh_8h_source.html#l02608">oomph::SolidMesh::node_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00554">oomph::DocInfo::number()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="fsi_8h_source.html#l00281">oomph::FSIWallElement::only_front_is_loaded_by_fluid()</a>, <a class="el" href="mesh_8cc_source.html#l02027">oomph::Mesh::output()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="elements_8h_source.html#l02820">oomph::FiniteElement::s_max()</a>, <a class="el" href="elements_8h_source.html#l02810">oomph::FiniteElement::s_min()</a>, <a class="el" href="nodes_8h_source.html#l01796">oomph::SolidNode::variable_position_pt()</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -293,9 +289,9 @@ template&lt;class FLUID_ELEMENT , unsigned DIM_FLUID&gt; </div>
 
 <p>Set up the information that the FSIWallElements in the specified solid mesh require to obtain the fluid loading from the adjacent fluid elements in the specified fluid mesh. The parameter b specifies the boundary in the fluid mesh that is adjacent to the solid mesh. The template parameters specify the type of the fluid element and their spatial dimension. The optional final argument, face, identifies the face of the FSIWallElements that is exposed to the fluid. face defaults to 0, indicating that the front is loaded along the specified fluid mesh boundary. Set it to 1 to set up the FSI lookup schemes for fluid loading along the "back" of the FSIWallElements. This routine uses the procedures in the <a class="el" href="namespaceoomph_1_1Multi__domain__functions.html">Multi_domain_functions</a> namespace to set up the interaction by locating the adjacent (source) elements for each integration point of each solid element. </p>
 
-<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00641">641</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00644">644</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multi__domain_8template_8cc_source.html#l00074">oomph::Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="multi__domain_8template_8cc_source.html#l00072">oomph::Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()</a>.</p>
 
 </div>
 </div>
@@ -348,9 +344,9 @@ template&lt;class FLUID_ELEMENT , unsigned DIM_FLUID&gt; </div>
 <p>Set up the information that the FSIWallElements in the specified solid mesh require to obtain the fluid loading from the adjacent fluid elements in the specified fluid mesh. The parameter b specifies the boundary in the fluid mesh that is adjacent to the solid mesh. The template parameters specify the type of the fluid element and their spatial dimension. The optional final argument, face, identifies the face of the FSIWallElements that is exposed to the fluid. face defaults to 0, indicating that the front is loaded along the specified fluid mesh boundary. Set it to 1 to set up the FSI lookup schemes for fluid loading along the "back" of the FSIWallElements. This routine uses the procedures in the <a class="el" href="namespaceoomph_1_1Multi__domain__functions.html">Multi_domain_functions</a> namespace to set up the interaction by locating the adjacent (source) elements for each integration point of each solid element. </p>
 <p>This is the vector based version it works simultaneously on fluid fsi boundaries identified in the vector boundary_in_fluid_mesh and the corresponding solid meshes in solid_mesh_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00608">608</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00613">613</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multi__domain_8template_8cc_source.html#l00074">oomph::Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="multi__domain_8template_8cc_source.html#l00072">oomph::Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()</a>.</p>
 
 </div>
 </div>
@@ -394,12 +390,11 @@ template&lt;class SOLID_ELEMENT , unsigned DIM_SOLID&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Setup multi-domain interaction required for imposition of solid displacements onto the pseudo-solid fluid mesh by Lagrange multipliers: This function locates the bulk solid elements next to boundary b_solid_fsi (the FSI boundary) in the solid mesh pointed to by Solid_mesh_pt. The deformation of these elements drives the deformation of the pseudo-solid fluid mesh via the Lagrange multiplier elements stored in l lagrange_multiplier_mesh_pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. <br  />
- </p>
+<p>Setup multi-domain interaction required for imposition of solid displacements onto the pseudo-solid fluid mesh by Lagrange multipliers: This function locates the bulk solid elements next to boundary b_solid_fsi (the FSI boundary) in the solid mesh pointed to by Solid_mesh_pt. The deformation of these elements drives the deformation of the pseudo-solid fluid mesh via the Lagrange multiplier elements stored in l lagrange_multiplier_mesh_pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. </p>
 
-<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00710">710</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00704">704</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multi__domain_8template_8cc_source.html#l00074">oomph::Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="multi__domain_8template_8cc_source.html#l00072">oomph::Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()</a>.</p>
 
 </div>
 </div>
@@ -446,9 +441,9 @@ template&lt;class SOLID_ELEMENT , unsigned DIM_SOLID&gt; </div>
 <p>Setup multi-domain interaction required for imposition of solid displacements onto the pseudo-solid fluid mesh by Lagrange multipliers: This function locates the bulk solid elements next to boundary b_solid_fsi (the FSI boundary) in the solid mesh pointed to by Solid_mesh_pt. The deformation of these elements drives the deformation of the pseudo-solid fluid mesh via the Lagrange multiplier elements stored in lagrange_multiplier_mesh_pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. </p>
 <p>This is the vector based version it works simultaneously on solid fsi boundaries identified in the vector b_solid_fsi and the corresponding Lagrange multiplier meshes in lagrange_multiplier_mesh_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00678">678</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fsi_8h_source.html#l00677">677</a> of file <a class="el" href="fsi_8h_source.html">fsi.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multi__domain_8template_8cc_source.html#l00074">oomph::Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="multi__domain_8template_8cc_source.html#l00072">oomph::Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()</a>.</p>
 
 </div>
 </div>
@@ -460,7 +455,7 @@ template&lt;class SOLID_ELEMENT , unsigned DIM_SOLID&gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double oomph::FSI_functions::Strouhal_for_no_slip =1.0</td>
+          <td class="memname">double oomph::FSI_functions::Strouhal_for_no_slip = 1.0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -468,9 +463,9 @@ template&lt;class SOLID_ELEMENT , unsigned DIM_SOLID&gt; </div>
 <p>Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1.0. </p>
 <p>Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1.0. </p>
 
-<p class="definition">Definition at line <a class="el" href="fsi_8cc_source.html#l00041">41</a> of file <a class="el" href="fsi_8cc_source.html">fsi.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fsi_8cc_source.html#l00039">39</a> of file <a class="el" href="fsi_8cc_source.html">fsi.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="fsi_8cc_source.html#l00050">apply_no_slip_on_moving_wall()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="fsi_8cc_source.html#l00048">apply_no_slip_on_moving_wall()</a>.</p>
 
 </div>
 </div>
@@ -502,7 +497,7 @@ template&lt;class SOLID_ELEMENT , unsigned DIM_SOLID&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:58:10
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:45
         </div>
       </div>
     </footer>

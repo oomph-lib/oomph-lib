@@ -45,8 +45,7 @@ void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054
 void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ae6834fcfc28dca27243ec53ea48d34be}{multiply}} (const \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&matrix\+\_\+in, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&result)
 \begin{DoxyCompactList}\small\item\em Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} matrix\+\_\+in The multiplication method used can be selected using the flag Matrix\+\_\+matrix\+\_\+multiply\+\_\+method. By default Method 2 is used. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a600a58c92baf401a534598cedcfd3415}{matrix\+\_\+reduction}} (const double \&alpha, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&reduced\+\_\+matrix)
-\begin{DoxyCompactList}\small\item\em For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ac30e2e7873bf639f36494ab1b03e26d7}{matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} ()
 \begin{DoxyCompactList}\small\item\em Access function to Matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -60,7 +59,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_afb1660974c8f6218c2a000c2
 \doxysubsection{Detailed Description}
 A class for compressed column matrices that store doubles. 
 
-Definition at line 2569 of file matrices.\+h.
+Definition at line 2822 of file matrices.\+h.
 
 
 
@@ -77,7 +76,7 @@ Default constructor.
 
 Default constructor, set the default linear solver and matrix-\/matrix multiplication method. 
 
-Definition at line 582 of file matrices.\+cc.
+Definition at line 572 of file matrices.\+cc.
 
 
 
@@ -95,7 +94,7 @@ Constructor\+: Pass vector of values, vector of row indices, vector of column st
 
 
 
-Definition at line 595 of file matrices.\+cc.
+Definition at line 585 of file matrices.\+cc.
 
 
 
@@ -113,7 +112,7 @@ Broken copy constructor.
 
 
 
-Definition at line 2590 of file matrices.\+h.
+Definition at line 2840 of file matrices.\+h.
 
 
 
@@ -131,7 +130,7 @@ Destructor\+: Kill the LU factors if they have been setup.
 
 Destructor\+: delete the default linear solver. 
 
-Definition at line 607 of file matrices.\+cc.
+Definition at line 597 of file matrices.\+cc.
 
 
 
@@ -152,7 +151,7 @@ LU back solve for given R\+HS.
 
 Do the backsubstitution. 
 
-Definition at line 621 of file matrices.\+cc.
+Definition at line 614 of file matrices.\+cc.
 
 
 
@@ -170,7 +169,7 @@ LU decomposition using Super\+LU.
 
 Perform LU decomposition. Return the sign of the determinant. 
 
-Definition at line 613 of file matrices.\+cc.
+Definition at line 606 of file matrices.\+cc.
 
 
 
@@ -188,7 +187,7 @@ Access function to Matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which 
 
 
 
-Definition at line 2667 of file matrices.\+h.
+Definition at line 2925 of file matrices.\+h.
 
 
 
@@ -202,12 +201,11 @@ References Matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
 
 
 
-For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
- 
+For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. 
 
 For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. 
 
-Definition at line 1167 of file matrices.\+cc.
+Definition at line 1149 of file matrices.\+cc.
 
 
 
@@ -225,7 +223,7 @@ Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CCDoubleM
 
 Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} matrix\+\_\+in The multiplication method used can be selected using the flag Matrix\+\_\+matrix\+\_\+multiply\+\_\+method. By default Method 2 is used. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... 
 
-Definition at line 835 of file matrices.\+cc.
+Definition at line 821 of file matrices.\+cc.
 
 
 
@@ -247,7 +245,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618
 
 
 
-Definition at line 629 of file matrices.\+cc.
+Definition at line 622 of file matrices.\+cc.
 
 
 
@@ -269,7 +267,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b4
 
 
 
-Definition at line 725 of file matrices.\+cc.
+Definition at line 715 of file matrices.\+cc.
 
 
 
@@ -295,7 +293,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd8
 
 
 
-Definition at line 2609 of file matrices.\+h.
+Definition at line 2862 of file matrices.\+h.
 
 
 
@@ -321,7 +319,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2
 
 
 
-Definition at line 2606 of file matrices.\+h.
+Definition at line 2856 of file matrices.\+h.
 
 
 
@@ -347,7 +345,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f
 
 
 
-Definition at line 2613 of file matrices.\+h.
+Definition at line 2869 of file matrices.\+h.
 
 
 
@@ -365,7 +363,7 @@ Broken assignment operator.
 
 
 
-Definition at line 2597 of file matrices.\+h.
+Definition at line 2847 of file matrices.\+h.
 
 
 
@@ -386,7 +384,7 @@ Flag to determine which matrix-\/matrix multiplication method is used.
 
 
 
-Definition at line 2675 of file matrices.\+h.
+Definition at line 2932 of file matrices.\+h.
 
 
 

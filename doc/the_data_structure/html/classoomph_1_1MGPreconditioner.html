@@ -302,9 +302,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a800f699ec8dda290105807cb91297850 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a800f699ec8dda290105807cb91297850">preconditioner_pt</a> ()</td></tr>
 <tr class="memdesc:a800f699ec8dda290105807cb91297850 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to preconditioner.  <a href="classoomph_1_1IterativeLinearSolver.html#a800f699ec8dda290105807cb91297850">More...</a><br /></td></tr>
 <tr class="separator:a800f699ec8dda290105807cb91297850 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5e122965d91017dee39249c0034773d inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#ab5e122965d91017dee39249c0034773d">preconditioner_pt</a> () const</td></tr>
-<tr class="memdesc:ab5e122965d91017dee39249c0034773d inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to preconditioner (const version)  <a href="classoomph_1_1IterativeLinearSolver.html#ab5e122965d91017dee39249c0034773d">More...</a><br /></td></tr>
-<tr class="separator:ab5e122965d91017dee39249c0034773d inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40dc3e8bcb0ca6963d91b7c999d9b0c6 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a40dc3e8bcb0ca6963d91b7c999d9b0c6">preconditioner_pt</a> () const</td></tr>
+<tr class="memdesc:a40dc3e8bcb0ca6963d91b7c999d9b0c6 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to preconditioner (const version)  <a href="classoomph_1_1IterativeLinearSolver.html#a40dc3e8bcb0ca6963d91b7c999d9b0c6">More...</a><br /></td></tr>
+<tr class="separator:a40dc3e8bcb0ca6963d91b7c999d9b0c6 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa76d0f94116e2bfa615652b9de9b1af7 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#aa76d0f94116e2bfa615652b9de9b1af7">tolerance</a> ()</td></tr>
 <tr class="memdesc:aa76d0f94116e2bfa615652b9de9b1af7 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to convergence tolerance.  <a href="classoomph_1_1IterativeLinearSolver.html#aa76d0f94116e2bfa615652b9de9b1af7">More...</a><br /></td></tr>
 <tr class="separator:aa76d0f94116e2bfa615652b9de9b1af7 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -380,23 +380,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable resolve (i.e. store matrix and/or LU decomposition, say) This function simply resets an internal flag. It's virtual so it can be overloaded to perform additional tasks such as cleaning up memory that is only required for the resolve.  <a href="classoomph_1_1LinearSolver.html#ad61c63af94c5961830bd9807225a48d6">More...</a><br /></td></tr>
 <tr class="separator:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">solve</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
-<tr class="memdesc:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">More...</a><br /></td></tr>
+<tr class="memdesc:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">More...</a><br /></td></tr>
 <tr class="separator:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">solve</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
-<tr class="memdesc:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">More...</a><br /></td></tr>
+<tr class="memdesc:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">More...</a><br /></td></tr>
 <tr class="separator:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a8e970813a1583f6105ee2d677d3e45f3">solve_transpose</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
 <tr class="memdesc:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solver: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem's fully assembled Jacobian and residual vector (broken virtual).  <a href="classoomph_1_1LinearSolver.html#a8e970813a1583f6105ee2d677d3e45f3">More...</a><br /></td></tr>
 <tr class="separator:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">solve_transpose</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
-<tr class="memdesc:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">More...</a><br /></td></tr>
+<tr class="memdesc:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">More...</a><br /></td></tr>
 <tr class="separator:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">solve_transpose</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
-<tr class="memdesc:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">More...</a><br /></td></tr>
+<tr class="memdesc:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">More...</a><br /></td></tr>
 <tr class="separator:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a3b310d08333033edc119b2a5bd7dcbfb">resolve</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
 <tr class="memdesc:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual)  <a href="classoomph_1_1LinearSolver.html#a3b310d08333033edc119b2a5bd7dcbfb">More...</a><br /></td></tr>
@@ -503,8 +499,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9202e15534f063a8e21a8a60623eac9f inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1183f65956ef8a5b332a1246f418e907 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a1183f65956ef8a5b332a1246f418e907">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse)</td></tr>
 <tr class="separator:a1183f65956ef8a5b332a1246f418e907 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61a462f4266c22050b4ab9ab441c77a6 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a61a462f4266c22050b4ab9ab441c77a6">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt; &amp;doftype_coarsen_map_coarse)</td></tr>
-<tr class="separator:a61a462f4266c22050b4ab9ab441c77a6 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad565e8036a34a48259aed3ce91f821ef inherit pub_methods_classoomph_1_1Preconditioner"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#ad565e8036a34a48259aed3ce91f821ef">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&gt; &amp;doftype_coarsen_map_coarse)</td></tr>
+<tr class="separator:ad565e8036a34a48259aed3ce91f821ef inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -615,7 +611,7 @@ class oomph::MGPreconditioner&lt; DIM &gt;</h3>
 
 <p>An interface to allow scalar MG to be used as a <a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00743">743</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00734">734</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a57daf87cd60b23d39670c462afba7371"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a57daf87cd60b23d39670c462afba7371">&#9670;&nbsp;</a></span>MGPreconditioner() <span class="overload">[1/2]</span></h2>
@@ -645,9 +641,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00748">748</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00738">738</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00630">oomph::MGSolver&lt; DIM &gt;::Nvcycle</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00622">oomph::MGSolver&lt; DIM &gt;::Nvcycle</a>.</p>
 
 </div>
 </div>
@@ -678,7 +674,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Destructor (empty) </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00755">755</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00745">745</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -710,9 +706,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00758">758</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00748">748</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -746,7 +742,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1MGSolver.html#a85e3e6f32b4e77d696d5b001e1428f08">oomph::MGSolver&lt; DIM &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00832">832</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00824">824</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -778,9 +774,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00764">764</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00754">754</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -824,9 +820,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00797">797</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00787">787</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00634">oomph::MGSolver&lt; DIM &gt;::Mg_problem_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02525">oomph::MGSolver&lt; DIM &gt;::mg_solve()</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00639">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00656">oomph::MGSolver&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00650">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00645">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00626">oomph::MGSolver&lt; DIM &gt;::Mg_problem_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02531">oomph::MGSolver&lt; DIM &gt;::mg_solve()</a>, <a class="el" href="problem_8h_source.html#l01681">oomph::Problem::ndof()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00631">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, <a class="el" href="oomph__definitions_8h_source.html#l00464">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00648">oomph::MGSolver&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00642">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00637">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
 
 </div>
 </div>
@@ -859,9 +855,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#af4886f4efe510e5c9b0eb19422943588">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00770">770</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00760">760</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01041">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00840">oomph::MGSolver&lt; DIM &gt;::full_setup()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00656">oomph::MGSolver&lt; DIM &gt;::Stream_pt</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00650">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00832">oomph::MGSolver&lt; DIM &gt;::full_setup()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8h_source.html#l00464">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00648">oomph::MGSolver&lt; DIM &gt;::Stream_pt</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00642">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>.</p>
 
 </div>
 </div>
@@ -896,7 +892,7 @@ template&lt;unsigned DIM&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:55:51
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:48
         </div>
       </div>
     </footer>

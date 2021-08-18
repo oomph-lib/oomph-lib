@@ -25,8 +25,7 @@ Inheritance diagram for oomph\+::Refineable\+Generalised\+Axisym\+Advection\+Dif
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_afde683f233636a412fea9793d5be89b3}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_a5573e05f0eb0cf349bbb3d396dc8fc7c}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
-\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
- Standard flux.\+from Generalised\+Axisym\+Advection\+Diffusion equations. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Generalised\+Axisym\+Advection\+Diffusion equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_a1de11bc60b5ff64c82d53987f73aee38}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_a2f7d7da51b9088a7e306692f709f9eed}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
@@ -46,7 +45,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusio
 \doxysubsection{Detailed Description}
 A version of the Generalised\+Axisym\+Advection\+Diffusion equations that can be used with non-\/uniform mesh refinement. In essence, the class overloads the \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_ac8c288d66e8d577940a4a4ee9c6ebab9}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff()}} function so that contributions from hanging nodes (or alternatively in-\/compatible function values) are taken into account. 
 
-Definition at line 55 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 54 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -63,7 +62,7 @@ Empty Constructor.
 
 
 
-Definition at line 63 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 61 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_a505509b2ab55b25e4f51d0df93cde106}\label{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_a505509b2ab55b25e4f51d0df93cde106}} 
 \index{oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations@{oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations}!RefineableGeneralisedAxisymAdvectionDiffusionEquations@{RefineableGeneralisedAxisymAdvectionDiffusionEquations}}
@@ -77,7 +76,7 @@ Broken copy constructor.
 
 
 
-Definition at line 71 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 70 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -98,7 +97,7 @@ Add the element\textquotesingle{}s contribution to the elemental residual vector
 
 Add the element\textquotesingle{}s contribution to the elemental residual vector and/or elemental jacobian matrix. This function overloads the standard version so that the possible presence of hanging nodes is taken into account. 
 
-Definition at line 38 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 37 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -120,11 +119,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Definition at line 167 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 177 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+A\+L\+E\+\_\+is\+\_\+disabled, oomph\+::conserved\+\_\+wind\+\_\+fct\+\_\+pt(), oomph\+::\+Conserved\+\_\+wind\+\_\+fct\+\_\+pt, oomph\+::\+Diff\+\_\+fct\+\_\+pt, oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Pe\+\_\+pt, oomph\+::\+Pe\+St\+\_\+pt, oomph\+::\+Source\+\_\+fct\+\_\+pt, and oomph\+::\+Wind\+\_\+fct\+\_\+pt.
+References oomph\+::\+A\+L\+E\+\_\+is\+\_\+disabled, oomph\+::\+Conserved\+\_\+wind\+\_\+fct\+\_\+pt, oomph\+::\+Diff\+\_\+fct\+\_\+pt, oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Pe\+\_\+pt, oomph\+::\+Pe\+St\+\_\+pt, oomph\+::\+Source\+\_\+fct\+\_\+pt, and oomph\+::\+Wind\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_a56cf6ea0f73a5a3fb80e44d56c31f852}\label{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_a56cf6ea0f73a5a3fb80e44d56c31f852}} 
 \index{oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations@{oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations}!geometric\_jacobian@{geometric\_jacobian}}
@@ -142,7 +141,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ad
 
 
 
-Definition at line 162 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 170 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_a2f7d7da51b9088a7e306692f709f9eed}\label{classoomph_1_1RefineableGeneralisedAxisymAdvectionDiffusionEquations_a2f7d7da51b9088a7e306692f709f9eed}} 
 \index{oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations@{oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -160,7 +159,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 133 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 140 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -182,7 +181,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 102 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 108 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -196,8 +195,7 @@ References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::
 
 
 
-Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
- Standard flux.\+from Generalised\+Axisym\+Advection\+Diffusion equations. 
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Generalised\+Axisym\+Advection\+Diffusion equations. 
 
 
 
@@ -205,7 +203,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 94 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 98 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -227,7 +225,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 90 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 91 of file refineable\+\_\+gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

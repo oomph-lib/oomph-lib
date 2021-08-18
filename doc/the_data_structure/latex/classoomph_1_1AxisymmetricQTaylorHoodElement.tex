@@ -28,7 +28,7 @@ void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a1557e286a76d
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_abfaf2fb0ff51a888f77c724af8c20809}{get\+\_\+traction}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a0a5523b91d5191c2f9e23fe8d74f4e07}{traction}}) const
 \begin{DoxyCompactList}\small\item\em Compute traction at local coordinate s for outer unit normal N. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a5593ee69e94a15cca6f309bb38717913}{p\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
-\begin{DoxyCompactList}\small\item\em Overload the access function for the pressure\textquotesingle{}s local. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Overload the access function for the pressure\textquotesingle{}s local equation numbers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_aa092b03db26878057c3d3c92496d752d}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a73bc9729dd01b61e467d4fdc7d8b802c}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
@@ -39,9 +39,8 @@ void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a4c2fcefe0593
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a9cd3bbcb75c7a4501c3de68e524a5503}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity (3 components) and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_ad763c91177814d4221ec485b076a38e9}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a71e61d0cdcea38a3f6d58e8d045595da}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -58,12 +57,12 @@ void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_abdb9779d344d
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a40720e74e6b8ce8d803ee95d7a6ad119}{Pconv}} \mbox{[}$\,$\mbox{]} =\{0,2,6,8\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a40720e74e6b8ce8d803ee95d7a6ad119}{Pconv}} \mbox{[}$\,$\mbox{]} = \{0, 2, 6, 8\}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold conversion from pressure node numbers to actual node numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_ae0826bd23cb739552135795de862c758}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]} =\{4,3,4,3,3,3,4,3,4\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_ae0826bd23cb739552135795de862c758}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -71,7 +70,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElem
 \doxysubsection{Detailed Description}
 Taylor--Hood elements are Navier--Stokes elements with quadratic interpolation for velocities and positions and continous linear pressure interpolation 
 
-Definition at line 1535 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1633 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -88,7 +87,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line 1590 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1688 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -111,7 +110,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a2cd
 
 
 
-Definition at line 1721 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1843 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -133,7 +132,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a76e
 
 
 
-Definition at line 1693 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1814 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -155,7 +154,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a8d9
 
 
 
-Definition at line 1668 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1788 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -173,30 +172,29 @@ Fix the pressure at local pressure node n\+\_\+p.
 
 
 
-Definition at line 1610 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1720 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
-\mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_ad763c91177814d4221ec485b076a38e9}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_ad763c91177814d4221ec485b076a38e9}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a71e61d0cdcea38a3f6d58e8d045595da}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a71e61d0cdcea38a3f6d58e8d045595da}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
 Create a list of pairs for all unknowns in this element, so the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 3544 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 3741 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -214,7 +212,7 @@ Compute traction at local coordinate s for outer unit normal N.
 
 
 
-Definition at line 3599 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 3794 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -236,7 +234,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 1643 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1765 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a636d0c75c75483f9da193d0192f4e05e}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a636d0c75c75483f9da193d0192f4e05e}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!npres\_axi\_nst@{npres\_axi\_nst}}
@@ -254,7 +252,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a89e
 
 
 
-Definition at line 1607 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1714 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -276,7 +274,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 1634 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1751 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -298,7 +296,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 1638 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1757 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -320,7 +318,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 1626 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1739 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -342,7 +340,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 1630 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1745 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -364,7 +362,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a3aa
 
 
 
-Definition at line 1603 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1708 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -378,15 +376,15 @@ References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), p\+\_\+nodal\+\_\+i
 
 
 
-Overload the access function for the pressure\textquotesingle{}s local. 
+Overload the access function for the pressure\textquotesingle{}s local equation numbers. 
 
-equation numbers 
+
 
 Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_ad6ac62ca5fa411c365fd2ecc72aa25e8}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
 
 
 
-Definition at line 1622 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1733 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -408,7 +406,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 1599 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1701 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -430,7 +428,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a630
 
 
 
-Definition at line 1760 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1884 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -456,7 +454,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a19a
 
 
 
-Definition at line 1785 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1908 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -482,7 +480,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoo
 
 
 
-Definition at line 1595 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1695 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -495,15 +493,21 @@ References Initial\+\_\+\+Nvalue, and n.
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue =\{4,3,4,3,3,3,4,3,4\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    4, 3, 4, 3, 3, 3, 4, 3, 4\}}
+
+\end{DoxyCode}
 
 
 Static array of ints to hold number of variables at node. 
 
 
 
-Definition at line 1542 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1639 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -513,7 +517,7 @@ Referenced by required\+\_\+nvalue().
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!Pconv@{Pconv}}
 \index{Pconv@{Pconv}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Pconv}{Pconv}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::\+Pconv =\{0,2,6,8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::\+Pconv = \{0, 2, 6, 8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -521,7 +525,7 @@ Static array of ints to hold conversion from pressure node numbers to actual nod
 
 
 
-Definition at line 1548 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1644 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

@@ -22,17 +22,13 @@ void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a97c2a982c586228f55d44ba2ecd
 unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_aa79feab5549359f30145c96ee89023e1}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Access function for Nvalue\+: \# of `values' (pinned or dofs) at node n (always returns the same value at every node, 1) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a44da26efce008c0c7c986f9277cd3302}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a8a9139cd1265c160c2c88df86fae8b6c}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a289c196b8a84337341e306887c82e3db}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a9abacba6348984ea82fa08bdf8ff2f9e}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a69344016c42eb40d39a0061175a6db94}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a06d4e2f4c6bf67caf316af96e85b61d8}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
@@ -41,9 +37,9 @@ void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a06d4e2f4c6bf67caf316af96e85
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1TPoissonElement_aa15655fd7d9489a77b6d6c82f18946e4}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+poisson}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1TPoissonElement_a957fae1b510200732d7da2594d1a69c2}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1TPoissonElement_af4a23d9088cdc834530545fd554ab906}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping (J). Also compute derivatives of dpsidx, dtestdx and J w.\+r.\+t. nodal coordinates. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_af9b5501d7aba59f31b9030e57d997af9}{nrecovery\+\_\+order}} ()
@@ -70,7 +66,7 @@ class oomph\+::\+T\+Poisson\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
 
 T\+Poisson\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are isoparametric triangular D\+I\+M-\/dimensional Poisson elements with N\+N\+O\+D\+E\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and \mbox{\hyperlink{classoomph_1_1PoissonEquations}{Poisson\+Equations}} 
 
-Definition at line 61 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 59 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -88,7 +84,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\
 
 
 
-Definition at line 70 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 66 of file Tpoisson\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a1af1fe9dc7fbd290654ecc8a0f2b211b}\label{classoomph_1_1TPoissonElement_a1af1fe9dc7fbd290654ecc8a0f2b211b}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!TPoissonElement@{TPoissonElement}}
@@ -103,7 +99,7 @@ Broken copy constructor.
 
 
 
-Definition at line 75 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 70 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -131,7 +127,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoissonEquations_a09f816da9c9b23fd6a30
 
 
 
-Definition at line 278 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 280 of file Tpoisson\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a957fae1b510200732d7da2594d1a69c2}\label{classoomph_1_1TPoissonElement_a957fae1b510200732d7da2594d1a69c2}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_poisson@{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}
@@ -140,9 +136,7 @@ Definition at line 278 of file Tpoisson\+\_\+elements.\+h.
 {\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+T\+Poisson\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -152,7 +146,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoissonEquations_af68ad067d9a9d1bcbcc1
 
 
 
-Definition at line 246 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 252 of file Tpoisson\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_aa15655fd7d9489a77b6d6c82f18946e4}\label{classoomph_1_1TPoissonElement_aa15655fd7d9489a77b6d6c82f18946e4}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_poisson@{dshape\_and\_dtest\_eulerian\_poisson}}
@@ -161,9 +155,7 @@ Definition at line 246 of file Tpoisson\+\_\+elements.\+h.
 {\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+T\+Poisson\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+poisson (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -173,7 +165,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoissonEquations_a88afb41d8733fb348875
 
 
 
-Definition at line 211 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 218 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -196,7 +188,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 179 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 185 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -238,7 +230,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 176 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 179 of file Tpoisson\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a86423f2dcb0bf2a440036ad0128a8bc6}\label{classoomph_1_1TPoissonElement_a86423f2dcb0bf2a440036ad0128a8bc6}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
@@ -257,7 +249,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 183 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 191 of file Tpoisson\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a97c2a982c586228f55d44ba2ecdb08a4}\label{classoomph_1_1TPoissonElement_a97c2a982c586228f55d44ba2ecdb08a4}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!operator=@{operator=}}
@@ -272,7 +264,7 @@ Broken assignment operator.
 
 
 
-Definition at line 81 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 76 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -287,8 +279,7 @@ void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+T\+Poisson\+Elem
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. 
+C-\/style output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -296,7 +287,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_afeaa8b136b9c
 
 
 
-Definition at line 108 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 105 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -311,8 +302,7 @@ void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+T\+Poisson\+Elem
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -320,7 +310,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_abc30eee5faaa
 
 
 
-Definition at line 116 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 113 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -335,8 +325,7 @@ void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+T\+Poisson\+Elem
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -344,7 +333,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_a2417afb77d42
 
 
 
-Definition at line 93 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 90 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -359,8 +348,7 @@ void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+T\+Poisson\+Elem
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -368,7 +356,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_a6683dd0afc16
 
 
 
-Definition at line 100 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 97 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -391,7 +379,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_a6d98964a14b3
 
 
 
-Definition at line 133 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 131 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -414,7 +402,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_ad6c637c8a522
 
 
 
-Definition at line 124 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 121 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -437,7 +425,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 88 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 83 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -460,7 +448,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 187 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 197 of file Tpoisson\+\_\+elements.\+h.
 
 
 
@@ -478,7 +466,7 @@ Static unsigned that holds the (same) number of variables at every node.
 
 
 
-Definition at line 193 of file Tpoisson\+\_\+elements.\+h.
+Definition at line 204 of file Tpoisson\+\_\+elements.\+h.
 
 
 

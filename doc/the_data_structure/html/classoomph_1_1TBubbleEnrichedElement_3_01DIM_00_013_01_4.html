@@ -169,8 +169,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:abf68d2c613e7876e949bbd61765d0c91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the geometric shape functions and derivatives w.r.t. local coordinates at local coordinate s.  <a href="classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4.html#abf68d2c613e7876e949bbd61765d0c91">More...</a><br /></td></tr>
 <tr class="separator:abf68d2c613e7876e949bbd61765d0c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af362359deb0709dc5d42b29eaf776152"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4.html#af362359deb0709dc5d42b29eaf776152">d2shape_local</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Shape.html">Shape</a> &amp;psi, <a class="el" href="classoomph_1_1DShape.html">DShape</a> &amp;dpsids, <a class="el" href="classoomph_1_1DShape.html">DShape</a> &amp;d2psids) const</td></tr>
-<tr class="memdesc:af362359deb0709dc5d42b29eaf776152"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the geometric shape functions, derivatives and second derivatives w.r.t local coordinates at local coordinate s d2psids(i,0) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_0^2 $" src="form_215.png"/> d2psids(i,1) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_1^2 $" src="form_216.png"/> d2psids(i,2) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_0 \partial s_1 $" src="form_217.png"/> <br  />
-  <a href="classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4.html#af362359deb0709dc5d42b29eaf776152">More...</a><br /></td></tr>
+<tr class="memdesc:af362359deb0709dc5d42b29eaf776152"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the geometric shape functions, derivatives and second derivatives w.r.t local coordinates at local coordinate s d2psids(i,0) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_0^2 $" src="form_215.png"/> d2psids(i,1) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_1^2 $" src="form_216.png"/> d2psids(i,2) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_0 \partial s_1 $" src="form_217.png"/>.  <a href="classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4.html#af362359deb0709dc5d42b29eaf776152">More...</a><br /></td></tr>
 <tr class="separator:af362359deb0709dc5d42b29eaf776152"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0da229b9fbea583877e7fa5d5992cdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4.html#af0da229b9fbea583877e7fa5d5992cdb">local_coordinate_of_node</a> (const unsigned &amp;j, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
 <tr class="memdesc:af0da229b9fbea583877e7fa5d5992cdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return local coordinates of node j.  <a href="classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4.html#af0da229b9fbea583877e7fa5d5992cdb">More...</a><br /></td></tr>
@@ -206,7 +205,7 @@ class oomph::TBubbleEnrichedElement&lt; DIM, 3 &gt;</h3>
 
 <p>Enriched <a class="el" href="classoomph_1_1TElement.html">TElement</a> class specialised to two spatial dimensions and three nodes per side (quadratic element) Ordering of nodes as in Zienkiwizc sketches: vertex nodes 0 - 1 - 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. The idea is that we inherit from the existing <a class="el" href="classoomph_1_1TElement.html">TElement&lt;2,3&gt;</a>, add the single extra node at the centroid and overload the shape functions to be those corresponding to the enriched element. </p>
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03535">3535</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03651">3651</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad7b4bb73defa6c522acf3f08c4b73027"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7b4bb73defa6c522acf3f08c4b73027">&#9670;&nbsp;</a></span>TBubbleEnrichedElement() <span class="overload">[1/2]</span></h2>
@@ -235,7 +234,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03549">3549</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03664">3664</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 
 </div>
 </div>
@@ -267,9 +266,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03561">3561</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03676">3676</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -301,7 +300,7 @@ template&lt;unsigned DIM&gt; </div>
 <p>Broken assignment operator. </p>
 <p>Destructor </p>
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03573">3573</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03688">3688</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 
 </div>
 </div>
@@ -386,10 +385,9 @@ template&lt;unsigned DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the geometric shape functions, derivatives and second derivatives w.r.t local coordinates at local coordinate s d2psids(i,0) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_0^2 $" src="form_215.png"/> d2psids(i,1) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_1^2 $" src="form_216.png"/> d2psids(i,2) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_0 \partial s_1 $" src="form_217.png"/> <br  />
- </p>
+<p>Compute the geometric shape functions, derivatives and second derivatives w.r.t local coordinates at local coordinate s d2psids(i,0) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_0^2 $" src="form_215.png"/> d2psids(i,1) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_1^2 $" src="form_216.png"/> d2psids(i,2) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial s_0 \partial s_1 $" src="form_217.png"/>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03591">3591</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03711">3711</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
@@ -439,7 +437,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Compute the geometric shape functions and derivatives w.r.t. local coordinates at local coordinate s. </p>
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03581">3581</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03698">3698</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
@@ -483,7 +481,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return local coordinates of node j. </p>
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03596">3596</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03721">3721</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
@@ -527,9 +525,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Calculate the geometric shape functions at local coordinate s. </p>
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03576">3576</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03691">3691</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="shape_8h_source.html#l00545">oomph::OneDimLagrange::shape()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="shape_8h_source.html#l00573">oomph::OneDimLagrange::shape()</a>.</p>
 
 </div>
 </div>
@@ -556,7 +554,7 @@ template&lt;unsigned DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03544">3544</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03660">3660</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 
 </div>
 </div>
@@ -582,7 +580,7 @@ template&lt;unsigned DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03541">3541</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Telements_8h_source.html#l03657">3657</a> of file <a class="el" href="Telements_8h_source.html">Telements.h</a>.</p>
 
 </div>
 </div>
@@ -618,7 +616,7 @@ template&lt;unsigned DIM&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:57:45
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:24
         </div>
       </div>
     </footer>

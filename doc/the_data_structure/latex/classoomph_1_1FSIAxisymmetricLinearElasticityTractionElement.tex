@@ -21,7 +21,7 @@ void \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionEleme
 \begin{DoxyCompactList}\small\item\em Fill in contribution from Jacobian. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_a7f934810722cf9109bfec4c063671ce5}{q}} () const
 \begin{DoxyCompactList}\small\item\em Return the ratio of the stress scales used to non-\/dimensionalise the fluid and elasticity equations. E.\+g. $ Q = (\omega a)^2 \rho/E $, i.\+e. the ratio between the inertial fluid stress and the solid\textquotesingle{}s elastic modulus E. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_a21c9405d5cf8a30c974016e289aaa805}{q\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_a1d3ced9cce5ef5d1cd0a5494809a7095}{q\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer the ratio of stress scales used to non-\/dimensionalise the fluid and solid equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_ae4a9f997d6975dea6ced9fa21603fc6b}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
@@ -46,7 +46,7 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTrac
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_aeff21738ba20eccede00f1db688e5a2a}{Default\+\_\+\+Q\+\_\+\+Value}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_aeff21738ba20eccede00f1db688e5a2a}{Default\+\_\+\+Q\+\_\+\+Value}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.\+0) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -57,7 +57,7 @@ class oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$
 
 A class for elements that allow the imposition of an applied traction in the equations of axisymmetric linear elasticity from an adjacent axisymmetric Navier Stokes element in a linearised F\+SI problem. The geometrical information can be read from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class. 
 
-Definition at line 500 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 493 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -75,7 +75,7 @@ Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the
 
 
 
-Definition at line 531 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 521 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -101,7 +101,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 569 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 558 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -124,7 +124,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 561 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 551 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -143,7 +143,7 @@ Helper function that actually calculates the residuals.
 
 Return the residuals. 
 
-Definition at line 684 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 678 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -170,7 +170,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 654 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 644 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -193,7 +193,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 658 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 650 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -216,7 +216,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 592 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 587 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_aa8de95635c065d9ba98a1faa67802d60}\label{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_aa8de95635c065d9ba98a1faa67802d60}} 
 \index{oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$@{oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$}!output@{output}}
@@ -235,7 +235,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 601 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 596 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -254,7 +254,7 @@ Return the ratio of the stress scales used to non-\/dimensionalise the fluid and
 
 
 
-Definition at line 584 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 573 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -264,12 +264,12 @@ References oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Eleme
 
 Referenced by oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output().
 
-\mbox{\Hypertarget{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_a21c9405d5cf8a30c974016e289aaa805}\label{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_a21c9405d5cf8a30c974016e289aaa805}} 
+\mbox{\Hypertarget{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_a1d3ced9cce5ef5d1cd0a5494809a7095}\label{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_a1d3ced9cce5ef5d1cd0a5494809a7095}} 
 \index{oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$@{oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$}!q\_pt@{q\_pt}}
 \index{q\_pt@{q\_pt}!oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$@{oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{q\_pt()}{q\_pt()}}
 {\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT , class N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement}{oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::q\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement}{oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::q\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -277,7 +277,7 @@ Return a pointer the ratio of stress scales used to non-\/dimensionalise the flu
 
 
 
-Definition at line 588 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 580 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -291,7 +291,7 @@ References oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Eleme
 \index{Default\_Q\_Value@{Default\_Q\_Value}!oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$@{oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_Q\_Value}{Default\_Q\_Value}}
 {\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT , class N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement}{oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Default\+\_\+\+Q\+\_\+\+Value =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement}{oomph\+::\+F\+S\+I\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Default\+\_\+\+Q\+\_\+\+Value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -299,7 +299,7 @@ Static default value for the ratio of stress scales used in the fluid and solid 
 
 Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.\+0) 
 
-Definition at line 515 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 506 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_affa78080f9785efcd0f29e16882b39a5}\label{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_affa78080f9785efcd0f29e16882b39a5}} 
 \index{oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$@{oomph::FSIAxisymmetricLinearElasticityTractionElement$<$ ELASTICITY\_BULK\_ELEMENT, NAVIER\_STOKES\_BULK\_ELEMENT $>$}!Q\_pt@{Q\_pt}}
@@ -314,7 +314,7 @@ Pointer to the ratio, $ Q $ , of the stress used to non-\/dimensionalise the flu
 
 
 
-Definition at line 511 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 502 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -333,7 +333,7 @@ Index at which the i-\/th displacement component is stored.
 
 
 
-Definition at line 518 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line 509 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 

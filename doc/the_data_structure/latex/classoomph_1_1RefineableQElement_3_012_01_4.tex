@@ -43,8 +43,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_ac14c3c0281921
 void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a708cd19748ee70eafefe614b32c4c25c}{setup\+\_\+hanging\+\_\+nodes}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::ofstream $\ast$ $>$ \&output\+\_\+stream)
 \begin{DoxyCompactList}\small\item\em Markup all hanging nodes \& document the results in the output streams contained in the vector output\+\_\+stream, if they are open. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb063dd2c98ebb42d87959ca6b88}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()=0
-\begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations as for the pressure in Taylor Hood). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations as for the pressure in Taylor Hood). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a739ecb3d2eff4c9d08efa79a39d387b0}{get\+\_\+boundaries}} (const int \&edge, std\+::set$<$ unsigned $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a5641be16902d346c51580a49fb9885dc}{boundaries}}) const
 \begin{DoxyCompactList}\small\item\em Determine set of (mesh) boundaries that the element edge/vertex lives on. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a7aaf952d8dfdcf6ed85f42bc0e7bbef2}{get\+\_\+bcs}} (int bound, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&bound\+\_\+cons) const
@@ -66,8 +65,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a71117
 \begin{DoxyCompactItemize}
 \item 
 static std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a95f17825b651c0ce6ec5daa2dd7c8fde}{Father\+\_\+bound}}
-\begin{DoxyCompactList}\small\item\em Coincidence between son nodal points and father boundaries\+: ~\newline
- Father\+\_\+bound\mbox{[}node\+\_\+1d\mbox{]}(jnod\+\_\+son,son\+\_\+type)=\{S\+W/\+S\+E/\+N\+W/\+N\+E/\+S/\+E/\+N/\+W/\+O\+M\+E\+GA\}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Coincidence between son nodal points and father boundaries\+: Father\+\_\+bound\mbox{[}node\+\_\+1d\mbox{]}(jnod\+\_\+son,son\+\_\+type)=\{S\+W/\+S\+E/\+N\+W/\+N\+E/\+S/\+E/\+N/\+W/\+O\+M\+E\+GA\}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -88,7 +86,7 @@ Refinement is performed by quadtree procedures. When the element is subdivided, 
 
 The class provides a generic \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a1226bff1b077a092766cedc2a12a350f}{Refineable\+Q\+Element$<$2$>$\+::build()}} function which deals with generic isoparametric Q\+Elements in which all values are associated with nodes. The \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36dfad028686adeb4694a9ef3}{Refineable\+Q\+Element$<$2$>$\+::further\+\_\+build()}} function provides an interface for any element-\/specific non-\/generic build operations. 
 
-Definition at line 70 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 69 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 
 
@@ -105,7 +103,7 @@ Shorthand for pointer to an argument-\/free void member function of the refineab
 
 
 
-Definition at line 78 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 75 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 
 
@@ -122,7 +120,7 @@ Constructor\+: Pass refinement level (default 0 = root)
 
 
 
-Definition at line 81 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 78 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 
 
@@ -140,7 +138,7 @@ Broken copy constructor.
 
 
 
-Definition at line 90 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 87 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 
 
@@ -158,7 +156,7 @@ Broken assignment operator.
 
 Destructor 
 
-Definition at line 106 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 104 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 
 
@@ -200,11 +198,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01
 
 
 
-Definition at line 600 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 642 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), boundaries, oomph\+::\+Mesh\+::boundary\+\_\+coordinate\+\_\+exists(), oomph\+::\+Element\+With\+Moving\+Nodes\+::enable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), get\+\_\+bcs(), get\+\_\+boundaries(), oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), i, interpolated\+\_\+zeta\+\_\+on\+\_\+edge(), oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt, oomph\+::\+Element\+With\+Moving\+Nodes\+::method\+\_\+for\+\_\+shape\+\_\+derivs(), oomph\+::\+Node\+::ndim(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+Data\+::pin(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), s, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Node\+::x().
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), boundaries, oomph\+::\+Mesh\+::boundary\+\_\+coordinate\+\_\+exists(), oomph\+::\+Element\+With\+Moving\+Nodes\+::enable\+\_\+always\+\_\+evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd(), oomph\+::\+Element\+With\+Moving\+Nodes\+::enable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), get\+\_\+bcs(), get\+\_\+boundaries(), oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 2 $>$\+::get\+\_\+solid\+\_\+bcs(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), i, interpolated\+\_\+zeta\+\_\+on\+\_\+edge(), oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt, oomph\+::\+Node\+::make\+\_\+periodic(), oomph\+::\+Element\+With\+Moving\+Nodes\+::method\+\_\+for\+\_\+shape\+\_\+derivs(), oomph\+::\+Node\+::ndim(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+Data\+::pin(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), s, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_012_01_4_a8f06b44d8fc378c3a3e256c9181e6b50}\label{classoomph_1_1RefineableQElement_3_012_01_4_a8f06b44d8fc378c3a3e256c9181e6b50}} 
 \index{oomph::RefineableQElement$<$ 2 $>$@{oomph::RefineableQElement$<$ 2 $>$}!check\_integrity@{check\_integrity}}
@@ -226,11 +224,11 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ae665f2d2eb0b6410ddc
 
 
 
-Definition at line 1780 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 1837 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::E, e, oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Refineable\+Element\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, t, values, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
+References oomph\+::\+Quad\+Tree\+Names\+::E, e, oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Refineable\+Element\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, t, values, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb063dd2c98ebb42d87959ca6b88}\label{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb063dd2c98ebb42d87959ca6b88}} 
 \index{oomph::RefineableQElement$<$ 2 $>$@{oomph::RefineableQElement$<$ 2 $>$}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
@@ -240,8 +238,7 @@ References oomph\+::\+Quad\+Tree\+Names\+::E, e, oomph\+::\+Quad\+Tree\+::gteq\+
 
 
 
-Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations as for the pressure in Taylor Hood). ~\newline
- 
+Perform additional hanging node procedures for variables that are not interpolated by all nodes (e.\+g. lower order interpolations as for the pressure in Taylor Hood). 
 
 
 
@@ -249,7 +246,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a86ea01c485f
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_abb293aeb834d1edf4d9f9e0150259e55}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a00d870c55a1a8e6596895d4efb5b3db5}{oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a4dabb74925f410045d1d7208a3b29130}{oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a744e9dabce8e94de320d9baa362786af}{oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetricQTaylorHoodElement_a6675183eb8c772e5a6129be446c8554e}{oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a4604904cbdb052492917860518b01aa7}{oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement_aef635d4f6f88c070bf0eeda652639795}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ae98562e5c0460648cf785dce08aac278}{oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQCrouzeixRaviartElement_afc31da5de97e9cc03bfc6106e08820f3}{oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_ad2ea85dbb9ac3434f4314a020b45861f}{oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a876b090aa3813d3837218a5aecb64404}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQSphericalAdvectionDiffusionElement_a0ad422bfa10c757b2cbc3d56209ea642}{oomph\+::\+Refineable\+Q\+Spherical\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1RefineablePolarTaylorHoodElement_aee481f421b3b57536ba7a929f760a337}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a2a183774e0992f6464b39b525552b985}{oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableQGeneralisedAxisymAdvectionDiffusionElement_aea4690891aa8c7a5d0cbb65eb101a3e9}{oomph\+::\+Refineable\+Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQYoungLaplaceElement_a2bf2a41febf535ba6993e7aafbf769c2}{oomph\+::\+Refineable\+Q\+Young\+Laplace\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a73d08f7b72685de1d8dd9ac30b8ddfec}{oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_abb293aeb834d1edf4d9f9e0150259e55}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement_a00d870c55a1a8e6596895d4efb5b3db5}{oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a4dabb74925f410045d1d7208a3b29130}{oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetricQTaylorHoodElement_a6675183eb8c772e5a6129be446c8554e}{oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a744e9dabce8e94de320d9baa362786af}{oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a4604904cbdb052492917860518b01aa7}{oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement_aef635d4f6f88c070bf0eeda652639795}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ae98562e5c0460648cf785dce08aac278}{oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQCrouzeixRaviartElement_afc31da5de97e9cc03bfc6106e08820f3}{oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableLinearisedAxisymmetricQCrouzeixRaviartElement_ad2ea85dbb9ac3434f4314a020b45861f}{oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a876b090aa3813d3837218a5aecb64404}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQSphericalAdvectionDiffusionElement_a0ad422bfa10c757b2cbc3d56209ea642}{oomph\+::\+Refineable\+Q\+Spherical\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1RefineablePolarTaylorHoodElement_aee481f421b3b57536ba7a929f760a337}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a2a183774e0992f6464b39b525552b985}{oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableQGeneralisedAxisymAdvectionDiffusionElement_aea4690891aa8c7a5d0cbb65eb101a3e9}{oomph\+::\+Refineable\+Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQYoungLaplaceElement_a2bf2a41febf535ba6993e7aafbf769c2}{oomph\+::\+Refineable\+Q\+Young\+Laplace\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01INITIAL__NNODE__1D_01_4_a73d08f7b72685de1d8dd9ac30b8ddfec}{oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_012_01_4_a7aaf952d8dfdcf6ed85f42bc0e7bbef2}\label{classoomph_1_1RefineableQElement_3_012_01_4_a7aaf952d8dfdcf6ed85f42bc0e7bbef2}} 
 \index{oomph::RefineableQElement$<$ 2 $>$@{oomph::RefineableQElement$<$ 2 $>$}!get\_bcs@{get\_bcs}}
@@ -271,7 +268,7 @@ Usual convention\+:
 \item bound\+\_\+cons\mbox{[}ival\mbox{]}=1 if value ival on this boundary is pinned 
 \end{DoxyItemize}
 
-Definition at line 119 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 145 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
@@ -295,7 +292,7 @@ Given an element edge/vertex, return a set that contains all the (mesh-\/)bounda
 
 For proper edges, the boundary is the one (if any) that is shared by both vertex nodes). For vertex nodes, we just return their boundaries. 
 
-Definition at line 258 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 288 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
@@ -323,7 +320,7 @@ Usual convention\+:
 \item bound\+\_\+cons\mbox{[}ival\mbox{]}=1 if value ival on this boundary is pinned 
 \end{DoxyItemize}
 
-Definition at line 192 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 224 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
@@ -341,7 +338,7 @@ Return the value of the intrinsic boundary coordinate interpolated along the edg
 
 Return the value of the intrinsic boundary coordinate interpolated along the edge (S/\+W/\+N/E) 
 
-Definition at line 365 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 390 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
@@ -367,11 +364,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01I
 
 
 
-Definition at line 493 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 516 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), i, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_012_01_4_ae989507794716d3ab8d0d2fd32dce28f}\label{classoomph_1_1RefineableQElement_3_012_01_4_ae989507794716d3ab8d0d2fd32dce28f}} 
 \index{oomph::RefineableQElement$<$ 2 $>$@{oomph::RefineableQElement$<$ 2 $>$}!node\_created\_by\_son\_of\_neighbour@{node\_created\_by\_son\_of\_neighbour}}
@@ -389,7 +386,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01I
 
 
 
-Definition at line 131 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 132 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_012_01_4_ac14c3c0281921b093497b76f0f51064a}\label{classoomph_1_1RefineableQElement_3_012_01_4_ac14c3c0281921b093497b76f0f51064a}} 
 \index{oomph::RefineableQElement$<$ 2 $>$@{oomph::RefineableQElement$<$ 2 $>$}!output\_corners@{output\_corners}}
@@ -403,7 +400,7 @@ Print corner nodes, use colour.
 
 Print corner nodes, use colour (default \char`\"{}\+B\+L\+A\+C\+K\char`\"{}) 
 
-Definition at line 1395 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 1443 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
@@ -425,11 +422,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_012_00_01I
 
 
 
-Definition at line 1480 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 1522 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Refineable\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+basis(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+node\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, oomph\+::\+Finite\+Element\+::s\+\_\+max(), oomph\+::\+Finite\+Element\+::s\+\_\+min(), oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
+References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Refineable\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+basis(), oomph\+::\+Refineable\+Element\+::interpolating\+\_\+node\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::S, oomph\+::\+Finite\+Element\+::s\+\_\+max(), oomph\+::\+Finite\+Element\+::s\+\_\+min(), oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_012_01_4_a7402a8119195f3684559ae200db41bb6}\label{classoomph_1_1RefineableQElement_3_012_01_4_a7402a8119195f3684559ae200db41bb6}} 
 \index{oomph::RefineableQElement$<$ 2 $>$@{oomph::RefineableQElement$<$ 2 $>$}!quadtree\_pt@{quadtree\_pt}}
@@ -443,7 +440,7 @@ Pointer to quadtree representation of this element.
 
 
 
-Definition at line 156 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 158 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 
 
@@ -461,7 +458,7 @@ Pointer to quadtree representation of this element.
 
 
 
-Definition at line 160 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 164 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_012_01_4_aac8b41efa9e63826756b390da15644bb}\label{classoomph_1_1RefineableQElement_3_012_01_4_aac8b41efa9e63826756b390da15644bb}} 
 \index{oomph::RefineableQElement$<$ 2 $>$@{oomph::RefineableQElement$<$ 2 $>$}!required\_nsons@{required\_nsons}}
@@ -479,7 +476,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a9761852271f
 
 
 
-Definition at line 114 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 112 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_012_01_4_ae72bc768135f78c574710524293bdbe2}\label{classoomph_1_1RefineableQElement_3_012_01_4_ae72bc768135f78c574710524293bdbe2}} 
 \index{oomph::RefineableQElement$<$ 2 $>$@{oomph::RefineableQElement$<$ 2 $>$}!setup\_father\_bounds@{setup\_father\_bounds}}
@@ -497,7 +494,7 @@ Father\+\_\+boundd\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type)=\{
 
 so that node nnode\+\_\+son in element of type son\+\_\+type lies on boundary/vertex Father\+\_\+boundd\mbox{[}nnode\+\_\+1d\mbox{]}(nnode\+\_\+son,son\+\_\+type) in its father element. If the node doesn\textquotesingle{}t lie on a boundary the value is O\+M\+E\+GA. 
 
-Definition at line 48 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 46 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
@@ -515,7 +512,7 @@ Internal helper function that is used to construct the hanging node schemes for 
 
 Internal function that sets up the hanging node scheme for a particular continuously interpolated value 
 
-Definition at line 1463 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 1506 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
@@ -523,7 +520,7 @@ References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N,
 
 
 
-Referenced by oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), and oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes().
+Referenced by oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), and oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQElement_3_012_01_4_a708cd19748ee70eafefe614b32c4c25c}\label{classoomph_1_1RefineableQElement_3_012_01_4_a708cd19748ee70eafefe614b32c4c25c}} 
 \index{oomph::RefineableQElement$<$ 2 $>$@{oomph::RefineableQElement$<$ 2 $>$}!setup\_hanging\_nodes@{setup\_hanging\_nodes}}
@@ -541,7 +538,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a54806551f79
 
 
 
-Definition at line 1438 of file refineable\+\_\+quad\+\_\+element.\+cc.
+Definition at line 1481 of file refineable\+\_\+quad\+\_\+element.\+cc.
 
 
 
@@ -558,12 +555,11 @@ References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N,
 
 
 
-Coincidence between son nodal points and father boundaries\+: ~\newline
- Father\+\_\+bound\mbox{[}node\+\_\+1d\mbox{]}(jnod\+\_\+son,son\+\_\+type)=\{S\+W/\+S\+E/\+N\+W/\+N\+E/\+S/\+E/\+N/\+W/\+O\+M\+E\+GA\}. 
+Coincidence between son nodal points and father boundaries\+: Father\+\_\+bound\mbox{[}node\+\_\+1d\mbox{]}(jnod\+\_\+son,son\+\_\+type)=\{S\+W/\+S\+E/\+N\+W/\+N\+E/\+S/\+E/\+N/\+W/\+O\+M\+E\+GA\}. 
 
 Static matrix for coincidence between son nodal points and father boundaries 
 
-Definition at line 176 of file refineable\+\_\+quad\+\_\+element.\+h.
+Definition at line 182 of file refineable\+\_\+quad\+\_\+element.\+h.
 
 
 

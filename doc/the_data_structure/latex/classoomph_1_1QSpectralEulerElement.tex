@@ -20,13 +20,12 @@ Inheritance diagram for oomph\+::Q\+Spectral\+Euler\+Element$<$ D\+IM, N\+N\+O\+
 void \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a1dc148b0c455243d79387ee6399a29df}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a1aea03c046d9d1bec4717182386d7860}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -38,7 +37,7 @@ class oomph\+::\+Q\+Spectral\+Euler\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D
 
 
 
-Definition at line 228 of file euler\+\_\+elements.\+h.
+Definition at line 256 of file euler\+\_\+elements.\+h.
 
 
 
@@ -56,7 +55,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\
 
 
 
-Definition at line 237 of file euler\+\_\+elements.\+h.
+Definition at line 262 of file euler\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralEulerElement_a6ac34b1fe60d76617accddf522bb3c9b}\label{classoomph_1_1QSpectralEulerElement_a6ac34b1fe60d76617accddf522bb3c9b}} 
 \index{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$}!QSpectralEulerElement@{QSpectralEulerElement}}
@@ -71,7 +70,7 @@ Broken copy constructor.
 
 
 
-Definition at line 242 of file euler\+\_\+elements.\+h.
+Definition at line 268 of file euler\+\_\+elements.\+h.
 
 
 
@@ -95,7 +94,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a21e7b05ac839ce
 
 
 
-Definition at line 375 of file euler\+\_\+elements.\+h.
+Definition at line 402 of file euler\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralEulerElement_a1dc148b0c455243d79387ee6399a29df}\label{classoomph_1_1QSpectralEulerElement_a1dc148b0c455243d79387ee6399a29df}} 
 \index{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_flux\_transport@{dshape\_and\_dtest\_eulerian\_flux\_transport}}
@@ -106,9 +105,9 @@ double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+Q\+Spect
 
 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Galerkin\+: Test functions = shape functions 
 
@@ -116,7 +115,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a9bdf6ab17431bc
 
 
 
-Definition at line 341 of file euler\+\_\+elements.\+h.
+Definition at line 369 of file euler\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}\label{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}} 
 \index{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -129,14 +128,13 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+Q\+Spectra
 
 Broken assignment operator. 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u 
+Output function\+: x,y,u or x,y,z,u 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1EulerEquations_a4478d473edbda3529602c75f70cafe30}{oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 262 of file euler\+\_\+elements.\+h.
+Definition at line 288 of file euler\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}\label{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}} 
 \index{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -147,8 +145,7 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+Q\+Spectra
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -156,7 +153,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1EulerEquations_a9d51d5bcc09634
 
 
 
-Definition at line 267 of file euler\+\_\+elements.\+h.
+Definition at line 295 of file euler\+\_\+elements.\+h.
 
 
 

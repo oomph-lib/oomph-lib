@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Linear\+Wave\+Equations$<$ D\+IM $>$\+:\begin{f
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}{Linear\+Wave\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})
-\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -52,8 +51,7 @@ void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ae2dedf5d1dc024da927b05f
 \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}{Linear\+Wave\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a61de270efb6fb0149da99d221580d13f}{source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. Const version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a1f2ef4ab9b1b50c29dc64ae4491265d1}{get\+\_\+source\+\_\+lin\+\_\+wave}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
-\begin{DoxyCompactList}\small\item\em Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a36ca5b4691a27beacd433a4f5279e1bf}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a51319cb9bbb054c6a79d63b203d7d163}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
@@ -76,8 +74,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a57ed864bd1eca
 virtual double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a8033ffc13e61d7adcd4b7e1154ea12af}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+lin\+\_\+wave}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ae6017a229d5eccb3fb342e34a10382ec}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -92,7 +89,7 @@ class oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}
 
 A class for all isoparametric elements that solve the Linear\+Wave equations. \[ \frac{\partial^2 u}{\partial x_i^2}= \frac{\partial^2 u}{\partial t^2}+f(t,x_j) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line 56 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 55 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -106,12 +103,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+:
 
 
 
-Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- 
+Function pointer to source function fct(x,f(x)) -- x is a Vector! 
 
 
 
-Definition at line 63 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 60 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -129,7 +125,7 @@ Constructor (must initialise the Source\+\_\+fct\+\_\+pt to null)
 
 
 
-Definition at line 68 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 65 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a611ab736d3b90455327c5a2812f8fbf0}\label{classoomph_1_1LinearWaveEquations_a611ab736d3b90455327c5a2812f8fbf0}} 
 \index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!LinearWaveEquations@{LinearWaveEquations}}
@@ -144,7 +140,7 @@ Broken copy constructor.
 
 
 
-Definition at line 71 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 68 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -172,7 +168,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 443 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 414 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
@@ -197,7 +193,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 526 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 494 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
@@ -216,7 +212,7 @@ d$^\wedge$2u/dt$^\wedge$2 at local node n. Uses suitably interpolated value for 
 
 
 
-Definition at line 120 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 121 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -296,7 +292,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 259 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 274 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -319,7 +315,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 249 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 264 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -334,8 +330,7 @@ void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave
 
 
 
-Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- 
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. 
 
 Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and/or element Jacobian matrix
 
@@ -347,7 +342,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_a0
 
 
 
-Definition at line 91 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 79 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
@@ -370,7 +365,7 @@ Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i.
 
 
 
-Definition at line 218 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 230 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -389,12 +384,11 @@ void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave
 
 
 
-Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. ~\newline
- 
+Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. 
 
 
 
-Definition at line 202 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 211 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -413,7 +407,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 320 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 335 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -432,7 +426,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 296 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 311 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -451,7 +445,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 268 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 283 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -470,7 +464,7 @@ Broken assignment operator.
 
 
 
-Definition at line 77 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 74 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -497,7 +491,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a9b6c23f23a7f
 
 
 
-Definition at line 158 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 160 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -528,7 +522,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a4fe8053385a0
 
 
 
-Definition at line 292 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 271 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
@@ -555,7 +549,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_ae7176ab05b31
 
 
 
-Definition at line 146 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 148 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -586,7 +580,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a4e44576ef363
 
 
 
-Definition at line 255 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 235 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
@@ -617,7 +611,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af991bd517d13
 
 
 
-Definition at line 386 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 361 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
@@ -648,7 +642,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af72b64dee3c8
 
 
 
-Definition at line 333 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 309 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
@@ -675,7 +669,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 222 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 205 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
@@ -694,7 +688,7 @@ Access function\+: Pointer to source function.
 
 
 
-Definition at line 194 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 197 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -717,7 +711,7 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line 197 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 203 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -736,7 +730,7 @@ Return the index at which the unknown value is stored. The default value, 0, is 
 
 
 
-Definition at line 89 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 86 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -758,7 +752,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 377 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 389 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 

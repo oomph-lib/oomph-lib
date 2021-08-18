@@ -50,10 +50,10 @@ virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_ae822f78ce56d1ff9a3
 void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a8e8d7354b213cba989b661f0b748d8b5}{remesh\+\_\+from\+\_\+triangulateio}} (std\+::istream \&restart\+\_\+file)
 \begin{DoxyCompactList}\small\item\em Regenerate the mesh from a dumped triangulateio file and dumped boundary coordinates of boundary nodes. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a2e7f54673e522b9be0543f0256afd04b}{remesh\+\_\+from\+\_\+internal\+\_\+triangulateio}} ()
-\begin{DoxyCompactList}\small\item\em Virtual function that is used for specific remeshing from the triangulateio. \end{DoxyCompactList}\item 
+\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_ad6e2c45db7c67e5a6fd063f0ea9bbfe7}{load\+\_\+balance}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&target\+\_\+domain\+\_\+for\+\_\+local\+\_\+non\+\_\+halo\+\_\+element)
 \begin{DoxyCompactList}\small\item\em Virtual function to perform the load balance rutines. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_adbb7621302c427dfc55dbc1ee2b7e77b}{reset\+\_\+boundary\+\_\+element\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&ntmp\+\_\+boundary\+\_\+elements, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&deleted\+\_\+elements)
+virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_ace8d65fe72a943aa50330566d4e6c633}{reset\+\_\+boundary\+\_\+element\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&ntmp\+\_\+boundary\+\_\+elements, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&deleted\+\_\+elements)
 \begin{DoxyCompactList}\small\item\em Virtual function to perform the reset boundary elements info rutines. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -68,7 +68,7 @@ bool \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a503839a1350bee25717570fbf5
 \doxysubsection{Detailed Description}
 Base class for triangle meshes (meshes made of 2D triangle elements). Note\+: we choose to template \mbox{\hyperlink{classoomph_1_1TriangleMeshBase}{Triangle\+Mesh\+Base}} here because certain functions in \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase}{Unstructured\+Two\+D\+Mesh\+Geometry\+Base}} need template parameters and it\textquotesingle{}s much cleaner simply to template the entire class 
 
-Definition at line 51 of file triangle\+\_\+mesh.\+h.
+Definition at line 50 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -85,7 +85,7 @@ Constructor.
 
 
 
-Definition at line 58 of file triangle\+\_\+mesh.\+h.
+Definition at line 55 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -103,7 +103,7 @@ Broken copy constructor.
 
 
 
-Definition at line 70 of file triangle\+\_\+mesh.\+h.
+Definition at line 67 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -121,7 +121,7 @@ Broken assignment operator.
 
 Destructor (empty) 
 
-Definition at line 86 of file triangle\+\_\+mesh.\+h.
+Definition at line 84 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -142,7 +142,7 @@ Helper function. Clean up the memory associated with the \mbox{\hyperlink{struct
 
 
 
-Definition at line 127 of file triangle\+\_\+mesh.\+h.
+Definition at line 137 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -160,7 +160,7 @@ write access for Use\+\_\+triangulateio\+\_\+restart.
 
 
 
-Definition at line 114 of file triangle\+\_\+mesh.\+h.
+Definition at line 118 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -178,7 +178,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_ab4472dde562e25eaa5
 
 
 
-Definition at line 137 of file triangle\+\_\+mesh.\+h.
+Definition at line 149 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -192,7 +192,7 @@ Referenced by oomph\+::\+Problem\+::dump().
 
 Virtual function that is used to dump info. related with distributed triangle meshes 
 
-Definition at line 149 of file triangle\+\_\+mesh.\+h.
+Definition at line 162 of file triangle\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a3b27444232702a4bbbeb95aa9c963c07}\label{classoomph_1_1TriangleMeshBase_a3b27444232702a4bbbeb95aa9c963c07}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!dump\_triangulateio@{dump\_triangulateio}}
@@ -228,7 +228,7 @@ write access for Use\+\_\+triangulateio\+\_\+restart.
 
 
 
-Definition at line 111 of file triangle\+\_\+mesh.\+h.
+Definition at line 112 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -250,7 +250,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_a712bfd68d4b55e9c47
 
 
 
-Definition at line 219 of file triangle\+\_\+mesh.\+h.
+Definition at line 236 of file triangle\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a56273b6d7b690d37f07632c7028adcf8}\label{classoomph_1_1TriangleMeshBase_a56273b6d7b690d37f07632c7028adcf8}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!read\_distributed\_info\_for\_restart@{read\_distributed\_info\_for\_restart}}
@@ -264,7 +264,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_ac023e6d962d37d1cc3
 
 
 
-Definition at line 161 of file triangle\+\_\+mesh.\+h.
+Definition at line 175 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -282,7 +282,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a3ecdb3b1
 
 
 
-Definition at line 173 of file triangle\+\_\+mesh.\+h.
+Definition at line 188 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -294,17 +294,13 @@ Referenced by oomph\+::\+Problem\+::read().
 \doxysubsubsection{\texorpdfstring{remesh\_from\_internal\_triangulateio()}{remesh\_from\_internal\_triangulateio()}}
 {\footnotesize\ttfamily virtual void oomph\+::\+Triangle\+Mesh\+Base\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
-Virtual function that is used for specific remeshing from the triangulateio. 
-
-
+Virtual function that is used for specific remeshing from the triangulateio 
 
 Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_a9bc95b0f26f8cd352997d2db32a6a292}{oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
 
 
 
-Definition at line 206 of file triangle\+\_\+mesh.\+h.
+Definition at line 224 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -322,7 +318,7 @@ Regenerate the mesh from a dumped triangulateio file and dumped boundary coordin
 
 Regenerate the mesh from a dumped triangulateio file and dumped boundary coordinates of boundary nodes 
 
-Definition at line 89 of file triangle\+\_\+mesh.\+cc.
+Definition at line 87 of file triangle\+\_\+mesh.\+cc.
 
 
 
@@ -332,11 +328,11 @@ References oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\
 
 Referenced by oomph\+::\+Problem\+::read().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_adbb7621302c427dfc55dbc1ee2b7e77b}\label{classoomph_1_1TriangleMeshBase_adbb7621302c427dfc55dbc1ee2b7e77b}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_ace8d65fe72a943aa50330566d4e6c633}\label{classoomph_1_1TriangleMeshBase_ace8d65fe72a943aa50330566d4e6c633}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!reset\_boundary\_element\_info@{reset\_boundary\_element\_info}}
 \index{reset\_boundary\_element\_info@{reset\_boundary\_element\_info}!oomph::TriangleMeshBase@{oomph::TriangleMeshBase}}
 \doxysubsubsection{\texorpdfstring{reset\_boundary\_element\_info()}{reset\_boundary\_element\_info()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Triangle\+Mesh\+Base\+::reset\+\_\+boundary\+\_\+element\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{ntmp\+\_\+boundary\+\_\+elements,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&}]{ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{deleted\+\_\+elements }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Triangle\+Mesh\+Base\+::reset\+\_\+boundary\+\_\+element\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{ntmp\+\_\+boundary\+\_\+elements,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&}]{ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{deleted\+\_\+elements }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -344,15 +340,19 @@ Virtual function to perform the reset boundary elements info rutines.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a37c3944a403f03316324a56a8878813f}{oomph\+::\+Mesh}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_ac481de51900d57248dd601b53816891f}{oomph\+::\+Mesh}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_a47080ac440e82c099c390b37bf694cfe}{oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_a5213a8126947509f566071c648e4716c}{oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
 
 
 
-Definition at line 231 of file triangle\+\_\+mesh.\+h.
+Definition at line 248 of file triangle\+\_\+mesh.\+h.
+
+
+
+Referenced by oomph\+::\+Mesh\+::distribute().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_aa78fe0d750c842df53e1fa2237205e51}\label{classoomph_1_1TriangleMeshBase_aa78fe0d750c842df53e1fa2237205e51}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
@@ -366,7 +366,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a6cc8bcd6b41209f0e9295cc9
 
 
 
-Definition at line 96 of file triangle\+\_\+mesh.\+h.
+Definition at line 94 of file triangle\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a187fd9dbc558b9d19a02d92ce876507c}\label{classoomph_1_1TriangleMeshBase_a187fd9dbc558b9d19a02d92ce876507c}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
@@ -384,7 +384,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a413cbcbea4fb1111703da9ee
 
 
 
-Definition at line 418 of file triangle\+\_\+mesh.\+cc.
+Definition at line 400 of file triangle\+\_\+mesh.\+cc.
 
 
 
@@ -402,7 +402,7 @@ Access to the triangulateio representation of the mesh.
 
 
 
-Definition at line 117 of file triangle\+\_\+mesh.\+h.
+Definition at line 124 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -424,7 +424,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a26cdfda4
 
 
 
-Definition at line 189 of file triangle\+\_\+mesh.\+h.
+Definition at line 205 of file triangle\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a69a2fe3d5e77ec39b9df4b3174b58c47}\label{classoomph_1_1TriangleMeshBase_a69a2fe3d5e77ec39b9df4b3174b58c47}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!use\_triangulateio\_restart@{use\_triangulateio\_restart}}
@@ -438,7 +438,7 @@ const access for Use\+\_\+triangulateio\+\_\+restart.
 
 
 
-Definition at line 108 of file triangle\+\_\+mesh.\+h.
+Definition at line 106 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -460,7 +460,7 @@ Helper function. Write a \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangul
 
 Write a Triangulateio\+\_\+object file of the \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object String s is add to assign a different value for input and/or output structure. The function give the same result of the \char`\"{}report\char`\"{} function included in the tricall.\+c, esternal\+\_\+src. 
 
-Definition at line 233 of file triangle\+\_\+mesh.\+cc.
+Definition at line 221 of file triangle\+\_\+mesh.\+cc.
 
 
 
@@ -481,7 +481,7 @@ References oomph\+::\+Triangulate\+I\+O\+::holelist, oomph\+::\+Triangulate\+I\+
 
 
 
-Definition at line 251 of file triangle\+\_\+mesh.\+h.
+Definition at line 267 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -495,7 +495,7 @@ Referenced by clear\+\_\+triangulateio(), dump\+\_\+triangulateio(), oomph\+::\+
 
 Should we use triangulateio specific parts for dump/restart? (Doesn\textquotesingle{}t work with some elements and isn\textquotesingle{}t needed if not using adaptivity). 
 
-Definition at line 255 of file triangle\+\_\+mesh.\+h.
+Definition at line 271 of file triangle\+\_\+mesh.\+h.
 
 
 

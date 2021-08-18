@@ -147,8 +147,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ad4ed9d81ba7718bf747e0abdd41cdaa1"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">ExactVorticityFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;vort_and_derivs)</td></tr>
-<tr class="separator:ad4ed9d81ba7718bf747e0abdd41cdaa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fa5cb83497fad80009ffbb9a45b351a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a5fa5cb83497fad80009ffbb9a45b351a">ExactVorticityFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;vort_and_derivs)</td></tr>
+<tr class="separator:a5fa5cb83497fad80009ffbb9a45b351a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -158,12 +158,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a84300b8d30090a7275a1e0233546b683"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a84300b8d30090a7275a1e0233546b683">create_container_for_vorticity_and_derivatives</a> () const</td></tr>
 <tr class="memdesc:a84300b8d30090a7275a1e0233546b683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a container for the vorticity and its partial derivatives. If the user wishes to output everything then this also creates space for the velocity derivatives too. This function has been written to allow for generalisation of the storage without (hopefully!) affecting too much.  <a href="classoomph_1_1VorticitySmootherElement.html#a84300b8d30090a7275a1e0233546b683">More...</a><br /></td></tr>
 <tr class="separator:a84300b8d30090a7275a1e0233546b683"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bc82b8c6788d3a4c35166a35a479cc0"><td class="memItemLeft" align="right" valign="top">std::pair&lt; unsigned, unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a9bc82b8c6788d3a4c35166a35a479cc0">vorticity_dof_to_container_id</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
-<tr class="memdesc:a9bc82b8c6788d3a4c35166a35a479cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that, given the local dof number of the i-th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1: this function goes hand-in-hand with <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a84300b8d30090a7275a1e0233546b683" title="Helper function to create a container for the vorticity and its partial derivatives....">create_container_for_vorticity_and_derivatives()</a> Note 2: i=0: vorticity itself; i&gt;0: vorticity derivatives.  <a href="classoomph_1_1VorticitySmootherElement.html#a9bc82b8c6788d3a4c35166a35a479cc0">More...</a><br /></td></tr>
-<tr class="separator:a9bc82b8c6788d3a4c35166a35a479cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5360f400ca274e7abfbb53b801241c6"><td class="memItemLeft" align="right" valign="top">std::pair&lt; unsigned, unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#af5360f400ca274e7abfbb53b801241c6">recovered_dof_to_container_id</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
-<tr class="memdesc:af5360f400ca274e7abfbb53b801241c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that, given the local dof number of the i-th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1: this function goes hand-in-hand with <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a84300b8d30090a7275a1e0233546b683" title="Helper function to create a container for the vorticity and its partial derivatives....">create_container_for_vorticity_and_derivatives()</a> Note 2: The input to this function is the i associated with the STORED nodal dof value. For example, if we're only recovering the velocity derivatives then i=0 is associated with du/dx.  <a href="classoomph_1_1VorticitySmootherElement.html#af5360f400ca274e7abfbb53b801241c6">More...</a><br /></td></tr>
-<tr class="separator:af5360f400ca274e7abfbb53b801241c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec37f30fb268a2f23e0db9b9c4d2ed35"><td class="memItemLeft" align="right" valign="top">std::pair&lt; unsigned, unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#aec37f30fb268a2f23e0db9b9c4d2ed35">vorticity_dof_to_container_id</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:aec37f30fb268a2f23e0db9b9c4d2ed35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that, given the local dof number of the i-th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1: this function goes hand-in-hand with <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a84300b8d30090a7275a1e0233546b683" title="Helper function to create a container for the vorticity and its partial derivatives....">create_container_for_vorticity_and_derivatives()</a> Note 2: i=0: vorticity itself; i&gt;0: vorticity derivatives.  <a href="classoomph_1_1VorticitySmootherElement.html#aec37f30fb268a2f23e0db9b9c4d2ed35">More...</a><br /></td></tr>
+<tr class="separator:aec37f30fb268a2f23e0db9b9c4d2ed35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb4a29c6bf81b07fd8005aeae5205ec1"><td class="memItemLeft" align="right" valign="top">std::pair&lt; unsigned, unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#adb4a29c6bf81b07fd8005aeae5205ec1">recovered_dof_to_container_id</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:adb4a29c6bf81b07fd8005aeae5205ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that, given the local dof number of the i-th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1: this function goes hand-in-hand with <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a84300b8d30090a7275a1e0233546b683" title="Helper function to create a container for the vorticity and its partial derivatives....">create_container_for_vorticity_and_derivatives()</a> Note 2: The input to this function is the i associated with the STORED nodal dof value. For example, if we're only recovering the velocity derivatives then i=0 is associated with du/dx.  <a href="classoomph_1_1VorticitySmootherElement.html#adb4a29c6bf81b07fd8005aeae5205ec1">More...</a><br /></td></tr>
+<tr class="separator:adb4a29c6bf81b07fd8005aeae5205ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0c9c94ce5dafa63f243511be306a237"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#aa0c9c94ce5dafa63f243511be306a237">stored_dof_to_recoverable_dof</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
 <tr class="memdesc:aa0c9c94ce5dafa63f243511be306a237"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the STORED dof number, this function returns the global recovered number. For example, if we only want to recover the velocity derivatives then the stored dof number of du/dy is 1 (as 0 is associated with du/dx). The global recovered number is 11 (as there are currently 10 vorticity derivatives that can be recovered and du/dy is the second velocity derivative we can recover).  <a href="classoomph_1_1VorticitySmootherElement.html#aa0c9c94ce5dafa63f243511be306a237">More...</a><br /></td></tr>
 <tr class="separator:aa0c9c94ce5dafa63f243511be306a237"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,10 +187,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a24820e11328d5c4a87eb6fc8399e2a54"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a24820e11328d5c4a87eb6fc8399e2a54">npartial_derivative</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
 <tr class="memdesc:a24820e11328d5c4a87eb6fc8399e2a54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the function written in <a class="el" href="namespaceoomph_1_1VorticityRecoveryHelpers.html">VorticityRecoveryHelpers</a>.  <a href="classoomph_1_1VorticitySmootherElement.html#a24820e11328d5c4a87eb6fc8399e2a54">More...</a><br /></td></tr>
 <tr class="separator:a24820e11328d5c4a87eb6fc8399e2a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf41507313bc7171bdaf0f579ab25dd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">ExactVorticityFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#acf41507313bc7171bdaf0f579ab25dd7">exact_vorticity_fct_pt</a> ()</td></tr>
+<tr class="memitem:acf41507313bc7171bdaf0f579ab25dd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a5fa5cb83497fad80009ffbb9a45b351a">ExactVorticityFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#acf41507313bc7171bdaf0f579ab25dd7">exact_vorticity_fct_pt</a> ()</td></tr>
 <tr class="memdesc:acf41507313bc7171bdaf0f579ab25dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to function that specifies exact vorticity and derivatives (for validation).  <a href="classoomph_1_1VorticitySmootherElement.html#acf41507313bc7171bdaf0f579ab25dd7">More...</a><br /></td></tr>
 <tr class="separator:acf41507313bc7171bdaf0f579ab25dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af554c9bc41710d8b042a51c19383351e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">ExactVorticityFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#af554c9bc41710d8b042a51c19383351e">exact_vorticity_fct_pt</a> () const</td></tr>
+<tr class="memitem:af554c9bc41710d8b042a51c19383351e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a5fa5cb83497fad80009ffbb9a45b351a">ExactVorticityFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#af554c9bc41710d8b042a51c19383351e">exact_vorticity_fct_pt</a> () const</td></tr>
 <tr class="memdesc:af554c9bc41710d8b042a51c19383351e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to function that specifies exact vorticity and derivatives (for validation) &ndash; const version.  <a href="classoomph_1_1VorticitySmootherElement.html#af554c9bc41710d8b042a51c19383351e">More...</a><br /></td></tr>
 <tr class="separator:af554c9bc41710d8b042a51c19383351e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5297ce9dd4c4d23fa99daafc2764d7db"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a5297ce9dd4c4d23fa99daafc2764d7db">smoothed_vorticity_index</a> () const</td></tr>
@@ -253,9 +253,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6987508c3afae70605d1bc73b27607d6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a6987508c3afae70605d1bc73b27607d6">vorticity_error_squared</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
 <tr class="memdesc:a6987508c3afae70605d1bc73b27607d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the element's contribution to the (squared) L2 norm of the difference between exact and smoothed vorticity. The input i corresponds to the i-th dof stored at each node (excluding the velocities and pressure).  <a href="classoomph_1_1VorticitySmootherElement.html#a6987508c3afae70605d1bc73b27607d6">More...</a><br /></td></tr>
 <tr class="separator:a6987508c3afae70605d1bc73b27607d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bd88c454b07db0ef8b44e7912651425"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a4bd88c454b07db0ef8b44e7912651425">vorticity_and_its_derivs</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;vort_and_derivs) const</td></tr>
-<tr class="memdesc:a4bd88c454b07db0ef8b44e7912651425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute smoothed vorticity and its derivatives.  <a href="classoomph_1_1VorticitySmootherElement.html#a4bd88c454b07db0ef8b44e7912651425">More...</a><br /></td></tr>
-<tr class="separator:a4bd88c454b07db0ef8b44e7912651425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07de6df1953ffa249761786ce94c163a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a07de6df1953ffa249761786ce94c163a">vorticity_and_its_derivs</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;vort_and_derivs) const</td></tr>
+<tr class="memdesc:a07de6df1953ffa249761786ce94c163a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute smoothed vorticity and its derivatives.  <a href="classoomph_1_1VorticitySmootherElement.html#a07de6df1953ffa249761786ce94c163a">More...</a><br /></td></tr>
+<tr class="separator:a07de6df1953ffa249761786ce94c163a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -280,7 +280,7 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a9fb49eba4ca7b0ffd94c4a728c5f9a17"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a9fb49eba4ca7b0ffd94c4a728c5f9a17">Maximum_order_of_velocity_derivative</a></td></tr>
 <tr class="memdesc:a9fb49eba4ca7b0ffd94c4a728c5f9a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of derivatives to retain in the velocity recovery. Note, the value 0 means we don't calculate the derivatives of the velocity.  <a href="classoomph_1_1VorticitySmootherElement.html#a9fb49eba4ca7b0ffd94c4a728c5f9a17">More...</a><br /></td></tr>
 <tr class="separator:a9fb49eba4ca7b0ffd94c4a728c5f9a17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63f838b49c19f7c3686c50b455da2e36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">ExactVorticityFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a63f838b49c19f7c3686c50b455da2e36">Exact_vorticity_fct_pt</a></td></tr>
+<tr class="memitem:a63f838b49c19f7c3686c50b455da2e36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a5fa5cb83497fad80009ffbb9a45b351a">ExactVorticityFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a63f838b49c19f7c3686c50b455da2e36">Exact_vorticity_fct_pt</a></td></tr>
 <tr class="memdesc:a63f838b49c19f7c3686c50b455da2e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to function that specifies exact vorticity and derivs (for validation).  <a href="classoomph_1_1VorticitySmootherElement.html#a63f838b49c19f7c3686c50b455da2e36">More...</a><br /></td></tr>
 <tr class="separator:a63f838b49c19f7c3686c50b455da2e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -290,10 +290,10 @@ class oomph::VorticitySmootherElement&lt; ELEMENT &gt;</h3>
 
 <p>Overloaded element that allows projection of vorticity. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00224">224</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00223">223</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="ad4ed9d81ba7718bf747e0abdd41cdaa1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4ed9d81ba7718bf747e0abdd41cdaa1">&#9670;&nbsp;</a></span>ExactVorticityFctPt</h2>
+<a id="a5fa5cb83497fad80009ffbb9a45b351a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fa5cb83497fad80009ffbb9a45b351a">&#9670;&nbsp;</a></span>ExactVorticityFctPt</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,13 +301,13 @@ class oomph::VorticitySmootherElement&lt; ELEMENT &gt;</h3>
 template&lt;class ELEMENT &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::ExactVorticityFctPt) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;vort_and_derivs)</td>
+          <td class="memname">typedef void(* <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::ExactVorticityFctPt) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;vort_and_derivs)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Typedef for pointer to function that specifies the exact vorticity and derivatives (for validation) </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00268">268</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00265">265</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
 </div>
 </div>
@@ -339,9 +339,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00229">229</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00227">227</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01796">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01776">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_velocity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01771">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_vorticity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01792">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01760">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00730">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::ncont_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01783">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>, <a class="el" href="namespaceoomph_1_1VorticityRecoveryHelpers.html#a7a5b81f8ddddc2ac5eb888fd970f060c">oomph::VorticityRecoveryHelpers::Recovery_helper</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01823">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01803">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_velocity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01798">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_vorticity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00075">oomph::VorticityRecoveryHelpers::RecoveryHelper::maximum_order_of_velocity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01819">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00068">oomph::VorticityRecoveryHelpers::RecoveryHelper::maximum_order_of_vorticity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01814">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00191">oomph::VorticityRecoveryHelpers::RecoveryHelper::ncont_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>, <a class="el" href="namespaceoomph_1_1VorticityRecoveryHelpers.html#a7a5b81f8ddddc2ac5eb888fd970f060c">oomph::VorticityRecoveryHelpers::Recovery_helper</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
@@ -373,11 +373,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Helper function to create a container for the vorticity and its partial derivatives. If the user wishes to output everything then this also creates space for the velocity derivatives too. This function has been written to allow for generalisation of the storage without (hopefully!) affecting too much. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00276">276</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00273">273</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01792">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00691">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01819">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01814">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00702">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01143">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_analytical_veloc_and_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00884">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_smoothed_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00980">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01603">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01159">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00825">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_analytical_veloc_and_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00899">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_smoothed_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00995">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01628">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>.</p>
 
 </div>
 </div>
@@ -393,7 +393,7 @@ template&lt;class ELEMENT &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">ExactVorticityFctPt</a>&amp; <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::exact_vorticity_fct_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a5fa5cb83497fad80009ffbb9a45b351a">ExactVorticityFctPt</a>&amp; <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::exact_vorticity_fct_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -408,9 +408,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Access function: Pointer to function that specifies exact vorticity and derivatives (for validation). </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00699">699</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00710">710</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01796">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01823">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>.</p>
 
 </div>
 </div>
@@ -426,7 +426,7 @@ template&lt;class ELEMENT &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">ExactVorticityFctPt</a> <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::exact_vorticity_fct_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a5fa5cb83497fad80009ffbb9a45b351a">ExactVorticityFctPt</a> <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::exact_vorticity_fct_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -441,9 +441,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Access function: Pointer to function that specifies exact vorticity and derivatives (for validation) &ndash; const version. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00707">707</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00718">718</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01796">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01823">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>.</p>
 
 </div>
 </div>
@@ -491,9 +491,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get the function value u in <a class="el" href="classoomph_1_1Vector.html">Vector</a>. Note: Given the generality of the interface (this function is usually called from black-box documentation or interpolation routines), the values <a class="el" href="classoomph_1_1Vector.html">Vector</a> sets its own size in here. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00753">753</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00765">765</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01760">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01783">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="shape_8h_source.html#l00545">oomph::OneDimLagrange::shape()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00580">values</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="shape_8h_source.html#l00573">oomph::OneDimLagrange::shape()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00580">values</a>.</p>
 
 </div>
 </div>
@@ -535,7 +535,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get the function value u in <a class="el" href="classoomph_1_1Vector.html">Vector</a>. Note: Given the generality of the interface (this function is usually called from black-box documentation or interpolation routines), the values <a class="el" href="classoomph_1_1Vector.html">Vector</a> sets its own size in here. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00740">740</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00751">751</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00580">values</a>.</p>
 
@@ -568,9 +568,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The maximum order of velocity derivative that can be recovered. This is set in the constructor and should NOT be changed during the running of the code. As such, a set...() function is not provided. DRAIG: Leave get_ prefix? </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00628">628</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00635">635</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01776">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_velocity_derivatives</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01803">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_velocity_derivatives</a>.</p>
 
 </div>
 </div>
@@ -601,9 +601,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The maximum order of vorticity derivative that can be recovered. This is set in the constructor and should NOT be changed during the running of the code. As such, a set...() function is not provided. DRAIG: Leave get_ prefix? </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00618">618</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00625">625</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01771">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_vorticity_derivatives</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01798">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_vorticity_derivatives</a>.</p>
 
 </div>
 </div>
@@ -634,9 +634,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The maximum order of derivatives calculated in the velocity recovery. Note, this value can only be set through the namespace <a class="el" href="namespaceoomph_1_1VorticityRecoveryHelpers.html">VorticityRecoveryHelpers</a>. DRAIG: Leave get_ prefix? </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00648">648</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00655">655</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01792">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01819">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>.</p>
 
 </div>
 </div>
@@ -667,9 +667,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The maximum order of derivatives calculated in the vorticity recovery. Note, this value can only be set through the namespace <a class="el" href="namespaceoomph_1_1VorticityRecoveryHelpers.html">VorticityRecoveryHelpers</a>. DRAIG: Leave get_ prefix? </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00638">638</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00645">645</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01814">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>.</p>
 
 </div>
 </div>
@@ -717,9 +717,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get raw derivative of velocity. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01260">1260</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01276">1276</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
@@ -761,9 +761,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get raw derivative of velocity. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01226">1226</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01242">1242</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+<p class="reference">References <a class="el" href="Vector_8h_source.html#l00160">oomph::Vector&lt; _Tp &gt;::initialise()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
@@ -811,9 +811,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get raw derivative of smoothed vorticity. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01353">1353</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01369">1369</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
@@ -855,9 +855,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get raw derivative of smoothed vorticity. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01321">1321</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01337">1337</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="Vector_8h_source.html#l00160">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
@@ -904,9 +904,9 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 <p>Get raw derivative of smoothed derivative vorticity [0]: d^2/dx^2, [1]: d^2/dxdy, [2]: d^2/dy^2 </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01436">1436</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01454">1454</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
@@ -948,9 +948,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get raw derivative of smoothed derivative vorticity. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01398">1398</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01416">1416</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="Vector_8h_source.html#l00160">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
@@ -997,9 +997,9 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 <p>Get raw derivative of smoothed derivative vorticity [0]: d^3/dx^3, [1]: d^3/dx^2dy, [2]: d^3/dxdy^2, [3]: d^3/dy^3, </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01535">1535</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01556">1556</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
@@ -1040,9 +1040,9 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 <p>Get raw derivative of smoothed derivative vorticity [0]: d^3/dx^3, [1]: d^3/dx^2dy, [2]: d^3/dxdy^2, [3]: d^3/dy^3 </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01493">1493</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01514">1514</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="Vector_8h_source.html#l00160">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
@@ -1073,11 +1073,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of continuously interpolated values: </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00730">730</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00741">741</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01783">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00972">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nscalar_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00980">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00229">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00987">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nscalar_paraview()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00995">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>.</p>
 
 </div>
 </div>
@@ -1109,11 +1109,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Call the function written in <a class="el" href="namespaceoomph_1_1VorticityRecoveryHelpers.html">VorticityRecoveryHelpers</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00691">691</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00702">702</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00154">oomph::VorticityRecoveryHelpers::RecoveryHelper::npartial_derivative()</a>, and <a class="el" href="namespaceoomph_1_1VorticityRecoveryHelpers.html#a7a5b81f8ddddc2ac5eb888fd970f060c">oomph::VorticityRecoveryHelpers::Recovery_helper</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00155">oomph::VorticityRecoveryHelpers::RecoveryHelper::npartial_derivative()</a>, and <a class="el" href="namespaceoomph_1_1VorticityRecoveryHelpers.html#a7a5b81f8ddddc2ac5eb888fd970f060c">oomph::VorticityRecoveryHelpers::Recovery_helper</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00276">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00674">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvelocity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00656">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvorticity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00456">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00550">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00316">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00683">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvelocity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00663">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvorticity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00460">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00555">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00315">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>.</p>
 
 </div>
 </div>
@@ -1144,11 +1144,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of scalars/fields output by this element. Re-implements broken virtual function in base class. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00972">972</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00987">987</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00730">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::ncont_interpolated_values()</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00741">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::ncont_interpolated_values()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01048">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_name_paraview()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00980">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01064">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_name_paraview()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00995">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>.</p>
 
 </div>
 </div>
@@ -1178,11 +1178,11 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 <p>The number of derivatives calculated in the velocity recovery. This does NOT include the zeroth derivatives as they are not "recovered" </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00674">674</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00683">683</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01792">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00691">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01819">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00702">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01603">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01628">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>.</p>
 
 </div>
 </div>
@@ -1213,11 +1213,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The number of terms calculated in the vorticity recovery. Also includes the zeroth derivative, i.e. the vorticity itself. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00656">656</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00663">663</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00691">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01814">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00702">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01603">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01628">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>.</p>
 
 </div>
 </div>
@@ -1259,9 +1259,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Overloaded output function: Output velocity, pressure and the smoothed vorticity. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01143">1143</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01159">1159</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00276">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01760">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="shape_8h_source.html#l00545">oomph::OneDimLagrange::shape()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01713">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="shape_8h_source.html#l00573">oomph::OneDimLagrange::shape()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01740">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>.</p>
 
 </div>
 </div>
@@ -1303,9 +1303,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Output exact velocity, vorticity, derivatives and indicator based on functions specified by two function pointers. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00810">810</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00825">825</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00276">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01796">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01760">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01823">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
@@ -1347,9 +1347,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Output the velocity, smoothed vorticity and derivatives. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00884">884</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00899">899</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00276">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01760">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01713">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01740">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>.</p>
 
 </div>
 </div>
@@ -1380,14 +1380,14 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Pin all smoothed vorticity quantities. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00788">788</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00801">801</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01783">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>, <a class="el" href="nodes_8h_source.html#l00379">oomph::Data::pin()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>, <a class="el" href="nodes_8h_source.html#l00391">oomph::Data::pin()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
-<a id="af5360f400ca274e7abfbb53b801241c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5360f400ca274e7abfbb53b801241c6">&#9670;&nbsp;</a></span>recovered_dof_to_container_id()</h2>
+<a id="adb4a29c6bf81b07fd8005aeae5205ec1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb4a29c6bf81b07fd8005aeae5205ec1">&#9670;&nbsp;</a></span>recovered_dof_to_container_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1398,7 +1398,7 @@ template&lt;class ELEMENT &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt;unsigned,unsigned&gt; <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::recovered_dof_to_container_id </td>
+          <td class="memname">std::pair&lt;unsigned, unsigned&gt; <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::recovered_dof_to_container_id </td>
           <td>(</td>
           <td class="paramtype">const unsigned &amp;&#160;</td>
           <td class="paramname"><em>i</em></td><td>)</td>
@@ -1414,11 +1414,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Helper function that, given the local dof number of the i-th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1: this function goes hand-in-hand with <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a84300b8d30090a7275a1e0233546b683" title="Helper function to create a container for the vorticity and its partial derivatives....">create_container_for_vorticity_and_derivatives()</a> Note 2: The input to this function is the i associated with the STORED nodal dof value. For example, if we're only recovering the velocity derivatives then i=0 is associated with du/dx. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00456">456</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00460">460</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01792">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00691">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01819">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01814">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00702">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00980">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00550">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01603">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00995">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00555">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01628">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>.</p>
 
 </div>
 </div>
@@ -1450,9 +1450,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of values required at local node n. In order to simplify matters, we allocate storage for pressure variables at all the nodes and then pin those that are not used. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00723">723</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00734">734</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01783">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>.</p>
 
 </div>
 </div>
@@ -1484,9 +1484,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Name of the i-th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. Can (should!) be overloaded with more meaningful names in specific elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01048">1048</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01064">1064</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01760">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00972">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nscalar_paraview()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00550">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, and <a class="el" href="oomph__utilities_8h_source.html#l00192">oomph::StringConversion::to_string()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00987">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nscalar_paraview()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00555">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, and <a class="el" href="oomph__utilities_8h_source.html#l00189">oomph::StringConversion::to_string()</a>.</p>
 
 </div>
 </div>
@@ -1534,9 +1534,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Write values of the i-th scalar field at the plot points. Needs to be implemented for each new specific element type. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00980">980</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00995">995</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00276">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01760">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00730">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::ncont_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00972">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nscalar_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00456">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01713">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00741">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::ncont_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00987">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nscalar_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00460">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01740">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>.</p>
 
 </div>
 </div>
@@ -1567,9 +1567,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Index of smoothed vorticity &ndash; followed by derivatives. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00714">714</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00725">725</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
@@ -1601,16 +1601,16 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Given the STORED dof number, this function returns the global recovered number. For example, if we only want to recover the velocity derivatives then the stored dof number of du/dy is 1 (as 0 is associated with du/dx). The global recovered number is 11 (as there are currently 10 vorticity derivatives that can be recovered and du/dy is the second velocity derivative we can recover). </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00550">550</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00555">555</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01771">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_vorticity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01760">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00691">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00456">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01798">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_vorticity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01814">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00702">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00460">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01048">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_name_paraview()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01064">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_name_paraview()</a>.</p>
 
 </div>
 </div>
-<a id="a4bd88c454b07db0ef8b44e7912651425"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bd88c454b07db0ef8b44e7912651425">&#9670;&nbsp;</a></span>vorticity_and_its_derivs()</h2>
+<a id="a07de6df1953ffa249761786ce94c163a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07de6df1953ffa249761786ce94c163a">&#9670;&nbsp;</a></span>vorticity_and_its_derivs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1629,7 +1629,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>vort_and_derivs</em>&#160;</td>
         </tr>
         <tr>
@@ -1647,16 +1647,16 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Compute smoothed vorticity and its derivatives. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01713">1713</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01740">1740</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00545">oomph::OneDimLagrange::shape()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00573">oomph::OneDimLagrange::shape()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01143">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00884">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_smoothed_vorticity()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00980">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01159">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00899">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_smoothed_vorticity()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00995">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>.</p>
 
 </div>
 </div>
-<a id="a9bc82b8c6788d3a4c35166a35a479cc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bc82b8c6788d3a4c35166a35a479cc0">&#9670;&nbsp;</a></span>vorticity_dof_to_container_id()</h2>
+<a id="aec37f30fb268a2f23e0db9b9c4d2ed35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec37f30fb268a2f23e0db9b9c4d2ed35">&#9670;&nbsp;</a></span>vorticity_dof_to_container_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1667,7 +1667,7 @@ template&lt;class ELEMENT &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt;unsigned,unsigned&gt; <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::vorticity_dof_to_container_id </td>
+          <td class="memname">std::pair&lt;unsigned, unsigned&gt; <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::vorticity_dof_to_container_id </td>
           <td>(</td>
           <td class="paramtype">const unsigned &amp;&#160;</td>
           <td class="paramname"><em>i</em></td><td>)</td>
@@ -1683,9 +1683,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Helper function that, given the local dof number of the i-th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1: this function goes hand-in-hand with <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a84300b8d30090a7275a1e0233546b683" title="Helper function to create a container for the vorticity and its partial derivatives....">create_container_for_vorticity_and_derivatives()</a> Note 2: i=0: vorticity itself; i&gt;0: vorticity derivatives. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00316">316</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00315">315</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01776">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_velocity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01771">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_vorticity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01792">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00691">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01803">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_velocity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01798">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_recoverable_vorticity_derivatives</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01819">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01814">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Maximum_order_of_vorticity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00702">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
 
 </div>
 </div>
@@ -1717,9 +1717,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Compute the element's contribution to the (squared) L2 norm of the difference between exact and smoothed vorticity. The input i corresponds to the i-th dof stored at each node (excluding the velocities and pressure). </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01603">1603</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01628">1628</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00276">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01796">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01760">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00674">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvelocity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00656">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvorticity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00456">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01764">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::W</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01823">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="Vector_8h_source.html#l00160">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00683">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvelocity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00663">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvorticity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00460">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>, and <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>.</p>
 
 </div>
 </div>
@@ -1736,7 +1736,7 @@ template&lt;class ELEMENT &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">ExactVorticityFctPt</a> <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</td>
+          <td class="memname"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#a5fa5cb83497fad80009ffbb9a45b351a">ExactVorticityFctPt</a> <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</td>
         </tr>
       </table>
   </td>
@@ -1748,9 +1748,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Pointer to function that specifies exact vorticity and derivs (for validation). </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01796">1796</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01823">1823</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00699">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::exact_vorticity_fct_pt()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_analytical_veloc_and_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01603">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00229">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00710">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::exact_vorticity_fct_pt()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00825">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_analytical_veloc_and_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01628">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -1778,9 +1778,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The current maximum order of velocity derivatives that can be recovered. Currently, we can recover the first derivatives: du/dx,du/dy,dv/dx,dv/dy. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01776">1776</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01803">1803</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00628">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_maximum_order_of_recoverable_velocity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00316">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00229">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00635">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_maximum_order_of_recoverable_velocity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00315">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -1808,9 +1808,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The current maximum order of vorticity derivatives that can be recovered. Currently, we can recover up to the third derivative: omega,d/dx,d/dy, d^2/dx^2,d^2/dxdy,d^2/dy^2, d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01771">1771</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01798">1798</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00618">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_maximum_order_of_recoverable_vorticity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00550">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00316">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00229">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00625">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_maximum_order_of_recoverable_vorticity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00555">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00315">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -1838,9 +1838,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Maximum number of derivatives to retain in the velocity recovery. Note, the value 0 means we don't calculate the derivatives of the velocity. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01792">1792</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01819">1819</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00276">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00648">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_maximum_order_of_velocity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00674">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvelocity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00456">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00316">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00229">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00655">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_maximum_order_of_velocity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00683">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvelocity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00460">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00315">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -1868,9 +1868,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Maximum number of derivatives to retain in the vorticity recovery. Note, the value -1 means we ONLY output u,v[,w],p. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01787">1787</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01814">1814</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00276">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00638">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_maximum_order_of_vorticity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00656">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvorticity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00456">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00550">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00316">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00229">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00645">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_maximum_order_of_vorticity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00663">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvorticity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00460">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00555">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00315">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_dof_to_container_id()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -1898,9 +1898,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of dimensions in the element. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01760">1760</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01787">1787</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00753">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01143">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_analytical_veloc_and_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00884">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_smoothed_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01048">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_name_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00980">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00550">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01603">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00229">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00765">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01159">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00825">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_analytical_veloc_and_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00899">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::output_smoothed_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01064">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_name_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00995">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00555">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::stored_dof_to_recoverable_dof()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01628">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -1928,9 +1928,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of values per field; how many of the following do we want: u,v,p,omega,d/dx,d/dy, d^2/dx^2,d^2/dxdy,d^2/dy^2, d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3, du/dx,du/dy,dv/dx,dv/dy. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01783">1783</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01810">1810</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00753">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00730">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::ncont_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00788">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::pin_smoothed_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00723">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::required_nvalue()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00229">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00765">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00741">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::ncont_interpolated_values()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00801">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::pin_smoothed_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00734">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::required_nvalue()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -1958,9 +1958,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Index of smoothed vorticity &ndash; followed by derivatives; in 2D this has value 3. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01764">1764</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01791">1791</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01321">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_raw_vorticity_deriv()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01398">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_raw_vorticity_second_deriv()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01493">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_raw_vorticity_third_deriv()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00788">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::pin_smoothed_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01048">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_name_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00714">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::smoothed_vorticity_index()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01713">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01603">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00229">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01337">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_raw_vorticity_deriv()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01416">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_raw_vorticity_second_deriv()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01514">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::get_raw_vorticity_third_deriv()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00801">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::pin_smoothed_vorticity()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01064">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::scalar_name_paraview()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00725">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::smoothed_vorticity_index()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01740">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01628">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_error_squared()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -1995,7 +1995,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:58:08
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:43
         </div>
       </div>
     </footer>

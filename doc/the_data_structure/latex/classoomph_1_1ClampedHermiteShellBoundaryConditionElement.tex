@@ -39,7 +39,7 @@ void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a189db759eda561b5ae63ae9527b3ae39}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a7b18a5df8ade2926ccd6e7bcfa182dd9}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a8630533c1a86f7f748e83fb1513345f6}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -54,7 +54,7 @@ Element that allows the imposition of boundary conditions for a shell that is cl
 {\bfseries{Note}} {\bfseries{1}}\+: Note that the introduction of the Lagrange multiplier adds two additional values (relative to the number of values before the addition of the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}) to the nodes. This ensures that nodes that are shared by adjacent Face\+Elements are not resized repeatedly but also means that this won\textquotesingle{}t work if two \char`\"{}edges\char`\"{} of the shell (that share a node) are subject to different constraints, each applied with its own independent Lagrange multiplier. In such cases a modified version of this class must be written. ~\newline
  {\bfseries{Note}} {\bfseries{2}}\+: The \mbox{\hyperlink{classoomph_1_1FaceGeometry}{Face\+Geometry}} for a \mbox{\hyperlink{classoomph_1_1HermiteShellElement}{Hermite\+Shell\+Element}} is the 1D two-\/node element \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element$<$1$>$}} which has four shape functions (two nodes, two types -- representing the shape functions that interpolate the value and the derivative). These are the \char`\"{}correct\char`\"{} shape functions for the interpolation of the Lagrange multiplier and the isoparametric representation of the geometry. However, when applying the contribution from the constraint equation to the bulk equations, we have to take all four types of dof into account so the element has to reset the number of positional dofs to four. To avoid any clashes we overload (the relevant subset of) the access functions to the shape functions and their derivatives and set the shape functions associated with the spurious positional dofs to zero. This is a bit hacky but the only way (?) this can be done... 
 
-Definition at line 600 of file shell\+\_\+elements.\+h.
+Definition at line 629 of file shell\+\_\+elements.\+h.
 
 
 
@@ -71,7 +71,7 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the f
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. 
 
-Definition at line 1418 of file shell\+\_\+elements.\+cc.
+Definition at line 1456 of file shell\+\_\+elements.\+cc.
 
 
 
@@ -89,7 +89,7 @@ Broken empty constructor.
 
 
 
-Definition at line 614 of file shell\+\_\+elements.\+h.
+Definition at line 641 of file shell\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a82fb81f4cd6214474c8966d8f3bd7d58}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a82fb81f4cd6214474c8966d8f3bd7d58}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!ClampedHermiteShellBoundaryConditionElement@{ClampedHermiteShellBoundaryConditionElement}}
@@ -103,7 +103,7 @@ Broken copy constructor.
 
 
 
-Definition at line 623 of file shell\+\_\+elements.\+h.
+Definition at line 650 of file shell\+\_\+elements.\+h.
 
 
 
@@ -128,7 +128,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line 675 of file shell\+\_\+elements.\+h.
+Definition at line 700 of file shell\+\_\+elements.\+h.
 
 
 
@@ -150,17 +150,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 1486 of file shell\+\_\+elements.\+cc.
+Definition at line 1520 of file shell\+\_\+elements.\+cc.
 
 
 
 References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Face\+Element\+::\+Nbulk\+\_\+value, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Normal\+\_\+to\+\_\+clamping\+\_\+plane, oomph\+::\+Integral\+::nweight(), oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn(), residuals(), s, shape(), oomph\+::\+Node\+::value(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Node\+::x\+\_\+gen().
 
-\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a7b18a5df8ade2926ccd6e7bcfa182dd9}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a7b18a5df8ade2926ccd6e7bcfa182dd9}} 
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a8630533c1a86f7f748e83fb1513345f6}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a8630533c1a86f7f748e83fb1513345f6}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -168,11 +168,11 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) This element is only in charge of the solid dofs. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 1769 of file shell\+\_\+elements.\+cc.
+Definition at line 1789 of file shell\+\_\+elements.\+cc.
 
 
 
@@ -194,7 +194,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 722 of file shell\+\_\+elements.\+h.
+Definition at line 755 of file shell\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af5081c0ce57fedef78e6dc2359ea3a1d}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af5081c0ce57fedef78e6dc2359ea3a1d}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!operator=@{operator=}}
@@ -208,7 +208,7 @@ Broken assignment operator.
 
 
 
-Definition at line 631 of file shell\+\_\+elements.\+h.
+Definition at line 657 of file shell\+\_\+elements.\+h.
 
 
 
@@ -226,7 +226,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 712 of file shell\+\_\+elements.\+h.
+Definition at line 740 of file shell\+\_\+elements.\+h.
 
 
 
@@ -248,7 +248,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 717 of file shell\+\_\+elements.\+h.
+Definition at line 748 of file shell\+\_\+elements.\+h.
 
 
 
@@ -266,7 +266,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 705 of file shell\+\_\+elements.\+h.
+Definition at line 730 of file shell\+\_\+elements.\+h.
 
 
 
@@ -288,7 +288,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 1649 of file shell\+\_\+elements.\+cc.
+Definition at line 1678 of file shell\+\_\+elements.\+cc.
 
 
 
@@ -306,7 +306,7 @@ Set normal vector to clamping plane.
 
 
 
-Definition at line 638 of file shell\+\_\+elements.\+h.
+Definition at line 663 of file shell\+\_\+elements.\+h.
 
 
 
@@ -328,7 +328,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line 657 of file shell\+\_\+elements.\+h.
+Definition at line 682 of file shell\+\_\+elements.\+h.
 
 
 
@@ -353,7 +353,7 @@ Normal vector to the clamping plane.
 
 
 
-Definition at line 740 of file shell\+\_\+elements.\+h.
+Definition at line 772 of file shell\+\_\+elements.\+h.
 
 
 

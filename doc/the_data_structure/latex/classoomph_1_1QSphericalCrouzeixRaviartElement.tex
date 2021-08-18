@@ -18,15 +18,14 @@ Inheritance diagram for oomph\+::Q\+Spherical\+Crouzeix\+Raviart\+Element\+:\beg
 unsigned \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a75ba69f53af20c9f240856d105bc12ea}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at local node n. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a793d90652542ffffade39aaf25f9cc4c}{p\+\_\+spherical\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
-\begin{DoxyCompactList}\small\item\em Return the i-\/th pressure value (Discontinous pressure interpolation -- no need to cater for hanging nodes). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the i-\/th pressure value (Discontinous pressure interpolation -- no need to cater for hanging nodes). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_adefc160b9cedb7638a265e4c37f2e237}{npres\+\_\+spherical\+\_\+nst}} () const
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a61feca031056f09a70e1d9901d20b58b}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a3ef0fa0d09e3a9e495f348801723d549}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a0a03c9da3f9b4454ebb15a80099409be}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a1fc00abb3eec401fe649f920267bc7f0}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_ac8e70942a4fda151ade37cdc7d466436}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a2e829acc8cb74c743a661b63fb1aa618}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations}{Spherical\+Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -42,9 +41,8 @@ void \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a1e6532c250
 \begin{DoxyCompactList}\small\item\em Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/dt,\mbox{[}dw/dt\mbox{]},dissipation in tecplot format. nplot points in each coordinate direction. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_af9984dcf9685e350ebb1173a511c9594}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity (three comp) and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_ac6a63310d1f2e4de8c0310c86c2aa9f9}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_ac1512e4e346d2a9e64a280f8db7bef76}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -74,7 +72,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartEl
 \doxysubsection{Detailed Description}
 Crouzeix\+\_\+\+Raviart elements are Navier--Stokes elements with quadratic interpolation for velocities and positions, but a discontinuous linear pressure interpolation. They can be used within oomph-\/lib\textquotesingle{}s block preconditioning framework. 
 
-Definition at line 722 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 812 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -91,7 +89,7 @@ Constructor, there are 3 internal values (for the pressure)
 
 
 
-Definition at line 768 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 862 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -116,7 +114,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a10ed6f
 
 
 
-Definition at line 898 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1013 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -138,7 +136,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a3b9e9c
 
 
 
-Definition at line 873 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 987 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -160,7 +158,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_ae4dc4c
 
 
 
-Definition at line 790 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 892 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -178,7 +176,7 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line 837 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 948 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -196,40 +194,39 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line 843 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 956 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::full\+\_\+output().
 
-\mbox{\Hypertarget{classoomph_1_1QSphericalCrouzeixRaviartElement_ac6a63310d1f2e4de8c0310c86c2aa9f9}\label{classoomph_1_1QSphericalCrouzeixRaviartElement_ac6a63310d1f2e4de8c0310c86c2aa9f9}} 
+\mbox{\Hypertarget{classoomph_1_1QSphericalCrouzeixRaviartElement_ac1512e4e346d2a9e64a280f8db7bef76}\label{classoomph_1_1QSphericalCrouzeixRaviartElement_ac1512e4e346d2a9e64a280f8db7bef76}} 
 \index{oomph::QSphericalCrouzeixRaviartElement@{oomph::QSphericalCrouzeixRaviartElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::QSphericalCrouzeixRaviartElement@{oomph::QSphericalCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
-
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
 
 Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 2390 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2429 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
 References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), npres\+\_\+spherical\+\_\+nst(), oomph\+::\+Data\+::nvalue(), and p\+\_\+local\+\_\+eqn().
 
-\mbox{\Hypertarget{classoomph_1_1QSphericalCrouzeixRaviartElement_a3ef0fa0d09e3a9e495f348801723d549}\label{classoomph_1_1QSphericalCrouzeixRaviartElement_a3ef0fa0d09e3a9e495f348801723d549}} 
+\mbox{\Hypertarget{classoomph_1_1QSphericalCrouzeixRaviartElement_a0a03c9da3f9b4454ebb15a80099409be}\label{classoomph_1_1QSphericalCrouzeixRaviartElement_a0a03c9da3f9b4454ebb15a80099409be}} 
 \index{oomph::QSphericalCrouzeixRaviartElement@{oomph::QSphericalCrouzeixRaviartElement}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::QSphericalCrouzeixRaviartElement@{oomph::QSphericalCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -247,21 +244,21 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
 
 
 
-Definition at line 2335 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2369 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
 References i, identify\+\_\+pressure\+\_\+data(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+nst().
 
-\mbox{\Hypertarget{classoomph_1_1QSphericalCrouzeixRaviartElement_a1fc00abb3eec401fe649f920267bc7f0}\label{classoomph_1_1QSphericalCrouzeixRaviartElement_a1fc00abb3eec401fe649f920267bc7f0}} 
+\mbox{\Hypertarget{classoomph_1_1QSphericalCrouzeixRaviartElement_ac8e70942a4fda151ade37cdc7d466436}\label{classoomph_1_1QSphericalCrouzeixRaviartElement_ac8e70942a4fda151ade37cdc7d466436}} 
 \index{oomph::QSphericalCrouzeixRaviartElement@{oomph::QSphericalCrouzeixRaviartElement}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::QSphericalCrouzeixRaviartElement@{oomph::QSphericalCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -279,11 +276,11 @@ Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for pressures values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
 
 
 
-Definition at line 2367 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2404 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -309,7 +306,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 849 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 964 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSphericalCrouzeixRaviartElement_adefc160b9cedb7638a265e4c37f2e237}\label{classoomph_1_1QSphericalCrouzeixRaviartElement_adefc160b9cedb7638a265e4c37f2e237}} 
 \index{oomph::QSphericalCrouzeixRaviartElement@{oomph::QSphericalCrouzeixRaviartElement}!npres\_spherical\_nst@{npres\_spherical\_nst}}
@@ -327,7 +324,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_ae01203
 
 
 
-Definition at line 787 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 886 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -349,7 +346,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 826 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 933 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -371,7 +368,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 830 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 939 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -393,7 +390,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 817 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 920 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -415,7 +412,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 821 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 926 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -437,7 +434,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_ad8d9a0
 
 
 
-Definition at line 762 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 855 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -455,8 +452,7 @@ Referenced by get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns().
 
 
 
-Return the i-\/th pressure value (Discontinous pressure interpolation -- no need to cater for hanging nodes). ~\newline
- 
+Return the i-\/th pressure value (Discontinous pressure interpolation -- no need to cater for hanging nodes). 
 
 
 
@@ -464,7 +460,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a5b50d5
 
 
 
-Definition at line 783 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 880 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -486,7 +482,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a17799e
 
 
 
-Definition at line 922 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1037 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -512,7 +508,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a862f1d
 
 
 
-Definition at line 931 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1046 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -534,7 +530,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 777 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 871 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -551,7 +547,7 @@ Static array of ints to hold required number of variables at nodes.
 
 
 
-Definition at line 728 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 818 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSphericalCrouzeixRaviartElement_afe49582c1bb7d3b8adb0593baf75f228}\label{classoomph_1_1QSphericalCrouzeixRaviartElement_afe49582c1bb7d3b8adb0593baf75f228}} 
 \index{oomph::QSphericalCrouzeixRaviartElement@{oomph::QSphericalCrouzeixRaviartElement}!P\_spherical\_nst\_internal\_index@{P\_spherical\_nst\_internal\_index}}
@@ -561,7 +557,7 @@ Definition at line 728 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\
 
 Internal index that indicates at which internal data the pressure is stored 
 
-Definition at line 734 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 823 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

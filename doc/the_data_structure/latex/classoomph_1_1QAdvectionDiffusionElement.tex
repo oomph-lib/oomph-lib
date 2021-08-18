@@ -27,17 +27,13 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a3ae936af68a9db00
 unsigned \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a5add10bf35486c4ece4505a067cc2fd2}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_af30152cc8ea671b103239fc6b3e506ce}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a792f83bb2d8c22365cce60c43853396c}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a891cdaba60a0cd6b3438f161fb537933}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a42d9f526bc4bcc8fe51c6dbb1d216b4c}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a0e5d05a939eebc797ec8d6b400296bfd}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
@@ -46,7 +42,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a0e5d05a939eebc79
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a968920ec8057c9b5a49154c5845c7dbd}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_afc66bf00b79622cc6580787b9d86f215}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
@@ -63,7 +59,7 @@ class oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\
 
 \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{Q\+Advection\+Diffusion\+Element}} elements are linear/quadrilateral/brick-\/shaped Advection Diffusion elements with isoparametric interpolation for the function. 
 
-Definition at line 580 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 615 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -81,7 +77,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\
 
 
 
-Definition at line 595 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 627 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a666a536d74e1fdb9bd48f70b2f708e20}\label{classoomph_1_1QAdvectionDiffusionElement_a666a536d74e1fdb9bd48f70b2f708e20}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!QAdvectionDiffusionElement@{QAdvectionDiffusionElement}}
@@ -96,7 +92,7 @@ Broken copy constructor.
 
 
 
-Definition at line 600 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 633 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -110,9 +106,9 @@ double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+Q\+
 
 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Galerkin\+: Test functions = shape functions 
 
@@ -124,7 +120,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a
 
 
 
-Definition at line 694 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 735 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_afc66bf00b79622cc6580787b9d86f215}\label{classoomph_1_1QAdvectionDiffusionElement_afc66bf00b79622cc6580787b9d86f215}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff@{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff}}
@@ -149,7 +145,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a
 
 
 
-Definition at line 728 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 768 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a3ae936af68a9db003914b4da44985e9c}\label{classoomph_1_1QAdvectionDiffusionElement_a3ae936af68a9db003914b4da44985e9c}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!operator=@{operator=}}
@@ -164,7 +160,7 @@ Broken assignment operator.
 
 
 
-Definition at line 607 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 640 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a792f83bb2d8c22365cce60c43853396c}\label{classoomph_1_1QAdvectionDiffusionElement_a792f83bb2d8c22365cce60c43853396c}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -175,8 +171,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+Q\+Ad
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. 
+C-\/style output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -188,7 +183,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 630 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 669 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a891cdaba60a0cd6b3438f161fb537933}\label{classoomph_1_1QAdvectionDiffusionElement_a891cdaba60a0cd6b3438f161fb537933}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -199,8 +194,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+Q\+Ad
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -212,7 +206,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 637 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 676 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_af30152cc8ea671b103239fc6b3e506ce}\label{classoomph_1_1QAdvectionDiffusionElement_af30152cc8ea671b103239fc6b3e506ce}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -223,8 +217,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+Q\+Ad
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -236,7 +229,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 619 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 654 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}\label{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -247,8 +240,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+Q\+Ad
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -260,7 +252,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 624 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 661 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a0e5d05a939eebc797ec8d6b400296bfd}\label{classoomph_1_1QAdvectionDiffusionElement_a0e5d05a939eebc797ec8d6b400296bfd}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
@@ -283,7 +275,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 653 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 695 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a42d9f526bc4bcc8fe51c6dbb1d216b4c}\label{classoomph_1_1QAdvectionDiffusionElement_a42d9f526bc4bcc8fe51c6dbb1d216b4c}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
@@ -306,7 +298,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 644 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 683 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a5add10bf35486c4ece4505a067cc2fd2}\label{classoomph_1_1QAdvectionDiffusionElement_a5add10bf35486c4ece4505a067cc2fd2}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
@@ -329,7 +321,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 614 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 647 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -347,7 +339,7 @@ Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nval
 
 
 
-Definition at line 588 of file advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 622 of file advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

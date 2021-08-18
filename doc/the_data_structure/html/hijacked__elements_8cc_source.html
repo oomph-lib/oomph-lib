@@ -129,100 +129,103 @@ $(function() {
 <div class="title">hijacked_elements.cc</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="hijacked__elements_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//Non inline functions for Hijacked elements</span></div>
+<a href="hijacked__elements_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Non inline functions for Hijacked elements</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="hijacked__elements_8h.html">hijacked_elements.h</a>&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//======================================================================</span><span class="comment"></span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/// Static default value of the multiplier for the original residuals</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/// The contribution to the total residuals is the product of the</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/// multiplier and the original value of the residuals</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">double</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#afd87cc7c33c2b846c5f7a373c352f13a">HijackedElementBase::Default_residual_multiplier</a>=0.0;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//====================================================================</span><span class="comment"></span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/// Destructor that cleans up any memory allocated by the class</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span><span class="comment">//===================================================================</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classoomph_1_1HijackedElementBase.html#af3393a98fc80a2f7761046920b4a3040">   42</a></span>&#160;<a class="code" href="classoomph_1_1HijackedElementBase.html#af3393a98fc80a2f7761046920b4a3040">HijackedElementBase::~HijackedElementBase</a>() </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; <span class="comment">//If the hijacked equation number storage has been alloacted</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; <span class="comment">//clear it</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; <span class="keywordflow">if</span>(<a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a>!=0) </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  {<span class="keyword">delete</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a>;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="comment">//If the hijacked equation number storage has been alloacted</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; <span class="comment">//clear it</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; <span class="keywordflow">if</span>(<a class="code" href="classoomph_1_1HijackedElementBase.html#ae604da2f744f328f3866a2cefa3aa80c">Hijacked_local_eqn_number_pt</a>!=0) </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  {<span class="keyword">delete</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#ae604da2f744f328f3866a2cefa3aa80c">Hijacked_local_eqn_number_pt</a>;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">//======================================================================</span><span class="comment"></span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/// Mark the global equation, addressed by global_eqn_pt, </span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/// as hijacked by this element.</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classoomph_1_1HijackedElementBase.html#ac518df71f978c2b80cd25a1283353ab5">   59</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#ac518df71f978c2b80cd25a1283353ab5">HijackedElementBase::hijack_global_eqn</a>(<span class="keywordtype">long</span>* <span class="keyword">const</span> &amp;global_eqn_pt)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; <span class="comment">//If the storage has not been allocated, allocate it</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; <span class="keywordflow">if</span>(<a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a>==0) </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  /// Static default value of the multiplier for the original residuals</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  /// The contribution to the total residuals is the product of the</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">  /// multiplier and the original value of the residuals</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span>  <span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">double</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#afd87cc7c33c2b846c5f7a373c352f13a">HijackedElementBase::Default_residual_multiplier</a> = 0.0;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="comment">//====================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">  /// Destructor that cleans up any memory allocated by the class</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span>  <span class="comment">//===================================================================</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classoomph_1_1HijackedElementBase.html#af3393a98fc80a2f7761046920b4a3040">   41</a></span>&#160;  <a class="code" href="classoomph_1_1HijackedElementBase.html#af3393a98fc80a2f7761046920b4a3040">HijackedElementBase::~HijackedElementBase</a>()</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// If the hijacked equation number storage has been alloacted</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// clear it</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a> != 0)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      <span class="keyword">delete</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// If the hijacked equation number storage has been alloacted</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// clear it</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1HijackedElementBase.html#ae604da2f744f328f3866a2cefa3aa80c">Hijacked_local_eqn_number_pt</a> != 0)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keyword">delete</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#ae604da2f744f328f3866a2cefa3aa80c">Hijacked_local_eqn_number_pt</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">  /// Mark the global equation, addressed by global_eqn_pt,</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">  /// as hijacked by this element.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span>  <span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classoomph_1_1HijackedElementBase.html#ac518df71f978c2b80cd25a1283353ab5">   62</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#ac518df71f978c2b80cd25a1283353ab5">HijackedElementBase::hijack_global_eqn</a>(<span class="keywordtype">long</span>* <span class="keyword">const</span>&amp; global_eqn_pt)</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   <a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a> = <span class="keyword">new</span> std::set&lt;long*&gt;;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; <span class="comment">//Now insert the value, note that this prevents multiple inclusions,</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; <span class="comment">//which is neater, but possibly inefficient.</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; <a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a>-&gt;insert(global_eqn_pt);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">//=====================================================================</span><span class="comment"></span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/// The global equation, addressed by global_eqn_pt,</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/// is no longer hijacked by this element.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span><span class="comment">//====================================================================</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classoomph_1_1HijackedElementBase.html#aa94e2c93374151302879645f4c354c3f">   76</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#aa94e2c93374151302879645f4c354c3f">HijackedElementBase::unhijack_global_eqn</a>(<span class="keywordtype">long</span>* <span class="keyword">const</span> &amp;global_eqn_pt)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; <span class="comment">//Check that the storage has been allocated</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; <span class="keywordflow">if</span>(<a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a>!=0)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// If the storage has not been allocated, allocate it</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a> == 0)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a> = <span class="keyword">new</span> std::set&lt;long*&gt;;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// Now insert the value, note that this prevents multiple inclusions,</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// which is neater, but possibly inefficient.</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a>-&gt;insert(global_eqn_pt);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">//=====================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">  /// The global equation, addressed by global_eqn_pt,</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">  /// is no longer hijacked by this element.</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span>  <span class="comment">//====================================================================</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classoomph_1_1HijackedElementBase.html#aa94e2c93374151302879645f4c354c3f">   79</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1HijackedElementBase.html#aa94e2c93374151302879645f4c354c3f">HijackedElementBase::unhijack_global_eqn</a>(<span class="keywordtype">long</span>* <span class="keyword">const</span>&amp; global_eqn_pt)</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;   <a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a>-&gt;erase(global_eqn_pt);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">// Check that the storage has been allocated</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a> != 0)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <a class="code" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a>-&gt;erase(global_eqn_pt);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// namespace oomph</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_af3393a98fc80a2f7761046920b4a3040"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#af3393a98fc80a2f7761046920b4a3040">oomph::HijackedElementBase::~HijackedElementBase</a></div><div class="ttdeci">virtual ~HijackedElementBase()</div><div class="ttdoc">Destructor, destroy the storage for the equation numbers.</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8cc_source.html#l00042">hijacked_elements.cc:42</a></div></div>
-<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_a9c3a9a4e39ee5e3af0f5594c31f532c5"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">oomph::HijackedElementBase::Hijacked_global_eqn_number_pt</a></div><div class="ttdeci">std::set&lt; long * &gt; * Hijacked_global_eqn_number_pt</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8h_source.html#l00081">hijacked_elements.h:81</a></div></div>
-<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_aa94e2c93374151302879645f4c354c3f"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#aa94e2c93374151302879645f4c354c3f">oomph::HijackedElementBase::unhijack_global_eqn</a></div><div class="ttdeci">void unhijack_global_eqn(long *const &amp;global_eqn_pt)</div><div class="ttdoc">The global equation, addressed by global_eqn_pt, is no longer hijacked by this element.</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8cc_source.html#l00076">hijacked_elements.cc:76</a></div></div>
+<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_af3393a98fc80a2f7761046920b4a3040"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#af3393a98fc80a2f7761046920b4a3040">oomph::HijackedElementBase::~HijackedElementBase</a></div><div class="ttdeci">virtual ~HijackedElementBase()</div><div class="ttdoc">Destructor, destroy the storage for the equation numbers.</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8cc_source.html#l00041">hijacked_elements.cc:41</a></div></div>
+<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_a9c3a9a4e39ee5e3af0f5594c31f532c5"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">oomph::HijackedElementBase::Hijacked_global_eqn_number_pt</a></div><div class="ttdeci">std::set&lt; long * &gt; * Hijacked_global_eqn_number_pt</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8h_source.html#l00086">hijacked_elements.h:86</a></div></div>
+<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_aa94e2c93374151302879645f4c354c3f"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#aa94e2c93374151302879645f4c354c3f">oomph::HijackedElementBase::unhijack_global_eqn</a></div><div class="ttdeci">void unhijack_global_eqn(long *const &amp;global_eqn_pt)</div><div class="ttdoc">The global equation, addressed by global_eqn_pt, is no longer hijacked by this element.</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8cc_source.html#l00079">hijacked_elements.cc:79</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
-<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_ac518df71f978c2b80cd25a1283353ab5"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#ac518df71f978c2b80cd25a1283353ab5">oomph::HijackedElementBase::hijack_global_eqn</a></div><div class="ttdeci">void hijack_global_eqn(long *const &amp;global_eqn_pt)</div><div class="ttdoc">Mark the global equation, addressed by global_eqn_pt, as hijacked by this element.</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8cc_source.html#l00059">hijacked_elements.cc:59</a></div></div>
+<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_ac518df71f978c2b80cd25a1283353ab5"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#ac518df71f978c2b80cd25a1283353ab5">oomph::HijackedElementBase::hijack_global_eqn</a></div><div class="ttdeci">void hijack_global_eqn(long *const &amp;global_eqn_pt)</div><div class="ttdoc">Mark the global equation, addressed by global_eqn_pt, as hijacked by this element.</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8cc_source.html#l00062">hijacked_elements.cc:62</a></div></div>
 <div class="ttc" id="ahijacked__elements_8h_html"><div class="ttname"><a href="hijacked__elements_8h.html">hijacked_elements.h</a></div></div>
-<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_ae604da2f744f328f3866a2cefa3aa80c"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#ae604da2f744f328f3866a2cefa3aa80c">oomph::HijackedElementBase::Hijacked_local_eqn_number_pt</a></div><div class="ttdeci">Vector&lt; int &gt; * Hijacked_local_eqn_number_pt</div><div class="ttdoc">Pointer to a vector of integers containing the local equation numbers of any hijacked variables in th...</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8h_source.html#l00086">hijacked_elements.h:86</a></div></div>
-<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_afd87cc7c33c2b846c5f7a373c352f13a"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#afd87cc7c33c2b846c5f7a373c352f13a">oomph::HijackedElementBase::Default_residual_multiplier</a></div><div class="ttdeci">static double Default_residual_multiplier</div><div class="ttdoc">Static default value for the double that multiplies the original residuals.</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8h_source.html#l00096">hijacked_elements.h:96</a></div></div>
+<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_ae604da2f744f328f3866a2cefa3aa80c"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#ae604da2f744f328f3866a2cefa3aa80c">oomph::HijackedElementBase::Hijacked_local_eqn_number_pt</a></div><div class="ttdeci">Vector&lt; int &gt; * Hijacked_local_eqn_number_pt</div><div class="ttdoc">Pointer to a vector of integers containing the local equation numbers of any hijacked variables in th...</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8h_source.html#l00091">hijacked_elements.h:91</a></div></div>
+<div class="ttc" id="aclassoomph_1_1HijackedElementBase_html_afd87cc7c33c2b846c5f7a373c352f13a"><div class="ttname"><a href="classoomph_1_1HijackedElementBase.html#afd87cc7c33c2b846c5f7a373c352f13a">oomph::HijackedElementBase::Default_residual_multiplier</a></div><div class="ttdeci">static double Default_residual_multiplier</div><div class="ttdef"><b>Definition:</b> <a href="hijacked__elements_8h_source.html#l00102">hijacked_elements.h:102</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
     <script src="../../js/jquery-1.12.0.min.js"></script>
@@ -250,7 +253,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:03
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:26
         </div>
       </div>
     </footer>

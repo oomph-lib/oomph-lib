@@ -37,9 +37,9 @@ void \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_a742ba8001f20e4c5237
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_aee55fcd80bf4f6ea2550a43216e8e1c0}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+fvk}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_a47009097d667db8345785599cb3bdb81}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+fvk}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_a772d3db8d92b7cfd1a29984c8a92d0eb}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_a9ffd9e45449f8e542a3137ee73b56b5b}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
@@ -64,7 +64,7 @@ class oomph\+::\+T\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}
 
 T\+Foepplvon\+Karman\+Element$<$\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are isoparametric triangular 2-\/dimensional Foeppl von Karman elements with N\+N\+O\+D\+E\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations}{Foepplvon\+Karman\+Equations}} 
 
-Definition at line 63 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 61 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -82,7 +82,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\
 
 
 
-Definition at line 72 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 68 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TFoepplvonKarmanElement_ac2eb4c6e57782f62699e70db1bd876ca}\label{classoomph_1_1TFoepplvonKarmanElement_ac2eb4c6e57782f62699e70db1bd876ca}} 
 \index{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$}!TFoepplvonKarmanElement@{TFoepplvonKarmanElement}}
@@ -97,7 +97,7 @@ Broken copy constructor.
 
 
 
-Definition at line 77 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 75 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -113,9 +113,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement}{oomph\+::\+T\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+fvk (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -125,7 +123,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_aab91609ffb4a
 
 
 
-Definition at line 235 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 244 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TFoepplvonKarmanElement_aee55fcd80bf4f6ea2550a43216e8e1c0}\label{classoomph_1_1TFoepplvonKarmanElement_aee55fcd80bf4f6ea2550a43216e8e1c0}} 
 \index{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_fvk@{dshape\_and\_dtest\_eulerian\_fvk}}
@@ -134,9 +132,7 @@ Definition at line 235 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement}{oomph\+::\+T\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+fvk (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -146,7 +142,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a59a391262fa8
 
 
 
-Definition at line 200 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 210 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -169,7 +165,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 168 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 177 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -192,7 +188,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 162 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 165 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TFoepplvonKarmanElement_a9ffd9e45449f8e542a3137ee73b56b5b}\label{classoomph_1_1TFoepplvonKarmanElement_a9ffd9e45449f8e542a3137ee73b56b5b}} 
 \index{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -211,7 +207,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 165 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 171 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TFoepplvonKarmanElement_aee9854af71ebdca47e675ee73dc589e4}\label{classoomph_1_1TFoepplvonKarmanElement_aee9854af71ebdca47e675ee73dc589e4}} 
 \index{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
@@ -230,7 +226,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 172 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 183 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TFoepplvonKarmanElement_a3ae70062aaba5d085af4e1bf247cfd4b}\label{classoomph_1_1TFoepplvonKarmanElement_a3ae70062aaba5d085af4e1bf247cfd4b}} 
 \index{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TFoepplvonKarmanElement$<$ NNODE\_1D $>$}!operator=@{operator=}}
@@ -245,7 +241,7 @@ Broken assignment operator.
 
 
 
-Definition at line 83 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 81 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -360,7 +356,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a3eec
 
 
 
-Definition at line 135 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 136 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -406,7 +402,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 90 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 88 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -429,7 +425,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 176 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 189 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -447,7 +443,7 @@ Static unsigned that holds the (same) number of variables at every node.
 
 
 
-Definition at line 182 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 196 of file Tfoeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 

@@ -400,19 +400,19 @@ EXTRA_DIST = validate.sh validata
 # Sources for executable
 simple_shear_SOURCES = simple_shear.cc precompiled_mesh.cc
 
-# Required libraries: 
+# Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 simple_shear_LDADD = -L${exec_prefix}/lib -lsolid -lconstitutive -lgeneric \
-                    $(EXTERNAL_LIBS) $(FLIBS)
+					$(EXTERNAL_LIBS) $(FLIBS)
 
 
 # Sources for executable
 refineable_simple_shear_SOURCES = refineable_simple_shear.cc precompiled_mesh.cc
 
-# Required libraries: 
+# Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 refineable_simple_shear_LDADD = -L${exec_prefix}/lib -lsolid -lconstitutive -lgeneric \
-                    $(EXTERNAL_LIBS) $(FLIBS)
+					$(EXTERNAL_LIBS) $(FLIBS)
 
 all: all-am
 
@@ -840,7 +840,7 @@ spit_out_gmsh_command:
 #Automake doesn't have an easy way to make without optimisation
 #This is the automake generated option without CXX and CPP flags
 precompiled_mesh.o : precompiled_mesh.cc
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

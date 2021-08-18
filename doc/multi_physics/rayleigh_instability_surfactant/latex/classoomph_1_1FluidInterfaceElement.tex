@@ -25,7 +25,7 @@ double $\ast$\& \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a1a950f0202
 \begin{DoxyCompactList}\small\item\em Pointer to the Capillary number. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0c55c0e3cff597363ecb9ab0869c0015}{st}} () const
 \begin{DoxyCompactList}\small\item\em The value of the Strouhal number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a3fa462bb0ff807cf655ba02b35c1ccb4}{st\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a561642e7ee22fa4f2cb3bc6f381dfdca}{st\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em The pointer to the Strouhal number. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a50a509413ea7f2a481678837846dd476}{u}} (const unsigned \&j, const unsigned \&i)
 \begin{DoxyCompactList}\small\item\em Return the i-\/th velocity component at local node j. \end{DoxyCompactList}\item 
@@ -34,8 +34,7 @@ double \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a8f807a6456da7785b12
 double \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a7c0a2a21afce911c301c75febd3ba44c}{pext}} () const
 \begin{DoxyCompactList}\small\item\em Return the value of the external pressure. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a7230ddea36eb36938d64583e5ee4b15f}{set\+\_\+external\+\_\+pressure\+\_\+data}} (Data $\ast$external\+\_\+pressure\+\_\+data\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Set the Data that contains the single pressure value that specifies the \char`\"{}external pressure\char`\"{} for the interface/free-\/surface. Setting this only makes sense if the interface is, in fact, a free surface (well, an interface to another inviscid fluid if you want to be picky). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set the Data that contains the single pressure value that specifies the \char`\"{}external pressure\char`\"{} for the interface/free-\/surface. Setting this only makes sense if the interface is, in fact, a free surface (well, an interface to another inviscid fluid if you want to be picky). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a87ee1f3227c456a4c30df77c4d0bad6b}{set\+\_\+external\+\_\+pressure\+\_\+data}} (Data $\ast$external\+\_\+pressure\+\_\+data\+\_\+pt, const unsigned \&index\+\_\+of\+\_\+external\+\_\+pressure\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Set the Data that contains the pressure value that specifies the \char`\"{}external pressure\char`\"{} for the interface/free-\/surface. Setting this only makes sense if the interface is, in fact, a free surface (well, an interface to another inviscid fluid if you want to be picky). Second argument specifies the index of the pressure value within the Data object. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a376f8d1d451890b5725c7a991c34b6fc}{make\+\_\+bounding\+\_\+element}} (const int \&face\+\_\+index)
@@ -96,7 +95,7 @@ class \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_af0eab9c2aa8fc5a5006d
 \doxysubsection{Detailed Description}
 Base class establishing common interfaces and functions for all Navier-\/\+Stokes-\/like fluid interface elements. Namely, elements that represent either a free surface or an interface between two fluids that have distinct momentum-\/like equation for each velocity component. 
 
-Definition at line 318 of file interface\+\_\+elements.\+h.
+Definition at line 320 of file interface\+\_\+elements.\+h.
 
 
 
@@ -142,7 +141,7 @@ Helper function to calculate the additional contributions to the resisuals and J
 \item the Jacobian of the mapping between the local and global coordinates along the element. (Note that in the axisymmmetric case this includes the r term)! 
 \end{DoxyItemize}
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a56c90572b8969dff01a4baa9de850d91}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a054c0dfcc88814e128318c7ad30e6e31}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_adedf33390efdf652e169f8bd38eb2350}{oomph\+::\+Surfactant\+Transport\+Interface\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a56c90572b8969dff01a4baa9de850d91}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a054c0dfcc88814e128318c7ad30e6e31}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_adedf33390efdf652e169f8bd38eb2350}{oomph\+::\+Surfactant\+Transport\+Interface\+Element}}.
 
 
 
@@ -164,7 +163,7 @@ The value of the Capillary number.
 
 
 
-Definition at line 471 of file interface\+\_\+elements.\+h.
+Definition at line 473 of file interface\+\_\+elements.\+h.
 
 
 
@@ -186,7 +185,7 @@ Pointer to the Capillary number.
 
 
 
-Definition at line 490 of file interface\+\_\+elements.\+h.
+Definition at line 492 of file interface\+\_\+elements.\+h.
 
 
 
@@ -230,7 +229,7 @@ Calculate the residuals by calling the generic residual contribution.
 
 
 
-Definition at line 461 of file interface\+\_\+elements.\+h.
+Definition at line 464 of file interface\+\_\+elements.\+h.
 
 
 
@@ -248,7 +247,7 @@ Helper function to calculate the residuals and (if flag==1) the Jacobian of the 
 
 Calculate the contribution to the residuals from the interface implemented generically with geometric information to be added from the specific elements 
 
-Definition at line 470 of file interface\+\_\+elements.\+cc.
+Definition at line 471 of file interface\+\_\+elements.\+cc.
 
 
 
@@ -284,7 +283,7 @@ Calculate the i-\/th velocity component at the local coordinate s.
 
 Calculate the i-\/th velocity component at local coordinate s. 
 
-Definition at line 445 of file interface\+\_\+elements.\+cc.
+Definition at line 442 of file interface\+\_\+elements.\+cc.
 
 
 
@@ -328,7 +327,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceEleme
 
 
 
-Definition at line 602 of file interface\+\_\+elements.\+h.
+Definition at line 617 of file interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceElement_ad39bb9862c7f76e07d5ac006a1209cf9}\label{classoomph_1_1FluidInterfaceElement_ad39bb9862c7f76e07d5ac006a1209cf9}} 
 \index{oomph::FluidInterfaceElement@{oomph::FluidInterfaceElement}!output@{output}}
@@ -342,7 +341,7 @@ Overload the C-\/style output function.
 
 
 
-Definition at line 627 of file interface\+\_\+elements.\+h.
+Definition at line 645 of file interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceElement_a57efd66ae07fab9e0cf98ac5f8eeb000}\label{classoomph_1_1FluidInterfaceElement_a57efd66ae07fab9e0cf98ac5f8eeb000}} 
 \index{oomph::FluidInterfaceElement@{oomph::FluidInterfaceElement}!output@{output}}
@@ -374,7 +373,7 @@ Overload the output function.
 
 
 
-Definition at line 621 of file interface\+\_\+elements.\+h.
+Definition at line 636 of file interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceElement_a213b1a40132a9605ee8bd31c88b225e0}\label{classoomph_1_1FluidInterfaceElement_a213b1a40132a9605ee8bd31c88b225e0}} 
 \index{oomph::FluidInterfaceElement@{oomph::FluidInterfaceElement}!output@{output}}
@@ -388,7 +387,7 @@ Output function.
 
 Overload the output functions generically. 
 
-Definition at line 673 of file interface\+\_\+elements.\+cc.
+Definition at line 672 of file interface\+\_\+elements.\+cc.
 
 
 
@@ -406,7 +405,7 @@ Return the value of the external pressure.
 
 
 
-Definition at line 506 of file interface\+\_\+elements.\+h.
+Definition at line 519 of file interface\+\_\+elements.\+h.
 
 
 
@@ -446,12 +445,11 @@ Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+int
 
 
 
-Set the Data that contains the single pressure value that specifies the \char`\"{}external pressure\char`\"{} for the interface/free-\/surface. Setting this only makes sense if the interface is, in fact, a free surface (well, an interface to another inviscid fluid if you want to be picky). ~\newline
- 
+Set the Data that contains the single pressure value that specifies the \char`\"{}external pressure\char`\"{} for the interface/free-\/surface. Setting this only makes sense if the interface is, in fact, a free surface (well, an interface to another inviscid fluid if you want to be picky). 
 
 
 
-Definition at line 526 of file interface\+\_\+elements.\+h.
+Definition at line 539 of file interface\+\_\+elements.\+h.
 
 
 
@@ -473,7 +471,7 @@ Set the Data that contains the pressure value that specifies the \char`\"{}exter
 
 
 
-Definition at line 565 of file interface\+\_\+elements.\+h.
+Definition at line 578 of file interface\+\_\+elements.\+h.
 
 
 
@@ -513,7 +511,7 @@ The value of the Strouhal number.
 
 
 
-Definition at line 493 of file interface\+\_\+elements.\+h.
+Definition at line 498 of file interface\+\_\+elements.\+h.
 
 
 
@@ -523,11 +521,11 @@ References St\+\_\+pt.
 
 Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface().
 
-\mbox{\Hypertarget{classoomph_1_1FluidInterfaceElement_a3fa462bb0ff807cf655ba02b35c1ccb4}\label{classoomph_1_1FluidInterfaceElement_a3fa462bb0ff807cf655ba02b35c1ccb4}} 
+\mbox{\Hypertarget{classoomph_1_1FluidInterfaceElement_a561642e7ee22fa4f2cb3bc6f381dfdca}\label{classoomph_1_1FluidInterfaceElement_a561642e7ee22fa4f2cb3bc6f381dfdca}} 
 \index{oomph::FluidInterfaceElement@{oomph::FluidInterfaceElement}!st\_pt@{st\_pt}}
 \index{st\_pt@{st\_pt}!oomph::FluidInterfaceElement@{oomph::FluidInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{st\_pt()}{st\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Fluid\+Interface\+Element\+::st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Fluid\+Interface\+Element\+::st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -535,7 +533,7 @@ The pointer to the Strouhal number.
 
 
 
-Definition at line 496 of file interface\+\_\+elements.\+h.
+Definition at line 504 of file interface\+\_\+elements.\+h.
 
 
 
@@ -553,7 +551,7 @@ Return the i-\/th velocity component at local node j.
 
 
 
-Definition at line 499 of file interface\+\_\+elements.\+h.
+Definition at line 510 of file interface\+\_\+elements.\+h.
 
 
 
@@ -574,7 +572,7 @@ Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+int
 
 
 
-Definition at line 321 of file interface\+\_\+elements.\+h.
+Definition at line 323 of file interface\+\_\+elements.\+h.
 
 
 
@@ -591,7 +589,7 @@ Pointer to the Capillary number.
 
 
 
-Definition at line 326 of file interface\+\_\+elements.\+h.
+Definition at line 327 of file interface\+\_\+elements.\+h.
 
 
 
@@ -609,7 +607,7 @@ Default value for physical constants.
 
 Default value for physical constant (static) 
 
-Definition at line 332 of file interface\+\_\+elements.\+h.
+Definition at line 333 of file interface\+\_\+elements.\+h.
 
 
 
@@ -681,7 +679,7 @@ Pointer to the Strouhal number.
 
 
 
-Definition at line 329 of file interface\+\_\+elements.\+h.
+Definition at line 330 of file interface\+\_\+elements.\+h.
 
 
 

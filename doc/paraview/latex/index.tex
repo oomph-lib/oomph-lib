@@ -31,25 +31,24 @@ Paraview makes it possible to animate sequences of plots from time-\/dependent s
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//=================paraview\_helper=================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace for paraview-\/style output helper functions }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{namespace }ParaviewHelper}
-\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{comment}{//=================paraview\_helper=================================}}
+\DoxyCodeLine{\textcolor{comment}{  /// Namespace for paraview-\/style output helper functions}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{namespace }ParaviewHelper}
+\DoxyCodeLine{  \{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// Write the pvd file header}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{void} write\_pvd\_header(std::ofstream\& pvd\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Write the pvd file header}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{extern} \textcolor{keywordtype}{void} write\_pvd\_header(std::ofstream \&pvd\_file);}
-\DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Add name of output file and associated continuous time}}
-\DoxyCodeLine{\textcolor{comment}{ /// to pvd file.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{extern} \textcolor{keywordtype}{void} write\_pvd\_information(std::ofstream \&pvd\_file,}
-\DoxyCodeLine{                                   \textcolor{keyword}{const} std::string\& output\_filename,}
-\DoxyCodeLine{                                   \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time);}
-\DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Write the pvd file footer}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{extern} \textcolor{keywordtype}{void} write\_pvd\_footer(std::ofstream \&pvd\_file);}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Add name of output file and associated continuous time}}
+\DoxyCodeLine{\textcolor{comment}{    /// to pvd file.}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{void} write\_pvd\_information(std::ofstream\& pvd\_file,}
+\DoxyCodeLine{                                      \textcolor{keyword}{const} std::string\& output\_filename,}
+\DoxyCodeLine{                                      \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// Write the pvd file footer}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{void} write\_pvd\_footer(std::ofstream\& pvd\_file);}
 \DoxyCodeLine{}
-\DoxyCodeLine{\}}
+\DoxyCodeLine{  \} \textcolor{comment}{// namespace ParaviewHelper}}
 
 \end{DoxyCodeInclude}
 

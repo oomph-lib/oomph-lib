@@ -34,8 +34,7 @@ void \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a21c1b5f5
 void \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a9b72261d8b53fa87f530653293163004}{dshape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids) const
 \begin{DoxyCompactList}\small\item\em Compute the geometric shape functions and derivatives w.\+r.\+t. local coordinates at local coordinate s. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_ab8f127689821bd33998c2fd9ae313dc2}{d2shape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psids) const
-\begin{DoxyCompactList}\small\item\em Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t local coordinates at local coordinate s d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t local coordinates at local coordinate s d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a80334f2ec7d9f8795b9e260d185194d3}{invert\+\_\+jacobian\+\_\+mapping}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inverse\+\_\+jacobian) const
 \begin{DoxyCompactList}\small\item\em Overload the template-\/free interface for the calculation of inverse jacobian matrix. This is a two dimensional element, so use the 2D version. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a16749c4131f12c3723eb28a201370768}{s\+\_\+min}} () const
@@ -90,7 +89,7 @@ class oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$}
 
 General \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} class specialised to two spatial dimensions Ordering of nodes as in Zienkiwizc sketches\+: vertex nodes 0 -\/ 1 -\/ 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. 
 
-Definition at line 1518 of file Telements.\+h.
+Definition at line 1521 of file Telements.\+h.
 
 
 
@@ -108,7 +107,7 @@ Constructor.
 
 
 
-Definition at line 1536 of file Telements.\+h.
+Definition at line 1538 of file Telements.\+h.
 
 
 
@@ -187,7 +186,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidTElement_3_012_00_01NNODE__
 
 
 
-Definition at line 372 of file Telements.\+cc.
+Definition at line 370 of file Telements.\+cc.
 
 
 
@@ -202,8 +201,7 @@ void \mbox{\hyperlink{classoomph_1_1TElement}{oomph\+::\+T\+Element}}$<$ 2, N\+N
 
 
 
-Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t local coordinates at local coordinate s d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ ~\newline
- 
+Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t local coordinates at local coordinate s d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $. 
 
 
 
@@ -211,7 +209,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da0
 
 
 
-Definition at line 1656 of file Telements.\+h.
+Definition at line 1667 of file Telements.\+h.
 
 
 
@@ -234,7 +232,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line 1647 of file Telements.\+h.
+Definition at line 1655 of file Telements.\+h.
 
 
 
@@ -257,7 +255,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2cd0ee849adf50d
 
 
 
-Definition at line 1616 of file Telements.\+h.
+Definition at line 1622 of file Telements.\+h.
 
 
 
@@ -280,7 +278,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb20
 
 
 
-Definition at line 1773 of file Telements.\+h.
+Definition at line 1805 of file Telements.\+h.
 
 
 
@@ -303,7 +301,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a42c86a7628fee00
 
 
 
-Definition at line 1663 of file Telements.\+h.
+Definition at line 1678 of file Telements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_acf3c8a84331e4ff80a9b270124a2730b}\label{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_acf3c8a84331e4ff80a9b270124a2730b}} 
 \index{oomph::TElement$<$ 2, NNODE\_1D $>$@{oomph::TElement$<$ 2, NNODE\_1D $>$}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
@@ -322,7 +320,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22bc4ee35e4f948
 
 
 
-Definition at line 1674 of file Telements.\+h.
+Definition at line 1697 of file Telements.\+h.
 
 
 
@@ -360,7 +358,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8
 
 
 
-Definition at line 1884 of file Telements.\+h.
+Definition at line 1923 of file Telements.\+h.
 
 
 
@@ -383,7 +381,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a06d32c85753a1e3
 
 
 
-Definition at line 1679 of file Telements.\+h.
+Definition at line 1705 of file Telements.\+h.
 
 
 
@@ -406,7 +404,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa1e11deffc8ee67
 
 
 
-Definition at line 1688 of file Telements.\+h.
+Definition at line 1717 of file Telements.\+h.
 
 
 
@@ -433,7 +431,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLi
 
 
 
-Definition at line 1613 of file Telements.\+h.
+Definition at line 1616 of file Telements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_acf3bfd1c5a6462aa9555bc8451914e63}\label{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_acf3bfd1c5a6462aa9555bc8451914e63}} 
 \index{oomph::TElement$<$ 2, NNODE\_1D $>$@{oomph::TElement$<$ 2, NNODE\_1D $>$}!output@{output}}
@@ -456,7 +454,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLi
 
 
 
-Definition at line 545 of file Telements.\+cc.
+Definition at line 538 of file Telements.\+cc.
 
 
 
@@ -483,7 +481,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLi
 
 
 
-Definition at line 556 of file Telements.\+cc.
+Definition at line 548 of file Telements.\+cc.
 
 
 
@@ -510,7 +508,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLi
 
 
 
-Definition at line 510 of file Telements.\+cc.
+Definition at line 504 of file Telements.\+cc.
 
 
 
@@ -537,7 +535,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLi
 
 
 
-Definition at line 498 of file Telements.\+cc.
+Definition at line 493 of file Telements.\+cc.
 
 
 
@@ -560,7 +558,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a64adbe935692713
 
 
 
-Definition at line 1671 of file Telements.\+h.
+Definition at line 1691 of file Telements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a16749c4131f12c3723eb28a201370768}\label{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a16749c4131f12c3723eb28a201370768}} 
 \index{oomph::TElement$<$ 2, NNODE\_1D $>$@{oomph::TElement$<$ 2, NNODE\_1D $>$}!s\_min@{s\_min}}
@@ -579,7 +577,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a35f0803115b68bd
 
 
 
-Definition at line 1668 of file Telements.\+h.
+Definition at line 1685 of file Telements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a21c1b5f546026b5d45c61e25e803feb7}\label{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a21c1b5f546026b5d45c61e25e803feb7}} 
 \index{oomph::TElement$<$ 2, NNODE\_1D $>$@{oomph::TElement$<$ 2, NNODE\_1D $>$}!shape@{shape}}
@@ -598,7 +596,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line 1642 of file Telements.\+h.
+Definition at line 1648 of file Telements.\+h.
 
 
 
@@ -621,7 +619,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e
 
 
 
-Definition at line 1813 of file Telements.\+h.
+Definition at line 1845 of file Telements.\+h.
 
 
 
@@ -648,7 +646,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLi
 
 
 
-Definition at line 1623 of file Telements.\+h.
+Definition at line 1629 of file Telements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a33b8548c4cdd2c28f663d47a5e616487}\label{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a33b8548c4cdd2c28f663d47a5e616487}} 
 \index{oomph::TElement$<$ 2, NNODE\_1D $>$@{oomph::TElement$<$ 2, NNODE\_1D $>$}!write\_paraview\_offsets@{write\_paraview\_offsets}}
@@ -667,7 +665,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af11d35779224185
 
 
 
-Definition at line 1745 of file Telements.\+h.
+Definition at line 1776 of file Telements.\+h.
 
 
 
@@ -690,7 +688,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afed006dd5b9ab6b
 
 
 
-Definition at line 1698 of file Telements.\+h.
+Definition at line 1730 of file Telements.\+h.
 
 
 
@@ -713,7 +711,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a68f0f8dc76f04e7
 
 
 
-Definition at line 1730 of file Telements.\+h.
+Definition at line 1761 of file Telements.\+h.
 
 
 
@@ -736,7 +734,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a03e50fc04226b7f
 
 
 
-Definition at line 1857 of file Telements.\+h.
+Definition at line 1891 of file Telements.\+h.
 
 
 
@@ -759,7 +757,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20
 
 
 
-Definition at line 1827 of file Telements.\+h.
+Definition at line 1862 of file Telements.\+h.
 
 
 
@@ -781,7 +779,7 @@ Default integration rule\+: Gaussian integration of same \textquotesingle{}order
 
 
 
-Definition at line 1530 of file Telements.\+h.
+Definition at line 1533 of file Telements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a75b99450e2a11a5d6723f86defde1cc0}\label{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a75b99450e2a11a5d6723f86defde1cc0}} 
 \index{oomph::TElement$<$ 2, NNODE\_1D $>$@{oomph::TElement$<$ 2, NNODE\_1D $>$}!Node\_on\_face@{Node\_on\_face}}
@@ -796,7 +794,7 @@ Nodal translation scheme for use when generating face elements.
 
 
 
-Definition at line 1524 of file Telements.\+h.
+Definition at line 1526 of file Telements.\+h.
 
 
 

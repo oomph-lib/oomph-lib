@@ -227,7 +227,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>A Class for shape functions. In simple cases, the shape functions have only one index that can be thought of as corresponding to the nodal points. In general, however, when quantities and their gradients are interpolated separately, the shape function have two indices: one corresponding to the nodal points, and the other to the "type" of quantity being interpolated: function, derivative, &amp;c The second index can also represent the vector coordinate for vector-valued (Nedelec) shape functions.</p>
 <p>The implementation of <a class="el" href="classoomph_1_1Shape.html">Shape</a> functions is designed to permit fast copying of entire sets of values by resetting the internal pointer to the data, Psi; functionality that is required, for example, when setting the test functions in Galerkin elements and when reading pre-computed values of the shape functions. In general, we cannot know at construction time whether the pointer to the values will be reset or not and, therefore, whether the storage for values should be allocated by the object. We choose to allocate storage on construction and store an additional pointer Allocated_data that <b>always</b> addresses the storage allocated by the object. If the Psi pointer is reset then this storage will be "wasted", but only for the lifetime of the object. The cost for non-copied <a class="el" href="classoomph_1_1Shape.html">Shape</a> functions is one additional pointer. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00077">77</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00075">75</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aedb62dd7998071721057eab955ecc1f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aedb62dd7998071721057eab955ecc1f9">&#9670;&nbsp;</a></span>Shape() <span class="overload">[1/4]</span></h2>
@@ -255,9 +255,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Constructor for a single-index set of shape functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00124">124</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00119">119</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="shape_8h_source.html#l00089">Allocated_storage</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::N</a>, and <a class="el" href="shape_8h_source.html#l00084">Psi</a>.</p>
+<p class="reference">References <a class="el" href="shape_8h_source.html#l00086">Allocated_storage</a>, <a class="el" href="quadtree_8h_source.html#l00060">oomph::QuadTreeNames::N</a>, and <a class="el" href="shape_8h_source.html#l00081">Psi</a>.</p>
 
 </div>
 </div>
@@ -297,9 +297,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Constructor for a two-index set of shape functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00128">128</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00126">126</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="shape_8h_source.html#l00089">Allocated_storage</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::N</a>, and <a class="el" href="shape_8h_source.html#l00084">Psi</a>.</p>
+<p class="reference">References <a class="el" href="shape_8h_source.html#l00086">Allocated_storage</a>, <a class="el" href="quadtree_8h_source.html#l00060">oomph::QuadTreeNames::N</a>, and <a class="el" href="shape_8h_source.html#l00081">Psi</a>.</p>
 
 </div>
 </div>
@@ -329,9 +329,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00132">132</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00133">133</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -359,7 +359,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Default constructor - just assigns a null pointers and zero index sizes. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00136">136</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00140">140</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
 </div>
 </div>
@@ -388,9 +388,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Destructor, clear up the memory allocated by the object. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00186">186</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00185">185</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="shape_8h_source.html#l00089">Allocated_storage</a>.</p>
+<p class="reference">References <a class="el" href="shape_8h_source.html#l00086">Allocated_storage</a>.</p>
 
 </div>
 </div>
@@ -420,11 +420,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Return the range of index 1 of the shape function object. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00258">258</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00262">262</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="shape_8h_source.html#l00092">Index1</a>.</p>
+<p class="reference">References <a class="el" href="shape_8h_source.html#l00089">Index1</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="interface__elements_8cc_source.html#l00759">oomph::LineDerivatives::compute_surface_derivatives()</a>, <a class="el" href="interface__elements_8cc_source.html#l00799">oomph::AxisymmetricDerivatives::compute_surface_derivatives()</a>, <a class="el" href="interface__elements_8cc_source.html#l00847">oomph::SurfaceDerivatives::compute_surface_derivatives()</a>, <a class="el" href="shell__elements_8h_source.html#l00675">oomph::ClampedHermiteShellBoundaryConditionElement::dshape_local()</a>, and <a class="el" href="shell__elements_8h_source.html#l00657">oomph::ClampedHermiteShellBoundaryConditionElement::shape()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="interface__elements_8cc_source.html#l00757">oomph::LineDerivatives::compute_surface_derivatives()</a>, <a class="el" href="interface__elements_8cc_source.html#l00798">oomph::AxisymmetricDerivatives::compute_surface_derivatives()</a>, <a class="el" href="interface__elements_8cc_source.html#l00847">oomph::SurfaceDerivatives::compute_surface_derivatives()</a>, <a class="el" href="shell__elements_8h_source.html#l00700">oomph::ClampedHermiteShellBoundaryConditionElement::dshape_local()</a>, and <a class="el" href="shell__elements_8h_source.html#l00682">oomph::ClampedHermiteShellBoundaryConditionElement::shape()</a>.</p>
 
 </div>
 </div>
@@ -453,11 +453,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Return the range of index 2 of the shape function object. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00261">261</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00268">268</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="shape_8h_source.html#l00095">Index2</a>.</p>
+<p class="reference">References <a class="el" href="shape_8h_source.html#l00092">Index2</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shell__elements_8h_source.html#l00675">oomph::ClampedHermiteShellBoundaryConditionElement::dshape_local()</a>, <a class="el" href="Tdarcy__elements_8h_source.html#l00333">oomph::TRaviartThomasDarcyElement&lt; ORDER &gt;::scale_basis()</a>, <a class="el" href="Tporoelasticity__elements_8h_source.html#l00436">oomph::TPoroelasticityElement&lt; ORDER &gt;::scale_basis()</a>, <a class="el" href="Taxisym__poroelasticity__elements_8h_source.html#l00573">oomph::TAxisymmetricPoroelasticityElement&lt; ORDER &gt;::scale_basis()</a>, and <a class="el" href="shell__elements_8h_source.html#l00657">oomph::ClampedHermiteShellBoundaryConditionElement::shape()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shell__elements_8h_source.html#l00700">oomph::ClampedHermiteShellBoundaryConditionElement::dshape_local()</a>, <a class="el" href="Tdarcy__elements_8h_source.html#l00325">oomph::TRaviartThomasDarcyElement&lt; ORDER &gt;::scale_basis()</a>, <a class="el" href="Tporoelasticity__elements_8h_source.html#l00422">oomph::TPoroelasticityElement&lt; ORDER &gt;::scale_basis()</a>, <a class="el" href="Taxisym__poroelasticity__elements_8h_source.html#l00555">oomph::TAxisymmetricPoroelasticityElement&lt; ORDER &gt;::scale_basis()</a>, and <a class="el" href="shell__elements_8h_source.html#l00682">oomph::ClampedHermiteShellBoundaryConditionElement::shape()</a>.</p>
 
 </div>
 </div>
@@ -487,9 +487,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Overload the round bracket operator to provide access to values. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00221">221</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00225">225</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00095">Index2</a>, <a class="el" href="shape_8h_source.html#l00084">Psi</a>, and <a class="el" href="shape_8h_source.html#l00098">range_check()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00092">Index2</a>, <a class="el" href="shape_8h_source.html#l00081">Psi</a>, and <a class="el" href="shape_8h_source.html#l00095">range_check()</a>.</p>
 
 </div>
 </div>
@@ -519,9 +519,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Overload the round bracket operator (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00230">230</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00234">234</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00095">Index2</a>, <a class="el" href="shape_8h_source.html#l00084">Psi</a>, and <a class="el" href="shape_8h_source.html#l00098">range_check()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00092">Index2</a>, <a class="el" href="shape_8h_source.html#l00081">Psi</a>, and <a class="el" href="shape_8h_source.html#l00095">range_check()</a>.</p>
 
 </div>
 </div>
@@ -561,9 +561,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Overload the round bracket operator, allowing for two indices. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00239">239</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00243">243</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00095">Index2</a>, <a class="el" href="shape_8h_source.html#l00084">Psi</a>, and <a class="el" href="shape_8h_source.html#l00098">range_check()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00092">Index2</a>, <a class="el" href="shape_8h_source.html#l00081">Psi</a>, and <a class="el" href="shape_8h_source.html#l00095">range_check()</a>.</p>
 
 </div>
 </div>
@@ -603,9 +603,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Overload the round bracket operator, allowing for two indices (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00249">249</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00253">253</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00095">Index2</a>, <a class="el" href="shape_8h_source.html#l00084">Psi</a>, and <a class="el" href="shape_8h_source.html#l00098">range_check()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00092">Index2</a>, <a class="el" href="shape_8h_source.html#l00081">Psi</a>, and <a class="el" href="shape_8h_source.html#l00095">range_check()</a>.</p>
 
 </div>
 </div>
@@ -634,9 +634,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The assignment operator does a shallow copy (resets the pointer to the data) </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00140">140</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00144">144</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="shape_8h_source.html#l00092">Index1</a>, <a class="el" href="shape_8h_source.html#l00095">Index2</a>, <a class="el" href="shape_8h_source.html#l00084">Psi</a>, and <a class="el" href="shape_8h_source.html#l01183">oomph::OneDimHermite::shape()</a>.</p>
+<p class="reference">References <a class="el" href="shape_8h_source.html#l00089">Index1</a>, <a class="el" href="shape_8h_source.html#l00092">Index2</a>, <a class="el" href="shape_8h_source.html#l00081">Psi</a>, and <a class="el" href="shape_8h_source.html#l01203">oomph::OneDimHermite::shape()</a>.</p>
 
 </div>
 </div>
@@ -665,9 +665,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The assignment operator does a shallow copy (resets the pointer to the data) </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00163">163</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00165">165</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="shape_8h_source.html#l00092">Index1</a>, <a class="el" href="shape_8h_source.html#l00095">Index2</a>, and <a class="el" href="shape_8h_source.html#l00084">Psi</a>.</p>
+<p class="reference">References <a class="el" href="shape_8h_source.html#l00089">Index1</a>, <a class="el" href="shape_8h_source.html#l00092">Index2</a>, and <a class="el" href="shape_8h_source.html#l00081">Psi</a>.</p>
 
 </div>
 </div>
@@ -697,9 +697,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Overload the bracket operator to provide access to values. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00203">203</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00207">207</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00095">Index2</a>, <a class="el" href="shape_8h_source.html#l00084">Psi</a>, and <a class="el" href="shape_8h_source.html#l00098">range_check()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00092">Index2</a>, <a class="el" href="shape_8h_source.html#l00081">Psi</a>, and <a class="el" href="shape_8h_source.html#l00095">range_check()</a>.</p>
 
 </div>
 </div>
@@ -729,9 +729,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Overload the bracket operator (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00212">212</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00216">216</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00095">Index2</a>, <a class="el" href="shape_8h_source.html#l00084">Psi</a>, and <a class="el" href="shape_8h_source.html#l00098">range_check()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00092">Index2</a>, <a class="el" href="shape_8h_source.html#l00081">Psi</a>, and <a class="el" href="shape_8h_source.html#l00095">range_check()</a>.</p>
 
 </div>
 </div>
@@ -771,11 +771,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Private function that checks whether the index is in range. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00098">98</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00095">95</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00092">Index1</a>, and <a class="el" href="shape_8h_source.html#l00095">Index2</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00089">Index1</a>, and <a class="el" href="shape_8h_source.html#l00092">Index2</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00221">operator()()</a>, and <a class="el" href="shape_8h_source.html#l00203">operator[]()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00225">operator()()</a>, and <a class="el" href="shape_8h_source.html#l00207">operator[]()</a>.</p>
 
 </div>
 </div>
@@ -815,9 +815,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Change the size of the storage. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00189">189</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00192">192</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">References <a class="el" href="shape_8h_source.html#l00089">Allocated_storage</a>, <a class="el" href="shape_8h_source.html#l00092">Index1</a>, <a class="el" href="shape_8h_source.html#l00095">Index2</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::N</a>, and <a class="el" href="shape_8h_source.html#l00084">Psi</a>.</p>
+<p class="reference">References <a class="el" href="shape_8h_source.html#l00086">Allocated_storage</a>, <a class="el" href="shape_8h_source.html#l00089">Index1</a>, <a class="el" href="shape_8h_source.html#l00092">Index2</a>, <a class="el" href="quadtree_8h_source.html#l00060">oomph::QuadTreeNames::N</a>, and <a class="el" href="shape_8h_source.html#l00081">Psi</a>.</p>
 
 </div>
 </div>
@@ -844,9 +844,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer that addresses the storage allocated by the object on construction. This will be the same as Psi if the object is not copied. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00089">89</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00086">86</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00189">resize()</a>, <a class="el" href="shape_8h_source.html#l00124">Shape()</a>, <a class="el" href="shape_8h_source.html#l00186">~Shape()</a>, and <a class="el" href="shape_8h_source.html#l00528">oomph::ShapeWithDeepCopy::~ShapeWithDeepCopy()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00192">resize()</a>, <a class="el" href="shape_8h_source.html#l00119">Shape()</a>, <a class="el" href="shape_8h_source.html#l00185">~Shape()</a>, and <a class="el" href="shape_8h_source.html#l00553">oomph::ShapeWithDeepCopy::~ShapeWithDeepCopy()</a>.</p>
 
 </div>
 </div>
@@ -872,9 +872,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Size of the first index of the shape function. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00092">92</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00089">89</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00258">nindex1()</a>, <a class="el" href="shape_8h_source.html#l00140">operator=()</a>, <a class="el" href="shape_8h_source.html#l00098">range_check()</a>, <a class="el" href="shape_8h_source.html#l00189">resize()</a>, and <a class="el" href="shape_8h_source.html#l00514">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00262">nindex1()</a>, <a class="el" href="shape_8h_source.html#l00144">operator=()</a>, <a class="el" href="shape_8h_source.html#l00095">range_check()</a>, <a class="el" href="shape_8h_source.html#l00192">resize()</a>, and <a class="el" href="shape_8h_source.html#l00537">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy()</a>.</p>
 
 </div>
 </div>
@@ -900,9 +900,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Size of the second index of the shape function. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00095">95</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00092">92</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00261">nindex2()</a>, <a class="el" href="shape_8h_source.html#l00221">operator()()</a>, <a class="el" href="shape_8h_source.html#l00140">operator=()</a>, <a class="el" href="shape_8h_source.html#l00203">operator[]()</a>, <a class="el" href="shape_8h_source.html#l00098">range_check()</a>, <a class="el" href="shape_8h_source.html#l00189">resize()</a>, and <a class="el" href="shape_8h_source.html#l00514">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00268">nindex2()</a>, <a class="el" href="shape_8h_source.html#l00225">operator()()</a>, <a class="el" href="shape_8h_source.html#l00144">operator=()</a>, <a class="el" href="shape_8h_source.html#l00207">operator[]()</a>, <a class="el" href="shape_8h_source.html#l00095">range_check()</a>, <a class="el" href="shape_8h_source.html#l00192">resize()</a>, and <a class="el" href="shape_8h_source.html#l00537">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy()</a>.</p>
 
 </div>
 </div>
@@ -928,9 +928,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer that addresses the storage that will be used to read and set the shape functions. The shape functions are packed into a flat array of doubles. </p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00084">84</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00081">81</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00221">operator()()</a>, <a class="el" href="shape_8h_source.html#l00140">operator=()</a>, <a class="el" href="shape_8h_source.html#l00203">operator[]()</a>, <a class="el" href="shape_8h_source.html#l00189">resize()</a>, <a class="el" href="shape_8h_source.html#l00124">Shape()</a>, and <a class="el" href="shape_8h_source.html#l00514">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="shape_8h_source.html#l00225">operator()()</a>, <a class="el" href="shape_8h_source.html#l00144">operator=()</a>, <a class="el" href="shape_8h_source.html#l00207">operator[]()</a>, <a class="el" href="shape_8h_source.html#l00192">resize()</a>, <a class="el" href="shape_8h_source.html#l00119">Shape()</a>, and <a class="el" href="shape_8h_source.html#l00537">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy()</a>.</p>
 
 </div>
 </div>
@@ -965,7 +965,7 @@ Protected Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:57:24
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:06
         </div>
       </div>
     </footer>

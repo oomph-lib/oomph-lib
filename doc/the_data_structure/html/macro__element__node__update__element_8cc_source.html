@@ -129,145 +129,141 @@ $(function() {
 <div class="title">macro_element_node_update_element.cc</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="macro__element__node__update__element_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<a href="macro__element__node__update__element_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// LIC//====================================================================</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="macro__element__node__update__element_8h.html">macro_element_node_update_element.h</a>&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span><span class="comment">// MacroElementNodeUpdateNodes </span><span class="comment"></span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/// Excute the update function: Update the current (and if </span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/// update_all_time_levels_for_new_node==true also the previous) </span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">/// nodal position. Also update the current nodal values if</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/// an auxiliary update function is defined.</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">/// Note: Updating of previous positions is only required (and should</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/// only be performed for) newly created MacroElementNodeUpdateNodes </span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/// i.e. when this function is called from... </span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/// If a node is hanging, its position is determined via its hanging</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/// node constraints after updating the position of its master nodes.</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classoomph_1_1MacroElementNodeUpdateNode.html#a02adaf04277672fd0e1be5296e6ed6cf">   50</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#a02adaf04277672fd0e1be5296e6ed6cf">MacroElementNodeUpdateNode::node_update</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                             update_all_time_levels_for_new_node)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; <span class="comment">// Number of time levels that need to be updated</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; <span class="keywordtype">unsigned</span> ntime;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; <span class="keywordflow">if</span> (update_all_time_levels_for_new_node)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   <span class="comment">//Present value plus the previous values</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;   ntime = 1 + <a class="code" href="classoomph_1_1Node.html#a8cf734873ab29a412289f8ac2d3be348">Position_time_stepper_pt</a>-&gt;<a class="code" href="classoomph_1_1TimeStepper.html#a0f38713ed304c18d9f7b5cf8131664c1">nprev_values</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;   <span class="comment">//Just the present value</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   ntime=1;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; <span class="comment">// Is it a hanging node? </span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1Node.html#af0e6237dfafad62cf427ff5013ddcfef">is_hanging</a>())</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  {     </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;   </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;   <span class="comment">// Loop over all master nodes and update their position</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   <span class="comment">// That&#39;s all we need to update the position of hanging nodes!</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;   <span class="comment">// (Recall that for hanging nodes Node::x(...) is not</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;   <span class="comment">// guaranteed to be kept up-to-date; the (constrained!) nodal </span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;   <span class="comment">// position of hanging nodes must be determined via</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;   <span class="comment">// Node::position() which determines the position </span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;   <span class="comment">// via the hanging node constraints from the position of</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;   <span class="comment">// the master nodes)</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;   <span class="keywordtype">unsigned</span> nmaster=<a class="code" href="classoomph_1_1Node.html#ab7b94371e9a8b62fe9a5cc7a03113ad9">hanging_pt</a>()-&gt;<a class="code" href="classoomph_1_1HangInfo.html#aa9c1130b58db2ff6d5eee4f923ba365c">nmaster</a>();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> imaster=0;imaster&lt;nmaster;imaster++)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;     <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html">MacroElementNodeUpdateNode</a>*<span class="keyword">&gt;</span>(<a class="code" href="classoomph_1_1Node.html#ab7b94371e9a8b62fe9a5cc7a03113ad9">hanging_pt</a>()-&gt;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                                          master_node_pt(imaster))</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      -&gt;<a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#a02adaf04277672fd0e1be5296e6ed6cf">node_update</a>(update_all_time_levels_for_new_node);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; <span class="comment">// Node isn&#39;t hanging --&gt; update it directly</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;   <span class="comment">// If no update element is defined, keep the nodal positions where</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;   <span class="comment">// they were (i.e. don&#39;t do anything), else update</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;   <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#acf9d92fa04ab826b442a25625b823e9f">Node_update_element_pt</a>!=0)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {       </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;     <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;     <span class="keywordtype">unsigned</span> n_dim=<a class="code" href="classoomph_1_1Node.html#a786c96a8e46eb27a03b2b31f629d41b3">ndim</a>();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;     <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x_new(n_dim); </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;     </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;     <span class="comment">// Loop over time levels</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>=0;<a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>&lt;ntime;<a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>++)</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      {      </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;       <span class="comment">//Update via macro element representation</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;       <a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#acf9d92fa04ab826b442a25625b823e9f">Node_update_element_pt</a>-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a6fc14cbf4e1d031acbc59b415cefa1ca">get_x</a>(<a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>,<a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#a7fce23ebb05f63487c89cdc8e8dbb5ac">S_in_node_update_element</a>,x_new);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;       <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;n_dim;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;         <a class="code" href="classoomph_1_1Node.html#a056f8e82da938369cd38541c5cdc598a">x</a>(<a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>,<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)=x_new[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; <span class="comment">// Perform auxiliary update of function values? Node passes itself</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; <span class="comment">// to this function so its position etc. is available to the auxiliary</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; <span class="comment">// node update function.</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1Node.html#a8bfd206ba303b6d446f59974719b24b6">Aux_node_update_fct_pt</a>!=0)</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;   <a class="code" href="classoomph_1_1Node.html#a8bfd206ba303b6d446f59974719b24b6">Aux_node_update_fct_pt</a>(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  ///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  ///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span>  <span class="comment">// MacroElementNodeUpdateNodes</span><span class="comment"></span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  ///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">  ///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">  /// Excute the update function: Update the current (and if</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">  /// update_all_time_levels_for_new_node==true also the previous)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">  /// nodal position. Also update the current nodal values if</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">  /// an auxiliary update function is defined.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">  /// Note: Updating of previous positions is only required (and should</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">  /// only be performed for) newly created MacroElementNodeUpdateNodes</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">  /// i.e. when this function is called from...</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">  /// If a node is hanging, its position is determined via its hanging</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">  /// node constraints after updating the position of its master nodes.</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span>  <span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classoomph_1_1MacroElementNodeUpdateNode.html#a02adaf04277672fd0e1be5296e6ed6cf">   48</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#a02adaf04277672fd0e1be5296e6ed6cf">MacroElementNodeUpdateNode::node_update</a>(</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; update_all_time_levels_for_new_node)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// Number of time levels that need to be updated</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">unsigned</span> ntime;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> (update_all_time_levels_for_new_node)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="comment">// Present value plus the previous values</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      ntime = 1 + <a class="code" href="classoomph_1_1Node.html#a8cf734873ab29a412289f8ac2d3be348">Position_time_stepper_pt</a>-&gt;<a class="code" href="classoomph_1_1TimeStepper.html#a0f38713ed304c18d9f7b5cf8131664c1">nprev_values</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="comment">// Just the present value</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      ntime = 1;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// Is it a hanging node?</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1Node.html#af0e6237dfafad62cf427ff5013ddcfef">is_hanging</a>())</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="comment">// Loop over all master nodes and update their position</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="comment">// That&#39;s all we need to update the position of hanging nodes!</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="comment">// (Recall that for hanging nodes Node::x(...) is not</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="comment">// guaranteed to be kept up-to-date; the (constrained!) nodal</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="comment">// position of hanging nodes must be determined via</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="comment">// Node::position() which determines the position</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <span class="comment">// via the hanging node constraints from the position of</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="comment">// the master nodes)</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordtype">unsigned</span> nmaster = <a class="code" href="classoomph_1_1Node.html#a09e3993064a98e7986f392fd5b239603">hanging_pt</a>()-&gt;<a class="code" href="classoomph_1_1HangInfo.html#aa9c1130b58db2ff6d5eee4f923ba365c">nmaster</a>();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> imaster = 0; imaster &lt; nmaster; imaster++)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html">MacroElementNodeUpdateNode</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;          <a class="code" href="classoomph_1_1Node.html#a09e3993064a98e7986f392fd5b239603">hanging_pt</a>()-&gt;<a class="code" href="classoomph_1_1HangInfo.html#a4983192a13d2ce3d12a454bd895b16e7">master_node_pt</a>(imaster))</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;          -&gt;<a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#a02adaf04277672fd0e1be5296e6ed6cf">node_update</a>(update_all_time_levels_for_new_node);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// Node isn&#39;t hanging --&gt; update it directly</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="comment">// If no update element is defined, keep the nodal positions where</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="comment">// they were (i.e. don&#39;t do anything), else update</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#acf9d92fa04ab826b442a25625b823e9f">Node_update_element_pt</a> != 0)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="comment">// Vector of local coordinates</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordtype">unsigned</span> n_dim = <a class="code" href="classoomph_1_1Node.html#a786c96a8e46eb27a03b2b31f629d41b3">ndim</a>();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x_new(n_dim);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="comment">// Loop over time levels</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a> = 0; <a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a> &lt; ntime; <a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>++)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;          <span class="comment">// Update via macro element representation</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;          <a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#acf9d92fa04ab826b442a25625b823e9f">Node_update_element_pt</a>-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a6fc14cbf4e1d031acbc59b415cefa1ca">get_x</a>(<a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="code" href="classoomph_1_1MacroElementNodeUpdateNode.html#a7fce23ebb05f63487c89cdc8e8dbb5ac">S_in_node_update_element</a>, x_new);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; n_dim; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;          {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <a class="code" href="classoomph_1_1Node.html#a056f8e82da938369cd38541c5cdc598a">x</a>(<a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) = x_new[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;          }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">// Perform auxiliary update of function values? Node passes itself</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="comment">// to this function so its position etc. is available to the auxiliary</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="comment">// node update function.</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1Node.html#a8bfd206ba303b6d446f59974719b24b6">Aux_node_update_fct_pt</a> != 0)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      <a class="code" href="classoomph_1_1Node.html#a8bfd206ba303b6d446f59974719b24b6">Aux_node_update_fct_pt</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;} <span class="comment">// namespace oomph</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateNode_html_a02adaf04277672fd0e1be5296e6ed6cf"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateNode.html#a02adaf04277672fd0e1be5296e6ed6cf">oomph::MacroElementNodeUpdateNode::node_update</a></div><div class="ttdeci">void node_update(const bool &amp;update_all_time_levels_for_new_node=false)</div><div class="ttdoc">Update the current nodal position. If required, perform the auxiliary update of nodal values....</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__node__update__element_8cc_source.html#l00050">macro_element_node_update_element.cc:50</a></div></div>
-<div class="ttc" id="aclassoomph_1_1HangInfo_html_aa9c1130b58db2ff6d5eee4f923ba365c"><div class="ttname"><a href="classoomph_1_1HangInfo.html#aa9c1130b58db2ff6d5eee4f923ba365c">oomph::HangInfo::nmaster</a></div><div class="ttdeci">unsigned nmaster() const</div><div class="ttdoc">Return the number of master nodes.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00728">nodes.h:728</a></div></div>
-<div class="ttc" id="aclassoomph_1_1Node_html_a8cf734873ab29a412289f8ac2d3be348"><div class="ttname"><a href="classoomph_1_1Node.html#a8cf734873ab29a412289f8ac2d3be348">oomph::Node::Position_time_stepper_pt</a></div><div class="ttdeci">TimeStepper * Position_time_stepper_pt</div><div class="ttdoc">Pointer to the timestepper associated with the position data.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00876">nodes.h:876</a></div></div>
-<div class="ttc" id="aclassoomph_1_1Node_html_ab7b94371e9a8b62fe9a5cc7a03113ad9"><div class="ttname"><a href="classoomph_1_1Node.html#ab7b94371e9a8b62fe9a5cc7a03113ad9">oomph::Node::hanging_pt</a></div><div class="ttdeci">HangInfo *const &amp; hanging_pt() const</div><div class="ttdoc">Return pointer to hanging node data (this refers to the geometric hanging node status) (const version...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01143">nodes.h:1143</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a6fc14cbf4e1d031acbc59b415cefa1ca"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a6fc14cbf4e1d031acbc59b415cefa1ca">oomph::FiniteElement::get_x</a></div><div class="ttdeci">void get_x(const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;x) const</div><div class="ttdoc">Global coordinates as function of local coordinates. Either via FE representation or via macro-elemen...</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01854">elements.h:1854</a></div></div>
-<div class="ttc" id="aclassoomph_1_1Node_html_a8bfd206ba303b6d446f59974719b24b6"><div class="ttname"><a href="classoomph_1_1Node.html#a8bfd206ba303b6d446f59974719b24b6">oomph::Node::Aux_node_update_fct_pt</a></div><div class="ttdeci">AuxNodeUpdateFctPt Aux_node_update_fct_pt</div><div class="ttdoc">Pointer to auxiliary update function – this can be used to update any nodal values following the upda...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00908">nodes.h:908</a></div></div>
+<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateNode_html_a02adaf04277672fd0e1be5296e6ed6cf"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateNode.html#a02adaf04277672fd0e1be5296e6ed6cf">oomph::MacroElementNodeUpdateNode::node_update</a></div><div class="ttdeci">void node_update(const bool &amp;update_all_time_levels_for_new_node=false)</div><div class="ttdoc">Update the current nodal position. If required, perform the auxiliary update of nodal values....</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__node__update__element_8cc_source.html#l00048">macro_element_node_update_element.cc:48</a></div></div>
+<div class="ttc" id="aclassoomph_1_1HangInfo_html_aa9c1130b58db2ff6d5eee4f923ba365c"><div class="ttname"><a href="classoomph_1_1HangInfo.html#aa9c1130b58db2ff6d5eee4f923ba365c">oomph::HangInfo::nmaster</a></div><div class="ttdeci">unsigned nmaster() const</div><div class="ttdoc">Return the number of master nodes.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00803">nodes.h:803</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a8cf734873ab29a412289f8ac2d3be348"><div class="ttname"><a href="classoomph_1_1Node.html#a8cf734873ab29a412289f8ac2d3be348">oomph::Node::Position_time_stepper_pt</a></div><div class="ttdeci">TimeStepper * Position_time_stepper_pt</div><div class="ttdoc">Pointer to the timestepper associated with the position data.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00951">nodes.h:951</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a6fc14cbf4e1d031acbc59b415cefa1ca"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a6fc14cbf4e1d031acbc59b415cefa1ca">oomph::FiniteElement::get_x</a></div><div class="ttdeci">void get_x(const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;x) const</div><div class="ttdoc">Global coordinates as function of local coordinates. Either via FE representation or via macro-elemen...</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01902">elements.h:1902</a></div></div>
+<div class="ttc" id="aclassoomph_1_1HangInfo_html_a4983192a13d2ce3d12a454bd895b16e7"><div class="ttname"><a href="classoomph_1_1HangInfo.html#a4983192a13d2ce3d12a454bd895b16e7">oomph::HangInfo::master_node_pt</a></div><div class="ttdeci">Node *const  &amp; master_node_pt(const unsigned &amp;i) const</div><div class="ttdoc">Return a pointer to the i-th master node.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00809">nodes.h:809</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a8bfd206ba303b6d446f59974719b24b6"><div class="ttname"><a href="classoomph_1_1Node.html#a8bfd206ba303b6d446f59974719b24b6">oomph::Node::Aux_node_update_fct_pt</a></div><div class="ttdeci">AuxNodeUpdateFctPt Aux_node_update_fct_pt</div><div class="ttdoc">Pointer to auxiliary update function – this can be used to update any nodal values following the upda...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00986">nodes.h:986</a></div></div>
 <div class="ttc" id="acfortran_8h_html_af6f0bd3dc13317f895c91323c25c2b8f"><div class="ttname"><a href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a></div><div class="ttdeci">char t</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
-<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateNode_html_a7fce23ebb05f63487c89cdc8e8dbb5ac"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateNode.html#a7fce23ebb05f63487c89cdc8e8dbb5ac">oomph::MacroElementNodeUpdateNode::S_in_node_update_element</a></div><div class="ttdeci">Vector&lt; double &gt; S_in_node_update_element</div><div class="ttdoc">Vector containing the node's local coordinates in node update element.</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__node__update__element_8h_source.html#l00184">macro_element_node_update_element.h:184</a></div></div>
-<div class="ttc" id="aclassoomph_1_1Node_html_a056f8e82da938369cd38541c5cdc598a"><div class="ttname"><a href="classoomph_1_1Node.html#a056f8e82da938369cd38541c5cdc598a">oomph::Node::x</a></div><div class="ttdeci">double &amp; x(const unsigned &amp;i)</div><div class="ttdoc">Return the i-th nodal coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00990">nodes.h:990</a></div></div>
-<div class="ttc" id="aclassoomph_1_1Node_html_af0e6237dfafad62cf427ff5013ddcfef"><div class="ttname"><a href="classoomph_1_1Node.html#af0e6237dfafad62cf427ff5013ddcfef">oomph::Node::is_hanging</a></div><div class="ttdeci">bool is_hanging() const</div><div class="ttdoc">Test whether the node is geometrically hanging.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01202">nodes.h:1202</a></div></div>
+<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateNode_html_a7fce23ebb05f63487c89cdc8e8dbb5ac"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateNode.html#a7fce23ebb05f63487c89cdc8e8dbb5ac">oomph::MacroElementNodeUpdateNode::S_in_node_update_element</a></div><div class="ttdeci">Vector&lt; double &gt; S_in_node_update_element</div><div class="ttdoc">Vector containing the node's local coordinates in node update element.</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__node__update__element_8h_source.html#l00185">macro_element_node_update_element.h:185</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a056f8e82da938369cd38541c5cdc598a"><div class="ttname"><a href="classoomph_1_1Node.html#a056f8e82da938369cd38541c5cdc598a">oomph::Node::x</a></div><div class="ttdeci">double &amp; x(const unsigned &amp;i)</div><div class="ttdoc">Return the i-th nodal coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01085">nodes.h:1085</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_af0e6237dfafad62cf427ff5013ddcfef"><div class="ttname"><a href="classoomph_1_1Node.html#af0e6237dfafad62cf427ff5013ddcfef">oomph::Node::is_hanging</a></div><div class="ttdeci">bool is_hanging() const</div><div class="ttdoc">Test whether the node is geometrically hanging.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01310">nodes.h:1310</a></div></div>
 <div class="ttc" id="aclassoomph_1_1TimeStepper_html_a0f38713ed304c18d9f7b5cf8131664c1"><div class="ttname"><a href="classoomph_1_1TimeStepper.html#a0f38713ed304c18d9f7b5cf8131664c1">oomph::TimeStepper::nprev_values</a></div><div class="ttdeci">virtual unsigned nprev_values() const =0</div><div class="ttdoc">Number of previous values available: 0 for static, 1 for BDF&lt;1&gt;,...</div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
-<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateNode_html_acf9d92fa04ab826b442a25625b823e9f"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateNode.html#acf9d92fa04ab826b442a25625b823e9f">oomph::MacroElementNodeUpdateNode::Node_update_element_pt</a></div><div class="ttdeci">FiniteElement * Node_update_element_pt</div><div class="ttdoc">Pointer to finite element that performs the node update by referring to its macro-element representat...</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__node__update__element_8h_source.html#l00180">macro_element_node_update_element.h:180</a></div></div>
+<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateNode_html_acf9d92fa04ab826b442a25625b823e9f"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateNode.html#acf9d92fa04ab826b442a25625b823e9f">oomph::MacroElementNodeUpdateNode::Node_update_element_pt</a></div><div class="ttdeci">FiniteElement * Node_update_element_pt</div><div class="ttdoc">Pointer to finite element that performs the node update by referring to its macro-element representat...</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__node__update__element_8h_source.html#l00181">macro_element_node_update_element.h:181</a></div></div>
 <div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
-<div class="ttc" id="aclassoomph_1_1Node_html_a786c96a8e46eb27a03b2b31f629d41b3"><div class="ttname"><a href="classoomph_1_1Node.html#a786c96a8e46eb27a03b2b31f629d41b3">oomph::Node::ndim</a></div><div class="ttdeci">unsigned ndim() const</div><div class="ttdoc">Return (Eulerian) spatial dimension of the node.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00987">nodes.h:987</a></div></div>
-<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateNode_html"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateNode.html">oomph::MacroElementNodeUpdateNode</a></div><div class="ttdef"><b>Definition:</b> <a href="macro__element__node__update__element_8h_source.html#l00050">macro_element_node_update_element.h:50</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a786c96a8e46eb27a03b2b31f629d41b3"><div class="ttname"><a href="classoomph_1_1Node.html#a786c96a8e46eb27a03b2b31f629d41b3">oomph::Node::ndim</a></div><div class="ttdeci">unsigned ndim() const</div><div class="ttdoc">Return (Eulerian) spatial dimension of the node.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01079">nodes.h:1079</a></div></div>
+<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateNode_html"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateNode.html">oomph::MacroElementNodeUpdateNode</a></div><div class="ttdef"><b>Definition:</b> <a href="macro__element__node__update__element_8h_source.html#l00048">macro_element_node_update_element.h:48</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a09e3993064a98e7986f392fd5b239603"><div class="ttname"><a href="classoomph_1_1Node.html#a09e3993064a98e7986f392fd5b239603">oomph::Node::hanging_pt</a></div><div class="ttdeci">HangInfo *const  &amp; hanging_pt() const</div><div class="ttdoc">Return pointer to hanging node data (this refers to the geometric hanging node status) (const version...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01253">nodes.h:1253</a></div></div>
 <div class="ttc" id="amacro__element__node__update__element_8h_html"><div class="ttname"><a href="macro__element__node__update__element_8h.html">macro_element_node_update_element.h</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -296,7 +292,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:04
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:27
         </div>
       </div>
     </footer>

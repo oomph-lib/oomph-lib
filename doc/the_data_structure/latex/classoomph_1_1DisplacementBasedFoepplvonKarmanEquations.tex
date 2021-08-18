@@ -28,11 +28,11 @@ void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ac
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a475db5e6023c4f6e0cf190683f13d58d}{nu}} () const
 \begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_adea541527e99d02a0117f854d0561928}{nu\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9e5f014ce1bd5405f9fe2288d2cdf1e4}{nu\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ad8e7978589f1ddf2de86510969288f57}{eta}} () const
 \begin{DoxyCompactList}\small\item\em Eta. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab1d473f22df694550ded35e1879db49e}{eta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aec76fc8b86f8fab117fd464771b03716}{eta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to eta. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a85e8c68577eb3c8528269db180d8db84}{nodal\+\_\+index\+\_\+fvk}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}=0) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th unknown value is stored. The default value, i, is appropriate for single-\/physics problems. By default, these are\+: 0\+: w 1\+: laplacian w 2\+: u\+\_\+x 3\+: u\+\_\+y In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
@@ -77,8 +77,7 @@ void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9
 void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ae5b7e25d861df6134d1ea4457e6e1880}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Fill in the residuals with this element\textquotesingle{}s contribution. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aac329f225fd5f309b23da3299fefdec1}{interpolated\+\_\+w\+\_\+fvk}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, unsigned index=0) const
-\begin{DoxyCompactList}\small\item\em Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a3e1ad8befd0561258f86c8e97da30744}{self\+\_\+test}} ()
 \begin{DoxyCompactList}\small\item\em Self-\/test\+: Return 0 for OK. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a29d4c7f7789b70e49e6555971f6abc96}{use\+\_\+linear\+\_\+bending\+\_\+model}} ()
@@ -119,7 +118,7 @@ static double \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEqu
 \doxysubsection{Detailed Description}
 A class for all isoparametric elements that solve the Foeppl von Karman equations. \[ \nabla^4 w - \eta \frac{\partial}{\partial x_{\beta}} \left( \sigma^{\alpha \beta} \frac{\partial w}{\partial x_{\alpha}} \right) = p(x,y) \] and \[ \frac{\sigma^{\alpha \beta}}{\partial x_{\beta}} = \tau_\alpha \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line 63 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 61 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -136,7 +135,7 @@ Function pointer to pressure function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line 70 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 66 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab2c41b3ecc15b89802657c068ee3e1cc}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab2c41b3ecc15b89802657c068ee3e1cc}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!FoepplvonKarmanTractionFctPt@{FoepplvonKarmanTractionFctPt}}
@@ -150,7 +149,7 @@ Function pointer to traction function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line 75 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 71 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -167,7 +166,7 @@ Constructor (must initialise the Pressure\+\_\+fct\+\_\+pt and the Traction\+\_\
 
 
 
-Definition at line 81 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 77 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -185,7 +184,7 @@ Broken copy constructor.
 
 
 
-Definition at line 95 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 91 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -212,7 +211,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 238 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 229 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -234,7 +233,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 179 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 194 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a93b089c7109311817e2fbd7dfcdca1f2}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a93b089c7109311817e2fbd7dfcdca1f2}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!dshape\_and\_dtest\_eulerian\_at\_knot\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_fvk}}
@@ -280,7 +279,7 @@ Eta.
 
 
 
-Definition at line 113 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 116 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -290,11 +289,11 @@ References Eta\+\_\+pt.
 
 Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab1d473f22df694550ded35e1879db49e}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab1d473f22df694550ded35e1879db49e}} 
+\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aec76fc8b86f8fab117fd464771b03716}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aec76fc8b86f8fab117fd464771b03716}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!eta\_pt@{eta\_pt}}
 \index{eta\_pt@{eta\_pt}!oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{eta\_pt()}{eta\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -302,7 +301,7 @@ Pointer to eta.
 
 
 
-Definition at line 116 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 122 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -324,7 +323,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 435 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 464 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -346,7 +345,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 458 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 483 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -364,7 +363,7 @@ Get gradient of deflection\+: gradient\mbox{[}i\mbox{]} = dw/dx\+\_\+i.
 
 
 
-Definition at line 239 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 269 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -386,7 +385,7 @@ Get gradient of field\+: gradient\mbox{[}i\mbox{]} = d\mbox{[}.\mbox{]}/dx\+\_\+
 
 
 
-Definition at line 283 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 313 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -404,7 +403,7 @@ Get pressure term at (Eulerian) position x. This function is virtual to allow ov
 
 
 
-Definition at line 208 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 235 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -422,7 +421,7 @@ Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 Get the in-\/plane stress (sigma) as a fct of the pre=computed displcement derivatives 
 
-Definition at line 324 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 354 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -440,7 +439,7 @@ Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and get\+
 
 
 
-Definition at line 355 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 384 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -462,7 +461,7 @@ Get in-\/plane traction term at (Eulerian) position x.
 
 
 
-Definition at line 222 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 252 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -480,12 +479,11 @@ Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 
 
-Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index ~\newline
- 
+Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index. 
 
 
 
-Definition at line 650 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 671 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -507,7 +505,7 @@ Return the index at which the i-\/th unknown value is stored. The default value,
 
 
 
-Definition at line 128 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 137 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -529,7 +527,7 @@ Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 107 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 104 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -539,11 +537,11 @@ References Nu\+\_\+pt.
 
 Referenced by get\+\_\+sigma().
 
-\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_adea541527e99d02a0117f854d0561928}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_adea541527e99d02a0117f854d0561928}} 
+\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9e5f014ce1bd5405f9fe2288d2cdf1e4}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9e5f014ce1bd5405f9fe2288d2cdf1e4}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!nu\_pt@{nu\_pt}}
 \index{nu\_pt@{nu\_pt}!oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{nu\_pt()}{nu\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::nu\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::nu\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -569,7 +567,7 @@ Broken assignment operator.
 
 
 
-Definition at line 101 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 98 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -595,7 +593,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line 142 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 154 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -625,7 +623,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line 146 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 140 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -651,7 +649,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line 131 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 143 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -681,7 +679,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line 78 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 76 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -707,7 +705,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line 159 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 172 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a43085c764ddc4c1b4676b3e89754f87a}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a43085c764ddc4c1b4676b3e89754f87a}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!output\_fct@{output\_fct}}
@@ -733,7 +731,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line 183 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 176 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -755,7 +753,7 @@ Access function\+: Pointer to pressure function.
 
 
 
-Definition at line 191 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 208 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -773,7 +771,7 @@ Access function\+: Pointer to pressure function. Const version.
 
 
 
-Definition at line 194 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 214 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -813,7 +811,7 @@ Access function\+: Pointer to in-\/plane traction function.
 
 
 
-Definition at line 198 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 220 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -831,7 +829,7 @@ Access function\+: Pointer to in-\/plane traction function. Const version.
 
 
 
-Definition at line 201 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 226 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -849,7 +847,7 @@ Sets a flag to signify that we are solving the linear, pure bending equations, a
 
 
 
-Definition at line 682 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 704 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -870,7 +868,7 @@ Default value for Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 748 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 769 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -882,13 +880,19 @@ Referenced by Displacement\+Based\+Foepplvon\+Karman\+Equations().
 \doxysubsubsection{\texorpdfstring{Default\_Physical\_Constant\_Value}{Default\_Physical\_Constant\_Value}}
 {\footnotesize\ttfamily double oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      0.0}
+
+\end{DoxyCode}
 
 
 Default value for physical constants. 
 
+Default value physical constants. 
 
-
-Definition at line 751 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 772 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -906,7 +910,7 @@ Pointer to global eta.
 
 
 
-Definition at line 737 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 759 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -924,7 +928,7 @@ Flag which stores whether we are using a linear, pure bending model instead of t
 
 
 
-Definition at line 755 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 776 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -942,7 +946,7 @@ Pointer to global Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 734 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 756 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -960,7 +964,7 @@ Pointer to pressure function\+:
 
 
 
-Definition at line 740 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 762 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -978,7 +982,7 @@ Pointer to traction function\+:
 
 
 
-Definition at line 743 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 765 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 

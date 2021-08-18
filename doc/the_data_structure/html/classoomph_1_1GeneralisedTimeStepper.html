@@ -135,8 +135,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Generalised timestepper that can serve a variety of purposes in continuation, bifurcation detection and periodic-orbit computations. The key generalisation is that more than one of the entries is actually a degree of freedom in the problem. These are distinct from our standard (implict) Timesteppers in which the only dof is the current value (first entry in the storage scheme). These objects will typically be used to replace exisiting timesteppers for specific tasks. <br  />
-  
+<p>Generalised timestepper that can serve a variety of purposes in continuation, bifurcation detection and periodic-orbit computations. The key generalisation is that more than one of the entries is actually a degree of freedom in the problem. These are distinct from our standard (implict) Timesteppers in which the only dof is the current value (first entry in the storage scheme). These objects will typically be used to replace exisiting timesteppers for specific tasks.  
  <a href="classoomph_1_1GeneralisedTimeStepper.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>&gt;</code></p>
@@ -246,9 +245,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">time_derivative</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, const unsigned &amp;j)</td></tr>
 <tr class="memdesc:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of j-th value in <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>. Note the use of the node's <a class="el" href="the__data__structure_8txt.html#a3b0d20781021ec2f0e788713f8b0fec8">value()</a> function so that hanging nodes are taken into account (this is why the functions for <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> cannot be combined through simple polymorphism: value is not virtual).  <a href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">More...</a><br /></td></tr>
 <tr class="separator:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">time_pt</a> () const</td></tr>
-<tr class="memdesc:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <a href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">More...</a><br /></td></tr>
-<tr class="separator:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af85e8103c08de76d5a9399d30fc2211c">time_pt</a> () const</td></tr>
+<tr class="memdesc:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <a href="classoomph_1_1TimeStepper.html#af85e8103c08de76d5a9399d30fc2211c">More...</a><br /></td></tr>
+<tr class="separator:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a3219b7e7ccdc37f733961eeb8cce0a49">time_pt</a> ()</td></tr>
 <tr class="separator:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a4cb0aecb044b77ba0553cdd54b586d8a">weight</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j) const</td></tr>
@@ -342,10 +341,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af91eb510f32a9d072399f37389853174 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Generalised timestepper that can serve a variety of purposes in continuation, bifurcation detection and periodic-orbit computations. The key generalisation is that more than one of the entries is actually a degree of freedom in the problem. These are distinct from our standard (implict) Timesteppers in which the only dof is the current value (first entry in the storage scheme). These objects will typically be used to replace exisiting timesteppers for specific tasks. <br  />
- </p>
+<div class="textblock"><p>Generalised timestepper that can serve a variety of purposes in continuation, bifurcation detection and periodic-orbit computations. The key generalisation is that more than one of the entries is actually a degree of freedom in the problem. These are distinct from our standard (implict) Timesteppers in which the only dof is the current value (first entry in the storage scheme). These objects will typically be used to replace exisiting timesteppers for specific tasks. </p>
 
-<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00051">51</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00050">50</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a900fa5bbfd48ee5a133ed8c6c2ba44a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a900fa5bbfd48ee5a133ed8c6c2ba44a8">&#9670;&nbsp;</a></span>GeneralisedTimeStepper() <span class="overload">[1/3]</span></h2>
@@ -388,7 +386,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Constructor that can only be called by derived objects. Pass the information directly through to the <a class="el" href="classoomph_1_1TimeStepper.html" title="Base class for time-stepping schemes. Timestepper provides an approximation of the temporal derivativ...">TimeStepper</a> object </p>
 
-<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00064">64</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00061">61</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
 
 </div>
 </div>
@@ -417,7 +415,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken empty constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00073">73</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00071">71</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
 
 </div>
 </div>
@@ -447,9 +445,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00076">76</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00074">74</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -479,11 +477,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Return the number of entries that correspond to dof storage. </p>
 
-<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00090">90</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00087">87</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="generalised__timesteppers_8h_source.html#l00057">Ndof_storage_entries</a>.</p>
+<p class="reference">References <a class="el" href="generalised__timesteppers_8h_source.html#l00054">Ndof_storage_entries</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="generalised__timesteppers_8h_source.html#l00134">oomph::ContinuationStorageScheme::modify_storage()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="generalised__timesteppers_8h_source.html#l00135">oomph::ContinuationStorageScheme::modify_storage()</a>.</p>
 
 </div>
 </div>
@@ -513,9 +511,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00082">82</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00080">80</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -540,9 +538,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00057">57</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generalised__timesteppers_8h_source.html#l00054">54</a> of file <a class="el" href="generalised__timesteppers_8h_source.html">generalised_timesteppers.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="generalised__timesteppers_8h_source.html#l00134">oomph::ContinuationStorageScheme::modify_storage()</a>, <a class="el" href="generalised__timesteppers_8h_source.html#l00090">ndof_storage_entries()</a>, <a class="el" href="generalised__timesteppers_8h_source.html#l00262">oomph::ContinuationStorageScheme::set_consistent_pinned_positions()</a>, and <a class="el" href="generalised__timesteppers_8h_source.html#l00220">oomph::ContinuationStorageScheme::set_consistent_pinned_values()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="generalised__timesteppers_8h_source.html#l00135">oomph::ContinuationStorageScheme::modify_storage()</a>, <a class="el" href="generalised__timesteppers_8h_source.html#l00087">ndof_storage_entries()</a>, <a class="el" href="generalised__timesteppers_8h_source.html#l00273">oomph::ContinuationStorageScheme::set_consistent_pinned_positions()</a>, and <a class="el" href="generalised__timesteppers_8h_source.html#l00233">oomph::ContinuationStorageScheme::set_consistent_pinned_values()</a>.</p>
 
 </div>
 </div>
@@ -577,7 +575,7 @@ Protected Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:55:27
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:28
         </div>
       </div>
     </footer>

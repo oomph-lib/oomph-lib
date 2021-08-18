@@ -20,9 +20,8 @@ Inheritance diagram for oomph\+::Projectable\+Taylor\+Hood\+Mixed\+Order\+Space\
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_abbc1349576e52b33a19d7f1ed9fa4bfe}{Projectable\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_a69240d9116b96f70e07e52b998531fad}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
-\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. ~\newline
- \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_ad71530b8347371953ce8e090a53c4c50}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_ad59d29adf0f33f77f6c682b6d32d24b3}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_ae3fad12106671018a2b43042b243519e}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
@@ -46,7 +45,7 @@ class oomph\+::\+Projectable\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<
 
 Taylor Hood upgraded to become projectable. 
 
-Definition at line 3076 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3121 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -64,30 +63,29 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line 3083 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3127 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_a69240d9116b96f70e07e52b998531fad}\label{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_a69240d9116b96f70e07e52b998531fad}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_ad71530b8347371953ce8e090a53c4c50}\label{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_ad71530b8347371953ce8e090a53c4c50}} 
 \index{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. ~\newline
- 
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. 
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line 3092 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3136 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_aeebbb2cb43f24c0240acaf264cd76a07}\label{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_aeebbb2cb43f24c0240acaf264cd76a07}} 
 \index{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -106,7 +104,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line 3232 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3277 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -129,7 +127,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line 3173 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3218 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -152,7 +150,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line 3285 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3329 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_ad59d29adf0f33f77f6c682b6d32d24b3}\label{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_ad59d29adf0f33f77f6c682b6d32d24b3}} 
 \index{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -171,7 +169,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line 3135 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3180 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_a6d898449da166599788a597b9ff282f8}\label{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_a6d898449da166599788a597b9ff282f8}} 
 \index{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -190,7 +188,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line 3164 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3209 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_ae3fad12106671018a2b43042b243519e}\label{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_ae3fad12106671018a2b43042b243519e}} 
 \index{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -209,7 +207,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line 3145 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3190 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_a0fe6ba879ea6881d17be913e8f0663f7}\label{classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement_a0fe6ba879ea6881d17be913e8f0663f7}} 
 \index{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -228,7 +226,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line 3271 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 3315 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

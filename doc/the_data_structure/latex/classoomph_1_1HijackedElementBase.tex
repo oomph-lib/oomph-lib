@@ -21,7 +21,7 @@ void \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd5
 \begin{DoxyCompactList}\small\item\em Reset the hijacked data pt, so that none of the equations in the element are hijacked. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a79740641b6ac5b5a966d072bd10ab66a}{residual\+\_\+multiplier}} () const
 \begin{DoxyCompactList}\small\item\em Return the value of the residual multiplier. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_affdb1888fb6b2de051bc0345e6f5d934}{residual\+\_\+multiplier\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}{residual\+\_\+multiplier\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to the residual multiplier. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -42,14 +42,14 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a283509b7af0947
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1HijackedElementBase_afd87cc7c33c2b846c5f7a373c352f13a}{Default\+\_\+residual\+\_\+multiplier}} =0.\+0
-\begin{DoxyCompactList}\small\item\em Static default value for the double that multiplies the original residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+static double \mbox{\hyperlink{classoomph_1_1HijackedElementBase_afd87cc7c33c2b846c5f7a373c352f13a}{Default\+\_\+residual\+\_\+multiplier}} = 0.\+0
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Hijacked\+Element base class that provides storage and access funcitons for pointers to the global equation numbers that are hijacked by the Hijacked\+Element. A default residuals multiplier is also provided. 
 
-Definition at line 45 of file hijacked\+\_\+elements.\+h.
+Definition at line 44 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -66,7 +66,7 @@ Constructor, initialise the pointer to the equation numbers for the storage to z
 
 
 
-Definition at line 51 of file hijacked\+\_\+elements.\+h.
+Definition at line 49 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -84,7 +84,7 @@ Destructor, destroy the storage for the equation numbers.
 
 Destructor that cleans up any memory allocated by the class. 
 
-Definition at line 42 of file hijacked\+\_\+elements.\+cc.
+Definition at line 41 of file hijacked\+\_\+elements.\+cc.
 
 
 
@@ -105,7 +105,7 @@ Mark the global equation, addressed by global\+\_\+eqn\+\_\+pt, as hijacked by t
 
 Mark the global equation, addressed by global\+\_\+eqn\+\_\+pt, as hijacked by this element. 
 
-Definition at line 59 of file hijacked\+\_\+elements.\+cc.
+Definition at line 62 of file hijacked\+\_\+elements.\+cc.
 
 
 
@@ -127,7 +127,7 @@ Return the value of the residual multiplier.
 
 
 
-Definition at line 69 of file hijacked\+\_\+elements.\+h.
+Definition at line 70 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -137,11 +137,11 @@ References Residual\+\_\+multiplier\+\_\+pt.
 
 Referenced by oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::get\+\_\+jacobian(), and oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::get\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_affdb1888fb6b2de051bc0345e6f5d934}\label{classoomph_1_1HijackedElementBase_affdb1888fb6b2de051bc0345e6f5d934}} 
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}\label{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}} 
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!residual\_multiplier\_pt@{residual\_multiplier\_pt}}
 \index{residual\_multiplier\_pt@{residual\_multiplier\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
 \doxysubsubsection{\texorpdfstring{residual\_multiplier\_pt()}{residual\_multiplier\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -149,7 +149,7 @@ Return the pointer to the residual multiplier.
 
 
 
-Definition at line 73 of file hijacked\+\_\+elements.\+h.
+Definition at line 76 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -167,7 +167,7 @@ Reset the hijacked data pt, so that none of the equations in the element are hij
 
 
 
-Definition at line 66 of file hijacked\+\_\+elements.\+h.
+Definition at line 64 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -185,7 +185,7 @@ The global equation, addressed by global\+\_\+eqn\+\_\+pt, is no longer hijacked
 
 The global equation, addressed by global\+\_\+eqn\+\_\+pt, is no longer hijacked by this element. 
 
-Definition at line 76 of file hijacked\+\_\+elements.\+cc.
+Definition at line 79 of file hijacked\+\_\+elements.\+cc.
 
 
 
@@ -198,15 +198,13 @@ References Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt.
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Default\_residual\_multiplier@{Default\_residual\_multiplier}}
 \index{Default\_residual\_multiplier@{Default\_residual\_multiplier}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
 \doxysubsubsection{\texorpdfstring{Default\_residual\_multiplier}{Default\_residual\_multiplier}}
-{\footnotesize\ttfamily double oomph\+::\+Hijacked\+Element\+Base\+::\+Default\+\_\+residual\+\_\+multiplier =0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily double oomph\+::\+Hijacked\+Element\+Base\+::\+Default\+\_\+residual\+\_\+multiplier = 0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
-
-
-Static default value for the double that multiplies the original residuals. 
+Static default value for the double that multiplies the original residuals
 
 Static default value of the multiplier for the original residuals The contribution to the total residuals is the product of the multiplier and the original value of the residuals 
 
-Definition at line 96 of file hijacked\+\_\+elements.\+h.
+Definition at line 102 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -220,7 +218,7 @@ Referenced by Hijacked\+Element\+Base().
 
 Pointer to a Set of pointers to the equation numbers that will be hijacked by this element. Note that these M\+U\+ST be pointers because hijacking information is set B\+E\+F\+O\+RE global equation numbers have been assigned. 
 
-Definition at line 81 of file hijacked\+\_\+elements.\+h.
+Definition at line 86 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -238,7 +236,7 @@ Pointer to a vector of integers containing the local equation numbers of any hij
 
 
 
-Definition at line 86 of file hijacked\+\_\+elements.\+h.
+Definition at line 91 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -256,7 +254,7 @@ Pointer to a double that multiplies the contribution to the residuals from the o
 
 
 
-Definition at line 93 of file hijacked\+\_\+elements.\+h.
+Definition at line 98 of file hijacked\+\_\+elements.\+h.
 
 
 

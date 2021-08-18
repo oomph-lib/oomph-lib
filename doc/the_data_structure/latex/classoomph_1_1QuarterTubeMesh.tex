@@ -63,10 +63,9 @@ The mesh boundaries are numbered as follows\+:
 \item Boundary 4\+: \char`\"{}\+Outflow\char`\"{} cross section; located along the line parametrised by $ \xi_0 = \xi_0^{hi} $ on the geometric object that specifies the wall.
 \end{DoxyItemize}
 
-I\+M\+P\+O\+R\+T\+A\+NT N\+O\+TE\+: The interface looks more general than it should. The toplogy must remain that of a quarter tube, or the mesh generation will break. ~\newline
- 
+I\+M\+P\+O\+R\+T\+A\+NT N\+O\+TE\+: The interface looks more general than it should. The toplogy must remain that of a quarter tube, or the mesh generation will break. 
 
-Definition at line 66 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 64 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -84,11 +83,11 @@ Constructor\+: Pass pointer to geometric object that specifies the wall, start a
 
 Constructor for deformable quarter tube mesh class. The domain is specified by the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that identifies boundary 3. Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper. Timestepper defaults to Static dummy timestepper. 
 
-Definition at line 46 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
+Definition at line 44 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\+Mesh\+::convert\+\_\+to\+\_\+boundary\+\_\+node(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+map(), oomph\+::\+Mesh\+::\+Node\+\_\+pt, oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::oomph\+\_\+info, s, oomph\+::\+Mesh\+::set\+\_\+nboundary(), oomph\+::\+Brick\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wall\+\_\+pt(), oomph\+::\+Node\+::x(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xi\+\_\+hi, and oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xi\+\_\+lo.
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Mesh\+::convert\+\_\+to\+\_\+boundary\+\_\+node(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+map(), oomph\+::\+Mesh\+::\+Node\+\_\+pt, oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::oomph\+\_\+info, s, oomph\+::\+Mesh\+::set\+\_\+nboundary(), oomph\+::\+Brick\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wall\+\_\+pt(), oomph\+::\+Node\+::x(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xi\+\_\+hi, and oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xi\+\_\+lo.
 
 \mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_aeb6ec7337a9e1666ebc6c942e788bab7}\label{classoomph_1_1QuarterTubeMesh_aeb6ec7337a9e1666ebc6c942e788bab7}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!````~QuarterTubeMesh@{$\sim$QuarterTubeMesh}}
@@ -103,7 +102,7 @@ Destructor\+: empty.
 
 
 
-Definition at line 85 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 80 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -129,7 +128,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMe
 
 
 
-Definition at line 107 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 108 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -148,7 +147,7 @@ Function pointer for function that squashes the outer macro elements towards the
 
 
 
-Definition at line 100 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 101 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -167,7 +166,7 @@ Access function to domain.
 
 
 
-Definition at line 94 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 92 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -190,7 +189,7 @@ Access function to underlying domain.
 
 
 
-Definition at line 113 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 114 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -209,7 +208,7 @@ Access function to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} rep
 
 
 
-Definition at line 91 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 86 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -235,7 +234,7 @@ Pointer to domain.
 
 
 
-Definition at line 118 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 121 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -254,7 +253,7 @@ Fraction along wall where outer ring is to be divided.
 
 
 
-Definition at line 127 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 130 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_a961bf18652514913c6a63c4850088e8b}\label{classoomph_1_1QuarterTubeMesh_a961bf18652514913c6a63c4850088e8b}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!Wall\_pt@{Wall\_pt}}
@@ -269,7 +268,7 @@ Pointer to the geometric object that represents the curved wall.
 
 
 
-Definition at line 121 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 124 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -288,7 +287,7 @@ Upper limits for the coordinates along the wall.
 
 
 
-Definition at line 130 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 133 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -307,7 +306,7 @@ Lower limits for the coordinates along the wall.
 
 
 
-Definition at line 124 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 127 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 

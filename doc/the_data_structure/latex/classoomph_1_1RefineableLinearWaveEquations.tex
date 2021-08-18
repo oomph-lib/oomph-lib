@@ -27,7 +27,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_a2a71c6a176c35
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_a83b2ad0eb1bbcfe802b48d433d104f3d}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_af5b91e3507fc1ef71d9e1e1d9d0b4fe2}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
-\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Linear\+Wave equations. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_a057892661a261b6959c3690f6b6e9a6a}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_a6e1d14ebf648099505632c4b3f9ba141}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
@@ -48,7 +48,7 @@ class oomph\+::\+Refineable\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}
 
 Refineable version of Linear\+Wave equations. 
 
-Definition at line 48 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 47 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -66,7 +66,7 @@ Constructor.
 
 
 
-Definition at line 55 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 54 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearWaveEquations_a7d87bef5939e692cb79739718b89399d}\label{classoomph_1_1RefineableLinearWaveEquations_a7d87bef5939e692cb79739718b89399d}} 
 \index{oomph::RefineableLinearWaveEquations$<$ DIM $>$@{oomph::RefineableLinearWaveEquations$<$ DIM $>$}!RefineableLinearWaveEquations@{RefineableLinearWaveEquations}}
@@ -107,7 +107,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ae6017a229
 
 
 
-Definition at line 42 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 39 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
@@ -130,7 +130,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Definition at line 146 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 155 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -153,7 +153,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 118 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 126 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -176,7 +176,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 86 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 93 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -189,17 +189,13 @@ References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations}{oomph\+::\+Refineable\+Linear\+Wave\+Equations}}$<$ D\+IM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
-Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Linear\+Wave equations. 
-
-
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Linear\+Wave equations 
 
 Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
 
 
 
-Definition at line 78 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 83 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -222,7 +218,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 75 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 76 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearWaveEquations_a2a71c6a176c35fa60170677f1dfc5799}\label{classoomph_1_1RefineableLinearWaveEquations_a2a71c6a176c35fa60170677f1dfc5799}} 
 \index{oomph::RefineableLinearWaveEquations$<$ DIM $>$@{oomph::RefineableLinearWaveEquations$<$ DIM $>$}!operator=@{operator=}}
@@ -237,7 +233,7 @@ Broken assignment operator.
 
 
 
-Definition at line 69 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 70 of file refineable\+\_\+linear\+\_\+wave\+\_\+elements.\+h.
 
 
 

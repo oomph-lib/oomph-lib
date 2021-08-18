@@ -47,7 +47,7 @@ virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{clas
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_a01009bc617cad72b7467b5e947e7be88}{unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs}} ()=0
 \begin{DoxyCompactList}\small\item\em Unpin all pressure dofs in the element. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_ae64d696cc2f48517adb894d9732a5d20}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs}} ()
-\begin{DoxyCompactList}\small\item\em Pin unused nodal pressure dofs (empty by default, because. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pin unused nodal pressure dofs (empty by default, because by default pressure dofs are not associated with nodes) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -63,7 +63,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_
 \doxysubsection{Detailed Description}
 Refineable version of the Axisymmetric Navier--Stokes equations. 
 
-Definition at line 47 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 45 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -80,7 +80,7 @@ Empty Constructor.
 
 
 
-Definition at line 68 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 67 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -101,11 +101,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 172 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 175 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+axi\+\_\+nst().
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+axi\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_aceeb8beea173139f943043d2dd47bb19}\label{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_aceeb8beea173139f943043d2dd47bb19}} 
 \index{oomph::RefineableAxisymmetricNavierStokesEquations@{oomph::RefineableAxisymmetricNavierStokesEquations}!fill\_in\_contribution\_to\_hessian\_vector\_products@{fill\_in\_contribution\_to\_hessian\_vector\_products}}
@@ -123,7 +123,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 381 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 387 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_a649f00dc4b0e086c90ebefb5c72ee481}\label{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_a649f00dc4b0e086c90ebefb5c72ee481}} 
 \index{oomph::RefineableAxisymmetricNavierStokesEquations@{oomph::RefineableAxisymmetricNavierStokesEquations}!fill\_in\_generic\_dresidual\_contribution\_axi\_nst@{fill\_in\_generic\_dresidual\_contribution\_axi\_nst}}
@@ -141,7 +141,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 367 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 373 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_a9ac92aefcee6fd7ef3e7c61af9bd305f}\label{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_a9ac92aefcee6fd7ef3e7c61af9bd305f}} 
 \index{oomph::RefineableAxisymmetricNavierStokesEquations@{oomph::RefineableAxisymmetricNavierStokesEquations}!fill\_in\_generic\_residual\_contribution\_axi\_nst@{fill\_in\_generic\_residual\_contribution\_axi\_nst}}
@@ -159,7 +159,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 40 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 38 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -185,7 +185,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQCrouzeixR
 
 
 
-Definition at line 133 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 136 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -229,7 +229,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquati
 
 
 
-Definition at line 937 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 982 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -251,7 +251,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 82 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 83 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -273,7 +273,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 74 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 75 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_ae64d696cc2f48517adb894d9732a5d20}\label{classoomph_1_1RefineableAxisymmetricNavierStokesEquations_ae64d696cc2f48517adb894d9732a5d20}} 
 \index{oomph::RefineableAxisymmetricNavierStokesEquations@{oomph::RefineableAxisymmetricNavierStokesEquations}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -283,9 +283,9 @@ Definition at line 74 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_
 
 
 
-Pin unused nodal pressure dofs (empty by default, because. 
+Pin unused nodal pressure dofs (empty by default, because by default pressure dofs are not associated with nodes) 
 
-by default pressure dofs are not associated with nodes) 
+
 
 Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a14e45b922f221125dcfccae8817e1534}{oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}.
 
@@ -310,10 +310,9 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 
 \begin{DoxyItemize}
 \item {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierStokesEquations}{Refineable\+Axisymmetric\+Navier\+Stokes\+Equations}}\+:}\+: pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs()
-\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom ~\newline
- (e.\+g. for refineable Taylor-\/\+Hood.) 
+\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom (e.\+g. for refineable Taylor-\/\+Hood.) 
 
-Definition at line 314 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 319 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -335,7 +334,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoo
 
 
 
-Definition at line 56 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 53 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -353,7 +352,7 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line 328 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 334 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

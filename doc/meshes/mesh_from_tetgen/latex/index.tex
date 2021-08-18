@@ -183,29 +183,26 @@ Here is a sketch of the resulting discretisation, as displayed by {\ttfamily tet
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//=========start of TetgenMesh class======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short  Unstructured tet mesh based on output from Tetgen:}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// http://wias-\/berlin.de/software/tetgen/}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{\textcolor{keyword}{class }TetgenMesh : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TetMeshBase}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{public}:}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Empty constructor}}
-\DoxyCodeLine{\textcolor{comment}{} TetgenMesh()}
+\DoxyCodeLine{  \textcolor{comment}{//=========start of TetgenMesh class======================================}}
+\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short  Unstructured tet mesh based on output from Tetgen:}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// http://wias-\/berlin.de/software/tetgen/}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{  \textcolor{keyword}{class }TetgenMesh : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TetMeshBase}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// Mesh can only be built with 3D Telements.}}
-\DoxyCodeLine{   MeshChecker::assert\_geometric\_element<TElementGeometricBase,ELEMENT>(3);}
-\DoxyCodeLine{  \}}
+\DoxyCodeLine{  \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Empty constructor}}
+\DoxyCodeLine{\textcolor{comment}{}    TetgenMesh()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// Mesh can only be built with 3D Telements.}}
+\DoxyCodeLine{      MeshChecker::assert\_geometric\_element<TElementGeometricBase, ELEMENT>(3);}
+\DoxyCodeLine{    \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor with the input files}}
-\DoxyCodeLine{\textcolor{comment}{} TetgenMesh(\textcolor{keyword}{const} std::string\& node\_file\_name,}
-\DoxyCodeLine{            \textcolor{keyword}{const} std::string\& element\_file\_name,}
-\DoxyCodeLine{            \textcolor{keyword}{const} std::string\& face\_file\_name,}
-\DoxyCodeLine{            TimeStepper* time\_stepper\_pt=}
-\DoxyCodeLine{            \&Mesh::Default\_TimeStepper,}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Constructor with the input files}}
+\DoxyCodeLine{\textcolor{comment}{}    TetgenMesh(\textcolor{keyword}{const} std::string\& node\_file\_name,}
+\DoxyCodeLine{               \textcolor{keyword}{const} std::string\& element\_file\_name,}
+\DoxyCodeLine{               \textcolor{keyword}{const} std::string\& face\_file\_name,}
+\DoxyCodeLine{               TimeStepper* time\_stepper\_pt = \&Mesh::Default\_TimeStepper,}
 
 \end{DoxyCodeInclude}
 

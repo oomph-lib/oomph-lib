@@ -33,9 +33,9 @@ virtual unsigned long \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2
 virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90da62b4da2af8a26d08b3}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Return the contribution to the residuals of the element elem\+\_\+pt. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0ba6ebee8d82509458e5}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation 
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{} for elem\+\_\+pt. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab2e4ee4623116b18245ca90cfe9ba144}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ $>$ \&matrix)
+virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a67093ef481c51d384606486c41002baa}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$$>$ \&matrix)
 \begin{DoxyCompactList}\small\item\em Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0ad82f98e694eecf270bb}{get\+\_\+dresiduals\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam)
 \begin{DoxyCompactList}\small\item\em Calculate the derivative of the residuals with respect to a parameter. \end{DoxyCompactList}\item 
@@ -49,13 +49,12 @@ virtual double $\ast$ \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692
 \begin{DoxyCompactList}\small\item\em Return a pointer to the bifurcation parameter in bifurcation tracking problems. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d0eb7ceb393e3ae9594f}{get\+\_\+eigenfunction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenfunction)
 \begin{DoxyCompactList}\small\item\em Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a60c8efc6756825df9cd41389cdeac6cc}{get\+\_\+inner\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ unsigned, unsigned $>$ $>$ const \&history\+\_\+index, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&inner\+\_\+product)
+virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab9c8bb0e9a66d031283bf37571be2524}{get\+\_\+inner\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ unsigned, unsigned $>$$>$ const \&history\+\_\+index, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&inner\+\_\+product)
 \begin{DoxyCompactList}\small\item\em Compute the inner products of the given vector of pairs of history values over the element. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2300910f43476551318d74e3a90e7713}{get\+\_\+inner\+\_\+product\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ const \&history\+\_\+index, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&inner\+\_\+product\+\_\+vector)
+virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_afc7da94d31606a6212a5106a36d91961}{get\+\_\+inner\+\_\+product\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ const \&history\+\_\+index, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&inner\+\_\+product\+\_\+vector)
 \begin{DoxyCompactList}\small\item\em Compute the vectors that when taken as a dot product with other history values give the inner product over the element. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a0ccef21253d997dd1a78ed26c2b99fce}{synchronise}} ()
-\begin{DoxyCompactList}\small\item\em Function that is used to perform any synchronisation required during the solution ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function that is used to perform any synchronisation required during the solution. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab26633238200230ab57a20cc49e731de}{$\sim$\+Assembly\+Handler}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -80,7 +79,7 @@ Empty constructor.
 
 
 
-Definition at line 67 of file assembly\+\_\+handler.\+h.
+Definition at line 66 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AssemblyHandler_ab26633238200230ab57a20cc49e731de}\label{classoomph_1_1AssemblyHandler_ab26633238200230ab57a20cc49e731de}} 
 \index{oomph::AssemblyHandler@{oomph::AssemblyHandler}!````~AssemblyHandler@{$\sim$AssemblyHandler}}
@@ -94,7 +93,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 165 of file assembly\+\_\+handler.\+h.
+Definition at line 169 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -115,7 +114,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HopfHandler_a49f4d0a78ac46ea1412
 
 
 
-Definition at line 153 of file assembly\+\_\+handler.\+cc.
+Definition at line 168 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -137,7 +136,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HopfHandler_a789de82e82adaac82b3
 
 
 
-Definition at line 133 of file assembly\+\_\+handler.\+h.
+Definition at line 134 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -155,7 +154,7 @@ Return vector of pointers to dofs in the element elem\+\_\+pt.
 
 Get the vector of pointers to dofs in the element elem\+\_\+pt Direct call to the function in the element. 
 
-Definition at line 57 of file assembly\+\_\+handler.\+cc.
+Definition at line 62 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -173,7 +172,7 @@ Return vector of dofs at time level t in the element elem\+\_\+pt.
 
 Get the vector of dofs in the element elem\+\_\+pt at time level t Direct call to the function in the element. 
 
-Definition at line 49 of file assembly\+\_\+handler.\+cc.
+Definition at line 51 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -195,7 +194,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HopfHandler_a9feb8087e8b9554164c
 
 
 
-Definition at line 74 of file assembly\+\_\+handler.\+cc.
+Definition at line 82 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -205,11 +204,11 @@ References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number().
 
 Referenced by oomph\+::\+Parallel\+Residuals\+Handler\+::eqn\+\_\+number(), oomph\+::\+Parameter\+Derivative\+Handler\+::eqn\+\_\+number(), oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+jacobian(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Problem\+::get\+\_\+my\+\_\+eqns(), oomph\+::\+Problem\+::get\+\_\+residuals(), oomph\+::\+Problem\+::parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::reorder\+\_\+elements(), oomph\+::\+Problem\+::setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve(), oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+lists(), oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+maps(), oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+two\+\_\+arrays(), oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+two\+\_\+vectors(), and oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+vectors\+\_\+of\+\_\+pairs().
 
-\mbox{\Hypertarget{classoomph_1_1AssemblyHandler_ab2e4ee4623116b18245ca90cfe9ba144}\label{classoomph_1_1AssemblyHandler_ab2e4ee4623116b18245ca90cfe9ba144}} 
+\mbox{\Hypertarget{classoomph_1_1AssemblyHandler_a67093ef481c51d384606486c41002baa}\label{classoomph_1_1AssemblyHandler_a67093ef481c51d384606486c41002baa}} 
 \index{oomph::AssemblyHandler@{oomph::AssemblyHandler}!get\_all\_vectors\_and\_matrices@{get\_all\_vectors\_and\_matrices}}
 \index{get\_all\_vectors\_and\_matrices@{get\_all\_vectors\_and\_matrices}!oomph::AssemblyHandler@{oomph::AssemblyHandler}}
 \doxysubsubsection{\texorpdfstring{get\_all\_vectors\_and\_matrices()}{get\_all\_vectors\_and\_matrices()}}
-{\footnotesize\ttfamily void oomph\+::\+Assembly\+Handler\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Assembly\+Handler\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$$>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -217,15 +216,19 @@ Calculate all desired vectors and matrices provided by the element elem\+\_\+pt.
 
 Calculate all desired vectors and matrices that are required by the element by calling the get\+\_\+jacobian function 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_adea071e3131e4e84b7c3e9400892fb17}{oomph\+::\+Parallel\+Residuals\+Handler}}, \mbox{\hyperlink{classoomph_1_1EigenProblemHandler_aa88f56b5c724c41e0c2926434ae920da}{oomph\+::\+Eigen\+Problem\+Handler}}, and \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepHandler_a842529121fbe177ea6900d668d8b2a65}{oomph\+::\+Explicit\+Time\+Step\+Handler}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_ad1627856c77501b2f57b5842e75833a3}{oomph\+::\+Parallel\+Residuals\+Handler}}, \mbox{\hyperlink{classoomph_1_1EigenProblemHandler_a37b33a36d3e5e73c41d81c7b82cb4be6}{oomph\+::\+Eigen\+Problem\+Handler}}, and \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepHandler_ad00d54cb242b64dee6a6d113f2238edf}{oomph\+::\+Explicit\+Time\+Step\+Handler}}.
 
 
 
-Definition at line 99 of file assembly\+\_\+handler.\+cc.
+Definition at line 113 of file assembly\+\_\+handler.\+cc.
 
 
 
 References get\+\_\+jacobian().
+
+
+
+Referenced by oomph\+::\+Problem\+::parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+lists(), oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+maps(), oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+two\+\_\+arrays(), oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+two\+\_\+vectors(), and oomph\+::\+Problem\+::sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+vectors\+\_\+of\+\_\+pairs().
 
 \mbox{\Hypertarget{classoomph_1_1AssemblyHandler_aefc0c13a65342806c167c5d53f014803}\label{classoomph_1_1AssemblyHandler_aefc0c13a65342806c167c5d53f014803}} 
 \index{oomph::AssemblyHandler@{oomph::AssemblyHandler}!get\_djacobian\_dparameter@{get\_djacobian\_dparameter}}
@@ -243,7 +246,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HopfHandler_a59fb2c41d850cfe1fdc
 
 
 
-Definition at line 123 of file assembly\+\_\+handler.\+cc.
+Definition at line 138 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -269,7 +272,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HopfHandler_a2953368ecc48dc22f8e
 
 
 
-Definition at line 110 of file assembly\+\_\+handler.\+cc.
+Definition at line 125 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -295,7 +298,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HopfHandler_a9d1ee586e6274cfa0ba
 
 
 
-Definition at line 175 of file assembly\+\_\+handler.\+cc.
+Definition at line 188 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -317,7 +320,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HopfHandler_a74b0266ee15bcb294db
 
 
 
-Definition at line 138 of file assembly\+\_\+handler.\+cc.
+Definition at line 153 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -327,11 +330,11 @@ References oomph\+::\+Generalised\+Element\+::get\+\_\+hessian\+\_\+vector\+\_\+
 
 Referenced by oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products().
 
-\mbox{\Hypertarget{classoomph_1_1AssemblyHandler_a2300910f43476551318d74e3a90e7713}\label{classoomph_1_1AssemblyHandler_a2300910f43476551318d74e3a90e7713}} 
+\mbox{\Hypertarget{classoomph_1_1AssemblyHandler_afc7da94d31606a6212a5106a36d91961}\label{classoomph_1_1AssemblyHandler_afc7da94d31606a6212a5106a36d91961}} 
 \index{oomph::AssemblyHandler@{oomph::AssemblyHandler}!get\_inner\_product\_vectors@{get\_inner\_product\_vectors}}
 \index{get\_inner\_product\_vectors@{get\_inner\_product\_vectors}!oomph::AssemblyHandler@{oomph::AssemblyHandler}}
 \doxysubsubsection{\texorpdfstring{get\_inner\_product\_vectors()}{get\_inner\_product\_vectors()}}
-{\footnotesize\ttfamily void oomph\+::\+Assembly\+Handler\+::get\+\_\+inner\+\_\+product\+\_\+vectors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ const \&}]{history\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{inner\+\_\+product\+\_\+vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Assembly\+Handler\+::get\+\_\+inner\+\_\+product\+\_\+vectors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ const \&}]{history\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{inner\+\_\+product\+\_\+vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -339,17 +342,17 @@ Compute the vectors that when taken as a dot product with other history values g
 
 Compute the vectors that when taken as a dot product with other history values give the inner product over the element. In other words if we call get\+\_\+inner\+\_\+product\+\_\+vectors(\{0,1\},output) output\mbox{[}0\mbox{]} will be a vector such that dofs.\+output\mbox{[}0\mbox{]} gives the inner product of current dofs with themselves. 
 
-Definition at line 211 of file assembly\+\_\+handler.\+cc.
+Definition at line 221 of file assembly\+\_\+handler.\+cc.
 
 
 
 References oomph\+::\+Generalised\+Element\+::get\+\_\+inner\+\_\+product\+\_\+vectors().
 
-\mbox{\Hypertarget{classoomph_1_1AssemblyHandler_a60c8efc6756825df9cd41389cdeac6cc}\label{classoomph_1_1AssemblyHandler_a60c8efc6756825df9cd41389cdeac6cc}} 
+\mbox{\Hypertarget{classoomph_1_1AssemblyHandler_ab9c8bb0e9a66d031283bf37571be2524}\label{classoomph_1_1AssemblyHandler_ab9c8bb0e9a66d031283bf37571be2524}} 
 \index{oomph::AssemblyHandler@{oomph::AssemblyHandler}!get\_inner\_products@{get\_inner\_products}}
 \index{get\_inner\_products@{get\_inner\_products}!oomph::AssemblyHandler@{oomph::AssemblyHandler}}
 \doxysubsubsection{\texorpdfstring{get\_inner\_products()}{get\_inner\_products()}}
-{\footnotesize\ttfamily void oomph\+::\+Assembly\+Handler\+::get\+\_\+inner\+\_\+products (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ unsigned, unsigned $>$ $>$ const \&}]{history\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{inner\+\_\+product }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Assembly\+Handler\+::get\+\_\+inner\+\_\+products (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ unsigned, unsigned $>$$>$ const \&}]{history\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{inner\+\_\+product }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -357,7 +360,7 @@ Compute the inner products of the given vector of pairs of history values over t
 
 ========================================================================== Compute the inner products of the given vector of pairs of history values over the element. The values of the index in the pair may be the same. 
 
-Definition at line 196 of file assembly\+\_\+handler.\+cc.
+Definition at line 206 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -371,7 +374,7 @@ References oomph\+::\+Generalised\+Element\+::get\+\_\+inner\+\_\+products().
 
 
 
-Calculate the elemental Jacobian matrix \char`\"{}d equation 
+Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{} for elem\+\_\+pt. 
 
 Calculate the elemental Jacobian matrix \char`\"{}d equation / d variable\char`\"{} by calling the element\textquotesingle{}s get\+\_\+jacobian function. 
@@ -380,7 +383,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HopfHandler_ab36c50421f53accced0
 
 
 
-Definition at line 90 of file assembly\+\_\+handler.\+cc.
+Definition at line 102 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -406,7 +409,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HopfHandler_a61a4006161da6532a9a
 
 
 
-Definition at line 82 of file assembly\+\_\+handler.\+cc.
+Definition at line 92 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -428,7 +431,7 @@ Return the t-\/th level of storage associated with the i-\/th (local) dof stored
 
 
 
-Definition at line 63 of file assembly\+\_\+handler.\+cc.
+Definition at line 70 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -468,8 +471,7 @@ Referenced by oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products()
 
 
 
-Function that is used to perform any synchronisation required during the solution ~\newline
- 
+Function that is used to perform any synchronisation required during the solution. 
 
 
 
@@ -477,7 +479,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a23a67d7212e251
 
 
 
-Definition at line 161 of file assembly\+\_\+handler.\+h.
+Definition at line 165 of file assembly\+\_\+handler.\+h.
 
 
 

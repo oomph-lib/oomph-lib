@@ -465,280 +465,150 @@ Diagram of a ChannelSpineMesh, going through the process of updating its central
 Making a SpineMesh</h2>
 <p>In this example we use a <code>SpineMesh</code> to model the domain. This mesh constitutes three regions: left (0), centre (1) and right (2), the left and right regions have a constant height, while in the centre region the height varies. These heights are defined by two geometric objects, a <a href="../../../the_data_structure/html/classoomph_1_1StraightLine.html">straight line </a> and a deflected line respectively. We will discuss the necessary steps taken to create this mesh (the complete documentation for this specific mesh can be found <a href="../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html">here </a>).</p>
 <p>To begin, we create a new class templated by a element and inheriting from <code>RectangularQuadMesh&lt;ELEMENT&gt;</code> and <code>SpineMesh</code>. The latter adds the functionality needed for using Spines.</p>
- <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
-<div class="line"><span class="keyword">class </span>ChannelSpineMesh : <span class="keyword">public</span> RectangularQuadMesh&lt;ELEMENT &gt;, <span class="keyword">public</span> SpineMesh</div>
-</div><!-- fragment --><p>All SpineMeshs must include a function <code>spine_node_update</code>(SpineNode* spine_node_pt), this will describe the operations performed when updating every SpineNode in the mesh. First we find the SpineNodes fraction along the spine.</p>
-<div class="fragment"><div class="line"> <span class="keyword">virtual</span> <span class="keywordtype">void</span> spine_node_update(SpineNode* spine_node_pt)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">// Get spine node&#39;s fraction along the spine</span></div>
-<div class="line">   <span class="keywordtype">double</span> W = spine_node_pt-&gt;fraction();</div>
-</div><!-- fragment --><p>We then get the local coordinate on the geometric object that defines the upper wall.</p>
-<div class="fragment"><div class="line">   </div>
-<div class="line">   <span class="comment">// Get local coordinates</span></div>
-<div class="line">   Vector&lt;double&gt; s_wall(1);</div>
-<div class="line">   s_wall[0] = spine_node_pt-&gt;spine_pt()-&gt;geom_parameter(0);</div>
-</div><!-- fragment --><p>Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node.</p>
-<div class="fragment"><div class="line">   </div>
-<div class="line">   <span class="comment">// Get position vector to wall</span></div>
-<div class="line">   Vector&lt;double&gt; position(2);</div>
-<div class="line">   spine_node_pt-&gt;spine_pt()-&gt;geom_object_pt(0)-&gt;position(s_wall,position);</div>
-<div class="line">     </div>
-<div class="line">   <span class="comment">//Set the value of y</span></div>
-<div class="line">   spine_node_pt-&gt;x(1) = this-&gt;Ymin + W*position[1];</div>
-<div class="line">  }</div>
-</div><!-- fragment --><p>We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects.</p>
-<div class="fragment"><div class="line"> <span class="comment">/// Number of elements in the left region</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> Nx0;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Number of elements in the centre region</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Nx1;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Number of elements in the right region</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Nx2;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Length of left region</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Lx0;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Length of centre region</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Lx1;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Length of right region</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Lx2;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Number of spines in left region</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Nleft_spine;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Number of spines in centre region</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Ncentre_spine;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// Number of spines in right region</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Nright_spine;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// GeomObject for upper wall</span></div>
-<div class="line"><span class="comment"></span> GeomObject* Wall_pt;</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// GeomObject for the straight upper wall</span></div>
-<div class="line"><span class="comment"></span> GeomObject* Straight_wall_pt;</div>
-</div><!-- fragment --><p>All these details are passed to the constructor, except for the pointer to the geometric object for the uniform wall. The constructor calls the empty constructor for <code>RectangularQuadMesh&lt;ELEMENT&gt;</code>, copies these values to their storage in the mesh.</p>
- <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
-<div class="line">ChannelSpineMesh&lt;ELEMENT&gt;::ChannelSpineMesh(</div>
-<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx0,</div>
-<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx1,</div>
-<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx2,</div>
-<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny,</div>
-<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx0,</div>
-<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx1,</div>
-<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx2,</div>
-<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;h,</div>
-<div class="line"> GeomObject* wall_pt, </div>
-<div class="line"> TimeStepper* time_stepper_pt) :  </div>
-<div class="line"> RectangularQuadMesh&lt;ELEMENT &gt;(nx0+nx1+nx2,ny,0.0,lx0+lx1+lx2,</div>
-<div class="line">                               0.0,h,false,false,time_stepper_pt),</div>
-<div class="line"> Nx0(nx0), Nx1(nx1), Nx2(nx2), </div>
-<div class="line"> Lx0(lx0), Lx1(lx1), Lx2(lx2), </div>
-<div class="line"> Wall_pt(wall_pt)</div>
+ <div class="fragment"></div><!-- fragment --><p>All SpineMeshs must include a function <code>spine_node_update</code>(SpineNode* spine_node_pt), this will describe the operations performed when updating every SpineNode in the mesh. First we find the SpineNodes fraction along the spine.</p>
+<div class="fragment"></div><!-- fragment --><p>We then get the local coordinate on the geometric object that defines the upper wall.</p>
+<div class="fragment"></div><!-- fragment --><p>Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node.</p>
+<div class="fragment"></div><!-- fragment --><p>We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects.</p>
+<div class="fragment"></div><!-- fragment --><p>All these details are passed to the constructor, except for the pointer to the geometric object for the uniform wall. The constructor calls the empty constructor for <code>RectangularQuadMesh&lt;ELEMENT&gt;</code>, copies these values to their storage in the mesh.</p>
+ <div class="fragment"><div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line">  ChannelSpineMesh&lt;ELEMENT&gt;::ChannelSpineMesh(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nx0,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nx1,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nx2,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ny,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lx0,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lx1,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lx2,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; h,</div>
+<div class="line">                                              GeomObject* wall_pt,</div>
+<div class="line">                                              TimeStepper* time_stepper_pt)</div>
+<div class="line">    : RectangularQuadMesh&lt;ELEMENT&gt;(nx0 + nx1 + nx2,</div>
+<div class="line">                                   ny,</div>
+<div class="line">                                   0.0,</div>
+<div class="line">                                   lx0 + lx1 + lx2,</div>
+<div class="line">                                   0.0,</div>
+<div class="line">                                   h,</div>
+<div class="line">                                   false,</div>
+<div class="line">                                   false,</div>
+<div class="line">                                   time_stepper_pt),</div>
+<div class="line">      Nx0(nx0),</div>
+<div class="line">      Nx1(nx1),</div>
+<div class="line">      Nx2(nx2),</div>
+<div class="line">      Lx0(lx0),</div>
+<div class="line">      Lx1(lx1),</div>
+<div class="line">      Lx2(lx2),</div>
+<div class="line">      Wall_pt(wall_pt)</div>
 </div><!-- fragment --><p>We then assign all the parameters for the <code>RectangularQuadMesh&lt;ELEMENT&gt;</code>, create the geometric object for the uniform wall and call the function <code><a class="el" href="spine__channel_8txt.html#af6dd20913b6f4c7abd5a0823c3ad7134">build_channel_spine_mesh(...)</a></code> </p>
-<div class="fragment"><div class="line">{</div>
+<div class="fragment"><div class="line">  {</div>
+<div class="line">    <span class="comment">// Mesh can only be built with 2D Qelements.</span></div>
+<div class="line">    MeshChecker::assert_geometric_element&lt;QElementGeometricBase, ELEMENT&gt;(2);</div>
 <div class="line"> </div>
-<div class="line"> <span class="comment">// Mesh can only be built with 2D Qelements.</span></div>
-<div class="line"> MeshChecker::assert_geometric_element&lt;QElementGeometricBase,ELEMENT&gt;(2);</div>
+<div class="line">    <span class="comment">// Mesh can only be built with spine elements</span></div>
+<div class="line">    MeshChecker::assert_geometric_element&lt;SpineFiniteElement, ELEMENT&gt;(2);</div>
 <div class="line"> </div>
-<div class="line"> <span class="comment">//Mesh can only be built with spine elements</span></div>
-<div class="line"> MeshChecker::assert_geometric_element&lt;SpineFiniteElement,ELEMENT&gt;(2);</div>
+<div class="line">    <span class="comment">// We&#39;ve called the &quot;generic&quot; constructor for the RectangularQuadMesh</span></div>
+<div class="line">    <span class="comment">// which doesn&#39;t do much...</span></div>
 <div class="line"> </div>
-<div class="line"> <span class="comment">// We&#39;ve called the &quot;generic&quot; constructor for the RectangularQuadMesh</span></div>
-<div class="line"> <span class="comment">// which doesn&#39;t do much...</span></div>
+<div class="line">    <span class="comment">// Build the straight line object</span></div>
+<div class="line">    Straight_wall_pt = <span class="keyword">new</span> StraightLine(h);</div>
 <div class="line"> </div>
-<div class="line"> <span class="comment">// Build the straight line object</span></div>
-<div class="line"> Straight_wall_pt = <span class="keyword">new</span> StraightLine(h);</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Now build the mesh: </span></div>
-<div class="line"> <a class="code" href="spine__channel_8txt.html#af6dd20913b6f4c7abd5a0823c3ad7134">build_channel_spine_mesh</a>(time_stepper_pt);</div>
-<div class="line"> </div>
-<div class="line">}</div>
+<div class="line">    <span class="comment">// Now build the mesh:</span></div>
+<div class="line">    <a class="code" href="spine__channel_8txt.html#af6dd20913b6f4c7abd5a0823c3ad7134">build_channel_spine_mesh</a>(time_stepper_pt);</div>
+<div class="line">  }</div>
 </div><!-- fragment --><p>When we call the function <code><a class="el" href="spine__channel_8txt.html#af6dd20913b6f4c7abd5a0823c3ad7134">build_channel_spine_mesh(...)</a></code>, it calls its counterpart in the <code>RectangularQuadMesh&lt;ELEMENT&gt;</code>, then store the numbers of elements in each direction in each region (and all at once).</p>
- <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code" href="spine__channel_8txt.html#af6dd20913b6f4c7abd5a0823c3ad7134">ChannelSpineMesh&lt;ELEMENT&gt;::build_channel_spine_mesh</a>(</div>
-<div class="line"> TimeStepper* time_stepper_pt) </div>
-<div class="line">{</div>
-<div class="line"> <span class="comment">// Build the underlying quad mesh: </span></div>
-<div class="line"> RectangularQuadMesh&lt;ELEMENT &gt;::build_mesh(time_stepper_pt);</div>
+ <div class="fragment"><div class="line">  <span class="keywordtype">void</span> <a class="code" href="spine__channel_8txt.html#af6dd20913b6f4c7abd5a0823c3ad7134">ChannelSpineMesh&lt;ELEMENT&gt;::build_channel_spine_mesh</a>(</div>
+<div class="line">    TimeStepper* time_stepper_pt)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Build the underlying quad mesh:</span></div>
+<div class="line">    RectangularQuadMesh&lt;ELEMENT&gt;::build_mesh(time_stepper_pt);</div>
 <div class="line"> </div>
-<div class="line"> <span class="comment">// Read out the number of elements in the x-direction and y-direction</span></div>
-<div class="line"> <span class="comment">// and in each of the left, centre and right regions</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_x = this-&gt;Nx;</div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_y = this-&gt;Ny;</div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_x0 = this-&gt;Nx0;</div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_x1 = this-&gt;Nx1;</div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_x2 = this-&gt;Nx2;</div>
+<div class="line">    <span class="comment">// Read out the number of elements in the x-direction and y-direction</span></div>
+<div class="line">    <span class="comment">// and in each of the left, centre and right regions</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> n_x = this-&gt;Nx;</div>
+<div class="line">    <span class="keywordtype">unsigned</span> n_y = this-&gt;Ny;</div>
+<div class="line">    <span class="keywordtype">unsigned</span> n_x0 = this-&gt;Nx0;</div>
+<div class="line">    <span class="keywordtype">unsigned</span> n_x1 = this-&gt;Nx1;</div>
+<div class="line">    <span class="keywordtype">unsigned</span> n_x2 = this-&gt;Nx2;</div>
 </div><!-- fragment --><p>We then allocate memory for the elements and spines in each region in each region.</p>
 <div class="fragment"><div class="line"> </div>
-<div class="line"> <span class="comment">// Set up the pointers to elements in the left region</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> nleft=n_x0*n_y;;</div>
-<div class="line"> Left_element_pt.reserve(nleft);</div>
-<div class="line"> <span class="keywordtype">unsigned</span> ncentre=n_x1*n_y;;</div>
-<div class="line"> Centre_element_pt.reserve(ncentre);</div>
-<div class="line"> <span class="keywordtype">unsigned</span> nright=n_x2*n_y;;</div>
-<div class="line"> Right_element_pt.reserve(nright); </div>
-<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> irow=0;irow&lt;n_y;irow++)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_x0;e++)</div>
+<div class="line">    <span class="comment">// Set up the pointers to elements in the left region</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> nleft = n_x0 * n_y;</div>
+<div class="line">    ;</div>
+<div class="line">    Left_element_pt.reserve(nleft);</div>
+<div class="line">    <span class="keywordtype">unsigned</span> ncentre = n_x1 * n_y;</div>
+<div class="line">    ;</div>
+<div class="line">    Centre_element_pt.reserve(ncentre);</div>
+<div class="line">    <span class="keywordtype">unsigned</span> nright = n_x2 * n_y;</div>
+<div class="line">    ;</div>
+<div class="line">    Right_element_pt.reserve(nright);</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> irow = 0; irow &lt; n_y; irow++)</div>
 <div class="line">    {</div>
-<div class="line">     Left_element_pt.push_back(</div>
-<div class="line">      this-&gt;finite_element_pt(irow*n_x+e));</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e = 0; e &lt; n_x0; e++)</div>
+<div class="line">      {</div>
+<div class="line">        Left_element_pt.push_back(this-&gt;finite_element_pt(irow * n_x + e));</div>
+<div class="line">      }</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e = 0; e &lt; n_x1; e++)</div>
+<div class="line">      {</div>
+<div class="line">        Centre_element_pt.push_back(</div>
+<div class="line">          this-&gt;finite_element_pt(irow * n_x + (n_x0 + e)));</div>
+<div class="line">      }</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e = 0; e &lt; n_x2; e++)</div>
+<div class="line">      {</div>
+<div class="line">        Right_element_pt.push_back(</div>
+<div class="line">          this-&gt;finite_element_pt(irow * n_x + (n_x0 + n_x1 + e)));</div>
+<div class="line">      }</div>
 <div class="line">    }</div>
-<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_x1;e++)</div>
-<div class="line">    {</div>
-<div class="line">     Centre_element_pt.push_back(</div>
-<div class="line">      this-&gt;finite_element_pt(irow*n_x+(n_x0+e)));</div>
-<div class="line">    }</div>
-<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_x2;e++)</div>
-<div class="line">    {</div>
-<div class="line">     Right_element_pt.push_back(</div>
-<div class="line">      this-&gt;finite_element_pt(irow*n_x+(n_x0+n_x1+e)));</div>
-<div class="line">    }</div>
-<div class="line">  }</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifdef PARANOID</span></div>
-<div class="line"> <span class="comment">// Check that we have the correct number of elements</span></div>
-<div class="line"> <span class="keywordflow">if</span> (nelement()!=nleft+ncentre+nright)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="keywordflow">throw</span> OomphLibError(<span class="stringliteral">&quot;Incorrect number of element pointers!&quot;</span>,</div>
-<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
-<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line">  }</div>
+<div class="line">    <span class="comment">// Check that we have the correct number of elements</span></div>
+<div class="line">    <span class="keywordflow">if</span> (nelement() != nleft + ncentre + nright)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keywordflow">throw</span> OomphLibError(<span class="stringliteral">&quot;Incorrect number of element pointers!&quot;</span>,</div>
+<div class="line">                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    }</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"> </div>
-<div class="line"> <span class="comment">// Allocate memory for the spines and fractions along spines</span></div>
-<div class="line"> <span class="comment">//---------------------------------------------------------</span></div>
+<div class="line">    <span class="comment">// Allocate memory for the spines and fractions along spines</span></div>
+<div class="line">    <span class="comment">//---------------------------------------------------------</span></div>
 <div class="line"> </div>
-<div class="line"> <span class="comment">// Read out number of linear points in the element</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_p = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(finite_element_pt(0))-&gt;nnode_1d();</div>
+<div class="line">    <span class="comment">// Read out number of linear points in the element</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> n_p = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(finite_element_pt(0))-&gt;nnode_1d();</div>
 <div class="line"> </div>
-<div class="line"> <span class="keywordtype">unsigned</span> nspine;</div>
-<div class="line"> <span class="comment">// Allocate store for the spines:</span></div>
-<div class="line"> <span class="keywordflow">if</span> (this-&gt;Xperiodic)</div>
-<div class="line">  {</div>
-<div class="line">   nspine = (n_p-1)*n_x;</div>
-<div class="line">   Spine_pt.reserve(nspine);</div>
-<div class="line">   <span class="comment">// Number of spines in each region</span></div>
-<div class="line">   <span class="comment">// NOTE that boundary spines are in both regions</span></div>
-<div class="line">   Nleft_spine = (n_p-1)*n_x0+1;</div>
-<div class="line">   Ncentre_spine = (n_p-1)*n_x1+1;</div>
-<div class="line">   Nright_spine = (n_p-1)*n_x2;</div>
-<div class="line">  }</div>
-<div class="line"> <span class="keywordflow">else</span></div>
-<div class="line">  {</div>
-<div class="line">   nspine = (n_p-1)*n_x+1;</div>
-<div class="line">   Spine_pt.reserve(nspine);</div>
-<div class="line">   <span class="comment">// Number of spines in each region</span></div>
-<div class="line">   <span class="comment">// NOTE that boundary spines are in both regions</span></div>
-<div class="line">   Nleft_spine = (n_p-1)*n_x0+1;</div>
-<div class="line">   Ncentre_spine = (n_p-1)*n_x1+1;</div>
-<div class="line">   Nright_spine = (n_p-1)*n_x2+1;</div>
-<div class="line">  }</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// end Allocating memory</span></div>
-</div><!-- fragment --><p>Now we allocate storage for the parameters used to build the spines.</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// set up the vectors of geometric data &amp; objects for building spines</span></div>
-<div class="line"> Vector&lt;double&gt; r_wall(2), zeta(1), s_wall(1);</div>
-<div class="line"> GeomObject* geometric_object_pt=0;</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// LEFT REGION</span></div>
-<div class="line"> <span class="comment">// ===========</span></div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// SPINES IN LEFT REGION</span></div>
-<div class="line"> <span class="comment">// ---------------------</span></div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Set up zeta increments</span></div>
-<div class="line"> <span class="keywordtype">double</span> zeta_lo=0.0;</div>
-<div class="line"> <span class="keywordtype">double</span> dzeta=Lx0/n_x0;</div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">// Initialise number of elements in previous regions:</span></div>
-<div class="line"> <span class="keywordtype">unsigned</span> n_prev_elements=0;</div>
-</div><!-- fragment --><p>Now we create the first Spine with unit length, pin the height (since it is not a degree of freedom in this mesh) and push the spine back onto the <code>Spine_pt</code>.</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">//FIRST SPINE</span></div>
-<div class="line"> <span class="comment">//-----------</span></div>
-<div class="line"> </div>
-<div class="line"> <span class="comment">//Element 0</span></div>
-<div class="line"> <span class="comment">//Node 0</span></div>
-<div class="line"> <span class="comment">//Assign the new spine with unit length</span></div>
-<div class="line"> <a class="code" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a>* new_spine_pt=<span class="keyword">new</span> <a class="code" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a>(1.0);</div>
-<div class="line"> new_spine_pt-&gt;spine_height_pt()-&gt;pin(0);</div>
-<div class="line"> Spine_pt.push_back(new_spine_pt);</div>
-</div><!-- fragment --><p>We then set the <code>spine_pt()</code> of the first node to the Spine we just created, assign the nodes <code><a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction()</a></code> to zero and define the node as part of this mesh.</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line"> <span class="comment">// Get pointer to node</span></div>
-<div class="line"> SpineNode* nod_pt=element_node_pt(0,0);</div>
-<div class="line"> <span class="comment">//Set the pointer to the spine</span></div>
-<div class="line"> nod_pt-&gt;spine_pt() = new_spine_pt;</div>
-<div class="line"> <span class="comment">//Set the fraction</span></div>
-<div class="line"> nod_pt-&gt;fraction() = 0.0;</div>
-<div class="line"> <span class="comment">// Pointer to the mesh that implements the update fct</span></div>
-<div class="line"> nod_pt-&gt;spine_mesh_pt() = <span class="keyword">this</span>; </div>
-</div><!-- fragment --><p>We then mark the node as part of the left (0) region.</p>
-<div class="fragment"><div class="line"> <span class="comment">// Set update fct id</span></div>
-<div class="line"> nod_pt-&gt;node_update_fct_id()=0;</div>
-</div><!-- fragment --><p>When we built the Spine, we set its height to 1.0. We now need to assign its height from the <code>Straight_wall_pt</code> and assign all the information needed to update the mesh to the Spine.</p>
-<p>First we set the value of <img class="formulaInl" alt="$\zeta$" src="form_28.png"/> and get the geometric object and the local coordinate.</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line"> <span class="comment">// Provide spine with additional storage for wall coordinate </span></div>
-<div class="line"> <span class="comment">// and wall geom object:</span></div>
-<div class="line"> </div>
-<div class="line"> {</div>
-<div class="line">  <span class="comment">// Get the Lagrangian coordinate in the Lower Wall</span></div>
-<div class="line">  zeta[0] =  0.0;</div>
-<div class="line">  <span class="comment">//Get the geometric object and local coordinate</span></div>
-<div class="line">  Straight_wall_pt-&gt;locate_zeta(zeta,geometric_object_pt,s_wall);</div>
-</div><!-- fragment --><p>Then we store these geometric parameters in the Spine.</p>
-<div class="fragment"><div class="line">  </div>
-<div class="line">  <span class="comment">//The local coordinate is a geometric parameter</span></div>
-<div class="line">  <span class="comment">//This needs to be set (rather than added) because the</span></div>
-<div class="line">  <span class="comment">//same spine may be visited more than once</span></div>
-<div class="line">  Vector&lt;double&gt; parameters(1,s_wall[0]);</div>
-<div class="line">  nod_pt-&gt;spine_pt()-&gt;set_geom_parameter(parameters);</div>
-</div><!-- fragment --><p>We then set the height of the Spine according to the geometric object.</p>
-<div class="fragment"><div class="line">  </div>
-<div class="line">  <span class="comment">// Get position of wall</span></div>
-<div class="line">  Straight_wall_pt-&gt;position(s_wall,r_wall);</div>
-<div class="line">  </div>
-<div class="line">  <span class="comment">// Adjust spine height</span></div>
-<div class="line">  nod_pt-&gt;spine_pt()-&gt;height()=r_wall[1];</div>
-</div><!-- fragment --><p>Finally we set the Spines' pointer to the geometric object.</p>
-<div class="fragment"><div class="line">  </div>
-<div class="line">  <span class="comment">// The sub geom object is one (and only) geom object</span></div>
-<div class="line">  <span class="comment">// for spine:</span></div>
-<div class="line">  Vector&lt;GeomObject*&gt; geom_object_pt(1);</div>
-<div class="line">  geom_object_pt[0] = geometric_object_pt;</div>
-<div class="line">  </div>
-<div class="line">  <span class="comment">// Pass geom object(s) to spine</span></div>
-<div class="line">  nod_pt-&gt;spine_pt()-&gt;set_geom_object_pt(geom_object_pt);</div>
-<div class="line"> }</div>
-</div><!-- fragment --><p>Now we loop vertically along the spine, adding a pointer to the spine to each element, and assigning the fraction for each node on this spine, define each node as part of this mesh, and mark it as part of the left region.</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line"> <span class="comment">//Loop vertically along the spine</span></div>
-<div class="line"> <span class="comment">//Loop over the elements </span></div>
-<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> i=0;i&lt;n_y;i++)</div>
-<div class="line">  {</div>
-<div class="line">   <span class="comment">//Loop over the vertical nodes, apart from the first</span></div>
-<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l1=1;l1&lt;n_p;l1++)</div>
+<div class="line">    <span class="keywordtype">unsigned</span> nspine;</div>
+<div class="line">    <span class="comment">// Allocate store for the spines:</span></div>
+<div class="line">    <span class="keywordflow">if</span> (this-&gt;Xperiodic)</div>
 <div class="line">    {</div>
-<div class="line">     <span class="comment">// Get pointer to node</span></div>
-<div class="line">     SpineNode* nod_pt=element_node_pt(i*n_x,l1*n_p);</div>
-<div class="line">     <span class="comment">//Set the pointer to the spine</span></div>
-<div class="line">     nod_pt-&gt;spine_pt() = new_spine_pt;</div>
-<div class="line">     <span class="comment">//Set the fraction</span></div>
-<div class="line">     nod_pt-&gt;fraction()=(double(i)+double(l1)/double(n_p-1))/<span class="keywordtype">double</span>(n_y);</div>
-<div class="line">     <span class="comment">// Pointer to the mesh that implements the update fct</span></div>
-<div class="line">     nod_pt-&gt;spine_mesh_pt() = <span class="keyword">this</span>; </div>
-<div class="line">     <span class="comment">// Set update fct id</span></div>
-<div class="line">     nod_pt-&gt;node_update_fct_id()=0;</div>
+<div class="line">      nspine = (n_p - 1) * n_x;</div>
+<div class="line">      Spine_pt.reserve(nspine);</div>
+<div class="line">      <span class="comment">// Number of spines in each region</span></div>
+<div class="line">      <span class="comment">// NOTE that boundary spines are in both regions</span></div>
+<div class="line">      Nleft_spine = (n_p - 1) * n_x0 + 1;</div>
+<div class="line">      Ncentre_spine = (n_p - 1) * n_x1 + 1;</div>
+<div class="line">      Nright_spine = (n_p - 1) * n_x2;</div>
 <div class="line">    }</div>
-<div class="line">  } <span class="comment">// end loop over elements</span></div>
-</div><!-- fragment --><p>We then loop over the remaining spines in the left region repeating this process, except that the first spine in each element (except the first) is copied from the last spine in the previous element.</p>
+<div class="line">    <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">      nspine = (n_p - 1) * n_x + 1;</div>
+<div class="line">      Spine_pt.reserve(nspine);</div>
+<div class="line">      <span class="comment">// Number of spines in each region</span></div>
+<div class="line">      <span class="comment">// NOTE that boundary spines are in both regions</span></div>
+<div class="line">      Nleft_spine = (n_p - 1) * n_x0 + 1;</div>
+<div class="line">      Ncentre_spine = (n_p - 1) * n_x1 + 1;</div>
+<div class="line">      Nright_spine = (n_p - 1) * n_x2 + 1;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// end Allocating memory</span></div>
+</div><!-- fragment --><p>Now we allocate storage for the parameters used to build the spines.</p>
+<div class="fragment"></div><!-- fragment --><p>Now we create the first Spine with unit length, pin the height (since it is not a degree of freedom in this mesh) and push the spine back onto the <code>Spine_pt</code>.</p>
+<div class="fragment"></div><!-- fragment --><p>We then set the <code>spine_pt()</code> of the first node to the Spine we just created, assign the nodes <code><a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction()</a></code> to zero and define the node as part of this mesh.</p>
+<div class="fragment"></div><!-- fragment --><p>We then mark the node as part of the left (0) region.</p>
+<div class="fragment"></div><!-- fragment --><p>When we built the Spine, we set its height to 1.0. We now need to assign its height from the <code>Straight_wall_pt</code> and assign all the information needed to update the mesh to the Spine.</p>
+<p>First we set the value of <img class="formulaInl" alt="$\zeta$" src="form_28.png"/> and get the geometric object and the local coordinate.</p>
+<div class="fragment"></div><!-- fragment --><p>Then we store these geometric parameters in the Spine.</p>
+<div class="fragment"></div><!-- fragment --><p>We then set the height of the Spine according to the geometric object.</p>
+<div class="fragment"></div><!-- fragment --><p>Finally we set the Spines' pointer to the geometric object.</p>
+<div class="fragment"></div><!-- fragment --><p>Now we loop vertically along the spine, adding a pointer to the spine to each element, and assigning the fraction for each node on this spine, define each node as part of this mesh, and mark it as part of the left region.</p>
+<div class="fragment"></div><!-- fragment --><p>We then loop over the remaining spines in the left region repeating this process, except that the first spine in each element (except the first) is copied from the last spine in the previous element.</p>
 <p>We then repeat this process for the centre and right regions, using the correct geometric objects to define the upper wall, which can be examined in detail <a href="../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html">here </a>.</p>
 <hr  />
  <hr  />
@@ -767,7 +637,6 @@ PDF file</h1>
 <div class="ttc" id="aclassChannelSpineFlowProblem_html_abdf2cc520915167d8718499459df348b"><div class="ttname"><a href="classChannelSpineFlowProblem.html#abdf2cc520915167d8718499459df348b">ChannelSpineFlowProblem::~ChannelSpineFlowProblem</a></div><div class="ttdeci">~ChannelSpineFlowProblem()</div><div class="ttdoc">Destructor: (empty)</div><div class="ttdef"><b>Definition:</b> <a href="simple__spine__channel_8cc_source.html#l00467">simple_spine_channel.cc:467</a></div></div>
 <div class="ttc" id="aclassSinusoidalWall_html"><div class="ttname"><a href="classSinusoidalWall.html">SinusoidalWall</a></div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8cc_source.html#l00072">spine_channel.cc:72</a></div></div>
 <div class="ttc" id="aclassChannelSpineFlowProblem_html_aaf6dd8a8a472ccd938df579aba61ec97"><div class="ttname"><a href="classChannelSpineFlowProblem.html#aaf6dd8a8a472ccd938df579aba61ec97">ChannelSpineFlowProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve. Update the nodal positions.</div><div class="ttdef"><b>Definition:</b> <a href="simple__spine__channel_8cc_source.html#l00471">simple_spine_channel.cc:471</a></div></div>
-<div class="ttc" id="aspine__channel_8txt_html_a914410aeeaf61a0d6c75c43ec26ecbaa"><div class="ttname"><a href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a></div><div class="ttdeci">When we built the Spine</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00434">spine_channel.txt:434</a></div></div>
 <div class="ttc" id="aspine__channel_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00006">spine_channel.txt:6</a></div></div>
 <div class="ttc" id="aspine__channel_8txt_html_af6dd20913b6f4c7abd5a0823c3ad7134"><div class="ttname"><a href="spine__channel_8txt.html#af6dd20913b6f4c7abd5a0823c3ad7134">build_channel_spine_mesh</a></div><div class="ttdeci">All these details are passed to the except for the pointer to the geometric object for the uniform wall The constructor calls the empty constructor for c copies these values to their storage in the mesh dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform wall and call the function c build_channel_spine_mesh(...) \until } When we call the function \c build_channel_spine_mesh(...)</div></div>
 <div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="simple__spine__channel_8cc_source.html#l00407">simple_spine_channel.cc:407</a></div></div>
@@ -801,7 +670,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:09:10
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:50:14
         </div>
       </div>
     </footer>

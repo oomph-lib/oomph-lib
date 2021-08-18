@@ -19,7 +19,7 @@ void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a05f4242ac8ee12f5a765bf7eff896e60}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aeabcecba445cac4bc31ef5133f87ce08}{compute\+\_\+gamma\+\_\+contribution}} (const double \&theta, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, std\+::complex$<$ double $>$ \&gamma\+\_\+con, std\+::map$<$ unsigned, std\+::complex$<$ double $>$ $>$ \&d\+\_\+gamma\+\_\+con)
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a912c116e1fe3120b7d2e3fec8ed28a37}{compute\+\_\+gamma\+\_\+contribution}} (const double \&theta, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, std\+::complex$<$ double $>$ \&gamma\+\_\+con, std\+::map$<$ unsigned, std\+::complex$<$ double $>$$>$ \&d\+\_\+gamma\+\_\+con)
 \begin{DoxyCompactList}\small\item\em Compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes the wavenumber (for gamma integral, not the one from the Fourier decomposition of the Helmholtz equations!) and the polar angle theta as input. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNMesh}{Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aceac2fb059ea8969dd57e1817e3beefa}{outer\+\_\+boundary\+\_\+mesh\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function to mesh of all DtN boundary condition elements (needed to get access to gamma values) \end{DoxyCompactList}\item 
@@ -31,8 +31,7 @@ void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a044d961d83a7d688f5e65ba91da751fa}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual vector ~\newline
- Jacobian matrix. Overloaded version, using the gamma computed in the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual vector Jacobian matrix. Overloaded version, using the gamma computed in the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -45,10 +44,9 @@ void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement
 \subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
 class oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
-\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} used to apply Sommerfeld radiation conditon via Dirichlet to Neumann map. ~\newline
- 
+\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} used to apply Sommerfeld radiation conditon via Dirichlet to Neumann map. 
 
-Definition at line 421 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 426 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -66,7 +64,7 @@ Construct element from specification of bulk element and face index.
 
 
 
-Definition at line 429 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 432 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -88,27 +86,26 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af03c43b9df
 
 
 
-Definition at line 484 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 488 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), oomph\+::\+Node\+::copied\+\_\+node\+\_\+pt(), e, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aeabcecba445cac4bc31ef5133f87ce08}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aeabcecba445cac4bc31ef5133f87ce08}} 
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a912c116e1fe3120b7d2e3fec8ed28a37}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a912c116e1fe3120b7d2e3fec8ed28a37}} 
 \index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!compute\_gamma\_contribution@{compute\_gamma\_contribution}}
 \index{compute\_gamma\_contribution@{compute\_gamma\_contribution}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_gamma\_contribution()}{compute\_gamma\_contribution()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+gamma\+\_\+contribution (\begin{DoxyParamCaption}\item[{const double \&}]{theta,  }\item[{const unsigned \&}]{n,  }\item[{std\+::complex$<$ double $>$ \&}]{gamma\+\_\+con,  }\item[{std\+::map$<$ unsigned, std\+::complex$<$ double $>$ $>$ \&}]{d\+\_\+gamma\+\_\+con }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+gamma\+\_\+contribution (\begin{DoxyParamCaption}\item[{const double \&}]{theta,  }\item[{const unsigned \&}]{n,  }\item[{std\+::complex$<$ double $>$ \&}]{gamma\+\_\+con,  }\item[{std\+::map$<$ unsigned, std\+::complex$<$ double $>$$>$ \&}]{d\+\_\+gamma\+\_\+con }\end{DoxyParamCaption})}
 
 
 
 Compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes the wavenumber (for gamma integral, not the one from the Fourier decomposition of the Helmholtz equations!) and the polar angle theta as input. 
 
-compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes wavenumber n (from the computation of the gamma integral, not the one from the Fourier decomposition of the Helmholtz equations!) and polar angle theta as input. ~\newline
- 
+compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes wavenumber n (from the computation of the gamma integral, not the one from the Fourier decomposition of the Helmholtz equations!) and polar angle theta as input. 
 
-Definition at line 769 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 778 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -135,7 +132,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 447 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 450 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -158,7 +155,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 436 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 439 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -173,12 +170,11 @@ void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement
 
 
 
-Compute the element\textquotesingle{}s residual vector ~\newline
- Jacobian matrix. Overloaded version, using the gamma computed in the mesh. 
+Compute the element\textquotesingle{}s residual vector Jacobian matrix. Overloaded version, using the gamma computed in the mesh. 
 
 
 
-Definition at line 536 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 538 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -201,7 +197,7 @@ Access function to mesh of all DtN boundary condition elements (needed to get ac
 
 
 
-Definition at line 468 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 472 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -220,7 +216,7 @@ Set mesh of all DtN boundary condition elements.
 
 
 
-Definition at line 475 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 478 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -242,7 +238,7 @@ Pointer to mesh of all DtN boundary condition elements (needed to get access to 
 
 
 
-Definition at line 748 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 759 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 

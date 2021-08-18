@@ -64,8 +64,7 @@ double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba
 double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}{Ymax}}
 \begin{DoxyCompactList}\small\item\em Maximum value of y coordinate. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a83dd0ace2eb47449f5e30522f71d9f59}{Xperiodic}}
-\begin{DoxyCompactList}\small\item\em Boolean variable used to determine whether the mesh is periodic in the x-\/direction ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Boolean variable used to determine whether the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -78,7 +77,7 @@ This class is designed to be used as a Base class for more complex two dimension
 
 It is also possible to make the solution periodic in the x direction. 
 
-Definition at line 59 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 58 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -96,7 +95,7 @@ Constructor that allows the specification of minimum and maximum values of x and
 
 
 
-Definition at line 94 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 93 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -115,7 +114,7 @@ Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of e
 
 
 
-Definition at line 116 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 123 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -134,7 +133,7 @@ Constructor that allows the specification of minimum and maximum values of x and
 
 
 
-Definition at line 130 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 146 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -153,7 +152,7 @@ Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of e
 
 
 
-Definition at line 149 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 174 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -172,7 +171,7 @@ Constructor that allows the specification of minimum and maximum values of x and
 
 
 
-Definition at line 166 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 199 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -194,7 +193,7 @@ Generic mesh construction function\+: contains all the hard work.
 
 Generic mesh construction. This function contains the \char`\"{}guts\char`\"{} of the mesh generation process, including all the tedious loops, counting and spacing functions. The function should be called in all constuctors of any derived classes. 
 
-Definition at line 44 of file rectangular\+\_\+quadmesh.\+template.\+cc.
+Definition at line 43 of file rectangular\+\_\+quadmesh.\+template.\+cc.
 
 
 
@@ -211,14 +210,13 @@ void \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\
 
 Reorder the elements\+: By default they are ordered in \char`\"{}horizontal\char`\"{} layers (increasing in x, then in y). This function changes this to an ordering in the vertical direction (y first, then x). This is more efficient if a frontal solver is used and the mesh has more elements in the x than the y direction. Can be overloaded in specific derived meshes. 
 
-Reorder the elements so they are listed in vertical slices (more efficient during the frontal solution if the domain is long in the x-\/direction. ~\newline
- 
+Reorder the elements so they are listed in vertical slices (more efficient during the frontal solution if the domain is long in the x-\/direction. 
 
 Reimplemented in \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_ad449460c4d06b2be64b53097143a3b09}{oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
 
 
 
-Definition at line 801 of file rectangular\+\_\+quadmesh.\+template.\+cc.
+Definition at line 834 of file rectangular\+\_\+quadmesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}\label{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!nx@{nx}}
@@ -233,7 +231,7 @@ Return number of elements in x direction.
 
 
 
-Definition at line 182 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 224 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -256,7 +254,7 @@ Return number of elements in y direction.
 
 
 
-Definition at line 189 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 231 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -279,7 +277,7 @@ Return the maximum value of x coordinate.
 
 
 
-Definition at line 203 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 245 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -298,7 +296,7 @@ Return the minimum value of x coordinate.
 
 
 
-Definition at line 196 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 238 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -321,7 +319,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a5fd9eae27ba19
 
 
 
-Definition at line 237 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 279 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -340,7 +338,7 @@ Return the maximum value of y coordinate.
 
 
 
-Definition at line 217 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 259 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -359,7 +357,7 @@ Return the minimum value of y coordinate.
 
 
 
-Definition at line 210 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 252 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -382,7 +380,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a2d05d5228e383
 
 
 
-Definition at line 252 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 296 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -404,7 +402,7 @@ Np\+: number of (linear) points in the element.
 
 
 
-Definition at line 68 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 67 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -423,7 +421,7 @@ Nx\+: number of elements in x-\/direction.
 
 
 
-Definition at line 64 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 63 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -442,7 +440,7 @@ Ny\+: number of elements in y-\/direction.
 
 
 
-Definition at line 66 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 65 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -461,7 +459,7 @@ Maximum value of x coordinate.
 
 
 
-Definition at line 73 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 72 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -480,7 +478,7 @@ Minimum value of x coordinate.
 
 
 
-Definition at line 71 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 70 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -495,12 +493,11 @@ bool \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\
 
 
 
-Boolean variable used to determine whether the mesh is periodic in the x-\/direction ~\newline
- 
+Boolean variable used to determine whether the mesh is periodic in the x-\/direction. 
 
 
 
-Definition at line 82 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 81 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}\label{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!Ymax@{Ymax}}
@@ -515,7 +512,7 @@ Maximum value of y coordinate.
 
 
 
-Definition at line 78 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 77 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 
@@ -534,7 +531,7 @@ Minimum value of y coordinate.
 
 
 
-Definition at line 76 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line 75 of file rectangular\+\_\+quadmesh.\+template.\+h.
 
 
 

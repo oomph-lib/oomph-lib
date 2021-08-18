@@ -82,7 +82,7 @@ class oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$}
 
 N\+S\+T\+E\+PS=1 gives normal \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}}. 
 
-Definition at line 864 of file timesteppers.\+h.
+Definition at line 929 of file timesteppers.\+h.
 
 
 
@@ -100,7 +100,7 @@ Typedef for function that returns the (scalar) initial value at a given value of
 
 
 
-Definition at line 916 of file timesteppers.\+h.
+Definition at line 979 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Newmark_af7c5c0d8127484525f751f084aa36d67}\label{classoomph_1_1Newmark_af7c5c0d8127484525f751f084aa36d67}} 
 \index{oomph::Newmark$<$ NSTEPS $>$@{oomph::Newmark$<$ NSTEPS $>$}!NodeInitialConditionFctPt@{NodeInitialConditionFctPt}}
@@ -115,7 +115,7 @@ Typedef for function that returns the (scalar) initial value at a given value of
 
 
 
-Definition at line 934 of file timesteppers.\+h.
+Definition at line 995 of file timesteppers.\+h.
 
 
 
@@ -133,7 +133,7 @@ Constructor\+: Pass pointer to global time. We set up a timestepping scheme with
 
 
 
-Definition at line 872 of file timesteppers.\+h.
+Definition at line 935 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Newmark_a439fe6ce251eea0cf7e0a5e8b3a0406e}\label{classoomph_1_1Newmark_a439fe6ce251eea0cf7e0a5e8b3a0406e}} 
 \index{oomph::Newmark$<$ NSTEPS $>$@{oomph::Newmark$<$ NSTEPS $>$}!Newmark@{Newmark}}
@@ -148,7 +148,7 @@ Broken copy constructor.
 
 
 
-Definition at line 882 of file timesteppers.\+h.
+Definition at line 945 of file timesteppers.\+h.
 
 
 
@@ -170,7 +170,7 @@ Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}
 
 
 
-Definition at line 576 of file timesteppers.\+cc.
+Definition at line 569 of file timesteppers.\+cc.
 
 
 
@@ -189,7 +189,7 @@ Initialise the time-\/history for the nodal values, so that the \mbox{\hyperlink
 
 Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, so that the \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} representations for current veloc and acceleration are exact. 
 
-Definition at line 699 of file timesteppers.\+cc.
+Definition at line 688 of file timesteppers.\+cc.
 
 
 
@@ -218,7 +218,7 @@ Call this function for t\+\_\+deriv=0,1,2,3. When calling with
 \end{DoxyCode}
  
 
-Definition at line 843 of file timesteppers.\+cc.
+Definition at line 831 of file timesteppers.\+cc.
 
 
 
@@ -235,11 +235,10 @@ void \mbox{\hyperlink{classoomph_1_1Newmark}{oomph\+::\+Newmark}}$<$ N\+S\+T\+E\
 
 Second step in a two-\/stage procedure to assign the history values for the \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} scheme so that the veloc and accel that are computed by the scheme are correct at the current time. 
 
-This assigns appropriate values for the \char`\"{}previous 
-velocities and accelerations\char`\"{} so that their current values, which were defined in assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(...), are represented exactly by the \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} scheme. ~\newline
- 
+This assigns appropriate values for the \char`\"{}previous
+velocities and accelerations\char`\"{} so that their current values, which were defined in assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(...), are represented exactly by the \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} scheme. 
 
-Definition at line 903 of file timesteppers.\+cc.
+Definition at line 889 of file timesteppers.\+cc.
 
 
 
@@ -262,7 +261,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_ab66972f0eaf3ba34645793e23
 
 
 
-Definition at line 538 of file timesteppers.\+cc.
+Definition at line 532 of file timesteppers.\+cc.
 
 
 
@@ -285,7 +284,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a7e894df13c88c96dd8eced270
 
 
 
-Definition at line 509 of file timesteppers.\+cc.
+Definition at line 503 of file timesteppers.\+cc.
 
 
 
@@ -308,7 +307,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a00e57b6436cff4fc82af481b8
 
 
 
-Definition at line 1000 of file timesteppers.\+h.
+Definition at line 1062 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Newmark_a4628c97b9f580d0888cb911caf28b54f}\label{classoomph_1_1Newmark_a4628c97b9f580d0888cb911caf28b54f}} 
 \index{oomph::Newmark$<$ NSTEPS $>$@{oomph::Newmark$<$ NSTEPS $>$}!nprev\_values@{nprev\_values}}
@@ -327,7 +326,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf81
 
 
 
-Definition at line 997 of file timesteppers.\+h.
+Definition at line 1056 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Newmark_a549944d9eecd9fe43cd7c81fad571986}\label{classoomph_1_1Newmark_a549944d9eecd9fe43cd7c81fad571986}} 
 \index{oomph::Newmark$<$ NSTEPS $>$@{oomph::Newmark$<$ NSTEPS $>$}!operator=@{operator=}}
@@ -342,7 +341,7 @@ Broken assignment operator.
 
 
 
-Definition at line 888 of file timesteppers.\+h.
+Definition at line 951 of file timesteppers.\+h.
 
 
 
@@ -365,7 +364,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a251e5d4b37381e582
 
 
 
-Definition at line 895 of file timesteppers.\+h.
+Definition at line 958 of file timesteppers.\+h.
 
 
 
@@ -392,7 +391,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1NewmarkBDF_af559fe2ed59f9b2787f4
 
 
 
-Definition at line 1055 of file timesteppers.\+cc.
+Definition at line 1039 of file timesteppers.\+cc.
 
 
 
@@ -419,7 +418,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a86ac259d50e62295d137
 
 
 
-Definition at line 999 of file timesteppers.\+cc.
+Definition at line 983 of file timesteppers.\+cc.
 
 
 
@@ -446,7 +445,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a4726c0ea901167bc2124
 
 
 
-Definition at line 966 of file timesteppers.\+cc.
+Definition at line 950 of file timesteppers.\+cc.
 
 
 
@@ -468,7 +467,7 @@ First \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} parameter (usually 0.\+5
 
 
 
-Definition at line 1006 of file timesteppers.\+h.
+Definition at line 1070 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Newmark_a01274acab6f486732be1cc37fb5b40ce}\label{classoomph_1_1Newmark_a01274acab6f486732be1cc37fb5b40ce}} 
 \index{oomph::Newmark$<$ NSTEPS $>$@{oomph::Newmark$<$ NSTEPS $>$}!Beta2@{Beta2}}
@@ -483,7 +482,7 @@ Second \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} parameter (usually 0.\+
 
 
 
-Definition at line 1009 of file timesteppers.\+h.
+Definition at line 1073 of file timesteppers.\+h.
 
 
 

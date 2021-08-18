@@ -28,14 +28,13 @@ void \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_ac895a84017b3eb57dadc
 void \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a97f911c422af3e4fbd078b58cfe3e207}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and element Jacobian matrix corresponding to the solid positions. Overloaded version to take the hanging nodes into account. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a23a8382cc9da7809752851db65e20241}{is\+\_\+undeformed\+\_\+macro\+\_\+element\+\_\+used\+\_\+for\+\_\+new\+\_\+lagrangian\+\_\+coords}} () const
-\begin{DoxyCompactList}\small\item\em Return the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). Default\+: False as it means that, following a refinement an element is no longer in equilbrium (as the Lagrangian coordinate is determined differently from the Eulerian one). However, basing the Lagrangian coordinates on the undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} can be more stable numerically and for steady problems it\textquotesingle{}s not a big deal either way as the difference between the two formulations only matters at finite resolution so we have no right to say that one is \char`\"{}more correct\char`\"{} than the other... \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). Default\+: False as it means that, following a refinement an element is no longer in equilbrium (as the Lagrangian coordinate is determined differently from the Eulerian one). However, basing the Lagrangian coordinates on the undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} can be more stable numerically and for steady problems it\textquotesingle{}s not a big deal either way as the difference between the two formulations only matters at finite resolution so we have no right to say that one is \char`\"{}more
+correct\char`\"{} than the other... \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a65b054a8a113f03e2a11647faa104b6f}{enable\+\_\+use\+\_\+of\+\_\+undeformed\+\_\+macro\+\_\+element\+\_\+for\+\_\+new\+\_\+lagrangian\+\_\+coords}} ()
-\begin{DoxyCompactList}\small\item\em Set the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a1d85edf9f84720ac0de66427d75a5871}{disable\+\_\+use\+\_\+of\+\_\+undeformed\+\_\+macro\+\_\+element\+\_\+for\+\_\+new\+\_\+lagrangian\+\_\+coords}} ()
-\begin{DoxyCompactList}\small\item\em Unset the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). ~\newline
- \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \& \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_ac939940d4412c76913afd16cf752cacf}{local\+\_\+position\+\_\+hang\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1FiniteElement_ace0e7fb72a805b5c2c600347bfae7a9b}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Unset the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \& \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_ac939940d4412c76913afd16cf752cacf}{local\+\_\+position\+\_\+hang\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a28ae3eb7760edc5c9d6427611d8e6fb6}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Access the local equation number of of hanging node variables associated with nodal positions. The function returns a dense matrix that contains all the local equation numbers corresponding to the positional degrees of freedom. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a159967ccbb5327b2ee04154a11b1b51c}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Further build\+: Pass the father\textquotesingle{}s Use\+\_\+undeformed\+\_\+macro\+\_\+element\+\_\+for\+\_\+new\+\_\+lagrangian\+\_\+coords flag down, then call the underlying \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}\textquotesingle{}s version. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -61,7 +60,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a973020f4458c30aa4584
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_ac12e9c9ea5a0f1f87cadaaec9d7d8fe9}{Local\+\_\+position\+\_\+hang\+\_\+eqn}}
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_aa361b9441808d7d194494125abd1f6fd}{Local\+\_\+position\+\_\+hang\+\_\+eqn}}
 \begin{DoxyCompactList}\small\item\em Storage for local equation numbers of hanging node variables associated with nodal positions. local position equation number = Local\+\_\+position\+\_\+hang\+\_\+eqn(master\+\_\+node\+\_\+pt,ival) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -69,7 +68,7 @@ std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperli
 \doxysubsection{Detailed Description}
 Refineable\+Solid\+Elements are Solid\+Finite\+Elements that may be subdivided into children to provide a better local approximation to the solution. The distinction is required to keep a clean separation between problems that alter nodal positions and others. A number of procedures are generic and are included in this class. 
 
-Definition at line 781 of file refineable\+\_\+elements.\+h.
+Definition at line 885 of file refineable\+\_\+elements.\+h.
 
 
 
@@ -86,7 +85,7 @@ Constructor.
 
 
 
-Definition at line 840 of file refineable\+\_\+elements.\+h.
+Definition at line 941 of file refineable\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSolidElement_a7bb075ed922e71ed102a02adfe2d24e7}\label{classoomph_1_1RefineableSolidElement_a7bb075ed922e71ed102a02adfe2d24e7}} 
 \index{oomph::RefineableSolidElement@{oomph::RefineableSolidElement}!````~RefineableSolidElement@{$\sim$RefineableSolidElement}}
@@ -100,7 +99,7 @@ Virtual Destructor, delete any allocated storage.
 
 
 
-Definition at line 844 of file refineable\+\_\+elements.\+h.
+Definition at line 949 of file refineable\+\_\+elements.\+h.
 
 
 
@@ -115,14 +114,13 @@ Definition at line 844 of file refineable\+\_\+elements.\+h.
 
 Assemble the jacobian matrix for the mapping from local to lagrangian coordinates, given the derivatives of the shape function Overload the standard version to use the hanging information for the lagrangian coordinates. 
 
-Internal function that is used to assemble the jacobian of the mapping from local coordinates (s) to the lagrangian coordinates (xi), given the derivatives of the shape functions. ~\newline
- 
+Internal function that is used to assemble the jacobian of the mapping from local coordinates (s) to the lagrangian coordinates (xi), given the derivatives of the shape functions. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a91f14d25d145e7ef47d55cabfd332f5c}{oomph\+::\+Solid\+Finite\+Element}}.
 
 
 
-Definition at line 851 of file refineable\+\_\+elements.\+cc.
+Definition at line 855 of file refineable\+\_\+elements.\+cc.
 
 
 
@@ -138,14 +136,13 @@ References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Solid\+Finite\+Ele
 
 Assemble the the \char`\"{}jacobian\char`\"{} matrix of second derivatives, given the second derivatives of the shape functions w.\+r.\+t. local coordinates Overload the standard version to use the hanging information for the lagrangian coordinates. 
 
-Internal function that is used to assemble the jacobian of second derivatives of the the mapping from local coordinates (s) to the lagrangian coordinates (xi), given the second derivatives of the shape functions. ~\newline
- 
+Internal function that is used to assemble the jacobian of second derivatives of the the mapping from local coordinates (s) to the lagrangian coordinates (xi), given the second derivatives of the shape functions. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a33ab1427cebdc36ff77d897f5db9f3a6}{oomph\+::\+Solid\+Finite\+Element}}.
 
 
 
-Definition at line 890 of file refineable\+\_\+elements.\+cc.
+Definition at line 894 of file refineable\+\_\+elements.\+cc.
 
 
 
@@ -163,7 +160,7 @@ Assign local equation numbers to the hanging values associated with positions or
 
 The standard equation numbering scheme for solid positions, so that hanging \mbox{\hyperlink{classoomph_1_1Node}{Node}} information is included. 
 
-Definition at line 1174 of file refineable\+\_\+elements.\+cc.
+Definition at line 1178 of file refineable\+\_\+elements.\+cc.
 
 
 
@@ -189,7 +186,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a3c7ad30f23
 
 
 
-Definition at line 848 of file refineable\+\_\+elements.\+h.
+Definition at line 953 of file refineable\+\_\+elements.\+h.
 
 
 
@@ -203,12 +200,11 @@ References assign\+\_\+solid\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), an
 
 
 
-Unset the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). ~\newline
- 
+Unset the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). 
 
 
 
-Definition at line 900 of file refineable\+\_\+elements.\+h.
+Definition at line 1009 of file refineable\+\_\+elements.\+h.
 
 
 
@@ -222,12 +218,11 @@ References Use\+\_\+undeformed\+\_\+macro\+\_\+element\+\_\+for\+\_\+new\+\_\+la
 
 
 
-Set the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). ~\newline
- 
+Set the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). 
 
 
 
-Definition at line 894 of file refineable\+\_\+elements.\+h.
+Definition at line 1001 of file refineable\+\_\+elements.\+h.
 
 
 
@@ -249,7 +244,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa4d7dab326
 
 
 
-Definition at line 1333 of file refineable\+\_\+elements.\+cc.
+Definition at line 1335 of file refineable\+\_\+elements.\+cc.
 
 
 
@@ -275,7 +270,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithPressur
 
 
 
-Definition at line 914 of file refineable\+\_\+elements.\+h.
+Definition at line 1027 of file refineable\+\_\+elements.\+h.
 
 
 
@@ -301,7 +296,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a2457ad75b4
 
 
 
-Definition at line 1048 of file refineable\+\_\+elements.\+cc.
+Definition at line 1055 of file refineable\+\_\+elements.\+cc.
 
 
 
@@ -323,7 +318,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a958d2efd4d
 
 
 
-Definition at line 1132 of file refineable\+\_\+elements.\+cc.
+Definition at line 1137 of file refineable\+\_\+elements.\+cc.
 
 
 
@@ -337,11 +332,12 @@ References oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Hang\+Info\+::master
 
 
 
-Return the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). Default\+: False as it means that, following a refinement an element is no longer in equilbrium (as the Lagrangian coordinate is determined differently from the Eulerian one). However, basing the Lagrangian coordinates on the undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} can be more stable numerically and for steady problems it\textquotesingle{}s not a big deal either way as the difference between the two formulations only matters at finite resolution so we have no right to say that one is \char`\"{}more correct\char`\"{} than the other... 
+Return the flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+Nodes are to be determined by the father element\textquotesingle{}s undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it has one). Default\+: False as it means that, following a refinement an element is no longer in equilbrium (as the Lagrangian coordinate is determined differently from the Eulerian one). However, basing the Lagrangian coordinates on the undeformed \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} can be more stable numerically and for steady problems it\textquotesingle{}s not a big deal either way as the difference between the two formulations only matters at finite resolution so we have no right to say that one is \char`\"{}more
+correct\char`\"{} than the other... 
 
 
 
-Definition at line 888 of file refineable\+\_\+elements.\+h.
+Definition at line 993 of file refineable\+\_\+elements.\+h.
 
 
 
@@ -363,7 +359,7 @@ Access the local equation number of of hanging node variables associated with no
 
 
 
-Definition at line 907 of file refineable\+\_\+elements.\+h.
+Definition at line 1018 of file refineable\+\_\+elements.\+h.
 
 
 
@@ -389,7 +385,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a811c926ab4
 
 
 
-Definition at line 934 of file refineable\+\_\+elements.\+cc.
+Definition at line 938 of file refineable\+\_\+elements.\+cc.
 
 
 
@@ -411,7 +407,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a73f387da7f
 
 
 
-Definition at line 992 of file refineable\+\_\+elements.\+cc.
+Definition at line 1003 of file refineable\+\_\+elements.\+cc.
 
 
 
@@ -420,11 +416,11 @@ References oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Hang\+Info\+::master
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1RefineableSolidElement_ac12e9c9ea5a0f1f87cadaaec9d7d8fe9}\label{classoomph_1_1RefineableSolidElement_ac12e9c9ea5a0f1f87cadaaec9d7d8fe9}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidElement_aa361b9441808d7d194494125abd1f6fd}\label{classoomph_1_1RefineableSolidElement_aa361b9441808d7d194494125abd1f6fd}} 
 \index{oomph::RefineableSolidElement@{oomph::RefineableSolidElement}!Local\_position\_hang\_eqn@{Local\_position\_hang\_eqn}}
 \index{Local\_position\_hang\_eqn@{Local\_position\_hang\_eqn}!oomph::RefineableSolidElement@{oomph::RefineableSolidElement}}
 \doxysubsubsection{\texorpdfstring{Local\_position\_hang\_eqn}{Local\_position\_hang\_eqn}}
-{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$,\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$int$>$ $>$ oomph\+::\+Refineable\+Solid\+Element\+::\+Local\+\_\+position\+\_\+hang\+\_\+eqn\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$int$>$ $>$ oomph\+::\+Refineable\+Solid\+Element\+::\+Local\+\_\+position\+\_\+hang\+\_\+eqn\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -432,7 +428,7 @@ Storage for local equation numbers of hanging node variables associated with nod
 
 
 
-Definition at line 791 of file refineable\+\_\+elements.\+h.
+Definition at line 893 of file refineable\+\_\+elements.\+h.
 
 
 
@@ -450,7 +446,7 @@ Flag deciding if the Lagrangian coordinates of newly-\/created interior Solid\+N
 
 
 
-Definition at line 811 of file refineable\+\_\+elements.\+h.
+Definition at line 912 of file refineable\+\_\+elements.\+h.
 
 
 

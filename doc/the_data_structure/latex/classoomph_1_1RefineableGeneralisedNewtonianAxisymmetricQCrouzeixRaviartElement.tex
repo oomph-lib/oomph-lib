@@ -29,7 +29,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQC
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a5b7210597de67dcdb363897539109464}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
 \begin{DoxyCompactList}\small\item\em Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). ~\newline
- Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
+Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
 Note\+: No pressure history is kept, so pressure is always the current value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_abb293aeb834d1edf4d9f9e0150259e55}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. Empty. \end{DoxyCompactList}\item 
@@ -46,7 +46,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQC
 \doxysubsection{Detailed Description}
 Refineable version of Axisymmetric Quad Crouzeix Raviart elements (note that unlike the cartesian version this is not scale-\/able to higher dimensions!) 
 
-Definition at line 712 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 773 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -63,7 +63,7 @@ Constructor\+:
 
 
 
-Definition at line 731 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 792 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -80,11 +80,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonian
 
 
 
-Definition at line 895 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 998 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::further\+\_\+build(), oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+axi\+\_\+nst(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, press, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quadtree\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, and value.
+References oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::further\+\_\+build(), oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+axi\+\_\+nst(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, press, oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quadtree\+\_\+pt(), oomph\+::\+Quad\+Tree\+Names\+::\+SE, oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Tree\+::son\+\_\+type(), oomph\+::\+Quad\+Tree\+Names\+::\+SW, and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_abb293aeb834d1edf4d9f9e0150259e55}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_abb293aeb834d1edf4d9f9e0150259e55}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
@@ -102,7 +102,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb0
 
 
 
-Definition at line 889 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 992 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a5b7210597de67dcdb363897539109464}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a5b7210597de67dcdb363897539109464}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -113,7 +113,7 @@ Definition at line 889 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+a
 
 
 Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). ~\newline
- Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
+Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
 Note\+: No pressure history is kept, so pressure is always the current value. 
 
 
@@ -122,7 +122,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 857 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 956 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -144,7 +144,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 837 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 932 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -166,7 +166,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db9
 
 
 
-Definition at line 738 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 801 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_adf4666579138c21a202b3d55332dbb6e}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_adf4666579138c21a202b3d55332dbb6e}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!nrecovery\_order@{nrecovery\_order}}
@@ -184,7 +184,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 818 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 909 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a82be46c378226d5588fe8aeda0cef491}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a82be46c378226d5588fe8aeda0cef491}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!nvertex\_node@{nvertex\_node}}
@@ -202,7 +202,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 824 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 915 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -224,7 +224,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line 741 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 807 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -246,7 +246,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymme
 
 
 
-Definition at line 720 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 780 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -268,7 +268,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 829 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 922 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

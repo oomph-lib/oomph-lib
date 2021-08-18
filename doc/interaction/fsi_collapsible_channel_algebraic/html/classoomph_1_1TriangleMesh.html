@@ -177,9 +177,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a18322e3238acaf2c0d3c473b5fac4c91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a18322e3238acaf2c0d3c473b5fac4c91">compute_boundary_segments_connectivity_and_initial_zeta_values</a> (const unsigned &amp;b)</td></tr>
 <tr class="memdesc:a18322e3238acaf2c0d3c473b5fac4c91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the boundary segments connectivity for those boundaries that were splited during the distribution process.  <a href="classoomph_1_1TriangleMesh.html#a18322e3238acaf2c0d3c473b5fac4c91">More...</a><br /></td></tr>
 <tr class="separator:a18322e3238acaf2c0d3c473b5fac4c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab45285f4e725ea9b79e3211d66c741ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#ab45285f4e725ea9b79e3211d66c741ce">re_assign_initial_zeta_values_for_internal_boundary</a> (const unsigned &amp;b, Vector&lt; std::list&lt; FiniteElement * &gt; &gt; &amp;old_segment_sorted_ele_pt, std::map&lt; FiniteElement *, bool &gt; &amp;old_is_inverted)</td></tr>
-<tr class="memdesc:ab45285f4e725ea9b79e3211d66c741ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-assign the boundary segments initial zeta (arclength) value for those internal boundaries that were splited during the distribution process. Those boundaries that have one face element at each side of the boundary.  <a href="classoomph_1_1TriangleMesh.html#ab45285f4e725ea9b79e3211d66c741ce">More...</a><br /></td></tr>
-<tr class="separator:ab45285f4e725ea9b79e3211d66c741ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a097beffb0767e900c92b5c3e5ee06da3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a097beffb0767e900c92b5c3e5ee06da3">re_assign_initial_zeta_values_for_internal_boundary</a> (const unsigned &amp;b, Vector&lt; std::list&lt; FiniteElement * &gt;&gt; &amp;old_segment_sorted_ele_pt, std::map&lt; FiniteElement *, bool &gt; &amp;old_is_inverted)</td></tr>
+<tr class="memdesc:a097beffb0767e900c92b5c3e5ee06da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-assign the boundary segments initial zeta (arclength) value for those internal boundaries that were splited during the distribution process. Those boundaries that have one face element at each side of the boundary.  <a href="classoomph_1_1TriangleMesh.html#a097beffb0767e900c92b5c3e5ee06da3">More...</a><br /></td></tr>
+<tr class="separator:a097beffb0767e900c92b5c3e5ee06da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a33a04b552311d9c9c258fa40e262de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a6a33a04b552311d9c9c258fa40e262de">re_scale_re_assigned_initial_zeta_values_for_internal_boundary</a> (const unsigned &amp;b)</td></tr>
 <tr class="memdesc:a6a33a04b552311d9c9c258fa40e262de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-scale the re-assigned zeta values for the boundary nodes, apply only for internal boundaries.  <a href="classoomph_1_1TriangleMesh.html#a6a33a04b552311d9c9c258fa40e262de">More...</a><br /></td></tr>
 <tr class="separator:a6a33a04b552311d9c9c258fa40e262de"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,12 +201,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afcfb27b6a9230629edbcf7b2f1cfbe48"><td class="memItemLeft" align="right" valign="top">Vector&lt; Node * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#afcfb27b6a9230629edbcf7b2f1cfbe48">boundary_segment_node_pt</a> (const unsigned &amp;b, const unsigned &amp;s)</td></tr>
 <tr class="memdesc:afcfb27b6a9230629edbcf7b2f1cfbe48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return direct access to nodes associated with a segment of a given boundary.  <a href="classoomph_1_1TriangleMesh.html#afcfb27b6a9230629edbcf7b2f1cfbe48">More...</a><br /></td></tr>
 <tr class="separator:afcfb27b6a9230629edbcf7b2f1cfbe48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7acd0ef2644130b830eed3cd3a9a259"><td class="memItemLeft" align="right" valign="top">Node *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#ad7acd0ef2644130b830eed3cd3a9a259">boundary_segment_node_pt</a> (const unsigned &amp;b, const unsigned &amp;s, const unsigned &amp;n)</td></tr>
-<tr class="memdesc:ad7acd0ef2644130b830eed3cd3a9a259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to node n on boundary b.  <a href="classoomph_1_1TriangleMesh.html#ad7acd0ef2644130b830eed3cd3a9a259">More...</a><br /></td></tr>
-<tr class="separator:ad7acd0ef2644130b830eed3cd3a9a259"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4922667cdfd747a3fbc5d391933ce31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#ae4922667cdfd747a3fbc5d391933ce31">update_triangulateio</a> (Vector&lt; Vector&lt; double &gt; &gt; &amp;internal_point)</td></tr>
-<tr class="memdesc:ae4922667cdfd747a3fbc5d391933ce31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the TriangulateIO object to the current nodal position and the centre hole coordinates.  <a href="classoomph_1_1TriangleMesh.html#ae4922667cdfd747a3fbc5d391933ce31">More...</a><br /></td></tr>
-<tr class="separator:ae4922667cdfd747a3fbc5d391933ce31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34dcdc586eb7548f34de8fbf9d561d0b"><td class="memItemLeft" align="right" valign="top">Node *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a34dcdc586eb7548f34de8fbf9d561d0b">boundary_segment_node_pt</a> (const unsigned &amp;b, const unsigned &amp;s, const unsigned &amp;n)</td></tr>
+<tr class="memdesc:a34dcdc586eb7548f34de8fbf9d561d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to node n on boundary b.  <a href="classoomph_1_1TriangleMesh.html#a34dcdc586eb7548f34de8fbf9d561d0b">More...</a><br /></td></tr>
+<tr class="separator:a34dcdc586eb7548f34de8fbf9d561d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43173b5b7e761e60e5f9af3be432918d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a43173b5b7e761e60e5f9af3be432918d">update_triangulateio</a> (Vector&lt; Vector&lt; double &gt;&gt; &amp;internal_point)</td></tr>
+<tr class="memdesc:a43173b5b7e761e60e5f9af3be432918d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the TriangulateIO object to the current nodal position and the centre hole coordinates.  <a href="classoomph_1_1TriangleMesh.html#a43173b5b7e761e60e5f9af3be432918d">More...</a><br /></td></tr>
+<tr class="separator:a43173b5b7e761e60e5f9af3be432918d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27153961f8b691a4cd50bd6c83ffc4d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a27153961f8b691a4cd50bd6c83ffc4d3">update_triangulateio</a> ()</td></tr>
 <tr class="memdesc:a27153961f8b691a4cd50bd6c83ffc4d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the triangulateio object to the current nodal positions.  <a href="classoomph_1_1TriangleMesh.html#a27153961f8b691a4cd50bd6c83ffc4d3">More...</a><br /></td></tr>
 <tr class="separator:a27153961f8b691a4cd50bd6c83ffc4d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,9 +238,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a712bfd68d4b55e9c475347c0146fc8ac"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a712bfd68d4b55e9c475347c0146fc8ac">load_balance</a> (const Vector&lt; unsigned &gt; &amp;target_domain_for_local_non_halo_element)</td></tr>
 <tr class="memdesc:a712bfd68d4b55e9c475347c0146fc8ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function to perform the load balance routines.  <a href="classoomph_1_1TriangleMesh.html#a712bfd68d4b55e9c475347c0146fc8ac">More...</a><br /></td></tr>
 <tr class="separator:a712bfd68d4b55e9c475347c0146fc8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47080ac440e82c099c390b37bf694cfe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a47080ac440e82c099c390b37bf694cfe">reset_boundary_element_info</a> (Vector&lt; unsigned &gt; &amp;ntmp_boundary_elements, Vector&lt; Vector&lt; unsigned &gt; &gt; &amp;ntmp_boundary_elements_in_region, Vector&lt; FiniteElement * &gt; &amp;deleted_elements)</td></tr>
-<tr class="memdesc:a47080ac440e82c099c390b37bf694cfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the boundary elements info. after load balance have taken place.  <a href="classoomph_1_1TriangleMesh.html#a47080ac440e82c099c390b37bf694cfe">More...</a><br /></td></tr>
-<tr class="separator:a47080ac440e82c099c390b37bf694cfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5213a8126947509f566071c648e4716c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a5213a8126947509f566071c648e4716c">reset_boundary_element_info</a> (Vector&lt; unsigned &gt; &amp;ntmp_boundary_elements, Vector&lt; Vector&lt; unsigned &gt;&gt; &amp;ntmp_boundary_elements_in_region, Vector&lt; FiniteElement * &gt; &amp;deleted_elements)</td></tr>
+<tr class="memdesc:a5213a8126947509f566071c648e4716c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the boundary elements info. after load balance have taken place.  <a href="classoomph_1_1TriangleMesh.html#a5213a8126947509f566071c648e4716c">More...</a><br /></td></tr>
+<tr class="separator:a5213a8126947509f566071c648e4716c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7ea71980a3512c16a4ead623988a1e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#ac7ea71980a3512c16a4ead623988a1e8">output_boundary_coordinates</a> (const unsigned &amp;b, std::ostream &amp;outfile)</td></tr>
 <tr class="separator:ac7ea71980a3512c16a4ead623988a1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -258,12 +258,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:a82ccf74f4e2befe3a6acd458d4e37c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh from scaffold.  <a href="classoomph_1_1TriangleMesh.html#a82ccf74f4e2befe3a6acd458d4e37c35">More...</a><br /></td></tr>
 <tr class="separator:a82ccf74f4e2befe3a6acd458d4e37c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b18773cfdc79964dc7ae58dd11c2862"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a1b18773cfdc79964dc7ae58dd11c2862">build_triangulateio</a> (const std::string &amp;poly_file_name, TriangulateIO &amp;triangulate_io, bool &amp;use_attributes)</td></tr>
-<tr class="memdesc:a1b18773cfdc79964dc7ae58dd11c2862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create TriangulateIO object (return in triangulate_io) from the .poly file <br  />
-  <a href="classoomph_1_1TriangleMesh.html#a1b18773cfdc79964dc7ae58dd11c2862">More...</a><br /></td></tr>
+<tr class="memdesc:a1b18773cfdc79964dc7ae58dd11c2862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create TriangulateIO object (return in triangulate_io) from the .poly file.  <a href="classoomph_1_1TriangleMesh.html#a1b18773cfdc79964dc7ae58dd11c2862">More...</a><br /></td></tr>
 <tr class="separator:a1b18773cfdc79964dc7ae58dd11c2862"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9be2eeed2b37cc9805ac75938206d3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#aa9be2eeed2b37cc9805ac75938206d3f">generic_constructor</a> (Vector&lt; TriangleMeshPolygon * &gt; &amp;outer_boundary_pt, Vector&lt; TriangleMeshPolygon * &gt; &amp;internal_polygon_pt, Vector&lt; TriangleMeshOpenCurve * &gt; &amp;open_polylines_pt, const double &amp;element_area, Vector&lt; Vector&lt; double &gt; &gt; &amp;extra_holes_coordinates, std::map&lt; unsigned, Vector&lt; double &gt; &gt; &amp;regions_coordinates, std::map&lt; unsigned, double &gt; &amp;regions_areas, TimeStepper *time_stepper_pt, const bool &amp;use_attributes, const bool &amp;refine_boundary, const bool &amp;refine_internal_boundary)</td></tr>
-<tr class="memdesc:aa9be2eeed2b37cc9805ac75938206d3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A general-purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information.  <a href="classoomph_1_1TriangleMesh.html#aa9be2eeed2b37cc9805ac75938206d3f">More...</a><br /></td></tr>
-<tr class="separator:aa9be2eeed2b37cc9805ac75938206d3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac98f63c884635dae9dd0f45d45261c8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#ac98f63c884635dae9dd0f45d45261c8a">generic_constructor</a> (Vector&lt; TriangleMeshPolygon * &gt; &amp;outer_boundary_pt, Vector&lt; TriangleMeshPolygon * &gt; &amp;internal_polygon_pt, Vector&lt; TriangleMeshOpenCurve * &gt; &amp;open_polylines_pt, const double &amp;element_area, Vector&lt; Vector&lt; double &gt;&gt; &amp;extra_holes_coordinates, std::map&lt; unsigned, Vector&lt; double &gt;&gt; &amp;regions_coordinates, std::map&lt; unsigned, double &gt; &amp;regions_areas, TimeStepper *time_stepper_pt, const bool &amp;use_attributes, const bool &amp;refine_boundary, const bool &amp;refine_internal_boundary)</td></tr>
+<tr class="memdesc:ac98f63c884635dae9dd0f45d45261c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A general-purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information.  <a href="classoomph_1_1TriangleMesh.html#ac98f63c884635dae9dd0f45d45261c8a">More...</a><br /></td></tr>
+<tr class="separator:ac98f63c884635dae9dd0f45d45261c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fa21c284395e87058afd244e3f04155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a3fa21c284395e87058afd244e3f04155">shared_boundaries_in_this_processor</a> (Vector&lt; unsigned &gt; &amp;shared_boundaries_in_this_processor)</td></tr>
 <tr class="memdesc:a3fa21c284395e87058afd244e3f04155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the shared boundaries ids living in the current processor.  <a href="classoomph_1_1TriangleMesh.html#a3fa21c284395e87058afd244e3f04155">More...</a><br /></td></tr>
 <tr class="separator:a3fa21c284395e87058afd244e3f04155"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -363,48 +362,48 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a772e4d49926279a9b39493e582695709"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a772e4d49926279a9b39493e582695709">create_distributed_domain_representation</a> (Vector&lt; TriangleMeshPolygon * &gt; &amp;polygons_pt, Vector&lt; TriangleMeshOpenCurve * &gt; &amp;open_curves_pt)</td></tr>
 <tr class="memdesc:a772e4d49926279a9b39493e582695709"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the distributed domain representation. Joins the original boundaires, shared boundaries and creates connections among them to create the new polygons that represent the distributed domain.  <a href="classoomph_1_1TriangleMesh.html#a772e4d49926279a9b39493e582695709">More...</a><br /></td></tr>
 <tr class="separator:a772e4d49926279a9b39493e582695709"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87b3ee8de1ce46c0733b5bd7d0355061"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a87b3ee8de1ce46c0733b5bd7d0355061">sort_polylines_helper</a> (Vector&lt; TriangleMeshPolyLine * &gt; &amp;unsorted_polylines_pt, Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &amp;sorted_polylines_pt)</td></tr>
-<tr class="memdesc:a87b3ee8de1ce46c0733b5bd7d0355061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the polylines so they be continuous and then we can create a closed or open curve from them.  <a href="classoomph_1_1TriangleMesh.html#a87b3ee8de1ce46c0733b5bd7d0355061">More...</a><br /></td></tr>
-<tr class="separator:a87b3ee8de1ce46c0733b5bd7d0355061"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdfe1bcf9fa27951ffd41e0b9d881292"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#acdfe1bcf9fa27951ffd41e0b9d881292">create_tmp_polygons_helper</a> (Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &amp;polylines_pt, Vector&lt; TriangleMeshPolygon * &gt; &amp;polygons_pt)</td></tr>
-<tr class="memdesc:acdfe1bcf9fa27951ffd41e0b9d881292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take the polylines from the shared boundaries and create temporary polygon representations of the domain.  <a href="classoomph_1_1TriangleMesh.html#acdfe1bcf9fa27951ffd41e0b9d881292">More...</a><br /></td></tr>
-<tr class="separator:acdfe1bcf9fa27951ffd41e0b9d881292"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a974feeefa08df781ea2ebaab25a9729c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a974feeefa08df781ea2ebaab25a9729c">create_tmp_open_curves_helper</a> (Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &amp;sorted_open_curves_pt, Vector&lt; TriangleMeshPolyLine * &gt; &amp;unsorted_shared_to_internal_poly_pt, Vector&lt; TriangleMeshOpenCurve * &gt; &amp;open_curves_pt)</td></tr>
-<tr class="memdesc:a974feeefa08df781ea2ebaab25a9729c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take the polylines from the original open curves and created new temporaly representations of open curves with the bits of original curves not overlapped by shared boundaries.  <a href="classoomph_1_1TriangleMesh.html#a974feeefa08df781ea2ebaab25a9729c">More...</a><br /></td></tr>
-<tr class="separator:a974feeefa08df781ea2ebaab25a9729c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42ae047a452ed3bc897deabe2c188fcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a42ae047a452ed3bc897deabe2c188fcf">compute_holes_left_by_halo_elements_helper</a> (Vector&lt; Vector&lt; double &gt; &gt; &amp;output_holes_coordinates)</td></tr>
-<tr class="memdesc:a42ae047a452ed3bc897deabe2c188fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the holes left by the halo elements, those adjacent to the shared boundaries.  <a href="classoomph_1_1TriangleMesh.html#a42ae047a452ed3bc897deabe2c188fcf">More...</a><br /></td></tr>
-<tr class="separator:a42ae047a452ed3bc897deabe2c188fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a730c9d300ac82244e4c37ab7f9f28248"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a730c9d300ac82244e4c37ab7f9f28248">update_holes_information_helper</a> (Vector&lt; TriangleMeshPolygon * &gt; &amp;polygons_pt, Vector&lt; Vector&lt; double &gt; &gt; &amp;output_holes_coordinates)</td></tr>
-<tr class="memdesc:a730c9d300ac82244e4c37ab7f9f28248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps those vertices that define a hole, those that are inside closed internal boundaries in the new polygons that define the domain. Delete those outside/inside the outer polygons (this is required since Triangle can not deal with vertices that define holes outside the new outer polygons of the domain)  <a href="classoomph_1_1TriangleMesh.html#a730c9d300ac82244e4c37ab7f9f28248">More...</a><br /></td></tr>
-<tr class="separator:a730c9d300ac82244e4c37ab7f9f28248"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08f130b96a6cf8c24f09977fd3565427"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a08f130b96a6cf8c24f09977fd3565427">check_connections_of_polyline_nodes</a> (std::set&lt; FiniteElement * &gt; &amp;element_in_processor_pt, const int &amp;root_edge_bnd_id, std::map&lt; std::pair&lt; Node *, Node * &gt;, bool &gt; &amp;overlapped_face, std::map&lt; unsigned, std::map&lt; Node *, bool &gt; &gt; &amp;node_on_bnd_not_overlapped_by_shd_bnd, std::list&lt; Node * &gt; &amp;current_polyline_nodes, std::map&lt; unsigned, std::list&lt; Node * &gt; &gt; &amp;shared_bnd_id_to_sorted_list_node_pt, const unsigned &amp;node_degree, Node *&amp;new_node_pt, const bool called_from_load_balance=false)</td></tr>
-<tr class="memdesc:a08f130b96a6cf8c24f09977fd3565427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check for any possible connections that the array of sorted nodes have with any previous boundaries or with itself. Return -1 if no connection was found, return -2 if the connection is with the same polyline, return the boundary id of the boundary to which the connection is performed.  <a href="classoomph_1_1TriangleMesh.html#a08f130b96a6cf8c24f09977fd3565427">More...</a><br /></td></tr>
-<tr class="separator:a08f130b96a6cf8c24f09977fd3565427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76509aa7af0fb00c08e3005056e09cd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a76509aa7af0fb00c08e3005056e09cd2">sort_polylines_helper</a> (Vector&lt; TriangleMeshPolyLine * &gt; &amp;unsorted_polylines_pt, Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt; &amp;sorted_polylines_pt)</td></tr>
+<tr class="memdesc:a76509aa7af0fb00c08e3005056e09cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the polylines so they be continuous and then we can create a closed or open curve from them.  <a href="classoomph_1_1TriangleMesh.html#a76509aa7af0fb00c08e3005056e09cd2">More...</a><br /></td></tr>
+<tr class="separator:a76509aa7af0fb00c08e3005056e09cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e49863e20f714a63ddc9d3224151614"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a5e49863e20f714a63ddc9d3224151614">create_tmp_polygons_helper</a> (Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt; &amp;polylines_pt, Vector&lt; TriangleMeshPolygon * &gt; &amp;polygons_pt)</td></tr>
+<tr class="memdesc:a5e49863e20f714a63ddc9d3224151614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take the polylines from the shared boundaries and create temporary polygon representations of the domain.  <a href="classoomph_1_1TriangleMesh.html#a5e49863e20f714a63ddc9d3224151614">More...</a><br /></td></tr>
+<tr class="separator:a5e49863e20f714a63ddc9d3224151614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75fd6b056f507bb37390537c133a1071"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a75fd6b056f507bb37390537c133a1071">create_tmp_open_curves_helper</a> (Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt; &amp;sorted_open_curves_pt, Vector&lt; TriangleMeshPolyLine * &gt; &amp;unsorted_shared_to_internal_poly_pt, Vector&lt; TriangleMeshOpenCurve * &gt; &amp;open_curves_pt)</td></tr>
+<tr class="memdesc:a75fd6b056f507bb37390537c133a1071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take the polylines from the original open curves and created new temporaly representations of open curves with the bits of original curves not overlapped by shared boundaries.  <a href="classoomph_1_1TriangleMesh.html#a75fd6b056f507bb37390537c133a1071">More...</a><br /></td></tr>
+<tr class="separator:a75fd6b056f507bb37390537c133a1071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45f537a111072a02fe5c9c4f1a2c04f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a45f537a111072a02fe5c9c4f1a2c04f4">compute_holes_left_by_halo_elements_helper</a> (Vector&lt; Vector&lt; double &gt;&gt; &amp;output_holes_coordinates)</td></tr>
+<tr class="memdesc:a45f537a111072a02fe5c9c4f1a2c04f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the holes left by the halo elements, those adjacent to the shared boundaries.  <a href="classoomph_1_1TriangleMesh.html#a45f537a111072a02fe5c9c4f1a2c04f4">More...</a><br /></td></tr>
+<tr class="separator:a45f537a111072a02fe5c9c4f1a2c04f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af55d4baf005b0ba4f9ae71eaf859c8bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#af55d4baf005b0ba4f9ae71eaf859c8bc">update_holes_information_helper</a> (Vector&lt; TriangleMeshPolygon * &gt; &amp;polygons_pt, Vector&lt; Vector&lt; double &gt;&gt; &amp;output_holes_coordinates)</td></tr>
+<tr class="memdesc:af55d4baf005b0ba4f9ae71eaf859c8bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps those vertices that define a hole, those that are inside closed internal boundaries in the new polygons that define the domain. Delete those outside/inside the outer polygons (this is required since Triangle can not deal with vertices that define holes outside the new outer polygons of the domain)  <a href="classoomph_1_1TriangleMesh.html#af55d4baf005b0ba4f9ae71eaf859c8bc">More...</a><br /></td></tr>
+<tr class="separator:af55d4baf005b0ba4f9ae71eaf859c8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c601dab5f849d8bb96abc59f9e1d853"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a5c601dab5f849d8bb96abc59f9e1d853">check_connections_of_polyline_nodes</a> (std::set&lt; FiniteElement * &gt; &amp;element_in_processor_pt, const int &amp;root_edge_bnd_id, std::map&lt; std::pair&lt; Node *, Node * &gt;, bool &gt; &amp;overlapped_face, std::map&lt; unsigned, std::map&lt; Node *, bool &gt;&gt; &amp;node_on_bnd_not_overlapped_by_shd_bnd, std::list&lt; Node * &gt; &amp;current_polyline_nodes, std::map&lt; unsigned, std::list&lt; Node * &gt;&gt; &amp;shared_bnd_id_to_sorted_list_node_pt, const unsigned &amp;node_degree, Node *&amp;new_node_pt, const bool called_from_load_balance=false)</td></tr>
+<tr class="memdesc:a5c601dab5f849d8bb96abc59f9e1d853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check for any possible connections that the array of sorted nodes have with any previous boundaries or with itself. Return -1 if no connection was found, return -2 if the connection is with the same polyline, return the boundary id of the boundary to which the connection is performed.  <a href="classoomph_1_1TriangleMesh.html#a5c601dab5f849d8bb96abc59f9e1d853">More...</a><br /></td></tr>
+<tr class="separator:a5c601dab5f849d8bb96abc59f9e1d853"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2645a78aa55dacf39530dd087d894d79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a2645a78aa55dacf39530dd087d894d79">create_shared_polylines_connections</a> ()</td></tr>
-<tr class="memdesc:a2645a78aa55dacf39530dd087d894d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Establish the connections of the polylines previously marked as having connections. This connections were marked in the function <a class="el" href="classoomph_1_1TriangleMesh.html#ac0896e7fe3af5f542ccf1160dd0aae3c" title="Creates polylines from the intersection of halo elements on all processors. The new polylines define ...">TriangleMesh::create_polylines_from_halo_elements_helper()</a>.  <a href="classoomph_1_1TriangleMesh.html#a2645a78aa55dacf39530dd087d894d79">More...</a><br /></td></tr>
+<tr class="memdesc:a2645a78aa55dacf39530dd087d894d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Establish the connections of the polylines previously marked as having connections. This connections were marked in the function <a class="el" href="classoomph_1_1TriangleMesh.html#afecd1b96956b0d2152907388fa356148" title="Creates polylines from the intersection of halo elements on all processors. The new polylines define ...">TriangleMesh::create_polylines_from_halo_elements_helper()</a>.  <a href="classoomph_1_1TriangleMesh.html#a2645a78aa55dacf39530dd087d894d79">More...</a><br /></td></tr>
 <tr class="separator:a2645a78aa55dacf39530dd087d894d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b5df9c44997b7d193b72382c92b35ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a1b5df9c44997b7d193b72382c92b35ff">create_shared_boundaries</a> (OomphCommunicator *comm_pt, const Vector&lt; unsigned &gt; &amp;element_domain, const Vector&lt; GeneralisedElement * &gt; &amp;backed_up_el_pt, const Vector&lt; FiniteElement * &gt; &amp;backed_up_f_el_pt, std::map&lt; Data *, std::set&lt; unsigned &gt; &gt; &amp;processors_associated_with_data, const bool &amp;overrule_keep_as_halo_element_status)</td></tr>
-<tr class="memdesc:a1b5df9c44997b7d193b72382c92b35ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the shared boundaries.  <a href="classoomph_1_1TriangleMesh.html#a1b5df9c44997b7d193b72382c92b35ff">More...</a><br /></td></tr>
-<tr class="separator:a1b5df9c44997b7d193b72382c92b35ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5e9079c6e3c1699996962e4560ae124"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#aa5e9079c6e3c1699996962e4560ae124">get_halo_elements_on_all_procs</a> (const unsigned &amp;nproc, const Vector&lt; unsigned &gt; &amp;element_domain, const Vector&lt; GeneralisedElement * &gt; &amp;backed_up_el_pt, std::map&lt; Data *, std::set&lt; unsigned &gt; &gt; &amp;processors_associated_with_data, const bool &amp;overrule_keep_as_halo_element_status, std::map&lt; GeneralisedElement *, unsigned &gt; &amp;element_to_global_index, Vector&lt; Vector&lt; Vector&lt; GeneralisedElement * &gt; &gt; &gt; &amp;output_halo_elements_pt)</td></tr>
-<tr class="memdesc:aa5e9079c6e3c1699996962e4560ae124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the halo elements on all processors Gets the halo elements on all processors, these elements are then used on the function that computes the shared boundaries among the processors.  <a href="classoomph_1_1TriangleMesh.html#aa5e9079c6e3c1699996962e4560ae124">More...</a><br /></td></tr>
-<tr class="separator:aa5e9079c6e3c1699996962e4560ae124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c246343aa1b7d7e112c32c706bdb493"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a8c246343aa1b7d7e112c32c706bdb493">create_shared_boundaries</a> (OomphCommunicator *comm_pt, const Vector&lt; unsigned &gt; &amp;element_domain, const Vector&lt; GeneralisedElement * &gt; &amp;backed_up_el_pt, const Vector&lt; FiniteElement * &gt; &amp;backed_up_f_el_pt, std::map&lt; Data *, std::set&lt; unsigned &gt;&gt; &amp;processors_associated_with_data, const bool &amp;overrule_keep_as_halo_element_status)</td></tr>
+<tr class="memdesc:a8c246343aa1b7d7e112c32c706bdb493"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the shared boundaries.  <a href="classoomph_1_1TriangleMesh.html#a8c246343aa1b7d7e112c32c706bdb493">More...</a><br /></td></tr>
+<tr class="separator:a8c246343aa1b7d7e112c32c706bdb493"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab501263f1ca2235aafdd0fee4b28df60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#ab501263f1ca2235aafdd0fee4b28df60">get_halo_elements_on_all_procs</a> (const unsigned &amp;nproc, const Vector&lt; unsigned &gt; &amp;element_domain, const Vector&lt; GeneralisedElement * &gt; &amp;backed_up_el_pt, std::map&lt; Data *, std::set&lt; unsigned &gt;&gt; &amp;processors_associated_with_data, const bool &amp;overrule_keep_as_halo_element_status, std::map&lt; GeneralisedElement *, unsigned &gt; &amp;element_to_global_index, Vector&lt; Vector&lt; Vector&lt; GeneralisedElement * &gt;&gt;&gt; &amp;output_halo_elements_pt)</td></tr>
+<tr class="memdesc:ab501263f1ca2235aafdd0fee4b28df60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the halo elements on all processors Gets the halo elements on all processors, these elements are then used on the function that computes the shared boundaries among the processors.  <a href="classoomph_1_1TriangleMesh.html#ab501263f1ca2235aafdd0fee4b28df60">More...</a><br /></td></tr>
+<tr class="separator:ab501263f1ca2235aafdd0fee4b28df60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9e400769c3f40150b5b50f5056fbf06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#ae9e400769c3f40150b5b50f5056fbf06">get_element_edges_on_boundary</a> (std::map&lt; std::pair&lt; Node *, Node * &gt;, unsigned &gt; &amp;element_edges_on_boundary)</td></tr>
 <tr class="memdesc:ae9e400769c3f40150b5b50f5056fbf06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the element edges (pair of nodes, edges) that lie on a boundary (used to mark shared boundaries that lie on internal boundaries)  <a href="classoomph_1_1TriangleMesh.html#ae9e400769c3f40150b5b50f5056fbf06">More...</a><br /></td></tr>
 <tr class="separator:ae9e400769c3f40150b5b50f5056fbf06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0896e7fe3af5f542ccf1160dd0aae3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#ac0896e7fe3af5f542ccf1160dd0aae3c">create_polylines_from_halo_elements_helper</a> (const Vector&lt; unsigned &gt; &amp;element_domain, std::map&lt; GeneralisedElement *, unsigned &gt; &amp;element_to_global_index, std::set&lt; FiniteElement * &gt; &amp;element_in_processor_pt, Vector&lt; Vector&lt; Vector&lt; GeneralisedElement * &gt; &gt; &gt; &amp;input_halo_elements, std::map&lt; std::pair&lt; Node *, Node * &gt;, unsigned &gt; &amp;elements_edges_on_boundary, Vector&lt; Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &gt; &amp;output_polylines_pt)</td></tr>
-<tr class="memdesc:ac0896e7fe3af5f542ccf1160dd0aae3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates polylines from the intersection of halo elements on all processors. The new polylines define the shared boundaries in the domain This get the polylines on ALL processors, that is why the three dimensions output_polylines_pt[iproc][ncurve][npolyline].  <a href="classoomph_1_1TriangleMesh.html#ac0896e7fe3af5f542ccf1160dd0aae3c">More...</a><br /></td></tr>
-<tr class="separator:ac0896e7fe3af5f542ccf1160dd0aae3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1af781a1654b93384d35db1d74cee919"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a1af781a1654b93384d35db1d74cee919">break_loops_on_shared_polyline_helper</a> (const unsigned &amp;initial_shd_bnd_id, std::list&lt; Node * &gt; &amp;input_nodes, Vector&lt; FiniteElement * &gt; &amp;input_boundary_element_pt, Vector&lt; int &gt; &amp;input_face_index_element, const int &amp;input_connect_to_the_left, const int &amp;input_connect_to_the_right, Vector&lt; std::list&lt; Node * &gt; &gt; &amp;output_sorted_nodes_pt, Vector&lt; Vector&lt; FiniteElement * &gt; &gt; &amp;output_boundary_element_pt, Vector&lt; Vector&lt; int &gt; &gt; &amp;output_face_index_element, Vector&lt; int &gt; &amp;output_connect_to_the_left, Vector&lt; int &gt; &amp;output_connect_to_the_right)</td></tr>
-<tr class="memdesc:a1af781a1654b93384d35db1d74cee919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Break any possible loop created by the sorted list of nodes that is used to create a new shared polyline.  <a href="classoomph_1_1TriangleMesh.html#a1af781a1654b93384d35db1d74cee919">More...</a><br /></td></tr>
-<tr class="separator:a1af781a1654b93384d35db1d74cee919"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3591154bfb4095a602c6e430e5624183"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a3591154bfb4095a602c6e430e5624183">break_loops_on_shared_polyline_load_balance_helper</a> (const unsigned &amp;initial_shd_bnd_id, std::list&lt; Node * &gt; &amp;input_nodes, Vector&lt; FiniteElement * &gt; &amp;input_boundary_element_pt, Vector&lt; FiniteElement * &gt; &amp;input_boundary_face_element_pt, Vector&lt; int &gt; &amp;input_face_index_element, const int &amp;input_connect_to_the_left, const int &amp;input_connect_to_the_right, Vector&lt; std::list&lt; Node * &gt; &gt; &amp;output_sorted_nodes_pt, Vector&lt; Vector&lt; FiniteElement * &gt; &gt; &amp;output_boundary_element_pt, Vector&lt; Vector&lt; FiniteElement * &gt; &gt; &amp;output_boundary_face_element_pt, Vector&lt; Vector&lt; int &gt; &gt; &amp;output_face_index_element, Vector&lt; int &gt; &amp;output_connect_to_the_left, Vector&lt; int &gt; &amp;output_connect_to_the_right)</td></tr>
-<tr class="memdesc:a3591154bfb4095a602c6e430e5624183"><td class="mdescLeft">&#160;</td><td class="mdescRight">Break any possible loop created by the sorted list of nodes that is used to create a new shared polyline (modified version for load balance)  <a href="classoomph_1_1TriangleMesh.html#a3591154bfb4095a602c6e430e5624183">More...</a><br /></td></tr>
-<tr class="separator:a3591154bfb4095a602c6e430e5624183"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ac8855f04d83042881ee21dcf60dad9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a6ac8855f04d83042881ee21dcf60dad9">create_shared_polyline</a> (const unsigned &amp;my_rank, const unsigned &amp;shd_bnd_id, const unsigned &amp;iproc, const unsigned &amp;jproc, std::list&lt; Node * &gt; &amp;sorted_nodes, const int &amp;root_edge_bnd_id, Vector&lt; FiniteElement * &gt; &amp;bulk_bnd_ele_pt, Vector&lt; int &gt; &amp;face_index_ele, Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &amp;unsorted_polylines_pt, const int &amp;connect_to_the_left_flag, const int &amp;connect_to_the_right_flag)</td></tr>
-<tr class="memdesc:a6ac8855f04d83042881ee21dcf60dad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the shared polyline and fill the data structured that keep all the information associated with the creationg of the shared boundary.  <a href="classoomph_1_1TriangleMesh.html#a6ac8855f04d83042881ee21dcf60dad9">More...</a><br /></td></tr>
-<tr class="separator:a6ac8855f04d83042881ee21dcf60dad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afecd1b96956b0d2152907388fa356148"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#afecd1b96956b0d2152907388fa356148">create_polylines_from_halo_elements_helper</a> (const Vector&lt; unsigned &gt; &amp;element_domain, std::map&lt; GeneralisedElement *, unsigned &gt; &amp;element_to_global_index, std::set&lt; FiniteElement * &gt; &amp;element_in_processor_pt, Vector&lt; Vector&lt; Vector&lt; GeneralisedElement * &gt;&gt;&gt; &amp;input_halo_elements, std::map&lt; std::pair&lt; Node *, Node * &gt;, unsigned &gt; &amp;elements_edges_on_boundary, Vector&lt; Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt;&gt; &amp;output_polylines_pt)</td></tr>
+<tr class="memdesc:afecd1b96956b0d2152907388fa356148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates polylines from the intersection of halo elements on all processors. The new polylines define the shared boundaries in the domain This get the polylines on ALL processors, that is why the three dimensions output_polylines_pt[iproc][ncurve][npolyline].  <a href="classoomph_1_1TriangleMesh.html#afecd1b96956b0d2152907388fa356148">More...</a><br /></td></tr>
+<tr class="separator:afecd1b96956b0d2152907388fa356148"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5de64c81efdddb488bd7a77505a32901"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a5de64c81efdddb488bd7a77505a32901">break_loops_on_shared_polyline_helper</a> (const unsigned &amp;initial_shd_bnd_id, std::list&lt; Node * &gt; &amp;input_nodes, Vector&lt; FiniteElement * &gt; &amp;input_boundary_element_pt, Vector&lt; int &gt; &amp;input_face_index_element, const int &amp;input_connect_to_the_left, const int &amp;input_connect_to_the_right, Vector&lt; std::list&lt; Node * &gt;&gt; &amp;output_sorted_nodes_pt, Vector&lt; Vector&lt; FiniteElement * &gt;&gt; &amp;output_boundary_element_pt, Vector&lt; Vector&lt; int &gt;&gt; &amp;output_face_index_element, Vector&lt; int &gt; &amp;output_connect_to_the_left, Vector&lt; int &gt; &amp;output_connect_to_the_right)</td></tr>
+<tr class="memdesc:a5de64c81efdddb488bd7a77505a32901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Break any possible loop created by the sorted list of nodes that is used to create a new shared polyline.  <a href="classoomph_1_1TriangleMesh.html#a5de64c81efdddb488bd7a77505a32901">More...</a><br /></td></tr>
+<tr class="separator:a5de64c81efdddb488bd7a77505a32901"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39738ee0a68fe021d446406287615327"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#a39738ee0a68fe021d446406287615327">break_loops_on_shared_polyline_load_balance_helper</a> (const unsigned &amp;initial_shd_bnd_id, std::list&lt; Node * &gt; &amp;input_nodes, Vector&lt; FiniteElement * &gt; &amp;input_boundary_element_pt, Vector&lt; FiniteElement * &gt; &amp;input_boundary_face_element_pt, Vector&lt; int &gt; &amp;input_face_index_element, const int &amp;input_connect_to_the_left, const int &amp;input_connect_to_the_right, Vector&lt; std::list&lt; Node * &gt;&gt; &amp;output_sorted_nodes_pt, Vector&lt; Vector&lt; FiniteElement * &gt;&gt; &amp;output_boundary_element_pt, Vector&lt; Vector&lt; FiniteElement * &gt;&gt; &amp;output_boundary_face_element_pt, Vector&lt; Vector&lt; int &gt;&gt; &amp;output_face_index_element, Vector&lt; int &gt; &amp;output_connect_to_the_left, Vector&lt; int &gt; &amp;output_connect_to_the_right)</td></tr>
+<tr class="memdesc:a39738ee0a68fe021d446406287615327"><td class="mdescLeft">&#160;</td><td class="mdescRight">Break any possible loop created by the sorted list of nodes that is used to create a new shared polyline (modified version for load balance)  <a href="classoomph_1_1TriangleMesh.html#a39738ee0a68fe021d446406287615327">More...</a><br /></td></tr>
+<tr class="separator:a39738ee0a68fe021d446406287615327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab42d799c12d00ce99da0fffe83fdbddd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMesh.html#ab42d799c12d00ce99da0fffe83fdbddd">create_shared_polyline</a> (const unsigned &amp;my_rank, const unsigned &amp;shd_bnd_id, const unsigned &amp;iproc, const unsigned &amp;jproc, std::list&lt; Node * &gt; &amp;sorted_nodes, const int &amp;root_edge_bnd_id, Vector&lt; FiniteElement * &gt; &amp;bulk_bnd_ele_pt, Vector&lt; int &gt; &amp;face_index_ele, Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt; &amp;unsorted_polylines_pt, const int &amp;connect_to_the_left_flag, const int &amp;connect_to_the_right_flag)</td></tr>
+<tr class="memdesc:ab42d799c12d00ce99da0fffe83fdbddd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the shared polyline and fill the data structured that keep all the information associated with the creationg of the shared boundary.  <a href="classoomph_1_1TriangleMesh.html#ab42d799c12d00ce99da0fffe83fdbddd">More...</a><br /></td></tr>
+<tr class="separator:ab42d799c12d00ce99da0fffe83fdbddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -483,10 +482,9 @@ Private Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
 class oomph::TriangleMesh&lt; ELEMENT &gt;</h3>
 
-<p>Triangle mesh build with the help of the scaffold mesh coming <br  />
- from the triangle mesh generator Triangle. <a href="http://www.cs.cmu.edu/~quake/triangle.html">http://www.cs.cmu.edu/~quake/triangle.html</a> </p>
+<p>Triangle mesh build with the help of the scaffold mesh coming from the triangle mesh generator Triangle. <a href="http://www.cs.cmu.edu/~quake/triangle.html">http://www.cs.cmu.edu/~quake/triangle.html</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00365">365</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00423">423</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="afd4948d805e89116cc5da629e413a449"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd4948d805e89116cc5da629e413a449">&#9670;&nbsp;</a></span>coord2_t</h2>
@@ -510,7 +508,7 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02094">2094</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02189">2189</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -536,7 +534,7 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02093">2093</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02188">2188</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -568,9 +566,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Empty constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00370">370</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00427">427</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01911">oomph::TriangleMesh&lt; ELEMENT &gt;::First_time_compute_holes_left_by_halo_elements</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01291">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l02021">oomph::TriangleMesh&lt; ELEMENT &gt;::First_time_compute_holes_left_by_halo_elements</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01355">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>.</p>
 
 </div>
 </div>
@@ -630,9 +628,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor with the input files. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00391">391</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00448">448</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8cc_source.html#l00045">oomph::TriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01911">oomph::TriangleMesh&lt; ELEMENT &gt;::First_time_compute_holes_left_by_halo_elements</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01124">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01296">oomph::TriangleMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01291">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01128">oomph::TriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8cc_source.html#l00044">oomph::TriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l02021">oomph::TriangleMesh&lt; ELEMENT &gt;::First_time_compute_holes_left_by_halo_elements</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01185">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01360">oomph::TriangleMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01355">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01189">oomph::TriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
 </div>
 </div>
@@ -674,9 +672,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Build mesh, based on the specifications on <a class="el" href="classoomph_1_1TriangleMeshParameters.html" title="Helper object for dealing with the parameters used for the TriangleMesh objects.">TriangleMeshParameters</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00462">462</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00516">516</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l00264">oomph::TriangleMeshParameters::communicator_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00176">oomph::TriangleMeshParameters::element_area()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00182">oomph::TriangleMeshParameters::extra_holes_coordinates()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01911">oomph::TriangleMesh&lt; ELEMENT &gt;::First_time_compute_holes_left_by_halo_elements</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01151">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00158">oomph::TriangleMeshParameters::internal_closed_curve_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00167">oomph::TriangleMeshParameters::internal_open_curves_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00301">oomph::TriangleMeshParameters::is_automatic_creation_of_vertices_on_boundaries_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00271">oomph::TriangleMeshParameters::is_boundary_refinement_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00282">oomph::TriangleMeshParameters::is_internal_boundary_refinement_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00257">oomph::TriangleMeshParameters::is_mesh_distributed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00251">oomph::TriangleMeshParameters::is_use_attributes()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00142">oomph::TriangleMeshParameters::outer_boundary_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01134">oomph::TriangleMesh&lt; ELEMENT &gt;::Regions_areas</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00230">oomph::TriangleMeshParameters::regions_coordinates()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00240">oomph::TriangleMeshParameters::target_area_for_region()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01124">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l00310">oomph::TriangleMeshParameters::communicator_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00189">oomph::TriangleMeshParameters::element_area()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00201">oomph::TriangleMeshParameters::extra_holes_coordinates()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l02021">oomph::TriangleMesh&lt; ELEMENT &gt;::First_time_compute_holes_left_by_halo_elements</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01211">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00163">oomph::TriangleMeshParameters::internal_closed_curve_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00176">oomph::TriangleMeshParameters::internal_open_curves_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00361">oomph::TriangleMeshParameters::is_automatic_creation_of_vertices_on_boundaries_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00322">oomph::TriangleMeshParameters::is_boundary_refinement_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00340">oomph::TriangleMeshParameters::is_internal_boundary_refinement_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00298">oomph::TriangleMeshParameters::is_mesh_distributed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00286">oomph::TriangleMeshParameters::is_use_attributes()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00139">oomph::TriangleMeshParameters::outer_boundary_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01194">oomph::TriangleMesh&lt; ELEMENT &gt;::Regions_areas</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00255">oomph::TriangleMeshParameters::regions_coordinates()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00267">oomph::TriangleMeshParameters::target_area_for_region()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01185">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>.</p>
 
 </div>
 </div>
@@ -730,9 +728,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Build mesh from poly file, with specified target area for all elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00702">702</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00755">755</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8cc_source.html#l00045">oomph::TriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l07079">oomph::TriangleMesh&lt; ELEMENT &gt;::build_triangulateio()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01911">oomph::TriangleMesh&lt; ELEMENT &gt;::First_time_compute_holes_left_by_halo_elements</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01124">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01296">oomph::TriangleMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, <a class="el" href="namespaceoomph.html#a3af531b221ad8fe56e4f9e3364435b87">oomph::triangulate()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01128">oomph::TriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8cc_source.html#l00044">oomph::TriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l07197">oomph::TriangleMesh&lt; ELEMENT &gt;::build_triangulateio()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l02021">oomph::TriangleMesh&lt; ELEMENT &gt;::First_time_compute_holes_left_by_halo_elements</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01185">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01360">oomph::TriangleMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, <a class="el" href="namespaceoomph.html#a3af531b221ad8fe56e4f9e3364435b87">oomph::triangulate()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01189">oomph::TriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
 </div>
 </div>
@@ -764,7 +762,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00796">796</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00848">848</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -795,9 +793,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00808">808</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00860">860</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01291">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01355">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>.</p>
 
 </div>
 </div>
@@ -838,9 +836,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01502">1502</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01596">1596</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01857">oomph::TriangleMesh&lt; ELEMENT &gt;::Face_index_at_shared_boundary</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01969">oomph::TriangleMesh&lt; ELEMENT &gt;::Face_index_at_shared_boundary</a>.</p>
 
 </div>
 </div>
@@ -880,9 +878,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01474">1474</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01566">1566</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01853">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01965">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
 
 </div>
 </div>
@@ -924,9 +922,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Add the node the shared boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01556">1556</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01652">1652</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01861">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01973">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
 
 </div>
 </div>
@@ -968,9 +966,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Returns the value that indicates if a subpolyline of a given boundary continues been used as internal boundary or should be changed as shared boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01808">1808</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01916">1916</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01875">oomph::TriangleMesh&lt; ELEMENT &gt;::Boundary_marked_as_shared_boundary</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01989">oomph::TriangleMesh&lt; ELEMENT &gt;::Boundary_marked_as_shared_boundary</a>.</p>
 
 </div>
 </div>
@@ -1002,9 +1000,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return direct access to nodes associated with a boundary but sorted in segments. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00904">904</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00958">958</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l43318">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::snap_nodes_onto_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l43658">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::snap_nodes_onto_boundary()</a>.</p>
 
 </div>
 </div>
@@ -1046,12 +1044,12 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return direct access to nodes associated with a segment of a given boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00909">909</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00965">965</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
-<a id="ad7acd0ef2644130b830eed3cd3a9a259"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7acd0ef2644130b830eed3cd3a9a259">&#9670;&nbsp;</a></span>boundary_segment_node_pt() <span class="overload">[3/3]</span></h2>
+<a id="a34dcdc586eb7548f34de8fbf9d561d0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34dcdc586eb7548f34de8fbf9d561d0b">&#9670;&nbsp;</a></span>boundary_segment_node_pt() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1062,7 +1060,7 @@ template&lt;class ELEMENT &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Node* &amp; <a class="el" href="classoomph_1_1TriangleMesh.html">oomph::TriangleMesh</a>&lt; ELEMENT &gt;::boundary_segment_node_pt </td>
+          <td class="memname">Node*&amp; <a class="el" href="classoomph_1_1TriangleMesh.html">oomph::TriangleMesh</a>&lt; ELEMENT &gt;::boundary_segment_node_pt </td>
           <td>(</td>
           <td class="paramtype">const unsigned &amp;&#160;</td>
           <td class="paramname"><em>b</em>, </td>
@@ -1094,7 +1092,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return pointer to node n on boundary b. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00913">913</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00972">972</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -1126,9 +1124,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Gets the vector of auxiliar polylines that will represent the given boundary (useful only when the boundaries were split) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01785">1785</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01890">1890</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01870">oomph::TriangleMesh&lt; ELEMENT &gt;::Boundary_subpolylines</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01983">oomph::TriangleMesh&lt; ELEMENT &gt;::Boundary_subpolylines</a>.</p>
 
 </div>
 </div>
@@ -1160,14 +1158,14 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Helper function to verify if a given boundary was splitted in the distribution process. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01744">1744</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01846">1846</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01865">oomph::TriangleMesh&lt; ELEMENT &gt;::Boundary_was_splitted</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01978">oomph::TriangleMesh&lt; ELEMENT &gt;::Boundary_was_splitted</a>.</p>
 
 </div>
 </div>
-<a id="a1af781a1654b93384d35db1d74cee919"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1af781a1654b93384d35db1d74cee919">&#9670;&nbsp;</a></span>break_loops_on_shared_polyline_helper()</h2>
+<a id="a5de64c81efdddb488bd7a77505a32901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de64c81efdddb488bd7a77505a32901">&#9670;&nbsp;</a></span>break_loops_on_shared_polyline_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1216,19 +1214,19 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; std::list&lt; Node * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; std::list&lt; Node * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_sorted_nodes_pt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; FiniteElement * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; FiniteElement * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_boundary_element_pt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; int &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; int &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_face_index_element</em>, </td>
         </tr>
         <tr>
@@ -1258,12 +1256,12 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Break any possible loop created by the sorted list of nodes that is used to create a new shared polyline. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l13099">13099</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l13265">13265</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="a3591154bfb4095a602c6e430e5624183"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3591154bfb4095a602c6e430e5624183">&#9670;&nbsp;</a></span>break_loops_on_shared_polyline_load_balance_helper()</h2>
+<a id="a39738ee0a68fe021d446406287615327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39738ee0a68fe021d446406287615327">&#9670;&nbsp;</a></span>break_loops_on_shared_polyline_load_balance_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1318,25 +1316,25 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; std::list&lt; Node * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; std::list&lt; Node * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_sorted_nodes_pt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; FiniteElement * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; FiniteElement * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_boundary_element_pt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; FiniteElement * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; FiniteElement * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_boundary_face_element_pt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; int &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; int &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_face_index_element</em>, </td>
         </tr>
         <tr>
@@ -1366,7 +1364,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Break any possible loop created by the sorted list of nodes that is used to create a new shared polyline (modified version for load balance) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l14019">14019</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l14190">14190</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -1409,9 +1407,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Build mesh from scaffold. </p>
 <p>Build with the help of the scaffold mesh coming from the triangle mesh generator Triangle. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l00045">45</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l00044">44</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01151">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00391">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01211">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01066">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00448">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -1457,18 +1455,17 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Helper function to create TriangulateIO object (return in triangulate_io) from the .poly file <br  />
- </p>
+<p>Helper function to create TriangulateIO object (return in triangulate_io) from the .poly file. </p>
 <p>Create TriangulateIO object via the .poly file. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l07079">7079</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l07197">7197</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00702">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00755">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
 
 </div>
 </div>
-<a id="a08f130b96a6cf8c24f09977fd3565427"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08f130b96a6cf8c24f09977fd3565427">&#9670;&nbsp;</a></span>check_connections_of_polyline_nodes()</h2>
+<a id="a5c601dab5f849d8bb96abc59f9e1d853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c601dab5f849d8bb96abc59f9e1d853">&#9670;&nbsp;</a></span>check_connections_of_polyline_nodes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1499,7 +1496,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; unsigned, std::map&lt; Node *, bool &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::map&lt; unsigned, std::map&lt; Node *, bool &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>node_on_bnd_not_overlapped_by_shd_bnd</em>, </td>
         </tr>
         <tr>
@@ -1511,7 +1508,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; unsigned, std::list&lt; Node * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::map&lt; unsigned, std::list&lt; Node * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>shared_bnd_id_to_sorted_list_node_pt</em>, </td>
         </tr>
         <tr>
@@ -1547,7 +1544,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Check for any possible connections that the array of sorted nodes have with any previous boundaries or with itself. Return -1 if no connection was found, return -2 if the connection is with the same polyline, return the boundary id of the boundary to which the connection is performed. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l08945">8945</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l09071">9071</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -1572,12 +1569,12 @@ template&lt;class ELEMENT &gt; </div>
 <p>Compute the boundary segments connectivity for those boundaries that were splited during the distribution process. </p>
 <p>Compute the boundary segments connectivity for those boundaries that were splited during the distribution process and also the initial zeta values for each segment (the initial and final boundary nodes coordinates) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l01842">1842</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l01838">1838</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="a42ae047a452ed3bc897deabe2c188fcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42ae047a452ed3bc897deabe2c188fcf">&#9670;&nbsp;</a></span>compute_holes_left_by_halo_elements_helper()</h2>
+<a id="a45f537a111072a02fe5c9c4f1a2c04f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45f537a111072a02fe5c9c4f1a2c04f4">&#9670;&nbsp;</a></span>compute_holes_left_by_halo_elements_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1590,7 +1587,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1TriangleMesh.html">oomph::TriangleMesh</a>&lt; ELEMENT &gt;::compute_holes_left_by_halo_elements_helper </td>
           <td>(</td>
-          <td class="paramtype">Vector&lt; Vector&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_holes_coordinates</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1604,7 +1601,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Compute the holes left by the halo elements, those adjacent to the shared boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l10686">10686</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l10819">10819</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -1636,9 +1633,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Returns a list of points on the convex hull in counter-clockwise order. Note: the last point in the returned list is the same as the first one. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02115">2115</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02213">2213</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l02108">oomph::TriangleMesh&lt; ELEMENT &gt;::cross()</a>, and <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00198">Global_Physical_Variables::H</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l02205">oomph::TriangleMesh&lt; ELEMENT &gt;::cross()</a>, and <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00198">Global_Physical_Variables::H</a>.</p>
 
 </div>
 </div>
@@ -1680,12 +1677,12 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Creates the distributed domain representation. Joins the original boundaires, shared boundaries and creates connections among them to create the new polygons that represent the distributed domain. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l08017">8017</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l08131">8131</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="ac0896e7fe3af5f542ccf1160dd0aae3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0896e7fe3af5f542ccf1160dd0aae3c">&#9670;&nbsp;</a></span>create_polylines_from_halo_elements_helper()</h2>
+<a id="afecd1b96956b0d2152907388fa356148"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afecd1b96956b0d2152907388fa356148">&#9670;&nbsp;</a></span>create_polylines_from_halo_elements_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1716,7 +1713,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; Vector&lt; GeneralisedElement * &gt; &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; Vector&lt; GeneralisedElement * &gt;&gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>input_halo_elements</em>, </td>
         </tr>
         <tr>
@@ -1728,7 +1725,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_polylines_pt</em>&#160;</td>
         </tr>
         <tr>
@@ -1746,12 +1743,12 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Creates polylines from the intersection of halo elements on all processors. The new polylines define the shared boundaries in the domain This get the polylines on ALL processors, that is why the three dimensions output_polylines_pt[iproc][ncurve][npolyline]. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11636">11636</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11770">11770</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="a1b5df9c44997b7d193b72382c92b35ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b5df9c44997b7d193b72382c92b35ff">&#9670;&nbsp;</a></span>create_shared_boundaries()</h2>
+<a id="a8c246343aa1b7d7e112c32c706bdb493"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c246343aa1b7d7e112c32c706bdb493">&#9670;&nbsp;</a></span>create_shared_boundaries()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1788,7 +1785,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; Data *, std::set&lt; unsigned &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::map&lt; Data *, std::set&lt; unsigned &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>processors_associated_with_data</em>, </td>
         </tr>
         <tr>
@@ -1812,12 +1809,12 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Creates the shared boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11406">11406</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11538">11538</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="a6ac8855f04d83042881ee21dcf60dad9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ac8855f04d83042881ee21dcf60dad9">&#9670;&nbsp;</a></span>create_shared_polyline()</h2>
+<a id="ab42d799c12d00ce99da0fffe83fdbddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab42d799c12d00ce99da0fffe83fdbddd">&#9670;&nbsp;</a></span>create_shared_polyline()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1878,7 +1875,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>unsorted_polylines_pt</em>, </td>
         </tr>
         <tr>
@@ -1908,7 +1905,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Create the shared polyline and fill the data structured that keep all the information associated with the creationg of the shared boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l14444">14444</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l14617">14617</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -1934,14 +1931,14 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Establish the connections of the polylines previously marked as having connections. This connections were marked in the function <a class="el" href="classoomph_1_1TriangleMesh.html#ac0896e7fe3af5f542ccf1160dd0aae3c" title="Creates polylines from the intersection of halo elements on all processors. The new polylines define ...">TriangleMesh::create_polylines_from_halo_elements_helper()</a>. </p>
+<p>Establish the connections of the polylines previously marked as having connections. This connections were marked in the function <a class="el" href="classoomph_1_1TriangleMesh.html#afecd1b96956b0d2152907388fa356148" title="Creates polylines from the intersection of halo elements on all processors. The new polylines define ...">TriangleMesh::create_polylines_from_halo_elements_helper()</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l09384">9384</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l09511">9511</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="a974feeefa08df781ea2ebaab25a9729c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a974feeefa08df781ea2ebaab25a9729c">&#9670;&nbsp;</a></span>create_tmp_open_curves_helper()</h2>
+<a id="a75fd6b056f507bb37390537c133a1071"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75fd6b056f507bb37390537c133a1071">&#9670;&nbsp;</a></span>create_tmp_open_curves_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1954,7 +1951,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1TriangleMesh.html">oomph::TriangleMesh</a>&lt; ELEMENT &gt;::create_tmp_open_curves_helper </td>
           <td>(</td>
-          <td class="paramtype">Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>sorted_open_curves_pt</em>, </td>
         </tr>
         <tr>
@@ -1984,12 +1981,12 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Take the polylines from the original open curves and created new temporaly representations of open curves with the bits of original curves not overlapped by shared boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l08904">8904</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l09031">9031</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="acdfe1bcf9fa27951ffd41e0b9d881292"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdfe1bcf9fa27951ffd41e0b9d881292">&#9670;&nbsp;</a></span>create_tmp_polygons_helper()</h2>
+<a id="a5e49863e20f714a63ddc9d3224151614"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e49863e20f714a63ddc9d3224151614">&#9670;&nbsp;</a></span>create_tmp_polygons_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2002,7 +1999,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1TriangleMesh.html">oomph::TriangleMesh</a>&lt; ELEMENT &gt;::create_tmp_polygons_helper </td>
           <td>(</td>
-          <td class="paramtype">Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>polylines_pt</em>, </td>
         </tr>
         <tr>
@@ -2026,7 +2023,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Take the polylines from the shared boundaries and create temporary polygon representations of the domain. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l08515">8515</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l08631">8631</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -2074,11 +2071,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>2D cross product of OA and OB vectors, i.e. z-component of their 3D cross product. Returns a positive value, if OAB makes a counter-clockwise turn, negative for clockwise turn, and zero if the points are collinear. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02108">2108</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02205">2205</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l02097">oomph::TriangleMesh&lt; ELEMENT &gt;::Point::x</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l02097">oomph::TriangleMesh&lt; ELEMENT &gt;::Point::y</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l02193">oomph::TriangleMesh&lt; ELEMENT &gt;::Point::x</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l02193">oomph::TriangleMesh&lt; ELEMENT &gt;::Point::y</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l02115">oomph::TriangleMesh&lt; ELEMENT &gt;::convex_hull()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l02213">oomph::TriangleMesh&lt; ELEMENT &gt;::convex_hull()</a>.</p>
 
 </div>
 </div>
@@ -2102,7 +2099,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Used to dump info. related with distributed triangle meshes. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l07319">7319</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l07436">7436</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -2142,9 +2139,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01506">1506</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01601">1601</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01857">oomph::TriangleMesh&lt; ELEMENT &gt;::Face_index_at_shared_boundary</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01969">oomph::TriangleMesh&lt; ELEMENT &gt;::Face_index_at_shared_boundary</a>.</p>
 
 </div>
 </div>
@@ -2175,9 +2172,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The final boundary id for shared boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01311">1311</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01376">1376</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01827">oomph::TriangleMesh&lt; ELEMENT &gt;::Final_shared_boundary_id</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01935">oomph::TriangleMesh&lt; ELEMENT &gt;::Final_shared_boundary_id</a>.</p>
 
 </div>
 </div>
@@ -2206,9 +2203,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01499">1499</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01591">1591</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01857">oomph::TriangleMesh&lt; ELEMENT &gt;::Face_index_at_shared_boundary</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01969">oomph::TriangleMesh&lt; ELEMENT &gt;::Face_index_at_shared_boundary</a>.</p>
 
 </div>
 </div>
@@ -2237,9 +2234,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01451">1451</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01542">1542</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01853">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01965">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
 
 </div>
 </div>
@@ -2269,9 +2266,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01454">1454</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01547">1547</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01853">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01965">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
 
 </div>
 </div>
@@ -2302,9 +2299,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Flush ALL the shared boundary nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01548">1548</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01640">1640</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01861">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01973">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
 
 </div>
 </div>
@@ -2336,9 +2333,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Flush the boundary nodes associated to the shared boundary b. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01552">1552</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01646">1646</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01861">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01973">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
 
 </div>
 </div>
@@ -2367,14 +2364,14 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01848">1848</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01957">1957</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01846">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01955">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
 
 </div>
 </div>
-<a id="aa9be2eeed2b37cc9805ac75938206d3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9be2eeed2b37cc9805ac75938206d3f">&#9670;&nbsp;</a></span>generic_constructor()</h2>
+<a id="ac98f63c884635dae9dd0f45d45261c8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac98f63c884635dae9dd0f45d45261c8a">&#9670;&nbsp;</a></span>generic_constructor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2411,13 +2408,13 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>extra_holes_coordinates</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; unsigned, Vector&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::map&lt; unsigned, Vector&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>regions_coordinates</em>, </td>
         </tr>
         <tr>
@@ -2465,11 +2462,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>A general-purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01151">1151</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01211">1211</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8cc_source.html#l00045">oomph::TriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01124">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01296">oomph::TriangleMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, <a class="el" href="namespaceoomph.html#a3af531b221ad8fe56e4f9e3364435b87">oomph::triangulate()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01291">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01128">oomph::TriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8cc_source.html#l00044">oomph::TriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01185">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01360">oomph::TriangleMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, <a class="el" href="namespaceoomph.html#a3af531b221ad8fe56e4f9e3364435b87">oomph::triangulate()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01355">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01189">oomph::TriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00462">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00516">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -2501,12 +2498,12 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get the element edges (pair of nodes, edges) that lie on a boundary (used to mark shared boundaries that lie on internal boundaries) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11570">11570</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11705">11705</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="aa5e9079c6e3c1699996962e4560ae124"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5e9079c6e3c1699996962e4560ae124">&#9670;&nbsp;</a></span>get_halo_elements_on_all_procs()</h2>
+<a id="ab501263f1ca2235aafdd0fee4b28df60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab501263f1ca2235aafdd0fee4b28df60">&#9670;&nbsp;</a></span>get_halo_elements_on_all_procs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2537,7 +2534,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; Data *, std::set&lt; unsigned &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::map&lt; Data *, std::set&lt; unsigned &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>processors_associated_with_data</em>, </td>
         </tr>
         <tr>
@@ -2555,7 +2552,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; Vector&lt; GeneralisedElement * &gt; &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; Vector&lt; GeneralisedElement * &gt;&gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_halo_elements_pt</em>&#160;</td>
         </tr>
         <tr>
@@ -2573,7 +2570,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Creates the halo elements on all processors Gets the halo elements on all processors, these elements are then used on the function that computes the shared boundaries among the processors. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11481">11481</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11616">11616</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -2615,9 +2612,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Gets the shared boundaries ids that overlap the given internal boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01699">1699</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01801">1801</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01842">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01951">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
 
 </div>
 </div>
@@ -2651,7 +2648,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Identify the segments from the old mesh (original mesh) in the new mesh (this) and assign initial and final boundary coordinates for the segments that create the boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l00386">386</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l00388">388</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -2697,6 +2694,8 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Identify the segments from the old mesh (original mesh) in the new mesh (this) and assign initial and final boundary coordinates for the segments that create the boundary. (This is the version called from the original mesh to identify its own segments) </p>
 
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l29595">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
+
 </div>
 </div>
 <a id="a27de848116b11c6fdd3dde35dcd0ca54"></a>
@@ -2726,11 +2725,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The initial boundary id for shared boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01307">1307</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01370">1370</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01824">oomph::TriangleMesh&lt; ELEMENT &gt;::Initial_shared_boundary_id</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01932">oomph::TriangleMesh&lt; ELEMENT &gt;::Initial_shared_boundary_id</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01066">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>.</p>
 
 </div>
 </div>
@@ -2772,9 +2771,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Is the node on the shared boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01600">1600</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01694">1694</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01861">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01973">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
 
 </div>
 </div>
@@ -2808,7 +2807,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableTriangleMesh.html#aaffa40b7d036f8ed8639bf9396f1088a">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02055">2055</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02154">2154</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -2840,9 +2839,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Gets the number of subpolylines that create the boundarya (useful only when the boundary is marked as split) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01760">1760</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01862">1862</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01870">oomph::TriangleMesh&lt; ELEMENT &gt;::Boundary_subpolylines</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01983">oomph::TriangleMesh&lt; ELEMENT &gt;::Boundary_subpolylines</a>.</p>
 
 </div>
 </div>
@@ -2871,11 +2870,11 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01428">1428</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01518">1518</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01853">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01965">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01318">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundaries_in_this_processor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01384">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundaries_in_this_processor()</a>.</p>
 
 </div>
 </div>
@@ -2917,9 +2916,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Access functions to boundaries shared with processors. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01384">1384</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01449">1449</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01832">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01941">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
 
 </div>
 </div>
@@ -2949,9 +2948,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01412">1412</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01494">1494</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01846">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01955">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
 
 </div>
 </div>
@@ -2981,9 +2980,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01431">1431</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01523">1523</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01853">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01965">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
 
 </div>
 </div>
@@ -3013,9 +3012,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01527">1527</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01620">1620</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01861">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01973">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
 
 </div>
 </div>
@@ -3046,9 +3045,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get the number of shared boundaries overlaping internal boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01655">1655</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01756">1756</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01842">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01951">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
 
 </div>
 </div>
@@ -3088,9 +3087,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01415">1415</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01499">1499</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01846">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01955">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
 
 </div>
 </div>
@@ -3121,11 +3120,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return the vector that contains the oomph-lib node number for all vertex nodes in the TriangulateIO representation of the mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01118">1118</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01179">1179</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01300">oomph::TriangleMesh&lt; ELEMENT &gt;::Oomph_vertex_nodes_id</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01364">oomph::TriangleMesh&lt; ELEMENT &gt;::Oomph_vertex_nodes_id</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l29344">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l29595">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
 
 </div>
 </div>
@@ -3157,7 +3156,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00802">802</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00854">854</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -3190,12 +3189,12 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 <p>Output the nodes on the boundary and their respective boundary coordinates(into separate tecplot zones) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l07902">7902</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l08014">8014</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
-<a id="ab45285f4e725ea9b79e3211d66c741ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab45285f4e725ea9b79e3211d66c741ce">&#9670;&nbsp;</a></span>re_assign_initial_zeta_values_for_internal_boundary()</h2>
+<a id="a097beffb0767e900c92b5c3e5ee06da3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a097beffb0767e900c92b5c3e5ee06da3">&#9670;&nbsp;</a></span>re_assign_initial_zeta_values_for_internal_boundary()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3211,7 +3210,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; std::list&lt; FiniteElement * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; std::list&lt; FiniteElement * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>old_segment_sorted_ele_pt</em>, </td>
         </tr>
         <tr>
@@ -3231,7 +3230,7 @@ template&lt;class ELEMENT &gt; </div>
 <p>Re-assign the boundary segments initial zeta (arclength) value for those internal boundaries that were splited during the distribution process. Those boundaries that have one face element at each side of the boundary. </p>
 <p>Re-assign the boundary segments initial zeta (arclength) for those internal boundaries that were splited during the distribution process. Those boundaries that have one face element at each side of the boundary. Here we create the segments only with the nonhalo elements, therefore the boundary coordinates need to be re-assigned to be passed to the new meshes. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l04059">4059</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l04089">4089</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -3256,7 +3255,7 @@ template&lt;class ELEMENT &gt; </div>
 <p>Re-scale the re-assigned zeta values for the boundary nodes, apply only for internal boundaries. </p>
 <p>Re-assign the boundary segments initial zeta (arclength) for those internal boundaries that were splited during the distribution process (only apply for internal boundaries that have one face element at each side of the boundary) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l06442">6442</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l06564">6564</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -3280,7 +3279,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Used to read info. related with distributed triangle meshes. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l07566">7566</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l07679">7679</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -3310,7 +3309,7 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00970">970</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01032">1032</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -3353,7 +3352,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableTriangleMesh.html#a3ecdb3b15c3fefbc96f407c4fdf5b155">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00989">989</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01051">1051</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -3384,14 +3383,14 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Completely regenerate the mesh from the trianglateio structure. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">1005</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01066">1066</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8cc_source.html#l00045">oomph::TriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01307">oomph::TriangleMesh&lt; ELEMENT &gt;::initial_shared_boundary_id()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01124">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01296">oomph::TriangleMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01291">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01128">oomph::TriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8cc_source.html#l00044">oomph::TriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01370">oomph::TriangleMesh&lt; ELEMENT &gt;::initial_shared_boundary_id()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01185">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01360">oomph::TriangleMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01355">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01189">oomph::TriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
 </div>
 </div>
-<a id="a47080ac440e82c099c390b37bf694cfe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47080ac440e82c099c390b37bf694cfe">&#9670;&nbsp;</a></span>reset_boundary_element_info()</h2>
+<a id="a5213a8126947509f566071c648e4716c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5213a8126947509f566071c648e4716c">&#9670;&nbsp;</a></span>reset_boundary_element_info()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3410,7 +3409,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; unsigned &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; unsigned &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>ntmp_boundary_elements_in_region</em>, </td>
         </tr>
         <tr>
@@ -3435,7 +3434,7 @@ template&lt;class ELEMENT &gt; </div>
 <p>Reset the boundary elements info. after load balance have taken place. </p>
 <p>Virtual function to perform the reset boundary elements info routines. Generally used after load balance. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l14687">14687</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l14860">14860</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -3484,7 +3483,7 @@ template&lt;class ELEMENT &gt; </div>
 <h1><a class="anchor" id="autotoc_md1"></a>
 elements created by this method</h1>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l05241">5241</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l05281">5281</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -3526,11 +3525,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Overload set_mesh_level_time_stepper so that the stored time stepper now corresponds to the new timestepper. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00845">845</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00897">897</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01124">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01185">oomph::TriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l29344">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l29595">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
 
 </div>
 </div>
@@ -3559,9 +3558,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01391">1391</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01460">1460</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01832">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01941">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
 
 </div>
 </div>
@@ -3590,11 +3589,11 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01388">1388</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01455">1455</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01832">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01941">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l29344">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::adapt()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01318">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundaries_in_this_processor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l29595">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::adapt()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01384">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundaries_in_this_processor()</a>.</p>
 
 </div>
 </div>
@@ -3624,9 +3623,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01397">1397</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01470">1470</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01832">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01941">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
 
 </div>
 </div>
@@ -3656,9 +3655,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01394">1394</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01465">1465</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01832">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01941">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
 
 </div>
 </div>
@@ -3698,9 +3697,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01404">1404</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01481">1481</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01832">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01941">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
 
 </div>
 </div>
@@ -3740,9 +3739,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01400">1400</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01475">1475</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01832">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01941">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
 
 </div>
 </div>
@@ -3788,9 +3787,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01407">1407</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01487">1487</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01832">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01941">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundaries_ids</a>.</p>
 
 </div>
 </div>
@@ -3822,9 +3821,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get the shared boundaries ids living in the current processor. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01318">1318</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01384">1384</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01428">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundaries()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01388">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundaries_ids()</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01518">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundaries()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01455">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundaries_ids()</a>.</p>
 
 </div>
 </div>
@@ -3864,9 +3863,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01478">1478</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01571">1571</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01853">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01965">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_element_pt</a>.</p>
 
 </div>
 </div>
@@ -3897,9 +3896,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return the association of the shared boundaries with the processors. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01630">1630</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01727">1727</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01837">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_from_processors</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01946">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_from_processors</a>.</p>
 
 </div>
 </div>
@@ -3929,9 +3928,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01633">1633</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01732">1732</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01837">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_from_processors</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01946">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_from_processors</a>.</p>
 
 </div>
 </div>
@@ -3971,9 +3970,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01579">1579</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01674">1674</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01861">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01973">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_node_pt</a>.</p>
 
 </div>
 </div>
@@ -4005,9 +4004,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Gets the boundary id of the internal boundary that the shared boundary lies on. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01675">1675</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01776">1776</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01842">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01951">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
 
 </div>
 </div>
@@ -4038,9 +4037,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Gets the storage that indicates if a shared boundary is part of an internal boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01739">1739</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01839">1839</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01842">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01951">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
 
 </div>
 </div>
@@ -4072,11 +4071,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Checks if the shared boundary overlaps an internal boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01661">1661</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01762">1762</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01842">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01951">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_overlaps_internal_boundary</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l29344">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l29595">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
 
 </div>
 </div>
@@ -4116,9 +4115,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01419">1419</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01505">1505</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01846">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01955">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
 
 </div>
 </div>
@@ -4164,14 +4163,14 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01423">1423</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01511">1511</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01846">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01955">oomph::TriangleMesh&lt; ELEMENT &gt;::Shared_boundary_polyline_pt</a>.</p>
 
 </div>
 </div>
-<a id="a87b3ee8de1ce46c0733b5bd7d0355061"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87b3ee8de1ce46c0733b5bd7d0355061">&#9670;&nbsp;</a></span>sort_polylines_helper()</h2>
+<a id="a76509aa7af0fb00c08e3005056e09cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76509aa7af0fb00c08e3005056e09cd2">&#9670;&nbsp;</a></span>sort_polylines_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4190,7 +4189,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; TriangleMeshPolyLine * &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>sorted_polylines_pt</em>&#160;</td>
         </tr>
         <tr>
@@ -4208,7 +4207,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Sorts the polylines so they be continuous and then we can create a closed or open curve from them. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11213">11213</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l11338">11338</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -4235,7 +4234,7 @@ template&lt;class ELEMENT &gt; </div>
 <h1><a class="anchor" id="autotoc_md2"></a>
 original mesh only</h1>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l05580">5580</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l05610">5610</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -4266,14 +4265,14 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Boolean defining if Triangulateio object has been built or not. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01109">1109</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01170">1170</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01291">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01355">oomph::TriangleMesh&lt; ELEMENT &gt;::Triangulateio_exists</a>.</p>
 
 </div>
 </div>
-<a id="a730c9d300ac82244e4c37ab7f9f28248"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a730c9d300ac82244e4c37ab7f9f28248">&#9670;&nbsp;</a></span>update_holes_information_helper()</h2>
+<a id="af55d4baf005b0ba4f9ae71eaf859c8bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af55d4baf005b0ba4f9ae71eaf859c8bc">&#9670;&nbsp;</a></span>update_holes_information_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4292,7 +4291,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>output_holes_coordinates</em>&#160;</td>
         </tr>
         <tr>
@@ -4310,9 +4309,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Keeps those vertices that define a hole, those that are inside closed internal boundaries in the new polygons that define the domain. Delete those outside/inside the outer polygons (this is required since Triangle can not deal with vertices that define holes outside the new outer polygons of the domain) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l10797">10797</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8cc_source.html#l10928">10928</a> of file <a class="el" href="triangle__mesh_8template_8cc_source.html">triangle_mesh.template.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l02097">oomph::TriangleMesh&lt; ELEMENT &gt;::Point::x</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l02097">oomph::TriangleMesh&lt; ELEMENT &gt;::Point::y</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l02193">oomph::TriangleMesh&lt; ELEMENT &gt;::Point::x</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l02193">oomph::TriangleMesh&lt; ELEMENT &gt;::Point::y</a>.</p>
 
 </div>
 </div>
@@ -4343,16 +4342,16 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Update the triangulateio object to the current nodal positions. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00943">943</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">1005</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01300">oomph::TriangleMesh&lt; ELEMENT &gt;::Oomph_vertex_nodes_id</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01364">oomph::TriangleMesh&lt; ELEMENT &gt;::Oomph_vertex_nodes_id</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00923">oomph::TriangleMesh&lt; ELEMENT &gt;::update_triangulateio()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00985">oomph::TriangleMesh&lt; ELEMENT &gt;::update_triangulateio()</a>.</p>
 
 </div>
 </div>
-<a id="ae4922667cdfd747a3fbc5d391933ce31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4922667cdfd747a3fbc5d391933ce31">&#9670;&nbsp;</a></span>update_triangulateio() <span class="overload">[2/2]</span></h2>
+<a id="a43173b5b7e761e60e5f9af3be432918d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43173b5b7e761e60e5f9af3be432918d">&#9670;&nbsp;</a></span>update_triangulateio() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4365,7 +4364,7 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1TriangleMesh.html">oomph::TriangleMesh</a>&lt; ELEMENT &gt;::update_triangulateio </td>
           <td>(</td>
-          <td class="paramtype">Vector&lt; Vector&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>internal_point</em></td><td>)</td>
           <td></td>
         </tr>
@@ -4379,9 +4378,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Update the TriangulateIO object to the current nodal position and the centre hole coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00923">923</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l00985">985</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l00943">oomph::TriangleMesh&lt; ELEMENT &gt;::update_triangulateio()</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">oomph::TriangleMesh&lt; ELEMENT &gt;::update_triangulateio()</a>.</p>
 
 </div>
 </div>
@@ -4410,9 +4409,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Flag to indicate if an internal boundary will be used as shared boundary because there is overlapping of the internal boundary with the shared boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01875">1875</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01989">1989</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01808">oomph::TriangleMesh&lt; ELEMENT &gt;::boundary_marked_as_shared_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01916">oomph::TriangleMesh&lt; ELEMENT &gt;::boundary_marked_as_shared_boundary()</a>.</p>
 
 </div>
 </div>
@@ -4440,9 +4439,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The polylines that will temporary represent the boundary that was splitted in the distribution process. Used to ease the sending of info. to Triangle during the adaptation process. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01870">1870</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01983">1983</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01785">oomph::TriangleMesh&lt; ELEMENT &gt;::boundary_subpolylines()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01760">oomph::TriangleMesh&lt; ELEMENT &gt;::nboundary_subpolylines()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01890">oomph::TriangleMesh&lt; ELEMENT &gt;::boundary_subpolylines()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01862">oomph::TriangleMesh&lt; ELEMENT &gt;::nboundary_subpolylines()</a>.</p>
 
 </div>
 </div>
@@ -4470,9 +4469,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Flag to indicate if a polyline has been splitted during the distribution process, the boundary id of the polyline is used to indicate if spplited. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01865">1865</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01978">1978</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01744">oomph::TriangleMesh&lt; ELEMENT &gt;::boundary_was_splitted()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01846">oomph::TriangleMesh&lt; ELEMENT &gt;::boundary_was_splitted()</a>.</p>
 
 </div>
 </div>
@@ -4500,9 +4499,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>For the e-th finite element on shared boundary b, this is the index of the face that lies along that boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01857">1857</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01969">1969</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01502">oomph::TriangleMesh&lt; ELEMENT &gt;::add_face_index_at_shared_boundary()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01506">oomph::TriangleMesh&lt; ELEMENT &gt;::face_index_at_shared_boundary()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01499">oomph::TriangleMesh&lt; ELEMENT &gt;::flush_face_index_at_shared_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01596">oomph::TriangleMesh&lt; ELEMENT &gt;::add_face_index_at_shared_boundary()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01601">oomph::TriangleMesh&lt; ELEMENT &gt;::face_index_at_shared_boundary()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01591">oomph::TriangleMesh&lt; ELEMENT &gt;::flush_face_index_at_shared_boundary()</a>.</p>
 
 </div>
 </div>
@@ -4530,9 +4529,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The final boundary id for shared boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01827">1827</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01935">1935</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01311">oomph::TriangleMesh&lt; ELEMENT &gt;::final_shared_boundary_id()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01376">oomph::TriangleMesh&lt; ELEMENT &gt;::final_shared_boundary_id()</a>.</p>
 
 </div>
 </div>
@@ -4560,9 +4559,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Flag to know if it is the first time we are going to compute the holes left by the halo elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01911">1911</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02021">2021</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00370">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00427">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -4590,9 +4589,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>The initial boundary id for shared boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01824">1824</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01932">1932</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01307">oomph::TriangleMesh&lt; ELEMENT &gt;::initial_shared_boundary_id()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01370">oomph::TriangleMesh&lt; ELEMENT &gt;::initial_shared_boundary_id()</a>.</p>
 
 </div>
 </div>
@@ -4620,9 +4619,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Vector storing oomph-lib node number for all vertex nodes in the TriangulateIO representation of the mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01300">1300</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01364">1364</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01118">oomph::TriangleMesh&lt; ELEMENT &gt;::oomph_vertex_nodes_id()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00943">oomph::TriangleMesh&lt; ELEMENT &gt;::update_triangulateio()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01179">oomph::TriangleMesh&lt; ELEMENT &gt;::oomph_vertex_nodes_id()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">oomph::TriangleMesh&lt; ELEMENT &gt;::update_triangulateio()</a>.</p>
 
 </div>
 </div>
@@ -4650,7 +4649,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Backup the original extra holes coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01914">1914</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l02024">2024</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -4678,9 +4677,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Target areas for regions; defaults to 0.0 which (luckily) implies "no specific target area" for triangle! </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01134">1134</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01194">1194</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00462">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l00516">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -4708,9 +4707,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Stores the boundaries ids created by the interaction of two processors Shared_boundaries_ids[iproc][jproc] = Vector of shared boundaries ids "iproc" processor shares boundaries with "jproc" processor. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01832">1832</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01941">1941</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01384">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundaries()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01388">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundaries_ids()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01449">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundaries()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01455">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundaries_ids()</a>.</p>
 
 </div>
 </div>
@@ -4738,9 +4737,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Stores the boundary elements adjacent to the shared boundaries, these elements are a subset of the halo and haloed elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01853">1853</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01965">1965</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01474">oomph::TriangleMesh&lt; ELEMENT &gt;::add_shared_boundary_element()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01451">oomph::TriangleMesh&lt; ELEMENT &gt;::flush_shared_boundary_element()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01428">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundaries()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01431">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_element()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01478">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_element_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01566">oomph::TriangleMesh&lt; ELEMENT &gt;::add_shared_boundary_element()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01542">oomph::TriangleMesh&lt; ELEMENT &gt;::flush_shared_boundary_element()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01518">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundaries()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01523">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_element()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01571">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_element_pt()</a>.</p>
 
 </div>
 </div>
@@ -4768,9 +4767,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Stores the processors involved in the generation of a shared boundary, in 2D two processors give rise to the creation of a shared boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01837">1837</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01946">1946</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01630">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_from_processors()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01727">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_from_processors()</a>.</p>
 
 </div>
 </div>
@@ -4798,9 +4797,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Stores the boundary nodes adjacent to the shared boundaries, these nodes are a subset of the halo and haloed nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01861">1861</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01973">1973</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01556">oomph::TriangleMesh&lt; ELEMENT &gt;::add_shared_boundary_node()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01548">oomph::TriangleMesh&lt; ELEMENT &gt;::flush_shared_boundary_node()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01600">oomph::TriangleMesh&lt; ELEMENT &gt;::is_node_on_shared_boundary()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01527">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_node()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01579">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_node_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01652">oomph::TriangleMesh&lt; ELEMENT &gt;::add_shared_boundary_node()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01640">oomph::TriangleMesh&lt; ELEMENT &gt;::flush_shared_boundary_node()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01694">oomph::TriangleMesh&lt; ELEMENT &gt;::is_node_on_shared_boundary()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01620">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_node()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01674">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_node_pt()</a>.</p>
 
 </div>
 </div>
@@ -4828,9 +4827,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Stores information about those shared boundaries that lie over or over a segment of an internal boundary (only used when using internal boundaries in the domain) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01842">1842</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01951">1951</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01699">oomph::TriangleMesh&lt; ELEMENT &gt;::get_shared_boundaries_overlapping_internal_boundary()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01655">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_overlaps_internal_boundary()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01675">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_overlapping_internal_boundary()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01661">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_overlaps_internal_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01801">oomph::TriangleMesh&lt; ELEMENT &gt;::get_shared_boundaries_overlapping_internal_boundary()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01756">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_overlaps_internal_boundary()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01776">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_overlapping_internal_boundary()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01762">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_overlaps_internal_boundary()</a>.</p>
 
 </div>
 </div>
@@ -4858,9 +4857,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Stores the polyline representation of the shared boundaries Shared_boundary_polyline_pt[iproc][ncurve][npolyline] = polyline_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01846">1846</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01955">1955</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01848">oomph::TriangleMesh&lt; ELEMENT &gt;::flush_shared_boundary_polyline_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01412">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_curves()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01415">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_polyline()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01419">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_polyline_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01957">oomph::TriangleMesh&lt; ELEMENT &gt;::flush_shared_boundary_polyline_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01494">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_curves()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01499">oomph::TriangleMesh&lt; ELEMENT &gt;::nshared_boundary_polyline()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l01505">oomph::TriangleMesh&lt; ELEMENT &gt;::shared_boundary_polyline_pt()</a>.</p>
 
 </div>
 </div>
@@ -4880,9 +4879,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Timestepper used to build elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01124">1124</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01185">1185</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01151">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00845">oomph::TriangleMesh&lt; ELEMENT &gt;::set_mesh_level_time_stepper()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00391">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01211">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01066">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00897">oomph::TriangleMesh&lt; ELEMENT &gt;::set_mesh_level_time_stepper()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00448">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -4910,9 +4909,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Temporary scaffold mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01296">1296</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01360">1360</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01151">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00391">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01211">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01066">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00448">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -4940,9 +4939,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Boolean defining if Triangulateio object has been built or not. </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01291">1291</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01355">1355</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01151">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00370">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01109">oomph::TriangleMesh&lt; ELEMENT &gt;::triangulateio_exists()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00808">oomph::TriangleMesh&lt; ELEMENT &gt;::~TriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01211">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01066">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00427">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01170">oomph::TriangleMesh&lt; ELEMENT &gt;::triangulateio_exists()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00860">oomph::TriangleMesh&lt; ELEMENT &gt;::~TriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -4961,9 +4960,9 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 <p>Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) </p>
 
-<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01128">1128</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="triangle__mesh_8template_8h_source.html#l01189">1189</a> of file <a class="el" href="triangle__mesh_8template_8h_source.html">triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01151">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01005">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00391">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l01211">oomph::TriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l01066">oomph::TriangleMesh&lt; ELEMENT &gt;::remesh_from_internal_triangulateio()</a>, and <a class="el" href="triangle__mesh_8template_8h_source.html#l00448">oomph::TriangleMesh&lt; ELEMENT &gt;::TriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -4999,7 +4998,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:20:06
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:59:59
         </div>
       </div>
     </footer>

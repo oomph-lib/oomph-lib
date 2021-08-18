@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Fourier\+Decomposed\+Helmholtz\+Equations\+:\be
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a66a39c7967ffeedd994c206e2a5f0d4e}{Fourier\+Decomposed\+Helmholtz\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&f)
-\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -61,7 +60,7 @@ void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a8139e48
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. Const version. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_af35f759fbed7364ef09250161dc32e93}{get\+\_\+source\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&source) const
 \item 
-void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_ae8d93aac73e1dec5e7f771c1000a3c46}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&flux) const
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a6ce7df4673b0b76ad6d1026448ab18cc}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i for real and imag part. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_af8de850d46849598e0d84bec03a8ecf6}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector (wrapper) \end{DoxyCompactList}\item 
@@ -79,8 +78,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquation
 virtual double \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_aa19bdb12fe50805a9ad1f75912c85678}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a0ada3466d3e5ee8e8a548fee6414e3ad}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -109,12 +107,11 @@ Definition at line 87 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elemen
 
 
 
-Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- 
+Function pointer to source function fct(x,f(x)) -- x is a Vector! 
 
 
 
-Definition at line 94 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 92 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -131,7 +128,7 @@ Constructor.
 
 
 
-Definition at line 100 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 97 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzEquations_a2d8eacb56de3a2d702352ed36ad162d0}\label{classoomph_1_1FourierDecomposedHelmholtzEquations_a2d8eacb56de3a2d702352ed36ad162d0}} 
 \index{oomph::FourierDecomposedHelmholtzEquations@{oomph::FourierDecomposedHelmholtzEquations}!FourierDecomposedHelmholtzEquations@{FourierDecomposedHelmholtzEquations}}
@@ -145,7 +142,7 @@ Broken copy constructor.
 
 
 
-Definition at line 105 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 103 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -172,7 +169,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 648 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 626 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -194,7 +191,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 235 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 240 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzEquations_a8139e48ff406de0f7b2c76d007b9e7e3}\label{classoomph_1_1FourierDecomposedHelmholtzEquations_a8139e48ff406de0f7b2c76d007b9e7e3}} 
 \index{oomph::FourierDecomposedHelmholtzEquations@{oomph::FourierDecomposedHelmholtzEquations}!compute\_norm@{compute\_norm}}
@@ -212,7 +209,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af2025a472d
 
 
 
-Definition at line 728 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 706 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -266,7 +263,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 328 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 339 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -288,7 +285,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 316 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 328 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -302,8 +299,7 @@ References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, fill\+\_\+in\
 
 
 
-Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- 
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. 
 
 Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and/or element Jacobian matrix
 
@@ -311,7 +307,7 @@ flag=1\+: compute both flag=0\+: compute only residual \mbox{\hyperlink{classoom
 
 Pure version without hanging nodes 
 
-Definition at line 189 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 183 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -333,7 +329,7 @@ Get the Fourier wavenumber.
 
 
 
-Definition at line 156 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 157 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -355,17 +351,17 @@ Get pointer to Fourier wavenumber.
 
 
 
-Definition at line 150 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 151 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
 References N\+\_\+fourier\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzEquations_ae8d93aac73e1dec5e7f771c1000a3c46}\label{classoomph_1_1FourierDecomposedHelmholtzEquations_ae8d93aac73e1dec5e7f771c1000a3c46}} 
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzEquations_a6ce7df4673b0b76ad6d1026448ab18cc}\label{classoomph_1_1FourierDecomposedHelmholtzEquations_a6ce7df4673b0b76ad6d1026448ab18cc}} 
 \index{oomph::FourierDecomposedHelmholtzEquations@{oomph::FourierDecomposedHelmholtzEquations}!get\_flux@{get\_flux}}
 \index{get\_flux@{get\_flux}!oomph::FourierDecomposedHelmholtzEquations@{oomph::FourierDecomposedHelmholtzEquations}}
 \doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
-{\footnotesize\ttfamily void oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Equations\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{flux }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Equations\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{flux }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -373,7 +369,7 @@ Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i for real and imag part.
 
 
 
-Definition at line 278 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 290 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -391,7 +387,7 @@ Referenced by oomph\+::\+T\+Fourier\+Decomposed\+Helmholtz\+Element$<$ N\+N\+O\+
 
 Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. 
 
-Definition at line 259 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 271 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -413,7 +409,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 340 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 350 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -435,7 +431,7 @@ Get the square of wavenumber.
 
 
 
-Definition at line 137 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 138 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -457,7 +453,7 @@ Get pointer to square of wavenumber.
 
 
 
-Definition at line 131 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 132 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -483,7 +479,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFourierDecomposedHelmholtzEleme
 
 
 
-Definition at line 188 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 190 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -513,7 +509,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFourierDecomposedHelmholtzEleme
 
 
 
-Definition at line 495 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 477 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -539,7 +535,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFourierDecomposedHelmholtzEleme
 
 
 
-Definition at line 169 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 170 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -557,8 +553,7 @@ Output FE representation of soln\+: x,y,u\+\_\+re,u\+\_\+im or x,y,z,u\+\_\+re,u
 
 Output function\+:
 
-r,z,u\+\_\+re,u\+\_\+imag ~\newline
-
+r,z,u\+\_\+re,u\+\_\+imag
 
 nplot points in each coordinate direction 
 
@@ -570,7 +565,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFourierDecomposedHelmholtzEleme
 
 
 
-Definition at line 410 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 402 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -596,7 +591,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFourierDecomposedHelmholtzEleme
 
 
 
-Definition at line 205 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 208 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzEquations_a9024cd81a80a4709b127560b6f15cd43}\label{classoomph_1_1FourierDecomposedHelmholtzEquations_a9024cd81a80a4709b127560b6f15cd43}} 
 \index{oomph::FourierDecomposedHelmholtzEquations@{oomph::FourierDecomposedHelmholtzEquations}!output\_fct@{output\_fct}}
@@ -620,7 +615,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFourierDecomposedHelmholtzEleme
 
 
 
-Definition at line 540 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 520 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -650,7 +645,7 @@ r,z,u
 
 Output at nplot points in each coordinate direction 
 
-Definition at line 455 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 441 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -680,7 +675,7 @@ r,z,u
 
 Output at nplot points in each coordinate direction 
 
-Definition at line 595 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 574 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -706,7 +701,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 379 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line 373 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -724,7 +719,7 @@ Access function\+: Pointer to source function.
 
 
 
-Definition at line 249 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 256 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -742,7 +737,7 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line 252 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 262 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -760,7 +755,7 @@ Broken assignment operator.
 
 Return the index at which the unknown value is stored\+: Real/imag part of index contains (real) index of real/imag part. 
 
-Definition at line 125 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 124 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -781,7 +776,7 @@ Pointer to square of wavenumber.
 
 
 
-Definition at line 411 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 420 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -799,7 +794,7 @@ Pointer to Fourier wave number.
 
 
 
-Definition at line 414 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 423 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -817,7 +812,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 408 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line 417 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 

@@ -34,13 +34,13 @@ void \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a93600
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a6d575d706d3b3689965726ca49d1a55a}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
 \begin{DoxyCompactList}\small\item\em Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). ~\newline
- Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
-Note\+: No pressure history is kept, so pressure is always the current value. \end{DoxyCompactList}\item 
+Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
+ Note\+: No pressure history is kept, so pressure is always the current value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a4dabb74925f410045d1d7208a3b29130}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. Empty. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a140d5327220a9a7301381d1f53ddd004}{further\+\_\+build}} ()
 \item 
-void \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a4e6ef46186c9167549288db230bd4965}{insert\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartElement_afc0678a5c1ee0672a997fdc3befe0209}{insert\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -53,7 +53,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a672ed
 \doxysubsection{Detailed Description}
 Refineable version of Crouzeix Raviart elements. Generic class definitions. 
 
-Definition at line 616 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 673 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -70,7 +70,7 @@ Constructor.
 
 
 
-Definition at line 635 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 692 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -89,7 +89,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineablePolarNavierStokesEqu
 
 
 
-Definition at line 921 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1018 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -111,7 +111,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb0
 
 
 
-Definition at line 740 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 811 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a6d575d706d3b3689965726ca49d1a55a}\label{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a6d575d706d3b3689965726ca49d1a55a}} 
 \index{oomph::RefineablePolarCrouzeixRaviartElement@{oomph::RefineablePolarCrouzeixRaviartElement}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -122,8 +122,8 @@ Definition at line 740 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_
 
 
 Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). ~\newline
- Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
-Note\+: No pressure history is kept, so pressure is always the current value. 
+Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
+ Note\+: No pressure history is kept, so pressure is always the current value. 
 
 
 
@@ -131,11 +131,11 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 684 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 753 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), t, oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Refineable\+Element\+::tree\+\_\+pt(), oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+pnst(), and values.
+References i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Refineable\+Element\+::tree\+\_\+pt(), oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+pnst(), and values.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a93600266d1ddfefb4275d4bc38f5d62c}\label{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a93600266d1ddfefb4275d4bc38f5d62c}} 
 \index{oomph::RefineablePolarCrouzeixRaviartElement@{oomph::RefineablePolarCrouzeixRaviartElement}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -153,17 +153,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 666 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 733 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References i, oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+pnst(), and values.
 
-\mbox{\Hypertarget{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a4e6ef46186c9167549288db230bd4965}\label{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a4e6ef46186c9167549288db230bd4965}} 
+\mbox{\Hypertarget{classoomph_1_1RefineablePolarCrouzeixRaviartElement_afc0678a5c1ee0672a997fdc3befe0209}\label{classoomph_1_1RefineablePolarCrouzeixRaviartElement_afc0678a5c1ee0672a997fdc3befe0209}} 
 \index{oomph::RefineablePolarCrouzeixRaviartElement@{oomph::RefineablePolarCrouzeixRaviartElement}!insert\_load\_data@{insert\_load\_data}}
 \index{insert\_load\_data@{insert\_load\_data}!oomph::RefineablePolarCrouzeixRaviartElement@{oomph::RefineablePolarCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{insert\_load\_data()}{insert\_load\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -175,7 +175,7 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. (Overloads non-\/refineable version and takes hanging nodes into account) 
 
-Definition at line 759 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 829 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -197,7 +197,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db9
 
 
 
-Definition at line 642 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 701 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a7425e9813dccd141f9a377d6478876f2}\label{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a7425e9813dccd141f9a377d6478876f2}} 
 \index{oomph::RefineablePolarCrouzeixRaviartElement@{oomph::RefineablePolarCrouzeixRaviartElement}!nrecovery\_order@{nrecovery\_order}}
@@ -215,7 +215,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 650 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 712 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a1e444d850f0b74355b1474fd49f239d1}\label{classoomph_1_1RefineablePolarCrouzeixRaviartElement_a1e444d850f0b74355b1474fd49f239d1}} 
 \index{oomph::RefineablePolarCrouzeixRaviartElement@{oomph::RefineablePolarCrouzeixRaviartElement}!nvertex\_node@{nvertex\_node}}
@@ -233,7 +233,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 653 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 718 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -255,7 +255,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line 835 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 908 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -277,7 +277,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineablePolarNavierStokesEquations_a
 
 
 
-Definition at line 624 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 680 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -299,7 +299,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 657 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 724 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

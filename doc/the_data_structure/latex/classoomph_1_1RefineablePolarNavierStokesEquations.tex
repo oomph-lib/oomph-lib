@@ -36,7 +36,7 @@ virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{clas
 virtual void \mbox{\hyperlink{classoomph_1_1RefineablePolarNavierStokesEquations_add592ab49fc813016f9d0d22bc82a68f}{unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs}} ()=0
 \begin{DoxyCompactList}\small\item\em Unpin all pressure dofs in the element. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineablePolarNavierStokesEquations_a29a784c096caf88d102b8fd13dc686e6}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs}} ()
-\begin{DoxyCompactList}\small\item\em Pin unused nodal pressure dofs (empty by default, because. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Pin unused nodal pressure dofs (empty by default, because by default pressure dofs are not associated with nodes) \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineablePolarNavierStokesEquations_a57ee96ad52906cc81b27676a1cc9fb25}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Add element\textquotesingle{}s contribution to elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -45,7 +45,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineablePolarNavierStokesEquations
 \doxysubsection{Detailed Description}
 Refineable version of my Polar Navier--Stokes equations 
 
-Definition at line 55 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 54 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -89,7 +89,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ad0
 
 
 
-Definition at line 50 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 48 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -115,7 +115,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineablePolarCrouzeixRaviartEl
 
 
 
-Definition at line 172 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 174 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -141,7 +141,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 129 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 131 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -163,7 +163,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 121 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 123 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePolarNavierStokesEquations_a29a784c096caf88d102b8fd13dc686e6}\label{classoomph_1_1RefineablePolarNavierStokesEquations_a29a784c096caf88d102b8fd13dc686e6}} 
 \index{oomph::RefineablePolarNavierStokesEquations@{oomph::RefineablePolarNavierStokesEquations}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -173,15 +173,15 @@ Definition at line 121 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_
 
 
 
-Pin unused nodal pressure dofs (empty by default, because. 
+Pin unused nodal pressure dofs (empty by default, because by default pressure dofs are not associated with nodes) 
 
-by default pressure dofs are not associated with nodes) 
+
 
 Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineablePolarTaylorHoodElement_a6c4de6358f04635ecd54ef87487d7ada}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element}}.
 
 
 
-Definition at line 71 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 72 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -200,10 +200,9 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 
 \begin{DoxyItemize}
 \item {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineablePolarNavierStokesEquations}{Refineable\+Polar\+Navier\+Stokes\+Equations}}\+:}\+: \mbox{\hyperlink{classoomph_1_1RefineablePolarNavierStokesEquations_a29a784c096caf88d102b8fd13dc686e6}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}
-\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom ~\newline
- (e.\+g. for refineable Taylor-\/\+Hood.) 
+\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom (e.\+g. for refineable Taylor-\/\+Hood.) 
 
-Definition at line 92 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 94 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -229,7 +228,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineablePolarTaylorHoodElement
 
 
 
-Definition at line 64 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 62 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -247,7 +246,7 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line 106 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 108 of file refineable\+\_\+polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

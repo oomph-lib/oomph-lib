@@ -21,11 +21,11 @@ void \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_ab0a885165f387f79bc30e19810
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa3d3b58e30a8eba0adce2c335d2fc437}{A\+M\+G\+\_\+strength}} =0.\+25
+double \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa3d3b58e30a8eba0adce2c335d2fc437}{A\+M\+G\+\_\+strength}} = 0.\+25
 \begin{DoxyCompactList}\small\item\em Default for A\+MG strength (0.\+25 recommended for 2D problems; larger (0.\+5-\/0.\+75, say) for 3D. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a8d34acec927aff8f150737afaec9651a}{A\+M\+G\+\_\+coarsening}} =6
+unsigned \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a8d34acec927aff8f150737afaec9651a}{A\+M\+G\+\_\+coarsening}} = 6
 \begin{DoxyCompactList}\small\item\em Default A\+MG coarsening strategy. Coarsening types include\+: 0 = C\+L\+JP (parallel coarsening using independent sets) 1 = classical RS with no boundary treatment (not recommended in parallel) 3 = modified RS with 3rd pass to add C points on the boundaries 6 = Falgout (uses 1 then C\+L\+JP using interior coarse points as first independent set) 8 = P\+M\+IS (parallel coarsening using independent sets -\/ lower complexities than 0, maybe also slower convergence) 10= H\+M\+IS (one pass RS on each processor then P\+M\+IS on interior coarse points as first independent set) 11= One pass RS on each processor (not recommended) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa32196f0215efa229ced79ce65e3887d}{A\+M\+G\+\_\+truncation}} =0.\+0
+double \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa32196f0215efa229ced79ce65e3887d}{A\+M\+G\+\_\+truncation}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em A\+MG interpolation truncation factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -45,7 +45,7 @@ Helper function to check the Hypre error flag, return the message associated wit
 
 Helper function to check the Hypre error flag, return the message associated with any error, and reset the global error flag to zero. This function also returns the error value. 
 
-Definition at line 150 of file hypre\+\_\+solver.\+cc.
+Definition at line 147 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -67,7 +67,7 @@ Helper function to create a serial H\+Y\+P\+R\+E\+\_\+\+I\+J\+Matrix and H\+Y\+P
 
 Helper function to create a serial H\+Y\+P\+R\+E\+\_\+\+I\+J\+Matrix and H\+Y\+P\+R\+E\+\_\+\+Par\+C\+S\+R\+Matrix from a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} N\+O\+TE\+: dist\+\_\+pt is rebuilt to match the distribution of the hypre solver which is not necassarily the same as the oomph lib matrix 
 
-Definition at line 274 of file hypre\+\_\+solver.\+cc.
+Definition at line 270 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -97,11 +97,11 @@ Helper function to create a H\+Y\+P\+R\+E\+\_\+\+I\+J\+Vector and H\+Y\+P\+R\+E\
 \item If M\+PI and distributed input vector the distributed output vectors are created. 
 \end{DoxyItemize}
 
-Definition at line 181 of file hypre\+\_\+solver.\+cc.
+Definition at line 178 of file hypre\+\_\+solver.\+cc.
 
 
 
-References oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), i, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), values, and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), i, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), values, and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 
 
@@ -127,7 +127,7 @@ Helper function to create a H\+Y\+P\+R\+E\+\_\+\+I\+J\+Vector and H\+Y\+P\+R\+E\
 \item If M\+PI and distributed input distribution the distributed output vectors are created. 
 \end{DoxyItemize}
 
-Definition at line 242 of file hypre\+\_\+solver.\+cc.
+Definition at line 240 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -145,7 +145,7 @@ Helper function to set Euclid options using a command line like array.
 
 
 
-Definition at line 417 of file hypre\+\_\+solver.\+cc.
+Definition at line 409 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -162,7 +162,7 @@ Referenced by oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup().
 \index{oomph::HypreHelpers@{oomph::HypreHelpers}!AMG\_coarsening@{AMG\_coarsening}}
 \index{AMG\_coarsening@{AMG\_coarsening}!oomph::HypreHelpers@{oomph::HypreHelpers}}
 \doxysubsubsection{\texorpdfstring{AMG\_coarsening}{AMG\_coarsening}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Helpers\+::\+A\+M\+G\+\_\+coarsening =6}
+{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Helpers\+::\+A\+M\+G\+\_\+coarsening = 6}
 
 
 
@@ -170,7 +170,7 @@ Default A\+MG coarsening strategy. Coarsening types include\+: 0 = C\+L\+JP (par
 
 
 
-Definition at line 137 of file hypre\+\_\+solver.\+cc.
+Definition at line 134 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -180,7 +180,7 @@ Referenced by oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface().
 \index{oomph::HypreHelpers@{oomph::HypreHelpers}!AMG\_strength@{AMG\_strength}}
 \index{AMG\_strength@{AMG\_strength}!oomph::HypreHelpers@{oomph::HypreHelpers}}
 \doxysubsubsection{\texorpdfstring{AMG\_strength}{AMG\_strength}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Helpers\+::\+A\+M\+G\+\_\+strength =0.\+25}
+{\footnotesize\ttfamily double oomph\+::\+Hypre\+Helpers\+::\+A\+M\+G\+\_\+strength = 0.\+25}
 
 
 
@@ -188,7 +188,7 @@ Default for A\+MG strength (0.\+25 recommended for 2D problems; larger (0.\+5-\/
 
 
 
-Definition at line 121 of file hypre\+\_\+solver.\+cc.
+Definition at line 118 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -198,7 +198,7 @@ Referenced by oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface().
 \index{oomph::HypreHelpers@{oomph::HypreHelpers}!AMG\_truncation@{AMG\_truncation}}
 \index{AMG\_truncation@{AMG\_truncation}!oomph::HypreHelpers@{oomph::HypreHelpers}}
 \doxysubsubsection{\texorpdfstring{AMG\_truncation}{AMG\_truncation}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Helpers\+::\+A\+M\+G\+\_\+truncation =0.\+0}
+{\footnotesize\ttfamily double oomph\+::\+Hypre\+Helpers\+::\+A\+M\+G\+\_\+truncation = 0.\+0}
 
 
 
@@ -206,7 +206,7 @@ A\+MG interpolation truncation factor.
 
 
 
-Definition at line 143 of file hypre\+\_\+solver.\+cc.
+Definition at line 140 of file hypre\+\_\+solver.\+cc.
 
 
 

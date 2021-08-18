@@ -222,9 +222,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ab8e2478caa8370dd12462f17e1cc8082">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse)</td></tr>
 <tr class="memdesc:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ab8e2478caa8370dd12462f17e1cc8082">More...</a><br /></td></tr>
 <tr class="separator:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ae9282acaaf19fa2cdb703d49f1a8de25">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt; &amp;doftype_coarsen_map_coarse)</td></tr>
-<tr class="memdesc:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ae9282acaaf19fa2cdb703d49f1a8de25">More...</a><br /></td></tr>
-<tr class="separator:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ac0d2887082cf856b680b4ae61b510d29">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&gt; &amp;doftype_coarsen_map_coarse)</td></tr>
+<tr class="memdesc:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ac0d2887082cf856b680b4ae61b510d29">More...</a><br /></td></tr>
+<tr class="separator:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#af704c4816469cef4fed9d35a9ad651ec">block_setup</a> ()</td></tr>
 <tr class="memdesc:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their "blocks" and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the internal blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if the identity dof-to-block mapping is okay, i.e. dof number 0 corresponds to block number 0 dof number 1 corresponds to block number 1 dof number 2 corresponds to block number 2 etc...  <a href="classoomph_1_1BlockPreconditioner.html#af704c4816469cef4fed9d35a9ad651ec">More...</a><br /></td></tr>
 <tr class="separator:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -356,9 +356,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a50b76a374797805f64e2af34d581cdc2">nfine_grain_dof_types_in</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
 <tr class="memdesc:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the number of most fine grain dof types in a (possibly coarsened) dof type.  <a href="classoomph_1_1BlockPreconditioner.html#a50b76a374797805f64e2af34d581cdc2">More...</a><br /></td></tr>
 <tr class="separator:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">replacement_dof_block_pt</a> () const</td></tr>
-<tr class="memdesc:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the replaced dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">More...</a><br /></td></tr>
-<tr class="separator:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">replacement_dof_block_pt</a> () const</td></tr>
+<tr class="memdesc:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the replaced dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">More...</a><br /></td></tr>
+<tr class="separator:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#adbe1ae854ee9831649249d50162bb6a9">setup_matrix_vector_product</a> (<a class="el" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a> *matvec_prod_pt, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *block_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;block_col_indices)</td></tr>
 <tr class="memdesc:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup a matrix vector product. matvec_prod_pt is a pointer to the MatrixVectorProduct, block_pt is a pointer to the block matrix, block_col_indices is a vector indicating which block indices does the RHS vector we want to multiply the matrix by.  <a href="classoomph_1_1BlockPreconditioner.html#adbe1ae854ee9831649249d50162bb6a9">More...</a><br /></td></tr>
 <tr class="separator:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -384,8 +384,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae3cf61f61e1aa50e2315e999827e7d59 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper function, takes the naturally ordered vector, v, and extracts the n-th block vector, b. Here n is the block number in the current preconditioner. NOTE: The ordering of the vector b is the same as the ordering of the block matrix from internal_get_block(...).  <a href="classoomph_1_1BlockPreconditioner.html#ae3cf61f61e1aa50e2315e999827e7d59">More...</a><br /></td></tr>
 <tr class="separator:ae3cf61f61e1aa50e2315e999827e7d59 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">internal_get_block_vectors</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;block_vec_number, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
-<tr class="memdesc:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. <br  />
-  <a href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">More...</a><br /></td></tr>
+<tr class="memdesc:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors.  <a href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">More...</a><br /></td></tr>
 <tr class="separator:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cde8af922cd8054dbf352527dd682b1 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a0cde8af922cd8054dbf352527dd682b1">internal_get_block_vectors</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
 <tr class="memdesc:a0cde8af922cd8054dbf352527dd682b1 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper function, takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. This is simply a wrapper around the other internal_get_block_vectors(...) function with the identity block_vec_number vector.  <a href="classoomph_1_1BlockPreconditioner.html#a0cde8af922cd8054dbf352527dd682b1">More...</a><br /></td></tr>
@@ -532,7 +531,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#af97821621b570d409e6662939e5f818d">set_mesh</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *const <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3c0e92cb77c3e3179007fe9fd99b6428">mesh_pt</a>, const bool &amp;allow_multiple_element_type_in_mesh=false)</td></tr>
 <tr class="memdesc:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the i-th mesh for this block preconditioner. Note: The method set_nmesh(...) must be called before this method to specify the number of meshes. By default, it is assumed that each mesh only contains elements of the same type. This condition may be relaxed by setting the boolean allow_multiple_element_type_in_mesh to true, however, each mesh must only contain elements with the same number of dof types.  <a href="classoomph_1_1BlockPreconditioner.html#af97821621b570d409e6662939e5f818d">More...</a><br /></td></tr>
 <tr class="separator:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">set_replacement_dof_block</a> (const unsigned &amp;block_i, const unsigned &amp;block_j, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *<a class="el" href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">replacement_dof_block_pt</a>)</td></tr>
+<tr class="memitem:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">set_replacement_dof_block</a> (const unsigned &amp;block_i, const unsigned &amp;block_j, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *<a class="el" href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">replacement_dof_block_pt</a>)</td></tr>
 <tr class="memdesc:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set replacement dof-level blocks. Only dof-level blocks can be set. This is important due to how the dof type coarsening feature operates.  <a href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">More...</a><br /></td></tr>
 <tr class="separator:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fb68db9e79048615984b005f8aa43b3 inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a6fb68db9e79048615984b005f8aa43b3">any_mesh_distributed</a> () const</td></tr>
@@ -567,9 +566,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">More...</a><br /></td></tr>
 <tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classoomph_1_1BlockPreconditioner"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1BlockPreconditioner')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1BlockPreconditioner.html">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;</a></td></tr>
-<tr class="memitem:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a6816cfc4c9d74a39aca7401f751bb235">Replacement_dof_block_pt</a></td></tr>
-<tr class="memdesc:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The replacement dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a6816cfc4c9d74a39aca7401f751bb235">More...</a><br /></td></tr>
-<tr class="separator:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ad2cd49c5c823c4202046e97038f6e080">Replacement_dof_block_pt</a></td></tr>
+<tr class="memdesc:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The replacement dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#ad2cd49c5c823c4202046e97038f6e080">More...</a><br /></td></tr>
+<tr class="separator:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a59e83eca59e3cdc41a93668539e138f1">Block_distribution_pt</a></td></tr>
 <tr class="memdesc:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The distribution for the blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a59e83eca59e3cdc41a93668539e138f1">More...</a><br /></td></tr>
 <tr class="separator:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -621,7 +620,7 @@ Additional Inherited Members</h2></td></tr>
 <li>By default this preconditioner uses a superlu preconditioner. </li>
 </ol>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00606">606</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00604">604</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a85f57923e70244d5fde0538946eb8c3d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a85f57923e70244d5fde0538946eb8c3d">&#9670;&nbsp;</a></span>SubsidiaryPreconditionerFctPt</h2>
@@ -637,7 +636,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>This preconditioner includes the option to use subsidiary operators other than <a class="el" href="classoomph_1_1SuperLUPreconditioner.html" title="An interface to allow SuperLU to be used as an (exact) Preconditioner.">SuperLUPreconditioner</a> for this problem. This is the typedef of a function that should return an instance of a subsidiary preconditioning operator. This preconditioner is responsible for the destruction of the subsidiary preconditioners. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00616">616</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00613">613</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
 </div>
 </div>
@@ -667,9 +666,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor. (By default this preconditioner is upper triangular). </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00619">619</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00616">616</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00709">Method</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00715">Scaling</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00712">Subsidiary_preconditioner_function_pt</a>.</p>
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00705">Method</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00711">Scaling</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00708">Subsidiary_preconditioner_function_pt</a>.</p>
 
 </div>
 </div>
@@ -698,9 +697,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00633">633</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00630">630</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00941">clean_up_memory()</a>.</p>
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00916">clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -730,9 +729,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00640">640</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00636">636</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -765,11 +764,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1Preconditioner.html#a46c31c416829bedcd9db238431262027">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00941">941</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00916">916</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l02185">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::clear_block_preconditioner_base()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00700">Diagonal_block_preconditioner_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00709">Method</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00703">Off_diagonal_matrix_vector_products</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l02165">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::clear_block_preconditioner_base()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00696">Diagonal_block_preconditioner_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00705">Method</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00699">Off_diagonal_matrix_vector_products</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00977">setup()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00633">~PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00951">setup()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00630">~PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld()</a>.</p>
 
 </div>
 </div>
@@ -811,9 +810,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l01073">1073</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l01045">1045</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="double__vector_8h_source.html#l00146">oomph::DoubleVector::clear()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00700">Diagonal_block_preconditioner_pt</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04132">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vector()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00709">Method</a>, <a class="el" href="block__preconditioner_8h_source.html#l01687">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::nblock_types()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00703">Off_diagonal_matrix_vector_products</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04432">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vector()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00248">oomph::CumulativeTimings::start()</a>.</p>
+<p class="reference">References <a class="el" href="double__vector_8h_source.html#l00142">oomph::DoubleVector::clear()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00696">Diagonal_block_preconditioner_pt</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04186">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vector()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00705">Method</a>, <a class="el" href="block__preconditioner_8h_source.html#l01676">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::nblock_types()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00699">Off_diagonal_matrix_vector_products</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04489">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vector()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00243">oomph::CumulativeTimings::start()</a>.</p>
 
 </div>
 </div>
@@ -842,11 +841,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Specify the scaling. Default is 1.0 Must be set before setup(...). </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00690">690</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00687">687</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00715">Scaling</a>.</p>
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00711">Scaling</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00557">oomph::PseudoElasticPreconditionerOld::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00552">oomph::PseudoElasticPreconditionerOld::setup()</a>.</p>
 
 </div>
 </div>
@@ -876,11 +875,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>access function to set the subsidiary preconditioner function. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00665">665</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00661">661</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00712">Subsidiary_preconditioner_function_pt</a>.</p>
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00708">Subsidiary_preconditioner_function_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00977">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00552">oomph::PseudoElasticPreconditionerOld::setup()</a>.</p>
 
 </div>
 </div>
@@ -911,9 +910,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#af4886f4efe510e5c9b0eb19422943588">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00977">977</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00951">951</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8cc_source.html#l02433">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_setup()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00941">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00700">Diagonal_block_preconditioner_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00688">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00531">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::matrix_pt()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00709">Method</a>, <a class="el" href="block__preconditioner_8h_source.html#l01711">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::ndof_types()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00703">Off_diagonal_matrix_vector_products</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00715">Scaling</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00665">set_subsidiary_preconditioner_function()</a>, <a class="el" href="classoomph_1_1Preconditioner.html#af4886f4efe510e5c9b0eb19422943588">oomph::Preconditioner::setup()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02425">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::setup_matrix_vector_product()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00712">Subsidiary_preconditioner_function_pt</a>, <a class="el" href="block__preconditioner_8cc_source.html#l02326">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::turn_into_subsidiary_block_preconditioner()</a>, and <a class="el" href="the__data__structure_8txt.html#aaa5287b1cf3ca06b3f413cb95bd1ec60">u()</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8cc_source.html#l02483">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_setup()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00916">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00696">Diagonal_block_preconditioner_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00679">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00526">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::matrix_pt()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00705">Method</a>, <a class="el" href="block__preconditioner_8h_source.html#l01700">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::ndof_types()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00699">Off_diagonal_matrix_vector_products</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00711">Scaling</a>, <a class="el" href="block__preconditioner_8h_source.html#l02403">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::setup_matrix_vector_product()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00708">Subsidiary_preconditioner_function_pt</a>, and <a class="el" href="the__data__structure_8txt.html#aaa5287b1cf3ca06b3f413cb95bd1ec60">u()</a>.</p>
 
 </div>
 </div>
@@ -942,11 +941,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>use as a block diagonal preconditioner </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00671">671</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00668">668</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00709">Method</a>.</p>
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00705">Method</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00557">oomph::PseudoElasticPreconditionerOld::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00552">oomph::PseudoElasticPreconditionerOld::setup()</a>.</p>
 
 </div>
 </div>
@@ -975,11 +974,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use as a lower triangular preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00683">683</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00680">680</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00709">Method</a>.</p>
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00705">Method</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00557">oomph::PseudoElasticPreconditionerOld::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00552">oomph::PseudoElasticPreconditionerOld::setup()</a>.</p>
 
 </div>
 </div>
@@ -1008,11 +1007,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use as an upper triangular preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00677">677</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00674">674</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00709">Method</a>.</p>
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00705">Method</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00557">oomph::PseudoElasticPreconditionerOld::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00552">oomph::PseudoElasticPreconditionerOld::setup()</a>.</p>
 
 </div>
 </div>
@@ -1039,9 +1038,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> of SuperLU preconditioner pointers for storing the preconditioners for each diagonal block. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00700">700</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00696">696</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00941">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l01073">preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00977">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00916">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l01045">preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00951">setup()</a>.</p>
 
 </div>
 </div>
@@ -1066,9 +1065,9 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>the preconditioning method. 0 - block diagonal 1 - upper triangular 2 - lower triangular </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00709">709</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00705">705</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00941">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l01073">preconditioner_solve()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00619">PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00977">setup()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00671">use_block_diagonal_approximation()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00683">use_lower_triangular_approximation()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00677">use_upper_triangular_approximation()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00916">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l01045">preconditioner_solve()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00616">PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00951">setup()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00668">use_block_diagonal_approximation()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00680">use_lower_triangular_approximation()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00674">use_upper_triangular_approximation()</a>.</p>
 
 </div>
 </div>
@@ -1094,9 +1093,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Matrix.html" title="Abstract base class for matrices, templated by the type of object that is stored in them and the type...">Matrix</a> of matrix vector product operators for the off diagonals. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00703">703</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00699">699</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00941">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l01073">preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00977">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00916">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l01045">preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00951">setup()</a>.</p>
 
 </div>
 </div>
@@ -1122,9 +1121,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The scaling. default 1.0. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00715">715</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00711">711</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00619">PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00690">scaling()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00977">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00616">PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00687">scaling()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00951">setup()</a>.</p>
 
 </div>
 </div>
@@ -1150,9 +1149,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The SubisidaryPreconditionerFctPt. </p>
 
-<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00712">712</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00708">708</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00619">PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00665">set_subsidiary_preconditioner_function()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00977">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00616">PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00661">set_subsidiary_preconditioner_function()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00951">setup()</a>.</p>
 
 </div>
 </div>
@@ -1188,7 +1187,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:56:26
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:39:17
         </div>
       </div>
     </footer>

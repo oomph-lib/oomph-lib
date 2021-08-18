@@ -101,22 +101,18 @@ To illustrate this, the code extract shown below provides a (partial) listing of
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Constructor takes a "bulk" element and the }}
-\DoxyCodeLine{\textcolor{comment}{ /// index that identifies which face the FaceElement is supposed}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// to be attached to. The optional identifier can be used}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// to distinguish the additional nodal values created by }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// this element from thos created by other FaceElements.}}
-\DoxyCodeLine{\textcolor{comment}{}  ImposeDisplacementByLagrangeMultiplierElement(}
-\DoxyCodeLine{   FiniteElement* \textcolor{keyword}{const} \&element\_pt, }
-\DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{int} \&face\_index, }
-\DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&\textcolor{keywordtype}{id}=0,}
-\DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& called\_from\_refineable\_constructor=\textcolor{keyword}{false}) : }
-\DoxyCodeLine{ FaceGeometry<ELEMENT>(), FaceElement(), Boundary\_shape\_geom\_object\_pt(0)}
-\DoxyCodeLine{  \{   }
-\DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{//  Store the ID of the FaceElement -\/-\/ this is used to distinguish}}
-\DoxyCodeLine{   \textcolor{comment}{// it from any others}}
-\DoxyCodeLine{   Id=id;}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Constructor takes a "bulk" element and the}}
+\DoxyCodeLine{\textcolor{comment}{    /// index that identifies which face the FaceElement is supposed}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// to be attached to. The optional identifier can be used}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// to distinguish the additional nodal values created by}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// this element from thos created by other FaceElements.}}
+\DoxyCodeLine{\textcolor{comment}{}    ImposeDisplacementByLagrangeMultiplierElement(}
+\DoxyCodeLine{      FiniteElement* \textcolor{keyword}{const}\& element\_pt,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& face\_index,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \textcolor{keywordtype}{id} = 0,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& called\_from\_refineable\_constructor = \textcolor{keyword}{false})}
+\DoxyCodeLine{      : FaceGeometry<ELEMENT>(), FaceElement(), Boundary\_shape\_geom\_object\_pt(0)}
+\DoxyCodeLine{    \{}
 
 \end{DoxyCodeInclude}
 
@@ -125,12 +121,6 @@ To illustrate this, the code extract shown below provides a (partial) listing of
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{   \textcolor{comment}{// Dimension of the bulk element}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} dim=element\_pt-\/>dim();}
-\DoxyCodeLine{ }
-\DoxyCodeLine{   \textcolor{comment}{// We need dim additional values for each FaceElement node}}
-\DoxyCodeLine{   \textcolor{comment}{// to store the dim Lagrange multipliers.}}
-\DoxyCodeLine{   Vector<unsigned> n\_additional\_values(nnode(), dim);}
 
 \end{DoxyCodeInclude}
 
@@ -139,12 +129,6 @@ Finally, we pass this vector, together with ID that identifies the type of the {
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Now add storage for Lagrange multipliers and set the map containing }}
-\DoxyCodeLine{   \textcolor{comment}{// the position of the first entry of this face element's }}
-\DoxyCodeLine{   \textcolor{comment}{// additional values.}}
-\DoxyCodeLine{   add\_additional\_values(n\_additional\_values,\textcolor{keywordtype}{id});}
-\DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
 

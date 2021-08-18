@@ -129,92 +129,89 @@ $(function() {
 <div class="title">poroelasticity/elasticity_tensor.cc</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="poroelasticity_2elasticity__tensor_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//Non-inline function for the Elasticity Tensor</span></div>
+<a href="poroelasticity_2elasticity__tensor_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Non-inline function for the Elasticity Tensor</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;elasticity_tensor.h&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{<span class="comment"></span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> ///\short Translation scheme that takes account of the symmetries of the </span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> ///tensor. The independent coefficients are related to the coefficients of</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> ///the elasticity tensor as follows:</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span><span class="comment"> /**\f[\begin{array}{cc}    0 &amp; E_{1111} \\</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">                            1 &amp; E_{1112} \\</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">                            2 &amp; E_{1122} \\</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">                            3 &amp; E_{1212} \\</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">                            4 &amp; E_{1222} \\</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">                            5 &amp; E_{2222} \\</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">                            6 &amp; E_{1113} \\</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">                            7 &amp; E_{1123} \\</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">                            8 &amp; E_{1133} \\</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">                            9 &amp; E_{1213} \\</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">                            10 &amp; E_{1223} \\</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">                            11 &amp; E_{1233} \\</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">                            12 &amp; E_{1313} \\</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">                            13 &amp; E_{1322} \\</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">                            14 &amp; E_{1323} \\</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">                            15 &amp; E_{1333} \\</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">                            16 &amp; E_{2223} \\</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">                            17 &amp; E_{2233} \\</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">                            18 &amp; E_{2323} \\</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">                            19 &amp; E_{2333} \\</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">                            20 &amp; E_{3333} </span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">                            \end{array}\f] **/</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1ElasticityTensor.html#a6be831fdf71155ccbab14287d30587f1">ElasticityTensor::Index</a>[3][3][3][3] = </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  {{{0,1,6},{1,2,7},{6,7,8}},</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;   {{1,3,9},{3,4,10},{9,10,11}},</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;   {{6,9,12},{9,13,14},{12,14,15}}},</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  {{{1,3,9},{3,4,10},{9,10,11}},</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;   {{2,4,13},{4,5,16},{13,16,17}},</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   {{7,10,14},{10,16,18},{14,18,19}}},</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  {{{6,9,12},{9,13,14},{12,14,15}},</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;   {{7,10,14},{10,16,18},{14,18,19}},</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;   {{8,11,15},{11,17,19},{15,19,20}}}</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; };</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> ///\short Translation scheme for the isotropic elasticity tensor</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1IsotropicElasticityTensor.html#aa100bfbbb893872dcb54c7090800d701">IsotropicElasticityTensor::StaticIndex</a>[21] =</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; {1,0,2,3,0,1,0,0,2,0,0,0,3,0,0,0,0,2,3,0,1};</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> ///\short Translation scheme for the deviatoric isotropic elasticity tensor</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1DeviatoricIsotropicElasticityTensor.html#a073434d42a9e9f9520abe64c3e720337">DeviatoricIsotropicElasticityTensor::StaticIndex</a>[21] =</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; {1,0,0,2,0,1,0,0,0,0,0,0,2,0,0,0,0,0,2,0,1};</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  ///\short Translation scheme that takes account of the symmetries of the</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  /// tensor. The independent coefficients are related to the coefficients of</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  /// the elasticity tensor as follows:</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span><span class="comment">  /**\f[\begin{array}{cc}    0 &amp; E_{1111} \\</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">                             1 &amp; E_{1112} \\</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">                             2 &amp; E_{1122} \\</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">                             3 &amp; E_{1212} \\</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">                             4 &amp; E_{1222} \\</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">                             5 &amp; E_{2222} \\</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">                             6 &amp; E_{1113} \\</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">                             7 &amp; E_{1123} \\</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">                             8 &amp; E_{1133} \\</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">                             9 &amp; E_{1213} \\</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">                             10 &amp; E_{1223} \\</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">                             11 &amp; E_{1233} \\</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">                             12 &amp; E_{1313} \\</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">                             13 &amp; E_{1322} \\</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">                             14 &amp; E_{1323} \\</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">                             15 &amp; E_{1333} \\</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">                             16 &amp; E_{2223} \\</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">                             17 &amp; E_{2233} \\</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">                             18 &amp; E_{2323} \\</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">                             19 &amp; E_{2333} \\</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">                             20 &amp; E_{3333}</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">                             \end{array}\f] **/</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1ElasticityTensor.html#a6be831fdf71155ccbab14287d30587f1">ElasticityTensor::Index</a>[3][3][3][3] = {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {{{0, 1, 6}, {1, 2, 7}, {6, 7, 8}},</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;     {{1, 3, 9}, {3, 4, 10}, {9, 10, 11}},</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;     {{6, 9, 12}, {9, 13, 14}, {12, 14, 15}}},</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {{{1, 3, 9}, {3, 4, 10}, {9, 10, 11}},</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;     {{2, 4, 13}, {4, 5, 16}, {13, 16, 17}},</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;     {{7, 10, 14}, {10, 16, 18}, {14, 18, 19}}},</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    {{{6, 9, 12}, {9, 13, 14}, {12, 14, 15}},</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;     {{7, 10, 14}, {10, 16, 18}, {14, 18, 19}},</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;     {{8, 11, 15}, {11, 17, 19}, {15, 19, 20}}}};</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">  ///\short Translation scheme for the isotropic elasticity tensor</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span>  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1IsotropicElasticityTensor.html#aa100bfbbb893872dcb54c7090800d701">IsotropicElasticityTensor::StaticIndex</a>[21] = {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    1, 0, 2, 3, 0, 1, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 2, 3, 0, 1};</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">  ///\short Translation scheme for the deviatoric isotropic elasticity tensor</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span>  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1DeviatoricIsotropicElasticityTensor.html#a073434d42a9e9f9520abe64c3e720337">DeviatoricIsotropicElasticityTensor::StaticIndex</a>[21] = {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 1};</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;} <span class="comment">// namespace oomph</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassoomph_1_1DeviatoricIsotropicElasticityTensor_html_a073434d42a9e9f9520abe64c3e720337"><div class="ttname"><a href="classoomph_1_1DeviatoricIsotropicElasticityTensor.html#a073434d42a9e9f9520abe64c3e720337">oomph::DeviatoricIsotropicElasticityTensor::StaticIndex</a></div><div class="ttdeci">static const unsigned StaticIndex[21]</div><div class="ttdoc">Translation scheme for the deviatoric isotropic elasticity tensor.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity_2elasticity__tensor_8h_source.html#l00235">poroelasticity/elasticity_tensor.h:235</a></div></div>
-<div class="ttc" id="aclassoomph_1_1ElasticityTensor_html_a6be831fdf71155ccbab14287d30587f1"><div class="ttname"><a href="classoomph_1_1ElasticityTensor.html#a6be831fdf71155ccbab14287d30587f1">oomph::ElasticityTensor::Index</a></div><div class="ttdeci">static const unsigned Index[3][3][3][3]</div><div class="ttdoc">Translation table from the four indices to the corresponding independent component.</div><div class="ttdef"><b>Definition:</b> <a href="linear__elasticity_2elasticity__tensor_8h_source.html#l00061">linear_elasticity/elasticity_tensor.h:61</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DeviatoricIsotropicElasticityTensor_html_a073434d42a9e9f9520abe64c3e720337"><div class="ttname"><a href="classoomph_1_1DeviatoricIsotropicElasticityTensor.html#a073434d42a9e9f9520abe64c3e720337">oomph::DeviatoricIsotropicElasticityTensor::StaticIndex</a></div><div class="ttdeci">static const unsigned StaticIndex[21]</div><div class="ttdoc">Translation scheme for the deviatoric isotropic elasticity tensor.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity_2elasticity__tensor_8h_source.html#l00236">poroelasticity/elasticity_tensor.h:236</a></div></div>
+<div class="ttc" id="aclassoomph_1_1ElasticityTensor_html_a6be831fdf71155ccbab14287d30587f1"><div class="ttname"><a href="classoomph_1_1ElasticityTensor.html#a6be831fdf71155ccbab14287d30587f1">oomph::ElasticityTensor::Index</a></div><div class="ttdeci">static const unsigned Index[3][3][3][3]</div><div class="ttdoc">Translation table from the four indices to the corresponding independent component.</div><div class="ttdef"><b>Definition:</b> <a href="linear__elasticity_2elasticity__tensor_8h_source.html#l00059">linear_elasticity/elasticity_tensor.h:59</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
-<div class="ttc" id="aclassoomph_1_1IsotropicElasticityTensor_html_aa100bfbbb893872dcb54c7090800d701"><div class="ttname"><a href="classoomph_1_1IsotropicElasticityTensor.html#aa100bfbbb893872dcb54c7090800d701">oomph::IsotropicElasticityTensor::StaticIndex</a></div><div class="ttdeci">static const unsigned StaticIndex[21]</div><div class="ttdoc">Translation scheme for the isotropic elasticity tensor.</div><div class="ttdef"><b>Definition:</b> <a href="linear__elasticity_2elasticity__tensor_8h_source.html#l00163">linear_elasticity/elasticity_tensor.h:163</a></div></div>
+<div class="ttc" id="aclassoomph_1_1IsotropicElasticityTensor_html_aa100bfbbb893872dcb54c7090800d701"><div class="ttname"><a href="classoomph_1_1IsotropicElasticityTensor.html#aa100bfbbb893872dcb54c7090800d701">oomph::IsotropicElasticityTensor::StaticIndex</a></div><div class="ttdeci">static const unsigned StaticIndex[21]</div><div class="ttdoc">Translation scheme for the isotropic elasticity tensor.</div><div class="ttdef"><b>Definition:</b> <a href="linear__elasticity_2elasticity__tensor_8h_source.html#l00166">linear_elasticity/elasticity_tensor.h:166</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
     <script src="../../js/jquery-1.12.0.min.js"></script>
@@ -242,7 +239,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:00
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:24
         </div>
       </div>
     </footer>

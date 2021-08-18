@@ -34,15 +34,15 @@ For instance, the full interface to the constructor of the {\ttfamily One\+D\+La
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Constructor: Pass number of elements, length,}}
-\DoxyCodeLine{\textcolor{comment}{ /// pointer to GeomObject that defines the undeformed Eulerian position,}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// and the timestepper -\/-\/ defaults to (Steady) default timestepper defined}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// in the Mesh base class}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a16c5b1918f8e50274913964a344d7f7c}{OneDLagrangianMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_element, }
-\DoxyCodeLine{                    \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length,}
-\DoxyCodeLine{                    \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{GeomObject}}* undef\_eulerian\_posn\_pt, }
-\DoxyCodeLine{                    \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{TimeStepper}}* time\_stepper\_pt=}
-\DoxyCodeLine{                    \&Mesh::Default\_TimeStepper);}
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Constructor: Pass number of elements, length,}}
+\DoxyCodeLine{\textcolor{comment}{    /// pointer to GeomObject that defines the undeformed Eulerian position,}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// and the timestepper -\/-\/ defaults to (Steady) default timestepper defined}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// in the Mesh base class}}
+\DoxyCodeLine{\textcolor{comment}{}    \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a16c5b1918f8e50274913964a344d7f7c}{OneDLagrangianMesh}}(}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_element,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& length,}
+\DoxyCodeLine{      \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{GeomObject}}* undef\_eulerian\_posn\_pt,}
+\DoxyCodeLine{      \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{TimeStepper}}* time\_stepper\_pt = \&Mesh::Default\_TimeStepper);}
 
 \end{DoxyCodeInclude}
 
@@ -147,47 +147,56 @@ To illustrate the procedure, here is the class definition for the {\ttfamily Ref
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//=====start\_of\_refineable\_algebraic\_collapsible\_channel\_mesh=====}}
-\DoxyCodeLine{\textcolor{comment}{/// Refineable version of the CollapsibleChannel mesh with}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// algebraic node update.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{\textcolor{keyword}{class }RefineableAlgebraicCollapsibleChannelMesh : }
-\DoxyCodeLine{  \textcolor{keyword}{public} RefineableQuadMesh<ELEMENT>,}
-\DoxyCodeLine{  \textcolor{keyword}{public} \textcolor{keyword}{virtual} AlgebraicCollapsibleChannelMesh<ELEMENT>}
-\DoxyCodeLine{\{ }
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{public}: }
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass number of elements in upstream/collapsible/}}
-\DoxyCodeLine{\textcolor{comment}{ /// downstream segment and across the channel; lengths of upstream/}}
-\DoxyCodeLine{\textcolor{comment}{ /// collapsible/downstream segments and width of channel, pointer to }}
-\DoxyCodeLine{\textcolor{comment}{ /// GeomObject that defines the collapsible segment and pointer to }}
-\DoxyCodeLine{\textcolor{comment}{ /// TimeStepper (defaults to the default timestepper, Steady). }}
-\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicCollapsibleChannelMesh(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nup, }
-\DoxyCodeLine{                                           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ncollapsible, }
-\DoxyCodeLine{                                           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ndown, }
-\DoxyCodeLine{                                           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ny, }
-\DoxyCodeLine{                                           \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lup, }
-\DoxyCodeLine{                                           \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lcollapsible, }
-\DoxyCodeLine{                                           \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& ldown, }
-\DoxyCodeLine{                                           \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& ly,}
-\DoxyCodeLine{                                           \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{GeomObject}}* wall\_pt,}
-\DoxyCodeLine{                                           \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{TimeStepper}}* time\_stepper\_pt=}
-\DoxyCodeLine{                                           \&Mesh::Default\_TimeStepper) :}
-\DoxyCodeLine{  CollapsibleChannelMesh<ELEMENT>(nup, ncollapsible, ndown, ny,}
-\DoxyCodeLine{                                  lup, lcollapsible, ldown, ly,}
-\DoxyCodeLine{                                  wall\_pt,}
-\DoxyCodeLine{                                  time\_stepper\_pt),}
-\DoxyCodeLine{  AlgebraicCollapsibleChannelMesh<ELEMENT>(nup, ncollapsible, ndown, ny,}
-\DoxyCodeLine{                                           lup, lcollapsible, ldown, ly,}
-\DoxyCodeLine{                                           wall\_pt,}
-\DoxyCodeLine{                                           time\_stepper\_pt)}
+\DoxyCodeLine{  \textcolor{comment}{//=====start\_of\_refineable\_algebraic\_collapsible\_channel\_mesh=====}}
+\DoxyCodeLine{\textcolor{comment}{  /// Refineable version of the CollapsibleChannel mesh with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// algebraic node update.}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{  \textcolor{keyword}{class }RefineableAlgebraicCollapsibleChannelMesh}
+\DoxyCodeLine{    : \textcolor{keyword}{public} RefineableQuadMesh<ELEMENT>,}
+\DoxyCodeLine{      \textcolor{keyword}{public} \textcolor{keyword}{virtual} AlgebraicCollapsibleChannelMesh<ELEMENT>}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{// Build quadtree forest}}
-\DoxyCodeLine{   this-\/>setup\_quadtree\_forest();}
-\DoxyCodeLine{  \}}
+\DoxyCodeLine{  \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Constructor: Pass number of elements in upstream/collapsible/}}
+\DoxyCodeLine{\textcolor{comment}{    /// downstream segment and across the channel; lengths of upstream/}}
+\DoxyCodeLine{\textcolor{comment}{    /// collapsible/downstream segments and width of channel, pointer to}}
+\DoxyCodeLine{\textcolor{comment}{    /// GeomObject that defines the collapsible segment and pointer to}}
+\DoxyCodeLine{\textcolor{comment}{    /// TimeStepper (defaults to the default timestepper, Steady).}}
+\DoxyCodeLine{\textcolor{comment}{}    RefineableAlgebraicCollapsibleChannelMesh(}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nup,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ncollapsible,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ndown,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ny,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lup,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lcollapsible,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& ldown,}
+\DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& ly,}
+\DoxyCodeLine{      \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{GeomObject}}* wall\_pt,}
+\DoxyCodeLine{      \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{TimeStepper}}* time\_stepper\_pt = \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{      : CollapsibleChannelMesh<ELEMENT>(nup,}
+\DoxyCodeLine{                                        ncollapsible,}
+\DoxyCodeLine{                                        ndown,}
+\DoxyCodeLine{                                        ny,}
+\DoxyCodeLine{                                        lup,}
+\DoxyCodeLine{                                        lcollapsible,}
+\DoxyCodeLine{                                        ldown,}
+\DoxyCodeLine{                                        ly,}
+\DoxyCodeLine{                                        wall\_pt,}
+\DoxyCodeLine{                                        time\_stepper\_pt),}
+\DoxyCodeLine{        AlgebraicCollapsibleChannelMesh<ELEMENT>(nup,}
+\DoxyCodeLine{                                                 ncollapsible,}
+\DoxyCodeLine{                                                 ndown,}
+\DoxyCodeLine{                                                 ny,}
+\DoxyCodeLine{                                                 lup,}
+\DoxyCodeLine{                                                 lcollapsible,}
+\DoxyCodeLine{                                                 ldown,}
+\DoxyCodeLine{                                                 ly,}
+\DoxyCodeLine{                                                 wall\_pt,}
+\DoxyCodeLine{                                                 time\_stepper\_pt)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// Build quadtree forest}}
+\DoxyCodeLine{      this-\/>setup\_quadtree\_forest();}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -196,11 +205,10 @@ We overload the (empty) previous implementations of {\ttfamily Algebraic\+Mesh\+
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Update the node update data for specified node following }}
-\DoxyCodeLine{\textcolor{comment}{ /// any mesh adapation}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} update\_node\_update(AlgebraicNode*\& node\_pt);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\}; }
+\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Update the node update data for specified node following}}
+\DoxyCodeLine{\textcolor{comment}{    /// any mesh adapation}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} update\_node\_update(AlgebraicNode*\& node\_pt);}
+\DoxyCodeLine{  \};}
 
 \end{DoxyCodeInclude}
 
@@ -209,16 +217,16 @@ Here is the actual implementation of this function. We start by extracting the r
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//========start\_update\_node\_update=================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Update the geometric references that are used }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to update node after mesh adaptation.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} RefineableAlgebraicCollapsibleChannelMesh<ELEMENT>::update\_node\_update(}
-\DoxyCodeLine{ AlgebraicNode*\& node\_pt)}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{ \textcolor{comment}{// Extract reference values for node update by copy construction}}
-\DoxyCodeLine{ Vector<double> ref\_value(node\_pt-\/>vector\_ref\_value());}
+\DoxyCodeLine{  \textcolor{comment}{//========start\_update\_node\_update=================================}}
+\DoxyCodeLine{\textcolor{comment}{  /// Update the geometric references that are used}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// to update node after mesh adaptation.}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{  \textcolor{keywordtype}{void} RefineableAlgebraicCollapsibleChannelMesh<ELEMENT>::update\_node\_update(}
+\DoxyCodeLine{    AlgebraicNode*\& node\_pt)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{    \textcolor{comment}{// Extract reference values for node update by copy construction}}
+\DoxyCodeLine{    Vector<double> ref\_value(node\_pt-\/>vector\_ref\_value());}
 
 \end{DoxyCodeInclude}
 
@@ -227,9 +235,9 @@ Recall from the discussion of the algebraic node-\/update strategy \href{../../f
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Fourth reference value: intrinsic coordinate on the (possibly }}
-\DoxyCodeLine{ \textcolor{comment}{// compound) wall.}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} zeta=ref\_value[3]; }
+\DoxyCodeLine{    \textcolor{comment}{// Fourth reference value: intrinsic coordinate on the (possibly}}
+\DoxyCodeLine{    \textcolor{comment}{// compound) wall.}}
+\DoxyCodeLine{    \textcolor{keywordtype}{double} zeta = ref\_value[3];}
 
 \end{DoxyCodeInclude}
 
@@ -238,8 +246,8 @@ Next, we extract vector of (pointers to the) {\ttfamily Geom\+Objects} involved 
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Extract geometric objects for update by copy construction}}
-\DoxyCodeLine{ Vector<GeomObject*> geom\_object\_pt(node\_pt-\/>vector\_geom\_object\_pt());}
+\DoxyCodeLine{    \textcolor{comment}{// Extract geometric objects for update by copy construction}}
+\DoxyCodeLine{    Vector<GeomObject*> geom\_object\_pt(node\_pt-\/>vector\_geom\_object\_pt());}
 
 \end{DoxyCodeInclude}
 
@@ -248,17 +256,17 @@ Now we use the {\ttfamily Geom\+Object\+::locate\+\_\+zeta(...)} function to obt
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Get pointer to geometric (sub-\/)object and Lagrangian coordinate}}
-\DoxyCodeLine{ \textcolor{comment}{// on that sub-\/object. For a wall that is represented by }}
-\DoxyCodeLine{ \textcolor{comment}{// a single geom object, this simply returns the input.}}
-\DoxyCodeLine{ \textcolor{comment}{// If the geom object consists of sub-\/objects (e.g. }}
-\DoxyCodeLine{ \textcolor{comment}{// if it is a finite element mesh representing a wall,}}
-\DoxyCodeLine{ \textcolor{comment}{// then we'll obtain the pointer to the finite element}}
-\DoxyCodeLine{ \textcolor{comment}{// (in its incarnation as a GeomObject) and the}}
-\DoxyCodeLine{ \textcolor{comment}{// local coordinate in that element.}}
-\DoxyCodeLine{ Vector<double> \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_abe1a872647b7cfc1c732b57adef7d1b9}{s}}(1);}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{GeomObject}}* geom\_obj\_pt;}
-\DoxyCodeLine{ this-\/>Wall\_pt-\/>locate\_zeta(zeta\_wall,geom\_obj\_pt,\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_abe1a872647b7cfc1c732b57adef7d1b9}{s}});}
+\DoxyCodeLine{    \textcolor{comment}{// Get pointer to geometric (sub-\/)object and Lagrangian coordinate}}
+\DoxyCodeLine{    \textcolor{comment}{// on that sub-\/object. For a wall that is represented by}}
+\DoxyCodeLine{    \textcolor{comment}{// a single geom object, this simply returns the input.}}
+\DoxyCodeLine{    \textcolor{comment}{// If the geom object consists of sub-\/objects (e.g.}}
+\DoxyCodeLine{    \textcolor{comment}{// if it is a finite element mesh representing a wall,}}
+\DoxyCodeLine{    \textcolor{comment}{// then we'll obtain the pointer to the finite element}}
+\DoxyCodeLine{    \textcolor{comment}{// (in its incarnation as a GeomObject) and the}}
+\DoxyCodeLine{    \textcolor{comment}{// local coordinate in that element.}}
+\DoxyCodeLine{    Vector<double> \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_abe1a872647b7cfc1c732b57adef7d1b9}{s}}(1);}
+\DoxyCodeLine{    \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{GeomObject}}* geom\_obj\_pt;}
+\DoxyCodeLine{    this-\/>Wall\_pt-\/>locate\_zeta(zeta\_wall, geom\_obj\_pt, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_abe1a872647b7cfc1c732b57adef7d1b9}{s}});}
 
 \end{DoxyCodeInclude}
 
@@ -267,11 +275,7 @@ We over-\/write the first (and, in fact, only) entry in the vector of {\ttfamily
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Update the pointer to the (sub-\/)GeomObject within which the}}
-\DoxyCodeLine{ \textcolor{comment}{// reference point is located. (If the wall is simple GeomObject}}
-\DoxyCodeLine{ \textcolor{comment}{// this is the same as Wall\_pt; if it's a compound GeomObject}}
-\DoxyCodeLine{ \textcolor{comment}{// this points to the sub-\/object)}}
-\DoxyCodeLine{ geom\_object\_pt[0]=geom\_obj\_pt; }
+\DoxyCodeLine{    \textcolor{comment}{// Update the pointer to the (sub-\/)GeomObject within which the}}
 
 \end{DoxyCodeInclude}
 
@@ -280,10 +284,6 @@ Similarly, we over-\/write the third reference value with the local coordinate o
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Update third reference value: Reference local coordinate}}
-\DoxyCodeLine{ \textcolor{comment}{// in wall element (local coordinate in FE if we're dealing}}
-\DoxyCodeLine{ \textcolor{comment}{// with a wall mesh)}}
-\DoxyCodeLine{ ref\_value[2]=\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_abe1a872647b7cfc1c732b57adef7d1b9}{s}}[0];}
 
 \end{DoxyCodeInclude}
 
@@ -292,16 +292,6 @@ The incorrect entries in the two vectors {\ttfamily geom\+\_\+object\+\_\+pt} an
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Kill the existing node update info}}
-\DoxyCodeLine{ node\_pt-\/>kill\_node\_update\_info(); }
-\DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Setup algebraic update for node: Pass update information}}
-\DoxyCodeLine{ node\_pt-\/>add\_node\_update\_info(}
-\DoxyCodeLine{  \textcolor{keyword}{this},               \textcolor{comment}{// mesh}}
-\DoxyCodeLine{  geom\_object\_pt,     \textcolor{comment}{// vector of geom objects}}
-\DoxyCodeLine{  ref\_value);         \textcolor{comment}{// vector of ref. values}}
-\DoxyCodeLine{ }
-\DoxyCodeLine{\}}
 
 \end{DoxyCodeInclude}
 

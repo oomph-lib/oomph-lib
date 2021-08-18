@@ -18,9 +18,8 @@ Inheritance diagram for oomph\+::Projectable\+Axisymmetric\+Taylor\+Hood\+Elemen
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_a9008d18dbbbcfa54964766fbe2d31cde}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
-\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. ~\newline
- \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_aa40b291fa1fffd604be21d1e07bc1151}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_a60842beb2f919f071623db9c1dc8a69a}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_af37df6381430a8983892ff3a1b425266}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
@@ -44,30 +43,29 @@ class oomph\+::\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\
 
 Axisymmetric Taylor Hood upgraded to become projectable. 
 
-Definition at line 1819 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1945 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_a9008d18dbbbcfa54964766fbe2d31cde}\label{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_a9008d18dbbbcfa54964766fbe2d31cde}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_aa40b291fa1fffd604be21d1e07bc1151}\label{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_aa40b291fa1fffd604be21d1e07bc1151}} 
 \index{oomph::ProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. ~\newline
- 
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. 
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line 1831 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1955 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -90,7 +88,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line 1932 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2055 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -113,7 +111,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line 1896 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2020 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -136,7 +134,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line 1984 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2106 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -159,7 +157,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line 1867 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1991 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_a88869af2e716697b7d9296c9de2af9bf}\label{classoomph_1_1ProjectableAxisymmetricTaylorHoodElement_a88869af2e716697b7d9296c9de2af9bf}} 
 \index{oomph::ProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -178,7 +176,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line 1889 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2013 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -201,7 +199,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line 1875 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1999 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -224,7 +222,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line 1970 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2092 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

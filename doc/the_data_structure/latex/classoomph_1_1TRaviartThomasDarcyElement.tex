@@ -167,20 +167,20 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_
 const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a104da495649d9884c20e86d46aff650f}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}3\mbox{]}
 \begin{DoxyCompactList}\small\item\em Face index associated with edge flux degree of freedom. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a59e42aea1ed16a766a5faa857d22edab}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
-\begin{DoxyCompactList}\small\item\em Fluxes are stored at mid-\/side nodes. \end{DoxyCompactList}\item 
+\item 
 const double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac89618c0ec7b5ba44b03f6d793bf74c7}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}1\mbox{]}
 \begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are taken to be. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aeda935e3c2ce74d478c9ace10adaa9b7}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}6\mbox{]}
 \begin{DoxyCompactList}\small\item\em Face index associated with edge flux degree of freedom. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afe141634074a47688bbb4a73697bd111}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
-\begin{DoxyCompactList}\small\item\em Fluxes are stored at midside nodes. \end{DoxyCompactList}\item 
+\item 
 const double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8ebe2866174e0f052434aae3f948d527}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}2\mbox{]}
 \begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are taken to be. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aebbd8a5f91a023e462a3847340e56557}{Q\+\_\+internal\+\_\+data\+\_\+index}}
-\begin{DoxyCompactList}\small\item\em The internal data index where the internal q degrees of freedom are stored. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ab4d0dfd16c5bbeb12c9420e2d137e1f2}{P\+\_\+internal\+\_\+data\+\_\+index}}
 \begin{DoxyCompactList}\small\item\em The internal data index where the p degrees of freedom are stored. \end{DoxyCompactList}\item 
 std\+::vector$<$ short $>$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8e3b4b2a4d840e22669bc3390843574a}{Sign\+\_\+edge}}
@@ -203,7 +203,7 @@ class oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$}
 
 Element which solves the Darcy equations using T\+Elements. Geometrically the element is always a six noded triangle. We use the mid-\/side nodes to store edge-\/based flux degrees of freedom and internal data for the discontinuous pressure and internal flux dofs. 
 
-Definition at line 49 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 47 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -242,7 +242,7 @@ Constructor. Order 0 elements have 1 pressure dof and no internal velocity dofs.
 
 Lowest-\/order Raviart-\/\+Thomas based Darcy equation element 
 
-Definition at line 44 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 42 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -260,7 +260,7 @@ Destructor.
 
 
 
-Definition at line 54 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 52 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a580f02c8f807f0aff60be3294c4d8164}\label{classoomph_1_1TRaviartThomasDarcyElement_a580f02c8f807f0aff60be3294c4d8164}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!TRaviartThomasDarcyElement@{TRaviartThomasDarcyElement}}
@@ -274,7 +274,7 @@ Constructor. Order 1 elements have 3 pressure dofs and 2 internal velocity dofs.
 
 Second-\/order Raviart-\/\+Thomas based Darcy equation element 
 
-Definition at line 221 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 215 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -292,7 +292,7 @@ Destructor.
 
 
 
-Definition at line 233 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 227 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -310,7 +310,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_aebfe04cc9fedf1ba024b4d
 
 
 
-Definition at line 233 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 226 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -337,7 +337,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a46a2b8488be8bb249852b4
 
 
 
-Definition at line 256 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 249 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -360,7 +360,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a250719cbe94e97c88996b5
 
 
 
-Definition at line 245 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 238 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -379,7 +379,7 @@ Get pointer to node that stores the edge flux dofs for specified edge.
 
 
 
-Definition at line 184 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 178 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -402,7 +402,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae1ab5c1d06efe95dfd2db5
 
 
 
-Definition at line 89 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 86 of file Tdarcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a104da495649d9884c20e86d46aff650f}\label{classoomph_1_1TRaviartThomasDarcyElement_a104da495649d9884c20e86d46aff650f}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}}
@@ -416,7 +416,7 @@ Face index associated with edge flux degree of freedom.
 
 
 
-Definition at line 186 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 181 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_aeda935e3c2ce74d478c9ace10adaa9b7}\label{classoomph_1_1TRaviartThomasDarcyElement_aeda935e3c2ce74d478c9ace10adaa9b7}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}}
@@ -430,7 +430,7 @@ Face index associated with edge flux degree of freedom.
 
 
 
-Definition at line 419 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 416 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a7abc470b07eb3e492b4aed3555734548}\label{classoomph_1_1TRaviartThomasDarcyElement_a7abc470b07eb3e492b4aed3555734548}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!face\_index\_of\_q\_edge\_basis\_fct@{face\_index\_of\_q\_edge\_basis\_fct}}
@@ -449,7 +449,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7800978eb25207be715250
 
 
 
-Definition at line 128 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 122 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -472,7 +472,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7597d6d7e22f97fd2a6f4a
 
 
 
-Definition at line 96 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 93 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -490,7 +490,7 @@ The points along each edge where the fluxes are taken to be.
 
 
 
-Definition at line 203 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 199 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a8ebe2866174e0f052434aae3f948d527}\label{classoomph_1_1TRaviartThomasDarcyElement_a8ebe2866174e0f052434aae3f948d527}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Flux\_interpolation\_point@{Flux\_interpolation\_point}}
@@ -504,7 +504,7 @@ The points along each edge where the fluxes are taken to be.
 
 
 
-Definition at line 434 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 432 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_af5828b15b9b21faabbd165672bca60c5}\label{classoomph_1_1TRaviartThomasDarcyElement_af5828b15b9b21faabbd165672bca60c5}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}}
@@ -522,7 +522,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1d3676060924184befea1
 
 
 
-Definition at line 101 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 98 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a6cbe24cce6930993cba8200964816919}\label{classoomph_1_1TRaviartThomasDarcyElement_a6cbe24cce6930993cba8200964816919}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}}
@@ -559,7 +559,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1d3676060924184befea1
 
 
 
-Definition at line 310 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 308 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -581,7 +581,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab413b560166194e4a9d1b7
 
 
 
-Definition at line 156 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 152 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_ab28d384f8b0f7c8b6f5c9d2a1b7f44bb}\label{classoomph_1_1TRaviartThomasDarcyElement_ab28d384f8b0f7c8b6f5c9d2a1b7f44bb}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!get\_p\_basis@{get\_p\_basis}}
@@ -618,7 +618,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab413b560166194e4a9d1b7
 
 
 
-Definition at line 388 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 385 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -640,7 +640,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae4098060d7311ceab8ad76
 
 
 
-Definition at line 83 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 80 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -681,7 +681,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae4098060d7311ceab8ad76
 
 
 
-Definition at line 261 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 255 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -695,7 +695,7 @@ References s.
 
 The number of values stored at each node\+: A single flux dof is stored at each midside node 
 
-Definition at line 178 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 173 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a9dd66bc1bde7b2a1a1150336b8d5f81e}\label{classoomph_1_1TRaviartThomasDarcyElement_a9dd66bc1bde7b2a1a1150336b8d5f81e}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -705,7 +705,7 @@ Definition at line 178 of file Tdarcy\+\_\+elements.\+cc.
 
 The number of values stored at each node. Two flux values are stored at each midside node. 
 
-Definition at line 411 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 408 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a9d072fcfe2c00f09b4351741ca3430b7}\label{classoomph_1_1TRaviartThomasDarcyElement_a9d072fcfe2c00f09b4351741ca3430b7}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!nedge\_flux\_interpolation\_point@{nedge\_flux\_interpolation\_point}}
@@ -715,7 +715,7 @@ Definition at line 411 of file Tdarcy\+\_\+elements.\+cc.
 
 Return the number of flux interpolation points along each edge of the element 
 
-Definition at line 120 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 116 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_aee9de4e429ee7852f960a9cf80bfe4fc}\label{classoomph_1_1TRaviartThomasDarcyElement_aee9de4e429ee7852f960a9cf80bfe4fc}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!nedge\_flux\_interpolation\_point@{nedge\_flux\_interpolation\_point}}
@@ -740,7 +740,7 @@ Referenced by oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$
 
 Return the number of flux\+\_\+interpolation points along each edge of the element 
 
-Definition at line 352 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 349 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_ac6605374b89981d2c977a597b034b2f8}\label{classoomph_1_1TRaviartThomasDarcyElement_ac6605374b89981d2c977a597b034b2f8}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!np\_basis@{np\_basis}}
@@ -754,7 +754,7 @@ Return the total number of pressure basis functions.
 
 
 
-Definition at line 147 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 143 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a73c28d7e3789db421c5c5eccc3e25581}\label{classoomph_1_1TRaviartThomasDarcyElement_a73c28d7e3789db421c5c5eccc3e25581}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!np\_basis@{np\_basis}}
@@ -779,7 +779,7 @@ Return the total number of pressure basis functions.
 
 
 
-Definition at line 379 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 376 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a4f88f5d8f94f7279e23aed150e91a305}\label{classoomph_1_1TRaviartThomasDarcyElement_a4f88f5d8f94f7279e23aed150e91a305}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!nq\_basis\_edge@{nq\_basis\_edge}}
@@ -793,7 +793,7 @@ Return the number of edge basis functions for q.
 
 
 
-Definition at line 63 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 61 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_af8ab0d926cdbb46da734e4db8461a2e5}\label{classoomph_1_1TRaviartThomasDarcyElement_af8ab0d926cdbb46da734e4db8461a2e5}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!nq\_basis\_edge@{nq\_basis\_edge}}
@@ -822,7 +822,7 @@ Return the number of edge basis functions for q.
 
 
 
-Definition at line 242 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 236 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a36f80df6ac5a4425f3fbedbe53867df1}\label{classoomph_1_1TRaviartThomasDarcyElement_a36f80df6ac5a4425f3fbedbe53867df1}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!nq\_basis\_internal@{nq\_basis\_internal}}
@@ -836,7 +836,7 @@ Return the number of internal basis functions for q.
 
 
 
-Definition at line 74 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 71 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_aeff07bf55d4794ab817827c367ec49f8}\label{classoomph_1_1TRaviartThomasDarcyElement_aeff07bf55d4794ab817827c367ec49f8}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!nq\_basis\_internal@{nq\_basis\_internal}}
@@ -861,7 +861,7 @@ Return the number of internal basis functions for q.
 
 
 
-Definition at line 252 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 246 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a596854f13ababaa50863458404174e7e}\label{classoomph_1_1TRaviartThomasDarcyElement_a596854f13ababaa50863458404174e7e}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -879,7 +879,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 168 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 163 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a8ead24922bd14ec7c52a4101f13e5077}\label{classoomph_1_1TRaviartThomasDarcyElement_a8ead24922bd14ec7c52a4101f13e5077}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -897,7 +897,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 401 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 398 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_adb1607a15629d5b7314ddd29bd61fc15}\label{classoomph_1_1TRaviartThomasDarcyElement_adb1607a15629d5b7314ddd29bd61fc15}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -931,7 +931,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3
 
 
 
-Definition at line 399 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 391 of file Tdarcy\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a5ef511a62668baf093c5531be1e086d7}\label{classoomph_1_1TRaviartThomasDarcyElement_a5ef511a62668baf093c5531be1e086d7}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!output@{output}}
@@ -950,7 +950,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 386 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 378 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -973,7 +973,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 393 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 385 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -992,7 +992,7 @@ Return pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that st
 
 
 
-Definition at line 320 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 312 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1014,7 +1014,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a3eee8ba9fd2256d01c4be1
 
 
 
-Definition at line 129 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 125 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -1051,7 +1051,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a3eee8ba9fd2256d01c4be1
 
 
 
-Definition at line 361 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 358 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -1073,7 +1073,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a788824ffa37b4fcae4d45e
 
 
 
-Definition at line 138 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 134 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -1110,7 +1110,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a788824ffa37b4fcae4d45e
 
 
 
-Definition at line 370 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 367 of file Tdarcy\+\_\+elements.\+cc.
 
 
 
@@ -1133,7 +1133,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a93c88bdb79b37be378f5ef
 
 
 
-Definition at line 314 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 306 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1156,7 +1156,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7731ceb6bd31bfd6cc6c8f
 
 
 
-Definition at line 295 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 288 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1179,7 +1179,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab66fb06e7f90655229b0eb
 
 
 
-Definition at line 190 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 184 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1191,13 +1191,9 @@ References n, oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+T\+Ra
 \doxysubsubsection{\texorpdfstring{Q\_edge\_conv()}{Q\_edge\_conv()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::Q\+\_\+edge\+\_\+conv\hspace{0.3cm}{\ttfamily [private]}}
 
+Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at Fluxes are stored at mid-\/side nodes 
 
-
-Fluxes are stored at mid-\/side nodes. 
-
-Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at 
-
-Definition at line 195 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 191 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_afe141634074a47688bbb4a73697bd111}\label{classoomph_1_1TRaviartThomasDarcyElement_afe141634074a47688bbb4a73697bd111}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Q\_edge\_conv@{Q\_edge\_conv}}
@@ -1205,13 +1201,9 @@ Definition at line 195 of file Tdarcy\+\_\+elements.\+cc.
 \doxysubsubsection{\texorpdfstring{Q\_edge\_conv()}{Q\_edge\_conv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::Q\+\_\+edge\+\_\+conv\hspace{0.3cm}{\ttfamily [private]}}
 
+Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at Fluxes are stored at midside nodes 
 
-
-Fluxes are stored at midside nodes. 
-
-Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at 
-
-Definition at line 427 of file Tdarcy\+\_\+elements.\+cc.
+Definition at line 425 of file Tdarcy\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_ac58734e7ac988c4eabc80f3352d613a6}\label{classoomph_1_1TRaviartThomasDarcyElement_ac58734e7ac988c4eabc80f3352d613a6}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!q\_edge\_data\_pt@{q\_edge\_data\_pt}}
@@ -1226,7 +1218,7 @@ Return vector of pointers to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} obj
 
 
 
-Definition at line 147 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 141 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1249,7 +1241,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2df2b20433444d1c8d3a9b
 
 
 
-Definition at line 171 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 165 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1276,7 +1268,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a559ad66d750c27f54ad342
 
 
 
-Definition at line 134 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 128 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1299,7 +1291,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a8b16b4fef19d8a785aae3c
 
 
 
-Definition at line 178 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 172 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1326,7 +1318,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_af92e9914e062e894514cca
 
 
 
-Definition at line 196 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 190 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1345,7 +1337,7 @@ Return pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that st
 
 
 
-Definition at line 158 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 152 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1364,7 +1356,7 @@ Return the index of the internal data where the q\+\_\+internal degrees of freed
 
 
 
-Definition at line 165 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 159 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1391,7 +1383,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a17e99902b01ea42312fa61
 
 
 
-Definition at line 140 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 134 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1414,7 +1406,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a05d86d0d0568c5f90e6d73
 
 
 
-Definition at line 83 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 80 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1437,7 +1429,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2d2b51170939e5804d18d5
 
 
 
-Definition at line 333 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 325 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1460,7 +1452,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7c950999d5108350bd8a44
 
 
 
-Definition at line 326 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 318 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1483,7 +1475,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a6e1c3c5e23d71d80b7976e
 
 
 
-Definition at line 202 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 196 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1506,7 +1498,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_aafb7955f9dd5b433383ccf
 
 
 
-Definition at line 208 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 202 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1529,7 +1521,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4052cf1c7cd03d9ea206f4
 
 
 
-Definition at line 414 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 409 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1556,7 +1548,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a43dc36e25fe5eed15066f5
 
 
 
-Definition at line 441 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 436 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1575,7 +1567,7 @@ Accessor for the unit normal sign of edge n.
 
 
 
-Definition at line 380 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 372 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1594,7 +1586,7 @@ Accessor for the unit normal sign of edge n (const version)
 
 
 
-Definition at line 374 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 366 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1621,7 +1613,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a863c4382c879a77
 
 
 
-Definition at line 403 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 397 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1639,7 +1631,7 @@ Face index associated with edge flux degree of freedom.
 
 
 
-Definition at line 55 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 52 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1658,7 +1650,7 @@ The points along each edge where the fluxes are interpolated.
 
 
 
-Definition at line 62 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 59 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1677,7 +1669,7 @@ The number of values stored at each node.
 
 
 
-Definition at line 458 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 462 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1696,7 +1688,7 @@ The internal data index where the p degrees of freedom are stored.
 
 
 
-Definition at line 68 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 66 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1715,7 +1707,7 @@ Conversion scheme from an edge degree of freedom to the node it\textquotesingle{
 
 
 
-Definition at line 59 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 56 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1728,13 +1720,9 @@ Referenced by oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$
 {\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
 unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element}}$<$ O\+R\+D\+ER $>$\+::Q\+\_\+internal\+\_\+data\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
 
+The internal data index where the internal q degrees of freedom are stored 
 
-
-The internal data index where the internal q degrees of freedom are stored. 
-
-
-
-Definition at line 65 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 63 of file Tdarcy\+\_\+elements.\+h.
 
 
 
@@ -1753,7 +1741,7 @@ Unit normal signs associated with each edge to ensure inter-\/element continuity
 
 
 
-Definition at line 72 of file Tdarcy\+\_\+elements.\+h.
+Definition at line 70 of file Tdarcy\+\_\+elements.\+h.
 
 
 

@@ -151,7 +151,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab746fd596b28c65865a9349b08ca5d6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1SolidInitialCondition.html#ab746fd596b28c65865a9349b08ca5d6b">More...</a><br /></td></tr>
 <tr class="separator:ab746fd596b28c65865a9349b08ca5d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a441ecb1f0511a77b14d11e1225484a46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolidInitialCondition.html#a441ecb1f0511a77b14d11e1225484a46">geom_object_pt</a> ()</td></tr>
-<tr class="memdesc:a441ecb1f0511a77b14d11e1225484a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Reference to) pointer to geom object that specifies the initial condition  <a href="classoomph_1_1SolidInitialCondition.html#a441ecb1f0511a77b14d11e1225484a46">More...</a><br /></td></tr>
 <tr class="separator:a441ecb1f0511a77b14d11e1225484a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1fcd02e1af7c0d22f871e5f968ee5e0"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolidInitialCondition.html#ad1fcd02e1af7c0d22f871e5f968ee5e0">ic_time_deriv</a> ()</td></tr>
 <tr class="memdesc:ad1fcd02e1af7c0d22f871e5f968ee5e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which time derivative are we currently assigning?  <a href="classoomph_1_1SolidInitialCondition.html#ad1fcd02e1af7c0d22f871e5f968ee5e0">More...</a><br /></td></tr>
@@ -169,7 +168,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to specify the initial conditions for a solid body. Solid bodies are often discretised with Hermite-type elements, for which the assignment of the generalised nodal values is nontrivial since they represent derivatives w.r.t. to the local coordinates. A <a class="el" href="classoomph_1_1SolidInitialCondition.html" title="A class to specify the initial conditions for a solid body. Solid bodies are often discretised with H...">SolidInitialCondition</a> object specifies initial position (i.e. shape), velocity and acceleration of the structure with a geometric object. An integer specifies which time-derivative derivative is currently assigned. See example codes for a demonstration of its use. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03370">3370</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03520">3520</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="acbadca9acd23896ac9a83a122784f451"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acbadca9acd23896ac9a83a122784f451">&#9670;&nbsp;</a></span>SolidInitialCondition() <span class="overload">[1/2]</span></h2>
@@ -197,7 +196,7 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor: Pass geometric object; initialise time deriv to 0. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03376">3376</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03524">3524</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
 </div>
 </div>
@@ -227,9 +226,9 @@ Private Attributes</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03382">3382</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03529">3529</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -256,14 +255,13 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
 <p>(Reference to) pointer to geom object that specifies the initial condition </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03395">3395</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03543">3543</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03411">Geom_object_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03558">Geom_object_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07235">oomph::SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="elastic__problems_8h_source.html#l00370">oomph::SolidICProblem::set_newmark_initial_condition_consistently()</a>, <a class="el" href="elastic__problems_8h_source.html#l00226">oomph::SolidICProblem::set_newmark_initial_condition_directly()</a>, and <a class="el" href="elastic__problems_8cc_source.html#l00538">oomph::SolidICProblem::set_static_initial_condition()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07385">oomph::SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="elastic__problems_8h_source.html#l00362">oomph::SolidICProblem::set_newmark_initial_condition_consistently()</a>, <a class="el" href="elastic__problems_8h_source.html#l00218">oomph::SolidICProblem::set_newmark_initial_condition_directly()</a>, and <a class="el" href="elastic__problems_8cc_source.html#l00522">oomph::SolidICProblem::set_static_initial_condition()</a>.</p>
 
 </div>
 </div>
@@ -292,11 +290,11 @@ Private Attributes</h2></td></tr>
 
 <p>Which time derivative are we currently assigning? </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03401">3401</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03549">3549</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03414">IC_time_deriv</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03561">IC_time_deriv</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07235">oomph::SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="elastic__problems_8h_source.html#l00370">oomph::SolidICProblem::set_newmark_initial_condition_consistently()</a>, <a class="el" href="elastic__problems_8h_source.html#l00226">oomph::SolidICProblem::set_newmark_initial_condition_directly()</a>, and <a class="el" href="elastic__problems_8cc_source.html#l00538">oomph::SolidICProblem::set_static_initial_condition()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07385">oomph::SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="elastic__problems_8h_source.html#l00362">oomph::SolidICProblem::set_newmark_initial_condition_consistently()</a>, <a class="el" href="elastic__problems_8h_source.html#l00218">oomph::SolidICProblem::set_newmark_initial_condition_directly()</a>, and <a class="el" href="elastic__problems_8cc_source.html#l00522">oomph::SolidICProblem::set_static_initial_condition()</a>.</p>
 
 </div>
 </div>
@@ -326,9 +324,9 @@ Private Attributes</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03388">3388</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03535">3535</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -355,9 +353,9 @@ Private Attributes</h2></td></tr>
 
 <p>Pointer to the <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> that specifies the initial condition (shape, veloc and accel) </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03411">3411</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03558">3558</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03395">geom_object_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03543">geom_object_pt()</a>.</p>
 
 </div>
 </div>
@@ -383,9 +381,9 @@ Private Attributes</h2></td></tr>
 
 <p>Which time derivative (0,1,2) are we currently assigning. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03414">3414</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03561">3561</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03401">ic_time_deriv()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03549">ic_time_deriv()</a>.</p>
 
 </div>
 </div>
@@ -420,7 +418,7 @@ Private Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:57:28
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:09
         </div>
       </div>
     </footer>

@@ -33,7 +33,7 @@ Inheritance diagram for oomph\+::Double\+Multi\+Vector\+:\begin{figure}[H]
 \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_af9eb30b7fa130f8d6211b8f63c962e68}{Double\+Multi\+Vector}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&new\+\_\+vector)
 \begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a551268cff3ee84866a102db6fb1fd6b0}{$\sim$\+Double\+Multi\+Vector}} ()
-\begin{DoxyCompactList}\small\item\em Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}{clear()}} to delete the distribution and data. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a7f48a5a0d0330bd6ee2f9b0ac1c5fa08}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&old\+\_\+vector)
 \begin{DoxyCompactList}\small\item\em assignment operator (deep copy) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_ae5d4d50a01bb6537701921e0d1a1cdff}{nvector}} () const
@@ -53,8 +53,7 @@ void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a38714b8e2c119a373b34eb8b6
 void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a69f75b786cd1b2b45922075f1fa39de7}{initialise}} (const double \&initial\+\_\+value)
 \begin{DoxyCompactList}\small\item\em initialise the whole vector with value v \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}{clear}} ()
-\begin{DoxyCompactList}\small\item\em initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_ad7ba248dc49b6bda0b49c28c677a82e7}{built}} () const
 \item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a1a7f714e738c77e1938304c5911e09bf}{redistribute}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$const \&dist\+\_\+pt)
@@ -113,7 +112,7 @@ bool \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a86924834b6045e4824a6088e9
 \doxysubsection{Detailed Description}
 A multi vector in the mathematical sense, initially developed for linear algebra type applications. If M\+PI then this multi vector can be distributed -\/ its distribution is described by the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} object at Distribution\+\_\+pt. \mbox{\hyperlink{classoomph_1_1Data}{Data}} is stored in a C-\/style pointer vector (double$\ast$) 
 
-Definition at line 56 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 55 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -130,7 +129,7 @@ Constructor for an uninitialized \mbox{\hyperlink{classoomph_1_1DoubleMultiVecto
 
 
 
-Definition at line 62 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 59 of file double\+\_\+multi\+\_\+vector.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a1a24f514e2589235589de6edadf5c058}\label{classoomph_1_1DoubleMultiVector_a1a24f514e2589235589de6edadf5c058}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!DoubleMultiVector@{DoubleMultiVector}}
@@ -144,7 +143,7 @@ Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Doubl
 
 
 
-Definition at line 69 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 68 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -162,7 +161,7 @@ Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Doubl
 
 
 
-Definition at line 82 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 81 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -180,7 +179,7 @@ Constructor. Build a multivector using the same distribution of the input vector
 
 
 
-Definition at line 94 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 93 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -198,7 +197,7 @@ Constructor that builds a multivector from selected columns of the input multive
 
 
 
-Definition at line 106 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 105 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -216,7 +215,7 @@ Constructor that builds a multivector from selected columns of the input multive
 
 
 
-Definition at line 145 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 144 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -234,7 +233,7 @@ Copy constructor.
 
 
 
-Definition at line 185 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 184 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -246,13 +245,9 @@ References build(), and setup\+\_\+doublevector\+\_\+representation().
 \doxysubsubsection{\texorpdfstring{$\sim$DoubleMultiVector()}{~DoubleMultiVector()}}
 {\footnotesize\ttfamily oomph\+::\+Double\+Multi\+Vector\+::$\sim$\+Double\+Multi\+Vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}{clear()}} to delete the distribution and data 
 
-
-Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}{clear()}} to delete the distribution and data. 
-
-
-
-Definition at line 195 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 198 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -273,7 +268,7 @@ Provides a (deep) copy of the old\+\_\+vector.
 
 
 
-Definition at line 275 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 281 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -295,7 +290,7 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vec
 
 
 
-Definition at line 307 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 313 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -313,7 +308,7 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vec
 
 
 
-Definition at line 317 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 323 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -327,7 +322,7 @@ References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distr
 
 
 
-Definition at line 404 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 413 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -345,12 +340,11 @@ Referenced by dot(), norm(), operator+=(), operator-\/=(), and operator==().
 
 
 
-initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length ~\newline
- 
+initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length 
 
 wipes the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} 
 
-Definition at line 381 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 387 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -372,7 +366,7 @@ compute the 2 norm of this vector
 
 
 
-Definition at line 778 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 809 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -394,7 +388,7 @@ access to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} repr
 
 
 
-Definition at line 670 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 692 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -416,7 +410,7 @@ access to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} repr
 
 
 
-Definition at line 674 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 698 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -434,7 +428,7 @@ initialise the whole vector with value v
 
 
 
-Definition at line 358 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 364 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -456,7 +450,7 @@ compute the 2 norm of this vector
 
 
 
-Definition at line 844 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 889 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -478,7 +472,7 @@ Return the number of vectors.
 
 
 
-Definition at line 208 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 211 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -500,7 +494,7 @@ Referenced by oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), bui
 
 
 
-Definition at line 472 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 484 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -518,7 +512,7 @@ Multiply by a scalar.
 
 
 
-Definition at line 632 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 642 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -536,7 +530,7 @@ References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_
 
 
 
-Definition at line 539 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 549 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -554,7 +548,7 @@ References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distrib
 
 
 
-Definition at line 586 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 596 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -572,7 +566,7 @@ assignment operator (deep copy)
 
 
 
-Definition at line 201 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 204 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -590,7 +584,7 @@ References build(), and setup\+\_\+doublevector\+\_\+representation().
 
 
 
-Definition at line 504 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 514 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -608,7 +602,7 @@ output the contents of the vector
 
 
 
-Definition at line 678 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 704 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -630,7 +624,7 @@ output the contents of the vector
 
 
 
-Definition at line 767 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 798 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -682,7 +676,7 @@ compute the A-\/norm using the matrix at matrix\+\_\+pt
 
 Setup the doublevector representation 
 
-Definition at line 930 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 988 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -704,7 +698,7 @@ Provide a (shallow) copy of the old vector.
 
 
 
-Definition at line 211 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 217 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -726,7 +720,7 @@ Build the storage for pointers to vectors with a given distribution, but do not 
 
 
 
-Definition at line 237 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 243 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -744,7 +738,7 @@ Build the storage for pointers to vectors with a given distribution, but do not 
 
 
 
-Definition at line 246 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 252 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -762,7 +756,7 @@ access function to the underlying values
 
 
 
-Definition at line 658 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 668 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -784,7 +778,7 @@ access function to the underlying values (const version)
 
 
 
-Definition at line 661 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 674 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -802,7 +796,7 @@ access function to the i-\/th vector\textquotesingle{}s data
 
 
 
-Definition at line 664 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 680 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -820,7 +814,7 @@ access function to the i-\/th vector\textquotesingle{}s data (const version)
 
 
 
-Definition at line 667 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 686 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -841,7 +835,7 @@ indicates that the vector has been built and is usable
 
 
 
-Definition at line 954 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 1012 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -859,7 +853,7 @@ Need a vector of Double\+Vectors to interface with our linear solvers.
 
 
 
-Definition at line 957 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 1015 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -877,7 +871,7 @@ Boolean flag to indicate whether the vector\textquotesingle{}s data (values\+\_\
 
 
 
-Definition at line 951 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 1009 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -895,7 +889,7 @@ The number of vectors.
 
 
 
-Definition at line 947 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 1005 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -909,7 +903,7 @@ Referenced by build(), initialise(), nvector(), operator()(), redistribute(), an
 
 the local data, need a pointer to a pointer so that the individual vectors can be extracted 
 
-Definition at line 944 of file double\+\_\+multi\+\_\+vector.\+h.
+Definition at line 1002 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 

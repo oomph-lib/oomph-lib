@@ -24,11 +24,10 @@ unsigned long \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ab29e58e25bd5bebd8
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a461b24284da88b9489d720e484a6925c}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Get the residuals. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aa6728813a099111bee2b6c79dec20fc4}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation 
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a6510803afcbcfce1ae5b1c1c5d82a541}{get\+\_\+dresiduals\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam)
-\begin{DoxyCompactList}\small\item\em Overload the derivatives of the residuals with respect to ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aa16d6770f6d46b7db4101f417373b191}{get\+\_\+djacobian\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djac\+\_\+dparam)
 \begin{DoxyCompactList}\small\item\em Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a85e7dba2d21c9fe95a575a115cf3ee9f}{get\+\_\+hessian\+\_\+vector\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const \&\mbox{\hyperlink{classoomph_1_1PitchForkHandler_a289ce15584734b8ea50cd9a7f7f430ed}{Y}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ const \&\mbox{\hyperlink{classoomph_1_1PitchForkHandler_a88f5df169c44b02f4ba563cf42241599}{C}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&product)
@@ -38,10 +37,9 @@ int \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aadc4f0b5dfb82cf171b91432536
 double $\ast$ \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a7363cb34d716d64d891af5018e09d807}{bifurcation\+\_\+parameter\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the bifurcation parameter in bifurcation tracking problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a9d5e1388fe0ede6834a249b98168b71a}{get\+\_\+eigenfunction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenfunction)
-\begin{DoxyCompactList}\small\item\em Return the eigenfunction(s) associated with the bifurcation that. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a23a67d7212e25108e40cf9b4606f4478}{synchronise}} ()
-\begin{DoxyCompactList}\small\item\em Function that is used to perform any synchronisation required during the solution ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function that is used to perform any synchronisation required during the solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ad0b0920383bcbdab5df1f43db5affa47}{solve\+\_\+augmented\+\_\+block\+\_\+system}} ()
 \begin{DoxyCompactList}\small\item\em Set to solve the augmented block system. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ad193c3d67741edd60b023c94e42c8802}{solve\+\_\+block\+\_\+system}} ()
@@ -77,8 +75,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a9314a176be55e7e9c5a359
 \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ \mbox{\hyperlink{classoomph_1_1PitchForkHandler_af6346c1dc77f3d4fb3dc8950afd91e0f}{Augmented\+\_\+dof\+\_\+distribution\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em The augmented distribution. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a56a173cbdf59e73728c9c1b8c5221817}{Sigma}}
-\begin{DoxyCompactList}\small\item\em A slack variable used to specify the amount of antisymmetry in the solution. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A slack variable used to specify the amount of antisymmetry in the solution. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a289ce15584734b8ea50cd9a7f7f430ed}{Y}}
 \begin{DoxyCompactList}\small\item\em Storage for the null vector. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aa04d0f340d919d4da3f9199eb76649b1}{Psi}}
@@ -105,10 +102,9 @@ class \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a223dd55e02e905ce0ce98e98f
 
 
 \doxysubsection{Detailed Description}
-A class that is used to assemble the augmented system that defines a pitchfork (symmetry-\/breaking) bifurcation. The \char`\"{}standard\char`\"{} problem must be a function of a global parameter $ \lambda $ and a solution is $R(u,\lambda) = 0$, where $u$ are the unknowns in the problem. A pitchfork bifurcation may be specified by the augmented system of size $2N+2$. \[ R(u,\lambda) + \sigma \psi = 0,\] \[ Jy = 0,\] \[ \langle u, \phi \rangle = 0, \] \[ \phi \cdot y = 1.\] In the abovem $J$ is the usual Jacobian matrix, $dR/du$ and $\phi$ is a constant vector that is chosen to ensure that the null vector, $y$, is not trivial. ~\newline
- Here $\sigma $ is a slack variable that is used to enforce the constraint $ \langle u, \phi \rangle = 0 $ --- the inner product of the solution with the chosen symmetry vector is zero. At the bifurcation $ \sigma $ should be very close to zero. Note that this formulation means that any odd symmetry in the problem must be about zero. Moreover, we use the dot product of two vectors to calculate the inner product, rather than an integral over the domain and so the mesh must be symmetric in the appropriate directions. 
+A class that is used to assemble the augmented system that defines a pitchfork (symmetry-\/breaking) bifurcation. The \char`\"{}standard\char`\"{} problem must be a function of a global parameter $ \lambda $ and a solution is $R(u,\lambda) = 0$, where $u$ are the unknowns in the problem. A pitchfork bifurcation may be specified by the augmented system of size $2N+2$. \[ R(u,\lambda) + \sigma \psi = 0,\] \[ Jy = 0,\] \[ \langle u, \phi \rangle = 0, \] \[ \phi \cdot y = 1.\] In the abovem $J$ is the usual Jacobian matrix, $dR/du$ and $\phi$ is a constant vector that is chosen to ensure that the null vector, $y$, is not trivial. Here $\sigma $ is a slack variable that is used to enforce the constraint $ \langle u, \phi \rangle = 0 $ --- the inner product of the solution with the chosen symmetry vector is zero. At the bifurcation $ \sigma $ should be very close to zero. Note that this formulation means that any odd symmetry in the problem must be about zero. Moreover, we use the dot product of two vectors to calculate the inner product, rather than an integral over the domain and so the mesh must be symmetric in the appropriate directions. 
 
-Definition at line 744 of file assembly\+\_\+handler.\+h.
+Definition at line 772 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -133,7 +129,7 @@ Block\+\_\+augmented\+\_\+J&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 751 of file assembly\+\_\+handler.\+h.
+Definition at line 779 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -150,7 +146,7 @@ Constructor, initialise the systems.
 
 Constructor\+: Initialise the \mbox{\hyperlink{classoomph_1_1PitchForkHandler}{Pitch\+Fork\+Handler}} by setting intial guesses for Sigma, Y, specifying C and Psi and calculating count. 
 
-Definition at line 2535 of file assembly\+\_\+handler.\+cc.
+Definition at line 2677 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -168,7 +164,7 @@ Destructor return the problem to its original (non-\/augmented) state.
 
 Destructor, return the problem to its original state, before the augmented system was added 
 
-Definition at line 2749 of file assembly\+\_\+handler.\+cc.
+Definition at line 2897 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -193,7 +189,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692c3d
 
 
 
-Definition at line 889 of file assembly\+\_\+handler.\+h.
+Definition at line 924 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -215,7 +211,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a22c5f240674e4
 
 
 
-Definition at line 885 of file assembly\+\_\+handler.\+h.
+Definition at line 917 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ab29e58e25bd5bebd836e30015f01ac8d}\label{classoomph_1_1PitchForkHandler_ab29e58e25bd5bebd836e30015f01ac8d}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!eqn\_number@{eqn\_number}}
@@ -233,7 +229,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559
 
 
 
-Definition at line 2827 of file assembly\+\_\+handler.\+cc.
+Definition at line 2974 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -259,7 +255,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_aefc0c13a65342
 
 
 
-Definition at line 3252 of file assembly\+\_\+handler.\+cc.
+Definition at line 3394 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a6510803afcbcfce1ae5b1c1c5d82a541}\label{classoomph_1_1PitchForkHandler_a6510803afcbcfce1ae5b1c1c5d82a541}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}}
@@ -269,18 +265,15 @@ Definition at line 3252 of file assembly\+\_\+handler.\+cc.
 
 
 
-Overload the derivatives of the residuals with respect to ~\newline
- 
+Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system. 
 
-Get the derivatives of the residuals with respect to a parameter.
-
-a parameter to apply to the augmented system 
+Get the derivatives of the residuals with respect to a parameter. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0ad82f98e694eecf270bb}{oomph\+::\+Assembly\+Handler}}.
 
 
 
-Definition at line 3174 of file assembly\+\_\+handler.\+cc.
+Definition at line 3316 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -294,9 +287,7 @@ References oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergenc
 
 
 
-Return the eigenfunction(s) associated with the bifurcation that. 
-
-has been detected in bifurcation tracking problems
+Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. 
 
 Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems 
 
@@ -304,7 +295,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d
 
 
 
-Definition at line 3290 of file assembly\+\_\+handler.\+cc.
+Definition at line 3430 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -326,7 +317,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a296bef49838d2
 
 
 
-Definition at line 3275 of file assembly\+\_\+handler.\+cc.
+Definition at line 3416 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -340,7 +331,7 @@ References C, oomph\+::\+Generalised\+Element\+::get\+\_\+hessian\+\_\+vector\+\
 
 
 
-Calculate the elemental Jacobian matrix \char`\"{}d equation 
+Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{}. 
 
 A\+L\+I\+CE\+:
@@ -351,7 +342,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0
 
 
 
-Definition at line 2991 of file assembly\+\_\+handler.\+cc.
+Definition at line 3137 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -377,7 +368,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90d
 
 
 
-Definition at line 2887 of file assembly\+\_\+handler.\+cc.
+Definition at line 3034 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -399,7 +390,7 @@ Function that is used to return map the global equations using the simplistic nu
 
 
 
-Definition at line 815 of file assembly\+\_\+handler.\+h.
+Definition at line 848 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -425,7 +416,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa0
 
 
 
-Definition at line 2797 of file assembly\+\_\+handler.\+cc.
+Definition at line 2944 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -447,7 +438,7 @@ Set to solve the augmented block system.
 
 Set to solve the augmented-\/by-\/one block system. 
 
-Definition at line 3334 of file assembly\+\_\+handler.\+cc.
+Definition at line 3476 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -469,7 +460,7 @@ Set to solve the block system.
 
 Set to solve the block system. The boolean flag is used to specify whether the block decomposition should use exactly the same jacobian as the original system. 
 
-Definition at line 3369 of file assembly\+\_\+handler.\+cc.
+Definition at line 3512 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -491,7 +482,7 @@ Solve non-\/block system.
 
 
 
-Definition at line 3392 of file assembly\+\_\+handler.\+cc.
+Definition at line 3535 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -509,8 +500,7 @@ Referenced by oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\
 
 
 
-Function that is used to perform any synchronisation required during the solution ~\newline
- 
+Function that is used to perform any synchronisation required during the solution. 
 
 
 
@@ -518,7 +508,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a0ccef21253d99
 
 
 
-Definition at line 3309 of file assembly\+\_\+handler.\+cc.
+Definition at line 3448 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -535,7 +525,7 @@ References oomph\+::\+Problem\+::communicator\+\_\+pt(), Distributed, Parameter\
 
 
 
-Definition at line 747 of file assembly\+\_\+handler.\+h.
+Definition at line 775 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_aba62ac8cc057be07657972adc4a78b45}\label{classoomph_1_1PitchForkHandler_aba62ac8cc057be07657972adc4a78b45}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!BlockPitchForkLinearSolver@{BlockPitchForkLinearSolver}}
@@ -545,7 +535,7 @@ Definition at line 747 of file assembly\+\_\+handler.\+h.
 
 
 
-Definition at line 746 of file assembly\+\_\+handler.\+h.
+Definition at line 774 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -562,7 +552,7 @@ Pointer to the underlying (original) assembly handler.
 
 
 
-Definition at line 764 of file assembly\+\_\+handler.\+h.
+Definition at line 797 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -580,7 +570,7 @@ The augmented distribution.
 
 
 
-Definition at line 774 of file assembly\+\_\+handler.\+h.
+Definition at line 807 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -598,7 +588,7 @@ A constant vector used to ensure that the null vector is not trivial.
 
 
 
-Definition at line 788 of file assembly\+\_\+handler.\+h.
+Definition at line 821 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -616,7 +606,7 @@ A vector that is used to determine how many elements contribute to a particular 
 
 
 
-Definition at line 795 of file assembly\+\_\+handler.\+h.
+Definition at line 828 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -634,7 +624,7 @@ Boolean to indicate whether the problem is distributed.
 
 
 
-Definition at line 809 of file assembly\+\_\+handler.\+h.
+Definition at line 842 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -652,7 +642,7 @@ Store the original dof distribution.
 
 
 
-Definition at line 771 of file assembly\+\_\+handler.\+h.
+Definition at line 804 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -670,7 +660,7 @@ A vector that is used to map the global equations to their actual location in a 
 
 
 
-Definition at line 799 of file assembly\+\_\+handler.\+h.
+Definition at line 832 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -688,7 +678,7 @@ Store the number of degrees of freedom in the non-\/augmented problem.
 
 
 
-Definition at line 768 of file assembly\+\_\+handler.\+h.
+Definition at line 801 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -702,7 +692,7 @@ Referenced by eqn\+\_\+number(), Pitch\+Fork\+Handler(), and solve\+\_\+augmente
 
 
 
-Definition at line 805 of file assembly\+\_\+handler.\+h.
+Definition at line 838 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -720,7 +710,7 @@ Storage for the pointer to the parameter.
 
 
 
-Definition at line 802 of file assembly\+\_\+handler.\+h.
+Definition at line 835 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -738,7 +728,7 @@ Pointer to the problem.
 
 
 
-Definition at line 761 of file assembly\+\_\+handler.\+h.
+Definition at line 794 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -756,7 +746,7 @@ A constant vector that is specifies the symmetry being broken.
 
 
 
-Definition at line 784 of file assembly\+\_\+handler.\+h.
+Definition at line 817 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -770,12 +760,11 @@ Referenced by get\+\_\+jacobian(), get\+\_\+residuals(), Pitch\+Fork\+Handler(),
 
 
 
-A slack variable used to specify the amount of antisymmetry in the solution. ~\newline
- 
+A slack variable used to specify the amount of antisymmetry in the solution. 
 
 
 
-Definition at line 778 of file assembly\+\_\+handler.\+h.
+Definition at line 811 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -793,7 +782,7 @@ Integer flag to indicate which system should be assembled. There are three possi
 
 
 
-Definition at line 758 of file assembly\+\_\+handler.\+h.
+Definition at line 791 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -811,7 +800,7 @@ Storage for the null vector.
 
 
 
-Definition at line 781 of file assembly\+\_\+handler.\+h.
+Definition at line 814 of file assembly\+\_\+handler.\+h.
 
 
 

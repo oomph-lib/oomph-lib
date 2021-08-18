@@ -172,18 +172,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a92ccf3b396de331440c5dcba2e024317"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a961a28583236f1b92bc35de064d2dba6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#a961a28583236f1b92bc35de064d2dba6">up_equivalent</a> (<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *tree_root_pt)</td></tr>
 <tr class="memdesc:a961a28583236f1b92bc35de064d2dba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return up equivalent of the neighbours specified by pointer: When viewed from the current octree's neighbour, our up direction is the neighbour's Up_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Up_equivalent</code>[neighbour_pt]=U (read as: "in my
-neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-front axis) say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my 
-neighbour, my Up is its Down"); etc. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. <br  />
-  <a href="classoomph_1_1OcTreeRoot.html#a961a28583236f1b92bc35de064d2dba6">More...</a><br /></td></tr>
+neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-front axis) say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my
+neighbour, my Up is its Down"); etc. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour.  <a href="classoomph_1_1OcTreeRoot.html#a961a28583236f1b92bc35de064d2dba6">More...</a><br /></td></tr>
 <tr class="separator:a961a28583236f1b92bc35de064d2dba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91210b8fab8bb9f092518303551e0c33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#a91210b8fab8bb9f092518303551e0c33">set_up_equivalent</a> (<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *tree_root_pt, const int &amp;dir)</td></tr>
 <tr class="memdesc:a91210b8fab8bb9f092518303551e0c33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up equivalent of the neighbours specified by pointer: When viewed from the current octree's neighbour, our up direction is the neighbour's Up_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Up_equivalent</code>[neighbour_pt]=U (read as: "in my
-neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-front axis) say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my 
+neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-front axis) say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my
 neighbour, my Up is its Down"); etc.  <a href="classoomph_1_1OcTreeRoot.html#a91210b8fab8bb9f092518303551e0c33">More...</a><br /></td></tr>
 <tr class="separator:a91210b8fab8bb9f092518303551e0c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a497950cb0812be6a95be8af658a03fb6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#a497950cb0812be6a95be8af658a03fb6">right_equivalent</a> (<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *tree_root_pt)</td></tr>
-<tr class="memdesc:a497950cb0812be6a95be8af658a03fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The same thing as up_equivalent, but for the right direction: When viewed from the current octree neighbour, our right direction is the neighbour's Right_equivalent[neighbour_pt] direction. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. <br  />
-  <a href="classoomph_1_1OcTreeRoot.html#a497950cb0812be6a95be8af658a03fb6">More...</a><br /></td></tr>
+<tr class="memdesc:a497950cb0812be6a95be8af658a03fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The same thing as up_equivalent, but for the right direction: When viewed from the current octree neighbour, our right direction is the neighbour's Right_equivalent[neighbour_pt] direction. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour.  <a href="classoomph_1_1OcTreeRoot.html#a497950cb0812be6a95be8af658a03fb6">More...</a><br /></td></tr>
 <tr class="separator:a497950cb0812be6a95be8af658a03fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa462fe159838307aee0870ad089836f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#aa462fe159838307aee0870ad089836f5">set_right_equivalent</a> (<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *tree_root_pt, const int &amp;dir)</td></tr>
 <tr class="memdesc:aa462fe159838307aee0870ad089836f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The same thing as up_equivalent, but for the right direction: When viewed from the current octree neighbour, our right direction is the neighbour's Right_equivalent[neighbour_pt] direction.  <a href="classoomph_1_1OcTreeRoot.html#aa462fe159838307aee0870ad089836f5">More...</a><br /></td></tr>
@@ -233,8 +231,7 @@ neighbour, my Up is its Down"); etc.  <a href="classoomph_1_1OcTreeRoot.html#a91
 <tr class="memdesc:ab2ca6416d7a368e29da6a6a998f460c7 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to the son for a given index. Note that to aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here.  <a href="classoomph_1_1Tree.html#ab2ca6416d7a368e29da6a6a998f460c7">More...</a><br /></td></tr>
 <tr class="separator:ab2ca6416d7a368e29da6a6a998f460c7 inherit pub_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7026d14ead1a8d91ce417dfd0cd9478 inherit pub_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ab7026d14ead1a8d91ce417dfd0cd9478">set_son_pt</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;<a class="el" href="classoomph_1_1Tree.html#ab2ca6416d7a368e29da6a6a998f460c7">son_pt</a>)</td></tr>
-<tr class="memdesc:ab7026d14ead1a8d91ce417dfd0cd9478 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). <br  />
-  <a href="classoomph_1_1Tree.html#ab7026d14ead1a8d91ce417dfd0cd9478">More...</a><br /></td></tr>
+<tr class="memdesc:ab7026d14ead1a8d91ce417dfd0cd9478 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here).  <a href="classoomph_1_1Tree.html#ab7026d14ead1a8d91ce417dfd0cd9478">More...</a><br /></td></tr>
 <tr class="separator:ab7026d14ead1a8d91ce417dfd0cd9478 inherit pub_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31e4123b40f6fb52d180a154c9123e85 inherit pub_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a31e4123b40f6fb52d180a154c9123e85">nsons</a> () const</td></tr>
 <tr class="memdesc:a31e4123b40f6fb52d180a154c9123e85 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of sons (zero if it's a leaf node)  <a href="classoomph_1_1Tree.html#a31e4123b40f6fb52d180a154c9123e85">More...</a><br /></td></tr>
@@ -269,8 +266,7 @@ neighbour, my Up is its Down"); etc.  <a href="classoomph_1_1OcTreeRoot.html#a91
 <tr class="memdesc:af5c67186ca9c87eef9ce7eaa0af41057 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and excute void <a class="el" href="classoomph_1_1Tree.html">Tree</a> member function that takes a pointer to a mesh as an argument.  <a href="classoomph_1_1Tree.html#af5c67186ca9c87eef9ce7eaa0af41057">More...</a><br /></td></tr>
 <tr class="separator:af5c67186ca9c87eef9ce7eaa0af41057 inherit pub_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef175445b09edb47624c4b88c6d548bc inherit pub_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aef175445b09edb47624c4b88c6d548bc">traverse_all_but_leaves</a> (<a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a> member_function)</td></tr>
-<tr class="memdesc:aef175445b09edb47624c4b88c6d548bc inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html">Tree</a> member function <br  />
-  <a href="classoomph_1_1Tree.html#aef175445b09edb47624c4b88c6d548bc">More...</a><br /></td></tr>
+<tr class="memdesc:aef175445b09edb47624c4b88c6d548bc inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html">Tree</a> member function member_function() at all its "nodes" aparat from the leaves.  <a href="classoomph_1_1Tree.html#aef175445b09edb47624c4b88c6d548bc">More...</a><br /></td></tr>
 <tr class="separator:aef175445b09edb47624c4b88c6d548bc inherit pub_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22e0e3695dd8986e439927b7657ff741 inherit pub_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a22e0e3695dd8986e439927b7657ff741">traverse_leaves</a> (<a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a> member_function)</td></tr>
 <tr class="memdesc:a22e0e3695dd8986e439927b7657ff741 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html">Tree</a> member function member_function() only at its leaves.  <a href="classoomph_1_1Tree.html#a22e0e3695dd8986e439927b7657ff741">More...</a><br /></td></tr>
@@ -309,12 +305,11 @@ neighbour, my Up is its Down"); etc.  <a href="classoomph_1_1OcTreeRoot.html#a91
 <tr class="memitem:a1a600f35a0134eafe193d0996b2c7cd3 inherit pub_methods_classoomph_1_1TreeRoot"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeRoot.html#a1a600f35a0134eafe193d0996b2c7cd3">operator=</a> (const <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> &amp;)</td></tr>
 <tr class="memdesc:a1a600f35a0134eafe193d0996b2c7cd3 inherit pub_methods_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1TreeRoot.html#a1a600f35a0134eafe193d0996b2c7cd3">More...</a><br /></td></tr>
 <tr class="separator:a1a600f35a0134eafe193d0996b2c7cd3 inherit pub_methods_classoomph_1_1TreeRoot"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b03a77d1231ef49f236a97374c15d6b inherit pub_methods_classoomph_1_1TreeRoot"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeRoot.html#a1b03a77d1231ef49f236a97374c15d6b">neighbour_pt</a> (const int &amp;direction)</td></tr>
-<tr class="memdesc:a1b03a77d1231ef49f236a97374c15d6b inherit pub_methods_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the neighbouring TreeRoots in specified direction. Returns NULL if there's no neighbour in this direction.  <a href="classoomph_1_1TreeRoot.html#a1b03a77d1231ef49f236a97374c15d6b">More...</a><br /></td></tr>
-<tr class="separator:a1b03a77d1231ef49f236a97374c15d6b inherit pub_methods_classoomph_1_1TreeRoot"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae793a707b05815957d5910d5216dddc1 inherit pub_methods_classoomph_1_1TreeRoot"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeRoot.html#ae793a707b05815957d5910d5216dddc1">neighbour_pt</a> (const int &amp;direction)</td></tr>
+<tr class="memdesc:ae793a707b05815957d5910d5216dddc1 inherit pub_methods_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the neighbouring TreeRoots in specified direction. Returns NULL if there's no neighbour in this direction.  <a href="classoomph_1_1TreeRoot.html#ae793a707b05815957d5910d5216dddc1">More...</a><br /></td></tr>
+<tr class="separator:ae793a707b05815957d5910d5216dddc1 inherit pub_methods_classoomph_1_1TreeRoot"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7be347e54e34f924c008c302f5146064 inherit pub_methods_classoomph_1_1TreeRoot"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeRoot.html#a7be347e54e34f924c008c302f5146064">is_neighbour_periodic</a> (const int &amp;direction)</td></tr>
-<tr class="memdesc:a7be347e54e34f924c008c302f5146064 inherit pub_methods_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return whether the neighbour in the particular direction is periodic. <br  />
-  <a href="classoomph_1_1TreeRoot.html#a7be347e54e34f924c008c302f5146064">More...</a><br /></td></tr>
+<tr class="memdesc:a7be347e54e34f924c008c302f5146064 inherit pub_methods_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return whether the neighbour in the particular direction is periodic.  <a href="classoomph_1_1TreeRoot.html#a7be347e54e34f924c008c302f5146064">More...</a><br /></td></tr>
 <tr class="separator:a7be347e54e34f924c008c302f5146064 inherit pub_methods_classoomph_1_1TreeRoot"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4a2c51b2b42261bd8dde67ca32c594c inherit pub_methods_classoomph_1_1TreeRoot"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeRoot.html#ad4a2c51b2b42261bd8dde67ca32c594c">set_neighbour_periodic</a> (const int &amp;direction)</td></tr>
 <tr class="memdesc:ad4a2c51b2b42261bd8dde67ca32c594c inherit pub_methods_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the neighbour in particular direction to be periodic.  <a href="classoomph_1_1TreeRoot.html#ad4a2c51b2b42261bd8dde67ca32c594c">More...</a><br /></td></tr>
@@ -328,18 +323,18 @@ neighbour, my Up is its Down"); etc.  <a href="classoomph_1_1OcTreeRoot.html#a91
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:afa562a1888008194b352be57f2c3d9a9"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#afa562a1888008194b352be57f2c3d9a9">Edge_neighbour_pt</a></td></tr>
-<tr class="memdesc:afa562a1888008194b352be57f2c3d9a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of pointers to the edge-neighbouring [Oc]TreeRoots: Edge_neighbour_pt[direction] is <a class="el" href="classoomph_1_1Vector.html">Vector</a> to the pointers to the [Oc]<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>'s edge neighbours in the (enumerated) (edge) direction.  <a href="classoomph_1_1OcTreeRoot.html#afa562a1888008194b352be57f2c3d9a9">More...</a><br /></td></tr>
-<tr class="separator:afa562a1888008194b352be57f2c3d9a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af35e1f7300551c1c8d9ad828d3ebccd9"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#af35e1f7300551c1c8d9ad828d3ebccd9">Up_equivalent</a></td></tr>
-<tr class="memdesc:af35e1f7300551c1c8d9ad828d3ebccd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map giving the Up equivalent of the neighbour specified by pointer: When viewed from the current octree's neighbour, our up direction is the neighbour's Up_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Up_equivalent</code>[neighbour_pt]=U (read as: "in my
-neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree(around the back-front axis), say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my 
-neighbour, my Up is its Down"); etc.  <a href="classoomph_1_1OcTreeRoot.html#af35e1f7300551c1c8d9ad828d3ebccd9">More...</a><br /></td></tr>
-<tr class="separator:af35e1f7300551c1c8d9ad828d3ebccd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a400dfaf6af4fe47b061faafddfb14680"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#a400dfaf6af4fe47b061faafddfb14680">Right_equivalent</a></td></tr>
-<tr class="memdesc:a400dfaf6af4fe47b061faafddfb14680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map giving the Right equivalent of the neighbour specified by pointer: When viewed from the current octree's neighbour, our right direction is the neighbour's right_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Right_equivalent</code>[neighbour_pt]=R (read as: "in my
-neighbour, my Right is its Right").  <a href="classoomph_1_1OcTreeRoot.html#a400dfaf6af4fe47b061faafddfb14680">More...</a><br /></td></tr>
-<tr class="separator:a400dfaf6af4fe47b061faafddfb14680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3c71331aaf452591ba6a3ab0cdbcdbc"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#ae3c71331aaf452591ba6a3ab0cdbcdbc">Edge_neighbour_pt</a></td></tr>
+<tr class="memdesc:ae3c71331aaf452591ba6a3ab0cdbcdbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of pointers to the edge-neighbouring [Oc]TreeRoots: Edge_neighbour_pt[direction] is <a class="el" href="classoomph_1_1Vector.html">Vector</a> to the pointers to the [Oc]<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>'s edge neighbours in the (enumerated) (edge) direction.  <a href="classoomph_1_1OcTreeRoot.html#ae3c71331aaf452591ba6a3ab0cdbcdbc">More...</a><br /></td></tr>
+<tr class="separator:ae3c71331aaf452591ba6a3ab0cdbcdbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a247955b8a3eb01e227ec2ee1f3bb96ce"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#a247955b8a3eb01e227ec2ee1f3bb96ce">Up_equivalent</a></td></tr>
+<tr class="memdesc:a247955b8a3eb01e227ec2ee1f3bb96ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map giving the Up equivalent of the neighbour specified by pointer: When viewed from the current octree's neighbour, our up direction is the neighbour's Up_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Up_equivalent</code>[neighbour_pt]=U (read as: "in my
+neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree(around the back-front axis), say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my
+neighbour, my Up is its Down"); etc.  <a href="classoomph_1_1OcTreeRoot.html#a247955b8a3eb01e227ec2ee1f3bb96ce">More...</a><br /></td></tr>
+<tr class="separator:a247955b8a3eb01e227ec2ee1f3bb96ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a739d09d26896cfb6924f4d023f5d791f"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTreeRoot.html#a739d09d26896cfb6924f4d023f5d791f">Right_equivalent</a></td></tr>
+<tr class="memdesc:a739d09d26896cfb6924f4d023f5d791f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map giving the Right equivalent of the neighbour specified by pointer: When viewed from the current octree's neighbour, our right direction is the neighbour's right_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Right_equivalent</code>[neighbour_pt]=R (read as: "in my
+neighbour, my Right is its Right").  <a href="classoomph_1_1OcTreeRoot.html#a739d09d26896cfb6924f4d023f5d791f">More...</a><br /></td></tr>
+<tr class="separator:a739d09d26896cfb6924f4d023f5d791f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -357,12 +352,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a5d7b0830cd9c913786e23259c69c71a0 inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the static data, rotation and reflection schemes, etc.  <a href="classoomph_1_1OcTree.html#a5d7b0830cd9c913786e23259c69c71a0">More...</a><br /></td></tr>
 <tr class="separator:a5d7b0830cd9c913786e23259c69c71a0 inherit pub_static_methods_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd54b3cd1f4196d618e73d19bb4ba157 inherit pub_static_methods_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#afd54b3cd1f4196d618e73d19bb4ba157">doc_face_neighbours</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; forest_nodes_pt, std::ofstream &amp;neighbours_file, std::ofstream &amp;neighbours_txt_file, double &amp;max_error)</td></tr>
-<tr class="memdesc:afd54b3cd1f4196d618e73d19bb4ba157 inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc/check all face neighbours of octree (nodes) contained in the <a class="el" href="classoomph_1_1Vector.html">Vector</a> forest_node_pt. Output into neighbours_file which can be viewed from tecplot with OcTreeNeighbours.mcr Neighbour info and errors are displayed on neighbours_txt_file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. <br  />
-  <a href="classoomph_1_1OcTree.html#afd54b3cd1f4196d618e73d19bb4ba157">More...</a><br /></td></tr>
+<tr class="memdesc:afd54b3cd1f4196d618e73d19bb4ba157 inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc/check all face neighbours of octree (nodes) contained in the <a class="el" href="classoomph_1_1Vector.html">Vector</a> forest_node_pt. Output into neighbours_file which can be viewed from tecplot with OcTreeNeighbours.mcr Neighbour info and errors are displayed on neighbours_txt_file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed.  <a href="classoomph_1_1OcTree.html#afd54b3cd1f4196d618e73d19bb4ba157">More...</a><br /></td></tr>
 <tr class="separator:afd54b3cd1f4196d618e73d19bb4ba157 inherit pub_static_methods_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a728b0580f568f9d5fb814458b6c75fe4 inherit pub_static_methods_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#a728b0580f568f9d5fb814458b6c75fe4">doc_true_edge_neighbours</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; forest_nodes_pt, std::ofstream &amp;neighbours_file, std::ofstream &amp;no_true_edge_file, std::ofstream &amp;neighbours_txt_file, double &amp;max_error)</td></tr>
-<tr class="memdesc:a728b0580f568f9d5fb814458b6c75fe4 inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc/check all true edge neighbours of octree (nodes) contained in the <a class="el" href="classoomph_1_1Vector.html">Vector</a> forest_node_pt. Output into neighbours_file which can be viewed from tecplot with OcTreeNeighbours.mcr Neighbour info and errors are displayed on neighbours_txt_file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. <br  />
-  <a href="classoomph_1_1OcTree.html#a728b0580f568f9d5fb814458b6c75fe4">More...</a><br /></td></tr>
+<tr class="memdesc:a728b0580f568f9d5fb814458b6c75fe4 inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc/check all true edge neighbours of octree (nodes) contained in the <a class="el" href="classoomph_1_1Vector.html">Vector</a> forest_node_pt. Output into neighbours_file which can be viewed from tecplot with OcTreeNeighbours.mcr Neighbour info and errors are displayed on neighbours_txt_file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed.  <a href="classoomph_1_1OcTree.html#a728b0580f568f9d5fb814458b6c75fe4">More...</a><br /></td></tr>
 <tr class="separator:a728b0580f568f9d5fb814458b6c75fe4 inherit pub_static_methods_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab03edae455d5bd788acf426ca3f87b9d inherit pub_static_methods_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#ab03edae455d5bd788acf426ca3f87b9d">get_the_other_face</a> (const unsigned &amp;n1, const unsigned &amp;n2, const unsigned &amp;nnode1d, const int &amp;face)</td></tr>
 <tr class="memdesc:ab03edae455d5bd788acf426ca3f87b9d inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">If an edge is bordered by the nodes whose local numbers are n1 and n2 in an element with nnode1d nodes along each coordinate direction, then this edge is shared by two faces. This function takes one of these faces as the argument <code>face</code> and returns the other one. (<code>face</code> is a direction in the set U,D,F,B,L,R).  <a href="classoomph_1_1OcTree.html#ab03edae455d5bd788acf426ca3f87b9d">More...</a><br /></td></tr>
@@ -371,7 +364,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:af2a129b95ad303ed340bb8bd86e05384 inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the local node number of given vertex [LDB,RDB,...] in an element with nnode1d nodes in each coordinate direction.  <a href="classoomph_1_1OcTree.html#af2a129b95ad303ed340bb8bd86e05384">More...</a><br /></td></tr>
 <tr class="separator:af2a129b95ad303ed340bb8bd86e05384 inherit pub_static_methods_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43cbe5258a41168fe2d891e52ae64e6b inherit pub_static_methods_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#a43cbe5258a41168fe2d891e52ae64e6b">node_number_to_vertex</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned &amp;nnode1d)</td></tr>
-<tr class="memdesc:a43cbe5258a41168fe2d891e52ae64e6b inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vertex [LDB,RDB,...] of local (vertex) node n.  <a href="classoomph_1_1OcTree.html#a43cbe5258a41168fe2d891e52ae64e6b">More...</a><br /></td></tr>
+<tr class="memdesc:a43cbe5258a41168fe2d891e52ae64e6b inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vertex [LDB,RDB,...] of local (vertex) node n in an element with nnode1d nodes in each coordinate direction.  <a href="classoomph_1_1OcTree.html#a43cbe5258a41168fe2d891e52ae64e6b">More...</a><br /></td></tr>
 <tr class="separator:a43cbe5258a41168fe2d891e52ae64e6b inherit pub_static_methods_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25e5185f0395a19883e216fd80103cf7 inherit pub_static_methods_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#a25e5185f0395a19883e216fd80103cf7">rotate</a> (const int &amp;new_up, const int &amp;new_right, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;dir)</td></tr>
 <tr class="memdesc:a25e5185f0395a19883e216fd80103cf7 inherit pub_static_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">If U[p] becomes new_up and R[ight] becomes new_right then the direction vector <code>dir</code> becomes rotate(new_up, new_right, dir)  <a href="classoomph_1_1OcTree.html#a25e5185f0395a19883e216fd80103cf7">More...</a><br /></td></tr>
@@ -400,8 +393,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:acf182a71db90c350c3f1d334d73d103f inherit pub_static_attribs_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code><a class="el" href="classoomph_1_1Vector.html">Vector</a></code> of vectors containing the two vertices for each edge, e.g. <code>Vertex_at_end_of_edge</code>[LU][0]=LUB and <code>Vertex_at_end_of_edge</code>[LU][1]=LUF.  <a href="classoomph_1_1OcTree.html#acf182a71db90c350c3f1d334d73d103f">More...</a><br /></td></tr>
 <tr class="separator:acf182a71db90c350c3f1d334d73d103f inherit pub_static_attribs_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec83bade91057d89aa3896274cb96b7e inherit pub_static_attribs_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">static std::map&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt;, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#aec83bade91057d89aa3896274cb96b7e">Vector_to_direction</a></td></tr>
-<tr class="memdesc:aec83bade91057d89aa3896274cb96b7e inherit pub_static_attribs_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Each vector representing a direction can be translated into a direction, either a son type (vertex), a face or an edge. E.g. : Vector_to_direction[(1,-1,1)]=RDF, Vector_to_direction[(0,1,0)]=U <br  />
-  <a href="classoomph_1_1OcTree.html#aec83bade91057d89aa3896274cb96b7e">More...</a><br /></td></tr>
+<tr class="memdesc:aec83bade91057d89aa3896274cb96b7e inherit pub_static_attribs_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Each vector representing a direction can be translated into a direction, either a son type (vertex), a face or an edge. E.g. : Vector_to_direction[(1,-1,1)]=RDF, Vector_to_direction[(0,1,0)]=U.  <a href="classoomph_1_1OcTree.html#aec83bade91057d89aa3896274cb96b7e">More...</a><br /></td></tr>
 <tr class="separator:aec83bade91057d89aa3896274cb96b7e inherit pub_static_attribs_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf813fbb9cffe89fb51f3c8ccd3083ca inherit pub_static_attribs_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#adf813fbb9cffe89fb51f3c8ccd3083ca">Direction_to_vector</a></td></tr>
 <tr class="memdesc:adf813fbb9cffe89fb51f3c8ccd3083ca inherit pub_static_attribs_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">For each direction, i.e. a son_type (vertex), a face or an edge, this defines a vector that indicates this direction. E.g : Direction_to_vector[RDB]=(1,-1,-1), Direction_to_vector[U]=(0,1,0)  <a href="classoomph_1_1OcTree.html#adf813fbb9cffe89fb51f3c8ccd3083ca">More...</a><br /></td></tr>
@@ -410,7 +402,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a88cff579697781e1ec50c86517feec77 inherit pub_static_attribs_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the up/right-equivalents corresponding to two pairs of vertices along an element edge:  <a href="classoomph_1_1OcTree.html#a88cff579697781e1ec50c86517feec77">More...</a><br /></td></tr>
 <tr class="separator:a88cff579697781e1ec50c86517feec77 inherit pub_static_attribs_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_classoomph_1_1Tree"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1Tree')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1Tree.html">oomph::Tree</a></td></tr>
-<tr class="memitem:a9e532196340dcd859ff8207eea2ddbbc inherit pub_static_attribs_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9e532196340dcd859ff8207eea2ddbbc">OMEGA</a> =26</td></tr>
+<tr class="memitem:a9e532196340dcd859ff8207eea2ddbbc inherit pub_static_attribs_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9e532196340dcd859ff8207eea2ddbbc">OMEGA</a> = 26</td></tr>
 <tr class="memdesc:a9e532196340dcd859ff8207eea2ddbbc inherit pub_static_attribs_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for an unassigned neighbour.  <a href="classoomph_1_1Tree.html#a9e532196340dcd859ff8207eea2ddbbc">More...</a><br /></td></tr>
 <tr class="separator:a9e532196340dcd859ff8207eea2ddbbc inherit pub_static_attribs_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classoomph_1_1OcTree"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1OcTree')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1OcTree.html">oomph::OcTree</a></td></tr>
@@ -418,24 +410,20 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:abb830075e2f08aa68bf65a07089039ca inherit pro_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <a href="classoomph_1_1OcTree.html#abb830075e2f08aa68bf65a07089039ca">More...</a><br /></td></tr>
 <tr class="separator:abb830075e2f08aa68bf65a07089039ca inherit pro_methods_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c0f7987566846a0451bdc1ed522a2d4 inherit pro_methods_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#a2c0f7987566846a0451bdc1ed522a2d4">OcTree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a2f2eeb0f1dd161f696cccc652974ff4c">object_pt</a>)</td></tr>
-<tr class="memdesc:a2c0f7987566846a0451bdc1ed522a2d4 inherit pro_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for empty (root) tree: no father, no sons; just pass a pointer to its object (a <a class="el" href="classoomph_1_1RefineableQElement_3_013_01_4.html">RefineableQElement&lt;3&gt;</a>). This is protected because OcTrees can only be created internally, during the split operation. Only OcTreeRoots can be created externally. <br  />
-  <a href="classoomph_1_1OcTree.html#a2c0f7987566846a0451bdc1ed522a2d4">More...</a><br /></td></tr>
+<tr class="memdesc:a2c0f7987566846a0451bdc1ed522a2d4 inherit pro_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for empty (root) tree: no father, no sons; just pass a pointer to its object (a <a class="el" href="classoomph_1_1RefineableQElement_3_013_01_4.html">RefineableQElement&lt;3&gt;</a>). This is protected because OcTrees can only be created internally, during the split operation. Only OcTreeRoots can be created externally.  <a href="classoomph_1_1OcTree.html#a2c0f7987566846a0451bdc1ed522a2d4">More...</a><br /></td></tr>
 <tr class="separator:a2c0f7987566846a0451bdc1ed522a2d4 inherit pro_methods_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af79e3cbf9d0c65f9e4a01207d65d4967 inherit pro_methods_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#af79e3cbf9d0c65f9e4a01207d65d4967">OcTree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a2f2eeb0f1dd161f696cccc652974ff4c">object_pt</a>, <a class="el" href="classoomph_1_1Tree.html">Tree</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a5f8444ddeda272b70669b8bbe929708a">father_pt</a>, const int &amp;<a class="el" href="classoomph_1_1Tree.html#a7537f8fe7c896d2220eb2da03567b34d">son_type</a>)</td></tr>
-<tr class="memdesc:af79e3cbf9d0c65f9e4a01207d65d4967 inherit pro_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son (LDB,RDB,...) it is. Protected because OcTrees can only be created internally, during the split operation. Only OcTreeRoots can be created externally. <br  />
-  <a href="classoomph_1_1OcTree.html#af79e3cbf9d0c65f9e4a01207d65d4967">More...</a><br /></td></tr>
+<tr class="memdesc:af79e3cbf9d0c65f9e4a01207d65d4967 inherit pro_methods_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son (LDB,RDB,...) it is. Protected because OcTrees can only be created internally, during the split operation. Only OcTreeRoots can be created externally.  <a href="classoomph_1_1OcTree.html#af79e3cbf9d0c65f9e4a01207d65d4967">More...</a><br /></td></tr>
 <tr class="separator:af79e3cbf9d0c65f9e4a01207d65d4967 inherit pro_methods_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classoomph_1_1Tree"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1Tree')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1Tree.html">oomph::Tree</a></td></tr>
 <tr class="memitem:ada92f1aa44ee6ef5b52ec5ad0af00359 inherit pro_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ada92f1aa44ee6ef5b52ec5ad0af00359">Tree</a> ()</td></tr>
 <tr class="memdesc:ada92f1aa44ee6ef5b52ec5ad0af00359 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <a href="classoomph_1_1Tree.html#ada92f1aa44ee6ef5b52ec5ad0af00359">More...</a><br /></td></tr>
 <tr class="separator:ada92f1aa44ee6ef5b52ec5ad0af00359 inherit pro_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e78c3a130add917de182ab5f1674531 inherit pro_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a6e78c3a130add917de182ab5f1674531">Tree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a2f2eeb0f1dd161f696cccc652974ff4c">object_pt</a>)</td></tr>
-<tr class="memdesc:a6e78c3a130add917de182ab5f1674531 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally. <br  />
-  <a href="classoomph_1_1Tree.html#a6e78c3a130add917de182ab5f1674531">More...</a><br /></td></tr>
+<tr class="memdesc:a6e78c3a130add917de182ab5f1674531 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally.  <a href="classoomph_1_1Tree.html#a6e78c3a130add917de182ab5f1674531">More...</a><br /></td></tr>
 <tr class="separator:a6e78c3a130add917de182ab5f1674531 inherit pro_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d611dde1f429500330f28e56ee71883 inherit pro_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9d611dde1f429500330f28e56ee71883">Tree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a2f2eeb0f1dd161f696cccc652974ff4c">object_pt</a>, <a class="el" href="classoomph_1_1Tree.html">Tree</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a5f8444ddeda272b70669b8bbe929708a">father_pt</a>, const int &amp;<a class="el" href="classoomph_1_1Tree.html#a7537f8fe7c896d2220eb2da03567b34d">son_type</a>)</td></tr>
-<tr class="memdesc:a9d611dde1f429500330f28e56ee71883 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally. <br  />
-  <a href="classoomph_1_1Tree.html#a9d611dde1f429500330f28e56ee71883">More...</a><br /></td></tr>
+<tr class="memdesc:a9d611dde1f429500330f28e56ee71883 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally.  <a href="classoomph_1_1Tree.html#a9d611dde1f429500330f28e56ee71883">More...</a><br /></td></tr>
 <tr class="separator:a9d611dde1f429500330f28e56ee71883 inherit pro_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classoomph_1_1Tree"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1Tree')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1Tree.html">oomph::Tree</a></td></tr>
 <tr class="memitem:a61782afd668561ad7ab324f658ffeb6a inherit pro_attribs_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a61782afd668561ad7ab324f658ffeb6a">Root_pt</a></td></tr>
@@ -457,25 +445,25 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a61ee20b575da510512d0e108cf7b06c6 inherit pro_attribs_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the object represented by the tree.  <a href="classoomph_1_1Tree.html#a61ee20b575da510512d0e108cf7b06c6">More...</a><br /></td></tr>
 <tr class="separator:a61ee20b575da510512d0e108cf7b06c6 inherit pro_attribs_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classoomph_1_1TreeRoot"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1TreeRoot')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1TreeRoot.html">oomph::TreeRoot</a></td></tr>
-<tr class="memitem:a01e5f3564f923fa92015c444d9f656bd inherit pro_attribs_classoomph_1_1TreeRoot"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeRoot.html#a01e5f3564f923fa92015c444d9f656bd">Neighbour_pt</a></td></tr>
-<tr class="memdesc:a01e5f3564f923fa92015c444d9f656bd inherit pro_attribs_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of pointers to the neighbouring TreeRoots: Neighbour_pt[direction] returns the pointer to the <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>'s neighbour in the (enumerated) direction. Returns NULL if there's no neighbour in this direction.  <a href="classoomph_1_1TreeRoot.html#a01e5f3564f923fa92015c444d9f656bd">More...</a><br /></td></tr>
-<tr class="separator:a01e5f3564f923fa92015c444d9f656bd inherit pro_attribs_classoomph_1_1TreeRoot"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a735d46a67142786a3368d0e719513c03 inherit pro_attribs_classoomph_1_1TreeRoot"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeRoot.html#a735d46a67142786a3368d0e719513c03">Neighbour_periodic</a></td></tr>
-<tr class="memdesc:a735d46a67142786a3368d0e719513c03 inherit pro_attribs_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of booleans used for periodic boundaries: Neighbour_periodic_direction[directon] returns true if the neighbour in that direction is actually a periodic neighbour &mdash; shared data values, but independent position. The default return of the map is false.  <a href="classoomph_1_1TreeRoot.html#a735d46a67142786a3368d0e719513c03">More...</a><br /></td></tr>
-<tr class="separator:a735d46a67142786a3368d0e719513c03 inherit pro_attribs_classoomph_1_1TreeRoot"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8923854080ee44a2d1be477000309b13 inherit pro_attribs_classoomph_1_1TreeRoot"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeRoot.html#a8923854080ee44a2d1be477000309b13">Neighbour_pt</a></td></tr>
+<tr class="memdesc:a8923854080ee44a2d1be477000309b13 inherit pro_attribs_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of pointers to the neighbouring TreeRoots: Neighbour_pt[direction] returns the pointer to the <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>'s neighbour in the (enumerated) direction. Returns NULL if there's no neighbour in this direction.  <a href="classoomph_1_1TreeRoot.html#a8923854080ee44a2d1be477000309b13">More...</a><br /></td></tr>
+<tr class="separator:a8923854080ee44a2d1be477000309b13 inherit pro_attribs_classoomph_1_1TreeRoot"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a067533f9b739e6c185ce776ea0c98e88 inherit pro_attribs_classoomph_1_1TreeRoot"><td class="memItemLeft" align="right" valign="top">std::map&lt; int, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeRoot.html#a067533f9b739e6c185ce776ea0c98e88">Neighbour_periodic</a></td></tr>
+<tr class="memdesc:a067533f9b739e6c185ce776ea0c98e88 inherit pro_attribs_classoomph_1_1TreeRoot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of booleans used for periodic boundaries: Neighbour_periodic_direction[directon] returns true if the neighbour in that direction is actually a periodic neighbour &mdash; shared data values, but independent position. The default return of the map is false.  <a href="classoomph_1_1TreeRoot.html#a067533f9b739e6c185ce776ea0c98e88">More...</a><br /></td></tr>
+<tr class="separator:a067533f9b739e6c185ce776ea0c98e88 inherit pro_attribs_classoomph_1_1TreeRoot"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classoomph_1_1OcTree"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1OcTree')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1OcTree.html">oomph::OcTree</a></td></tr>
-<tr class="memitem:addaa397d11580ec949531c8ae9b082a5 inherit pro_static_attribs_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#addaa397d11580ec949531c8ae9b082a5">Static_data_has_been_setup</a> =false</td></tr>
+<tr class="memitem:addaa397d11580ec949531c8ae9b082a5 inherit pro_static_attribs_classoomph_1_1OcTree"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OcTree.html#addaa397d11580ec949531c8ae9b082a5">Static_data_has_been_setup</a> = false</td></tr>
 <tr class="memdesc:addaa397d11580ec949531c8ae9b082a5 inherit pro_static_attribs_classoomph_1_1OcTree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool indicating that static member data has been setup.  <a href="classoomph_1_1OcTree.html#addaa397d11580ec949531c8ae9b082a5">More...</a><br /></td></tr>
 <tr class="separator:addaa397d11580ec949531c8ae9b082a5 inherit pro_static_attribs_classoomph_1_1OcTree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classoomph_1_1Tree"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1Tree')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1Tree.html">oomph::Tree</a></td></tr>
-<tr class="memitem:aef9abebc166fa3bf81ecb59ec0d5d6b2 inherit pro_static_attribs_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2">Max_neighbour_finding_tolerance</a> =1.0e-14</td></tr>
+<tr class="memitem:aef9abebc166fa3bf81ecb59ec0d5d6b2 inherit pro_static_attribs_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2">Max_neighbour_finding_tolerance</a> = 1.0e-14</td></tr>
 <tr class="memdesc:aef9abebc166fa3bf81ecb59ec0d5d6b2 inherit pro_static_attribs_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements)  <a href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2">More...</a><br /></td></tr>
 <tr class="separator:aef9abebc166fa3bf81ecb59ec0d5d6b2 inherit pro_static_attribs_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classoomph_1_1OcTreeRoot.html">OcTreeRoot</a> is a <a class="el" href="classoomph_1_1OcTree.html">OcTree</a> that forms the root of a (recursive) octree. The "root node" is special as it holds additional information about its neighbours and their relative rotation (inside a <a class="el" href="classoomph_1_1OcTreeForest.html">OcTreeForest</a>). </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00598">598</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00617">617</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a594278fd254e72415e1523b1b8e7273d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a594278fd254e72415e1523b1b8e7273d">&#9670;&nbsp;</a></span>OcTreeRoot() <span class="overload">[1/2]</span></h2>
@@ -503,9 +491,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor for the root octree: Pass pointer to the <a class="el" href="classoomph_1_1RefineableQElement_3_013_01_4.html">RefineableQElement&lt;3&gt;</a> that is represented by the <a class="el" href="classoomph_1_1OcTree.html">OcTree</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00631">631</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00648">648</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00394">oomph::OcTree::Static_data_has_been_setup</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00419">oomph::OcTree::Static_data_has_been_setup</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>.</p>
 
 </div>
 </div>
@@ -535,9 +523,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00654">654</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00668">668</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -578,11 +566,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Add pointer to the edge-neighbouring [Oc]<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> in the (enumerated) (edge) direction &ndash; maintains uniqueness. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00720">720</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00730">730</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::DB</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::DF</a>, <a class="el" href="octree_8h_source.html#l00314">oomph::OcTree::Direct_string</a>, <a class="el" href="octree_8h_source.html#l00605">Edge_neighbour_pt</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::LB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LD</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::LF</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LU</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::RB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::RD</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::RF</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::RU</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::UB</a>, and <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::UF</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00059">oomph::OcTreeNames::DB</a>, <a class="el" href="octree_8h_source.html#l00067">oomph::OcTreeNames::DF</a>, <a class="el" href="octree_8h_source.html#l00336">oomph::OcTree::Direct_string</a>, <a class="el" href="octree_8h_source.html#l00623">Edge_neighbour_pt</a>, <a class="el" href="octree_8h_source.html#l00057">oomph::OcTreeNames::LB</a>, <a class="el" href="octree_8h_source.html#l00061">oomph::OcTreeNames::LD</a>, <a class="el" href="octree_8h_source.html#l00065">oomph::OcTreeNames::LF</a>, <a class="el" href="octree_8h_source.html#l00063">oomph::OcTreeNames::LU</a>, <a class="el" href="octree_8h_source.html#l00058">oomph::OcTreeNames::RB</a>, <a class="el" href="octree_8h_source.html#l00062">oomph::OcTreeNames::RD</a>, <a class="el" href="octree_8h_source.html#l00066">oomph::OcTreeNames::RF</a>, <a class="el" href="octree_8h_source.html#l00064">oomph::OcTreeNames::RU</a>, <a class="el" href="octree_8h_source.html#l00060">oomph::OcTreeNames::UB</a>, and <a class="el" href="octree_8h_source.html#l00068">oomph::OcTreeNames::UF</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l04889">oomph::OcTreeForest::find_neighbours()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l04913">oomph::OcTreeForest::find_neighbours()</a>.</p>
 
 </div>
 </div>
@@ -612,11 +600,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>If octree_root_pt is a neighbour, return the direction [faces L/R/F/B/U/D or edges DB/UP/...] in which it is found, otherwise return OMEGA. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00819">819</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00828">828</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00055">oomph::OcTreeNames::B</a>, <a class="el" href="octree_8h_source.html#l00055">oomph::OcTreeNames::D</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::DB</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::DF</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="octree_8h_source.html#l00668">edge_neighbour_pt()</a>, <a class="el" href="octree_8h_source.html#l00055">oomph::OcTreeNames::F</a>, <a class="el" href="octree_8h_source.html#l00055">oomph::OcTreeNames::L</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::LB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LD</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::LF</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LU</a>, <a class="el" href="tree_8h_source.html#l00307">oomph::TreeRoot::Neighbour_pt</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, <a class="el" href="octree_8h_source.html#l00055">oomph::OcTreeNames::R</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::RB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::RD</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::RF</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::RU</a>, <a class="el" href="octree_8h_source.html#l00055">oomph::OcTreeNames::U</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::UB</a>, and <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::UF</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00073">oomph::OcTreeNames::B</a>, <a class="el" href="octree_8h_source.html#l00071">oomph::OcTreeNames::D</a>, <a class="el" href="octree_8h_source.html#l00059">oomph::OcTreeNames::DB</a>, <a class="el" href="octree_8h_source.html#l00067">oomph::OcTreeNames::DF</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="octree_8h_source.html#l00682">edge_neighbour_pt()</a>, <a class="el" href="octree_8h_source.html#l00074">oomph::OcTreeNames::F</a>, <a class="el" href="octree_8h_source.html#l00069">oomph::OcTreeNames::L</a>, <a class="el" href="octree_8h_source.html#l00057">oomph::OcTreeNames::LB</a>, <a class="el" href="octree_8h_source.html#l00061">oomph::OcTreeNames::LD</a>, <a class="el" href="octree_8h_source.html#l00065">oomph::OcTreeNames::LF</a>, <a class="el" href="octree_8h_source.html#l00063">oomph::OcTreeNames::LU</a>, <a class="el" href="tree_8h_source.html#l00336">oomph::TreeRoot::Neighbour_pt</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, <a class="el" href="octree_8h_source.html#l00070">oomph::OcTreeNames::R</a>, <a class="el" href="octree_8h_source.html#l00058">oomph::OcTreeNames::RB</a>, <a class="el" href="octree_8h_source.html#l00062">oomph::OcTreeNames::RD</a>, <a class="el" href="octree_8h_source.html#l00066">oomph::OcTreeNames::RF</a>, <a class="el" href="octree_8h_source.html#l00064">oomph::OcTreeNames::RU</a>, <a class="el" href="octree_8h_source.html#l00072">oomph::OcTreeNames::U</a>, <a class="el" href="octree_8h_source.html#l00060">oomph::OcTreeNames::UB</a>, and <a class="el" href="octree_8h_source.html#l00068">oomph::OcTreeNames::UF</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l05230">oomph::OcTreeForest::construct_up_right_equivalents()</a>, <a class="el" href="octree_8h_source.html#l00795">right_equivalent()</a>, and <a class="el" href="octree_8h_source.html#l00762">up_equivalent()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l05255">oomph::OcTreeForest::construct_up_right_equivalents()</a>, <a class="el" href="octree_8h_source.html#l00804">right_equivalent()</a>, and <a class="el" href="octree_8h_source.html#l00771">up_equivalent()</a>.</p>
 
 </div>
 </div>
@@ -646,11 +634,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return vector of pointers to the edge-neighbouring TreeRoots in the (enumerated) (edge) direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00668">668</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00682">682</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::DB</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::DF</a>, <a class="el" href="octree_8h_source.html#l00314">oomph::OcTree::Direct_string</a>, <a class="el" href="octree_8h_source.html#l00605">Edge_neighbour_pt</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::LB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LD</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::LF</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LU</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::RB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::RD</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::RF</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::RU</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::UB</a>, and <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::UF</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00059">oomph::OcTreeNames::DB</a>, <a class="el" href="octree_8h_source.html#l00067">oomph::OcTreeNames::DF</a>, <a class="el" href="octree_8h_source.html#l00336">oomph::OcTree::Direct_string</a>, <a class="el" href="octree_8h_source.html#l00623">Edge_neighbour_pt</a>, <a class="el" href="octree_8h_source.html#l00057">oomph::OcTreeNames::LB</a>, <a class="el" href="octree_8h_source.html#l00061">oomph::OcTreeNames::LD</a>, <a class="el" href="octree_8h_source.html#l00065">oomph::OcTreeNames::LF</a>, <a class="el" href="octree_8h_source.html#l00063">oomph::OcTreeNames::LU</a>, <a class="el" href="octree_8h_source.html#l00058">oomph::OcTreeNames::RB</a>, <a class="el" href="octree_8h_source.html#l00062">oomph::OcTreeNames::RD</a>, <a class="el" href="octree_8h_source.html#l00066">oomph::OcTreeNames::RF</a>, <a class="el" href="octree_8h_source.html#l00064">oomph::OcTreeNames::RU</a>, <a class="el" href="octree_8h_source.html#l00060">oomph::OcTreeNames::UB</a>, and <a class="el" href="octree_8h_source.html#l00068">oomph::OcTreeNames::UF</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8h_source.html#l00819">direction_of_neighbour()</a>, and <a class="el" href="octree_8h_source.html#l00965">oomph::OcTreeForest::oc_edge_neigh_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8h_source.html#l00828">direction_of_neighbour()</a>, and <a class="el" href="octree_8h_source.html#l01022">oomph::OcTreeForest::oc_edge_neigh_pt()</a>.</p>
 
 </div>
 </div>
@@ -680,9 +668,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return number of edge-neighbouring <a class="el" href="classoomph_1_1OcTreeRoot.html">OcTreeRoot</a> in the (enumerated) (edge) direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00695">695</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00707">707</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::DB</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::DF</a>, <a class="el" href="octree_8h_source.html#l00314">oomph::OcTree::Direct_string</a>, <a class="el" href="octree_8h_source.html#l00605">Edge_neighbour_pt</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::LB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LD</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::LF</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LU</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::RB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::RD</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::RF</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::RU</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::UB</a>, and <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::UF</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00059">oomph::OcTreeNames::DB</a>, <a class="el" href="octree_8h_source.html#l00067">oomph::OcTreeNames::DF</a>, <a class="el" href="octree_8h_source.html#l00336">oomph::OcTree::Direct_string</a>, <a class="el" href="octree_8h_source.html#l00623">Edge_neighbour_pt</a>, <a class="el" href="octree_8h_source.html#l00057">oomph::OcTreeNames::LB</a>, <a class="el" href="octree_8h_source.html#l00061">oomph::OcTreeNames::LD</a>, <a class="el" href="octree_8h_source.html#l00065">oomph::OcTreeNames::LF</a>, <a class="el" href="octree_8h_source.html#l00063">oomph::OcTreeNames::LU</a>, <a class="el" href="octree_8h_source.html#l00058">oomph::OcTreeNames::RB</a>, <a class="el" href="octree_8h_source.html#l00062">oomph::OcTreeNames::RD</a>, <a class="el" href="octree_8h_source.html#l00066">oomph::OcTreeNames::RF</a>, <a class="el" href="octree_8h_source.html#l00064">oomph::OcTreeNames::RU</a>, <a class="el" href="octree_8h_source.html#l00060">oomph::OcTreeNames::UB</a>, and <a class="el" href="octree_8h_source.html#l00068">oomph::OcTreeNames::UF</a>.</p>
 
 </div>
 </div>
@@ -712,9 +700,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00660">660</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00674">674</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -742,14 +730,13 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The same thing as up_equivalent, but for the right direction: When viewed from the current octree neighbour, our right direction is the neighbour's Right_equivalent[neighbour_pt] direction. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. <br  />
- </p>
+<p>The same thing as up_equivalent, but for the right direction: When viewed from the current octree neighbour, our right direction is the neighbour's Right_equivalent[neighbour_pt] direction. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00795">795</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00804">804</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00819">direction_of_neighbour()</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, and <a class="el" href="octree_8h_source.html#l00624">Right_equivalent</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00828">direction_of_neighbour()</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, and <a class="el" href="octree_8h_source.html#l00642">Right_equivalent</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l03343">oomph::OcTree::gteq_face_neighbour()</a>, and <a class="el" href="octree_8cc_source.html#l03592">oomph::OcTree::gteq_true_edge_neighbour()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l03373">oomph::OcTree::gteq_face_neighbour()</a>, and <a class="el" href="octree_8cc_source.html#l03618">oomph::OcTree::gteq_true_edge_neighbour()</a>.</p>
 
 </div>
 </div>
@@ -789,11 +776,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The same thing as up_equivalent, but for the right direction: When viewed from the current octree neighbour, our right direction is the neighbour's Right_equivalent[neighbour_pt] direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00811">811</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00820">820</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00624">Right_equivalent</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00642">Right_equivalent</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l05230">oomph::OcTreeForest::construct_up_right_equivalents()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l05255">oomph::OcTreeForest::construct_up_right_equivalents()</a>.</p>
 
 </div>
 </div>
@@ -832,14 +819,14 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set up equivalent of the neighbours specified by pointer: When viewed from the current octree's neighbour, our up direction is the neighbour's Up_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Up_equivalent</code>[neighbour_pt]=U (read as: "in my
-neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-front axis) say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my 
+neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-front axis) say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my
 neighbour, my Up is its Down"); etc. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00784">784</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00793">793</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00616">Up_equivalent</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00634">Up_equivalent</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l05230">oomph::OcTreeForest::construct_up_right_equivalents()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l05255">oomph::OcTreeForest::construct_up_right_equivalents()</a>.</p>
 
 </div>
 </div>
@@ -868,21 +855,20 @@ neighbour, my Up is its Down"); etc. </p>
 </div><div class="memdoc">
 
 <p>Return up equivalent of the neighbours specified by pointer: When viewed from the current octree's neighbour, our up direction is the neighbour's Up_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Up_equivalent</code>[neighbour_pt]=U (read as: "in my
-neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-front axis) say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my 
-neighbour, my Up is its Down"); etc. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. <br  />
- </p>
+neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-front axis) say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my
+neighbour, my Up is its Down"); etc. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00762">762</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00771">771</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00819">direction_of_neighbour()</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, and <a class="el" href="octree_8h_source.html#l00616">Up_equivalent</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00828">direction_of_neighbour()</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, and <a class="el" href="octree_8h_source.html#l00634">Up_equivalent</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l03343">oomph::OcTree::gteq_face_neighbour()</a>, and <a class="el" href="octree_8cc_source.html#l03592">oomph::OcTree::gteq_true_edge_neighbour()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l03373">oomph::OcTree::gteq_face_neighbour()</a>, and <a class="el" href="octree_8cc_source.html#l03618">oomph::OcTree::gteq_true_edge_neighbour()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="afa562a1888008194b352be57f2c3d9a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa562a1888008194b352be57f2c3d9a9">&#9670;&nbsp;</a></span>Edge_neighbour_pt</h2>
+<a id="ae3c71331aaf452591ba6a3ab0cdbcdbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3c71331aaf452591ba6a3ab0cdbcdbc">&#9670;&nbsp;</a></span>Edge_neighbour_pt</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -891,7 +877,7 @@ neighbour, my Up is its Down"); etc. Returns OMEGA if the Octree specified by th
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;int,<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>*&gt; &gt; oomph::OcTreeRoot::Edge_neighbour_pt</td>
+          <td class="memname">std::map&lt;int, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>*&gt; &gt; oomph::OcTreeRoot::Edge_neighbour_pt</td>
         </tr>
       </table>
   </td>
@@ -903,14 +889,14 @@ neighbour, my Up is its Down"); etc. Returns OMEGA if the Octree specified by th
 
 <p>Map of pointers to the edge-neighbouring [Oc]TreeRoots: Edge_neighbour_pt[direction] is <a class="el" href="classoomph_1_1Vector.html">Vector</a> to the pointers to the [Oc]<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>'s edge neighbours in the (enumerated) (edge) direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00605">605</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00623">623</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8h_source.html#l00720">add_edge_neighbour_pt()</a>, <a class="el" href="octree_8h_source.html#l00668">edge_neighbour_pt()</a>, and <a class="el" href="octree_8h_source.html#l00695">nedge_neighbour()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8h_source.html#l00730">add_edge_neighbour_pt()</a>, <a class="el" href="octree_8h_source.html#l00682">edge_neighbour_pt()</a>, and <a class="el" href="octree_8h_source.html#l00707">nedge_neighbour()</a>.</p>
 
 </div>
 </div>
-<a id="a400dfaf6af4fe47b061faafddfb14680"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a400dfaf6af4fe47b061faafddfb14680">&#9670;&nbsp;</a></span>Right_equivalent</h2>
+<a id="a739d09d26896cfb6924f4d023f5d791f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a739d09d26896cfb6924f4d023f5d791f">&#9670;&nbsp;</a></span>Right_equivalent</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -919,7 +905,7 @@ neighbour, my Up is its Down"); etc. Returns OMEGA if the Octree specified by th
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>*,int&gt; oomph::OcTreeRoot::Right_equivalent</td>
+          <td class="memname">std::map&lt;<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>*, int&gt; oomph::OcTreeRoot::Right_equivalent</td>
         </tr>
       </table>
   </td>
@@ -932,14 +918,14 @@ neighbour, my Up is its Down"); etc. Returns OMEGA if the Octree specified by th
 <p>Map giving the Right equivalent of the neighbour specified by pointer: When viewed from the current octree's neighbour, our right direction is the neighbour's right_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Right_equivalent</code>[neighbour_pt]=R (read as: "in my
 neighbour, my Right is its Right"). </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00624">624</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00642">642</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8h_source.html#l00795">right_equivalent()</a>, and <a class="el" href="octree_8h_source.html#l00811">set_right_equivalent()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8h_source.html#l00804">right_equivalent()</a>, and <a class="el" href="octree_8h_source.html#l00820">set_right_equivalent()</a>.</p>
 
 </div>
 </div>
-<a id="af35e1f7300551c1c8d9ad828d3ebccd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af35e1f7300551c1c8d9ad828d3ebccd9">&#9670;&nbsp;</a></span>Up_equivalent</h2>
+<a id="a247955b8a3eb01e227ec2ee1f3bb96ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a247955b8a3eb01e227ec2ee1f3bb96ce">&#9670;&nbsp;</a></span>Up_equivalent</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -948,7 +934,7 @@ neighbour, my Right is its Right"). </p>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>*,int&gt; oomph::OcTreeRoot::Up_equivalent</td>
+          <td class="memname">std::map&lt;<a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>*, int&gt; oomph::OcTreeRoot::Up_equivalent</td>
         </tr>
       </table>
   </td>
@@ -959,12 +945,12 @@ neighbour, my Right is its Right"). </p>
 </div><div class="memdoc">
 
 <p>Map giving the Up equivalent of the neighbour specified by pointer: When viewed from the current octree's neighbour, our up direction is the neighbour's Up_equivalent[neighbour_pt] direction. If there's no rotation, this map contains the identify so that, e.g. <code>Up_equivalent</code>[neighbour_pt]=U (read as: "in my
-neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree(around the back-front axis), say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my 
+neighbour, my Up is its Up"). If the neighbour is rotated by 180 degrees relative to the current octree(around the back-front axis), say, we have <code>Up_equivalent</code>[neighbour_pt]=D (read as: "in my
 neighbour, my Up is its Down"); etc. </p>
 
-<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00616">616</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="octree_8h_source.html#l00634">634</a> of file <a class="el" href="octree_8h_source.html">octree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="octree_8h_source.html#l00784">set_up_equivalent()</a>, and <a class="el" href="octree_8h_source.html#l00762">up_equivalent()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="octree_8h_source.html#l00793">set_up_equivalent()</a>, and <a class="el" href="octree_8h_source.html#l00771">up_equivalent()</a>.</p>
 
 </div>
 </div>
@@ -999,7 +985,7 @@ neighbour, my Up is its Down"); etc. </p>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:55:58
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:54
         </div>
       </div>
     </footer>

@@ -35,17 +35,15 @@ static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperli
 static void \mbox{\hyperlink{classoomph_1_1OcTree_a5d7b0830cd9c913786e23259c69c71a0}{setup\+\_\+static\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Setup the static data, rotation and reflection schemes, etc. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{classoomph_1_1OcTree_afd54b3cd1f4196d618e73d19bb4ba157}{doc\+\_\+face\+\_\+neighbours}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ forest\+\_\+nodes\+\_\+pt, std\+::ofstream \&neighbours\+\_\+file, std\+::ofstream \&neighbours\+\_\+txt\+\_\+file, double \&max\+\_\+error)
-\begin{DoxyCompactList}\small\item\em Doc/check all face neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Doc/check all face neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{classoomph_1_1OcTree_a728b0580f568f9d5fb814458b6c75fe4}{doc\+\_\+true\+\_\+edge\+\_\+neighbours}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ forest\+\_\+nodes\+\_\+pt, std\+::ofstream \&neighbours\+\_\+file, std\+::ofstream \&no\+\_\+true\+\_\+edge\+\_\+file, std\+::ofstream \&neighbours\+\_\+txt\+\_\+file, double \&max\+\_\+error)
-\begin{DoxyCompactList}\small\item\em Doc/check all true edge neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Doc/check all true edge neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. \end{DoxyCompactList}\item 
 static int \mbox{\hyperlink{classoomph_1_1OcTree_ab03edae455d5bd788acf426ca3f87b9d}{get\+\_\+the\+\_\+other\+\_\+face}} (const unsigned \&n1, const unsigned \&n2, const unsigned \&nnode1d, const int \&face)
 \begin{DoxyCompactList}\small\item\em If an edge is bordered by the nodes whose local numbers are n1 and n2 in an element with nnode1d nodes along each coordinate direction, then this edge is shared by two faces. This function takes one of these faces as the argument {\ttfamily face} and returns the other one. ({\ttfamily face} is a direction in the set U,D,F,B,L,R). \end{DoxyCompactList}\item 
 static unsigned \mbox{\hyperlink{classoomph_1_1OcTree_af2a129b95ad303ed340bb8bd86e05384}{vertex\+\_\+to\+\_\+node\+\_\+number}} (const int \&vertex, const unsigned \&nnode1d)
 \begin{DoxyCompactList}\small\item\em Return the local node number of given vertex \mbox{[}L\+DB,R\+DB,...\mbox{]} in an element with nnode1d nodes in each coordinate direction. \end{DoxyCompactList}\item 
 static int \mbox{\hyperlink{classoomph_1_1OcTree_a43cbe5258a41168fe2d891e52ae64e6b}{node\+\_\+number\+\_\+to\+\_\+vertex}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&nnode1d)
-\begin{DoxyCompactList}\small\item\em Return the vertex \mbox{[}L\+DB,R\+DB,...\mbox{]} of local (vertex) node n. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the vertex \mbox{[}L\+DB,R\+DB,...\mbox{]} of local (vertex) node n in an element with nnode1d nodes in each coordinate direction. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a25e5185f0395a19883e216fd80103cf7}{rotate}} (const int \&new\+\_\+up, const int \&new\+\_\+right, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&dir)
 \begin{DoxyCompactList}\small\item\em If U\mbox{[}p\mbox{]} becomes new\+\_\+up and R\mbox{[}ight\mbox{]} becomes new\+\_\+right then the direction vector {\ttfamily dir} becomes rotate(new\+\_\+up, new\+\_\+right, dir) \end{DoxyCompactList}\item 
 static int \mbox{\hyperlink{classoomph_1_1OcTree_ab65a00f8f47eb8b6da56ffa9d6ba8f36}{rotate}} (const int \&new\+\_\+up, const int \&new\+\_\+right, const int \&dir)
@@ -64,8 +62,7 @@ static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperli
 static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1OcTree_acf182a71db90c350c3f1d334d73d103f}{Vertex\+\_\+at\+\_\+end\+\_\+of\+\_\+edge}}
 \begin{DoxyCompactList}\small\item\em {\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}} of vectors containing the two vertices for each edge, e.\+g. {\ttfamily Vertex\+\_\+at\+\_\+end\+\_\+of\+\_\+edge}\mbox{[}LU\mbox{]}\mbox{[}0\mbox{]}=L\+UB and {\ttfamily Vertex\+\_\+at\+\_\+end\+\_\+of\+\_\+edge}\mbox{[}LU\mbox{]}\mbox{[}1\mbox{]}=L\+UF. \end{DoxyCompactList}\item 
 static std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$, int $>$ \mbox{\hyperlink{classoomph_1_1OcTree_aec83bade91057d89aa3896274cb96b7e}{Vector\+\_\+to\+\_\+direction}}
-\begin{DoxyCompactList}\small\item\em Each vector representing a direction can be translated into a direction, either a son type (vertex), a face or an edge. E.\+g. \+: Vector\+\_\+to\+\_\+direction\mbox{[}(1,-\/1,1)\mbox{]}=R\+DF, Vector\+\_\+to\+\_\+direction\mbox{[}(0,1,0)\mbox{]}=U ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Each vector representing a direction can be translated into a direction, either a son type (vertex), a face or an edge. E.\+g. \+: Vector\+\_\+to\+\_\+direction\mbox{[}(1,-\/1,1)\mbox{]}=R\+DF, Vector\+\_\+to\+\_\+direction\mbox{[}(0,1,0)\mbox{]}=U. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1OcTree_adf813fbb9cffe89fb51f3c8ccd3083ca}{Direction\+\_\+to\+\_\+vector}}
 \begin{DoxyCompactList}\small\item\em For each direction, i.\+e. a son\+\_\+type (vertex), a face or an edge, this defines a vector that indicates this direction. E.\+g \+: Direction\+\_\+to\+\_\+vector\mbox{[}R\+DB\mbox{]}=(1,-\/1,-\/1), Direction\+\_\+to\+\_\+vector\mbox{[}U\mbox{]}=(0,1,0) \end{DoxyCompactList}\item 
 static std\+::map$<$ std\+::pair$<$ std\+::pair$<$ int, int $>$, std\+::pair$<$ int, int $>$ $>$, std\+::pair$<$ int, int $>$ $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a88cff579697781e1ec50c86517feec77}{Up\+\_\+and\+\_\+right\+\_\+equivalent\+\_\+for\+\_\+pairs\+\_\+of\+\_\+vertices}}
@@ -76,15 +73,13 @@ static std\+::map$<$ std\+::pair$<$ std\+::pair$<$ int, int $>$, std\+::pair$<$ 
 \mbox{\hyperlink{classoomph_1_1OcTree_abb830075e2f08aa68bf65a07089039ca}{Oc\+Tree}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1OcTree_a2c0f7987566846a0451bdc1ed522a2d4}{Oc\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em Constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object (a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}}). This is protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object (a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}}). This is protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1OcTree_af79e3cbf9d0c65f9e4a01207d65d4967}{Oc\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
-\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (L\+DB,R\+DB,...) it is. Protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (L\+DB,R\+DB,...) it is. Protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static bool \mbox{\hyperlink{classoomph_1_1OcTree_addaa397d11580ec949531c8ae9b082a5}{Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}} =false
+static bool \mbox{\hyperlink{classoomph_1_1OcTree_addaa397d11580ec949531c8ae9b082a5}{Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}} = false
 \begin{DoxyCompactList}\small\item\em Bool indicating that static member data has been setup. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -99,8 +94,7 @@ bool \mbox{\hyperlink{classoomph_1_1OcTree_ab780bf82a61230f23bc3d96774a63010}{ed
 \begin{DoxyCompactItemize}
 \item 
 static void \mbox{\hyperlink{classoomph_1_1OcTree_ad3667015671b5dbc06fdc298c59e4064}{construct\+\_\+rotation\+\_\+matrix}} (int \&axis, int \&angle, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \&mat)
-\begin{DoxyCompactList}\small\item\em This constructs the rotation matrix of the rotation around the axis {\ttfamily axis} with an angle of {\ttfamily angle$\ast$90} ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This constructs the rotation matrix of the rotation around the axis {\ttfamily axis} with an angle of {\ttfamily angle$\ast$90}. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{classoomph_1_1OcTree_a4cb0cccaedfcb4301edcc8dc7cead639}{mult\+\_\+mat\+\_\+vect}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \&mat, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&vect1, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&vect2)
 \begin{DoxyCompactList}\small\item\em Helper function\+: Performs the operation \+: vect2 = mat$\ast$vect1. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{classoomph_1_1OcTree_ad67128675db4b8d5d3e5815134d78fd2}{mult\+\_\+mat\+\_\+mat}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \&mat1, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \&mat2, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \&mat3)
@@ -123,11 +117,9 @@ static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \m
 static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a11213866602c59eae49ac1c9164b9785}{Colour}}
 \begin{DoxyCompactList}\small\item\em Colours for neighbours in various directions. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a114adf939f2937d16a69a541b8e2ceb3}{S\+\_\+base}}
-\begin{DoxyCompactList}\small\item\em s\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the face indicated by direction (L/\+R/\+U/\+D/\+F/B) ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em s\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the face indicated by direction (L/\+R/\+U/\+D/\+F/B) \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1OcTree_af1c005f0207cae66390314859edd9bd1}{S\+\_\+steplo}}
-\begin{DoxyCompactList}\small\item\em Each face of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by two (of the three) local coordinates that parametrise the entire 3D element. E.\+g. the B\mbox{[}ack\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]}, s\mbox{[}1\mbox{]}); the D\mbox{[}own\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]},s\mbox{[}2\mbox{]}); etc. We always identify the in-\/face coordinate with the lower (3D) index with the subscript {\ttfamily \+\_\+lo} and the one with the larger (3D) index with the subscript {\ttfamily \+\_\+hi}. Here we set up the translation scheme between the 2D in-\/face coordinates (s\+\_\+lo,s\+\_\+hi) and the corresponding 3D coordinates\+: If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B/\+U/D\mbox{]}, then an increase in s\+\_\+lo from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+steplo(i,face)} in the 3D coordinate {\ttfamily s}\mbox{[}i\mbox{]}. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Each face of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by two (of the three) local coordinates that parametrise the entire 3D element. E.\+g. the B\mbox{[}ack\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]}, s\mbox{[}1\mbox{]}); the D\mbox{[}own\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]},s\mbox{[}2\mbox{]}); etc. We always identify the in-\/face coordinate with the lower (3D) index with the subscript {\ttfamily \+\_\+lo} and the one with the larger (3D) index with the subscript {\ttfamily \+\_\+hi}. Here we set up the translation scheme between the 2D in-\/face coordinates (s\+\_\+lo,s\+\_\+hi) and the corresponding 3D coordinates\+: If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B/\+U/D\mbox{]}, then an increase in s\+\_\+lo from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+steplo(i,face)} in the 3D coordinate {\ttfamily s}\mbox{[}i\mbox{]}. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1OcTree_addcc327c9831b6c57f30c8596125c236}{S\+\_\+stephi}}
 \begin{DoxyCompactList}\small\item\em If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B/\+U/D\mbox{]}, then an increase in s\+\_\+hi from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+stephi(i,face)} in the 3D coordinate \textbackslash{} s\mbox{[}i\mbox{]}. \mbox{[}Read the discussion of {\ttfamily s\+\_\+steplo} for an explanation of the subscripts {\ttfamily \+\_\+hi} and {\ttfamily \+\_\+lo}.\mbox{]}. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a2ece71f32cf50ba50851d2102af15426}{S\+\_\+directlo}}
@@ -137,11 +129,9 @@ static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$
 static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a9f8afa940d0ce2ceca2a064f3f1ec6b1}{S\+\_\+base\+\_\+edge}}
 \begin{DoxyCompactList}\small\item\em S\+\_\+base\+\_\+edge(i,edge)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the specified edge (L\+F/\+R\+F/...). \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a036d7e355507212bee6a53d42adbea26}{S\+\_\+step\+\_\+edge}}
-\begin{DoxyCompactList}\small\item\em Each edge of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by one (of the three) local coordinates that parametrise the entire 3D element. If we\textquotesingle{}re located on edge {\ttfamily edge} \mbox{[}DB,UB,...\mbox{]}, then an increase in s from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+step\+\_\+edge(i,edge)} in the 3D coordinates {\ttfamily s}\mbox{[}i\mbox{]}. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Each edge of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by one (of the three) local coordinates that parametrise the entire 3D element. If we\textquotesingle{}re located on edge {\ttfamily edge} \mbox{[}DB,UB,...\mbox{]}, then an increase in s from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+step\+\_\+edge(i,edge)} in the 3D coordinates {\ttfamily s}\mbox{[}i\mbox{]}. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1OcTree_abf12711759332ae1d0b55da939b62aa0}{S\+\_\+direct\+\_\+edge}}
-\begin{DoxyCompactList}\small\item\em Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s edge {\ttfamily edge}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+lo} = h/2 {\ttfamily S\+\_\+direct\+\_\+edge(edge,son\+\_\+octant)}. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s edge {\ttfamily edge}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+lo} = h/2 {\ttfamily S\+\_\+direct\+\_\+edge(edge,son\+\_\+octant)}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -165,7 +155,7 @@ Finally, the leaf \char`\"{}nodes\char`\"{} can be split depending on criteria d
 
 Note that Oc\+Trees are only generated by splitting existing Oc\+Trees. Therefore, the constructors are protected. The only \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} that \char`\"{}\+Joe User\char`\"{} can create is the (derived) class \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}}. 
 
-Definition at line 93 of file octree.\+h.
+Definition at line 113 of file octree.\+h.
 
 
 
@@ -182,7 +172,7 @@ Destructor. Note\+: Deleting a octree also deletes the objects associated with a
 
 
 
-Definition at line 100 of file octree.\+h.
+Definition at line 118 of file octree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_af9ead3a5abe10fff53b45e1a6b4adb97}\label{classoomph_1_1OcTree_af9ead3a5abe10fff53b45e1a6b4adb97}} 
 \index{oomph::OcTree@{oomph::OcTree}!OcTree@{OcTree}}
@@ -196,7 +186,7 @@ Broken copy constructor.
 
 
 
-Definition at line 104 of file octree.\+h.
+Definition at line 122 of file octree.\+h.
 
 
 
@@ -214,7 +204,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line 367 of file octree.\+h.
+Definition at line 389 of file octree.\+h.
 
 
 
@@ -228,12 +218,11 @@ Referenced by construct\+\_\+son().
 
 
 
-Constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object (a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}}). This is protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. ~\newline
- 
+Constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object (a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}}). This is protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. 
 
 
 
-Definition at line 380 of file octree.\+h.
+Definition at line 402 of file octree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_af79e3cbf9d0c65f9e4a01207d65d4967}\label{classoomph_1_1OcTree_af79e3cbf9d0c65f9e4a01207d65d4967}} 
 \index{oomph::OcTree@{oomph::OcTree}!OcTree@{OcTree}}
@@ -243,12 +232,11 @@ Definition at line 380 of file octree.\+h.
 
 
 
-Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (L\+DB,R\+DB,...) it is. Protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. ~\newline
- 
+Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (L\+DB,R\+DB,...) it is. Protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. 
 
 
 
-Definition at line 389 of file octree.\+h.
+Definition at line 411 of file octree.\+h.
 
 
 
@@ -261,12 +249,11 @@ Definition at line 389 of file octree.\+h.
 
 
 
-This constructs the rotation matrix of the rotation around the axis {\ttfamily axis} with an angle of {\ttfamily angle$\ast$90} ~\newline
- 
+This constructs the rotation matrix of the rotation around the axis {\ttfamily axis} with an angle of {\ttfamily angle$\ast$90}. 
 
 Build the rotation matrix for a rotation around the axis {\ttfamily axis} of an angle {\ttfamily angle$\ast$90} 
 
-Definition at line 616 of file octree.\+cc.
+Definition at line 609 of file octree.\+cc.
 
 
 
@@ -292,7 +279,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Tree_a5eb29718044b1bc56403ee9bd15a60b6
 
 
 
-Definition at line 118 of file octree.\+h.
+Definition at line 136 of file octree.\+h.
 
 
 
@@ -306,12 +293,11 @@ References oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Tree\+::object\+\_\+p
 
 
 
-Doc/check all face neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. ~\newline
- 
+Doc/check all face neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. 
 
 Doc/check all face neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighbouring element. If the two filestreams are closed, output is suppressed. (Static function.) 
 
-Definition at line 4253 of file octree.\+cc.
+Definition at line 4275 of file octree.\+cc.
 
 
 
@@ -329,16 +315,15 @@ Referenced by oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), s
 
 
 
-Doc/check all true edge neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. ~\newline
- 
+Doc/check all true edge neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. 
 
 Doc/check all true edge neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighbouring element. If the two filestreams are closed, output is suppressed. (Static function). 
 
-Definition at line 4525 of file octree.\+cc.
+Definition at line 4552 of file octree.\+cc.
 
 
 
-References Colour, Direct\+\_\+string, faces\+\_\+of\+\_\+common\+\_\+edge(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Tree\+::is\+\_\+leaf(), oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance, oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Refineable\+Element\+::number(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::pause(), oomph\+::\+Tree\+::root\+\_\+pt(), s, S\+\_\+base\+\_\+edge, S\+\_\+step\+\_\+edge, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
+References Colour, Direct\+\_\+string, faces\+\_\+of\+\_\+common\+\_\+edge(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Tree\+::is\+\_\+leaf(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance, oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Refineable\+Element\+::number(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::pause(), oomph\+::\+Tree\+::root\+\_\+pt(), s, S\+\_\+base\+\_\+edge, S\+\_\+step\+\_\+edge, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 
 
@@ -356,7 +341,7 @@ Is the edge neighbour (for edge \char`\"{}edge\char`\"{}) specified via the poin
 
 
 
-Definition at line 2734 of file octree.\+cc.
+Definition at line 2769 of file octree.\+cc.
 
 
 
@@ -378,7 +363,7 @@ Function that, given an edge, returns the two faces on which it.
 
 Given an edge, this function returns the faces on which it lies. 
 
-Definition at line 279 of file octree.\+cc.
+Definition at line 268 of file octree.\+cc.
 
 
 
@@ -400,7 +385,7 @@ If an edge is bordered by the nodes whose local numbers are n1 and n2 in an elem
 
 This function takes as argument two node numbers of two nodes delimiting an edge, and one face of this edge and returns the other face that is sharing this edge. The node numbers given to this function M\+U\+ST be vertices nodes to work. it also need the value of nnode1d to work. ({\ttfamily face} is a direction in the set U,D,F,B,L,R). 
 
-Definition at line 570 of file octree.\+cc.
+Definition at line 565 of file octree.\+cc.
 
 
 
@@ -448,7 +433,7 @@ Parameters\+:
 \item orig\+\_\+root\+\_\+pt identifies the root node of the element whose neighbour we\textquotesingle{}re really trying to find by all these recursive calls. 
 \end{DoxyItemize}
 
-Definition at line 3994 of file octree.\+cc.
+Definition at line 4015 of file octree.\+cc.
 
 
 
@@ -495,7 +480,7 @@ Parameters\+:
 \item orig\+\_\+root\+\_\+pt identifies the root node of the element whose neighbour we\textquotesingle{}re really trying to find by all these recursive calls. 
 \end{DoxyItemize}
 
-Definition at line 3821 of file octree.\+cc.
+Definition at line 3839 of file octree.\+cc.
 
 
 
@@ -535,7 +520,7 @@ Find (pointer to) `greater-\/or-\/equal-\/sized face neighbour' in given directi
 \item {\ttfamily diff\+\_\+level} $<$= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current octree. 
 \end{DoxyItemize}
 
-Definition at line 3343 of file octree.\+cc.
+Definition at line 3373 of file octree.\+cc.
 
 
 
@@ -543,7 +528,7 @@ References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, Dir
 
 
 
-Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::check\+\_\+integrity(), doc\+\_\+face\+\_\+neighbours(), edge\+\_\+neighbour\+\_\+is\+\_\+face\+\_\+neighbour(), gteq\+\_\+edge\+\_\+neighbour(), and gteq\+\_\+face\+\_\+neighbour().
+Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::check\+\_\+integrity(), doc\+\_\+face\+\_\+neighbours(), edge\+\_\+neighbour\+\_\+is\+\_\+face\+\_\+neighbour(), gteq\+\_\+edge\+\_\+neighbour(), gteq\+\_\+face\+\_\+neighbour(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), and oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_ab5a26409cd49a430095915c76060f476}\label{classoomph_1_1OcTree_ab5a26409cd49a430095915c76060f476}} 
 \index{oomph::OcTree@{oomph::OcTree}!gteq\_true\_edge\_neighbour@{gteq\_true\_edge\_neighbour}}
@@ -577,7 +562,7 @@ Find (pointer to) `greater-\/or-\/equal-\/sized true edge neighbour' in the give
 \item {\ttfamily diff\+\_\+level} $<$= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current octree.
 \end{DoxyItemize}{\bfseries{Important\+:}} We\textquotesingle{}re only looking for {\bfseries{true}} edge neighbours i.\+e. edge neigbours that are not also face neighbours. This is an important difference to Samet\textquotesingle{}s terminology. If the neighbour in a certain direction is not a true edge neighbour, or if there is no neighbour, then this function returns N\+U\+LL. 
 
-Definition at line 3592 of file octree.\+cc.
+Definition at line 3618 of file octree.\+cc.
 
 
 
@@ -585,7 +570,7 @@ References oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+D
 
 
 
-Referenced by doc\+\_\+true\+\_\+edge\+\_\+neighbours().
+Referenced by doc\+\_\+true\+\_\+edge\+\_\+neighbours(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), and oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_ad67128675db4b8d5d3e5815134d78fd2}\label{classoomph_1_1OcTree_ad67128675db4b8d5d3e5815134d78fd2}} 
 \index{oomph::OcTree@{oomph::OcTree}!mult\_mat\_mat@{mult\_mat\_mat}}
@@ -599,7 +584,7 @@ Helper function\+: Performs the operation \+: mat3=mat1$\ast$mat2.
 
 Helper\+: Performs the operation Mat3=Mat1$\ast$\+Mat2. 
 
-Definition at line 659 of file octree.\+cc.
+Definition at line 664 of file octree.\+cc.
 
 
 
@@ -621,7 +606,7 @@ Helper function\+: Performs the operation \+: vect2 = mat$\ast$vect1.
 
 Helper\+: Performs the operation Vect2=Mat$\ast$\+Vect1. 
 
-Definition at line 683 of file octree.\+cc.
+Definition at line 687 of file octree.\+cc.
 
 
 
@@ -639,13 +624,11 @@ Referenced by rotate().
 
 
 
-Return the vertex \mbox{[}L\+DB,R\+DB,...\mbox{]} of local (vertex) node n. 
+Return the vertex \mbox{[}L\+DB,R\+DB,...\mbox{]} of local (vertex) node n in an element with nnode1d nodes in each coordinate direction. 
 
-Return the vertex of local (vertex) node n in an element with nnode1d nodes in each coordinate direction.
+Return the vertex of local (vertex) node n in an element with nnode1d nodes in each coordinate direction. 
 
-in an element with nnode1d nodes in each coordinate direction. 
-
-Definition at line 512 of file octree.\+cc.
+Definition at line 491 of file octree.\+cc.
 
 
 
@@ -667,7 +650,7 @@ Broken assignment operator.
 
 
 
-Definition at line 110 of file octree.\+h.
+Definition at line 128 of file octree.\+h.
 
 
 
@@ -685,7 +668,7 @@ If U\mbox{[}p\mbox{]} becomes new\+\_\+up and R\mbox{[}ight\mbox{]} becomes new\
 
 A rotation is defined by the new\+Up and new\+Right directions; so if Up becomes new\+Up and Right becomes new\+Right then dir becomes rotate(new\+Up,new\+Right,dir); 
 
-Definition at line 707 of file octree.\+cc.
+Definition at line 709 of file octree.\+cc.
 
 
 
@@ -703,7 +686,7 @@ If U\mbox{[}p\mbox{]} becomes new\+\_\+up and R\mbox{[}ight\mbox{]} becomes new\
 
 This function rotates a vector according to a rotation of the axes that changes up to new\+\_\+up and right to new\+\_\+right. 
 
-Definition at line 754 of file octree.\+cc.
+Definition at line 750 of file octree.\+cc.
 
 
 
@@ -725,7 +708,7 @@ Self-\/test\+: Check all neighbours. Return success (0) if the max. distance bet
 
 Self-\/test\+: Check neighbour finding routine. For each element in the tree and for each vertex, determine the distance between the vertex and its position in the neigbour. . If the difference is less than \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}. return success (0), otherwise failure (1) 
 
-Definition at line 4178 of file octree.\+cc.
+Definition at line 4200 of file octree.\+cc.
 
 
 
@@ -743,7 +726,7 @@ Setup the static data, rotation and reflection schemes, etc.
 
 Setup static data for \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}}. 
 
-Definition at line 1009 of file octree.\+cc.
+Definition at line 1040 of file octree.\+cc.
 
 
 
@@ -765,7 +748,7 @@ Returns the vector of the coordinate directions of vertex node number n in an el
 
 This function is used to translate the position of a vertex node (given by his local number n into a vector giving the position of this node in the local coordinates system. It also needs the value of nnode1d to work. 
 
-Definition at line 240 of file octree.\+cc.
+Definition at line 232 of file octree.\+cc.
 
 
 
@@ -787,7 +770,7 @@ Return the local node number of given vertex \mbox{[}L\+DB,R\+DB,...\mbox{]} in 
 
 Return the local node number of given vertex in an element with nnode1d nodes in each coordinate direction. 
 
-Definition at line 426 of file octree.\+cc.
+Definition at line 414 of file octree.\+cc.
 
 
 
@@ -795,7 +778,7 @@ References Direct\+\_\+string, oomph\+::\+Oc\+Tree\+Names\+::\+L\+DB, oomph\+::\
 
 
 
-Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents().
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents(), and oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::maximum\+\_\+edge\+\_\+width().
 
 
 
@@ -812,7 +795,7 @@ Colours for neighbours in various directions.
 
 
 
-Definition at line 525 of file octree.\+h.
+Definition at line 547 of file octree.\+h.
 
 
 
@@ -830,7 +813,7 @@ Determine common face of edges or octants. Slightly bizarre lookup scheme from S
 
 Determine common face of edges or octants. Slightly bizarre lookup scheme from Samet\textquotesingle{}s book. 
 
-Definition at line 522 of file octree.\+h.
+Definition at line 544 of file octree.\+h.
 
 
 
@@ -848,7 +831,7 @@ Entry in rotation matrix\+: cos(i$\ast$90)
 
 
 
-Definition at line 505 of file octree.\+h.
+Definition at line 527 of file octree.\+h.
 
 
 
@@ -866,7 +849,7 @@ Translate (enumerated) directions into strings.
 
 
 
-Definition at line 314 of file octree.\+h.
+Definition at line 336 of file octree.\+h.
 
 
 
@@ -884,11 +867,11 @@ For each direction, i.\+e. a son\+\_\+type (vertex), a face or an edge, this def
 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} storing the information to translate a direction into a vector of directions (in the three coordinate directions) 
 
-Definition at line 338 of file octree.\+h.
+Definition at line 360 of file octree.\+h.
 
 
 
-Referenced by oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::get\+\_\+bcs(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::get\+\_\+boundaries(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 3 $>$\+::get\+\_\+solid\+\_\+bcs(), get\+\_\+the\+\_\+other\+\_\+face(), gteq\+\_\+face\+\_\+neighbour(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), rotate(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::setup\+\_\+father\+\_\+bounds(), and setup\+\_\+static\+\_\+data().
+Referenced by oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::get\+\_\+bcs(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::get\+\_\+boundaries(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 3 $>$\+::get\+\_\+solid\+\_\+bcs(), get\+\_\+the\+\_\+other\+\_\+face(), gteq\+\_\+face\+\_\+neighbour(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), rotate(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::setup\+\_\+father\+\_\+bounds(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a24e29b9da2bf17cc81d803af6925890b}\label{classoomph_1_1OcTree_a24e29b9da2bf17cc81d803af6925890b}} 
 \index{oomph::OcTree@{oomph::OcTree}!Is\_adjacent@{Is\_adjacent}}
@@ -902,7 +885,7 @@ Array of direction/octant adjacency scheme\+: Is\+\_\+adjacent(direction,octant)
 
 Array of direction/octant adjacency scheme\+: Is\+\_\+adjacent(direction,octant)\+: Is face/edge {\ttfamily direction} adjacent to octant {\ttfamily octant} ? Table in Samet\textquotesingle{}s book. 
 
-Definition at line 514 of file octree.\+h.
+Definition at line 536 of file octree.\+h.
 
 
 
@@ -920,7 +903,7 @@ Reflection scheme\+: Reflect(direction,octant)\+: Get mirror of octant/edge in s
 
 Reflection scheme\+: Reflect(direction,octant)\+: Get mirror of octant/edge in specified direction. E.\+g. Reflect(\+L\+D\+F,\+L)=R\+DF 
 
-Definition at line 518 of file octree.\+h.
+Definition at line 540 of file octree.\+h.
 
 
 
@@ -938,7 +921,7 @@ Get opposite edge, e.\+g. Reflect\+\_\+edge\mbox{[}DB\mbox{]}=UF.
 
 
 
-Definition at line 320 of file octree.\+h.
+Definition at line 342 of file octree.\+h.
 
 
 
@@ -956,7 +939,7 @@ Get opposite face, e.\+g. Reflect\+\_\+face\mbox{[}L\mbox{]}=R.
 
 
 
-Definition at line 317 of file octree.\+h.
+Definition at line 339 of file octree.\+h.
 
 
 
@@ -974,7 +957,7 @@ Get opposite vertex, e.\+g. Reflect\+\_\+vertex\mbox{[}L\+DB\mbox{]}=R\+UF.
 
 
 
-Definition at line 323 of file octree.\+h.
+Definition at line 345 of file octree.\+h.
 
 
 
@@ -988,13 +971,11 @@ Referenced by setup\+\_\+static\+\_\+data().
 
 
 
-s\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the face indicated by direction (L/\+R/\+U/\+D/\+F/B) ~\newline
- 
+s\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the face indicated by direction (L/\+R/\+U/\+D/\+F/B) 
 
-s\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the face indicated by direction (L/\+R/\+U/\+D/\+F/B) ~\newline
- 
+s\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the face indicated by direction (L/\+R/\+U/\+D/\+F/B) 
 
-Definition at line 529 of file octree.\+h.
+Definition at line 551 of file octree.\+h.
 
 
 
@@ -1012,7 +993,7 @@ S\+\_\+base\+\_\+edge(i,edge)\+: Initial value for coordinate s\mbox{[}i\mbox{]}
 
 S\+\_\+base\+\_\+edge(i,edge)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the specified edge (L\+F/\+R\+F/...). 
 
-Definition at line 570 of file octree.\+h.
+Definition at line 592 of file octree.\+h.
 
 
 
@@ -1026,13 +1007,11 @@ Referenced by doc\+\_\+true\+\_\+edge\+\_\+neighbours(), gteq\+\_\+true\+\_\+edg
 
 
 
-Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s edge {\ttfamily edge}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+lo} = h/2 {\ttfamily S\+\_\+direct\+\_\+edge(edge,son\+\_\+octant)}. ~\newline
- 
+Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s edge {\ttfamily edge}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+lo} = h/2 {\ttfamily S\+\_\+direct\+\_\+edge(edge,son\+\_\+octant)}. 
 
-Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s edge {\ttfamily edge}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+lo} = h/2 {\ttfamily S\+\_\+direct\+\_\+edge(edge,son\+\_\+octant)}. ~\newline
- 
+Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s edge {\ttfamily edge}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+lo} = h/2 {\ttfamily S\+\_\+direct\+\_\+edge(edge,son\+\_\+octant)}. 
 
-Definition at line 585 of file octree.\+h.
+Definition at line 607 of file octree.\+h.
 
 
 
@@ -1050,7 +1029,7 @@ Relative to the left/down/back vertex in any (father) octree, the corresponding 
 
 Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s face {\ttfamily face}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+hi} = h/2 {\ttfamily S\+\_\+directlhi(face,son\+\_\+octant)}. \mbox{[}See discussion of {\ttfamily S\+\_\+steplo} for an explanation of the subscripts {\ttfamily \+\_\+hi} and {\ttfamily \+\_\+lo}.\mbox{]} 
 
-Definition at line 566 of file octree.\+h.
+Definition at line 588 of file octree.\+h.
 
 
 
@@ -1068,7 +1047,7 @@ Relative to the left/down/back vertex in any (father) octree, the corresponding 
 
 Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s face {\ttfamily face}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+lo} = h/2 {\ttfamily S\+\_\+directlo(face,son\+\_\+octant)}. \mbox{[}See discussion of {\ttfamily S\+\_\+steplo} for an explanation of the subscripts {\ttfamily \+\_\+hi} and {\ttfamily \+\_\+lo}.\mbox{]} 
 
-Definition at line 558 of file octree.\+h.
+Definition at line 580 of file octree.\+h.
 
 
 
@@ -1082,14 +1061,11 @@ Referenced by gteq\+\_\+face\+\_\+neighbour(), and setup\+\_\+static\+\_\+data()
 
 
 
-Each edge of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by one (of the three) local coordinates that parametrise the entire 3D element. If we\textquotesingle{}re located on edge {\ttfamily edge} \mbox{[}DB,UB,...\mbox{]}, then an increase in s from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+step\+\_\+edge(i,edge)} in the 3D coordinates {\ttfamily s}\mbox{[}i\mbox{]}. ~\newline
- 
+Each edge of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by one (of the three) local coordinates that parametrise the entire 3D element. If we\textquotesingle{}re located on edge {\ttfamily edge} \mbox{[}DB,UB,...\mbox{]}, then an increase in s from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+step\+\_\+edge(i,edge)} in the 3D coordinates {\ttfamily s}\mbox{[}i\mbox{]}. 
 
-Each edge of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented ~\newline
- by the octree is parametrised by one (of the three) local coordinates that parametrise the entire 3D element. If we\textquotesingle{}re located on edge {\ttfamily edge} \mbox{[}DB,UB,...\mbox{]}, then an increase in s from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+step\+\_\+edge(i,edge)} in the 3D coordinates {\ttfamily s}\mbox{[}i\mbox{]}. ~\newline
- 
+Each edge of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by one (of the three) local coordinates that parametrise the entire 3D element. If we\textquotesingle{}re located on edge {\ttfamily edge} \mbox{[}DB,UB,...\mbox{]}, then an increase in s from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+step\+\_\+edge(i,edge)} in the 3D coordinates {\ttfamily s}\mbox{[}i\mbox{]}. 
 
-Definition at line 578 of file octree.\+h.
+Definition at line 600 of file octree.\+h.
 
 
 
@@ -1107,7 +1083,7 @@ If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B
 
 If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B/\+U/D\mbox{]}, then an increase in s\+\_\+hi from -\/1 to +1 corresponds to a change of {\ttfamily S\+\_\+stephi(i,face)} in the 3D coordinate \textbackslash{} s\mbox{[}i\mbox{]}. \mbox{[}Read the discussion of {\ttfamily S\+\_\+steplo} for an explanation of the subscripts {\ttfamily \+\_\+hi} and {\ttfamily \+\_\+lo}.\mbox{]} 
 
-Definition at line 550 of file octree.\+h.
+Definition at line 572 of file octree.\+h.
 
 
 
@@ -1121,12 +1097,11 @@ Referenced by doc\+\_\+face\+\_\+neighbours(), gteq\+\_\+face\+\_\+neighbour(), 
 
 
 
-Each face of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by two (of the three) local coordinates that parametrise the entire 3D element. E.\+g. the B\mbox{[}ack\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]}, s\mbox{[}1\mbox{]}); the D\mbox{[}own\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]},s\mbox{[}2\mbox{]}); etc. We always identify the in-\/face coordinate with the lower (3D) index with the subscript {\ttfamily \+\_\+lo} and the one with the larger (3D) index with the subscript {\ttfamily \+\_\+hi}. Here we set up the translation scheme between the 2D in-\/face coordinates (s\+\_\+lo,s\+\_\+hi) and the corresponding 3D coordinates\+: If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B/\+U/D\mbox{]}, then an increase in s\+\_\+lo from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+steplo(i,face)} in the 3D coordinate {\ttfamily s}\mbox{[}i\mbox{]}. ~\newline
- 
+Each face of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by two (of the three) local coordinates that parametrise the entire 3D element. E.\+g. the B\mbox{[}ack\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]}, s\mbox{[}1\mbox{]}); the D\mbox{[}own\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]},s\mbox{[}2\mbox{]}); etc. We always identify the in-\/face coordinate with the lower (3D) index with the subscript {\ttfamily \+\_\+lo} and the one with the larger (3D) index with the subscript {\ttfamily \+\_\+hi}. Here we set up the translation scheme between the 2D in-\/face coordinates (s\+\_\+lo,s\+\_\+hi) and the corresponding 3D coordinates\+: If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B/\+U/D\mbox{]}, then an increase in s\+\_\+lo from -\/1 to +1 corresponds to a change of {\ttfamily s\+\_\+steplo(i,face)} in the 3D coordinate {\ttfamily s}\mbox{[}i\mbox{]}. 
 
 Each face of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the octree is parametrised by two (of the three) local coordinates that parametrise the entire 3D element. E.\+g. the B\mbox{[}ack\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]}, s\mbox{[}1\mbox{]}); the D\mbox{[}own\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]},s\mbox{[}2\mbox{]}); etc. We always identify the in-\/face coordinate with the lower (3D) index with the subscript {\ttfamily \+\_\+lo} and the one with the larger (3D) index with the subscript {\ttfamily \+\_\+hi}. Here we set up the translation scheme between the 2D in-\/face coordinates (s\+\_\+lo,s\+\_\+hi) and the corresponding 3D coordinates\+: If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B/\+U/D\mbox{]}, then an increase in s\+\_\+lo from -\/1 to +1 corresponds to a change of {\ttfamily S\+\_\+steplo(i,face)} in the 3D coordinate {\ttfamily s}\mbox{[}i\mbox{]}. S\+\_\+steplo(i,direction) 
 
-Definition at line 543 of file octree.\+h.
+Definition at line 565 of file octree.\+h.
 
 
 
@@ -1144,7 +1119,7 @@ Entry in rotation matrix sin(i$\ast$90)
 
 Entry in rotation matrix\+: sin(i$\ast$90) 
 
-Definition at line 508 of file octree.\+h.
+Definition at line 530 of file octree.\+h.
 
 
 
@@ -1154,7 +1129,7 @@ Referenced by construct\+\_\+rotation\+\_\+matrix(), and setup\+\_\+static\+\_\+
 \index{oomph::OcTree@{oomph::OcTree}!Static\_data\_has\_been\_setup@{Static\_data\_has\_been\_setup}}
 \index{Static\_data\_has\_been\_setup@{Static\_data\_has\_been\_setup}!oomph::OcTree@{oomph::OcTree}}
 \doxysubsubsection{\texorpdfstring{Static\_data\_has\_been\_setup}{Static\_data\_has\_been\_setup}}
-{\footnotesize\ttfamily bool oomph\+::\+Oc\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup =false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily bool oomph\+::\+Oc\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -1162,7 +1137,7 @@ Bool indicating that static member data has been setup.
 
 
 
-Definition at line 394 of file octree.\+h.
+Definition at line 419 of file octree.\+h.
 
 
 
@@ -1190,10 +1165,9 @@ Storage for the up/right-\/equivalents corresponding to two pairs of vertices al
 \item the vertex at the other end of the edge in the reference element
 \item the corresponding vertex in the edge neighbour.
 \end{DoxyEnumerate}
-\end{DoxyItemize}These two pairs completely define the relative rotation between the reference element and its edge neighbour. The map returns a pair which contains the up\+\_\+equivalent and the right\+\_\+equivalent of the edge neighbour, i.\+e. it tells us which direction in the edge neighbour coincides with the up (or right) direction in the reference element. ~\newline
- 
+\end{DoxyItemize}These two pairs completely define the relative rotation between the reference element and its edge neighbour. The map returns a pair which contains the up\+\_\+equivalent and the right\+\_\+equivalent of the edge neighbour, i.\+e. it tells us which direction in the edge neighbour coincides with the up (or right) direction in the reference element. 
 
-Definition at line 361 of file octree.\+h.
+Definition at line 384 of file octree.\+h.
 
 
 
@@ -1207,12 +1181,11 @@ Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+e
 
 
 
-Each vector representing a direction can be translated into a direction, either a son type (vertex), a face or an edge. E.\+g. \+: Vector\+\_\+to\+\_\+direction\mbox{[}(1,-\/1,1)\mbox{]}=R\+DF, Vector\+\_\+to\+\_\+direction\mbox{[}(0,1,0)\mbox{]}=U ~\newline
- 
+Each vector representing a direction can be translated into a direction, either a son type (vertex), a face or an edge. E.\+g. \+: Vector\+\_\+to\+\_\+direction\mbox{[}(1,-\/1,1)\mbox{]}=R\+DF, Vector\+\_\+to\+\_\+direction\mbox{[}(0,1,0)\mbox{]}=U. 
 
 Map storing the information to translate a vector of directions (in the three coordinate directions) into a direction 
 
-Definition at line 333 of file octree.\+h.
+Definition at line 355 of file octree.\+h.
 
 
 
@@ -1230,7 +1203,7 @@ Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::get\+\_\+bcs(), oomp
 
 Map of vectors containing the two vertices for each edge. 
 
-Definition at line 328 of file octree.\+h.
+Definition at line 350 of file octree.\+h.
 
 
 

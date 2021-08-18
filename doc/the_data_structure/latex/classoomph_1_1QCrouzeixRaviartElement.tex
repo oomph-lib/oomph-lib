@@ -35,9 +35,9 @@ void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_ae885b689682846f17db
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a5b824083683ead3f8bead4061bce21f1}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_ae57ed7defb77ccaa537a5d9caae68172}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a517a8773d48cb5858bb7c0e01ee4bd0f}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_ad01a1d2af20703dfb57971bfba4d376e}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_ab3dc717e812fdfc15f2bbb4c25bd3028}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a0d152892ee354f495bbaced9e423b541}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -53,7 +53,7 @@ void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_aa38eca6cb5bfec6206d
 \begin{DoxyCompactList}\small\item\em Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/dt,\mbox{[}dw/dt\mbox{]},dissipation in tecplot format. nplot points in each coordinate direction. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_ad252ba37ecfb028ccd851ab6600d4df3}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a2c4a2475b10e711163c3e63835acf9a8}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_ab56e087502c63a40a61614ad639e6104}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_aedff5d890955c1939b623dcffbc255d4}{pshape\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \item 
@@ -102,7 +102,7 @@ class oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}
 
 Crouzeix\+\_\+\+Raviart elements are Navier--Stokes elements with quadratic interpolation for velocities and positions, but a discontinuous linear pressure interpolation. They can be used within oomph-\/lib\textquotesingle{}s block preconditioning framework. 
 
-Definition at line 1666 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1753 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -120,7 +120,7 @@ Constructor, there are D\+I\+M+1 internal values (for the pressure)
 
 
 
-Definition at line 1716 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1800 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -150,7 +150,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElemen
 
 
 
-Definition at line 1773 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1867 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -183,7 +183,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2f3024a4d370ec4
 
 
 
-Definition at line 2014 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2123 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -201,7 +201,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2f3024a4d370ec4
 
 
 
-Definition at line 2099 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2204 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -236,7 +236,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_afbc63afd804f514
 
 
 
-Definition at line 1906 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2014 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -256,7 +256,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_afbc63afd804f514
 
 
 
-Definition at line 1954 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2064 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -283,7 +283,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 1880 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1987 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -310,7 +310,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 1859 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1964 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -337,7 +337,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 1763 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1857 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -356,7 +356,7 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line 1823 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1925 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -375,18 +375,18 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line 1829 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1933 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::full\+\_\+output().
 
-\mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_a2c4a2475b10e711163c3e63835acf9a8}\label{classoomph_1_1QCrouzeixRaviartElement_a2c4a2475b10e711163c3e63835acf9a8}} 
+\mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_ab56e087502c63a40a61614ad639e6104}\label{classoomph_1_1QCrouzeixRaviartElement_ab56e087502c63a40a61614ad639e6104}} 
 \index{oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{oomph\+::\+Q\+Crouzeix\+Raviart\+Element}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{oomph\+::\+Q\+Crouzeix\+Raviart\+Element}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -394,22 +394,22 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the D\+OF that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 2681 of file navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2662 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
 References n.
 
-\mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_ae57ed7defb77ccaa537a5d9caae68172}\label{classoomph_1_1QCrouzeixRaviartElement_ae57ed7defb77ccaa537a5d9caae68172}} 
+\mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_a517a8773d48cb5858bb7c0e01ee4bd0f}\label{classoomph_1_1QCrouzeixRaviartElement_a517a8773d48cb5858bb7c0e01ee4bd0f}} 
 \index{oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{oomph\+::\+Q\+Crouzeix\+Raviart\+Element}}$<$ D\+IM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{oomph\+::\+Q\+Crouzeix\+Raviart\+Element}}$<$ D\+IM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -427,26 +427,26 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement_ad2389a0bad47e50cb11cb2cea3f57b24}{oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement_af5669e7a3df68e9f5bb13939e7d1c658}{oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 2621 of file navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2598 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
 References i, and n.
 
-\mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_ad01a1d2af20703dfb57971bfba4d376e}\label{classoomph_1_1QCrouzeixRaviartElement_ad01a1d2af20703dfb57971bfba4d376e}} 
+\mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_ab3dc717e812fdfc15f2bbb4c25bd3028}\label{classoomph_1_1QCrouzeixRaviartElement_ab3dc717e812fdfc15f2bbb4c25bd3028}} 
 \index{oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{oomph\+::\+Q\+Crouzeix\+Raviart\+Element}}$<$ D\+IM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{oomph\+::\+Q\+Crouzeix\+Raviart\+Element}}$<$ D\+IM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -464,11 +464,11 @@ Add to the set {\ttfamily paired\+\_\+pressue\+\_\+data} pairs containing
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all pressures values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
 
 
 
-Definition at line 2656 of file navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2635 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_af6e04a0a6e1daf9583e3e4b811b17699}\label{classoomph_1_1QCrouzeixRaviartElement_af6e04a0a6e1daf9583e3e4b811b17699}} 
 \index{oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -482,7 +482,7 @@ Definition at line 2656 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-Definition at line 2599 of file navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2572 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_a5b2aaa3af99e697fc6218f4c22cda207}\label{classoomph_1_1QCrouzeixRaviartElement_a5b2aaa3af99e697fc6218f4c22cda207}} 
 \index{oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -496,7 +496,7 @@ Definition at line 2599 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-Definition at line 2593 of file navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2566 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_ad252ba37ecfb028ccd851ab6600d4df3}\label{classoomph_1_1QCrouzeixRaviartElement_ad252ba37ecfb028ccd851ab6600d4df3}} 
 \index{oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}!ndof\_types@{ndof\_types}}
@@ -515,7 +515,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 1835 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1941 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_a0cbd8f1a5e0814abdbfd34ae7c58b018}\label{classoomph_1_1QCrouzeixRaviartElement_a0cbd8f1a5e0814abdbfd34ae7c58b018}} 
 \index{oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
@@ -538,7 +538,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 1747 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1836 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -561,7 +561,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_acb921a4
 
 
 
-Definition at line 1813 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1910 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -584,7 +584,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_af09ce1e
 
 
 
-Definition at line 1816 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1916 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -607,7 +607,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_ae2c8742
 
 
 
-Definition at line 1804 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1897 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -630,7 +630,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2bc96a2
 
 
 
-Definition at line 1808 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1903 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -653,7 +653,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_
 
 
 
-Definition at line 1759 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1851 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -680,7 +680,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 1737 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1822 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -707,7 +707,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 1743 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1830 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -748,7 +748,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 1997 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2108 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -770,7 +770,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 2082 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2188 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -797,7 +797,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 2066 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2172 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -824,7 +824,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartEleme
 
 
 
-Definition at line 2606 of file navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2581 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -846,7 +846,7 @@ Static array of ints to hold required number of variables at nodes.
 
 
 
-Definition at line 1672 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1758 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QCrouzeixRaviartElement_a50b6de74ff6201ea44db66c72063ecf4}\label{classoomph_1_1QCrouzeixRaviartElement_a50b6de74ff6201ea44db66c72063ecf4}} 
 \index{oomph::QCrouzeixRaviartElement$<$ DIM $>$@{oomph::QCrouzeixRaviartElement$<$ DIM $>$}!P\_nst\_internal\_index@{P\_nst\_internal\_index}}
@@ -857,7 +857,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{oomph\+::\+Q\+C
 
 Internal index that indicates at which internal data the pressure is stored 
 
-Definition at line 1678 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1763 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

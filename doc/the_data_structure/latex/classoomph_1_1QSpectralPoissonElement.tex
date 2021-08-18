@@ -20,17 +20,13 @@ Inheritance diagram for oomph\+::Q\+Spectral\+Poisson\+Element$<$ D\+IM, N\+N\+O
 unsigned \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a6f37168c5ce1065a14b9a2a78df20539}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_aa102e31f1f3c1f3040d69842aa0ad75a}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a09f0813f51286ed47f4e89536e8c4e2e}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_ac5588896f64d8c24a896dc0b30e7ec29}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_aa3a03bc9793e976facde1a49396f5b43}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a112f8c43964b2514296974a90dc4b587}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_aa18ae34af7cc2aee225d5e30a76edb10}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
@@ -39,7 +35,7 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_aa18ae34af7cc2aee225
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_ab2600e7f60d8a8c4b5c32109e9174e8f}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+poisson}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a20e5c72a2d391708edb7dd2e53666810}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
@@ -58,7 +54,7 @@ class oomph\+::\+Q\+Spectral\+Poisson\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\
 
 \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{Q\+Spectral\+Poisson\+Element}} elements are linear/quadrilateral/brick-\/shaped Poisson elements with isoparametric spectral interpolation for the function. Note that the implementation is Poisson\+Equations$<$\+D\+I\+M$>$ does not use sum factorisation for the evaluation of the residuals and is, therefore, not optimal for higher dimensions. 
 
-Definition at line 50 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 49 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 
@@ -76,7 +72,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QSpectralEle
 
 
 
-Definition at line 65 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 61 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralPoissonElement_a4b8762d8403532d66e8ae9fbed409764}\label{classoomph_1_1QSpectralPoissonElement_a4b8762d8403532d66e8ae9fbed409764}} 
 \index{oomph::QSpectralPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralPoissonElement$<$ DIM, NNODE\_1D $>$}!QSpectralPoissonElement@{QSpectralPoissonElement}}
@@ -91,7 +87,7 @@ Broken copy constructor.
 
 
 
-Definition at line 70 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 67 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 
@@ -119,7 +115,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoissonEquations_a09f816da9c9b23fd6a30
 
 
 
-Definition at line 234 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 248 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}\label{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}} 
 \index{oomph::QSpectralPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralPoissonElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_poisson@{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}
@@ -140,7 +136,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoissonEquations_af68ad067d9a9d1bcbcc1
 
 
 
-Definition at line 206 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 221 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralPoissonElement_ab2600e7f60d8a8c4b5c32109e9174e8f}\label{classoomph_1_1QSpectralPoissonElement_ab2600e7f60d8a8c4b5c32109e9174e8f}} 
 \index{oomph::QSpectralPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralPoissonElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_poisson@{dshape\_and\_dtest\_eulerian\_poisson}}
@@ -149,9 +145,7 @@ Definition at line 206 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 {\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{oomph\+::\+Q\+Spectral\+Poisson\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+poisson (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -161,7 +155,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoissonEquations_a88afb41d8733fb348875
 
 
 
-Definition at line 172 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 188 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 
@@ -176,8 +170,7 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{oomph\+::\+Q\+Spect
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. 
+C-\/style output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -185,7 +178,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_afeaa8b136b9c
 
 
 
-Definition at line 103 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 107 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 
@@ -200,8 +193,7 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{oomph\+::\+Q\+Spect
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -209,7 +201,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_abc30eee5faaa
 
 
 
-Definition at line 109 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 115 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 
@@ -224,8 +216,7 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{oomph\+::\+Q\+Spect
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -248,8 +239,7 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{oomph\+::\+Q\+Spect
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -257,7 +247,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_a6683dd0afc16
 
 
 
-Definition at line 97 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 99 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 
@@ -280,7 +270,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_a6d98964a14b3
 
 
 
-Definition at line 124 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 134 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 
@@ -303,7 +293,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_ad6c637c8a522
 
 
 
-Definition at line 115 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 123 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 
@@ -326,7 +316,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 87 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 85 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 
@@ -348,7 +338,7 @@ Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nval
 
 
 
-Definition at line 58 of file spectral\+\_\+poisson\+\_\+elements.\+h.
+Definition at line 56 of file spectral\+\_\+poisson\+\_\+elements.\+h.
 
 
 

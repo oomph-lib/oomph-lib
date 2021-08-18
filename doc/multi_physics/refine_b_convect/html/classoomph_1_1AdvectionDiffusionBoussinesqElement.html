@@ -171,7 +171,7 @@ class oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt
 
 <p>Build <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">AdvectionDiffusionBoussinesqElement</a> that inherits from ElementWithExternalElement so that it can "communicate" with the Navier Stokes element </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01050">1050</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01070">1070</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a733c18518938e3b85e06de5a618cd49f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a733c18518938e3b85e06de5a618cd49f">&#9670;&nbsp;</a></span>AdvectionDiffusionBoussinesqElement()</h2>
@@ -200,7 +200,7 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 
 <p>Constructor: call the underlying constructors. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01057">1057</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01076">1076</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
 </div>
 </div>
@@ -243,9 +243,9 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 
 <p>Compute the element's residual vector and the Jacobian matrix. Jacobian is computed by finite-differencing. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01138">1138</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01169">1169</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="refine__b__convect_8txt.html#afb1ff8cf837bf38120135bebec006cd4">fill_in_contribution_to_jacobian()</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01174">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
+<p class="reference">References <a class="el" href="refine__b__convect_8txt.html#afb1ff8cf837bf38120135bebec006cd4">fill_in_contribution_to_jacobian()</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01206">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
 
 </div>
 </div>
@@ -293,7 +293,7 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 
 <p>Add the element's contribution to its residuals vector, jacobian matrix and mass matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01160">1160</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01191">1191</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
 </div>
 </div>
@@ -335,11 +335,11 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 
 <p>Compute the contribution of the external degrees of freedom (velocities) on the AdvectionDiffusion equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01174">1174</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01206">1206</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01313">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::get_dwind_adv_diff_dexternal_element_data()</a>.</p>
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01344">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::get_dwind_adv_diff_dexternal_element_data()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01138">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01169">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>.</p>
 
 </div>
 </div>
@@ -386,9 +386,9 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 <p>Fill in the derivatives of the wind with respect to the external unknowns. </p>
 <p>Fill in the derivatives of the wind with respect to the external unknowns in the advection-diffusion equations </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01313">1313</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01344">1344</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01174">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01206">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
 
 </div>
 </div>
@@ -435,7 +435,7 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 <p>Overload the wind function in the advection-diffusion equations. This provides the coupling from the Navier&ndash;Stokes equations to the advection-diffusion equations because the wind is the fluid velocity, obtained from the source element in the other mesh. </p>
 <p>Overload the wind function in the advection-diffusion equations. This provides the coupling from the Navier&ndash;Stokes equations to the advection-diffusion equations because the wind is the fluid velocity, obtained from the source elements in the other mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01292">1292</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01321">1321</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
 </div>
 </div>
@@ -467,7 +467,7 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 
 <p>C-style output function: Broken default. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01120">1120</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01146">1146</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
 </div>
 </div>
@@ -509,7 +509,7 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 
 <p>C-style output function: Broken default. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01124">1124</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01152">1152</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
 </div>
 </div>
@@ -541,7 +541,7 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 
 <p>Overload the standard output function with the broken default. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01117">1117</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01140">1140</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
 </div>
 </div>
@@ -583,7 +583,7 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
 
 <p>Output function: Output x, y, theta at Nplot^DIM plot points. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01083">1083</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01104">1104</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
 
 </div>
 </div>
@@ -618,7 +618,7 @@ template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:23:50
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:03:24
         </div>
       </div>
     </footer>

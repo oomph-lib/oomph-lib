@@ -65,7 +65,7 @@ bool \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a7f79fb03756524e23c8cc71
 \doxysubsection{Detailed Description}
 Class defining a closed polygon for the Triangle mesh generation. 
 
-Definition at line 1329 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1450 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -82,7 +82,7 @@ Constructor\+: Specify vector of pointers to \mbox{\hyperlink{classoomph_1_1Tria
 
 Constructor\+: Specify vector of pointers to \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} that define the boundary of the segments of the polygon. Each \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} has its own boundary ID and can contain multiple (straight-\/line) segments. For consistency across the various uses of this class, we insist that the closed boundary is represented by at least two separate \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} whose joint vertices must be specified in both. (This is to allow the setup of unique boundary coordinate(s) around the polygon.) This may seem slightly annoying in cases where a polygon really only represents a single boundary, but... Note\+: The specified vector of pointers must consist of only \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} elements. There is a checking on the P\+A\+R\+A\+N\+O\+ID mode for this constraint 
 
-Definition at line 1594 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+Definition at line 1577 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
 
 
 
@@ -100,7 +100,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 1354 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1473 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -117,7 +117,7 @@ Test whether curve can update reference.
 
 
 
-Definition at line 1444 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1572 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -139,7 +139,7 @@ Disable re-\/distribution of polyline segments in the curve between different bo
 
 
 
-Definition at line 1440 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1566 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -157,7 +157,7 @@ Enable re-\/distribution of polyline segments in the curve between different bou
 
 
 
-Definition at line 1435 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1559 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -175,7 +175,7 @@ Test whether the polygon is fixed or not.
 
 
 
-Definition at line 1468 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1598 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -193,7 +193,7 @@ Is re-\/distribution of polyline segments in the curve between different boundar
 
 
 
-Definition at line 1430 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1552 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -219,7 +219,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_af0b316414dd
 
 
 
-Definition at line 1357 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1476 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -241,7 +241,7 @@ Number of constituent polylines.
 
 
 
-Definition at line 1361 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1482 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -263,7 +263,7 @@ Return vector of boundary ids of associated polylines.
 
 
 
-Definition at line 1414 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1536 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -281,7 +281,7 @@ Pointer to i-\/th constituent polyline.
 
 
 
-Definition at line 1389 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1512 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -299,7 +299,7 @@ Pointer to i-\/th constituent polyline.
 
 
 
-Definition at line 1364 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1488 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -325,7 +325,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPol
 
 
 
-Definition at line 1449 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1579 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -343,7 +343,7 @@ Set the polygon to be fixed.
 
 
 
-Definition at line 1471 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1604 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -361,7 +361,7 @@ Set the polygon to be allowed to move (default)
 
 
 
-Definition at line 1474 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1610 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -382,7 +382,7 @@ Boolean flag to indicate whether the polygon can update its own reference config
 
 
 
-Definition at line 1485 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1624 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -400,7 +400,7 @@ Is re-\/distribution of polyline segments between different boundaries during ad
 
 
 
-Definition at line 1480 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1618 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -418,7 +418,7 @@ Boolean flag to indicate whether the polygon can move (default false because if 
 
 
 
-Definition at line 1492 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+Definition at line 1630 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 

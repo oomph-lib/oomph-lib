@@ -35,8 +35,7 @@ void \mbox{\hyperlink{classoomph_1_1PVDEquations_a60ed017dce1a6a98098b8ad3127389
 \begin{DoxyCompactItemize}
 \item 
 virtual void \mbox{\hyperlink{classoomph_1_1PVDEquations_a2e169e572d3715f08e571cb29779a754}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PVDEquations_ae870a58617c8a268a30779e93fb96f54}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma)
 \begin{DoxyCompactList}\small\item\em Return the 2nd Piola Kirchhoff stress tensor, as calculated from the constitutive law\+: Pass metric tensors in the stress free and current configurations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PVDEquations_a522084ede6bf0e6b6154ec0ac61c3f5f}{get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+sigma\+\_\+dG)
@@ -55,7 +54,7 @@ class oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$}
 
 A class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements in cartesian coordinates. 
 
-Definition at line 396 of file solid\+\_\+elements.\+h.
+Definition at line 439 of file solid\+\_\+elements.\+h.
 
 
 
@@ -73,7 +72,7 @@ Constructor.
 
 
 
-Definition at line 402 of file solid\+\_\+elements.\+h.
+Definition at line 443 of file solid\+\_\+elements.\+h.
 
 
 
@@ -91,7 +90,7 @@ Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma and the strain
 
 Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma strain and stress components. 
 
-Definition at line 732 of file solid\+\_\+elements.\+cc.
+Definition at line 751 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -114,7 +113,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a3167a2005e
 
 
 
-Definition at line 418 of file solid\+\_\+elements.\+h.
+Definition at line 459 of file solid\+\_\+elements.\+h.
 
 
 
@@ -137,7 +136,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 410 of file solid\+\_\+elements.\+h.
+Definition at line 451 of file solid\+\_\+elements.\+h.
 
 
 
@@ -156,8 +155,7 @@ void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+P\+V\+D\+Equations}
 
 
 
-Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- 
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. 
 
 Compute the residuals for the discretised principle of virtual displacements. 
 
@@ -165,7 +163,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_ace1bda5d
 
 
 
-Definition at line 172 of file solid\+\_\+elements.\+cc.
+Definition at line 179 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -188,7 +186,7 @@ Return the derivatives of the 2nd Piola Kirchhoff stress tensor, as calculated f
 
 
 
-Definition at line 530 of file solid\+\_\+elements.\+h.
+Definition at line 569 of file solid\+\_\+elements.\+h.
 
 
 
@@ -207,7 +205,7 @@ Return the 2nd Piola Kirchhoff stress tensor, as calculated from the constitutiv
 
 
 
-Definition at line 503 of file solid\+\_\+elements.\+h.
+Definition at line 543 of file solid\+\_\+elements.\+h.
 
 
 
@@ -230,7 +228,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_ad429d68f0129d5f7a387
 
 
 
-Definition at line 926 of file solid\+\_\+elements.\+cc.
+Definition at line 951 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -257,7 +255,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDBubbleEnrichedElement_a7ca64
 
 
 
-Definition at line 477 of file solid\+\_\+elements.\+h.
+Definition at line 517 of file solid\+\_\+elements.\+h.
 
 
 
@@ -284,7 +282,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDBubbleEnrichedElement_a703ae
 
 
 
-Definition at line 609 of file solid\+\_\+elements.\+cc.
+Definition at line 629 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -311,7 +309,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDBubbleEnrichedElement_a4b2c4
 
 
 
-Definition at line 466 of file solid\+\_\+elements.\+h.
+Definition at line 506 of file solid\+\_\+elements.\+h.
 
 
 
@@ -338,7 +336,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDBubbleEnrichedElement_a88ae1
 
 
 
-Definition at line 556 of file solid\+\_\+elements.\+cc.
+Definition at line 575 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -361,7 +359,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_abd9064a8651728806dda
 
 
 
-Definition at line 561 of file solid\+\_\+elements.\+h.
+Definition at line 596 of file solid\+\_\+elements.\+h.
 
 
 

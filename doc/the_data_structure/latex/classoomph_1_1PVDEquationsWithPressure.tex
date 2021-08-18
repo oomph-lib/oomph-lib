@@ -44,14 +44,13 @@ void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ae6d9a646cfd9be1213
 void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a27aee23c253bef90a7f389acd376fd27}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},p,gamma. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a9b47b97cb7f3dafac867a0af20650d0d}{extended\+\_\+output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma and the strain and stress. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma and the strain and stress components. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ad216a201134e2b239e3d5bcaedd56973}{get\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&mass\+\_\+diag)
 \begin{DoxyCompactList}\small\item\em Compute the diagonal of the displacement mass matrix for L\+SC preconditioner. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ac7b6036faac154cd6a535ab5083c6d84}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em returns the number of D\+OF types associated with this element\+: displacement components and pressure \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a46331a93e6ac8cff7b4badad1c7a7a03}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) There are D\+I\+M+1 types of D\+OF\+: displacement compnents and pressure ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a500ca8d255757889f18bc9f805325a4b}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) There are D\+I\+M+1 types of D\+OF\+: displacement compnents and pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -83,7 +82,7 @@ class oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$}
 
 A class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements, with a contitutive equation that involves a pressure. This formulation is required in the case of incompressible materials, in which the additional constraint that volume must be conserved is applied. In this case, the Incompressible flag must be set to true. If the Incompressible flag is not set to true, we use the nearly-\/incompressible formulation of the constitutive equations. 
 
-Definition at line 818 of file solid\+\_\+elements.\+h.
+Definition at line 860 of file solid\+\_\+elements.\+h.
 
 
 
@@ -101,7 +100,7 @@ Constructor, by default the element is N\+OT incompressible.
 
 
 
-Definition at line 824 of file solid\+\_\+elements.\+h.
+Definition at line 866 of file solid\+\_\+elements.\+h.
 
 
 
@@ -115,13 +114,11 @@ void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure}{oomph\+::\+P\+V\+D
 
 
 
-Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma and the strain and stress. 
+Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma and the strain and stress components. 
 
-Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma strain and stress components.
+Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma strain and stress components. 
 
-components 
-
-Definition at line 2067 of file solid\+\_\+elements.\+cc.
+Definition at line 2116 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -144,7 +141,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a3167a2005e
 
 
 
-Definition at line 860 of file solid\+\_\+elements.\+h.
+Definition at line 914 of file solid\+\_\+elements.\+h.
 
 
 
@@ -167,7 +164,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 908 of file solid\+\_\+elements.\+h.
+Definition at line 958 of file solid\+\_\+elements.\+h.
 
 
 
@@ -190,7 +187,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 847 of file solid\+\_\+elements.\+h.
+Definition at line 899 of file solid\+\_\+elements.\+h.
 
 
 
@@ -220,7 +217,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPressu
 
 
 
-Definition at line 1235 of file solid\+\_\+elements.\+cc.
+Definition at line 1271 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -243,11 +240,11 @@ Return the derivative of the 2nd Piola Kirchhoff stress tensor, as calculated fr
 
 
 
-Definition at line 1237 of file solid\+\_\+elements.\+h.
+Definition at line 1288 of file solid\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::interpolated\+\_\+solid\+\_\+p(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::interpolated\+\_\+solid\+\_\+p(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a35b1c9e4ebd765bbb185421c2c02aa1a}\label{classoomph_1_1PVDEquationsWithPressure_a35b1c9e4ebd765bbb185421c2c02aa1a}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_d\_stress\_dG\_upper@{get\_d\_stress\_dG\_upper}}
@@ -262,31 +259,30 @@ Return the derivative of the deviatoric part of the 2nd Piola Kirchhoff stress t
 
 
 
-Definition at line 1133 of file solid\+\_\+elements.\+h.
+Definition at line 1177 of file solid\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::interpolated\+\_\+solid\+\_\+p(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::interpolated\+\_\+solid\+\_\+p(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
-\mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a46331a93e6ac8cff7b4badad1c7a7a03}\label{classoomph_1_1PVDEquationsWithPressure_a46331a93e6ac8cff7b4badad1c7a7a03}} 
+\mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a500ca8d255757889f18bc9f805325a4b}\label{classoomph_1_1PVDEquationsWithPressure_a500ca8d255757889f18bc9f805325a4b}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure}{oomph\+::\+P\+V\+D\+Equations\+With\+Pressure}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure}{oomph\+::\+P\+V\+D\+Equations\+With\+Pressure}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) There are D\+I\+M+1 types of D\+OF\+: displacement compnents and pressure ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) There are D\+I\+M+1 types of D\+OF\+: displacement compnents and pressure. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_af17c01ce27e3a8aa21f86aaed70bc34e}{oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a56a5df1e14d4f10d23026f2a0b5c9da8}{oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 1029 of file solid\+\_\+elements.\+h.
+Definition at line 1077 of file solid\+\_\+elements.\+h.
 
 
 
@@ -309,7 +305,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_ad2
 
 
 
-Definition at line 2146 of file solid\+\_\+elements.\+cc.
+Definition at line 2198 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -328,11 +324,11 @@ Return the deviatoric part of the 2nd Piola Kirchhoff stress tensor, as calculat
 
 
 
-Definition at line 1206 of file solid\+\_\+elements.\+h.
+Definition at line 1258 of file solid\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Constitutive\+\_\+law\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Constitutive\+\_\+law\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a4ae331361c8fd63725a55050e90e9e2d}\label{classoomph_1_1PVDEquationsWithPressure_a4ae331361c8fd63725a55050e90e9e2d}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_stress@{get\_stress}}
@@ -347,11 +343,11 @@ Return the deviatoric part of the 2nd Piola Kirchhoff stress tensor, as calculat
 
 
 
-Definition at line 1100 of file solid\+\_\+elements.\+h.
+Definition at line 1145 of file solid\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Constitutive\+\_\+law\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Constitutive\+\_\+law\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a15cfb4084a47c24f7cf108554a4b850d}\label{classoomph_1_1PVDEquationsWithPressure_a15cfb4084a47c24f7cf108554a4b850d}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_stress@{get\_stress}}
@@ -370,7 +366,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_ad429d68f0129d5f7a387
 
 
 
-Definition at line 2218 of file solid\+\_\+elements.\+cc.
+Definition at line 2267 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -389,7 +385,7 @@ Return the interpolated\+\_\+solid\+\_\+pressure.
 
 
 
-Definition at line 965 of file solid\+\_\+elements.\+h.
+Definition at line 1011 of file solid\+\_\+elements.\+h.
 
 
 
@@ -412,7 +408,7 @@ Return whether the material is incompressible.
 
 
 
-Definition at line 832 of file solid\+\_\+elements.\+h.
+Definition at line 875 of file solid\+\_\+elements.\+h.
 
 
 
@@ -439,7 +435,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a749f42fea2b7
 
 
 
-Definition at line 1016 of file solid\+\_\+elements.\+h.
+Definition at line 1064 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_ae6d9a646cfd9be12134aeba45249d7c7}\label{classoomph_1_1PVDEquationsWithPressure_ae6d9a646cfd9be12134aeba45249d7c7}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!output@{output}}
@@ -462,7 +458,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressur
 
 
 
-Definition at line 996 of file solid\+\_\+elements.\+h.
+Definition at line 1044 of file solid\+\_\+elements.\+h.
 
 
 
@@ -489,7 +485,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressur
 
 
 
-Definition at line 1940 of file solid\+\_\+elements.\+cc.
+Definition at line 1990 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -516,7 +512,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressur
 
 
 
-Definition at line 985 of file solid\+\_\+elements.\+h.
+Definition at line 1033 of file solid\+\_\+elements.\+h.
 
 
 
@@ -543,7 +539,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressur
 
 
 
-Definition at line 1886 of file solid\+\_\+elements.\+cc.
+Definition at line 1934 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -562,7 +558,7 @@ Set the material to be compressible.
 
 
 
-Definition at line 838 of file solid\+\_\+elements.\+h.
+Definition at line 887 of file solid\+\_\+elements.\+h.
 
 
 
@@ -581,7 +577,7 @@ Set the material to be incompressible.
 
 
 
-Definition at line 835 of file solid\+\_\+elements.\+h.
+Definition at line 881 of file solid\+\_\+elements.\+h.
 
 
 
@@ -653,7 +649,7 @@ Return the stored solid shape functions at the knots.
 
 
 
-Definition at line 1171 of file solid\+\_\+elements.\+h.
+Definition at line 1220 of file solid\+\_\+elements.\+h.
 
 
 
@@ -675,7 +671,7 @@ Boolean to determine whether the solid is incompressible or not.
 
 
 
-Definition at line 1186 of file solid\+\_\+elements.\+h.
+Definition at line 1237 of file solid\+\_\+elements.\+h.
 
 
 

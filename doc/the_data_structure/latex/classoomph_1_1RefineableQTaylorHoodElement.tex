@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+IM $
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_a4b6f46aea58a70a24f9c356074a0ad95}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Number of values required at local node n. In order to simplify matters, we allocate storage for pressure variables at all the nodes and then pin those that are not used. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_ab47675822b8632474fc4e3e435fc19bf}{ncont\+\_\+interpolated\+\_\+values}} () const
-\begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: (D\+IM velocities + 1 pressure) \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_a207d8ad472735c629b01be6318aed44d}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Rebuild from sons\+: empty. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_a44ffd481fbc9e2538500a150d7ced7aa}{nrecovery\+\_\+order}} ()
@@ -49,7 +49,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_af6a401e81f0376
 \begin{DoxyCompactList}\small\item\em The basis interpolating the pressure is given by pshape(). / The basis interpolating the velocity is \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape()}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_ab7f69a90be6e5129d2dbf294e01642af}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_af9358dd7b65ca4a1005980d50986db0d}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_ae33c3a85421336c32c43014fe1a693bf}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -67,7 +67,7 @@ class oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}
 
 Refineable version of Taylor Hood elements. These classes can be written in total generality. 
 
-Definition at line 663 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 648 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -85,7 +85,7 @@ Constructor.
 
 
 
-Definition at line 703 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 694 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -107,7 +107,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_aa3c4eabbed
 
 
 
-Definition at line 923 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 962 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -130,7 +130,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a86ea01c485f
 
 
 
-Definition at line 788 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 803 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -153,7 +153,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 752 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 763 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -176,7 +176,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 736 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 743 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -199,18 +199,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad920e66c008
 
 
 
-Definition at line 833 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 855 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), i, oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance, oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pressure\+\_\+node\+\_\+pt(), and s.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodElement_af9358dd7b65ca4a1005980d50986db0d}\label{classoomph_1_1RefineableQTaylorHoodElement_af9358dd7b65ca4a1005980d50986db0d}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodElement_ae33c3a85421336c32c43014fe1a693bf}\label{classoomph_1_1RefineableQTaylorHoodElement_ae33c3a85421336c32c43014fe1a693bf}} 
 \index{oomph::RefineableQTaylorHoodElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodElement$<$ DIM $>$}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::RefineableQTaylorHoodElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement}{oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement}{oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -222,11 +222,11 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. (Overloads non-\/refineable version and takes hanging nodes into account) 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_af14ad75ea276ed120e620646f48dcc0c}{oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a6796a527a8ac53e872eecf38b932f852}{oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 941 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 979 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -249,7 +249,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8ca420443c2
 
 
 
-Definition at line 910 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 944 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -272,7 +272,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ab27986fc2f6
 
 
 
-Definition at line 801 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 818 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -295,7 +295,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ac4e4ae53741
 
 
 
-Definition at line 813 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 835 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -308,17 +308,13 @@ References i, and oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fract
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement}{oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
 Number of continuously interpolated values\+: (D\+IM velocities + 1 pressure) 
-
-
 
 Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{oomph\+::\+Refineable\+Element}}.
 
 
 
-Definition at line 715 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 712 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodElement_a0348c238d8d1bf7afb2532d6f7d1f5a8}\label{classoomph_1_1RefineableQTaylorHoodElement_a0348c238d8d1bf7afb2532d6f7d1f5a8}} 
 \index{oomph::RefineableQTaylorHoodElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodElement$<$ DIM $>$}!ninterpolating\_node@{ninterpolating\_node}}
@@ -337,7 +333,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8b1b5031b55
 
 
 
-Definition at line 901 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 930 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -360,7 +356,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a850180084aa
 
 
 
-Definition at line 893 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 916 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -402,7 +398,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 725 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 728 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -425,7 +421,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquation
 
 
 
-Definition at line 682 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 668 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -448,7 +444,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquation
 
 
 
-Definition at line 794 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 809 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -494,7 +490,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a7993924abd
 
 
 
-Definition at line 712 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 705 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodElement_a130b113b3de095ab4f17e18f3659c84a}\label{classoomph_1_1RefineableQTaylorHoodElement_a130b113b3de095ab4f17e18f3659c84a}} 
 \index{oomph::RefineableQTaylorHoodElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodElement$<$ DIM $>$}!unpin\_elemental\_pressure\_dofs@{unpin\_elemental\_pressure\_dofs}}
@@ -513,7 +509,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_acd0b5
 
 
 
-Definition at line 671 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 655 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -536,7 +532,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 729 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 734 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

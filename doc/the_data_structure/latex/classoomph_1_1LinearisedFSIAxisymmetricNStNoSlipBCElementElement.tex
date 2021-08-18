@@ -22,7 +22,7 @@ Inheritance diagram for oomph\+::Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+S
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index identifying the face to which the element is attached. The optional identifier can be used to distinguish the additional nodal values created by this element from thos created by other Face\+Elements. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_a16f97341361af16ad42812b1cb058196}{Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element}} (const \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement}{Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element}} \&dummy)
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_ac8ff4865ccf6bb99ba08244ca4eb49a0}{st\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_afe5044e0fcf345645097caeed5fb1904}{st\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_abe73b608c305d9bbf92e3fb5419927c1}{st}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the fluid Strouhal number. \end{DoxyCompactList}\item 
@@ -44,14 +44,12 @@ void \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementE
 double \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_a4cc3a6f8e7acd58deedb5e3155b6b165}{shape\+\_\+and\+\_\+test}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_a18005efa3fd8b67b026a569d36001f71}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_a9a6fbfd58722a6f7559680191d4bfd37}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fsi\+\_\+no\+\_\+slip\+\_\+axisym}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -72,7 +70,7 @@ class oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Eleme
 
 A class for elements that allow the imposition of the linearised F\+SI no slip condition from an adjacent linearly elastic axisymmetric solid. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 629 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 615 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -90,7 +88,7 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the f
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, and the face index that identifies the face of the bulk element to which this face element is to be attached. The optional identifier can be used to distinguish the additional nodal values created by this element from thos created by other Face\+Elements. 
 
-Definition at line 847 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 836 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -109,7 +107,7 @@ Broken copy constructor.
 
 
 
-Definition at line 649 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 632 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -135,7 +133,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 690 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 677 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -158,7 +156,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 679 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 666 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -173,12 +171,11 @@ void \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementE
 
 
 
-Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. ~\newline
- 
+Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. 
 
 Helper function to compute the element\textquotesingle{}s residual vector and the Jacobian matrix. 
 
-Definition at line 900 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 890 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -205,7 +202,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 753 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 737 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -228,7 +225,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 757 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 743 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -251,7 +248,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 702 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 689 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_a55fc51ebb69cbd5ace59ea959a2a5028}\label{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_a55fc51ebb69cbd5ace59ea959a2a5028}} 
 \index{oomph::LinearisedFSIAxisymmetricNStNoSlipBCElementElement$<$ FLUID\_BULK\_ELEMENT, SOLID\_BULK\_ELEMENT $>$@{oomph::LinearisedFSIAxisymmetricNStNoSlipBCElementElement$<$ FLUID\_BULK\_ELEMENT, SOLID\_BULK\_ELEMENT $>$}!output@{output}}
@@ -270,7 +267,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 710 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 697 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -289,7 +286,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 767 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 753 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -304,12 +301,11 @@ double \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElemen
 
 
 
-Function to compute the shape and test functions and to return ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
 
-the Jacobian of mapping between local and global (Eulerian) coordinates 
 
-Definition at line 787 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+Definition at line 777 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -328,18 +324,18 @@ Access function for the fluid Strouhal number.
 
 
 
-Definition at line 673 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 660 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+St\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_ac8ff4865ccf6bb99ba08244ca4eb49a0}\label{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_ac8ff4865ccf6bb99ba08244ca4eb49a0}} 
+\mbox{\Hypertarget{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_afe5044e0fcf345645097caeed5fb1904}\label{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement_afe5044e0fcf345645097caeed5fb1904}} 
 \index{oomph::LinearisedFSIAxisymmetricNStNoSlipBCElementElement$<$ FLUID\_BULK\_ELEMENT, SOLID\_BULK\_ELEMENT $>$@{oomph::LinearisedFSIAxisymmetricNStNoSlipBCElementElement$<$ FLUID\_BULK\_ELEMENT, SOLID\_BULK\_ELEMENT $>$}!st\_pt@{st\_pt}}
 \index{st\_pt@{st\_pt}!oomph::LinearisedFSIAxisymmetricNStNoSlipBCElementElement$<$ FLUID\_BULK\_ELEMENT, SOLID\_BULK\_ELEMENT $>$@{oomph::LinearisedFSIAxisymmetricNStNoSlipBCElementElement$<$ FLUID\_BULK\_ELEMENT, SOLID\_BULK\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{st\_pt()}{st\_pt()}}
 {\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement}{oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element}}$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1LinearisedFSIAxisymmetricNStNoSlipBCElementElement}{oomph\+::\+Linearised\+F\+S\+I\+Axisymmetric\+N\+St\+No\+Slip\+B\+C\+Element\+Element}}$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -347,7 +343,7 @@ Broken assignment operator.
 
 Access function for the pointer to the fluid Strouhal number (if not set, St defaults to 1) 
 
-Definition at line 670 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 654 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -369,7 +365,7 @@ The spatial dimension of the problem.
 
 
 
-Definition at line 817 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 808 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -388,7 +384,7 @@ Lagrange Id.
 
 
 
-Definition at line 823 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 814 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -407,7 +403,7 @@ Pointer to fluid Strouhal number.
 
 
 
-Definition at line 826 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 817 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -426,7 +422,7 @@ The index at which the unknowns are stored at the nodes.
 
 
 
-Definition at line 820 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 811 of file axisym\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 

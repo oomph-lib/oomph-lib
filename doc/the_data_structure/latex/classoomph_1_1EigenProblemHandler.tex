@@ -27,9 +27,9 @@ unsigned long \mbox{\hyperlink{classoomph_1_1EigenProblemHandler_ab94bef9c8135c9
 void \mbox{\hyperlink{classoomph_1_1EigenProblemHandler_a0dc97e08638986970c7ca5f3903c8b6d}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Return the contribution to the residuals of the element elem\+\_\+pt This is deliberately broken in our eigenproblem. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1EigenProblemHandler_aaaf7c3aa3713030ff4859117941b3a39}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation 
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{} for elem\+\_\+pt. Again deliberately broken in the eigenproblem. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EigenProblemHandler_aa88f56b5c724c41e0c2926434ae920da}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ $>$ \&matrix)
+void \mbox{\hyperlink{classoomph_1_1EigenProblemHandler_a37b33a36d3e5e73c41d81c7b82cb4be6}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$$>$ \&matrix)
 \begin{DoxyCompactList}\small\item\em Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1EigenProblemHandler_aa103e5d9d14e498eeeb07cf8be50cd0d}{$\sim$\+Eigen\+Problem\+Handler}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -60,7 +60,7 @@ Constructor, sets the value of the real shift.
 
 
 
-Definition at line 230 of file assembly\+\_\+handler.\+h.
+Definition at line 229 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1EigenProblemHandler_aa103e5d9d14e498eeeb07cf8be50cd0d}\label{classoomph_1_1EigenProblemHandler_aa103e5d9d14e498eeeb07cf8be50cd0d}} 
 \index{oomph::EigenProblemHandler@{oomph::EigenProblemHandler}!````~EigenProblemHandler@{$\sim$EigenProblemHandler}}
@@ -74,7 +74,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 258 of file assembly\+\_\+handler.\+h.
+Definition at line 257 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -95,17 +95,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559
 
 
 
-Definition at line 302 of file assembly\+\_\+handler.\+cc.
+Definition at line 315 of file assembly\+\_\+handler.\+cc.
 
 
 
 References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number().
 
-\mbox{\Hypertarget{classoomph_1_1EigenProblemHandler_aa88f56b5c724c41e0c2926434ae920da}\label{classoomph_1_1EigenProblemHandler_aa88f56b5c724c41e0c2926434ae920da}} 
+\mbox{\Hypertarget{classoomph_1_1EigenProblemHandler_a37b33a36d3e5e73c41d81c7b82cb4be6}\label{classoomph_1_1EigenProblemHandler_a37b33a36d3e5e73c41d81c7b82cb4be6}} 
 \index{oomph::EigenProblemHandler@{oomph::EigenProblemHandler}!get\_all\_vectors\_and\_matrices@{get\_all\_vectors\_and\_matrices}}
 \index{get\_all\_vectors\_and\_matrices@{get\_all\_vectors\_and\_matrices}!oomph::EigenProblemHandler@{oomph::EigenProblemHandler}}
 \doxysubsubsection{\texorpdfstring{get\_all\_vectors\_and\_matrices()}{get\_all\_vectors\_and\_matrices()}}
-{\footnotesize\ttfamily void oomph\+::\+Eigen\+Problem\+Handler\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Eigen\+Problem\+Handler\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$$>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -113,11 +113,11 @@ Calculate all desired vectors and matrices provided by the element elem\+\_\+pt.
 
 Calculate all desired vectors and matrices that are required by the problem by calling those of the underlying element. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab2e4ee4623116b18245ca90cfe9ba144}{oomph\+::\+Assembly\+Handler}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a67093ef481c51d384606486c41002baa}{oomph\+::\+Assembly\+Handler}}.
 
 
 
-Definition at line 335 of file assembly\+\_\+handler.\+cc.
+Definition at line 350 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -131,7 +131,7 @@ References oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+ma
 
 
 
-Calculate the elemental Jacobian matrix \char`\"{}d equation 
+Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{} for elem\+\_\+pt. Again deliberately broken in the eigenproblem. 
 
 Cannot call get\+\_\+jacobian for an eigenproblem, so throw an error. 
@@ -140,7 +140,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0
 
 
 
-Definition at line 320 of file assembly\+\_\+handler.\+cc.
+Definition at line 336 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1EigenProblemHandler_a0dc97e08638986970c7ca5f3903c8b6d}\label{classoomph_1_1EigenProblemHandler_a0dc97e08638986970c7ca5f3903c8b6d}} 
 \index{oomph::EigenProblemHandler@{oomph::EigenProblemHandler}!get\_residuals@{get\_residuals}}
@@ -158,7 +158,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90d
 
 
 
-Definition at line 308 of file assembly\+\_\+handler.\+cc.
+Definition at line 324 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1EigenProblemHandler_ae9e44eeceee6e19c60c51b08195730eb}\label{classoomph_1_1EigenProblemHandler_ae9e44eeceee6e19c60c51b08195730eb}} 
 \index{oomph::EigenProblemHandler@{oomph::EigenProblemHandler}!ndof@{ndof}}
@@ -176,7 +176,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa0
 
 
 
-Definition at line 294 of file assembly\+\_\+handler.\+cc.
+Definition at line 306 of file assembly\+\_\+handler.\+cc.
 
 
 

@@ -14,24 +14,21 @@ Inheritance diagram for oomph\+::P\+V\+D\+Equations\+Base$<$ D\+IM $>$\+:\begin{
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a59fc7069e0330c399ff53aebb6c67729}{Isotropic\+Growth\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, double \&gamma)
-\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the isotropic growth as a function of the Lagrangian coordinates F\+C\+T(xi,gamma(xi)) -- xi is a Vector! ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the isotropic growth as a function of the Lagrangian coordinates F\+C\+T(xi,gamma(xi)) -- xi is a Vector! \end{DoxyCompactList}\item 
 typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a457b9ffb2b62ecc0cf5fe61cf28e98e5}{Prestress\+Fct\+Pt}}) (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi)
-\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the pre-\/stress sigma\+\_\+0(i,j) as a function of the Lagrangian coordinates F\+C\+T(i,j,xi) -- xi is a Vector! ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the pre-\/stress sigma\+\_\+0(i,j) as a function of the Lagrangian coordinates F\+C\+T(i,j,xi) -- xi is a Vector! \end{DoxyCompactList}\item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_aa0d7dc7279aff03dfcc3ad35bb6653be}{Body\+Force\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
-\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Lagrangian coordinates and time F\+C\+T(t,xi,b) -- xi and b are Vectors! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Lagrangian coordinates and time F\+C\+T(t,xi,b) -- xi and b are Vectors! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_aa3cbcc0a97041d72b82233311eaa53cf}{P\+V\+D\+Equations\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set null pointers for constitutive law and for isotropic growth function. Set physical parameter values to default values, enable inertia and set body force to zero. Default evaluation of Jacobian\+: analytically rather than by FD. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a60fa403e1d80572b36dfc93f24566bde}{constitutive\+\_\+law\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a41de65a90c211181e8bef46decd73ecc}{constitutive\+\_\+law\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the constitutive law pointer. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_af734fb69def2791d9b6f9a97d9aa9b8f}{lambda\+\_\+sq}} () const
 \begin{DoxyCompactList}\small\item\em Access function for timescale ratio (nondim density) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_ae18693daa7038a22239ad468b8b83a58}{lambda\+\_\+sq\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a7ca93ce0f59d8a109a94b1592c7b49a9}{lambda\+\_\+sq\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to timescale ratio (nondim density) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a59fc7069e0330c399ff53aebb6c67729}{Isotropic\+Growth\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_ab80dd7e5bf9072699faca5e2da80f66a}{isotropic\+\_\+growth\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to isotropic growth function. \end{DoxyCompactList}\item 
@@ -75,7 +72,7 @@ void \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_add35ffbc2d8984fae27c4e1fb4
 \begin{DoxyCompactList}\small\item\em Evaluate body force at Lagrangian coordinate xi at present time (returns zero vector if no body force function pointer has been set) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a749f42fea2b7138a61193c2615b2d95c}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em returns the number of D\+OF types associated with this element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_af17c01ce27e3a8aa21f86aaed70bc34e}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a56a5df1e14d4f10d23026f2a0b5c9da8}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) E.\+g. in a 3D problem there are 3 types of D\+OF\+: 0 -\/ x displacement 1 -\/ y displacement 2 -\/ z displacement. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_ae3a43aed7cc42dac606e14ab90bb1c08}{enable\+\_\+evaluate\+\_\+jacobian\+\_\+by\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Set Jacobian to be evaluated by FD? Else\+: Analytically. \end{DoxyCompactList}\item 
@@ -112,7 +109,7 @@ bool \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_ab63c545f5b34501a58d5d47c56
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a23f668bc7eb83a9614cb601a2bdfaffb}{Default\+\_\+lambda\+\_\+sq\+\_\+value}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a23f668bc7eb83a9614cb601a2bdfaffb}{Default\+\_\+lambda\+\_\+sq\+\_\+value}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for timescale ratio (1.\+0 -- for natural scaling) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
@@ -128,7 +125,7 @@ class oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$}
 
 A base class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements in Cartesian coordinates. Combines a few generic functions that are shared by \mbox{\hyperlink{classoomph_1_1PVDEquations}{P\+V\+D\+Equations}} and \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure}{P\+V\+D\+Equations\+With\+Pressure}}. 
 
-Definition at line 59 of file solid\+\_\+elements.\+h.
+Definition at line 57 of file solid\+\_\+elements.\+h.
 
 
 
@@ -142,12 +139,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+
 
 
 
-Function pointer to function that specifies the body force as a function of the Lagrangian coordinates and time F\+C\+T(t,xi,b) -- xi and b are Vectors! ~\newline
- 
+Function pointer to function that specifies the body force as a function of the Lagrangian coordinates and time F\+C\+T(t,xi,b) -- xi and b are Vectors! 
 
 
 
-Definition at line 84 of file solid\+\_\+elements.\+h.
+Definition at line 81 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_a59fc7069e0330c399ff53aebb6c67729}\label{classoomph_1_1PVDEquationsBase_a59fc7069e0330c399ff53aebb6c67729}} 
 \index{oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}!IsotropicGrowthFctPt@{IsotropicGrowthFctPt}}
@@ -158,12 +154,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+
 
 
 
-Function pointer to function that specifies the isotropic growth as a function of the Lagrangian coordinates F\+C\+T(xi,gamma(xi)) -- xi is a Vector! ~\newline
- 
+Function pointer to function that specifies the isotropic growth as a function of the Lagrangian coordinates F\+C\+T(xi,gamma(xi)) -- xi is a Vector! 
 
 
 
-Definition at line 73 of file solid\+\_\+elements.\+h.
+Definition at line 68 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_a457b9ffb2b62ecc0cf5fe61cf28e98e5}\label{classoomph_1_1PVDEquationsBase_a457b9ffb2b62ecc0cf5fe61cf28e98e5}} 
 \index{oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}!PrestressFctPt@{PrestressFctPt}}
@@ -174,12 +169,11 @@ typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::
 
 
 
-Function pointer to function that specifies the pre-\/stress sigma\+\_\+0(i,j) as a function of the Lagrangian coordinates F\+C\+T(i,j,xi) -- xi is a Vector! ~\newline
- 
+Function pointer to function that specifies the pre-\/stress sigma\+\_\+0(i,j) as a function of the Lagrangian coordinates F\+C\+T(i,j,xi) -- xi is a Vector! 
 
 
 
-Definition at line 79 of file solid\+\_\+elements.\+h.
+Definition at line 74 of file solid\+\_\+elements.\+h.
 
 
 
@@ -197,7 +191,7 @@ Constructor\+: Set null pointers for constitutive law and for isotropic growth f
 
 
 
-Definition at line 92 of file solid\+\_\+elements.\+h.
+Definition at line 89 of file solid\+\_\+elements.\+h.
 
 
 
@@ -215,7 +209,7 @@ Evaluate body force at Lagrangian coordinate xi at present time (returns zero ve
 
 
 
-Definition at line 245 of file solid\+\_\+elements.\+h.
+Definition at line 287 of file solid\+\_\+elements.\+h.
 
 
 
@@ -234,7 +228,7 @@ Access function\+: Pointer to body force function.
 
 
 
-Definition at line 123 of file solid\+\_\+elements.\+h.
+Definition at line 140 of file solid\+\_\+elements.\+h.
 
 
 
@@ -257,18 +251,18 @@ Access function\+: Pointer to body force function (const version)
 
 
 
-Definition at line 126 of file solid\+\_\+elements.\+h.
+Definition at line 146 of file solid\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_a60fa403e1d80572b36dfc93f24566bde}\label{classoomph_1_1PVDEquationsBase_a60fa403e1d80572b36dfc93f24566bde}} 
+\mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_a41de65a90c211181e8bef46decd73ecc}\label{classoomph_1_1PVDEquationsBase_a41de65a90c211181e8bef46decd73ecc}} 
 \index{oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}!constitutive\_law\_pt@{constitutive\_law\_pt}}
 \index{constitutive\_law\_pt@{constitutive\_law\_pt}!oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{constitutive\_law\_pt()}{constitutive\_law\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}}$\ast$ \& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+P\+V\+D\+Equations\+Base}}$<$ D\+IM $>$\+::constitutive\+\_\+law\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}}$\ast$\& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+P\+V\+D\+Equations\+Base}}$<$ D\+IM $>$\+::constitutive\+\_\+law\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -276,7 +270,7 @@ Return the constitutive law pointer.
 
 
 
-Definition at line 99 of file solid\+\_\+elements.\+h.
+Definition at line 101 of file solid\+\_\+elements.\+h.
 
 
 
@@ -299,7 +293,7 @@ Set Jacobian to be evaluated analytically Else\+: by FD.
 
 
 
-Definition at line 341 of file solid\+\_\+elements.\+h.
+Definition at line 380 of file solid\+\_\+elements.\+h.
 
 
 
@@ -318,7 +312,7 @@ Switch off solid inertia.
 
 
 
-Definition at line 132 of file solid\+\_\+elements.\+h.
+Definition at line 158 of file solid\+\_\+elements.\+h.
 
 
 
@@ -337,7 +331,7 @@ Set Jacobian to be evaluated by FD? Else\+: Analytically.
 
 
 
-Definition at line 338 of file solid\+\_\+elements.\+h.
+Definition at line 374 of file solid\+\_\+elements.\+h.
 
 
 
@@ -356,7 +350,7 @@ Switch on solid inertia.
 
 
 
-Definition at line 129 of file solid\+\_\+elements.\+h.
+Definition at line 152 of file solid\+\_\+elements.\+h.
 
 
 
@@ -375,18 +369,18 @@ Return the deformed covariant basis vectors at specified local coordinate\+: {\t
 
 Return the deformed covariant basis vectors at specified local coordinate\+: {\ttfamily def\+\_\+covariant\+\_\+basis(i,j)} is the j-\/th component of the i-\/th basis vector. 
 
-Definition at line 1161 of file solid\+\_\+elements.\+cc.
+Definition at line 1197 of file solid\+\_\+elements.\+cc.
 
 
 
 References i, and s.
 
-\mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_af17c01ce27e3a8aa21f86aaed70bc34e}\label{classoomph_1_1PVDEquationsBase_af17c01ce27e3a8aa21f86aaed70bc34e}} 
+\mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_a56a5df1e14d4f10d23026f2a0b5c9da8}\label{classoomph_1_1PVDEquationsBase_a56a5df1e14d4f10d23026f2a0b5c9da8}} 
 \index{oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+P\+V\+D\+Equations\+Base}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+P\+V\+D\+Equations\+Base}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -394,15 +388,15 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a46331a93e6ac8cff7b4badad1c7a7a03}{oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a500ca8d255757889f18bc9f805325a4b}{oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 291 of file solid\+\_\+elements.\+h.
+Definition at line 329 of file solid\+\_\+elements.\+h.
 
 
 
@@ -421,7 +415,7 @@ Get potential (strain) and kinetic energy.
 
 
 
-Definition at line 807 of file solid\+\_\+elements.\+cc.
+Definition at line 829 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -440,7 +434,7 @@ Evaluate isotropic growth function at Lagrangian coordinate xi and/or local coor
 
 
 
-Definition at line 228 of file solid\+\_\+elements.\+h.
+Definition at line 267 of file solid\+\_\+elements.\+h.
 
 
 
@@ -459,7 +453,7 @@ Compute principal stress vectors and (scalar) principal stresses at specified lo
 
 Compute principal stress vectors and (scalar) principal stresses at specified local coordinate\+: {\ttfamily principal\+\_\+stress\+\_\+vector(i,j)} is the j-\/th component of the i-\/th principal stress vector. 
 
-Definition at line 1038 of file solid\+\_\+elements.\+cc.
+Definition at line 1071 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -478,7 +472,7 @@ Return the strain tensor.
 
 Compute the strain tensor at local coordinate s. 
 
-Definition at line 50 of file solid\+\_\+elements.\+cc.
+Definition at line 47 of file solid\+\_\+elements.\+cc.
 
 
 
@@ -516,7 +510,7 @@ Access function to flag that switches inertia on/off (const version)
 
 
 
-Definition at line 135 of file solid\+\_\+elements.\+h.
+Definition at line 164 of file solid\+\_\+elements.\+h.
 
 
 
@@ -539,7 +533,7 @@ Return the flag indicating whether the jacobian is evaluated by fd.
 
 
 
-Definition at line 344 of file solid\+\_\+elements.\+h.
+Definition at line 386 of file solid\+\_\+elements.\+h.
 
 
 
@@ -562,7 +556,7 @@ Access function\+: Pointer to isotropic growth function.
 
 
 
-Definition at line 111 of file solid\+\_\+elements.\+h.
+Definition at line 122 of file solid\+\_\+elements.\+h.
 
 
 
@@ -585,7 +579,7 @@ Access function\+: Pointer to isotropic growth function (const version)
 
 
 
-Definition at line 119 of file solid\+\_\+elements.\+h.
+Definition at line 134 of file solid\+\_\+elements.\+h.
 
 
 
@@ -604,18 +598,18 @@ Access function for timescale ratio (nondim density)
 
 
 
-Definition at line 103 of file solid\+\_\+elements.\+h.
+Definition at line 108 of file solid\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Lambda\+\_\+sq\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_ae18693daa7038a22239ad468b8b83a58}\label{classoomph_1_1PVDEquationsBase_ae18693daa7038a22239ad468b8b83a58}} 
+\mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_a7ca93ce0f59d8a109a94b1592c7b49a9}\label{classoomph_1_1PVDEquationsBase_a7ca93ce0f59d8a109a94b1592c7b49a9}} 
 \index{oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}!lambda\_sq\_pt@{lambda\_sq\_pt}}
 \index{lambda\_sq\_pt@{lambda\_sq\_pt}!oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{lambda\_sq\_pt()}{lambda\_sq\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+P\+V\+D\+Equations\+Base}}$<$ D\+IM $>$\+::lambda\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+P\+V\+D\+Equations\+Base}}$<$ D\+IM $>$\+::lambda\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -623,7 +617,7 @@ Access function for pointer to timescale ratio (nondim density)
 
 
 
-Definition at line 107 of file solid\+\_\+elements.\+h.
+Definition at line 115 of file solid\+\_\+elements.\+h.
 
 
 
@@ -654,7 +648,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ac7b603
 
 
 
-Definition at line 276 of file solid\+\_\+elements.\+h.
+Definition at line 314 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_a6e8457327151e87d2fa5694148afc7cc}\label{classoomph_1_1PVDEquationsBase_a6e8457327151e87d2fa5694148afc7cc}} 
 \index{oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}!npres\_solid@{npres\_solid}}
@@ -673,7 +667,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressur
 
 
 
-Definition at line 139 of file solid\+\_\+elements.\+h.
+Definition at line 171 of file solid\+\_\+elements.\+h.
 
 
 
@@ -696,7 +690,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinu
 
 
 
-Definition at line 156 of file solid\+\_\+elements.\+h.
+Definition at line 196 of file solid\+\_\+elements.\+h.
 
 
 
@@ -716,10 +710,9 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 
 \begin{DoxyItemize}
 \item {\ttfamily P\+V\+D\+Equations\+Base$<$\+D\+I\+M$>$\+::} pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()
-\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal solid pressure degrees of freedom ~\newline
- (e.\+g. solid elements with continuous pressure interpolation.) 
+\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal solid pressure degrees of freedom (e.\+g. solid elements with continuous pressure interpolation.) 
 
-Definition at line 168 of file solid\+\_\+elements.\+h.
+Definition at line 208 of file solid\+\_\+elements.\+h.
 
 
 
@@ -738,7 +731,7 @@ Return (i,j)-\/th component of second Piola Kirchhoff membrane prestress at Lagr
 
 
 
-Definition at line 348 of file solid\+\_\+elements.\+h.
+Definition at line 393 of file solid\+\_\+elements.\+h.
 
 
 
@@ -757,7 +750,7 @@ Access function\+: Pointer to pre-\/stress function.
 
 
 
-Definition at line 115 of file solid\+\_\+elements.\+h.
+Definition at line 128 of file solid\+\_\+elements.\+h.
 
 
 
@@ -780,7 +773,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressur
 
 
 
-Definition at line 143 of file solid\+\_\+elements.\+h.
+Definition at line 178 of file solid\+\_\+elements.\+h.
 
 
 
@@ -803,7 +796,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressur
 
 
 
-Definition at line 148 of file solid\+\_\+elements.\+h.
+Definition at line 186 of file solid\+\_\+elements.\+h.
 
 
 
@@ -822,7 +815,7 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line 181 of file solid\+\_\+elements.\+h.
+Definition at line 221 of file solid\+\_\+elements.\+h.
 
 
 
@@ -863,7 +856,7 @@ Pointer to body force function.
 
 
 
-Definition at line 380 of file solid\+\_\+elements.\+h.
+Definition at line 424 of file solid\+\_\+elements.\+h.
 
 
 
@@ -882,7 +875,7 @@ Pointer to the constitutive law.
 
 
 
-Definition at line 371 of file solid\+\_\+elements.\+h.
+Definition at line 415 of file solid\+\_\+elements.\+h.
 
 
 
@@ -893,7 +886,7 @@ Referenced by oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::constitutive
 \index{Default\_lambda\_sq\_value@{Default\_lambda\_sq\_value}!oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_lambda\_sq\_value}{Default\_lambda\_sq\_value}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+P\+V\+D\+Equations\+Base}}$<$ D\+IM $>$\+::Default\+\_\+lambda\+\_\+sq\+\_\+value =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+P\+V\+D\+Equations\+Base}}$<$ D\+IM $>$\+::Default\+\_\+lambda\+\_\+sq\+\_\+value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -901,7 +894,7 @@ Static default value for timescale ratio (1.\+0 -- for natural scaling)
 
 
 
-Definition at line 383 of file solid\+\_\+elements.\+h.
+Definition at line 427 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsBase_ab63c545f5b34501a58d5d47c56ba1471}\label{classoomph_1_1PVDEquationsBase_ab63c545f5b34501a58d5d47c56ba1471}} 
 \index{oomph::PVDEquationsBase$<$ DIM $>$@{oomph::PVDEquationsBase$<$ DIM $>$}!Evaluate\_jacobian\_by\_fd@{Evaluate\_jacobian\_by\_fd}}
@@ -916,7 +909,7 @@ Use FD to evaluate Jacobian.
 
 
 
-Definition at line 386 of file solid\+\_\+elements.\+h.
+Definition at line 430 of file solid\+\_\+elements.\+h.
 
 
 
@@ -935,7 +928,7 @@ Pointer to isotropic growth function.
 
 
 
-Definition at line 365 of file solid\+\_\+elements.\+h.
+Definition at line 409 of file solid\+\_\+elements.\+h.
 
 
 
@@ -954,7 +947,7 @@ Timescale ratio (non-\/dim. density)
 
 
 
-Definition at line 374 of file solid\+\_\+elements.\+h.
+Definition at line 418 of file solid\+\_\+elements.\+h.
 
 
 
@@ -973,7 +966,7 @@ Pointer to prestress function.
 
 
 
-Definition at line 368 of file solid\+\_\+elements.\+h.
+Definition at line 412 of file solid\+\_\+elements.\+h.
 
 
 
@@ -992,7 +985,7 @@ Static \char`\"{}magic\char`\"{} number that indicates that the solid pressure i
 
 \char`\"{}\+Magic\char`\"{} number that indicates that the solid pressure is not stored at a node. It is a negative number that cannot be -\/1 because that is used to represent the positional hanging scheme in Hanging\+\_\+pt objects 
 
-Definition at line 65 of file solid\+\_\+elements.\+h.
+Definition at line 62 of file solid\+\_\+elements.\+h.
 
 
 
@@ -1011,7 +1004,7 @@ Flag that switches inertia on/off.
 
 
 
-Definition at line 377 of file solid\+\_\+elements.\+h.
+Definition at line 421 of file solid\+\_\+elements.\+h.
 
 
 

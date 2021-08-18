@@ -39,9 +39,8 @@ unsigned \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a0aa0ca45ff
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a9bd9f83e67108ac008efa20601fb1ade}{additional\+\_\+ndof\+\_\+types}} () const
 \item 
-void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a722461f623710d20a71a28b5fa6018a9}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a40f079bde5258d4c2f534183139d8fbb}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -74,7 +73,7 @@ Constructor takes a \char`\"{}bulk\char`\"{} element, the index that identifies 
 
 
 
-Definition at line 59 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 55 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -92,7 +91,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\
 
 
 
-Definition at line 293 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 299 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -119,7 +118,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 89 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 85 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -142,7 +141,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 81 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 77 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -161,7 +160,7 @@ Helper function to compute the residuals and, if flag==1, the Jacobian.
 
 
 
-Definition at line 117 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 120 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -171,25 +170,24 @@ References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+F
 
 Referenced by oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a722461f623710d20a71a28b5fa6018a9}\label{classoomph_1_1ImposeImpenetrabilityElement_a722461f623710d20a71a28b5fa6018a9}} 
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a40f079bde5258d4c2f534183139d8fbb}\label{classoomph_1_1ImposeImpenetrabilityElement_a40f079bde5258d4c2f534183139d8fbb}} 
 \index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 306 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 312 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -212,7 +210,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 283 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 289 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -235,7 +233,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 98 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 94 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -258,7 +256,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 101 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 100 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -281,7 +279,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 109 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 110 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 
@@ -303,7 +301,7 @@ Lagrange Id.
 
 
 
-Definition at line 50 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+Definition at line 48 of file impose\+\_\+impenetrability\+\_\+element.\+h.
 
 
 

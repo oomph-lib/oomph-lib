@@ -66,7 +66,7 @@ class oomph\+::\+C\+R\+Matrix$<$ T $>$}
 
 A class for compressed row matrices, a sparse storage format Once again the recursive template trick is used to inform that base class that is should use the access functions provided in the \mbox{\hyperlink{classoomph_1_1CRMatrix}{C\+R\+Matrix}} class. 
 
-Definition at line 671 of file matrices.\+h.
+Definition at line 696 of file matrices.\+h.
 
 
 
@@ -84,7 +84,7 @@ Default constructor.
 
 
 
-Definition at line 678 of file matrices.\+h.
+Definition at line 700 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_afefb2869fd01835cd23a8db25b90148f}\label{classoomph_1_1CRMatrix_afefb2869fd01835cd23a8db25b90148f}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!CRMatrix@{CRMatrix}}
@@ -99,7 +99,7 @@ Constructor\+: Pass vector of values, vector of column indices, vector of row st
 
 
 
-Definition at line 690 of file matrices.\+h.
+Definition at line 712 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_a27b5182b560fd414bde62baf6fe7f519}\label{classoomph_1_1CRMatrix_a27b5182b560fd414bde62baf6fe7f519}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!CRMatrix@{CRMatrix}}
@@ -114,7 +114,7 @@ Copy constructor.
 
 
 
-Definition at line 702 of file matrices.\+h.
+Definition at line 725 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_ae0f73d8120305af7a20f6f7b64af0547}\label{classoomph_1_1CRMatrix_ae0f73d8120305af7a20f6f7b64af0547}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!````~CRMatrix@{$\sim$CRMatrix}}
@@ -129,7 +129,7 @@ Destructor, delete any allocated memory.
 
 
 
-Definition at line 733 of file matrices.\+h.
+Definition at line 756 of file matrices.\+h.
 
 
 
@@ -147,7 +147,7 @@ Build matrix from compressed representation. Number of nonzero entries is read o
 
 Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. The optional final parameter specifies the number of columns. If it is not specified the matrix is assumed to be quadratic. 
 
-Definition at line 3162 of file matrices.\+h.
+Definition at line 3443 of file matrices.\+h.
 
 
 
@@ -166,7 +166,7 @@ Function to build matrix from pointers to arrays which hold the row starts, colu
 
 Function to build a \mbox{\hyperlink{classoomph_1_1CRMatrix}{C\+R\+Matrix}} from pointers to arrays which hold the row starts, column indices and non-\/zero values Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments! 
 
-Definition at line 3120 of file matrices.\+h.
+Definition at line 3393 of file matrices.\+h.
 
 
 
@@ -185,7 +185,7 @@ Wipe matrix data and set all values to 0.
 
 
 
-Definition at line 3088 of file matrices.\+h.
+Definition at line 3362 of file matrices.\+h.
 
 
 
@@ -204,7 +204,7 @@ Access to C-\/style column index array.
 
 
 
-Definition at line 785 of file matrices.\+h.
+Definition at line 815 of file matrices.\+h.
 
 
 
@@ -223,7 +223,7 @@ Access to C-\/style column index array (const version)
 
 
 
-Definition at line 788 of file matrices.\+h.
+Definition at line 821 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_a5ad8bd622cd8929c4fea17cf057f0a73}\label{classoomph_1_1CRMatrix_a5ad8bd622cd8929c4fea17cf057f0a73}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!entry@{entry}}
@@ -238,7 +238,7 @@ The read-\/write access function is deliberately broken.
 
 
 
-Definition at line 758 of file matrices.\+h.
+Definition at line 782 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_afc7fe758067c8ab3fe2dba96a4258492}\label{classoomph_1_1CRMatrix_afc7fe758067c8ab3fe2dba96a4258492}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!get\_entry@{get\_entry}}
@@ -253,7 +253,7 @@ Access function that will be called by the read-\/only round-\/bracket operator 
 
 
 
-Definition at line 741 of file matrices.\+h.
+Definition at line 766 of file matrices.\+h.
 
 
 
@@ -272,7 +272,7 @@ Broken assignment operator.
 
 
 
-Definition at line 727 of file matrices.\+h.
+Definition at line 750 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_abf764862746afbbe2655a41bdf726327}\label{classoomph_1_1CRMatrix_abf764862746afbbe2655a41bdf726327}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!output\_bottom\_right\_zero\_helper@{output\_bottom\_right\_zero\_helper}}
@@ -291,7 +291,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e15
 
 
 
-Definition at line 793 of file matrices.\+h.
+Definition at line 829 of file matrices.\+h.
 
 
 
@@ -310,7 +310,7 @@ Access to C-\/style row\+\_\+start array.
 
 
 
-Definition at line 779 of file matrices.\+h.
+Definition at line 803 of file matrices.\+h.
 
 
 
@@ -329,7 +329,7 @@ Access to C-\/style row\+\_\+start array (const version)
 
 
 
-Definition at line 782 of file matrices.\+h.
+Definition at line 809 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_af34167172020d60e5fa382e4bd5d6466}\label{classoomph_1_1CRMatrix_af34167172020d60e5fa382e4bd5d6466}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
@@ -348,7 +348,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af
 
 
 
-Definition at line 810 of file matrices.\+h.
+Definition at line 846 of file matrices.\+h.
 
 
 
@@ -370,7 +370,7 @@ Column index.
 
 
 
-Definition at line 852 of file matrices.\+h.
+Definition at line 888 of file matrices.\+h.
 
 
 
@@ -389,7 +389,7 @@ Start index for row.
 
 
 
-Definition at line 855 of file matrices.\+h.
+Definition at line 891 of file matrices.\+h.
 
 
 

@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Helmholtz\+Equations$<$ D\+IM $>$\+:\begin{figu
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a630648023d91bba9ee9a900353a1ea58}{Helmholtz\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&f)
-\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -61,7 +60,7 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_ab54feaaaca82a4cf112da743
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. Const version. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a6a65cb36cbb2d273a5cfe2a8f73e9604}{get\+\_\+source\+\_\+helmholtz}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&source) const
 \item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a5a572831004e521f58d5a54c8392262f}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&flux) const
+void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a24a6d4b7ac6ff606b1d20d08d7352ea4}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i for real and imag part. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a78f38997ee311a4cd710f0f595de1f3c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector (wrapper) \end{DoxyCompactList}\item 
@@ -79,8 +78,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a9a64bff0cb0c87
 virtual double \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a4559bf3e98ee0efa33f6efc11292ad3e}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+helmholtz}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a24fbdea32fd24f0cef97d34cf99c36a3}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -97,7 +95,7 @@ class oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$}
 
 A class for all isoparametric elements that solve the Helmholtz equations. \[ \frac{\partial^2 u}{\partial x_i^2} + k^2 u = f(x_j) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line 58 of file helmholtz\+\_\+elements.\+h.
+Definition at line 57 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -111,12 +109,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{oomph\+::
 
 
 
-Function pointer to source function fct(x,f(x)) -- x is a Vector! ~\newline
- 
+Function pointer to source function fct(x,f(x)) -- x is a Vector! 
 
 
 
-Definition at line 65 of file helmholtz\+\_\+elements.\+h.
+Definition at line 62 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -134,7 +131,7 @@ Constructor (must initialise the Source\+\_\+fct\+\_\+pt to null)
 
 
 
-Definition at line 70 of file helmholtz\+\_\+elements.\+h.
+Definition at line 67 of file helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzEquations_a938188bb8d574804293e70aa62c1c8b7}\label{classoomph_1_1HelmholtzEquations_a938188bb8d574804293e70aa62c1c8b7}} 
 \index{oomph::HelmholtzEquations$<$ DIM $>$@{oomph::HelmholtzEquations$<$ DIM $>$}!HelmholtzEquations@{HelmholtzEquations}}
@@ -149,7 +146,7 @@ Broken copy constructor.
 
 
 
-Definition at line 75 of file helmholtz\+\_\+elements.\+h.
+Definition at line 70 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -177,7 +174,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 501 of file helmholtz\+\_\+elements.\+cc.
+Definition at line 482 of file helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -200,7 +197,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 273 of file helmholtz\+\_\+elements.\+h.
+Definition at line 271 of file helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzEquations_a4559bf3e98ee0efa33f6efc11292ad3e}\label{classoomph_1_1HelmholtzEquations_a4559bf3e98ee0efa33f6efc11292ad3e}} 
 \index{oomph::HelmholtzEquations$<$ DIM $>$@{oomph::HelmholtzEquations$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_helmholtz@{dshape\_and\_dtest\_eulerian\_at\_knot\_helmholtz}}
@@ -249,7 +246,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 362 of file helmholtz\+\_\+elements.\+h.
+Definition at line 367 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -272,7 +269,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 350 of file helmholtz\+\_\+elements.\+h.
+Definition at line 356 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -287,8 +284,7 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{oomph\+::\+Helmholtz\+Eq
 
 
 
-Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- 
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. 
 
 Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and/or element Jacobian matrix
 
@@ -300,7 +296,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a37
 
 
 
-Definition at line 52 of file helmholtz\+\_\+elements.\+cc.
+Definition at line 49 of file helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -310,12 +306,12 @@ References i, interpolated\+\_\+u(), residuals(), and oomph\+::\+Quad\+Tree\+Nam
 
 Referenced by oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1HelmholtzEquations_a5a572831004e521f58d5a54c8392262f}\label{classoomph_1_1HelmholtzEquations_a5a572831004e521f58d5a54c8392262f}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzEquations_a24a6d4b7ac6ff606b1d20d08d7352ea4}\label{classoomph_1_1HelmholtzEquations_a24a6d4b7ac6ff606b1d20d08d7352ea4}} 
 \index{oomph::HelmholtzEquations$<$ DIM $>$@{oomph::HelmholtzEquations$<$ DIM $>$}!get\_flux@{get\_flux}}
 \index{get\_flux@{get\_flux}!oomph::HelmholtzEquations$<$ DIM $>$@{oomph::HelmholtzEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{oomph\+::\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{flux }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{oomph\+::\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{flux }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -323,7 +319,7 @@ Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i for real and imag part.
 
 
 
-Definition at line 312 of file helmholtz\+\_\+elements.\+h.
+Definition at line 318 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -342,7 +338,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{oomph\+::\+Helmh
 
 Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. 
 
-Definition at line 294 of file helmholtz\+\_\+elements.\+h.
+Definition at line 300 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -361,7 +357,7 @@ Return FE representation of function value u\+\_\+helmholtz(s) at local coordina
 
 
 
-Definition at line 373 of file helmholtz\+\_\+elements.\+h.
+Definition at line 377 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -384,7 +380,7 @@ Get the square of wavenumber.
 
 
 
-Definition at line 104 of file helmholtz\+\_\+elements.\+h.
+Definition at line 102 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -403,7 +399,7 @@ Get pointer to square of wavenumber.
 
 
 
-Definition at line 97 of file helmholtz\+\_\+elements.\+h.
+Definition at line 95 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -430,7 +426,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba
 
 
 
-Definition at line 122 of file helmholtz\+\_\+elements.\+h.
+Definition at line 119 of file helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzEquations_a4ff9181e482ccaf3ae94b452e0efa9a1}\label{classoomph_1_1HelmholtzEquations_a4ff9181e482ccaf3ae94b452e0efa9a1}} 
 \index{oomph::HelmholtzEquations$<$ DIM $>$@{oomph::HelmholtzEquations$<$ DIM $>$}!output@{output}}
@@ -453,7 +449,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ac30733fd570c0
 
 
 
-Definition at line 225 of file helmholtz\+\_\+elements.\+h.
+Definition at line 221 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -484,7 +480,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_a235f2ddc4141b
 
 
 
-Definition at line 344 of file helmholtz\+\_\+elements.\+cc.
+Definition at line 331 of file helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -511,7 +507,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ab64bdf668cacf
 
 
 
-Definition at line 206 of file helmholtz\+\_\+elements.\+h.
+Definition at line 201 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -542,7 +538,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ac05323b02dc7d
 
 
 
-Definition at line 257 of file helmholtz\+\_\+elements.\+cc.
+Definition at line 254 of file helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -569,7 +565,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ad9aeaf3b84064
 
 
 
-Definition at line 242 of file helmholtz\+\_\+elements.\+h.
+Definition at line 239 of file helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzEquations_a18bda8e96ef3abc2d247018592f15f56}\label{classoomph_1_1HelmholtzEquations_a18bda8e96ef3abc2d247018592f15f56}} 
 \index{oomph::HelmholtzEquations$<$ DIM $>$@{oomph::HelmholtzEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -594,7 +590,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ae560b649d5604
 
 
 
-Definition at line 390 of file helmholtz\+\_\+elements.\+cc.
+Definition at line 374 of file helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -625,7 +621,7 @@ x,y,u or x,y,z,u
 
 Output at nplot points in each coordinate direction 
 
-Definition at line 303 of file helmholtz\+\_\+elements.\+cc.
+Definition at line 294 of file helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -656,7 +652,7 @@ x,y,u or x,y,z,u
 
 Output at nplot points in each coordinate direction 
 
-Definition at line 446 of file helmholtz\+\_\+elements.\+cc.
+Definition at line 429 of file helmholtz\+\_\+elements.\+cc.
 
 
 
@@ -683,7 +679,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a49cc2d4f7ed5772
 
 
 
-Definition at line 176 of file helmholtz\+\_\+elements.\+h.
+Definition at line 172 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -706,7 +702,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a02cf8832a5e2886
 
 
 
-Definition at line 129 of file helmholtz\+\_\+elements.\+h.
+Definition at line 126 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -771,7 +767,7 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line 287 of file helmholtz\+\_\+elements.\+h.
+Definition at line 290 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -790,7 +786,7 @@ Broken assignment operator.
 
 Return the index at which the unknown value is stored. 
 
-Definition at line 92 of file helmholtz\+\_\+elements.\+h.
+Definition at line 88 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -812,7 +808,7 @@ Pointer to square of wavenumber.
 
 
 
-Definition at line 438 of file helmholtz\+\_\+elements.\+h.
+Definition at line 445 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -831,7 +827,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 435 of file helmholtz\+\_\+elements.\+h.
+Definition at line 442 of file helmholtz\+\_\+elements.\+h.
 
 
 

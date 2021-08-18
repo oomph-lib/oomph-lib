@@ -35,8 +35,7 @@ void \mbox{\hyperlink{classoomph_1_1Steady_a9598718f5a8ab37a123fb183ba4b8bf9}{as
 void \mbox{\hyperlink{classoomph_1_1Steady_aa1c00b0014a2394f7b2e1b302ebbce00}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em This function updates the \mbox{\hyperlink{classoomph_1_1Data}{Data}}\textquotesingle{}s time history so that we can advance to the next timestep. As for \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}} schemes, we simply push the values backwards... \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Steady_a4b3c9877146cb5a3673b54e0f02d9625}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em This function advances the time history of the positions at a node. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This function advances the time history of the positions at a node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Steady_a2a00515fba0cfe35d486ea2bbb5af99c}{set\+\_\+weights}} ()
 \begin{DoxyCompactList}\small\item\em Set weights. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Steady_acb34aea820a95d50b4dd7a8e92bea91a}{nprev\+\_\+values}} () const
@@ -48,9 +47,9 @@ double \mbox{\hyperlink{classoomph_1_1Steady_a34c993309f0a5c4c1cbf35ceef86f01b}{
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1Steady_a4bbc07dac00bd37fa208731f3bd52a0b}{One}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1Steady_a4bbc07dac00bd37fa208731f3bd52a0b}{One}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static variable to hold the value 1.\+0. \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{classoomph_1_1Steady_aaafcc85863ac0695b273a98fd4525196}{Zero}} =0.\+0
+static double \mbox{\hyperlink{classoomph_1_1Steady_aaafcc85863ac0695b273a98fd4525196}{Zero}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Static variable to hold the value 0.\+0. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1Time}{Time}} \mbox{\hyperlink{classoomph_1_1Steady_a5ef22ed9000bea59c719d9e3e98df267}{Dummy\+\_\+time}}
 \end{DoxyCompactItemize}
@@ -63,7 +62,7 @@ class oomph\+::\+Steady$<$ N\+S\+T\+E\+P\+S $>$}
 
 Faux time-\/stepper for steady problems. Allows storage for N\+S\+T\+E\+PS previous values. 
 
-Definition at line 629 of file timesteppers.\+h.
+Definition at line 692 of file timesteppers.\+h.
 
 
 
@@ -81,7 +80,7 @@ Typedef for function that returns the (scalar) initial value at a given value of
 
 
 
-Definition at line 714 of file timesteppers.\+h.
+Definition at line 778 of file timesteppers.\+h.
 
 
 
@@ -99,7 +98,7 @@ Constructor\+: Creates storage for N\+S\+T\+E\+PS previous timesteps and can eva
 
 
 
-Definition at line 638 of file timesteppers.\+h.
+Definition at line 699 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_af4d22661e0a41a82bcf08de797bd59e1}\label{classoomph_1_1Steady_af4d22661e0a41a82bcf08de797bd59e1}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!Steady@{Steady}}
@@ -114,7 +113,7 @@ Broken copy constructor.
 
 
 
-Definition at line 650 of file timesteppers.\+h.
+Definition at line 711 of file timesteppers.\+h.
 
 
 
@@ -132,7 +131,7 @@ Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}
 
 
 
-Definition at line 719 of file timesteppers.\+h.
+Definition at line 783 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_ad0aa4ed8297b77af2295827b1c0052b0}\label{classoomph_1_1Steady_ad0aa4ed8297b77af2295827b1c0052b0}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
@@ -151,7 +150,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_ab66972f0eaf3ba34645793e23
 
 
 
-Definition at line 687 of file timesteppers.\+h.
+Definition at line 751 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a1e25537dc2c134d8d23a9d5c1a1be328}\label{classoomph_1_1Steady_a1e25537dc2c134d8d23a9d5c1a1be328}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}}
@@ -170,7 +169,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a7e894df13c88c96dd8eced270
 
 
 
-Definition at line 667 of file timesteppers.\+h.
+Definition at line 731 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_add50fd00901dc87069f2404014d699f7}\label{classoomph_1_1Steady_add50fd00901dc87069f2404014d699f7}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!ndt@{ndt}}
@@ -189,7 +188,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a00e57b6436cff4fc82af481b8
 
 
 
-Definition at line 814 of file timesteppers.\+h.
+Definition at line 880 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_acb34aea820a95d50b4dd7a8e92bea91a}\label{classoomph_1_1Steady_acb34aea820a95d50b4dd7a8e92bea91a}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!nprev\_values@{nprev\_values}}
@@ -208,7 +207,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf81
 
 
 
-Definition at line 811 of file timesteppers.\+h.
+Definition at line 874 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a72bd55932539990df0c7b5db3a42926a}\label{classoomph_1_1Steady_a72bd55932539990df0c7b5db3a42926a}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!operator=@{operator=}}
@@ -223,7 +222,7 @@ Broken assignment operator.
 
 
 
-Definition at line 656 of file timesteppers.\+h.
+Definition at line 717 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_ac1735b614e9adf73a889e37afdd6d3a2}\label{classoomph_1_1Steady_ac1735b614e9adf73a889e37afdd6d3a2}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!order@{order}}
@@ -242,7 +241,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a251e5d4b37381e582
 
 
 
-Definition at line 663 of file timesteppers.\+h.
+Definition at line 724 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a2a00515fba0cfe35d486ea2bbb5af99c}\label{classoomph_1_1Steady_a2a00515fba0cfe35d486ea2bbb5af99c}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
@@ -261,7 +260,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb
 
 
 
-Definition at line 794 of file timesteppers.\+h.
+Definition at line 857 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a4b3c9877146cb5a3673b54e0f02d9625}\label{classoomph_1_1Steady_a4b3c9877146cb5a3673b54e0f02d9625}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!shift\_time\_positions@{shift\_time\_positions}}
@@ -272,8 +271,7 @@ void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+P
 
 
 
-This function advances the time history of the positions at a node. ~\newline
- 
+This function advances the time history of the positions at a node. 
 
 
 
@@ -281,7 +279,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a518b1bee5dc3aae8c5ef13560
 
 
 
-Definition at line 768 of file timesteppers.\+h.
+Definition at line 831 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_aa1c00b0014a2394f7b2e1b302ebbce00}\label{classoomph_1_1Steady_aa1c00b0014a2394f7b2e1b302ebbce00}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!shift\_time\_values@{shift\_time\_values}}
@@ -300,7 +298,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a010a3b03a23a1c48dd8ca1064
 
 
 
-Definition at line 746 of file timesteppers.\+h.
+Definition at line 809 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a34c993309f0a5c4c1cbf35ceef86f01b}\label{classoomph_1_1Steady_a34c993309f0a5c4c1cbf35ceef86f01b}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!weight@{weight}}
@@ -319,7 +317,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a4cb0aecb044b77ba0
 
 
 
-Definition at line 817 of file timesteppers.\+h.
+Definition at line 886 of file timesteppers.\+h.
 
 
 
@@ -333,14 +331,14 @@ Definition at line 817 of file timesteppers.\+h.
 
 
 
-Definition at line 838 of file timesteppers.\+h.
+Definition at line 906 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a4bbc07dac00bd37fa208731f3bd52a0b}\label{classoomph_1_1Steady_a4bbc07dac00bd37fa208731f3bd52a0b}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!One@{One}}
 \index{One@{One}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{One}{One}}
 {\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::One =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::One = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -348,14 +346,14 @@ Static variable to hold the value 1.\+0.
 
 
 
-Definition at line 832 of file timesteppers.\+h.
+Definition at line 900 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_aaafcc85863ac0695b273a98fd4525196}\label{classoomph_1_1Steady_aaafcc85863ac0695b273a98fd4525196}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!Zero@{Zero}}
 \index{Zero@{Zero}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{Zero}{Zero}}
 {\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::Zero =0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::Zero = 0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -363,7 +361,7 @@ Static variable to hold the value 0.\+0.
 
 
 
-Definition at line 835 of file timesteppers.\+h.
+Definition at line 903 of file timesteppers.\+h.
 
 
 

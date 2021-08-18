@@ -37,7 +37,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1FpPressureAdvectionDiffusionProblem_a026
 \begin{DoxyCompactList}\small\item\em The spatial dimension. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$ \mbox{\hyperlink{classoomph_1_1FpPressureAdvectionDiffusionProblem_aa39f26d35ad196059b7be871d77f04cc}{Orig\+\_\+problem\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to orig problem (required so we can re-\/assign eqn numbers) \end{DoxyCompactList}\item 
-std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1FpPressureAdvectionDiffusionProblem_ad2e52d2785ab08702684bab80542bbd8}{Eqn\+\_\+number\+\_\+backup}}
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1FpPressureAdvectionDiffusionProblem_ac897a2558e17c2fc7d608cc1cda69fe8}{Eqn\+\_\+number\+\_\+backup}}
 \begin{DoxyCompactList}\small\item\em Map to store original equation numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -48,7 +48,7 @@ class oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N
 
 Auxiliary \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} that can be used to assemble the pressure advection diffusion matrix needed by the Fp\+Preconditoner. 
 
-Definition at line 166 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 154 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -66,7 +66,7 @@ Constructor\+: Pass Navier-\/\+Stokes mesh and pointer to orig problem.
 
 
 
-Definition at line 172 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 158 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -88,7 +88,7 @@ Doc solution (only needed during development -- kept alive in case validation is
 
 
 
-Definition at line 499 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 478 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -111,7 +111,7 @@ Get the pressure advection diffusion Jacobian.
 
 
 
-Definition at line 192 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 178 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -130,7 +130,7 @@ Pin all non-\/pressure dofs and (if boolean flag is set to true also all pressur
 
 
 
-Definition at line 273 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 257 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -153,7 +153,7 @@ Reset pin status of all values.
 
 
 
-Definition at line 217 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 202 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -176,7 +176,7 @@ Validate pressure advection diffusion problem and doc exact and computed solutio
 
 
 
-Definition at line 382 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 365 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -189,12 +189,12 @@ Referenced by oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::va
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1FpPressureAdvectionDiffusionProblem_ad2e52d2785ab08702684bab80542bbd8}\label{classoomph_1_1FpPressureAdvectionDiffusionProblem_ad2e52d2785ab08702684bab80542bbd8}} 
+\mbox{\Hypertarget{classoomph_1_1FpPressureAdvectionDiffusionProblem_ac897a2558e17c2fc7d608cc1cda69fe8}\label{classoomph_1_1FpPressureAdvectionDiffusionProblem_ac897a2558e17c2fc7d608cc1cda69fe8}} 
 \index{oomph::FpPressureAdvectionDiffusionProblem$<$ ELEMENT $>$@{oomph::FpPressureAdvectionDiffusionProblem$<$ ELEMENT $>$}!Eqn\_number\_backup@{Eqn\_number\_backup}}
 \index{Eqn\_number\_backup@{Eqn\_number\_backup}!oomph::FpPressureAdvectionDiffusionProblem$<$ ELEMENT $>$@{oomph::FpPressureAdvectionDiffusionProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Eqn\_number\_backup}{Eqn\_number\_backup}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-std\+::map$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,std\+::vector$<$int$>$ $>$ \mbox{\hyperlink{classoomph_1_1FpPressureAdvectionDiffusionProblem}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Eqn\+\_\+number\+\_\+backup\hspace{0.3cm}{\ttfamily [private]}}
+std\+::map$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, std\+::vector$<$int$>$ $>$ \mbox{\hyperlink{classoomph_1_1FpPressureAdvectionDiffusionProblem}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Eqn\+\_\+number\+\_\+backup\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -202,7 +202,7 @@ Map to store original equation numbers.
 
 
 
-Definition at line 559 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 536 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -221,7 +221,7 @@ The spatial dimension.
 
 
 
-Definition at line 552 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 529 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -240,7 +240,7 @@ Pointer to orig problem (required so we can re-\/assign eqn numbers)
 
 
 
-Definition at line 556 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 533 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 

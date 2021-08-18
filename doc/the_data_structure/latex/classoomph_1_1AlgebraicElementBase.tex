@@ -26,7 +26,7 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicElementBase_ab9ada27015d5cb28ae00b0
 \doxysubsection{Detailed Description}
 Base class for algebraic elements. 
 
-Definition at line 516 of file algebraic\+\_\+elements.\+h.
+Definition at line 511 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -43,7 +43,7 @@ Empty constructor.
 
 
 
-Definition at line 522 of file algebraic\+\_\+elements.\+h.
+Definition at line 515 of file algebraic\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicElementBase_a992e105cff9c261ef9c809eb36ba288e}\label{classoomph_1_1AlgebraicElementBase_a992e105cff9c261ef9c809eb36ba288e}} 
 \index{oomph::AlgebraicElementBase@{oomph::AlgebraicElementBase}!AlgebraicElementBase@{AlgebraicElementBase}}
@@ -57,7 +57,7 @@ Broken copy constructor.
 
 
 
-Definition at line 525 of file algebraic\+\_\+elements.\+h.
+Definition at line 518 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -78,7 +78,7 @@ Broken assignment operator.
 
 
 
-Definition at line 531 of file algebraic\+\_\+elements.\+h.
+Definition at line 524 of file algebraic\+\_\+elements.\+h.
 
 
 
@@ -94,14 +94,13 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 Set up node update info for (newly created) algebraic node\+: I.\+e. work out its node update information by interpolation from the father element. Pass pointer to father element and the newly created node\textquotesingle{}s local coordinate in the father element. 
 
-Set up node update info for (newly created) algebraic node\+: Work out its node update information by interpolation from its father element, based on pointer to father element and its local coordinate in the father element. We\textquotesingle{}re creating the node update info for update functions that are shared by all nodes in the father element. ~\newline
- Now loop over the ids and check if they appear in all nodes
+Set up node update info for (newly created) algebraic node\+: Work out its node update information by interpolation from its father element, based on pointer to father element and its local coordinate in the father element. We\textquotesingle{}re creating the node update info for update functions that are shared by all nodes in the father element. Now loop over the ids and check if they appear in all nodes
 
-Definition at line 50 of file algebraic\+\_\+elements.\+cc.
-
+Definition at line 48 of file algebraic\+\_\+elements.\+cc.
 
 
-References oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), i, oomph\+::\+Algebraic\+Node\+::mesh\+\_\+pt(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update().
+
+References oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), i, oomph\+::\+Algebraic\+Node\+::mesh\+\_\+pt(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt(), and oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value().
 
 
 

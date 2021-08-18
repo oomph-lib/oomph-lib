@@ -45,24 +45,21 @@ Here is a sketch of the resulting discretisation, as displayed by {\ttfamily geo
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//=========start\_of\_geompackquadmesh\_class================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Quadrilateral mesh generator; Uses input from Geompack++.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// See: http://members.shaw.ca/bjoe/}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Currently only for four-\/noded quads -\/-\/ extension to higher-\/order}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// quads should be trivial (see the corresponding classes for}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// triangular meshes).}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{\textcolor{keyword}{class }GeompackQuadMesh : \textcolor{keyword}{public} Mesh}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{public}:}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor with the input files}}
-\DoxyCodeLine{\textcolor{comment}{} GeompackQuadMesh(\textcolor{keyword}{const} std::string\& mesh\_file\_name,}
-\DoxyCodeLine{                  \textcolor{keyword}{const} std::string\& curve\_file\_name,}
-\DoxyCodeLine{                  TimeStepper* time\_stepper\_pt=}
-\DoxyCodeLine{                  \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{  \textcolor{comment}{//=========start\_of\_geompackquadmesh\_class================================}}
+\DoxyCodeLine{\textcolor{comment}{  /// Quadrilateral mesh generator; Uses input from Geompack++.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// See: http://members.shaw.ca/bjoe/}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// Currently only for four-\/noded quads -\/-\/ extension to higher-\/order}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// quads should be trivial (see the corresponding classes for}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// triangular meshes).}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{  \textcolor{keyword}{class }GeompackQuadMesh : \textcolor{keyword}{public} Mesh}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{  \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Constructor with the input files}}
+\DoxyCodeLine{\textcolor{comment}{}    GeompackQuadMesh(\textcolor{keyword}{const} std::string\& mesh\_file\_name,}
+\DoxyCodeLine{                     \textcolor{keyword}{const} std::string\& curve\_file\_name,}
+\DoxyCodeLine{                     TimeStepper* time\_stepper\_pt = \&Mesh::Default\_TimeStepper)}
 
 \end{DoxyCodeInclude}
 

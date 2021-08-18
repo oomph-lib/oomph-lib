@@ -154,12 +154,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ace863f736d0dfa0a059b28959fced51d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with tetgenio data structure.  <a href="classoomph_1_1TetgenMesh.html#ace863f736d0dfa0a059b28959fced51d">More...</a><br /></td></tr>
 <tr class="separator:ace863f736d0dfa0a059b28959fced51d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a867b3f70bd0f5063901720d04f28e95e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a867b3f70bd0f5063901720d04f28e95e">TetgenMesh</a> (const std::string &amp;node_file_name, const std::string &amp;element_file_name, const std::string &amp;face_file_name, const bool &amp;split_corner_elements, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
-<tr class="memdesc:a867b3f70bd0f5063901720d04f28e95e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with the input files. Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
-  <a href="classoomph_1_1TetgenMesh.html#a867b3f70bd0f5063901720d04f28e95e">More...</a><br /></td></tr>
+<tr class="memdesc:a867b3f70bd0f5063901720d04f28e95e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with the input files. Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution.  <a href="classoomph_1_1TetgenMesh.html#a867b3f70bd0f5063901720d04f28e95e">More...</a><br /></td></tr>
 <tr class="separator:a867b3f70bd0f5063901720d04f28e95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fa783641ea515a942941425c468df01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a0fa783641ea515a942941425c468df01">TetgenMesh</a> (tetgenio &amp;tetgen_data, const bool &amp;split_corner_elements, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
-<tr class="memdesc:a0fa783641ea515a942941425c468df01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with tetgen data structure Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
-  <a href="classoomph_1_1TetgenMesh.html#a0fa783641ea515a942941425c468df01">More...</a><br /></td></tr>
+<tr class="memdesc:a0fa783641ea515a942941425c468df01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with tetgen data structure Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution.  <a href="classoomph_1_1TetgenMesh.html#a0fa783641ea515a942941425c468df01">More...</a><br /></td></tr>
 <tr class="separator:a0fa783641ea515a942941425c468df01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5eb01196bfadb426bb926f34f50261d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a5eb01196bfadb426bb926f34f50261d6">TetgenMesh</a> (TetMeshFacetedClosedSurface *const &amp;outer_boundary_pt, Vector&lt; TetMeshFacetedSurface * &gt; &amp;internal_surface_pt, const double &amp;element_volume, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false, const bool &amp;split_corner_elements=false)</td></tr>
 <tr class="memdesc:a5eb01196bfadb426bb926f34f50261d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh, based on a TetgenMeshFactedClosedSurface that specifies the outer boundary of the domain and any number of internal boundaries, specified by TetMeshFacetedSurfaces. Also specify target size for uniform element size.  <a href="classoomph_1_1TetgenMesh.html#a5eb01196bfadb426bb926f34f50261d6">More...</a><br /></td></tr>
@@ -176,10 +174,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aeab19209f141e65511a52f195d89d6ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#aeab19209f141e65511a52f195d89d6ac">tetgenio_exists</a> () const</td></tr>
 <tr class="memdesc:aeab19209f141e65511a52f195d89d6ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolen defining whether tetgenio object has been built or not.  <a href="classoomph_1_1TetgenMesh.html#aeab19209f141e65511a52f195d89d6ac">More...</a><br /></td></tr>
 <tr class="separator:aeab19209f141e65511a52f195d89d6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47071bb8a8c0df965a5e013f0a8fb1ba"><td class="memItemLeft" align="right" valign="top">tetgenio *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a47071bb8a8c0df965a5e013f0a8fb1ba">tetgenio_pt</a> ()</td></tr>
-<tr class="memdesc:a47071bb8a8c0df965a5e013f0a8fb1ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the triangulateio representation of the mesh.  <a href="classoomph_1_1TetgenMesh.html#a47071bb8a8c0df965a5e013f0a8fb1ba">More...</a><br /></td></tr>
-<tr class="separator:a47071bb8a8c0df965a5e013f0a8fb1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8758320eb646d20b578414c35145f0d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a8758320eb646d20b578414c35145f0d7">set_deep_copy_tetgenio_pt</a> (tetgenio *const &amp;<a class="el" href="classoomph_1_1TetgenMesh.html#a47071bb8a8c0df965a5e013f0a8fb1ba">tetgenio_pt</a>)</td></tr>
+<tr class="memitem:a0bab3fa6decfe7f79a7b8b9ff558543e"><td class="memItemLeft" align="right" valign="top">tetgenio *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a0bab3fa6decfe7f79a7b8b9ff558543e">tetgenio_pt</a> ()</td></tr>
+<tr class="memdesc:a0bab3fa6decfe7f79a7b8b9ff558543e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the triangulateio representation of the mesh.  <a href="classoomph_1_1TetgenMesh.html#a0bab3fa6decfe7f79a7b8b9ff558543e">More...</a><br /></td></tr>
+<tr class="separator:a0bab3fa6decfe7f79a7b8b9ff558543e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8758320eb646d20b578414c35145f0d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a8758320eb646d20b578414c35145f0d7">set_deep_copy_tetgenio_pt</a> (tetgenio *const &amp;<a class="el" href="classoomph_1_1TetgenMesh.html#a0bab3fa6decfe7f79a7b8b9ff558543e">tetgenio_pt</a>)</td></tr>
 <tr class="memdesc:a8758320eb646d20b578414c35145f0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the tetgen pointer by a deep copy.  <a href="classoomph_1_1TetgenMesh.html#a8758320eb646d20b578414c35145f0d7">More...</a><br /></td></tr>
 <tr class="separator:a8758320eb646d20b578414c35145f0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93e764a63a21a93d4a2548058eb1a7c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a93e764a63a21a93d4a2548058eb1a7c4">deep_copy_of_tetgenio</a> (tetgenio *const &amp;input_pt, tetgenio *&amp;output_pt)</td></tr>
@@ -215,7 +213,7 @@ class oomph::TetgenMesh&lt; ELEMENT &gt;</h3>
 
 <p>Unstructured tet mesh based on output from Tetgen: <a href="http://wias-berlin.de/software/tetgen/">http://wias-berlin.de/software/tetgen/</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00052">52</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00051">51</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2d2c7796e578f9fed1faf17569893531"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d2c7796e578f9fed1faf17569893531">&#9670;&nbsp;</a></span>TetgenMesh() <span class="overload">[1/6]</span></h2>
@@ -244,7 +242,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Empty constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00058">58</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00055">55</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -304,9 +302,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor with the input files. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00065">65</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00062">62</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00048">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00683">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00694">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
 </div>
 </div>
@@ -354,9 +352,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor with tetgenio data structure. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00105">105</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00100">100</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00048">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00687">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00690">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00683">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00694">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
 </div>
 </div>
@@ -420,12 +418,11 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor with the input files. Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
- </p>
+<p>Constructor with the input files. Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00154">154</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00147">147</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00048">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00687">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00690">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00683">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00694">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
 </div>
 </div>
@@ -477,12 +474,11 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor with tetgen data structure Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
- </p>
+<p>Constructor with tetgen data structure Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00211">211</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00203">203</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00048">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00687">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00690">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00683">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00694">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
 </div>
 </div>
@@ -548,9 +544,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Build mesh, based on a TetgenMeshFactedClosedSurface that specifies the outer boundary of the domain and any number of internal boundaries, specified by TetMeshFacetedSurfaces. Also specify target size for uniform element size. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00261">261</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00253">253</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00388">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>, <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00833">oomph::TetgenMesh&lt; ELEMENT &gt;::setup_reverse_lookup_schemes_for_faceted_surface()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00048">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00382">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>, <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00828">oomph::TetgenMesh&lt; ELEMENT &gt;::setup_reverse_lookup_schemes_for_faceted_surface()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00687">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00690">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00683">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00694">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
 </div>
 </div>
@@ -581,9 +577,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Empty destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00628">628</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00623">623</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>.</p>
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8h_source.html#l00687">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00690">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>.</p>
 
 </div>
 </div>
@@ -627,9 +623,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Build mesh from scaffold. </p>
 <p>Build unstructured tet mesh based on output from scaffold. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">53</a> of file <a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00048">48</a> of file <a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00065">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00080">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00062">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
 
 </div>
 </div>
@@ -678,9 +674,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Build tetgenio object from the TetMeshFacetedSurfaces. </p>
 <p>ALH: This may not be needed</p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00388">388</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00382">382</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00261">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00253">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
 
 </div>
 </div>
@@ -713,9 +709,9 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 <p>Transfer tetgenio data from the input to the output The output is assumed to have been constructed and "empty" </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00871">871</a> of file <a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00865">865</a> of file <a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00653">oomph::TetgenMesh&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00080">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00655">oomph::TetgenMesh&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt()</a>.</p>
 
 </div>
 </div>
@@ -747,9 +743,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Set the tetgen pointer by a deep copy. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00653">653</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00655">655</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00871">oomph::TetgenMesh&lt; ELEMENT &gt;::deep_copy_of_tetgenio()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>.</p>
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00865">oomph::TetgenMesh&lt; ELEMENT &gt;::deep_copy_of_tetgenio()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00687">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00690">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>.</p>
 
 </div>
 </div>
@@ -791,7 +787,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Overload set_mesh_level_time_stepper so that the stored time stepper now corresponds to the new timestepper. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00639">639</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00634">634</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -824,9 +820,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Function to setup the reverse look-up schemes. </p>
 <p>Helper function to set up the reverse look up scheme for facets. This is used to set up boundary coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00833">833</a> of file <a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00828">828</a> of file <a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00261">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00080">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00253">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
 
 </div>
 </div>
@@ -857,14 +853,14 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Boolen defining whether tetgenio object has been built or not. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00646">646</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00642">642</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>.</p>
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8h_source.html#l00687">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>.</p>
 
 </div>
 </div>
-<a id="a47071bb8a8c0df965a5e013f0a8fb1ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47071bb8a8c0df965a5e013f0a8fb1ba">&#9670;&nbsp;</a></span>tetgenio_pt()</h2>
+<a id="a0bab3fa6decfe7f79a7b8b9ff558543e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bab3fa6decfe7f79a7b8b9ff558543e">&#9670;&nbsp;</a></span>tetgenio_pt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -875,7 +871,7 @@ template&lt;class ELEMENT &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tetgenio* &amp; <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::tetgenio_pt </td>
+          <td class="memname">tetgenio*&amp; <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::tetgenio_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -890,11 +886,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Access to the triangulateio representation of the mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00650">650</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00649">649</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>.</p>
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8h_source.html#l00690">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00444">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00450">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
 
 </div>
 </div>
@@ -923,9 +919,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Boolean to indicate whether a tetgenio representation of the mesh exists. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">686</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00687">687</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00653">oomph::TetgenMesh&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00646">oomph::TetgenMesh&lt; ELEMENT &gt;::tetgenio_exists()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00105">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00628">oomph::TetgenMesh&lt; ELEMENT &gt;::~TetgenMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00080">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00655">oomph::TetgenMesh&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00642">oomph::TetgenMesh&lt; ELEMENT &gt;::tetgenio_exists()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00100">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00623">oomph::TetgenMesh&lt; ELEMENT &gt;::~TetgenMesh()</a>.</p>
 
 </div>
 </div>
@@ -953,9 +949,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Tetgen representation of mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">689</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00690">690</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00653">oomph::TetgenMesh&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00650">oomph::TetgenMesh&lt; ELEMENT &gt;::tetgenio_pt()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00105">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00628">oomph::TetgenMesh&lt; ELEMENT &gt;::~TetgenMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00080">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00655">oomph::TetgenMesh&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00649">oomph::TetgenMesh&lt; ELEMENT &gt;::tetgenio_pt()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00100">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00623">oomph::TetgenMesh&lt; ELEMENT &gt;::~TetgenMesh()</a>.</p>
 
 </div>
 </div>
@@ -983,9 +979,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Temporary scaffold mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">682</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00683">683</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00065">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00080">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00062">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
 
 </div>
 </div>
@@ -1013,9 +1009,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) </p>
 
-<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">693</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00694">694</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00065">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00062">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
 
 </div>
 </div>
@@ -1051,7 +1047,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:48:27
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:32:07
         </div>
       </div>
     </footer>

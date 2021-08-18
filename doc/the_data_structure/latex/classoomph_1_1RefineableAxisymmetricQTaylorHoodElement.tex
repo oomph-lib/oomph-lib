@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Elem
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3a7d2c7272f30b217c992b2c90ce8881}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at node n. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af1fe431fc8cdb9df1533b58bef408c49}{ncont\+\_\+interpolated\+\_\+values}} () const
-\begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: 4 (3 velocities + 1 pressure) \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a72b408f405d92ec892af7c0d74e913a7}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Rebuild from sons\+: empty. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a76415a2111375cf4b88cea3b2ade9c68}{nrecovery\+\_\+order}} ()
@@ -60,7 +60,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a14
 \doxysubsection{Detailed Description}
 Refineable version of Axisymmetric Quad Taylor Hood elements. (note that unlike the cartesian version this is not scale-\/able to higher dimensions!) 
 
-Definition at line 401 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 403 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -77,7 +77,7 @@ Constructor\+:
 
 
 
-Definition at line 442 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 453 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -98,7 +98,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb0
 
 
 
-Definition at line 533 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 566 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -120,7 +120,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 496 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 525 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -142,7 +142,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 477 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 502 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -164,7 +164,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad920e66c008
 
 
 
-Definition at line 577 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 615 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -186,7 +186,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8ca420443c2
 
 
 
-Definition at line 657 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 708 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -208,7 +208,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ab27986fc2f6
 
 
 
-Definition at line 543 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 576 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -230,7 +230,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ac4e4ae53741
 
 
 
-Definition at line 556 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 594 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -242,17 +242,13 @@ References i, and oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fract
 \doxysubsubsection{\texorpdfstring{ncont\_interpolated\_values()}{ncont\_interpolated\_values()}}
 {\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
 Number of continuously interpolated values\+: 4 (3 velocities + 1 pressure) 
-
-
 
 Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{oomph\+::\+Refineable\+Element}}.
 
 
 
-Definition at line 454 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 471 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a637fff45cb50b55c9c05633321489b89}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a637fff45cb50b55c9c05633321489b89}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!ninterpolating\_node@{ninterpolating\_node}}
@@ -270,7 +266,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8b1b5031b55
 
 
 
-Definition at line 648 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 693 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -292,7 +288,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a850180084aa
 
 
 
-Definition at line 639 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 678 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -314,7 +310,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 461 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 481 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ae60cce9a7c941a9e82ef31d1da23908b}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ae60cce9a7c941a9e82ef31d1da23908b}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!nvertex\_node@{nvertex\_node}}
@@ -332,7 +328,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 464 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 487 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -354,7 +350,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierSt
 
 
 
-Definition at line 422 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 428 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -376,7 +372,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierSt
 
 
 
-Definition at line 409 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 410 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -398,7 +394,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line 457 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 477 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3a7d2c7272f30b217c992b2c90ce8881}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3a7d2c7272f30b217c992b2c90ce8881}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!required\_nvalue@{required\_nvalue}}
@@ -416,7 +412,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement
 
 
 
-Definition at line 451 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 464 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a8f9a8ab37c89caf1460ee47dc667a4f0}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a8f9a8ab37c89caf1460ee47dc667a4f0}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!unpin\_elemental\_pressure\_dofs@{unpin\_elemental\_pressure\_dofs}}
@@ -434,7 +430,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierStokesEqua
 
 
 
-Definition at line 413 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 416 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -456,7 +452,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 468 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 493 of file refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

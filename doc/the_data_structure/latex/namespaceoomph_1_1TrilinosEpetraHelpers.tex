@@ -15,8 +15,7 @@ Epetra\+\_\+\+Vector $\ast$ \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHel
 Epetra\+\_\+\+Vector $\ast$ \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_acc7e0619f591ab3b4dc04802444dc92b}{create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&oomph\+\_\+vec)
 \begin{DoxyCompactList}\small\item\em create an Epetra\+\_\+\+Vector equivalent of \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} The argument \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} must be built. The Epetra\+\_\+\+Vector will point to, and N\+OT C\+O\+PY the underlying data in the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}. The oomph-\/lib \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} and the returned Epetra\+\_\+\+Vector will have the the same distribution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a302ed5d22db12175522a3fcf304856c9}{copy\+\_\+to\+\_\+oomphlib\+\_\+vector}} (const Epetra\+\_\+\+Vector $\ast$epetra\+\_\+vec\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&oomph\+\_\+vec)
-\begin{DoxyCompactList}\small\item\em Helper function to copy the contents of a Trilinos vector to an oomph-\/lib distributed vector. The distribution of the two vectors must be identical ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Helper function to copy the contents of a Trilinos vector to an oomph-\/lib distributed vector. The distribution of the two vectors must be identical. \end{DoxyCompactList}\item 
 Epetra\+\_\+\+Crs\+Matrix $\ast$ \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a0a8d24c6cf06d8c71bb414c153a276cf}{create\+\_\+distributed\+\_\+epetra\+\_\+matrix}} (const \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$oomph\+\_\+matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$dist\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em create an Epetra\+\_\+\+Crs\+Matrix from an oomph-\/lib \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. If oomph\+\_\+matrix\+\_\+pt is N\+OT distributed (i.\+e. locally replicated) and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If the oomph\+\_\+matrix\+\_\+pt is distributed then the Epetra\+\_\+\+Crs\+Matrix returned will have the same distribution as oomph\+\_\+matrix\+\_\+pt. The \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} argument dist\+\_\+pt should specify the distribution of the object this matrix will operate on. \end{DoxyCompactList}\item 
 Epetra\+\_\+\+Crs\+Matrix $\ast$ \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a1b96bb02b661a770a7b5830af771a249}{create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$oomph\+\_\+matrix\+\_\+pt)
@@ -24,8 +23,7 @@ Epetra\+\_\+\+Crs\+Matrix $\ast$ \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpet
 void \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a595c337ff02ad53b3dcac04ed142f8db}{multiply}} (const \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$matrix, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln)
 \begin{DoxyCompactList}\small\item\em Function to perform a matrix-\/vector multiplication on a oomph-\/lib matrix and vector using Trilinos functionality. N\+O\+TE 1. the matrix and the vectors must have the same communicator. N\+O\+TE 2. The vector will be returned with the same distribution as the matrix, unless a distribution is predefined in the solution vector in which case the vector will be returned with that distribution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a0d96936ed1e5f3266ef06564ae300103}{multiply}} (const \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} \&matrix\+\_\+1, const \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} \&matrix\+\_\+2, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} \&matrix\+\_\+soln, const bool \&use\+\_\+ml=false)
-\begin{DoxyCompactList}\small\item\em Function to perform a matrix-\/matrix multiplication on oomph-\/lib matrices by using Trilinos functionality. {\bfseries{N\+O\+TE}} 1. There are two Trilinos matrix-\/matrix multiplication methods available, using either the Epetra\+Ext\+::\+Matrix\+Matrix class (if use\+\_\+ml == false) or using ML (Epetra\+\_\+\+Matrix\+Mult method) {\bfseries{N\+O\+TE}} 2. the solution matrix (matrix\+\_\+soln) will be returned with the same distribution as matrix1 {\bfseries{N\+O\+TE}} 3. All matrices must share the same communicator. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to perform a matrix-\/matrix multiplication on oomph-\/lib matrices by using Trilinos functionality. {\bfseries{N\+O\+TE}} 1. There are two Trilinos matrix-\/matrix multiplication methods available, using either the Epetra\+Ext\+::\+Matrix\+Matrix class (if use\+\_\+ml == false) or using ML (Epetra\+\_\+\+Matrix\+Mult method) {\bfseries{N\+O\+TE}} 2. the solution matrix (matrix\+\_\+soln) will be returned with the same distribution as matrix1 {\bfseries{N\+O\+TE}} 3. All matrices must share the same communicator. \end{DoxyCompactList}\item 
 Epetra\+\_\+\+Map $\ast$ \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a5ccd0dec0ba044834119416b0ed06a2f}{create\+\_\+epetra\+\_\+map}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$const dist)
 \begin{DoxyCompactList}\small\item\em create an Epetra\+\_\+\+Map corresponding to the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -42,12 +40,11 @@ Helper namespace for use with the Trilinos Epetra package. Contains functions to
 
 
 
-Helper function to copy the contents of a Trilinos vector to an oomph-\/lib distributed vector. The distribution of the two vectors must be identical ~\newline
- 
+Helper function to copy the contents of a Trilinos vector to an oomph-\/lib distributed vector. The distribution of the two vectors must be identical. 
 
 
 
-Definition at line 188 of file trilinos\+\_\+helpers.\+cc.
+Definition at line 180 of file trilinos\+\_\+helpers.\+cc.
 
 
 
@@ -69,7 +66,7 @@ create an Epetra\+\_\+\+Crs\+Matrix from an oomph-\/lib \mbox{\hyperlink{classoo
 
 
 
-Definition at line 280 of file trilinos\+\_\+helpers.\+cc.
+Definition at line 289 of file trilinos\+\_\+helpers.\+cc.
 
 
 
@@ -91,7 +88,7 @@ create and Epetra\+\_\+\+Crs\+Matrix from an oomph-\/lib \mbox{\hyperlink{classo
 
 
 
-Definition at line 482 of file trilinos\+\_\+helpers.\+cc.
+Definition at line 474 of file trilinos\+\_\+helpers.\+cc.
 
 
 
@@ -113,7 +110,7 @@ create an Epetra\+\_\+\+Vector from an oomph-\/lib \mbox{\hyperlink{classoomph_1
 
 create an Epetra\+\_\+\+Vector from an oomph-\/lib \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}. If oomph\+\_\+vec is N\+OT distributed (i.\+e. locally replicated) and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If the oomph\+\_\+vec is distributed then the Epetra\+\_\+\+Vector returned will have the same distribution as oomph\+\_\+vec. 
 
-Definition at line 43 of file trilinos\+\_\+helpers.\+cc.
+Definition at line 41 of file trilinos\+\_\+helpers.\+cc.
 
 
 
@@ -135,7 +132,7 @@ create an Epetra\+\_\+\+Vector based on the argument oomph-\/lib \mbox{\hyperlin
 
 
 
-Definition at line 104 of file trilinos\+\_\+helpers.\+cc.
+Definition at line 100 of file trilinos\+\_\+helpers.\+cc.
 
 
 
@@ -153,7 +150,7 @@ create an Epetra\+\_\+\+Map corresponding to the \mbox{\hyperlink{classoomph_1_1
 
 
 
-Definition at line 1021 of file trilinos\+\_\+helpers.\+cc.
+Definition at line 977 of file trilinos\+\_\+helpers.\+cc.
 
 
 
@@ -175,7 +172,7 @@ create an Epetra\+\_\+\+Vector equivalent of \mbox{\hyperlink{classoomph_1_1Doub
 
 Create an Epetra\+\_\+\+Vector equivalent of \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} The argument \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} must be built. The Epetra\+\_\+\+Vector will point to, and N\+OT C\+O\+PY the underlying data in the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}. The oomph-\/lib \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} and the returned Epetra\+\_\+\+Vector will have the the same distribution. 
 
-Definition at line 153 of file trilinos\+\_\+helpers.\+cc.
+Definition at line 146 of file trilinos\+\_\+helpers.\+cc.
 
 
 
@@ -189,12 +186,11 @@ References oomph\+::\+Double\+Vector\+::built(), create\+\_\+epetra\+\_\+map(), 
 
 
 
-Function to perform a matrix-\/matrix multiplication on oomph-\/lib matrices by using Trilinos functionality. {\bfseries{N\+O\+TE}} 1. There are two Trilinos matrix-\/matrix multiplication methods available, using either the Epetra\+Ext\+::\+Matrix\+Matrix class (if use\+\_\+ml == false) or using ML (Epetra\+\_\+\+Matrix\+Mult method) {\bfseries{N\+O\+TE}} 2. the solution matrix (matrix\+\_\+soln) will be returned with the same distribution as matrix1 {\bfseries{N\+O\+TE}} 3. All matrices must share the same communicator. ~\newline
- 
+Function to perform a matrix-\/matrix multiplication on oomph-\/lib matrices by using Trilinos functionality. {\bfseries{N\+O\+TE}} 1. There are two Trilinos matrix-\/matrix multiplication methods available, using either the Epetra\+Ext\+::\+Matrix\+Matrix class (if use\+\_\+ml == false) or using ML (Epetra\+\_\+\+Matrix\+Mult method) {\bfseries{N\+O\+TE}} 2. the solution matrix (matrix\+\_\+soln) will be returned with the same distribution as matrix1 {\bfseries{N\+O\+TE}} 3. All matrices must share the same communicator. 
 
 
 
-Definition at line 777 of file trilinos\+\_\+helpers.\+cc.
+Definition at line 753 of file trilinos\+\_\+helpers.\+cc.
 
 
 
@@ -212,7 +208,7 @@ Function to perform a matrix-\/vector multiplication on a oomph-\/lib matrix and
 
 
 
-Definition at line 675 of file trilinos\+\_\+helpers.\+cc.
+Definition at line 657 of file trilinos\+\_\+helpers.\+cc.
 
 
 
@@ -220,5 +216,5 @@ References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::bu
 
 
 
-Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::interpolate\+\_\+and\+\_\+correct(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::interpolate\+\_\+and\+\_\+correct(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::interpolation\+\_\+self\+\_\+test(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::residual\+\_\+norm(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::restrict\+\_\+residual(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::restrict\+\_\+residual(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::restriction\+\_\+self\+\_\+test(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+structures(), and oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+structures().
+Referenced by oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), and oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose().
 

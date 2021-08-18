@@ -26,9 +26,8 @@ void \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElemen
 \begin{DoxyCompactList}\small\item\em Boundary id. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a54b4d5fe8b28df0937ffb61eb731108e}{boundary\+\_\+id}} () const
 \begin{DoxyCompactList}\small\item\em Boundary id. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abbf541f3b88a4b0acc89f4b6f252de3b}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
-\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. ~\newline
- \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a05b8e1fb0105106e178e93807b543975}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abc3c4f65ddb05984629ad9e35daa209a}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a9343241dc18e1331a5b220fd3fbe07a7}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
@@ -36,8 +35,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableEl
 unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a43bb151ce94f5f171b5f0577e1f46909}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of positional history values (Note\+: count includes current value!). Extract from first node but assume it\textquotesingle{}s the same for all. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ac9e67d23b865eb118acbca2eea74c8a3}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
-\begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a788234ec49e0702b4af030d03a454adc}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
 \begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ab2dddff594eedd24a1db29b17ab8868b}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
@@ -58,7 +56,7 @@ class oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+
 
 Class that makes the finite element specified as template argument projectable -- on the assumption that all fields are interpolated by isoparametric Lagrange interpolation between the nodes. 
 
-Definition at line 46 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 44 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -76,7 +74,7 @@ Constructor.
 
 
 
-Definition at line 53 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 49 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -98,7 +96,7 @@ Boundary id.
 
 
 
-Definition at line 93 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 88 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -108,25 +106,24 @@ References oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E
 
 Referenced by oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+id().
 
-\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abbf541f3b88a4b0acc89f4b6f252de3b}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abbf541f3b88a4b0acc89f4b6f252de3b}} 
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a05b8e1fb0105106e178e93807b543975}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a05b8e1fb0105106e178e93807b543975}} 
 \index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. ~\newline
- 
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. 
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line 113 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 107 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -149,7 +146,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line 167 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 160 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -164,8 +161,7 @@ double \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElem
 
 
 
-Return Jacobian of mapping and shape functions of field fld at local coordinate s. ~\newline
- 
+Return Jacobian of mapping and shape functions of field fld at local coordinate s. 
 
 
 
@@ -173,7 +169,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line 155 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 149 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -196,7 +192,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line 198 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 191 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -219,7 +215,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line 131 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 125 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -242,7 +238,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line 147 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 141 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -265,7 +261,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line 139 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 133 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -288,7 +284,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line 190 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 183 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -307,7 +303,7 @@ Boundary id.
 
 
 
-Definition at line 87 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 82 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -334,7 +330,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07
 
 
 
-Definition at line 59 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 55 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -356,7 +352,7 @@ Boundary id.
 
 
 
-Definition at line 208 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 199 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 

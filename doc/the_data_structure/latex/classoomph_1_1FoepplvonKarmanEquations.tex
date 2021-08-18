@@ -26,7 +26,7 @@ void \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a99922811dcc40c96e4
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_ac13007de5218847c3059c0c8971aec75}{eta}} () const
 \begin{DoxyCompactList}\small\item\em Eta. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a14eacc9306ffdbd6eff320f2d2b27702}{eta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a3d7635581df2578152d61456637c3ffa}{eta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to eta. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_aefe4ad7be59aeb518f31bc6a7374d957}{set\+\_\+volume\+\_\+constraint\+\_\+pressure\+\_\+data\+\_\+as\+\_\+external\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set \mbox{\hyperlink{classoomph_1_1Data}{Data}} value containing a single value which represents the volume control pressure as external data for this element. Only used for volume controlled problems in conjunction with \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanVolumeConstraintElement}{Foepplvon\+Karman\+Volume\+Constraint\+Element}}. \end{DoxyCompactList}\item 
@@ -65,8 +65,7 @@ void \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a1fb7d4b7782b2d04f4
 void \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a476cc624a69a47a4e66e1de129ad3a93}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Fill in the residuals with this element\textquotesingle{}s contribution. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a1a132ca2041cc236704ff4db2974dfc9}{interpolated\+\_\+w\+\_\+fvk}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, unsigned index=0) const
-\begin{DoxyCompactList}\small\item\em Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_ad5dae45475795bac40f5665391e1217e}{interpolated\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double \&sigma\+\_\+xx, double \&sigma\+\_\+yy, double \&sigma\+\_\+xy)
 \begin{DoxyCompactList}\small\item\em Compute in-\/plane stresses. \end{DoxyCompactList}\item 
 virtual double \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a6fa390e13fa36ed3f4fe24bfe79af008}{get\+\_\+bounded\+\_\+volume}} () const
@@ -109,7 +108,7 @@ static double \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_ac7346e43c
 \doxysubsection{Detailed Description}
 A class for all isoparametric elements that solve the Foeppl von Karman equations. \[ \nabla^4 w - \eta Diamond^4(w,\phi) = p(x,y) \] and \[ \nabla^4 \phi + \frac{1}{2} Diamond^4(w,w) = 0 \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line 62 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 60 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -126,7 +125,7 @@ Function pointer to pressure function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line 69 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 65 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -143,7 +142,7 @@ Constructor (must initialise the Pressure\+\_\+fct\+\_\+pt and Airy\+\_\+forcing
 
 
 
-Definition at line 76 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 71 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -161,7 +160,7 @@ Broken copy constructor.
 
 
 
-Definition at line 88 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 82 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -182,7 +181,7 @@ Access function\+: Pointer to Airy forcing function.
 
 
 
-Definition at line 210 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 224 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -200,7 +199,7 @@ Access function\+: Pointer to Airy forcing function. Const version.
 
 
 
-Definition at line 214 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 230 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -224,7 +223,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 556 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 547 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -246,7 +245,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 191 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 198 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FoepplvonKarmanEquations_aab91609ffb4a1ae2ae32ef7cb44f887e}\label{classoomph_1_1FoepplvonKarmanEquations_aab91609ffb4a1ae2ae32ef7cb44f887e}} 
 \index{oomph::FoepplvonKarmanEquations@{oomph::FoepplvonKarmanEquations}!dshape\_and\_dtest\_eulerian\_at\_knot\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_fvk}}
@@ -292,7 +291,7 @@ Eta.
 
 
 
-Definition at line 102 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 96 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -302,11 +301,11 @@ References Eta\+\_\+pt.
 
 Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1FoepplvonKarmanEquations_a14eacc9306ffdbd6eff320f2d2b27702}\label{classoomph_1_1FoepplvonKarmanEquations_a14eacc9306ffdbd6eff320f2d2b27702}} 
+\mbox{\Hypertarget{classoomph_1_1FoepplvonKarmanEquations_a3d7635581df2578152d61456637c3ffa}\label{classoomph_1_1FoepplvonKarmanEquations_a3d7635581df2578152d61456637c3ffa}} 
 \index{oomph::FoepplvonKarmanEquations@{oomph::FoepplvonKarmanEquations}!eta\_pt@{eta\_pt}}
 \index{eta\_pt@{eta\_pt}!oomph::FoepplvonKarmanEquations@{oomph::FoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{eta\_pt()}{eta\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -314,7 +313,7 @@ Pointer to eta.
 
 
 
-Definition at line 105 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 102 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -338,7 +337,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 53 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 50 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -356,7 +355,7 @@ Get Airy forcing term at (Eulerian) position x. This function is virtual to allo
 
 
 
-Definition at line 238 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 259 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -378,7 +377,7 @@ Return the integral of the displacement over the current element, effectively ca
 
 
 
-Definition at line 331 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 355 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -400,7 +399,7 @@ Get gradient of deflection\+: gradient\mbox{[}i\mbox{]} = dw/dx\+\_\+i.
 
 
 
-Definition at line 252 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 276 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -422,7 +421,7 @@ Get pressure term at (Eulerian) position x. This function is virtual to allow ov
 
 
 
-Definition at line 221 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 239 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -444,7 +443,7 @@ Compute in-\/plane stresses.
 
 
 
-Definition at line 372 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 374 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -458,12 +457,11 @@ References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::ds
 
 
 
-Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index ~\newline
- 
+Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index. 
 
 
 
-Definition at line 294 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 318 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -485,7 +483,7 @@ Return the index at which the i-\/th unknown value is stored. The default value,
 
 
 
-Definition at line 140 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 141 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -507,7 +505,7 @@ Broken assignment operator.
 
 
 
-Definition at line 94 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 88 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -533,7 +531,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFoepplvonKarmanElement_a8ac6c91
 
 
 
-Definition at line 154 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 158 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -563,7 +561,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFoepplvonKarmanElement_a06a3e1e
 
 
 
-Definition at line 466 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 461 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -589,7 +587,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFoepplvonKarmanElement_a283a307
 
 
 
-Definition at line 143 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 147 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -619,7 +617,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFoepplvonKarmanElement_a7cf9bdc
 
 
 
-Definition at line 427 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 426 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -645,7 +643,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFoepplvonKarmanElement_aaf40f9b
 
 
 
-Definition at line 171 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 176 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FoepplvonKarmanEquations_a2e926381021b99050cebb69a07867ebc}\label{classoomph_1_1FoepplvonKarmanEquations_a2e926381021b99050cebb69a07867ebc}} 
 \index{oomph::FoepplvonKarmanEquations@{oomph::FoepplvonKarmanEquations}!output\_fct@{output\_fct}}
@@ -671,7 +669,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QFoepplvonKarmanElement_a8bfd0ab
 
 
 
-Definition at line 503 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 496 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -693,7 +691,7 @@ Access function\+: Pointer to pressure function.
 
 
 
-Definition at line 203 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 212 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -711,7 +709,7 @@ Access function\+: Pointer to pressure function. Const version.
 
 
 
-Definition at line 206 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 218 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -733,7 +731,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 345 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
+Definition at line 349 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
@@ -769,7 +767,7 @@ Sets a flag to signify that we are solving the linear, pure bending equations, a
 
 
 
-Definition at line 386 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 410 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -786,7 +784,7 @@ References Linear\+\_\+bending\+\_\+model, oomph\+::\+Finite\+Element\+::nnode()
 
 
 
-Definition at line 444 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 468 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -804,7 +802,7 @@ Default value for physical constants.
 
 Default value physical constants. 
 
-Definition at line 449 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 472 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -822,7 +820,7 @@ Pointer to global eta.
 
 
 
-Definition at line 438 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 462 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -840,7 +838,7 @@ Flag which stores whether we are using a linear, pure bending model instead of t
 
 
 
-Definition at line 453 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 476 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -858,7 +856,7 @@ Pointer to pressure function\+:
 
 
 
-Definition at line 441 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 465 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -876,7 +874,7 @@ Index of the external \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that re
 
 
 
-Definition at line 459 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+Definition at line 482 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 

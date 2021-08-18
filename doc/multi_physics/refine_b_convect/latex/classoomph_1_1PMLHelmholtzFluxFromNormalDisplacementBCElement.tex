@@ -40,7 +40,7 @@ void \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElem
 double \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_a4e6b686d2905fc642cb735d611830be4}{shape\+\_\+and\+\_\+test}} (const Vector$<$ double $>$ \&s, Shape \&psi, Shape \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_ac0c13560b5e8dba19dc11f44f455bf97}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, Shape \&psi, Shape \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -61,7 +61,7 @@ class oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Ele
 
 A class for elements that allow the imposition of an prescribed flux (determined from the normal displacements of an adjacent linearly elastic solid. Normal derivative for displacement potential is given by normal displacement of adjacent solid multiplies by F\+SI parameter (q = k$^\wedge$2 B/E). The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 694 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 681 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -79,7 +79,7 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the f
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, and the face index that identifies the face of the bulk element to which this face element is to be attached. 
 
-Definition at line 913 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 898 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -98,7 +98,7 @@ Broken copy constructor.
 
 
 
-Definition at line 710 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 693 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -116,7 +116,7 @@ Add the element\textquotesingle{}s contribution to its residual vector and its J
 
 
 
-Definition at line 742 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 726 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -135,7 +135,7 @@ Broken assignment operator.
 
 Add the element\textquotesingle{}s contribution to its residual vector 
 
-Definition at line 731 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 715 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -154,7 +154,7 @@ Add the element\textquotesingle{}s contribution to its residual vector. flag=1(o
 
 Helper function to compute the element\textquotesingle{}s residual vector and the Jacobian matrix. 
 
-Definition at line 1081 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 1056 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -173,7 +173,7 @@ C-\/style output function.
 
 
 
-Definition at line 826 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 808 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_a798feeb0c2f831476e3ded0a91c6a572}\label{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_a798feeb0c2f831476e3ded0a91c6a572}} 
 \index{oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!output@{output}}
@@ -188,7 +188,7 @@ C-\/style output function.
 
 
 
-Definition at line 830 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 814 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_a64c0556634eed3070ae9a63d2a43efb5}\label{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_a64c0556634eed3070ae9a63d2a43efb5}} 
 \index{oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!output@{output}}
@@ -203,7 +203,7 @@ Output function.
 
 
 
-Definition at line 754 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 738 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_af0317c3b22f661138ddc31968c67eed8}\label{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_af0317c3b22f661138ddc31968c67eed8}} 
 \index{oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!output@{output}}
@@ -218,7 +218,7 @@ Output function\+: flux etc at Gauss points; n\+\_\+plot is ignored.
 
 
 
-Definition at line 762 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 746 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -237,7 +237,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 840 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 824 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_ac0c13560b5e8dba19dc11f44f455bf97}\label{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_ac0c13560b5e8dba19dc11f44f455bf97}} 
 \index{oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
@@ -248,11 +248,11 @@ double \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCEl
 
 
 
-Function to compute the shape and test functions and to return. 
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
 
-the Jacobian of mapping between local and global (Eulerian) coordinates 
 
-Definition at line 861 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+
+Definition at line 848 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -270,7 +270,7 @@ The spatial dimension of the problem.
 
 
 
-Definition at line 891 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 879 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 
@@ -289,7 +289,7 @@ The index at which the unknown is stored at the nodes.
 
 
 
-Definition at line 894 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
+Definition at line 882 of file pml\+\_\+helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h.
 
 
 

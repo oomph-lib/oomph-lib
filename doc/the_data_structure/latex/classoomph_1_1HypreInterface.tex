@@ -131,11 +131,9 @@ bool \mbox{\hyperlink{classoomph_1_1HypreInterface_aa0570d52546893f0767060c6efcd
 bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a0117cae635c9242ccfd9ad7153511c07}{Delete\+\_\+input\+\_\+data}}
 \begin{DoxyCompactList}\small\item\em Internal flag which is true when hypre\+\_\+setup or hypre\+\_\+solve can delete input matrix. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a3e1fd87d247b737001fb366bf4a7081f}{Using\+\_\+distributed\+\_\+rhs}}
-\begin{DoxyCompactList}\small\item\em Internal flag which tell the solver if the rhs \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} is distributed or not ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Internal flag which tell the solver if the rhs \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} is distributed or not. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a1bc7fe7e11b5c08cc768969b9e1f8641}{Returning\+\_\+distributed\+\_\+solution}}
-\begin{DoxyCompactList}\small\item\em Internal flag which tell the solver if the solution \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to be returned is distributed or not ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Internal flag which tell the solver if the solution \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to be returned is distributed or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -166,7 +164,7 @@ Hypre\textquotesingle{}s Krylov subspace solvers (\mbox{\hyperlink{classoomph_1_
 \end{DoxyVerb}
  
 
-Definition at line 137 of file hypre\+\_\+solver.\+h.
+Definition at line 133 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -230,7 +228,7 @@ Constructor.
 
 
 
-Definition at line 142 of file hypre\+\_\+solver.\+h.
+Definition at line 137 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -248,7 +246,7 @@ Destructor.
 
 
 
-Definition at line 232 of file hypre\+\_\+solver.\+h.
+Definition at line 226 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -266,7 +264,7 @@ Broken copy constructor.
 
 
 
-Definition at line 242 of file hypre\+\_\+solver.\+h.
+Definition at line 236 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -287,7 +285,7 @@ Turn off hypre error messages.
 
 
 
-Definition at line 257 of file hypre\+\_\+solver.\+h.
+Definition at line 254 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -305,7 +303,7 @@ Turn on the hypre error messages.
 
 
 
-Definition at line 254 of file hypre\+\_\+solver.\+h.
+Definition at line 248 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -323,7 +321,7 @@ Function return value of which preconditioner (if any) is stored.
 
 
 
-Definition at line 273 of file hypre\+\_\+solver.\+h.
+Definition at line 279 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -341,7 +339,7 @@ Function to return value of which solver (if any) is currently stored.
 
 
 
-Definition at line 270 of file hypre\+\_\+solver.\+h.
+Definition at line 273 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -363,7 +361,7 @@ Function deletes all solver data.
 
 \mbox{\hyperlink{classoomph_1_1HypreInterface_a989fc83bc47f7b4fb8a753b16a26a012}{hypre\+\_\+clean\+\_\+up\+\_\+memory()}} deletes any existing Hypre solver and Hypre matrix 
 
-Definition at line 1318 of file hypre\+\_\+solver.\+cc.
+Definition at line 1301 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -385,7 +383,7 @@ Function which sets values of First\+\_\+global\+\_\+row, Last\+\_\+global\+\_\+
 
 Helper function which creates a Hypre matrix from a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} If O\+O\+M\+P\+H-\/\+L\+IB has been set up for M\+PI use, the Hypre matrix is distributed over the available processors. 
 
-Definition at line 523 of file hypre\+\_\+solver.\+cc.
+Definition at line 513 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -407,7 +405,7 @@ Helper function performs a solve if any solver exists.
 
 Helper function performs a solve if solver data has been set up using hypre\+\_\+solver\+\_\+setup(...). 
 
-Definition at line 1102 of file hypre\+\_\+solver.\+cc.
+Definition at line 1086 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -429,7 +427,7 @@ Sets up the data required for to use as an oomph-\/lib \mbox{\hyperlink{classoom
 
 Sets up the solver data required for use in an oomph-\/lib \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} or \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}, once the Hypre matrix has been generated using hypre\+\_\+matrix\+\_\+setup(...). 
 
-Definition at line 571 of file hypre\+\_\+solver.\+cc.
+Definition at line 558 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -451,7 +449,7 @@ Broken assignment operator.
 
 
 
-Definition at line 248 of file hypre\+\_\+solver.\+h.
+Definition at line 242 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -472,7 +470,7 @@ A\+MG coarsening strategy. Coarsening types include\+: 0 = C\+L\+JP (parallel co
 
 
 
-Definition at line 384 of file hypre\+\_\+solver.\+h.
+Definition at line 392 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -490,7 +488,7 @@ Complex smoothing methods used in Boomer\+A\+MG. Relaxation types are\+: 6 = Sch
 
 
 
-Definition at line 358 of file hypre\+\_\+solver.\+h.
+Definition at line 366 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -508,7 +506,7 @@ Damping factor for Boomer\+A\+MG smoothed Jacobi or hybrid S\+OR.
 
 
 
-Definition at line 364 of file hypre\+\_\+solver.\+h.
+Definition at line 372 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -526,7 +524,7 @@ Maximum number of levels used in A\+MG.
 
 
 
-Definition at line 328 of file hypre\+\_\+solver.\+h.
+Definition at line 336 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -544,7 +542,7 @@ Parameter to identify diagonally dominant parts of the matrix in A\+MG.
 
 
 
-Definition at line 331 of file hypre\+\_\+solver.\+h.
+Definition at line 339 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -562,7 +560,7 @@ Used to set the Hypre printing level for A\+MG 0\+: no printout 1\+: print setup
 
 
 
-Definition at line 325 of file hypre\+\_\+solver.\+h.
+Definition at line 333 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -580,7 +578,7 @@ Simple smoothing methods used in Boomer\+A\+MG. Relaxation types include\+: 0 = 
 
 
 
-Definition at line 349 of file hypre\+\_\+solver.\+h.
+Definition at line 357 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -598,7 +596,7 @@ The number of smoother iterations to apply.
 
 
 
-Definition at line 361 of file hypre\+\_\+solver.\+h.
+Definition at line 369 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -616,7 +614,7 @@ Connection strength threshold parameter for Boomer\+A\+MG.
 
 
 
-Definition at line 367 of file hypre\+\_\+solver.\+h.
+Definition at line 375 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -634,7 +632,7 @@ Interpolation truncation factor for Boomer\+A\+MG.
 
 
 
-Definition at line 370 of file hypre\+\_\+solver.\+h.
+Definition at line 378 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -652,7 +650,7 @@ Flag to determine whether simple smoothers (determined by the A\+M\+G\+\_\+simpl
 
 
 
-Definition at line 336 of file hypre\+\_\+solver.\+h.
+Definition at line 344 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -666,7 +664,7 @@ Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+using\+\_\+complex\+\_\+smoot
 
 
 
-Definition at line 280 of file hypre\+\_\+solver.\+h.
+Definition at line 289 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -680,7 +678,7 @@ Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
 
 
 
-Definition at line 279 of file hypre\+\_\+solver.\+h.
+Definition at line 288 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -694,7 +692,7 @@ Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
 
 
 
-Definition at line 281 of file hypre\+\_\+solver.\+h.
+Definition at line 290 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -708,7 +706,7 @@ Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
 
 
 
-Definition at line 276 of file hypre\+\_\+solver.\+h.
+Definition at line 285 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -722,7 +720,7 @@ Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
 
 
 
-Definition at line 278 of file hypre\+\_\+solver.\+h.
+Definition at line 287 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -736,7 +734,7 @@ Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
 
 
 
-Definition at line 277 of file hypre\+\_\+solver.\+h.
+Definition at line 286 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -754,7 +752,7 @@ Internal flag which is true when hypre\+\_\+setup or hypre\+\_\+solve can delete
 
 
 
-Definition at line 443 of file hypre\+\_\+solver.\+h.
+Definition at line 451 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -772,7 +770,7 @@ Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{cl
 
 
 
-Definition at line 464 of file hypre\+\_\+solver.\+h.
+Definition at line 471 of file hypre\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HypreInterface_af91bb7e92785e510c04cdb0c11ef99cf}\label{classoomph_1_1HypreInterface_af91bb7e92785e510c04cdb0c11ef99cf}} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Euclid\_droptol@{Euclid\_droptol}}
@@ -786,7 +784,7 @@ Euclid drop tolerance for I\+L\+U(k) and I\+L\+UT factorization.
 
 
 
-Definition at line 404 of file hypre\+\_\+solver.\+h.
+Definition at line 412 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -804,7 +802,7 @@ Euclid level parameter for I\+L\+U(k) factorization.
 
 
 
-Definition at line 416 of file hypre\+\_\+solver.\+h.
+Definition at line 424 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -822,7 +820,7 @@ Flag to set the level of printing from Euclid when the Euclid destructor is call
 
 
 
-Definition at line 423 of file hypre\+\_\+solver.\+h.
+Definition at line 431 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -840,7 +838,7 @@ Flag to switch on Euclid row scaling.
 
 
 
-Definition at line 407 of file hypre\+\_\+solver.\+h.
+Definition at line 415 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -858,7 +856,7 @@ Flag to determine if Block Jacobi is used instead of P\+I\+LU.
 
 
 
-Definition at line 413 of file hypre\+\_\+solver.\+h.
+Definition at line 421 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -876,7 +874,7 @@ Flag to determine if I\+L\+UT (if true) or I\+L\+U(k) is used in Euclid.
 
 
 
-Definition at line 410 of file hypre\+\_\+solver.\+h.
+Definition at line 418 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -894,7 +892,7 @@ Used to keep track of which preconditioner (if any) is currently stored.
 
 
 
-Definition at line 486 of file hypre\+\_\+solver.\+h.
+Definition at line 493 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -912,7 +910,7 @@ Used to keep track of which solver (if any) is currently stored.
 
 
 
-Definition at line 483 of file hypre\+\_\+solver.\+h.
+Definition at line 490 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -930,7 +928,7 @@ the distribution for this helpers-\/
 
 
 
-Definition at line 489 of file hypre\+\_\+solver.\+h.
+Definition at line 496 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -957,7 +955,7 @@ Flag to determine if non-\/zero values of the Hypre error flag plus Hypre error 
 \item deallocation of solver data 
 \end{DoxyEnumerate}
 
-Definition at line 439 of file hypre\+\_\+solver.\+h.
+Definition at line 447 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -975,7 +973,7 @@ Hypre method flag. Valid values are specified in enumeration.
 
 
 
-Definition at line 312 of file hypre\+\_\+solver.\+h.
+Definition at line 320 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -993,7 +991,7 @@ Referenced by oomph\+::\+Hypre\+Solver\+::hypre\+\_\+method(), oomph\+::\+Hypre\
 
 
 
-Definition at line 318 of file hypre\+\_\+solver.\+h.
+Definition at line 326 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1011,7 +1009,7 @@ Used to set the Hypre printing level for the Krylov subspace solvers.
 
 
 
-Definition at line 427 of file hypre\+\_\+solver.\+h.
+Definition at line 435 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1029,7 +1027,7 @@ The Hypre\+\_\+\+I\+J\+Matrix version of the matrix used in solve(...), resolve(
 
 
 
-Definition at line 468 of file hypre\+\_\+solver.\+h.
+Definition at line 475 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1047,7 +1045,7 @@ The Hypre\+\_\+\+Par\+C\+S\+R\+Matrix version of the matrix used in solve(...), 
 
 
 
-Definition at line 472 of file hypre\+\_\+solver.\+h.
+Definition at line 479 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1065,7 +1063,7 @@ Maximum number of iterations used in solver.
 
 
 
-Definition at line 306 of file hypre\+\_\+solver.\+h.
+Definition at line 314 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1083,7 +1081,7 @@ Flag is true to output info and results of timings.
 
 
 
-Definition at line 303 of file hypre\+\_\+solver.\+h.
+Definition at line 311 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1101,7 +1099,7 @@ Para\+Sails filter parameter.
 
 
 
-Definition at line 401 of file hypre\+\_\+solver.\+h.
+Definition at line 409 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1119,7 +1117,7 @@ Para\+Sails nlevel parameter.
 
 
 
-Definition at line 395 of file hypre\+\_\+solver.\+h.
+Definition at line 403 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1137,7 +1135,7 @@ Para\+Sails symmetry flag, used to inform Para\+Sails of Symmetry of definitenss
 
 
 
-Definition at line 392 of file hypre\+\_\+solver.\+h.
+Definition at line 400 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1155,7 +1153,7 @@ Para\+Sails thresh parameter.
 
 
 
-Definition at line 398 of file hypre\+\_\+solver.\+h.
+Definition at line 406 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1173,7 +1171,7 @@ The internal Hypre preconditioner used in conjunction with Solver. \mbox{[}This 
 
 
 
-Definition at line 480 of file hypre\+\_\+solver.\+h.
+Definition at line 487 of file hypre\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HypreInterface_a1bc7fe7e11b5c08cc768969b9e1f8641}\label{classoomph_1_1HypreInterface_a1bc7fe7e11b5c08cc768969b9e1f8641}} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Returning\_distributed\_solution@{Returning\_distributed\_solution}}
@@ -1183,12 +1181,11 @@ Definition at line 480 of file hypre\+\_\+solver.\+h.
 
 
 
-Internal flag which tell the solver if the solution \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to be returned is distributed or not ~\newline
- 
+Internal flag which tell the solver if the solution \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to be returned is distributed or not. 
 
 
 
-Definition at line 452 of file hypre\+\_\+solver.\+h.
+Definition at line 460 of file hypre\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HypreInterface_a3b245194966a26307c86f3cf42062489}\label{classoomph_1_1HypreInterface_a3b245194966a26307c86f3cf42062489}} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Solver@{Solver}}
@@ -1202,7 +1199,7 @@ The Hypre solver used in solve(...), resolve(...) or preconditioner\+\_\+solve(.
 
 
 
-Definition at line 476 of file hypre\+\_\+solver.\+h.
+Definition at line 483 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1220,7 +1217,7 @@ Tolerance used to terminate solver.
 
 
 
-Definition at line 309 of file hypre\+\_\+solver.\+h.
+Definition at line 317 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1234,12 +1231,11 @@ Referenced by hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hyp
 
 
 
-Internal flag which tell the solver if the rhs \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} is distributed or not ~\newline
- 
+Internal flag which tell the solver if the rhs \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} is distributed or not. 
 
 
 
-Definition at line 448 of file hypre\+\_\+solver.\+h.
+Definition at line 456 of file hypre\+\_\+solver.\+h.
 
 
 

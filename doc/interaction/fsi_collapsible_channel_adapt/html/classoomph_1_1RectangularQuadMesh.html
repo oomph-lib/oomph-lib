@@ -220,8 +220,7 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:aacbacc3a0e6ea8508abb3140ba343ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">More...</a><br /></td></tr>
 <tr class="separator:aacbacc3a0e6ea8508abb3140ba343ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83dd0ace2eb47449f5e30522f71d9f59"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">Xperiodic</a></td></tr>
-<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction <br  />
-  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
+<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
 <tr class="separator:a83dd0ace2eb47449f5e30522f71d9f59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -232,7 +231,7 @@ class oomph::RectangularQuadMesh&lt; ELEMENT &gt;</h3>
 <p>This class is designed to be used as a Base class for more complex two dimensional meshes. The virtual functions <a class="el" href="classoomph_1_1RectangularQuadMesh.html#ad4c2f349cf201cb3107f0a4e5447c16f" title="Return the value of the x-coordinate at the node given by the local node number (xnode,...">x_spacing_function()</a> and <a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae78204de1f176cdf2e819673bd34e78a" title="Return the value of the y-coordinate at the node given by the local node number (xnode,...">y_spacing_function()</a> may be overloaded to provide arbitrary node spacing. The default is uniformly spaced nodes in each direction.</p>
 <p>It is also possible to make the solution periodic in the x direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00059">59</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00058">58</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aeda49fb3896e9e3aec328391b196a6bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeda49fb3896e9e3aec328391b196a6bf">&#9670;&nbsp;</a></span>RectangularQuadMesh() <span class="overload">[1/5]</span></h2>
@@ -314,9 +313,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!! </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00094">94</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00093">93</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00044">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00043">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
 
 </div>
 </div>
@@ -376,9 +375,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to Steady) </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00116">116</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00123">123</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00044">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00043">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
 
 </div>
 </div>
@@ -450,9 +449,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor that allows the specification of minimum and maximum values of x and y coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00130">130</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00146">146</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00044">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00043">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
 
 </div>
 </div>
@@ -518,9 +517,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-direction. Also pass pointer to timestepper (defaults to Steady) </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00149">149</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00174">174</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00044">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00043">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
 
 </div>
 </div>
@@ -598,9 +597,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00166">166</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00199">199</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00044">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00043">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
 
 </div>
 </div>
@@ -634,9 +633,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Generic mesh construction function: contains all the hard work. </p>
 <p>Generic mesh construction. This function contains the "guts" of the mesh generation process, including all the tedious loops, counting and spacing functions. The function should be called in all constuctors of any derived classes. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00044">44</a> of file <a class="el" href="rectangular__quadmesh_8template_8cc_source.html">rectangular_quadmesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00043">43</a> of file <a class="el" href="rectangular__quadmesh_8template_8cc_source.html">rectangular_quadmesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00143">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, <a class="el" href="horizontal__single__layer__spine__mesh_8template_8cc_source.html#l00074">oomph::HorizontalSingleLayerSpineMesh&lt; ELEMENT &gt;::build_horizontal_single_layer_mesh()</a>, <a class="el" href="single__layer__spine__mesh_8template_8cc_source.html#l00115">oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;::build_single_layer_mesh()</a>, <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00246">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::build_two_layer_mesh()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00094">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::RectangularQuadMesh()</a>, and <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00150">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::TwoLayerSpineMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00153">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, <a class="el" href="horizontal__single__layer__spine__mesh_8template_8cc_source.html#l00075">oomph::HorizontalSingleLayerSpineMesh&lt; ELEMENT &gt;::build_horizontal_single_layer_mesh()</a>, <a class="el" href="single__layer__spine__mesh_8template_8cc_source.html#l00114">oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;::build_single_layer_mesh()</a>, <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00267">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::build_two_layer_mesh()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00093">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::RectangularQuadMesh()</a>, and <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00156">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::TwoLayerSpineMesh()</a>.</p>
 
 </div>
 </div>
@@ -663,12 +662,11 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 
 <p>Reorder the elements: By default they are ordered in "horizontal" layers (increasing in x, then in y). This function changes this to an ordering in the vertical direction (y first, then x). This is more efficient if a frontal solver is used and the mesh has more elements in the x than the y direction. Can be overloaded in specific derived meshes. </p>
-<p>Reorder the elements so they are listed in vertical slices (more efficient during the frontal solution if the domain is long in the x-direction. <br  />
- </p>
+<p>Reorder the elements so they are listed in vertical slices (more efficient during the frontal solution if the domain is long in the x-direction. </p>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1ChannelSpineMesh.html#ad449460c4d06b2be64b53097143a3b09">oomph::ChannelSpineMesh&lt; ELEMENT &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00801">801</a> of file <a class="el" href="rectangular__quadmesh_8template_8cc_source.html">rectangular_quadmesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00834">834</a> of file <a class="el" href="rectangular__quadmesh_8template_8cc_source.html">rectangular_quadmesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -699,11 +697,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return number of elements in x direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00182">182</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00224">224</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00064">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Nx</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00063">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Nx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="backward__step__mesh_8template_8h_source.html#l00059">oomph::BackwardStepQuadMesh&lt; ELEMENT &gt;::BackwardStepQuadMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="backward__step__mesh_8template_8h_source.html#l00054">oomph::BackwardStepQuadMesh&lt; ELEMENT &gt;::BackwardStepQuadMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00060">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
 
 </div>
 </div>
@@ -734,11 +732,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return number of elements in y direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00189">189</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00231">231</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00066">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ny</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00065">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ny</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="backward__step__mesh_8template_8h_source.html#l00059">oomph::BackwardStepQuadMesh&lt; ELEMENT &gt;::BackwardStepQuadMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="backward__step__mesh_8template_8h_source.html#l00054">oomph::BackwardStepQuadMesh&lt; ELEMENT &gt;::BackwardStepQuadMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00060">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
 
 </div>
 </div>
@@ -769,9 +767,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return the maximum value of x coordinate. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00203">203</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00245">245</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00073">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmax</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00072">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmax</a>.</p>
 
 </div>
 </div>
@@ -802,9 +800,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return the minimum value of x coordinate. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00196">196</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00238">238</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00071">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmin</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00070">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmin</a>.</p>
 
 </div>
 </div>
@@ -860,9 +858,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a5fd9eae27ba19788e0b397936f0c5ead">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1ChannelSpineMesh.html#a16e0d4264443b1beb274753b0d6b970e">oomph::ChannelSpineMesh&lt; ELEMENT &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00237">237</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00279">279</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00068">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Np</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00064">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Nx</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00073">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00071">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmin</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00067">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Np</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00063">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Nx</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00072">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00070">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmin</a>.</p>
 
 </div>
 </div>
@@ -893,9 +891,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return the maximum value of y coordinate. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00217">217</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00259">259</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00078">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymax</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00077">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymax</a>.</p>
 
 </div>
 </div>
@@ -926,9 +924,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Return the minimum value of y coordinate. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00210">210</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00252">252</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00076">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymin</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00075">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymin</a>.</p>
 
 </div>
 </div>
@@ -984,9 +982,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a2d05d5228e3831021ab48dd429ada890">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00252">252</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00296">296</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00068">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Np</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00066">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ny</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00078">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00076">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymin</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00067">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Np</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00065">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ny</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00077">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00075">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymin</a>.</p>
 
 </div>
 </div>
@@ -1015,9 +1013,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Np: number of (linear) points in the element. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00068">68</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00067">67</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00144">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::x_spacing_function()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00237">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_spacing_function()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00252">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_spacing_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00156">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::x_spacing_function()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00279">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_spacing_function()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00296">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_spacing_function()</a>.</p>
 
 </div>
 </div>
@@ -1045,9 +1043,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Nx: number of elements in x-direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00064">64</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00063">63</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00182">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::nx()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00237">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_spacing_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00224">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::nx()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00165">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00279">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_spacing_function()</a>.</p>
 
 </div>
 </div>
@@ -1075,9 +1073,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Ny: number of elements in y-direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00066">66</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00065">65</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00189">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00252">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_spacing_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00231">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00296">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_spacing_function()</a>.</p>
 
 </div>
 </div>
@@ -1105,9 +1103,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Maximum value of x coordinate. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00073">73</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00072">72</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00203">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_max()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00237">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_spacing_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00165">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00245">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_max()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00279">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_spacing_function()</a>.</p>
 
 </div>
 </div>
@@ -1135,9 +1133,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Minimum value of x coordinate. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00071">71</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00070">70</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00196">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_min()</a>, <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00144">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::x_spacing_function()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00237">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_spacing_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00165">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00238">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_min()</a>, <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00156">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::x_spacing_function()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00279">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::x_spacing_function()</a>.</p>
 
 </div>
 </div>
@@ -1163,10 +1161,9 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Boolean variable used to determine whether the mesh is periodic in the x-direction <br  />
- </p>
+<p>Boolean variable used to determine whether the mesh is periodic in the x-direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00082">82</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00081">81</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -1194,9 +1191,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Maximum value of y coordinate. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00078">78</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00077">77</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00467">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00234">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_upper()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00217">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_max()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00252">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_spacing_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00510">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00254">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_upper()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00259">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_max()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00296">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_spacing_function()</a>.</p>
 
 </div>
 </div>
@@ -1224,9 +1221,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Minimum value of y coordinate. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00076">76</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00075">75</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00467">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>, <a class="el" href="single__layer__spine__mesh_8template_8h_source.html#l00079">oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00121">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00222">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_lower()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00234">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_upper()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00210">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_min()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00252">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_spacing_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00510">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>, <a class="el" href="single__layer__spine__mesh_8template_8h_source.html#l00075">oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00133">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00242">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_lower()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00254">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_upper()</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00252">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_min()</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00296">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::y_spacing_function()</a>.</p>
 
 </div>
 </div>
@@ -1262,7 +1259,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:20:38
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:00:26
         </div>
       </div>
     </footer>

@@ -25,17 +25,13 @@ Inheritance diagram for Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element$<$
 unsigned \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a90c0ea92a8f9f454c072f485d8b5ba6c}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a27d90ccfbecff454ee6d15ea44b1c956}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- r,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: r,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a8af9ea616644aac1a96d7e6647ce9cf5}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a50bc8d92910239c2fda6e65950042f05}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- r,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a8a4d1085090bd4c1a26f66ba56c1ba91}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a042bcc2a530356ca39490393f011287a}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: r,z,u\+\_\+exact at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a1f731cce10286e25c409d13bf3354da1}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt)
@@ -44,13 +40,13 @@ void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a1f731cce
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_ae0fbfa30e85f9a3fdc53b62c24a18395}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, Shape \&psi, D\+Shape \&dpsidx, Shape \&test, D\+Shape \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em Shape, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a78eca532d205360e75d634283b53b1b5}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, Shape \&psi, D\+Shape \&dpsidx, Shape \&test, D\+Shape \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Shape, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a56731006b4970e2a38efa586df3190ac}{Initial\+\_\+\+Nvalue}}
+static const unsigned \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement_a56731006b4970e2a38efa586df3190ac}{Initial\+\_\+\+Nvalue}} = 1
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nvalue\mbox{[}n\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -60,7 +56,7 @@ class Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_
 
 \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element}} elements are linear/quadrilateral/brick-\/shaped Advection Diffusion elements with isoparametric interpolation for the function. 
 
-Definition at line 603 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 662 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -78,7 +74,7 @@ Constructor\+: Call constructors for Q\+Element and Advection Diffusion equation
 
 
 
-Definition at line 619 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 674 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classQGeneralisedAxisymAdvectionDiffusionElement_a02ffb84281318b258dff327a3458dba1}\label{classQGeneralisedAxisymAdvectionDiffusionElement_a02ffb84281318b258dff327a3458dba1}} 
 \index{QGeneralisedAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{QGeneralisedAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!QGeneralisedAxisymAdvectionDiffusionElement@{QGeneralisedAxisymAdvectionDiffusionElement}}
@@ -93,7 +89,7 @@ Broken copy constructor.
 
 
 
-Definition at line 624 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 680 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -117,7 +113,7 @@ Define the shape functions and test functions and derivatives w.\+r.\+t. global 
 
 Galerkin\+: Test functions = shape functions 
 
-Definition at line 755 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 817 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classQGeneralisedAxisymAdvectionDiffusionElement_ae0fbfa30e85f9a3fdc53b62c24a18395}\label{classQGeneralisedAxisymAdvectionDiffusionElement_ae0fbfa30e85f9a3fdc53b62c24a18395}} 
 \index{QGeneralisedAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{QGeneralisedAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_cons\_axisym\_adv\_diff@{dshape\_and\_dtest\_eulerian\_cons\_axisym\_adv\_diff}}
@@ -128,13 +124,13 @@ double \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Gen
 
 
 
-Shape, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+Shape, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Galerkin\+: Test functions = shape functions 
 
-Definition at line 721 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 784 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -149,12 +145,11 @@ void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Gener
 
 
 
-C-\/style output function\+: ~\newline
- r,z,u. 
+C-\/style output function\+: r,z,u. 
 
 
 
-Definition at line 654 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 717 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -169,12 +164,11 @@ void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Gener
 
 
 
-C-\/style output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
+C-\/style output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
 
 
 
-Definition at line 661 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 724 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -189,12 +183,11 @@ void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Gener
 
 
 
-Output function\+: ~\newline
- r,z,u. 
+Output function\+: r,z,u. 
 
 
 
-Definition at line 643 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 702 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -209,12 +202,11 @@ void \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Gener
 
 
 
-Output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
+Output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
 
 
 
-Definition at line 648 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 709 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -233,7 +225,7 @@ Output function for a time-\/dependent exact solution. r,z,u\+\_\+exact at n\+\_
 
 
 
-Definition at line 678 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 743 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -252,7 +244,7 @@ Output function for an exact solution\+: r,z,u\+\_\+exact at n\+\_\+plot$^\wedge
 
 
 
-Definition at line 668 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 731 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -271,7 +263,7 @@ Broken assignment operator.
 
 Required \# of `values' (pinned or dofs) at node n 
 
-Definition at line 638 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 695 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -281,7 +273,7 @@ Definition at line 638 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_
 \index{Initial\_Nvalue@{Initial\_Nvalue}!QGeneralisedAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{QGeneralisedAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-const unsigned \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+const unsigned \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -289,10 +281,11 @@ Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nval
 
 
 
-Definition at line 612 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 669 of file gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{gen__axisym__advection__diffusion__elements_8h}{gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{gen__axisym__advection__diffusion__elements_8h}{gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{gen__axisym__advection__diffusion__elements_8cc}{gen\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

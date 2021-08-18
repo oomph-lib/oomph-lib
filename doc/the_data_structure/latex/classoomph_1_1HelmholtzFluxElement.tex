@@ -46,8 +46,7 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a8afbad47be6598b8a4a677
 void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a125673c600acb76787db63810c51066d}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
 virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ae3fb5779a0337f07a71bf8211ea403e3}{u\+\_\+index\+\_\+helmholtz}} () const
-\begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -58,8 +57,7 @@ double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a463b7abfac1cc3aa6984
 void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a0e43870b7dc404d05c58c835a79e7121}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)
 \item 
 virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a4f6caf80f078c526144990ee77bfaf92}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -78,7 +76,7 @@ class oomph\+::\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 A class for elements that allow the imposition of an applied flux on the boundaries of Helmholtz elements. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 52 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 51 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -96,7 +94,7 @@ Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a \mbox{\
 
 
 
-Definition at line 62 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 58 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -114,7 +112,7 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. 
 
-Definition at line 253 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 274 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -133,7 +131,7 @@ Broken empty constructor.
 
 
 
-Definition at line 70 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 67 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a6a2ee949191b2634cd3d5cd305f1982b}\label{classoomph_1_1HelmholtzFluxElement_a6a2ee949191b2634cd3d5cd305f1982b}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!HelmholtzFluxElement@{HelmholtzFluxElement}}
@@ -148,7 +146,7 @@ Broken copy constructor.
 
 
 
-Definition at line 79 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 76 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -174,7 +172,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 111 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 112 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -197,7 +195,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 100 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 101 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -212,12 +210,11 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+
 
 
 
-Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. ~\newline
- 
+Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. 
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
 
-Definition at line 409 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 426 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -240,7 +237,7 @@ Broken assignment operator.
 
 Access function for the prescribed-\/flux function pointer 
 
-Definition at line 96 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 94 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -255,7 +252,7 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+
 
 Function to calculate the prescribed flux at a given spatial position 
 
-Definition at line 201 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 225 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -274,7 +271,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 141 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 151 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -297,7 +294,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 146 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 159 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -316,7 +313,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 131 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 136 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -339,7 +336,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 135 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 143 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -358,7 +355,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 161 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 178 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -377,7 +374,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 181 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 202 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -392,12 +389,11 @@ virtual std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFlu
 
 
 
-Return the index at which the unknown value is stored. ~\newline
- 
+Return the index at which the unknown value is stored. 
 
 
 
-Definition at line 152 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 167 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -420,7 +416,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 124 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 126 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -442,7 +438,7 @@ The spatial dimension of the problem.
 
 
 
-Definition at line 233 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 258 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -461,7 +457,7 @@ Function pointer to the (global) prescribed-\/flux function.
 
 
 
-Definition at line 230 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 255 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -480,7 +476,7 @@ The index at which the real and imag part of the unknown is stored at the nodes.
 
 
 
-Definition at line 218 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 242 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 

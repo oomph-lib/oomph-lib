@@ -153,9 +153,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a68326e89f80f01690d8c2d03effb8508"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a68326e89f80f01690d8c2d03effb8508">SamplePointContainer</a> (Mesh *<a class="el" href="classSamplePointContainer.html#ae170916821b5f8f00255d251cd7f2d8c">mesh_pt</a>, const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;<a class="el" href="classSamplePointContainer.html#a6799027f7c569176934457b17bfddf0f">min_and_max_coordinates</a>, const bool &amp;<a class="el" href="classSamplePointContainer.html#a6b6b42a9e6bd8f116af8699e03a78d44">use_eulerian_coordinates_during_setup</a>, const bool &amp;<a class="el" href="classSamplePointContainer.html#a399d246c1afdfd993ceb80e6f2de1400">ignore_halo_elements_during_locate_zeta_search</a>, const unsigned &amp;<a class="el" href="classSamplePointContainer.html#a48e5ae762e0d56f67645ce4e7dd886d7">nsample_points_generated_per_element</a>)</td></tr>
-<tr class="memdesc:a68326e89f80f01690d8c2d03effb8508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classSamplePointContainer.html#a68326e89f80f01690d8c2d03effb8508">More...</a><br /></td></tr>
-<tr class="separator:a68326e89f80f01690d8c2d03effb8508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b07edb6a654c43dc33725c2d368ce2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#ab4b07edb6a654c43dc33725c2d368ce2">SamplePointContainer</a> (Mesh *<a class="el" href="classSamplePointContainer.html#ae170916821b5f8f00255d251cd7f2d8c">mesh_pt</a>, const Vector&lt; std::pair&lt; double, double &gt;&gt; &amp;<a class="el" href="classSamplePointContainer.html#a6799027f7c569176934457b17bfddf0f">min_and_max_coordinates</a>, const bool &amp;<a class="el" href="classSamplePointContainer.html#a6b6b42a9e6bd8f116af8699e03a78d44">use_eulerian_coordinates_during_setup</a>, const bool &amp;<a class="el" href="classSamplePointContainer.html#a399d246c1afdfd993ceb80e6f2de1400">ignore_halo_elements_during_locate_zeta_search</a>, const unsigned &amp;<a class="el" href="classSamplePointContainer.html#a48e5ae762e0d56f67645ce4e7dd886d7">nsample_points_generated_per_element</a>)</td></tr>
+<tr class="memdesc:ab4b07edb6a654c43dc33725c2d368ce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classSamplePointContainer.html#ab4b07edb6a654c43dc33725c2d368ce2">More...</a><br /></td></tr>
+<tr class="separator:ab4b07edb6a654c43dc33725c2d368ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6801f78c9d6b55a69f7e60a372dc9bf2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a6801f78c9d6b55a69f7e60a372dc9bf2">SamplePointContainer</a> ()</td></tr>
 <tr class="memdesc:a6801f78c9d6b55a69f7e60a372dc9bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken default constructor; needed for broken copy constructors. Don't call. It will die.  <a href="classSamplePointContainer.html#a6801f78c9d6b55a69f7e60a372dc9bf2">More...</a><br /></td></tr>
 <tr class="separator:a6801f78c9d6b55a69f7e60a372dc9bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,7 +172,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:acca8dbae8346d6c8924b1f815aa5f049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find sub-GeomObject (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub_geom_object_pt=0 if point can't be found.  <a href="classSamplePointContainer.html#acca8dbae8346d6c8924b1f815aa5f049">More...</a><br /></td></tr>
 <tr class="separator:acca8dbae8346d6c8924b1f815aa5f049"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af05aff0424680eec183a5680c4d6d65f"><td class="memItemLeft" align="right" valign="top">virtual unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#af05aff0424680eec183a5680c4d6d65f">total_number_of_sample_points_visited_during_locate_zeta_from_top_level</a> ()</td></tr>
-<tr class="memdesc:af05aff0424680eec183a5680c4d6d65f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter to keep track of how many sample points we've visited during top level call to locate_zeta. Virtual so it can be.  <a href="classSamplePointContainer.html#af05aff0424680eec183a5680c4d6d65f">More...</a><br /></td></tr>
+<tr class="memdesc:af05aff0424680eec183a5680c4d6d65f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter to keep track of how many sample points we've visited during top level call to locate_zeta. Virtual so it can be overloaded for different versions.  <a href="classSamplePointContainer.html#af05aff0424680eec183a5680c4d6d65f">More...</a><br /></td></tr>
 <tr class="separator:af05aff0424680eec183a5680c4d6d65f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7bf51a6987a9180c7715d6211fdbb46"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#ac7bf51a6987a9180c7715d6211fdbb46">total_number_of_sample_points_computed_recursively</a> () const =0</td></tr>
 <tr class="memdesc:ac7bf51a6987a9180c7715d6211fdbb46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of sample points in sample point container, possibly computed recursively.  <a href="classSamplePointContainer.html#ac7bf51a6987a9180c7715d6211fdbb46">More...</a><br /></td></tr>
@@ -207,16 +207,16 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:ad08a1cb658b3783bcf7d8491e90965f3"><td class="memItemLeft" align="right" valign="top">static std::ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#ad08a1cb658b3783bcf7d8491e90965f3">Visited_sample_points_file</a></td></tr>
 <tr class="memdesc:ad08a1cb658b3783bcf7d8491e90965f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">File to record sequence of visited sample points in.  <a href="classSamplePointContainer.html#ad08a1cb658b3783bcf7d8491e90965f3">More...</a><br /></td></tr>
 <tr class="separator:ad08a1cb658b3783bcf7d8491e90965f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1098cdf602fabc6ceec41bb7ea73805f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a1098cdf602fabc6ceec41bb7ea73805f">Always_fail_elemental_locate_zeta</a> =false</td></tr>
+<tr class="memitem:a1098cdf602fabc6ceec41bb7ea73805f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a1098cdf602fabc6ceec41bb7ea73805f">Always_fail_elemental_locate_zeta</a> = false</td></tr>
 <tr class="memdesc:a1098cdf602fabc6ceec41bb7ea73805f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to make to make locate zeta fail. Used for debugging/ illustration of search procedures.  <a href="classSamplePointContainer.html#a1098cdf602fabc6ceec41bb7ea73805f">More...</a><br /></td></tr>
 <tr class="separator:a1098cdf602fabc6ceec41bb7ea73805f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affcd582fab41aa86bfe46e1bf92fafd1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#affcd582fab41aa86bfe46e1bf92fafd1">Use_equally_spaced_interior_sample_points</a> =true</td></tr>
+<tr class="memitem:affcd582fab41aa86bfe46e1bf92fafd1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#affcd582fab41aa86bfe46e1bf92fafd1">Use_equally_spaced_interior_sample_points</a> = true</td></tr>
 <tr class="memdesc:affcd582fab41aa86bfe46e1bf92fafd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use equally spaced sample points? (otherwise vertices are sampled repeatedly.  <a href="classSamplePointContainer.html#affcd582fab41aa86bfe46e1bf92fafd1">More...</a><br /></td></tr>
 <tr class="separator:affcd582fab41aa86bfe46e1bf92fafd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1755d4419776cc87ab27e845d03449de"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a1755d4419776cc87ab27e845d03449de">Enable_timing_of_setup</a> =false</td></tr>
+<tr class="memitem:a1755d4419776cc87ab27e845d03449de"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a1755d4419776cc87ab27e845d03449de">Enable_timing_of_setup</a> = false</td></tr>
 <tr class="memdesc:a1755d4419776cc87ab27e845d03449de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time setup?  <a href="classSamplePointContainer.html#a1755d4419776cc87ab27e845d03449de">More...</a><br /></td></tr>
 <tr class="separator:a1755d4419776cc87ab27e845d03449de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13035786055416a2da9ae7eec515bccd"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a13035786055416a2da9ae7eec515bccd">Percentage_offset</a> =5.0</td></tr>
+<tr class="memitem:a13035786055416a2da9ae7eec515bccd"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a13035786055416a2da9ae7eec515bccd">Percentage_offset</a> = 5.0</td></tr>
 <tr class="memdesc:a13035786055416a2da9ae7eec515bccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset of sample point container boundaries beyond max/min coords.  <a href="classSamplePointContainer.html#a13035786055416a2da9ae7eec515bccd">More...</a><br /></td></tr>
 <tr class="separator:a13035786055416a2da9ae7eec515bccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -254,8 +254,8 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00218">218</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a68326e89f80f01690d8c2d03effb8508"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68326e89f80f01690d8c2d03effb8508">&#9670;&nbsp;</a></span>SamplePointContainer() <span class="overload">[1/3]</span></h2>
+<a id="ab4b07edb6a654c43dc33725c2d368ce2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4b07edb6a654c43dc33725c2d368ce2">&#9670;&nbsp;</a></span>SamplePointContainer() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -272,7 +272,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const Vector&lt; std::pair&lt; double, double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>min_and_max_coordinates</em>, </td>
         </tr>
         <tr>
@@ -308,9 +308,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00225">225</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00222">222</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00405">Max_search_radius</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00408">Max_search_radius</a>.</p>
 
 </div>
 </div>
@@ -339,7 +339,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken default constructor; needed for broken copy constructors. Don't call. It will die. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00247">247</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00246">246</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
 </div>
 </div>
@@ -369,9 +369,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00256">256</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00255">255</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -400,7 +400,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00264">264</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00267">267</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
 </div>
 </div>
@@ -430,11 +430,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Ignore halo elements? </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00315">315</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00318">318</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00389">Ignore_halo_elements_during_locate_zeta_search</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00391">Ignore_halo_elements_during_locate_zeta_search</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>.</p>
 
 </div>
 </div>
@@ -482,7 +482,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Implemented in <a class="el" href="classCGALSamplePointContainer.html#a059a8f0ebd74ffbc48722122b01e172b">CGALSamplePointContainer</a>, <a class="el" href="classNonRefineableBinArray.html#a27abcdeac898d37af63968ed97427e36">NonRefineableBinArray</a>, and <a class="el" href="classRefineableBinArray.html#a4f2f78efe9b05fda23d94e857d00cfa1">RefineableBinArray</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="mesh__as__geometric__object_8h_source.html#l00375">oomph::MeshAsGeomObject::locate_zeta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="mesh__as__geometric__object_8h_source.html#l00379">oomph::MeshAsGeomObject::locate_zeta()</a>.</p>
 
 </div>
 </div>
@@ -511,11 +511,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Set maximum search radius for locate zeta. This is initialised do DBL_MAX so we brutally search through the entire bin structure, no matter how big it is until we've found the required point (or failed to do so. This can be VERY costly with fine meshes. Here the user takes full responsibility and states that we have no chance in hell to find the required point in a bin whose closest vertex is further than the specified max search radius. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00343">343</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00346">346</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00405">Max_search_radius</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00408">Max_search_radius</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01997">RefineableBinArray::locate_zeta()</a>, and <a class="el" href="line__visualiser_8h_source.html#l00613">oomph::LineVisualiser::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l02002">RefineableBinArray::locate_zeta()</a>, and <a class="el" href="line__visualiser_8h_source.html#l00668">oomph::LineVisualiser::setup()</a>.</p>
 
 </div>
 </div>
@@ -544,9 +544,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer to mesh from whose FiniteElements sample points are created. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00291">291</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00294">294</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00374">Mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00376">Mesh_pt</a>.</p>
 
 </div>
 </div>
@@ -575,11 +575,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Vector of pair of doubles for min and maximum coordinates. min (first) and max. (second) coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00306">306</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00309">309</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00380">Min_and_max_coordinates</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00382">Min_and_max_coordinates</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01037">RefineableBinArray::output_neighbouring_bins()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01044">RefineableBinArray::output_neighbouring_bins()</a>.</p>
 
 </div>
 </div>
@@ -609,9 +609,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Pair of doubles for min and maximum coordinates in i-th direction: min (first) and max. (second) coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00298">298</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00301">301</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="sample__point__container_8h_source.html#l00380">Min_and_max_coordinates</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="sample__point__container_8h_source.html#l00382">Min_and_max_coordinates</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8cc_source.html#l00040">oomph::RefineableGmshTetMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
 
 </div>
 </div>
@@ -669,11 +671,11 @@ Protected Attributes</h2></td></tr>
 
 <p>"Measure of" number of sample points generated in each element </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00330">330</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00333">333</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00394">Nsample_points_generated_per_element</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00396">Nsample_points_generated_per_element</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>.</p>
 
 </div>
 </div>
@@ -703,9 +705,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00260">260</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00261">261</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -735,11 +737,11 @@ Protected Attributes</h2></td></tr>
 <p>Helper function to compute the min and max coordinates for the mesh, in each dimension. </p>
 <p>Setup the min and max coordinates for the mesh, in each dimension. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00690">690</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00684">684</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03384">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02171">NonRefineableBinArray::NonRefineableBinArray()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l00840">RefineableBinArray::RefineableBinArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03390">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02169">NonRefineableBinArray::NonRefineableBinArray()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l00841">RefineableBinArray::RefineableBinArray()</a>.</p>
 
 </div>
 </div>
@@ -795,16 +797,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Counter to keep track of how many sample points we've visited during top level call to locate_zeta. Virtual so it can be. </p>
-<p>overloaded for different versions. </p>
+<p>Counter to keep track of how many sample points we've visited during top level call to locate_zeta. Virtual so it can be overloaded for different versions. </p>
 
 <p>Reimplemented in <a class="el" href="classRefineableBinArray.html#a551adefafd0be9d184c4daa6adf16512">RefineableBinArray</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00277">277</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00280">280</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00398">Total_number_of_sample_points_visited_during_locate_zeta_from_top_level</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00401">Total_number_of_sample_points_visited_during_locate_zeta_from_top_level</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03093">NonRefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>.</p>
 
 </div>
 </div>
@@ -833,11 +834,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Use Eulerian coordinates (i.e. interpolated_x) rather than zeta itself (i.e. interpolated_zeta) to identify point. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00324">324</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00327">327</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00384">Use_eulerian_coordinates_during_setup</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00386">Use_eulerian_coordinates_during_setup</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03093">NonRefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>.</p>
 
 </div>
 </div>
@@ -852,7 +853,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool SamplePointContainer::Always_fail_elemental_locate_zeta =false</td>
+          <td class="memname">bool SamplePointContainer::Always_fail_elemental_locate_zeta = false</td>
         </tr>
       </table>
   </td>
@@ -865,9 +866,9 @@ Protected Attributes</h2></td></tr>
 <p>Boolean flag to make to make locate zeta fail. Used for debugging/ illustration of search procedures. </p>
 <p>Boolean flag to make to make locate zeta fail. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00355">355</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00358">358</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00445">RefineableBin::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01997">RefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03093">NonRefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00438">RefineableBin::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02002">RefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>.</p>
 
 </div>
 </div>
@@ -881,7 +882,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool SamplePointContainer::Enable_timing_of_setup =false</td>
+          <td class="memname">bool SamplePointContainer::Enable_timing_of_setup = false</td>
         </tr>
       </table>
   </td>
@@ -893,9 +894,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Time setup? </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00362">362</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00365">365</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03384">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03469">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02171">NonRefineableBinArray::NonRefineableBinArray()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l00840">RefineableBinArray::RefineableBinArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03390">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03480">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02169">NonRefineableBinArray::NonRefineableBinArray()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l00841">RefineableBinArray::RefineableBinArray()</a>.</p>
 
 </div>
 </div>
@@ -921,9 +922,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Ignore halo elements? </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00389">389</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00391">391</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8h_source.html#l00315">ignore_halo_elements_during_locate_zeta_search()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03093">NonRefineableBinArray::locate_zeta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8h_source.html#l00318">ignore_halo_elements_during_locate_zeta_search()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>.</p>
 
 </div>
 </div>
@@ -949,9 +950,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Max radius beyond which we stop searching the bin. Initialised to DBL_MAX so keep going until the point is found or until we've searched every single bin. Overwriting this means we won't search in bins whose closest vertex is at a distance greater than Max_search_radius from the point to be located. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00405">405</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00408">408</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03093">NonRefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>, <a class="el" href="sample__point__container_8h_source.html#l00343">max_search_radius()</a>, and <a class="el" href="sample__point__container_8h_source.html#l00225">SamplePointContainer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>, <a class="el" href="sample__point__container_8h_source.html#l00346">max_search_radius()</a>, and <a class="el" href="sample__point__container_8h_source.html#l00222">SamplePointContainer()</a>.</p>
 
 </div>
 </div>
@@ -977,9 +978,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer to mesh from whose FiniteElements sample points are created. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00374">374</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00376">376</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03384">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01874">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02406">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03469">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>, <a class="el" href="sample__point__container_8h_source.html#l00291">mesh_pt()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02171">NonRefineableBinArray::NonRefineableBinArray()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l00840">RefineableBinArray::RefineableBinArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03390">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01882">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02402">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03480">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>, <a class="el" href="sample__point__container_8h_source.html#l00294">mesh_pt()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02169">NonRefineableBinArray::NonRefineableBinArray()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l00841">RefineableBinArray::RefineableBinArray()</a>.</p>
 
 </div>
 </div>
@@ -1004,9 +1005,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Vector of pairs of doubles for min and maximum coordinates. Call: Min_and_max_coordinates[j] gives me the pair of min (first) and max. (second) coordinates in the j-th coordinate direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00380">380</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00382">382</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03384">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01830">BinArray::coords_to_bin_index()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01960">BinArray::coords_to_vectorial_bin_index()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01874">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02406">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02799">NonRefineableBinArray::get_bin()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00987">RefineableBinArray::get_bin_boundaries()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02914">NonRefineableBinArray::get_bin_vertices()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03469">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01997">RefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03093">NonRefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>, <a class="el" href="sample__point__container_8h_source.html#l00298">min_and_max_coordinates()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02171">NonRefineableBinArray::NonRefineableBinArray()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01037">RefineableBinArray::output_neighbouring_bins()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01222">BinArray::profile_get_neighbouring_bins_helper()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l00840">RefineableBinArray::RefineableBinArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03390">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01840">BinArray::coords_to_bin_index()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01969">BinArray::coords_to_vectorial_bin_index()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01882">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02402">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02794">NonRefineableBinArray::get_bin()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00995">RefineableBinArray::get_bin_boundaries()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02912">NonRefineableBinArray::get_bin_vertices()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03480">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02002">RefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>, <a class="el" href="sample__point__container_8h_source.html#l00301">min_and_max_coordinates()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02169">NonRefineableBinArray::NonRefineableBinArray()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01044">RefineableBinArray::output_neighbouring_bins()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01227">BinArray::profile_get_neighbouring_bins_helper()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l00841">RefineableBinArray::RefineableBinArray()</a>.</p>
 
 </div>
 </div>
@@ -1032,9 +1033,9 @@ Protected Attributes</h2></td></tr>
 
 <p>"Measure of" number of sample points generated in each element </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00394">394</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00396">396</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01874">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02406">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03469">CGALSamplePointContainer::get_sample_points()</a>, and <a class="el" href="sample__point__container_8h_source.html#l00330">nsample_points_generated_per_element()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01882">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02402">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03480">CGALSamplePointContainer::get_sample_points()</a>, and <a class="el" href="sample__point__container_8h_source.html#l00333">nsample_points_generated_per_element()</a>.</p>
 
 </div>
 </div>
@@ -1048,7 +1049,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double SamplePointContainer::Percentage_offset =5.0</td>
+          <td class="memname">double SamplePointContainer::Percentage_offset = 5.0</td>
         </tr>
       </table>
   </td>
@@ -1060,9 +1061,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Offset of sample point container boundaries beyond max/min coords. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00365">365</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00368">368</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l02406">NonRefineableBinArray::fill_bin_array()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l02402">NonRefineableBinArray::fill_bin_array()</a>.</p>
 
 </div>
 </div>
@@ -1088,9 +1089,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Counter to keep track of how many sample points we've visited during top level call to locate_zeta. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00398">398</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00401">401</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03384">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01997">RefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03093">NonRefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00840">RefineableBinArray::RefineableBinArray()</a>, <a class="el" href="sample__point__container_8h_source.html#l00277">total_number_of_sample_points_visited_during_locate_zeta_from_top_level()</a>, and <a class="el" href="sample__point__container_8h_source.html#l00724">RefineableBinArray::total_number_of_sample_points_visited_during_locate_zeta_from_top_level()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03390">CGALSamplePointContainer::CGALSamplePointContainer()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02002">RefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00841">RefineableBinArray::RefineableBinArray()</a>, <a class="el" href="sample__point__container_8h_source.html#l00280">total_number_of_sample_points_visited_during_locate_zeta_from_top_level()</a>, and <a class="el" href="sample__point__container_8h_source.html#l00727">RefineableBinArray::total_number_of_sample_points_visited_during_locate_zeta_from_top_level()</a>.</p>
 
 </div>
 </div>
@@ -1104,7 +1105,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool SamplePointContainer::Use_equally_spaced_interior_sample_points =true</td>
+          <td class="memname">bool SamplePointContainer::Use_equally_spaced_interior_sample_points = true</td>
         </tr>
       </table>
   </td>
@@ -1116,9 +1117,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Use equally spaced sample points? (otherwise vertices are sampled repeatedly. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00359">359</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00362">362</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01874">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02406">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03469">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00445">RefineableBin::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01882">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02402">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03480">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00438">RefineableBin::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>.</p>
 
 </div>
 </div>
@@ -1144,9 +1145,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Use Eulerian coordinates (i.e. interpolated_x) rather than zeta itself (i.e. interpolated_zeta) to identify point. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00384">384</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00386">386</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01874">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02406">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03469">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02308">NonRefineableBinArray::output_bins()</a>, and <a class="el" href="sample__point__container_8h_source.html#l00324">use_eulerian_coordinates_during_setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01882">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02402">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03480">CGALSamplePointContainer::get_sample_points()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02308">NonRefineableBinArray::output_bins()</a>, and <a class="el" href="sample__point__container_8h_source.html#l00327">use_eulerian_coordinates_during_setup()</a>.</p>
 
 </div>
 </div>
@@ -1174,9 +1175,9 @@ Protected Attributes</h2></td></tr>
 <p>File to record sequence of visited sample points in. Used for debugging/ illustration of search procedures.</p>
 <p><a class="el" href="classSamplePointContainer.html" title="Base class for all sample point containers.">SamplePointContainer</a> base class </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00351">351</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00354">354</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03810">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00445">RefineableBin::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03093">NonRefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03597">CGALSamplePointContainer::locate_zeta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l03821">CGALSamplePointContainer::limited_locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00438">RefineableBin::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l03606">CGALSamplePointContainer::locate_zeta()</a>.</p>
 
 </div>
 </div>
@@ -1212,7 +1213,7 @@ Protected Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:18
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:40
         </div>
       </div>
     </footer>

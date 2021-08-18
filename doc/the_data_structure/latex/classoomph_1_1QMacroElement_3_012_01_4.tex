@@ -34,8 +34,7 @@ void \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a204600d5c3473f95ef
 virtual void \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a74aaa1b631144e956b5f61e8d0cd9f05}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em assemble the jacobian of the mapping from the macro coordinates to the global coordinates \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_aef266683860031114776d25f51e8e306}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian2)
-\begin{DoxyCompactList}\small\item\em Assembles the second derivative jacobian of the mapping from the macro coordinates to global coordinates x ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Assembles the second derivative jacobian of the mapping from the macro coordinates to global coordinates x. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -54,7 +53,7 @@ The macro element mapping is based on the member function pointer to the associa
 \item $ t $ is the time level (t=0\+: current; t$>$0 previous timestep) 
 \end{DoxyItemize}
 
-Definition at line 292 of file macro\+\_\+element.\+h.
+Definition at line 286 of file macro\+\_\+element.\+h.
 
 
 
@@ -71,7 +70,7 @@ Constructor\+: Pass the pointer to the domain and the macro element\textquotesin
 
 
 
-Definition at line 299 of file macro\+\_\+element.\+h.
+Definition at line 291 of file macro\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QMacroElement_3_012_01_4_ab709c20b82b4959edfa566b17e1b5441}\label{classoomph_1_1QMacroElement_3_012_01_4_ab709c20b82b4959edfa566b17e1b5441}} 
 \index{oomph::QMacroElement$<$ 2 $>$@{oomph::QMacroElement$<$ 2 $>$}!QMacroElement@{QMacroElement}}
@@ -85,7 +84,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line 304 of file macro\+\_\+element.\+h.
+Definition at line 296 of file macro\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QMacroElement_3_012_01_4_afb16986bbc009e8d23a434d6dc6631bc}\label{classoomph_1_1QMacroElement_3_012_01_4_afb16986bbc009e8d23a434d6dc6631bc}} 
 \index{oomph::QMacroElement$<$ 2 $>$@{oomph::QMacroElement$<$ 2 $>$}!QMacroElement@{QMacroElement}}
@@ -99,7 +98,7 @@ Broken copy constructor.
 
 
 
-Definition at line 312 of file macro\+\_\+element.\+h.
+Definition at line 304 of file macro\+\_\+element.\+h.
 
 
 
@@ -117,7 +116,7 @@ Empty destructor.
 
 
 
-Definition at line 324 of file macro\+\_\+element.\+h.
+Definition at line 316 of file macro\+\_\+element.\+h.
 
 
 
@@ -126,22 +125,19 @@ Definition at line 324 of file macro\+\_\+element.\+h.
 \index{oomph::QMacroElement$<$ 2 $>$@{oomph::QMacroElement$<$ 2 $>$}!assemble\_macro\_to\_eulerian\_jacobian@{assemble\_macro\_to\_eulerian\_jacobian}}
 \index{assemble\_macro\_to\_eulerian\_jacobian@{assemble\_macro\_to\_eulerian\_jacobian}!oomph::QMacroElement$<$ 2 $>$@{oomph::QMacroElement$<$ 2 $>$}}
 \doxysubsubsection{\texorpdfstring{assemble\_macro\_to\_eulerian\_jacobian()}{assemble\_macro\_to\_eulerian\_jacobian()}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1QMacroElement}{oomph\+::\+Q\+Macro\+Element}}$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{S,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1QMacroElement}{oomph\+::\+Q\+Macro\+Element}}$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 assemble the jacobian of the mapping from the macro coordinates to the global coordinates 
 
-Assembles the jacobian of the mapping from the macro coordinates to ~\newline
-
-
-the global coordinates 
+Assembles the jacobian of the mapping from the macro coordinates to the global coordinates. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1MacroElement_acd465f4065dee7acfbb36d307ad691f9}{oomph\+::\+Macro\+Element}}.
 
 
 
-Definition at line 240 of file macro\+\_\+element.\+cc.
+Definition at line 238 of file macro\+\_\+element.\+cc.
 
 
 
@@ -155,8 +151,7 @@ References oomph\+::\+Domain\+::dmacro\+\_\+element\+\_\+boundary(), oomph\+::\+
 
 
 
-Assembles the second derivative jacobian of the mapping from the macro coordinates to global coordinates x ~\newline
- 
+Assembles the second derivative jacobian of the mapping from the macro coordinates to global coordinates x. 
 
 
 
@@ -164,7 +159,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1MacroElement_a3c898b6deef9f8bf
 
 
 
-Definition at line 336 of file macro\+\_\+element.\+cc.
+Definition at line 334 of file macro\+\_\+element.\+cc.
 
 
 
@@ -226,7 +221,7 @@ Broken assignment operator.
 
 
 
-Definition at line 318 of file macro\+\_\+element.\+h.
+Definition at line 310 of file macro\+\_\+element.\+h.
 
 
 
@@ -248,7 +243,7 @@ Implements \mbox{\hyperlink{classoomph_1_1MacroElement_a5d3646716d60aedf45688976
 
 
 
-Definition at line 329 of file macro\+\_\+element.\+h.
+Definition at line 321 of file macro\+\_\+element.\+h.
 
 
 

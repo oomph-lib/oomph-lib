@@ -95,7 +95,7 @@ double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aa54b4067e3
 virtual unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abd193a0c754ddfc7b87ee7ec9f7e7694}{u\+\_\+index\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th unknown velocity component is stored. The default value, i, is appropriate for single-\/physics problems. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknowns are always stored at the same indices at each node. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3e15de0c9f6d885f35906653c34b7697}{n\+\_\+u\+\_\+nst}} () const
-\begin{DoxyCompactList}\small\item\em Return the number of velocity components (used in Fluid\+Interface\+Elements) \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aff570df80204a77f5c999573d4f2cb6d}{get\+\_\+du\+\_\+dt}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em i-\/th component of du/dt at local node n. Uses suitably interpolated value for hanging nodes. N\+O\+TE\+: This is essentially a wrapper for \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a543fb6d0eddee513017e3b95c8b2a271}{du\+\_\+dt\+\_\+nst()}} so it can be called externally. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a543fb6d0eddee513017e3b95c8b2a271}{du\+\_\+dt\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
@@ -185,7 +185,7 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_af986024e19c3
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a72a0b348de77b1855d47429dd7430682}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7aeaf71b3ffa04114f9d44f630af84c2}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+dresiduals\+\_\+dparameter}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam)
-\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (differentiated w.\+r.\+t. a parameter) \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ad994654e6b67f8fe23baec0c1a15cac7}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+djacobian\+\_\+dparameter}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djac\+\_\+dparam)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix Virtual function can be overloaded by hanging-\/node version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aa8950bfab421438e63717ac8317f6911}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+djacobian\+\_\+and\+\_\+dmass\+\_\+matrix\+\_\+dparameter}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djac\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&dmass\+\_\+matrix\+\_\+dparam)
@@ -194,7 +194,7 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a8ea25af36d46
 \begin{DoxyCompactList}\small\item\em Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a0ba16529bfdadde8c927ac92e2e95941}{fill\+\_\+in\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the residuals and Jacobian for the associated pressure advection diffusion problem. Used by the Fp preconditioner. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&eqn\+\_\+number\+\_\+backup)
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&eqn\+\_\+number\+\_\+backup)
 \begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs and backup eqn numbers. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)=0
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
@@ -279,7 +279,7 @@ double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aa54b4067e3
 virtual unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abd193a0c754ddfc7b87ee7ec9f7e7694}{u\+\_\+index\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th unknown velocity component is stored. The default value, i, is appropriate for single-\/physics problems. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknowns are always stored at the same indices at each node. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3e15de0c9f6d885f35906653c34b7697}{n\+\_\+u\+\_\+nst}} () const
-\begin{DoxyCompactList}\small\item\em Return the number of velocity components (used in Fluid\+Interface\+Elements) \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aff570df80204a77f5c999573d4f2cb6d}{get\+\_\+du\+\_\+dt}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em i-\/th component of du/dt at local node n. Uses suitably interpolated value for hanging nodes. N\+O\+TE\+: This is essentially a wrapper for \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a543fb6d0eddee513017e3b95c8b2a271}{du\+\_\+dt\+\_\+nst()}} so it can be called externally. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a543fb6d0eddee513017e3b95c8b2a271}{du\+\_\+dt\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
@@ -369,7 +369,7 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_af986024e19c3
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a72a0b348de77b1855d47429dd7430682}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7aeaf71b3ffa04114f9d44f630af84c2}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+dresiduals\+\_\+dparameter}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam)
-\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (differentiated w.\+r.\+t. a parameter) \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ad994654e6b67f8fe23baec0c1a15cac7}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+djacobian\+\_\+dparameter}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djac\+\_\+dparam)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix Virtual function can be overloaded by hanging-\/node version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aa8950bfab421438e63717ac8317f6911}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+djacobian\+\_\+and\+\_\+dmass\+\_\+matrix\+\_\+dparameter}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djac\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&dmass\+\_\+matrix\+\_\+dparam)
@@ -378,7 +378,7 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a8ea25af36d46
 \begin{DoxyCompactList}\small\item\em Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a0ba16529bfdadde8c927ac92e2e95941}{fill\+\_\+in\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the residuals and Jacobian for the associated pressure advection diffusion problem. Used by the Fp preconditioner. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&eqn\+\_\+number\+\_\+backup)
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&eqn\+\_\+number\+\_\+backup)
 \begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs and backup eqn numbers. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)=0
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
@@ -461,7 +461,7 @@ double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aa54b4067e3
 virtual unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abd193a0c754ddfc7b87ee7ec9f7e7694}{u\+\_\+index\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th unknown velocity component is stored. The default value, i, is appropriate for single-\/physics problems. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknowns are always stored at the same indices at each node. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3e15de0c9f6d885f35906653c34b7697}{n\+\_\+u\+\_\+nst}} () const
-\begin{DoxyCompactList}\small\item\em Return the number of velocity components (used in Fluid\+Interface\+Elements) \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aff570df80204a77f5c999573d4f2cb6d}{get\+\_\+du\+\_\+dt}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em i-\/th component of du/dt at local node n. Uses suitably interpolated value for hanging nodes. N\+O\+TE\+: This is essentially a wrapper for \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a543fb6d0eddee513017e3b95c8b2a271}{du\+\_\+dt\+\_\+nst()}} so it can be called externally. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a543fb6d0eddee513017e3b95c8b2a271}{du\+\_\+dt\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
@@ -551,7 +551,7 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_af986024e19c3
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a72a0b348de77b1855d47429dd7430682}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7aeaf71b3ffa04114f9d44f630af84c2}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+dresiduals\+\_\+dparameter}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam)
-\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (differentiated w.\+r.\+t. a parameter) \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ad994654e6b67f8fe23baec0c1a15cac7}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+djacobian\+\_\+dparameter}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djac\+\_\+dparam)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix Virtual function can be overloaded by hanging-\/node version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aa8950bfab421438e63717ac8317f6911}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+djacobian\+\_\+and\+\_\+dmass\+\_\+matrix\+\_\+dparameter}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djac\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&dmass\+\_\+matrix\+\_\+dparam)
@@ -560,7 +560,7 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a8ea25af36d46
 \begin{DoxyCompactList}\small\item\em Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a0ba16529bfdadde8c927ac92e2e95941}{fill\+\_\+in\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the residuals and Jacobian for the associated pressure advection diffusion problem. Used by the Fp preconditioner. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&eqn\+\_\+number\+\_\+backup)
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&eqn\+\_\+number\+\_\+backup)
 \begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs and backup eqn numbers. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)=0
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
@@ -720,12 +720,12 @@ bool \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7002ecb67fc5
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static int \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a86f9883b590636180cbf51216d3c5fa8}{Pressure\+\_\+not\+\_\+stored\+\_\+at\+\_\+node}} =-\/100
+static int \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a86f9883b590636180cbf51216d3c5fa8}{Pressure\+\_\+not\+\_\+stored\+\_\+at\+\_\+node}} = -\/100
 \begin{DoxyCompactList}\small\item\em Static \char`\"{}magic\char`\"{} number that indicates that the pressure is not stored at a node. \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a559c0593d604a126d32d3b3056b4729d}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}} =0.\+0
-\begin{DoxyCompactList}\small\item\em Static default value for the physical constants (all initialised to zero) \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ae66d63f1872a754adc5cd360c039d110}{Default\+\_\+\+Physical\+\_\+\+Ratio\+\_\+\+Value}} =1.\+0
-\begin{DoxyCompactList}\small\item\em Static default value for the physical ratios (all are initialised to one) \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a559c0593d604a126d32d3b3056b4729d}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}
+\begin{DoxyCompactList}\small\item\em Navier-\/\+Stokes equations static data. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ae66d63f1872a754adc5cd360c039d110}{Default\+\_\+\+Physical\+\_\+\+Ratio\+\_\+\+Value}}
+\begin{DoxyCompactList}\small\item\em Navier-\/\+Stokes equations static data. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a9915a850967b024b10d2efeaa79a779b}{Default\+\_\+\+Gravity\+\_\+vector}}
 \begin{DoxyCompactList}\small\item\em Static default value for the gravity vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -748,7 +748,7 @@ $ { \frac{\partial u_i}{\partial x_i}=Q } $
 We also provide all functions required to use this element in F\+SI problems, by deriving it from the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} base class.
 
 \DoxyHorRuler{0}
- \hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md32}{}\doxysubsubsection{S\+P\+A\+C\+E-\/\+T\+I\+M\+E E\+L\+E\+M\+E\+N\+T\+S\+:}\label{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md32}
+ \hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md33}{}\doxysubsubsection{S\+P\+A\+C\+E-\/\+T\+I\+M\+E E\+L\+E\+M\+E\+N\+T\+S\+:}\label{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md33}
 The space-\/time extension is written O\+N\+LY for the 2D Navier-\/\+Stokes equations. The result is a 3D problem (x,y,t) to be solved on a 3D mesh. The template parameter D\+IM now corresponds to the dimension of the space-\/time problem (i.\+e. D\+IM=3 for the 2D flow).
 
 A class for elements that solve the Cartesian Navier-\/\+Stokes equations, templated by the dimension D\+IM. This contains the generic maths -- any concrete implementation must be derived from this.
@@ -764,7 +764,7 @@ $ { \frac{\partial u_i}{\partial x_i}=Q } $
 We also provide all functions required to use this element in F\+SI problems, by deriving it from the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} base class.
 
 \DoxyHorRuler{0}
- \hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md34}{}\doxysubsubsection{S\+P\+A\+C\+E-\/\+T\+I\+M\+E E\+L\+E\+M\+E\+N\+T\+S\+:}\label{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md34}
+ \hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md35}{}\doxysubsubsection{S\+P\+A\+C\+E-\/\+T\+I\+M\+E E\+L\+E\+M\+E\+N\+T\+S\+:}\label{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md35}
 The space-\/time extension is written O\+N\+LY for the 2D Navier-\/\+Stokes equations. The result is a 3D problem (x,y,t) to be solved on a 3D mesh. The template parameter D\+IM now corresponds to the dimension of the space-\/time problem (i.\+e. D\+IM=3 for the 2D flow).
 
 A class for elements that solve the Cartesian Navier-\/\+Stokes equations, templated by the dimension D\+IM. This contains the generic maths -- any concrete implementation must be derived from this.
@@ -780,10 +780,10 @@ $ { \frac{\partial u_i}{\partial x_i}=Q } $
 We also provide all functions required to use this element in F\+SI problems, by deriving it from the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} base class.
 
 \DoxyHorRuler{0}
- \hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md36}{}\doxysubsubsection{S\+P\+A\+C\+E-\/\+T\+I\+M\+E E\+L\+E\+M\+E\+N\+T\+S\+:}\label{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md36}
+ \hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md37}{}\doxysubsubsection{S\+P\+A\+C\+E-\/\+T\+I\+M\+E E\+L\+E\+M\+E\+N\+T\+S\+:}\label{classoomph_1_1SpaceTimeNavierStokesEquations_autotoc_md37}
 The space-\/time extension is written O\+N\+LY for the 2D Navier-\/\+Stokes equations. The result is a 3D problem (x,y,t) to be solved on a 3D mesh. The template parameter D\+IM now corresponds to the dimension of the space-\/time problem (i.\+e. D\+IM=3 for the 2D flow). 
 
-Definition at line 473 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 469 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -801,7 +801,7 @@ Function pointer to body force function fct(t,x,f(x)) x is a Vector!
 
 
 
-Definition at line 481 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 476 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a6564a776dce312aad43b9317d7f1373c}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a6564a776dce312aad43b9317d7f1373c}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!NavierStokesBodyForceFctPt@{NavierStokesBodyForceFctPt}}
@@ -816,7 +816,7 @@ Function pointer to body force function fct(t,x,f(x)) x is a Vector!
 
 
 
-Definition at line 481 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 476 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a6564a776dce312aad43b9317d7f1373c}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a6564a776dce312aad43b9317d7f1373c}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!NavierStokesBodyForceFctPt@{NavierStokesBodyForceFctPt}}
@@ -831,7 +831,7 @@ Function pointer to body force function fct(t,x,f(x)) x is a Vector!
 
 
 
-Definition at line 481 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 476 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_adb897d6391666773c5d5bf22b9d9bc83}\label{classoomph_1_1SpaceTimeNavierStokesEquations_adb897d6391666773c5d5bf22b9d9bc83}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!NavierStokesPressureAdvDiffSourceFctPt@{NavierStokesPressureAdvDiffSourceFctPt}}
@@ -846,7 +846,7 @@ Function pointer to source function fct(x) for the pressure advection diffusion 
 
 
 
-Definition at line 493 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 487 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_adb897d6391666773c5d5bf22b9d9bc83}\label{classoomph_1_1SpaceTimeNavierStokesEquations_adb897d6391666773c5d5bf22b9d9bc83}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!NavierStokesPressureAdvDiffSourceFctPt@{NavierStokesPressureAdvDiffSourceFctPt}}
@@ -861,7 +861,7 @@ Function pointer to source function fct(x) for the pressure advection diffusion 
 
 
 
-Definition at line 493 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 487 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_adb897d6391666773c5d5bf22b9d9bc83}\label{classoomph_1_1SpaceTimeNavierStokesEquations_adb897d6391666773c5d5bf22b9d9bc83}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!NavierStokesPressureAdvDiffSourceFctPt@{NavierStokesPressureAdvDiffSourceFctPt}}
@@ -876,7 +876,7 @@ Function pointer to source function fct(x) for the pressure advection diffusion 
 
 
 
-Definition at line 493 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 487 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a9af90d7010d22eb4a672b79c977774d9}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a9af90d7010d22eb4a672b79c977774d9}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!NavierStokesSourceFctPt@{NavierStokesSourceFctPt}}
@@ -891,7 +891,7 @@ Function pointer to source function fct(t,x) (x is a Vector!)
 
 
 
-Definition at line 486 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 481 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a9af90d7010d22eb4a672b79c977774d9}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a9af90d7010d22eb4a672b79c977774d9}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!NavierStokesSourceFctPt@{NavierStokesSourceFctPt}}
@@ -906,7 +906,7 @@ Function pointer to source function fct(t,x) (x is a Vector!)
 
 
 
-Definition at line 486 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 481 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a9af90d7010d22eb4a672b79c977774d9}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a9af90d7010d22eb4a672b79c977774d9}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!NavierStokesSourceFctPt@{NavierStokesSourceFctPt}}
@@ -921,7 +921,7 @@ Function pointer to source function fct(t,x) (x is a Vector!)
 
 
 
-Definition at line 486 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 481 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -939,7 +939,7 @@ Constructor\+: N\+U\+LL the body force and source function and make sure the A\+
 
 
 
-Definition at line 806 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 801 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -958,7 +958,7 @@ Constructor\+: N\+U\+LL the body force and source function and make sure the A\+
 
 
 
-Definition at line 806 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 801 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -977,7 +977,7 @@ Constructor\+: N\+U\+LL the body force and source function and make sure the A\+
 
 
 
-Definition at line 789 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 784 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -999,7 +999,7 @@ Access function for the body-\/force pointer.
 
 
 
-Definition at line 969 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 989 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1018,7 +1018,7 @@ Access function for the body-\/force pointer.
 
 
 
-Definition at line 994 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1015 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1037,7 +1037,7 @@ Access function for the body-\/force pointer.
 
 
 
-Definition at line 994 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1015 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1060,7 +1060,7 @@ Access function for the body-\/force pointer. Const version.
 
 
 
-Definition at line 973 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 995 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1079,7 +1079,7 @@ Access function for the body-\/force pointer. Const version.
 
 
 
-Definition at line 998 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1021 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1098,7 +1098,7 @@ Access function for the body-\/force pointer. Const version.
 
 
 
-Definition at line 998 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1021 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1193,7 +1193,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a687fd8f8eb51faf
 
 
 
-Definition at line 604 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 607 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -1246,7 +1246,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a91475e8230b16c8
 
 
 
-Definition at line 528 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 531 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -1299,7 +1299,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 674 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 677 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -1352,7 +1352,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 240 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 243 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -1405,7 +1405,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a6c1220af04b60c1
 
 
 
-Definition at line 384 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 387 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -1458,7 +1458,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_acf790e5680
 
 
 
-Definition at line 191 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 195 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -1514,7 +1514,7 @@ Get integral of time derivative of kinetic energy over element.
 
 Get integral of time derivative of kinetic energy over element\+: 
 
-Definition at line 1671 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1668 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -1537,7 +1537,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1809 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1851 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1560,7 +1560,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1835 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1878 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1583,7 +1583,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1835 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1878 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1602,7 +1602,7 @@ Density ratio for element\+: Element\textquotesingle{}s density relative to the 
 
 
 
-Definition at line 951 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 953 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1621,7 +1621,7 @@ Density ratio for element\+: Element\textquotesingle{}s density relative to the 
 
 
 
-Definition at line 976 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 979 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1640,7 +1640,7 @@ Density ratio for element\+: Element\textquotesingle{}s density relative to the 
 
 
 
-Definition at line 976 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 979 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1659,7 +1659,7 @@ Pointer to Density ratio.
 
 
 
-Definition at line 954 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 959 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1678,7 +1678,7 @@ Pointer to Density ratio.
 
 
 
-Definition at line 979 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 985 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1697,7 +1697,7 @@ Pointer to Density ratio.
 
 
 
-Definition at line 979 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 985 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1724,7 +1724,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesE
 
 
 
-Definition at line 1915 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1957 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1747,7 +1747,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesE
 
 
 
-Definition at line 1941 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1984 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1770,7 +1770,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesE
 
 
 
-Definition at line 1941 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1984 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1793,7 +1793,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line 1145 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1180 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1816,7 +1816,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line 1170 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1206 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1839,7 +1839,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line 1170 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1206 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -1880,7 +1880,7 @@ Return integral of dissipation over element.
 
 
 
-Definition at line 1302 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1305 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -2180,7 +2180,7 @@ i-\/th component of du/dt at local node n. Uses suitably interpolated value for 
 
 
 
-Definition at line 1094 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1129 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2199,7 +2199,7 @@ i-\/th component of du/dt at local node n. Uses suitably interpolated value for 
 
 
 
-Definition at line 1119 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1155 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2218,7 +2218,7 @@ i-\/th component of du/dt at local node n. Uses suitably interpolated value for 
 
 
 
-Definition at line 1119 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1155 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2245,7 +2245,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6
 
 
 
-Definition at line 1155 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1190 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2268,7 +2268,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6
 
 
 
-Definition at line 1180 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1216 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2291,7 +2291,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6
 
 
 
-Definition at line 1180 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1216 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2310,7 +2310,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2d6e3c918e
 
 
 
-Definition at line 1631 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1673 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2329,7 +2329,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2d6e3c918e
 
 
 
-Definition at line 1657 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1700 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2348,7 +2348,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2d6e3c918e
 
 
 
-Definition at line 1657 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1700 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2371,7 +2371,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a90ee6ee39d
 
 
 
-Definition at line 1612 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1653 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2394,7 +2394,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a90ee6ee39d
 
 
 
-Definition at line 1638 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1680 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2417,7 +2417,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a90ee6ee39d
 
 
 
-Definition at line 1638 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1680 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2430,17 +2430,13 @@ References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+dresiduals\+\_\+dparameter (\begin{DoxyParamCaption}\item[{double $\ast$const \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dres\+\_\+dparam }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
 Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (differentiated w.\+r.\+t. a parameter) 
-
-
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a64d31806fcbe7c5b689a3281932e8073}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 1594 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1635 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2453,17 +2449,13 @@ References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+dresiduals\+\_\+dparameter (\begin{DoxyParamCaption}\item[{double $\ast$const \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dres\+\_\+dparam }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
 Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (differentiated w.\+r.\+t. a parameter) 
-
-
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a64d31806fcbe7c5b689a3281932e8073}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 1620 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1662 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2476,17 +2468,13 @@ References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+dresiduals\+\_\+dparameter (\begin{DoxyParamCaption}\item[{double $\ast$const \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dres\+\_\+dparam }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
 Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (differentiated w.\+r.\+t. a parameter) 
-
-
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a64d31806fcbe7c5b689a3281932e8073}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 1620 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1662 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2539,7 +2527,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a94e118d65f
 
 
 
-Definition at line 2453 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2462 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_af986024e19c3b5f8c9c880dcea38e7b0}\label{classoomph_1_1SpaceTimeNavierStokesEquations_af986024e19c3b5f8c9c880dcea38e7b0}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -2558,7 +2546,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 1561 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1602 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2581,7 +2569,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 1587 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1629 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2604,7 +2592,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 1587 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1629 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2627,7 +2615,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 1577 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1619 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2650,7 +2638,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 1603 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1646 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2673,7 +2661,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 1603 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1646 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2696,7 +2684,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 1546 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1586 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2719,7 +2707,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 1572 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1613 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2742,7 +2730,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 1572 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1613 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2770,10 +2758,9 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+S
 
 Compute the derivatives of the residuals for the Navier-\/\+Stokes equations with respect to a parameter Flag=1 (or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. Flag=2\+: Fill in mass matrix too. 
 
-Compute the derivatives of the residuals for the Navier-\/\+Stokes equations with respect to a parameter; flag=2 or 1 or 0\+: do (or don\textquotesingle{}t) compute the Jacobian and mass matrix as well ~\newline
- 
+Compute the derivatives of the residuals for the Navier-\/\+Stokes equations with respect to a parameter; flag=2 or 1 or 0\+: do (or don\textquotesingle{}t) compute the Jacobian and mass matrix as well 
 
-Definition at line 2434 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2443 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -2816,14 +2803,13 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+S
 
 Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
-Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6e32e07036ba99e2d712ab8756b3f74d}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6e32e07036ba99e2d712ab8756b3f74d}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6e32e07036ba99e2d712ab8756b3f74d}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 1817 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1812 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -2874,14 +2860,13 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+S
 
 Compute the residuals for the Navier-\/\+Stokes equations. Flag=1 (or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. Flag=2\+: Fill in mass matrix too. 
 
-Compute the residuals for the Navier-\/\+Stokes equations; flag=1 (or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Compute the residuals for the Navier-\/\+Stokes equations; flag=1 (or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a830ec939fcac36ceabbb8367b89332c6}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a830ec939fcac36ceabbb8367b89332c6}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a830ec939fcac36ceabbb8367b89332c6}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 1993 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1994 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -2923,7 +2908,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1664 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1707 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2946,7 +2931,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1690 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1734 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2969,7 +2954,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1690 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1734 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -2992,7 +2977,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1651 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1693 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3015,7 +3000,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1677 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1720 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3038,7 +3023,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1677 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1720 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3102,7 +3087,7 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line 1447 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1487 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3121,7 +3106,7 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line 1472 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1513 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3140,7 +3125,7 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line 1472 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1513 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3168,10 +3153,9 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+S
 
 Full output function\+: x,y,t,u,v,p,du/dt,dv/dt,dissipation in tecplot format. Use n\+\_\+plot plot points in each coordinate direction. 
 
-Full output function\+: x,y,t,u,v,p,du/dt,dv/dt,dissipation in tecplot format. Specified number of plot points in each coordinate direction ~\newline
- 
+Full output function\+: x,y,t,u,v,p,du/dt,dv/dt,dissipation in tecplot format. Specified number of plot points in each coordinate direction 
 
-Definition at line 1087 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1091 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -3201,7 +3185,7 @@ const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyper
 
 
 
-Definition at line 963 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 977 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3220,7 +3204,7 @@ const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyper
 
 
 
-Definition at line 988 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1003 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3239,7 +3223,7 @@ const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyper
 
 
 
-Definition at line 988 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1003 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3258,7 +3242,7 @@ Pointer to \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of gravitational comp
 
 
 
-Definition at line 966 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 983 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3277,7 +3261,7 @@ Pointer to \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of gravitational comp
 
 
 
-Definition at line 991 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1009 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3296,7 +3280,7 @@ Pointer to \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of gravitational comp
 
 
 
-Definition at line 991 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1009 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3315,7 +3299,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomp
 
 Get gradient of body force term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. Computed via function pointer (if set) or by finite differencing (default) 
 
-Definition at line 639 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 635 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3330,7 +3314,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomp
 
 Get gradient of body force term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. Computed via function pointer (if set) or by finite differencing (default) 
 
-Definition at line 656 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 652 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3345,7 +3329,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomp
 
 Get gradient of body force term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. Computed via function pointer (if set) or by finite differencing (default) 
 
-Definition at line 656 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 652 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3364,7 +3348,7 @@ Calculate the body force at a given time and local and/or Eulerian position. Thi
 
 
 
-Definition at line 613 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 609 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3383,7 +3367,7 @@ Calculate the body force at a given time and local and/or Eulerian position. Thi
 
 
 
-Definition at line 630 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 626 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3402,7 +3386,7 @@ Calculate the body force at a given time and local and/or Eulerian position. Thi
 
 
 
-Definition at line 630 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 626 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3442,8 +3426,7 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+S
 
 Compute derivatives of elemental residual vector with respect to nodal coordinates. Overwrites default implementation in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} base class. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j)=d res(l) / d\+X\+\_\+\{ij\}. 
 
-Compute derivatives of elemental residual vector with respect to nodal coordinates. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j)=d res(l) / d\+X\+\_\+\{ij\} Overloads the F\+D-\/based version in the FE base class. D\+R\+A\+IG\+: This needs doing carefully if the A\+LE nodes aren\textquotesingle{}t fixed!!! ~\newline
- 
+Compute derivatives of elemental residual vector with respect to nodal coordinates. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j)=d res(l) / d\+X\+\_\+\{ij\} Overloads the F\+D-\/based version in the FE base class. D\+R\+A\+IG\+: This needs doing carefully if the A\+LE nodes aren\textquotesingle{}t fixed!!! 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ae4b85a31a983a52d3010930f9e0851b8}{oomph\+::\+Finite\+Element}}.
 
@@ -3453,7 +3436,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesE
 
 
 
-Definition at line 2471 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2481 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -3491,7 +3474,7 @@ i-\/th component of du/dt at local node n. Uses suitably interpolated value for 
 
 
 
-Definition at line 1085 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1120 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3510,7 +3493,7 @@ i-\/th component of du/dt at local node n. Uses suitably interpolated value for 
 
 
 
-Definition at line 1110 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1146 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3529,7 +3512,7 @@ i-\/th component of du/dt at local node n. Uses suitably interpolated value for 
 
 
 
-Definition at line 1110 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1146 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3552,7 +3535,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_acf10e6a716b5e0f743579
 
 
 
-Definition at line 1225 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1265 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3575,7 +3558,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_acf10e6a716b5e0f743579
 
 
 
-Definition at line 1250 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1291 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3598,7 +3581,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_acf10e6a716b5e0f743579
 
 
 
-Definition at line 1250 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1291 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3640,7 +3623,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesE
 
 
 
-Definition at line 67 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 70 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -3674,7 +3657,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomp
 
 Get gradient of source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. Computed via function pointer (if set) or by finite differencing (default) 
 
-Definition at line 708 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 704 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3689,7 +3672,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomp
 
 Get gradient of source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. Computed via function pointer (if set) or by finite differencing (default) 
 
-Definition at line 725 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 721 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3704,7 +3687,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomp
 
 Get gradient of source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. Computed via function pointer (if set) or by finite differencing (default) 
 
-Definition at line 725 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 721 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3723,7 +3706,7 @@ Calculate the source fct at a given time and Eulerian position.
 
 
 
-Definition at line 684 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 680 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3742,7 +3725,7 @@ Calculate the source fct at a given time and Eulerian position.
 
 
 
-Definition at line 701 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 697 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3765,7 +3748,7 @@ Calculate the source fct at a given time and Eulerian position.
 
 
 
-Definition at line 701 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 697 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -3804,10 +3787,9 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+S
 
 Compute traction (on the viscous scale) exerted onto the fluid at local coordinate s. N has to be outer unit normal to the fluid. 
 
-Compute traction (on the viscous scale) exerted onto the fluid at local coordinate s. N has to be outer unit normal to the fluid. ~\newline
- 
+Compute traction (on the viscous scale) exerted onto the fluid at local coordinate s. N has to be outer unit normal to the fluid. 
 
-Definition at line 1364 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1366 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -3899,7 +3881,7 @@ Compute the vorticity vector at local coordinate s.
 
 Compute 2D vorticity vector at local coordinate s (return in one and only component of vorticity vector as a double 
 
-Definition at line 1605 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1601 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -3913,7 +3895,7 @@ References s.
 
 Compute 2D vorticity vector at local coordinate s (return in one and only component of vorticity vector as a double 
 
-Definition at line 1605 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1601 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -3927,7 +3909,7 @@ References s.
 
 Compute 2D vorticity vector at local coordinate s (return in one and only component of vorticity vector as a double 
 
-Definition at line 1605 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1601 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -3974,7 +3956,7 @@ Compute the vorticity vector at local coordinate s.
 
 Compute 2D vorticity vector at local coordinate s (return in one and only component of vorticity vector 
 
-Definition at line 1538 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1536 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -3988,7 +3970,7 @@ References i, oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise(), and s.
 
 Compute 2D vorticity vector at local coordinate s (return in one and only component of vorticity vector 
 
-Definition at line 1538 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1536 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -4002,7 +3984,7 @@ References i, oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise(), and s.
 
 Compute 2D vorticity vector at local coordinate s (return in one and only component of vorticity vector 
 
-Definition at line 1538 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1536 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -4021,7 +4003,7 @@ Return FE representation of function value du\+\_\+i/dt(s) at local coordinate s
 
 
 
-Definition at line 1109 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1144 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4040,7 +4022,7 @@ Return FE representation of function value du\+\_\+i/dt(s) at local coordinate s
 
 
 
-Definition at line 1134 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1170 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4059,7 +4041,7 @@ Return FE representation of function value du\+\_\+i/dt(s) at local coordinate s
 
 
 
-Definition at line 1134 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1170 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4082,7 +4064,7 @@ Return FE interpolated pressure at local coordinate s at time level t.
 
 
 
-Definition at line 1996 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2038 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4101,7 +4083,7 @@ Return FE interpolated pressure at local coordinate s at time level t.
 
 
 
-Definition at line 2022 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2065 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4120,7 +4102,7 @@ Return FE interpolated pressure at local coordinate s at time level t.
 
 
 
-Definition at line 2022 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2065 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4139,7 +4121,7 @@ Return FE interpolated pressure at local coordinate s.
 
 
 
-Definition at line 1974 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2016 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4158,7 +4140,7 @@ Return FE interpolated pressure at local coordinate s.
 
 
 
-Definition at line 2000 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2043 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4181,7 +4163,7 @@ Return FE interpolated pressure at local coordinate s.
 
 
 
-Definition at line 2000 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2043 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4200,7 +4182,7 @@ Return FE interpolated velocity u\mbox{[}i\mbox{]} at local coordinate s time le
 
 
 
-Definition at line 1892 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1934 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_abf2d3ed63a89a44d045885e0a3db0a2d}\label{classoomph_1_1SpaceTimeNavierStokesEquations_abf2d3ed63a89a44d045885e0a3db0a2d}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!interpolated\_u\_nst@{interpolated\_u\_nst}}
@@ -4215,7 +4197,7 @@ Return FE interpolated velocity u\mbox{[}i\mbox{]} at local coordinate s time le
 
 
 
-Definition at line 1918 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1961 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_abf2d3ed63a89a44d045885e0a3db0a2d}\label{classoomph_1_1SpaceTimeNavierStokesEquations_abf2d3ed63a89a44d045885e0a3db0a2d}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!interpolated\_u\_nst@{interpolated\_u\_nst}}
@@ -4230,7 +4212,7 @@ Return FE interpolated velocity u\mbox{[}i\mbox{]} at local coordinate s time le
 
 
 
-Definition at line 1918 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1961 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a9876971336810a9b786bd4d2dc07f3fe}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a9876971336810a9b786bd4d2dc07f3fe}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!interpolated\_u\_nst@{interpolated\_u\_nst}}
@@ -4245,7 +4227,7 @@ Return FE interpolated velocity u\mbox{[}i\mbox{]} at local coordinate s.
 
 
 
-Definition at line 1861 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1903 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4264,7 +4246,7 @@ Return FE interpolated velocity u\mbox{[}i\mbox{]} at local coordinate s.
 
 
 
-Definition at line 1887 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1930 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4283,7 +4265,7 @@ Return FE interpolated velocity u\mbox{[}i\mbox{]} at local coordinate s.
 
 
 
-Definition at line 1887 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1930 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4302,7 +4284,7 @@ Compute vector of FE interpolated velocity u at local coordinate s.
 
 
 
-Definition at line 1829 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1871 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4321,7 +4303,7 @@ Compute vector of FE interpolated velocity u at local coordinate s.
 
 
 
-Definition at line 1855 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1898 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4340,7 +4322,7 @@ Compute vector of FE interpolated velocity u at local coordinate s.
 
 
 
-Definition at line 1855 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1898 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4363,7 +4345,7 @@ Are we storing the Strouhal number as external data?
 
 
 
-Definition at line 863 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 859 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4382,7 +4364,7 @@ Are we storing the Strouhal number as external data?
 
 
 
-Definition at line 896 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 892 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4405,7 +4387,7 @@ Are we storing the Strouhal number as external data?
 
 
 
-Definition at line 896 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 892 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4446,7 +4428,7 @@ Get integral of kinetic energy over element.
 
 Get integral of kinetic energy over element\+: Note that this is the \char`\"{}raw\char`\"{} kinetic energy in the sense that the density ratio has not been included. In problems with two or more fluids the user will have to remember to premultiply certain elements by the appropriate density ratio. 
 
-Definition at line 1626 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1623 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -4459,13 +4441,9 @@ References i, and s.
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::n\+\_\+u\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-
-
 Return the number of velocity components (used in Fluid\+Interface\+Elements) 
 
-
-
-Definition at line 1074 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1109 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a3e15de0c9f6d885f35906653c34b7697}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a3e15de0c9f6d885f35906653c34b7697}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!n\_u\_nst@{n\_u\_nst}}
@@ -4474,13 +4452,9 @@ Definition at line 1074 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::n\+\_\+u\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-
-
 Return the number of velocity components (used in Fluid\+Interface\+Elements) 
 
-
-
-Definition at line 1099 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1135 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a3e15de0c9f6d885f35906653c34b7697}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a3e15de0c9f6d885f35906653c34b7697}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!n\_u\_nst@{n\_u\_nst}}
@@ -4489,13 +4463,9 @@ Definition at line 1099 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::n\+\_\+u\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-
-
 Return the number of velocity components (used in Fluid\+Interface\+Elements) 
 
-
-
-Definition at line 1099 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1135 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a9484c60ff5a5099f41d277c1d2cf79f4}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a9484c60ff5a5099f41d277c1d2cf79f4}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!npres\_nst@{npres\_nst}}
@@ -4563,7 +4533,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba
 
 
 
-Definition at line 1246 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1287 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_aaab4919eaba2e354fb1b53d866cb0a97}\label{classoomph_1_1SpaceTimeNavierStokesEquations_aaab4919eaba2e354fb1b53d866cb0a97}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!nscalar\_paraview@{nscalar\_paraview}}
@@ -4582,7 +4552,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba
 
 
 
-Definition at line 1271 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1313 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_aaab4919eaba2e354fb1b53d866cb0a97}\label{classoomph_1_1SpaceTimeNavierStokesEquations_aaab4919eaba2e354fb1b53d866cb0a97}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!nscalar\_paraview@{nscalar\_paraview}}
@@ -4601,7 +4571,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba
 
 
 
-Definition at line 1271 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1313 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a592b8cc9328e9008c2747cc8b68819cf}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a592b8cc9328e9008c2747cc8b68819cf}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!output@{output}}
@@ -4624,7 +4594,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aeff
 
 
 
-Definition at line 1429 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1469 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4651,7 +4621,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aeff
 
 
 
-Definition at line 1454 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1495 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4678,7 +4648,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aeff
 
 
 
-Definition at line 1454 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1495 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4724,7 +4694,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a17d
 
 
 
-Definition at line 1037 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1041 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -4770,7 +4740,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa
 
 
 
-Definition at line 1412 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1452 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4797,7 +4767,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa
 
 
 
-Definition at line 1437 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1478 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4824,7 +4794,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa
 
 
 
-Definition at line 1437 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1478 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -4870,7 +4840,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a734
 
 
 
-Definition at line 978 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 982 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -4927,7 +4897,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2a8426dccd57b92
 
 
 
-Definition at line 848 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 851 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -4995,7 +4965,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee
 
 
 
-Definition at line 774 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 777 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -5014,7 +4984,7 @@ Output the Face\+Elements that apply the Robin boundary condition to the pressur
 
 
 
-Definition at line 1773 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1813 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5033,7 +5003,7 @@ Output the Face\+Elements that apply the Robin boundary condition to the pressur
 
 
 
-Definition at line 1799 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1840 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5052,7 +5022,7 @@ Output the Face\+Elements that apply the Robin boundary condition to the pressur
 
 
 
-Definition at line 1799 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1840 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5080,10 +5050,9 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+S
 
 Output function\+: x,y,t,u,v in tecplot format. Use n\+\_\+plot points in each coordinate direction at timestep t (t=0\+: present; t$>$0\+: previous timestep) 
 
-Output function\+: Velocities only ~\newline
- x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]} in tecplot format at specified previous timestep (t=0\+: present; t$>$0\+: previous timestep). Specified number of plot points in each coordinate direction. D\+R\+A\+IG\+: Should be broken! 
+Output function\+: Velocities only x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]} in tecplot format at specified previous timestep (t=0\+: present; t$>$0\+: previous timestep). Specified number of plot points in each coordinate direction. D\+R\+A\+IG\+: Should be broken! 
 
-Definition at line 924 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 928 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -5124,7 +5093,7 @@ Output function\+: x,y,t,omega in tecplot format. nplot points in each coordinat
 
 Output function for vorticity. x,y,\mbox{[}z\mbox{]},\mbox{[}omega\+\_\+x,omega\+\_\+y,\mbox{[}and/or omega\+\_\+z\mbox{]}\mbox{]} in tecplot format. Specified number of plot points in each coordinate direction. 
 
-Definition at line 1220 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1223 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -5162,7 +5131,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140
 
 
 
-Definition at line 1174 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1209 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5189,7 +5158,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140
 
 
 
-Definition at line 1199 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1235 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5216,7 +5185,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140
 
 
 
-Definition at line 1199 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1235 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5320,12 +5289,12 @@ Pressure at local pressure \char`\"{}node\char`\"{} n\+\_\+p at time level t.
 
 Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}\label{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}\label{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
 \index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -5333,22 +5302,22 @@ Pin all non-\/pressure dofs and backup eqn numbers.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}{oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}{oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base}}.
 
 
 
-Definition at line 1678 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1720 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Data\+::eqn\+\_\+number(), i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), oomph\+::\+Data\+::pin(), oomph\+::\+Finite\+Element\+::size(), and oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}\label{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}\label{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
 \index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -5356,22 +5325,22 @@ Pin all non-\/pressure dofs and backup eqn numbers.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}{oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}{oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base}}.
 
 
 
-Definition at line 1704 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1747 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Data\+::eqn\+\_\+number(), i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), oomph\+::\+Data\+::pin(), oomph\+::\+Finite\+Element\+::size(), and oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}\label{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}\label{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
 \index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -5379,11 +5348,11 @@ Pin all non-\/pressure dofs and backup eqn numbers.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}{oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}{oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base}}.
 
 
 
-Definition at line 1704 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1747 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5406,7 +5375,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 994 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1029 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5429,7 +5398,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1019 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1055 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5452,7 +5421,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line 1019 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1055 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5475,7 +5444,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8bf3f75b55d4e67
 
 
 
-Definition at line 2019 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2061 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5498,7 +5467,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8bf3f75b55d4e67
 
 
 
-Definition at line 2045 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2088 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5521,7 +5490,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8bf3f75b55d4e67
 
 
 
-Definition at line 2045 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2088 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5562,7 +5531,7 @@ double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\
 
 Return pressure integrated over the element. 
 
-Definition at line 1766 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1765 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -5675,7 +5644,7 @@ Reynolds number.
 
 
 
-Definition at line 871 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 867 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5694,7 +5663,7 @@ Reynolds number.
 
 
 
-Definition at line 880 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 876 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5713,7 +5682,7 @@ Reynolds number.
 
 
 
-Definition at line 880 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 876 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5732,7 +5701,7 @@ Global inverse Froude number.
 
 
 
-Definition at line 957 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 965 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5751,7 +5720,7 @@ Global inverse Froude number.
 
 
 
-Definition at line 982 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 991 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5770,7 +5739,7 @@ Global inverse Froude number.
 
 
 
-Definition at line 982 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 991 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5789,7 +5758,7 @@ Pointer to global inverse Froude number.
 
 
 
-Definition at line 960 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 971 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5808,7 +5777,7 @@ Pointer to global inverse Froude number.
 
 
 
-Definition at line 985 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 997 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5827,7 +5796,7 @@ Pointer to global inverse Froude number.
 
 
 
-Definition at line 985 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 997 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5850,7 +5819,7 @@ Pointer to Reynolds number.
 
 
 
-Definition at line 879 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 875 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5869,7 +5838,7 @@ Pointer to Reynolds number.
 
 
 
-Definition at line 888 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 884 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5888,7 +5857,7 @@ Pointer to Reynolds number.
 
 
 
-Definition at line 888 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 884 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5911,7 +5880,7 @@ Re\+St parameter (const. version)
 
 
 
-Definition at line 887 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 883 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5930,7 +5899,7 @@ Product of Reynolds and Strouhal number (=Womersley number)
 
 
 
-Definition at line 960 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 957 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5949,7 +5918,7 @@ Product of Reynolds and Strouhal number (=Womersley number)
 
 
 
-Definition at line 960 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 957 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5968,7 +5937,7 @@ Pointer to Re\+St number (can only assign to private member data)
 
 
 
-Definition at line 935 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 931 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -5987,7 +5956,7 @@ Pointer to Strouhal parameter (const. version)
 
 
 
-Definition at line 911 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 907 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6010,7 +5979,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a49cc2d4f7ed5772
 
 
 
-Definition at line 1375 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1416 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6033,7 +6002,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a49cc2d4f7ed5772
 
 
 
-Definition at line 1400 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1442 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6056,7 +6025,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a49cc2d4f7ed5772
 
 
 
-Definition at line 1400 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1442 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6079,7 +6048,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab566cc2b0a758b0
 
 
 
-Definition at line 1305 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1347 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6102,7 +6071,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab566cc2b0a758b0
 
 
 
-Definition at line 1330 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1373 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6125,7 +6094,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab566cc2b0a758b0
 
 
 
-Definition at line 1330 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1373 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6148,7 +6117,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a02cf8832a5e2886
 
 
 
-Definition at line 1254 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1295 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6171,7 +6140,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a02cf8832a5e2886
 
 
 
-Definition at line 1279 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1321 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6194,7 +6163,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a02cf8832a5e2886
 
 
 
-Definition at line 1279 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1321 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6213,7 +6182,7 @@ Access function for the source-\/function pointer for pressure advection diffusi
 
 
 
-Definition at line 984 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1014 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6232,7 +6201,7 @@ Access function for the source-\/function pointer for pressure advection diffusi
 
 
 
-Definition at line 1009 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1040 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6251,7 +6220,7 @@ Access function for the source-\/function pointer for pressure advection diffusi
 
 
 
-Definition at line 1009 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1040 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6270,7 +6239,7 @@ Access function for the source-\/function pointer for pressure advection diffusi
 
 
 
-Definition at line 989 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1021 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6289,7 +6258,7 @@ Access function for the source-\/function pointer for pressure advection diffusi
 
 
 
-Definition at line 1014 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1047 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6308,7 +6277,7 @@ Access function for the source-\/function pointer for pressure advection diffusi
 
 
 
-Definition at line 1014 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1047 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6327,7 +6296,7 @@ Access function for the source-\/function pointer.
 
 
 
-Definition at line 977 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1001 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6346,7 +6315,7 @@ Access function for the source-\/function pointer.
 
 
 
-Definition at line 1002 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1027 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6369,7 +6338,7 @@ Access function for the source-\/function pointer.
 
 
 
-Definition at line 1002 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1027 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6388,7 +6357,7 @@ Access function for the source-\/function pointer. Const version.
 
 
 
-Definition at line 980 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1007 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6407,7 +6376,7 @@ Access function for the source-\/function pointer. Const version.
 
 
 
-Definition at line 1005 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1033 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6426,7 +6395,7 @@ Access function for the source-\/function pointer. Const version.
 
 
 
-Definition at line 1005 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1033 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6445,7 +6414,7 @@ Strouhal parameter (const. version)
 
 
 
-Definition at line 904 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 900 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6464,7 +6433,7 @@ Strouhal parameter (const. version)
 
 
 
-Definition at line 904 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 900 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6483,7 +6452,7 @@ Pointer to Strouhal number (can only assign to private member data)
 
 
 
-Definition at line 952 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 949 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6502,7 +6471,7 @@ Pointer to Strouhal number (can only assign to private member data)
 
 
 
-Definition at line 952 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 949 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6521,7 +6490,7 @@ Pointer to Strouhal parameter (const. version)
 
 
 
-Definition at line 928 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 924 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6544,7 +6513,7 @@ Pointer to Strouhal parameter (const. version)
 
 
 
-Definition at line 928 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 924 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6563,7 +6532,7 @@ Function that tells us whether the period is stored as external data.
 
 
 
-Definition at line 830 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 826 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6582,7 +6551,7 @@ Function that tells us whether the period is stored as external data.
 
 
 
-Definition at line 847 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 843 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6601,7 +6570,7 @@ Function that tells us whether the period is stored as external data.
 
 
 
-Definition at line 847 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 843 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6669,7 +6638,7 @@ Return the index at which the i-\/th unknown velocity component is stored. The d
 
 
 
-Definition at line 1048 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1082 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6688,7 +6657,7 @@ Return the index at which the i-\/th unknown velocity component is stored. The d
 
 
 
-Definition at line 1073 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1108 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6711,7 +6680,7 @@ Return the index at which the i-\/th unknown velocity component is stored. The d
 
 
 
-Definition at line 1073 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1108 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6730,7 +6699,7 @@ Velocity i at local node n. Uses suitably interpolated value for hanging nodes. 
 
 
 
-Definition at line 1017 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1052 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6749,7 +6718,7 @@ Velocity i at local node n. Uses suitably interpolated value for hanging nodes. 
 
 
 
-Definition at line 1042 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1078 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6768,7 +6737,7 @@ Velocity i at local node n. Uses suitably interpolated value for hanging nodes. 
 
 
 
-Definition at line 1042 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1078 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6787,7 +6756,7 @@ Velocity i at local node n at timestep t (t=0\+: present; t$>$0\+: previous). Us
 
 
 
-Definition at line 1024 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1059 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6806,7 +6775,7 @@ Velocity i at local node n at timestep t (t=0\+: present; t$>$0\+: previous). Us
 
 
 
-Definition at line 1049 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1085 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6825,7 +6794,7 @@ Velocity i at local node n at timestep t (t=0\+: present; t$>$0\+: previous). Us
 
 
 
-Definition at line 1049 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1085 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6844,7 +6813,7 @@ Viscosity ratio for element\+: Element\textquotesingle{}s viscosity relative to 
 
 
 
-Definition at line 944 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 940 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6863,7 +6832,7 @@ Viscosity ratio for element\+: Element\textquotesingle{}s viscosity relative to 
 
 
 
-Definition at line 969 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 966 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6882,7 +6851,7 @@ Viscosity ratio for element\+: Element\textquotesingle{}s viscosity relative to 
 
 
 
-Definition at line 969 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 966 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6901,7 +6870,7 @@ Pointer to Viscosity Ratio.
 
 
 
-Definition at line 947 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 946 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6965,7 +6934,7 @@ Boolean flag to indicate if A\+LE formulation is disabled when time-\/derivative
 
 
 
-Definition at line 554 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 549 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -6984,7 +6953,7 @@ Pointer to body force function.
 
 
 
-Definition at line 542 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 537 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7003,7 +6972,7 @@ Static default value for the gravity vector.
 
 Navier-\/\+Stokes equations default gravity vector. 
 
-Definition at line 508 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 504 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7014,15 +6983,21 @@ Referenced by oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+
 \index{Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}!oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_Physical\_Constant\_Value}{Default\_Physical\_Constant\_Value}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-static double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value =0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+static double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    0.0}
 
+\end{DoxyCode}
 
-Static default value for the physical constants (all initialised to zero) 
 
 Navier-\/\+Stokes equations static data. 
 
-Definition at line 502 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Static default value for the physical constants (all initialised to zero) 
+
+Definition at line 497 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7033,15 +7008,21 @@ Referenced by oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+
 \index{Default\_Physical\_Ratio\_Value@{Default\_Physical\_Ratio\_Value}!oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_Physical\_Ratio\_Value}{Default\_Physical\_Ratio\_Value}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-static double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+\+Physical\+\_\+\+Ratio\+\_\+\+Value =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+static double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+\+Physical\+\_\+\+Ratio\+\_\+\+Value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    1.0}
 
+\end{DoxyCode}
 
-Static default value for the physical ratios (all are initialised to one) 
 
 Navier-\/\+Stokes equations static data. 
 
-Definition at line 505 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Static default value for the physical ratios (all are initialised to one) 
+
+Definition at line 501 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7060,7 +7041,7 @@ Pointer to the density ratio (relative to the density used in the definition of 
 
 
 
-Definition at line 520 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 515 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7079,7 +7060,7 @@ Pointer to global gravity \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}.
 
 
 
-Definition at line 539 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 534 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7098,7 +7079,7 @@ Navier-\/\+Stokes equations static data.
 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to decide whether the stress-\/divergence form is used or not N.\+B. This needs to be public so that the intel compiler gets things correct somehow the access function messes things up when going to refineable Navier-\/\+Stokes 
 
-Definition at line 843 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 839 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesEquations_a0f24c5d2a7d39dae9512b7792ec19573}\label{classoomph_1_1SpaceTimeNavierStokesEquations_a0f24c5d2a7d39dae9512b7792ec19573}} 
 \index{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}!Pinned\_fp\_pressure\_eqn@{Pinned\_fp\_pressure\_eqn}}
@@ -7113,7 +7094,7 @@ Global eqn number of pressure dof that\textquotesingle{}s pinned in pressure adv
 
 
 
-Definition at line 563 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 558 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7132,7 +7113,7 @@ Pointer to source function pressure advection diffusion equation (only to be use
 
 
 
-Definition at line 549 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 544 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7151,7 +7132,7 @@ Storage for Face\+Elements that apply Robin BC for pressure adv diff equation us
 
 
 
-Definition at line 559 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 554 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7162,7 +7143,7 @@ Referenced by oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\
 \index{Pressure\_not\_stored\_at\_node@{Pressure\_not\_stored\_at\_node}!oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::SpaceTimeNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Pressure\_not\_stored\_at\_node}{Pressure\_not\_stored\_at\_node}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-static int \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::Pressure\+\_\+not\+\_\+stored\+\_\+at\+\_\+node =-\/100\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+static int \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ D\+IM $>$\+::Pressure\+\_\+not\+\_\+stored\+\_\+at\+\_\+node = -\/100\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -7170,7 +7151,7 @@ Static \char`\"{}magic\char`\"{} number that indicates that the pressure is not 
 
 \char`\"{}\+Magic\char`\"{} negative number that indicates that the pressure is not stored at a node. This cannot be -\/1 because that represents the positional hanging scheme in the hanging\+\_\+pt object of nodes. 
 
-Definition at line 499 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 493 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7189,7 +7170,7 @@ Pointer to global Reynolds number.
 
 
 
-Definition at line 525 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 520 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7208,7 +7189,7 @@ Pointer to global Reynolds number x inverse Froude number (= Bond number / Capil
 
 
 
-Definition at line 536 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 531 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7227,7 +7208,7 @@ Pointer to global Reynolds number x Strouhal number (= Womersley)
 
 
 
-Definition at line 528 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 523 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7246,7 +7227,7 @@ Boolean to indicate whether or not the Strouhal value is stored as external data
 
 
 
-Definition at line 532 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 527 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7265,7 +7246,7 @@ Pointer to volumetric source function.
 
 
 
-Definition at line 545 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 540 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7284,7 +7265,7 @@ Pointer to global Reynolds number x Strouhal number (=Womersley)
 
 
 
-Definition at line 528 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 523 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7303,7 +7284,7 @@ Boolean to indicate whether or not the Strouhal value is stored as external data
 
 
 
-Definition at line 532 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 527 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -7322,7 +7303,7 @@ Pointer to the viscosity ratio (relative to the viscosity used in the definition
 
 
 
-Definition at line 516 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 511 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

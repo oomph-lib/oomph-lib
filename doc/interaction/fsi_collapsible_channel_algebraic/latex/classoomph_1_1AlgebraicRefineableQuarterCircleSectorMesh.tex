@@ -67,32 +67,31 @@ Algebraic version of \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSecto
 \DoxyCodeLine{                     -\/-\/-\/\_\_\_}
 \DoxyCodeLine{                    |      -\/-\/-\/\_\_\_\_}
 \DoxyCodeLine{                    |              -\/   BOUNDARY 1}
-\DoxyCodeLine{                    |               /  }
-\DoxyCodeLine{                    |     [2]      /  |  }
-\DoxyCodeLine{                    |             /     | }
-\DoxyCodeLine{                    | N          /        |  }
-\DoxyCodeLine{                    | |\_ E      /          |    }
-\DoxyCodeLine{     BOUNDARY 2     |-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/           |  }
+\DoxyCodeLine{                    |               /}
+\DoxyCodeLine{                    |     [2]      /  |}
+\DoxyCodeLine{                    |             /     |}
+\DoxyCodeLine{                    | N          /        |}
+\DoxyCodeLine{                    | |\_ E      /          |}
+\DoxyCodeLine{     BOUNDARY 2     |-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/           |}
 \DoxyCodeLine{                    |          |    [1]    |}
 \DoxyCodeLine{                    |   [0]    |           |  \string^}
 \DoxyCodeLine{                    |          |           | / \(\backslash\)  direction of}
-\DoxyCodeLine{                    | N        |    N      |  |   Lagrangian }
-\DoxyCodeLine{                    | |\_ E     |    |\_ E   |  |   coordinate }
+\DoxyCodeLine{                    | N        |    N      |  |   Lagrangian}
+\DoxyCodeLine{                    | |\_ E     |    |\_ E   |  |   coordinate}
 \DoxyCodeLine{                    |\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_|  |   along \mbox{\hyperlink{fsi__chan__alg_8txt_a0a0d4ba6149e87b8c0b0c4e8e33f7e11}{wall}} GeomObject}
 \DoxyCodeLine{}
 \DoxyCodeLine{                         BOUNDARY 0}
 \DoxyCodeLine{}
 \DoxyCodeLine{Within \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} elements (MacroElements), \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} local \mbox{\hyperlink{fsi__chan__alg_8txt_a75f15746e5758321c4131e0c2146346f}{coordinates}}}
-\DoxyCodeLine{are such \mbox{\hyperlink{fsi__chan__alg_8txt_a28366a9775c6f52fb8596c1d643ab794}{that}} \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} (E)astern direction coincides with \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} positive }
-\DoxyCodeLine{s\_0 direction,  \textcolor{keywordflow}{while} \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} (N)orther direction coincides with \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} positive }
+\DoxyCodeLine{are such \mbox{\hyperlink{fsi__chan__alg_8txt_a28366a9775c6f52fb8596c1d643ab794}{that}} \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} (E)astern direction coincides with \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} positive}
+\DoxyCodeLine{s\_0 direction,  \textcolor{keywordflow}{while} \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} (N)orther direction coincides with \mbox{\hyperlink{fsi__chan__alg_8txt_af1ca369cf5d9c84bb9d78787e09be829}{the}} positive}
 \DoxyCodeLine{s\_1 direction.}
 \end{DoxyCode}
 
 
-Domain is parametrised by three macro elements as sketched. Elements need to be derived from Algebraic\+Element\+Base. In addition to all the refinement procedures available for \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}} which forms the basis for this mesh, we implement algebraic node update functions for the nodes. ~\newline
- 
+Domain is parametrised by three macro elements as sketched. Elements need to be derived from Algebraic\+Element\+Base. In addition to all the refinement procedures available for \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}} which forms the basis for this mesh, we implement algebraic node update functions for the nodes. 
 
-Definition at line 465 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+Definition at line 439 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
@@ -122,7 +121,7 @@ Upper\+\_\+left\+\_\+box&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 670 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+Definition at line 625 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
@@ -140,7 +139,7 @@ Constructor\+: Pass pointer to geometric object, start and end coordinates on th
 
 
 
-Definition at line 482 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+Definition at line 451 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
@@ -162,7 +161,7 @@ Implement the algebraic node update function for a node at time level t (t=0\+: 
 
 
 
-Definition at line 562 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+Definition at line 527 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
@@ -181,7 +180,7 @@ Resolve mesh update\+: Update current nodal positions via algebraic node update.
 
 
 
-Definition at line 534 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+Definition at line 501 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a89dc4a592e3f188f9bfbffd5c7fdbbcc}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a89dc4a592e3f188f9bfbffd5c7fdbbcc}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update\_in\_central\_box@{node\_update\_in\_central\_box}}
@@ -196,7 +195,7 @@ Algebraic update function for a node that is located in the central box.
 
 Algebraic update function\+: Update in central box according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 866 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
+Definition at line 851 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -215,7 +214,7 @@ Algebraic update function for a node that is located in the lower right box.
 
 Algebraic update function\+: Update in lower right box according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 957 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
+Definition at line 940 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -234,7 +233,7 @@ Algebraic update function for a node that is located in the upper left box.
 
 Algebraic update function\+: Update in upper left box according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 1069 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
+Definition at line 1048 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -253,7 +252,7 @@ Run self-\/test for algebraic mesh -- return 0/1 for O\+K/failure.
 
 
 
-Definition at line 524 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+Definition at line 491 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a3eb269dc5c26355a808d1c5035190017}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a3eb269dc5c26355a808d1c5035190017}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
@@ -272,7 +271,7 @@ Setup algebraic update operation, based on individual blocks. Mesh is suspended 
 \item Nodes in the two outer \char`\"{}ring\char`\"{} elements (bottom right and top left) are located on straight lines running from the edges of the central box to the outer wall. 
 \end{DoxyItemize}Pointer to algebraic element in central box
 
-Definition at line 570 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
+Definition at line 557 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -295,7 +294,7 @@ Update the node update info for specified algebraic node following any spatial m
 
 
 
-Definition at line 613 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+Definition at line 573 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
@@ -314,7 +313,7 @@ Update algebraic node update function for nodes in lower right box.
 
 Update algebraic update function for nodes in lower right box. 
 
-Definition at line 1183 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
+Definition at line 1159 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -337,7 +336,7 @@ Update algebraic node update function for nodes in upper left box.
 
 Update algebraic update function for nodes in upper left box. 
 
-Definition at line 1288 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
+Definition at line 1259 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -363,7 +362,7 @@ Fractional width of central box.
 
 
 
-Definition at line 674 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+Definition at line 634 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a2690e44e43dd4ed1e45b02f4b71ae43f}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a2690e44e43dd4ed1e45b02f4b71ae43f}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!Lambda\_y@{Lambda\_y}}
@@ -378,7 +377,7 @@ Fractional height of central box.
 
 
 
-Definition at line 677 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+Definition at line 637 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 

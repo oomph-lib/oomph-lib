@@ -140,43 +140,42 @@ When run as {\ttfamily  ./triangle -\/pc -\/a0.\+1 -\/q35 box\+\_\+hole.\+poly }
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//============start\_of\_triangle\_class===================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Triangle mesh build with the help of the scaffold mesh coming  }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from the triangle mesh generator Triangle.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// http://www.cs.cmu.edu/\string~quake/triangle.html}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{ \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{ \textcolor{keyword}{class }TriangleMesh : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TriangleMeshBase}
-\DoxyCodeLine{ \{}
-\DoxyCodeLine{ \textcolor{keyword}{public}:}
-\DoxyCodeLine{  \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Empty constructor }}
-\DoxyCodeLine{\textcolor{comment}{}  TriangleMesh()}
-\DoxyCodeLine{   \{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_TRIANGLE\_LIB  }}
-\DoxyCodeLine{    \textcolor{comment}{// Using this constructor no Triangulateio object is built}}
-\DoxyCodeLine{    Triangulateio\_exists=\textcolor{keyword}{false};}
-\DoxyCodeLine{    \textcolor{comment}{// By default allow the automatic creation of vertices along the}}
-\DoxyCodeLine{    \textcolor{comment}{// boundaries by Triangle}}
-\DoxyCodeLine{    this-\/>Allow\_automatic\_creation\_of\_vertices\_on\_boundaries = \textcolor{keyword}{true};}
+\DoxyCodeLine{  \textcolor{comment}{//============start\_of\_triangle\_class===================================}}
+\DoxyCodeLine{\textcolor{comment}{  /// Triangle mesh build with the help of the scaffold mesh coming}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// from the triangle mesh generator Triangle.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// http://www.cs.cmu.edu/\string~quake/triangle.html}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{  \textcolor{keyword}{class }TriangleMesh : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TriangleMeshBase}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{  \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Empty constructor}}
+\DoxyCodeLine{\textcolor{comment}{}    TriangleMesh()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_TRIANGLE\_LIB}}
+\DoxyCodeLine{      \textcolor{comment}{// Using this constructor no Triangulateio object is built}}
+\DoxyCodeLine{      Triangulateio\_exists = \textcolor{keyword}{false};}
+\DoxyCodeLine{      \textcolor{comment}{// By default allow the automatic creation of vertices along the}}
+\DoxyCodeLine{      \textcolor{comment}{// boundaries by Triangle}}
+\DoxyCodeLine{      this-\/>Allow\_automatic\_creation\_of\_vertices\_on\_boundaries = \textcolor{keyword}{true};}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
-\DoxyCodeLine{    \textcolor{comment}{// Initialize the flag to indicate this is the first time to}}
-\DoxyCodeLine{    \textcolor{comment}{// compute the holes left by the halo elements}}
-\DoxyCodeLine{    First\_time\_compute\_holes\_left\_by\_halo\_elements = \textcolor{keyword}{true};}
+\DoxyCodeLine{      \textcolor{comment}{// Initialize the flag to indicate this is the first time to}}
+\DoxyCodeLine{      \textcolor{comment}{// compute the holes left by the halo elements}}
+\DoxyCodeLine{      First\_time\_compute\_holes\_left\_by\_halo\_elements = \textcolor{keyword}{true};}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif // \#ifdef OOMPH\_HAS\_MPI}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{comment}{// Mesh can only be built with 2D Telements.}}
-\DoxyCodeLine{    MeshChecker::assert\_geometric\_element<TElementGeometricBase,ELEMENT>(2);}
-\DoxyCodeLine{   \}}
-\DoxyCodeLine{  \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Constructor with the input files}}
-\DoxyCodeLine{\textcolor{comment}{}  TriangleMesh(\textcolor{keyword}{const} std::string\& node\_file\_name,}
-\DoxyCodeLine{               \textcolor{keyword}{const} std::string\& element\_file\_name,}
-\DoxyCodeLine{               \textcolor{keyword}{const} std::string\& poly\_file\_name,}
-\DoxyCodeLine{               TimeStepper* time\_stepper\_pt=}
-\DoxyCodeLine{               \&Mesh::Default\_TimeStepper,}
+\DoxyCodeLine{      \textcolor{comment}{// Mesh can only be built with 2D Telements.}}
+\DoxyCodeLine{      MeshChecker::assert\_geometric\_element<TElementGeometricBase, ELEMENT>(2);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Constructor with the input files}}
+\DoxyCodeLine{\textcolor{comment}{}    TriangleMesh(}
+\DoxyCodeLine{      \textcolor{keyword}{const} std::string\& node\_file\_name,}
+\DoxyCodeLine{      \textcolor{keyword}{const} std::string\& element\_file\_name,}
+\DoxyCodeLine{      \textcolor{keyword}{const} std::string\& poly\_file\_name,}
+\DoxyCodeLine{      TimeStepper* time\_stepper\_pt = \&Mesh::Default\_TimeStepper,}
 
 \end{DoxyCodeInclude}
 

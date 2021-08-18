@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Kirchhoff\+Love\+Beam\+Equations\+:\begin{figur
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a1593622c70aae5fdff3a8291e76871c6}{Kirchhoff\+Love\+Beam\+Equations}} ()
-\begin{DoxyCompactList}\small\item\em Constructor. Set default values for all physical parameters and zero traction. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor. Set default values for all physical parameters and zero traction. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_aef8e5b3abb7669c7292103d7061f10c6}{load\+\_\+vector}} (const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
 \begin{DoxyCompactList}\small\item\em Get the load vector\+: Pass number of integration point (dummy), Lagr. and Eulerian coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for F\+SI. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a967cb9c4cf03007464eed6edcb7bccf6}{wall\+\_\+profile}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&h\+\_\+ratio)
@@ -26,11 +25,11 @@ const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a8dc17
 \begin{DoxyCompactList}\small\item\em Return the timescale ratio (non-\/dimensional density) \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_aa6d1fce06b7f030673fa5dce0f539a72}{sigma0}} () const
 \begin{DoxyCompactList}\small\item\em Return the axial prestress. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a1aa02dcbcf7a8f278100aa509a1cf4ae}{sigma0\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a69d957808b74157eb54ff6e2175df61b}{sigma0\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to axial prestress. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a269ed76cccc247c9dfdbe0750b09db3a}{h\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_aa0464db51a575e1e1c00872f34e53a7c}{h\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to non-\/dim. wall thickness. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a82ef550c7f4237fda4561dee0b20712a}{lambda\+\_\+sq\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_ad366bb2f4c7a4cac901c71337a2fa91f}{lambda\+\_\+sq\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to timescale ratio (nondim density) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_ade277069089bd27531bf47caea1cb827}{undeformed\+\_\+beam\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a Pointer to geometric object that specifies the beam\textquotesingle{}s undeformed geometry. \end{DoxyCompactList}\item 
@@ -53,9 +52,9 @@ void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_ae003c588ad4e3145
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a0710dd43c856aaa9c94d3112f8cba7ed}{load\+\_\+vector\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a249f1139559ba8e64856f389a9161bb7}{load\+\_\+vector\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Reference to the load vector function pointer. \end{DoxyCompactList}\item 
-void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&h\+\_\+ratio) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a692f4e893d75223ca5bedbb4ab5a1572}{wall\+\_\+profile\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&h\+\_\+ratio) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a7e65a0419b827758d9bc53494691c186}{wall\+\_\+profile\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Reference to the wall thickness ratio profile function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -85,18 +84,17 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a700cd4a
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a22ce2707713186c808aedc32bd12be3c}{Default\+\_\+sigma0\+\_\+value}} =0.\+0
+static double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a22ce2707713186c808aedc32bd12be3c}{Default\+\_\+sigma0\+\_\+value}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for 2nd Piola Kirchhoff prestress. \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a965ef43850af9f156cc46d35d536edc1}{Default\+\_\+lambda\+\_\+sq\+\_\+value}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a965ef43850af9f156cc46d35d536edc1}{Default\+\_\+lambda\+\_\+sq\+\_\+value}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for timescale ratio (1.\+0 -- for natural scaling) \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a8761f159953be81594eee6432c94790d}{Default\+\_\+h\+\_\+value}} =0.\+05
+static double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a8761f159953be81594eee6432c94790d}{Default\+\_\+h\+\_\+value}} = 0.\+05
 \begin{DoxyCompactList}\small\item\em Static default value for non-\/dim wall thickness. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-A class for elements that solve the equations of Kirchhoff-\/\+Love ~\newline
- large-\/displacement (but linearly-\/elastic) thin-\/beam theory.
+A class for elements that solve the equations of Kirchhoff-\/\+Love large-\/displacement (but linearly-\/elastic) thin-\/beam theory.
 
 The variational principle has the form \[ \int_0^{L} \left[ (\sigma_0 + \gamma) \ \delta \gamma + \frac{1}{12} \left(\frac{h}{R_0}\right)^2 \kappa \ \delta \kappa - \left( \left(\frac{R_0}{h}\right) {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot \delta {\bf R}_w \right] \ d\xi = 0, \] where all lengths have been non-\/dimensionalised w.\+r.\+t. $ R_0 $. The strain and and bending \char`\"{}tensors\char`\"{} $\gamma$ and $\kappa$ are computed relative to the shape of the beam\textquotesingle{}s undeformed shape which is specified as a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}.
 
@@ -113,8 +111,7 @@ Default values\+:
 \item the 2nd Piola Kirchhoff pre-\/stress $ \sigma_0 $ is zero.
 \item the wall thickness $ h/R_0$ is 1/20.
 \item the timescale ratio $ \Lambda^2$ is 1.
-\item the traction vector $ f $ evaluates to zero. ~\newline
-
+\item the traction vector $ f $ evaluates to zero.
 \end{DoxyItemize}
 
 Need to specify\+:
@@ -124,7 +121,7 @@ Need to specify\+:
 
 The governing equations can be switched from the principle of virtual displacements to a system of equations that forces the beam to deform into a shape specified by a \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object. If {\ttfamily \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_abb6ff13ecd9068e25dba4b8a63ffe5b0}{Solid\+Finite\+Element\+::solid\+\_\+ic\+\_\+pt()}}!=0} we solve the the equations \[ \int_0^{L} \left( \frac{\partial^i {\bf R}_{IC}}{\partial t^i} - {\bf R}_w \right) \psi_{jk} \ d\xi = 0, \] where $ \partial^i {\bf R}_{IC}/\partial t^i$ is implemented by the \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object, pointed to by {\ttfamily Solid\+Finite\+Element\+::shell\+\_\+ic\+\_\+pt()}. 
 
-Definition at line 110 of file beam\+\_\+elements.\+h.
+Definition at line 109 of file beam\+\_\+elements.\+h.
 
 
 
@@ -137,12 +134,11 @@ Definition at line 110 of file beam\+\_\+elements.\+h.
 
 
 
-Constructor. Set default values for all physical parameters and zero traction. ~\newline
- 
+Constructor. Set default values for all physical parameters and zero traction. 
 
 
 
-Definition at line 175 of file beam\+\_\+elements.\+h.
+Definition at line 170 of file beam\+\_\+elements.\+h.
 
 
 
@@ -171,7 +167,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIHermiteBeamElement_ab81052ae3
 
 
 
-Definition at line 530 of file beam\+\_\+elements.\+cc.
+Definition at line 534 of file beam\+\_\+elements.\+cc.
 
 
 
@@ -197,7 +193,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 278 of file beam\+\_\+elements.\+h.
+Definition at line 297 of file beam\+\_\+elements.\+h.
 
 
 
@@ -215,7 +211,7 @@ Return the residuals for the equations of Kirchhoff-\/\+Love beam theory with li
 
 Return the residuals for the equations of Kirchhoff-\/\+Love beam theory with linear constitutive equations; if Solid\+\_\+ic\+\_\+pt!=0, we assign residuals which force the assignement of an initial shape/ veloc/accel to the dofs. 
 
-Definition at line 283 of file beam\+\_\+elements.\+cc.
+Definition at line 275 of file beam\+\_\+elements.\+cc.
 
 
 
@@ -237,7 +233,7 @@ Get potential (strain) and kinetic energy of the element.
 
 Compute the potential (strain) and kinetic energy of the element (wrapper function). 
 
-Definition at line 564 of file beam\+\_\+elements.\+cc.
+Definition at line 568 of file beam\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_ae003c588ad4e314538fcd04c9289a702}\label{classoomph_1_1KirchhoffLoveBeamEquations_ae003c588ad4e314538fcd04c9289a702}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!get\_energy@{get\_energy}}
@@ -251,7 +247,7 @@ Get the potential energy due to stretching and bending and the kinetic energy of
 
 Compute the potential (strain) and kinetic energy of the element, breaking down the potential energy into stretching and bending components. 
 
-Definition at line 584 of file beam\+\_\+elements.\+cc.
+Definition at line 588 of file beam\+\_\+elements.\+cc.
 
 
 
@@ -269,7 +265,7 @@ Get position vector to and non-\/unit tangent vector on wall\+: dr/ds.
 
 
 
-Definition at line 186 of file beam\+\_\+elements.\+cc.
+Definition at line 184 of file beam\+\_\+elements.\+cc.
 
 
 
@@ -291,7 +287,7 @@ Get normal vector on wall.
 
 
 
-Definition at line 256 of file beam\+\_\+elements.\+h.
+Definition at line 275 of file beam\+\_\+elements.\+h.
 
 
 
@@ -331,7 +327,7 @@ Return the non-\/dimensional wall thickness.
 
 
 
-Definition at line 233 of file beam\+\_\+elements.\+h.
+Definition at line 231 of file beam\+\_\+elements.\+h.
 
 
 
@@ -341,11 +337,11 @@ References H\+\_\+pt.
 
 Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), and get\+\_\+energy().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a269ed76cccc247c9dfdbe0750b09db3a}\label{classoomph_1_1KirchhoffLoveBeamEquations_a269ed76cccc247c9dfdbe0750b09db3a}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_aa0464db51a575e1e1c00872f34e53a7c}\label{classoomph_1_1KirchhoffLoveBeamEquations_aa0464db51a575e1e1c00872f34e53a7c}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!h\_pt@{h\_pt}}
 \index{h\_pt@{h\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{h\_pt()}{h\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::h\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::h\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -353,7 +349,7 @@ Return a pointer to non-\/dim. wall thickness.
 
 
 
-Definition at line 246 of file beam\+\_\+elements.\+h.
+Definition at line 256 of file beam\+\_\+elements.\+h.
 
 
 
@@ -371,7 +367,7 @@ Return the timescale ratio (non-\/dimensional density)
 
 
 
-Definition at line 236 of file beam\+\_\+elements.\+h.
+Definition at line 237 of file beam\+\_\+elements.\+h.
 
 
 
@@ -381,11 +377,11 @@ References Lambda\+\_\+sq\+\_\+pt.
 
 Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), and get\+\_\+energy().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a82ef550c7f4237fda4561dee0b20712a}\label{classoomph_1_1KirchhoffLoveBeamEquations_a82ef550c7f4237fda4561dee0b20712a}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_ad366bb2f4c7a4cac901c71337a2fa91f}\label{classoomph_1_1KirchhoffLoveBeamEquations_ad366bb2f4c7a4cac901c71337a2fa91f}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!lambda\_sq\_pt@{lambda\_sq\_pt}}
 \index{lambda\_sq\_pt@{lambda\_sq\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{lambda\_sq\_pt()}{lambda\_sq\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::lambda\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::lambda\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -393,7 +389,7 @@ Return a pointer to timescale ratio (nondim density)
 
 
 
-Definition at line 249 of file beam\+\_\+elements.\+h.
+Definition at line 262 of file beam\+\_\+elements.\+h.
 
 
 
@@ -415,7 +411,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIHermiteBeamElement_aee4b8fcde
 
 
 
-Definition at line 203 of file beam\+\_\+elements.\+h.
+Definition at line 199 of file beam\+\_\+elements.\+h.
 
 
 
@@ -437,7 +433,7 @@ Return the axial prestress.
 
 
 
-Definition at line 239 of file beam\+\_\+elements.\+h.
+Definition at line 243 of file beam\+\_\+elements.\+h.
 
 
 
@@ -447,11 +443,11 @@ References Sigma0\+\_\+pt.
 
 Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), and get\+\_\+energy().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a1aa02dcbcf7a8f278100aa509a1cf4ae}\label{classoomph_1_1KirchhoffLoveBeamEquations_a1aa02dcbcf7a8f278100aa509a1cf4ae}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a69d957808b74157eb54ff6e2175df61b}\label{classoomph_1_1KirchhoffLoveBeamEquations_a69d957808b74157eb54ff6e2175df61b}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!sigma0\_pt@{sigma0\_pt}}
 \index{sigma0\_pt@{sigma0\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{sigma0\_pt()}{sigma0\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::sigma0\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::sigma0\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -459,7 +455,7 @@ Return a pointer to axial prestress.
 
 
 
-Definition at line 242 of file beam\+\_\+elements.\+h.
+Definition at line 249 of file beam\+\_\+elements.\+h.
 
 
 
@@ -477,7 +473,7 @@ Return a Pointer to geometric object that specifies the beam\textquotesingle{}s 
 
 
 
-Definition at line 253 of file beam\+\_\+elements.\+h.
+Definition at line 269 of file beam\+\_\+elements.\+h.
 
 
 
@@ -495,7 +491,7 @@ Default profile function (constant thickness \textquotesingle{}h\+\_\+0\textquot
 
 Default wall profile function (constant thickness h\+\_\+0) 
 
-Definition at line 64 of file beam\+\_\+elements.\+cc.
+Definition at line 66 of file beam\+\_\+elements.\+cc.
 
 
 
@@ -513,7 +509,7 @@ Get the wall profile\+: Pass Lagrangian \& Eulerian coordinate and return the wa
 
 
 
-Definition at line 223 of file beam\+\_\+elements.\+h.
+Definition at line 221 of file beam\+\_\+elements.\+h.
 
 
 
@@ -535,7 +531,7 @@ Default load function (zero traction)
 
 
 
-Definition at line 52 of file beam\+\_\+elements.\+cc.
+Definition at line 51 of file beam\+\_\+elements.\+cc.
 
 
 
@@ -552,7 +548,7 @@ Referenced by Kirchhoff\+Love\+Beam\+Equations().
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Default\_h\_value@{Default\_h\_value}}
 \index{Default\_h\_value@{Default\_h\_value}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{Default\_h\_value}{Default\_h\_value}}
-{\footnotesize\ttfamily double oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Default\+\_\+h\+\_\+value =0.\+05\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily double oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Default\+\_\+h\+\_\+value = 0.\+05\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -560,7 +556,7 @@ Static default value for non-\/dim wall thickness.
 
 Static default value for non-\/dim wall thickness (1/20) 
 
-Definition at line 123 of file beam\+\_\+elements.\+h.
+Definition at line 120 of file beam\+\_\+elements.\+h.
 
 
 
@@ -570,7 +566,7 @@ Referenced by Kirchhoff\+Love\+Beam\+Equations().
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Default\_lambda\_sq\_value@{Default\_lambda\_sq\_value}}
 \index{Default\_lambda\_sq\_value@{Default\_lambda\_sq\_value}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{Default\_lambda\_sq\_value}{Default\_lambda\_sq\_value}}
-{\footnotesize\ttfamily double oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Default\+\_\+lambda\+\_\+sq\+\_\+value =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily double oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Default\+\_\+lambda\+\_\+sq\+\_\+value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -578,7 +574,7 @@ Static default value for timescale ratio (1.\+0 -- for natural scaling)
 
 Static default value for timescale ratio (1.\+0 for natural scaling) 
 
-Definition at line 119 of file beam\+\_\+elements.\+h.
+Definition at line 116 of file beam\+\_\+elements.\+h.
 
 
 
@@ -588,7 +584,7 @@ Referenced by Kirchhoff\+Love\+Beam\+Equations().
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Default\_sigma0\_value@{Default\_sigma0\_value}}
 \index{Default\_sigma0\_value@{Default\_sigma0\_value}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{Default\_sigma0\_value}{Default\_sigma0\_value}}
-{\footnotesize\ttfamily double oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Default\+\_\+sigma0\+\_\+value =0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily double oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Default\+\_\+sigma0\+\_\+value = 0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -596,7 +592,7 @@ Static default value for 2nd Piola Kirchhoff prestress.
 
 Static default value for 2nd Piola Kirchhoff prestress (zero) 
 
-Definition at line 116 of file beam\+\_\+elements.\+h.
+Definition at line 113 of file beam\+\_\+elements.\+h.
 
 
 
@@ -614,7 +610,7 @@ Pointer to wall thickness.
 
 
 
-Definition at line 130 of file beam\+\_\+elements.\+h.
+Definition at line 127 of file beam\+\_\+elements.\+h.
 
 
 
@@ -632,17 +628,17 @@ Pointer to Timescale ratio (non-\/dim. density)
 
 
 
-Definition at line 133 of file beam\+\_\+elements.\+h.
+Definition at line 130 of file beam\+\_\+elements.\+h.
 
 
 
 Referenced by Kirchhoff\+Love\+Beam\+Equations(), lambda\+\_\+sq(), and lambda\+\_\+sq\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a0710dd43c856aaa9c94d3112f8cba7ed}\label{classoomph_1_1KirchhoffLoveBeamEquations_a0710dd43c856aaa9c94d3112f8cba7ed}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a249f1139559ba8e64856f389a9161bb7}\label{classoomph_1_1KirchhoffLoveBeamEquations_a249f1139559ba8e64856f389a9161bb7}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!load\_vector\_fct\_pt@{load\_vector\_fct\_pt}}
 \index{load\_vector\_fct\_pt@{load\_vector\_fct\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{load\_vector\_fct\_pt}{load\_vector\_fct\_pt}}
-{\footnotesize\ttfamily void($\ast$ \&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& load) oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& load) oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -650,7 +646,7 @@ Reference to the load vector function pointer.
 
 
 
-Definition at line 190 of file beam\+\_\+elements.\+h.
+Definition at line 185 of file beam\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a66707c32b8a08bcf6e8ed855066f9618}\label{classoomph_1_1KirchhoffLoveBeamEquations_a66707c32b8a08bcf6e8ed855066f9618}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Load\_vector\_fct\_pt@{Load\_vector\_fct\_pt}}
@@ -664,7 +660,7 @@ Pointer to load vector function\+: Its arguments are\+: Lagrangian coordinate, E
 
 
 
-Definition at line 148 of file beam\+\_\+elements.\+h.
+Definition at line 144 of file beam\+\_\+elements.\+h.
 
 
 
@@ -682,7 +678,7 @@ Pointer to axial prestress.
 
 
 
-Definition at line 126 of file beam\+\_\+elements.\+h.
+Definition at line 123 of file beam\+\_\+elements.\+h.
 
 
 
@@ -700,17 +696,17 @@ Pointer to the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that sp
 
 
 
-Definition at line 169 of file beam\+\_\+elements.\+h.
+Definition at line 165 of file beam\+\_\+elements.\+h.
 
 
 
 Referenced by oomph\+::\+F\+S\+I\+Hermite\+Beam\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), get\+\_\+energy(), get\+\_\+non\+\_\+unit\+\_\+tangent(), get\+\_\+normal(), oomph\+::\+Hermite\+Beam\+Element\+::output(), and undeformed\+\_\+beam\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a692f4e893d75223ca5bedbb4ab5a1572}\label{classoomph_1_1KirchhoffLoveBeamEquations_a692f4e893d75223ca5bedbb4ab5a1572}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a7e65a0419b827758d9bc53494691c186}\label{classoomph_1_1KirchhoffLoveBeamEquations_a7e65a0419b827758d9bc53494691c186}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!wall\_profile\_fct\_pt@{wall\_profile\_fct\_pt}}
 \index{wall\_profile\_fct\_pt@{wall\_profile\_fct\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{wall\_profile\_fct\_pt}{wall\_profile\_fct\_pt}}
-{\footnotesize\ttfamily void($\ast$ \&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, double\& h\+\_\+ratio) oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::wall\+\_\+profile\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, double\& h\+\_\+ratio) oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::wall\+\_\+profile\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -718,7 +714,7 @@ Reference to the wall thickness ratio profile function pointer.
 
 
 
-Definition at line 213 of file beam\+\_\+elements.\+h.
+Definition at line 209 of file beam\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a6ca999fcdf45f0cf51b0a74a1025ed53}\label{classoomph_1_1KirchhoffLoveBeamEquations_a6ca999fcdf45f0cf51b0a74a1025ed53}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Wall\_profile\_fct\_pt@{Wall\_profile\_fct\_pt}}
@@ -732,7 +728,7 @@ Pointer to wall profile function\+: Its arguments are\+: Lagrangian coordinate, 
 
 
 
-Definition at line 163 of file beam\+\_\+elements.\+h.
+Definition at line 159 of file beam\+\_\+elements.\+h.
 
 
 

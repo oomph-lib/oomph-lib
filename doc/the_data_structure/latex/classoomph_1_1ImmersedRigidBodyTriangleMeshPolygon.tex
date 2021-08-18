@@ -41,7 +41,7 @@ void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a04d825
 \doxysubsection{Detailed Description}
 Class upgrading a \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} to a \char`\"{}hole\char`\"{} for use during triangle mesh generation. For mesh generation purposes, the main (and only) addition to the base class is the provision of the coordinates of a hole inside the polygon. To faciliate the movement of the \char`\"{}hole\char`\"{} through the domain we also provide a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose three values represent the x and y displacements of its centre of gravity and the polygon\textquotesingle{}s rotation about its centre of gravity. If added to a mesh in the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} (in its incarnation as a \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}}) the displacement/rotation of the polygon is computed in response to (i) user-\/specifiable applied forces and a torque and (ii) the net drag (and associated torque) from a mesh of elements that can exert a drag onto the polygon (typically Navier-\/\+Stokes Face\+Elements that apply a viscous drag to an immersed body, represented by the polygon.) 
 
-Definition at line 582 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+Definition at line 667 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
@@ -58,7 +58,7 @@ Constructor\+: Specify coordinates of a point inside the hole and a vector of po
 
 
 
-Definition at line 382 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
+Definition at line 387 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
 
 
 
@@ -76,7 +76,7 @@ Empty Destuctor.
 
 
 
-Definition at line 605 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+Definition at line 686 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
@@ -89,7 +89,7 @@ Definition at line 605 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 Helper function to assign the values of the (scaled) arc-\/length to each node of each polyline. The direction will be the natural order of the vertices within the polyline. 
 
-Definition at line 736 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+Definition at line 811 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
@@ -111,7 +111,7 @@ Get the initial position of the polygon.
 
 
 
-Definition at line 639 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+Definition at line 716 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
@@ -137,7 +137,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_aca95
 
 
 
-Definition at line 620 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+Definition at line 698 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
@@ -159,7 +159,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a14f5
 
 
 
-Definition at line 611 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+Definition at line 689 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
@@ -181,11 +181,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a9c569f8bf
 
 
 
-Definition at line 544 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
+Definition at line 549 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
 
 
 
-References oomph\+::\+Immersed\+Rigid\+Body\+Element\+::apply\+\_\+rigid\+\_\+body\+\_\+motion(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Centre\+\_\+displacement\+\_\+data\+\_\+pt, i, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Initial\+\_\+centre\+\_\+of\+\_\+mass, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Initial\+\_\+\+Phi, oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::internal\+\_\+point(), oomph\+::\+Triangle\+Mesh\+Polygon\+::ncurve\+\_\+section(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::value(), and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
+References oomph\+::\+Immersed\+Rigid\+Body\+Element\+::apply\+\_\+rigid\+\_\+body\+\_\+motion(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Centre\+\_\+displacement\+\_\+data\+\_\+pt, i, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Initial\+\_\+centre\+\_\+of\+\_\+mass, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Initial\+\_\+\+Phi, oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::internal\+\_\+point(), oomph\+::\+Triangle\+Mesh\+Polygon\+::ncurve\+\_\+section(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::value(), and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
 
 
 
@@ -202,7 +202,7 @@ References oomph\+::\+Immersed\+Rigid\+Body\+Element\+::apply\+\_\+rigid\+\_\+bo
 
 
 
-Definition at line 789 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+Definition at line 864 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 

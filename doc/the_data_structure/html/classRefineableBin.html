@@ -171,18 +171,17 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a39cc753a17e800ef388c4cb1352ff0cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a39cc753a17e800ef388c4cb1352ff0cf">make_sub_bin_array</a> (const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;min_and_max_coordinates)</td></tr>
-<tr class="memdesc:a39cc753a17e800ef388c4cb1352ff0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for building a new subbin_array (called when the Bin size is greater than the Max_number_of_sample_point_per_bin (and the Bin is recursive). Pass in the extremal coordinates of the bin which is being subdivided. Redistributes all existing sample points to newly made sub-bin-array and empties its own storage. Pass Max./min. coordinates of new bin array for efficiency.  <a href="classRefineableBin.html#a39cc753a17e800ef388c4cb1352ff0cf">More...</a><br /></td></tr>
-<tr class="separator:a39cc753a17e800ef388c4cb1352ff0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a495380328c638a224ca8c13b1b38d952"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a495380328c638a224ca8c13b1b38d952">get_bin_boundaries</a> (Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;min_and_max_coordinates)</td></tr>
-<tr class="memdesc:a495380328c638a224ca8c13b1b38d952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundaries of bin in each coordinate direction. *.first = min; *.second = max.  <a href="classRefineableBin.html#a495380328c638a224ca8c13b1b38d952">More...</a><br /></td></tr>
-<tr class="separator:a495380328c638a224ca8c13b1b38d952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23bc68c6082f3d5a1cf3f5e8538a9b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#ac23bc68c6082f3d5a1cf3f5e8538a9b2">make_sub_bin_array</a> (const Vector&lt; std::pair&lt; double, double &gt;&gt; &amp;min_and_max_coordinates)</td></tr>
+<tr class="memdesc:ac23bc68c6082f3d5a1cf3f5e8538a9b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for building a new subbin_array (called when the Bin size is greater than the Max_number_of_sample_point_per_bin (and the Bin is recursive). Pass in the extremal coordinates of the bin which is being subdivided. Redistributes all existing sample points to newly made sub-bin-array and empties its own storage. Pass Max./min. coordinates of new bin array for efficiency.  <a href="classRefineableBin.html#ac23bc68c6082f3d5a1cf3f5e8538a9b2">More...</a><br /></td></tr>
+<tr class="separator:ac23bc68c6082f3d5a1cf3f5e8538a9b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e434ec90024cbc5590d0eb5a5aba11e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a6e434ec90024cbc5590d0eb5a5aba11e">get_bin_boundaries</a> (Vector&lt; std::pair&lt; double, double &gt;&gt; &amp;min_and_max_coordinates)</td></tr>
+<tr class="memdesc:a6e434ec90024cbc5590d0eb5a5aba11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundaries of bin in each coordinate direction. *.first = min; *.second = max.  <a href="classRefineableBin.html#a6e434ec90024cbc5590d0eb5a5aba11e">More...</a><br /></td></tr>
+<tr class="separator:a6e434ec90024cbc5590d0eb5a5aba11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a9d0241fb089b4bb2e50e0ab435ebd6ba"><td class="memItemLeft" align="right" valign="top">Vector&lt; <a class="el" href="classSamplePoint.html">SamplePoint</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a9d0241fb089b4bb2e50e0ab435ebd6ba">Sample_point_pt</a></td></tr>
-<tr class="memdesc:a9d0241fb089b4bb2e50e0ab435ebd6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Container of SamplePoints. Pointer to vector because it's shorter than an empty vector! (Not all RefineableBins have sample points &ndash; the ones that are subdivided don't!) <br  />
-  <a href="classRefineableBin.html#a9d0241fb089b4bb2e50e0ab435ebd6ba">More...</a><br /></td></tr>
+<tr class="memdesc:a9d0241fb089b4bb2e50e0ab435ebd6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Container of SamplePoints. Pointer to vector because it's shorter than an empty vector! (Not all RefineableBins have sample points &ndash; the ones that are subdivided don't!)  <a href="classRefineableBin.html#a9d0241fb089b4bb2e50e0ab435ebd6ba">More...</a><br /></td></tr>
 <tr class="separator:a9d0241fb089b4bb2e50e0ab435ebd6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ef2b185fee14608f5adc423b266e1f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a6ef2b185fee14608f5adc423b266e1f7">Sub_bin_array_pt</a></td></tr>
 <tr class="memdesc:a6ef2b185fee14608f5adc423b266e1f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a possible sub-BinArray. Null by default.  <a href="classRefineableBin.html#a6ef2b185fee14608f5adc423b266e1f7">More...</a><br /></td></tr>
@@ -197,7 +196,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classRefineableBin.html">RefineableBin</a> class. Contains sample points and is embedded in a <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a>. May itself be represented by a <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a> to make it recursive. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00109">109</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00113">113</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab840fa275927998ba2f51ec7ef46235c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab840fa275927998ba2f51ec7ef46235c">&#9670;&nbsp;</a></span>RefineableBin() <span class="overload">[1/2]</span></h2>
@@ -235,7 +234,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Constructor. Pass pointer to bin array that contains this bin and the index of the newly created bin in that <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00116">116</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00119">119</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
 </div>
 </div>
@@ -265,9 +264,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00126">126</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00130">130</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -288,7 +287,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00044">44</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00042">42</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>.</p>
 
@@ -324,12 +323,12 @@ Protected Attributes</h2></td></tr>
 <p>Add a new sample point to <a class="el" href="classRefineableBin.html">RefineableBin</a>. </p>
 <p>Add a SamplePoint* to a <a class="el" href="classRefineableBin.html">RefineableBin</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00400">400</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00392">392</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
 
 </div>
 </div>
-<a id="a495380328c638a224ca8c13b1b38d952"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a495380328c638a224ca8c13b1b38d952">&#9670;&nbsp;</a></span>get_bin_boundaries()</h2>
+<a id="a6e434ec90024cbc5590d0eb5a5aba11e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e434ec90024cbc5590d0eb5a5aba11e">&#9670;&nbsp;</a></span>get_bin_boundaries()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -340,7 +339,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void RefineableBin::get_bin_boundaries </td>
           <td>(</td>
-          <td class="paramtype">Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; std::pair&lt; double, double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>min_and_max_coordinates</em></td><td>)</td>
           <td></td>
         </tr>
@@ -355,7 +354,7 @@ Protected Attributes</h2></td></tr>
 <p>Boundaries of bin in each coordinate direction. *.first = min; *.second = max. </p>
 <p>Boundaries of bin in each coordinate direction. *.first = min; *.second = max. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00607">607</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00603">603</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="the__data__structure_8txt.html#aaa5287b1cf3ca06b3f413cb95bd1ec60">u()</a>.</p>
 
@@ -396,14 +395,14 @@ Protected Attributes</h2></td></tr>
 <p>Find sub-GeomObject (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub_geom_object_pt=0 if point can't be found. </p>
 <p>Find sub-GeomObject (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub_geom_object_pt=0 if point can't be found. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00445">445</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00438">438</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00355">SamplePointContainer::Always_fail_elemental_locate_zeta</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="sample__point__container_8h_source.html#l00359">SamplePointContainer::Use_equally_spaced_interior_sample_points</a>, and <a class="el" href="sample__point__container_8h_source.html#l00351">SamplePointContainer::Visited_sample_points_file</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00358">SamplePointContainer::Always_fail_elemental_locate_zeta</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="sample__point__container_8h_source.html#l00362">SamplePointContainer::Use_equally_spaced_interior_sample_points</a>, and <a class="el" href="sample__point__container_8h_source.html#l00354">SamplePointContainer::Visited_sample_points_file</a>.</p>
 
 </div>
 </div>
-<a id="a39cc753a17e800ef388c4cb1352ff0cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39cc753a17e800ef388c4cb1352ff0cf">&#9670;&nbsp;</a></span>make_sub_bin_array()</h2>
+<a id="ac23bc68c6082f3d5a1cf3f5e8538a9b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac23bc68c6082f3d5a1cf3f5e8538a9b2">&#9670;&nbsp;</a></span>make_sub_bin_array()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -414,7 +413,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void RefineableBin::make_sub_bin_array </td>
           <td>(</td>
-          <td class="paramtype">const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const Vector&lt; std::pair&lt; double, double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>min_and_max_coordinates</em></td><td>)</td>
           <td></td>
         </tr>
@@ -429,7 +428,7 @@ Protected Attributes</h2></td></tr>
 <p>Method for building a new subbin_array (called when the Bin size is greater than the Max_number_of_sample_point_per_bin (and the Bin is recursive). Pass in the extremal coordinates of the bin which is being subdivided. Redistributes all existing sample points to newly made sub-bin-array and empties its own storage. Pass Max./min. coordinates of new bin array for efficiency. </p>
 <p>Function called for making a sub bin array in a given <a class="el" href="classRefineableBin.html">RefineableBin</a>. Pass the vector of min and max coordinates of the NEW bin array. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00093">93</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00091">91</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
 
 </div>
 </div>
@@ -458,9 +457,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Number of sample points stored in bin. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00164">164</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00168">168</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00181">Sample_point_pt</a>.</p>
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00184">Sample_point_pt</a>.</p>
 
 </div>
 </div>
@@ -490,9 +489,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00132">132</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00136">136</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -524,9 +523,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Output bin; x,[y,[z]],n_sample_points. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00183">183</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00181">181</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>.</p>
 
 </div>
 </div>
@@ -549,9 +548,9 @@ Protected Attributes</h2></td></tr>
 <p>Output bin vertices (allowing display of bins as zones). </p>
 <p>Output bin; x,[y,[z]]. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00295">295</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00291">291</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>.</p>
 
 </div>
 </div>
@@ -592,7 +591,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Compute total number of sample points recursively. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00067">67</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00065">65</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
 
 </div>
 </div>
@@ -619,7 +618,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer to the bin array which "owns" this <a class="el" href="classRefineableBin.html">RefineableBin</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00187">187</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00190">190</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
 </div>
 </div>
@@ -645,7 +644,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Index of bin in its bin array. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00190">190</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00193">193</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
 </div>
 </div>
@@ -669,12 +668,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Container of SamplePoints. Pointer to vector because it's shorter than an empty vector! (Not all RefineableBins have sample points &ndash; the ones that are subdivided don't!) <br  />
- </p>
+<p>Container of SamplePoints. Pointer to vector because it's shorter than an empty vector! (Not all RefineableBins have sample points &ndash; the ones that are subdivided don't!) </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00181">181</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00184">184</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sample__point__container_8h_source.html#l00164">nsample_points_in_bin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8h_source.html#l00168">nsample_points_in_bin()</a>.</p>
 
 </div>
 </div>
@@ -700,7 +698,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer to a possible sub-BinArray. Null by default. </p>
 
-<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00184">184</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00187">187</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
 
 </div>
 </div>
@@ -736,7 +734,7 @@ Protected Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:16
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:39
         </div>
       </div>
     </footer>

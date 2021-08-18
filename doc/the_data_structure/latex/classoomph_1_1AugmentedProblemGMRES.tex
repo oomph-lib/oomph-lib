@@ -59,8 +59,8 @@ void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f50778038
 \begin{DoxyCompactList}\small\item\em Apply the block-\/diagonal Schur complement preconditioner to compute the L\+HS which has size N+1 (the augmented system size) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1ff5a4b43235b43d2254af0db6195dc7}{solve\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
 \begin{DoxyCompactList}\small\item\em General interface to solve function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x)
-\begin{DoxyCompactList}\small\item\em Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2831faedac86c6e6acd34351c138fe52}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x)
+\item 
 void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a74bb2d9ceab6473c1922b166ebf48681}{generate\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
 \begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a175361cb4600f20511213636f2e645ce}{apply\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
@@ -98,7 +98,7 @@ bool \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66
 \doxysubsection{Detailed Description}
 The \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} method. 
 
-Definition at line 1592 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1623 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -115,7 +115,7 @@ Constructor.
 
 
 
-Definition at line 1598 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1627 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -133,7 +133,7 @@ Destructor\+: Clean up storage.
 
 
 
-Definition at line 1617 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1646 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -151,7 +151,7 @@ Broken copy constructor.
 
 
 
-Definition at line 1623 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1652 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -172,7 +172,7 @@ Helper function\+: Apply plane rotation. This is done using the update\+:
 
 \[ \begin{bmatrix} dx \newline dy \end{bmatrix} \leftarrow \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix}. \] 
 
-Definition at line 1988 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2026 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -190,7 +190,7 @@ Apply the block-\/diagonal Schur complement preconditioner to compute the L\+HS 
 
 
 
-Definition at line 1781 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1817 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -212,7 +212,7 @@ Multiply the vector x by the augmented system matrix.
 
 
 
-Definition at line 1742 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1778 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -238,7 +238,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 1732 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1768 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -260,7 +260,7 @@ Switches off iteration restart.
 
 
 
-Definition at line 1718 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1749 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -282,7 +282,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line 1635 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1664 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -300,7 +300,7 @@ switches on iteration restarting and takes as an argument the number of iteratio
 
 
 
-Definition at line 1711 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1742 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -318,7 +318,7 @@ Helper function\+: Generate a plane rotation. This is done by finding the values
 
 \[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \] where $ r=\sqrt{pow(dx,2)+pow(dy,2)} $. The values of a and b are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+192 
 
-Definition at line 1930 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1967 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -336,7 +336,7 @@ access function indicating whether restarted \mbox{\hyperlink{classoomph_1_1GMRE
 
 
 
-Definition at line 1703 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1734 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -358,7 +358,7 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line 1697 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1728 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -376,7 +376,7 @@ Broken assignment operator.
 
 
 
-Definition at line 1629 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1658 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -398,7 +398,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line 2861 of file iterative\+\_\+linear\+\_\+solver.\+cc.
+Definition at line 2831 of file iterative\+\_\+linear\+\_\+solver.\+cc.
 
 
 
@@ -416,7 +416,7 @@ Set left preconditioning (the default)
 
 
 
-Definition at line 1724 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1755 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -434,7 +434,7 @@ Enable right preconditioning.
 
 
 
-Definition at line 1727 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1761 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -456,7 +456,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line 1648 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1677 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -478,7 +478,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Definition at line 1686 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1715 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -500,7 +500,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 2778 of file iterative\+\_\+linear\+\_\+solver.\+cc.
+Definition at line 2746 of file iterative\+\_\+linear\+\_\+solver.\+cc.
 
 
 
@@ -522,7 +522,7 @@ General interface to solve function.
 
 Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. based on the algorithm presented in Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, Barrett, Berry et al, S\+I\+AM, 2006 and the implementation in the I\+M\+L++ library \+: \href{http://math.nist.gov/iml++/}{\texttt{ http\+://math.\+nist.\+gov/iml++/}} 
 
-Definition at line 2893 of file iterative\+\_\+linear\+\_\+solver.\+cc.
+Definition at line 2862 of file iterative\+\_\+linear\+\_\+solver.\+cc.
 
 
 
@@ -532,19 +532,15 @@ References apply\+\_\+plane\+\_\+rotation(), apply\+\_\+schur\+\_\+complement\+\
 
 Referenced by solve().
 
-\mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}\label{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}} 
+\mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a2831faedac86c6e6acd34351c138fe52}\label{classoomph_1_1AugmentedProblemGMRES_a2831faedac86c6e6acd34351c138fe52}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!update@{update}}
 \index{update@{update}!oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily void oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{H,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{H,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
+Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y 
 
-
-Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. 
-
-
-
-Definition at line 1834 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 1871 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -569,7 +565,7 @@ Pointer to the column vector in the bordered system.
 
 
 
-Definition at line 2014 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2052 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -587,7 +583,7 @@ Pointer to the row vector in the bordered system.
 
 
 
-Definition at line 2017 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2055 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -605,7 +601,7 @@ boolean indicating if iteration restarting is used
 
 
 
-Definition at line 2008 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2046 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -623,7 +619,7 @@ Number of iterations taken.
 
 
 
-Definition at line 2001 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2039 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -641,7 +637,7 @@ Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be delet
 
 
 
-Definition at line 2034 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2072 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -659,7 +655,7 @@ Pointer to matrix.
 
 
 
-Definition at line 2011 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2049 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -677,7 +673,7 @@ boolean indicating use of left hand preconditioning (if true) or right hand prec
 
 
 
-Definition at line 2038 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2076 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -695,7 +691,7 @@ Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setu
 
 
 
-Definition at line 2030 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2068 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -713,7 +709,7 @@ The number of iterations before the iteration proceedure is restarted if iterati
 
 
 
-Definition at line 2005 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2043 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -731,7 +727,7 @@ Pointer to the last entry of the R\+HS vector in the bordered system.
 
 
 
-Definition at line 2023 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2061 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}\label{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Schur\_complement\_scalar@{Schur\_complement\_scalar}}
@@ -745,7 +741,7 @@ The scalar component of the Schur complement preconditioner.
 
 
 
-Definition at line 2026 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2064 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -763,7 +759,7 @@ Pointer to the last entry of the L\+HS vector in the bordered system.
 
 
 
-Definition at line 2020 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 2058 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 

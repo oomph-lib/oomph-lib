@@ -36,7 +36,7 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh_abb1a6cb242b5d0e067a8e64b3ac50c
 \begin{DoxyCompactList}\small\item\em Overload set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper so that the stored time stepper now corresponds to the new timestepper. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a18322e3238acaf2c0d3c473b5fac4c91}{compute\+\_\+boundary\+\_\+segments\+\_\+connectivity\+\_\+and\+\_\+initial\+\_\+zeta\+\_\+values}} (const unsigned \&b)
 \begin{DoxyCompactList}\small\item\em Compute the boundary segments connectivity for those boundaries that were splited during the distribution process. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_ab45285f4e725ea9b79e3211d66c741ce}{re\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values\+\_\+for\+\_\+internal\+\_\+boundary}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \&old\+\_\+segment\+\_\+sorted\+\_\+ele\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, bool $>$ \&old\+\_\+is\+\_\+inverted)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a097beffb0767e900c92b5c3e5ee06da3}{re\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values\+\_\+for\+\_\+internal\+\_\+boundary}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ \&old\+\_\+segment\+\_\+sorted\+\_\+ele\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, bool $>$ \&old\+\_\+is\+\_\+inverted)
 \begin{DoxyCompactList}\small\item\em Re-\/assign the boundary segments initial zeta (arclength) value for those internal boundaries that were splited during the distribution process. Those boundaries that have one face element at each side of the boundary. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a6a33a04b552311d9c9c258fa40e262de}{re\+\_\+scale\+\_\+re\+\_\+assigned\+\_\+initial\+\_\+zeta\+\_\+values\+\_\+for\+\_\+internal\+\_\+boundary}} (const unsigned \&b)
 \begin{DoxyCompactList}\small\item\em Re-\/scale the re-\/assigned zeta values for the boundary nodes, apply only for internal boundaries. \end{DoxyCompactList}\item 
@@ -52,9 +52,9 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh_ac05d0de6cbe1a5008cbc9e65f56551
 \begin{DoxyCompactList}\small\item\em Return direct access to nodes associated with a boundary but sorted in segments. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \& \mbox{\hyperlink{classoomph_1_1TriangleMesh_afcfb27b6a9230629edbcf7b2f1cfbe48}{boundary\+\_\+segment\+\_\+node\+\_\+pt}} (const unsigned \&b, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
 \begin{DoxyCompactList}\small\item\em Return direct access to nodes associated with a segment of a given boundary. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\& \mbox{\hyperlink{classoomph_1_1TriangleMesh_ad7acd0ef2644130b830eed3cd3a9a259}{boundary\+\_\+segment\+\_\+node\+\_\+pt}} (const unsigned \&b, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\& \mbox{\hyperlink{classoomph_1_1TriangleMesh_a34dcdc586eb7548f34de8fbf9d561d0b}{boundary\+\_\+segment\+\_\+node\+\_\+pt}} (const unsigned \&b, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
 \begin{DoxyCompactList}\small\item\em Return pointer to node n on boundary b. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_ae4922667cdfd747a3fbc5d391933ce31}{update\+\_\+triangulateio}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&internal\+\_\+point)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a43173b5b7e761e60e5f9af3be432918d}{update\+\_\+triangulateio}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&internal\+\_\+point)
 \begin{DoxyCompactList}\small\item\em Update the \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object to the current nodal position and the centre hole coordinates. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a27153961f8b691a4cd50bd6c83ffc4d3}{update\+\_\+triangulateio}} ()
 \begin{DoxyCompactList}\small\item\em Update the triangulateio object to the current nodal positions. \end{DoxyCompactList}\item 
@@ -78,7 +78,7 @@ const unsigned \mbox{\hyperlink{classoomph_1_1TriangleMesh_aa0f608107023deae643f
 \begin{DoxyCompactList}\small\item\em The final boundary id for shared boundaries. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a712bfd68d4b55e9c475347c0146fc8ac}{load\+\_\+balance}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&target\+\_\+domain\+\_\+for\+\_\+local\+\_\+non\+\_\+halo\+\_\+element)
 \begin{DoxyCompactList}\small\item\em Virtual function to perform the load balance routines. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a47080ac440e82c099c390b37bf694cfe}{reset\+\_\+boundary\+\_\+element\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&ntmp\+\_\+boundary\+\_\+elements, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&deleted\+\_\+elements)
+virtual void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a5213a8126947509f566071c648e4716c}{reset\+\_\+boundary\+\_\+element\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&ntmp\+\_\+boundary\+\_\+elements, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&deleted\+\_\+elements)
 \begin{DoxyCompactList}\small\item\em Reset the boundary elements info. after load balance have taken place. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_ac7ea71980a3512c16a4ead623988a1e8}{output\+\_\+boundary\+\_\+coordinates}} (const unsigned \&b, std\+::ostream \&outfile)
 \end{DoxyCompactItemize}
@@ -95,9 +95,8 @@ bool \mbox{\hyperlink{classoomph_1_1TriangleMesh_a166a8057de8390280acb6365c3df87
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a82ccf74f4e2befe3a6acd458d4e37c35}{build\+\_\+from\+\_\+scaffold}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt, const bool \&use\+\_\+attributes)
 \begin{DoxyCompactList}\small\item\em Build mesh from scaffold. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a1b18773cfdc79964dc7ae58dd11c2862}{build\+\_\+triangulateio}} (const std\+::string \&poly\+\_\+file\+\_\+name, \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&triangulate\+\_\+io, bool \&use\+\_\+attributes)
-\begin{DoxyCompactList}\small\item\em Helper function to create \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object (return in triangulate\+\_\+io) from the .poly file ~\newline
- \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_aa9be2eeed2b37cc9805ac75938206d3f}{generic\+\_\+constructor}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&outer\+\_\+boundary\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&internal\+\_\+polygon\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&open\+\_\+polylines\+\_\+pt, const double \&element\+\_\+area, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&extra\+\_\+holes\+\_\+coordinates, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&regions\+\_\+coordinates, std\+::map$<$ unsigned, double $>$ \&regions\+\_\+areas, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt, const bool \&use\+\_\+attributes, const bool \&refine\+\_\+boundary, const bool \&refine\+\_\+internal\+\_\+boundary)
+\begin{DoxyCompactList}\small\item\em Helper function to create \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object (return in triangulate\+\_\+io) from the .poly file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_ac98f63c884635dae9dd0f45d45261c8a}{generic\+\_\+constructor}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&outer\+\_\+boundary\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&internal\+\_\+polygon\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&open\+\_\+polylines\+\_\+pt, const double \&element\+\_\+area, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&extra\+\_\+holes\+\_\+coordinates, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&regions\+\_\+coordinates, std\+::map$<$ unsigned, double $>$ \&regions\+\_\+areas, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt, const bool \&use\+\_\+attributes, const bool \&refine\+\_\+boundary, const bool \&refine\+\_\+internal\+\_\+boundary)
 \begin{DoxyCompactList}\small\item\em A general-\/purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a3fa21c284395e87058afd244e3f04155}{shared\+\_\+boundaries\+\_\+in\+\_\+this\+\_\+processor}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&shared\+\_\+boundaries\+\_\+in\+\_\+this\+\_\+processor)
 \begin{DoxyCompactList}\small\item\em Get the shared boundaries ids living in the current processor. \end{DoxyCompactList}\item 
@@ -149,11 +148,11 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh_addbb476c72cce6f9d190d6bc026edb
 \begin{DoxyCompactList}\small\item\em Flush A\+LL the shared boundary nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a23d348f815de7eee301395bbda9a0adf}{flush\+\_\+shared\+\_\+boundary\+\_\+node}} (const unsigned \&b)
 \begin{DoxyCompactList}\small\item\em Flush the boundary nodes associated to the shared boundary b. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a56132de18ed5754ac30202036025347b}{add\+\_\+shared\+\_\+boundary\+\_\+node}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\mbox{\hyperlink{classoomph_1_1Mesh_aebdb699466fe07f2e27aa4404008cde4}{node\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a56132de18ed5754ac30202036025347b}{add\+\_\+shared\+\_\+boundary\+\_\+node}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\mbox{\hyperlink{classoomph_1_1Mesh_ab3c2b72c8ef4e9fd35f5998a5e7dc93b}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Add the node the shared boundary. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TriangleMesh_a9605f96f76e7f00b3e0f8130e5118029}{shared\+\_\+boundary\+\_\+node\+\_\+pt}} (const unsigned \&b, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
 \item 
-bool \mbox{\hyperlink{classoomph_1_1TriangleMesh_a14bf5a67e8ce6cc64a38922b08af991c}{is\+\_\+node\+\_\+on\+\_\+shared\+\_\+boundary}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Mesh_aebdb699466fe07f2e27aa4404008cde4}{node\+\_\+pt}})
+bool \mbox{\hyperlink{classoomph_1_1TriangleMesh_a14bf5a67e8ce6cc64a38922b08af991c}{is\+\_\+node\+\_\+on\+\_\+shared\+\_\+boundary}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Mesh_ab3c2b72c8ef4e9fd35f5998a5e7dc93b}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Is the node on the shared boundary. \end{DoxyCompactList}\item 
 std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1TriangleMesh_a10c5d3db04d6bd99b16485ff40a7bda2}{shared\+\_\+boundary\+\_\+from\+\_\+processors}} ()
 \begin{DoxyCompactList}\small\item\em Return the association of the shared boundaries with the processors. \end{DoxyCompactList}\item 
@@ -181,33 +180,33 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh_adc885e145e4539db3d5336ef9304e3
 \item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a772e4d49926279a9b39493e582695709}{create\+\_\+distributed\+\_\+domain\+\_\+representation}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&polygons\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&open\+\_\+curves\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Creates the distributed domain representation. Joins the original boundaires, shared boundaries and creates connections among them to create the new polygons that represent the distributed domain. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a87b3ee8de1ce46c0733b5bd7d0355061}{sort\+\_\+polylines\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&unsorted\+\_\+polylines\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ \&sorted\+\_\+polylines\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a76509aa7af0fb00c08e3005056e09cd2}{sort\+\_\+polylines\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&unsorted\+\_\+polylines\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$ \&sorted\+\_\+polylines\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Sorts the polylines so they be continuous and then we can create a closed or open curve from them. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_acdfe1bcf9fa27951ffd41e0b9d881292}{create\+\_\+tmp\+\_\+polygons\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ \&polylines\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&polygons\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a5e49863e20f714a63ddc9d3224151614}{create\+\_\+tmp\+\_\+polygons\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$ \&polylines\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&polygons\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Take the polylines from the shared boundaries and create temporary polygon representations of the domain. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a974feeefa08df781ea2ebaab25a9729c}{create\+\_\+tmp\+\_\+open\+\_\+curves\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ \&sorted\+\_\+open\+\_\+curves\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&unsorted\+\_\+shared\+\_\+to\+\_\+internal\+\_\+poly\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&open\+\_\+curves\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a75fd6b056f507bb37390537c133a1071}{create\+\_\+tmp\+\_\+open\+\_\+curves\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$ \&sorted\+\_\+open\+\_\+curves\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&unsorted\+\_\+shared\+\_\+to\+\_\+internal\+\_\+poly\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&open\+\_\+curves\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Take the polylines from the original open curves and created new temporaly representations of open curves with the bits of original curves not overlapped by shared boundaries. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a42ae047a452ed3bc897deabe2c188fcf}{compute\+\_\+holes\+\_\+left\+\_\+by\+\_\+halo\+\_\+elements\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&output\+\_\+holes\+\_\+coordinates)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a45f537a111072a02fe5c9c4f1a2c04f4}{compute\+\_\+holes\+\_\+left\+\_\+by\+\_\+halo\+\_\+elements\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&output\+\_\+holes\+\_\+coordinates)
 \begin{DoxyCompactList}\small\item\em Compute the holes left by the halo elements, those adjacent to the shared boundaries. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a730c9d300ac82244e4c37ab7f9f28248}{update\+\_\+holes\+\_\+information\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&polygons\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&output\+\_\+holes\+\_\+coordinates)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_af55d4baf005b0ba4f9ae71eaf859c8bc}{update\+\_\+holes\+\_\+information\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&polygons\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&output\+\_\+holes\+\_\+coordinates)
 \begin{DoxyCompactList}\small\item\em Keeps those vertices that define a hole, those that are inside closed internal boundaries in the new polygons that define the domain. Delete those outside/inside the outer polygons (this is required since Triangle can not deal with vertices that define holes outside the new outer polygons of the domain) \end{DoxyCompactList}\item 
-const int \mbox{\hyperlink{classoomph_1_1TriangleMesh_a08f130b96a6cf8c24f09977fd3565427}{check\+\_\+connections\+\_\+of\+\_\+polyline\+\_\+nodes}} (std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&element\+\_\+in\+\_\+processor\+\_\+pt, const int \&root\+\_\+edge\+\_\+bnd\+\_\+id, std\+::map$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$, bool $>$ \&overlapped\+\_\+face, std\+::map$<$ unsigned, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, bool $>$ $>$ \&node\+\_\+on\+\_\+bnd\+\_\+not\+\_\+overlapped\+\_\+by\+\_\+shd\+\_\+bnd, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&current\+\_\+polyline\+\_\+nodes, std\+::map$<$ unsigned, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ $>$ \&shared\+\_\+bnd\+\_\+id\+\_\+to\+\_\+sorted\+\_\+list\+\_\+node\+\_\+pt, const unsigned \&node\+\_\+degree, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+node\+\_\+pt, const bool called\+\_\+from\+\_\+load\+\_\+balance=false)
+const int \mbox{\hyperlink{classoomph_1_1TriangleMesh_a5c601dab5f849d8bb96abc59f9e1d853}{check\+\_\+connections\+\_\+of\+\_\+polyline\+\_\+nodes}} (std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&element\+\_\+in\+\_\+processor\+\_\+pt, const int \&root\+\_\+edge\+\_\+bnd\+\_\+id, std\+::map$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$, bool $>$ \&overlapped\+\_\+face, std\+::map$<$ unsigned, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, bool $>$$>$ \&node\+\_\+on\+\_\+bnd\+\_\+not\+\_\+overlapped\+\_\+by\+\_\+shd\+\_\+bnd, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&current\+\_\+polyline\+\_\+nodes, std\+::map$<$ unsigned, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$$>$ \&shared\+\_\+bnd\+\_\+id\+\_\+to\+\_\+sorted\+\_\+list\+\_\+node\+\_\+pt, const unsigned \&node\+\_\+degree, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+node\+\_\+pt, const bool called\+\_\+from\+\_\+load\+\_\+balance=false)
 \begin{DoxyCompactList}\small\item\em Check for any possible connections that the array of sorted nodes have with any previous boundaries or with itself. Return -\/1 if no connection was found, return -\/2 if the connection is with the same polyline, return the boundary id of the boundary to which the connection is performed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a2645a78aa55dacf39530dd087d894d79}{create\+\_\+shared\+\_\+polylines\+\_\+connections}} ()
-\begin{DoxyCompactList}\small\item\em Establish the connections of the polylines previously marked as having connections. This connections were marked in the function \mbox{\hyperlink{classoomph_1_1TriangleMesh_ac0896e7fe3af5f542ccf1160dd0aae3c}{Triangle\+Mesh\+::create\+\_\+polylines\+\_\+from\+\_\+halo\+\_\+elements\+\_\+helper()}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a1b5df9c44997b7d193b72382c92b35ff}{create\+\_\+shared\+\_\+boundaries}} (\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$comm\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&backed\+\_\+up\+\_\+el\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&backed\+\_\+up\+\_\+f\+\_\+el\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::set$<$ unsigned $>$ $>$ \&processors\+\_\+associated\+\_\+with\+\_\+data, const bool \&overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status)
+\begin{DoxyCompactList}\small\item\em Establish the connections of the polylines previously marked as having connections. This connections were marked in the function \mbox{\hyperlink{classoomph_1_1TriangleMesh_afecd1b96956b0d2152907388fa356148}{Triangle\+Mesh\+::create\+\_\+polylines\+\_\+from\+\_\+halo\+\_\+elements\+\_\+helper()}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a8c246343aa1b7d7e112c32c706bdb493}{create\+\_\+shared\+\_\+boundaries}} (\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$comm\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&backed\+\_\+up\+\_\+el\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&backed\+\_\+up\+\_\+f\+\_\+el\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::set$<$ unsigned $>$$>$ \&processors\+\_\+associated\+\_\+with\+\_\+data, const bool \&overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status)
 \begin{DoxyCompactList}\small\item\em Creates the shared boundaries. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_aa5e9079c6e3c1699996962e4560ae124}{get\+\_\+halo\+\_\+elements\+\_\+on\+\_\+all\+\_\+procs}} (const unsigned \&nproc, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&backed\+\_\+up\+\_\+el\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::set$<$ unsigned $>$ $>$ \&processors\+\_\+associated\+\_\+with\+\_\+data, const bool \&overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$, unsigned $>$ \&element\+\_\+to\+\_\+global\+\_\+index, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ $>$ $>$ \&output\+\_\+halo\+\_\+elements\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_ab501263f1ca2235aafdd0fee4b28df60}{get\+\_\+halo\+\_\+elements\+\_\+on\+\_\+all\+\_\+procs}} (const unsigned \&nproc, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&backed\+\_\+up\+\_\+el\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::set$<$ unsigned $>$$>$ \&processors\+\_\+associated\+\_\+with\+\_\+data, const bool \&overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$, unsigned $>$ \&element\+\_\+to\+\_\+global\+\_\+index, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$$>$$>$ \&output\+\_\+halo\+\_\+elements\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Creates the halo elements on all processors Gets the halo elements on all processors, these elements are then used on the function that computes the shared boundaries among the processors. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMesh_ae9e400769c3f40150b5b50f5056fbf06}{get\+\_\+element\+\_\+edges\+\_\+on\+\_\+boundary}} (std\+::map$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$, unsigned $>$ \&element\+\_\+edges\+\_\+on\+\_\+boundary)
 \begin{DoxyCompactList}\small\item\em Get the element edges (pair of nodes, edges) that lie on a boundary (used to mark shared boundaries that lie on internal boundaries) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_ac0896e7fe3af5f542ccf1160dd0aae3c}{create\+\_\+polylines\+\_\+from\+\_\+halo\+\_\+elements\+\_\+helper}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$, unsigned $>$ \&element\+\_\+to\+\_\+global\+\_\+index, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&element\+\_\+in\+\_\+processor\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ $>$ $>$ \&input\+\_\+halo\+\_\+elements, std\+::map$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$, unsigned $>$ \&elements\+\_\+edges\+\_\+on\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ $>$ \&output\+\_\+polylines\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_afecd1b96956b0d2152907388fa356148}{create\+\_\+polylines\+\_\+from\+\_\+halo\+\_\+elements\+\_\+helper}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$, unsigned $>$ \&element\+\_\+to\+\_\+global\+\_\+index, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&element\+\_\+in\+\_\+processor\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$$>$$>$ \&input\+\_\+halo\+\_\+elements, std\+::map$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$, unsigned $>$ \&elements\+\_\+edges\+\_\+on\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$$>$ \&output\+\_\+polylines\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Creates polylines from the intersection of halo elements on all processors. The new polylines define the shared boundaries in the domain This get the polylines on A\+LL processors, that is why the three dimensions output\+\_\+polylines\+\_\+pt\mbox{[}iproc\mbox{]}\mbox{[}ncurve\mbox{]}\mbox{[}npolyline\mbox{]}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a1af781a1654b93384d35db1d74cee919}{break\+\_\+loops\+\_\+on\+\_\+shared\+\_\+polyline\+\_\+helper}} (const unsigned \&initial\+\_\+shd\+\_\+bnd\+\_\+id, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&input\+\_\+nodes, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&input\+\_\+boundary\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&input\+\_\+face\+\_\+index\+\_\+element, const int \&input\+\_\+connect\+\_\+to\+\_\+the\+\_\+left, const int \&input\+\_\+connect\+\_\+to\+\_\+the\+\_\+right, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ $>$ \&output\+\_\+sorted\+\_\+nodes\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \&output\+\_\+boundary\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $>$ \&output\+\_\+face\+\_\+index\+\_\+element, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&output\+\_\+connect\+\_\+to\+\_\+the\+\_\+left, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&output\+\_\+connect\+\_\+to\+\_\+the\+\_\+right)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a5de64c81efdddb488bd7a77505a32901}{break\+\_\+loops\+\_\+on\+\_\+shared\+\_\+polyline\+\_\+helper}} (const unsigned \&initial\+\_\+shd\+\_\+bnd\+\_\+id, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&input\+\_\+nodes, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&input\+\_\+boundary\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&input\+\_\+face\+\_\+index\+\_\+element, const int \&input\+\_\+connect\+\_\+to\+\_\+the\+\_\+left, const int \&input\+\_\+connect\+\_\+to\+\_\+the\+\_\+right, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$$>$ \&output\+\_\+sorted\+\_\+nodes\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ \&output\+\_\+boundary\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$$>$ \&output\+\_\+face\+\_\+index\+\_\+element, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&output\+\_\+connect\+\_\+to\+\_\+the\+\_\+left, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&output\+\_\+connect\+\_\+to\+\_\+the\+\_\+right)
 \begin{DoxyCompactList}\small\item\em Break any possible loop created by the sorted list of nodes that is used to create a new shared polyline. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a3591154bfb4095a602c6e430e5624183}{break\+\_\+loops\+\_\+on\+\_\+shared\+\_\+polyline\+\_\+load\+\_\+balance\+\_\+helper}} (const unsigned \&initial\+\_\+shd\+\_\+bnd\+\_\+id, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&input\+\_\+nodes, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&input\+\_\+boundary\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&input\+\_\+boundary\+\_\+face\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&input\+\_\+face\+\_\+index\+\_\+element, const int \&input\+\_\+connect\+\_\+to\+\_\+the\+\_\+left, const int \&input\+\_\+connect\+\_\+to\+\_\+the\+\_\+right, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ $>$ \&output\+\_\+sorted\+\_\+nodes\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \&output\+\_\+boundary\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \&output\+\_\+boundary\+\_\+face\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $>$ \&output\+\_\+face\+\_\+index\+\_\+element, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&output\+\_\+connect\+\_\+to\+\_\+the\+\_\+left, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&output\+\_\+connect\+\_\+to\+\_\+the\+\_\+right)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a39738ee0a68fe021d446406287615327}{break\+\_\+loops\+\_\+on\+\_\+shared\+\_\+polyline\+\_\+load\+\_\+balance\+\_\+helper}} (const unsigned \&initial\+\_\+shd\+\_\+bnd\+\_\+id, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&input\+\_\+nodes, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&input\+\_\+boundary\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&input\+\_\+boundary\+\_\+face\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&input\+\_\+face\+\_\+index\+\_\+element, const int \&input\+\_\+connect\+\_\+to\+\_\+the\+\_\+left, const int \&input\+\_\+connect\+\_\+to\+\_\+the\+\_\+right, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$$>$ \&output\+\_\+sorted\+\_\+nodes\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ \&output\+\_\+boundary\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ \&output\+\_\+boundary\+\_\+face\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$$>$ \&output\+\_\+face\+\_\+index\+\_\+element, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&output\+\_\+connect\+\_\+to\+\_\+the\+\_\+left, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&output\+\_\+connect\+\_\+to\+\_\+the\+\_\+right)
 \begin{DoxyCompactList}\small\item\em Break any possible loop created by the sorted list of nodes that is used to create a new shared polyline (modified version for load balance) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh_a6ac8855f04d83042881ee21dcf60dad9}{create\+\_\+shared\+\_\+polyline}} (const unsigned \&my\+\_\+rank, const unsigned \&shd\+\_\+bnd\+\_\+id, const unsigned \&iproc, const unsigned \&jproc, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&sorted\+\_\+nodes, const int \&root\+\_\+edge\+\_\+bnd\+\_\+id, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&bulk\+\_\+bnd\+\_\+ele\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&face\+\_\+index\+\_\+ele, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ \&unsorted\+\_\+polylines\+\_\+pt, const int \&connect\+\_\+to\+\_\+the\+\_\+left\+\_\+flag, const int \&connect\+\_\+to\+\_\+the\+\_\+right\+\_\+flag)
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh_ab42d799c12d00ce99da0fffe83fdbddd}{create\+\_\+shared\+\_\+polyline}} (const unsigned \&my\+\_\+rank, const unsigned \&shd\+\_\+bnd\+\_\+id, const unsigned \&iproc, const unsigned \&jproc, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&sorted\+\_\+nodes, const int \&root\+\_\+edge\+\_\+bnd\+\_\+id, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&bulk\+\_\+bnd\+\_\+ele\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&face\+\_\+index\+\_\+ele, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$ \&unsorted\+\_\+polylines\+\_\+pt, const int \&connect\+\_\+to\+\_\+the\+\_\+left\+\_\+flag, const int \&connect\+\_\+to\+\_\+the\+\_\+right\+\_\+flag)
 \begin{DoxyCompactList}\small\item\em Create the shared polyline and fill the data structured that keep all the information associated with the creationg of the shared boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -269,10 +268,9 @@ std\+::vector$<$ \mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point}{Point}} 
 \subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
 class oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
-Triangle mesh build with the help of the scaffold mesh coming ~\newline
- from the triangle mesh generator Triangle. \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ http\+://www.\+cs.\+cmu.\+edu/$\sim$quake/triangle.\+html}} 
+Triangle mesh build with the help of the scaffold mesh coming from the triangle mesh generator Triangle. \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ http\+://www.\+cs.\+cmu.\+edu/$\sim$quake/triangle.\+html}} 
 
-Definition at line 365 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 423 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -286,7 +284,7 @@ typedef double \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\
 
 
 
-Definition at line 2094 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2189 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMesh_ad50b14a66b40a3bfb22a43df86c9006e}\label{classoomph_1_1TriangleMesh_ad50b14a66b40a3bfb22a43df86c9006e}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!coord\_t@{coord\_t}}
@@ -297,7 +295,7 @@ typedef double \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\
 
 
 
-Definition at line 2093 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2188 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -315,7 +313,7 @@ Empty constructor.
 
 
 
-Definition at line 370 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 427 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -334,7 +332,7 @@ Constructor with the input files.
 
 
 
-Definition at line 391 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 448 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -353,7 +351,7 @@ Build mesh, based on the specifications on \mbox{\hyperlink{classoomph_1_1Triang
 
 
 
-Definition at line 462 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 516 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -372,7 +370,7 @@ Build mesh from poly file, with specified target area for all elements.
 
 
 
-Definition at line 702 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 755 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -391,7 +389,7 @@ Broken copy constructor.
 
 
 
-Definition at line 796 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 848 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -410,7 +408,7 @@ Destructor.
 
 
 
-Definition at line 808 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 860 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -428,7 +426,7 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 
 
-Definition at line 1502 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1596 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -443,7 +441,7 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 
 
-Definition at line 1474 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1566 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -462,7 +460,7 @@ Add the node the shared boundary.
 
 
 
-Definition at line 1556 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1652 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -481,7 +479,7 @@ Returns the value that indicates if a subpolyline of a given boundary continues 
 
 
 
-Definition at line 1808 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1916 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -500,7 +498,7 @@ Return direct access to nodes associated with a boundary but sorted in segments.
 
 
 
-Definition at line 904 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 958 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -523,18 +521,18 @@ Return direct access to nodes associated with a segment of a given boundary.
 
 
 
-Definition at line 909 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 965 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
 References oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+segment\+\_\+node\+\_\+pt, and s.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_ad7acd0ef2644130b830eed3cd3a9a259}\label{classoomph_1_1TriangleMesh_ad7acd0ef2644130b830eed3cd3a9a259}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a34dcdc586eb7548f34de8fbf9d561d0b}\label{classoomph_1_1TriangleMesh_a34dcdc586eb7548f34de8fbf9d561d0b}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!boundary\_segment\_node\_pt@{boundary\_segment\_node\_pt}}
 \index{boundary\_segment\_node\_pt@{boundary\_segment\_node\_pt}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{boundary\_segment\_node\_pt()}{boundary\_segment\_node\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \& \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::boundary\+\_\+segment\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{s,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$\& \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::boundary\+\_\+segment\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{s,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -542,7 +540,7 @@ Return pointer to node n on boundary b.
 
 
 
-Definition at line 913 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 972 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -561,7 +559,7 @@ Gets the vector of auxiliar polylines that will represent the given boundary (us
 
 
 
-Definition at line 1785 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1890 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -580,18 +578,18 @@ Helper function to verify if a given boundary was splitted in the distribution p
 
 
 
-Definition at line 1744 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1846 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
 References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+was\+\_\+splitted.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a1af781a1654b93384d35db1d74cee919}\label{classoomph_1_1TriangleMesh_a1af781a1654b93384d35db1d74cee919}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a5de64c81efdddb488bd7a77505a32901}\label{classoomph_1_1TriangleMesh_a5de64c81efdddb488bd7a77505a32901}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!break\_loops\_on\_shared\_polyline\_helper@{break\_loops\_on\_shared\_polyline\_helper}}
 \index{break\_loops\_on\_shared\_polyline\_helper@{break\_loops\_on\_shared\_polyline\_helper}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{break\_loops\_on\_shared\_polyline\_helper()}{break\_loops\_on\_shared\_polyline\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::break\+\_\+loops\+\_\+on\+\_\+shared\+\_\+polyline\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{initial\+\_\+shd\+\_\+bnd\+\_\+id,  }\item[{std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{input\+\_\+nodes,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{input\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{input\+\_\+face\+\_\+index\+\_\+element,  }\item[{const int \&}]{input\+\_\+connect\+\_\+to\+\_\+the\+\_\+left,  }\item[{const int \&}]{input\+\_\+connect\+\_\+to\+\_\+the\+\_\+right,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ $>$ \&}]{output\+\_\+sorted\+\_\+nodes\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \&}]{output\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $>$ \&}]{output\+\_\+face\+\_\+index\+\_\+element,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{output\+\_\+connect\+\_\+to\+\_\+the\+\_\+left,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{output\+\_\+connect\+\_\+to\+\_\+the\+\_\+right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::break\+\_\+loops\+\_\+on\+\_\+shared\+\_\+polyline\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{initial\+\_\+shd\+\_\+bnd\+\_\+id,  }\item[{std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{input\+\_\+nodes,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{input\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{input\+\_\+face\+\_\+index\+\_\+element,  }\item[{const int \&}]{input\+\_\+connect\+\_\+to\+\_\+the\+\_\+left,  }\item[{const int \&}]{input\+\_\+connect\+\_\+to\+\_\+the\+\_\+right,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$$>$ \&}]{output\+\_\+sorted\+\_\+nodes\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ \&}]{output\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$$>$ \&}]{output\+\_\+face\+\_\+index\+\_\+element,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{output\+\_\+connect\+\_\+to\+\_\+the\+\_\+left,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{output\+\_\+connect\+\_\+to\+\_\+the\+\_\+right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -599,14 +597,14 @@ Break any possible loop created by the sorted list of nodes that is used to crea
 
 
 
-Definition at line 13099 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 13265 of file triangle\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a3591154bfb4095a602c6e430e5624183}\label{classoomph_1_1TriangleMesh_a3591154bfb4095a602c6e430e5624183}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a39738ee0a68fe021d446406287615327}\label{classoomph_1_1TriangleMesh_a39738ee0a68fe021d446406287615327}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!break\_loops\_on\_shared\_polyline\_load\_balance\_helper@{break\_loops\_on\_shared\_polyline\_load\_balance\_helper}}
 \index{break\_loops\_on\_shared\_polyline\_load\_balance\_helper@{break\_loops\_on\_shared\_polyline\_load\_balance\_helper}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{break\_loops\_on\_shared\_polyline\_load\_balance\_helper()}{break\_loops\_on\_shared\_polyline\_load\_balance\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::break\+\_\+loops\+\_\+on\+\_\+shared\+\_\+polyline\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{initial\+\_\+shd\+\_\+bnd\+\_\+id,  }\item[{std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{input\+\_\+nodes,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{input\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{input\+\_\+boundary\+\_\+face\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{input\+\_\+face\+\_\+index\+\_\+element,  }\item[{const int \&}]{input\+\_\+connect\+\_\+to\+\_\+the\+\_\+left,  }\item[{const int \&}]{input\+\_\+connect\+\_\+to\+\_\+the\+\_\+right,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ $>$ \&}]{output\+\_\+sorted\+\_\+nodes\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \&}]{output\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \&}]{output\+\_\+boundary\+\_\+face\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $>$ \&}]{output\+\_\+face\+\_\+index\+\_\+element,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{output\+\_\+connect\+\_\+to\+\_\+the\+\_\+left,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{output\+\_\+connect\+\_\+to\+\_\+the\+\_\+right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::break\+\_\+loops\+\_\+on\+\_\+shared\+\_\+polyline\+\_\+load\+\_\+balance\+\_\+helper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{initial\+\_\+shd\+\_\+bnd\+\_\+id,  }\item[{std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{input\+\_\+nodes,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{input\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{input\+\_\+boundary\+\_\+face\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{input\+\_\+face\+\_\+index\+\_\+element,  }\item[{const int \&}]{input\+\_\+connect\+\_\+to\+\_\+the\+\_\+left,  }\item[{const int \&}]{input\+\_\+connect\+\_\+to\+\_\+the\+\_\+right,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$$>$ \&}]{output\+\_\+sorted\+\_\+nodes\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ \&}]{output\+\_\+boundary\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ \&}]{output\+\_\+boundary\+\_\+face\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$$>$ \&}]{output\+\_\+face\+\_\+index\+\_\+element,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{output\+\_\+connect\+\_\+to\+\_\+the\+\_\+left,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{output\+\_\+connect\+\_\+to\+\_\+the\+\_\+right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -614,7 +612,7 @@ Break any possible loop created by the sorted list of nodes that is used to crea
 
 
 
-Definition at line 14019 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 14190 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMesh_a82ccf74f4e2befe3a6acd458d4e37c35}\label{classoomph_1_1TriangleMesh_a82ccf74f4e2befe3a6acd458d4e37c35}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!build\_from\_scaffold@{build\_from\_scaffold}}
@@ -629,7 +627,7 @@ Build mesh from scaffold.
 
 Build with the help of the scaffold mesh coming from the triangle mesh generator Triangle. 
 
-Definition at line 45 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 44 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -648,12 +646,11 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 
 
-Helper function to create \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object (return in triangulate\+\_\+io) from the .poly file ~\newline
- 
+Helper function to create \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object (return in triangulate\+\_\+io) from the .poly file. 
 
 Create \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object via the .poly file. 
 
-Definition at line 7079 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 7197 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -663,12 +660,12 @@ References oomph\+::\+Triangulate\+I\+O\+::holelist, i, oomph\+::\+Triangle\+Hel
 
 Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Triangle\+Mesh().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a08f130b96a6cf8c24f09977fd3565427}\label{classoomph_1_1TriangleMesh_a08f130b96a6cf8c24f09977fd3565427}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a5c601dab5f849d8bb96abc59f9e1d853}\label{classoomph_1_1TriangleMesh_a5c601dab5f849d8bb96abc59f9e1d853}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!check\_connections\_of\_polyline\_nodes@{check\_connections\_of\_polyline\_nodes}}
 \index{check\_connections\_of\_polyline\_nodes@{check\_connections\_of\_polyline\_nodes}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{check\_connections\_of\_polyline\_nodes()}{check\_connections\_of\_polyline\_nodes()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-const int \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::check\+\_\+connections\+\_\+of\+\_\+polyline\+\_\+nodes (\begin{DoxyParamCaption}\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{element\+\_\+in\+\_\+processor\+\_\+pt,  }\item[{const int \&}]{root\+\_\+edge\+\_\+bnd\+\_\+id,  }\item[{std\+::map$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$, bool $>$ \&}]{overlapped\+\_\+face,  }\item[{std\+::map$<$ unsigned, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, bool $>$ $>$ \&}]{node\+\_\+on\+\_\+bnd\+\_\+not\+\_\+overlapped\+\_\+by\+\_\+shd\+\_\+bnd,  }\item[{std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{current\+\_\+polyline\+\_\+nodes,  }\item[{std\+::map$<$ unsigned, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ $>$ \&}]{shared\+\_\+bnd\+\_\+id\+\_\+to\+\_\+sorted\+\_\+list\+\_\+node\+\_\+pt,  }\item[{const unsigned \&}]{node\+\_\+degree,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{new\+\_\+node\+\_\+pt,  }\item[{const bool}]{called\+\_\+from\+\_\+load\+\_\+balance = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+const int \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::check\+\_\+connections\+\_\+of\+\_\+polyline\+\_\+nodes (\begin{DoxyParamCaption}\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{element\+\_\+in\+\_\+processor\+\_\+pt,  }\item[{const int \&}]{root\+\_\+edge\+\_\+bnd\+\_\+id,  }\item[{std\+::map$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$, bool $>$ \&}]{overlapped\+\_\+face,  }\item[{std\+::map$<$ unsigned, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, bool $>$$>$ \&}]{node\+\_\+on\+\_\+bnd\+\_\+not\+\_\+overlapped\+\_\+by\+\_\+shd\+\_\+bnd,  }\item[{std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{current\+\_\+polyline\+\_\+nodes,  }\item[{std\+::map$<$ unsigned, std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$$>$ \&}]{shared\+\_\+bnd\+\_\+id\+\_\+to\+\_\+sorted\+\_\+list\+\_\+node\+\_\+pt,  }\item[{const unsigned \&}]{node\+\_\+degree,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{new\+\_\+node\+\_\+pt,  }\item[{const bool}]{called\+\_\+from\+\_\+load\+\_\+balance = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -676,7 +673,7 @@ Check for any possible connections that the array of sorted nodes have with any 
 
 
 
-Definition at line 8945 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 9071 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -695,18 +692,18 @@ Compute the boundary segments connectivity for those boundaries that were splite
 
 Compute the boundary segments connectivity for those boundaries that were splited during the distribution process and also the initial zeta values for each segment (the initial and final boundary nodes coordinates) 
 
-Definition at line 1842 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 1838 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References e, oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary(), i, oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Generalised\+Element\+::non\+\_\+halo\+\_\+proc\+\_\+\+I\+D(), and oomph\+::\+Node\+::x().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a42ae047a452ed3bc897deabe2c188fcf}\label{classoomph_1_1TriangleMesh_a42ae047a452ed3bc897deabe2c188fcf}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a45f537a111072a02fe5c9c4f1a2c04f4}\label{classoomph_1_1TriangleMesh_a45f537a111072a02fe5c9c4f1a2c04f4}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!compute\_holes\_left\_by\_halo\_elements\_helper@{compute\_holes\_left\_by\_halo\_elements\_helper}}
 \index{compute\_holes\_left\_by\_halo\_elements\_helper@{compute\_holes\_left\_by\_halo\_elements\_helper}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_holes\_left\_by\_halo\_elements\_helper()}{compute\_holes\_left\_by\_halo\_elements\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+holes\+\_\+left\+\_\+by\+\_\+halo\+\_\+elements\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{output\+\_\+holes\+\_\+coordinates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+holes\+\_\+left\+\_\+by\+\_\+halo\+\_\+elements\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{output\+\_\+holes\+\_\+coordinates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -714,7 +711,7 @@ Compute the holes left by the halo elements, those adjacent to the shared bounda
 
 
 
-Definition at line 10686 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 10819 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -733,7 +730,7 @@ Returns a list of points on the convex hull in counter-\/clockwise order. Note\+
 
 
 
-Definition at line 2115 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2213 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -752,18 +749,18 @@ Creates the distributed domain representation. Joins the original boundaires, sh
 
 
 
-Definition at line 8017 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 8131 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+id(), i, and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_ac0896e7fe3af5f542ccf1160dd0aae3c}\label{classoomph_1_1TriangleMesh_ac0896e7fe3af5f542ccf1160dd0aae3c}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_afecd1b96956b0d2152907388fa356148}\label{classoomph_1_1TriangleMesh_afecd1b96956b0d2152907388fa356148}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!create\_polylines\_from\_halo\_elements\_helper@{create\_polylines\_from\_halo\_elements\_helper}}
 \index{create\_polylines\_from\_halo\_elements\_helper@{create\_polylines\_from\_halo\_elements\_helper}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_polylines\_from\_halo\_elements\_helper()}{create\_polylines\_from\_halo\_elements\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+polylines\+\_\+from\+\_\+halo\+\_\+elements\+\_\+helper (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$, unsigned $>$ \&}]{element\+\_\+to\+\_\+global\+\_\+index,  }\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{element\+\_\+in\+\_\+processor\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ $>$ $>$ \&}]{input\+\_\+halo\+\_\+elements,  }\item[{std\+::map$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$, unsigned $>$ \&}]{elements\+\_\+edges\+\_\+on\+\_\+boundary,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ $>$ \&}]{output\+\_\+polylines\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+polylines\+\_\+from\+\_\+halo\+\_\+elements\+\_\+helper (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$, unsigned $>$ \&}]{element\+\_\+to\+\_\+global\+\_\+index,  }\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{element\+\_\+in\+\_\+processor\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$$>$$>$ \&}]{input\+\_\+halo\+\_\+elements,  }\item[{std\+::map$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$, unsigned $>$ \&}]{elements\+\_\+edges\+\_\+on\+\_\+boundary,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$$>$ \&}]{output\+\_\+polylines\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -771,18 +768,18 @@ Creates polylines from the intersection of halo elements on all processors. The 
 
 
 
-Definition at line 11636 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 11770 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References e, i, oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a1b5df9c44997b7d193b72382c92b35ff}\label{classoomph_1_1TriangleMesh_a1b5df9c44997b7d193b72382c92b35ff}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a8c246343aa1b7d7e112c32c706bdb493}\label{classoomph_1_1TriangleMesh_a8c246343aa1b7d7e112c32c706bdb493}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!create\_shared\_boundaries@{create\_shared\_boundaries}}
 \index{create\_shared\_boundaries@{create\_shared\_boundaries}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_shared\_boundaries()}{create\_shared\_boundaries()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+shared\+\_\+boundaries (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$}]{comm\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{backed\+\_\+up\+\_\+el\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{backed\+\_\+up\+\_\+f\+\_\+el\+\_\+pt,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::set$<$ unsigned $>$ $>$ \&}]{processors\+\_\+associated\+\_\+with\+\_\+data,  }\item[{const bool \&}]{overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+shared\+\_\+boundaries (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$}]{comm\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{backed\+\_\+up\+\_\+el\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{backed\+\_\+up\+\_\+f\+\_\+el\+\_\+pt,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::set$<$ unsigned $>$$>$ \&}]{processors\+\_\+associated\+\_\+with\+\_\+data,  }\item[{const bool \&}]{overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -790,22 +787,22 @@ Creates the shared boundaries.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a78170e61889ad6017c67a0025f15c8ad}{oomph\+::\+Mesh}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_aa5fa0a183d2702723e2e5add4df128dd}{oomph\+::\+Mesh}}.
 
 
 
-Definition at line 11406 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 11538 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References e.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a6ac8855f04d83042881ee21dcf60dad9}\label{classoomph_1_1TriangleMesh_a6ac8855f04d83042881ee21dcf60dad9}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_ab42d799c12d00ce99da0fffe83fdbddd}\label{classoomph_1_1TriangleMesh_ab42d799c12d00ce99da0fffe83fdbddd}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!create\_shared\_polyline@{create\_shared\_polyline}}
 \index{create\_shared\_polyline@{create\_shared\_polyline}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_shared\_polyline()}{create\_shared\_polyline()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+shared\+\_\+polyline (\begin{DoxyParamCaption}\item[{const unsigned \&}]{my\+\_\+rank,  }\item[{const unsigned \&}]{shd\+\_\+bnd\+\_\+id,  }\item[{const unsigned \&}]{iproc,  }\item[{const unsigned \&}]{jproc,  }\item[{std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{sorted\+\_\+nodes,  }\item[{const int \&}]{root\+\_\+edge\+\_\+bnd\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{bulk\+\_\+bnd\+\_\+ele\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{face\+\_\+index\+\_\+ele,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ \&}]{unsorted\+\_\+polylines\+\_\+pt,  }\item[{const int \&}]{connect\+\_\+to\+\_\+the\+\_\+left\+\_\+flag,  }\item[{const int \&}]{connect\+\_\+to\+\_\+the\+\_\+right\+\_\+flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+shared\+\_\+polyline (\begin{DoxyParamCaption}\item[{const unsigned \&}]{my\+\_\+rank,  }\item[{const unsigned \&}]{shd\+\_\+bnd\+\_\+id,  }\item[{const unsigned \&}]{iproc,  }\item[{const unsigned \&}]{jproc,  }\item[{std\+::list$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{sorted\+\_\+nodes,  }\item[{const int \&}]{root\+\_\+edge\+\_\+bnd\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{bulk\+\_\+bnd\+\_\+ele\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{face\+\_\+index\+\_\+ele,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$ \&}]{unsorted\+\_\+polylines\+\_\+pt,  }\item[{const int \&}]{connect\+\_\+to\+\_\+the\+\_\+left\+\_\+flag,  }\item[{const int \&}]{connect\+\_\+to\+\_\+the\+\_\+right\+\_\+flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -813,7 +810,7 @@ Create the shared polyline and fill the data structured that keep all the inform
 
 
 
-Definition at line 14444 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 14617 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -828,22 +825,22 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 
 
-Establish the connections of the polylines previously marked as having connections. This connections were marked in the function \mbox{\hyperlink{classoomph_1_1TriangleMesh_ac0896e7fe3af5f542ccf1160dd0aae3c}{Triangle\+Mesh\+::create\+\_\+polylines\+\_\+from\+\_\+halo\+\_\+elements\+\_\+helper()}}. 
+Establish the connections of the polylines previously marked as having connections. This connections were marked in the function \mbox{\hyperlink{classoomph_1_1TriangleMesh_afecd1b96956b0d2152907388fa356148}{Triangle\+Mesh\+::create\+\_\+polylines\+\_\+from\+\_\+halo\+\_\+elements\+\_\+helper()}}. 
 
 
 
-Definition at line 9384 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 9511 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::connect\+\_\+final\+\_\+vertex\+\_\+to\+\_\+polyline(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::connect\+\_\+initial\+\_\+vertex\+\_\+to\+\_\+polyline(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+bnd\+\_\+id(), i, oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+bnd\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+final\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+initial\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a974feeefa08df781ea2ebaab25a9729c}\label{classoomph_1_1TriangleMesh_a974feeefa08df781ea2ebaab25a9729c}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a75fd6b056f507bb37390537c133a1071}\label{classoomph_1_1TriangleMesh_a75fd6b056f507bb37390537c133a1071}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!create\_tmp\_open\_curves\_helper@{create\_tmp\_open\_curves\_helper}}
 \index{create\_tmp\_open\_curves\_helper@{create\_tmp\_open\_curves\_helper}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_tmp\_open\_curves\_helper()}{create\_tmp\_open\_curves\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+tmp\+\_\+open\+\_\+curves\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ \&}]{sorted\+\_\+open\+\_\+curves\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&}]{unsorted\+\_\+shared\+\_\+to\+\_\+internal\+\_\+poly\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&}]{open\+\_\+curves\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+tmp\+\_\+open\+\_\+curves\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$ \&}]{sorted\+\_\+open\+\_\+curves\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&}]{unsorted\+\_\+shared\+\_\+to\+\_\+internal\+\_\+poly\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&}]{open\+\_\+curves\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -851,18 +848,18 @@ Take the polylines from the original open curves and created new temporaly repre
 
 
 
-Definition at line 8904 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 9031 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References i.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_acdfe1bcf9fa27951ffd41e0b9d881292}\label{classoomph_1_1TriangleMesh_acdfe1bcf9fa27951ffd41e0b9d881292}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a5e49863e20f714a63ddc9d3224151614}\label{classoomph_1_1TriangleMesh_a5e49863e20f714a63ddc9d3224151614}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!create\_tmp\_polygons\_helper@{create\_tmp\_polygons\_helper}}
 \index{create\_tmp\_polygons\_helper@{create\_tmp\_polygons\_helper}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_tmp\_polygons\_helper()}{create\_tmp\_polygons\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+tmp\+\_\+polygons\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ \&}]{polylines\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{polygons\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+tmp\+\_\+polygons\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$ \&}]{polylines\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{polygons\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -870,7 +867,7 @@ Take the polylines from the shared boundaries and create temporary polygon repre
 
 
 
-Definition at line 8515 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 8631 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -889,7 +886,7 @@ References i, and oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\
 
 
 
-Definition at line 2108 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2205 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -916,7 +913,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_ad8e275d5f252
 
 
 
-Definition at line 7319 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 7436 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMesh_add131164ffb57a4569147c03231acb8e}\label{classoomph_1_1TriangleMesh_add131164ffb57a4569147c03231acb8e}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!face\_index\_at\_shared\_boundary@{face\_index\_at\_shared\_boundary}}
@@ -927,7 +924,7 @@ int \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ 
 
 
 
-Definition at line 1506 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1601 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -946,7 +943,7 @@ The final boundary id for shared boundaries.
 
 
 
-Definition at line 1311 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1376 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -961,7 +958,7 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 
 
-Definition at line 1499 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1591 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -976,7 +973,7 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 
 
-Definition at line 1451 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1542 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -991,7 +988,7 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 
 
-Definition at line 1454 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1547 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1010,7 +1007,7 @@ Flush A\+LL the shared boundary nodes.
 
 
 
-Definition at line 1548 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1640 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1029,7 +1026,7 @@ Flush the boundary nodes associated to the shared boundary b.
 
 
 
-Definition at line 1552 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1646 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1044,18 +1041,18 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 
 
-Definition at line 1848 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1957 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
 References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shared\+\_\+boundary\+\_\+polyline\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_aa9be2eeed2b37cc9805ac75938206d3f}\label{classoomph_1_1TriangleMesh_aa9be2eeed2b37cc9805ac75938206d3f}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_ac98f63c884635dae9dd0f45d45261c8a}\label{classoomph_1_1TriangleMesh_ac98f63c884635dae9dd0f45d45261c8a}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!generic\_constructor@{generic\_constructor}}
 \index{generic\_constructor@{generic\_constructor}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{generic\_constructor()}{generic\_constructor()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::generic\+\_\+constructor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{internal\+\_\+polygon\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&}]{open\+\_\+polylines\+\_\+pt,  }\item[{const double \&}]{element\+\_\+area,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{extra\+\_\+holes\+\_\+coordinates,  }\item[{std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{regions\+\_\+coordinates,  }\item[{std\+::map$<$ unsigned, double $>$ \&}]{regions\+\_\+areas,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt,  }\item[{const bool \&}]{use\+\_\+attributes,  }\item[{const bool \&}]{refine\+\_\+boundary,  }\item[{const bool \&}]{refine\+\_\+internal\+\_\+boundary }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::generic\+\_\+constructor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{internal\+\_\+polygon\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&}]{open\+\_\+polylines\+\_\+pt,  }\item[{const double \&}]{element\+\_\+area,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{extra\+\_\+holes\+\_\+coordinates,  }\item[{std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{regions\+\_\+coordinates,  }\item[{std\+::map$<$ unsigned, double $>$ \&}]{regions\+\_\+areas,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt,  }\item[{const bool \&}]{use\+\_\+attributes,  }\item[{const bool \&}]{refine\+\_\+boundary,  }\item[{const bool \&}]{refine\+\_\+internal\+\_\+boundary }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -1063,7 +1060,7 @@ A general-\/purpose construction function that builds the mesh once the differen
 
 
 
-Definition at line 1151 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1211 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1086,18 +1083,18 @@ Get the element edges (pair of nodes, edges) that lie on a boundary (used to mar
 
 
 
-Definition at line 11570 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 11705 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References e, oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_aa5e9079c6e3c1699996962e4560ae124}\label{classoomph_1_1TriangleMesh_aa5e9079c6e3c1699996962e4560ae124}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_ab501263f1ca2235aafdd0fee4b28df60}\label{classoomph_1_1TriangleMesh_ab501263f1ca2235aafdd0fee4b28df60}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!get\_halo\_elements\_on\_all\_procs@{get\_halo\_elements\_on\_all\_procs}}
 \index{get\_halo\_elements\_on\_all\_procs@{get\_halo\_elements\_on\_all\_procs}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_halo\_elements\_on\_all\_procs()}{get\_halo\_elements\_on\_all\_procs()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+halo\+\_\+elements\+\_\+on\+\_\+all\+\_\+procs (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nproc,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{backed\+\_\+up\+\_\+el\+\_\+pt,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::set$<$ unsigned $>$ $>$ \&}]{processors\+\_\+associated\+\_\+with\+\_\+data,  }\item[{const bool \&}]{overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$, unsigned $>$ \&}]{element\+\_\+to\+\_\+global\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ $>$ $>$ \&}]{output\+\_\+halo\+\_\+elements\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+halo\+\_\+elements\+\_\+on\+\_\+all\+\_\+procs (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nproc,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{backed\+\_\+up\+\_\+el\+\_\+pt,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::set$<$ unsigned $>$$>$ \&}]{processors\+\_\+associated\+\_\+with\+\_\+data,  }\item[{const bool \&}]{overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$, unsigned $>$ \&}]{element\+\_\+to\+\_\+global\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$$>$$>$ \&}]{output\+\_\+halo\+\_\+elements\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1105,7 +1102,7 @@ Creates the halo elements on all processors Gets the halo elements on all proces
 
 
 
-Definition at line 11481 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 11616 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1124,7 +1121,7 @@ Gets the shared boundaries ids that overlap the given internal boundary.
 
 
 
-Definition at line 1699 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1801 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1143,7 +1140,7 @@ Identify the segments from the old mesh (original mesh) in the new mesh (this) a
 
 
 
-Definition at line 386 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 388 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1160,6 +1157,10 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 Identify the segments from the old mesh (original mesh) in the new mesh (this) and assign initial and final boundary coordinates for the segments that create the boundary. (This is the version called from the original mesh to identify its own segments) 
 
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
+
 \mbox{\Hypertarget{classoomph_1_1TriangleMesh_a27de848116b11c6fdd3dde35dcd0ca54}\label{classoomph_1_1TriangleMesh_a27de848116b11c6fdd3dde35dcd0ca54}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!initial\_shared\_boundary\_id@{initial\_shared\_boundary\_id}}
 \index{initial\_shared\_boundary\_id@{initial\_shared\_boundary\_id}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
@@ -1173,7 +1174,7 @@ The initial boundary id for shared boundaries.
 
 
 
-Definition at line 1307 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1370 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1196,7 +1197,7 @@ Is the node on the shared boundary.
 
 
 
-Definition at line 1600 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1694 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1223,7 +1224,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_aaffa40b7
 
 
 
-Definition at line 2055 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2154 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMesh_aa735ba252e89f8dfe6b95a4b19970c25}\label{classoomph_1_1TriangleMesh_aa735ba252e89f8dfe6b95a4b19970c25}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!nboundary\_subpolylines@{nboundary\_subpolylines}}
@@ -1238,7 +1239,7 @@ Gets the number of subpolylines that create the boundarya (useful only when the 
 
 
 
-Definition at line 1760 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1862 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1253,7 +1254,7 @@ const unsigned \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\
 
 
 
-Definition at line 1428 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1518 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1276,7 +1277,7 @@ Access functions to boundaries shared with processors.
 
 
 
-Definition at line 1384 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1449 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1291,7 +1292,7 @@ const unsigned \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\
 
 
 
-Definition at line 1412 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1494 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1306,7 +1307,7 @@ const unsigned \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\
 
 
 
-Definition at line 1431 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1523 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1321,7 +1322,7 @@ const unsigned \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\
 
 
 
-Definition at line 1527 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1620 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1340,7 +1341,7 @@ Get the number of shared boundaries overlaping internal boundaries.
 
 
 
-Definition at line 1655 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1756 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1355,7 +1356,7 @@ const unsigned \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\
 
 
 
-Definition at line 1415 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1499 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1374,7 +1375,7 @@ Return the vector that contains the oomph-\/lib node number for all vertex nodes
 
 
 
-Definition at line 1118 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1179 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1397,7 +1398,7 @@ Broken assignment operator.
 
 
 
-Definition at line 802 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 854 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1412,18 +1413,18 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 Output the nodes on the boundary and their respective boundary coordinates(into separate tecplot zones) 
 
-Definition at line 7902 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 8014 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
 References e, oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary(), i, oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Node\+::x().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_ab45285f4e725ea9b79e3211d66c741ce}\label{classoomph_1_1TriangleMesh_ab45285f4e725ea9b79e3211d66c741ce}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a097beffb0767e900c92b5c3e5ee06da3}\label{classoomph_1_1TriangleMesh_a097beffb0767e900c92b5c3e5ee06da3}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!re\_assign\_initial\_zeta\_values\_for\_internal\_boundary@{re\_assign\_initial\_zeta\_values\_for\_internal\_boundary}}
 \index{re\_assign\_initial\_zeta\_values\_for\_internal\_boundary@{re\_assign\_initial\_zeta\_values\_for\_internal\_boundary}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{re\_assign\_initial\_zeta\_values\_for\_internal\_boundary()}{re\_assign\_initial\_zeta\_values\_for\_internal\_boundary()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::re\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values\+\_\+for\+\_\+internal\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \&}]{old\+\_\+segment\+\_\+sorted\+\_\+ele\+\_\+pt,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, bool $>$ \&}]{old\+\_\+is\+\_\+inverted }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::re\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values\+\_\+for\+\_\+internal\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::list$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ \&}]{old\+\_\+segment\+\_\+sorted\+\_\+ele\+\_\+pt,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, bool $>$ \&}]{old\+\_\+is\+\_\+inverted }\end{DoxyParamCaption})}
 
 
 
@@ -1431,7 +1432,7 @@ Re-\/assign the boundary segments initial zeta (arclength) value for those inter
 
 Re-\/assign the boundary segments initial zeta (arclength) for those internal boundaries that were splited during the distribution process. Those boundaries that have one face element at each side of the boundary. Here we create the segments only with the nonhalo elements, therefore the boundary coordinates need to be re-\/assigned to be passed to the new meshes. 
 
-Definition at line 4059 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 4089 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1450,7 +1451,7 @@ Re-\/scale the re-\/assigned zeta values for the boundary nodes, apply only for 
 
 Re-\/assign the boundary segments initial zeta (arclength) for those internal boundaries that were splited during the distribution process (only apply for internal boundaries that have one face element at each side of the boundary) 
 
-Definition at line 6442 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 6564 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1473,7 +1474,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a56273b6d7b69
 
 
 
-Definition at line 7566 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 7679 of file triangle\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMesh_a64a1a162d84647e1821813f245b96734}\label{classoomph_1_1TriangleMesh_a64a1a162d84647e1821813f245b96734}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!read\_unsigned\_line\_helper@{read\_unsigned\_line\_helper}}
@@ -1484,7 +1485,7 @@ const unsigned \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\
 
 
 
-Definition at line 970 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1032 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1507,7 +1508,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a3ecdb3b1
 
 
 
-Definition at line 989 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1051 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMesh_a9bc95b0f26f8cd352997d2db32a6a292}\label{classoomph_1_1TriangleMesh_a9bc95b0f26f8cd352997d2db32a6a292}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!remesh\_from\_internal\_triangulateio@{remesh\_from\_internal\_triangulateio}}
@@ -1526,18 +1527,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a2e7f54673e52
 
 
 
-Definition at line 1005 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1066 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
 References oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+curve\+\_\+section\+\_\+pt, oomph\+::\+Mesh\+::\+Boundary\+\_\+element\+\_\+pt, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+region\+\_\+element\+\_\+pt, oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), e, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::\+External\+\_\+halo\+\_\+element\+\_\+pt, oomph\+::\+Mesh\+::\+External\+\_\+halo\+\_\+node\+\_\+pt, oomph\+::\+Mesh\+::\+External\+\_\+haloed\+\_\+element\+\_\+pt, oomph\+::\+Mesh\+::\+External\+\_\+haloed\+\_\+node\+\_\+pt, oomph\+::\+Mesh\+::\+Face\+\_\+index\+\_\+at\+\_\+boundary, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Face\+\_\+index\+\_\+region\+\_\+at\+\_\+boundary, oomph\+::\+Mesh\+::flush\+\_\+element\+\_\+and\+\_\+node\+\_\+storage(), oomph\+::\+Mesh\+::\+Halo\+\_\+node\+\_\+pt, oomph\+::\+Mesh\+::\+Haloed\+\_\+node\+\_\+pt, oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initial\+\_\+shared\+\_\+boundary\+\_\+id(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::\+Node\+\_\+pt, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Polygonal\+\_\+vertex\+\_\+arclength\+\_\+info, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Region\+\_\+attribute, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Region\+\_\+element\+\_\+pt, oomph\+::\+Mesh\+::remove\+\_\+boundary\+\_\+nodes(), oomph\+::\+Mesh\+::\+Root\+\_\+halo\+\_\+element\+\_\+pt, oomph\+::\+Mesh\+::\+Root\+\_\+haloed\+\_\+element\+\_\+pt, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Time\+\_\+stepper\+\_\+pt, oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Tmp\+\_\+mesh\+\_\+pt, oomph\+::\+Triangle\+Mesh\+Base\+::\+Triangulateio, oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Triangulateio\+\_\+exists, and oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Use\+\_\+attributes.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a47080ac440e82c099c390b37bf694cfe}\label{classoomph_1_1TriangleMesh_a47080ac440e82c099c390b37bf694cfe}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a5213a8126947509f566071c648e4716c}\label{classoomph_1_1TriangleMesh_a5213a8126947509f566071c648e4716c}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!reset\_boundary\_element\_info@{reset\_boundary\_element\_info}}
 \index{reset\_boundary\_element\_info@{reset\_boundary\_element\_info}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{reset\_boundary\_element\_info()}{reset\_boundary\_element\_info()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::reset\+\_\+boundary\+\_\+element\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{ntmp\+\_\+boundary\+\_\+elements,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&}]{ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{deleted\+\_\+elements }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::reset\+\_\+boundary\+\_\+element\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{ntmp\+\_\+boundary\+\_\+elements,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&}]{ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{deleted\+\_\+elements }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1545,11 +1546,11 @@ Reset the boundary elements info. after load balance have taken place.
 
 Virtual function to perform the reset boundary elements info routines. Generally used after load balance. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_adbb7621302c427dfc55dbc1ee2b7e77b}{oomph\+::\+Triangle\+Mesh\+Base}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_ace8d65fe72a943aa50330566d4e6c633}{oomph\+::\+Triangle\+Mesh\+Base}}.
 
 
 
-Definition at line 14687 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 14860 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1566,14 +1567,14 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 Select face element from boundary using the criteria to decide which of the two face elements should be used on internal boundaries. 
 
-===================================================================== Select face elements from a given boundary. In case the we are dealing with an internal boundary we use a set of criterias to decide which of the two face elements should be used on represent the internal boundary. We return the face elements, halo or haloed on this processor that form the boundary. The caller method should be in charge of selecting nonhalo elements and deleting the face \hypertarget{classoomph_1_1TriangleMesh_autotoc_md24}{}\doxysubsection{elements created by this method}\label{classoomph_1_1TriangleMesh_autotoc_md24}
+===================================================================== Select face elements from a given boundary. In case the we are dealing with an internal boundary we use a set of criterias to decide which of the two face elements should be used on represent the internal boundary. We return the face elements, halo or haloed on this processor that form the boundary. The caller method should be in charge of selecting nonhalo elements and deleting the face \hypertarget{classoomph_1_1TriangleMesh_autotoc_md25}{}\doxysubsection{elements created by this method}\label{classoomph_1_1TriangleMesh_autotoc_md25}
 
 
-Definition at line 5241 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 5281 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
-References e, i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Generalised\+Element\+::non\+\_\+halo\+\_\+proc\+\_\+\+I\+D().
+References e, i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Generalised\+Element\+::non\+\_\+halo\+\_\+proc\+\_\+\+I\+D(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMesh_abb1a6cb242b5d0e067a8e64b3ac50cfb}\label{classoomph_1_1TriangleMesh_abb1a6cb242b5d0e067a8e64b3ac50cfb}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!set\_mesh\_level\_time\_stepper@{set\_mesh\_level\_time\_stepper}}
@@ -1592,7 +1593,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a52c30b4ebc67038e137a5de1
 
 
 
-Definition at line 845 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 897 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1611,7 +1612,7 @@ Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+
 
 
 
-Definition at line 1391 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1460 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1626,7 +1627,7 @@ References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shared\+\_\
 
 
 
-Definition at line 1388 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1455 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1645,7 +1646,7 @@ Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+
 
 
 
-Definition at line 1397 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1470 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1660,7 +1661,7 @@ References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shared\+\_\
 
 
 
-Definition at line 1394 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1465 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1675,7 +1676,7 @@ References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shared\+\_\
 
 
 
-Definition at line 1404 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1481 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1690,7 +1691,7 @@ References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shared\+\_\
 
 
 
-Definition at line 1400 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1475 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1705,7 +1706,7 @@ const unsigned \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\
 
 
 
-Definition at line 1407 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1487 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1724,7 +1725,7 @@ Get the shared boundaries ids living in the current processor.
 
 
 
-Definition at line 1318 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1384 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1739,7 +1740,7 @@ References oomph\+::\+Mesh\+::communicator\+\_\+pt(), oomph\+::\+Triangle\+Mesh$
 
 
 
-Definition at line 1478 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1571 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1758,7 +1759,7 @@ Return the association of the shared boundaries with the processors.
 
 
 
-Definition at line 1630 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1727 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1773,7 +1774,7 @@ References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shared\+\_\
 
 
 
-Definition at line 1633 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1732 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1788,7 +1789,7 @@ References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shared\+\_\
 
 
 
-Definition at line 1579 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1674 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1807,7 +1808,7 @@ Gets the boundary id of the internal boundary that the shared boundary lies on.
 
 
 
-Definition at line 1675 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1776 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1826,7 +1827,7 @@ Gets the storage that indicates if a shared boundary is part of an internal boun
 
 
 
-Definition at line 1739 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1839 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1845,7 +1846,7 @@ Checks if the shared boundary overlaps an internal boundary.
 
 
 
-Definition at line 1661 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1762 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1864,7 +1865,7 @@ Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+
 
 
 
-Definition at line 1419 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1505 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1879,18 +1880,18 @@ References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shared\+\_\
 
 
 
-Definition at line 1423 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1511 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
 References i, and oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shared\+\_\+boundary\+\_\+polyline\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a87b3ee8de1ce46c0733b5bd7d0355061}\label{classoomph_1_1TriangleMesh_a87b3ee8de1ce46c0733b5bd7d0355061}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a76509aa7af0fb00c08e3005056e09cd2}\label{classoomph_1_1TriangleMesh_a76509aa7af0fb00c08e3005056e09cd2}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!sort\_polylines\_helper@{sort\_polylines\_helper}}
 \index{sort\_polylines\_helper@{sort\_polylines\_helper}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{sort\_polylines\_helper()}{sort\_polylines\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::sort\+\_\+polylines\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&}]{unsorted\+\_\+polylines\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ $>$ \&}]{sorted\+\_\+polylines\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::sort\+\_\+polylines\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&}]{unsorted\+\_\+polylines\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$$>$ \&}]{sorted\+\_\+polylines\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1898,7 +1899,7 @@ Sorts the polylines so they be continuous and then we can create a closed or ope
 
 
 
-Definition at line 11213 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 11338 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1915,10 +1916,10 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 In charge of sinchronize the boundary coordinates for internal boundaries that were split as part of the distribution process. Called after \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9edf47b5d621689f7c1d376b9c057ede}{setup\+\_\+boundary\+\_\+coordinates()}} for the original mesh only. 
 
-======================================================================== In charge of sinchronize the boundary coordinates for internal boundaries that were split as part of the distribution process. Called after \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9edf47b5d621689f7c1d376b9c057ede}{setup\+\_\+boundary\+\_\+coordinates()}} for the \hypertarget{classoomph_1_1TriangleMesh_autotoc_md25}{}\doxysubsection{original mesh only}\label{classoomph_1_1TriangleMesh_autotoc_md25}
+======================================================================== In charge of sinchronize the boundary coordinates for internal boundaries that were split as part of the distribution process. Called after \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9edf47b5d621689f7c1d376b9c057ede}{setup\+\_\+boundary\+\_\+coordinates()}} for the \hypertarget{classoomph_1_1TriangleMesh_autotoc_md26}{}\doxysubsection{original mesh only}\label{classoomph_1_1TriangleMesh_autotoc_md26}
 
 
-Definition at line 5580 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 5610 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1937,18 +1938,18 @@ Boolean defining if Triangulateio object has been built or not.
 
 
 
-Definition at line 1109 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1170 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
 References oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Triangulateio\+\_\+exists.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a730c9d300ac82244e4c37ab7f9f28248}\label{classoomph_1_1TriangleMesh_a730c9d300ac82244e4c37ab7f9f28248}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_af55d4baf005b0ba4f9ae71eaf859c8bc}\label{classoomph_1_1TriangleMesh_af55d4baf005b0ba4f9ae71eaf859c8bc}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!update\_holes\_information\_helper@{update\_holes\_information\_helper}}
 \index{update\_holes\_information\_helper@{update\_holes\_information\_helper}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{update\_holes\_information\_helper()}{update\_holes\_information\_helper()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::update\+\_\+holes\+\_\+information\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{polygons\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{output\+\_\+holes\+\_\+coordinates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::update\+\_\+holes\+\_\+information\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{polygons\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{output\+\_\+holes\+\_\+coordinates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1956,7 +1957,7 @@ Keeps those vertices that define a hole, those that are inside closed internal b
 
 
 
-Definition at line 10797 of file triangle\+\_\+mesh.\+template.\+cc.
+Definition at line 10928 of file triangle\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -1975,7 +1976,7 @@ Update the triangulateio object to the current nodal positions.
 
 
 
-Definition at line 943 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1005 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -1985,12 +1986,12 @@ References oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\
 
 Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+triangulateio().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMesh_ae4922667cdfd747a3fbc5d391933ce31}\label{classoomph_1_1TriangleMesh_ae4922667cdfd747a3fbc5d391933ce31}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMesh_a43173b5b7e761e60e5f9af3be432918d}\label{classoomph_1_1TriangleMesh_a43173b5b7e761e60e5f9af3be432918d}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!update\_triangulateio@{update\_triangulateio}}
 \index{update\_triangulateio@{update\_triangulateio}!oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{update\_triangulateio()}{update\_triangulateio()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::update\+\_\+triangulateio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{internal\+\_\+point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::update\+\_\+triangulateio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{internal\+\_\+point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1998,7 +1999,7 @@ Update the \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} obje
 
 
 
-Definition at line 923 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 985 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2020,7 +2021,7 @@ Flag to indicate if an internal boundary will be used as shared boundary because
 
 
 
-Definition at line 1875 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1989 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2039,7 +2040,7 @@ The polylines that will temporary represent the boundary that was splitted in th
 
 
 
-Definition at line 1870 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1983 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2058,7 +2059,7 @@ Flag to indicate if a polyline has been splitted during the distribution process
 
 
 
-Definition at line 1865 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1978 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2077,7 +2078,7 @@ For the e-\/th finite element on shared boundary b, this is the index of the fac
 
 
 
-Definition at line 1857 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1969 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2096,7 +2097,7 @@ The final boundary id for shared boundaries.
 
 
 
-Definition at line 1827 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1935 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2115,7 +2116,7 @@ Flag to know if it is the first time we are going to compute the holes left by t
 
 
 
-Definition at line 1911 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2021 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2134,7 +2135,7 @@ The initial boundary id for shared boundaries.
 
 
 
-Definition at line 1824 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1932 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2153,7 +2154,7 @@ Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initial\+\
 
 
 
-Definition at line 1300 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1364 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2172,7 +2173,7 @@ Backup the original extra holes coordinates.
 
 
 
-Definition at line 1914 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 2024 of file triangle\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMesh_a26e357b1993ee77e390aa3b246c1e12b}\label{classoomph_1_1TriangleMesh_a26e357b1993ee77e390aa3b246c1e12b}} 
 \index{oomph::TriangleMesh$<$ ELEMENT $>$@{oomph::TriangleMesh$<$ ELEMENT $>$}!Regions\_areas@{Regions\_areas}}
@@ -2187,7 +2188,7 @@ Target areas for regions; defaults to 0.\+0 which (luckily) implies \char`\"{}no
 
 
 
-Definition at line 1134 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1194 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2206,7 +2207,7 @@ Stores the boundaries ids created by the interaction of two processors Shared\+\
 
 
 
-Definition at line 1832 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1941 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2225,7 +2226,7 @@ Stores the boundary elements adjacent to the shared boundaries, these elements a
 
 
 
-Definition at line 1853 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1965 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2244,7 +2245,7 @@ Stores the processors involved in the generation of a shared boundary, in 2D two
 
 
 
-Definition at line 1837 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1946 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2263,7 +2264,7 @@ Stores the boundary nodes adjacent to the shared boundaries, these nodes are a s
 
 
 
-Definition at line 1861 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1973 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2282,7 +2283,7 @@ Stores information about those shared boundaries that lie over or over a segment
 
 
 
-Definition at line 1842 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1951 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2301,7 +2302,7 @@ Stores the polyline representation of the shared boundaries Shared\+\_\+boundary
 
 
 
-Definition at line 1846 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1955 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2320,7 +2321,7 @@ Timestepper used to build elements.
 
 
 
-Definition at line 1124 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1185 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2339,7 +2340,7 @@ Temporary scaffold mesh.
 
 
 
-Definition at line 1296 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1360 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2358,7 +2359,7 @@ Boolean defining if Triangulateio object has been built or not.
 
 
 
-Definition at line 1291 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1355 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 
@@ -2373,7 +2374,7 @@ bool \mbox{\hyperlink{classoomph_1_1TriangleMesh}{oomph\+::\+Triangle\+Mesh}}$<$
 
 Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) 
 
-Definition at line 1128 of file triangle\+\_\+mesh.\+template.\+h.
+Definition at line 1189 of file triangle\+\_\+mesh.\+template.\+h.
 
 
 

@@ -13,15 +13,14 @@ Inheritance diagram for oomph\+::Time\+Harmonic\+Fourier\+Decomposed\+Linear\+El
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b)
-\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(x,b) -- x and b are Vectors! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ab02490a5edf2df6ee6de1b250955162e}{Body\+Force\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&b)
+\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(x,b) -- x and b are Vectors! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a4a526881fb74b4c41d8f5e542448e69c}{u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (const unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th (i=0\+: r, i=1\+: z; i=2\+: theta) real or imag unknown displacement component is stored at the nodes. The default assignment here (u\+\_\+r\+\_\+real, u\+\_\+z\+\_\+real, ..., u\+\_\+theta\+\_\+imag) is appropriate for single-\/physics problems. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&disp) const
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a5d914a07c328d877a5403c7cc475b2d2}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&disp) const
 \begin{DoxyCompactList}\small\item\em Compute vector of FE interpolated displacement u at local coordinate s. \end{DoxyCompactList}\item 
 std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a0447989939b3b9a88ee060f15755c05d}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return FE interpolated displacement u\mbox{[}i\mbox{]} (i=0\+: r, i=1\+: z; i=2\+: theta) at local coordinate s. \end{DoxyCompactList}\item 
@@ -29,7 +28,7 @@ std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierD
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set null pointers for constitutive law. Set physical parameter values to default values, and set body force to zero. \end{DoxyCompactList}\item 
 const std\+::complex$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_af24d84d32f712a3005f4dd630b503676}{omega\+\_\+sq}} () const
 \begin{DoxyCompactList}\small\item\em Access function for square of non-\/dim frequency. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_acc4ef01fcf7436ef9bb7958c3bf59763}{omega\+\_\+sq\+\_\+pt}} ()
+std\+::complex$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a9a03ad679a8263b9cf43bca9e773d187}{omega\+\_\+sq\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for square of non-\/dim frequency. \end{DoxyCompactList}\item 
 std\+::complex$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a36aad144d015678c13d506497a6bb3a2}{youngs\+\_\+modulus\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
@@ -43,17 +42,16 @@ int \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElastic
 \begin{DoxyCompactList}\small\item\em Access function for Fourier wavenumber. \end{DoxyCompactList}\item 
 int $\ast$\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_aef8b8fd381c219d23dc52eb219f4f643}{fourier\+\_\+wavenumber\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to Fourier wavenumber. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a324fb3895931d4bb35ea56ebc202c856}{body\+\_\+force\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ab02490a5edf2df6ee6de1b250955162e}{Body\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a324fb3895931d4bb35ea56ebc202c856}{body\+\_\+force\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_aedfbce28438549e162312546f8c31485}{body\+\_\+force\+\_\+fct\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ab02490a5edf2df6ee6de1b250955162e}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_aedfbce28438549e162312546f8c31485}{body\+\_\+force\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function (const version) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a7e28782573e1210b9a5f98f17360f6e9}{body\+\_\+force}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b) const
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a6f6add9fed0101ba40bae58dec423519}{body\+\_\+force}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&b) const
 \begin{DoxyCompactList}\small\item\em Evaluate body force at Eulerian coordinate x at present time (returns zero vector if no body force function pointer has been set) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a7fc55ec08c580274e0f0de664c43c249}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: for now lump them all into one D\+OF type. Can be adjusted later. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ae49e9b233a22735986bf1bc3ef31502f}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_abbcccaef8b90a232ffce39eee8a3985d}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -65,7 +63,7 @@ std\+::complex$<$ double $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicF
 \begin{DoxyCompactList}\small\item\em Pointer to Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
 int $\ast$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a3d4a166655d1f7828f8b1323d7d3d943}{Fourier\+\_\+wavenumber\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to Fourier wavenumber. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a65c341e132adbe3baf9c3d6332f1212d}{Body\+\_\+force\+\_\+fct\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ab02490a5edf2df6ee6de1b250955162e}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a65c341e132adbe3baf9c3d6332f1212d}{Body\+\_\+force\+\_\+fct\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to body force function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -85,20 +83,19 @@ Definition at line 57 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\
 
 
 \doxysubsection{Member Typedef Documentation}
-\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}} 
+\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ab02490a5edf2df6ee6de1b250955162e}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ab02490a5edf2df6ee6de1b250955162e}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!BodyForceFctPt@{BodyForceFctPt}}
 \index{BodyForceFctPt@{BodyForceFctPt}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{BodyForceFctPt}{BodyForceFctPt}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::\+Body\+Force\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b)}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::\+Body\+Force\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&b)}
 
 
 
-Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(x,b) -- x and b are Vectors! ~\newline
- 
+Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(x,b) -- x and b are Vectors! 
 
 
 
-Definition at line 148 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 143 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -115,16 +112,16 @@ Constructor\+: Set null pointers for constitutive law. Set physical parameter va
 
 
 
-Definition at line 154 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 149 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a7e28782573e1210b9a5f98f17360f6e9}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a7e28782573e1210b9a5f98f17360f6e9}} 
+\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a6f6add9fed0101ba40bae58dec423519}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a6f6add9fed0101ba40bae58dec423519}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!body\_force@{body\_force}}
 \index{body\_force@{body\_force}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{body\_force()}{body\_force()}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -132,7 +129,7 @@ Evaluate body force at Eulerian coordinate x at present time (returns zero vecto
 
 
 
-Definition at line 223 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 241 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -146,7 +143,7 @@ Referenced by oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!body\_force\_fct\_pt@{body\_force\_fct\_pt}}
 \index{body\_force\_fct\_pt@{body\_force\_fct\_pt}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{body\_force\_fct\_pt()}{body\_force\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}}\& oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ab02490a5edf2df6ee6de1b250955162e}{Body\+Force\+Fct\+Pt}}\& oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -154,7 +151,7 @@ Access function\+: Pointer to body force function.
 
 
 
-Definition at line 216 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 228 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -164,7 +161,7 @@ References Body\+\_\+force\+\_\+fct\+\_\+pt.
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!body\_force\_fct\_pt@{body\_force\_fct\_pt}}
 \index{body\_force\_fct\_pt@{body\_force\_fct\_pt}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{body\_force\_fct\_pt()}{body\_force\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}} oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ab02490a5edf2df6ee6de1b250955162e}{Body\+Force\+Fct\+Pt}} oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -172,7 +169,7 @@ Access function\+: Pointer to body force function (const version)
 
 
 
-Definition at line 219 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 234 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -190,7 +187,7 @@ Access function for Fourier wavenumber.
 
 
 
-Definition at line 195 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 205 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -212,30 +209,29 @@ Access function for pointer to Fourier wavenumber.
 
 
 
-Definition at line 213 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 222 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
 References Fourier\+\_\+wavenumber\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ae49e9b233a22735986bf1bc3ef31502f}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ae49e9b233a22735986bf1bc3ef31502f}} 
+\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_abbcccaef8b90a232ffce39eee8a3985d}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_abbcccaef8b90a232ffce39eee8a3985d}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 256 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 274 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -253,17 +249,17 @@ Return FE interpolated displacement u\mbox{[}i\mbox{]} (i=0\+: r, i=1\+: z; i=2\
 
 
 
-Definition at line 111 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 107 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
 References i, interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), and u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity().
 
-\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}} 
+\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a5d914a07c328d877a5403c7cc475b2d2}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a5d914a07c328d877a5403c7cc475b2d2}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}}
 \index{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity()}{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -271,7 +267,7 @@ Compute vector of FE interpolated displacement u at local coordinate s.
 
 
 
-Definition at line 73 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 72 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -297,7 +293,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 245 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 263 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a65802eedd9aa3abb54efd7d2125f27b9}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a65802eedd9aa3abb54efd7d2125f27b9}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!nu@{nu}}
@@ -311,7 +307,7 @@ Access function for Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 175 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 183 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -333,7 +329,7 @@ Access function for pointer to Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 192 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 199 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -351,7 +347,7 @@ Access function for square of non-\/dim frequency.
 
 
 
-Definition at line 160 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 159 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -361,11 +357,11 @@ References Omega\+\_\+sq\+\_\+pt.
 
 Referenced by oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fourier\+\_\+decomp\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity().
 
-\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_acc4ef01fcf7436ef9bb7958c3bf59763}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_acc4ef01fcf7436ef9bb7958c3bf59763}} 
+\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a9a03ad679a8263b9cf43bca9e773d187}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a9a03ad679a8263b9cf43bca9e773d187}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!omega\_sq\_pt@{omega\_sq\_pt}}
 \index{omega\_sq\_pt@{omega\_sq\_pt}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{omega\_sq\_pt()}{omega\_sq\_pt()}}
-{\footnotesize\ttfamily std\+::complex$<$double$>$$\ast$ \& oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::omega\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::complex$<$double$>$$\ast$\& oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::omega\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -373,7 +369,7 @@ Access function for square of non-\/dim frequency.
 
 
 
-Definition at line 163 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 165 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -391,7 +387,7 @@ Return the index at which the i-\/th (i=0\+: r, i=1\+: z; i=2\+: theta) real or 
 
 
 
-Definition at line 67 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 65 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -413,7 +409,7 @@ Access function to Young\textquotesingle{}s modulus.
 
 
 
-Definition at line 169 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 177 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -435,7 +431,7 @@ Return the pointer to Young\textquotesingle{}s modulus.
 
 
 
-Definition at line 166 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 171 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -448,7 +444,7 @@ References Youngs\+\_\+modulus\+\_\+pt.
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!Body\_force\_fct\_pt@{Body\_force\_fct\_pt}}
 \index{Body\_force\_fct\_pt@{Body\_force\_fct\_pt}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{Body\_force\_fct\_pt}{Body\_force\_fct\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}} oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ab02490a5edf2df6ee6de1b250955162e}{Body\+Force\+Fct\+Pt}} oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -456,7 +452,7 @@ Pointer to body force function.
 
 
 
-Definition at line 310 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 326 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -474,7 +470,7 @@ Static default value for squared frequency.
 
 Static default value for square of angular frequency\+: Zero. 
 
-Definition at line 313 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 329 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a3c4db38ac630e9db8d87ca33a0655e5b}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a3c4db38ac630e9db8d87ca33a0655e5b}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!Default\_youngs\_modulus\_value@{Default\_youngs\_modulus\_value}}
@@ -482,12 +478,9 @@ Definition at line 313 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+
 \doxysubsubsection{\texorpdfstring{Default\_youngs\_modulus\_value}{Default\_youngs\_modulus\_value}}
 {\footnotesize\ttfamily std\+::complex$<$ double $>$ oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::\+Default\+\_\+youngs\+\_\+modulus\+\_\+value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
-Static default value for Young\textquotesingle{}s modulus (1.\+0 -- for natural scaling, i.\+e. all stresses have been non-\/dimensionalised by the same reference Young\textquotesingle{}s modulus. Setting the \char`\"{}non-\/dimensional\char`\"{} Young\textquotesingle{}s modulus (obtained by de-\/referencing Youngs\+\_\+modulus\+\_\+pt) to a number larger than one means that the material is stiffer than assumed in the non-\/dimensionalisation. ~\newline
-
-
 Static default value for Young\textquotesingle{}s modulus (1.\+0 -- for natural scaling, i.\+e. all stresses have been non-\/dimensionalised by the same reference Young\textquotesingle{}s modulus. Setting the \char`\"{}non-\/dimensional\char`\"{} Young\textquotesingle{}s modulus (obtained by de-\/referencing Youngs\+\_\+modulus\+\_\+pt) to a number larger than one means that the material is stiffer than assumed in the non-\/dimensionalisation. 
 
-Definition at line 321 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 337 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a3d4a166655d1f7828f8b1323d7d3d943}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a3d4a166655d1f7828f8b1323d7d3d943}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!Fourier\_wavenumber\_pt@{Fourier\_wavenumber\_pt}}
@@ -501,7 +494,7 @@ Pointer to Fourier wavenumber.
 
 
 
-Definition at line 307 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 323 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -519,7 +512,7 @@ Pointer to Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 304 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 320 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -537,7 +530,7 @@ Square of nondim frequency.
 
 
 
-Definition at line 298 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 314 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -555,7 +548,7 @@ Pointer to the Young\textquotesingle{}s modulus.
 
 
 
-Definition at line 301 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 317 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 

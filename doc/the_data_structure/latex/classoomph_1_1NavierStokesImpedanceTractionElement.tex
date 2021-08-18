@@ -22,8 +22,7 @@ Inheritance diagram for oomph\+::Navier\+Stokes\+Impedance\+Traction\+Element$<$
 double \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a853055ebb50a6500602288a6f0563852}{get\+\_\+volume\+\_\+flux}} ()
 \begin{DoxyCompactList}\small\item\em Get integral of volume flux through element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_afd73c927eab27d77f54d83c67ef84a0f}{set\+\_\+external\+\_\+data\+\_\+from\+\_\+navier\+\_\+stokes\+\_\+outflow\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a6ddd1fa5b0e8c498aa1fc03f4492ee34}{navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em Navier\+Stokes\+Impedance\+Traction\+Elements that contribute to the volume flux into the downstream \char`\"{}impedance tube\char`\"{} to the element and classify all nodes in that mesh as external \mbox{\hyperlink{classoomph_1_1Data}{Data}} for this element (unless the nodes are also the element\textquotesingle{}s own nodes, of course). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Navier\+Stokes\+Impedance\+Traction\+Elements that contribute to the volume flux into the downstream \char`\"{}impedance tube\char`\"{} to the element and classify all nodes in that mesh as external \mbox{\hyperlink{classoomph_1_1Data}{Data}} for this element (unless the nodes are also the element\textquotesingle{}s own nodes, of course). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_abd5db43a552949e7d2ab4c1c25a68e96}{set\+\_\+aux\+\_\+integral\+\_\+pt}} (std\+::map$<$ unsigned, double $>$ $\ast$aux\+\_\+integral\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set pointer to the precomputed auxiliary integral that contains the derivative of the total volume flux through the outflow boundary of the (higher-\/dimensional) Navier-\/\+Stokes mesh w.\+r.\+t. to the discrete (global) (velocity) degrees of freedom. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_ade2eae5b0a6ecac82949f05a073217ea}{total\+\_\+volume\+\_\+flux\+\_\+into\+\_\+downstream\+\_\+tube}} ()
@@ -48,17 +47,15 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a11722d
 virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_ac5070c5b06b172cb7f1cb36b853e8edf}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_aa1738496ef280139a8bd1dbda979d8b1}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a0ebea8eb00325fda0ff0b4ad38b78dc0}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::map$<$ unsigned, double $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a15020b8235206fc52d2fcf967e471904}{Aux\+\_\+integral\+\_\+pt}}
+std\+::map$<$ unsigned, double $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a7af776e4f241f949a108afd1689c3708}{Aux\+\_\+integral\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to auxiliary integral, containing the derivative of the total volume flux through the outflow boundary of the (higher-\/dimensional) Navier-\/\+Stokes mesh w.\+r.\+t. to the discrete (global) (velocity) degrees of freedom. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase}{Womersley\+Impedance\+Tube\+Base}}$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT, D\+IM $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a65123707e91f7a351bb9cffb64e1b81c}{Impedance\+\_\+tube\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase}{Womersley\+Impedance\+Tube\+Base}}$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT, D\+IM $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a647e9ee8bf0cf8542ddd09588dee6813}{Impedance\+\_\+tube\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to Impedance\+Tube\+Problem that computes the flow resistance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -69,7 +66,7 @@ class oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ B\+U\+L\+K\+\_\
 
 A class for elements that allow the imposition of an impedance type traction boundary condition to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometery$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class. Template arguments specify the type of the bulk Navier Stokes elements that the elements are attached to, and the type of the Womersley element used to compute the flow resistance in the downstream \char`\"{}impedance tube\char`\"{}. 
 
-Definition at line 2052 of file womersley\+\_\+elements.\+h.
+Definition at line 1992 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -83,7 +80,7 @@ Definition at line 2052 of file womersley\+\_\+elements.\+h.
 
 Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
 
-Definition at line 2113 of file womersley\+\_\+elements.\+h.
+Definition at line 2052 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -102,7 +99,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 2164 of file womersley\+\_\+elements.\+h.
+Definition at line 2103 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -120,7 +117,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBa
 
 
 
-Definition at line 2371 of file womersley\+\_\+elements.\+h.
+Definition at line 2314 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -143,7 +140,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 2449 of file womersley\+\_\+elements.\+h.
+Definition at line 2391 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -166,7 +163,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 2438 of file womersley\+\_\+elements.\+h.
+Definition at line 2380 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -181,12 +178,11 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement}{oomph\
 
 
 
-This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Function that returns the residuals for the imposed traction Navier\+\_\+\+Stokes equations 
 
-Definition at line 2494 of file womersley\+\_\+elements.\+h.
+Definition at line 2442 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -209,7 +205,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBa
 
 
 
-Definition at line 2175 of file womersley\+\_\+elements.\+h.
+Definition at line 2114 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -232,7 +228,7 @@ Access to mesh containing all Navier\+Stokes\+Impedance\+Traction\+Elements that
 
 
 
-Definition at line 2169 of file womersley\+\_\+elements.\+h.
+Definition at line 2108 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElement_a43b61cca808fed11ace680439488c3df}\label{classoomph_1_1NavierStokesImpedanceTractionElement_a43b61cca808fed11ace680439488c3df}} 
 \index{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$@{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$}!output@{output}}
@@ -251,7 +247,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 2468 of file womersley\+\_\+elements.\+h.
+Definition at line 2414 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -274,7 +270,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 2471 of file womersley\+\_\+elements.\+h.
+Definition at line 2420 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -297,7 +293,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBa
 
 
 
-Definition at line 2319 of file womersley\+\_\+elements.\+h.
+Definition at line 2256 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElement_afd73c927eab27d77f54d83c67ef84a0f}\label{classoomph_1_1NavierStokesImpedanceTractionElement_afd73c927eab27d77f54d83c67ef84a0f}} 
 \index{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$@{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$}!set\_external\_data\_from\_navier\_stokes\_outflow\_mesh@{set\_external\_data\_from\_navier\_stokes\_outflow\_mesh}}
@@ -308,8 +304,7 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement}{oomph\
 
 
 
-Navier\+Stokes\+Impedance\+Traction\+Elements that contribute to the volume flux into the downstream \char`\"{}impedance tube\char`\"{} to the element and classify all nodes in that mesh as external \mbox{\hyperlink{classoomph_1_1Data}{Data}} for this element (unless the nodes are also the element\textquotesingle{}s own nodes, of course). ~\newline
- 
+Navier\+Stokes\+Impedance\+Traction\+Elements that contribute to the volume flux into the downstream \char`\"{}impedance tube\char`\"{} to the element and classify all nodes in that mesh as external \mbox{\hyperlink{classoomph_1_1Data}{Data}} for this element (unless the nodes are also the element\textquotesingle{}s own nodes, of course). 
 
 
 
@@ -317,7 +312,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBa
 
 
 
-Definition at line 2277 of file womersley\+\_\+elements.\+h.
+Definition at line 2213 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -340,7 +335,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBa
 
 
 
-Definition at line 2359 of file womersley\+\_\+elements.\+h.
+Definition at line 2301 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElement_aa1738496ef280139a8bd1dbda979d8b1}\label{classoomph_1_1NavierStokesImpedanceTractionElement_aa1738496ef280139a8bd1dbda979d8b1}} 
 \index{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$@{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
@@ -351,12 +346,11 @@ double \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement}{oomp
 
 
 
-Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping. 
 
 
 
-Definition at line 2082 of file womersley\+\_\+elements.\+h.
+Definition at line 2021 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -375,7 +369,7 @@ Compute total volume flux into the \char`\"{}downstream tube\char`\"{} that prov
 
 
 
-Definition at line 2329 of file womersley\+\_\+elements.\+h.
+Definition at line 2266 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -394,7 +388,7 @@ Access function that returns the local equation numbers for velocity components.
 
 
 
-Definition at line 2077 of file womersley\+\_\+elements.\+h.
+Definition at line 2014 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -417,7 +411,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 2462 of file womersley\+\_\+elements.\+h.
+Definition at line 2405 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -426,12 +420,12 @@ References i, and n.
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElement_a15020b8235206fc52d2fcf967e471904}\label{classoomph_1_1NavierStokesImpedanceTractionElement_a15020b8235206fc52d2fcf967e471904}} 
+\mbox{\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElement_a7af776e4f241f949a108afd1689c3708}\label{classoomph_1_1NavierStokesImpedanceTractionElement_a7af776e4f241f949a108afd1689c3708}} 
 \index{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$@{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$}!Aux\_integral\_pt@{Aux\_integral\_pt}}
 \index{Aux\_integral\_pt@{Aux\_integral\_pt}!oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$@{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Aux\_integral\_pt}{Aux\_integral\_pt}}
 {\footnotesize\ttfamily template$<$class B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+NT , class W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-std\+::map$<$unsigned,double$>$$\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element}}$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+NT, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT, D\+IM $>$\+::Aux\+\_\+integral\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+std\+::map$<$unsigned, double$>$$\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element}}$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+NT, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT, D\+IM $>$\+::Aux\+\_\+integral\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -439,14 +433,14 @@ Pointer to auxiliary integral, containing the derivative of the total volume flu
 
 
 
-Definition at line 2064 of file womersley\+\_\+elements.\+h.
+Definition at line 2002 of file womersley\+\_\+elements.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElement_a65123707e91f7a351bb9cffb64e1b81c}\label{classoomph_1_1NavierStokesImpedanceTractionElement_a65123707e91f7a351bb9cffb64e1b81c}} 
+\mbox{\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElement_a647e9ee8bf0cf8542ddd09588dee6813}\label{classoomph_1_1NavierStokesImpedanceTractionElement_a647e9ee8bf0cf8542ddd09588dee6813}} 
 \index{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$@{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$}!Impedance\_tube\_pt@{Impedance\_tube\_pt}}
 \index{Impedance\_tube\_pt@{Impedance\_tube\_pt}!oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$@{oomph::NavierStokesImpedanceTractionElement$<$ BULK\_NAVIER\_STOKES\_ELEMENT, WOMERSLEY\_ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Impedance\_tube\_pt}{Impedance\_tube\_pt}}
 {\footnotesize\ttfamily template$<$class B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+NT , class W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase}{Womersley\+Impedance\+Tube\+Base}}$<$W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT,D\+IM$>$$\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element}}$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+NT, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT, D\+IM $>$\+::Impedance\+\_\+tube\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase}{Womersley\+Impedance\+Tube\+Base}}$<$W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT, D\+IM$>$$\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element}}$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+NT, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+NT, D\+IM $>$\+::Impedance\+\_\+tube\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -454,7 +448,7 @@ Pointer to Impedance\+Tube\+Problem that computes the flow resistance.
 
 
 
-Definition at line 2067 of file womersley\+\_\+elements.\+h.
+Definition at line 2005 of file womersley\+\_\+elements.\+h.
 
 
 

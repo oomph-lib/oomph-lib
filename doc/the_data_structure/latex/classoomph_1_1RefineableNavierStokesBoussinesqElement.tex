@@ -17,7 +17,7 @@ Inheritance diagram for oomph\+::Refineable\+Navier\+Stokes\+Boussinesq\+Element
 \begin{DoxyCompactList}\small\item\em Constructor\+: call the underlying constructors and initialise the pointer to the Rayleigh number to point to the default value of 0.\+0. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_ae18350ad83634633acea59b60123d3c0}{ra}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the Rayleigh number (const version) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_ac2f3ff1714a6859b151da46109eda0ae}{ra\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_a6b17e71029b9bc5e3d5bd036579b1c00}{ra\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to the Rayleigh number. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_a8b7b18f473b0fa9c4127de305e5a6ccc}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Call the underlying single-\/physics element\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_a8b7b18f473b0fa9c4127de305e5a6ccc}{further\+\_\+build()}} functions and make sure that the pointer to the Rayleigh number is passed to the sons. Also make sure that if the external geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} was ignored in the father it\textquotesingle{}s also ignored in the sons. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_a445
 \begin{DoxyCompactList}\small\item\em Fill in the derivatives of the body force with respect to the external unknowns. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_a9609dc454ef3d29b1e256fa32fb2c665}{fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the contribution of the external degrees of freedom (temperatures) on the Navier-\/\+Stokes equations. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_aab581709145cc3e9a4da5c5417d1c50f}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_a51f635527470cc32cbc0ffb396895e74}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Classify dof numbers as in underlying element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_a8e494f3887499d79d8c30c7434494b47}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em Get number of dof types from underlying element. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -49,7 +49,7 @@ class oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ N\+S\+T\+\_\
 
 Build a refineable Navier Stokes element that inherits from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element}} so that it can \char`\"{}communicate\char`\"{} with an advection diffusion element that provides the temperature in the body force term. 
 
-Definition at line 66 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 63 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -67,7 +67,7 @@ Constructor\+: call the underlying constructors and initialise the pointer to th
 
 
 
-Definition at line 75 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 71 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -93,7 +93,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae5
 
 
 
-Definition at line 155 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 156 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -112,7 +112,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 180 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 179 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -131,7 +131,7 @@ Compute the contribution of the external degrees of freedom (temperatures) on th
 
 
 
-Definition at line 201 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 202 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -154,7 +154,7 @@ Call the underlying single-\/physics element\textquotesingle{}s \mbox{\hyperlink
 
 
 
-Definition at line 95 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 97 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -192,7 +192,7 @@ Fill in the derivatives of the body force with respect to the external unknowns.
 
 Fill in the derivatives of the body force with respect to the external unknowns in the Navier--Stokes equations 
 
-Definition at line 1400 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 1435 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -202,12 +202,12 @@ References i, n, and oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize().
 
 Referenced by oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T, A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesBoussinesqElement_aab581709145cc3e9a4da5c5417d1c50f}\label{classoomph_1_1RefineableNavierStokesBoussinesqElement_aab581709145cc3e9a4da5c5417d1c50f}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesBoussinesqElement_a51f635527470cc32cbc0ffb396895e74}\label{classoomph_1_1RefineableNavierStokesBoussinesqElement_a51f635527470cc32cbc0ffb396895e74}} 
 \index{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$class N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT , class A\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element}}$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT, A\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element}}$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT, A\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -215,11 +215,11 @@ Classify dof numbers as in underlying element.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 342 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 345 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesBoussinesqElement_a8e494f3887499d79d8c30c7434494b47}\label{classoomph_1_1RefineableNavierStokesBoussinesqElement_a8e494f3887499d79d8c30c7434494b47}} 
 \index{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!ndof\_types@{ndof\_types}}
@@ -238,7 +238,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 350 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 353 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesBoussinesqElement_ae18350ad83634633acea59b60123d3c0}\label{classoomph_1_1RefineableNavierStokesBoussinesqElement_ae18350ad83634633acea59b60123d3c0}} 
 \index{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!ra@{ra}}
@@ -253,7 +253,7 @@ Access function for the Rayleigh number (const version)
 
 
 
-Definition at line 86 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 82 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -263,12 +263,12 @@ References oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ N\+S\+T
 
 Referenced by oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T, A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+body\+\_\+force\+\_\+nst().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesBoussinesqElement_ac2f3ff1714a6859b151da46109eda0ae}\label{classoomph_1_1RefineableNavierStokesBoussinesqElement_ac2f3ff1714a6859b151da46109eda0ae}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesBoussinesqElement_a6b17e71029b9bc5e3d5bd036579b1c00}\label{classoomph_1_1RefineableNavierStokesBoussinesqElement_a6b17e71029b9bc5e3d5bd036579b1c00}} 
 \index{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!ra\_pt@{ra\_pt}}
 \index{ra\_pt@{ra\_pt}!oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{oomph::RefineableNavierStokesBoussinesqElement$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{ra\_pt()}{ra\_pt()}}
 {\footnotesize\ttfamily template$<$class N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT , class A\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element}}$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT, A\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::ra\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element}}$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT, A\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::ra\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -276,7 +276,7 @@ Access function for the pointer to the Rayleigh number.
 
 
 
-Definition at line 89 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 88 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 
@@ -302,7 +302,7 @@ Pointer to a private data member, the Rayleigh number.
 
 
 
-Definition at line 358 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
+Definition at line 360 of file multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h.
 
 
 

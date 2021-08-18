@@ -292,9 +292,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a800f699ec8dda290105807cb91297850 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a800f699ec8dda290105807cb91297850">preconditioner_pt</a> ()</td></tr>
 <tr class="memdesc:a800f699ec8dda290105807cb91297850 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to preconditioner.  <a href="classoomph_1_1IterativeLinearSolver.html#a800f699ec8dda290105807cb91297850">More...</a><br /></td></tr>
 <tr class="separator:a800f699ec8dda290105807cb91297850 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5e122965d91017dee39249c0034773d inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#ab5e122965d91017dee39249c0034773d">preconditioner_pt</a> () const</td></tr>
-<tr class="memdesc:ab5e122965d91017dee39249c0034773d inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to preconditioner (const version)  <a href="classoomph_1_1IterativeLinearSolver.html#ab5e122965d91017dee39249c0034773d">More...</a><br /></td></tr>
-<tr class="separator:ab5e122965d91017dee39249c0034773d inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40dc3e8bcb0ca6963d91b7c999d9b0c6 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a40dc3e8bcb0ca6963d91b7c999d9b0c6">preconditioner_pt</a> () const</td></tr>
+<tr class="memdesc:a40dc3e8bcb0ca6963d91b7c999d9b0c6 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to preconditioner (const version)  <a href="classoomph_1_1IterativeLinearSolver.html#a40dc3e8bcb0ca6963d91b7c999d9b0c6">More...</a><br /></td></tr>
+<tr class="separator:a40dc3e8bcb0ca6963d91b7c999d9b0c6 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa76d0f94116e2bfa615652b9de9b1af7 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#aa76d0f94116e2bfa615652b9de9b1af7">tolerance</a> ()</td></tr>
 <tr class="memdesc:aa76d0f94116e2bfa615652b9de9b1af7 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to convergence tolerance.  <a href="classoomph_1_1IterativeLinearSolver.html#aa76d0f94116e2bfa615652b9de9b1af7">More...</a><br /></td></tr>
 <tr class="separator:aa76d0f94116e2bfa615652b9de9b1af7 inherit pub_methods_classoomph_1_1IterativeLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -370,23 +370,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable resolve (i.e. store matrix and/or LU decomposition, say) This function simply resets an internal flag. It's virtual so it can be overloaded to perform additional tasks such as cleaning up memory that is only required for the resolve.  <a href="classoomph_1_1LinearSolver.html#ad61c63af94c5961830bd9807225a48d6">More...</a><br /></td></tr>
 <tr class="separator:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">solve</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
-<tr class="memdesc:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">More...</a><br /></td></tr>
+<tr class="memdesc:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">More...</a><br /></td></tr>
 <tr class="separator:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">solve</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
-<tr class="memdesc:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">More...</a><br /></td></tr>
+<tr class="memdesc:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">More...</a><br /></td></tr>
 <tr class="separator:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a8e970813a1583f6105ee2d677d3e45f3">solve_transpose</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
 <tr class="memdesc:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solver: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem's fully assembled Jacobian and residual vector (broken virtual).  <a href="classoomph_1_1LinearSolver.html#a8e970813a1583f6105ee2d677d3e45f3">More...</a><br /></td></tr>
 <tr class="separator:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">solve_transpose</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
-<tr class="memdesc:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">More...</a><br /></td></tr>
+<tr class="memdesc:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">More...</a><br /></td></tr>
 <tr class="separator:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">solve_transpose</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
-<tr class="memdesc:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
-  <a href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">More...</a><br /></td></tr>
+<tr class="memdesc:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">More...</a><br /></td></tr>
 <tr class="separator:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a3b310d08333033edc119b2a5bd7dcbfb">resolve</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
 <tr class="memdesc:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual)  <a href="classoomph_1_1LinearSolver.html#a3b310d08333033edc119b2a5bd7dcbfb">More...</a><br /></td></tr>
@@ -618,7 +614,7 @@ Additional Inherited Members</h2></td></tr>
 class oomph::MGSolver&lt; DIM &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00094">94</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00089">89</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a72fa4eb80c0b5a0ec6811dcd92b30231"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a72fa4eb80c0b5a0ec6811dcd92b30231">&#9670;&nbsp;</a></span>PostSmootherFactoryFctPt</h2>
@@ -636,7 +632,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>typedef for a function that returns a pointer to an object of the class <a class="el" href="classoomph_1_1Smoother.html">Smoother</a> to be used as the post-smoother </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00104">104</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00098">98</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -656,7 +652,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>typedef for a function that returns a pointer to an object of the class <a class="el" href="classoomph_1_1Smoother.html">Smoother</a> to be used as the pre-smoother </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00100">100</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00094">94</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -689,9 +685,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Constructor: Set up default values for number of V-cycles and pre- and post-smoothing steps. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00123">123</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00118">118</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00682">oomph::MGSolver&lt; DIM &gt;::Mg_hierarchy</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00634">oomph::MGSolver&lt; DIM &gt;::Mg_problem_pt</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l00222">oomph::IterativeLinearSolver::Tolerance</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00673">oomph::MGSolver&lt; DIM &gt;::Mg_hierarchy</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00626">oomph::MGSolver&lt; DIM &gt;::Mg_problem_pt</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l00245">oomph::IterativeLinearSolver::Tolerance</a>.</p>
 
 </div>
 </div>
@@ -722,9 +718,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Delete any dynamically allocated data. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00146">146</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00141">141</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -760,11 +756,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1MGPreconditioner.html#acc92bd3f8c9b729283d35c1f4ae37dd2">oomph::MGPreconditioner&lt; DIM &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00153">153</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00148">148</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00726">oomph::MGSolver&lt; DIM &gt;::Doc_everything</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00729">oomph::MGSolver&lt; DIM &gt;::Has_been_setup</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00688">oomph::MGSolver&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00682">oomph::MGSolver&lt; DIM &gt;::Mg_hierarchy</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00685">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00679">oomph::MGSolver&lt; DIM &gt;::Nlevel</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00713">oomph::MGSolver&lt; DIM &gt;::Post_smoothers_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00710">oomph::MGSolver&lt; DIM &gt;::Pre_smoothers_storage_pt</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00691">oomph::MGSolver&lt; DIM &gt;::Restriction_matrices_storage_pt</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00717">oomph::MGSolver&lt; DIM &gt;::Doc_everything</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00720">oomph::MGSolver&lt; DIM &gt;::Has_been_setup</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00679">oomph::MGSolver&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00673">oomph::MGSolver&lt; DIM &gt;::Mg_hierarchy</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00676">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00670">oomph::MGSolver&lt; DIM &gt;::Nlevel</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00704">oomph::MGSolver&lt; DIM &gt;::Post_smoothers_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00701">oomph::MGSolver&lt; DIM &gt;::Pre_smoothers_storage_pt</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00682">oomph::MGSolver&lt; DIM &gt;::Restriction_matrices_storage_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00146">oomph::MGSolver&lt; DIM &gt;::~MGSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00141">oomph::MGSolver&lt; DIM &gt;::~MGSolver()</a>.</p>
 
 </div>
 </div>
@@ -795,9 +791,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Call the direct solver (SuperLU) to solve the problem exactly. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00396">396</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00392">392</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00685">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00679">oomph::MGSolver&lt; DIM &gt;::Nlevel</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00639">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00516">oomph::MGSolver&lt; DIM &gt;::solve()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00694">oomph::MGSolver&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00676">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00670">oomph::MGSolver&lt; DIM &gt;::Nlevel</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00631">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00685">oomph::MGSolver&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
 
 </div>
 </div>
@@ -828,9 +824,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Suppress anything that can be suppressed, i.e. any timings. Things like mesh adaptation can not however be silenced using this. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00261">261</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00256">256</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00316">oomph::oomph_nullstream</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00656">oomph::MGSolver&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00650">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00645">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00313">oomph::oomph_nullstream</a>, <a class="el" href="oomph__definitions_8h_source.html#l00464">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00648">oomph::MGSolver&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00642">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00637">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
 
 </div>
 </div>
@@ -861,9 +857,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Suppress the output of both smoothers and SuperLU. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00313">313</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00308">308</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00685">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00679">oomph::MGSolver&lt; DIM &gt;::Nlevel</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00713">oomph::MGSolver&lt; DIM &gt;::Post_smoothers_storage_pt</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00710">oomph::MGSolver&lt; DIM &gt;::Pre_smoothers_storage_pt</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00676">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00670">oomph::MGSolver&lt; DIM &gt;::Nlevel</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00704">oomph::MGSolver&lt; DIM &gt;::Post_smoothers_storage_pt</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00701">oomph::MGSolver&lt; DIM &gt;::Pre_smoothers_storage_pt</a>.</p>
 
 </div>
 </div>
@@ -894,9 +890,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Disable all output from mg_solve apart from the number of V-cycles used to solve the problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00250">250</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00245">245</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00645">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00637">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
 
 </div>
 </div>
@@ -927,9 +923,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Enable the output from anything that could have been suppressed. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00291">291</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00286">286</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00726">oomph::MGSolver&lt; DIM &gt;::Doc_everything</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00717">oomph::MGSolver&lt; DIM &gt;::Doc_everything</a>.</p>
 
 </div>
 </div>
@@ -960,9 +956,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Enable the output from anything that could have been suppressed. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00300">300</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00295">295</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00650">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00645">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00642">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00637">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
 
 </div>
 </div>
@@ -993,9 +989,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Enable the output of the V-cycle timings and other output. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00281">281</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00276">276</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00645">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00637">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>.</p>
 
 </div>
 </div>
@@ -1016,11 +1012,11 @@ template&lt;unsigned DIM&gt; </div>
 <p>Do a full setup (assumes everything will be setup around the <a class="el" href="classoomph_1_1MGProblem.html" title="MGProblem class; subclass of Problem.">MGProblem</a> pointer given in the constructor) </p>
 <p>Runs a full setup of the MG solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00840">840</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00832">832</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00090">oomph::TerminateHelper::clean_up_memory()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="namespaceoomph.html#a6a5cfce839009bef49cce08492ec6aeb">oomph::self_test()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00086">oomph::TerminateHelper::clean_up_memory()</a>, <a class="el" href="elements_8h_source.html#l02628">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="namespaceoomph.html#a6a5cfce839009bef49cce08492ec6aeb">oomph::self_test()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00770">oomph::MGPreconditioner&lt; DIM &gt;::setup()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00516">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00760">oomph::MGPreconditioner&lt; DIM &gt;::setup()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00509">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
 
 </div>
 </div>
@@ -1044,9 +1040,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Interpolate solution at current level onto next finer mesh and correct the solution x at that level. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02043">2043</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02049">2049</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>.</p>
 
 </div>
 </div>
@@ -1112,9 +1108,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Builds a <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> that is used to interpolate the residual between levels. The transpose can be used as the full weighting restriction. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00407">407</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00402">402</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00688">oomph::MGSolver&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00679">oomph::MGSolver&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
 </div>
 </div>
@@ -1180,9 +1176,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Builds a <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> that is used to interpolate the residual between levels. The transpose can be used as the full weighting restriction. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00425">425</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00420">420</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00688">oomph::MGSolver&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00682">oomph::MGSolver&lt; DIM &gt;::Mg_hierarchy</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00679">oomph::MGSolver&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00673">oomph::MGSolver&lt; DIM &gt;::Mg_hierarchy</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
 </div>
 </div>
@@ -1203,9 +1199,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Make a self-test to make sure that the interpolation matrices are doing the same thing to interpolate the vectors up. </p>
 <p>Function which implements a self-test to interpolate a vector up all of levels of the MG hierarchy and outputs the restricted vectors to file. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02344">2344</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02350">2350</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>.</p>
 
 </div>
 </div>
@@ -1238,9 +1234,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1IterativeLinearSolver.html#a5fe7f7b5e4847fdbd4f95d3875ec7a46">oomph::IterativeLinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00603">603</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00595">595</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00736">oomph::MGSolver&lt; DIM &gt;::V_cycle_counter</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00727">oomph::MGSolver&lt; DIM &gt;::V_cycle_counter</a>.</p>
 
 </div>
 </div>
@@ -1274,7 +1270,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="geometric__multigrid_8cc_source.html#l00037">37</a> of file <a class="el" href="geometric__multigrid_8cc_source.html">geometric_multigrid.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::NE</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::NW</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::SE</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::SW</a>.</p>
+<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00059">oomph::QuadTreeNames::NE</a>, <a class="el" href="quadtree_8h_source.html#l00058">oomph::QuadTreeNames::NW</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="quadtree_8h_source.html#l00057">oomph::QuadTreeNames::SE</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::SW</a>.</p>
 
 </div>
 </div>
@@ -1308,7 +1304,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="geometric__multigrid_8cc_source.html#l00091">91</a> of file <a class="el" href="geometric__multigrid_8cc_source.html">geometric_multigrid.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::LDB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::LDF</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::LUB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::LUF</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::RDB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::RDF</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::RUB</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::RUF</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+<p class="reference">References <a class="el" href="octree_8h_source.html#l00049">oomph::OcTreeNames::LDB</a>, <a class="el" href="octree_8h_source.html#l00053">oomph::OcTreeNames::LDF</a>, <a class="el" href="octree_8h_source.html#l00051">oomph::OcTreeNames::LUB</a>, <a class="el" href="octree_8h_source.html#l00055">oomph::OcTreeNames::LUF</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, <a class="el" href="octree_8h_source.html#l00050">oomph::OcTreeNames::RDB</a>, <a class="el" href="octree_8h_source.html#l00054">oomph::OcTreeNames::RDF</a>, <a class="el" href="octree_8h_source.html#l00052">oomph::OcTreeNames::RUB</a>, <a class="el" href="octree_8h_source.html#l00056">oomph::OcTreeNames::RUF</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
@@ -1371,9 +1367,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Number of iterations. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00610">610</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00602">602</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00630">oomph::MGSolver&lt; DIM &gt;::Nvcycle</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00622">oomph::MGSolver&lt; DIM &gt;::Nvcycle</a>.</p>
 
 </div>
 </div>
@@ -1406,11 +1402,11 @@ template&lt;unsigned DIM&gt; </div>
 <p>Do the actual solve &ndash; this is called through the pure virtual solve function in the <a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> base class. The function is stored as protected to allow the <a class="el" href="classoomph_1_1MGPreconditioner.html" title="An interface to allow scalar MG to be used as a Preconditioner.">MGPreconditioner</a> derived class to use the solver. </p>
 <p>Linear solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02525">2525</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02531">2531</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00797">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00516">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00787">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00509">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
 
 </div>
 </div>
@@ -1439,9 +1435,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Normalise the rows of the restriction matrices to avoid amplifications when projecting to the coarser level. </p>
 <p>Modify the restriction matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02070">2070</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02076">2076</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="matrices_8h_source.html#l01046">oomph::CRDoubleMatrix::row_start()</a>, and <a class="el" href="matrices_8h_source.html#l01058">oomph::CRDoubleMatrix::value()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="matrices_8h_source.html#l01023">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="matrices_8h_source.html#l01081">oomph::CRDoubleMatrix::row_start()</a>, and <a class="el" href="matrices_8h_source.html#l01105">oomph::CRDoubleMatrix::value()</a>.</p>
 
 </div>
 </div>
@@ -1472,9 +1468,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return the number of post-smoothing iterations (lvalue) </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00331">331</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00328">328</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00719">oomph::MGSolver&lt; DIM &gt;::Npost_smooth</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00710">oomph::MGSolver&lt; DIM &gt;::Npost_smooth</a>.</p>
 
 </div>
 </div>
@@ -1505,9 +1501,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return the number of pre-smoothing iterations (lvalue) </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00339">339</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00336">336</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00716">oomph::MGSolver&lt; DIM &gt;::Npre_smooth</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00707">oomph::MGSolver&lt; DIM &gt;::Npre_smooth</a>.</p>
 
 </div>
 </div>
@@ -1548,9 +1544,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Given a level in the hierarchy, an input vector and a filename this function will document the given vector according to the structure of the mesh on the given level. </p>
 <p>Plots the input vector (assuming we're dealing with scalar nodal data, otherwise I don't know how to implement this...) </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02379">2379</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02385">2385</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="nodes_8h_source.html#l00361">oomph::Data::eqn_number()</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="nodes_8h_source.html#l01143">oomph::Node::hanging_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01202">oomph::Node::is_hanging()</a>, <a class="el" href="nodes_8h_source.html#l01285">oomph::Node::is_on_boundary()</a>, <a class="el" href="nodes_8h_source.html#l00731">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00748">oomph::HangInfo::master_weight()</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00728">oomph::HangInfo::nmaster()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02164">oomph::FiniteElement::nnode_1d()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="elements_8h_source.html#l03018">oomph::FiniteElement::tecplot_zone_string()</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="nodes_8h_source.html#l00373">oomph::Data::eqn_number()</a>, <a class="el" href="mesh_8h_source.html#l00480">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="nodes_8h_source.html#l01253">oomph::Node::hanging_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01310">oomph::Node::is_hanging()</a>, <a class="el" href="nodes_8h_source.html#l01398">oomph::Node::is_on_boundary()</a>, <a class="el" href="nodes_8h_source.html#l00809">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00826">oomph::HangInfo::master_weight()</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00803">oomph::HangInfo::nmaster()</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02235">oomph::FiniteElement::nnode_1d()</a>, <a class="el" href="mesh_8h_source.html#l00443">oomph::Mesh::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="elements_8h_source.html#l03178">oomph::FiniteElement::tecplot_zone_string()</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -1582,9 +1578,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Post-smoother: Perform max_iter smoothing steps on the linear system Ax=b with current RHS vector, b, starting with current solution vector, x. Uses the default smoother (set in the <a class="el" href="classoomph_1_1MGProblem.html" title="MGProblem class; subclass of Problem.">MGProblem</a> constructor) which can be overloaded for specific problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00370">370</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00366">366</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00713">oomph::MGSolver&lt; DIM &gt;::Post_smoothers_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00639">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00694">oomph::MGSolver&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00704">oomph::MGSolver&lt; DIM &gt;::Post_smoothers_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00631">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00685">oomph::MGSolver&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
 
 </div>
 </div>
@@ -1616,9 +1612,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pre-smoother: Perform 'max_iter' smoothing steps on the linear system Ax=b with current RHS vector, b, starting with current solution vector, x. Return the residual vector r=b-Ax. Uses the default smoother (set in the <a class="el" href="classoomph_1_1MGProblem.html" title="MGProblem class; subclass of Problem.">MGProblem</a> constructor) which can be overloaded for a specific problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00351">351</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00348">348</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00685">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00710">oomph::MGSolver&lt; DIM &gt;::Pre_smoothers_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00697">oomph::MGSolver&lt; DIM &gt;::Residual_mg_vectors_storage</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00639">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00694">oomph::MGSolver&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00676">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00701">oomph::MGSolver&lt; DIM &gt;::Pre_smoothers_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00688">oomph::MGSolver&lt; DIM &gt;::Residual_mg_vectors_storage</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00631">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00685">oomph::MGSolver&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
 
 </div>
 </div>
@@ -1650,9 +1646,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return norm of residual r=b-Ax and the residual vector itself on the level-th level. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00380">380</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00375">375</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00685">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00697">oomph::MGSolver&lt; DIM &gt;::Residual_mg_vectors_storage</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00639">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00694">oomph::MGSolver&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00676">oomph::MGSolver&lt; DIM &gt;::Mg_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00688">oomph::MGSolver&lt; DIM &gt;::Residual_mg_vectors_storage</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00631">oomph::MGSolver&lt; DIM &gt;::Rhs_mg_vectors_storage</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00685">oomph::MGSolver&lt; DIM &gt;::X_mg_vectors_storage</a>.</p>
 
 </div>
 </div>
@@ -1677,9 +1673,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Restrict residual (computed on level-th MG level) to the next coarser mesh and stick it into the coarse mesh RHS vector. </p>
 <p>Restrict residual (computed on current MG level) to next coarser mesh and stick it into the coarse mesh RHS vector using the restriction matrix (if restrict_flag=1) or the transpose of the interpolation matrix (if restrict_flag=2) </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02019">2019</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02026">2026</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>.</p>
 
 </div>
 </div>
@@ -1700,9 +1696,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Make a self-test to make sure that the interpolation matrices are doing the same thing to restrict the vectors down through the heirachy. </p>
 <p>Function which implements a self-test to restrict the residual vector down all of the coarser grids and output the restricted vectors to file. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02307">2307</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02313">2313</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>.</p>
 
 </div>
 </div>
@@ -1722,9 +1718,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Makes a vector, restricts it down the levels of the hierarchy and documents it at each level. After this is done the vector is interpolated up the levels of the hierarchy with the output being documented at each level. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02135">2135</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02141">2141</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -1756,9 +1752,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function to set the post-smoother creation function. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00114">114</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00109">109</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00664">oomph::MGSolver&lt; DIM &gt;::Post_smoother_factory_function_pt</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00655">oomph::MGSolver&lt; DIM &gt;::Post_smoother_factory_function_pt</a>.</p>
 
 </div>
 </div>
@@ -1790,9 +1786,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function to set the pre-smoother creation function. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00107">107</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00101">101</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00661">oomph::MGSolver&lt; DIM &gt;::Pre_smoother_factory_function_pt</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00652">oomph::MGSolver&lt; DIM &gt;::Pre_smoother_factory_function_pt</a>.</p>
 
 </div>
 </div>
@@ -1823,9 +1819,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Builds a <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> on each level that is used to restrict the residual between levels. The transpose can be used as the interpolation matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00471">471</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00465">465</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00688">oomph::MGSolver&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00679">oomph::MGSolver&lt; DIM &gt;::Nlevel</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00691">oomph::MGSolver&lt; DIM &gt;::Restriction_matrices_storage_pt</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00679">oomph::MGSolver&lt; DIM &gt;::Interpolation_matrices_storage_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00670">oomph::MGSolver&lt; DIM &gt;::Nlevel</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00682">oomph::MGSolver&lt; DIM &gt;::Restriction_matrices_storage_pt</a>.</p>
 
 </div>
 </div>
@@ -1846,9 +1842,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Makes a vector which will be used in the self-test. Is currently set to make the entries of the vector represent a plane wave propagating at an angle of 45 degrees. </p>
 <p>Sets the initial vector to be used in the restriction and interpolation self-tests. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02220">2220</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l02225">2225</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="nodes_8h_source.html#l00361">oomph::Data::eqn_number()</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00159">oomph::MathematicalConstants::Pi</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="nodes_8h_source.html#l00373">oomph::Data::eqn_number()</a>, <a class="el" href="mesh_8h_source.html#l00480">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00443">oomph::Mesh::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00157">oomph::MathematicalConstants::Pi</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -1869,9 +1865,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Setup the interpolation matrix on each level. </p>
 <p>Setup the interpolation matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l01513">1513</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l01516">1516</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l00361">oomph::Data::eqn_number()</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="nodes_8h_source.html#l00731">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00748">oomph::HangInfo::master_weight()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00728">oomph::HangInfo::nmaster()</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00373">oomph::Data::eqn_number()</a>, <a class="el" href="mesh_8h_source.html#l00480">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="nodes_8h_source.html#l00809">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00826">oomph::HangInfo::master_weight()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00803">oomph::HangInfo::nmaster()</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
 </div>
 </div>
@@ -1892,9 +1888,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Setup the interpolation matrix on each level (used for unstructured meshes) </p>
 <p>Setup the interpolation matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l01835">1835</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l01838">1838</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l00361">oomph::Data::eqn_number()</a>, <a class="el" href="nodes_8h_source.html#l01143">oomph::Node::hanging_pt()</a>, <a class="el" href="nodes_8h_source.html#l01202">oomph::Node::is_hanging()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="mesh__as__geometric__object_8h_source.html#l00375">oomph::MeshAsGeomObject::locate_zeta()</a>, <a class="el" href="nodes_8h_source.html#l00731">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00748">oomph::HangInfo::master_weight()</a>, <a class="el" href="nodes_8h_source.html#l00728">oomph::HangInfo::nmaster()</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8cc_source.html#l02409">oomph::Node::position()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00373">oomph::Data::eqn_number()</a>, <a class="el" href="nodes_8h_source.html#l01253">oomph::Node::hanging_pt()</a>, <a class="el" href="nodes_8h_source.html#l01310">oomph::Node::is_hanging()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="mesh__as__geometric__object_8h_source.html#l00379">oomph::MeshAsGeomObject::locate_zeta()</a>, <a class="el" href="nodes_8h_source.html#l00809">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00826">oomph::HangInfo::master_weight()</a>, <a class="el" href="nodes_8h_source.html#l00803">oomph::HangInfo::nmaster()</a>, <a class="el" href="mesh_8h_source.html#l00603">oomph::Mesh::nnode()</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00443">oomph::Mesh::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8cc_source.html#l02499">oomph::Node::position()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
 </div>
 </div>
@@ -1923,9 +1919,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Function to set up the hierachy of levels. Creates a vector of pointers to each MG level. </p>
 <p>Set up the MG hierarchy. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00980">980</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00974">974</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l01010">oomph::Problem::actions_after_adapt()</a>, <a class="el" href="problem_8h_source.html#l01007">oomph::Problem::actions_before_adapt()</a>, <a class="el" href="problem_8cc_source.html#l01968">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="classoomph_1_1MGProblem.html#a8698cbc94e6cb46df5c2c189fab81196">oomph::MGProblem::make_new_problem()</a>, <a class="el" href="classoomph_1_1MGProblem.html#a491bcf30805006f4b976de8ebaf5afd3">oomph::MGProblem::mg_bulk_mesh_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01025">oomph::Problem::actions_after_adapt()</a>, <a class="el" href="problem_8h_source.html#l01022">oomph::Problem::actions_before_adapt()</a>, <a class="el" href="problem_8cc_source.html#l01989">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00560">level</a>, <a class="el" href="classoomph_1_1MGProblem.html#a8698cbc94e6cb46df5c2c189fab81196">oomph::MGProblem::make_new_problem()</a>, <a class="el" href="classoomph_1_1MGProblem.html#a491bcf30805006f4b976de8ebaf5afd3">oomph::MGProblem::mg_bulk_mesh_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="refineable__mesh_8cc_source.html#l01907">oomph::TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh_minus_one()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -1956,7 +1952,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l01186">1186</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00174">oomph::LinearAlgebraDistribution::clear()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00171">oomph::LinearAlgebraDistribution::clear()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -1985,9 +1981,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Function to set up all of the smoothers once the system matrices have been set up. </p>
 <p>Set up the smoothers on all levels. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l01364">1364</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l01366">1366</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l00112">oomph::IterativeLinearSolver::tolerance()</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l00113">oomph::IterativeLinearSolver::tolerance()</a>.</p>
 
 </div>
 </div>
@@ -2008,9 +2004,9 @@ template&lt;unsigned DIM&gt; </div>
 <p>Setup the transfer matrices on each level. </p>
 <p>Set up the transfer matrices. Both the pure injection and full weighting method have been implemented here but it is highly recommended that full weighting is used in general. In both methods the transpose of the transfer matrix is used to transfer a vector back. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l01125">1125</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l01123">1123</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -2054,11 +2050,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00516">516</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00509">509</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00840">oomph::MGSolver&lt; DIM &gt;::full_setup()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00733">oomph::MGSolver&lt; DIM &gt;::Has_been_solved</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00634">oomph::MGSolver&lt; DIM &gt;::Mg_problem_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02525">oomph::MGSolver&lt; DIM &gt;::mg_solve()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00656">oomph::MGSolver&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00650">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00645">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00736">oomph::MGSolver&lt; DIM &gt;::V_cycle_counter</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00396">oomph::MGSolver&lt; DIM &gt;::direct_solve()</a>.</p>
+<p class="reference">References <a class="el" href="geometric__multigrid_8h_source.html#l00832">oomph::MGSolver&lt; DIM &gt;::full_setup()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00724">oomph::MGSolver&lt; DIM &gt;::Has_been_solved</a>, <a class="el" href="problem_8h_source.html#l01287">oomph::Problem::mesh_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00626">oomph::MGSolver&lt; DIM &gt;::Mg_problem_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02531">oomph::MGSolver&lt; DIM &gt;::mg_solve()</a>, <a class="el" href="mesh_8h_source.html#l00443">oomph::Mesh::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8h_source.html#l00464">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00648">oomph::MGSolver&lt; DIM &gt;::Stream_pt</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00642">oomph::MGSolver&lt; DIM &gt;::Suppress_all_output</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00637">oomph::MGSolver&lt; DIM &gt;::Suppress_v_cycle_output</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00727">oomph::MGSolver&lt; DIM &gt;::V_cycle_counter</a>.</p>
 
 </div>
 </div>
@@ -2087,9 +2081,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>If this is set to true we document everything. In addition to outputting the information of the setup timings and V-cycle data we document the refinement and unrefinement patterns given by the transfer operators which is done by keeping the coarser MG problem pointers alive. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00726">726</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00717">717</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00291">oomph::MGSolver&lt; DIM &gt;::enable_doc_everything()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00286">oomph::MGSolver&lt; DIM &gt;::enable_doc_everything()</a>.</p>
 
 </div>
 </div>
@@ -2117,9 +2111,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Boolean variable to indicate whether or not the solver has been setup. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00729">729</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00720">720</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -2146,9 +2140,9 @@ template&lt;unsigned DIM&gt; </div>
 </div><div class="memdoc">
 <p>Boolean variable to indicate whether or not the problem was successfully solved </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00733">733</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00724">724</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00516">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00509">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
 
 </div>
 </div>
@@ -2176,9 +2170,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the interpolation matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00688">688</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00679">679</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00407">oomph::MGSolver&lt; DIM &gt;::interpolation_matrix_set()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00471">oomph::MGSolver&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00402">oomph::MGSolver&lt; DIM &gt;::interpolation_matrix_set()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00465">oomph::MGSolver&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
 
 </div>
 </div>
@@ -2206,7 +2200,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the result of interpolation on each level (only required if the user wishes to document the output of interpolation and restriction on each level) </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00702">702</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00693">693</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -2234,9 +2228,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> containing pointers to problems in hierarchy. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00682">682</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00673">673</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00425">oomph::MGSolver&lt; DIM &gt;::interpolation_matrix_set()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00123">oomph::MGSolver&lt; DIM &gt;::MGSolver()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00420">oomph::MGSolver&lt; DIM &gt;::interpolation_matrix_set()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00118">oomph::MGSolver&lt; DIM &gt;::MGSolver()</a>.</p>
 
 </div>
 </div>
@@ -2264,9 +2258,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the system matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00685">685</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00676">676</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00396">oomph::MGSolver&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00313">oomph::MGSolver&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00351">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00380">oomph::MGSolver&lt; DIM &gt;::residual_norm()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00392">oomph::MGSolver&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00308">oomph::MGSolver&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00348">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00375">oomph::MGSolver&lt; DIM &gt;::residual_norm()</a>.</p>
 
 </div>
 </div>
@@ -2294,9 +2288,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to the MG problem (deep copy). This is protected to provide access to the MG preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00634">634</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00626">626</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00123">oomph::MGSolver&lt; DIM &gt;::MGSolver()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00797">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00516">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00118">oomph::MGSolver&lt; DIM &gt;::MGSolver()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00787">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00509">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
 
 </div>
 </div>
@@ -2324,9 +2318,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>The number of levels in the multigrid heirachy. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00679">679</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00670">670</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00396">oomph::MGSolver&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00313">oomph::MGSolver&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00471">oomph::MGSolver&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00392">oomph::MGSolver&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00308">oomph::MGSolver&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00465">oomph::MGSolver&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
 
 </div>
 </div>
@@ -2354,9 +2348,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Number of post-smoothing steps. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00719">719</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00710">710</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00331">oomph::MGSolver&lt; DIM &gt;::npost_smooth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00328">oomph::MGSolver&lt; DIM &gt;::npost_smooth()</a>.</p>
 
 </div>
 </div>
@@ -2384,9 +2378,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Number of pre-smoothing steps. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00716">716</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00707">707</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00339">oomph::MGSolver&lt; DIM &gt;::npre_smooth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00336">oomph::MGSolver&lt; DIM &gt;::npre_smooth()</a>.</p>
 
 </div>
 </div>
@@ -2414,9 +2408,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Maximum number of V-cycles (this is set as a protected variable so. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00630">630</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00622">622</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00610">oomph::MGSolver&lt; DIM &gt;::max_iter()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00748">oomph::MGPreconditioner&lt; DIM &gt;::MGPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00602">oomph::MGSolver&lt; DIM &gt;::max_iter()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00738">oomph::MGPreconditioner&lt; DIM &gt;::MGPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -2444,9 +2438,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Function to create post-smoothers. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00664">664</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00655">655</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00114">oomph::MGSolver&lt; DIM &gt;::set_post_smoother_factory_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00109">oomph::MGSolver&lt; DIM &gt;::set_post_smoother_factory_function()</a>.</p>
 
 </div>
 </div>
@@ -2474,9 +2468,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the post-smoothers. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00713">713</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00704">704</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00313">oomph::MGSolver&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00370">oomph::MGSolver&lt; DIM &gt;::post_smooth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00308">oomph::MGSolver&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00366">oomph::MGSolver&lt; DIM &gt;::post_smooth()</a>.</p>
 
 </div>
 </div>
@@ -2504,9 +2498,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Function to create pre-smoothers. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00661">661</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00652">652</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00107">oomph::MGSolver&lt; DIM &gt;::set_pre_smoother_factory_function()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00101">oomph::MGSolver&lt; DIM &gt;::set_pre_smoother_factory_function()</a>.</p>
 
 </div>
 </div>
@@ -2534,9 +2528,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the pre-smoothers. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00710">710</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00701">701</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00313">oomph::MGSolver&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00351">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00308">oomph::MGSolver&lt; DIM &gt;::disable_smoother_and_superlu_doc_time()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00348">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>.</p>
 
 </div>
 </div>
@@ -2564,9 +2558,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the residual vectors. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00697">697</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00688">688</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00351">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00380">oomph::MGSolver&lt; DIM &gt;::residual_norm()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00348">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00375">oomph::MGSolver&lt; DIM &gt;::residual_norm()</a>.</p>
 
 </div>
 </div>
@@ -2594,9 +2588,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the restriction matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00691">691</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00682">682</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00153">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00471">oomph::MGSolver&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00148">oomph::MGSolver&lt; DIM &gt;::clean_up_memory()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00465">oomph::MGSolver&lt; DIM &gt;::set_restriction_matrices_as_interpolation_transposes()</a>.</p>
 
 </div>
 </div>
@@ -2624,7 +2618,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the result of restriction on each level (only required if the user wishes to document the output of interpolation and restriction on each level) </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00707">707</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00698">698</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
 </div>
 </div>
@@ -2652,9 +2646,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the RHS vectors (Rhs_mg). This is protected to allow the multigrid preconditioner to assign the RHS vector during preconditioner_solve() </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00639">639</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00631">631</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00396">oomph::MGSolver&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00370">oomph::MGSolver&lt; DIM &gt;::post_smooth()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00351">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00797">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00380">oomph::MGSolver&lt; DIM &gt;::residual_norm()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00392">oomph::MGSolver&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00366">oomph::MGSolver&lt; DIM &gt;::post_smooth()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00348">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00787">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00375">oomph::MGSolver&lt; DIM &gt;::residual_norm()</a>.</p>
 
 </div>
 </div>
@@ -2682,9 +2676,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to the output stream &ndash; defaults to std::cout. This is protected member data to allow the preconditioner to restore normal output if everything was chosen to be suppressed by the user. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00656">656</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00648">648</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00261">oomph::MGSolver&lt; DIM &gt;::disable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00797">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00770">oomph::MGPreconditioner&lt; DIM &gt;::setup()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00516">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00256">oomph::MGSolver&lt; DIM &gt;::disable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00787">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00760">oomph::MGPreconditioner&lt; DIM &gt;::setup()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00509">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
 
 </div>
 </div>
@@ -2712,9 +2706,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>If this is set to true then all output from the solver is suppressed. This is protected member data so that the multigrid preconditioner knows whether or not to restore the stream pointer. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00650">650</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00642">642</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00261">oomph::MGSolver&lt; DIM &gt;::disable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00300">oomph::MGSolver&lt; DIM &gt;::enable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00797">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00770">oomph::MGPreconditioner&lt; DIM &gt;::setup()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00516">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00256">oomph::MGSolver&lt; DIM &gt;::disable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00295">oomph::MGSolver&lt; DIM &gt;::enable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00787">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00760">oomph::MGPreconditioner&lt; DIM &gt;::setup()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00509">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
 
 </div>
 </div>
@@ -2742,9 +2736,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Indicates whether or not the V-cycle output should be suppressed. Needs to be protected member data for the multigrid preconditioner to know whether or not to output information with each preconditioning step. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00645">645</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00637">637</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00261">oomph::MGSolver&lt; DIM &gt;::disable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00250">oomph::MGSolver&lt; DIM &gt;::disable_v_cycle_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00300">oomph::MGSolver&lt; DIM &gt;::enable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00281">oomph::MGSolver&lt; DIM &gt;::enable_v_cycle_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00797">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00516">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00256">oomph::MGSolver&lt; DIM &gt;::disable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00245">oomph::MGSolver&lt; DIM &gt;::disable_v_cycle_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00295">oomph::MGSolver&lt; DIM &gt;::enable_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00276">oomph::MGSolver&lt; DIM &gt;::enable_v_cycle_output()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00787">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00509">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
 
 </div>
 </div>
@@ -2772,9 +2766,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to counter for V-cycles. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00736">736</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00727">727</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00603">oomph::MGSolver&lt; DIM &gt;::iterations()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00516">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00595">oomph::MGSolver&lt; DIM &gt;::iterations()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00509">oomph::MGSolver&lt; DIM &gt;::solve()</a>.</p>
 
 </div>
 </div>
@@ -2802,9 +2796,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> to store the solution vectors (X_mg) </p>
 
-<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00694">694</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometric__multigrid_8h_source.html#l00685">685</a> of file <a class="el" href="geometric__multigrid_8h_source.html">geometric_multigrid.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00396">oomph::MGSolver&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00370">oomph::MGSolver&lt; DIM &gt;::post_smooth()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00351">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00380">oomph::MGSolver&lt; DIM &gt;::residual_norm()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometric__multigrid_8h_source.html#l00392">oomph::MGSolver&lt; DIM &gt;::direct_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00366">oomph::MGSolver&lt; DIM &gt;::post_smooth()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00348">oomph::MGSolver&lt; DIM &gt;::pre_smooth()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l00375">oomph::MGSolver&lt; DIM &gt;::residual_norm()</a>.</p>
 
 </div>
 </div>
@@ -2839,7 +2833,7 @@ template&lt;unsigned DIM&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:55:51
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:48
         </div>
       </div>
     </footer>

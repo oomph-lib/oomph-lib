@@ -19,18 +19,16 @@ virtual \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a27c34416
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_aa7ac9f6e82b6890030a739665ec1f63a}{q}} () const
 \begin{DoxyCompactList}\small\item\em Return the ratio of the stress scales used to non-\/dimensionalise the fluid and elasticity equations. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ad348cd2e740d5bf8ca88c1f8409bd27f}{q\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a484f9a863d4ba51fc09417bfc2b05a79}{q\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer the ratio of stress scales used to non-\/dimensionalise the fluid and solid equations. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ad3b508a8c906a3e175f9c058a0103023}{ngeom\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? All nodal data. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a4aa016e0164dad96f66ff98af98889e6}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
-\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9fc819d4f7a036a45bd62a484c9749d7}{position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Overloaded position function\+: Return 2D position vector\+: (r(zeta),z(zeta)) of material point whose \char`\"{}\+Lagrangian coordinate\char`\"{} is given by zeta. Here r=zeta! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9c86ac02c60541d451ceb50eb49914ed}{position}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
-\begin{DoxyCompactList}\small\item\em Overloaded position function\+: Return 2D position vector\+: (r(zeta),z(zeta)) of material point whose \char`\"{}\+Lagrangian coordinate\char`\"{} is given by zeta. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Overloaded position function\+: Return 2D position vector\+: (r(zeta),z(zeta)) of material point whose \char`\"{}\+Lagrangian coordinate\char`\"{} is given by zeta. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a83bf7fe6d4d9dc08400aa853198c716d}{dposition\+\_\+dt}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&drdt)
 \begin{DoxyCompactList}\small\item\em j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a96b9277c8b9ff3ca40f25851fa30b34e}{get\+\_\+pressure\+\_\+fvk}} (const unsigned \&ipt, const double \&r, double \&pressure) const
@@ -65,7 +63,7 @@ class oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\
 
 F\+SI Axisym Foepplvon\+Karman\+Element elements are 1D Foeppl von Karman elements with isoparametric interpolation for the function. Gets traction from adjacent fluid element(s) of type F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT. 
 
-Definition at line 542 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 568 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -83,7 +81,7 @@ Constructor.
 
 
 
-Definition at line 550 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 574 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -102,7 +100,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 559 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 583 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -124,7 +122,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_aa46469e491d25eda8d
 
 
 
-Definition at line 628 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 659 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -143,8 +141,7 @@ virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{class
 
 
 
-Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. ~\newline
- 
+Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. 
 
 
 
@@ -152,7 +149,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ae1940fc6a3050e645c
 
 
 
-Definition at line 578 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 608 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -175,7 +172,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 680 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 712 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -198,7 +195,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e12
 
 
 
-Definition at line 571 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 601 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -217,7 +214,7 @@ Update the nodal positions in all fluid elements that affect the traction on thi
 
 
 
-Definition at line 815 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 843 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -244,7 +241,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a
 
 
 
-Definition at line 847 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 875 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -263,7 +260,7 @@ Output adjacent fluid elements (for checking of fsi setup)
 
 
 
-Definition at line 766 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 794 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -282,7 +279,7 @@ Output integration points (for checking of fsi setup)
 
 
 
-Definition at line 713 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 745 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -297,8 +294,7 @@ void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+
 
 
 
-Overloaded position function\+: Return 2D position vector\+: (r(zeta),z(zeta)) of material point whose \char`\"{}\+Lagrangian coordinate\char`\"{} is given by zeta. ~\newline
- 
+Overloaded position function\+: Return 2D position vector\+: (r(zeta),z(zeta)) of material point whose \char`\"{}\+Lagrangian coordinate\char`\"{} is given by zeta. 
 
 
 
@@ -306,7 +302,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af1
 
 
 
-Definition at line 595 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 625 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -329,7 +325,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660f
 
 
 
-Definition at line 586 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 616 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -348,7 +344,7 @@ Return the ratio of the stress scales used to non-\/dimensionalise the fluid and
 
 
 
-Definition at line 563 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 587 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -358,12 +354,12 @@ References oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\
 
 Referenced by oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+pressure\+\_\+fvk().
 
-\mbox{\Hypertarget{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ad348cd2e740d5bf8ca88c1f8409bd27f}\label{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ad348cd2e740d5bf8ca88c1f8409bd27f}} 
+\mbox{\Hypertarget{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a484f9a863d4ba51fc09417bfc2b05a79}\label{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a484f9a863d4ba51fc09417bfc2b05a79}} 
 \index{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}!q\_pt@{q\_pt}}
 \index{q\_pt@{q\_pt}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{q\_pt()}{q\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D, class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::q\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::q\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -371,7 +367,7 @@ Return a pointer the ratio of stress scales used to non-\/dimensionalise the flu
 
 
 
-Definition at line 567 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 594 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -394,7 +390,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a90
 
 
 
-Definition at line 791 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 819 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -417,7 +413,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a2b
 
 
 
-Definition at line 807 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 835 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -440,7 +436,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a24
 
 
 
-Definition at line 784 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 812 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -463,7 +459,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ab3
 
 
 
-Definition at line 799 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 827 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -485,7 +481,7 @@ Pointer to the ratio, $ Q $ , of the stress used to non-\/dimensionalise the flu
 
 
 
-Definition at line 888 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line 913 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 

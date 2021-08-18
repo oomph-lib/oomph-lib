@@ -40,13 +40,11 @@ void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a4b0afe4dc57ca9764200c27
 unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a1fa211b49730947fe525156d08b66da4}{amg\+\_\+iterations}} ()
 \begin{DoxyCompactList}\small\item\em Return function for Max\+\_\+iter. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a7d4e9b31759555c67d51c0418de2980e}{amg\+\_\+using\+\_\+simple\+\_\+smoothing}} ()
-\begin{DoxyCompactList}\small\item\em Function to select use of \textquotesingle{}simple\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+simple\+\_\+smoother ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to select use of \textquotesingle{}simple\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+simple\+\_\+smoother. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a0abc961b0dfacd9b6bf7e1da428ab484}{amg\+\_\+simple\+\_\+smoother}} ()
 \begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+simple\+\_\+smoother flag. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a65c4923b3332f92c1712a1da86d1da9e}{amg\+\_\+using\+\_\+complex\+\_\+smoothing}} ()
-\begin{DoxyCompactList}\small\item\em Function to select use of \textquotesingle{}complex\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+complex\+\_\+smoother ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to select use of \textquotesingle{}complex\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+complex\+\_\+smoother. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ab4a47036de2b2992259863716f6f9121}{amg\+\_\+complex\+\_\+smoother}} ()
 \begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+complex\+\_\+smoother flag. \end{DoxyCompactList}\item 
 bool \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a7d849ee9489020e7a58bec0f5d33700e}{amg\+\_\+using\+\_\+simple\+\_\+smoothing\+\_\+flag}} ()
@@ -88,10 +86,9 @@ void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a5fb9201982dc22f9a07b32f
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a96f90cbfd3e92251707872391c3d66ab}{disable\+\_\+euclid\+\_\+row\+Scale}} ()
 \begin{DoxyCompactList}\small\item\em Disable euclid row scaling. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a722f36d087901fd11b5055f7f3b619b3}{enable\+\_\+euclid\+\_\+using\+\_\+\+BJ}} ()
-\begin{DoxyCompactList}\small\item\em Enable use of Block Jacobi as opposed to P\+I\+LU ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Enable use of Block Jacobi as opposed to P\+I\+LU. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a2165ef8d97b1e267d0555f877a3da342}{disable\+\_\+euclid\+\_\+using\+\_\+\+BJ}} ()
-\begin{DoxyCompactList}\small\item\em Disable use of Block Jacobi,. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Disable use of Block Jacobi, so P\+I\+LU will be used. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a635c84d0bdf407eb532e09f9ebe38d9f}{euclid\+\_\+using\+\_\+\+I\+L\+UK}} ()
 \begin{DoxyCompactList}\small\item\em Function to switch on I\+L\+U(k) factorization for Euclid (default is I\+L\+U(k) factorization) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a55b6027d5212c7e66eec212341dd0af6}{euclid\+\_\+using\+\_\+\+I\+L\+UT}} ()
@@ -101,13 +98,11 @@ unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a8be8b1933ac9cc1a
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}{enable\+\_\+delete\+\_\+matrix}} ()
 \begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling this function which changes the flag from false (its default) to true. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a53c33cbd53d80d45ba2326273033f036}{disable\+\_\+delete\+\_\+matrix}} ()
-\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. Calling this function ensures that the matrix is not deleted. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a5622db3b409cbdc49887aa65fa35215a}{setup}} ()
-\begin{DoxyCompactList}\small\item\em Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function is required when preconditioning and must be called before using the preconditioner\+\_\+solve(...) function. This interface allows \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} object for oomph-\/lib\textquotesingle{}s own \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. {\bfseries{Note\+:}} matrix\+\_\+pt must point to an object of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix. ~\newline
- {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} and Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}{enable\+\_\+delete\+\_\+matrix()}} function. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function is required when preconditioning and must be called before using the preconditioner\+\_\+solve(...) function. This interface allows \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} object for oomph-\/lib\textquotesingle{}s own \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. {\bfseries{Note\+:}} matrix\+\_\+pt must point to an object of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix. {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} and Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}{enable\+\_\+delete\+\_\+matrix()}} function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ad4967b01386d24d1839bccb99b2f9560}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
-\begin{DoxyCompactList}\small\item\em Function applies solver to vector r for preconditioning. This requires a call to setup(...) first. ~\newline
- {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user with the delete\+\_\+matrix() function. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function applies solver to vector r for preconditioning. This requires a call to setup(...) first. {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user with the delete\+\_\+matrix() function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a4d2ffc88b3a9e9ba84f969211b433231}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Function deletes all solver data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
@@ -120,11 +115,11 @@ static void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687b
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a53f01c25e89f237bd46c14f029f34a46}{Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}} =0.\+0
+static double \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a53f01c25e89f237bd46c14f029f34a46}{Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Static double that accumulates the preconditioner solve time of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. \end{DoxyCompactList}\item 
 static std\+::map$<$ std\+::string, double $>$ \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a67a4607506c6fa1429f3e87ca04e42a5}{Context\+\_\+based\+\_\+cumulative\+\_\+solve\+\_\+time}}
 \begin{DoxyCompactList}\small\item\em Static double that accumulates the preconditioner solve time of all instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. \end{DoxyCompactList}\item 
-static unsigned \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ad38447ce80a362510590b770cc501885}{Cumulative\+\_\+npreconditioner\+\_\+solve}} =0
+static unsigned \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ad38447ce80a362510590b770cc501885}{Cumulative\+\_\+npreconditioner\+\_\+solve}} = 0
 \begin{DoxyCompactList}\small\item\em Static unsigned that accumulates the number of preconditioner solves of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. \end{DoxyCompactList}\item 
 static std\+::map$<$ std\+::string, unsigned $>$ \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a1eedf6ffc280c11da2e5da705dc5a612}{Context\+\_\+based\+\_\+cumulative\+\_\+npreconditioner\+\_\+solve}}
 \begin{DoxyCompactList}\small\item\em Static unsigned that accumulates the number of preconditioner solves of all instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. \end{DoxyCompactList}\item 
@@ -140,8 +135,7 @@ bool \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ac88a0ccc5367586dd10e7c7
 double \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a812e880bd4518b75c937870c2da0f7cd}{My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}}
 \begin{DoxyCompactList}\small\item\em Private double that accumulates the preconditioner solve time of thi instantiation of this class. Is reported in destructor if Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time is set to true. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a653e88aa4e4f65e16cbae13cc08014c7}{Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}}
-\begin{DoxyCompactList}\small\item\em Bool to request report of My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time in destructor ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Bool to request report of My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time in destructor. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a2662d242a5a13b6ce7c4f570e48c2615}{Context\+\_\+string}}
 \begin{DoxyCompactList}\small\item\em String can be used to provide context for annotation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -149,15 +143,14 @@ std\+::string \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a2662d242a5a13b
 
 \doxysubsection{Detailed Description}
 An \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} class using the suite of Hypre preconditioners to allow \begin{DoxyVerb} BoomerAMG (Algebraic Multi Grid),
- Euclid (ILU) or 
- ParaSails (Approximate inverse) 
+ Euclid (ILU) or
+ ParaSails (Approximate inverse)
 \end{DoxyVerb}
 
 
-to be used for Preconditioner\+::preconditioner\+\_\+solve(...). By default Boomer\+A\+MG is used. ~\newline
- 
+to be used for Preconditioner\+::preconditioner\+\_\+solve(...). By default Boomer\+A\+MG is used. 
 
-Definition at line 740 of file hypre\+\_\+solver.\+h.
+Definition at line 837 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -174,7 +167,7 @@ Constructor. Provide optional string that is used in annotation of performance.
 
 
 
-Definition at line 746 of file hypre\+\_\+solver.\+h.
+Definition at line 842 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -192,7 +185,7 @@ Destructor.
 
 
 
-Definition at line 778 of file hypre\+\_\+solver.\+h.
+Definition at line 874 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -210,7 +203,7 @@ Broken copy constructor.
 
 
 
-Definition at line 790 of file hypre\+\_\+solver.\+h.
+Definition at line 885 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -231,7 +224,7 @@ Access function to A\+M\+G\+\_\+coarsening flag.
 
 
 
-Definition at line 906 of file hypre\+\_\+solver.\+h.
+Definition at line 1038 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -253,7 +246,7 @@ Access function to A\+M\+G\+\_\+complex\+\_\+smoother flag.
 
 
 
-Definition at line 891 of file hypre\+\_\+solver.\+h.
+Definition at line 1014 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -271,7 +264,7 @@ Access function to A\+M\+G\+\_\+damping parameter.
 
 
 
-Definition at line 912 of file hypre\+\_\+solver.\+h.
+Definition at line 1050 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -293,7 +286,7 @@ Return function for Max\+\_\+iter.
 
 
 
-Definition at line 874 of file hypre\+\_\+solver.\+h.
+Definition at line 988 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -315,7 +308,7 @@ Access function to A\+M\+G\+\_\+max\+\_\+levels.
 
 
 
-Definition at line 909 of file hypre\+\_\+solver.\+h.
+Definition at line 1044 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -333,7 +326,7 @@ Access function to A\+M\+G\+\_\+max\+\_\+row\+\_\+sum.
 
 
 
-Definition at line 918 of file hypre\+\_\+solver.\+h.
+Definition at line 1062 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -351,7 +344,7 @@ Access function to A\+M\+G\+\_\+print\+\_\+level.
 
 
 
-Definition at line 900 of file hypre\+\_\+solver.\+h.
+Definition at line 1026 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -369,7 +362,7 @@ Access function to A\+M\+G\+\_\+simple\+\_\+smoother flag.
 
 
 
-Definition at line 884 of file hypre\+\_\+solver.\+h.
+Definition at line 1001 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -391,7 +384,7 @@ Access function to A\+M\+G\+\_\+smoother\+\_\+iterations.
 
 
 
-Definition at line 903 of file hypre\+\_\+solver.\+h.
+Definition at line 1032 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -413,7 +406,7 @@ Access function to A\+M\+G\+\_\+strength.
 
 
 
-Definition at line 915 of file hypre\+\_\+solver.\+h.
+Definition at line 1056 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -435,7 +428,7 @@ Access function to A\+M\+G\+\_\+truncation.
 
 
 
-Definition at line 921 of file hypre\+\_\+solver.\+h.
+Definition at line 1068 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -449,12 +442,11 @@ References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+truncation.
 
 
 
-Function to select use of \textquotesingle{}complex\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+complex\+\_\+smoother ~\newline
- 
+Function to select use of \textquotesingle{}complex\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+complex\+\_\+smoother. 
 
 
 
-Definition at line 888 of file hypre\+\_\+solver.\+h.
+Definition at line 1008 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -468,12 +460,11 @@ References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+using\+\_\+simple\+\_\+
 
 
 
-Function to select use of \textquotesingle{}simple\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+simple\+\_\+smoother ~\newline
- 
+Function to select use of \textquotesingle{}simple\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+simple\+\_\+smoother. 
 
 
 
-Definition at line 881 of file hypre\+\_\+solver.\+h.
+Definition at line 995 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -495,7 +486,7 @@ Return function for the A\+M\+G\+\_\+using\+\_\+simple\+\_\+smoothing\+\_\+flag.
 
 
 
-Definition at line 894 of file hypre\+\_\+solver.\+h.
+Definition at line 1020 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -517,7 +508,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line 1870 of file hypre\+\_\+solver.\+cc.
+Definition at line 1842 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -535,11 +526,11 @@ Referenced by setup().
 
 
 
-Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. 
+Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. Calling this function ensures that the matrix is not deleted. 
 
-or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. Calling this function ensures that the matrix is not deleted. 
 
-Definition at line 991 of file hypre\+\_\+solver.\+h.
+
+Definition at line 1189 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -557,7 +548,7 @@ Disable documentation of preconditioner timings.
 
 
 
-Definition at line 855 of file hypre\+\_\+solver.\+h.
+Definition at line 957 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -575,7 +566,7 @@ Disable euclid row scaling.
 
 
 
-Definition at line 951 of file hypre\+\_\+solver.\+h.
+Definition at line 1128 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -589,11 +580,11 @@ References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale.
 
 
 
-Disable use of Block Jacobi,. 
+Disable use of Block Jacobi, so P\+I\+LU will be used. 
 
-so P\+I\+LU will be used 
 
-Definition at line 959 of file hypre\+\_\+solver.\+h.
+
+Definition at line 1142 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -611,7 +602,7 @@ Disable reporting of cumulative solve time in destructor.
 
 
 
-Definition at line 848 of file hypre\+\_\+solver.\+h.
+Definition at line 945 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -629,7 +620,7 @@ Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{cl
 
 
 
-Definition at line 985 of file hypre\+\_\+solver.\+h.
+Definition at line 1180 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -647,7 +638,7 @@ Enable documentation of preconditioner timings.
 
 
 
-Definition at line 852 of file hypre\+\_\+solver.\+h.
+Definition at line 951 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -665,7 +656,7 @@ Enable euclid row\+Scaling.
 
 
 
-Definition at line 948 of file hypre\+\_\+solver.\+h.
+Definition at line 1122 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -679,12 +670,11 @@ References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale.
 
 
 
-Enable use of Block Jacobi as opposed to P\+I\+LU ~\newline
- 
+Enable use of Block Jacobi as opposed to P\+I\+LU. 
 
 
 
-Definition at line 955 of file hypre\+\_\+solver.\+h.
+Definition at line 1135 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -702,7 +692,7 @@ Enable reporting of cumulative solve time in destructor.
 
 
 
-Definition at line 844 of file hypre\+\_\+solver.\+h.
+Definition at line 939 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -720,7 +710,7 @@ Access function to Euclid drop tolerance parameter.
 
 
 
-Definition at line 942 of file hypre\+\_\+solver.\+h.
+Definition at line 1110 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -738,7 +728,7 @@ Access function to Euclid level parameter for I\+L\+U(k) factorization.
 
 
 
-Definition at line 945 of file hypre\+\_\+solver.\+h.
+Definition at line 1116 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -756,7 +746,7 @@ Function to set the level of printing from Euclid when the Euclid destructor is 
 
 
 
-Definition at line 974 of file hypre\+\_\+solver.\+h.
+Definition at line 1166 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -774,7 +764,7 @@ Function to switch on I\+L\+U(k) factorization for Euclid (default is I\+L\+U(k)
 
 
 
-Definition at line 963 of file hypre\+\_\+solver.\+h.
+Definition at line 1149 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -792,7 +782,7 @@ Function to switch on I\+L\+UT factorization for Euclid (default is I\+L\+U(k) f
 
 
 
-Definition at line 967 of file hypre\+\_\+solver.\+h.
+Definition at line 1156 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -810,7 +800,7 @@ Access function to Hypre\+\_\+method flag -- specified via enumeration.
 
 
 
-Definition at line 858 of file hypre\+\_\+solver.\+h.
+Definition at line 963 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -832,7 +822,7 @@ Access function to Internal\+\_\+preconditioner flag -- specified via enumeratio
 
 
 
-Definition at line 862 of file hypre\+\_\+solver.\+h.
+Definition at line 970 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -850,7 +840,7 @@ Broken assignment operator.
 
 
 
-Definition at line 796 of file hypre\+\_\+solver.\+h.
+Definition at line 891 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -868,7 +858,7 @@ Access function to Para\+Sails filter parameter.
 
 
 
-Definition at line 936 of file hypre\+\_\+solver.\+h.
+Definition at line 1098 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -886,7 +876,7 @@ Access function to Para\+Sails nlevel parameter.
 
 
 
-Definition at line 930 of file hypre\+\_\+solver.\+h.
+Definition at line 1086 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -904,7 +894,7 @@ Access function to Para\+Sails symmetry flag.
 
 
 
-Definition at line 927 of file hypre\+\_\+solver.\+h.
+Definition at line 1080 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -922,7 +912,7 @@ Access function to Para\+Sails thresh parameter.
 
 
 
-Definition at line 933 of file hypre\+\_\+solver.\+h.
+Definition at line 1092 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -936,8 +926,7 @@ References oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+thresh.
 
 
 
-Function applies solver to vector r for preconditioning. This requires a call to setup(...) first. ~\newline
- {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user with the delete\+\_\+matrix() function. 
+Function applies solver to vector r for preconditioning. This requires a call to setup(...) first. {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user with the delete\+\_\+matrix() function. 
 
 Preconditioner\+\_\+solve uses a hypre solver to precondition vector r. 
 
@@ -945,7 +934,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 1799 of file hypre\+\_\+solver.\+cc.
+Definition at line 1775 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -963,7 +952,7 @@ Report cumulative solve times of all instantiations of this class.
 
 
 
-Definition at line 1674 of file hypre\+\_\+solver.\+cc.
+Definition at line 1648 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -981,7 +970,7 @@ Reset cumulative solve times.
 
 
 
-Definition at line 1719 of file hypre\+\_\+solver.\+cc.
+Definition at line 1699 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -999,7 +988,7 @@ Function to set the number of times to apply Boomer\+A\+MG.
 
 
 
-Definition at line 868 of file hypre\+\_\+solver.\+h.
+Definition at line 982 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1017,8 +1006,7 @@ Referenced by oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditio
 
 
 
-Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function is required when preconditioning and must be called before using the preconditioner\+\_\+solve(...) function. This interface allows \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} object for oomph-\/lib\textquotesingle{}s own \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. {\bfseries{Note\+:}} matrix\+\_\+pt must point to an object of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix. ~\newline
- {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} and Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}{enable\+\_\+delete\+\_\+matrix()}} function. 
+Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function is required when preconditioning and must be called before using the preconditioner\+\_\+solve(...) function. This interface allows \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} object for oomph-\/lib\textquotesingle{}s own \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. {\bfseries{Note\+:}} matrix\+\_\+pt must point to an object of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix. {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} and Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}{enable\+\_\+delete\+\_\+matrix()}} function. 
 
 An interface to allow \mbox{\hyperlink{classoomph_1_1HypreSolver}{Hypre\+Solver}} to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} for the oomph-\/lib \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} has to be of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix. 
 
@@ -1026,7 +1014,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 1734 of file hypre\+\_\+solver.\+cc.
+Definition at line 1714 of file hypre\+\_\+solver.\+cc.
 
 
 
@@ -1044,7 +1032,7 @@ Function to select Boomer\+A\+MG as the preconditioner.
 
 
 
-Definition at line 865 of file hypre\+\_\+solver.\+h.
+Definition at line 976 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1062,7 +1050,7 @@ Function to select use Euclid as the preconditioner.
 
 
 
-Definition at line 939 of file hypre\+\_\+solver.\+h.
+Definition at line 1104 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1080,7 +1068,7 @@ Function to select Para\+Sails as the preconditioner.
 
 
 
-Definition at line 924 of file hypre\+\_\+solver.\+h.
+Definition at line 1074 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1101,7 +1089,7 @@ Static unsigned that accumulates the number of preconditioner solves of all inst
 
 
 
-Definition at line 827 of file hypre\+\_\+solver.\+h.
+Definition at line 922 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1117,11 +1105,9 @@ Referenced by preconditioner\+\_\+solve(), report\+\_\+cumulative\+\_\+solve\+\_
 
 Static double that accumulates the preconditioner solve time of all instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
 
-map of static doubles that accumulates the preconditioner solve time of all instantiations of this class, labeled by
+map of static doubles that accumulates the preconditioner solve time of all instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
 
-context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
-
-Definition at line 812 of file hypre\+\_\+solver.\+h.
+Definition at line 907 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1139,7 +1125,7 @@ Static unsigned that stores nrow for the most recent instantiations of this clas
 
 
 
-Definition at line 834 of file hypre\+\_\+solver.\+h.
+Definition at line 929 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1157,7 +1143,7 @@ String can be used to provide context for annotation.
 
 
 
-Definition at line 1053 of file hypre\+\_\+solver.\+h.
+Definition at line 1252 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1167,7 +1153,7 @@ Referenced by Hypre\+Preconditioner(), preconditioner\+\_\+solve(), setup(), and
 \index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Cumulative\_npreconditioner\_solve@{Cumulative\_npreconditioner\_solve}}
 \index{Cumulative\_npreconditioner\_solve@{Cumulative\_npreconditioner\_solve}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
 \doxysubsubsection{\texorpdfstring{Cumulative\_npreconditioner\_solve}{Cumulative\_npreconditioner\_solve}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Preconditioner\+::\+Cumulative\+\_\+npreconditioner\+\_\+solve =0\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Preconditioner\+::\+Cumulative\+\_\+npreconditioner\+\_\+solve = 0\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -1175,7 +1161,7 @@ Static unsigned that accumulates the number of preconditioner solves of all inst
 
 
 
-Definition at line 819 of file hypre\+\_\+solver.\+h.
+Definition at line 914 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1185,17 +1171,15 @@ Referenced by preconditioner\+\_\+solve(), report\+\_\+cumulative\+\_\+solve\+\_
 \index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Cumulative\_preconditioner\_solve\_time@{Cumulative\_preconditioner\_solve\_time}}
 \index{Cumulative\_preconditioner\_solve\_time@{Cumulative\_preconditioner\_solve\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
 \doxysubsubsection{\texorpdfstring{Cumulative\_preconditioner\_solve\_time}{Cumulative\_preconditioner\_solve\_time}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Preconditioner\+::\+Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time =0.\+0\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily double oomph\+::\+Hypre\+Preconditioner\+::\+Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time = 0.\+0\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 Static double that accumulates the preconditioner solve time of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
 
-Static double that accumulates the preconditioner solve time of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve, using.
 
-\mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
 
-Definition at line 805 of file hypre\+\_\+solver.\+h.
+Definition at line 900 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1213,7 +1197,7 @@ Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{cl
 
 
 
-Definition at line 1037 of file hypre\+\_\+solver.\+h.
+Definition at line 1236 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1227,7 +1211,7 @@ Referenced by disable\+\_\+delete\+\_\+matrix(), enable\+\_\+delete\+\_\+matrix(
 
 
 
-Definition at line 1040 of file hypre\+\_\+solver.\+h.
+Definition at line 1239 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1245,7 +1229,7 @@ Private double that accumulates the preconditioner solve time of thi instantiati
 
 
 
-Definition at line 1046 of file hypre\+\_\+solver.\+h.
+Definition at line 1245 of file hypre\+\_\+solver.\+h.
 
 
 
@@ -1259,12 +1243,11 @@ Referenced by Hypre\+Preconditioner(), preconditioner\+\_\+solve(), and $\sim$\+
 
 
 
-Bool to request report of My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time in destructor ~\newline
- 
+Bool to request report of My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time in destructor. 
 
 
 
-Definition at line 1050 of file hypre\+\_\+solver.\+h.
+Definition at line 1249 of file hypre\+\_\+solver.\+h.
 
 
 

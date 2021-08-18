@@ -230,7 +230,7 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><p>Spines are used for algebraic node update operations in free-surface fluid problems: They form the back-bones along which nodes in a a free-surface mesh are located. Typically, the free surface is located at the "end" of the spine; the nodes in the interior of the mesh are located at fixed fractions along the spine. The key <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> member of the <a class="el" href="classoomph_1_1Spine.html">Spine</a> object is its "height" &ndash; usually an unknown in the problem &ndash; which is used by the <a class="el" href="classoomph_1_1SpineNode.html">SpineNode</a>'s node update function to update the <a class="el" href="classoomph_1_1SpineNode.html">SpineNode</a>'s position.</p>
 <p>In more complex problems (such as the case where a fluid layer is deposited on an elastic body), the node update function can depend on additional information, such as the <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> representation of the elastic body, and additional <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> objects wich specify the position on the <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> from which the <a class="el" href="classoomph_1_1Spine.html">Spine</a> emanates. The <a class="el" href="classoomph_1_1Spine.html">Spine</a> class therefore provides storage for pointers to GeomObjects and storage for any additional geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that may be required during node update operations. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00065">65</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00063">63</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a93fe5032eec46631288d4c098f49e89a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a93fe5032eec46631288d4c098f49e89a">&#9670;&nbsp;</a></span>Spine() <span class="overload">[1/4]</span></h2>
@@ -257,9 +257,9 @@ Private Attributes</h2></td></tr>
 
 <p>Default constructor: Create the <a class="el" href="classoomph_1_1Spine.html">Spine</a> and initialise its height to zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00072">72</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00068">68</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00148">Data</a>, and <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00148">Data</a>, and <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>.</p>
 
 </div>
 </div>
@@ -289,9 +289,9 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor: Create the <a class="el" href="classoomph_1_1Spine.html">Spine</a> and initialise its height to the specified value. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00081">81</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00077">77</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00148">Data</a>, <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>, and <a class="el" href="spines_8h_source.html#l00154">height()</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00148">Data</a>, <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>, and <a class="el" href="spines_8h_source.html#l00150">height()</a>.</p>
 
 </div>
 </div>
@@ -331,9 +331,9 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor: Create the <a class="el" href="classoomph_1_1Spine.html">Spine</a> and initialise its height to the specified value. Store the vector of (pointers to) the additional geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that is required during the node update operation for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00094">94</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00090">90</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00148">Data</a>, <a class="el" href="spines_8h_source.html#l00199">geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>, <a class="el" href="spines_8h_source.html#l00154">height()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00148">Data</a>, <a class="el" href="spines_8h_source.html#l00198">geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>, <a class="el" href="spines_8h_source.html#l00150">height()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
@@ -379,9 +379,9 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor: Create the <a class="el" href="classoomph_1_1Spine.html">Spine</a> and initialise its height to the specified value. Store the vector of (pointers to) the additional geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that is required during the node update operation; also store vector of (pointers to) GeomObjects that is required during the node update operation for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00119">119</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00115">115</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00148">Data</a>, <a class="el" href="spines_8h_source.html#l00199">geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>, <a class="el" href="spines_8h_source.html#l00154">height()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00148">Data</a>, <a class="el" href="spines_8h_source.html#l00198">geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>, <a class="el" href="spines_8h_source.html#l00150">height()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
@@ -410,9 +410,9 @@ Private Attributes</h2></td></tr>
 
 <p>Destructor: Wipe <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object that stores the <a class="el" href="classoomph_1_1Spine.html">Spine</a> height. All other objects (geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and geometric objects) were created outside the <a class="el" href="classoomph_1_1Spine.html">Spine</a> and must be deleted there. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00146">146</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00142">142</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>.</p>
 
 </div>
 </div>
@@ -443,9 +443,9 @@ Private Attributes</h2></td></tr>
 
 <p>Add (pointer to) geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00192">192</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00191">191</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00199">geom_data_pt()</a>, and <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00198">geom_data_pt()</a>, and <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>.</p>
 
 </div>
 </div>
@@ -475,9 +475,9 @@ Private Attributes</h2></td></tr>
 
 <p>Add (pointer to) geometric object that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00226">226</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00237">237</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00233">geom_object_pt()</a>, and <a class="el" href="spines_8h_source.html#l00282">Geom_object_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00244">geom_object_pt()</a>, and <a class="el" href="spines_8h_source.html#l00309">Geom_object_pt</a>.</p>
 
 </div>
 </div>
@@ -507,9 +507,9 @@ Private Attributes</h2></td></tr>
 
 <p>Add geometric parameter involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00258">258</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00280">280</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00263">geom_parameter()</a>, and <a class="el" href="spines_8h_source.html#l00285">Geom_parameter</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00287">geom_parameter()</a>, and <a class="el" href="spines_8h_source.html#l00312">Geom_parameter</a>.</p>
 
 </div>
 </div>
@@ -539,11 +539,11 @@ Private Attributes</h2></td></tr>
 
 <p>Return i-th geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00199">199</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00198">198</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00192">add_geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00378">oomph::SpineNode::all_geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00180">set_geom_data_pt()</a>, and <a class="el" href="spines_8h_source.html#l00094">Spine()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00191">add_geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00433">oomph::SpineNode::all_geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00179">set_geom_data_pt()</a>, and <a class="el" href="spines_8h_source.html#l00090">Spine()</a>.</p>
 
 </div>
 </div>
@@ -573,9 +573,9 @@ Private Attributes</h2></td></tr>
 
 <p>Return i-th geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. Const version. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00203">203</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00205">205</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
@@ -605,11 +605,11 @@ Private Attributes</h2></td></tr>
 
 <p>Return i-th geometric object that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00233">233</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00244">244</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00282">Geom_object_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00309">Geom_object_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00226">add_geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00382">oomph::SpineNode::all_geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00214">set_geom_object_pt()</a>, <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00121">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00450">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_channel()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00195">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00426">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00218">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00379">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00264">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_lower()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00321">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_upper()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00237">add_geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00439">oomph::SpineNode::all_geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00225">set_geom_object_pt()</a>, <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00133">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00464">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_channel()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00208">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00440">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00231">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00393">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00277">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_lower()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00335">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_upper()</a>.</p>
 
 </div>
 </div>
@@ -639,9 +639,9 @@ Private Attributes</h2></td></tr>
 
 <p>Return i-th geometric object that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. Const version. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00237">237</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00251">251</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00282">Geom_object_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00309">Geom_object_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
@@ -671,11 +671,11 @@ Private Attributes</h2></td></tr>
 
 <p>Return i-th geometric parameter that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00263">263</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00287">287</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00285">Geom_parameter</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00312">Geom_parameter</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00258">add_geom_parameter()</a>, <a class="el" href="spines_8h_source.html#l00253">set_geom_parameter()</a>, <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00121">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00450">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_channel()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00195">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00426">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00218">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00379">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00264">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_lower()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00321">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_upper()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00280">add_geom_parameter()</a>, <a class="el" href="spines_8h_source.html#l00273">set_geom_parameter()</a>, <a class="el" href="channel__spine__mesh_8template_8h_source.html#l00133">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00464">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_channel()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00208">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00440">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00231">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00393">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00277">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_lower()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00335">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_upper()</a>.</p>
 
 </div>
 </div>
@@ -705,9 +705,9 @@ Private Attributes</h2></td></tr>
 
 <p>Return i-th geometric parameter that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. Const version. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00268">268</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00294">294</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00285">Geom_parameter</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00312">Geom_parameter</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
@@ -736,11 +736,11 @@ Private Attributes</h2></td></tr>
 
 <p>Access function to spine height. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00154">154</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00150">150</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00143">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, <a class="el" href="spines_8h_source.html#l00359">oomph::SpineNode::h()</a>, <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01131">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::reposition_spines()</a>, and <a class="el" href="spines_8h_source.html#l00081">Spine()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00153">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, <a class="el" href="spines_8h_source.html#l00397">oomph::SpineNode::h()</a>, <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01158">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::reposition_spines()</a>, and <a class="el" href="spines_8h_source.html#l00077">Spine()</a>.</p>
 
 </div>
 </div>
@@ -769,11 +769,11 @@ Private Attributes</h2></td></tr>
 
 <p>Number of geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00175">175</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00171">171</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00366">oomph::SpineNode::ngeom_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00407">oomph::SpineNode::ngeom_data()</a>.</p>
 
 </div>
 </div>
@@ -802,11 +802,11 @@ Private Attributes</h2></td></tr>
 
 <p>Number of geometric objects that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00210">210</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00218">218</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00282">Geom_object_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00309">Geom_object_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00372">oomph::SpineNode::ngeom_object()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00420">oomph::SpineNode::ngeom_object()</a>.</p>
 
 </div>
 </div>
@@ -835,9 +835,9 @@ Private Attributes</h2></td></tr>
 
 <p>Number of geometric parameters that are involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00248">248</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00265">265</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00285">Geom_parameter</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00312">Geom_parameter</a>.</p>
 
 </div>
 </div>
@@ -867,9 +867,9 @@ Private Attributes</h2></td></tr>
 
 <p>Set vector of (pointers to) geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. Wipes any previously existing geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00180">180</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00179">179</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00199">geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00198">geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
@@ -899,11 +899,11 @@ Private Attributes</h2></td></tr>
 
 <p>Set vector of (pointers to) geometric objects that is involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00214">214</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00225">225</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00233">geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00282">Geom_object_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00244">geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00309">Geom_object_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00143">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01131">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::reposition_spines()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00153">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01158">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::reposition_spines()</a>.</p>
 
 </div>
 </div>
@@ -933,11 +933,11 @@ Private Attributes</h2></td></tr>
 
 <p>Set vector of geometric parameters that are involved in the node update operations for this <a class="el" href="classoomph_1_1Spine.html">Spine</a>. Wipes any previously existing geometric parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00253">253</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00273">273</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00263">geom_parameter()</a>, and <a class="el" href="spines_8h_source.html#l00285">Geom_parameter</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00287">geom_parameter()</a>, and <a class="el" href="spines_8h_source.html#l00312">Geom_parameter</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00143">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01131">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::reposition_spines()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00153">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01158">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::reposition_spines()</a>.</p>
 
 </div>
 </div>
@@ -966,11 +966,11 @@ Private Attributes</h2></td></tr>
 
 <p>Access function to <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object that stores the spine height. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00160">160</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00156">156</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00143">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, <a class="el" href="spines_8h_source.html#l00721">oomph::SpineElement&lt; FaceGeometry&lt; ELEMENT &gt; &gt;::complete_setup_of_dependencies()</a>, <a class="el" href="spines_8cc_source.html#l00231">oomph::SpineMesh::dump()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00120">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::pin_all_spines()</a>, and <a class="el" href="spines_8cc_source.html#l00255">oomph::SpineMesh::read()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00153">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, <a class="el" href="spines_8h_source.html#l00781">oomph::SpineElement&lt; FaceGeometry&lt; ELEMENT &gt; &gt;::complete_setup_of_dependencies()</a>, <a class="el" href="spines_8cc_source.html#l00229">oomph::SpineMesh::dump()</a>, <a class="el" href="hijacked__elements_8h_source.html#l00279">oomph::Hijacked&lt; SpineElement&lt; FaceGeometry&lt; ELEMENT &gt; &gt; &gt;::hijack_nodal_spine_value()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00128">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::pin_all_spines()</a>, and <a class="el" href="spines_8cc_source.html#l00253">oomph::SpineMesh::read()</a>.</p>
 
 </div>
 </div>
@@ -999,9 +999,9 @@ Private Attributes</h2></td></tr>
 
 <p>Access function to <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object that stores the spine height (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00167">167</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00163">163</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>.</p>
 
 </div>
 </div>
@@ -1030,9 +1030,9 @@ Private Attributes</h2></td></tr>
 
 <p>Return the vector of geometric data. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00206">206</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00211">211</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00278">Geom_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00305">Geom_data_pt</a>.</p>
 
 </div>
 </div>
@@ -1061,9 +1061,9 @@ Private Attributes</h2></td></tr>
 
 <p>Return the vector of all geometric objects that affect this spine. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00244">244</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00258">258</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">References <a class="el" href="spines_8h_source.html#l00282">Geom_object_pt</a>.</p>
+<p class="reference">References <a class="el" href="spines_8h_source.html#l00309">Geom_object_pt</a>.</p>
 
 </div>
 </div>
@@ -1091,9 +1091,9 @@ Private Attributes</h2></td></tr>
 <p><a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that stores the spine height. </p>
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> that stores the pointers to additional geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00278">278</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00305">305</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00192">add_geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00199">geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00154">height()</a>, <a class="el" href="spines_8h_source.html#l00175">ngeom_data()</a>, <a class="el" href="spines_8h_source.html#l00180">set_geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00072">Spine()</a>, <a class="el" href="spines_8h_source.html#l00160">spine_height_pt()</a>, <a class="el" href="spines_8h_source.html#l00206">vector_geom_data_pt()</a>, and <a class="el" href="spines_8h_source.html#l00146">~Spine()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00191">add_geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00198">geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00150">height()</a>, <a class="el" href="spines_8h_source.html#l00171">ngeom_data()</a>, <a class="el" href="spines_8h_source.html#l00179">set_geom_data_pt()</a>, <a class="el" href="spines_8h_source.html#l00068">Spine()</a>, <a class="el" href="spines_8h_source.html#l00156">spine_height_pt()</a>, <a class="el" href="spines_8h_source.html#l00211">vector_geom_data_pt()</a>, and <a class="el" href="spines_8h_source.html#l00142">~Spine()</a>.</p>
 
 </div>
 </div>
@@ -1119,9 +1119,9 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> that stores the pointers to geometric objects that is involved in the node update operation. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00282">282</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00309">309</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00226">add_geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00233">geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00210">ngeom_object()</a>, <a class="el" href="spines_8h_source.html#l00214">set_geom_object_pt()</a>, and <a class="el" href="spines_8h_source.html#l00244">vector_geom_object_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00237">add_geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00244">geom_object_pt()</a>, <a class="el" href="spines_8h_source.html#l00218">ngeom_object()</a>, <a class="el" href="spines_8h_source.html#l00225">set_geom_object_pt()</a>, and <a class="el" href="spines_8h_source.html#l00258">vector_geom_object_pt()</a>.</p>
 
 </div>
 </div>
@@ -1147,9 +1147,9 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> that stores doubles that are used in the geometric updates. </p>
 
-<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00285">285</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spines_8h_source.html#l00312">312</a> of file <a class="el" href="spines_8h_source.html">spines.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00258">add_geom_parameter()</a>, <a class="el" href="spines_8h_source.html#l00263">geom_parameter()</a>, <a class="el" href="spines_8h_source.html#l00248">ngeom_parameter()</a>, and <a class="el" href="spines_8h_source.html#l00253">set_geom_parameter()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spines_8h_source.html#l00280">add_geom_parameter()</a>, <a class="el" href="spines_8h_source.html#l00287">geom_parameter()</a>, <a class="el" href="spines_8h_source.html#l00265">ngeom_parameter()</a>, and <a class="el" href="spines_8h_source.html#l00273">set_geom_parameter()</a>.</p>
 
 </div>
 </div>
@@ -1184,7 +1184,7 @@ Private Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:57:36
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:16
         </div>
       </div>
     </footer>

@@ -16,8 +16,7 @@ Inheritance diagram for oomph\+::Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+NT
 \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a2cdbf36114a4da773fb7d659218d09cb}{Single\+Layer\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx, const double \&h, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length, height of layer, and pointer to timestepper (defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} timestepper) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_afb908e31d988eaa930e949a54eeea37f}{Single\+Layer\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx, const double \&h, const bool \&periodic\+\_\+in\+\_\+x, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length, height of layer, a boolean flag to make the mesh periodic in the x-\/direction, and a pointer to timestepper (defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} timestepper) ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length, height of layer, a boolean flag to make the mesh periodic in the x-\/direction, and a pointer to timestepper (defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} timestepper) \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a364648c15ab29c0c8d1cf7c2bc4cb792}{spine\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$spine\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em General node update function implements pure virtual function defined in \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}} base class and performs specific node update actions\+: along vertical spines. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
@@ -34,7 +33,7 @@ class oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 Single-\/layer spine mesh class derived from standard 2D mesh. The mesh contains a layer of spinified fluid elements (of type E\+L\+E\+M\+E\+NT; e.\+g \mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}}$<$Q\+Crouzeix\+Raviart\+Element$<$2$>$). It constructs the spines and contains the information on how to update the nodal positions within the mesh as a function of the spine lengths. Equations that determine the spine heights (even if they are pinned) must be specified externally or else there will be problems. 
 
-Definition at line 47 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 45 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -54,7 +53,7 @@ Constructor for spine 2D mesh\+: Pass number of elements in x-\/direction, numbe
 
 The mesh must be called with spinified elements and it constructs the spines and contains the information on how to update the nodal positions within the mesh as a function of the spine lengths. Equations that determine the spine heights (even if they are pinned) must be specified externally or else there will be problems. 
 
-Definition at line 51 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line 48 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -69,14 +68,13 @@ References oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::b
 
 
 
-Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length, height of layer, a boolean flag to make the mesh periodic in the x-\/direction, and a pointer to timestepper (defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} timestepper) ~\newline
- 
+Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length, height of layer, a boolean flag to make the mesh periodic in the x-\/direction, and a pointer to timestepper (defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} timestepper) 
 
 Constuctor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length and height of layer, a boolean flag to make the mesh periodic in the x-\/direction, and pointer to timestepper (defaults to Static timestepper).
 
 The mesh must be called with spinified elements and it constructs the spines and contains the information on how to update the nodal positions within the mesh as a function of the spine lengths. Equations that determine the spine heights (even if they are pinned) must be specified externally or else there will be problems. 
 
-Definition at line 85 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line 84 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -98,7 +96,7 @@ Helper function to actually build the single-\/layer spine mesh (called from var
 
 Helper function that actually builds the single-\/layer spine mesh based on the parameters set in the various constructors 
 
-Definition at line 115 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line 114 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -129,7 +127,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a981301706d4
 
 
 
-Definition at line 79 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 75 of file single\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 

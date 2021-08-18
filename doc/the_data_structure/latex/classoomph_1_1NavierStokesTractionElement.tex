@@ -28,7 +28,7 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_aa086549476addc4
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a97b29ab7568f8b93982fda56043449b6}{traction\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a650e79d7595f6ff62fcfb5694c3389d2}{traction\+\_\+fct\+\_\+pt}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -38,13 +38,11 @@ double \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a8ddd7c891c265
 virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a61e835222d62341faf05a991b1be04c4}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a55f3d90286a5fd98dfdae7ac8a5b1b0f}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_ab5b0454a2b29fc69938235af430702bf}{get\+\_\+traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a7c28b510ac27af92bae51f521cec5890}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -64,7 +62,7 @@ class oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 A class for elements that allow the imposition of an applied traction to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class 
 
-Definition at line 54 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 53 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -78,7 +76,7 @@ Definition at line 54 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
 
-Definition at line 132 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 139 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -97,7 +95,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 177 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 183 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -123,7 +121,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesTractionEl
 
 
 
-Definition at line 194 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 204 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -150,7 +148,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesTractionEl
 
 
 
-Definition at line 185 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 195 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -165,12 +163,11 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement}{oomph\+::\+Navi
 
 
 
-This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Function that returns the residuals for the imposed traction Navier\+\_\+\+Stokes equations 
 
-Definition at line 225 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 237 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -193,7 +190,7 @@ Function to calculate the traction applied to the fluid.
 
 
 
-Definition at line 100 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 105 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -216,7 +213,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 202 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 213 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -239,7 +236,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 205 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 219 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -254,12 +251,11 @@ double \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement}{oomph\+::\+Na
 
 
 
-Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping. 
 
 
 
-Definition at line 84 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 86 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -301,7 +297,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 70 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 67 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -323,22 +319,22 @@ The highest dimension of the problem.
 
 
 
-Definition at line 126 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 134 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
 Referenced by oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction(), and oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Traction\+Element().
 
-\mbox{\Hypertarget{classoomph_1_1NavierStokesTractionElement_a97b29ab7568f8b93982fda56043449b6}\label{classoomph_1_1NavierStokesTractionElement_a97b29ab7568f8b93982fda56043449b6}} 
+\mbox{\Hypertarget{classoomph_1_1NavierStokesTractionElement_a650e79d7595f6ff62fcfb5694c3389d2}\label{classoomph_1_1NavierStokesTractionElement_a650e79d7595f6ff62fcfb5694c3389d2}} 
 \index{oomph::NavierStokesTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesTractionElement$<$ ELEMENT $>$}!traction\_fct\_pt@{traction\_fct\_pt}}
 \index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::NavierStokesTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void($\ast$\&)(const double\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& result) \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement}{oomph\+::\+Navier\+Stokes\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+void($\ast$\&)(const double\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& result) \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement}{oomph\+::\+Navier\+Stokes\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 180 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 186 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesTractionElement_a487a7d11742c2e08c5d2c804df6d5eda}\label{classoomph_1_1NavierStokesTractionElement_a487a7d11742c2e08c5d2c804df6d5eda}} 
 \index{oomph::NavierStokesTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesTractionElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
@@ -353,7 +349,7 @@ Pointer to an imposed traction function.
 
 
 
-Definition at line 61 of file fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 58 of file fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 

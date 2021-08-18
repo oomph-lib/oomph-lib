@@ -31,9 +31,9 @@ unsigned \& \mbox{\hyperlink{classCGALSamplePointContainer_abc24c27b40b502df4a57
 unsigned \& \mbox{\hyperlink{classCGALSamplePointContainer_a568d1e098b2e76e7871a60aced767db6}{last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
 \begin{DoxyCompactList}\small\item\em When searching through sample points only actually do the locate\+\_\+zeta calls when when the counter is less than this value. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classCGALSamplePointContainer_a52a64f338cef6e48a009564650608b4f}{multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
-\begin{DoxyCompactList}\small\item\em Every time we\textquotesingle{}ve completed a \char`\"{}spiral\char`\"{}, visiting a finite number of sample points in a deterministic order, use this multiplier to increase the max. number of sample points to be visited. Using a multiplier rather than a constant increment increases. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Every time we\textquotesingle{}ve completed a \char`\"{}spiral\char`\"{}, visiting a finite number of sample points in a deterministic order, use this multiplier to increase the max. number of sample points to be visited. Using a multiplier rather than a constant increment increases the amount of (more and more unlikely to yield anything!) work done locally before doing another costly mpi round trip when we\textquotesingle{}re already far from the point we\textquotesingle{}re trying to find. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classCGALSamplePointContainer_a6e348c02398a20868849874f793792a2}{initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
-\begin{DoxyCompactList}\small\item\em When searching through sample points only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em When searching through sample points only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. This is the initial value when starting the spiral based search. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classCGALSamplePointContainer_a059a8f0ebd74ffbc48722122b01e172b}{locate\+\_\+zeta}} (const Vector$<$ double $>$ \&zeta, Geom\+Object $\ast$\&sub\+\_\+geom\+\_\+object\+\_\+pt, Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
 \begin{DoxyCompactList}\small\item\em Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub\+\_\+geom\+\_\+object\+\_\+pt=0 if point can\textquotesingle{}t be found. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classCGALSamplePointContainer_a5bb7bc1e129ace75da7d5f128d964dac}{limited\+\_\+locate\+\_\+zeta}} (const Vector$<$ double $>$ \&zeta, const unsigned \&max\+\_\+sample\+\_\+points\+\_\+for\+\_\+newton\+\_\+based\+\_\+search, Geom\+Object $\ast$\&sub\+\_\+geom\+\_\+object\+\_\+pt, Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
@@ -49,13 +49,13 @@ typedef C\+G\+A\+L\+::\+Cartesian\+\_\+d$<$ double $>$ \mbox{\hyperlink{classCGA
 \begin{DoxyCompactList}\small\item\em typedefs for cgal stuff \end{DoxyCompactList}\item 
 typedef Kernel\+\_\+d\+::\+Point\+\_\+d \mbox{\hyperlink{classCGALSamplePointContainer_a5cb9506ad72c5a21b91e626d5d8604ed}{Point\+\_\+d}}
 \item 
-typedef boost\+::tuple$<$ \mbox{\hyperlink{classCGALSamplePointContainer_a5cb9506ad72c5a21b91e626d5d8604ed}{Point\+\_\+d}}, \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} $\ast$ $>$ \mbox{\hyperlink{classCGALSamplePointContainer_a9fd65260284f24b79526a9db5fb55a3b}{Point\+\_\+d\+\_\+and\+\_\+pointer}}
+typedef boost\+::tuple$<$ \mbox{\hyperlink{classCGALSamplePointContainer_a5cb9506ad72c5a21b91e626d5d8604ed}{Point\+\_\+d}}, \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} $\ast$ $>$ \mbox{\hyperlink{classCGALSamplePointContainer_abf8e500690626a94f2a6c5b4fcea5961}{Point\+\_\+d\+\_\+and\+\_\+pointer}}
 \item 
 typedef C\+G\+A\+L\+::\+Search\+\_\+traits\+\_\+d$<$ \mbox{\hyperlink{classCGALSamplePointContainer_aa62fc873f6ad941cd31996baf64e669a}{Kernel\+\_\+d}} $>$ \mbox{\hyperlink{classCGALSamplePointContainer_ad22aa447b0cd9cfa0d92669b2d939dcc}{Traits\+\_\+base\+\_\+d}}
 \item 
-typedef C\+G\+A\+L\+::\+Search\+\_\+traits\+\_\+adapter$<$ \mbox{\hyperlink{classCGALSamplePointContainer_a9fd65260284f24b79526a9db5fb55a3b}{Point\+\_\+d\+\_\+and\+\_\+pointer}}, C\+G\+A\+L\+::\+Nth\+\_\+of\+\_\+tuple\+\_\+property\+\_\+map$<$ 0, \mbox{\hyperlink{classCGALSamplePointContainer_a9fd65260284f24b79526a9db5fb55a3b}{Point\+\_\+d\+\_\+and\+\_\+pointer}} $>$, \mbox{\hyperlink{classCGALSamplePointContainer_ad22aa447b0cd9cfa0d92669b2d939dcc}{Traits\+\_\+base\+\_\+d}} $>$ \mbox{\hyperlink{classCGALSamplePointContainer_abf3c9b2e8768b34dc1700c1f0d4ea342}{Traits\+\_\+d}}
+typedef C\+G\+A\+L\+::\+Search\+\_\+traits\+\_\+adapter$<$ \mbox{\hyperlink{classCGALSamplePointContainer_abf8e500690626a94f2a6c5b4fcea5961}{Point\+\_\+d\+\_\+and\+\_\+pointer}}, C\+G\+A\+L\+::\+Nth\+\_\+of\+\_\+tuple\+\_\+property\+\_\+map$<$ 0, \mbox{\hyperlink{classCGALSamplePointContainer_abf8e500690626a94f2a6c5b4fcea5961}{Point\+\_\+d\+\_\+and\+\_\+pointer}} $>$, \mbox{\hyperlink{classCGALSamplePointContainer_ad22aa447b0cd9cfa0d92669b2d939dcc}{Traits\+\_\+base\+\_\+d}} $>$ \mbox{\hyperlink{classCGALSamplePointContainer_af910631abb8b6bb7f8b3c8c2a281dcc6}{Traits\+\_\+d}}
 \item 
-typedef C\+G\+A\+L\+::\+Orthogonal\+\_\+k\+\_\+neighbor\+\_\+search$<$ \mbox{\hyperlink{classCGALSamplePointContainer_abf3c9b2e8768b34dc1700c1f0d4ea342}{Traits\+\_\+d}} $>$ \mbox{\hyperlink{classCGALSamplePointContainer_a381241085bd45dcba4709de640071982}{K\+\_\+neighbor\+\_\+search\+\_\+d}}
+typedef C\+G\+A\+L\+::\+Orthogonal\+\_\+k\+\_\+neighbor\+\_\+search$<$ \mbox{\hyperlink{classCGALSamplePointContainer_af910631abb8b6bb7f8b3c8c2a281dcc6}{Traits\+\_\+d}} $>$ \mbox{\hyperlink{classCGALSamplePointContainer_a381241085bd45dcba4709de640071982}{K\+\_\+neighbor\+\_\+search\+\_\+d}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -87,7 +87,7 @@ unsigned \mbox{\hyperlink{classCGALSamplePointContainer_aa430905eee4411f05aadae3
 \doxysubsection{Detailed Description}
 C\+G\+A\+L-\/based \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}}. 
 
-Definition at line 1075 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1076 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -96,7 +96,7 @@ Definition at line 1075 of file sample\+\_\+point\+\_\+container.\+h.
 \index{CGALSamplePointContainer@{CGALSamplePointContainer}!K\_neighbor\_search\_d@{K\_neighbor\_search\_d}}
 \index{K\_neighbor\_search\_d@{K\_neighbor\_search\_d}!CGALSamplePointContainer@{CGALSamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{K\_neighbor\_search\_d}{K\_neighbor\_search\_d}}
-{\footnotesize\ttfamily typedef C\+G\+A\+L\+::\+Orthogonal\+\_\+k\+\_\+neighbor\+\_\+search$<$\mbox{\hyperlink{classCGALSamplePointContainer_abf3c9b2e8768b34dc1700c1f0d4ea342}{Traits\+\_\+d}}$>$ \mbox{\hyperlink{classCGALSamplePointContainer_a381241085bd45dcba4709de640071982}{C\+G\+A\+L\+Sample\+Point\+Container\+::\+K\+\_\+neighbor\+\_\+search\+\_\+d}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef C\+G\+A\+L\+::\+Orthogonal\+\_\+k\+\_\+neighbor\+\_\+search$<$\mbox{\hyperlink{classCGALSamplePointContainer_af910631abb8b6bb7f8b3c8c2a281dcc6}{Traits\+\_\+d}}$>$ \mbox{\hyperlink{classCGALSamplePointContainer_a381241085bd45dcba4709de640071982}{C\+G\+A\+L\+Sample\+Point\+Container\+::\+K\+\_\+neighbor\+\_\+search\+\_\+d}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -114,7 +114,7 @@ typedefs for cgal stuff
 
 
 
-Definition at line 1182 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1180 of file sample\+\_\+point\+\_\+container.\+h.
 
 \mbox{\Hypertarget{classCGALSamplePointContainer_a5cb9506ad72c5a21b91e626d5d8604ed}\label{classCGALSamplePointContainer_a5cb9506ad72c5a21b91e626d5d8604ed}} 
 \index{CGALSamplePointContainer@{CGALSamplePointContainer}!Point\_d@{Point\_d}}
@@ -124,17 +124,17 @@ Definition at line 1182 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Definition at line 1183 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1181 of file sample\+\_\+point\+\_\+container.\+h.
 
-\mbox{\Hypertarget{classCGALSamplePointContainer_a9fd65260284f24b79526a9db5fb55a3b}\label{classCGALSamplePointContainer_a9fd65260284f24b79526a9db5fb55a3b}} 
+\mbox{\Hypertarget{classCGALSamplePointContainer_abf8e500690626a94f2a6c5b4fcea5961}\label{classCGALSamplePointContainer_abf8e500690626a94f2a6c5b4fcea5961}} 
 \index{CGALSamplePointContainer@{CGALSamplePointContainer}!Point\_d\_and\_pointer@{Point\_d\_and\_pointer}}
 \index{Point\_d\_and\_pointer@{Point\_d\_and\_pointer}!CGALSamplePointContainer@{CGALSamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{Point\_d\_and\_pointer}{Point\_d\_and\_pointer}}
-{\footnotesize\ttfamily typedef boost\+::tuple$<$\mbox{\hyperlink{classCGALSamplePointContainer_a5cb9506ad72c5a21b91e626d5d8604ed}{Point\+\_\+d}},\mbox{\hyperlink{classSamplePoint}{Sample\+Point}}$\ast$ $>$ \mbox{\hyperlink{classCGALSamplePointContainer_a9fd65260284f24b79526a9db5fb55a3b}{C\+G\+A\+L\+Sample\+Point\+Container\+::\+Point\+\_\+d\+\_\+and\+\_\+pointer}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef boost\+::tuple$<$\mbox{\hyperlink{classCGALSamplePointContainer_a5cb9506ad72c5a21b91e626d5d8604ed}{Point\+\_\+d}}, \mbox{\hyperlink{classSamplePoint}{Sample\+Point}}$\ast$$>$ \mbox{\hyperlink{classCGALSamplePointContainer_abf8e500690626a94f2a6c5b4fcea5961}{C\+G\+A\+L\+Sample\+Point\+Container\+::\+Point\+\_\+d\+\_\+and\+\_\+pointer}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 1184 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1182 of file sample\+\_\+point\+\_\+container.\+h.
 
 \mbox{\Hypertarget{classCGALSamplePointContainer_ad22aa447b0cd9cfa0d92669b2d939dcc}\label{classCGALSamplePointContainer_ad22aa447b0cd9cfa0d92669b2d939dcc}} 
 \index{CGALSamplePointContainer@{CGALSamplePointContainer}!Traits\_base\_d@{Traits\_base\_d}}
@@ -144,13 +144,13 @@ Definition at line 1184 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Definition at line 1185 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1183 of file sample\+\_\+point\+\_\+container.\+h.
 
-\mbox{\Hypertarget{classCGALSamplePointContainer_abf3c9b2e8768b34dc1700c1f0d4ea342}\label{classCGALSamplePointContainer_abf3c9b2e8768b34dc1700c1f0d4ea342}} 
+\mbox{\Hypertarget{classCGALSamplePointContainer_af910631abb8b6bb7f8b3c8c2a281dcc6}\label{classCGALSamplePointContainer_af910631abb8b6bb7f8b3c8c2a281dcc6}} 
 \index{CGALSamplePointContainer@{CGALSamplePointContainer}!Traits\_d@{Traits\_d}}
 \index{Traits\_d@{Traits\_d}!CGALSamplePointContainer@{CGALSamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{Traits\_d}{Traits\_d}}
-{\footnotesize\ttfamily typedef C\+G\+A\+L\+::\+Search\+\_\+traits\+\_\+adapter$<$\mbox{\hyperlink{classCGALSamplePointContainer_a9fd65260284f24b79526a9db5fb55a3b}{Point\+\_\+d\+\_\+and\+\_\+pointer}}, C\+G\+A\+L\+::\+Nth\+\_\+of\+\_\+tuple\+\_\+property\+\_\+map$<$0, \mbox{\hyperlink{classCGALSamplePointContainer_a9fd65260284f24b79526a9db5fb55a3b}{Point\+\_\+d\+\_\+and\+\_\+pointer}}$>$, \mbox{\hyperlink{classCGALSamplePointContainer_ad22aa447b0cd9cfa0d92669b2d939dcc}{Traits\+\_\+base\+\_\+d}}$>$ \mbox{\hyperlink{classCGALSamplePointContainer_abf3c9b2e8768b34dc1700c1f0d4ea342}{C\+G\+A\+L\+Sample\+Point\+Container\+::\+Traits\+\_\+d}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef C\+G\+A\+L\+::\+Search\+\_\+traits\+\_\+adapter$<$ \mbox{\hyperlink{classCGALSamplePointContainer_abf8e500690626a94f2a6c5b4fcea5961}{Point\+\_\+d\+\_\+and\+\_\+pointer}}, C\+G\+A\+L\+::\+Nth\+\_\+of\+\_\+tuple\+\_\+property\+\_\+map$<$0, \mbox{\hyperlink{classCGALSamplePointContainer_abf8e500690626a94f2a6c5b4fcea5961}{Point\+\_\+d\+\_\+and\+\_\+pointer}}$>$, \mbox{\hyperlink{classCGALSamplePointContainer_ad22aa447b0cd9cfa0d92669b2d939dcc}{Traits\+\_\+base\+\_\+d}}$>$ \mbox{\hyperlink{classCGALSamplePointContainer_af910631abb8b6bb7f8b3c8c2a281dcc6}{C\+G\+A\+L\+Sample\+Point\+Container\+::\+Traits\+\_\+d}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -171,7 +171,7 @@ Constructor.
 
 
 
-Definition at line 3384 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 3390 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -189,7 +189,7 @@ Broken copy constructor.
 
 
 
-Definition at line 1085 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1084 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -207,7 +207,7 @@ Virtual destructor.
 
 
 
-Definition at line 1097 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1096 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -228,7 +228,7 @@ When searching through sample points only actually do the locate\+\_\+zeta calls
 
 
 
-Definition at line 1111 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1110 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -236,7 +236,7 @@ References First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+d
 
 
 
-Referenced by locate\+\_\+zeta().
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), and locate\+\_\+zeta().
 
 \mbox{\Hypertarget{classCGALSamplePointContainer_a9986b13f78a4f22113a2e41b85b73ee3}\label{classCGALSamplePointContainer_a9986b13f78a4f22113a2e41b85b73ee3}} 
 \index{CGALSamplePointContainer@{CGALSamplePointContainer}!get\_sample\_points@{get\_sample\_points}}
@@ -250,7 +250,7 @@ Get the sample points; return time for setup of C\+G\+AL tree.
 
 Get the sample points; returns time taken for setup of C\+G\+AL tree. For all the sample points we have to create ...
 
-Definition at line 3469 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 3480 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -268,15 +268,19 @@ Referenced by C\+G\+A\+L\+Sample\+Point\+Container().
 
 
 
-When searching through sample points only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. 
+When searching through sample points only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. This is the initial value when starting the spiral based search. 
 
-This is the initial value when starting the spiral based search. 
 
-Definition at line 1139 of file sample\+\_\+point\+\_\+container.\+h.
+
+Definition at line 1138 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
 References Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
+
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{classCGALSamplePointContainer_a568d1e098b2e76e7871a60aced767db6}\label{classCGALSamplePointContainer_a568d1e098b2e76e7871a60aced767db6}} 
 \index{CGALSamplePointContainer@{CGALSamplePointContainer}!last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
@@ -290,7 +294,7 @@ When searching through sample points only actually do the locate\+\_\+zeta calls
 
 
 
-Definition at line 1118 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1117 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -298,7 +302,7 @@ References Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+du
 
 
 
-Referenced by locate\+\_\+zeta().
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), and locate\+\_\+zeta().
 
 \mbox{\Hypertarget{classCGALSamplePointContainer_a5bb7bc1e129ace75da7d5f128d964dac}\label{classCGALSamplePointContainer_a5bb7bc1e129ace75da7d5f128d964dac}} 
 \index{CGALSamplePointContainer@{CGALSamplePointContainer}!limited\_locate\_zeta@{limited\_locate\_zeta}}
@@ -312,7 +316,7 @@ Find the sub geometric object and local coordinate therein that corresponds to t
 
 
 
-Definition at line 3810 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 3821 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -334,7 +338,7 @@ Implements \mbox{\hyperlink{classSamplePointContainer_acca8dbae8346d6c8924b1f815
 
 
 
-Definition at line 3597 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 3606 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -348,15 +352,19 @@ References Sample\+Point\+Container\+::\+Always\+\_\+fail\+\_\+elemental\+\_\+lo
 
 
 
-Every time we\textquotesingle{}ve completed a \char`\"{}spiral\char`\"{}, visiting a finite number of sample points in a deterministic order, use this multiplier to increase the max. number of sample points to be visited. Using a multiplier rather than a constant increment increases. 
+Every time we\textquotesingle{}ve completed a \char`\"{}spiral\char`\"{}, visiting a finite number of sample points in a deterministic order, use this multiplier to increase the max. number of sample points to be visited. Using a multiplier rather than a constant increment increases the amount of (more and more unlikely to yield anything!) work done locally before doing another costly mpi round trip when we\textquotesingle{}re already far from the point we\textquotesingle{}re trying to find. 
 
-the amount of (more and more unlikely to yield anything!) work done locally before doing another costly mpi round trip when we\textquotesingle{}re already far from the point we\textquotesingle{}re trying to find. 
 
-Definition at line 1131 of file sample\+\_\+point\+\_\+container.\+h.
+
+Definition at line 1130 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
 References Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
+
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{classCGALSamplePointContainer_a0fb2970a09f9fa0e21b04cbf7690a5a2}\label{classCGALSamplePointContainer_a0fb2970a09f9fa0e21b04cbf7690a5a2}} 
 \index{CGALSamplePointContainer@{CGALSamplePointContainer}!ndim\_zeta@{ndim\_zeta}}
@@ -374,7 +382,7 @@ Implements \mbox{\hyperlink{classSamplePointContainer_af2cfee8a92a28addb59a5533d
 
 
 
-Definition at line 1165 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1164 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -396,7 +404,7 @@ Broken assignment operator.
 
 
 
-Definition at line 1091 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1090 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -418,7 +426,7 @@ Implements \mbox{\hyperlink{classSamplePointContainer_ac7bf51a6987a9180c7715d621
 
 
 
-Definition at line 3584 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 3594 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -426,7 +434,7 @@ References Sample\+\_\+point\+\_\+pt.
 
 
 
-Referenced by C\+G\+A\+L\+Sample\+Point\+Container().
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), and C\+G\+A\+L\+Sample\+Point\+Container().
 
 
 
@@ -497,7 +505,7 @@ When searching through sample points only actually do the locate\+\_\+zeta calls
 
 
 
-Definition at line 1222 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1223 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -533,7 +541,7 @@ Every time we\textquotesingle{}ve completed a \char`\"{}spiral\char`\"{}, visiti
 
 
 
-Definition at line 1217 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1218 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -551,7 +559,7 @@ Dimension of the zeta ( = dim of local coordinate of elements)
 
 
 
-Definition at line 1179 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1177 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 

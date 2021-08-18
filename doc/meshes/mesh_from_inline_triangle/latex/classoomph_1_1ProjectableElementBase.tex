@@ -22,14 +22,12 @@ Inheritance diagram for oomph\+::Projectable\+Element\+Base\+:\begin{figure}[H]
 \item 
 virtual \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a668500db9bcaab7aa983d3c92f94e34b}{$\sim$\+Projectable\+Element\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
-virtual Vector$<$ std\+::pair$<$ Data $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)=0
-\begin{DoxyCompactList}\small\item\em Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.\+g. in Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the D\+I\+M-\/th field) are the D\+I\+M-\/th values at the vertex nodes etc. ~\newline
- \end{DoxyCompactList}\item 
+virtual Vector$<$ std\+::pair$<$ Data $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)=0
+\begin{DoxyCompactList}\small\item\em Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.\+g. in Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the D\+I\+M-\/th field) are the D\+I\+M-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}{nfields\+\_\+for\+\_\+projection}} ()=0
 \begin{DoxyCompactList}\small\item\em Number of fields of the problem, so e.\+g. for 2D Navier Stokes this would be 3 (for the two velocities and one pressure) \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b964663281f8740f43a5}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)=0
-\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field ~\newline
- (includes current value!) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field (includes current value!) \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a3ed675dc7198203c1f}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()=0
 \begin{DoxyCompactList}\small\item\em Number of history values to be stored when projecting the history values of the nodal coordinates (includes current value!) \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)=0
@@ -74,7 +72,7 @@ bool \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a0f9195c254f229b178a8
 \doxysubsection{Detailed Description}
 Template-\/free Base class for projectable elements. 
 
-Definition at line 55 of file projection.\+h.
+Definition at line 54 of file projection.\+h.
 
 
 
@@ -105,7 +103,7 @@ Value&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 62 of file projection.\+h.
+Definition at line 59 of file projection.\+h.
 
 
 
@@ -132,21 +130,20 @@ Virtual destructor.
 
 
 
-Definition at line 116 of file projection.\+h.
+Definition at line 123 of file projection.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}\label{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}\label{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableElementBase@{oomph::ProjectableElementBase}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
-{\footnotesize\ttfamily virtual Vector$<$std\+::pair$<$Data$\ast$,unsigned$>$ $>$ oomph\+::\+Projectable\+Element\+Base\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual Vector$<$std\+::pair$<$Data$\ast$, unsigned$>$ $>$ oomph\+::\+Projectable\+Element\+Base\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.\+g. in Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the D\+I\+M-\/th field) are the D\+I\+M-\/th values at the vertex nodes etc. ~\newline
- 
+Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.\+g. in Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the D\+I\+M-\/th field) are the D\+I\+M-\/th values at the vertex nodes etc. 
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}\label{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!get\_field@{get\_field}}
@@ -218,8 +215,7 @@ Number of history values to be stored when projecting the history values of the 
 
 
 
-Number of history values to be stored for fld-\/th field ~\newline
- (includes current value!) 
+Number of history values to be stored for fld-\/th field (includes current value!) 
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}\label{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -250,7 +246,7 @@ Remember if the element includes external geometric data when used in non-\/proj
 
 
 
-Definition at line 96 of file projection.\+h.
+Definition at line 98 of file projection.\+h.
 
 
 
@@ -268,7 +264,7 @@ Remember if the element includes external data when used in non-\/projection mod
 
 
 
-Definition at line 102 of file projection.\+h.
+Definition at line 104 of file projection.\+h.
 
 
 
@@ -286,7 +282,7 @@ Store number of \char`\"{}external\char`\"{} interactions that were assigned to 
 
 
 
-Definition at line 91 of file projection.\+h.
+Definition at line 93 of file projection.\+h.
 
 
 
@@ -304,7 +300,7 @@ Bool to know if we do projection or not. If false (the default) we solve the ele
 
 
 
-Definition at line 86 of file projection.\+h.
+Definition at line 88 of file projection.\+h.
 
 
 
@@ -322,7 +318,7 @@ When projecting the history values of the nodal coordinates, this is the coordin
 
 
 
-Definition at line 72 of file projection.\+h.
+Definition at line 74 of file projection.\+h.
 
 
 
@@ -340,7 +336,7 @@ Field that is currently being projected.
 
 
 
-Definition at line 65 of file projection.\+h.
+Definition at line 67 of file projection.\+h.
 
 
 
@@ -358,7 +354,7 @@ When projecting the Lagrangain coordinates indicate which coordiante is to be pr
 
 
 
-Definition at line 76 of file projection.\+h.
+Definition at line 78 of file projection.\+h.
 
 
 
@@ -376,7 +372,7 @@ Variable to indicate if we\textquotesingle{}re projecting the history values of 
 
 
 
-Definition at line 81 of file projection.\+h.
+Definition at line 83 of file projection.\+h.
 
 
 
@@ -394,7 +390,7 @@ Time level we are projecting (0=current values; $>$0\+: history values)
 
 
 
-Definition at line 68 of file projection.\+h.
+Definition at line 70 of file projection.\+h.
 
 
 

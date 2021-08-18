@@ -178,8 +178,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8b8010edcc0869283621e72a9bbc51e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of nonzero entries.  <a href="classoomph_1_1SparseMatrix.html#a8b8010edcc0869283621e72a9bbc51e3">More...</a><br /></td></tr>
 <tr class="separator:a8b8010edcc0869283621e72a9bbc51e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c638f36db786e159565e1f890402ed2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a4c638f36db786e159565e1f890402ed2">output_bottom_right_zero_helper</a> (std::ostream &amp;outfile) const</td></tr>
-<tr class="memdesc:a4c638f36db786e159565e1f890402ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python). <br  />
-  <a href="classoomph_1_1SparseMatrix.html#a4c638f36db786e159565e1f890402ed2">More...</a><br /></td></tr>
+<tr class="memdesc:a4c638f36db786e159565e1f890402ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <a href="classoomph_1_1SparseMatrix.html#a4c638f36db786e159565e1f890402ed2">More...</a><br /></td></tr>
 <tr class="separator:a4c638f36db786e159565e1f890402ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84a08f7e77be50af6a5655cbe0609619"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a84a08f7e77be50af6a5655cbe0609619">sparse_indexed_output_helper</a> (std::ostream &amp;outfile) const</td></tr>
 <tr class="memdesc:a84a08f7e77be50af6a5655cbe0609619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only.  <a href="classoomph_1_1SparseMatrix.html#a84a08f7e77be50af6a5655cbe0609619">More...</a><br /></td></tr>
@@ -230,7 +229,7 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a71a5ae159c26f93c314c839f4db6eaaf"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a71a5ae159c26f93c314c839f4db6eaaf">Zero</a> =T(0)</td></tr>
+<tr class="memitem:a71a5ae159c26f93c314c839f4db6eaaf"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a71a5ae159c26f93c314c839f4db6eaaf">Zero</a> = T(0)</td></tr>
 <tr class="memdesc:a71a5ae159c26f93c314c839f4db6eaaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy zero.  <a href="classoomph_1_1SparseMatrix.html#a71a5ae159c26f93c314c839f4db6eaaf">More...</a><br /></td></tr>
 <tr class="separator:a71a5ae159c26f93c314c839f4db6eaaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -247,7 +246,7 @@ class oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;</h3>
 
 <p>Class for sparse matrices, that store only the non-zero values in a linear array in memory. The details of the array indexing vary depending on the storage scheme used. The MATRIX_TYPE template parameter for use in the curious recursive template pattern is included and passed directly to the base <a class="el" href="classoomph_1_1Matrix.html" title="Abstract base class for matrices, templated by the type of object that is stored in them and the type...">Matrix</a> class. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00561">561</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00573">573</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9aff0ae09aadbc704580726a53fe51c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9aff0ae09aadbc704580726a53fe51c5">&#9670;&nbsp;</a></span>SparseMatrix() <span class="overload">[1/2]</span></h2>
@@ -276,7 +275,7 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Default constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00583">583</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00593">593</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -308,7 +307,7 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00586">586</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00596">596</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -339,7 +338,7 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Destructor, delete the memory associated with the values. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00611">611</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00624">624</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -373,9 +372,9 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1Matrix.html#ad1af46b34096c348272b0dfacb5ce6a9">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00623">623</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00649">649</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00994">oomph::CRDoubleMatrix::ncol()</a>, and <a class="el" href="matrices_8h_source.html#l00586">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l01029">oomph::CRDoubleMatrix::ncol()</a>, and <a class="el" href="matrices_8h_source.html#l00596">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -406,9 +405,9 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Return the number of nonzero entries. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00626">626</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00655">655</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01790">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02052">oomph::SuperLUSolver::factorise_serial()</a>, <a class="el" href="matrices_8h_source.html#l01064">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00172">oomph::MatrixBasedLumpedPreconditioner&lt; oomph::CRDoubleMatrix &gt;::setup()</a>, and <a class="el" href="matrices_8h_source.html#l00586">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01827">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02123">oomph::SuperLUSolver::factorise_serial()</a>, <a class="el" href="matrices_8h_source.html#l01117">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00167">oomph::MatrixBasedLumpedPreconditioner&lt; oomph::CRDoubleMatrix &gt;::setup()</a>, and <a class="el" href="matrices_8h_source.html#l00596">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -441,9 +440,9 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1Matrix.html#ac366ca5324d3e00e23d9800f3d5f4d5f">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00620">620</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00643">643</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00586">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00596">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -475,7 +474,7 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00605">605</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00618">618</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -505,14 +504,13 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python). <br  />
- </p>
+<p>Output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python). </p>
 
 <p>Implements <a class="el" href="classoomph_1_1Matrix.html#a10ee338f4d3893010291a692aea04248">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a>.</p>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1CCMatrix.html#ac3b138b2ed470866999f2a92f3e1f239">oomph::CCMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#ac3b138b2ed470866999f2a92f3e1f239">oomph::CCMatrix&lt; double &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#ac3b138b2ed470866999f2a92f3e1f239">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#abf764862746afbbe2655a41bdf726327">oomph::CRMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#abf764862746afbbe2655a41bdf726327">oomph::CRMatrix&lt; double &gt;</a>, and <a class="el" href="classoomph_1_1CRMatrix.html#abf764862746afbbe2655a41bdf726327">oomph::CRMatrix&lt; std::complex&lt; double &gt; &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00631">631</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00663">663</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -548,7 +546,7 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1CCMatrix.html#a1f6e451f0688c392e45bc03bf20fdda7">oomph::CCMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#a1f6e451f0688c392e45bc03bf20fdda7">oomph::CCMatrix&lt; double &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#a1f6e451f0688c392e45bc03bf20fdda7">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#af34167172020d60e5fa382e4bd5d6466">oomph::CRMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#af34167172020d60e5fa382e4bd5d6466">oomph::CRMatrix&lt; double &gt;</a>, and <a class="el" href="classoomph_1_1CRMatrix.html#af34167172020d60e5fa382e4bd5d6466">oomph::CRMatrix&lt; std::complex&lt; double &gt; &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00645">645</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00676">676</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -579,9 +577,9 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Access to C-style value array. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00614">614</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00631">631</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01790">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02052">oomph::SuperLUSolver::factorise_serial()</a>, <a class="el" href="matrices_8cc_source.html#l03388">oomph::CRDoubleMatrix::inf_norm()</a>, <a class="el" href="matrices_8cc_source.html#l02388">oomph::CRDoubleMatrix::matrix_reduction()</a>, <a class="el" href="matrices_8cc_source.html#l01801">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00835">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l01903">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00172">oomph::MatrixBasedLumpedPreconditioner&lt; oomph::CRDoubleMatrix &gt;::setup()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00323">oomph::ILUZeroPreconditioner&lt; CCDoubleMatrix &gt;::setup()</a>, <a class="el" href="matrices_8h_source.html#l00586">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>, and <a class="el" href="matrices_8h_source.html#l01058">oomph::CRDoubleMatrix::value()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l01827">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02123">oomph::SuperLUSolver::factorise_serial()</a>, <a class="el" href="matrices_8cc_source.html#l03412">oomph::CRDoubleMatrix::inf_norm()</a>, <a class="el" href="matrices_8cc_source.html#l02365">oomph::CRDoubleMatrix::matrix_reduction()</a>, <a class="el" href="matrices_8cc_source.html#l01782">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l01882">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00167">oomph::MatrixBasedLumpedPreconditioner&lt; oomph::CRDoubleMatrix &gt;::setup()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00326">oomph::ILUZeroPreconditioner&lt; CCDoubleMatrix &gt;::setup()</a>, <a class="el" href="matrices_8h_source.html#l00596">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>, and <a class="el" href="matrices_8h_source.html#l01105">oomph::CRDoubleMatrix::value()</a>.</p>
 
 </div>
 </div>
@@ -612,7 +610,7 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Access to C-style value array (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00617">617</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00637">637</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -641,9 +639,9 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Number of columns. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00572">572</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00583">583</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00623">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::ncol()</a>, and <a class="el" href="matrices_8h_source.html#l00586">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00649">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::ncol()</a>, and <a class="el" href="matrices_8h_source.html#l00596">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -671,9 +669,9 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Number of rows. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00569">569</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00580">580</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00620">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::nrow()</a>, and <a class="el" href="matrices_8h_source.html#l00586">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00643">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::nrow()</a>, and <a class="el" href="matrices_8h_source.html#l00596">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -701,9 +699,9 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Number of non-zero values (i.e. size of Value array) </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00575">575</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00586">586</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00626">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::nnz()</a>, and <a class="el" href="matrices_8h_source.html#l00586">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00655">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::nnz()</a>, and <a class="el" href="matrices_8h_source.html#l00596">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -731,9 +729,9 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Internal representation of the matrix values, a pointer. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00566">566</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00577">577</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00586">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>, <a class="el" href="matrices_8h_source.html#l00614">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::value()</a>, and <a class="el" href="matrices_8h_source.html#l00611">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::~SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l00596">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::SparseMatrix()</a>, <a class="el" href="matrices_8h_source.html#l00631">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::value()</a>, and <a class="el" href="matrices_8h_source.html#l00624">oomph::SparseMatrix&lt; double, CCMatrix&lt; double &gt; &gt;::~SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -749,7 +747,7 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T <a class="el" href="classoomph_1_1SparseMatrix.html">oomph::SparseMatrix</a>&lt; T, MATRIX_TYPE &gt;::Zero =T(0)</td>
+          <td class="memname">T <a class="el" href="classoomph_1_1SparseMatrix.html">oomph::SparseMatrix</a>&lt; T, MATRIX_TYPE &gt;::Zero = T(0)</td>
         </tr>
       </table>
   </td>
@@ -761,7 +759,7 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
 
 <p>Dummy zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00578">578</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00589">589</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -796,7 +794,7 @@ template&lt;class T , class MATRIX_TYPE &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:57:35
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:15
         </div>
       </div>
     </footer>

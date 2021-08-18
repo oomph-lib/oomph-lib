@@ -171,15 +171,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:a91ee0e36a8c127d83269a08d6740dfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a91ee0e36a8c127d83269a08d6740dfb2">More...</a><br /></td></tr>
 <tr class="separator:a91ee0e36a8c127d83269a08d6740dfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3a879cf569b317c086f07872164f9f8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ad3a879cf569b317c086f07872164f9f8">shape_and_test_at_knot</a> (const unsigned &amp;ipt, Shape &amp;psi, Shape &amp;test) const</td></tr>
-<tr class="memdesc:ad3a879cf569b317c086f07872164f9f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to compute the shape and test functions and to return <br  />
-  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ad3a879cf569b317c086f07872164f9f8">More...</a><br /></td></tr>
+<tr class="memdesc:ad3a879cf569b317c086f07872164f9f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ad3a879cf569b317c086f07872164f9f8">More...</a><br /></td></tr>
 <tr class="separator:ad3a879cf569b317c086f07872164f9f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a66f653fb85249296deb66cc91647cc52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a66f653fb85249296deb66cc91647cc52">fill_in_generic_residual_contribution_helmholtz_flux_from_displacement</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, const unsigned &amp;flag)</td></tr>
-<tr class="memdesc:a66f653fb85249296deb66cc91647cc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residual vector. flag=1(or 0): do (or don't) compute the contribution to the Jacobian as well. <br  />
-  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a66f653fb85249296deb66cc91647cc52">More...</a><br /></td></tr>
+<tr class="memdesc:a66f653fb85249296deb66cc91647cc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residual vector. flag=1(or 0): do (or don't) compute the contribution to the Jacobian as well.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a66f653fb85249296deb66cc91647cc52">More...</a><br /></td></tr>
 <tr class="separator:a66f653fb85249296deb66cc91647cc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -197,7 +195,7 @@ class oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELE
 
 <p>A class for elements that allow the imposition of an prescribed flux (determined from the normal displacements of an adjacent linearly elastic solid. Normal derivative for displacement potential is given by normal displacement of adjacent solid multiplies by FSI parameter (q = k^2 B/E). The element geometry is obtained from the FaceGeometry&lt;ELEMENT&gt; policy class. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00452">452</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00449">449</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae37a7a8b5ad9850527f9285f2325aa2c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae37a7a8b5ad9850527f9285f2325aa2c">&#9670;&nbsp;</a></span>HelmholtzFluxFromNormalDisplacementBCElement() <span class="overload">[1/2]</span></h2>
@@ -230,9 +228,9 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 <p>Constructor, takes the pointer to the "bulk" element and the face index identifying the face to which the element is attached. </p>
 <p>Constructor, takes the pointer to the "bulk" element, and the face index that identifies the face of the bulk element to which this face element is to be attached. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00665">665</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00663">663</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00643">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::Dim</a>, and <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00646">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::U_index_helmholtz_from_displacement</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00644">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::Dim</a>, and <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00647">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::U_index_helmholtz_from_displacement</a>.</p>
 
 </div>
 </div>
@@ -264,7 +262,7 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00467">467</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00461">461</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 </div>
 </div>
@@ -307,9 +305,9 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 
 <p>Add the element's contribution to its residual vector and its Jacobian matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00496">496</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00491">491</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00832">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_generic_residual_contribution_helmholtz_flux_from_displacement()</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00820">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_generic_residual_contribution_helmholtz_flux_from_displacement()</a>.</p>
 
 </div>
 </div>
@@ -342,9 +340,9 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 <p>Broken assignment operator. </p>
 <p>Add the element's contribution to its residual vector </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00485">485</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00480">480</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00832">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_generic_residual_contribution_helmholtz_flux_from_displacement()</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00820">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_generic_residual_contribution_helmholtz_flux_from_displacement()</a>.</p>
 
 </div>
 </div>
@@ -390,13 +388,12 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 </table>
 </div><div class="memdoc">
 
-<p>Add the element's contribution to its residual vector. flag=1(or 0): do (or don't) compute the contribution to the Jacobian as well. <br  />
- </p>
+<p>Add the element's contribution to its residual vector. flag=1(or 0): do (or don't) compute the contribution to the Jacobian as well. </p>
 <p>Helper function to compute the element's residual vector and the Jacobian matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00832">832</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00820">820</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00496">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00485">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00491">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00480">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
 
 </div>
 </div>
@@ -428,7 +425,7 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 
 <p>C-style output function. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00579">579</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00573">573</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 </div>
 </div>
@@ -470,7 +467,7 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 
 <p>C-style output function. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00583">583</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00579">579</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 </div>
 </div>
@@ -502,7 +499,7 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 
 <p>Output function. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00508">508</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00503">503</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 </div>
 </div>
@@ -544,9 +541,9 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 
 <p>Output function: flux etc at Gauss points; n_plot is ignored. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00516">516</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00511">511</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00643">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::Dim</a>.</p>
+<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00644">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::Dim</a>.</p>
 
 </div>
 </div>
@@ -594,7 +591,7 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 
 <p>Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00593">593</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00589">589</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
 </div>
 </div>
@@ -640,9 +637,7 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 </table>
 </div><div class="memdoc">
 
-<p>Function to compute the shape and test functions and to return <br  />
- </p>
-<p>the Jacobian of mapping between local and global (Eulerian) coordinates </p>
+<p>Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. </p>
 
 <p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00613">613</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
@@ -673,9 +668,9 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 
 <p>The spatial dimension of the problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00643">643</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00644">644</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00665">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::HelmholtzFluxFromNormalDisplacementBCElement()</a>, and <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00516">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::output()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00663">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::HelmholtzFluxFromNormalDisplacementBCElement()</a>, and <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00511">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::output()</a>.</p>
 
 </div>
 </div>
@@ -703,9 +698,9 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
 
 <p>The index at which the unknown is stored at the nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00646">646</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00647">647</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00665">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::HelmholtzFluxFromNormalDisplacementBCElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00663">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::HelmholtzFluxFromNormalDisplacementBCElement()</a>.</p>
 
 </div>
 </div>
@@ -740,7 +735,7 @@ template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:23:51
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:03:25
         </div>
       </div>
     </footer>

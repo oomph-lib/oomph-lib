@@ -40,9 +40,8 @@ double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a32688fe93c7350d93b
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a406cb34eb2852b9507cca4f97b3002bc}{global\+\_\+power\+\_\+contribution}} (std\+::ofstream \&outfile)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. Also output the power density as a fct of the polar angle in the specified output file if it\textquotesingle{}s open. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a893de4dec96142dfbc64ea78e88737ec}{compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&a\+\_\+coeff\+\_\+pos, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&a\+\_\+coeff\+\_\+neg)
-\begin{DoxyCompactList}\small\item\em Compute element\textquotesingle{}s contribution to Fourier components of the solution -- length of vector indicates number of terms to be computed. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ab49842fa3eac63f0da1f5584637b296c}{compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&a\+\_\+coeff\+\_\+pos, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&a\+\_\+coeff\+\_\+neg)
+\begin{DoxyCompactList}\small\item\em Compute element\textquotesingle{}s contribution to Fourier components of the solution -- length of vector indicates number of terms to be computed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -66,7 +65,7 @@ class oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 A class for elements that allow the approximation of the Sommerfeld radiation BC. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 169 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 166 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -84,7 +83,7 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index. 
 
-Definition at line 1891 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 1883 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -103,7 +102,7 @@ Broken empty constructor.
 
 
 
-Definition at line 180 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 176 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a29f6e4cfef6066d637f0eea0e2253075}\label{classoomph_1_1HelmholtzBCElementBase_a29f6e4cfef6066d637f0eea0e2253075}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!HelmholtzBCElementBase@{HelmholtzBCElementBase}}
@@ -118,7 +117,7 @@ Broken copy constructor.
 
 
 
-Definition at line 189 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 185 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -127,21 +126,20 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a893de4dec96142dfbc64ea78e88737ec}\label{classoomph_1_1HelmholtzBCElementBase_a893de4dec96142dfbc64ea78e88737ec}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_ab49842fa3eac63f0da1f5584637b296c}\label{classoomph_1_1HelmholtzBCElementBase_ab49842fa3eac63f0da1f5584637b296c}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!compute\_contribution\_to\_fourier\_components@{compute\_contribution\_to\_fourier\_components}}
 \index{compute\_contribution\_to\_fourier\_components@{compute\_contribution\_to\_fourier\_components}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_contribution\_to\_fourier\_components()}{compute\_contribution\_to\_fourier\_components()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{a\+\_\+coeff\+\_\+pos,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{a\+\_\+coeff\+\_\+neg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{a\+\_\+coeff\+\_\+pos,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{a\+\_\+coeff\+\_\+neg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Compute element\textquotesingle{}s contribution to Fourier components of the solution -- length of vector indicates number of terms to be computed. ~\newline
- 
+Compute element\textquotesingle{}s contribution to Fourier components of the solution -- length of vector indicates number of terms to be computed. 
 
 
 
-Definition at line 387 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 395 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -164,7 +162,7 @@ Function to compute the shape, test functions and derivates and to return the Ja
 
 
 
-Definition at line 520 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 523 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -187,7 +185,7 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line 244 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 254 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a406cb34eb2852b9507cca4f97b3002bc}\label{classoomph_1_1HelmholtzBCElementBase_a406cb34eb2852b9507cca4f97b3002bc}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -202,7 +200,7 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line 255 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 265 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -221,7 +219,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 226 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 231 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -244,7 +242,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 231 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 239 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -286,7 +284,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 221 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 224 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -305,7 +303,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 507 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 510 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -328,7 +326,7 @@ Return the index at which the real/imag unknown value is stored.
 
 
 
-Definition at line 236 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 246 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -355,7 +353,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 210 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 207 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -377,7 +375,7 @@ The spatial dimension of the problem.
 
 
 
-Definition at line 549 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 553 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -396,7 +394,7 @@ The index at which the real and imag part of the unknown is stored at the nodes.
 
 
 
-Definition at line 546 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line 550 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 

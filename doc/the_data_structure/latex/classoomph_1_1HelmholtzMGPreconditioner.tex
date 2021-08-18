@@ -104,8 +104,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzMGPreconditioner_af4886f4ef
 void \mbox{\hyperlink{classoomph_1_1HelmholtzMGPreconditioner_aedd9102297d40354bd8d769ca2c343cb}{mg\+\_\+solve}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Do the actual solve -- this is called through the pure virtual solve function in the \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} base class. The function is stored as protected to allow the \mbox{\hyperlink{classoomph_1_1HelmholtzMGPreconditioner}{Helmholtz\+M\+G\+Preconditioner}} derived class to use the solver. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzMGPreconditioner_a935a8245757bc2bd7bf29f1ce029af77}{block\+\_\+preconditioner\+\_\+self\+\_\+test}} ()
-\begin{DoxyCompactList}\small\item\em Function to ensure the block form of the Jacobian matches the form described, i.\+e. we should have\+: ~\newline
- $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$ $\vert$ A\+\_\+r $\vert$ -\/A\+\_\+c $\vert$ A = $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$. $\vert$ A\+\_\+c $\vert$ A\+\_\+r $\vert$ $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to ensure the block form of the Jacobian matches the form described, i.\+e. we should have\+: $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$ $\vert$ A\+\_\+r $\vert$ -\/A\+\_\+c $\vert$ A = $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$. $\vert$ A\+\_\+c $\vert$ A\+\_\+r $\vert$ $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzMGPreconditioner_aba7a7fb0549452ac56c7e97bd5557c3f}{setup}} ()
 \begin{DoxyCompactList}\small\item\em Function to set up the hierachy of levels. Creates a vector of pointers to each MG level. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzMGPreconditioner_ad811c870bf06b25f3237c84b5037e089}{setup\+\_\+mg\+\_\+hierarchy}} ()
@@ -192,7 +191,7 @@ class oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$}
 
 
 
-Definition at line 87 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 82 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -210,7 +209,7 @@ typedef for a function that returns a pointer to an object of the class \mbox{\h
 
 
 
-Definition at line 98 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 91 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_ac17ab35f36cad29ce8f1e64593c90a95}\label{classoomph_1_1HelmholtzMGPreconditioner_ac17ab35f36cad29ce8f1e64593c90a95}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!PreSmootherFactoryFctPt@{PreSmootherFactoryFctPt}}
@@ -225,7 +224,7 @@ typedef for a function that returns a pointer to an object of the class \mbox{\h
 
 
 
-Definition at line 94 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 87 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -243,7 +242,7 @@ Constructor\+: Set up default values for number of V-\/cycles and pre-\/ and pos
 
 
 
-Definition at line 118 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 111 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -262,7 +261,7 @@ Delete any dynamically allocated data.
 
 
 
-Definition at line 141 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 134 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -284,7 +283,7 @@ Function to change the value of the shift.
 
 
 
-Definition at line 218 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 211 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -299,12 +298,11 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzMGPreconditioner}{oomph\+::\+Helmho
 
 
 
-Function to ensure the block form of the Jacobian matches the form described, i.\+e. we should have\+: ~\newline
- $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$ $\vert$ A\+\_\+r $\vert$ -\/A\+\_\+c $\vert$ A = $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$. $\vert$ A\+\_\+c $\vert$ A\+\_\+r $\vert$ $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$. 
+Function to ensure the block form of the Jacobian matches the form described, i.\+e. we should have\+: $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$ $\vert$ A\+\_\+r $\vert$ -\/A\+\_\+c $\vert$ A = $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$. $\vert$ A\+\_\+c $\vert$ A\+\_\+r $\vert$ $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$. 
 
 Check the block preconditioner framework returns the correct system matrix. 
 
-Definition at line 884 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 873 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -327,7 +325,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line 148 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 141 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -350,7 +348,7 @@ Call the direct solver (Super\+LU) to solve the problem exactly.
 
 
 
-Definition at line 384 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 375 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -369,7 +367,7 @@ Disable time documentation.
 
 
 
-Definition at line 225 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 218 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -388,7 +386,7 @@ Suppress anything that can be suppressed, i.\+e. any timings. Things like mesh a
 
 
 
-Definition at line 244 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 237 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -407,7 +405,7 @@ Suppress the output of both smoothers and Super\+LU.
 
 
 
-Definition at line 294 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 287 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -426,7 +424,7 @@ Disable all output from mg\+\_\+solve apart from the number of V-\/cycles used t
 
 
 
-Definition at line 233 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 226 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -445,7 +443,7 @@ Enable time documentation.
 
 
 
-Definition at line 264 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 257 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -464,7 +462,7 @@ Enable the output from anything that could have been suppressed.
 
 
 
-Definition at line 281 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 274 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -483,7 +481,7 @@ Enable the output of the V-\/cycle timings and other output.
 
 
 
-Definition at line 271 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 264 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -502,7 +500,7 @@ Do a full setup (assumes everything will be setup around the \mbox{\hyperlink{cl
 
 Runs a full setup of the MG solver. 
 
-Definition at line 1138 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 1103 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -525,11 +523,11 @@ Interpolate solution at current level onto next finer mesh and correct the solut
 
 
 
-Definition at line 3616 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 3595 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
-References level, and oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply().
+References level.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a2c7591ae2de4d1c461bca085d3210e73}\label{classoomph_1_1HelmholtzMGPreconditioner_a2c7591ae2de4d1c461bca085d3210e73}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!interpolation\_matrix\_set@{interpolation\_matrix\_set}}
@@ -544,7 +542,7 @@ Builds a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} t
 
 
 
-Definition at line 404 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 396 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -563,7 +561,7 @@ Builds a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} t
 
 
 
-Definition at line 423 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 415 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -582,7 +580,7 @@ Number of iterations.
 
 
 
-Definition at line 549 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 539 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -611,7 +609,7 @@ Given the son type of the element and the local coordinate s of a given node in 
 
 
 
-Definition at line 3462 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 3441 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -629,7 +627,7 @@ Given the son type of the element and the local coordinate s of a given node in 
 
 
 
-Definition at line 3529 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 3508 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -658,7 +656,7 @@ Find the value of the parameters h on the level-\/th problem in the hierarchy. T
 
 This is the explicit template specialisation of the case D\+IM=2. 
 
-Definition at line 2251 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 2222 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -674,14 +672,13 @@ References oomph\+::\+Mesh\+::element\+\_\+pt(), i, level, n, oomph\+::\+Mesh\+:
 
 Find the value of the parameters h on the level-\/th problem in the hierarchy. The value of h is determined by looping over each element in the mesh and calculating the length of each side and take the maximum value. Note, this is a heuristic calculation; if the mesh is non-\/uniform or adaptive refinement is used then the value of h, is not the same everywhere so we find the maximum edge width instead. If, however, uniform refinement is used on a uniform mesh (using quad elements) then this will return the correct value of h. 
 
-This is the explicit template specialisation of the case D\+IM=3. The calculation of h is different here. In 2D we were able to loop over each pair of nodes in an anti-\/clockwise manner since the only node pairs were \{(C0,C1),(C1,C2),(C2,C3),(C3,C0)\} where CN denotes the N-\/th corner in the element. In 3D this method cannot be used since we have 12 edges to consider. ~\newline
- 
+This is the explicit template specialisation of the case D\+IM=3. The calculation of h is different here. In 2D we were able to loop over each pair of nodes in an anti-\/clockwise manner since the only node pairs were \{(C0,C1),(C1,C2),(C2,C3),(C3,C0)\} where CN denotes the N-\/th corner in the element. In 3D this method cannot be used since we have 12 edges to consider. 
 
-Definition at line 2382 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
-
+Definition at line 2354 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
-References oomph\+::\+Mesh\+::element\+\_\+pt(), i, oomph\+::\+Oc\+Tree\+Names\+::\+L\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+L\+DF, level, oomph\+::\+Oc\+Tree\+Names\+::\+L\+UB, oomph\+::\+Oc\+Tree\+Names\+::\+L\+UF, n, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Oc\+Tree\+Names\+::\+R\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+R\+DF, oomph\+::\+Oc\+Tree\+Names\+::\+R\+UB, oomph\+::\+Oc\+Tree\+Names\+::\+R\+UF, and oomph\+::\+Node\+::x().
+
+References oomph\+::\+Mesh\+::element\+\_\+pt(), i, oomph\+::\+Oc\+Tree\+Names\+::\+L\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+L\+DF, level, oomph\+::\+Oc\+Tree\+Names\+::\+L\+UB, oomph\+::\+Oc\+Tree\+Names\+::\+L\+UF, n, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Oc\+Tree\+Names\+::\+R\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+R\+DF, oomph\+::\+Oc\+Tree\+Names\+::\+R\+UB, oomph\+::\+Oc\+Tree\+Names\+::\+R\+UF, oomph\+::\+Oc\+Tree\+::vertex\+\_\+to\+\_\+node\+\_\+number(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_aedd9102297d40354bd8d769ca2c343cb}\label{classoomph_1_1HelmholtzMGPreconditioner_aedd9102297d40354bd8d769ca2c343cb}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!mg\_solve@{mg\_solve}}
@@ -696,7 +693,7 @@ Do the actual solve -- this is called through the pure virtual solve function in
 
 Linear solver. This is where the general V-\/cycle algorithm is implemented. 
 
-Definition at line 3656 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 3638 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -719,7 +716,7 @@ Return the number of post-\/smoothing iterations (lvalue)
 
 
 
-Definition at line 312 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 305 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -738,7 +735,7 @@ Return the number of pre-\/smoothing iterations (lvalue)
 
 
 
-Definition at line 320 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 313 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -757,7 +754,7 @@ Post-\/smoother\+: Perform max\+\_\+iter smoothing steps on the linear system Ax
 
 
 
-Definition at line 348 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 340 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -776,7 +773,7 @@ Pre-\/smoother\+: Perform \textquotesingle{}max\+\_\+iter\textquotesingle{} smoo
 
 
 
-Definition at line 332 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 325 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -799,7 +796,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 514 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 504 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -818,7 +815,7 @@ Return norm of residual r=b-\/\+Ax and the residual vector itself on the level-\
 
 
 
-Definition at line 361 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 352 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -841,11 +838,11 @@ Calculate the norm of the residual vector, r=b-\/\+Ax.
 
 Calculating the residual r=b-\/\+Ax in the complex case requires more care than the real case. To calculate the residual vector we split A, x and b into their complex components\+: r = b -\/ A$\ast$x, = (b\+\_\+r + i$\ast$b\+\_\+c) -\/ (A\+\_\+r + i$\ast$\+A\+\_\+c)$\ast$(x\+\_\+r + i$\ast$x\+\_\+c), = \mbox{[}b\+\_\+r -\/ A\+\_\+r$\ast$x\+\_\+r + A\+\_\+c$\ast$x\+\_\+c\mbox{]} + i$\ast$\mbox{[}b\+\_\+c -\/ A\+\_\+r$\ast$x\+\_\+c -\/ A\+\_\+c$\ast$x\+\_\+r\mbox{]}, ==$>$ real(r) = b\+\_\+r -\/ A\+\_\+r$\ast$x\+\_\+r + A\+\_\+c$\ast$x\+\_\+c, \& imag(r) = b\+\_\+c -\/ A\+\_\+r$\ast$x\+\_\+c -\/ A\+\_\+c$\ast$x\+\_\+r. 
 
-Definition at line 746 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 734 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
-References i, oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise(), level, and oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply().
+References i, oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise(), and level.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a013c21557363edf86790fa98a1da2aff}\label{classoomph_1_1HelmholtzMGPreconditioner_a013c21557363edf86790fa98a1da2aff}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!restrict\_residual@{restrict\_residual}}
@@ -858,14 +855,13 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzMGPreconditioner}{oomph\+::\+Helmho
 
 Restrict residual (computed on level-\/th MG level) to the next coarser mesh and stick it into the coarse mesh R\+HS vector. 
 
-Restrict residual (computed on current MG level) to next coarser mesh and stick it into the coarse mesh R\+HS vector using the restriction matrix (if restrict\+\_\+flag=1) or the transpose of the interpolation matrix (if restrict\+\_\+flag=2) ~\newline
- 
+Restrict residual (computed on current MG level) to next coarser mesh and stick it into the coarse mesh R\+HS vector using the restriction matrix (if restrict\+\_\+flag=1) or the transpose of the interpolation matrix (if restrict\+\_\+flag=2) 
 
-Definition at line 3583 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
-
+Definition at line 3563 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
-References level, and oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply().
+
+References level.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a986dc273c291bcaa9607661f9f3ab06f}\label{classoomph_1_1HelmholtzMGPreconditioner_a986dc273c291bcaa9607661f9f3ab06f}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!set\_post\_smoother\_factory\_function@{set\_post\_smoother\_factory\_function}}
@@ -880,7 +876,7 @@ Access function to set the post-\/smoother creation function.
 
 
 
-Definition at line 109 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 102 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -899,7 +895,7 @@ Access function to set the pre-\/smoother creation function.
 
 
 
-Definition at line 101 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 94 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -918,7 +914,7 @@ Builds a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} o
 
 
 
-Definition at line 470 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 461 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -941,7 +937,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 584 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 573 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -971,7 +967,7 @@ Use the version in the \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditi
 
 
 
-Definition at line 124 of file preconditioner.\+h.
+Definition at line 126 of file preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}\label{classoomph_1_1HelmholtzMGPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!setup@{setup}}
@@ -986,7 +982,7 @@ Use the version in the \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditi
 
 
 
-Definition at line 98 of file preconditioner.\+h.
+Definition at line 100 of file preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a2436c6189b4cda832bf28471f4f9e23c}\label{classoomph_1_1HelmholtzMGPreconditioner_a2436c6189b4cda832bf28471f4f9e23c}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!setup\_coarsest\_level\_structures@{setup\_coarsest\_level\_structures}}
@@ -1001,7 +997,7 @@ Function to create the fully expanded system matrix on the coarsest level.
 
 Function to set up structures on the coarsest level of the MG hierarchy. This includes setting up the \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} version of the coarsest level system matrix. This would otherwise be stored as a vector of pointers to the constituent \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} objects which has the form\+: $\vert$-\/-\/---$\vert$ $\vert$ A\+\_\+r $\vert$ Matrix\+\_\+mg\+\_\+pt = $\vert$-\/-\/---$\vert$ $\vert$ A\+\_\+i $\vert$ $\vert$-\/-\/---$\vert$ and we want to construct\+: $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$ $\vert$ A\+\_\+r $\vert$ -\/A\+\_\+c $\vert$ Coarse\+\_\+matrix\+\_\+mg\+\_\+pt = $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$ $\vert$ A\+\_\+c $\vert$ A\+\_\+r $\vert$ $\vert$-\/-\/---$\vert$-\/-\/-\/---$\vert$ Once this is done we have to set up the distributions of the vectors associated with Coarse\+\_\+matrix\+\_\+mg\+\_\+pt. 
 
-Definition at line 2006 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 1980 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1020,7 +1016,7 @@ Setup the interpolation matrix on each level.
 
 Set up the interpolation matrices. 
 
-Definition at line 2771 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 2744 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1039,7 +1035,7 @@ Setup the interpolation matrix on each level (used for unstructured meshes)
 
 Setup the interpolation matrices. 
 
-Definition at line 3265 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 3243 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1058,11 +1054,11 @@ Function to set up the hierachy of levels. Creates a vector of pointers to each 
 
 Set up the MG hierarchy. Creates a vector of pointers to each MG level and resizes internal storage for multigrid data. 
 
-Definition at line 1296 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 1263 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
-References oomph\+::\+Problem\+::actions\+\_\+after\+\_\+adapt(), oomph\+::\+Problem\+::actions\+\_\+before\+\_\+adapt(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), level, oomph\+::\+Helmholtz\+M\+G\+Problem\+::make\+\_\+new\+\_\+problem(), oomph\+::\+Helmholtz\+M\+G\+Problem\+::mg\+\_\+bulk\+\_\+mesh\+\_\+pt(), oomph\+::oomph\+\_\+info, and oomph\+::\+Timing\+Helpers\+::timer().
+References oomph\+::\+Problem\+::actions\+\_\+after\+\_\+adapt(), oomph\+::\+Problem\+::actions\+\_\+before\+\_\+adapt(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), level, oomph\+::\+Helmholtz\+M\+G\+Problem\+::make\+\_\+new\+\_\+problem(), oomph\+::\+Helmholtz\+M\+G\+Problem\+::mg\+\_\+bulk\+\_\+mesh\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+base\+\_\+mesh\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh\+\_\+minus\+\_\+one(), and oomph\+::\+Timing\+Helpers\+::timer().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a4285eee67bbf57ae00ca2aada2744743}\label{classoomph_1_1HelmholtzMGPreconditioner_a4285eee67bbf57ae00ca2aada2744743}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!setup\_mg\_structures@{setup\_mg\_structures}}
@@ -1077,11 +1073,11 @@ Function to set up the hierachy of levels. Creates a vector of pointers to each 
 
 Set up the MG structures on each level. 
 
-Definition at line 1504 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 1476 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
-References oomph\+::\+P\+M\+L\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::alpha\+\_\+pt(), oomph\+::\+C\+R\+Double\+Matrix\+::build(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), i, oomph\+::\+P\+M\+L\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::k\+\_\+squared(), level, oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::oomph\+\_\+info, residuals(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Timing\+Helpers\+::timer().
+References oomph\+::\+P\+M\+L\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::alpha\+\_\+pt(), oomph\+::\+C\+R\+Double\+Matrix\+::build(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), i, oomph\+::\+P\+M\+L\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::k\+\_\+squared(), level, oomph\+::oomph\+\_\+info, residuals(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Timing\+Helpers\+::timer().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a8e6345b2fd41602dd6a91e9bcecf718c}\label{classoomph_1_1HelmholtzMGPreconditioner_a8e6345b2fd41602dd6a91e9bcecf718c}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!setup\_smoothers@{setup\_smoothers}}
@@ -1096,7 +1092,7 @@ Function to set up all of the smoothers once the system matrices have been set u
 
 Set up the smoothers on all levels. 
 
-Definition at line 2568 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 2541 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1115,7 +1111,7 @@ Setup the transfer matrices on each level.
 
 Set up the transfer matrices. Both the pure injection and full weighting method have been implemented here but it is highly recommended that full weighting is used in general. In both methods the transpose of the transfer matrix is used to transfer a vector back. 
 
-Definition at line 1452 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 1422 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1134,7 +1130,7 @@ Access function for the variable Tolerance (lvalue)
 
 
 
-Definition at line 211 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 204 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1156,7 +1152,7 @@ Temporary version of the shift -- to run bash scripts.
 
 
 
-Definition at line 731 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 720 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1175,7 +1171,7 @@ Stores the system matrix on the coarest level in the fully expanded format\+: $\
 
 
 
-Definition at line 636 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 625 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1194,7 +1190,7 @@ Assuming we\textquotesingle{}re solving the system Ax=b, this vector will contai
 
 
 
-Definition at line 656 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 645 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1213,7 +1209,7 @@ Assuming we\textquotesingle{}re solving the system Ax=b, this vector will contai
 
 
 
-Definition at line 646 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 635 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1232,7 +1228,7 @@ Indicates whether or not time documentation should be used.
 
 
 
-Definition at line 712 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 701 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1251,7 +1247,7 @@ Boolean variable to indicate whether or not the solver has been setup.
 
 
 
-Definition at line 721 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 710 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1270,7 +1266,7 @@ Boolean variable to indicate whether or not the problem was successfully solved.
 
 
 
-Definition at line 725 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 714 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a661811aae02c456b338964cb5e918e70}\label{classoomph_1_1HelmholtzMGPreconditioner_a661811aae02c456b338964cb5e918e70}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!Interpolation\_matrices\_storage\_pt@{Interpolation\_matrices\_storage\_pt}}
@@ -1285,7 +1281,7 @@ Definition at line 725 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
-Definition at line 659 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 648 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1304,7 +1300,7 @@ Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::clean
 
 
 
-Definition at line 688 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 677 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a77c24f2c136211274a0f0326694eff51}\label{classoomph_1_1HelmholtzMGPreconditioner_a77c24f2c136211274a0f0326694eff51}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!Mg\_hierarchy\_pt@{Mg\_hierarchy\_pt}}
@@ -1319,7 +1315,7 @@ Definition at line 688 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
-Definition at line 618 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 607 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1338,7 +1334,7 @@ Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::\+Hel
 
 
 
-Definition at line 626 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 615 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1357,7 +1353,7 @@ Pointer to the MG problem (deep copy)
 
 
 
-Definition at line 615 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 604 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1376,7 +1372,7 @@ The number of levels in the multigrid heirachy.
 
 
 
-Definition at line 697 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 686 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1395,7 +1391,7 @@ Number of post-\/smoothing steps.
 
 
 
-Definition at line 703 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 692 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1414,7 +1410,7 @@ Number of pre-\/smoothing steps.
 
 
 
-Definition at line 700 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 689 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1433,7 +1429,7 @@ Maximum number of V-\/cycles.
 
 
 
-Definition at line 706 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 695 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a6c837962598479ba2eafd3978fccab9c}\label{classoomph_1_1HelmholtzMGPreconditioner_a6c837962598479ba2eafd3978fccab9c}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!Post\_smoother\_factory\_function\_pt@{Post\_smoother\_factory\_function\_pt}}
@@ -1448,7 +1444,7 @@ Function to create post-\/smoothers.
 
 
 
-Definition at line 565 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 554 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1467,7 +1463,7 @@ Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::set\+
 
 
 
-Definition at line 683 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 672 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1486,7 +1482,7 @@ Function to create pre-\/smoothers.
 
 
 
-Definition at line 562 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 551 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1505,7 +1501,7 @@ Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::set\+
 
 
 
-Definition at line 680 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 669 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1524,7 +1520,7 @@ Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::clean
 
 
 
-Definition at line 677 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 666 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1543,7 +1539,7 @@ Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::resid
 
 
 
-Definition at line 662 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 651 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1562,7 +1558,7 @@ Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::clean
 
 
 
-Definition at line 673 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 662 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1581,7 +1577,7 @@ Pointer to the output stream -- defaults to std\+::cout.
 
 
 
-Definition at line 728 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 717 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1600,7 +1596,7 @@ If this is set to true then all output from the solver is suppressed.
 
 
 
-Definition at line 718 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 707 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1619,7 +1615,7 @@ Indicates whether or not the V-\/cycle output should be suppressed.
 
 
 
-Definition at line 715 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 704 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1638,7 +1634,7 @@ The tolerance of the multigrid preconditioner.
 
 
 
-Definition at line 694 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 683 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1657,7 +1653,7 @@ Pointer to counter for V-\/cycles.
 
 
 
-Definition at line 709 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 698 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
@@ -1676,7 +1672,7 @@ The value of the wavenumber, k.
 
 
 
-Definition at line 691 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 680 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzMGPreconditioner_a636cb6f321d27cb892d61d7cdddd9338}\label{classoomph_1_1HelmholtzMGPreconditioner_a636cb6f321d27cb892d61d7cdddd9338}} 
 \index{oomph::HelmholtzMGPreconditioner$<$ DIM $>$@{oomph::HelmholtzMGPreconditioner$<$ DIM $>$}!X\_mg\_vectors\_storage@{X\_mg\_vectors\_storage}}
@@ -1691,7 +1687,7 @@ Definition at line 691 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 
-Definition at line 669 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
+Definition at line 658 of file helmholtz\+\_\+geometric\+\_\+multigrid.\+h.
 
 
 

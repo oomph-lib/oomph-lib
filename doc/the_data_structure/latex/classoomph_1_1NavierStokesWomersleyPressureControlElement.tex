@@ -20,17 +20,15 @@ Inheritance diagram for oomph\+::Navier\+Stokes\+Womersley\+Pressure\+Control\+E
 void \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement_a336e39637cd1405c5edefbcb4c9e26e8}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em This function returns the residuals. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement_aa899b746f1831673358ba6a71409e45c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals and the Jacobian, plus the Jacobian contribution for the \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} with respect to unknowns in this element ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This function returns the residuals and the Jacobian, plus the Jacobian contribution for the \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} with respect to unknowns in this element. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement_a091e01b1894fc97c8cca758f9c6cc121}{volume\+\_\+flux\+\_\+data\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Function to return a pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the flux degree of freedom. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement_a88706386c6cbdf93ccdbf78d38424ee9}{add\+\_\+pressure\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$pressure\+\_\+data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function to add to external data the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied at the boundary. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement_a65a9d8901d8d0690f82b873c0dafe1bd}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into -\/ set to 1. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement_ac06944c7b24e71a1d9341166049fc360}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement_ac2f498f76383bd2c80ded2f33461fa18}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -55,7 +53,7 @@ An element to impose a fluid pressure obtained from a Womersley impedance tube a
 
 Note\+: the \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement}{Navier\+Stokes\+Womersley\+Pressure\+Control\+Element}} element calculates Jacobian entries B\+O\+TH for itself A\+ND for the \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} with respect to the unknowns in this (\mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement}{Navier\+Stokes\+Womersley\+Pressure\+Control\+Element}}) element. 
 
-Definition at line 2651 of file womersley\+\_\+elements.\+h.
+Definition at line 2593 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -72,7 +70,7 @@ Constructor takes a pointer to a suitable Womersley impedance tube which defines
 
 
 
-Definition at line 2658 of file womersley\+\_\+elements.\+h.
+Definition at line 2599 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -90,7 +88,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 2670 of file womersley\+\_\+elements.\+h.
+Definition at line 2611 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -107,7 +105,7 @@ Function to add to external data the \mbox{\hyperlink{classoomph_1_1Data}{Data}}
 
 
 
-Definition at line 2700 of file womersley\+\_\+elements.\+h.
+Definition at line 2642 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -121,8 +119,7 @@ Referenced by oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+
 
 
 
-This function returns the residuals and the Jacobian, plus the Jacobian contribution for the \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} with respect to unknowns in this element ~\newline
- 
+This function returns the residuals and the Jacobian, plus the Jacobian contribution for the \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} with respect to unknowns in this element. 
 
 
 
@@ -130,7 +127,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 2686 of file womersley\+\_\+elements.\+h.
+Definition at line 2625 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -152,7 +149,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 2673 of file womersley\+\_\+elements.\+h.
+Definition at line 2614 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -170,30 +167,29 @@ This function returns the residuals. flag=1(or 0)\+: do (or don\textquotesingle{
 
 
 
-Definition at line 2737 of file womersley\+\_\+elements.\+h.
+Definition at line 2678 of file womersley\+\_\+elements.\+h.
 
 
 
 References residuals().
 
-\mbox{\Hypertarget{classoomph_1_1NavierStokesWomersleyPressureControlElement_ac06944c7b24e71a1d9341166049fc360}\label{classoomph_1_1NavierStokesWomersleyPressureControlElement_ac06944c7b24e71a1d9341166049fc360}} 
+\mbox{\Hypertarget{classoomph_1_1NavierStokesWomersleyPressureControlElement_ac2f498f76383bd2c80ded2f33461fa18}\label{classoomph_1_1NavierStokesWomersleyPressureControlElement_ac2f498f76383bd2c80ded2f33461fa18}} 
 \index{oomph::NavierStokesWomersleyPressureControlElement@{oomph::NavierStokesWomersleyPressureControlElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::NavierStokesWomersleyPressureControlElement@{oomph::NavierStokesWomersleyPressureControlElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Womersley\+Pressure\+Control\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Womersley\+Pressure\+Control\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 2718 of file womersley\+\_\+elements.\+h.
+Definition at line 2660 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesWomersleyPressureControlElement_a65a9d8901d8d0690f82b873c0dafe1bd}\label{classoomph_1_1NavierStokesWomersleyPressureControlElement_a65a9d8901d8d0690f82b873c0dafe1bd}} 
 \index{oomph::NavierStokesWomersleyPressureControlElement@{oomph::NavierStokesWomersleyPressureControlElement}!ndof\_types@{ndof\_types}}
@@ -211,7 +207,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 2707 of file womersley\+\_\+elements.\+h.
+Definition at line 2649 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesWomersleyPressureControlElement_a091e01b1894fc97c8cca758f9c6cc121}\label{classoomph_1_1NavierStokesWomersleyPressureControlElement_a091e01b1894fc97c8cca758f9c6cc121}} 
 \index{oomph::NavierStokesWomersleyPressureControlElement@{oomph::NavierStokesWomersleyPressureControlElement}!volume\_flux\_data\_pt@{volume\_flux\_data\_pt}}
@@ -225,7 +221,7 @@ Function to return a pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} 
 
 
 
-Definition at line 2696 of file womersley\+\_\+elements.\+h.
+Definition at line 2635 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -242,7 +238,7 @@ Id of external \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single v
 
 
 
-Definition at line 2782 of file womersley\+\_\+elements.\+h.
+Definition at line 2722 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesWomersleyPressureControlElement_a90810e440b763afca53dc50b24a7848c}\label{classoomph_1_1NavierStokesWomersleyPressureControlElement_a90810e440b763afca53dc50b24a7848c}} 
 \index{oomph::NavierStokesWomersleyPressureControlElement@{oomph::NavierStokesWomersleyPressureControlElement}!Volume\_flux\_data\_id@{Volume\_flux\_data\_id}}
@@ -256,7 +252,7 @@ Id of internal \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single v
 
 
 
-Definition at line 2786 of file womersley\+\_\+elements.\+h.
+Definition at line 2726 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesWomersleyPressureControlElement_ab7385fe09993adfda19e4787f91abeb6}\label{classoomph_1_1NavierStokesWomersleyPressureControlElement_ab7385fe09993adfda19e4787f91abeb6}} 
 \index{oomph::NavierStokesWomersleyPressureControlElement@{oomph::NavierStokesWomersleyPressureControlElement}!Volume\_flux\_data\_pt@{Volume\_flux\_data\_pt}}
@@ -270,7 +266,7 @@ Definition at line 2786 of file womersley\+\_\+elements.\+h.
 
 
 
-Definition at line 2776 of file womersley\+\_\+elements.\+h.
+Definition at line 2716 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesWomersleyPressureControlElement_a8aedb28c49fd569eb65687efd2139abc}\label{classoomph_1_1NavierStokesWomersleyPressureControlElement_a8aedb28c49fd569eb65687efd2139abc}} 
 \index{oomph::NavierStokesWomersleyPressureControlElement@{oomph::NavierStokesWomersleyPressureControlElement}!Womersley\_tube\_pt@{Womersley\_tube\_pt}}
@@ -284,7 +280,7 @@ Pointer to the Womersley impedance tube.
 
 
 
-Definition at line 2779 of file womersley\+\_\+elements.\+h.
+Definition at line 2719 of file womersley\+\_\+elements.\+h.
 
 
 

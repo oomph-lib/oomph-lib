@@ -222,8 +222,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">More...</a><br /></td></tr>
 <tr class="separator:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">Xperiodic</a></td></tr>
-<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction <br  />
-  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
+<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
 <tr class="separator:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -233,7 +232,7 @@ class oomph::RefineableRectangularQuadMesh&lt; ELEMENT &gt;</h3>
 <p>Refineable version of the <a class="el" href="classoomph_1_1RectangularQuadMesh.html">RectangularQuadMesh</a>: A two-dimensional mesh of Quad elements with Nx elements in the "x" (horizonal) direction and Ny elements in the "y" (vertical) direction. Two Constructors are provided. The basic constructor assumes that the lower-left-hand corner of the mesh is (0,0) and takes only the arguments, Nx, Ny, Xmax and Ymax. The more complex constructor takes the additional arguments Xmin and Ymin.</p>
 <p>This class is designed to be used as a Base class for more complex two dimensional meshes. The virtual functions <a class="el" href="classoomph_1_1RectangularQuadMesh.html#ad4c2f349cf201cb3107f0a4e5447c16f" title="Return the value of the x-coordinate at the node given by the local node number (xnode,...">x_spacing_function()</a> and <a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae78204de1f176cdf2e819673bd34e78a" title="Return the value of the y-coordinate at the node given by the local node number (xnode,...">y_spacing_function()</a> may be overloaded to provide arbitrary node spacing. The default is uniformly spaced nodes in each direction. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00281">281</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00323">323</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac00e380a8fa1bdfc63fd25fdf9b5fbf0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac00e380a8fa1bdfc63fd25fdf9b5fbf0">&#9670;&nbsp;</a></span>RefineableRectangularQuadMesh() <span class="overload">[1/4]</span></h2>
@@ -291,7 +290,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly). Also pass pointer to timestepper (defaults to Steady) </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00292">292</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00332">332</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -357,7 +356,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly); periodic_in_x, periodicity in x. Also pass pointer to timestepper (defaults to Steady) </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00308">308</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00350">350</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -429,7 +428,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor that allows the specification of minimum and maximum values of x and y coordinates Also pass pointer to timestepper (defaults to Steady) </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00323">323</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00368">368</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -507,7 +506,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor that allows the specification of minimum and maximum values of x and y coordinates and periodicity Also pass pointer to timestepper (defaults to Steady) </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00338">338</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00387">387</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -542,7 +541,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:20:42
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:00:30
         </div>
       </div>
     </footer>

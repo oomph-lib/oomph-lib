@@ -68,7 +68,7 @@ A Class for shape functions. In simple cases, the shape functions have only one 
 
 The implementation of \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions is designed to permit fast copying of entire sets of values by resetting the internal pointer to the data, Psi; functionality that is required, for example, when setting the test functions in Galerkin elements and when reading pre-\/computed values of the shape functions. In general, we cannot know at construction time whether the pointer to the values will be reset or not and, therefore, whether the storage for values should be allocated by the object. We choose to allocate storage on construction and store an additional pointer Allocated\+\_\+data that {\bfseries{always}} addresses the storage allocated by the object. If the Psi pointer is reset then this storage will be \char`\"{}wasted\char`\"{}, but only for the lifetime of the object. The cost for non-\/copied \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions is one additional pointer. 
 
-Definition at line 77 of file shape.\+h.
+Definition at line 75 of file shape.\+h.
 
 
 
@@ -85,7 +85,7 @@ Constructor for a single-\/index set of shape functions.
 
 
 
-Definition at line 124 of file shape.\+h.
+Definition at line 119 of file shape.\+h.
 
 
 
@@ -103,7 +103,7 @@ Constructor for a two-\/index set of shape functions.
 
 
 
-Definition at line 128 of file shape.\+h.
+Definition at line 126 of file shape.\+h.
 
 
 
@@ -121,7 +121,7 @@ Broken copy constructor.
 
 
 
-Definition at line 132 of file shape.\+h.
+Definition at line 133 of file shape.\+h.
 
 
 
@@ -135,7 +135,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 Default constructor -\/ just assigns a null pointers and zero index sizes. 
 
-Definition at line 136 of file shape.\+h.
+Definition at line 140 of file shape.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Shape_af6e38eb7b8c072b0acac31c61f11cc27}\label{classoomph_1_1Shape_af6e38eb7b8c072b0acac31c61f11cc27}} 
 \index{oomph::Shape@{oomph::Shape}!````~Shape@{$\sim$Shape}}
@@ -149,7 +149,7 @@ Destructor, clear up the memory allocated by the object.
 
 
 
-Definition at line 186 of file shape.\+h.
+Definition at line 185 of file shape.\+h.
 
 
 
@@ -170,7 +170,7 @@ Return the range of index 1 of the shape function object.
 
 
 
-Definition at line 258 of file shape.\+h.
+Definition at line 262 of file shape.\+h.
 
 
 
@@ -192,7 +192,7 @@ Return the range of index 2 of the shape function object.
 
 
 
-Definition at line 261 of file shape.\+h.
+Definition at line 268 of file shape.\+h.
 
 
 
@@ -214,7 +214,7 @@ Overload the round bracket operator to provide access to values.
 
 
 
-Definition at line 221 of file shape.\+h.
+Definition at line 225 of file shape.\+h.
 
 
 
@@ -232,7 +232,7 @@ Overload the round bracket operator (const version)
 
 
 
-Definition at line 230 of file shape.\+h.
+Definition at line 234 of file shape.\+h.
 
 
 
@@ -250,7 +250,7 @@ Overload the round bracket operator, allowing for two indices.
 
 
 
-Definition at line 239 of file shape.\+h.
+Definition at line 243 of file shape.\+h.
 
 
 
@@ -268,7 +268,7 @@ Overload the round bracket operator, allowing for two indices (const version)
 
 
 
-Definition at line 249 of file shape.\+h.
+Definition at line 253 of file shape.\+h.
 
 
 
@@ -282,7 +282,7 @@ References i, Index2, Psi, and range\+\_\+check().
 
 The assignment operator does a shallow copy (resets the pointer to the data) 
 
-Definition at line 140 of file shape.\+h.
+Definition at line 144 of file shape.\+h.
 
 
 
@@ -296,7 +296,7 @@ References Index1, Index2, Psi, and oomph\+::\+One\+Dim\+Hermite\+::shape().
 
 The assignment operator does a shallow copy (resets the pointer to the data) 
 
-Definition at line 163 of file shape.\+h.
+Definition at line 165 of file shape.\+h.
 
 
 
@@ -314,7 +314,7 @@ Overload the bracket operator to provide access to values.
 
 
 
-Definition at line 203 of file shape.\+h.
+Definition at line 207 of file shape.\+h.
 
 
 
@@ -332,7 +332,7 @@ Overload the bracket operator (const version)
 
 
 
-Definition at line 212 of file shape.\+h.
+Definition at line 216 of file shape.\+h.
 
 
 
@@ -350,7 +350,7 @@ Private function that checks whether the index is in range.
 
 
 
-Definition at line 98 of file shape.\+h.
+Definition at line 95 of file shape.\+h.
 
 
 
@@ -372,7 +372,7 @@ Change the size of the storage.
 
 
 
-Definition at line 189 of file shape.\+h.
+Definition at line 192 of file shape.\+h.
 
 
 
@@ -393,7 +393,7 @@ Pointer that addresses the storage allocated by the object on construction. This
 
 
 
-Definition at line 89 of file shape.\+h.
+Definition at line 86 of file shape.\+h.
 
 
 
@@ -411,7 +411,7 @@ Size of the first index of the shape function.
 
 
 
-Definition at line 92 of file shape.\+h.
+Definition at line 89 of file shape.\+h.
 
 
 
@@ -429,7 +429,7 @@ Size of the second index of the shape function.
 
 
 
-Definition at line 95 of file shape.\+h.
+Definition at line 92 of file shape.\+h.
 
 
 
@@ -447,7 +447,7 @@ Pointer that addresses the storage that will be used to read and set the shape f
 
 
 
-Definition at line 84 of file shape.\+h.
+Definition at line 81 of file shape.\+h.
 
 
 

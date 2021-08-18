@@ -49,7 +49,7 @@ void \mbox{\hyperlink{classoomph_1_1TreeForest_a38e8313e3b672bdcba26be8a02cf7615
 \doxysubsection{Detailed Description}
 A \mbox{\hyperlink{classoomph_1_1TreeForest}{Tree\+Forest}} consists of a collection of Tree\+Roots. Each member tree can have neighbours in various enumerated directions (e.\+g. S/\+W/\+N/E for a \mbox{\hyperlink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}}) and the orientation of their compasses can differ, allowing for complex, unstructured meshes. 
 
-Definition at line 381 of file tree.\+h.
+Definition at line 420 of file tree.\+h.
 
 
 
@@ -71,10 +71,9 @@ Pass\+:
 \item trees\+\_\+pt\mbox{[}\mbox{]}, the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the constituent trees (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} objects)
 \end{DoxyItemize}
 
-Note that the pointers to the neighbour\textquotesingle{}s of each tree must have been allocated before the constructor is called, otherwise the relative rotation scheme will not be constructed correctly. ~\newline
- 
+Note that the pointers to the neighbour\textquotesingle{}s of each tree must have been allocated before the constructor is called, otherwise the relative rotation scheme will not be constructed correctly. 
 
-Definition at line 352 of file tree.\+cc.
+Definition at line 359 of file tree.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TreeForest_ac05719b25a53c4f27d94ed8535bf3d6a}\label{classoomph_1_1TreeForest_ac05719b25a53c4f27d94ed8535bf3d6a}} 
 \index{oomph::TreeForest@{oomph::TreeForest}!TreeForest@{TreeForest}}
@@ -88,7 +87,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line 390 of file tree.\+h.
+Definition at line 428 of file tree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TreeForest_ae53f48ad56b12c57231d8968e5c6ddcc}\label{classoomph_1_1TreeForest_ae53f48ad56b12c57231d8968e5c6ddcc}} 
 \index{oomph::TreeForest@{oomph::TreeForest}!TreeForest@{TreeForest}}
@@ -102,7 +101,7 @@ Broken copy constructor.
 
 
 
-Definition at line 399 of file tree.\+h.
+Definition at line 438 of file tree.\+h.
 
 
 
@@ -120,7 +119,7 @@ Destructor\+: Delete the constituent trees (and thus the objects associated with
 
 Kill tree forest\+: Delete the constituent trees. 
 
-Definition at line 358 of file tree.\+cc.
+Definition at line 364 of file tree.\+cc.
 
 
 
@@ -159,7 +158,7 @@ Close output files that will store any hanging nodes in the forest and delete an
 
 Close the hanging node output files and delete storage allocated at the pointers. This can be done generically at the base level 
 
-Definition at line 429 of file tree.\+cc.
+Definition at line 432 of file tree.\+cc.
 
 
 
@@ -181,7 +180,7 @@ Flush trees from forest.
 
 
 
-Definition at line 448 of file tree.\+h.
+Definition at line 490 of file tree.\+h.
 
 
 
@@ -203,7 +202,7 @@ Number of trees in forest.
 
 
 
-Definition at line 442 of file tree.\+h.
+Definition at line 478 of file tree.\+h.
 
 
 
@@ -243,7 +242,7 @@ Broken assignment operator.
 
 
 
-Definition at line 405 of file tree.\+h.
+Definition at line 444 of file tree.\+h.
 
 
 
@@ -261,11 +260,11 @@ Traverse forest and stick pointers to all \char`\"{}nodes\char`\"{} into \mbox{\
 
 Traverse \mbox{\hyperlink{classoomph_1_1TreeForest}{Tree\+Forest}}\+: Preorder traverse and stick pointers to all nodes into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} 
 
-Definition at line 401 of file tree.\+cc.
+Definition at line 405 of file tree.\+cc.
 
 
 
-References i, oomph\+::\+Tree\+::nsons(), ntree(), oomph\+::\+Tree\+::son\+\_\+pt(), and tree\+\_\+pt().
+References i, oomph\+::\+Tree\+::nsons(), ntree(), oomph\+::\+Tree\+::son\+\_\+pt(), oomph\+::\+Tree\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), and tree\+\_\+pt().
 
 
 
@@ -283,7 +282,7 @@ Traverse forst and stick pointers to leaf \char`\"{}nodes\char`\"{} into \mbox{\
 
 Traverse \mbox{\hyperlink{classoomph_1_1TreeForest}{Tree\+Forest}}\+: Preorder traverse and stick pointers to leaf nodes (only) into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} 
 
-Definition at line 373 of file tree.\+cc.
+Definition at line 379 of file tree.\+cc.
 
 
 
@@ -291,7 +290,7 @@ References i, oomph\+::\+Tree\+::nsons(), ntree(), oomph\+::\+Tree\+::son\+\_\+p
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh().
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh().
 
 \mbox{\Hypertarget{classoomph_1_1TreeForest_ab031414d924b1637cc4492c7048f3f7a}\label{classoomph_1_1TreeForest_ab031414d924b1637cc4492c7048f3f7a}} 
 \index{oomph::TreeForest@{oomph::TreeForest}!tree\_pt@{tree\_pt}}
@@ -305,7 +304,7 @@ Return pointer to i-\/th tree in forest.
 
 
 
-Definition at line 445 of file tree.\+h.
+Definition at line 484 of file tree.\+h.
 
 
 
@@ -330,7 +329,7 @@ Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(
 
 
 
-Definition at line 457 of file tree.\+h.
+Definition at line 498 of file tree.\+h.
 
 
 

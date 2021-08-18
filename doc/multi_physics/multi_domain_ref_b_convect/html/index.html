@@ -213,196 +213,105 @@ Part II: Implementing multi-domain interaction elements for the Boussinesq conve
 <h2><a class="anchor" id="nst"></a>
 Upgrading the Navier-Stokes element to an ElementWithExternalElement</h2>
 <p>We use multiple inheritance to upgrade an existing refineable Navier-Stokes element to a <code>RefineableNavierStokesBoussinesqElement</code> in which the temperature that affects the body force is given by an "external" advection-diffusion element. To facilitate code reuse we employ templating to specify the types of the Navier-Stokes and advection diffusion elements.</p>
- <div class="fragment"><div class="line"><span class="comment">//======================nst_bous_class=================================</span></div>
-<div class="line"><span class="comment">/// Build a refineable Navier Stokes element that inherits from </span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// ElementWithExternalElement so that it can &quot;communicate&quot; with </span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// an advection diffusion element that provides the temperature</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// in the body force term.</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> NST_ELEMENT, <span class="keyword">class</span> AD_ELEMENT&gt;</div>
-<div class="line"><span class="keyword">class </span>RefineableNavierStokesBoussinesqElement : <span class="keyword">public</span> <span class="keyword">virtual</span> NST_ELEMENT,</div>
-<div class="line"><span class="keyword">public</span> <span class="keyword">virtual</span> ElementWithExternalElement</div>
-<div class="line">{</div>
+ <div class="fragment"><div class="line">  <span class="comment">//======================nst_bous_class=================================</span></div>
+<div class="line"><span class="comment">  /// Build a refineable Navier Stokes element that inherits from</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// ElementWithExternalElement so that it can &quot;communicate&quot; with</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// an advection diffusion element that provides the temperature</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// in the body force term.</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//=====================================================================</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">class</span> NST_ELEMENT, <span class="keyword">class</span> AD_ELEMENT&gt;</div>
+<div class="line">  <span class="keyword">class </span>RefineableNavierStokesBoussinesqElement</div>
+<div class="line">    : <span class="keyword">public</span> <span class="keyword">virtual</span> NST_ELEMENT,</div>
+<div class="line">      <span class="keyword">public</span> <span class="keyword">virtual</span> ElementWithExternalElement</div>
+<div class="line">  {</div>
 </div><!-- fragment --><p>The constructor calls the constructors of the underlying elements, initialises the pointer to the Rayleigh number (stored as private member data in the class) and sets the number of interactions to one, indicating that the residuals of the Navier-Stokes element are only affected by a single type of "external element" &ndash; the advection-diffusion element that determines the temperature distribution.</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line">  <span class="keyword">public</span>: </div>
-<div class="line"> <span class="comment"></span></div>
-<div class="line"><span class="comment"> /// \short Constructor: call the underlying constructors and </span></div>
-<div class="line"><span class="comment"> /// initialise the pointer to the Rayleigh number to point</span></div>
-<div class="line"><span class="comment"> /// to the default value of 0.0.</span></div>
-<div class="line"><span class="comment"></span> RefineableNavierStokesBoussinesqElement() : </div>
-<div class="line">  NST_ELEMENT(), ElementWithExternalElement()</div>
-<div class="line">  {</div>
-<div class="line">   Ra_pt = &amp;<a class="code" href="namespaceoomph_1_1MultiDomainBoussinesqHelper.html#ae77c07b69cffe295ac07e2c25c31a8aa">MultiDomainBoussinesqHelper::Default_Physical_Constant_Value</a>;</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">//There is one interaction: The effect of the advection-diffusion</span></div>
-<div class="line">   <span class="comment">//element onto the buoyancy term</span></div>
-<div class="line">   this-&gt;set_ninteraction(1);</div>
-<div class="line">  } </div>
+<div class="fragment"><div class="line">  <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">    /// \short Constructor: call the underlying constructors and</span></div>
+<div class="line"><span class="comment">    /// initialise the pointer to the Rayleigh number to point</span></div>
+<div class="line"><span class="comment">    /// to the default value of 0.0.</span></div>
+<div class="line"><span class="comment"></span>    RefineableNavierStokesBoussinesqElement()</div>
+<div class="line">      : NST_ELEMENT(), ElementWithExternalElement()</div>
+<div class="line">    {</div>
+<div class="line">      Ra_pt = &amp;<a class="code" href="namespaceoomph_1_1MultiDomainBoussinesqHelper.html#ae77c07b69cffe295ac07e2c25c31a8aa">MultiDomainBoussinesqHelper::Default_Physical_Constant_Value</a>;</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// There is one interaction: The effect of the advection-diffusion</span></div>
+<div class="line">      <span class="comment">// element onto the buoyancy term</span></div>
+<div class="line">      this-&gt;set_ninteraction(1);</div>
+<div class="line">    }</div>
 </div><!-- fragment --><p>We provide access functions to the Rayleigh number</p>
-<div class="fragment"><div class="line">  <span class="comment"></span></div>
-<div class="line"><span class="comment">  ///Access function for the Rayleigh number (const version)</span></div>
-<div class="line"><span class="comment"></span>  <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ra()<span class="keyword"> const </span>{<span class="keywordflow">return</span> *Ra_pt;}</div>
-<div class="line">  <span class="comment"></span></div>
-<div class="line"><span class="comment">  ///Access function for the pointer to the Rayleigh number</span></div>
-<div class="line"><span class="comment"></span>  <span class="keywordtype">double</span>* &amp;ra_pt() {<span class="keywordflow">return</span> Ra_pt;}</div>
-</div><!-- fragment --><p>and, given that we are dealing with a refineable element, make sure that the pointer to the Rayleigh number is passed to the "son" elements when the element is refined. Furthermore, if the external geometric data could safely be ignored in the "father" elements we assume that the same is true for the "sons":</p>
-<div class="fragment"><div class="line">  <span class="comment"></span></div>
-<div class="line"><span class="comment">  /// \short Call the underlying single-physics element&#39;s further_build()</span></div>
-<div class="line"><span class="comment">  /// functions and make sure that the pointer to the Rayleigh number</span></div>
-<div class="line"><span class="comment">  /// is passed to the sons. Also make sure that if the external geometric</span></div>
-<div class="line"><span class="comment">  /// Data was ignored in the father it&#39;s also ignored in the sons</span></div>
-<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> further_build()</div>
-<div class="line">  {</div>
-<div class="line">   NST_ELEMENT::further_build();</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">//Cast the pointer to the father element to the specific</span></div>
-<div class="line">   <span class="comment">//element type</span></div>
-<div class="line">   RefineableNavierStokesBoussinesqElement&lt;NST_ELEMENT,AD_ELEMENT&gt;* </div>
-<div class="line">    cast_father_element_pt</div>
-<div class="line">    = <span class="keyword">dynamic_cast&lt;</span>RefineableNavierStokesBoussinesqElement</div>
-<div class="line">    &lt;NST_ELEMENT,AD_ELEMENT<span class="keyword">&gt;</span>*&gt;(</div>
-<div class="line">     this-&gt;father_element_pt());</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">//Set the pointer to the Rayleigh number to be the same as that in</span></div>
-<div class="line">   <span class="comment">//the father</span></div>
-<div class="line">   this-&gt;Ra_pt = cast_father_element_pt-&gt;ra_pt();</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Retain ignorance about external geometric data...</span></div>
-<div class="line">   <span class="keywordflow">if</span> (!cast_father_element_pt-&gt;external_geometric_data_is_included())</div>
+<div class="fragment"></div><!-- fragment --><p>and, given that we are dealing with a refineable element, make sure that the pointer to the Rayleigh number is passed to the "son" elements when the element is refined. Furthermore, if the external geometric data could safely be ignored in the "father" elements we assume that the same is true for the "sons":</p>
+<div class="fragment"></div><!-- fragment --><p>The most important step is to overload the function that computes the body force in the Navier-Stokes equations so that it depends on the temperature at the <code>ipt</code> -th integration point, as computed by the "external element":</p>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short Overload get_body_force_nst() to return the temperature-dependent</span></div>
+<div class="line"><span class="comment">    /// buoyancy force, using the temperature computed by the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// &quot;external&quot; advection diffusion element associated with</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// integration point \c ipt.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> get_body_force_nst(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line">                            <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ipt,</div>
+<div class="line">                            <span class="keyword">const</span> Vector&lt;double&gt;&amp; s,</div>
+<div class="line">                            <span class="keyword">const</span> Vector&lt;double&gt;&amp; x,</div>
+<div class="line">                            Vector&lt;double&gt;&amp; body_force)</div>
 <div class="line">    {</div>
-<div class="line">     this-&gt;ignore_external_geometric_data();</div>
-<div class="line">    }</div>
-</div><!-- fragment --><p>The most important step is to overload the function that computes the body force in the Navier-Stokes equations so that it depends on the temperature at the <code>ipt</code> -th integration point, as computed by the "external element":</p>
- <div class="fragment"><div class="line">  <span class="comment">/// \short Overload get_body_force_nst() to return the temperature-dependent</span></div>
-<div class="line"><span class="comment">  /// buoyancy force, using the temperature computed by the </span></div>
-<div class="line"><span class="comment"></span><span class="comment">  /// &quot;external&quot; advection diffusion element associated with </span></div>
-<div class="line"><span class="comment"></span><span class="comment">  /// integration point \c ipt.</span></div>
-<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> get_body_force_nst(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ipt, </div>
-<div class="line">                          <span class="keyword">const</span> Vector&lt;double&gt; &amp;s, <span class="keyword">const</span> Vector&lt;double&gt; &amp;x, </div>
-<div class="line">                          Vector&lt;double&gt; &amp;body_force)</div>
-<div class="line">  {   </div>
-<div class="line">   <span class="comment">// Set interaction index -- there&#39;s only one interaction...</span></div>
-<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> interaction=0;</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Get a pointer to the external element that computes the</span></div>
-<div class="line">   <span class="comment">// the temperature -- we know it&#39;s an advection diffusion element.</span></div>
-<div class="line">   <span class="keyword">const</span> AD_ELEMENT* adv_diff_el_pt=</div>
-<div class="line">    <span class="keyword">dynamic_cast&lt;</span>AD_ELEMENT*<span class="keyword">&gt;</span>(</div>
-<div class="line">     external_element_pt(interaction,ipt));</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Get the temperature interpolated from the external element</span></div>
-<div class="line">   <span class="keyword">const</span> <span class="keywordtype">double</span> interpolated_t =adv_diff_el_pt-&gt;</div>
-<div class="line">    interpolated_u_adv_diff(external_element_local_coord(interaction,ipt));</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Get vector that indicates the direction of gravity from</span></div>
-<div class="line">   <span class="comment">// the Navier-Stokes equations</span></div>
-<div class="line">   Vector&lt;double&gt; gravity(NST_ELEMENT::g());</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Set the temperature-dependent body force:</span></div>
-<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_dim=this-&gt;dim();</div>
-<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;n_dim;i++)</div>
-<div class="line">    {</div>
-<div class="line">     body_force[i] = -gravity[i]*interpolated_t*ra();</div>
-<div class="line">    }</div>
-<div class="line">   </div>
-<div class="line">  } <span class="comment">// end overloaded body force</span></div>
+<div class="line">      <span class="comment">// Set interaction index -- there&#39;s only one interaction...</span></div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> interaction = 0;</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get a pointer to the external element that computes the</span></div>
+<div class="line">      <span class="comment">// the temperature -- we know it&#39;s an advection diffusion element.</span></div>
+<div class="line">      <span class="keyword">const</span> AD_ELEMENT* adv_diff_el_pt =</div>
+<div class="line">        <span class="keyword">dynamic_cast&lt;</span>AD_ELEMENT*<span class="keyword">&gt;</span>(external_element_pt(interaction, ipt));</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get the temperature interpolated from the external element</span></div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> interpolated_t = adv_diff_el_pt-&gt;interpolated_u_adv_diff(</div>
+<div class="line">        external_element_local_coord(interaction, ipt));</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get vector that indicates the direction of gravity from</span></div>
+<div class="line">      <span class="comment">// the Navier-Stokes equations</span></div>
+<div class="line">      Vector&lt;double&gt; gravity(NST_ELEMENT::g());</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Set the temperature-dependent body force:</span></div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_dim = this-&gt;dim();</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; n_dim; i++)</div>
+<div class="line">      {</div>
+<div class="line">        body_force[i] = -gravity[i] * interpolated_t * ra();</div>
+<div class="line">      }</div>
+<div class="line"> </div>
+<div class="line">    } <span class="comment">// end overloaded body force</span></div>
 </div><!-- fragment --><p>There is only one external interaction so the interaction index is set to zero and the value of the temperature at the integration point is obtained by casting the external element to an advection diffusion element and finding its interpolated field at the appropriate stored local coordinate. Once the temperature has been obtained, the code is identical to that discussed in the <a href="../../b_convection/html/index.html">tutorial for the corresponding multi-field implementation</a>; in that implementation the temperature could be found from a member function because the interaction is internal to the element.</p>
 <p>Finally, we have to compute the element's Jacobian matrix. The easiest (although potentially inefficient) way to do this is to recycle the analytical computation of the derivatives of the Navier-Stokes residuals with respect to the fluid degrees of freedom, as implemented in <br  />
  <code>NST_ELEMENT::fill_in_contribution_to_jacobian(...)</code>,</p>
- <div class="fragment"><div class="line"> <span class="comment">/// \short Compute the element&#39;s residual vector and the Jacobian matrix.</span></div>
-<div class="line">  <span class="keywordtype">void</span> fill_in_contribution_to_jacobian(Vector&lt;double&gt; &amp;residuals,</div>
-<div class="line">                                        DenseMatrix&lt;double&gt; &amp;jacobian)</div>
-<div class="line">  {</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">//Get the analytical contribution from the basic Navier-Stokes element</span></div>
-<div class="line">   NST_ELEMENT::fill_in_contribution_to_jacobian(residuals,jacobian);</div>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short Compute the element&#39;s residual vector and the Jacobian matrix.</span></div>
 </div><!-- fragment --><p>and then fill in the derivatives with respect to the degrees of freedom associated with the "external
 elements" by finite differencing:</p>
-<div class="fragment"><div class="line">   </div>
-<div class="line"><span class="preprocessor">#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ</span></div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//Get the off-diagonal terms by finite differencing</span></div>
-<div class="line">   this-&gt;fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);</div>
-<div class="line">   </div>
-<div class="line"><span class="preprocessor">#else</span></div>
-</div><!-- fragment --><p>If this is deemed to be too inefficient, we can provide a function that computes the required entries in the Jacobian analytically:</p>
-<div class="fragment"><div class="line">   </div>
-<div class="line">   <span class="comment">//Get the off-diagonal terms analytically</span></div>
-<div class="line">   this-&gt;fill_in_off_diagonal_block_analytic(residuals,jacobian);</div>
-<div class="line">   </div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line">   </div>
-<div class="line">  }</div>
-</div><!-- fragment --><p>(The code illustrates both approaches and employs the macro <code>USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ</code> to choose which one to use.)</p>
+<div class="fragment"></div><!-- fragment --><p>If this is deemed to be too inefficient, we can provide a function that computes the required entries in the Jacobian analytically:</p>
+<div class="fragment"></div><!-- fragment --><p>(The code illustrates both approaches and employs the macro <code>USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ</code> to choose which one to use.)</p>
 <p>We refer to <a href="#optimise"><b>Part IV</b></a> for a discussion of how to implement the fully-analytic computation of the Jacobian matrix in the function <code>fill_in_off_diagonal_block_analytic(...)</code>.</p>
 <hr  />
 <hr  />
 <h2><a class="anchor" id="ad"></a>
 Upgrading the advection-diffusion element to an ElementWithExternalElement</h2>
 <p>Upgrading the advection-diffusion element to an <code>ElementWithExternalElement</code> in which the wind is given by the "external" Navier Stokes element follows the same procedure. We use multiple inheritance to construct the element and set the number of interactions to one:</p>
- <div class="fragment"><div class="line"><span class="comment">//======================ad_bous_class==================================</span></div>
-<div class="line"><span class="comment">/// Build an AdvectionDiffusionElement that inherits from </span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// ElementWithExternalElement so that it can &quot;communicate&quot; with the </span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// a NavierStokesElement that provides its wind.</span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> AD_ELEMENT, <span class="keyword">class</span> NST_ELEMENT&gt;</div>
-<div class="line"><span class="keyword">class </span>RefineableAdvectionDiffusionBoussinesqElement : </div>
-<div class="line"><span class="keyword">public</span> <span class="keyword">virtual</span> AD_ELEMENT, <span class="keyword">public</span> <span class="keyword">virtual</span> ElementWithExternalElement</div>
-<div class="line">{</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment"> /// \short Constructor: call the underlying constructors</span></div>
-<div class="line"><span class="comment"></span> RefineableAdvectionDiffusionBoussinesqElement() : </div>
-<div class="line">  AD_ELEMENT(), ElementWithExternalElement() </div>
-<div class="line">  { </div>
-<div class="line">   <span class="comment">//There is one interaction</span></div>
-<div class="line">   this-&gt;set_ninteraction(1);</div>
-<div class="line">  }</div>
+ <div class="fragment"><div class="line">  <span class="comment">//======================ad_bous_class==================================</span></div>
+<div class="line"><span class="comment">  /// Build an AdvectionDiffusionElement that inherits from</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// ElementWithExternalElement so that it can &quot;communicate&quot; with the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// a NavierStokesElement that provides its wind.</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//=====================================================================</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">class</span> AD_ELEMENT, <span class="keyword">class</span> NST_ELEMENT&gt;</div>
+<div class="line">  <span class="keyword">class </span>RefineableAdvectionDiffusionBoussinesqElement</div>
+<div class="line">    : <span class="keyword">public</span> <span class="keyword">virtual</span> AD_ELEMENT,</div>
+<div class="line">      <span class="keyword">public</span> <span class="keyword">virtual</span> ElementWithExternalElement</div>
+<div class="line">  {</div>
+<div class="line">  <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">    /// \short Constructor: call the underlying constructors</span></div>
+<div class="line"><span class="comment"></span>    RefineableAdvectionDiffusionBoussinesqElement()</div>
+<div class="line">      : AD_ELEMENT(), ElementWithExternalElement()</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// There is one interaction</span></div>
+<div class="line">      this-&gt;set_ninteraction(1);</div>
+<div class="line">    }</div>
 </div><!-- fragment --><p>We overload the function that computes the "wind" for the advection diffusion equations so that it is given by the fluid velocity at the <code>ipt</code> -th integration point, as computed by the "external element":</p>
- <div class="fragment"><div class="line"> <span class="comment">/// \short Overload the wind function in the advection-diffusion equations.</span></div>
-<div class="line"><span class="comment"> /// This provides the coupling from the Navier--Stokes equations to the</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// advection-diffusion equations because the wind is the fluid velocity,</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// obtained from the &quot;external&quot; element</span></div>
-<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> get_wind_adv_diff(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ipt, <span class="keyword">const</span> Vector&lt;double&gt; &amp;s, </div>
-<div class="line">                        <span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; wind)<span class="keyword"> const</span></div>
-<div class="line"><span class="keyword"> </span>{</div>
-<div class="line">  <span class="comment">// There is only one interaction</span></div>
-<div class="line">  <span class="keywordtype">unsigned</span> interaction=0;</div>
-<div class="line">  </div>
-<div class="line">  <span class="comment">// Dynamic cast &quot;external&quot; element to Navier Stokes element</span></div>
-<div class="line">  NST_ELEMENT* nst_el_pt= <span class="keyword">dynamic_cast&lt;</span>NST_ELEMENT*<span class="keyword">&gt;</span></div>
-<div class="line">   (external_element_pt(interaction,ipt));</div>
-<div class="line">  </div>
-<div class="line">  <span class="comment">//Wind is given by the velocity in the Navier Stokes element</span></div>
-<div class="line">  nst_el_pt-&gt;interpolated_u_nst</div>
-<div class="line">   (external_element_local_coord(interaction,ipt),wind);</div>
-<div class="line">  </div>
-<div class="line"> }  <span class="comment">//end of get_wind_adv_diff</span></div>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short Overload the wind function in the advection-diffusion equations.</span></div>
 </div><!-- fragment --><p>Again, there is only one external interaction so the interaction index is set to zero and the external element must be cast to a Navier-Stokes element so that the interpolated velocity field can be found. The code is similar to that used in the <a href="../../b_convection/html/index.html">multi-field implementation</a>, which uses internal, rather than external, interaction.</p>
 <p>The element's Jacobian matrix can be computed by the same methods discussed for the Navier-Stokes elements:</p>
-<div class="fragment"><div class="line"> <span class="comment">///\short Compute the element&#39;s residual vector and the Jacobian matrix.</span></div>
-<div class="line"> <span class="keywordtype">void</span> fill_in_contribution_to_jacobian(Vector&lt;double&gt; &amp;residuals,</div>
-<div class="line">                                       DenseMatrix&lt;double&gt; &amp;jacobian)</div>
-<div class="line"> {</div>
-<div class="line">  <span class="comment">//Get the contribution from the basic advection diffusion element</span></div>
-<div class="line">  AD_ELEMENT::fill_in_contribution_to_jacobian(residuals,jacobian);</div>
-<div class="line">  </div>
-<div class="line"><span class="preprocessor">#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ</span></div>
-<div class="line">  </div>
-<div class="line">  <span class="comment">//Get the off-diagonal terms by finite differencing</span></div>
-<div class="line">  this-&gt;fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);</div>
-<div class="line">  </div>
-<div class="line"><span class="preprocessor">#else</span></div>
-<div class="line">  </div>
-<div class="line">  <span class="comment">//Get the off-diagonal terms analytically</span></div>
-<div class="line">  this-&gt;fill_in_off_diagonal_block_analytic(residuals,jacobian);</div>
-<div class="line">  </div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line">  </div>
-<div class="line"> }</div>
-</div><!-- fragment --><hr  />
+<div class="fragment"></div><!-- fragment --><hr  />
  <hr  />
 <h1><a class="anchor" id="multi_domain_boussinesq"></a>
 Part III: The driver code for the multi-domain Boussinesq problem</h1>
@@ -737,53 +646,52 @@ Part IV: Optimising multi-domain interactions</h1>
 <h2><a class="anchor" id="restricting_field_data"></a>
 Ignoring field data that does not participate in the interaction</h2>
 <p>The function <code>ElementWithExternalElement::identify_all_field_data_for_external_interaction(...)</code> assumes that <b>all</b> data values in the external elements affect the interaction with the <code>ElementWithExternalElement</code>. In many cases this assumption is overly pessimistic (and costly). For instance in the Boussinesq convection problem only the velocity degrees of freedom in the (external) Navier-Stokes element affect the the advection-diffusion equations via the "wind". It is therefore sensible to exclude the pressure degrees of freedom from the interaction by re-implementing <code>identify_all_field_data_for_external_interaction(...)</code> as follows</p>
- <div class="fragment"><div class="line"><span class="comment">//================optimised_identification_of_field_data==================</span></div>
-<div class="line"><span class="comment">/// Overload the function that must return all field data involved</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// in the interaction with the external (Navier Stokes) element. </span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// Only the velocity dofs in the Navier Stokes element affect the</span></div>
-<div class="line"><span class="comment"></span><span class="comment">/// interaction with the current element. </span></div>
-<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> AD_ELEMENT, <span class="keyword">class</span> NST_ELEMENT&gt;</div>
-<div class="line"><span class="keywordtype">void</span> RefineableAdvectionDiffusionBoussinesqElement&lt;AD_ELEMENT,NST_ELEMENT&gt;::</div>
-<div class="line">identify_all_field_data_for_external_interaction(</div>
-<div class="line"> Vector&lt;std::set&lt;FiniteElement*&gt; &gt; <span class="keyword">const</span> &amp;external_elements_pt,</div>
-<div class="line"> std::set&lt;std::pair&lt;Data*,unsigned&gt; &gt; &amp;paired_interaction_data)</div>
-<div class="line"> {</div>
-<div class="line">  <span class="comment">//There&#39;s only one interaction</span></div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> interaction = 0;</div>
-<div class="line">  </div>
-<div class="line">  <span class="comment">// Loop over each Navier Stokes element in the set of external elements that</span></div>
-<div class="line">  <span class="comment">// affect the current element</span></div>
-<div class="line">  <span class="keywordflow">for</span>(std::set&lt;FiniteElement*&gt;::iterator it=</div>
-<div class="line">       external_elements_pt[interaction].begin();</div>
-<div class="line">      it != external_elements_pt[interaction].end(); it++)</div>
-<div class="line">   {</div>
-<div class="line">    </div>
-<div class="line">    <span class="comment">//Cast the external element to a fluid element</span></div>
-<div class="line">    NST_ELEMENT* external_fluid_el_pt =</div>
-<div class="line">     <span class="keyword">dynamic_cast&lt;</span>NST_ELEMENT*<span class="keyword">&gt;</span>(*it);</div>
-<div class="line">   </div>
-<div class="line">   <span class="comment">// Loop over the nodes</span></div>
-<div class="line">   <span class="keywordtype">unsigned</span> nnod=external_fluid_el_pt-&gt;nnode();</div>
-<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;nnod;j++)</div>
+ <div class="fragment"><div class="line">  <span class="comment">//================optimised_identification_of_field_data==================</span></div>
+<div class="line"><span class="comment">  /// Overload the function that must return all field data involved</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// in the interaction with the external (Navier Stokes) element.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// Only the velocity dofs in the Navier Stokes element affect the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">  /// interaction with the current element.</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//=======================================================================</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">class</span> AD_ELEMENT, <span class="keyword">class</span> NST_ELEMENT&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> RefineableAdvectionDiffusionBoussinesqElement&lt;AD_ELEMENT, NST_ELEMENT&gt;::</div>
+<div class="line">    identify_all_field_data_for_external_interaction(</div>
+<div class="line">      Vector&lt;std::set&lt;FiniteElement*&gt;&gt; <span class="keyword">const</span>&amp; external_elements_pt,</div>
+<div class="line">      std::set&lt;std::pair&lt;Data*, unsigned&gt;&gt;&amp; paired_interaction_data)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// There&#39;s only one interaction</span></div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> interaction = 0;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Loop over each Navier Stokes element in the set of external elements that</span></div>
+<div class="line">    <span class="comment">// affect the current element</span></div>
+<div class="line">    <span class="keywordflow">for</span> (std::set&lt;FiniteElement*&gt;::iterator it =</div>
+<div class="line">           external_elements_pt[interaction].begin();</div>
+<div class="line">         it != external_elements_pt[interaction].end();</div>
+<div class="line">         it++)</div>
 <div class="line">    {</div>
-<div class="line">     <span class="comment">// Pointer to node (in its incarnation as Data)</span></div>
-<div class="line">     Data* veloc_data_pt=external_fluid_el_pt-&gt;node_pt(j);</div>
-<div class="line">     </div>
-<div class="line">     <span class="comment">// Get all velocity dofs</span></div>
-<div class="line">     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_dim=this-&gt;dim();</div>
-<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;n_dim;i++)</div>
+<div class="line">      <span class="comment">// Cast the external element to a fluid element</span></div>
+<div class="line">      NST_ELEMENT* external_fluid_el_pt = <span class="keyword">dynamic_cast&lt;</span>NST_ELEMENT*<span class="keyword">&gt;</span>(*it);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Loop over the nodes</span></div>
+<div class="line">      <span class="keywordtype">unsigned</span> nnod = external_fluid_el_pt-&gt;nnode();</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j = 0; j &lt; nnod; j++)</div>
 <div class="line">      {</div>
-<div class="line">       <span class="comment">// Which value corresponds to the i-th velocity?</span></div>
-<div class="line">       <span class="keywordtype">unsigned</span> val=external_fluid_el_pt-&gt;u_index_nst(i);</div>
-<div class="line">       </div>
-<div class="line">       <span class="comment">// Turn pointer to Data and index of value into pair</span></div>
-<div class="line">       <span class="comment">// and add to the set</span></div>
-<div class="line">       paired_interaction_data.insert(std::make_pair(veloc_data_pt,val));</div>
+<div class="line">        <span class="comment">// Pointer to node (in its incarnation as Data)</span></div>
+<div class="line">        Data* veloc_data_pt = external_fluid_el_pt-&gt;node_pt(j);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Get all velocity dofs</span></div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_dim = this-&gt;dim();</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; n_dim; i++)</div>
+<div class="line">        {</div>
+<div class="line">          <span class="comment">// Which value corresponds to the i-th velocity?</span></div>
+<div class="line">          <span class="keywordtype">unsigned</span> val = external_fluid_el_pt-&gt;u_index_nst(i);</div>
+<div class="line"> </div>
+<div class="line">          <span class="comment">// Turn pointer to Data and index of value into pair</span></div>
+<div class="line">          <span class="comment">// and add to the set</span></div>
+<div class="line">          paired_interaction_data.insert(std::make_pair(veloc_data_pt, val));</div>
+<div class="line">        }</div>
 <div class="line">      }</div>
 <div class="line">    }</div>
-<div class="line">  }</div>
-<div class="line">} <span class="comment">// done</span></div>
+<div class="line">  } <span class="comment">// done</span></div>
 </div><!-- fragment --><p>Similar approaches can be used to ignore selected (weak) interactions when computing the element's Jacobian matrix. For instance, the <code>FSIWallElement</code> is an <code>ElementWithExternalElement</code> for which the adjacent fluid elements that apply the fluid traction to the FSI boundary act as "external elements". In high-Reynolds-number flows, the fluid traction is dominated by the pressure while shear stresses tend to be small. The <code>FSIWallElement</code> therefore uses the same mechanism as illustrated above to (optionally) neglect the derivatives of its residuals with respect to the fluid velocity degrees of freedom. We stress that this does not exclude the shear stress from the computation &ndash; it simply replaces the exact Jacobian by an approximate version in which the effect of the velocity degrees of freedom on the residuals of the <code>FSIWallElement</code> are neglected. This may lead to a slight degradation in the convergence rate of the Newton iteration but this may be more than compensated for by the reduction in the CPU times required to compute the Jacobian matrix.</p>
 <hr  />
 <h2><a class="anchor" id="restricting_geom_data"></a>
@@ -859,7 +767,7 @@ PDF file</h1>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a637fd2a6a7c5b34ed3288300d8bf84b7"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a637fd2a6a7c5b34ed3288300d8bf84b7">Global_Physical_Variables::Rayleigh</a></div><div class="ttdeci">double Rayleigh</div><div class="ttdoc">Rayleigh number, set to be greater than the threshold for linear instability.</div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__convection_8cc_source.html#l00058">boussinesq_convection.cc:58</a></div></div>
-<div class="ttc" id="anamespaceoomph_1_1MultiDomainBoussinesqHelper_html_ae77c07b69cffe295ac07e2c25c31a8aa"><div class="ttname"><a href="namespaceoomph_1_1MultiDomainBoussinesqHelper.html#ae77c07b69cffe295ac07e2c25c31a8aa">oomph::MultiDomainBoussinesqHelper::Default_Physical_Constant_Value</a></div><div class="ttdeci">double Default_Physical_Constant_Value</div><div class="ttdoc">Default value for physical constants.</div><div class="ttdef"><b>Definition:</b> <a href="multi__domain__boussinesq__elements_8h_source.html#l00051">multi_domain_boussinesq_elements.h:51</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1MultiDomainBoussinesqHelper_html_ae77c07b69cffe295ac07e2c25c31a8aa"><div class="ttname"><a href="namespaceoomph_1_1MultiDomainBoussinesqHelper.html#ae77c07b69cffe295ac07e2c25c31a8aa">oomph::MultiDomainBoussinesqHelper::Default_Physical_Constant_Value</a></div><div class="ttdeci">double Default_Physical_Constant_Value</div><div class="ttdoc">Default value for physical constants.</div><div class="ttdef"><b>Definition:</b> <a href="multi__domain__boussinesq__elements_8h_source.html#l00048">multi_domain_boussinesq_elements.h:48</a></div></div>
 <div class="ttc" id="aclassRefineableConvectionProblem_html_a97e661986093402bf55fb6c32b782ddc"><div class="ttname"><a href="classRefineableConvectionProblem.html#a97e661986093402bf55fb6c32b782ddc">RefineableConvectionProblem::RefineableConvectionProblem</a></div><div class="ttdeci">RefineableConvectionProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="multi__domain__ref__b__convection_8cc_source.html#l00187">multi_domain_ref_b_convection.cc:187</a></div></div>
 <div class="ttc" id="aclassRefineableConvectionProblem_html_a694f0be87fe09a30d94e92acfce85eee"><div class="ttname"><a href="classRefineableConvectionProblem.html#a694f0be87fe09a30d94e92acfce85eee">RefineableConvectionProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve:</div><div class="ttdef"><b>Definition:</b> <a href="multi__domain__ref__b__convection_8cc_source.html#l00364">multi_domain_ref_b_convection.cc:364</a></div></div>
 <div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a87796c9f402e6f90c07cf5ba0db4367e"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a87796c9f402e6f90c07cf5ba0db4367e">Global_Physical_Variables::Inverse_Prandtl</a></div><div class="ttdeci">double Inverse_Prandtl</div><div class="ttdoc">1/Prandtl number</div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__convection_8cc_source.html#l00054">boussinesq_convection.cc:54</a></div></div>
@@ -893,7 +801,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:24:05
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:03:36
         </div>
       </div>
     </footer>

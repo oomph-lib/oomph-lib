@@ -67,8 +67,7 @@ double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a17313d4bf33a00c472f
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_aa2de83c41435886f3bd1eb8f5bd3d9f6}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+biharmonic\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. Flux elements only make contribution to the residual vector. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_acf685857a04bc982fa884025609904b2}{J\+\_\+eulerian}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
-\begin{DoxyCompactList}\small\item\em Calculate the Jacobian of the mapping between local and global coordinates at the position s for face elements for two dimensional problems The jacobian of the 1D face element is computed which is dt/ds\+\_\+t ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate the Jacobian of the mapping between local and global coordinates at the position s for face elements for two dimensional problems The jacobian of the 1D face element is computed which is dt/ds\+\_\+t. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_aefab5b3ebf50ee9b4c9fff1a0e51e2fd}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+biharmonic\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residual)
 \begin{DoxyCompactList}\small\item\em Compute the elemental contribution to the residual vector for 2D problem type 0 biharmonic flux elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -91,7 +90,7 @@ class oomph\+::\+Biharmonic\+Flux\+Element$<$ D\+I\+M $>$}
 
 Biharmonic Flux Element. 
 
-Definition at line 89 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 81 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -105,7 +104,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\
 
 definition of flux function pointer, flux must be parametised in terms of the macro element coordinate position (s) along the problem edge 
 
-Definition at line 98 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 88 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -134,7 +133,7 @@ Broken empty constructor.
 
 
 
-Definition at line 107 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 97 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluxElement_a471a32aff811268bb75a138f7d8f4204}\label{classoomph_1_1BiharmonicFluxElement_a471a32aff811268bb75a138f7d8f4204}} 
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!BiharmonicFluxElement@{BiharmonicFluxElement}}
@@ -149,7 +148,7 @@ Broken copy constructor.
 
 
 
-Definition at line 117 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 106 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -163,7 +162,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. And the macro element position of the flux element along the edge of the problem 
 
-Definition at line 47 of file biharmonic\+\_\+flux\+\_\+elements.\+cc.
+Definition at line 46 of file biharmonic\+\_\+flux\+\_\+elements.\+cc.
 
 
 
@@ -189,7 +188,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 180 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 178 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluxElement_a2d9f3025aa3d9e941a95e2d2ca7f86ce}\label{classoomph_1_1BiharmonicFluxElement_a2d9f3025aa3d9e941a95e2d2ca7f86ce}} 
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -208,7 +207,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 145 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 140 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -231,7 +230,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 136 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 131 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -249,7 +248,7 @@ Compute the elemental contribution to the residual vector for 2D problem type 0 
 
 
 
-Definition at line 128 of file biharmonic\+\_\+flux\+\_\+elements.\+cc.
+Definition at line 125 of file biharmonic\+\_\+flux\+\_\+elements.\+cc.
 
 
 
@@ -283,7 +282,7 @@ Access function for the flux0 function pointer.
 
 
 
-Definition at line 130 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 119 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -306,7 +305,7 @@ Access function for the flux1 function pointer.
 
 
 
-Definition at line 133 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 125 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -329,7 +328,7 @@ Function to return the prescribed flux at a given macro element coordinate posit
 
 
 
-Definition at line 193 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 196 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -348,7 +347,7 @@ Function to return the prescribed flux at a given macro element coordinate posit
 
 
 
-Definition at line 209 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 212 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -362,8 +361,7 @@ References oomph\+::\+Biharmonic\+Flux\+Element$<$ D\+I\+M $>$\+::\+Flux1\+\_\+f
 
 
 
-Calculate the Jacobian of the mapping between local and global coordinates at the position s for face elements for two dimensional problems The jacobian of the 1D face element is computed which is dt/ds\+\_\+t ~\newline
- 
+Calculate the Jacobian of the mapping between local and global coordinates at the position s for face elements for two dimensional problems The jacobian of the 1D face element is computed which is dt/ds\+\_\+t. 
 
 
 
@@ -371,7 +369,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a919d0d76746eaa78a
 
 
 
-Definition at line 77 of file biharmonic\+\_\+flux\+\_\+elements.\+cc.
+Definition at line 74 of file biharmonic\+\_\+flux\+\_\+elements.\+cc.
 
 
 
@@ -405,7 +403,7 @@ Broken assignment operator.
 
 
 
-Definition at line 124 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 113 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -428,7 +426,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 172 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 170 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluxElement_ad5e4addb8deb7cf8df09e7f9ea23e155}\label{classoomph_1_1BiharmonicFluxElement_ad5e4addb8deb7cf8df09e7f9ea23e155}} 
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!output@{output}}
@@ -447,7 +445,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 176 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 174 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluxElement_a04c4c197b9a2e0be02a9c84a5c6d6e2a}\label{classoomph_1_1BiharmonicFluxElement_a04c4c197b9a2e0be02a9c84a5c6d6e2a}} 
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!output@{output}}
@@ -466,7 +464,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 164 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 162 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluxElement_a6fe872f8689f493bbcd2f251106284dd}\label{classoomph_1_1BiharmonicFluxElement_a6fe872f8689f493bbcd2f251106284dd}} 
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!output@{output}}
@@ -485,7 +483,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 168 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 166 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluxElement_af8520446e8c6194b43081bbb5e479bdd}\label{classoomph_1_1BiharmonicFluxElement_af8520446e8c6194b43081bbb5e479bdd}} 
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -504,7 +502,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee
 
 
 
-Definition at line 185 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 186 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluxElement_af4c405bca7989f8609926279fdf09f0f}\label{classoomph_1_1BiharmonicFluxElement_af4c405bca7989f8609926279fdf09f0f}} 
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -523,7 +521,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07
 
 
 
-Definition at line 158 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 153 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -541,7 +539,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharm
 
 
 
-Definition at line 243 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 246 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -560,7 +558,7 @@ Function pointer to the prescribed flux.
 
 
 
-Definition at line 233 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 236 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -579,7 +577,7 @@ Function pointer to the prescribed flux.
 
 
 
-Definition at line 236 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 239 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -598,7 +596,7 @@ the number of nodal degrees of freedom for the face element basis functions
 
 
 
-Definition at line 240 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
+Definition at line 243 of file biharmonic\+\_\+flux\+\_\+elements.\+h.
 
 
 

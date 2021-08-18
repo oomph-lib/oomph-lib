@@ -20,16 +20,14 @@ Inheritance diagram for oomph\+::Q\+Spectral\+Scalar\+Advection\+Element$<$ D\+I
 unsigned \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a7467b1b382307bb0d40901519465b4b1}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_ad594e0a382ee5e10e50cedf75215f40e}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a5d4b75608288e93077aa3132e56a113b}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a6cc8f352ebe569b0251345aa6e312729}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_ad6e292ae057d0ed3f3e9990fa35f9bcc}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -41,7 +39,7 @@ class oomph\+::\+Q\+Spectral\+Scalar\+Advection\+Element$<$ D\+I\+M, N\+N\+O\+D\
 
 
 
-Definition at line 183 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line 200 of file scalar\+\_\+advection\+\_\+elements.\+h.
 
 
 
@@ -59,7 +57,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\
 
 
 
-Definition at line 192 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line 207 of file scalar\+\_\+advection\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_a71dbb999674e05e7e45a0ccb95bdfea7}\label{classoomph_1_1QSpectralScalarAdvectionElement_a71dbb999674e05e7e45a0ccb95bdfea7}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!QSpectralScalarAdvectionElement@{QSpectralScalarAdvectionElement}}
@@ -74,7 +72,7 @@ Broken copy constructor.
 
 
 
-Definition at line 197 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line 213 of file scalar\+\_\+advection\+\_\+elements.\+h.
 
 
 
@@ -98,7 +96,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a21e7b05ac839ce
 
 
 
-Definition at line 333 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line 354 of file scalar\+\_\+advection\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_a6cc8f352ebe569b0251345aa6e312729}\label{classoomph_1_1QSpectralScalarAdvectionElement_a6cc8f352ebe569b0251345aa6e312729}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_flux\_transport@{dshape\_and\_dtest\_eulerian\_flux\_transport}}
@@ -109,9 +107,9 @@ double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::
 
 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Galerkin\+: Test functions = shape functions 
 
@@ -119,7 +117,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a9bdf6ab17431bc
 
 
 
-Definition at line 299 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line 321 of file scalar\+\_\+advection\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_ad594e0a382ee5e10e50cedf75215f40e}\label{classoomph_1_1QSpectralScalarAdvectionElement_ad594e0a382ee5e10e50cedf75215f40e}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -130,8 +128,7 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -139,7 +136,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_afd690f
 
 
 
-Definition at line 220 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line 240 of file scalar\+\_\+advection\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_a5d4b75608288e93077aa3132e56a113b}\label{classoomph_1_1QSpectralScalarAdvectionElement_a5d4b75608288e93077aa3132e56a113b}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -150,8 +147,7 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -159,7 +155,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6b9ea1
 
 
 
-Definition at line 225 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line 247 of file scalar\+\_\+advection\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_a7467b1b382307bb0d40901519465b4b1}\label{classoomph_1_1QSpectralScalarAdvectionElement_a7467b1b382307bb0d40901519465b4b1}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
@@ -178,7 +174,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_a71a3
 
 
 
-Definition at line 216 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line 233 of file scalar\+\_\+advection\+\_\+elements.\+h.
 
 
 

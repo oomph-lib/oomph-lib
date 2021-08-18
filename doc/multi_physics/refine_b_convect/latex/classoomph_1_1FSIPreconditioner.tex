@@ -2,8 +2,7 @@
 \label{classoomph_1_1FSIPreconditioner}\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
 
 
-F\+SI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of F\+SI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Navier\+Stokes\+Schur\+Complement\+Preconditioner is used as the inexact solver for the fluid block; Super\+LU (in its incarnation as an \char`\"{}exact\char`\"{} preconditioner) is used for the solid block. By default we retain the fluid on solid off diagonal blocks. ~\newline
-  
+F\+SI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of F\+SI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Navier\+Stokes\+Schur\+Complement\+Preconditioner is used as the inexact solver for the fluid block; Super\+LU (in its incarnation as an \char`\"{}exact\char`\"{} preconditioner) is used for the solid block. By default we retain the fluid on solid off diagonal blocks.  
 
 
 
@@ -79,10 +78,9 @@ bool \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a87e5a1cb279243414b1b0c2a5
 
 
 \doxysubsection{Detailed Description}
-F\+SI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of F\+SI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Navier\+Stokes\+Schur\+Complement\+Preconditioner is used as the inexact solver for the fluid block; Super\+LU (in its incarnation as an \char`\"{}exact\char`\"{} preconditioner) is used for the solid block. By default we retain the fluid on solid off diagonal blocks. ~\newline
- 
+F\+SI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of F\+SI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Navier\+Stokes\+Schur\+Complement\+Preconditioner is used as the inexact solver for the fluid block; Super\+LU (in its incarnation as an \char`\"{}exact\char`\"{} preconditioner) is used for the solid block. By default we retain the fluid on solid off diagonal blocks. 
 
-Definition at line 54 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 50 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -99,7 +97,7 @@ Constructor\+: By default use block triangular form with retained fluid on solid
 
 
 
-Definition at line 62 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 56 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -117,7 +115,7 @@ Destructor\+: Clean up.
 
 
 
-Definition at line 98 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 93 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -135,7 +133,7 @@ Broken copy constructor.
 
 
 
-Definition at line 113 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 108 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -152,7 +150,7 @@ Disable documentation of time.
 
 
 
-Definition at line 217 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 216 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -170,7 +168,7 @@ Enable documentation of time.
 
 
 
-Definition at line 214 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 210 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -188,7 +186,7 @@ Access function to the Navier Stokes preconditioner (inexact solver)
 
 
 
-Definition at line 208 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 203 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -206,7 +204,7 @@ Apply preconditioner to r.
 
 Apply preconditioner to Vector r. 
 
-Definition at line 381 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 378 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -224,15 +222,11 @@ Setter function for the mesh containing the block-\/preconditionable Navier-\/\+
 
 
 
-Definition at line 174 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 169 of file fsi\+\_\+preconditioners.\+h.
 
 
 
 References Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh, and Navier\+\_\+stokes\+\_\+mesh\+\_\+pt.
-
-
-
-Referenced by setup().
 
 \mbox{\Hypertarget{classoomph_1_1FSIPreconditioner_a0f21e38e18521e0946c3f3ec98a85baa}\label{classoomph_1_1FSIPreconditioner_a0f21e38e18521e0946c3f3ec98a85baa}} 
 \index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!set\_solid\_preconditioner\_pt@{set\_solid\_preconditioner\_pt}}
@@ -246,7 +240,7 @@ Broken assignment operator.
 
 Set solid preconditioner (deletes existing one) 
 
-Definition at line 130 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 126 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -264,7 +258,7 @@ Setter function for the mesh containing the block-\/preconditionable F\+SI solid
 
 
 
-Definition at line 188 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 184 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -282,11 +276,11 @@ Setup the preconditioner.
 
 Setup the preconditioner. Note\+: Matrix must be a C\+R\+Double\+Matrix. 
 
-Definition at line 275 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 274 of file fsi\+\_\+preconditioners.\+h.
 
 
 
-References Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh, Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh, Doc\+\_\+time, Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt, Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt, Navier\+\_\+stokes\+\_\+mesh\+\_\+pt, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms, Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms, set\+\_\+navier\+\_\+stokes\+\_\+mesh(), Solid\+\_\+preconditioner\+\_\+pt, and Wall\+\_\+mesh\+\_\+pt.
+References Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh, Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh, Doc\+\_\+time, Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt, Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt, Navier\+\_\+stokes\+\_\+mesh\+\_\+pt, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms, Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms, Solid\+\_\+preconditioner\+\_\+pt, and Wall\+\_\+mesh\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1FSIPreconditioner_abc97d84c4d0e7a280947855b7f33c34c}\label{classoomph_1_1FSIPreconditioner_abc97d84c4d0e7a280947855b7f33c34c}} 
 \index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!solid\_preconditioner\_pt@{solid\_preconditioner\_pt}}
@@ -300,7 +294,7 @@ Read-\/only access to solid preconditoner (use set\+\_\+... to set it)
 
 
 
-Definition at line 141 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 137 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -322,7 +316,7 @@ Switch to block-\/diagonal preconditioner.
 
 
 
-Definition at line 148 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 144 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -340,7 +334,7 @@ Switch to block-\/triangular preconditioner in which action of fluid dofs onto s
 
 
 
-Definition at line 156 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 152 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -358,7 +352,7 @@ Switch to block-\/triangular preconditioner in which action of solid dofs onto f
 
 
 
-Definition at line 164 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 160 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -375,7 +369,7 @@ References Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms, and Retain\+\_\+so
 
 Flag to indicate if there are multiple element types in the Navier-\/\+Stokes mesh. 
 
-Definition at line 256 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 257 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -389,7 +383,7 @@ Referenced by F\+S\+I\+Preconditioner(), set\+\_\+navier\+\_\+stokes\+\_\+mesh()
 
 
 
-Definition at line 259 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 260 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -407,7 +401,7 @@ Set Doc\+\_\+time to true for outputting results of timings.
 
 
 
-Definition at line 246 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 247 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -425,7 +419,7 @@ Pointer to fluid/solid interaction matrix.
 
 
 
-Definition at line 229 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 230 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -443,7 +437,7 @@ Pointer to solid/fluid solid interaction matrix.
 
 
 
-Definition at line 232 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 233 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -461,7 +455,7 @@ Pointer to the navier stokes mesh.
 
 
 
-Definition at line 249 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 250 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -479,7 +473,7 @@ Pointer the Navier Stokes preconditioner (inexact solver)
 
 
 
-Definition at line 223 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 224 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -497,7 +491,7 @@ Boolean indicating the preconditioner has been set up.
 
 
 
-Definition at line 235 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 236 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -515,7 +509,7 @@ Boolean flag used to indicate that the fluid onto solid interaction terms are to
 
 
 
-Definition at line 243 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 244 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -533,7 +527,7 @@ Boolean flag used to indicate that the solid onto fluid interaction terms are to
 
 
 
-Definition at line 239 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 240 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -551,7 +545,7 @@ Pointer to the solid preconditioner (inexact solver)
 
 
 
-Definition at line 226 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 227 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -569,7 +563,7 @@ pointer to the solid mesh
 
 
 
-Definition at line 252 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 253 of file fsi\+\_\+preconditioners.\+h.
 
 
 

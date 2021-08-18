@@ -60,7 +60,7 @@ bool \mbox{\hyperlink{classoomph_1_1BlockSelector_ad5b7ec23096f89f3d0cceed70ca07
 \begin{DoxyCompactItemize}
 \item 
 std\+::ostream \& \mbox{\hyperlink{classoomph_1_1BlockSelector_aae471ca00fb73dad738500975f46071b}{operator$<$$<$}} (std\+::ostream \&o\+\_\+stream, const \mbox{\hyperlink{classoomph_1_1BlockSelector}{Block\+Selector}} \&block\+\_\+selector)
-\begin{DoxyCompactList}\small\item\em Output function, outputs the Row\+\_\+index, Column\+\_\+index, Wanted and the address of the Replacement\+\_\+block\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Output function, outputs the Row\+\_\+index, Column\+\_\+index, Wanted and the address of the Replacement\+\_\+block\+\_\+pt. P.\+M.\+: The address of a null pointer on a Mac is 0x0 but for self-\/tests the address needs to be simply 0. Easy (but hacky) check sorts that out... \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -106,7 +106,7 @@ then the resulting concatenated matrix would contain
 
 \mbox{[} R , J\+\_\+00 J\+\_\+21 , 0 \mbox{]} 
 
-Definition at line 124 of file block\+\_\+preconditioner.\+h.
+Definition at line 123 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -123,7 +123,7 @@ Default constructor, initialise block index i, j to 0 and bool to false.
 
 
 
-Definition at line 130 of file block\+\_\+preconditioner.\+h.
+Definition at line 128 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -141,7 +141,7 @@ Constructor, takes the row and column indices and a boolean indicating if the bl
 
 
 
-Definition at line 142 of file block\+\_\+preconditioner.\+h.
+Definition at line 141 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -159,7 +159,7 @@ Default destructor.
 
 
 
-Definition at line 169 of file block\+\_\+preconditioner.\+h.
+Definition at line 168 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -176,7 +176,7 @@ References Column\+\_\+index, Replacement\+\_\+block\+\_\+pt, and Row\+\_\+index
 
 Build function, sets the Row\+\_\+index, Column\+\_\+index and Wanted variables. the Replacement\+\_\+block\+\_\+pt is only set if it is not null. Otherwise it is left alone. 
 
-Definition at line 329 of file block\+\_\+preconditioner.\+h.
+Definition at line 326 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -198,7 +198,7 @@ returns the column index.
 
 
 
-Definition at line 294 of file block\+\_\+preconditioner.\+h.
+Definition at line 290 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -220,7 +220,7 @@ Indicate that we do not want the block (set Wanted to false).
 
 
 
-Definition at line 221 of file block\+\_\+preconditioner.\+h.
+Definition at line 218 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -238,7 +238,7 @@ Set Replacement\+\_\+block\+\_\+pt to null.
 
 
 
-Definition at line 244 of file block\+\_\+preconditioner.\+h.
+Definition at line 241 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -260,7 +260,7 @@ Returns Replacement\+\_\+block\+\_\+pt.
 
 
 
-Definition at line 270 of file block\+\_\+preconditioner.\+h.
+Definition at line 266 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -282,7 +282,7 @@ returns the row index.
 
 
 
-Definition at line 282 of file block\+\_\+preconditioner.\+h.
+Definition at line 278 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -304,7 +304,7 @@ Select a block.
 
 
 
-Definition at line 190 of file block\+\_\+preconditioner.\+h.
+Definition at line 188 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -322,7 +322,7 @@ Set the column index.
 
 
 
-Definition at line 288 of file block\+\_\+preconditioner.\+h.
+Definition at line 284 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -340,7 +340,7 @@ set Replacement\+\_\+block\+\_\+pt.
 
 
 
-Definition at line 250 of file block\+\_\+preconditioner.\+h.
+Definition at line 247 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -358,7 +358,7 @@ Set the row index.
 
 
 
-Definition at line 276 of file block\+\_\+preconditioner.\+h.
+Definition at line 272 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -376,7 +376,7 @@ Indicate that we require the block (set Wanted to true).
 
 
 
-Definition at line 215 of file block\+\_\+preconditioner.\+h.
+Definition at line 212 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -394,7 +394,7 @@ returns whether the block is wanted or not.
 
 
 
-Definition at line 300 of file block\+\_\+preconditioner.\+h.
+Definition at line 296 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -415,11 +415,11 @@ Referenced by Block\+Selector(), build(), and select\+\_\+block().
 
 
 
-Output function, outputs the Row\+\_\+index, Column\+\_\+index, Wanted and the address of the Replacement\+\_\+block\+\_\+pt. 
+Output function, outputs the Row\+\_\+index, Column\+\_\+index, Wanted and the address of the Replacement\+\_\+block\+\_\+pt. P.\+M.\+: The address of a null pointer on a Mac is 0x0 but for self-\/tests the address needs to be simply 0. Easy (but hacky) check sorts that out... 
 
-P.\+M.\+: The address of a null pointer on a Mac is 0x0 but for self-\/tests the address needs to be simply 0. Easy (but hacky) check sorts that out... 
 
-Definition at line 310 of file block\+\_\+preconditioner.\+h.
+
+Definition at line 307 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -436,7 +436,7 @@ Column index of the block.
 
 
 
-Definition at line 365 of file block\+\_\+preconditioner.\+h.
+Definition at line 363 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -454,7 +454,7 @@ Pointer to the block.
 
 
 
-Definition at line 371 of file block\+\_\+preconditioner.\+h.
+Definition at line 369 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -472,7 +472,7 @@ Row index of the block.
 
 
 
-Definition at line 362 of file block\+\_\+preconditioner.\+h.
+Definition at line 360 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -490,7 +490,7 @@ Bool to indicate if we require this block.
 
 
 
-Definition at line 368 of file block\+\_\+preconditioner.\+h.
+Definition at line 366 of file block\+\_\+preconditioner.\+h.
 
 
 

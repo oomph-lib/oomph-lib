@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Biharmonic\+Fluid\+Boundary\+Element\+:\begin{f
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a7753395db6939adf4c2ebf5b7d251cef}{Biharmonic\+Fluid\+Boundary\+Element}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_ace0e7fb72a805b5c2c600347bfae7a9b}{node\+\_\+pt}}, const unsigned s\+\_\+fixed\+\_\+index)
+\mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a7753395db6939adf4c2ebf5b7d251cef}{Biharmonic\+Fluid\+Boundary\+Element}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a28ae3eb7760edc5c9d6427611d8e6fb6}{node\+\_\+pt}}, const unsigned s\+\_\+fixed\+\_\+index)
 \item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a20586e08a9a747f2165b9e2eeb62a4dc}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function -- does nothing. \end{DoxyCompactList}\item 
@@ -49,7 +49,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a4f72d42e
 \doxysubsection{Detailed Description}
 Point equation element used to impose the traction free edge (i.\+e. du/dn = 0) on the boundary when dt/ds\+\_\+n != 0. The following equation is implemented \+: du/ds\+\_\+n = dt/ds\+\_\+n $\ast$ ds\+\_\+t/dt $\ast$ du/dt. The bulk biharmonic elements on the boundary must be hijackable and the du/ds\+\_\+n and d2u/ds\+\_\+nds\+\_\+t boundary D\+O\+Fs hijacked when these elements are applied. At any node where dt/ds\+\_\+n = 0 we can impose du/ds\+\_\+n = 0 and d2u/ds\+\_\+nds\+\_\+t = 0 using pinning -\/ see \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a1cc57555bbd0ceef1d93010c133ac597}{Biharmonic\+Fluid\+Problem\+::impose\+\_\+traction\+\_\+free\+\_\+edge()}} 
 
-Definition at line 320 of file biharmonic\+\_\+problem.\+h.
+Definition at line 311 of file biharmonic\+\_\+problem.\+h.
 
 
 
@@ -62,7 +62,7 @@ Definition at line 320 of file biharmonic\+\_\+problem.\+h.
 
 
 
-Definition at line 327 of file biharmonic\+\_\+problem.\+h.
+Definition at line 315 of file biharmonic\+\_\+problem.\+h.
 
 
 
@@ -87,7 +87,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 359 of file biharmonic\+\_\+problem.\+h.
+Definition at line 345 of file biharmonic\+\_\+problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidBoundaryElement_a9bc299d6f1c70851999b9e9b72c88602}\label{classoomph_1_1BiharmonicFluidBoundaryElement_a9bc299d6f1c70851999b9e9b72c88602}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -105,7 +105,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 380 of file biharmonic\+\_\+problem.\+h.
+Definition at line 368 of file biharmonic\+\_\+problem.\+h.
 
 
 
@@ -127,7 +127,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 366 of file biharmonic\+\_\+problem.\+h.
+Definition at line 355 of file biharmonic\+\_\+problem.\+h.
 
 
 
@@ -145,7 +145,7 @@ Computes the elemental residual vector and the elemental jacobian matrix if J\+F
 
 
 
-Definition at line 398 of file biharmonic\+\_\+problem.\+cc.
+Definition at line 391 of file biharmonic\+\_\+problem.\+cc.
 
 
 
@@ -171,7 +171,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 351 of file biharmonic\+\_\+problem.\+h.
+Definition at line 337 of file biharmonic\+\_\+problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidBoundaryElement_a41c4acc14c45cb120c33d02baf7a5189}\label{classoomph_1_1BiharmonicFluidBoundaryElement_a41c4acc14c45cb120c33d02baf7a5189}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!output@{output}}
@@ -189,7 +189,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 355 of file biharmonic\+\_\+problem.\+h.
+Definition at line 341 of file biharmonic\+\_\+problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidBoundaryElement_a20586e08a9a747f2165b9e2eeb62a4dc}\label{classoomph_1_1BiharmonicFluidBoundaryElement_a20586e08a9a747f2165b9e2eeb62a4dc}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!output@{output}}
@@ -207,7 +207,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 339 of file biharmonic\+\_\+problem.\+h.
+Definition at line 325 of file biharmonic\+\_\+problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidBoundaryElement_a74ffdc1669962263212c95e7acc3cce2}\label{classoomph_1_1BiharmonicFluidBoundaryElement_a74ffdc1669962263212c95e7acc3cce2}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!output@{output}}
@@ -225,7 +225,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 343 of file biharmonic\+\_\+problem.\+h.
+Definition at line 329 of file biharmonic\+\_\+problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidBoundaryElement_a9a639b1f556286e525b221ed9a96e7f5}\label{classoomph_1_1BiharmonicFluidBoundaryElement_a9a639b1f556286e525b221ed9a96e7f5}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!output\_fluid\_velocity@{output\_fluid\_velocity}}
@@ -239,7 +239,7 @@ Output function -- does nothing.
 
 
 
-Definition at line 347 of file biharmonic\+\_\+problem.\+h.
+Definition at line 333 of file biharmonic\+\_\+problem.\+h.
 
 
 
@@ -252,7 +252,7 @@ Definition at line 347 of file biharmonic\+\_\+problem.\+h.
 
 
 
-Definition at line 401 of file biharmonic\+\_\+problem.\+h.
+Definition at line 385 of file biharmonic\+\_\+problem.\+h.
 
 
 

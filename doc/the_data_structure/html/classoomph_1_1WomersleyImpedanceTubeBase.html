@@ -177,9 +177,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a912ef51e8ac9c44e80566126da7d591f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#a912ef51e8ac9c44e80566126da7d591f">setup</a> (double *re_st_pt, const double &amp;dt, const double &amp;q_initial, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=0)</td></tr>
 <tr class="memdesc:a912ef51e8ac9c44e80566126da7d591f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the Womersley tubes so that a subsequent call to get_response(...) computes the inlet pressure for the currently prescribed instantaneous flow rate, assuming that at all previous times the tube conveyed steady, fully-developed flow with flowrate q_initial. dt specifies the timestep for the subsequent time integration. Specify: Womersley number, (constant) timestep, the initial volume flux (from which the subsequent impulsive start is performed) and, optionally the pointer to the timestepper to be used in the Womersley elements (defaults to BDF&lt;2&gt;).  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#a912ef51e8ac9c44e80566126da7d591f">More...</a><br /></td></tr>
 <tr class="separator:a912ef51e8ac9c44e80566126da7d591f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59aa99fe9771f53ee482218da67d87c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1WomersleyProblem.html">WomersleyProblem</a>&lt; ELEMENT, DIM &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#a59aa99fe9771f53ee482218da67d87c7">womersley_problem_pt</a> ()</td></tr>
-<tr class="memdesc:a59aa99fe9771f53ee482218da67d87c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to underlying Womersley problem.  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#a59aa99fe9771f53ee482218da67d87c7">More...</a><br /></td></tr>
-<tr class="separator:a59aa99fe9771f53ee482218da67d87c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e3b51eefdd1bf477a6e61d6d0950838"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1WomersleyProblem.html">WomersleyProblem</a>&lt; ELEMENT, DIM &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#a0e3b51eefdd1bf477a6e61d6d0950838">womersley_problem_pt</a> ()</td></tr>
+<tr class="memdesc:a0e3b51eefdd1bf477a6e61d6d0950838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to underlying Womersley problem.  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#a0e3b51eefdd1bf477a6e61d6d0950838">More...</a><br /></td></tr>
+<tr class="separator:a0e3b51eefdd1bf477a6e61d6d0950838"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5796e64a6f25944dc9be6489149f513"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#ad5796e64a6f25944dc9be6489149f513">shift_time_values</a> (const double &amp;dt)</td></tr>
 <tr class="memdesc:ad5796e64a6f25944dc9be6489149f513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shift history values to allow coputation of next timestep. Note: When used with a full Navier-Stokes problem this function must be called in actions_before_implicit_timestep()  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#ad5796e64a6f25944dc9be6489149f513">More...</a><br /></td></tr>
 <tr class="separator:ad5796e64a6f25944dc9be6489149f513"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -214,9 +214,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a7363d921cd306353eae884b9cfe5c8e9"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#a7363d921cd306353eae884b9cfe5c8e9">Current_volume_flux_pt</a></td></tr>
 <tr class="memdesc:a7363d921cd306353eae884b9cfe5c8e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to double that specifies the currently imposed instantaneous volume flux into the impedance tube. This is used to communicate with the Womersley elements which require access to the flux via a pointer to a double.  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#a7363d921cd306353eae884b9cfe5c8e9">More...</a><br /></td></tr>
 <tr class="separator:a7363d921cd306353eae884b9cfe5c8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab424ec7b47d3f31acd44dcf93be6b5e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1WomersleyProblem.html">WomersleyProblem</a>&lt; ELEMENT, DIM &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#ab424ec7b47d3f31acd44dcf93be6b5e5">Womersley_problem_pt</a></td></tr>
-<tr class="memdesc:ab424ec7b47d3f31acd44dcf93be6b5e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Womersley problem that determines the pressure gradient along the tube.  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#ab424ec7b47d3f31acd44dcf93be6b5e5">More...</a><br /></td></tr>
-<tr class="separator:ab424ec7b47d3f31acd44dcf93be6b5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaecc70e3f205dc58f59c6f9a7ddda0ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1WomersleyProblem.html">WomersleyProblem</a>&lt; ELEMENT, DIM &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#aaecc70e3f205dc58f59c6f9a7ddda0ac">Womersley_problem_pt</a></td></tr>
+<tr class="memdesc:aaecc70e3f205dc58f59c6f9a7ddda0ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Womersley problem that determines the pressure gradient along the tube.  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#aaecc70e3f205dc58f59c6f9a7ddda0ac">More...</a><br /></td></tr>
+<tr class="separator:aaecc70e3f205dc58f59c6f9a7ddda0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa4f6e203c33d02e82a92986b1aeee0d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#afa4f6e203c33d02e82a92986b1aeee0d">P_out</a></td></tr>
 <tr class="memdesc:afa4f6e203c33d02e82a92986b1aeee0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outlet pressure.  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#afa4f6e203c33d02e82a92986b1aeee0d">More...</a><br /></td></tr>
 <tr class="separator:afa4f6e203c33d02e82a92986b1aeee0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -226,9 +226,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a59b41acf37d7bfce3c1a8676304915d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#a59b41acf37d7bfce3c1a8676304915d7">Navier_stokes_outflow_mesh_pt</a></td></tr>
 <tr class="memdesc:a59b41acf37d7bfce3c1a8676304915d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the mesh of NavierStokesImpedanceTractionElements that are attached to the outflow cross-section of the higher-dimensional Navier Stokes mesh and provide the inflow into the Impedance tube.  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#a59b41acf37d7bfce3c1a8676304915d7">More...</a><br /></td></tr>
 <tr class="separator:a59b41acf37d7bfce3c1a8676304915d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8b569812e4c3fa5ae6c1064689bb2fe"><td class="memItemLeft" align="right" valign="top">std::map&lt; unsigned, double &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#ad8b569812e4c3fa5ae6c1064689bb2fe">Aux_integral_pt</a></td></tr>
-<tr class="memdesc:ad8b569812e4c3fa5ae6c1064689bb2fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to auxiliary integral, containing the derivative of the total volume flux through the outflow boundary of the (higher-dimensional) Navier-Stokes mesh w.r.t. to the discrete (global) (velocity) degrees of freedom.  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#ad8b569812e4c3fa5ae6c1064689bb2fe">More...</a><br /></td></tr>
-<tr class="separator:ad8b569812e4c3fa5ae6c1064689bb2fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf66368875ede8bcb714250328bfc080"><td class="memItemLeft" align="right" valign="top">std::map&lt; unsigned, double &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#abf66368875ede8bcb714250328bfc080">Aux_integral_pt</a></td></tr>
+<tr class="memdesc:abf66368875ede8bcb714250328bfc080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to auxiliary integral, containing the derivative of the total volume flux through the outflow boundary of the (higher-dimensional) Navier-Stokes mesh w.r.t. to the discrete (global) (velocity) degrees of freedom.  <a href="classoomph_1_1WomersleyImpedanceTubeBase.html#abf66368875ede8bcb714250328bfc080">More...</a><br /></td></tr>
+<tr class="separator:abf66368875ede8bcb714250328bfc080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -238,7 +238,7 @@ Private Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_attribs_classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase.html">oomph::TemplateFreeWomersleyImpedanceTubeBase</a></td></tr>
-<tr class="memitem:a37b438da1f862ccadbdb80cf8258a781 inherit pub_static_attribs_classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase.html#a37b438da1f862ccadbdb80cf8258a781">Zero</a> =0.0</td></tr>
+<tr class="memitem:a37b438da1f862ccadbdb80cf8258a781 inherit pub_static_attribs_classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase.html#a37b438da1f862ccadbdb80cf8258a781">Zero</a> = 0.0</td></tr>
 <tr class="memdesc:a37b438da1f862ccadbdb80cf8258a781 inherit pub_static_attribs_classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zero!  <a href="classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase.html#a37b438da1f862ccadbdb80cf8258a781">More...</a><br /></td></tr>
 <tr class="separator:a37b438da1f862ccadbdb80cf8258a781 inherit pub_static_attribs_classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -246,10 +246,9 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><h3>template&lt;class ELEMENT, unsigned DIM&gt;<br />
 class oomph::WomersleyImpedanceTubeBase&lt; ELEMENT, DIM &gt;</h3>
 
-<p>Base class for Womersley impedance tube. Allows the computation of the inlet pressure p_in into a uniform tube of specified length that is assumed to convey fully-developed, but time-dependent flow with a presribed instantaneous flow rate, q. Also computes the derivative dp_in/dq required when this is used to determine impedance-type outlet boundary conditions in a Navier-Stokes computation. <br  />
- </p>
+<p>Base class for Womersley impedance tube. Allows the computation of the inlet pressure p_in into a uniform tube of specified length that is assumed to convey fully-developed, but time-dependent flow with a presribed instantaneous flow rate, q. Also computes the derivative dp_in/dq required when this is used to determine impedance-type outlet boundary conditions in a Navier-Stokes computation. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01116">1116</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01086">1086</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a329107c12ef8f97c5afd4e0ae5d67b70"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a329107c12ef8f97c5afd4e0ae5d67b70">&#9670;&nbsp;</a></span>PrescribedVolumeFluxFctPt</h2>
@@ -267,7 +266,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Function pointer to fct that prescribes volume flux q=fct(t) &ndash; mainly used for validation purposes. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01124">1124</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01092">1092</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -310,7 +309,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Constructor: Specify length of tube and pointer to function that specifies the prescribed volume flux. Outlet pressure is set to zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01129">1129</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01097">1097</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -352,7 +351,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Constructor: Specify length of tube and the pointer to the mesh of either NavierStokesImpedanceTractionElements or NavierStokesFluxControlElements that are attached to the outflow cross-section of a (higher-dimensional) Navier Stokes mesh and provide the inflow into the ImpedanceTube. Outlet pressure is set to zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01152">1152</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01120">1120</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -429,7 +428,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase.html#a95c60d5f7661be3ee298cd2b4bd45de5">oomph::TemplateFreeWomersleyImpedanceTubeBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01424">1424</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01392">1392</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -460,7 +459,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Access fct to outlet pressure. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01220">1220</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01187">1187</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -491,7 +490,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Precompute auxiliary integrals required for the computation of the Jacobian in the <a class="el" href="classoomph_1_1NavierStokesImpedanceTractionElement.html">NavierStokesImpedanceTractionElement</a>. Also pass the pointer to the pre-computed integrals to the elements in the Navier_stokes_outflow_mesh_pt so they can refer to it. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01450">1450</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01417">1417</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -522,7 +521,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Set up the Womersley tubes so that a subsequent call to get_response(...) computes the inlet pressure for the currently prescribed instantaneous flow rate. <a class="el" href="classoomph_1_1Steady.html">Steady</a> version! </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01234">1234</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01204">1204</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -577,7 +576,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 <p>Set up the Womersley tubes so that a subsequent call to get_response(...) computes the inlet pressure for the currently prescribed instantaneous flow rate, assuming that at all previous times the tube conveyed steady, fully-developed flow with flowrate q_initial. dt specifies the timestep for the subsequent time integration. Specify: Womersley number, (constant) timestep, the initial volume flux (from which the subsequent impulsive start is performed) and, optionally the pointer to the timestepper to be used in the Womersley elements (defaults to BDF&lt;2&gt;). </p>
 <p>By default, we do want to suppress the output from the Newton solver</p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01254">1254</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01224">1224</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -609,7 +608,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Shift history values to allow coputation of next timestep. Note: When used with a full Navier-Stokes problem this function must be called in actions_before_implicit_timestep() </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01360">1360</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01328">1328</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -640,12 +639,12 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Compute total current volume flux into the "impedance tube" that provides the flow resistance (flux is either obtained from the function that specifies it externally or by by adding up the flux through all NavierStokesImpedanceTractionElements in the mesh pointed to by the Navier_stokes_outflow_mesh_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01386">1386</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01353">1353</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
-<a id="a59aa99fe9771f53ee482218da67d87c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59aa99fe9771f53ee482218da67d87c7">&#9670;&nbsp;</a></span>womersley_problem_pt()</h2>
+<a id="a0e3b51eefdd1bf477a6e61d6d0950838"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e3b51eefdd1bf477a6e61d6d0950838">&#9670;&nbsp;</a></span>womersley_problem_pt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -656,7 +655,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1WomersleyProblem.html">WomersleyProblem</a>&lt;ELEMENT,DIM&gt;* <a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html">oomph::WomersleyImpedanceTubeBase</a>&lt; ELEMENT, DIM &gt;::womersley_problem_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1WomersleyProblem.html">WomersleyProblem</a>&lt;ELEMENT, DIM&gt;* <a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html">oomph::WomersleyImpedanceTubeBase</a>&lt; ELEMENT, DIM &gt;::womersley_problem_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -671,13 +670,13 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Access to underlying Womersley problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01350">1350</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01319">1319</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad8b569812e4c3fa5ae6c1064689bb2fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8b569812e4c3fa5ae6c1064689bb2fe">&#9670;&nbsp;</a></span>Aux_integral_pt</h2>
+<a id="abf66368875ede8bcb714250328bfc080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf66368875ede8bcb714250328bfc080">&#9670;&nbsp;</a></span>Aux_integral_pt</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -688,7 +687,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;unsigned,double&gt;* <a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html">oomph::WomersleyImpedanceTubeBase</a>&lt; ELEMENT, DIM &gt;::Aux_integral_pt</td>
+          <td class="memname">std::map&lt;unsigned, double&gt;* <a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html">oomph::WomersleyImpedanceTubeBase</a>&lt; ELEMENT, DIM &gt;::Aux_integral_pt</td>
         </tr>
       </table>
   </td>
@@ -700,7 +699,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Pointer to auxiliary integral, containing the derivative of the total volume flux through the outflow boundary of the (higher-dimensional) Navier-Stokes mesh w.r.t. to the discrete (global) (velocity) degrees of freedom. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01516">1516</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01479">1479</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -728,7 +727,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Pointer to double that specifies the currently imposed instantaneous volume flux into the impedance tube. This is used to communicate with the Womersley elements which require access to the flux via a pointer to a double. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01495">1495</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01458">1458</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -756,7 +755,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Derivative of inflow pressure w.r.t. instantaenous volume flux (Note: Can be pre-computed) </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01489">1489</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01452">1452</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -784,7 +783,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Length of the tube. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01485">1485</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01448">1448</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -812,7 +811,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Pointer to the mesh of NavierStokesImpedanceTractionElements that are attached to the outflow cross-section of the higher-dimensional Navier Stokes mesh and provide the inflow into the Impedance tube. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01510">1510</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01473">1473</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -840,7 +839,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Outlet pressure. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01502">1502</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01465">1465</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -868,7 +867,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Pointer to function that specifies the prescribed volume flux. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01505">1505</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01468">1468</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -894,12 +893,12 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01522">1522</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01484">1484</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
-<a id="ab424ec7b47d3f31acd44dcf93be6b5e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab424ec7b47d3f31acd44dcf93be6b5e5">&#9670;&nbsp;</a></span>Womersley_problem_pt</h2>
+<a id="aaecc70e3f205dc58f59c6f9a7ddda0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaecc70e3f205dc58f59c6f9a7ddda0ac">&#9670;&nbsp;</a></span>Womersley_problem_pt</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -910,7 +909,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1WomersleyProblem.html">WomersleyProblem</a>&lt;ELEMENT,DIM&gt;* <a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html">oomph::WomersleyImpedanceTubeBase</a>&lt; ELEMENT, DIM &gt;::Womersley_problem_pt</td>
+          <td class="memname"><a class="el" href="classoomph_1_1WomersleyProblem.html">WomersleyProblem</a>&lt;ELEMENT, DIM&gt;* <a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html">oomph::WomersleyImpedanceTubeBase</a>&lt; ELEMENT, DIM &gt;::Womersley_problem_pt</td>
         </tr>
       </table>
   </td>
@@ -922,7 +921,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
 
 <p>Pointer to Womersley problem that determines the pressure gradient along the tube. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01499">1499</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l01462">1462</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -957,7 +956,7 @@ template&lt;class ELEMENT , unsigned DIM&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:58:09
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:43
         </div>
       </div>
     </footer>

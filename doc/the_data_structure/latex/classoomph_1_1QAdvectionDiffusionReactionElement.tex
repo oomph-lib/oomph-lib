@@ -27,17 +27,13 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a0c4f00cf
 unsigned \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_ac6a740436c52b5c541c1758508be0710}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_abea67b1715ee4b70086ee68dcddbc0b1}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_acafd4d0efa43a6c63600c8f1e8823c5b}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a5a3333fcb25ba0d5e74e74c2964d8d1c}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_abd8dbb087ca525304f3328d823311d6f}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a4dcfb4e1778ee7e46c86609ea4d1ce30}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_aced1d7c07e1e49b95aff9b354676808b}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
@@ -46,7 +42,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_aced1d7c0
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_acb2af6c72ae97ffe0c762c9df692c3ab}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff\+\_\+react}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a2a52a7accae36bd8e3bb46e659f9c983}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -58,7 +54,7 @@ class oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element$<$ N\+R\+E\+A\+G\+E\
 
 \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{Q\+Advection\+Diffusion\+Reaction\+Element}} elements are linear/quadrilateral/brick-\/shaped Advection Diffusion elements with isoparametric interpolation for the function. 
 
-Definition at line 622 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 672 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -76,7 +72,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\
 
 
 
-Definition at line 631 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 679 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_a4a319e1d78394fd5db9b9d63ca14cd1b}\label{classoomph_1_1QAdvectionDiffusionReactionElement_a4a319e1d78394fd5db9b9d63ca14cd1b}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!QAdvectionDiffusionReactionElement@{QAdvectionDiffusionReactionElement}}
@@ -91,7 +87,7 @@ Broken copy constructor.
 
 
 
-Definition at line 636 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 686 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -109,9 +105,9 @@ double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\
 
 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Galerkin\+: Test functions = shape functions 
 
@@ -119,7 +115,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a2
 
 
 
-Definition at line 734 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 792 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -144,7 +140,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_ac
 
 
 
-Definition at line 768 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 825 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_a0c4f00cf6b1cd8a0bb0ec505ed319807}\label{classoomph_1_1QAdvectionDiffusionReactionElement_a0c4f00cf6b1cd8a0bb0ec505ed319807}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!operator=@{operator=}}
@@ -159,7 +155,7 @@ Broken assignment operator.
 
 
 
-Definition at line 643 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 693 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -174,8 +170,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+:
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. 
+C-\/style output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -183,7 +178,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEqua
 
 
 
-Definition at line 666 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 724 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -198,8 +193,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+:
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -207,7 +201,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEqua
 
 
 
-Definition at line 673 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 731 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -222,8 +216,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+:
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -231,7 +224,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEqua
 
 
 
-Definition at line 655 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 708 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -246,8 +239,7 @@ void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+:
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -255,7 +247,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEqua
 
 
 
-Definition at line 660 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 715 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -278,7 +270,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEqua
 
 
 
-Definition at line 691 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 751 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -301,7 +293,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEqua
 
 
 
-Definition at line 680 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 739 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
@@ -324,7 +316,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 651 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line 701 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 

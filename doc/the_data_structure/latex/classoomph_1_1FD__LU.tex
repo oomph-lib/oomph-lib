@@ -27,8 +27,7 @@ void \mbox{\hyperlink{classoomph_1_1FD__LU_a972f0332d47cf89719ab28f3feeb36d5}{op
 void \mbox{\hyperlink{classoomph_1_1FD__LU_a6fd251bef9cdb7efbed4927f005eda2f}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (Jacobian computed by FD approx.) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FD__LU_ab8c9d6006352d0ea61a721b9c58cd523}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
-\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc80da9eba1}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -37,7 +36,7 @@ void \mbox{\hyperlink{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc80da9eba1}{so
 \doxysubsection{Detailed Description}
 Dense LU decomposition-\/based solve of linear system assembled via finite differencing of the residuals \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Even more inefficient than \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} but excellent sanity check! 
 
-Definition at line 422 of file linear\+\_\+solver.\+h.
+Definition at line 443 of file linear\+\_\+solver.\+h.
 
 
 
@@ -54,7 +53,7 @@ Constructor\+: empty.
 
 
 
-Definition at line 427 of file linear\+\_\+solver.\+h.
+Definition at line 447 of file linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FD__LU_ad45be3df2a071c29cef9a9555bbd28f8}\label{classoomph_1_1FD__LU_ad45be3df2a071c29cef9a9555bbd28f8}} 
 \index{oomph::FD\_LU@{oomph::FD\_LU}!FD\_LU@{FD\_LU}}
@@ -68,7 +67,7 @@ Broken copy constructor.
 
 
 
-Definition at line 430 of file linear\+\_\+solver.\+h.
+Definition at line 450 of file linear\+\_\+solver.\+h.
 
 
 
@@ -89,7 +88,7 @@ Broken assignment operator.
 
 
 
-Definition at line 436 of file linear\+\_\+solver.\+h.
+Definition at line 456 of file linear\+\_\+solver.\+h.
 
 
 
@@ -103,8 +102,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. 
 
 
 
@@ -112,7 +110,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1DenseLU_ae82e044bb5a1173b8105b
 
 
 
-Definition at line 448 of file linear\+\_\+solver.\+h.
+Definition at line 468 of file linear\+\_\+solver.\+h.
 
 
 
@@ -134,7 +132,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1DenseLU_a1d79cf13a269733d655e3
 
 
 
-Definition at line 457 of file linear\+\_\+solver.\+h.
+Definition at line 479 of file linear\+\_\+solver.\+h.
 
 
 
@@ -156,7 +154,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1DenseLU_ac354b224819146618ce8a
 
 
 
-Definition at line 554 of file linear\+\_\+solver.\+cc.
+Definition at line 568 of file linear\+\_\+solver.\+cc.
 
 
 

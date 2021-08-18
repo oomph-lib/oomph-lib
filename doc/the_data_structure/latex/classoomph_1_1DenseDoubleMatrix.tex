@@ -2,8 +2,7 @@
 \label{classoomph_1_1DenseDoubleMatrix}\index{oomph::DenseDoubleMatrix@{oomph::DenseDoubleMatrix}}
 
 
-Class of matrices containing doubles, and stored as a \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix$<$double$>$}}, but with solving functionality inherited from the abstract Double\+Matrix class. ~\newline
-  
+Class of matrices containing doubles, and stored as a \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix$<$double$>$}}, but with solving functionality inherited from the abstract Double\+Matrix class.  
 
 
 
@@ -54,18 +53,16 @@ void \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5
 void \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const
 \begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a64b81a329f8e9204e50b75ea367a77d4}{matrix\+\_\+reduction}} (const double \&alpha, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&reduced\+\_\+matrix)
-\begin{DoxyCompactList}\small\item\em For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_aab687b1136f0265434ada2684aa1b0a4}{multiply}} (const \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&matrix\+\_\+in, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&result)
 \begin{DoxyCompactList}\small\item\em Function to multiply this matrix by a \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} matrix\+\_\+in. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-Class of matrices containing doubles, and stored as a \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix$<$double$>$}}, but with solving functionality inherited from the abstract Double\+Matrix class. ~\newline
- 
+Class of matrices containing doubles, and stored as a \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix$<$double$>$}}, but with solving functionality inherited from the abstract Double\+Matrix class. 
 
-Definition at line 1230 of file matrices.\+h.
+Definition at line 1291 of file matrices.\+h.
 
 
 
@@ -82,7 +79,7 @@ Constructor, set the default linear solver.
 
 Constructor, set the default linear solver to be the \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} solver 
 
-Definition at line 142 of file matrices.\+cc.
+Definition at line 139 of file matrices.\+cc.
 
 
 
@@ -100,7 +97,7 @@ Constructor to build a square n by n matrix.
 
 Constructor to build a square n by n matrix. Set the default linear solver to be \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} 
 
-Definition at line 151 of file matrices.\+cc.
+Definition at line 148 of file matrices.\+cc.
 
 
 
@@ -118,7 +115,7 @@ Constructor to build a matrix with n rows and m columns.
 
 Constructor to build a matrix with n rows and m columns. Set the default linear solver to be \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} 
 
-Definition at line 162 of file matrices.\+cc.
+Definition at line 159 of file matrices.\+cc.
 
 
 
@@ -136,7 +133,7 @@ Constructor to build a matrix with n rows and m columns, with initial value init
 
 Constructor to build a matrix with n rows and m columns, with initial value initial\+\_\+val Set the default linear solver to be \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} 
 
-Definition at line 174 of file matrices.\+cc.
+Definition at line 171 of file matrices.\+cc.
 
 
 
@@ -154,7 +151,7 @@ Broken copy constructor.
 
 
 
-Definition at line 1251 of file matrices.\+h.
+Definition at line 1310 of file matrices.\+h.
 
 
 
@@ -172,7 +169,7 @@ Destructor.
 
 Destructor delete the default linear solver. 
 
-Definition at line 185 of file matrices.\+cc.
+Definition at line 182 of file matrices.\+cc.
 
 
 
@@ -203,7 +200,7 @@ Determine eigenvalues and eigenvectors, using Jacobi rotations. Only for symmetr
 \item {\ttfamily eigen\+\_\+val}\mbox{[}i\mbox{]} is the i-\/th eigenvalue; same ordering as in eigenvectors 
 \end{DoxyItemize}
 
-Definition at line 227 of file matrices.\+cc.
+Definition at line 224 of file matrices.\+cc.
 
 
 
@@ -225,7 +222,7 @@ LU backsubstitution.
 
 Back substitute an LU decomposed matrix. 
 
-Definition at line 205 of file matrices.\+cc.
+Definition at line 202 of file matrices.\+cc.
 
 
 
@@ -247,7 +244,7 @@ LU backsubstitution.
 
 Back substitute an LU decomposed matrix. 
 
-Definition at line 214 of file matrices.\+cc.
+Definition at line 211 of file matrices.\+cc.
 
 
 
@@ -265,7 +262,7 @@ LU decomposition using \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} (defa
 
 LU decompose a matrix, by using the default linear solver (\mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}}) 
 
-Definition at line 195 of file matrices.\+cc.
+Definition at line 192 of file matrices.\+cc.
 
 
 
@@ -283,12 +280,11 @@ Referenced by oomph\+::\+D\+G\+Element\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix
 
 
 
-For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
- 
+For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. 
 
 For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. 
 
-Definition at line 487 of file matrices.\+cc.
+Definition at line 481 of file matrices.\+cc.
 
 
 
@@ -306,7 +302,7 @@ Function to multiply this matrix by a \mbox{\hyperlink{classoomph_1_1DenseDouble
 
 Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} matrix\+\_\+in. 
 
-Definition at line 529 of file matrices.\+cc.
+Definition at line 521 of file matrices.\+cc.
 
 
 
@@ -328,11 +324,11 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618
 
 
 
-Definition at line 299 of file matrices.\+cc.
+Definition at line 294 of file matrices.\+cc.
 
 
 
-References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Dense\+Matrix$<$ double $>$\+::M, oomph\+::\+Dense\+Matrix$<$ double $>$\+::\+Matrixdata, oomph\+::\+Dense\+Matrix$<$ double $>$\+::N, ncol(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}\label{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}} 
 \index{oomph::DenseDoubleMatrix@{oomph::DenseDoubleMatrix}!multiply\_transpose@{multiply\_transpose}}
@@ -350,7 +346,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b4
 
 
 
-Definition at line 389 of file matrices.\+cc.
+Definition at line 385 of file matrices.\+cc.
 
 
 
@@ -372,7 +368,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd8
 
 
 
-Definition at line 1268 of file matrices.\+h.
+Definition at line 1330 of file matrices.\+h.
 
 
 
@@ -398,7 +394,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2
 
 
 
-Definition at line 1265 of file matrices.\+h.
+Definition at line 1324 of file matrices.\+h.
 
 
 
@@ -420,7 +416,7 @@ Overload the non-\/const version of the round-\/bracket access operator for read
 
 
 
-Definition at line 1278 of file matrices.\+h.
+Definition at line 1345 of file matrices.\+h.
 
 
 
@@ -442,7 +438,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f
 
 
 
-Definition at line 1272 of file matrices.\+h.
+Definition at line 1337 of file matrices.\+h.
 
 
 
@@ -460,7 +456,7 @@ Broken assignment operator.
 
 
 
-Definition at line 1258 of file matrices.\+h.
+Definition at line 1317 of file matrices.\+h.
 
 
 

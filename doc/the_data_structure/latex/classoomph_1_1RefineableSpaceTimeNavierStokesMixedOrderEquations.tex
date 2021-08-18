@@ -49,8 +49,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesMixed
 void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a3f1721c71dd00c445c6349c81764a235}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, const unsigned \&compute\+\_\+jacobian\+\_\+flag)
 \begin{DoxyCompactList}\small\item\em Add the elements contribution to elemental residual vector and/or Jacobian matrix. compute\+\_\+jacobian\+\_\+flag=0\+: compute residual vector only compute\+\_\+jacobian\+\_\+flag=1\+: compute both. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a5d961aa6f819a17ae53c0be7984a2792}{fill\+\_\+in\+\_\+generic\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+contribution\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&compute\+\_\+jacobian\+\_\+flag)
-\begin{DoxyCompactList}\small\item\em Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a440efcc004ff43124c477f919fbe76eb}{get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&dresidual\+\_\+dnodal\+\_\+coordinates)
 \begin{DoxyCompactList}\small\item\em Compute derivatives of elemental residual vector with respect to nodal coordinates. Overwrites default implementation in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} base class. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j) = d res(l) / d\+X\+\_\+\{ij\}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -62,7 +61,7 @@ class oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equation
 
 Refineable version of the Navier-\/\+Stokes equations. 
 
-Definition at line 337 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 338 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -80,7 +79,7 @@ Constructor.
 
 
 
-Definition at line 354 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 353 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -102,11 +101,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrde
 
 
 
-Definition at line 576 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 579 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+nst().
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a5d961aa6f819a17ae53c0be7984a2792}\label{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a5d961aa6f819a17ae53c0be7984a2792}} 
 \index{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$}!fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst@{fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst}}
@@ -117,17 +116,15 @@ void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEqu
 
 
 
-Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
-Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderEquations_a8e7494ade33155d3587e53790a568e71}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 284 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 287 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -150,7 +147,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrde
 
 
 
-Definition at line 570 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 582 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -173,11 +170,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Definition at line 518 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 520 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+A\+L\+E\+\_\+is\+\_\+disabled, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::density\+\_\+ratio\+\_\+pt(), oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt(), oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+G\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::g\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::is\+\_\+reynolds\+\_\+strouhal\+\_\+stored\+\_\+as\+\_\+external\+\_\+data(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::re\+\_\+invfr\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Re\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::re\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Re\+Inv\+Fr\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Re\+St\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Reynolds\+Strouhal\+\_\+is\+\_\+stored\+\_\+as\+\_\+external\+\_\+data, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Source\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::source\+\_\+fct\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::store\+\_\+reynolds\+\_\+strouhal\+\_\+as\+\_\+external\+\_\+data(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt, and oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::viscosity\+\_\+ratio\+\_\+pt().
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+A\+L\+E\+\_\+is\+\_\+disabled, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt, oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+G\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Re\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Re\+Inv\+Fr\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Re\+St\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Reynolds\+Strouhal\+\_\+is\+\_\+stored\+\_\+as\+\_\+external\+\_\+data, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Source\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::store\+\_\+reynolds\+\_\+strouhal\+\_\+as\+\_\+external\+\_\+data(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a440efcc004ff43124c477f919fbe76eb}\label{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a440efcc004ff43124c477f919fbe76eb}} 
 \index{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$}!get\_dresidual\_dnodal\_coordinates@{get\_dresidual\_dnodal\_coordinates}}
@@ -196,7 +193,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a83d4f26d6f4
 
 
 
-Definition at line 1268 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1295 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a2c1c7d0481a14a1477b175a3535279f3}\label{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a2c1c7d0481a14a1477b175a3535279f3}} 
 \index{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$}!get\_pressure\_and\_velocity\_mass\_matrix\_diagonal@{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal}}
@@ -238,7 +235,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 434 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 436 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -261,7 +258,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 424 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 426 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_aeac2fa40b08e120506203270f5229236}\label{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_aeac2fa40b08e120506203270f5229236}} 
 \index{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -300,8 +297,7 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 
 \begin{DoxyItemize}
 \item {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations}{Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations}}\+:}\+: \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_aeac2fa40b08e120506203270f5229236}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}
-\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom ~\newline
- (e.\+g. for refineable Taylor-\/\+Hood.) 
+\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom (e.\+g. for refineable Taylor-\/\+Hood.) 
 
 Definition at line 371 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
@@ -326,7 +322,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderS
 
 
 
-Definition at line 406 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 408 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a8bcb8fa0cce15eb418edb3f11d0e34c8}\label{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a8bcb8fa0cce15eb418edb3f11d0e34c8}} 
 \index{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations$<$ DIM $>$}!unpin\_all\_pressure\_dofs@{unpin\_all\_pressure\_dofs}}
@@ -341,7 +337,7 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line 388 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 389 of file refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

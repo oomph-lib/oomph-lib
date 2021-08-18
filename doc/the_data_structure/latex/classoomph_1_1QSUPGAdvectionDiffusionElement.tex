@@ -38,9 +38,9 @@ void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_ac567806bf531
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a07f5aafc7171048c0237574bf74ab265}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are S\+U\+P\+G-\/stabilised Advection Diffusion elements with N\+N\+O\+D\+E\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{Q\+Advection\+Diffusion\+Element}} and overwrites their test functions. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_af77acfc13df8c460118d2c1bfbf0d74d}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -55,7 +55,7 @@ class oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+
 
 Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are S\+U\+P\+G-\/stabilised Advection Diffusion elements with N\+N\+O\+D\+E\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{Q\+Advection\+Diffusion\+Element}} and overwrites their test functions. 
 
-Definition at line 43 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 42 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -73,7 +73,7 @@ Constructor\+: Call constructors for underlying Q\+Advection\+Diffusion element.
 
 
 
-Definition at line 53 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 49 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -95,7 +95,7 @@ Compute stabilisation parameter for the element.
 
 
 
-Definition at line 73 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 70 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -110,9 +110,9 @@ double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\
 
 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are S\+U\+P\+G-\/stabilised Advection Diffusion elements with N\+N\+O\+D\+E\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{Q\+Advection\+Diffusion\+Element}} and overwrites their test functions. 
 
-Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are S\+U\+P\+G-\/stabilised Advection Diffusion elements with N\+N\+O\+D\+E\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{Q\+Advection\+Diffusion\+Element}} and overwrites their test functions.
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -122,7 +122,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a96
 
 
 
-Definition at line 50 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 49 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -137,9 +137,9 @@ double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\
 
 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 S\+U\+PG stabilisation\+: Petrov-\/\+Galerkin, i.\+e. test functions $ \ne $ shape functions 
 
@@ -147,7 +147,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_afc
 
 
 
-Definition at line 109 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 107 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -166,7 +166,7 @@ Get stabilisation parameter for the element.
 
 
 
-Definition at line 59 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 56 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -189,7 +189,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a79
 
 
 
-Definition at line 223 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 219 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -212,7 +212,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a89
 
 
 
-Definition at line 227 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 225 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -235,7 +235,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_af3
 
 
 
-Definition at line 219 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 213 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -258,7 +258,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a24
 
 
 
-Definition at line 172 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 169 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -277,7 +277,7 @@ Set stabilisation parameter for the element to zero.
 
 
 
-Definition at line 66 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 63 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -299,7 +299,7 @@ S\+U\+PG stabilisation parameter.
 
 
 
-Definition at line 247 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 250 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

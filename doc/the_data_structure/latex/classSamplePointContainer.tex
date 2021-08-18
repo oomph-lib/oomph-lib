@@ -18,7 +18,7 @@ Inheritance diagram for Sample\+Point\+Container\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classSamplePointContainer_a68326e89f80f01690d8c2d03effb8508}{Sample\+Point\+Container}} (Mesh $\ast$\mbox{\hyperlink{classSamplePointContainer_ae170916821b5f8f00255d251cd7f2d8c}{mesh\+\_\+pt}}, const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&\mbox{\hyperlink{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}{min\+\_\+and\+\_\+max\+\_\+coordinates}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}, const unsigned \&\mbox{\hyperlink{classSamplePointContainer_a48e5ae762e0d56f67645ce4e7dd886d7}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}})
+\mbox{\hyperlink{classSamplePointContainer_ab4b07edb6a654c43dc33725c2d368ce2}{Sample\+Point\+Container}} (Mesh $\ast$\mbox{\hyperlink{classSamplePointContainer_ae170916821b5f8f00255d251cd7f2d8c}{mesh\+\_\+pt}}, const Vector$<$ std\+::pair$<$ double, double $>$$>$ \&\mbox{\hyperlink{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}{min\+\_\+and\+\_\+max\+\_\+coordinates}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}, const unsigned \&\mbox{\hyperlink{classSamplePointContainer_a48e5ae762e0d56f67645ce4e7dd886d7}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}})
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classSamplePointContainer_a6801f78c9d6b55a69f7e60a372dc9bf2}{Sample\+Point\+Container}} ()
 \begin{DoxyCompactList}\small\item\em Broken default constructor; needed for broken copy constructors. Don\textquotesingle{}t call. It will die. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ virtual \mbox{\hyperlink{classSamplePointContainer_a753a58798c528e01d384a4f44436
 virtual void \mbox{\hyperlink{classSamplePointContainer_acca8dbae8346d6c8924b1f815aa5f049}{locate\+\_\+zeta}} (const Vector$<$ double $>$ \&zeta, Geom\+Object $\ast$\&sub\+\_\+geom\+\_\+object\+\_\+pt, Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})=0
 \begin{DoxyCompactList}\small\item\em Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub\+\_\+geom\+\_\+object\+\_\+pt=0 if point can\textquotesingle{}t be found. \end{DoxyCompactList}\item 
 virtual unsigned \& \mbox{\hyperlink{classSamplePointContainer_af05aff0424680eec183a5680c4d6d65f}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}} ()
-\begin{DoxyCompactList}\small\item\em Counter to keep track of how many sample points we\textquotesingle{}ve visited during top level call to locate\+\_\+zeta. Virtual so it can be. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Counter to keep track of how many sample points we\textquotesingle{}ve visited during top level call to locate\+\_\+zeta. Virtual so it can be overloaded for different versions. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classSamplePointContainer_ac7bf51a6987a9180c7715d6211fdbb46}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively}} () const =0
 \begin{DoxyCompactList}\small\item\em Total number of sample points in sample point container, possibly computed recursively. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classSamplePointContainer_af2cfee8a92a28addb59a5533dfd138e7}{ndim\+\_\+zeta}} () const =0
@@ -55,13 +55,13 @@ double \& \mbox{\hyperlink{classSamplePointContainer_ad38b50923288cd35ff5e24ada0
 \item 
 static std\+::ofstream \mbox{\hyperlink{classSamplePointContainer_ad08a1cb658b3783bcf7d8491e90965f3}{Visited\+\_\+sample\+\_\+points\+\_\+file}}
 \begin{DoxyCompactList}\small\item\em File to record sequence of visited sample points in. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{classSamplePointContainer_a1098cdf602fabc6ceec41bb7ea73805f}{Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta}} =false
+static bool \mbox{\hyperlink{classSamplePointContainer_a1098cdf602fabc6ceec41bb7ea73805f}{Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta}} = false
 \begin{DoxyCompactList}\small\item\em Boolean flag to make to make locate zeta fail. Used for debugging/ illustration of search procedures. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{classSamplePointContainer_affcd582fab41aa86bfe46e1bf92fafd1}{Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points}} =true
+static bool \mbox{\hyperlink{classSamplePointContainer_affcd582fab41aa86bfe46e1bf92fafd1}{Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points}} = true
 \begin{DoxyCompactList}\small\item\em Use equally spaced sample points? (otherwise vertices are sampled repeatedly. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{classSamplePointContainer_a1755d4419776cc87ab27e845d03449de}{Enable\+\_\+timing\+\_\+of\+\_\+setup}} =false
+static bool \mbox{\hyperlink{classSamplePointContainer_a1755d4419776cc87ab27e845d03449de}{Enable\+\_\+timing\+\_\+of\+\_\+setup}} = false
 \begin{DoxyCompactList}\small\item\em Time setup? \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{classSamplePointContainer_a13035786055416a2da9ae7eec515bccd}{Percentage\+\_\+offset}} =5.\+0
+static double \mbox{\hyperlink{classSamplePointContainer_a13035786055416a2da9ae7eec515bccd}{Percentage\+\_\+offset}} = 5.\+0
 \begin{DoxyCompactList}\small\item\em Offset of sample point container boundaries beyond max/min coords. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -95,11 +95,11 @@ Definition at line 218 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classSamplePointContainer_a68326e89f80f01690d8c2d03effb8508}\label{classSamplePointContainer_a68326e89f80f01690d8c2d03effb8508}} 
+\mbox{\Hypertarget{classSamplePointContainer_ab4b07edb6a654c43dc33725c2d368ce2}\label{classSamplePointContainer_ab4b07edb6a654c43dc33725c2d368ce2}} 
 \index{SamplePointContainer@{SamplePointContainer}!SamplePointContainer@{SamplePointContainer}}
 \index{SamplePointContainer@{SamplePointContainer}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{SamplePointContainer()}{SamplePointContainer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily Sample\+Point\+Container\+::\+Sample\+Point\+Container (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt,  }\item[{const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates,  }\item[{const bool \&}]{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup,  }\item[{const bool \&}]{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search,  }\item[{const unsigned \&}]{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Sample\+Point\+Container\+::\+Sample\+Point\+Container (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt,  }\item[{const Vector$<$ std\+::pair$<$ double, double $>$$>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates,  }\item[{const bool \&}]{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup,  }\item[{const bool \&}]{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search,  }\item[{const unsigned \&}]{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -107,7 +107,7 @@ Constructor.
 
 
 
-Definition at line 225 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 222 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -125,7 +125,7 @@ Broken default constructor; needed for broken copy constructors. Don\textquotesi
 
 
 
-Definition at line 247 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 246 of file sample\+\_\+point\+\_\+container.\+h.
 
 \mbox{\Hypertarget{classSamplePointContainer_ad4dd29301d0ce831f3d702527de951a8}\label{classSamplePointContainer_ad4dd29301d0ce831f3d702527de951a8}} 
 \index{SamplePointContainer@{SamplePointContainer}!SamplePointContainer@{SamplePointContainer}}
@@ -139,7 +139,7 @@ Broken copy constructor.
 
 
 
-Definition at line 256 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 255 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -157,7 +157,7 @@ Virtual destructor.
 
 
 
-Definition at line 264 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 267 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -174,7 +174,7 @@ Ignore halo elements?
 
 
 
-Definition at line 315 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 318 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -214,7 +214,7 @@ Set maximum search radius for locate zeta. This is initialised do D\+B\+L\+\_\+\
 
 
 
-Definition at line 343 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 346 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -236,7 +236,7 @@ Pointer to mesh from whose Finite\+Elements sample points are created.
 
 
 
-Definition at line 291 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 294 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -254,7 +254,7 @@ Vector of pair of doubles for min and maximum coordinates. min (first) and max. 
 
 
 
-Definition at line 306 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 309 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -276,11 +276,15 @@ Pair of doubles for min and maximum coordinates in i-\/th direction\+: min (firs
 
 
 
-Definition at line 298 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 301 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
 References i, and Min\+\_\+and\+\_\+max\+\_\+coordinates.
+
+
+
+Referenced by oomph\+::\+Refineable\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
 
 \mbox{\Hypertarget{classSamplePointContainer_af2cfee8a92a28addb59a5533dfd138e7}\label{classSamplePointContainer_af2cfee8a92a28addb59a5533dfd138e7}} 
 \index{SamplePointContainer@{SamplePointContainer}!ndim\_zeta@{ndim\_zeta}}
@@ -308,7 +312,7 @@ Implemented in \mbox{\hyperlink{classCGALSamplePointContainer_a0fb2970a09f9fa0e2
 
 
 
-Definition at line 330 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 333 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -330,7 +334,7 @@ Broken assignment operator.
 
 
 
-Definition at line 260 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 261 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -348,7 +352,7 @@ Helper function to compute the min and max coordinates for the mesh, in each dim
 
 Setup the min and max coordinates for the mesh, in each dimension. 
 
-Definition at line 690 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 684 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -380,15 +384,15 @@ Implemented in \mbox{\hyperlink{classCGALSamplePointContainer_ae6d735524cdc0af76
 
 
 
-Counter to keep track of how many sample points we\textquotesingle{}ve visited during top level call to locate\+\_\+zeta. Virtual so it can be. 
+Counter to keep track of how many sample points we\textquotesingle{}ve visited during top level call to locate\+\_\+zeta. Virtual so it can be overloaded for different versions. 
 
-overloaded for different versions. 
+
 
 Reimplemented in \mbox{\hyperlink{classRefineableBinArray_a551adefafd0be9d184c4daa6adf16512}{Refineable\+Bin\+Array}}.
 
 
 
-Definition at line 277 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 280 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -410,7 +414,7 @@ Use Eulerian coordinates (i.\+e. interpolated\+\_\+x) rather than zeta itself (i
 
 
 
-Definition at line 324 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 327 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -427,7 +431,7 @@ Referenced by C\+G\+A\+L\+Sample\+Point\+Container\+::limited\+\_\+locate\+\_\+z
 \index{SamplePointContainer@{SamplePointContainer}!Always\_fail\_elemental\_locate\_zeta@{Always\_fail\_elemental\_locate\_zeta}}
 \index{Always\_fail\_elemental\_locate\_zeta@{Always\_fail\_elemental\_locate\_zeta}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{Always\_fail\_elemental\_locate\_zeta}{Always\_fail\_elemental\_locate\_zeta}}
-{\footnotesize\ttfamily bool Sample\+Point\+Container\+::\+Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta =false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool Sample\+Point\+Container\+::\+Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta = false\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -435,7 +439,7 @@ Boolean flag to make to make locate zeta fail. Used for debugging/ illustration 
 
 Boolean flag to make to make locate zeta fail. 
 
-Definition at line 355 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 358 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -445,7 +449,7 @@ Referenced by C\+G\+A\+L\+Sample\+Point\+Container\+::limited\+\_\+locate\+\_\+z
 \index{SamplePointContainer@{SamplePointContainer}!Enable\_timing\_of\_setup@{Enable\_timing\_of\_setup}}
 \index{Enable\_timing\_of\_setup@{Enable\_timing\_of\_setup}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{Enable\_timing\_of\_setup}{Enable\_timing\_of\_setup}}
-{\footnotesize\ttfamily bool Sample\+Point\+Container\+::\+Enable\+\_\+timing\+\_\+of\+\_\+setup =false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool Sample\+Point\+Container\+::\+Enable\+\_\+timing\+\_\+of\+\_\+setup = false\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -453,7 +457,7 @@ Time setup?
 
 
 
-Definition at line 362 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 365 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -471,7 +475,7 @@ Ignore halo elements?
 
 
 
-Definition at line 389 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 391 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -489,7 +493,7 @@ Max radius beyond which we stop searching the bin. Initialised to D\+B\+L\+\_\+\
 
 
 
-Definition at line 405 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 408 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -507,7 +511,7 @@ Pointer to mesh from whose Finite\+Elements sample points are created.
 
 
 
-Definition at line 374 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 376 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -521,7 +525,7 @@ Referenced by C\+G\+A\+L\+Sample\+Point\+Container\+::\+C\+G\+A\+L\+Sample\+Poin
 
 Vector of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. 
 
-Definition at line 380 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 382 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -539,7 +543,7 @@ Referenced by C\+G\+A\+L\+Sample\+Point\+Container\+::\+C\+G\+A\+L\+Sample\+Poin
 
 
 
-Definition at line 394 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 396 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -549,7 +553,7 @@ Referenced by Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refinea
 \index{SamplePointContainer@{SamplePointContainer}!Percentage\_offset@{Percentage\_offset}}
 \index{Percentage\_offset@{Percentage\_offset}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{Percentage\_offset}{Percentage\_offset}}
-{\footnotesize\ttfamily double Sample\+Point\+Container\+::\+Percentage\+\_\+offset =5.\+0\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily double Sample\+Point\+Container\+::\+Percentage\+\_\+offset = 5.\+0\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -557,7 +561,7 @@ Offset of sample point container boundaries beyond max/min coords.
 
 
 
-Definition at line 365 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 368 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -575,7 +579,7 @@ Counter to keep track of how many sample points we\textquotesingle{}ve visited d
 
 
 
-Definition at line 398 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 401 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -585,7 +589,7 @@ Referenced by C\+G\+A\+L\+Sample\+Point\+Container\+::\+C\+G\+A\+L\+Sample\+Poin
 \index{SamplePointContainer@{SamplePointContainer}!Use\_equally\_spaced\_interior\_sample\_points@{Use\_equally\_spaced\_interior\_sample\_points}}
 \index{Use\_equally\_spaced\_interior\_sample\_points@{Use\_equally\_spaced\_interior\_sample\_points}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{Use\_equally\_spaced\_interior\_sample\_points}{Use\_equally\_spaced\_interior\_sample\_points}}
-{\footnotesize\ttfamily bool Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points =true\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points = true\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -593,7 +597,7 @@ Use equally spaced sample points? (otherwise vertices are sampled repeatedly.
 
 
 
-Definition at line 359 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 362 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -611,7 +615,7 @@ Use Eulerian coordinates (i.\+e. interpolated\+\_\+x) rather than zeta itself (i
 
 
 
-Definition at line 384 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 386 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -631,7 +635,7 @@ File to record sequence of visited sample points in. Used for debugging/ illustr
 
 \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}} base class 
 
-Definition at line 351 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 354 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 

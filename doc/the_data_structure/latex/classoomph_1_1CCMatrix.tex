@@ -47,8 +47,7 @@ void \mbox{\hyperlink{classoomph_1_1CCMatrix_a1f6e451f0688c392e45bc03bf20fdda7}{
 void \mbox{\hyperlink{classoomph_1_1CCMatrix_af3f7a40493a8576558e211c681b1ca3c}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Wipe matrix data and set all values to 0. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CCMatrix_aa08192365e3c87357d1f7ca8131f03de}{build}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ T $>$ \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a3e382ff145082821a6b0b3e63b6aed5d}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CCMatrix_acbea54ff48550342267246b7ae07c8c4}{row\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CCMatrix_a955390de47c08eb8799550519a1a2751}{column\+\_\+start}}, const unsigned long \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned long \&m)
-\begin{DoxyCompactList}\small\item\em Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CCMatrix_a57eddb79a6a3af698a1c92196482335a}{build\+\_\+without\+\_\+copy}} (T $\ast$\mbox{\hyperlink{classoomph_1_1SparseMatrix_a3e382ff145082821a6b0b3e63b6aed5d}{value}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CCMatrix_acbea54ff48550342267246b7ae07c8c4}{row\+\_\+index}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CCMatrix_a955390de47c08eb8799550519a1a2751}{column\+\_\+start}}, const unsigned long \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a8b8010edcc0869283621e72a9bbc51e3}{nnz}}, const unsigned long \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned long \&m)
 \begin{DoxyCompactList}\small\item\em Function to build matrix from pointers to arrays which hold the column starts, row indices and non-\/zero values. The final parameters specifies the number of rows and columns. Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
@@ -67,7 +66,7 @@ class oomph\+::\+C\+C\+Matrix$<$ T $>$}
 
 A class for compressed column matrices\+: a sparse matrix format The class is passed as the M\+A\+T\+R\+I\+X\+\_\+\+T\+Y\+PE paramater so that the base class can use the specific access functions in the round-\/bracket operator. 
 
-Definition at line 2373 of file matrices.\+h.
+Definition at line 2613 of file matrices.\+h.
 
 
 
@@ -85,7 +84,7 @@ Default constructor.
 
 
 
-Definition at line 2379 of file matrices.\+h.
+Definition at line 2617 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CCMatrix_a4d8bf86e2cb87a710fb5485ac5904274}\label{classoomph_1_1CCMatrix_a4d8bf86e2cb87a710fb5485ac5904274}} 
 \index{oomph::CCMatrix$<$ T $>$@{oomph::CCMatrix$<$ T $>$}!CCMatrix@{CCMatrix}}
@@ -100,7 +99,7 @@ Constructor\+: Pass vector of values, vector of row indices, vector of column st
 
 
 
-Definition at line 2391 of file matrices.\+h.
+Definition at line 2629 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CCMatrix_a815c8a3473ce3b8fe70c682e7591a33d}\label{classoomph_1_1CCMatrix_a815c8a3473ce3b8fe70c682e7591a33d}} 
 \index{oomph::CCMatrix$<$ T $>$@{oomph::CCMatrix$<$ T $>$}!CCMatrix@{CCMatrix}}
@@ -115,7 +114,7 @@ Copy constructor.
 
 
 
-Definition at line 2403 of file matrices.\+h.
+Definition at line 2643 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CCMatrix_a5f6e403c6f6478abe752ca515d3120d9}\label{classoomph_1_1CCMatrix_a5f6e403c6f6478abe752ca515d3120d9}} 
 \index{oomph::CCMatrix$<$ T $>$@{oomph::CCMatrix$<$ T $>$}!````~CCMatrix@{$\sim$CCMatrix}}
@@ -130,7 +129,7 @@ Destructor, delete any allocated memory.
 
 
 
-Definition at line 2436 of file matrices.\+h.
+Definition at line 2676 of file matrices.\+h.
 
 
 
@@ -144,13 +143,11 @@ void \mbox{\hyperlink{classoomph_1_1CCMatrix}{oomph\+::\+C\+C\+Matrix}}$<$ T $>$
 
 
 
-Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. ~\newline
- 
+Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. 
 
-Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. ~\newline
- 
+Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. 
 
-Definition at line 3017 of file matrices.\+h.
+Definition at line 3286 of file matrices.\+h.
 
 
 
@@ -169,7 +166,7 @@ Function to build matrix from pointers to arrays which hold the column starts, r
 
 Build matrix from compressed representation. Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments! 
 
-Definition at line 2977 of file matrices.\+h.
+Definition at line 3238 of file matrices.\+h.
 
 
 
@@ -188,7 +185,7 @@ Wipe matrix data and set all values to 0.
 
 
 
-Definition at line 2946 of file matrices.\+h.
+Definition at line 3208 of file matrices.\+h.
 
 
 
@@ -207,7 +204,7 @@ Access to C-\/style column\+\_\+start array.
 
 
 
-Definition at line 2482 of file matrices.\+h.
+Definition at line 2724 of file matrices.\+h.
 
 
 
@@ -226,7 +223,7 @@ Access to C-\/style column\+\_\+start array (const version)
 
 
 
-Definition at line 2485 of file matrices.\+h.
+Definition at line 2730 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CCMatrix_a93b26c3364bd4994f547998b7ceb939c}\label{classoomph_1_1CCMatrix_a93b26c3364bd4994f547998b7ceb939c}} 
 \index{oomph::CCMatrix$<$ T $>$@{oomph::CCMatrix$<$ T $>$}!entry@{entry}}
@@ -237,7 +234,7 @@ T\& \mbox{\hyperlink{classoomph_1_1CCMatrix}{oomph\+::\+C\+C\+Matrix}}$<$ T $>$\
 
 Read-\/write access is not permitted for these matrices and is deliberately broken. 
 
-Definition at line 2461 of file matrices.\+h.
+Definition at line 2703 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CCMatrix_a9b40b8a395a94be77939308cc413828a}\label{classoomph_1_1CCMatrix_a9b40b8a395a94be77939308cc413828a}} 
 \index{oomph::CCMatrix$<$ T $>$@{oomph::CCMatrix$<$ T $>$}!get\_entry@{get\_entry}}
@@ -252,7 +249,7 @@ Access function that will be called by the read-\/only round-\/bracket operator 
 
 
 
-Definition at line 2444 of file matrices.\+h.
+Definition at line 2686 of file matrices.\+h.
 
 
 
@@ -271,7 +268,7 @@ Broken assignment operator.
 
 
 
-Definition at line 2429 of file matrices.\+h.
+Definition at line 2669 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CCMatrix_ac3b138b2ed470866999f2a92f3e1f239}\label{classoomph_1_1CCMatrix_ac3b138b2ed470866999f2a92f3e1f239}} 
 \index{oomph::CCMatrix$<$ T $>$@{oomph::CCMatrix$<$ T $>$}!output\_bottom\_right\_zero\_helper@{output\_bottom\_right\_zero\_helper}}
@@ -290,7 +287,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e15
 
 
 
-Definition at line 2496 of file matrices.\+h.
+Definition at line 2750 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CCMatrix_acbea54ff48550342267246b7ae07c8c4}\label{classoomph_1_1CCMatrix_acbea54ff48550342267246b7ae07c8c4}} 
 \index{oomph::CCMatrix$<$ T $>$@{oomph::CCMatrix$<$ T $>$}!row\_index@{row\_index}}
@@ -305,7 +302,7 @@ Access to C-\/style row index array.
 
 
 
-Definition at line 2488 of file matrices.\+h.
+Definition at line 2736 of file matrices.\+h.
 
 
 
@@ -324,7 +321,7 @@ Access to C-\/style row index array (const version)
 
 
 
-Definition at line 2491 of file matrices.\+h.
+Definition at line 2742 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CCMatrix_a1f6e451f0688c392e45bc03bf20fdda7}\label{classoomph_1_1CCMatrix_a1f6e451f0688c392e45bc03bf20fdda7}} 
 \index{oomph::CCMatrix$<$ T $>$@{oomph::CCMatrix$<$ T $>$}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
@@ -343,7 +340,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af
 
 
 
-Definition at line 2513 of file matrices.\+h.
+Definition at line 2767 of file matrices.\+h.
 
 
 
@@ -361,7 +358,7 @@ Start index for column.
 
 
 
-Definition at line 2557 of file matrices.\+h.
+Definition at line 2811 of file matrices.\+h.
 
 
 
@@ -380,7 +377,7 @@ Row index.
 
 
 
-Definition at line 2554 of file matrices.\+h.
+Definition at line 2808 of file matrices.\+h.
 
 
 

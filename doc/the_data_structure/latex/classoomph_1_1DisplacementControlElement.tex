@@ -34,9 +34,8 @@ void \mbox{\hyperlink{classoomph_1_1DisplacementControlElement_a35a463ca767d3b9d
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector\+: The displacement constraint. \mbox{[}Note\+: Jacobian is computed automatically by finite-\/differencing\mbox{]}. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1DisplacementControlElement_aceec0d8fd80fc5d50451e99680306d1a}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the control pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DisplacementControlElement_a4b076c21ac84aefbb52f4bf0c7a40cc8}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) The only dof this element is in charge of is the control load, provided it\textquotesingle{}s been created as internal \mbox{\hyperlink{classoomph_1_1Data}{Data}}. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1DisplacementControlElement_aaa6af433248ee270869c11871cf23f48}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) The only dof this element is in charge of is the control load, provided it\textquotesingle{}s been created as internal \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -74,12 +73,10 @@ Displacement control element\+: In the \char`\"{}normal\char`\"{} formulation of
 \end{DoxyItemize}The {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement}{Displacement\+Control\+Element}}} has two constructors\+:
 \begin{DoxyItemize}
 \item In the first version, we pass the pointer to the {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} object whose one-\/and-\/only value contains the scalar load level that is \char`\"{}traded\char`\"{} for the displacement constraint. This is appropriate if the load {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} has already been created (and is included in the overall equation numbering procedure) by some other element. In that case the {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement}{Displacement\+Control\+Element}}} treats the (already existing) {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} object external {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}}.
-\item In the second version, a {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} object (with a single value) is created by the constructor of the {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement}{Displacement\+Control\+Element}}} and stored in its internal {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}}. Once the ~\newline
- {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement}{Displacement\+Control\+Element}}} has been included in one of the {\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s} meshes, it is therefore automatically included in the equation numbering procedure. The (pointer to) the newly created {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} is accessible via the access function {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement_a4bb140bfc80d122542ad52fd0074171f}{displacement\+\_\+control\+\_\+load\+\_\+pt()}}}. It can be used to make make the unknown load level accessible to the load function that drives the deformation.
-\end{DoxyItemize}{\bfseries{Note\+:}} The element inherits from the Block\+Preconditionable\+Element\+Base and can be used in the block-\/preconditioning context. The element is \char`\"{}in charge\char`\"{} of the control load (if it\textquotesingle{}s been created internally) and classifies it as its one-\/and-\/only \char`\"{}\+D\+O\+F type\char`\"{} ~\newline
- 
+\item In the second version, a {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} object (with a single value) is created by the constructor of the {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement}{Displacement\+Control\+Element}}} and stored in its internal {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}}. Once the {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement}{Displacement\+Control\+Element}}} has been included in one of the {\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s} meshes, it is therefore automatically included in the equation numbering procedure. The (pointer to) the newly created {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} is accessible via the access function {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement_a4bb140bfc80d122542ad52fd0074171f}{displacement\+\_\+control\+\_\+load\+\_\+pt()}}}. It can be used to make make the unknown load level accessible to the load function that drives the deformation.
+\end{DoxyItemize}{\bfseries{Note\+:}} The element inherits from the Block\+Preconditionable\+Element\+Base and can be used in the block-\/preconditioning context. The element is \char`\"{}in charge\char`\"{} of the control load (if it\textquotesingle{}s been created internally) and classifies it as its one-\/and-\/only \char`\"{}\+D\+O\+F type\char`\"{} 
 
-Definition at line 106 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 105 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -101,10 +98,9 @@ Constructor. Pass\+:
 \item the coordinate direction in which the position of the control point is prescribed
 \item pointer to double that specifies the prescribed coordinate of the control point
 \item Pointer to \mbox{\hyperlink{classoomph_1_1Data}{Data}} item whose one-\/and-\/only value contains the load value that is being adjusted to allow displacement control.
-\end{DoxyItemize}The load {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} is treated as external {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} for this element. ~\newline
- 
+\end{DoxyItemize}The load {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} is treated as external {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}} for this element. 
 
-Definition at line 126 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 122 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -126,10 +122,9 @@ Constructor. Pass\+:
 \item \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} that contains the local coordinates of the control point in that element.
 \item the coordinate direction in which the position of the control point is prescribed
 \item pointer to double that specifies the prescribed coordinate of the control point
-\end{DoxyItemize}The pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} item whose one-\/and-\/only value contains the load value that is being adjusted to allow displacement control is created internally (and stored in the element\textquotesingle{}s internal {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}}. It is accessible (for use the load function) via the access function ~\newline
- {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement_a4bb140bfc80d122542ad52fd0074171f}{displacement\+\_\+control\+\_\+load\+\_\+pt()}}} 
+\end{DoxyItemize}The pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} item whose one-\/and-\/only value contains the load value that is being adjusted to allow displacement control is created internally (and stored in the element\textquotesingle{}s internal {\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}}. It is accessible (for use the load function) via the access function {\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementControlElement_a4bb140bfc80d122542ad52fd0074171f}{displacement\+\_\+control\+\_\+load\+\_\+pt()}}} 
 
-Definition at line 183 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 177 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -147,7 +142,7 @@ Broken copy constructor.
 
 
 
-Definition at line 215 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 210 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -172,7 +167,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a4cdd0d1eef
 
 
 
-Definition at line 235 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 232 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -190,7 +185,7 @@ Pointer to \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose one-\/and-\/
 
 
 
-Definition at line 230 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 225 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -216,30 +211,29 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 257 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 254 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
-References Control\+\_\+position\+\_\+value\+\_\+pt, Controlled\+\_\+direction, Controlled\+\_\+element\+\_\+pt, Controlled\+\_\+point, Displ\+\_\+ctrl\+\_\+local\+\_\+eqn, and residuals().
+References Control\+\_\+position\+\_\+value\+\_\+pt, Controlled\+\_\+direction, Controlled\+\_\+element\+\_\+pt, Controlled\+\_\+point, Displ\+\_\+ctrl\+\_\+local\+\_\+eqn, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), and residuals().
 
-\mbox{\Hypertarget{classoomph_1_1DisplacementControlElement_a4b076c21ac84aefbb52f4bf0c7a40cc8}\label{classoomph_1_1DisplacementControlElement_a4b076c21ac84aefbb52f4bf0c7a40cc8}} 
+\mbox{\Hypertarget{classoomph_1_1DisplacementControlElement_aaa6af433248ee270869c11871cf23f48}\label{classoomph_1_1DisplacementControlElement_aaa6af433248ee270869c11871cf23f48}} 
 \index{oomph::DisplacementControlElement@{oomph::DisplacementControlElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::DisplacementControlElement@{oomph::DisplacementControlElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Displacement\+Control\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Displacement\+Control\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) The only dof this element is in charge of is the control load, provided it\textquotesingle{}s been created as internal \mbox{\hyperlink{classoomph_1_1Data}{Data}}. ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) The only dof this element is in charge of is the control load, provided it\textquotesingle{}s been created as internal \mbox{\hyperlink{classoomph_1_1Data}{Data}}. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 282 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 280 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -261,7 +255,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 269 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 267 of file displacement\+\_\+control\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementControlElement_af6a93fc12b436e69cf5a95e9e35ca8e1}\label{classoomph_1_1DisplacementControlElement_af6a93fc12b436e69cf5a95e9e35ca8e1}} 
 \index{oomph::DisplacementControlElement@{oomph::DisplacementControlElement}!operator=@{operator=}}
@@ -275,7 +269,7 @@ Broken assignment operator.
 
 
 
-Definition at line 222 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 217 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -296,7 +290,7 @@ Pointer to the value that stores the prescribed coordinate of the control point.
 
 
 
-Definition at line 317 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 314 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -314,7 +308,7 @@ Coordinate direction in which the displacement of the control point is controlle
 
 
 
-Definition at line 321 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 318 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -332,7 +326,7 @@ Pointer to \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Ele
 
 
 
-Definition at line 324 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 321 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -350,7 +344,7 @@ Referenced by Displacement\+Control\+Element(), and fill\+\_\+in\+\_\+contributi
 
 
 
-Definition at line 328 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 325 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -368,7 +362,7 @@ Local equation number of the control-\/displacement equation.
 
 
 
-Definition at line 339 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 337 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -386,7 +380,7 @@ Pointer to \mbox{\hyperlink{classoomph_1_1Data}{Data}} item whose one-\/and-\/on
 
 
 
-Definition at line 313 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 310 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -404,7 +398,7 @@ Flag to indicate if load data was created internally or externally (and is there
 
 
 
-Definition at line 332 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 330 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 
@@ -422,7 +416,7 @@ In which component (in the vector of the element\textquotesingle{}s internal or 
 
 
 
-Definition at line 336 of file displacement\+\_\+control\+\_\+element.\+h.
+Definition at line 334 of file displacement\+\_\+control\+\_\+element.\+h.
 
 
 

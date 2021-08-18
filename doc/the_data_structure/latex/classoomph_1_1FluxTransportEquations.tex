@@ -26,8 +26,7 @@ void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ac3c3ab10011367a88010
 void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a12c2f66dbf817754f548cb51137529fa}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Assemble the contributions to the mass matrix and residuals. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6994eab818eb7236e24e45b6fedec1f7}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a919f56a48a7ab618c90ceb41da5afaeb}{interpolated\+\_\+u\+\_\+flux\+\_\+transport}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Return the i-\/th unknown at the local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ab637781b0f2fe83c5bc8f8127af4e1d4}{du\+\_\+dt\+\_\+flux\+\_\+transport}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
@@ -62,7 +61,7 @@ class oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$}
 
 Base class for the flux transport equations templated by the dimension D\+IM. The equations that are solved are \[ \frac{\partial u_{i}}{\partial t} + \frac{\partial}{\partial x_{j}} \left(F_{ij}(u_{k})\right), \] where $ F_{ij} $ is a matrix of flux components. 
 
-Definition at line 50 of file flux\+\_\+transport\+\_\+elements.\+h.
+Definition at line 49 of file flux\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -113,7 +112,7 @@ Compute the average values of the fluxes.
 
 Calculate the averages of the flux variables. 
 
-Definition at line 299 of file flux\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 308 of file flux\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -121,7 +120,7 @@ References i, interpolated\+\_\+u(), and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), oomph\+::\+D\+G\+Spectral\+Euler\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), oomph\+::\+D\+G\+Spectral\+Euler\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), oomph\+::\+D\+G\+Scalar\+Advection\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), and oomph\+::\+D\+G\+Scalar\+Advection\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages().
+Referenced by oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), oomph\+::\+D\+G\+Spectral\+Euler\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), oomph\+::\+D\+G\+Scalar\+Advection\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), oomph\+::\+D\+G\+Spectral\+Euler\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages(), and oomph\+::\+D\+G\+Scalar\+Advection\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+element\+\_\+averages().
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_a85c3239c26cb1fb4ddd102759eb0fc0d}\label{classoomph_1_1FluxTransportEquations_a85c3239c26cb1fb4ddd102759eb0fc0d}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!dflux\_du@{dflux\_du}}
@@ -140,7 +139,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af00736
 
 
 
-Definition at line 41 of file flux\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 40 of file flux\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -189,7 +188,7 @@ i-\/th component of du/dt at local node n. Uses suitably interpolated value for 
 
 
 
-Definition at line 268 of file flux\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 276 of file flux\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -212,7 +211,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 125 of file flux\+\_\+transport\+\_\+elements.\+h.
+Definition at line 127 of file flux\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -231,7 +230,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 135 of file flux\+\_\+transport\+\_\+elements.\+h.
+Definition at line 137 of file flux\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -254,7 +253,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a09e337880e
 
 
 
-Definition at line 145 of file flux\+\_\+transport\+\_\+elements.\+h.
+Definition at line 148 of file flux\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -292,8 +291,7 @@ void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Tra
 
 
 
-Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Compute the residuals for the flux transport equations; flag=1 compute jacobian as well flag=2 compute mass matrix and jacobian as well flag=3 compute mass matrix as well. 
 
@@ -301,7 +299,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_0
 
 
 
-Definition at line 89 of file flux\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 90 of file flux\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -328,7 +326,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3
 
 
 
-Definition at line 69 of file flux\+\_\+transport\+\_\+elements.\+h.
+Definition at line 71 of file flux\+\_\+transport\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_a919f56a48a7ab618c90ceb41da5afaeb}\label{classoomph_1_1FluxTransportEquations_a919f56a48a7ab618c90ceb41da5afaeb}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!interpolated\_u\_flux\_transport@{interpolated\_u\_flux\_transport}}
@@ -343,7 +341,7 @@ Return the i-\/th unknown at the local coordinate s.
 
 
 
-Definition at line 241 of file flux\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 250 of file flux\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -366,7 +364,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1EulerEquations_a6bf35d53c8c306df
 
 
 
-Definition at line 56 of file flux\+\_\+transport\+\_\+elements.\+h.
+Definition at line 53 of file flux\+\_\+transport\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_afd690f82a24bc20b686fc7d25a59f775}\label{classoomph_1_1FluxTransportEquations_afd690f82a24bc20b686fc7d25a59f775}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!output@{output}}
@@ -389,7 +387,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QScalarAdvectionElement_aeb9bb43
 
 
 
-Definition at line 171 of file flux\+\_\+transport\+\_\+elements.\+h.
+Definition at line 176 of file flux\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -416,7 +414,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QScalarAdvectionElement_a1e964b1
 
 
 
-Definition at line 371 of file flux\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 385 of file flux\+\_\+transport\+\_\+elements.\+cc.
 
 
 

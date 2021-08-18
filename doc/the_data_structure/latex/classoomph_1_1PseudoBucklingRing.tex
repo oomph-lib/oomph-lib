@@ -59,15 +59,13 @@ void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a7c45a80564ceaeb146d9eb81
 void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ae983ed12da7311457a4a2d4f1c3f8b6c}{accel}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&accel)
 \begin{DoxyCompactList}\small\item\em Parametrised acceleration on object at current time\+: accel = d$^\wedge$2 r(zeta)/dt$^\wedge$2. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a027211cc7067efa849e605b456cb5462}{position}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
-\begin{DoxyCompactList}\small\item\em Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta at discrete previous time (t=0\+: present time; t$>$0\+: previous time) ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta at discrete previous time (t=0\+: present time; t$>$0\+: previous time) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_aa11d7bbd2d01a646200e8719e61ad09a}{dposition\+\_\+dt}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&drdt)
 \begin{DoxyCompactList}\small\item\em j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a9e03780134886a9a2a19358519eca3be}{ngeom\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a5f53b50c00bf2cf98db90a09dc65b410}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
-\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -82,7 +80,7 @@ Pseudo buckling ring\+: Circular ring deformed by the N-\/th buckling mode of a 
 
 \[ x = R_0 \cos(\zeta) + \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta) \sin(\zeta) \right) sin(2 \pi t/T) \] \[ y = R_0 \sin(\zeta) + \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta) \cos(\zeta) \right) sin(2 \pi t/T) \] where A is the ratio of the aziumuthal to the radial buckling amplitude (A=-\/1/N for statically buckling rings) and epsilon is the buckling amplitude. 
 
-Definition at line 64 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 65 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -99,7 +97,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line 71 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 69 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_aab85d68a2bcb4158e74cb3eeb3c24dd4}\label{classoomph_1_1PseudoBucklingRing_aab85d68a2bcb4158e74cb3eeb3c24dd4}} 
 \index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!PseudoBucklingRing@{PseudoBucklingRing}}
@@ -121,7 +119,7 @@ Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitu
 \end{DoxyCode}
  
 
-Definition at line 90 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 88 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -139,7 +137,7 @@ Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitu
 
 
 
-Definition at line 130 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 126 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -157,7 +155,7 @@ Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitu
 
 
 
-Definition at line 178 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 175 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -175,7 +173,7 @@ Broken copy constructor.
 
 
 
-Definition at line 272 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 273 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -193,7 +191,7 @@ Destructor\+: Clean up if necessary.
 
 
 
-Definition at line 285 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 286 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -214,7 +212,7 @@ Parametrised acceleration on object at current time\+: accel = d$^\wedge$2 r(zet
 
 
 
-Definition at line 405 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 433 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -236,7 +234,7 @@ Access function for amplitude ratio.
 
 
 
-Definition at line 300 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 304 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -262,7 +260,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_aa46469e491d25eda8d
 
 
 
-Definition at line 490 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 522 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -280,7 +278,7 @@ Access function for buckling amplitude.
 
 
 
-Definition at line 297 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 298 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -298,8 +296,7 @@ Referenced by Pseudo\+Buckling\+Ring(), and set\+\_\+eps\+\_\+buckl().
 
 
 
-Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on ~\newline
- 
+Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. 
 
 
 
@@ -307,7 +304,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ae1940fc6a3050e645c
 
 
 
-Definition at line 526 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 562 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -329,7 +326,7 @@ Access function for buckling wavenumber (as float)
 
 
 
-Definition at line 309 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 322 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -351,7 +348,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e12
 
 
 
-Definition at line 522 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 555 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -369,7 +366,7 @@ Broken assignment operator.
 
 
 
-Definition at line 278 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 279 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -383,8 +380,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 
-Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta at discrete previous time (t=0\+: present time; t$>$0\+: previous time) ~\newline
- 
+Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta at discrete previous time (t=0\+: present time; t$>$0\+: previous time) 
 
 
 
@@ -392,7 +388,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af1
 
 
 
-Definition at line 439 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 469 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -414,7 +410,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660f
 
 
 
-Definition at line 335 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 361 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -436,7 +432,7 @@ Access function for undeformed radius.
 
 
 
-Definition at line 303 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 310 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -458,7 +454,7 @@ Set amplitude ratio between radial and azimuthal buckling displacements.
 
 
 
-Definition at line 317 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 335 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -476,7 +472,7 @@ Set buckling amplitude.
 
 
 
-Definition at line 312 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 328 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -494,7 +490,7 @@ Set buckling wavenumber.
 
 
 
-Definition at line 321 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 341 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -512,7 +508,7 @@ Set undeformed radius of ring.
 
 
 
-Definition at line 325 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 347 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -530,7 +526,7 @@ Set period of oscillation.
 
 
 
-Definition at line 329 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 353 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -548,7 +544,7 @@ Access function for period of oscillation.
 
 
 
-Definition at line 306 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 316 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -570,7 +566,7 @@ Parametrised velocity on object at current time\+: veloc = d r(zeta)/dt.
 
 
 
-Definition at line 371 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 398 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -595,7 +591,7 @@ Referenced by dposition\+\_\+dt().
 
 
 
-Definition at line 533 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 570 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -613,7 +609,7 @@ Do I need to clean up?
 
 
 
-Definition at line 536 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
+Definition at line 573 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 

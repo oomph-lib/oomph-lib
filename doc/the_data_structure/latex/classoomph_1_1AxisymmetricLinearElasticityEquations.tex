@@ -50,7 +50,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquation
 \doxysubsection{Detailed Description}
 A class for elements that solve the axisymmetric (in cylindrical polars) equations of linear elasticity 
 
-Definition at line 417 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 432 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -67,7 +67,7 @@ Constructor.
 
 
 
-Definition at line 423 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 437 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -86,7 +86,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 678 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 662 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -106,7 +106,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 765 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 744 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -124,11 +124,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 440 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 457 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity().
+References residuals().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityEquations_adadd2893e700f16f0866b558a687aadb}\label{classoomph_1_1AxisymmetricLinearElasticityEquations_adadd2893e700f16f0866b558a687aadb}} 
 \index{oomph::AxisymmetricLinearElasticityEquations@{oomph::AxisymmetricLinearElasticityEquations}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -146,7 +146,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 430 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 447 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -164,15 +164,15 @@ Private helper function to compute residuals and (if requested via flag) also th
 
 Compute the residuals for the axisymmetric (in cyl. polars) linear elasticity equations in. Flag indicates if we want Jacobian too. 
 
-Definition at line 166 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 163 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
-References a(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Integral\+::knot(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::lambda\+\_\+sq(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::nu(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value(), residuals(), s, oomph\+::\+Time\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+pt(), oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), oomph\+::\+Time\+Stepper\+::weight(), and oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::youngs\+\_\+modulus().
+References a(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Integral\+::knot(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::lambda\+\_\+sq(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::nu(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value(), residuals(), s, oomph\+::\+Time\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+pt(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), oomph\+::\+Time\+Stepper\+::weight(), and oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::youngs\+\_\+modulus().
 
 
 
-Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityEquations_a079d1722a01188f2e06911932af3da1f}\label{classoomph_1_1AxisymmetricLinearElasticityEquations_a079d1722a01188f2e06911932af3da1f}} 
 \index{oomph::AxisymmetricLinearElasticityEquations@{oomph::AxisymmetricLinearElasticityEquations}!get\_strain@{get\_strain}}
@@ -186,7 +186,7 @@ Get strain (3x3 entries; r, z, phi)
 
 
 
-Definition at line 56 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 55 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -216,7 +216,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QAxisymmetricLinearElasticityEle
 
 
 
-Definition at line 477 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 493 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -242,7 +242,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QAxisymmetricLinearElasticityEle
 
 
 
-Definition at line 634 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 620 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -268,7 +268,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QAxisymmetricLinearElasticityEle
 
 
 
-Definition at line 467 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 483 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -294,7 +294,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityEle
 
 
 
-Definition at line 579 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 558 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -314,7 +314,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2a8426dccd57b92
 
 
 
-Definition at line 525 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 507 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -336,7 +336,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee
 
 
 
-Definition at line 472 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 456 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -358,7 +358,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 426 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 440 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 

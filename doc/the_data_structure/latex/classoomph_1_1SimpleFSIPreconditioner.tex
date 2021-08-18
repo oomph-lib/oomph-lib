@@ -2,8 +2,7 @@
 \label{classoomph_1_1SimpleFSIPreconditioner}\index{oomph::SimpleFSIPreconditioner$<$ MATRIX $>$@{oomph::SimpleFSIPreconditioner$<$ MATRIX $>$}}
 
 
-F\+SI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of F\+SI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Blocks are then re-\/assembled into one global matrix and solved with a direct solver (Super\+LU in its incarnation as an exact preconditioner). By default we retain the fluid on solid off diagonal blocks. ~\newline
-  
+F\+SI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of F\+SI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Blocks are then re-\/assembled into one global matrix and solved with a direct solver (Super\+LU in its incarnation as an exact preconditioner). By default we retain the fluid on solid off diagonal blocks.  
 
 
 
@@ -28,8 +27,7 @@ Inheritance diagram for oomph\+::Simple\+F\+S\+I\+Preconditioner$<$ M\+A\+T\+R\+
 void \mbox{\hyperlink{classoomph_1_1SimpleFSIPreconditioner_ab9c5875d7186cfb5c55cecb72bed50b3}{set\+\_\+navier\+\_\+stokes\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3c0e92cb77c3e3179007fe9fd99b6428}{mesh\+\_\+pt}}, const bool \&allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh=false)
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SimpleFSIPreconditioner_a324b53aaedfc8f0a2cc3da921ef94686}{set\+\_\+wall\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3c0e92cb77c3e3179007fe9fd99b6428}{mesh\+\_\+pt}}, const bool \&allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh=false)
-\begin{DoxyCompactList}\small\item\em Setter function for the mesh containing the block-\/preconditionable F\+SI solid elements. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Setter function for the mesh containing the block-\/preconditionable F\+SI solid elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SimpleFSIPreconditioner_aaf19c0c3f19f6d8ef4f36a1581829230}{setup}} ()
 \begin{DoxyCompactList}\small\item\em Setup the preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SimpleFSIPreconditioner_a31684c26aa10a782189c32304d9d0824}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
@@ -69,10 +67,9 @@ bool \mbox{\hyperlink{classoomph_1_1SimpleFSIPreconditioner_a70094cbfae8c30e1164
 \subsubsection*{template$<$typename M\+A\+T\+R\+IX$>$\newline
 class oomph\+::\+Simple\+F\+S\+I\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}
 
-F\+SI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of F\+SI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Blocks are then re-\/assembled into one global matrix and solved with a direct solver (Super\+LU in its incarnation as an exact preconditioner). By default we retain the fluid on solid off diagonal blocks. ~\newline
- 
+F\+SI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of F\+SI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Blocks are then re-\/assembled into one global matrix and solved with a direct solver (Super\+LU in its incarnation as an exact preconditioner). By default we retain the fluid on solid off diagonal blocks. 
 
-Definition at line 495 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 489 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -90,7 +87,7 @@ Constructor.
 
 
 
-Definition at line 501 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 493 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -109,7 +106,7 @@ Destructor\+: Clean up.
 
 
 
-Definition at line 523 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 515 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -128,7 +125,7 @@ Broken copy constructor.
 
 
 
-Definition at line 536 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 528 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -150,7 +147,7 @@ Identify the required blocks\+: Here we only need the momentum, gradient and div
 
 Identify the required blocks\+: Here we only need the momentum, gradient and divergence blocks of the 2x2 block-\/structured fluid matrix, the 1x1 solid block and the selected F\+S\+I-\/off diagonals. 
 
-Definition at line 654 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 643 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -173,7 +170,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 793 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 776 of file fsi\+\_\+preconditioners.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SimpleFSIPreconditioner_ab9c5875d7186cfb5c55cecb72bed50b3}\label{classoomph_1_1SimpleFSIPreconditioner_ab9c5875d7186cfb5c55cecb72bed50b3}} 
 \index{oomph::SimpleFSIPreconditioner$<$ MATRIX $>$@{oomph::SimpleFSIPreconditioner$<$ MATRIX $>$}!set\_navier\_stokes\_mesh@{set\_navier\_stokes\_mesh}}
@@ -186,10 +183,9 @@ void \mbox{\hyperlink{classoomph_1_1SimpleFSIPreconditioner}{oomph\+::\+Simple\+
 
 Broken assignment operator. 
 
-Setter function for the mesh containing the block-\/preconditionable Navier-\/\+Stokes elements. ~\newline
- 
+Setter function for the mesh containing the block-\/preconditionable Navier-\/\+Stokes elements. 
 
-Definition at line 551 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 542 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -204,12 +200,11 @@ void \mbox{\hyperlink{classoomph_1_1SimpleFSIPreconditioner}{oomph\+::\+Simple\+
 
 
 
-Setter function for the mesh containing the block-\/preconditionable F\+SI solid elements. ~\newline
- 
+Setter function for the mesh containing the block-\/preconditionable F\+SI solid elements. 
 
 
 
-Definition at line 565 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 556 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -226,14 +221,13 @@ void \mbox{\hyperlink{classoomph_1_1SimpleFSIPreconditioner}{oomph\+::\+Simple\+
 
 Setup the preconditioner. 
 
-Setup the preconditioner\+: Copy the upper/lower triangular block matrices back into a big matrix (with the entries re-\/ordered relative to the original Jacobian matrix). ~\newline
- 
+Setup the preconditioner\+: Copy the upper/lower triangular block matrices back into a big matrix (with the entries re-\/ordered relative to the original Jacobian matrix). 
 
 Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
 
 
 
-Definition at line 708 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 694 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -252,7 +246,7 @@ Switch to block-\/diagonal preconditioner.
 
 
 
-Definition at line 584 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 575 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -271,7 +265,7 @@ Switch to block-\/triangular preconditioner in which action of fluid dofs onto s
 
 
 
-Definition at line 592 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 583 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -290,7 +284,7 @@ Switch to block-\/triangular preconditioner in which action of solid dofs onto f
 
 
 
-Definition at line 600 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 591 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -312,7 +306,7 @@ Flag for multiple element types in the Navier-\/\+Stokes mesh.
 
 
 
-Definition at line 632 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 622 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -331,7 +325,7 @@ Flag for multiple element types in the Wall mesh.
 
 
 
-Definition at line 635 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 625 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -350,7 +344,7 @@ Pointer to the navier stokes mesh.
 
 
 
-Definition at line 626 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 616 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -369,7 +363,7 @@ Referenced by oomph\+::\+Simple\+F\+S\+I\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$
 
 
 
-Definition at line 609 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 599 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -388,7 +382,7 @@ Boolean flag used to indicate that the fluid onto solid interaction terms are to
 
 
 
-Definition at line 617 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 607 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -407,7 +401,7 @@ Boolean flag used to indicate that the solid onto fluid interaction terms are to
 
 
 
-Definition at line 613 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 603 of file fsi\+\_\+preconditioners.\+h.
 
 
 
@@ -426,7 +420,7 @@ pointer to the solid mesh
 
 
 
-Definition at line 629 of file fsi\+\_\+preconditioners.\+h.
+Definition at line 619 of file fsi\+\_\+preconditioners.\+h.
 
 
 

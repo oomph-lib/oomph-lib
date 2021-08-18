@@ -23,11 +23,11 @@ double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ac945c
 \begin{DoxyCompactList}\small\item\em Return the surface peclect number. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_acb4ff16ed90e79ffe9e4156ef030d689}{peclet\+\_\+strouhal\+\_\+s}} ()
 \begin{DoxyCompactList}\small\item\em Return the surface peclect strouhal number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a7f64f64c3b5ad3abe6e09bb10a039298}{beta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a41af929d7aabb7fef48b993b3e893fe4}{beta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the Elasticity number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a3ce30a3705a18034585c80d2f9757099}{peclet\+\_\+s\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a22bc470c2fb7eef5a7b6f9a61f04d5cb}{peclet\+\_\+s\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the surface Peclet number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a422fa3f65ca6635b6bfbe993e01bce72}{peclet\+\_\+strouhal\+\_\+s\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a7f7e5af3ad9d26b920c01653bdb1e88a}{peclet\+\_\+strouhal\+\_\+s\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the surface Peclet x Strouhal number. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a280f065d9cb85438c0fe4f7cd95d14b3}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
@@ -62,7 +62,7 @@ Vector$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfa
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ae2c6f40fd7bc427636ac25c23d816e74}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}} = 1.\+0
+static double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ae2c6f40fd7bc427636ac25c23d816e74}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}
 \begin{DoxyCompactList}\small\item\em Default value of the physical constants. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -78,7 +78,7 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement
 \doxysubsection{Detailed Description}
 Generic surfactant transport equations implemented independently of the dimension and then specialised using the generic mechanisms introduce in the Fluid\+Interface\+Elements 
 
-Definition at line 49 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 48 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -91,7 +91,7 @@ Definition at line 49 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 Constructor that passes the bulk element and face index down to the underlying 
 
-Definition at line 115 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 120 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -120,7 +120,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceEleme
 
 
 
-Definition at line 118 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 121 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -138,7 +138,7 @@ Return the Elasticity number.
 
 
 
-Definition at line 127 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 135 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -148,11 +148,11 @@ References Beta\+\_\+pt.
 
 Referenced by dsigma\+\_\+d\+C(), and sigma().
 
-\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a7f64f64c3b5ad3abe6e09bb10a039298}\label{classoomph_1_1SurfactantTransportInterfaceElement_a7f64f64c3b5ad3abe6e09bb10a039298}} 
+\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a41af929d7aabb7fef48b993b3e893fe4}\label{classoomph_1_1SurfactantTransportInterfaceElement_a41af929d7aabb7fef48b993b3e893fe4}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!beta\_pt@{beta\_pt}}
 \index{beta\_pt@{beta\_pt}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{beta\_pt()}{beta\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -160,7 +160,7 @@ Access function for pointer to the Elasticity number.
 
 
 
-Definition at line 136 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 153 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -200,7 +200,7 @@ Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interfac
 
 Return the derivative of sigma with respect to C For use in computing the Jacobian 
 
-Definition at line 85 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 82 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -218,7 +218,7 @@ Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interfac
 
 Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix 
 
-Definition at line 102 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 107 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a703c35a6da2925926c976957f2da77c4}\label{classoomph_1_1SurfactantTransportInterfaceElement_a703c35a6da2925926c976957f2da77c4}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!integrate\_c@{integrate\_c}}
@@ -232,7 +232,7 @@ Compute the concentration intergated over the surface area.
 
 
 
-Definition at line 343 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 358 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -254,7 +254,7 @@ Get the surfactant concentration.
 
 
 
-Definition at line 41 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 40 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -276,7 +276,7 @@ Overload the C-\/style output function.
 
 
 
-Definition at line 151 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 180 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_ad41354dbe1ae8291e3330b3752b525f8}\label{classoomph_1_1SurfactantTransportInterfaceElement_ad41354dbe1ae8291e3330b3752b525f8}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!output@{output}}
@@ -290,7 +290,7 @@ C-\/style Output function.
 
 
 
-Definition at line 154 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 186 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a280f065d9cb85438c0fe4f7cd95d14b3}\label{classoomph_1_1SurfactantTransportInterfaceElement_a280f065d9cb85438c0fe4f7cd95d14b3}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!output@{output}}
@@ -304,7 +304,7 @@ Overload the output function.
 
 
 
-Definition at line 146 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 172 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_aebc3ed4954b636f4992a212c7973c670}\label{classoomph_1_1SurfactantTransportInterfaceElement_aebc3ed4954b636f4992a212c7973c670}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!output@{output}}
@@ -318,7 +318,7 @@ Overload the output function.
 
 
 
-Definition at line 286 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 298 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -336,7 +336,7 @@ Return the surface peclect number.
 
 
 
-Definition at line 130 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 141 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -346,11 +346,11 @@ References Peclet\+\_\+\+S\+\_\+pt.
 
 Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface().
 
-\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a3ce30a3705a18034585c80d2f9757099}\label{classoomph_1_1SurfactantTransportInterfaceElement_a3ce30a3705a18034585c80d2f9757099}} 
+\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a22bc470c2fb7eef5a7b6f9a61f04d5cb}\label{classoomph_1_1SurfactantTransportInterfaceElement_a22bc470c2fb7eef5a7b6f9a61f04d5cb}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!peclet\_s\_pt@{peclet\_s\_pt}}
 \index{peclet\_s\_pt@{peclet\_s\_pt}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{peclet\_s\_pt()}{peclet\_s\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -358,7 +358,7 @@ Access function for pointer to the surface Peclet number.
 
 
 
-Definition at line 139 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 159 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -380,17 +380,17 @@ Return the surface peclect strouhal number.
 
 
 
-Definition at line 133 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 147 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
 References Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a422fa3f65ca6635b6bfbe993e01bce72}\label{classoomph_1_1SurfactantTransportInterfaceElement_a422fa3f65ca6635b6bfbe993e01bce72}} 
+\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a7f7e5af3ad9d26b920c01653bdb1e88a}\label{classoomph_1_1SurfactantTransportInterfaceElement_a7f7e5af3ad9d26b920c01653bdb1e88a}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!peclet\_strouhal\_s\_pt@{peclet\_strouhal\_s\_pt}}
 \index{peclet\_strouhal\_s\_pt@{peclet\_strouhal\_s\_pt}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{peclet\_strouhal\_s\_pt()}{peclet\_strouhal\_s\_pt()}}
-{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -398,7 +398,7 @@ Access function for pointer to the surface Peclet x Strouhal number.
 
 
 
-Definition at line 142 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 165 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -416,7 +416,7 @@ Referenced by Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\
 
 
 
-Definition at line 124 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 129 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -434,7 +434,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a7e5c3ca
 
 
 
-Definition at line 93 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line 95 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
 
 
 
@@ -459,7 +459,7 @@ Pointer to an Elasticity number.
 
 
 
-Definition at line 54 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 52 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -473,7 +473,7 @@ Referenced by beta(), beta\+\_\+pt(), and Surfactant\+Transport\+Interface\+Elem
 
 Index at which the surfactant concentration is stored at the nodes 
 
-Definition at line 66 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 63 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -483,15 +483,21 @@ Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interfac
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
 \index{Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{Default\_Physical\_Constant\_Value}{Default\_Physical\_Constant\_Value}}
-{\footnotesize\ttfamily double oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily double oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    1.0}
+
+\end{DoxyCode}
 
 
 Default value of the physical constants. 
 
 
 
-Definition at line 70 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 67 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -509,7 +515,7 @@ Pointer to Surface Peclet number.
 
 
 
-Definition at line 57 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 55 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 
@@ -527,7 +533,7 @@ Pointer to the surface Peclect Strouhal number.
 
 
 
-Definition at line 60 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line 58 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
 

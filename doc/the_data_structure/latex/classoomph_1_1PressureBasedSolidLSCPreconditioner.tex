@@ -33,8 +33,7 @@ void \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad432b40
 void \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aeb7e9109194f8a468a2c6ffec13e3c9f}{enable\+\_\+p\+\_\+matrix\+\_\+scaling}} ()
 \begin{DoxyCompactList}\small\item\em Enable mass matrix diagonal scaling in the Schur complement approximation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa1b8a157c96f347dcb5f23b14c88765f}{disable\+\_\+p\+\_\+matrix\+\_\+scaling}} ()
-\begin{DoxyCompactList}\small\item\em Enable mass matrix diagonal scaling in the ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Enable mass matrix diagonal scaling in the Schur complement approximation. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_abefd3cc7c97fbdaad40c0231663c680f}{is\+\_\+p\+\_\+matrix\+\_\+using\+\_\+scaling}} () const
 \begin{DoxyCompactList}\small\item\em Return whether the mass matrix is using diagonal scaling or not. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a921f36ec8af49017b799a3832d7f688f}{set\+\_\+p\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$new\+\_\+p\+\_\+preconditioner\+\_\+pt)
@@ -113,7 +112,7 @@ In our implementation of the preconditioner, the linear systems can either be so
 \end{DoxyCode}
  
 
-Definition at line 157 of file solid\+\_\+preconditioners.\+h.
+Definition at line 153 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -130,7 +129,7 @@ Constructor -\/ sets defaults for control flags.
 
 
 
-Definition at line 164 of file solid\+\_\+preconditioners.\+h.
+Definition at line 158 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -148,7 +147,7 @@ Destructor.
 
 
 
-Definition at line 209 of file solid\+\_\+preconditioners.\+h.
+Definition at line 204 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -166,7 +165,7 @@ Broken copy constructor.
 
 
 
-Definition at line 215 of file solid\+\_\+preconditioners.\+h.
+Definition at line 210 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -185,7 +184,7 @@ Helper function to assemble the diagonal of the mass matrix from the elemental c
 
 Helper function to assemble the diagonal of the mass matrix from the elemental contributions defined in Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::get\+\_\+mass\+\_\+matrix\+\_\+diagonal(...). 
 
-Definition at line 726 of file solid\+\_\+preconditioners.\+cc.
+Definition at line 705 of file solid\+\_\+preconditioners.\+cc.
 
 
 
@@ -211,7 +210,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line 1393 of file solid\+\_\+preconditioners.\+cc.
+Definition at line 1357 of file solid\+\_\+preconditioners.\+cc.
 
 
 
@@ -233,7 +232,7 @@ Disable documentation of time.
 
 
 
-Definition at line 309 of file solid\+\_\+preconditioners.\+h.
+Definition at line 318 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -251,7 +250,7 @@ if this function is called then\+: in setup(...) \+: the matrices B, F are assem
 
 
 
-Definition at line 324 of file solid\+\_\+preconditioners.\+h.
+Definition at line 339 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -265,10 +264,9 @@ References Form\+\_\+\+B\+F\+Bt\+\_\+product.
 
 
 
-Enable mass matrix diagonal scaling in the ~\newline
- 
+Enable mass matrix diagonal scaling in the Schur complement approximation. 
 
-Schur complement approximation 
+
 
 Definition at line 250 of file solid\+\_\+preconditioners.\+h.
 
@@ -288,7 +286,7 @@ Enable documentation of time.
 
 
 
-Definition at line 306 of file solid\+\_\+preconditioners.\+h.
+Definition at line 312 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -306,7 +304,7 @@ If this function is called then\+: in setup(...) \+: B\+F\+Bt is computed. in pr
 
 
 
-Definition at line 315 of file solid\+\_\+preconditioners.\+h.
+Definition at line 327 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -324,7 +322,7 @@ Enable mass matrix diagonal scaling in the Schur complement approximation.
 
 
 
-Definition at line 246 of file solid\+\_\+preconditioners.\+h.
+Definition at line 243 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -342,7 +340,7 @@ Return whether the mass matrix is using diagonal scaling or not.
 
 
 
-Definition at line 254 of file solid\+\_\+preconditioners.\+h.
+Definition at line 257 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -364,7 +362,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 506 of file solid\+\_\+preconditioners.\+cc.
+Definition at line 493 of file solid\+\_\+preconditioners.\+cc.
 
 
 
@@ -382,7 +380,7 @@ Function to set a new momentum matrix preconditioner (inexact solver)
 
 
 
-Definition at line 281 of file solid\+\_\+preconditioners.\+h.
+Definition at line 287 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -400,7 +398,7 @@ Function to (re-\/)set momentum matrix preconditioner (inexact solver) to Super\
 
 
 
-Definition at line 295 of file solid\+\_\+preconditioners.\+h.
+Definition at line 301 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -418,7 +416,7 @@ Function to set a new pressure matrix preconditioner (inexact solver)
 
 
 
-Definition at line 257 of file solid\+\_\+preconditioners.\+h.
+Definition at line 263 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -436,7 +434,7 @@ Function to (re-\/)set pressure matrix preconditioner (inexact solver) to Super\
 
 
 
-Definition at line 271 of file solid\+\_\+preconditioners.\+h.
+Definition at line 277 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -450,7 +448,7 @@ References P\+\_\+preconditioner\+\_\+pt, and Using\+\_\+default\+\_\+p\+\_\+pre
 
 specify the mesh containing the mesh containing the block-\/preconditionable solid elements. The dimension of the problem must also be specified. 
 
-Definition at line 239 of file solid\+\_\+preconditioners.\+h.
+Definition at line 236 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -474,11 +472,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 43 of file solid\+\_\+preconditioners.\+cc.
+Definition at line 38 of file solid\+\_\+preconditioners.\+cc.
 
 
 
-References assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), Bt\+\_\+mat\+\_\+vec\+\_\+pt, clean\+\_\+up\+\_\+memory(), Doc\+\_\+time, E\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner, F\+\_\+preconditioner\+\_\+pt, Form\+\_\+\+B\+F\+Bt\+\_\+product, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block(), i, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::matrix\+\_\+pt(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::ndof\+\_\+types(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh(), oomph\+::oomph\+\_\+info, P\+\_\+matrix\+\_\+using\+\_\+scaling, P\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Q\+Bt\+\_\+mat\+\_\+vec\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+mesh(), oomph\+::\+Preconditioner\+::setup(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product(), Solid\+\_\+mesh\+\_\+pt, oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), Using\+\_\+default\+\_\+f\+\_\+preconditioner, and Using\+\_\+default\+\_\+p\+\_\+preconditioner.
+References assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), Bt\+\_\+mat\+\_\+vec\+\_\+pt, clean\+\_\+up\+\_\+memory(), Doc\+\_\+time, E\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner, F\+\_\+preconditioner\+\_\+pt, Form\+\_\+\+B\+F\+Bt\+\_\+product, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block(), i, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::matrix\+\_\+pt(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::ndof\+\_\+types(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh(), oomph\+::oomph\+\_\+info, P\+\_\+matrix\+\_\+using\+\_\+scaling, P\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Q\+Bt\+\_\+mat\+\_\+vec\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+mesh(), oomph\+::\+Preconditioner\+::setup(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product(), Solid\+\_\+mesh\+\_\+pt, oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), Using\+\_\+default\+\_\+f\+\_\+preconditioner, and Using\+\_\+default\+\_\+p\+\_\+preconditioner.
 
 
 
@@ -495,7 +493,7 @@ References assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Pre
 
 
 
-Definition at line 376 of file solid\+\_\+preconditioners.\+h.
+Definition at line 393 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -513,7 +511,7 @@ Set Doc\+\_\+time to true for outputting results of timings.
 
 
 
-Definition at line 367 of file solid\+\_\+preconditioners.\+h.
+Definition at line 384 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -531,7 +529,7 @@ Referenced by disable\+\_\+doc\+\_\+time(), enable\+\_\+doc\+\_\+time(), precond
 
 
 
-Definition at line 379 of file solid\+\_\+preconditioners.\+h.
+Definition at line 396 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -549,7 +547,7 @@ Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), Pressure
 
 
 
-Definition at line 370 of file solid\+\_\+preconditioners.\+h.
+Definition at line 387 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -567,7 +565,7 @@ Boolean indicating whether the momentum system preconditioner is a block precond
 
 
 
-Definition at line 364 of file solid\+\_\+preconditioners.\+h.
+Definition at line 381 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -585,7 +583,7 @@ Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the F matr
 
 
 
-Definition at line 340 of file solid\+\_\+preconditioners.\+h.
+Definition at line 357 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -603,7 +601,7 @@ indicates whether B\+F\+Bt should be formed or the component matrices should be 
 
 
 
-Definition at line 393 of file solid\+\_\+preconditioners.\+h.
+Definition at line 410 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -621,7 +619,7 @@ Control flag is true if mass matrix diagonal scaling is used in the Schur comple
 
 
 
-Definition at line 355 of file solid\+\_\+preconditioners.\+h.
+Definition at line 372 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -639,7 +637,7 @@ Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the pressu
 
 
 
-Definition at line 337 of file solid\+\_\+preconditioners.\+h.
+Definition at line 354 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -657,7 +655,7 @@ Control flag is true if the preconditioner has been setup (used so we can wipe t
 
 
 
-Definition at line 351 of file solid\+\_\+preconditioners.\+h.
+Definition at line 368 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -675,7 +673,7 @@ Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), Pressure
 
 
 
-Definition at line 373 of file solid\+\_\+preconditioners.\+h.
+Definition at line 390 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -693,7 +691,7 @@ the pointer to the mesh of block preconditionable solid elements.
 
 
 
-Definition at line 397 of file solid\+\_\+preconditioners.\+h.
+Definition at line 414 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -711,7 +709,7 @@ flag indicating whether the default F preconditioner is used
 
 
 
-Definition at line 343 of file solid\+\_\+preconditioners.\+h.
+Definition at line 360 of file solid\+\_\+preconditioners.\+h.
 
 
 
@@ -729,7 +727,7 @@ flag indicating whether the default P preconditioner is used
 
 
 
-Definition at line 346 of file solid\+\_\+preconditioners.\+h.
+Definition at line 363 of file solid\+\_\+preconditioners.\+h.
 
 
 

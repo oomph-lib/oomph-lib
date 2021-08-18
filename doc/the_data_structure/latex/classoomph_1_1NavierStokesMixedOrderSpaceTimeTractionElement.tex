@@ -34,15 +34,13 @@ void($\ast$\&)(const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c9
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a350157b77114d4d761e1a04846fbb1d3}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a51874f9c60a2025f00998dc2dab65464}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Space\+Time\+Element representation, by default. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a0dd0c98bad3a48200a5bd1cec80ec307}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a34d6765470ce98acbb4ad4855300e4a1}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_ad0dabb5d3e4bf3d085a8edcd0ec137a0}{get\+\_\+traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
@@ -78,7 +76,7 @@ Definition at line 51 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+sp
 
 Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
 
-Definition at line 67 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 65 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -97,7 +95,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 123 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 121 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -123,7 +121,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesMixedOrder
 
 
 
-Definition at line 148 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 146 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -150,7 +148,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesMixedOrder
 
 
 
-Definition at line 138 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 136 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -165,12 +163,11 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionEleme
 
 
 
-This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Function that returns the residuals for the imposed traction Navier-\/\+Stokes equations 
 
-Definition at line 341 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 340 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -193,7 +190,7 @@ Function to calculate the traction applied to the fluid.
 
 
 
-Definition at line 303 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 302 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -216,7 +213,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 157 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 156 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -239,7 +236,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 164 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 163 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -254,12 +251,11 @@ double \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionEle
 
 
 
-Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping. 
 
 
 
-Definition at line 202 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 200 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -278,7 +274,7 @@ Access function that returns the local equation numbers for velocity components.
 
 
 
-Definition at line 195 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 193 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -301,7 +297,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 182 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 180 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -323,7 +319,7 @@ The highest dimension of the problem.
 
 
 
-Definition at line 328 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 327 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -342,7 +338,7 @@ Access function for the imposed traction pointer.
 
 
 
-Definition at line 127 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 125 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aec5d2670416767435ae242444db71565}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aec5d2670416767435ae242444db71565}} 
 \index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
@@ -357,7 +353,7 @@ Pointer to an imposed traction function.
 
 
 
-Definition at line 58 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 57 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 

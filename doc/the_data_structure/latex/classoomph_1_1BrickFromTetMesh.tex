@@ -17,16 +17,16 @@ Inheritance diagram for oomph\+::Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass xda file name. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_af05fe6ff520986d7794c467fc1885f92}{Brick\+From\+Tet\+Mesh}} (const std\+::string \&node\+\_\+file\+\_\+name, const std\+::string \&element\+\_\+file\+\_\+name, const std\+::string \&face\+\_\+file\+\_\+name, const bool \&split\+\_\+corner\+\_\+elements, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}, const bool \&use\+\_\+attributes=false)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass the files required for the tetgen mesh. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_a49d6a583221a04f2997dae4509592350}{Brick\+From\+Tet\+Mesh}} (const std\+::string xda\+\_\+file\+\_\+name, \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$ $>$ $\ast$\&xda\+\_\+tet\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_a6933534a7c0b2a06596cffbeafde15a8}{Brick\+From\+Tet\+Mesh}} (const std\+::string xda\+\_\+file\+\_\+name, \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$$>$ $\ast$\&xda\+\_\+tet\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass xda file name. This returns a pointer to the internally built \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}} for external use. Note that Y\+OU are responsible for deleting this mesh. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_aeca8c8e899bdafb9eb24f36c500c7df6}{oomph\+\_\+lib\+\_\+boundary\+\_\+ids}} (const unsigned \&xda\+\_\+boundary\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Access functions to the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of oomph-\/lib boundary ids that make up boundary b in the original xda enumeration. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_a9b81e29d3b000f02764bf367fa762bfb}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$ $>$ $\ast$tet\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_a1514f6a7f830d1f3c562a7eb10ff90b3}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$$>$ $\ast$tet\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Build fct\+: Pass pointer to existing tet mesh. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_afd36d1606f796e926c61b1112b3b6117}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$ $>$ $\ast$tet\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_a29fd9197e43adcfca7c89ff6499820d9}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$$>$ $\ast$tet\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Build fct\+: Pass pointer to existing tet mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -42,7 +42,7 @@ class oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 Brick mesh built by brickifying an existing tet mesh -- each tet gets split into four bricks. Can only be built with quadratic (27 node) elements. 
 
-Definition at line 62 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 60 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -60,7 +60,7 @@ Constructor\+: Pass xda file name.
 
 
 
-Definition at line 68 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 64 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -79,18 +79,18 @@ Constructor\+: Pass the files required for the tetgen mesh.
 
 
 
-Definition at line 87 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 83 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
 References oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
 
-\mbox{\Hypertarget{classoomph_1_1BrickFromTetMesh_a49d6a583221a04f2997dae4509592350}\label{classoomph_1_1BrickFromTetMesh_a49d6a583221a04f2997dae4509592350}} 
+\mbox{\Hypertarget{classoomph_1_1BrickFromTetMesh_a6933534a7c0b2a06596cffbeafde15a8}\label{classoomph_1_1BrickFromTetMesh_a6933534a7c0b2a06596cffbeafde15a8}} 
 \index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!BrickFromTetMesh@{BrickFromTetMesh}}
 \index{BrickFromTetMesh@{BrickFromTetMesh}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{BrickFromTetMesh()}{BrickFromTetMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{Brick\+From\+Tet\+Mesh}} (\begin{DoxyParamCaption}\item[{const std\+::string}]{xda\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$ $>$ $\ast$\&}]{xda\+\_\+tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{Brick\+From\+Tet\+Mesh}} (\begin{DoxyParamCaption}\item[{const std\+::string}]{xda\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$$>$ $\ast$\&}]{xda\+\_\+tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -98,7 +98,7 @@ Constructor\+: Pass xda file name. This returns a pointer to the internally buil
 
 
 
-Definition at line 118 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 114 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -107,12 +107,12 @@ References oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1BrickFromTetMesh_afd36d1606f796e926c61b1112b3b6117}\label{classoomph_1_1BrickFromTetMesh_afd36d1606f796e926c61b1112b3b6117}} 
+\mbox{\Hypertarget{classoomph_1_1BrickFromTetMesh_a29fd9197e43adcfca7c89ff6499820d9}\label{classoomph_1_1BrickFromTetMesh_a29fd9197e43adcfca7c89ff6499820d9}} 
 \index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
 \index{build\_mesh@{build\_mesh}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$ $>$ $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$$>$ $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -120,18 +120,18 @@ Build fct\+: Pass pointer to existing tet mesh.
 
 Build fct\+: Pass pointer to existing tet mesh and timestepper Specialisation for \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}}$<$T\+Element$<$3,3$>$ $>$ 
 
-Definition at line 4940 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+cc.
+Definition at line 4896 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+cc.
 
 
 
 References oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), e, oomph\+::\+Q\+Element1\+Face\+To\+Bulk\+Coordinates\+::face0(), oomph\+::\+Q\+Element1\+Face\+To\+Bulk\+Coordinates\+::face1(), oomph\+::\+Q\+Element2\+Face\+To\+Bulk\+Coordinates\+::face2(), oomph\+::\+Brick\+From\+Tet\+Mesh\+Helper\+::\+Face\+\_\+position\+\_\+tolerance, oomph\+::\+T\+Face\+::get\+\_\+boundaries\+\_\+pt(), i, oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta(), oomph\+::\+Edge\+::is\+\_\+boundary\+\_\+edge(), oomph\+::\+T\+Face\+::is\+\_\+boundary\+\_\+face(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Face\+Element\+::normal\+\_\+sign(), s, oomph\+::\+Face\+Element\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Data\+::set\+\_\+value(), and oomph\+::\+Node\+::x().
 
-\mbox{\Hypertarget{classoomph_1_1BrickFromTetMesh_a9b81e29d3b000f02764bf367fa762bfb}\label{classoomph_1_1BrickFromTetMesh_a9b81e29d3b000f02764bf367fa762bfb}} 
+\mbox{\Hypertarget{classoomph_1_1BrickFromTetMesh_a1514f6a7f830d1f3c562a7eb10ff90b3}\label{classoomph_1_1BrickFromTetMesh_a1514f6a7f830d1f3c562a7eb10ff90b3}} 
 \index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
 \index{build\_mesh@{build\_mesh}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$ $>$ $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}$<$ 3, 3 $>$$>$ $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -139,7 +139,7 @@ Build fct\+: Pass pointer to existing tet mesh.
 
 Build fct\+: Pass pointer to existing tet mesh and timestepper Specialisation for \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$T\+Element$<$3,3$>$ $>$ 
 
-Definition at line 41 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+cc.
+Definition at line 39 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -162,7 +162,7 @@ Access functions to the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of oomph
 
 
 
-Definition at line 138 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 134 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -184,7 +184,7 @@ References oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Bou
 
 
 
-Definition at line 156 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 151 of file brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 

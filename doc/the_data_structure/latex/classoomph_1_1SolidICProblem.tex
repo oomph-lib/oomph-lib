@@ -68,7 +68,7 @@ Boundary conditions for all data items associated with the mesh\textquotesingle{
 
 All data and its pinned-\/status are restored at the end of the call to setup\+\_\+ic(). 
 
-Definition at line 91 of file elastic\+\_\+problems.\+h.
+Definition at line 87 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -85,7 +85,7 @@ Constructor. Initialise pointer to IC object to N\+U\+LL. Create a dummy mesh th
 
 Create dummy mesh
 
-Definition at line 100 of file elastic\+\_\+problems.\+h.
+Definition at line 94 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -103,7 +103,7 @@ Broken copy constructor.
 
 
 
-Definition at line 111 of file elastic\+\_\+problems.\+h.
+Definition at line 105 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -128,7 +128,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a033ec7301123deeb7e56d
 
 
 
-Definition at line 123 of file elastic\+\_\+problems.\+h.
+Definition at line 117 of file elastic\+\_\+problems.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SolidICProblem_ad234d3268b330cd2f532548103cb60fc}\label{classoomph_1_1SolidICProblem_ad234d3268b330cd2f532548103cb60fc}} 
 \index{oomph::SolidICProblem@{oomph::SolidICProblem}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
@@ -146,7 +146,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a0c8d70891f7369bb4bf84
 
 
 
-Definition at line 126 of file elastic\+\_\+problems.\+h.
+Definition at line 120 of file elastic\+\_\+problems.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SolidICProblem_a14343410dca129169282dd6d5081813d}\label{classoomph_1_1SolidICProblem_a14343410dca129169282dd6d5081813d}} 
 \index{oomph::SolidICProblem@{oomph::SolidICProblem}!backup\_original\_state@{backup\_original\_state}}
@@ -160,7 +160,7 @@ Backup original state of all data associated with mesh.
 
 Backup pinned status of all data associated with the mesh. Also backup the (pointers to the) elements\textquotesingle{} external data. 
 
-Definition at line 199 of file elastic\+\_\+problems.\+cc.
+Definition at line 191 of file elastic\+\_\+problems.\+cc.
 
 
 
@@ -182,7 +182,7 @@ Max. tolerated residual after application of consistent \mbox{\hyperlink{classoo
 
 
 
-Definition at line 182 of file elastic\+\_\+problems.\+h.
+Definition at line 178 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -200,7 +200,7 @@ Broken assignment operator.
 
 
 
-Definition at line 117 of file elastic\+\_\+problems.\+h.
+Definition at line 111 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -218,7 +218,7 @@ Reset original state of all data associated with mesh.
 
 Reset pinned status of all data and re-\/instate the pointers to the elements\textquotesingle{} external data. 
 
-Definition at line 355 of file elastic\+\_\+problems.\+cc.
+Definition at line 343 of file elastic\+\_\+problems.\+cc.
 
 
 
@@ -241,11 +241,11 @@ Setup initial condition for time-\/integration with \mbox{\hyperlink{classoomph_
 
 Setup initial condition for time-\/integration with \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}}\textquotesingle{}s method. Past displacements and velocities are assigned directly (consistent with the idea that a second order O\+DE can take I\+Cs up to 1st order, while the history value for the previous acceleration is determined by the condition that that the weak equation is satisfied at the initial time. The multiplier function needs to specify the factor that multiplies the inertia terms -- typically this is a constant, given by the ratio $ \Lambda^2 $ of the problem\textquotesingle{}s intrinsic timescale to the time used to non-\/dimensionalise the equations. If the function (pointer) is not specified, the multiplier is assumed to be equal to 1.\+0 -- appropriate for a non-\/dimensionalisation based on the problem\textquotesingle{}s intrinsic timescale. Pointer to member type solver
 
-Definition at line 370 of file elastic\+\_\+problems.\+h.
+Definition at line 362 of file elastic\+\_\+problems.\+h.
 
 
 
-References oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), backup\+\_\+original\+\_\+state(), oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::enable\+\_\+solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel(), oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Solid\+Initial\+Condition\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Problem\+::get\+\_\+residuals(), i, I\+C\+\_\+pt, oomph\+::\+Solid\+Initial\+Condition\+::ic\+\_\+time\+\_\+deriv(), oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt(), Max\+\_\+residual\+\_\+after\+\_\+consistent\+\_\+newton\+\_\+ic, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::multiplier\+\_\+fct\+\_\+pt(), n, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, problem, reset\+\_\+original\+\_\+state(), residuals(), oomph\+::\+Data\+::set\+\_\+value(), setup\+\_\+problem(), oomph\+::\+Solid\+Finite\+Element\+::solid\+\_\+ic\+\_\+pt(), oomph\+::\+Linear\+Solver\+::solve(), oomph\+::\+Time\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+pt(), oomph\+::\+Problem\+::time\+\_\+pt(), oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::value(), and oomph\+::\+Data\+::value\+\_\+pt().
+References oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), backup\+\_\+original\+\_\+state(), oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::enable\+\_\+solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel(), oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Solid\+Initial\+Condition\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Problem\+::get\+\_\+residuals(), i, I\+C\+\_\+pt, oomph\+::\+Solid\+Initial\+Condition\+::ic\+\_\+time\+\_\+deriv(), oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt(), Max\+\_\+residual\+\_\+after\+\_\+consistent\+\_\+newton\+\_\+ic, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::multiplier\+\_\+fct\+\_\+pt(), n, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, problem, reset\+\_\+original\+\_\+state(), residuals(), oomph\+::\+Data\+::set\+\_\+value(), setup\+\_\+problem(), oomph\+::\+Solid\+Finite\+Element\+::solid\+\_\+ic\+\_\+pt(), oomph\+::\+Linear\+Solver\+::solve(), oomph\+::\+Time\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+pt(), oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::value(), and oomph\+::\+Data\+::value\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1SolidICProblem_ac88248cf3c1b9353724deb2e0d0e1f39}\label{classoomph_1_1SolidICProblem_ac88248cf3c1b9353724deb2e0d0e1f39}} 
 \index{oomph::SolidICProblem@{oomph::SolidICProblem}!set\_newmark\_initial\_condition\_directly@{set\_newmark\_initial\_condition\_directly}}
@@ -260,7 +260,7 @@ Setup initial condition for time-\/integration with \mbox{\hyperlink{classoomph_
 
 
 
-Definition at line 226 of file elastic\+\_\+problems.\+h.
+Definition at line 218 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -278,7 +278,7 @@ Force the elastic structure that is discretised on the specified mesh to deform 
 
 
 
-Definition at line 138 of file elastic\+\_\+problems.\+h.
+Definition at line 132 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -296,7 +296,7 @@ Force the elastic structure that is discretised on the specified mesh to deform 
 
 IC problem for wall\+: Deform wall into the static initial shape described by the IC object at given time. 
 
-Definition at line 538 of file elastic\+\_\+problems.\+cc.
+Definition at line 522 of file elastic\+\_\+problems.\+cc.
 
 
 
@@ -323,7 +323,7 @@ Setup IC problem by\+:
 \item Setting the pointer to the IC object for all elements to ensure that the correct residuals/\+Jacobians are computed. 
 \end{DoxyItemize}
 
-Definition at line 50 of file elastic\+\_\+problems.\+cc.
+Definition at line 48 of file elastic\+\_\+problems.\+cc.
 
 
 
@@ -348,7 +348,7 @@ Referenced by set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), 
 
 
 
-Definition at line 207 of file elastic\+\_\+problems.\+h.
+Definition at line 202 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -366,7 +366,7 @@ Referenced by backup\+\_\+original\+\_\+state(), and reset\+\_\+original\+\_\+st
 
 
 
-Definition at line 204 of file elastic\+\_\+problems.\+h.
+Definition at line 199 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -384,7 +384,7 @@ Pointer to initial condition object.
 
 
 
-Definition at line 201 of file elastic\+\_\+problems.\+h.
+Definition at line 196 of file elastic\+\_\+problems.\+h.
 
 
 
@@ -402,7 +402,7 @@ Max. tolerated residual after application of consistent \mbox{\hyperlink{classoo
 
 
 
-Definition at line 212 of file elastic\+\_\+problems.\+h.
+Definition at line 207 of file elastic\+\_\+problems.\+h.
 
 
 

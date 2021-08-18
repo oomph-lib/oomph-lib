@@ -37,14 +37,11 @@ void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a12e662227e5daf656244
 \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f}{segregated\+\_\+solve}} ()
 \begin{DoxyCompactList}\small\item\em Segregated solver. Peform a segregated step from the present state of the system. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f8145df86358916df505e2b513caf6a}{steady\+\_\+segregated\+\_\+solve}} ()
-\begin{DoxyCompactList}\small\item\em Steady version of segregated solver. Makes all timesteppers steady before solving. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Steady version of segregated solver. Makes all timesteppers steady before solving. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168}{unsteady\+\_\+segregated\+\_\+solve}} (const double \&dt)
-\begin{DoxyCompactList}\small\item\em Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a17f019ebaf83e170219bf605a8554111}{unsteady\+\_\+segregated\+\_\+solve}} (const double \&dt, const bool \&shift\+\_\+values)
-\begin{DoxyCompactList}\small\item\em Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a88eb2704f55c89db093cc2857490b727}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual}} (const double \&tol)
 \begin{DoxyCompactList}\small\item\em Assess convergence based on max. residual of coupled system of eqns. The argument specifies the convergence tolerance. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a2fba426552e48abb7ff8a554c20953da}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual}} ()
@@ -58,8 +55,7 @@ void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abec6313054e23d998b45
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af95d2c3833b64d37635e2e07776cef54}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change}} ()
 \begin{DoxyCompactList}\small\item\em Assess convergence based on max. relative change of solid dofs. This interface has no argument and the default convergence tolerance for the Newton solver, Problem\+::\+Newton\+\_\+solver\+\_\+tolerance is used. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a08c87f24c9e3ea80182a4b19d3a9fa92}{enable\+\_\+pointwise\+\_\+aitken}} (const unsigned \&pointwise\+\_\+aitken\+\_\+start)
-\begin{DoxyCompactList}\small\item\em Use pointwise Aitken extrapolation. The argument is used to specify the Picard iteration after which pointwise Aitken extrapolation is to be used for the first time. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Use pointwise Aitken extrapolation. The argument is used to specify the Picard iteration after which pointwise Aitken extrapolation is to be used for the first time. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a3f52d9c6555b43d8ada274ec80940c13}{enable\+\_\+pointwise\+\_\+aitken}} ()
 \begin{DoxyCompactList}\small\item\em Use pointwise Aitken extrapolation. This interface has no argument and the current value of Pointwise\+\_\+aitken\+\_\+start will be used. The default is zero, extrapolation starts immediately. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a34c040b6fe4860ad44bc48ddf859e9fe}{disable\+\_\+pointwise\+\_\+aitken}} ()
@@ -119,8 +115,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f18
 bool \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aadc0d46511ee90dad36d0d00a8c2d7ad}{Doc\+\_\+max\+\_\+global\+\_\+residual}}
 \begin{DoxyCompactList}\small\item\em Doc maximum global residual during iteration? (default\+: false) \end{DoxyCompactList}\item 
 Vector$<$ Data $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\+\_\+data\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Vector storing the Data objects associated with the fluid problem\+: Tyically the nodal and internal data of the elements in the fluid bulk mesh ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Vector storing the Data objects associated with the fluid problem\+: Tyically the nodal and internal data of the elements in the fluid bulk mesh. \end{DoxyCompactList}\item 
 Vector$<$ std\+::vector$<$ bool $>$ $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}{Fluid\+\_\+value\+\_\+is\+\_\+pinned}}
 \begin{DoxyCompactList}\small\item\em Vector of vectors that store the pinned status of fluid Data values. \end{DoxyCompactList}\item 
 Vector$<$ Data $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\+\_\+data\+\_\+pt}}
@@ -151,11 +146,9 @@ void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0e67b39cdae35ea25ef9
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a9da3017952982a64496ff9c16ca7024c}{under\+\_\+relax\+\_\+solid}} ()
 \begin{DoxyCompactList}\small\item\em Under-\/relax the most recently computed solid variables, either by classical relaxation or by Irons \& Tuck. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13a9841e0aa05bf57ec228b49b311a26}{use\+\_\+only\+\_\+fluid\+\_\+elements}} ()
-\begin{DoxyCompactList}\small\item\em Only include fluid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated fluid solve. The fluid elements are identified by the user via the fluid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the fluids elements in a submesh, then no stripping of non-\/fluid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Only include fluid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated fluid solve. The fluid elements are identified by the user via the fluid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the fluids elements in a submesh, then no stripping of non-\/fluid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a330660bc7b69c9c128bfed62b54dcf62}{use\+\_\+only\+\_\+solid\+\_\+elements}} ()
-\begin{DoxyCompactList}\small\item\em Only include solid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the solid elements in a submesh, then no stripping of non-\/solid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Only include solid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the solid elements in a submesh, then no stripping of non-\/solid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a33397ef8c5410b782cc9801979812be0}{pin\+\_\+fluid\+\_\+dofs}} ()
 \begin{DoxyCompactList}\small\item\em Pin fluid dofs. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -178,7 +171,7 @@ bool \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abb20be243e501b04b18d
 \doxysubsection{Detailed Description}
 Base class for problems that can be solved by segregated F\+SI solver 
 
-Definition at line 149 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 167 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -209,7 +202,7 @@ Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 385 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 409 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418}\label{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418}} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!solve\_type@{solve\_type}}
@@ -237,7 +230,7 @@ Solid\+\_\+solve&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 391 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 418 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -261,7 +254,7 @@ Constructor. Set default values for solver parameters\+:
 \item Max. 50 Picard iterations 
 \end{DoxyItemize}boolean flag to indicate if timer has been halted
 
-Definition at line 175 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 191 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -279,7 +272,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 226 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 242 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -296,7 +289,7 @@ This function is called once at the end of each segregated solve.
 
 
 
-Definition at line 159 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 176 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -314,7 +307,7 @@ This function is to be filled with actions that take place before the check for 
 
 
 
-Definition at line 163 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 180 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -332,7 +325,7 @@ This function is called once at the start of each segregated solve.
 
 
 
-Definition at line 155 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 172 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -350,7 +343,7 @@ Assess convergence based on max. absolute change of solid dofs. This interface h
 
 
 
-Definition at line 325 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 338 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa0b531963389cf3b2ad253891931def9}\label{classoomph_1_1SegregatableFSIProblem_aa0b531963389cf3b2ad253891931def9}} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!assess\_convergence\_based\_on\_absolute\_solid\_change@{assess\_convergence\_based\_on\_absolute\_solid\_change}}
@@ -364,7 +357,7 @@ Assess convergence based on max. absolute change of solid dofs. The argument spe
 
 
 
-Definition at line 314 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 328 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -382,7 +375,7 @@ Assess convergence based on max. residuals of coupled system of eqns. This inter
 
 
 
-Definition at line 306 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 320 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a88eb2704f55c89db093cc2857490b727}\label{classoomph_1_1SegregatableFSIProblem_a88eb2704f55c89db093cc2857490b727}} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!assess\_convergence\_based\_on\_max\_global\_residual@{assess\_convergence\_based\_on\_max\_global\_residual}}
@@ -396,7 +389,7 @@ Assess convergence based on max. residual of coupled system of eqns. The argumen
 
 
 
-Definition at line 295 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 310 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -414,7 +407,7 @@ Assess convergence based on max. relative change of solid dofs. This interface h
 
 
 
-Definition at line 344 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 356 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_abec6313054e23d998b4584f2de80bc52}\label{classoomph_1_1SegregatableFSIProblem_abec6313054e23d998b4584f2de80bc52}} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!assess\_convergence\_based\_on\_relative\_solid\_change@{assess\_convergence\_based\_on\_relative\_solid\_change}}
@@ -428,7 +421,7 @@ Assess convergence based on max. relative change of solid dofs. The argument spe
 
 
 
-Definition at line 333 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 346 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -446,7 +439,7 @@ Do not use Irons and Tuck extrapolation for solid dofs.
 
 
 
-Definition at line 381 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 403 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -464,7 +457,7 @@ Disable the use of pointwise Aitken extrapolation.
 
 
 
-Definition at line 366 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 381 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -482,7 +475,7 @@ Use Irons and Tuck extrapolation for solid dofs.
 
 
 
-Definition at line 377 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 397 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -500,7 +493,7 @@ Use pointwise Aitken extrapolation. This interface has no argument and the curre
 
 
 
-Definition at line 363 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 375 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -514,12 +507,11 @@ References Use\+\_\+pointwise\+\_\+aitken.
 
 
 
-Use pointwise Aitken extrapolation. The argument is used to specify the Picard iteration after which pointwise Aitken extrapolation is to be used for the first time. ~\newline
- 
+Use pointwise Aitken extrapolation. The argument is used to specify the Picard iteration after which pointwise Aitken extrapolation is to be used for the first time. 
 
 
 
-Definition at line 354 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 366 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -537,7 +529,7 @@ Use under-\/relaxation and (optionally) specify under-\/relaxation parameter. De
 
 
 
-Definition at line 373 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 391 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -555,7 +547,7 @@ Extrapolate solid data and update fluid mesh during unsteady run.
 
 Extrapolate solid data and update fluid mesh. Extrapolation is based on previous history values and is therefore only called in time-\/dependent runs. 
 
-Definition at line 40 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 39 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -577,7 +569,7 @@ Get rms of change in the solid dofs; the max. change of the solid dofs and the r
 
 Get rms of change in the solid dofs; the max. change of the solid dofs and the rms norm of the solid dofs themselves. Change is computed relative to the reference values stored when \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{store\+\_\+solid\+\_\+dofs()}} was last called. 
 
-Definition at line 327 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 303 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -599,7 +591,7 @@ Halt timer (e.\+g. before performing non-\/essential parts of the code such as d
 
 
 
-Definition at line 428 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 460 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -635,7 +627,7 @@ Pin fluid dofs.
 
 Pin all fluid dofs. 
 
-Definition at line 161 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 153 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -657,7 +649,7 @@ Pin solid dofs.
 
 Pin all solid dofs. 
 
-Definition at line 219 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 206 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -679,7 +671,7 @@ Do pointwise Aitken extrapolation for solid.
 
 Pointwise Aitken extrapolation for solid variables. 
 
-Definition at line 520 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 490 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -701,7 +693,7 @@ Rebuild global mesh for monolithic discretisation.
 
 Rebuild global mesh for monolithic problem. 
 
-Definition at line 89 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 87 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -723,7 +715,7 @@ Reset timer.
 
 
 
-Definition at line 407 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 439 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -745,7 +737,7 @@ Referenced by segregated\+\_\+solve().
 
 
 
-Definition at line 418 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 450 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -767,7 +759,7 @@ Restore pinned status of fluid dofs.
 
 Restore the pinned status of all fluid dofs. 
 
-Definition at line 186 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 176 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -789,7 +781,7 @@ Restore pinned status of solid dofs.
 
 Restore the pinned status of all solid dofs. 
 
-Definition at line 245 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 229 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -811,7 +803,7 @@ Segregated solver. Peform a segregated step from the present state of the system
 
 Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
 
-Definition at line 570 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 538 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -833,7 +825,7 @@ Setup the segregated solver\+: Backup the pinned status of the fluid and solid d
 
 Setup segregated solver, using the information provided by the user in his/her implementation of the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). 
 
-Definition at line 1147 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 1111 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -847,12 +839,11 @@ References Del\+\_\+irons\+\_\+and\+\_\+tuck, Fluid\+\_\+data\+\_\+pt, Fluid\+\_
 
 
 
-Steady version of segregated solver. Makes all timesteppers steady before solving. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. ~\newline
- 
+Steady version of segregated solver. Makes all timesteppers steady before solving. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
 
 Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
 
-Definition at line 999 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 964 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -868,10 +859,9 @@ References oomph\+::\+Segregated\+Solver\+Error\+::\+Ran\+\_\+out\+\_\+of\+\_\+i
 
 Store the current solid values as reference values for future convergence check. Also add another entry to pointwise Aitken history if required. 
 
-Store the current solid values as reference values for future convergence check. Also add another entry to pointwise Aitken history. ~\newline
- 
+Store the current solid values as reference values for future convergence check. Also add another entry to pointwise Aitken history. 
 
-Definition at line 280 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 260 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -893,7 +883,7 @@ Total elapsed time since start of solve.
 
 
 
-Definition at line 439 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 471 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -915,7 +905,7 @@ Under-\/relax the most recently computed solid variables, either by classical re
 
 Under-\/relax solid, either by classical relaxation or by Irons \& Tuck. 
 
-Definition at line 381 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 354 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -933,12 +923,11 @@ Referenced by segregated\+\_\+solve().
 
 
 
-Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. ~\newline
- 
+Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
 
 Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
 
-Definition at line 1070 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 1033 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a17f019ebaf83e170219bf605a8554111}\label{classoomph_1_1SegregatableFSIProblem_a17f019ebaf83e170219bf605a8554111}} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!unsteady\_segregated\_solve@{unsteady\_segregated\_solve}}
@@ -948,12 +937,11 @@ Definition at line 1070 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
-Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. ~\newline
- 
+Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
 
 Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
 
-Definition at line 1082 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 1045 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -967,13 +955,11 @@ References extrapolate\+\_\+solid\+\_\+data(), oomph\+::\+Segregated\+Solver\+Er
 
 
 
-Only include fluid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated fluid solve. The fluid elements are identified by the user via the fluid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the fluids elements in a submesh, then no stripping of non-\/fluid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. ~\newline
- 
+Only include fluid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated fluid solve. The fluid elements are identified by the user via the fluid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the fluids elements in a submesh, then no stripping of non-\/fluid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. 
 
-Only include fluid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated fluid solve. The fluid elements are identified by the user via the fluid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the fluids elements in a submesh, then no stripping of non-\/fluid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. ~\newline
- 
+Only include fluid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated fluid solve. The fluid elements are identified by the user via the fluid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the fluids elements in a submesh, then no stripping of non-\/fluid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. 
 
-Definition at line 144 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 138 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -991,13 +977,11 @@ Referenced by segregated\+\_\+solve().
 
 
 
-Only include solid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the solid elements in a submesh, then no stripping of non-\/solid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. ~\newline
- 
+Only include solid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the solid elements in a submesh, then no stripping of non-\/solid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. 
 
-Only include solid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the solids elements in a submesh, then no stripping of non-\/solid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. ~\newline
- 
+Only include solid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a N\+U\+LL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the solids elements in a submesh, then no stripping of non-\/solid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. 
 
-Definition at line 118 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line 115 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
@@ -1022,7 +1006,7 @@ Convergence criterion (enumerated flag)
 
 
 
-Definition at line 581 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 611 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1040,7 +1024,7 @@ Convergence tolerance for Picard iteration.
 
 
 
-Definition at line 469 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 500 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1058,7 +1042,7 @@ Vector of changes in Irons and Tuck under-\/relaxation.
 
 
 
-Definition at line 526 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 557 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1076,7 +1060,7 @@ Doc maximum global residual during iteration? (default\+: false)
 
 
 
-Definition at line 475 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 506 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1090,12 +1074,11 @@ Referenced by Segregatable\+F\+S\+I\+Problem(), and segregated\+\_\+solve().
 
 
 
-Vector storing the Data objects associated with the fluid problem\+: Tyically the nodal and internal data of the elements in the fluid bulk mesh ~\newline
- 
+Vector storing the Data objects associated with the fluid problem\+: Tyically the nodal and internal data of the elements in the fluid bulk mesh. 
 
 
 
-Definition at line 493 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 524 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1113,7 +1096,7 @@ Mesh containing only fluid elements -- the elements in this Mesh will be exclude
 
 
 
-Definition at line 515 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 546 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1131,7 +1114,7 @@ Vector of vectors that store the pinned status of fluid Data values.
 
 
 
-Definition at line 497 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 528 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1149,7 +1132,7 @@ Max. number of Picard iterations.
 
 
 
-Definition at line 472 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 503 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1167,7 +1150,7 @@ Under-\/relaxation parameter. (1.\+0\+: no under-\/relaxation; 0.\+0\+: Freeze w
 
 
 
-Definition at line 574 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 604 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1185,7 +1168,7 @@ Backup for the pointers to the submeshes in the original problem.
 
 
 
-Definition at line 523 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 554 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1203,7 +1186,7 @@ Number of Aitken histories available (int because after extrapolation it\textquo
 
 
 
-Definition at line 456 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 487 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1221,7 +1204,7 @@ Vector of Vectors containing up to three previous iterates for the solid dofs; u
 
 
 
-Definition at line 533 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 564 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1239,7 +1222,7 @@ Start pointwise Aitken extrpolation after specified number of Picard iterations.
 
 
 
-Definition at line 463 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 494 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1257,7 +1240,7 @@ Vector storing the previous solid values -- used for convergence check.
 
 
 
-Definition at line 510 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 541 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1275,7 +1258,7 @@ Irons and Tuck relaxation factor.
 
 
 
-Definition at line 529 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 560 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1293,7 +1276,7 @@ Have we just done a pointwise Aitken step.
 
 
 
-Definition at line 536 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 567 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1311,7 +1294,7 @@ Vector storing the Data objects associated with the solid problem\+: Typically t
 
 
 
-Definition at line 502 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 533 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1329,7 +1312,7 @@ Mesh containing only solid elements -- the elements in this mesh will be exclude
 
 
 
-Definition at line 520 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 551 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1347,7 +1330,7 @@ Vector of vectors that store the pinned status of solid Data values.
 
 
 
-Definition at line 506 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 537 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1365,7 +1348,7 @@ Solve that is taking place (enumerated flag)
 
 
 
-Definition at line 466 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 497 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1383,7 +1366,7 @@ Reference time for segregated solve. Can be re-\/initialised whenever total elap
 
 
 
-Definition at line 586 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 616 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1401,7 +1384,7 @@ Total elapsed time since start of solve, can be accumulated by adding bits of ti
 
 
 
-Definition at line 591 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 621 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1419,7 +1402,7 @@ boolean flag to indicate if timer has been halted
 
 
 
-Definition at line 594 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 624 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1437,7 +1420,7 @@ Boolean flag to indicate use of Irons and Tuck\textquotesingle{}s extrapolation 
 
 
 
-Definition at line 578 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 608 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 
@@ -1455,7 +1438,7 @@ Use pointwise Aitken extrapolation?
 
 
 
-Definition at line 459 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line 490 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 
 
 

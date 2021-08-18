@@ -19,13 +19,11 @@ Inheritance diagram for oomph\+::Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac2e77539dfed482cc3d8b7c9e17a9567}{Algebraic\+Collapsible\+Channel\+Mesh}} (const unsigned \&nup, const unsigned \&ncollapsible, const unsigned \&ndown, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a45011f22dedd480392b1f376e4269921}{ny}}, const double \&lup, const double \&lcollapsible, const double \&ldown, const double \&ly, Geom\+Object $\ast$\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a04ffeb61678763dfd250962ea9ba614b}{wall\+\_\+pt}}, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab921ed3dbc5678fc5d39626fdf32c4ed}{$\sim$\+Algebraic\+Collapsible\+Channel\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_a3c19524e69a9408c79047d130b79d6b3}{Algebraic\+Collapsible\+Channel\+Mesh}} (const unsigned \&nup, const unsigned \&ncollapsible, const unsigned \&ndown, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a45011f22dedd480392b1f376e4269921}{ny}}, const double \&lup, const double \&lcollapsible, const double \&ldown, const double \&ly, Geom\+Object $\ast$\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a04ffeb61678763dfd250962ea9ba614b}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+B\+L\+Squash\+Fct\+Pt}} bl\+\_\+squash\+\_\+function\+\_\+pt, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+B\+L\+Squash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_abf1848b49f57419af4379a637464587d}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the mesh near the walls. Default trivial mapping (the identity) leaves vertical nodal positions unchanged. Mapping is used in underlying \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain}{Collapsible\+Channel\+Domain}}. Broken function that overloads the version in the \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{Collapsible\+Channel\+Mesh}}. It does not make sense to specify the function pointer after the mesh has been set up! \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+B\+L\+Squash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_afa53bd526ff0903526afbdf5e6f4f532}{axial\+\_\+spacing\+\_\+fct\+\_\+pt}} ()
@@ -52,7 +50,7 @@ class oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>
 
 Collapsible channel mesh with algebraic node update. 
 
-Definition at line 430 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
+Definition at line 426 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
 
 
 
@@ -66,12 +64,11 @@ Definition at line 430 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h
 
 
 
-Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). ~\newline
- 
+Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). 
 
 
 
-Definition at line 443 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
+Definition at line 436 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
 
 
 
@@ -90,7 +87,7 @@ Destructor\+: empty.
 
 
 
-Definition at line 467 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
+Definition at line 466 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_a3c19524e69a9408c79047d130b79d6b3}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_a3c19524e69a9408c79047d130b79d6b3}} 
 \index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!AlgebraicCollapsibleChannelMesh@{AlgebraicCollapsibleChannelMesh}}
@@ -101,12 +98,11 @@ Definition at line 467 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h
 
 
 
-Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). ~\newline
- 
+Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). 
 
 
 
-Definition at line 475 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
+Definition at line 474 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
 
 
 
@@ -128,7 +124,7 @@ Update nodal position at time level t (t=0\+: present; t$>$0\+: previous)
 
 Perform algebraic mesh update at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 236 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc.
+Definition at line 242 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_afa53bd526ff0903526afbdf5e6f4f532}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_afa53bd526ff0903526afbdf5e6f4f532}} 
 \index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}}
@@ -147,7 +143,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ac7913d
 
 
 
-Definition at line 540 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
+Definition at line 542 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
 
 
 
@@ -170,7 +166,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_aac6057
 
 
 
-Definition at line 514 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
+Definition at line 517 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
 
 
 
@@ -189,7 +185,7 @@ Function to setup the algebraic node update.
 
 Setup algebraic mesh update -- assumes that mesh has initially been set up with a flush upper wall 
 
-Definition at line 326 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc.
+Definition at line 324 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -208,7 +204,7 @@ Update the node-\/udate data after mesh adaptation. Empty -- no update of node u
 
 
 
-Definition at line 566 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
+Definition at line 567 of file collapsible\+\_\+channel\+\_\+mesh.\+template.\+h.
 
 
 

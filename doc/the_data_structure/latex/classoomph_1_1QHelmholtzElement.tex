@@ -20,19 +20,15 @@ Inheritance diagram for oomph\+::Q\+Helmholtz\+Element$<$ D\+IM, N\+N\+O\+D\+E\+
 unsigned \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_aacbd4741d254660373226d447e508eae}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ab64bdf668cacf69003ddc36832b29559}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ac05323b02dc7d06f506ade8078fa2356}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_a60e27818eabd8a5ebf9328a97b89b2b3}{output\+\_\+real}} (std\+::ostream \&outfile, const double \&phi, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function for real part of full time-\/dependent solution u = Re( (u\+\_\+r +i u\+\_\+i) exp(-\/i omega t) at phase angle omega t = phi. x,y,u or x,y,z,u at n\+\_\+plot plot points in each coordinate direction. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ac30733fd570c0f78f87ed4a7c542cc5a}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_a235f2ddc4141b070590e8e19f1924b21}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ae560b649d5604bfa9a49e0cd7fb37d6f}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_a91d895b690a27d2a3cffb7ebb6b7c8f8}{output\+\_\+real\+\_\+fct}} (std\+::ostream \&outfile, const double \&phi, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
@@ -43,7 +39,7 @@ void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ad9aeaf3b84064897747f46590
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_af7fc05bfa3f872b6d82596406faf2e26}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+helmholtz}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1QHelmholtzElement_ade0cbf9a26ee1ac1f64fd999d8903a72}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+helmholtz}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
@@ -60,7 +56,7 @@ class oomph\+::\+Q\+Helmholtz\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
 
 \mbox{\hyperlink{classoomph_1_1QHelmholtzElement}{Q\+Helmholtz\+Element}} elements are linear/quadrilateral/brick-\/shaped Helmholtz elements with isoparametric interpolation for the function. 
 
-Definition at line 458 of file helmholtz\+\_\+elements.\+h.
+Definition at line 459 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -78,7 +74,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\
 
 
 
-Definition at line 473 of file helmholtz\+\_\+elements.\+h.
+Definition at line 470 of file helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHelmholtzElement_a589e3ccd70828be0777a15ebae315965}\label{classoomph_1_1QHelmholtzElement_a589e3ccd70828be0777a15ebae315965}} 
 \index{oomph::QHelmholtzElement$<$ DIM, NNODE\_1D $>$@{oomph::QHelmholtzElement$<$ DIM, NNODE\_1D $>$}!QHelmholtzElement@{QHelmholtzElement}}
@@ -93,7 +89,7 @@ Broken copy constructor.
 
 
 
-Definition at line 477 of file helmholtz\+\_\+elements.\+h.
+Definition at line 475 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -121,7 +117,7 @@ Implements \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a4559bf3e98ee0efa33
 
 
 
-Definition at line 618 of file helmholtz\+\_\+elements.\+h.
+Definition at line 633 of file helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHelmholtzElement_af7fc05bfa3f872b6d82596406faf2e26}\label{classoomph_1_1QHelmholtzElement_af7fc05bfa3f872b6d82596406faf2e26}} 
 \index{oomph::QHelmholtzElement$<$ DIM, NNODE\_1D $>$@{oomph::QHelmholtzElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_helmholtz@{dshape\_and\_dtest\_eulerian\_helmholtz}}
@@ -130,9 +126,7 @@ Definition at line 618 of file helmholtz\+\_\+elements.\+h.
 {\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1QHelmholtzElement}{oomph\+::\+Q\+Helmholtz\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+helmholtz (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -142,7 +136,7 @@ Implements \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a9a64bff0cb0c873e50
 
 
 
-Definition at line 589 of file helmholtz\+\_\+elements.\+h.
+Definition at line 606 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -157,8 +151,7 @@ void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement}{oomph\+::\+Q\+Helmholtz\+
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. 
+C-\/style output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -166,7 +159,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a4ff9181e48
 
 
 
-Definition at line 517 of file helmholtz\+\_\+elements.\+h.
+Definition at line 524 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -181,8 +174,7 @@ void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement}{oomph\+::\+Q\+Helmholtz\+
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -190,7 +182,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a0ba883cd70
 
 
 
-Definition at line 523 of file helmholtz\+\_\+elements.\+h.
+Definition at line 532 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -205,8 +197,7 @@ void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement}{oomph\+::\+Q\+Helmholtz\+
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -229,8 +220,7 @@ void \mbox{\hyperlink{classoomph_1_1QHelmholtzElement}{oomph\+::\+Q\+Helmholtz\+
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -238,7 +228,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a63c04aa6b9
 
 
 
-Definition at line 502 of file helmholtz\+\_\+elements.\+h.
+Definition at line 504 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -261,7 +251,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_abf09295bc4
 
 
 
-Definition at line 551 of file helmholtz\+\_\+elements.\+h.
+Definition at line 566 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -284,7 +274,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a18bda8e96e
 
 
 
-Definition at line 529 of file helmholtz\+\_\+elements.\+h.
+Definition at line 540 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -303,7 +293,7 @@ Output function for real part of full time-\/dependent solution u = Re( (u\+\_\+
 
 
 
-Definition at line 510 of file helmholtz\+\_\+elements.\+h.
+Definition at line 514 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -322,7 +312,7 @@ Output function for real part of full time-\/dependent fct u = Re( (u\+\_\+r +i 
 
 
 
-Definition at line 539 of file helmholtz\+\_\+elements.\+h.
+Definition at line 553 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -345,7 +335,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 491 of file helmholtz\+\_\+elements.\+h.
+Definition at line 489 of file helmholtz\+\_\+elements.\+h.
 
 
 
@@ -367,7 +357,7 @@ Static int that holds the number of variables at nodes\+: always the same.
 
 Set the data for the number of Variables at each node, always two (real and imag part) in every case 
 
-Definition at line 466 of file helmholtz\+\_\+elements.\+h.
+Definition at line 465 of file helmholtz\+\_\+elements.\+h.
 
 
 

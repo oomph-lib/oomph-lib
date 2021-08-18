@@ -129,343 +129,348 @@ $(function() {
 <div class="title">double_multi_vector.cc</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="double__multi__vector_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<a href="double__multi__vector_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// LIC//====================================================================</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="double__multi__vector_8h.html">double_multi_vector.h</a>&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="matrices_8h.html">matrices.h</a>&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{<span class="comment"></span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> /// The contents of the vector are redistributed to match the new</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> /// distribution. In a non-MPI rebuild this method works, but does nothing. </span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> /// \b NOTE 1: The current distribution and the new distribution must have</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> /// the same number of global rows.</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> /// \b NOTE 2: The current distribution and the new distribution must have</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> /// the same Communicator.</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classoomph_1_1DoubleMultiVector.html#a1a7f714e738c77e1938304c5911e09bf">   37</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1DoubleMultiVector.html#a1a7f714e738c77e1938304c5911e09bf">DoubleMultiVector::redistribute</a>(</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">const</span> <a class="code" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a>* <span class="keyword">const</span>&amp; dist_pt)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  /// The contents of the vector are redistributed to match the new</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  /// distribution. In a non-MPI rebuild this method works, but does nothing.</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  /// \b NOTE 1: The current distribution and the new distribution must have</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">  /// the same number of global rows.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">  /// \b NOTE 2: The current distribution and the new distribution must have</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">  /// the same Communicator.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classoomph_1_1DoubleMultiVector.html#a1a7f714e738c77e1938304c5911e09bf">   37</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1DoubleMultiVector.html#a1a7f714e738c77e1938304c5911e09bf">DoubleMultiVector::redistribute</a>(</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">const</span> <a class="code" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a>* <span class="keyword">const</span>&amp; dist_pt)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  {</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#ifdef OOMPH_HAS_MPI</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;   <span class="keywordflow">if</span> (!<a class="code" href="classoomph_1_1DoubleMultiVector.html#adf8fe4053c07e949f8e9cbea9e29e6e6">Internal_values</a>)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classoomph_1_1DoubleMultiVector.html#adf8fe4053c07e949f8e9cbea9e29e6e6">Internal_values</a>)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;     <span class="comment">// if this vector does not own the double* values then it cannot be</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;     <span class="comment">// distributed.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;     <span class="comment">// note: this is not stictly necessary - would just need to be careful </span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">// with delete[] below.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;     std::ostringstream error_message;    </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;     error_message &lt;&lt; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="stringliteral">&quot;This multi vector does not own its data (i.e. data has been &quot;</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                   &lt;&lt; <span class="stringliteral">&quot;passed in via set_external_values() and therefore &quot;</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                   &lt;&lt; <span class="stringliteral">&quot;cannot be redistributed&quot;</span>; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;     <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_message.str(),</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;   }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;   <span class="comment">// paranoid check that the nrows for both distributions is the </span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   <span class="comment">// same</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;   <span class="keywordflow">if</span> (dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#aafad0b69de2284808366b65bd63e493b">nrow</a>() != this-&gt;nrow())</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;     std::ostringstream error_message;    </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;     error_message &lt;&lt; <span class="stringliteral">&quot;The number of global rows in the new distribution (&quot;</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                   &lt;&lt; dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#aafad0b69de2284808366b65bd63e493b">nrow</a>() &lt;&lt; <span class="stringliteral">&quot;) is not equal to the number&quot;</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                   &lt;&lt; <span class="stringliteral">&quot; of global rows in the current distribution (&quot;</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                   &lt;&lt; this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a>() &lt;&lt; <span class="stringliteral">&quot;).\n&quot;</span>; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;     <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_message.str(),</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;   <span class="comment">// paranoid check that the current distribution and the new distribution</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;   <span class="comment">// have the same Communicator</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   <a class="code" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> temp_comm(*dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2e4736826a65253f574d4f6f152ab514">communicator_pt</a>());</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;   <span class="keywordflow">if</span> (!(temp_comm == *this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;communicator_pt()))</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;     std::ostringstream error_message;  </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;     error_message &lt;&lt; <span class="stringliteral">&quot;The new distribution and the current distribution must &quot;</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                   &lt;&lt; <span class="stringliteral">&quot;have the same communicator.&quot;</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;     <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_message.str(),</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;   </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;   <span class="comment">// check the distributions are not the same</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;   <span class="keywordflow">if</span> (!((*this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()) == *dist_pt))</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;     <span class="comment">//Cache the number of vectors</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_vector = this-&gt;<a class="code" href="classoomph_1_1DoubleMultiVector.html#a21446924694c708c6a82cc908bf7846a">Nvector</a>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;     </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;     <span class="comment">// get the rank and the number of processors</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;     <span class="keywordtype">int</span> my_rank = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2e4736826a65253f574d4f6f152ab514">communicator_pt</a>()-&gt;my_rank();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;     <span class="keywordtype">int</span> nproc = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2e4736826a65253f574d4f6f152ab514">communicator_pt</a>()-&gt;nproc();</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;     <span class="comment">// if both vectors are distributed</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;     <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a>() &amp;&amp; dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a05842d032d28880ae37951deae804ad8">distributed</a>())</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;       <span class="comment">// new nrow_local and first_row data</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;       <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_first_row_data(nproc);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;       <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_nrow_local_data(nproc);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;       <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> current_first_row_data(nproc);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;       <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> current_nrow_local_data(nproc);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;       <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; nproc; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;         new_first_row_data[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2634e540a78fe1ee3f5c907aff500b58">first_row</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;         new_nrow_local_data[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#ac9310de740f9c3a61f8d5dab9bef88ca">nrow_local</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;         current_first_row_data[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;         current_nrow_local_data[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;       </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;       <span class="comment">// compute which local rows are expected to be received from each </span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;       <span class="comment">// processor / sent to each processor</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;       <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_first_row_for_proc(nproc);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;       <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_nrow_local_for_proc(nproc);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;       <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_first_row_from_proc(nproc);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;       <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_nrow_local_from_proc(nproc);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;       <span class="comment">// for every processor compute first_row and nrow_local that will</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;       <span class="comment">// will sent and received by this processor</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;       <span class="keywordflow">for</span> (<span class="keywordtype">int</span> p = 0; p &lt; nproc; p++)</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;         <span class="comment">// start with data to be sent</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;         <span class="keywordflow">if</span> ((new_first_row_data[p] &lt; (current_first_row_data[my_rank] +</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                                       current_nrow_local_data[my_rank])) &amp;&amp;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;             (current_first_row_data[my_rank] &lt; (new_first_row_data[p] +</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                                                 new_nrow_local_data[p])))</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;         {</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;          new_first_row_for_proc[p] = </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;           std::max(current_first_row_data[my_rank],</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                    new_first_row_data[p]);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;          new_nrow_local_for_proc[p] = </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;           std::min((current_first_row_data[my_rank] +</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                     current_nrow_local_data[my_rank]),</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                    (new_first_row_data[p] +</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                     new_nrow_local_data[p])) - new_first_row_for_proc[p];</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;         }</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;         </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;         <span class="comment">// and data to be received</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;         <span class="keywordflow">if</span> ((new_first_row_data[my_rank] &lt; (current_first_row_data[p] +</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                                                 current_nrow_local_data[p])) </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;             &amp;&amp; (current_first_row_data[p] &lt; (new_first_row_data[my_rank] +</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                                              new_nrow_local_data[my_rank])))</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;         {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;          new_first_row_from_proc[p] = </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;           std::max(current_first_row_data[p],</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                    new_first_row_data[my_rank]);</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;          new_nrow_local_from_proc[p] = </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;           std::min((current_first_row_data[p] +</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                     current_nrow_local_data[p]),</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                    (new_first_row_data[my_rank] +</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                     new_nrow_local_data[my_rank]))-new_first_row_from_proc[p];</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;         }         </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        }</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;       </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;       <span class="comment">// Storage for the new data</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;       <span class="keywordtype">double</span> **temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>*[n_vector];</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;       <span class="keywordtype">double</span> *contiguous_temp_data = </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keyword">new</span> <span class="keywordtype">double</span>[n_vector*new_nrow_local_data[my_rank]];</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;       <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> v=0;v&lt;n_vector;++v)</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        {</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;         temp_data[v] = &amp;contiguous_temp_data[v*new_nrow_local_data[my_rank]];</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        }</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;       </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;       <span class="comment">// &quot;send to self&quot; or copy Data that does not need to be sent else where</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;       <span class="comment">// to temp_data</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;       <span class="keywordflow">if</span> (new_nrow_local_for_proc[my_rank] != 0)</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        {</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;         <span class="keywordtype">unsigned</span> j = new_first_row_for_proc[my_rank] - </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;          current_first_row_data[my_rank];</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;         <span class="keywordtype">unsigned</span> k = new_first_row_for_proc[my_rank] - </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;          new_first_row_data[my_rank];</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; new_nrow_local_for_proc[my_rank]; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;          {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;           <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> v=0;v&lt;n_vector;++v)</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;             temp_data[v][k + <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v][j +<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;          }</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        }</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;       </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;         <span class="comment">// send and receive circularly</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;       <span class="keywordflow">for</span> (<span class="keywordtype">int</span> p = 1; p &lt; nproc; p++)</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        {</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;         <span class="comment">// next processor to send to</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;         <span class="keywordtype">unsigned</span> dest_p = (my_rank + p)%nproc;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;         </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;         <span class="comment">// next processor to receive from</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;         <span class="keywordtype">unsigned</span> source_p = (nproc + my_rank - p)%nproc;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;         </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;         <span class="comment">// send and receive the value</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;         MPI_Status status;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;         <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> v=0;v&lt;n_vector;v++)</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;          {</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;           MPI_Sendrecv(<a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v] + new_first_row_for_proc[dest_p] -</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                        current_first_row_data[my_rank],</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                        new_nrow_local_for_proc[dest_p],</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                        MPI_DOUBLE,dest_p,1,</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                        temp_data[v] + new_first_row_from_proc[source_p] - </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                        new_first_row_data[my_rank],</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                        new_nrow_local_from_proc[source_p],</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                        MPI_DOUBLE,source_p,1,</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                        this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;communicator_pt()-&gt;mpi_comm(),</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                        &amp;status);</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;          }</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        }</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;       <span class="comment">// copy from temp data to Values_pt</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;       <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[0]; <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;       <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a> = temp_data;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <span class="comment">// if this vector does not own the double* values then it cannot be</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="comment">// distributed.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="comment">// note: this is not stictly necessary - would just need to be careful</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      <span class="comment">// with delete[] below.</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      std::ostringstream error_message;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      error_message</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        &lt;&lt; <span class="stringliteral">&quot;This multi vector does not own its data (i.e. data has been &quot;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        &lt;&lt; <span class="stringliteral">&quot;passed in via set_external_values() and therefore &quot;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        &lt;&lt; <span class="stringliteral">&quot;cannot be redistributed&quot;</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// paranoid check that the nrows for both distributions is the</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// same</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span> (dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#aafad0b69de2284808366b65bd63e493b">nrow</a>() != this-&gt;nrow())</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      std::ostringstream error_message;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      error_message &lt;&lt; <span class="stringliteral">&quot;The number of global rows in the new distribution (&quot;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    &lt;&lt; dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#aafad0b69de2284808366b65bd63e493b">nrow</a>() &lt;&lt; <span class="stringliteral">&quot;) is not equal to the number&quot;</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot; of global rows in the current distribution (&quot;</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    &lt;&lt; this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a>() &lt;&lt; <span class="stringliteral">&quot;).\n&quot;</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// paranoid check that the current distribution and the new distribution</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// have the same Communicator</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> temp_comm(*dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2e4736826a65253f574d4f6f152ab514">communicator_pt</a>());</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (!(temp_comm == *this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;communicator_pt()))</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      std::ostringstream error_message;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      error_message &lt;&lt; <span class="stringliteral">&quot;The new distribution and the current distribution must &quot;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;have the same communicator.&quot;</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">// check the distributions are not the same</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">if</span> (!((*this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()) == *dist_pt))</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="comment">// Cache the number of vectors</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_vector = this-&gt;<a class="code" href="classoomph_1_1DoubleMultiVector.html#a21446924694c708c6a82cc908bf7846a">Nvector</a>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="comment">// get the rank and the number of processors</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keywordtype">int</span> my_rank = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2e4736826a65253f574d4f6f152ab514">communicator_pt</a>()-&gt;my_rank();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keywordtype">int</span> nproc = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2e4736826a65253f574d4f6f152ab514">communicator_pt</a>()-&gt;nproc();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="comment">// if both vectors are distributed</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a>() &amp;&amp; dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a05842d032d28880ae37951deae804ad8">distributed</a>())</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="comment">// new nrow_local and first_row data</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_first_row_data(nproc);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_nrow_local_data(nproc);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> current_first_row_data(nproc);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> current_nrow_local_data(nproc);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; nproc; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;          new_first_row_data[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2634e540a78fe1ee3f5c907aff500b58">first_row</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;          new_nrow_local_data[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#ac9310de740f9c3a61f8d5dab9bef88ca">nrow_local</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;          current_first_row_data[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;          current_nrow_local_data[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="comment">// compute which local rows are expected to be received from each</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="comment">// processor / sent to each processor</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_first_row_for_proc(nproc);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_nrow_local_for_proc(nproc);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_first_row_from_proc(nproc);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> new_nrow_local_from_proc(nproc);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="comment">// for every processor compute first_row and nrow_local that will</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="comment">// will sent and received by this processor</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> p = 0; p &lt; nproc; p++)</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;          <span class="comment">// start with data to be sent</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;          <span class="keywordflow">if</span> ((new_first_row_data[p] &lt; (current_first_row_data[my_rank] +</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                                        current_nrow_local_data[my_rank])) &amp;&amp;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;              (current_first_row_data[my_rank] &lt;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;               (new_first_row_data[p] + new_nrow_local_data[p])))</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;          {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            new_first_row_for_proc[p] =</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;              std::max(current_first_row_data[my_rank], new_first_row_data[p]);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            new_nrow_local_for_proc[p] =</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;              std::min((current_first_row_data[my_rank] +</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                        current_nrow_local_data[my_rank]),</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                       (new_first_row_data[p] + new_nrow_local_data[p])) -</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;              new_first_row_for_proc[p];</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;          }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;          <span class="comment">// and data to be received</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;          <span class="keywordflow">if</span> ((new_first_row_data[my_rank] &lt;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;               (current_first_row_data[p] + current_nrow_local_data[p])) &amp;&amp;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;              (current_first_row_data[p] &lt;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;               (new_first_row_data[my_rank] + new_nrow_local_data[my_rank])))</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;          {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            new_first_row_from_proc[p] =</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;              std::max(current_first_row_data[p], new_first_row_data[my_rank]);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            new_nrow_local_from_proc[p] =</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;              std::min(</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                (current_first_row_data[p] + current_nrow_local_data[p]),</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                (new_first_row_data[my_rank] + new_nrow_local_data[my_rank])) -</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;              new_first_row_from_proc[p];</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;          }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="comment">// Storage for the new data</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keywordtype">double</span>** temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>*[n_vector];</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordtype">double</span>* contiguous_temp_data =</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;          <span class="keyword">new</span> <span class="keywordtype">double</span>[n_vector * new_nrow_local_data[my_rank]];</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> v = 0; v &lt; n_vector; ++v)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;          temp_data[v] =</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            &amp;contiguous_temp_data[v * new_nrow_local_data[my_rank]];</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="comment">// &quot;send to self&quot; or copy Data that does not need to be sent else where</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="comment">// to temp_data</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordflow">if</span> (new_nrow_local_for_proc[my_rank] != 0)</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;          <span class="keywordtype">unsigned</span> j =</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            new_first_row_for_proc[my_rank] - current_first_row_data[my_rank];</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;          <span class="keywordtype">unsigned</span> k =</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            new_first_row_for_proc[my_rank] - new_first_row_data[my_rank];</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; new_nrow_local_for_proc[my_rank]; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;          {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> v = 0; v &lt; n_vector; ++v)</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;              temp_data[v][k + <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v][j + <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;          }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        }</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="comment">// send and receive circularly</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> p = 1; p &lt; nproc; p++)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;          <span class="comment">// next processor to send to</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;          <span class="keywordtype">unsigned</span> dest_p = (my_rank + p) % nproc;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;          <span class="comment">// next processor to receive from</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;          <span class="keywordtype">unsigned</span> source_p = (nproc + my_rank - p) % nproc;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;          <span class="comment">// send and receive the value</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;          MPI_Status status;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> v = 0; v &lt; n_vector; v++)</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;          {</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            MPI_Sendrecv(<a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v] + new_first_row_for_proc[dest_p] -</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                           current_first_row_data[my_rank],</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                         new_nrow_local_for_proc[dest_p],</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                         MPI_DOUBLE,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                         dest_p,</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                         1,</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                         temp_data[v] + new_first_row_from_proc[source_p] -</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                           new_first_row_data[my_rank],</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                         new_nrow_local_from_proc[source_p],</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                         MPI_DOUBLE,</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                         source_p,</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                         1,</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                         this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;communicator_pt()-&gt;mpi_comm(),</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                         &amp;status);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;          }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        }</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="comment">// copy from temp data to Values_pt</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[0];</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a> = temp_data;</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;      }</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;     <span class="comment">// if this vector is distributed but the new distributed is global</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a>() &amp;&amp; !dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a05842d032d28880ae37951deae804ad8">distributed</a>())</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;      <span class="comment">// if this vector is distributed but the new distributed is global</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a>() &amp;&amp; !dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a05842d032d28880ae37951deae804ad8">distributed</a>())</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;      {</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;       <span class="comment">// copy existing Values_pt to temp_data</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;       <span class="keywordtype">unsigned</span> n_local_data = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>();</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;       <span class="keywordtype">double</span> **temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>*[n_vector];</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;       <span class="comment">//New continguous data</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;       <span class="keywordtype">double</span> *contiguous_temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>[n_vector*n_local_data];</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;       <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> v=0;v&lt;n_vector;++v)</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        {</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;         temp_data[v] = &amp;contiguous_temp_data[v*n_local_data];</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; n_local_data; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;          {</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;           temp_data[v][<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v][<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;          }</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        }</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;       </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;       <span class="comment">// clear and resize Values_pt</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;       <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[0]; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;       <span class="keywordtype">double</span> *<a class="code" href="classoomph_1_1DoubleMultiVector.html#ab6e0f86c71dffe3678598d6c714d113c">values</a> = <span class="keyword">new</span> <span class="keywordtype">double</span>[this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a>()*n_vector];</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;       <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> v=0;v&lt;n_vector;v++) {<a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v] = &amp;<a class="code" href="classoomph_1_1DoubleMultiVector.html#ab6e0f86c71dffe3678598d6c714d113c">values</a>[v*this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a>()];}</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;       </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;       <span class="comment">// create a int vector of first rows</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;       <span class="keywordtype">int</span>* dist_first_row = <span class="keyword">new</span> <span class="keywordtype">int</span>[nproc];</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;       <span class="keywordtype">int</span>* dist_nrow_local =  <span class="keyword">new</span> <span class="keywordtype">int</span>[nproc];</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;       <span class="keywordflow">for</span> (<span class="keywordtype">int</span> p = 0; p &lt; nproc; p++)</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        {</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;         dist_first_row[p] = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a>(p);</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;         dist_nrow_local[p] = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>(p);</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        }</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;       </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;       <span class="comment">// gather the local vectors from all processors on all processors</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;       <span class="keywordtype">int</span> my_local_data(this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>());</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;       <span class="comment">//Loop over all vectors</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;       <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> v=0;v&lt;n_vector;v++)</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;         MPI_Allgatherv(temp_data[v],my_local_data,MPI_DOUBLE,</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                        <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v],dist_nrow_local,</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                        dist_first_row,MPI_DOUBLE,</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                        this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;communicator_pt()-&gt;mpi_comm());</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        }</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;       <span class="comment">// update the distribution</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;       this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a>(dist_pt);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;       <span class="comment">// delete the temp_data</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;       <span class="keyword">delete</span>[] temp_data[0]; <span class="keyword">delete</span>[] temp_data;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;       <span class="comment">// clean up</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;       <span class="keyword">delete</span>[] dist_first_row;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;       <span class="keyword">delete</span>[] dist_nrow_local;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;      }</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;     </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;     <span class="comment">// if this vector is not distrubted but the target vector is</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a>() &amp;&amp; dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a05842d032d28880ae37951deae804ad8">distributed</a>())</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;      {   </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;       <span class="comment">// cache the new nrow_local</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;       <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> = dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#ac9310de740f9c3a61f8d5dab9bef88ca">nrow_local</a>();</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;       </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;       <span class="comment">// and first_row</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;       <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> = dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2634e540a78fe1ee3f5c907aff500b58">first_row</a>();</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_local_data = <a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;       <span class="keywordtype">double</span> **temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>*[n_vector];</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;       <span class="keywordtype">double</span> *contiguous_temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>[n_vector*n_local_data];</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;       </div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;       <span class="comment">// copy the data</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;       <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> v=0;v&lt;n_vector;v++)</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        {</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;         temp_data[v] = &amp;contiguous_temp_data[v*n_local_data];</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; n_local_data; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;          {</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;           temp_data[v][<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v][<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> + <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;          }</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        }</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;       </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;       <span class="comment">//copy to Values_pt</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;       <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[0]; <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;       <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a> = temp_data;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;       <span class="comment">// update the distribution</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;       this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a>(dist_pt);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="comment">// copy existing Values_pt to temp_data</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="keywordtype">unsigned</span> n_local_data = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>();</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keywordtype">double</span>** temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>*[n_vector];</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="comment">// New continguous data</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="keywordtype">double</span>* contiguous_temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>[n_vector * n_local_data];</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> v = 0; v &lt; n_vector; ++v)</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;          temp_data[v] = &amp;contiguous_temp_data[v * n_local_data];</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; n_local_data; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;          {</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            temp_data[v][<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v][<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;          }</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        }</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="comment">// clear and resize Values_pt</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[0];</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keywordtype">double</span>* <a class="code" href="classoomph_1_1DoubleMultiVector.html#ab6e0f86c71dffe3678598d6c714d113c">values</a> = <span class="keyword">new</span> <span class="keywordtype">double</span>[this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a>() * n_vector];</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> v = 0; v &lt; n_vector; v++)</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        {</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;          <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v] = &amp;<a class="code" href="classoomph_1_1DoubleMultiVector.html#ab6e0f86c71dffe3678598d6c714d113c">values</a>[v * this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a>()];</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        }</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="comment">// create a int vector of first rows</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordtype">int</span>* dist_first_row = <span class="keyword">new</span> <span class="keywordtype">int</span>[nproc];</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="keywordtype">int</span>* dist_nrow_local = <span class="keyword">new</span> <span class="keywordtype">int</span>[nproc];</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> p = 0; p &lt; nproc; p++)</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;          dist_first_row[p] = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a>(p);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;          dist_nrow_local[p] = this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>(p);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        }</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <span class="comment">// gather the local vectors from all processors on all processors</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keywordtype">int</span> my_local_data(this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>());</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="comment">// Loop over all vectors</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> v = 0; v &lt; n_vector; v++)</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;          MPI_Allgatherv(</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            temp_data[v],</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            my_local_data,</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            MPI_DOUBLE,</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v],</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            dist_nrow_local,</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            dist_first_row,</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            MPI_DOUBLE,</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a>()-&gt;communicator_pt()-&gt;mpi_comm());</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="comment">// update the distribution</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a>(dist_pt);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="comment">// delete the temp_data</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="keyword">delete</span>[] temp_data[0];</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keyword">delete</span>[] temp_data;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="comment">// clean up</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="keyword">delete</span>[] dist_first_row;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keyword">delete</span>[] dist_nrow_local;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;      }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;      <span class="comment">// if this vector is not distrubted but the target vector is</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a>() &amp;&amp; dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a05842d032d28880ae37951deae804ad8">distributed</a>())</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;      {</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="comment">// cache the new nrow_local</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> = dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#ac9310de740f9c3a61f8d5dab9bef88ca">nrow_local</a>();</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="comment">// and first_row</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> = dist_pt-&gt;<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a2634e540a78fe1ee3f5c907aff500b58">first_row</a>();</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_local_data = <a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a>;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="keywordtype">double</span>** temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>*[n_vector];</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordtype">double</span>* contiguous_temp_data = <span class="keyword">new</span> <span class="keywordtype">double</span>[n_vector * n_local_data];</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="comment">// copy the data</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> v = 0; v &lt; n_vector; v++)</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        {</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;          temp_data[v] = &amp;contiguous_temp_data[v * n_local_data];</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; n_local_data; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;          {</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            temp_data[v][<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[v][<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> + <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;          }</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        }</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;      }</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;     </div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;     <span class="comment">// copy the Distribution</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;     this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a>(dist_pt);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    }</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;   <span class="comment">//Update the doublevector representation</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;   this-&gt;<a class="code" href="classoomph_1_1DoubleMultiVector.html#a09b97b4d4c7d0945178e8bf190813cdd">setup_doublevector_representation</a>();</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  }</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;}</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="comment">// copy to Values_pt</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>[0];</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keyword">delete</span>[] <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a>;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <a class="code" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a> = temp_data;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="comment">// update the distribution</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a>(dist_pt);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;      }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;      <span class="comment">// copy the Distribution</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      this-&gt;<a class="code" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a>(dist_pt);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="comment">// Update the doublevector representation</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    this-&gt;<a class="code" href="classoomph_1_1DoubleMultiVector.html#a09b97b4d4c7d0945178e8bf190813cdd">setup_doublevector_representation</a>();</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;} <span class="comment">// namespace oomph</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_a2634e540a78fe1ee3f5c907aff500b58"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#a2634e540a78fe1ee3f5c907aff500b58">oomph::LinearAlgebraDistribution::first_row</a></div><div class="ttdeci">unsigned first_row() const</div><div class="ttdoc">access function for the first row on this processor. If not distributed then this is just zero.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00264">linear_algebra_distribution.h:264</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_ab00a3919b8634c698749f14a4d92947d"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">oomph::DistributableLinearAlgebraObject::first_row</a></div><div class="ttdeci">unsigned first_row() const</div><div class="ttdoc">access function for the first row on this processor</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00494">linear_algebra_distribution.h:494</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_adf8fe4053c07e949f8e9cbea9e29e6e6"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#adf8fe4053c07e949f8e9cbea9e29e6e6">oomph::DoubleMultiVector::Internal_values</a></div><div class="ttdeci">bool Internal_values</div><div class="ttdoc">Boolean flag to indicate whether the vector's data (values_pt) is owned by this vector.</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l00951">double_multi_vector.h:951</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_ac5340bac40b9559b0378037b57005203"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">oomph::DistributableLinearAlgebraObject::build_distribution</a></div><div class="ttdeci">void build_distribution(const LinearAlgebraDistribution *const dist_pt)</div><div class="ttdoc">setup the distribution of this distributable linear algebra object</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00520">linear_algebra_distribution.h:520</a></div></div>
+<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_a2634e540a78fe1ee3f5c907aff500b58"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#a2634e540a78fe1ee3f5c907aff500b58">oomph::LinearAlgebraDistribution::first_row</a></div><div class="ttdeci">unsigned first_row() const</div><div class="ttdoc">access function for the first row on this processor. If not distributed then this is just zero.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00261">linear_algebra_distribution.h:261</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_ab00a3919b8634c698749f14a4d92947d"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">oomph::DistributableLinearAlgebraObject::first_row</a></div><div class="ttdeci">unsigned first_row() const</div><div class="ttdoc">access function for the first row on this processor</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00487">linear_algebra_distribution.h:487</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_adf8fe4053c07e949f8e9cbea9e29e6e6"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#adf8fe4053c07e949f8e9cbea9e29e6e6">oomph::DoubleMultiVector::Internal_values</a></div><div class="ttdeci">bool Internal_values</div><div class="ttdoc">Boolean flag to indicate whether the vector's data (values_pt) is owned by this vector.</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l01009">double_multi_vector.h:1009</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_ac5340bac40b9559b0378037b57005203"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">oomph::DistributableLinearAlgebraObject::build_distribution</a></div><div class="ttdeci">void build_distribution(const LinearAlgebraDistribution *const dist_pt)</div><div class="ttdoc">setup the distribution of this distributable linear algebra object</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00513">linear_algebra_distribution.h:513</a></div></div>
 <div class="ttc" id="aclassoomph_1_1OomphCommunicator_html"><div class="ttname"><a href="classoomph_1_1OomphCommunicator.html">oomph::OomphCommunicator</a></div><div class="ttdoc">An oomph-lib wrapper to the MPI_Comm communicator object. Just contains an MPI_Comm object (which is ...</div><div class="ttdef"><b>Definition:</b> <a href="communicator_8h_source.html#l00053">communicator.h:53</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_ab6e0f86c71dffe3678598d6c714d113c"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#ab6e0f86c71dffe3678598d6c714d113c">oomph::DoubleMultiVector::values</a></div><div class="ttdeci">double ** values()</div><div class="ttdoc">access function to the underlying values</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l00658">double_multi_vector.h:658</a></div></div>
-<div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00225">oomph_definitions.h:225</a></div></div>
-<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html">oomph::LinearAlgebraDistribution</a></div><div class="ttdoc">Describes the distribution of a distributable linear algebra type object. Typically this is a contain...</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00064">linear_algebra_distribution.h:64</a></div></div>
-<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_a2e4736826a65253f574d4f6f152ab514"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#a2e4736826a65253f574d4f6f152ab514">oomph::LinearAlgebraDistribution::communicator_pt</a></div><div class="ttdeci">OomphCommunicator * communicator_pt() const</div><div class="ttdoc">const access to the communicator pointer</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00339">linear_algebra_distribution.h:339</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_a7569556f14fd68b28508920e89bd5eee"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">oomph::DistributableLinearAlgebraObject::nrow</a></div><div class="ttdeci">unsigned nrow() const</div><div class="ttdoc">access function to the number of global rows.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00476">linear_algebra_distribution.h:476</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_a603105384d60c9a3710378af39f538b9"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">oomph::DistributableLinearAlgebraObject::distribution_pt</a></div><div class="ttdeci">LinearAlgebraDistribution * distribution_pt() const</div><div class="ttdoc">access to the LinearAlgebraDistribution</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00470">linear_algebra_distribution.h:470</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_a9bd7e1d242c69a28da85a804a7717fce"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">oomph::DistributableLinearAlgebraObject::nrow_local</a></div><div class="ttdeci">unsigned nrow_local() const</div><div class="ttdoc">access function for the num of local rows on this processor.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00482">linear_algebra_distribution.h:482</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_ab6e0f86c71dffe3678598d6c714d113c"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#ab6e0f86c71dffe3678598d6c714d113c">oomph::DoubleMultiVector::values</a></div><div class="ttdeci">double ** values()</div><div class="ttdoc">access function to the underlying values</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l00668">double_multi_vector.h:668</a></div></div>
+<div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00221">oomph_definitions.h:221</a></div></div>
+<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html">oomph::LinearAlgebraDistribution</a></div><div class="ttdoc">Describes the distribution of a distributable linear algebra type object. Typically this is a contain...</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00063">linear_algebra_distribution.h:63</a></div></div>
+<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_a2e4736826a65253f574d4f6f152ab514"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#a2e4736826a65253f574d4f6f152ab514">oomph::LinearAlgebraDistribution::communicator_pt</a></div><div class="ttdeci">OomphCommunicator * communicator_pt() const</div><div class="ttdoc">const access to the communicator pointer</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00335">linear_algebra_distribution.h:335</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_a7569556f14fd68b28508920e89bd5eee"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">oomph::DistributableLinearAlgebraObject::nrow</a></div><div class="ttdeci">unsigned nrow() const</div><div class="ttdoc">access function to the number of global rows.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00469">linear_algebra_distribution.h:469</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_a603105384d60c9a3710378af39f538b9"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">oomph::DistributableLinearAlgebraObject::distribution_pt</a></div><div class="ttdeci">LinearAlgebraDistribution * distribution_pt() const</div><div class="ttdoc">access to the LinearAlgebraDistribution</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00463">linear_algebra_distribution.h:463</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_a9bd7e1d242c69a28da85a804a7717fce"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">oomph::DistributableLinearAlgebraObject::nrow_local</a></div><div class="ttdeci">unsigned nrow_local() const</div><div class="ttdoc">access function for the num of local rows on this processor.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00475">linear_algebra_distribution.h:475</a></div></div>
 <div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_a1a7f714e738c77e1938304c5911e09bf"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#a1a7f714e738c77e1938304c5911e09bf">oomph::DoubleMultiVector::redistribute</a></div><div class="ttdeci">void redistribute(const LinearAlgebraDistribution *const &amp;dist_pt)</div><div class="ttdoc">Allows are external data to be used by this vector. WARNING: The size of the external data must corre...</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8cc_source.html#l00037">double_multi_vector.cc:37</a></div></div>
 <div class="ttc" id="adouble__multi__vector_8h_html"><div class="ttname"><a href="double__multi__vector_8h.html">double_multi_vector.h</a></div></div>
-<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_a05842d032d28880ae37951deae804ad8"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#a05842d032d28880ae37951deae804ad8">oomph::LinearAlgebraDistribution::distributed</a></div><div class="ttdeci">bool distributed() const</div><div class="ttdoc">access function to the distributed - indicates whether the distribution is serial or distributed</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00333">linear_algebra_distribution.h:333</a></div></div>
+<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_a05842d032d28880ae37951deae804ad8"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#a05842d032d28880ae37951deae804ad8">oomph::LinearAlgebraDistribution::distributed</a></div><div class="ttdeci">bool distributed() const</div><div class="ttdoc">access function to the distributed - indicates whether the distribution is serial or distributed</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00329">linear_algebra_distribution.h:329</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; unsigned &gt;</a></div></div>
 <div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
 <div class="ttc" id="amatrices_8h_html"><div class="ttname"><a href="matrices_8h.html">matrices.h</a></div></div>
-<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_aafad0b69de2284808366b65bd63e493b"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#aafad0b69de2284808366b65bd63e493b">oomph::LinearAlgebraDistribution::nrow</a></div><div class="ttdeci">unsigned nrow() const</div><div class="ttdoc">access function to the number of global rows.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00189">linear_algebra_distribution.h:189</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_a21446924694c708c6a82cc908bf7846a"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#a21446924694c708c6a82cc908bf7846a">oomph::DoubleMultiVector::Nvector</a></div><div class="ttdeci">unsigned Nvector</div><div class="ttdoc">The number of vectors.</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l00947">double_multi_vector.h:947</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_a5505731e7e73d7e4251c67c7adec6bf5"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">oomph::DistributableLinearAlgebraObject::distributed</a></div><div class="ttdeci">bool distributed() const</div><div class="ttdoc">distribution is serial or distributed</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00506">linear_algebra_distribution.h:506</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_a09b97b4d4c7d0945178e8bf190813cdd"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#a09b97b4d4c7d0945178e8bf190813cdd">oomph::DoubleMultiVector::setup_doublevector_representation</a></div><div class="ttdeci">void setup_doublevector_representation()</div><div class="ttdoc">compute the A-norm using the matrix at matrix_pt</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l00930">double_multi_vector.h:930</a></div></div>
-<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_ac9310de740f9c3a61f8d5dab9bef88ca"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#ac9310de740f9c3a61f8d5dab9bef88ca">oomph::LinearAlgebraDistribution::nrow_local</a></div><div class="ttdeci">unsigned nrow_local() const</div><div class="ttdoc">access function for the num of local rows on this processor. If no MPI then Nrow is returned.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00196">linear_algebra_distribution.h:196</a></div></div>
-<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_a562d13abfae53ad5b3e3c6020b4da0e5"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">oomph::DoubleMultiVector::Values</a></div><div class="ttdeci">double ** Values</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l00944">double_multi_vector.h:944</a></div></div>
+<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_aafad0b69de2284808366b65bd63e493b"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#aafad0b69de2284808366b65bd63e493b">oomph::LinearAlgebraDistribution::nrow</a></div><div class="ttdeci">unsigned nrow() const</div><div class="ttdoc">access function to the number of global rows.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00186">linear_algebra_distribution.h:186</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_a21446924694c708c6a82cc908bf7846a"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#a21446924694c708c6a82cc908bf7846a">oomph::DoubleMultiVector::Nvector</a></div><div class="ttdeci">unsigned Nvector</div><div class="ttdoc">The number of vectors.</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l01005">double_multi_vector.h:1005</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DistributableLinearAlgebraObject_html_a5505731e7e73d7e4251c67c7adec6bf5"><div class="ttname"><a href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">oomph::DistributableLinearAlgebraObject::distributed</a></div><div class="ttdeci">bool distributed() const</div><div class="ttdoc">distribution is serial or distributed</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00499">linear_algebra_distribution.h:499</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_a09b97b4d4c7d0945178e8bf190813cdd"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#a09b97b4d4c7d0945178e8bf190813cdd">oomph::DoubleMultiVector::setup_doublevector_representation</a></div><div class="ttdeci">void setup_doublevector_representation()</div><div class="ttdoc">compute the A-norm using the matrix at matrix_pt</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l00988">double_multi_vector.h:988</a></div></div>
+<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_ac9310de740f9c3a61f8d5dab9bef88ca"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#ac9310de740f9c3a61f8d5dab9bef88ca">oomph::LinearAlgebraDistribution::nrow_local</a></div><div class="ttdeci">unsigned nrow_local() const</div><div class="ttdoc">access function for the num of local rows on this processor. If no MPI then Nrow is returned.</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00193">linear_algebra_distribution.h:193</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DoubleMultiVector_html_a562d13abfae53ad5b3e3c6020b4da0e5"><div class="ttname"><a href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">oomph::DoubleMultiVector::Values</a></div><div class="ttdeci">double ** Values</div><div class="ttdef"><b>Definition:</b> <a href="double__multi__vector_8h_source.html#l01002">double_multi_vector.h:1002</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
     <script src="../../js/jquery-1.12.0.min.js"></script>
@@ -493,7 +498,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:00
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:24
         </div>
       </div>
     </footer>

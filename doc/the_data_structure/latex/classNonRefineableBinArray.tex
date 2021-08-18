@@ -48,13 +48,13 @@ double \mbox{\hyperlink{classNonRefineableBinArray_aeec23360643e8a4581d8d841a97f
 \begin{DoxyCompactList}\small\item\em Compute the minimum distance of any vertex in the specified bin from the specified Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classNonRefineableBinArray_a9db5392fc81650a23251f1f5de52f0af}{output\+\_\+bin\+\_\+vertices}} (std\+::ofstream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output bin vertices (allowing display of bins as zones). \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classNonRefineableBinArray_a84750d2bf80a132783b3982ad1462ffc}{get\+\_\+bin\+\_\+vertices}} (const unsigned \&i\+\_\+bin, Vector$<$ Vector$<$ double $>$ $>$ \&bin\+\_\+vertex)
+void \mbox{\hyperlink{classNonRefineableBinArray_a37c24340ab16169f780d9b8880c84280}{get\+\_\+bin\+\_\+vertices}} (const unsigned \&i\+\_\+bin, Vector$<$ Vector$<$ double $>$$>$ \&bin\+\_\+vertex)
 \begin{DoxyCompactList}\small\item\em Get vector of vectors containing the coordinates of the vertices of the i\+\_\+bin-\/th bin\+: bin\+\_\+vertex\mbox{[}j\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th coordinate of the j-\/th vertex. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classNonRefineableBinArray_a02617f0c049a443f5d13ab6d09b6e156}{get\+\_\+bin}} (const Vector$<$ double $>$ \&zeta, int \&bin\+\_\+number)
 \begin{DoxyCompactList}\small\item\em Get the number of the bin containing the specified coordinate. Bin number is negative if the coordinate is outside the bin structure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classNonRefineableBinArray_a9482f2913608b1ce36c75acacdaf99e7}{get\+\_\+bin}} (const Vector$<$ double $>$ \&zeta, int \&bin\+\_\+number, Vector$<$ std\+::pair$<$ Finite\+Element $\ast$, Vector$<$ double $>$ $>$ $>$ \&sample\+\_\+point\+\_\+pairs)
+void \mbox{\hyperlink{classNonRefineableBinArray_a03aaf0c4bf437f15452def428add28ce}{get\+\_\+bin}} (const Vector$<$ double $>$ \&zeta, int \&bin\+\_\+number, Vector$<$ std\+::pair$<$ Finite\+Element $\ast$, Vector$<$ double $>$$>$$>$ \&sample\+\_\+point\+\_\+pairs)
 \begin{DoxyCompactList}\small\item\em Get the number of the bin containing the specified coordinate; also return the contents of that bin. Bin number is negative if the coordinate is outside the bin structure. \end{DoxyCompactList}\item 
-Vector$<$ Vector$<$ std\+::pair$<$ Finite\+Element $\ast$, Vector$<$ double $>$ $>$ $>$ $>$ \mbox{\hyperlink{classNonRefineableBinArray_ab5f0fb40c4211e20cfe927d6eb1206f9}{bin\+\_\+content}} () const
+Vector$<$ Vector$<$ std\+::pair$<$ Finite\+Element $\ast$, Vector$<$ double $>$ $>$ $>$ $>$ \mbox{\hyperlink{classNonRefineableBinArray_aad03123879becd593a4d7d6ea8177873}{bin\+\_\+content}} () const
 \begin{DoxyCompactList}\small\item\em Get the contents of all bins in vector. \end{DoxyCompactList}\item 
 const std\+::map$<$ unsigned, Vector$<$ std\+::pair$<$ Finite\+Element $\ast$, Vector$<$ double $>$ $>$ $>$ $>$ $\ast$ \mbox{\hyperlink{classNonRefineableBinArray_a0ee4ab7c5c1f27271ac1666656b15ad6}{get\+\_\+all\+\_\+bins\+\_\+content}} () const
 \begin{DoxyCompactList}\small\item\em Get the contents of all bins in vector. \end{DoxyCompactList}\item 
@@ -67,21 +67,21 @@ void \mbox{\hyperlink{classNonRefineableBinArray_a8e19ec2e3229a8e533ed7b4040a244
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static unsigned \mbox{\hyperlink{classNonRefineableBinArray_ab6a79a3d17b5b7958e1a669a3780333a}{Default\+\_\+n\+\_\+bin\+\_\+1d}} =100
+static unsigned \mbox{\hyperlink{classNonRefineableBinArray_ab6a79a3d17b5b7958e1a669a3780333a}{Default\+\_\+n\+\_\+bin\+\_\+1d}} = 100
 \begin{DoxyCompactList}\small\item\em Default number of bins (in each coordinate direction). (Note\+: don\textquotesingle{}t move this into a common base class because each derived class has its own value; nonrefineable bin wants a much larger value than the refineable one!) \end{DoxyCompactList}\item 
-static unsigned long \mbox{\hyperlink{classNonRefineableBinArray_a1c6ff21c3d267b12fbfed4dbcaf7b55f}{Total\+\_\+nbin\+\_\+cells\+\_\+counter}} =0
+static unsigned long \mbox{\hyperlink{classNonRefineableBinArray_a1c6ff21c3d267b12fbfed4dbcaf7b55f}{Total\+\_\+nbin\+\_\+cells\+\_\+counter}} = 0
 \begin{DoxyCompactList}\small\item\em Counter for overall number of bins allocated -- used to issue warning if this exceeds a threshhold. (Default assignment of 100$^\wedge$\+D\+IM bins per Mesh\+As\+Geom\+Object can be a killer if there are huge numbers of sub-\/meshes (e.\+g. in unstructured F\+SI). \end{DoxyCompactList}\item 
-static unsigned long \mbox{\hyperlink{classNonRefineableBinArray_adb9e92176f8fc319f5dcf82656ae57ee}{Threshold\+\_\+for\+\_\+total\+\_\+bin\+\_\+cell\+\_\+number\+\_\+warning}} =50000000
+static unsigned long \mbox{\hyperlink{classNonRefineableBinArray_adb9e92176f8fc319f5dcf82656ae57ee}{Threshold\+\_\+for\+\_\+total\+\_\+bin\+\_\+cell\+\_\+number\+\_\+warning}}
 \begin{DoxyCompactList}\small\item\em Total number of bins above which warning is issued. (Default assignment of 100$^\wedge$\+D\+IM bins per Mesh\+As\+Geom\+Object can be a killer if there are huge numbers of sub-\/meshes (e.\+g. in unstructured F\+SI). \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{classNonRefineableBinArray_a0530530a5b790e7858c69237d5b4fa13}{Suppress\+\_\+warning\+\_\+about\+\_\+large\+\_\+total\+\_\+number\+\_\+of\+\_\+bins}} =false
+static bool \mbox{\hyperlink{classNonRefineableBinArray_a0530530a5b790e7858c69237d5b4fa13}{Suppress\+\_\+warning\+\_\+about\+\_\+large\+\_\+total\+\_\+number\+\_\+of\+\_\+bins}}
 \begin{DoxyCompactList}\small\item\em Boolean to supppress warnings about large number of bins. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{classNonRefineableBinArray_a9f65e36e36025d0060040bf5109dcc24}{Already\+\_\+warned\+\_\+about\+\_\+large\+\_\+number\+\_\+of\+\_\+bin\+\_\+cells}} =false
+static bool \mbox{\hyperlink{classNonRefineableBinArray_a9f65e36e36025d0060040bf5109dcc24}{Already\+\_\+warned\+\_\+about\+\_\+large\+\_\+number\+\_\+of\+\_\+bin\+\_\+cells}}
 \begin{DoxyCompactList}\small\item\em Boolean flag to make sure that warning about large number of bin cells only gets triggered once. \end{DoxyCompactList}\item 
-static unsigned \mbox{\hyperlink{classNonRefineableBinArray_a2ba9c40401772ed01cafa58b84861d2e}{Threshold\+\_\+for\+\_\+elements\+\_\+per\+\_\+bin\+\_\+warning}} =100
+static unsigned \mbox{\hyperlink{classNonRefineableBinArray_a2ba9c40401772ed01cafa58b84861d2e}{Threshold\+\_\+for\+\_\+elements\+\_\+per\+\_\+bin\+\_\+warning}} = 100
 \begin{DoxyCompactList}\small\item\em Fraction of elements/bin that triggers warning. Too many elements per bin can lead to very slow computations. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{classNonRefineableBinArray_a4ef6aaf738c73b6ea2b490ac42df70c1}{Suppress\+\_\+warning\+\_\+about\+\_\+small\+\_\+number\+\_\+of\+\_\+bins}} =false
+static bool \mbox{\hyperlink{classNonRefineableBinArray_a4ef6aaf738c73b6ea2b490ac42df70c1}{Suppress\+\_\+warning\+\_\+about\+\_\+small\+\_\+number\+\_\+of\+\_\+bins}}
 \begin{DoxyCompactList}\small\item\em Boolean to supppress warnings about small number of bins. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{classNonRefineableBinArray_a00af6975c82a55816e96d63f73a2ae6b}{Already\+\_\+warned\+\_\+about\+\_\+small\+\_\+number\+\_\+of\+\_\+bin\+\_\+cells}} =false
+static bool \mbox{\hyperlink{classNonRefineableBinArray_a00af6975c82a55816e96d63f73a2ae6b}{Already\+\_\+warned\+\_\+about\+\_\+small\+\_\+number\+\_\+of\+\_\+bin\+\_\+cells}}
 \begin{DoxyCompactList}\small\item\em Boolean flag to make sure that warning about small number of bin cells only gets triggered once. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -111,7 +111,7 @@ unsigned \mbox{\hyperlink{classNonRefineableBinArray_a0f3b174a09336f9e941813a09f
 \doxysubsection{Detailed Description}
 \mbox{\hyperlink{classNonRefineableBinArray}{Non\+Refineable\+Bin\+Array}} class. 
 
-Definition at line 851 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 849 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -128,7 +128,7 @@ Constructor.
 
 
 
-Definition at line 2171 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 2169 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -146,7 +146,7 @@ Destructor\+:
 
 
 
-Definition at line 862 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 857 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -164,7 +164,7 @@ Broken copy constructor.
 
 
 
-Definition at line 868 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 863 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -173,11 +173,11 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classNonRefineableBinArray_ab5f0fb40c4211e20cfe927d6eb1206f9}\label{classNonRefineableBinArray_ab5f0fb40c4211e20cfe927d6eb1206f9}} 
+\mbox{\Hypertarget{classNonRefineableBinArray_aad03123879becd593a4d7d6ea8177873}\label{classNonRefineableBinArray_aad03123879becd593a4d7d6ea8177873}} 
 \index{NonRefineableBinArray@{NonRefineableBinArray}!bin\_content@{bin\_content}}
 \index{bin\_content@{bin\_content}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{bin\_content()}{bin\_content()}}
-{\footnotesize\ttfamily Vector$<$Vector$<$std\+::pair$<$Finite\+Element$\ast$,Vector$<$double$>$ $>$ $>$ $>$ Non\+Refineable\+Bin\+Array\+::bin\+\_\+content (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Vector$<$Vector$<$std\+::pair$<$Finite\+Element$\ast$, Vector$<$double$>$ $>$ $>$ $>$ Non\+Refineable\+Bin\+Array\+::bin\+\_\+content (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -185,7 +185,7 @@ Get the contents of all bins in vector.
 
 
 
-Definition at line 963 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 967 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -209,7 +209,7 @@ Access function to current max. spiral level.
 
 
 
-Definition at line 927 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 928 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -231,7 +231,7 @@ Access function to current min. spiral level.
 
 
 
-Definition at line 924 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 922 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -253,7 +253,7 @@ Fill the bin array with sample points from Finite\+Elements stored in mesh.
 
 Loop over subobjects (elements) to decide which bin they belong in...
 
-Definition at line 2406 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 2402 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -275,7 +275,7 @@ Fill bin by diffusion, populating each empty bin with the same content as the fi
 
 Fill bin by diffusion, populating each empty bin with the same content as the first non-\/empty bin found during a spiral-\/based search up to the specified \char`\"{}radius\char`\"{} (default 1) 
 
-Definition at line 2672 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 2667 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -297,7 +297,7 @@ Flush the storage for the binning method (and decrement counter for total number
 
 
 
-Definition at line 1039 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1041 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -319,7 +319,7 @@ Get the contents of all bins in vector.
 
 
 
-Definition at line 972 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 975 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -339,10 +339,9 @@ Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+
 
 Get the number of the bin containing the specified coordinate. Bin number is negative if the coordinate is outside the bin structure. 
 
-Get the number of the bin containing the specified coordinate. Bin number is negative if the coordinate is outside the bin structure. ~\newline
- 
+Get the number of the bin containing the specified coordinate. Bin number is negative if the coordinate is outside the bin structure. 
 
-Definition at line 2799 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 2794 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -352,21 +351,21 @@ References Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array, get\+\_\+bin\
 
 Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
 
-\mbox{\Hypertarget{classNonRefineableBinArray_a9482f2913608b1ce36c75acacdaf99e7}\label{classNonRefineableBinArray_a9482f2913608b1ce36c75acacdaf99e7}} 
+\mbox{\Hypertarget{classNonRefineableBinArray_a03aaf0c4bf437f15452def428add28ce}\label{classNonRefineableBinArray_a03aaf0c4bf437f15452def428add28ce}} 
 \index{NonRefineableBinArray@{NonRefineableBinArray}!get\_bin@{get\_bin}}
 \index{get\_bin@{get\_bin}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{get\_bin()}{get\_bin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void Non\+Refineable\+Bin\+Array\+::get\+\_\+bin (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{int \&}]{bin\+\_\+number,  }\item[{Vector$<$ std\+::pair$<$ Finite\+Element $\ast$, Vector$<$ double $>$ $>$ $>$ \&}]{sample\+\_\+point\+\_\+pairs }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Non\+Refineable\+Bin\+Array\+::get\+\_\+bin (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{int \&}]{bin\+\_\+number,  }\item[{Vector$<$ std\+::pair$<$ Finite\+Element $\ast$, Vector$<$ double $>$$>$$>$ \&}]{sample\+\_\+point\+\_\+pairs }\end{DoxyParamCaption})}
 
 
 
 Get the number of the bin containing the specified coordinate; also return the contents of that bin. Bin number is negative if the coordinate is outside the bin structure. 
 
-\mbox{\Hypertarget{classNonRefineableBinArray_a84750d2bf80a132783b3982ad1462ffc}\label{classNonRefineableBinArray_a84750d2bf80a132783b3982ad1462ffc}} 
+\mbox{\Hypertarget{classNonRefineableBinArray_a37c24340ab16169f780d9b8880c84280}\label{classNonRefineableBinArray_a37c24340ab16169f780d9b8880c84280}} 
 \index{NonRefineableBinArray@{NonRefineableBinArray}!get\_bin\_vertices@{get\_bin\_vertices}}
 \index{get\_bin\_vertices@{get\_bin\_vertices}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{get\_bin\_vertices()}{get\_bin\_vertices()}}
-{\footnotesize\ttfamily void Non\+Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+vertices (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i\+\_\+bin,  }\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{bin\+\_\+vertex }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Non\+Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+vertices (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i\+\_\+bin,  }\item[{Vector$<$ Vector$<$ double $>$$>$ \&}]{bin\+\_\+vertex }\end{DoxyParamCaption})}
 
 
 
@@ -374,7 +373,7 @@ Get vector of vectors containing the coordinates of the vertices of the i\+\_\+b
 
 Get vector of vectors containing the coordinates of the vertices of the i\+\_\+bin-\/th bin\+: bin\+\_\+vertex\mbox{[}j\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th coordinate of the j-\/th vertex. 
 
-Definition at line 2914 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 2912 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -396,7 +395,7 @@ Provide some stats on the fill level of the associated bin.
 
 
 
-Definition at line 2634 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 2629 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -422,7 +421,7 @@ Implements \mbox{\hyperlink{classSamplePointContainer_acca8dbae8346d6c8924b1f815
 
 
 
-Definition at line 3093 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 3088 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -440,7 +439,7 @@ Access function to max. spiral level during straight locate\+\_\+zeta search (fo
 
 
 
-Definition at line 921 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 916 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -458,7 +457,7 @@ Compute the minimum distance of any vertex in the specified bin from the specifi
 
 Compute the minimum distance of any vertex in the specified bin from the specified Lagrangian coordinate zeta. 
 
-Definition at line 3061 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 3057 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -480,7 +479,7 @@ Number of spirals to be searched in one go.
 
 
 
-Definition at line 914 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 909 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -498,7 +497,7 @@ Number of spirals to be searched in one go const version.
 
 
 
-Definition at line 908 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 903 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -524,7 +523,7 @@ Implements \mbox{\hyperlink{classBinArray_aad085bf99d78162120c419f7504d256b}{Bin
 
 
 
-Definition at line 887 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 882 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -546,7 +545,7 @@ Broken assignment operator.
 
 
 
-Definition at line 874 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 869 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -568,7 +567,7 @@ Implements \mbox{\hyperlink{classBinArray_afc595a05f2ab19e1bb973c5a076b1432}{Bin
 
 
 
-Definition at line 2360 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 2357 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -612,7 +611,7 @@ Output bins.
 
 
 
-Definition at line 989 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 992 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -634,7 +633,7 @@ Implements \mbox{\hyperlink{classSamplePointContainer_ac7bf51a6987a9180c7715d621
 
 
 
-Definition at line 2285 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line 2284 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
@@ -651,15 +650,21 @@ Referenced by Non\+Refineable\+Bin\+Array().
 \index{NonRefineableBinArray@{NonRefineableBinArray}!Already\_warned\_about\_large\_number\_of\_bin\_cells@{Already\_warned\_about\_large\_number\_of\_bin\_cells}}
 \index{Already\_warned\_about\_large\_number\_of\_bin\_cells@{Already\_warned\_about\_large\_number\_of\_bin\_cells}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{Already\_warned\_about\_large\_number\_of\_bin\_cells}{Already\_warned\_about\_large\_number\_of\_bin\_cells}}
-{\footnotesize\ttfamily bool Non\+Refineable\+Bin\+Array\+::\+Already\+\_\+warned\+\_\+about\+\_\+large\+\_\+number\+\_\+of\+\_\+bin\+\_\+cells =false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool Non\+Refineable\+Bin\+Array\+::\+Already\+\_\+warned\+\_\+about\+\_\+large\+\_\+number\+\_\+of\+\_\+bin\+\_\+cells\hspace{0.3cm}{\ttfamily [static]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    \textcolor{keyword}{false}}
+
+\end{DoxyCode}
 
 
 Boolean flag to make sure that warning about large number of bin cells only gets triggered once. 
 
 
 
-Definition at line 1014 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1017 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -669,15 +674,21 @@ Referenced by fill\+\_\+bin\+\_\+array().
 \index{NonRefineableBinArray@{NonRefineableBinArray}!Already\_warned\_about\_small\_number\_of\_bin\_cells@{Already\_warned\_about\_small\_number\_of\_bin\_cells}}
 \index{Already\_warned\_about\_small\_number\_of\_bin\_cells@{Already\_warned\_about\_small\_number\_of\_bin\_cells}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{Already\_warned\_about\_small\_number\_of\_bin\_cells}{Already\_warned\_about\_small\_number\_of\_bin\_cells}}
-{\footnotesize\ttfamily bool Non\+Refineable\+Bin\+Array\+::\+Already\+\_\+warned\+\_\+about\+\_\+small\+\_\+number\+\_\+of\+\_\+bin\+\_\+cells =false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool Non\+Refineable\+Bin\+Array\+::\+Already\+\_\+warned\+\_\+about\+\_\+small\+\_\+number\+\_\+of\+\_\+bin\+\_\+cells\hspace{0.3cm}{\ttfamily [static]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    \textcolor{keyword}{false}}
+
+\end{DoxyCode}
 
 
 Boolean flag to make sure that warning about small number of bin cells only gets triggered once. 
 
 
 
-Definition at line 1025 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1028 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -695,7 +706,7 @@ Storage for paired objects and coords in each bin.
 
 
 
-Definition at line 1047 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1049 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -713,7 +724,7 @@ Current max. spiralling level.
 
 
 
-Definition at line 1057 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1059 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -731,7 +742,7 @@ Current min. spiralling level.
 
 
 
-Definition at line 1054 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1056 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -741,7 +752,7 @@ Referenced by current\+\_\+min\+\_\+spiral\+\_\+level(), and Non\+Refineable\+Bi
 \index{NonRefineableBinArray@{NonRefineableBinArray}!Default\_n\_bin\_1d@{Default\_n\_bin\_1d}}
 \index{Default\_n\_bin\_1d@{Default\_n\_bin\_1d}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{Default\_n\_bin\_1d}{Default\_n\_bin\_1d}}
-{\footnotesize\ttfamily unsigned Non\+Refineable\+Bin\+Array\+::\+Default\+\_\+n\+\_\+bin\+\_\+1d =100\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily unsigned Non\+Refineable\+Bin\+Array\+::\+Default\+\_\+n\+\_\+bin\+\_\+1d = 100\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -749,7 +760,7 @@ Default number of bins (in each coordinate direction). (Note\+: don\textquotesin
 
 Default number of bins (in each coordinate direction) 
 
-Definition at line 902 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 897 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -767,7 +778,7 @@ Max. spiralling level (for efficiency; effect similar to max\+\_\+search\+\_\+ra
 
 
 
-Definition at line 1051 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1053 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -785,7 +796,7 @@ Number of spirals to be searched in one go.
 
 
 
-Definition at line 1060 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1062 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -795,15 +806,21 @@ Referenced by n\+\_\+spiral\+\_\+chunk(), and Non\+Refineable\+Bin\+Array().
 \index{NonRefineableBinArray@{NonRefineableBinArray}!Suppress\_warning\_about\_large\_total\_number\_of\_bins@{Suppress\_warning\_about\_large\_total\_number\_of\_bins}}
 \index{Suppress\_warning\_about\_large\_total\_number\_of\_bins@{Suppress\_warning\_about\_large\_total\_number\_of\_bins}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{Suppress\_warning\_about\_large\_total\_number\_of\_bins}{Suppress\_warning\_about\_large\_total\_number\_of\_bins}}
-{\footnotesize\ttfamily bool Non\+Refineable\+Bin\+Array\+::\+Suppress\+\_\+warning\+\_\+about\+\_\+large\+\_\+total\+\_\+number\+\_\+of\+\_\+bins =false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool Non\+Refineable\+Bin\+Array\+::\+Suppress\+\_\+warning\+\_\+about\+\_\+large\+\_\+total\+\_\+number\+\_\+of\+\_\+bins\hspace{0.3cm}{\ttfamily [static]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      \textcolor{keyword}{false}}
+
+\end{DoxyCode}
 
 
 Boolean to supppress warnings about large number of bins. 
 
 
 
-Definition at line 1010 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1013 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -813,15 +830,21 @@ Referenced by fill\+\_\+bin\+\_\+array().
 \index{NonRefineableBinArray@{NonRefineableBinArray}!Suppress\_warning\_about\_small\_number\_of\_bins@{Suppress\_warning\_about\_small\_number\_of\_bins}}
 \index{Suppress\_warning\_about\_small\_number\_of\_bins@{Suppress\_warning\_about\_small\_number\_of\_bins}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{Suppress\_warning\_about\_small\_number\_of\_bins}{Suppress\_warning\_about\_small\_number\_of\_bins}}
-{\footnotesize\ttfamily bool Non\+Refineable\+Bin\+Array\+::\+Suppress\+\_\+warning\+\_\+about\+\_\+small\+\_\+number\+\_\+of\+\_\+bins =false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool Non\+Refineable\+Bin\+Array\+::\+Suppress\+\_\+warning\+\_\+about\+\_\+small\+\_\+number\+\_\+of\+\_\+bins\hspace{0.3cm}{\ttfamily [static]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    \textcolor{keyword}{false}}
+
+\end{DoxyCode}
 
 
 Boolean to supppress warnings about small number of bins. 
 
 
 
-Definition at line 1021 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1024 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -831,7 +854,7 @@ Referenced by fill\+\_\+bin\+\_\+array().
 \index{NonRefineableBinArray@{NonRefineableBinArray}!Threshold\_for\_elements\_per\_bin\_warning@{Threshold\_for\_elements\_per\_bin\_warning}}
 \index{Threshold\_for\_elements\_per\_bin\_warning@{Threshold\_for\_elements\_per\_bin\_warning}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{Threshold\_for\_elements\_per\_bin\_warning}{Threshold\_for\_elements\_per\_bin\_warning}}
-{\footnotesize\ttfamily unsigned Non\+Refineable\+Bin\+Array\+::\+Threshold\+\_\+for\+\_\+elements\+\_\+per\+\_\+bin\+\_\+warning =100\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily unsigned Non\+Refineable\+Bin\+Array\+::\+Threshold\+\_\+for\+\_\+elements\+\_\+per\+\_\+bin\+\_\+warning = 100\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -839,7 +862,7 @@ Fraction of elements/bin that triggers warning. Too many elements per bin can le
 
 
 
-Definition at line 1018 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1021 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -849,15 +872,21 @@ Referenced by fill\+\_\+bin\+\_\+array().
 \index{NonRefineableBinArray@{NonRefineableBinArray}!Threshold\_for\_total\_bin\_cell\_number\_warning@{Threshold\_for\_total\_bin\_cell\_number\_warning}}
 \index{Threshold\_for\_total\_bin\_cell\_number\_warning@{Threshold\_for\_total\_bin\_cell\_number\_warning}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{Threshold\_for\_total\_bin\_cell\_number\_warning}{Threshold\_for\_total\_bin\_cell\_number\_warning}}
-{\footnotesize\ttfamily unsigned long Non\+Refineable\+Bin\+Array\+::\+Threshold\+\_\+for\+\_\+total\+\_\+bin\+\_\+cell\+\_\+number\+\_\+warning =50000000\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily unsigned long Non\+Refineable\+Bin\+Array\+::\+Threshold\+\_\+for\+\_\+total\+\_\+bin\+\_\+cell\+\_\+number\+\_\+warning\hspace{0.3cm}{\ttfamily [static]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      50000000}
+
+\end{DoxyCode}
 
 
 Total number of bins above which warning is issued. (Default assignment of 100$^\wedge$\+D\+IM bins per Mesh\+As\+Geom\+Object can be a killer if there are huge numbers of sub-\/meshes (e.\+g. in unstructured F\+SI). 
 
 
 
-Definition at line 1007 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1010 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -867,7 +896,7 @@ Referenced by fill\+\_\+bin\+\_\+array().
 \index{NonRefineableBinArray@{NonRefineableBinArray}!Total\_nbin\_cells\_counter@{Total\_nbin\_cells\_counter}}
 \index{Total\_nbin\_cells\_counter@{Total\_nbin\_cells\_counter}!NonRefineableBinArray@{NonRefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{Total\_nbin\_cells\_counter}{Total\_nbin\_cells\_counter}}
-{\footnotesize\ttfamily unsigned long Non\+Refineable\+Bin\+Array\+::\+Total\+\_\+nbin\+\_\+cells\+\_\+counter =0\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily unsigned long Non\+Refineable\+Bin\+Array\+::\+Total\+\_\+nbin\+\_\+cells\+\_\+counter = 0\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -875,7 +904,7 @@ Counter for overall number of bins allocated -- used to issue warning if this ex
 
 
 
-Definition at line 1001 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line 1004 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 

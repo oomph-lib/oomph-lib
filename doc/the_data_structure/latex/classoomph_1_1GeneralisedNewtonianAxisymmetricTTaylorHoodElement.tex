@@ -37,9 +37,9 @@ unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorH
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a800da4469b80723056d016b0e5ac4815}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a2f7a2becd038eb8be0f69f1b3e2ce8c3}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ae9cf80eb03f0861a8c416f4f692bfd64}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_aa33e3b4641824ea7516c5e98beeb9e1f}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a3e4d2bf9bb6d5760737a8f7939d28db6}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a27e5fdda8d9499f20b99f82443d37b78}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -61,7 +61,7 @@ void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodE
 \begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain rate tensor. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ab5b87110b4a1c13ab828c259a28d2d36}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocities and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_adf21b3fd505b34cc8546f97499b3a55e}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a9cb9f8f2aa0d716bf422f665fa31178d}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -83,12 +83,12 @@ void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodE
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_acd1d91d33a8a6b6a4f7ffee878512732}{Pconv}} \mbox{[}$\,$\mbox{]} =\{0,1,2\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_acd1d91d33a8a6b6a4f7ffee878512732}{Pconv}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold conversion from pressure node numbers to actual node numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a23c42ed8e8f9cd1f33b906c854294223}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]} =\{4,4,4,3,3,3\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a23c42ed8e8f9cd1f33b906c854294223}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -96,7 +96,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymm
 \doxysubsection{Detailed Description}
 Taylor--Hood elements are Navier--Stokes elements with quadratic interpolation for velocities and positions and continous linear pressure interpolation 
 
-Definition at line 552 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 569 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -113,7 +113,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line 622 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 637 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ab313ad665e9969c00b9e3612fe6d26af}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ab313ad665e9969c00b9e3612fe6d26af}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{GeneralisedNewtonianAxisymmetricTTaylorHoodElement}}
@@ -127,7 +127,7 @@ Broken copy constructor.
 
 
 
-Definition at line 627 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 645 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -148,7 +148,7 @@ Compute the pressure shape and test functions and derivatives w.\+r.\+t. global 
 
 Pressure shape and test functions and derivs w.\+r.\+t. to Eulerian coords. Return Jacobian of mapping between local and global coordinates. 
 
-Definition at line 923 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 975 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -172,7 +172,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavier
 
 
 
-Definition at line 898 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 947 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -194,7 +194,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavier
 
 
 
-Definition at line 876 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 923 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -216,7 +216,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavier
 
 
 
-Definition at line 854 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 901 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -234,17 +234,17 @@ Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value.
 
 
 
-Definition at line 681 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 715 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
-\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_adf21b3fd505b34cc8546f97499b3a55e}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_adf21b3fd505b34cc8546f97499b3a55e}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a9cb9f8f2aa0d716bf422f665fa31178d}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a9cb9f8f2aa0d716bf422f665fa31178d}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -252,11 +252,11 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 802 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 851 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -278,17 +278,17 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 748 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 797 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References i, and oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate().
 
-\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a2f7a2becd038eb8be0f69f1b3e2ce8c3}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a2f7a2becd038eb8be0f69f1b3e2ce8c3}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ae9cf80eb03f0861a8c416f4f692bfd64}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ae9cf80eb03f0861a8c416f4f692bfd64}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
 
 
 
@@ -298,8 +298,7 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing.
 \begin{DoxyItemize}
 \item the pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
-\end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. ~\newline
-
+\end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function.
 
 Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
 \begin{DoxyItemize}
@@ -307,17 +306,17 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Definition at line 197 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 199 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
 References i, identify\+\_\+pressure\+\_\+data(), n, oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_aa33e3b4641824ea7516c5e98beeb9e1f}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_aa33e3b4641824ea7516c5e98beeb9e1f}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a3e4d2bf9bb6d5760737a8f7939d28db6}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a3e4d2bf9bb6d5760737a8f7939d28db6}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
 
 
 
@@ -335,7 +334,7 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Definition at line 225 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 228 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -361,7 +360,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 791 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 840 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_adb127de036210e35b09096c7df88b4d5}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_adb127de036210e35b09096c7df88b4d5}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!npres\_axi\_nst@{npres\_axi\_nst}}
@@ -379,7 +378,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavier
 
 
 
-Definition at line 678 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 709 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -401,7 +400,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 728 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 770 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ad607e2e88bfcab444870e8d6b4e4b08a}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ad607e2e88bfcab444870e8d6b4e4b08a}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -419,7 +418,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 740 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 789 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a0630c3c5533051b6f0e348571bd0c3ce}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a0630c3c5533051b6f0e348571bd0c3ce}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!nvertex\_node@{nvertex\_node}}
@@ -437,7 +436,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 731 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 776 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a38d25c4d7f0e65079c61ad69b5d62567}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_a38d25c4d7f0e65079c61ad69b5d62567}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!operator=@{operator=}}
@@ -451,7 +450,7 @@ Broken assignment operator.
 
 
 
-Definition at line 635 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 653 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -473,7 +472,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetr
 
 
 
-Definition at line 718 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 756 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -495,7 +494,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetr
 
 
 
-Definition at line 722 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 762 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -517,7 +516,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetr
 
 
 
-Definition at line 709 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 743 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -539,7 +538,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetr
 
 
 
-Definition at line 713 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 749 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -561,7 +560,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavier
 
 
 
-Definition at line 671 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 697 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -579,7 +578,7 @@ Which nodal value represents the pressure?
 
 
 
-Definition at line 659 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 680 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_adab05003b0136131aa4ca7bcafd32c02}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_adab05003b0136131aa4ca7bcafd32c02}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!p\_local\_eqn@{p\_local\_eqn}}
@@ -597,7 +596,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavier
 
 
 
-Definition at line 666 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 690 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -619,7 +618,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetr
 
 
 
-Definition at line 675 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 703 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ad8861d17694cf61211abff428a80ef97}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_ad8861d17694cf61211abff428a80ef97}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!pin\_all\_nodal\_pressure\_dofs@{pin\_all\_nodal\_pressure\_dofs}}
@@ -633,7 +632,7 @@ Pin all nodal pressure dofs.
 
 Pin all nodal pressure dofs, incl the mid-\/face/side ones where they have been allocated (e.\+g. in the refineable version of this element). 
 
-Definition at line 157 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 158 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -657,7 +656,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavier
 
 
 
-Definition at line 974 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1023 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -683,7 +682,7 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavier
 
 
 
-Definition at line 986 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1034 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -705,7 +704,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 643 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 661 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -727,7 +726,7 @@ Unpin all pressure dofs.
 
 Unpin all pressure dofs, incl the mid-\/face/side ones where they have been allocated (e.\+g. in the refineable version of this element). 
 
-Definition at line 137 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 138 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -745,7 +744,7 @@ Unpin the proper nodal pressure dofs.
 
 Unpin the proper nodal pressure dofs which are not hanging. 
 
-Definition at line 174 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 175 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -767,7 +766,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 735 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 782 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -780,15 +779,21 @@ References oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue =\{4,4,4,3,3,3\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{      4, 4, 4, 3, 3, 3\}}
+
+\end{DoxyCode}
 
 
 Static array of ints to hold number of variables at node. 
 
 
 
-Definition at line 561 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 577 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -798,15 +803,21 @@ Referenced by required\+\_\+nvalue().
 \index{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}!Pconv@{Pconv}}
 \index{Pconv@{Pconv}!oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement@{oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Pconv}{Pconv}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::\+Pconv =\{0,1,2\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::\+Pconv\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    \{0, 1, 2\}}
+
+\end{DoxyCode}
 
 
 Static array of ints to hold conversion from pressure node numbers to actual node numbers. 
 
 
 
-Definition at line 567 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 582 of file generalised\+\_\+newtonian\+\_\+\+Taxisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

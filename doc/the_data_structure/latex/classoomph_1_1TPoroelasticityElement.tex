@@ -29,7 +29,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a23b1b0c75019070b
 int \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a662897b1eae45958e2ac4fe2cb5b63bf}{q\+\_\+edge\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th edge (flux) degree of freedom. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a6e45ef2eff3ba7ba401a1502760c7724}{q\+\_\+internal\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
-\begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th internal (moment) degree of freedom. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a48a1a06d3f87bbd923e8222cf8c19e66}{q\+\_\+internal\+\_\+index}} () const
 \begin{DoxyCompactList}\small\item\em Return the index of the internal data where the q\+\_\+internal degrees of freedom are stored. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a3486524ccf5ec2c3213a700a8d9beddd}{q\+\_\+edge\+\_\+index}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
@@ -51,7 +51,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a65dd05b91f2953a7
 void \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_aa432c3fedc655e17ee0e62d6d594eeaa}{get\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Returns the local form of the q basis at local coordinate s. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a1fca2ce3e962fc273d38525d0e1f2865}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) const
-\begin{DoxyCompactList}\small\item\em Returns the local form of the q basis and dbasis/ds at local coordinate s. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a43bec0e682f98fd6961cd02bd469dac2}{nedge\+\_\+gauss\+\_\+point}} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of gauss points along each edge of the element. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a1c6d52613fdb0e2d56c49ef17f4774bc}{edge\+\_\+gauss\+\_\+point}} (const unsigned \&edge, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
@@ -129,20 +129,20 @@ double \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a26cc12dec0a9072021
 const unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a4277dd6201f6fc1966c4258646be6b89}{Initial\+\_\+\+Nvalue}} \mbox{[}6\mbox{]}
 \begin{DoxyCompactList}\small\item\em The number of values stored at each node. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a4fea23f7a4f0cf0ad79e531cd0a4d6ad}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
-\begin{DoxyCompactList}\small\item\em Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at. \end{DoxyCompactList}\item 
+\item 
 const double \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_ab8e37f401845cd24df08c44797317550}{Gauss\+\_\+point}} \mbox{[}1\mbox{]}
 \begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are taken to be. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a68f6b9153d1359a0b4057bf42c1a45fb}{Initial\+\_\+\+Nvalue}} \mbox{[}6\mbox{]}
 \begin{DoxyCompactList}\small\item\em The number of values stored at each node. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a15fba21e7788ef90a7b4a04c46375110}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
-\begin{DoxyCompactList}\small\item\em Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at. \end{DoxyCompactList}\item 
+\item 
 const double \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a6f600bee023c1dee1e011493419f974a}{Gauss\+\_\+point}} \mbox{[}2\mbox{]}
 \begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are taken to be. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a1f6d34cb8d26fb7d82e4fbd1a7a7c9a3}{Q\+\_\+internal\+\_\+data\+\_\+index}}
-\begin{DoxyCompactList}\small\item\em The internal data index where the internal q degrees of freedom are stored. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a982e6e841b2bc2ab02526916dbc77ca8}{P\+\_\+internal\+\_\+data\+\_\+index}}
 \begin{DoxyCompactList}\small\item\em The internal data index where the p degrees of freedom are stored. \end{DoxyCompactList}\item 
 std\+::vector$<$ short $>$ \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a350907258dbb3be942c027db0090e7b3}{Sign\+\_\+edge}}
@@ -153,7 +153,7 @@ std\+::vector$<$ short $>$ \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement
 static const unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_aa906a23cadc727176f0373923dde01f1}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em The number of values stored at each node. \end{DoxyCompactList}\item 
 static const unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a233a15513d26988887d35cbcaa517a0b}{Q\+\_\+edge\+\_\+conv}} \mbox{[}$\,$\mbox{]}
-\begin{DoxyCompactList}\small\item\em Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at. \end{DoxyCompactList}\item 
+\item 
 static const double \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a57b72b30d03fd2c5ca6da2f31d10fe97}{Gauss\+\_\+point}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are taken to be. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -165,7 +165,7 @@ class oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$}
 
 Element which solves the Darcy equations using T\+Elements. 
 
-Definition at line 42 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 41 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -272,7 +272,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af1e01a7f1546c
 
 
 
-Definition at line 268 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 262 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -299,7 +299,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a9809ca678dced
 
 
 
-Definition at line 296 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 288 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -331,7 +331,7 @@ The points along each edge where the fluxes are taken to be.
 
 
 
-Definition at line 267 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 273 of file Tporoelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TPoroelasticityElement_abdfb25ae1eea7cc86f88835074347ad4}\label{classoomph_1_1TPoroelasticityElement_abdfb25ae1eea7cc86f88835074347ad4}} 
 \index{oomph::TPoroelasticityElement$<$ ORDER $>$@{oomph::TPoroelasticityElement$<$ ORDER $>$}!get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}}
@@ -367,7 +367,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae137222ce1c79
 
 
 
-Definition at line 203 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 207 of file Tporoelasticity\+\_\+elements.\+cc.
 
 
 
@@ -380,11 +380,7 @@ References s.
 {\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
 void \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement}{oomph\+::\+T\+Poroelasticity\+Element}}$<$ O\+R\+D\+ER $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
-
-
-Returns the local form of the q basis and dbasis/ds at local coordinate s. 
-
-
+Returns the local form of the q basis and dbasis/ds at local coordinate s 
 
 Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae137222ce1c7904212ce34ad180123f8}{oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$}}.
 
@@ -408,7 +404,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af5dd9aa31ee8d
 
 
 
-Definition at line 108 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 107 of file Tporoelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TPoroelasticityElement_a018d73336fc96bf64d93d939873b62ae}\label{classoomph_1_1TPoroelasticityElement_a018d73336fc96bf64d93d939873b62ae}} 
 \index{oomph::TPoroelasticityElement$<$ ORDER $>$@{oomph::TPoroelasticityElement$<$ ORDER $>$}!get\_p\_basis@{get\_p\_basis}}
@@ -426,7 +422,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af5dd9aa31ee8d
 
 
 
-Definition at line 248 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 253 of file Tporoelasticity\+\_\+elements.\+cc.
 
 
 
@@ -526,7 +522,7 @@ The number of values stored at each node.
 
 
 
-Definition at line 116 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 115 of file Tporoelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TPoroelasticityElement_a68f6b9153d1359a0b4057bf42c1a45fb}\label{classoomph_1_1TPoroelasticityElement_a68f6b9153d1359a0b4057bf42c1a45fb}} 
 \index{oomph::TPoroelasticityElement$<$ ORDER $>$@{oomph::TPoroelasticityElement$<$ ORDER $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -540,7 +536,7 @@ The number of values stored at each node.
 
 
 
-Definition at line 258 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 263 of file Tporoelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TPoroelasticityElement_a1d6284b4287ea101dc0d6ca7730a21fd}\label{classoomph_1_1TPoroelasticityElement_a1d6284b4287ea101dc0d6ca7730a21fd}} 
 \index{oomph::TPoroelasticityElement$<$ ORDER $>$@{oomph::TPoroelasticityElement$<$ ORDER $>$}!nedge\_gauss\_point@{nedge\_gauss\_point}}
@@ -554,7 +550,7 @@ Returns the number of gauss points along each edge of the element.
 
 
 
-Definition at line 94 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 93 of file Tporoelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TPoroelasticityElement_ae06fefe486fcc79eb83c5f86a1cfe180}\label{classoomph_1_1TPoroelasticityElement_ae06fefe486fcc79eb83c5f86a1cfe180}} 
 \index{oomph::TPoroelasticityElement$<$ ORDER $>$@{oomph::TPoroelasticityElement$<$ ORDER $>$}!nedge\_gauss\_point@{nedge\_gauss\_point}}
@@ -568,7 +564,7 @@ Returns the number of gauss points along each edge of the element.
 
 
 
-Definition at line 234 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 239 of file Tporoelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TPoroelasticityElement_a43bec0e682f98fd6961cd02bd469dac2}\label{classoomph_1_1TPoroelasticityElement_a43bec0e682f98fd6961cd02bd469dac2}} 
 \index{oomph::TPoroelasticityElement$<$ ORDER $>$@{oomph::TPoroelasticityElement$<$ ORDER $>$}!nedge\_gauss\_point@{nedge\_gauss\_point}}
@@ -597,7 +593,7 @@ Return the total number of pressure basis functions.
 
 
 
-Definition at line 101 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 100 of file Tporoelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TPoroelasticityElement_adb27b1d2535b88622ec913cb65c5fdae}\label{classoomph_1_1TPoroelasticityElement_adb27b1d2535b88622ec913cb65c5fdae}} 
 \index{oomph::TPoroelasticityElement$<$ ORDER $>$@{oomph::TPoroelasticityElement$<$ ORDER $>$}!np\_basis@{np\_basis}}
@@ -611,7 +607,7 @@ Return the total number of pressure basis functions.
 
 
 
-Definition at line 241 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 246 of file Tporoelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TPoroelasticityElement_a5857ac5848d232bfc8b9ae84dde851fe}\label{classoomph_1_1TPoroelasticityElement_a5857ac5848d232bfc8b9ae84dde851fe}} 
 \index{oomph::TPoroelasticityElement$<$ ORDER $>$@{oomph::TPoroelasticityElement$<$ ORDER $>$}!np\_basis@{np\_basis}}
@@ -731,7 +727,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 488 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 475 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -754,7 +750,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 495 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 482 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -777,7 +773,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a98642c2cf0e47
 
 
 
-Definition at line 374 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 364 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -800,7 +796,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_abe547474535cb
 
 
 
-Definition at line 392 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 381 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -823,7 +819,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a66ba2228e7e67
 
 
 
-Definition at line 417 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 404 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -846,7 +842,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a25b900a66e8e3
 
 
 
-Definition at line 356 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 347 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -869,7 +865,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a67d1df907b555
 
 
 
-Definition at line 175 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 172 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -892,7 +888,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aed66c1aeaa3ca
 
 
 
-Definition at line 194 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 190 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -904,11 +900,7 @@ References n, oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+T\+Po
 \doxysubsubsection{\texorpdfstring{Q\_edge\_conv()}{Q\_edge\_conv()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement}{oomph\+::\+T\+Poroelasticity\+Element}}$<$ 0 $>$\+::Q\+\_\+edge\+\_\+conv\hspace{0.3cm}{\ttfamily [private]}}
 
-
-
-Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at. 
-
-
+Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at 
 
 Definition at line 122 of file Tporoelasticity\+\_\+elements.\+cc.
 
@@ -918,13 +910,9 @@ Definition at line 122 of file Tporoelasticity\+\_\+elements.\+cc.
 \doxysubsubsection{\texorpdfstring{Q\_edge\_conv()}{Q\_edge\_conv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement}{oomph\+::\+T\+Poroelasticity\+Element}}$<$ 1 $>$\+::Q\+\_\+edge\+\_\+conv\hspace{0.3cm}{\ttfamily [private]}}
 
+Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at 
 
-
-Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at. 
-
-
-
-Definition at line 263 of file Tporoelasticity\+\_\+elements.\+cc.
+Definition at line 269 of file Tporoelasticity\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1TPoroelasticityElement_a3486524ccf5ec2c3213a700a8d9beddd}\label{classoomph_1_1TPoroelasticityElement_a3486524ccf5ec2c3213a700a8d9beddd}} 
 \index{oomph::TPoroelasticityElement$<$ ORDER $>$@{oomph::TPoroelasticityElement$<$ ORDER $>$}!q\_edge\_index@{q\_edge\_index}}
@@ -943,7 +931,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_abe5fd6d829fce
 
 
 
-Definition at line 139 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 138 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -993,7 +981,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a34a28eb238815
 
 
 
-Definition at line 157 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 155 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1020,7 +1008,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a95ed7bb3ad2ef
 
 
 
-Definition at line 212 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 207 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1043,7 +1031,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a98223c55e8801
 
 
 
-Definition at line 231 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 225 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1062,7 +1050,7 @@ Return the index of the internal data where the q\+\_\+internal degrees of freed
 
 
 
-Definition at line 133 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 132 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1079,11 +1067,7 @@ Referenced by oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\
 {\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
 int \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement}{oomph\+::\+T\+Poroelasticity\+Element}}$<$ O\+R\+D\+ER $>$\+::q\+\_\+internal\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
-Return the equation number of the n-\/th internal (moment) degree of freedom. 
-
-
+Return the equation number of the n-\/th internal (moment) degree of freedom 
 
 Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a432e37d70b8fd6c643946609d5e92ddd}{oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$}}.
 
@@ -1112,7 +1096,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab22159684bdf5
 
 
 
-Definition at line 73 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 74 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1135,7 +1119,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a92c3f4965f318
 
 
 
-Definition at line 436 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 422 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1158,7 +1142,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a14fa3f0b43c4d
 
 
 
-Definition at line 504 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 490 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1185,7 +1169,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a1fe3d6550d835
 
 
 
-Definition at line 543 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 529 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1204,7 +1188,7 @@ Accessor for the unit normal sign of edge n.
 
 
 
-Definition at line 482 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 469 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1223,7 +1207,7 @@ Accessor for the unit normal sign of edge n (const version)
 
 
 
-Definition at line 476 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 463 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1250,7 +1234,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b2272
 
 
 
-Definition at line 78 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 79 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1291,7 +1275,7 @@ The number of values stored at each node.
 
 
 
-Definition at line 47 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 46 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1310,7 +1294,7 @@ The internal data index where the p degrees of freedom are stored.
 
 
 
-Definition at line 59 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 60 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1323,11 +1307,7 @@ Referenced by oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::\+T\
 {\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
 const unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement}{oomph\+::\+T\+Poroelasticity\+Element}}$<$ O\+R\+D\+ER $>$\+::Q\+\_\+edge\+\_\+conv\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
-
-
-Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at. 
-
-
+Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at 
 
 Definition at line 50 of file Tporoelasticity\+\_\+elements.\+h.
 
@@ -1342,13 +1322,9 @@ Referenced by oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::edge
 {\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
 unsigned \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement}{oomph\+::\+T\+Poroelasticity\+Element}}$<$ O\+R\+D\+ER $>$\+::Q\+\_\+internal\+\_\+data\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
 
+The internal data index where the internal q degrees of freedom are stored 
 
-
-The internal data index where the internal q degrees of freedom are stored. 
-
-
-
-Definition at line 56 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 57 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 
@@ -1367,7 +1343,7 @@ Unit normal signs associated with each edge to ensure inter-\/element continuity
 
 
 
-Definition at line 63 of file Tporoelasticity\+\_\+elements.\+h.
+Definition at line 64 of file Tporoelasticity\+\_\+elements.\+h.
 
 
 

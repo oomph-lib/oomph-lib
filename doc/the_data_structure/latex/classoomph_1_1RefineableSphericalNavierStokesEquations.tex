@@ -43,7 +43,7 @@ virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{clas
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a6d4b7f91dc9139367408a3b9f067920d}{unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs}} ()=0
 \begin{DoxyCompactList}\small\item\em Unpin all pressure dofs in the element. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a0041d52514b3020466b88bc63a5f749a}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs}} ()
-\begin{DoxyCompactList}\small\item\em Pin unused nodal pressure dofs (empty by default, because. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pin unused nodal pressure dofs (empty by default, because by default pressure dofs are not associated with nodes) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -55,7 +55,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_aaa
 \doxysubsection{Detailed Description}
 Refineable version of the Spherical Navier--Stokes equations. 
 
-Definition at line 47 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 45 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -72,7 +72,7 @@ Empty Constructor.
 
 
 
-Definition at line 68 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 67 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -93,7 +93,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 40 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 38 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -119,7 +119,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRavi
 
 
 
-Definition at line 131 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 132 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -145,7 +145,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ad
 
 
 
-Definition at line 126 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 125 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSphericalNavierStokesEquations_ae0b6940ca1e05e042dae71b185e995b5}\label{classoomph_1_1RefineableSphericalNavierStokesEquations_ae0b6940ca1e05e042dae71b185e995b5}} 
 \index{oomph::RefineableSphericalNavierStokesEquations@{oomph::RefineableSphericalNavierStokesEquations}!get\_Z2\_flux@{get\_Z2\_flux}}
@@ -163,7 +163,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 82 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 83 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -185,7 +185,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 74 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 75 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSphericalNavierStokesEquations_a0041d52514b3020466b88bc63a5f749a}\label{classoomph_1_1RefineableSphericalNavierStokesEquations_a0041d52514b3020466b88bc63a5f749a}} 
 \index{oomph::RefineableSphericalNavierStokesEquations@{oomph::RefineableSphericalNavierStokesEquations}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -195,9 +195,9 @@ Definition at line 74 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\
 
 
 
-Pin unused nodal pressure dofs (empty by default, because. 
+Pin unused nodal pressure dofs (empty by default, because by default pressure dofs are not associated with nodes) 
 
-by default pressure dofs are not associated with nodes) 
+
 
 Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a0aa5d5880b277ae6f4711b54e4b28203}{oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element}}.
 
@@ -222,10 +222,9 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 
 \begin{DoxyItemize}
 \item {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations}{Refineable\+Spherical\+Navier\+Stokes\+Equations}}\+:}\+: pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs()
-\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom ~\newline
- (e.\+g. for refineable Taylor-\/\+Hood.) 
+\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom (e.\+g. for refineable Taylor-\/\+Hood.) 
 
-Definition at line 173 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 174 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -247,7 +246,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodEl
 
 
 
-Definition at line 56 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 53 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -265,7 +264,7 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line 187 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 188 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

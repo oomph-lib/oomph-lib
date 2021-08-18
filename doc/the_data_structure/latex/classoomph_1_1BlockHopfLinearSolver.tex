@@ -22,8 +22,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a9a7cc6bda9ab1a8baf83d
 void \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a5e9ff24466ec138cca8264e5befc31fe}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em The solve function uses the block factorisation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_ac8f7442b3bc437f8ad25308b1c84482b}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
-\begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a5074e6a65910bcbe881a3e1c71b1947f}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a2c0e342f253917e987f8504b16862b2c}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
@@ -49,7 +48,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a2c0e342f253917e987f85
 \doxysubsection{Detailed Description}
 A custom linear solver class that is used to solve a block-\/factorised version of the Hopf bifurcation detection problem. 
 
-Definition at line 918 of file assembly\+\_\+handler.\+h.
+Definition at line 954 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -66,7 +65,7 @@ Constructor, inherits the original linear solver.
 
 
 
-Definition at line 938 of file assembly\+\_\+handler.\+h.
+Definition at line 973 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a7a77bcca3b3018995f644fff39c7a957}\label{classoomph_1_1BlockHopfLinearSolver_a7a77bcca3b3018995f644fff39c7a957}} 
 \index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!````~BlockHopfLinearSolver@{$\sim$BlockHopfLinearSolver}}
@@ -80,7 +79,7 @@ Destructor\+: clean up the allocated memory.
 
 Clean up the memory that may have been allocated by the solver. 
 
-Definition at line 3458 of file assembly\+\_\+handler.\+cc.
+Definition at line 3601 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -101,7 +100,7 @@ Access function to the original linear solver.
 
 
 
-Definition at line 983 of file assembly\+\_\+handler.\+h.
+Definition at line 1023 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -127,7 +126,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line 4204 of file assembly\+\_\+handler.\+cc.
+Definition at line 4417 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BlockHopfLinearSolver_ac8f7442b3bc437f8ad25308b1c84482b}\label{classoomph_1_1BlockHopfLinearSolver_ac8f7442b3bc437f8ad25308b1c84482b}} 
 \index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!solve@{solve}}
@@ -137,16 +136,15 @@ Definition at line 4204 of file assembly\+\_\+handler.\+cc.
 
 
 
-The linear-\/algebra-\/type solver does not make sense. ~\newline
- 
+The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. 
 
-The interface is deliberately broken 
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Definition at line 956 of file assembly\+\_\+handler.\+h.
+Definition at line 996 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a5074e6a65910bcbe881a3e1c71b1947f}\label{classoomph_1_1BlockHopfLinearSolver_a5074e6a65910bcbe881a3e1c71b1947f}} 
 \index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!solve@{solve}}
@@ -164,7 +162,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Definition at line 968 of file assembly\+\_\+handler.\+h.
+Definition at line 1008 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a5e9ff24466ec138cca8264e5befc31fe}\label{classoomph_1_1BlockHopfLinearSolver_a5e9ff24466ec138cca8264e5befc31fe}} 
 \index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!solve@{solve}}
@@ -182,7 +180,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 3469 of file assembly\+\_\+handler.\+cc.
+Definition at line 3621 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -200,7 +198,7 @@ Solve for two right hand sides.
 
 Solve for two right hand sides, required for (efficient) continuation because otherwise we have to store the inverse of the jacobian and the complex equivalent ... nasty. 
 
-Definition at line 3788 of file assembly\+\_\+handler.\+cc.
+Definition at line 3966 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -221,7 +219,7 @@ Pointer to the storage for the vector a.
 
 
 
-Definition at line 927 of file assembly\+\_\+handler.\+h.
+Definition at line 963 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -239,7 +237,7 @@ Pointer to the storage for the vector e (0 to n-\/1)
 
 
 
-Definition at line 930 of file assembly\+\_\+handler.\+h.
+Definition at line 966 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -257,7 +255,7 @@ Pointer to the storage for the vector g (0 to n-\/1)
 
 
 
-Definition at line 933 of file assembly\+\_\+handler.\+h.
+Definition at line 969 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -275,7 +273,7 @@ Pointer to the original linear solver.
 
 
 
-Definition at line 921 of file assembly\+\_\+handler.\+h.
+Definition at line 957 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -293,7 +291,7 @@ Pointer to the problem, used in the resolve.
 
 
 
-Definition at line 924 of file assembly\+\_\+handler.\+h.
+Definition at line 960 of file assembly\+\_\+handler.\+h.
 
 
 

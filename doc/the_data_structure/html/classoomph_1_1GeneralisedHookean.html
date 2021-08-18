@@ -160,12 +160,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5beca3e59f04d109c394bf9fd24bb7c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the stress tensor.  <a href="classoomph_1_1GeneralisedHookean.html#a5beca3e59f04d109c394bf9fd24bb7c1">More...</a><br /></td></tr>
 <tr class="separator:a5beca3e59f04d109c394bf9fd24bb7c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a641d0893e485df52b48b15e189a850ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#a641d0893e485df52b48b15e189a850ed">calculate_second_piola_kirchhoff_stress</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;g, const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;G, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;sigma_dev, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;G_contra, double &amp;Gdet)</td></tr>
-<tr class="memdesc:a641d0893e485df52b48b15e189a850ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the deviatoric part <img class="formulaInl" alt="$ \overline{ \sigma^{ij}}$" src="form_119.png"/> of the contravariant 2nd Piola Kirchhoff stress tensor <img class="formulaInl" alt="$ \sigma^{ij}$" src="form_113.png"/>. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $" src="form_120.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined by <img class="formulaInl" alt="$ \det G_{ij} - \det g_{ij} = 0 $" src="form_121.png"/>. <br  />
-  <a href="classoomph_1_1GeneralisedHookean.html#a641d0893e485df52b48b15e189a850ed">More...</a><br /></td></tr>
+<tr class="memdesc:a641d0893e485df52b48b15e189a850ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the deviatoric part <img class="formulaInl" alt="$ \overline{ \sigma^{ij}}$" src="form_119.png"/> of the contravariant 2nd Piola Kirchhoff stress tensor <img class="formulaInl" alt="$ \sigma^{ij}$" src="form_113.png"/>. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $" src="form_120.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined by <img class="formulaInl" alt="$ \det G_{ij} - \det g_{ij} = 0 $" src="form_121.png"/>.  <a href="classoomph_1_1GeneralisedHookean.html#a641d0893e485df52b48b15e189a850ed">More...</a><br /></td></tr>
 <tr class="separator:a641d0893e485df52b48b15e189a850ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad19b5e80755f5d8e5513c4199f62fe03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#ad19b5e80755f5d8e5513c4199f62fe03">calculate_second_piola_kirchhoff_stress</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;g, const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;G, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;sigma_dev, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;Gcontra, double &amp;gen_dil, double &amp;inv_kappa)</td></tr>
-<tr class="memdesc:ad19b5e80755f5d8e5513c4199f62fe03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, <img class="formulaInl" alt="$ d, $" src="form_114.png"/> and the inverse of the bulk modulus <img class="formulaInl" alt="$ \kappa$" src="form_115.png"/>. This form is appropriate for near-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $" src="form_116.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined from <img class="formulaInl" alt="$ p / \kappa - d =0 $" src="form_118.png"/>. <br  />
-  <a href="classoomph_1_1GeneralisedHookean.html#ad19b5e80755f5d8e5513c4199f62fe03">More...</a><br /></td></tr>
+<tr class="memdesc:ad19b5e80755f5d8e5513c4199f62fe03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, <img class="formulaInl" alt="$ d, $" src="form_114.png"/> and the inverse of the bulk modulus <img class="formulaInl" alt="$ \kappa$" src="form_115.png"/>. This form is appropriate for near-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $" src="form_116.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined from <img class="formulaInl" alt="$ p / \kappa - d =0 $" src="form_118.png"/>.  <a href="classoomph_1_1GeneralisedHookean.html#ad19b5e80755f5d8e5513c4199f62fe03">More...</a><br /></td></tr>
 <tr class="separator:ad19b5e80755f5d8e5513c4199f62fe03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ed467d8b7c838cb7fed8c861aa652e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#a9ed467d8b7c838cb7fed8c861aa652e9">requires_incompressibility_constraint</a> ()</td></tr>
 <tr class="memdesc:a9ed467d8b7c838cb7fed8c861aa652e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function in which the writer must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. False.  <a href="classoomph_1_1GeneralisedHookean.html#a9ed467d8b7c838cb7fed8c861aa652e9">More...</a><br /></td></tr>
@@ -228,14 +226,12 @@ Additional Inherited Members</h2></td></tr>
 <p> For small strains <img class="formulaInl" alt="$ (| G_{ij} - g_{ij} | \ll 1)$" src="form_144.png"/> this approaches the version appropriate for linear elasticity, obtained by replacing <img class="formulaInl" alt="$ G^{ij}$" src="form_145.png"/> with <img class="formulaInl" alt="$ g^{ij}$" src="form_146.png"/>.</p>
 <p>We provide three versions of <code><a class="el" href="classoomph_1_1GeneralisedHookean.html#a5beca3e59f04d109c394bf9fd24bb7c1" title="Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed...">calculate_second_piola_kirchhoff_stress()</a></code>:</p><ol type="1">
 <li>If <img class="formulaInl" alt="$ \nu \ne 1/2 $" src="form_147.png"/> (and not close to <img class="formulaInl" alt="$ 1/2 $" src="form_148.png"/>), the constitutive law can be used directly in the above form, using the deformed and undeformed metric tensors as input.</li>
-<li>If the material is incompressible ( <img class="formulaInl" alt="$ \nu = 1/2 $" src="form_149.png"/>), the first term in the above expression for <img class="formulaInl" alt="$ E^{ijkl} $" src="form_150.png"/> is singular. We re-write the constitutive equation for this case as <br  />
- <p class="formulaDsp">
+<li>If the material is incompressible ( <img class="formulaInl" alt="$ \nu = 1/2 $" src="form_149.png"/>), the first term in the above expression for <img class="formulaInl" alt="$ E^{ijkl} $" src="form_150.png"/> is singular. We re-write the constitutive equation for this case as <p class="formulaDsp">
 <img class="formulaDsp" alt="\[ \sigma^{ij} = -p G^{ij} + \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \]" src="form_151.png"/>
 </p>
  where the pressure <img class="formulaInl" alt="$ p $" src="form_117.png"/> needs to be determined independently via the incompressibility constraint. In this case, the stress returned by <code><a class="el" href="classoomph_1_1GeneralisedHookean.html#a5beca3e59f04d109c394bf9fd24bb7c1" title="Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed...">calculate_second_piola_kirchhoff_stress()</a></code> contains only the deviatoric part of the 2nd Piola Kirchhoff stress, <p class="formulaDsp">
 <img class="formulaDsp" alt="\[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \]" src="form_152.png"/>
 </p>
- <br  />
  The function also returns the contravariant metric tensor <img class="formulaInl" alt="$ G^{ij}$" src="form_145.png"/> (since it is needed to form the complete stress tensor), and the determinant of the deformed covariant metric tensor <img class="formulaInl" alt="$ {\tt detG} = \det G_{ij} $" src="form_153.png"/> (since it is needed in the equation that enforces the incompressibility).</li>
 <li>If <img class="formulaInl" alt="$ \nu \approx 1/2 $" src="form_154.png"/>, the original form of the constitutive equation could be used, but the resulting equations tend to be ill-conditioned since they contain the product of the large "bulk modulus" <p class="formulaDsp">
 <img class="formulaDsp" alt="\[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \]" src="form_155.png"/>
@@ -246,11 +242,10 @@ Additional Inherited Members</h2></td></tr>
  [ <img class="formulaInl" alt="$ d $" src="form_139.png"/> represents the actual dilatation in the small strain limit; for large deformations it doesn't have any sensible interpretation (or does it?). It is simply the term that needs to go to zero as <img class="formulaInl" alt="$ \kappa \to \infty$" src="form_140.png"/>.] In this case, the stress returned by <code><a class="el" href="classoomph_1_1GeneralisedHookean.html#a5beca3e59f04d109c394bf9fd24bb7c1" title="Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed...">calculate_second_piola_kirchhoff_stress()</a></code> contains only the deviatoric part of the 2nd Piola Kirchhoff stress, <p class="formulaDsp">
 <img class="formulaDsp" alt="\[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \]" src="form_152.png"/>
 </p>
- <br  />
  The function also returns the contravariant metric tensor <img class="formulaInl" alt="$ G^{ij}$" src="form_145.png"/> (since it is needed to form the complete stress tensor), the inverse of the bulk modulus, and the generalised dilatation (since they are needed in the equation that determines the pressure). </li>
 </ol>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00710">710</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00719">719</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae345f3619a2826b4547f7cb42a052ca6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae345f3619a2826b4547f7cb42a052ca6">&#9670;&nbsp;</a></span>GeneralisedHookean() <span class="overload">[1/2]</span></h2>
@@ -287,7 +282,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>The constructor takes the pointers to values of material parameters: Poisson's ratio and Young's modulus. </p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00717">717</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00724">724</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
 </div>
 </div>
@@ -316,7 +311,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>The constructor takes the pointers to value of Poisson's ratio . Young's modulus is set to E=1.0, implying that all stresses have been non-dimensionalised on on it. </p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00725">725</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00733">733</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
 </div>
 </div>
@@ -345,9 +340,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00731">731</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00743">743</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
-<p class="reference">References <a class="el" href="constitutive__laws_8h_source.html#l00787">E_pt</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00791">Must_delete_e</a>.</p>
+<p class="reference">References <a class="el" href="constitutive__laws_8h_source.html#l00804">E_pt</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00808">Must_delete_e</a>.</p>
 
 </div>
 </div>
@@ -397,11 +392,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1ConstitutiveLaw.html#a93527d910de908035feb8f41b0401065">oomph::ConstitutiveLaw</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8cc_source.html#l00669">669</a> of file <a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8cc_source.html#l00682">682</a> of file <a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="constitutive__laws_8cc_source.html#l00107">oomph::ConstitutiveLaw::calculate_contravariant()</a>, <a class="el" href="constitutive__laws_8cc_source.html#l00060">oomph::ConstitutiveLaw::error_checking_in_input()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="matrices_8h_source.html#l00500">oomph::DenseMatrix&lt; T &gt;::nrow()</a>.</p>
+<p class="reference">References <a class="el" href="constitutive__laws_8cc_source.html#l00113">oomph::ConstitutiveLaw::calculate_contravariant()</a>, <a class="el" href="constitutive__laws_8cc_source.html#l00071">oomph::ConstitutiveLaw::error_checking_in_input()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="matrices_8h_source.html#l00497">oomph::DenseMatrix&lt; T &gt;::nrow()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constitutive__laws_8cc_source.html#l00751">calculate_second_piola_kirchhoff_stress()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8cc_source.html#l00765">calculate_second_piola_kirchhoff_stress()</a>.</p>
 
 </div>
 </div>
@@ -457,16 +452,14 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Calculate the deviatoric part <img class="formulaInl" alt="$ \overline{ \sigma^{ij}}$" src="form_119.png"/> of the contravariant 2nd Piola Kirchhoff stress tensor <img class="formulaInl" alt="$ \sigma^{ij}$" src="form_113.png"/>. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $" src="form_120.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined by <img class="formulaInl" alt="$ \det G_{ij} - \det g_{ij} = 0 $" src="form_121.png"/>. <br  />
- </p>
-<p>Calculate the deviatoric part <img class="formulaInl" alt="$ \overline{ \sigma^{ij}}$" src="form_119.png"/> of the contravariant 2nd Piola Kirchhoff stress tensor <img class="formulaInl" alt="$ \sigma^{ij}$" src="form_113.png"/>. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $" src="form_120.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined by <img class="formulaInl" alt="$ \det G_{ij} - \det g_{ij} = 0 $" src="form_121.png"/>. <br  />
- </p>
+<p>Calculate the deviatoric part <img class="formulaInl" alt="$ \overline{ \sigma^{ij}}$" src="form_119.png"/> of the contravariant 2nd Piola Kirchhoff stress tensor <img class="formulaInl" alt="$ \sigma^{ij}$" src="form_113.png"/>. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $" src="form_120.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined by <img class="formulaInl" alt="$ \det G_{ij} - \det g_{ij} = 0 $" src="form_121.png"/>. </p>
+<p>Calculate the deviatoric part <img class="formulaInl" alt="$ \overline{ \sigma^{ij}}$" src="form_119.png"/> of the contravariant 2nd Piola Kirchhoff stress tensor <img class="formulaInl" alt="$ \sigma^{ij}$" src="form_113.png"/>. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $" src="form_120.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined by <img class="formulaInl" alt="$ \det G_{ij} - \det g_{ij} = 0 $" src="form_121.png"/>. </p>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1ConstitutiveLaw.html#ac8178b1b7cd7e6a64942dba9e0997b30">oomph::ConstitutiveLaw</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8cc_source.html#l00797">797</a> of file <a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8cc_source.html#l00811">811</a> of file <a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="constitutive__laws_8cc_source.html#l00107">oomph::ConstitutiveLaw::calculate_contravariant()</a>, <a class="el" href="constitutive__laws_8cc_source.html#l00060">oomph::ConstitutiveLaw::error_checking_in_input()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="matrices_8h_source.html#l00500">oomph::DenseMatrix&lt; T &gt;::nrow()</a>.</p>
+<p class="reference">References <a class="el" href="constitutive__laws_8cc_source.html#l00113">oomph::ConstitutiveLaw::calculate_contravariant()</a>, <a class="el" href="constitutive__laws_8cc_source.html#l00071">oomph::ConstitutiveLaw::error_checking_in_input()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="matrices_8h_source.html#l00497">oomph::DenseMatrix&lt; T &gt;::nrow()</a>.</p>
 
 </div>
 </div>
@@ -528,16 +521,14 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, <img class="formulaInl" alt="$ d, $" src="form_114.png"/> and the inverse of the bulk modulus <img class="formulaInl" alt="$ \kappa$" src="form_115.png"/>. This form is appropriate for near-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $" src="form_116.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined from <img class="formulaInl" alt="$ p / \kappa - d =0 $" src="form_118.png"/>. <br  />
- </p>
-<p>Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, <img class="formulaInl" alt="$ d, $" src="form_114.png"/> and the inverse of the bulk modulus <img class="formulaInl" alt="$ \kappa$" src="form_115.png"/>. This form is appropriate for near-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $" src="form_116.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined from <img class="formulaInl" alt="$ p / \kappa - d =0 $" src="form_118.png"/>. <br  />
- </p>
+<p>Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, <img class="formulaInl" alt="$ d, $" src="form_114.png"/> and the inverse of the bulk modulus <img class="formulaInl" alt="$ \kappa$" src="form_115.png"/>. This form is appropriate for near-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $" src="form_116.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined from <img class="formulaInl" alt="$ p / \kappa - d =0 $" src="form_118.png"/>. </p>
+<p>Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, <img class="formulaInl" alt="$ d, $" src="form_114.png"/> and the inverse of the bulk modulus <img class="formulaInl" alt="$ \kappa$" src="form_115.png"/>. This form is appropriate for near-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $" src="form_116.png"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_117.png"/> is determined from <img class="formulaInl" alt="$ p / \kappa - d =0 $" src="form_118.png"/>. </p>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1ConstitutiveLaw.html#a26f34355b626bebcad8f498fa5271d20">oomph::ConstitutiveLaw</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8cc_source.html#l00751">751</a> of file <a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8cc_source.html#l00765">765</a> of file <a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="constitutive__laws_8cc_source.html#l00669">calculate_second_piola_kirchhoff_stress()</a>, <a class="el" href="constitutive__laws_8h_source.html#l00787">E_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00500">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00784">Nu_pt</a>.</p>
+<p class="reference">References <a class="el" href="constitutive__laws_8cc_source.html#l00682">calculate_second_piola_kirchhoff_stress()</a>, <a class="el" href="constitutive__laws_8h_source.html#l00804">E_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00497">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00801">Nu_pt</a>.</p>
 
 </div>
 </div>
@@ -568,7 +559,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1ConstitutiveLaw.html#a446452158a8ae9fbc3dde4277155f824">oomph::ConstitutiveLaw</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00779">779</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00794">794</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
 </div>
 </div>
@@ -595,9 +586,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Young's modulus. </p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00787">787</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00804">804</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constitutive__laws_8cc_source.html#l00751">calculate_second_piola_kirchhoff_stress()</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00731">~GeneralisedHookean()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8cc_source.html#l00765">calculate_second_piola_kirchhoff_stress()</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00743">~GeneralisedHookean()</a>.</p>
 
 </div>
 </div>
@@ -623,9 +614,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Boolean flag to indicate if storage for elastic modulus must be deleted in destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00791">791</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00808">808</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00731">~GeneralisedHookean()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00743">~GeneralisedHookean()</a>.</p>
 
 </div>
 </div>
@@ -651,9 +642,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Poisson ratio. </p>
 
-<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00784">784</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00801">801</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constitutive__laws_8cc_source.html#l00751">calculate_second_piola_kirchhoff_stress()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8cc_source.html#l00765">calculate_second_piola_kirchhoff_stress()</a>.</p>
 
 </div>
 </div>
@@ -689,7 +680,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:55:23
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:24
         </div>
       </div>
     </footer>

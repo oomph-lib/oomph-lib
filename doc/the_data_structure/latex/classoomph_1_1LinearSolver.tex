@@ -36,19 +36,15 @@ virtual void \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd98
 virtual void \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)=0
 \begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
-\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
-\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector (broken virtual). \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
-\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
-\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e597fade4c0ca4022}{resolve\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
@@ -86,7 +82,7 @@ bool \mbox{\hyperlink{classoomph_1_1LinearSolver_a9fd3bf9a5a94dcc23b7d903f99535e
 \doxysubsection{Detailed Description}
 Base class for all linear solvers. This merely defines standard interfaces for linear solvers, so that different solvers can be used in a clean and transparent manner. Note that Linear\+Solvers are primarily used to solve the linear systems arising in oomph-\/lib\textquotesingle{}s Newton iteration. Their primary solve function therefore takes a pointer to the associated problem, construct its Jacobian matrix and residual vector, and return the solution of the linear system formed by the Jacobian and the residual vector. We also provide broken virtual interfaces to a linear-\/algebra-\/type solve function in which the matrix and the rhs can be specified, but this are not guaranteed to implemented for all linear solvers (e.\+g. for frontal solvers). 
 
-Definition at line 69 of file linear\+\_\+solver.\+h.
+Definition at line 67 of file linear\+\_\+solver.\+h.
 
 
 
@@ -103,7 +99,7 @@ Empty constructor, initialise the member data.
 
 
 
-Definition at line 96 of file linear\+\_\+solver.\+h.
+Definition at line 92 of file linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_a53c67c7ccd63b318f3af48e826ad57dc}\label{classoomph_1_1LinearSolver_a53c67c7ccd63b318f3af48e826ad57dc}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!LinearSolver@{LinearSolver}}
@@ -117,7 +113,7 @@ Broken copy constructor.
 
 
 
-Definition at line 100 of file linear\+\_\+solver.\+h.
+Definition at line 101 of file linear\+\_\+solver.\+h.
 
 
 
@@ -135,7 +131,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 112 of file linear\+\_\+solver.\+h.
+Definition at line 113 of file linear\+\_\+solver.\+h.
 
 
 
@@ -152,11 +148,11 @@ Empty virtual function that can be overloaded in specific linear solvers to clea
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_a5593b936e70b6668758bb94f4097b9b1}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1DampedJacobi_a959c1fcafae700e8735f7100fd3670f1}{oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a946b88bc1392180c56909b739bfa7b3c}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a6e5470c508a10e89dd110463c7cea89a}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1MGPreconditioner_acc92bd3f8c9b729283d35c1f4ae37dd2}{oomph\+::\+M\+G\+Preconditioner$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1GS_a7dcf28fef43088ead0e662a32275b383}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1HypreSolver_a5c1a57f1f74c0748a47c1629635ee0fc}{oomph\+::\+Hypre\+Solver}}, \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{oomph\+::\+Super\+L\+U\+Solver}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a6c97b794a4bec6a22df28f5f160577be}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1DenseLU_a5d4d454874476adadb3bc23913b1190b}{oomph\+::\+Dense\+LU}}, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a365a39ae1dec32eb78aa160b70426f59}{oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver}}, \mbox{\hyperlink{classoomph_1_1CG_ab51014aac249e9998a002509c7a3088e}{oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a4e246d712c8eb9e4db05f859148784d3}{oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{oomph\+::\+Mumps\+Solver}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a81487397ec92afb883f0a95beb99aff0}{oomph\+::\+H\+S\+L\+\_\+\+M\+A42}}, and \mbox{\hyperlink{classoomph_1_1MGSolver_a85e3e6f32b4e77d696d5b001e1428f08}{oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_a5593b936e70b6668758bb94f4097b9b1}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1DampedJacobi_a959c1fcafae700e8735f7100fd3670f1}{oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a946b88bc1392180c56909b739bfa7b3c}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a6e5470c508a10e89dd110463c7cea89a}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1MGPreconditioner_acc92bd3f8c9b729283d35c1f4ae37dd2}{oomph\+::\+M\+G\+Preconditioner$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1HypreSolver_a5c1a57f1f74c0748a47c1629635ee0fc}{oomph\+::\+Hypre\+Solver}}, \mbox{\hyperlink{classoomph_1_1GS_a7dcf28fef43088ead0e662a32275b383}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{oomph\+::\+Super\+L\+U\+Solver}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a6c97b794a4bec6a22df28f5f160577be}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1DenseLU_a5d4d454874476adadb3bc23913b1190b}{oomph\+::\+Dense\+LU}}, \mbox{\hyperlink{classoomph_1_1CG_ab51014aac249e9998a002509c7a3088e}{oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a365a39ae1dec32eb78aa160b70426f59}{oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver}}, \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a4e246d712c8eb9e4db05f859148784d3}{oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{oomph\+::\+Mumps\+Solver}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a81487397ec92afb883f0a95beb99aff0}{oomph\+::\+H\+S\+L\+\_\+\+M\+A42}}, and \mbox{\hyperlink{classoomph_1_1MGSolver_a85e3e6f32b4e77d696d5b001e1428f08}{oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$}}.
 
 
 
-Definition at line 241 of file linear\+\_\+solver.\+h.
+Definition at line 262 of file linear\+\_\+solver.\+h.
 
 
 
@@ -174,7 +170,7 @@ function to disable the computation of the gradient required for the globally co
 
 
 
-Definition at line 278 of file linear\+\_\+solver.\+h.
+Definition at line 299 of file linear\+\_\+solver.\+h.
 
 
 
@@ -192,7 +188,7 @@ Disable documentation of solve times.
 
 
 
-Definition at line 118 of file linear\+\_\+solver.\+h.
+Definition at line 122 of file linear\+\_\+solver.\+h.
 
 
 
@@ -214,11 +210,11 @@ Disable resolve (i.\+e. store matrix and/or LU decomposition, say) This function
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a842b638722cd45650da8771aea2f9e5c}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a338c1108f68089ba78104a93ec2cbbca}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_a5297a6d4f978e601989990eee1333b64}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a07db774f0aca4e71579c7c071e25a451}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a41c2dd2610f61fd9e25053511fdd9eab}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1GS_a9c3bfbebb6686c5f3ca650ef01697728}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ac278643faf0a13eb3f8e6bc984338d2a}{oomph\+::\+Super\+L\+U\+Solver}}, \mbox{\hyperlink{classoomph_1_1HypreSolver_ae8949856fc75ff767f1ad940a710109f}{oomph\+::\+Hypre\+Solver}}, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7d9c9d9beddb2d18abea55529db534e4}{oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a7ed3198928966fddf84e9f908b3361d4}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1CG_a1116011340fabc5c5d2a97cea0cd5b72}{oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a8419d983544da158f96ab305549a94a9}{oomph\+::\+H\+S\+L\+\_\+\+M\+A42}}, and \mbox{\hyperlink{classoomph_1_1MumpsSolver_aba2b1c844e190da45c8adbd6dfc0f344}{oomph\+::\+Mumps\+Solver}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a842b638722cd45650da8771aea2f9e5c}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a338c1108f68089ba78104a93ec2cbbca}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_a5297a6d4f978e601989990eee1333b64}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a07db774f0aca4e71579c7c071e25a451}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a41c2dd2610f61fd9e25053511fdd9eab}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1GS_a9c3bfbebb6686c5f3ca650ef01697728}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ac278643faf0a13eb3f8e6bc984338d2a}{oomph\+::\+Super\+L\+U\+Solver}}, \mbox{\hyperlink{classoomph_1_1HypreSolver_ae8949856fc75ff767f1ad940a710109f}{oomph\+::\+Hypre\+Solver}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a7ed3198928966fddf84e9f908b3361d4}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7d9c9d9beddb2d18abea55529db534e4}{oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver}}, \mbox{\hyperlink{classoomph_1_1CG_a1116011340fabc5c5d2a97cea0cd5b72}{oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a8419d983544da158f96ab305549a94a9}{oomph\+::\+H\+S\+L\+\_\+\+M\+A42}}, and \mbox{\hyperlink{classoomph_1_1MumpsSolver_aba2b1c844e190da45c8adbd6dfc0f344}{oomph\+::\+Mumps\+Solver}}.
 
 
 
-Definition at line 134 of file linear\+\_\+solver.\+h.
+Definition at line 150 of file linear\+\_\+solver.\+h.
 
 
 
@@ -244,7 +240,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1GMRES_a15a0241031d5351ff7ab62966
 
 
 
-Definition at line 267 of file linear\+\_\+solver.\+h.
+Definition at line 288 of file linear\+\_\+solver.\+h.
 
 
 
@@ -262,7 +258,7 @@ Enable documentation of solve times.
 
 
 
-Definition at line 115 of file linear\+\_\+solver.\+h.
+Definition at line 116 of file linear\+\_\+solver.\+h.
 
 
 
@@ -284,7 +280,7 @@ Enable resolve (i.\+e. store matrix and/or LU decomposition, say) Virtual so it 
 
 
 
-Definition at line 128 of file linear\+\_\+solver.\+h.
+Definition at line 141 of file linear\+\_\+solver.\+h.
 
 
 
@@ -306,7 +302,7 @@ function to access the gradient, provided it has been computed
 
 
 
-Definition at line 291 of file linear\+\_\+solver.\+h.
+Definition at line 312 of file linear\+\_\+solver.\+h.
 
 
 
@@ -328,7 +324,7 @@ Is documentation of solve times enabled?
 
 
 
-Definition at line 121 of file linear\+\_\+solver.\+h.
+Definition at line 128 of file linear\+\_\+solver.\+h.
 
 
 
@@ -350,7 +346,7 @@ Boolean flag indicating if resolves are enabled.
 
 
 
-Definition at line 124 of file linear\+\_\+solver.\+h.
+Definition at line 134 of file linear\+\_\+solver.\+h.
 
 
 
@@ -376,7 +372,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a9e9bdeac1f619319b
 
 
 
-Definition at line 245 of file linear\+\_\+solver.\+h.
+Definition at line 266 of file linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_a3c66f77db812a9c196478c7e2f77ef09}\label{classoomph_1_1LinearSolver_a3c66f77db812a9c196478c7e2f77ef09}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!linear\_solver\_solution\_time@{linear\_solver\_solution\_time}}
@@ -394,7 +390,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a39e375e5ca8186312
 
 
 
-Definition at line 256 of file linear\+\_\+solver.\+h.
+Definition at line 277 of file linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_aeb1820234b9335b2a5072e5ee19306d4}\label{classoomph_1_1LinearSolver_aeb1820234b9335b2a5072e5ee19306d4}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!operator=@{operator=}}
@@ -408,7 +404,7 @@ Broken assignment operator.
 
 
 
-Definition at line 106 of file linear\+\_\+solver.\+h.
+Definition at line 107 of file linear\+\_\+solver.\+h.
 
 
 
@@ -426,7 +422,7 @@ function to reset the size of the gradient before each Newton solve
 
 
 
-Definition at line 285 of file linear\+\_\+solver.\+h.
+Definition at line 306 of file linear\+\_\+solver.\+h.
 
 
 
@@ -452,7 +448,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HypreSolver_a892df4a9377dfa5ec97
 
 
 
-Definition at line 211 of file linear\+\_\+solver.\+h.
+Definition at line 231 of file linear\+\_\+solver.\+h.
 
 
 
@@ -474,7 +470,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a81d582d853c16aa1f
 
 
 
-Definition at line 222 of file linear\+\_\+solver.\+h.
+Definition at line 242 of file linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}\label{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!solve@{solve}}
@@ -484,8 +480,7 @@ Definition at line 222 of file linear\+\_\+solver.\+h.
 
 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. 
 
 
 
@@ -493,7 +488,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a3e6405af2506c7
 
 
 
-Definition at line 143 of file linear\+\_\+solver.\+h.
+Definition at line 162 of file linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}\label{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!solve@{solve}}
@@ -503,16 +498,15 @@ Definition at line 143 of file linear\+\_\+solver.\+h.
 
 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. 
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a14ba0370fbc782fa7ab9364a035a7513}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a6dc70380e15f0c35f3d4e1d3dc827c97}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_ab2d5a5beea3383391404a62515a210d9}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a5074e6a65910bcbe881a3e1c71b1947f}{oomph\+::\+Block\+Hopf\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a9dd1695e8d907d57151df79a6e3e3968}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a989f4c09b2976a561acb498ba4d85ace}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a8569368b8772d6642a50fb1279f4b61f}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1GS_a7fb932f50b127b44208c0dee295e6bd8}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a45c8a56bd1942374756feb9edcfb6151}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a994915fcd5d99a58472559fdb57807c4}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc80da9eba1}{oomph\+::\+F\+D\+\_\+\+LU}}, \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_ae7f5f1459fef68479b39f0d1a1dce243}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1DenseLU_a1d79cf13a269733d655e3e90c447f84d}{oomph\+::\+Dense\+LU}}, and \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad8f7434a5b1391751ac513c7dc1acc77}{oomph\+::\+H\+S\+L\+\_\+\+M\+A42}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a14ba0370fbc782fa7ab9364a035a7513}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a6dc70380e15f0c35f3d4e1d3dc827c97}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_ab2d5a5beea3383391404a62515a210d9}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a5074e6a65910bcbe881a3e1c71b1947f}{oomph\+::\+Block\+Hopf\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a989f4c09b2976a561acb498ba4d85ace}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a9dd1695e8d907d57151df79a6e3e3968}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a8569368b8772d6642a50fb1279f4b61f}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1GS_a7fb932f50b127b44208c0dee295e6bd8}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a45c8a56bd1942374756feb9edcfb6151}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a994915fcd5d99a58472559fdb57807c4}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc80da9eba1}{oomph\+::\+F\+D\+\_\+\+LU}}, \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_ae7f5f1459fef68479b39f0d1a1dce243}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1DenseLU_a1d79cf13a269733d655e3e90c447f84d}{oomph\+::\+Dense\+LU}}, and \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad8f7434a5b1391751ac513c7dc1acc77}{oomph\+::\+H\+S\+L\+\_\+\+M\+A42}}.
 
 
 
-Definition at line 155 of file linear\+\_\+solver.\+h.
+Definition at line 174 of file linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}\label{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!solve@{solve}}
@@ -526,11 +520,11 @@ Solver\+: Takes pointer to problem and returns the results vector which contains
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1HypreSolver_a3a42a158a390f24d7d91ee78aa53e960}{oomph\+::\+Hypre\+Solver}}, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7dc1ae7f05e8a50416b8df700f832eb9}{oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver}}, \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df2ebe39fcdb7a0837864}{oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a5806236b991ac2d7fe4bc7a4f19e98fb}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a73d8d3d8b161084e6291560cdd7984dc}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_ade0f569ecda6b63d3e77dfe07a19cb13}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1DampedJacobi_ace422835d94b7d465d08cc1f4df192ea}{oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a5e9ff24466ec138cca8264e5befc31fe}{oomph\+::\+Block\+Hopf\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a76987ec784cd80e6605c63ef8d0ec6b7}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a85164d55db2ab10404d5679657e8f6de}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a0cbeb150ac83d5be1a1e30c0f728a70b}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1GS_ad7d1bfb3d25a194d2875e266e104dc9f}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_ad196867613954a8fabd318b50e2aadc6}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a5a121df89c72a8741d051aa176b12255}{oomph\+::\+Super\+L\+U\+Solver}}, \mbox{\hyperlink{classoomph_1_1MGSolver_a68f8c874b922c5b67e73c836048e34f5}{oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_ab9267bcbaf8435303190a1c12dbb7c2b}{oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1FD__LU_a6fd251bef9cdb7efbed4927f005eda2f}{oomph\+::\+F\+D\+\_\+\+LU}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a56e2df052fee2e26ffec644ad9161864}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a11690b33089e999d0c894b4e4b0646d9}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1DenseLU_ac354b224819146618ce8a1396f8f980e}{oomph\+::\+Dense\+LU}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242ac21a4987da62a}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242ac21a4987da62a}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, \mbox{\hyperlink{classoomph_1_1CG_a3ae0fb5451136aec30defea2758c8c5d}{oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}{oomph\+::\+H\+S\+L\+\_\+\+M\+A42}}, and \mbox{\hyperlink{classoomph_1_1MumpsSolver_ae0346a464f3ed74bfcca4063bdeed3ad}{oomph\+::\+Mumps\+Solver}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1HypreSolver_a3a42a158a390f24d7d91ee78aa53e960}{oomph\+::\+Hypre\+Solver}}, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7dc1ae7f05e8a50416b8df700f832eb9}{oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver}}, \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df2ebe39fcdb7a0837864}{oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a5806236b991ac2d7fe4bc7a4f19e98fb}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a73d8d3d8b161084e6291560cdd7984dc}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_ade0f569ecda6b63d3e77dfe07a19cb13}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1DampedJacobi_ace422835d94b7d465d08cc1f4df192ea}{oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a5e9ff24466ec138cca8264e5befc31fe}{oomph\+::\+Block\+Hopf\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a76987ec784cd80e6605c63ef8d0ec6b7}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a85164d55db2ab10404d5679657e8f6de}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a0cbeb150ac83d5be1a1e30c0f728a70b}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1GS_ad7d1bfb3d25a194d2875e266e104dc9f}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_ad196867613954a8fabd318b50e2aadc6}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a5a121df89c72a8741d051aa176b12255}{oomph\+::\+Super\+L\+U\+Solver}}, \mbox{\hyperlink{classoomph_1_1MGSolver_a68f8c874b922c5b67e73c836048e34f5}{oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_ab9267bcbaf8435303190a1c12dbb7c2b}{oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1FD__LU_a6fd251bef9cdb7efbed4927f005eda2f}{oomph\+::\+F\+D\+\_\+\+LU}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a56e2df052fee2e26ffec644ad9161864}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a11690b33089e999d0c894b4e4b0646d9}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver}}, \mbox{\hyperlink{classoomph_1_1DenseLU_ac354b224819146618ce8a1396f8f980e}{oomph\+::\+Dense\+LU}}, \mbox{\hyperlink{classoomph_1_1CG_a3ae0fb5451136aec30defea2758c8c5d}{oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242ac21a4987da62a}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242ac21a4987da62a}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}{oomph\+::\+H\+S\+L\+\_\+\+M\+A42}}, and \mbox{\hyperlink{classoomph_1_1MumpsSolver_ae0346a464f3ed74bfcca4063bdeed3ad}{oomph\+::\+Mumps\+Solver}}.
 
 
 
-Referenced by oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives(), oomph\+::\+Fold\+Handler\+::\+Fold\+Handler(), oomph\+::\+Problem\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), oomph\+::\+Hopf\+Handler\+::\+Hopf\+Handler(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve(), oomph\+::\+Double\+Matrix\+Base\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+F\+D\+\_\+\+L\+U\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve(), oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+A\+R\+P\+A\+C\+K\+::solve\+\_\+eigenproblem(), and oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs().
+Referenced by oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives(), oomph\+::\+Fold\+Handler\+::\+Fold\+Handler(), oomph\+::\+Problem\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), oomph\+::\+Hopf\+Handler\+::\+Hopf\+Handler(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve(), oomph\+::\+Double\+Matrix\+Base\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+F\+D\+\_\+\+L\+U\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+A\+R\+P\+A\+C\+K\+::solve\+\_\+eigenproblem(), and oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs().
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}\label{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!solve\_transpose@{solve\_transpose}}
@@ -540,8 +534,7 @@ Referenced by oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), oom
 
 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. 
 
 
 
@@ -549,7 +542,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a4954bcec402af933d
 
 
 
-Definition at line 186 of file linear\+\_\+solver.\+h.
+Definition at line 206 of file linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}\label{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!solve\_transpose@{solve\_transpose}}
@@ -559,12 +552,11 @@ Definition at line 186 of file linear\+\_\+solver.\+h.
 
 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
- 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. 
 
 
 
-Definition at line 198 of file linear\+\_\+solver.\+h.
+Definition at line 218 of file linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}\label{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!solve\_transpose@{solve\_transpose}}
@@ -582,7 +574,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a10bdce2b176a3ca51
 
 
 
-Definition at line 168 of file linear\+\_\+solver.\+h.
+Definition at line 187 of file linear\+\_\+solver.\+h.
 
 
 
@@ -599,7 +591,7 @@ flag that indicates whether the gradient required for the globally convergent Ne
 
 
 
-Definition at line 84 of file linear\+\_\+solver.\+h.
+Definition at line 81 of file linear\+\_\+solver.\+h.
 
 
 
@@ -617,7 +609,7 @@ Boolean flag that indicates whether the time taken.
 
 
 
-Definition at line 80 of file linear\+\_\+solver.\+h.
+Definition at line 77 of file linear\+\_\+solver.\+h.
 
 
 
@@ -635,11 +627,11 @@ Boolean that indicates whether the matrix (or its factors, in the case of direct
 
 
 
-Definition at line 76 of file linear\+\_\+solver.\+h.
+Definition at line 73 of file linear\+\_\+solver.\+h.
 
 
 
-Referenced by disable\+\_\+resolve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::disable\+\_\+resolve(), oomph\+::\+Hypre\+Solver\+::disable\+\_\+resolve(), enable\+\_\+resolve(), is\+\_\+resolve\+\_\+enabled(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve\+\_\+for\+\_\+one\+\_\+dof(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
+Referenced by disable\+\_\+resolve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::disable\+\_\+resolve(), oomph\+::\+Hypre\+Solver\+::disable\+\_\+resolve(), enable\+\_\+resolve(), is\+\_\+resolve\+\_\+enabled(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve\+\_\+for\+\_\+one\+\_\+dof(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
 
 \mbox{\Hypertarget{classoomph_1_1LinearSolver_ad38255ae12611787a857cc5c90ffa9f8}\label{classoomph_1_1LinearSolver_ad38255ae12611787a857cc5c90ffa9f8}} 
 \index{oomph::LinearSolver@{oomph::LinearSolver}!Gradient\_for\_glob\_conv\_newton\_solve@{Gradient\_for\_glob\_conv\_newton\_solve}}
@@ -653,7 +645,7 @@ Referenced by disable\+\_\+resolve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+
 
 
 
-Definition at line 91 of file linear\+\_\+solver.\+h.
+Definition at line 88 of file linear\+\_\+solver.\+h.
 
 
 
@@ -671,7 +663,7 @@ flag that indicates whether the gradient was computed or not
 
 
 
-Definition at line 87 of file linear\+\_\+solver.\+h.
+Definition at line 84 of file linear\+\_\+solver.\+h.
 
 
 

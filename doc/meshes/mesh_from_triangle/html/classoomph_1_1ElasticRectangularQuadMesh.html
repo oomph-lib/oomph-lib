@@ -140,8 +140,7 @@ Inheritance diagram for oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;:</div
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aad1e395c3f314854b68c4f1df9256230"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticRectangularQuadMesh.html#aad1e395c3f314854b68c4f1df9256230">ElasticRectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, const Vector&lt; double &gt; &amp;origin, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
-<tr class="memdesc:aad1e395c3f314854b68c4f1df9256230"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-free one and assign boundary coordinates. Origin specifies an additional rigid-body displacement. <br  />
-  <a href="classoomph_1_1ElasticRectangularQuadMesh.html#aad1e395c3f314854b68c4f1df9256230">More...</a><br /></td></tr>
+<tr class="memdesc:aad1e395c3f314854b68c4f1df9256230"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-free one and assign boundary coordinates. Origin specifies an additional rigid-body displacement.  <a href="classoomph_1_1ElasticRectangularQuadMesh.html#aad1e395c3f314854b68c4f1df9256230">More...</a><br /></td></tr>
 <tr class="separator:aad1e395c3f314854b68c4f1df9256230"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57b701739dcc5c643a1a9bae94a4b7d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticRectangularQuadMesh.html#a57b701739dcc5c643a1a9bae94a4b7d8">ElasticRectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
 <tr class="memdesc:a57b701739dcc5c643a1a9bae94a4b7d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-free one and assign boundary coordinates.  <a href="classoomph_1_1ElasticRectangularQuadMesh.html#a57b701739dcc5c643a1a9bae94a4b7d8">More...</a><br /></td></tr>
@@ -228,18 +227,16 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">More...</a><br /></td></tr>
 <tr class="separator:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">Xperiodic</a></td></tr>
-<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction <br  />
-  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
+<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
 <tr class="separator:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
 class oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;</h3>
 
-<p>Elastic quad mesh with functionality to attach traction elements to the specified boundaries. We "upgrade" the <a class="el" href="classoomph_1_1RectangularQuadMesh.html">RectangularQuadMesh</a> to become an SolidMesh and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-free configuration. <br  />
- </p>
+<p>Elastic quad mesh with functionality to attach traction elements to the specified boundaries. We "upgrade" the <a class="el" href="classoomph_1_1RectangularQuadMesh.html">RectangularQuadMesh</a> to become an SolidMesh and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-free configuration. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00369">369</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00420">420</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aad1e395c3f314854b68c4f1df9256230"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad1e395c3f314854b68c4f1df9256230">&#9670;&nbsp;</a></span>ElasticRectangularQuadMesh() <span class="overload">[1/3]</span></h2>
@@ -301,13 +298,12 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-free one and assign boundary coordinates. Origin specifies an additional rigid-body displacement. <br  />
- </p>
+<p>Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-free one and assign boundary coordinates. Origin specifies an additional rigid-body displacement. </p>
 <p>Make the current configuration the undeformed one by setting the nodal Lagrangian coordinates to their current Eulerian ones</p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00381">381</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00429">429</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00467">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00510">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>.</p>
 
 </div>
 </div>
@@ -368,9 +364,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-free one and assign boundary coordinates. </p>
 <p>Make the current configuration the undeformed one by setting the nodal Lagrangian coordinates to their current Eulerian ones</p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00414">414</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00459">459</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00467">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00510">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>.</p>
 
 </div>
 </div>
@@ -437,9 +433,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-free one and assign boundary coordinates. This includes a boolean flag to specify if the mesh is periodic in the x-direction. </p>
 <p>Make the current configuration the undeformed one by setting the nodal Lagrangian coordinates to their current Eulerian ones</p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00440">440</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00484">484</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00467">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00510">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::set_boundary_coordinates()</a>.</p>
 
 </div>
 </div>
@@ -472,11 +468,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Setup the boundary coordinates. Vector origin specifies the coordinates of the lower left corner of the mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00467">467</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00510">510</a> of file <a class="el" href="rectangular__quadmesh_8template_8h_source.html">rectangular_quadmesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00078">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00076">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymin</a>.</p>
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00077">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00075">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymin</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00381">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::ElasticRectangularQuadMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00429">oomph::ElasticRectangularQuadMesh&lt; ELEMENT &gt;::ElasticRectangularQuadMesh()</a>.</p>
 
 </div>
 </div>
@@ -511,7 +507,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:50:06
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:33:39
         </div>
       </div>
     </footer>

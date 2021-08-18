@@ -26,20 +26,18 @@ double \mbox{\hyperlink{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e418154
 \begin{DoxyCompactList}\small\item\em Calculate the pressure from the unknowns. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1EulerEquations_a51f474519ebab18d4b8504fa4b414d16}{gamma}} () const
 \begin{DoxyCompactList}\small\item\em Return the value of gamma. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1EulerEquations_a51c9ada4af6c82571e76493ff3c377b9}{gamma\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1EulerEquations_afa267c8b6e4a6ed4938d572ae90cd5de}{gamma\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to gamma. \end{DoxyCompactList}\item 
-double $\ast$const \& \mbox{\hyperlink{classoomph_1_1EulerEquations_a4e40438e856369de5b3282efab02719b}{gamma\+\_\+pt}} () const
+double $\ast$const  \& \mbox{\hyperlink{classoomph_1_1EulerEquations_aec33261b153f07968bdc4277ca1aa5ad}{gamma\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to gamma (const version) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1EulerEquations_a94116a7673c825ab36ed1d57f3cb8a62}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em The number of unknowns at each node is the number of flux components. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1EulerEquations_a3e277760413c4b27b3eae150b1d212b1}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+solution\+\_\+pt, const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&norm)
 \item 
 void \mbox{\hyperlink{classoomph_1_1EulerEquations_a4478d473edbda3529602c75f70cafe30}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1EulerEquations_a9d51d5bcc096341b6f73353d87def5b3}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1EulerEquations_aee507c1b94ee9a6bdfd77db410ca85e8}{allocate\+\_\+memory\+\_\+for\+\_\+averages}} ()
 \item 
 double \& \mbox{\hyperlink{classoomph_1_1EulerEquations_a0e83b231a00250adc6da3069b9936cc1}{average\+\_\+gradient}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j)
@@ -85,7 +83,7 @@ class oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$}
 
 Base class for \mbox{\hyperlink{classoomph_1_1Euler}{Euler}} equations. 
 
-Definition at line 47 of file euler\+\_\+elements.\+h.
+Definition at line 46 of file euler\+\_\+elements.\+h.
 
 
 
@@ -122,7 +120,7 @@ Destructor.
 
 
 
-Definition at line 83 of file euler\+\_\+elements.\+h.
+Definition at line 85 of file euler\+\_\+elements.\+h.
 
 
 
@@ -140,7 +138,7 @@ void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}
 
 
 
-Definition at line 188 of file euler\+\_\+elements.\+h.
+Definition at line 213 of file euler\+\_\+elements.\+h.
 
 
 
@@ -159,7 +157,7 @@ Return access to the average gradient.
 
 
 
-Definition at line 201 of file euler\+\_\+elements.\+h.
+Definition at line 230 of file euler\+\_\+elements.\+h.
 
 
 
@@ -178,7 +176,7 @@ Return the average values.
 
 
 
-Definition at line 213 of file euler\+\_\+elements.\+h.
+Definition at line 242 of file euler\+\_\+elements.\+h.
 
 
 
@@ -197,7 +195,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a6c1220af04b60c1
 
 
 
-Definition at line 108 of file euler\+\_\+elements.\+h.
+Definition at line 129 of file euler\+\_\+elements.\+h.
 
 
 
@@ -250,7 +248,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ab6ed40
 
 
 
-Definition at line 75 of file euler\+\_\+elements.\+cc.
+Definition at line 76 of file euler\+\_\+elements.\+cc.
 
 
 
@@ -269,18 +267,18 @@ Return the value of gamma.
 
 
 
-Definition at line 95 of file euler\+\_\+elements.\+h.
+Definition at line 103 of file euler\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Gamma\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1EulerEquations_a51c9ada4af6c82571e76493ff3c377b9}\label{classoomph_1_1EulerEquations_a51c9ada4af6c82571e76493ff3c377b9}} 
+\mbox{\Hypertarget{classoomph_1_1EulerEquations_afa267c8b6e4a6ed4938d572ae90cd5de}\label{classoomph_1_1EulerEquations_afa267c8b6e4a6ed4938d572ae90cd5de}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!gamma\_pt@{gamma\_pt}}
 \index{gamma\_pt@{gamma\_pt}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{gamma\_pt()}{gamma\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -288,18 +286,18 @@ Access function for the pointer to gamma.
 
 
 
-Definition at line 98 of file euler\+\_\+elements.\+h.
+Definition at line 109 of file euler\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Gamma\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1EulerEquations_a4e40438e856369de5b3282efab02719b}\label{classoomph_1_1EulerEquations_a4e40438e856369de5b3282efab02719b}} 
+\mbox{\Hypertarget{classoomph_1_1EulerEquations_aec33261b153f07968bdc4277ca1aa5ad}\label{classoomph_1_1EulerEquations_aec33261b153f07968bdc4277ca1aa5ad}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!gamma\_pt@{gamma\_pt}}
 \index{gamma\_pt@{gamma\_pt}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{gamma\_pt()}{gamma\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ const \& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$ const\& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -307,7 +305,7 @@ Access function for the pointer to gamma (const version)
 
 
 
-Definition at line 101 of file euler\+\_\+elements.\+h.
+Definition at line 115 of file euler\+\_\+elements.\+h.
 
 
 
@@ -330,7 +328,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ae77531
 
 
 
-Definition at line 64 of file euler\+\_\+elements.\+h.
+Definition at line 62 of file euler\+\_\+elements.\+h.
 
 
 
@@ -345,8 +343,7 @@ void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -358,7 +355,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f5
 
 
 
-Definition at line 178 of file euler\+\_\+elements.\+h.
+Definition at line 203 of file euler\+\_\+elements.\+h.
 
 
 
@@ -373,8 +370,7 @@ void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 Output function, print the values of all unknowns. 
 
@@ -386,7 +382,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f3
 
 
 
-Definition at line 105 of file euler\+\_\+elements.\+cc.
+Definition at line 112 of file euler\+\_\+elements.\+cc.
 
 
 
@@ -405,7 +401,7 @@ Calculate the pressure from the unknowns.
 
 Calculate the pressure value from the unknowns. 
 
-Definition at line 50 of file euler\+\_\+elements.\+cc.
+Definition at line 49 of file euler\+\_\+elements.\+cc.
 
 
 
@@ -428,7 +424,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 104 of file euler\+\_\+elements.\+h.
+Definition at line 122 of file euler\+\_\+elements.\+h.
 
 
 
@@ -446,7 +442,7 @@ Storage for the approximated gradients.
 
 
 
-Definition at line 59 of file euler\+\_\+elements.\+h.
+Definition at line 58 of file euler\+\_\+elements.\+h.
 
 
 
@@ -465,7 +461,7 @@ Storage for the average primitive values.
 
 
 
-Definition at line 56 of file euler\+\_\+elements.\+h.
+Definition at line 55 of file euler\+\_\+elements.\+h.
 
 
 
@@ -480,7 +476,7 @@ double \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equation
 
 
 
-Definition at line 50 of file euler\+\_\+elements.\+h.
+Definition at line 49 of file euler\+\_\+elements.\+h.
 
 
 
@@ -495,7 +491,7 @@ double$\ast$ \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Eq
 
 
 
-Definition at line 53 of file euler\+\_\+elements.\+h.
+Definition at line 52 of file euler\+\_\+elements.\+h.
 
 
 

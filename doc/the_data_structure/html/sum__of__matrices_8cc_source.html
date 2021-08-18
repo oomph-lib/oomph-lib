@@ -129,31 +129,31 @@ $(function() {
 <div class="title">sum_of_matrices.cc</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="sum__of__matrices_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<a href="sum__of__matrices_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// LIC//</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// LIC//====================================================================</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="matrices_8h.html">matrices.h</a>&quot;</span></div>
@@ -163,81 +163,79 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; <span class="comment">// =================================================================</span><span class="comment"></span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> /// \short Matrix-vector multiplication for a sumofmatrices class. Just</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> /// delegate each multiplication to the appropriate class then add up the</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> /// results.</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span> <span class="comment">// =================================================================</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classoomph_1_1SumOfMatrices.html#ae6c97ff92220835df3c3eeb1b0a85cc5">   41</a></span>&#160; <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SumOfMatrices.html#ae6c97ff92220835df3c3eeb1b0a85cc5">SumOfMatrices::multiply</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;soln)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword"> </span>{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="comment">// We assume that appropriate checks and initialisation on x and soln are</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="comment">// carried out within the individual matrix multiplys.</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// Multiply for the main matrix</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="classoomph_1_1SumOfMatrices.html#afa2c914fc55c972b1389de3d9b7a7266">Main_matrix_pt</a>-&gt;<a class="code" href="classoomph_1_1DoubleMatrixBase.html#a78204eab557e0dc99618e41a28a5c092">multiply</a>(x, soln);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="comment">// Now add contribution for the added matrices</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i_matrix=0; i_matrix&lt;<a class="code" href="classoomph_1_1SumOfMatrices.html#a65dfe9fb848ae855f9949f1621df4df8">Added_matrix_pt</a>.size(); i_matrix++)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;   {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// If possible copy the matrix distribution, otherwise it isn&#39;t</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// distributed so make a serial LinearAlgebraDistribution object.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> col_dist, row_dist;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> serial_comm; <span class="comment">// Serial communcator (does nothing)</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    col_dist.<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a3cab441019e738e4c6db6ee22dd71515">build</a>(&amp;serial_comm, <a class="code" href="classoomph_1_1SumOfMatrices.html#a4d305ca67acad2600f833accd4acf982">added_matrix_pt</a>(i_matrix)-&gt;<a class="code" href="classoomph_1_1SumOfMatrices.html#ad18b4591850b5e89ee6695407aaeec54">ncol</a>(), <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    row_dist.<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a3cab441019e738e4c6db6ee22dd71515">build</a>(&amp;serial_comm, <a class="code" href="classoomph_1_1SumOfMatrices.html#a4d305ca67acad2600f833accd4acf982">added_matrix_pt</a>(i_matrix)-&gt;<a class="code" href="classoomph_1_1SumOfMatrices.html#a5d3b790f7e4f1bce927ecfb61844a52a">nrow</a>(), <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// Create temporary output DoubleVector</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a> temp_soln(row_dist);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// Create a const iterator for the map (faster than .find() or []</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// access, const means can&#39;t change the map via the iterator).</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::map&lt;unsigned, unsigned&gt;::const_iterator it;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// Pull out the appropriate values into a temp vector</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">//??ds not parallel</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a> temp_x(col_dist);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">for</span>(it = <a class="code" href="classoomph_1_1SumOfMatrices.html#a0c3227daf48147b18bc5360fafc53d1f">Col_map_pt</a>[i_matrix]-&gt;main_to_added_mapping_pt()-&gt;begin();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        it != <a class="code" href="classoomph_1_1SumOfMatrices.html#a0c3227daf48147b18bc5360fafc53d1f">Col_map_pt</a>[i_matrix]-&gt;main_to_added_mapping_pt()-&gt;end();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        it++)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;     {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        temp_x[it-&gt;second] = x[it-&gt;first];</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;     }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// Perform the multiplication</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classoomph_1_1SumOfMatrices.html#a65dfe9fb848ae855f9949f1621df4df8">Added_matrix_pt</a>[i_matrix]-&gt;multiply(temp_x, temp_soln);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// Add result to solution vector</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">//??ds not parallel</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">for</span>(it = <a class="code" href="classoomph_1_1SumOfMatrices.html#ada8abf72cfd7c3c74b2f656191f06a31">Row_map_pt</a>[i_matrix]-&gt;main_to_added_mapping_pt()-&gt;begin();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        it != <a class="code" href="classoomph_1_1SumOfMatrices.html#ada8abf72cfd7c3c74b2f656191f06a31">Row_map_pt</a>[i_matrix]-&gt;main_to_added_mapping_pt()-&gt;end();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        it++)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;     {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        soln[it-&gt;first] += temp_soln[it-&gt;second];</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;     }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;   }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="comment">// =================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">  /// \short Matrix-vector multiplication for a sumofmatrices class. Just</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">  /// delegate each multiplication to the appropriate class then add up the</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">  /// results.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span>  <span class="comment">// =================================================================</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classoomph_1_1SumOfMatrices.html#ae6c97ff92220835df3c3eeb1b0a85cc5">   40</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SumOfMatrices.html#ae6c97ff92220835df3c3eeb1b0a85cc5">SumOfMatrices::multiply</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a>&amp; x, <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a>&amp; soln)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// We assume that appropriate checks and initialisation on x and soln are</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// carried out within the individual matrix multiplys.</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Multiply for the main matrix</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classoomph_1_1SumOfMatrices.html#afa2c914fc55c972b1389de3d9b7a7266">Main_matrix_pt</a>-&gt;<a class="code" href="classoomph_1_1DoubleMatrixBase.html#a78204eab557e0dc99618e41a28a5c092">multiply</a>(x, soln);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// Now add contribution for the added matrices</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i_matrix = 0; i_matrix &lt; <a class="code" href="classoomph_1_1SumOfMatrices.html#a65dfe9fb848ae855f9949f1621df4df8">Added_matrix_pt</a>.size(); i_matrix++)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="comment">// If possible copy the matrix distribution, otherwise it isn&#39;t</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <span class="comment">// distributed so make a serial LinearAlgebraDistribution object.</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <a class="code" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> col_dist, row_dist;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <a class="code" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> serial_comm; <span class="comment">// Serial communcator (does nothing)</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      col_dist.<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a3cab441019e738e4c6db6ee22dd71515">build</a>(&amp;serial_comm, <a class="code" href="classoomph_1_1SumOfMatrices.html#a4d305ca67acad2600f833accd4acf982">added_matrix_pt</a>(i_matrix)-&gt;<a class="code" href="classoomph_1_1SumOfMatrices.html#ad18b4591850b5e89ee6695407aaeec54">ncol</a>(), <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      row_dist.<a class="code" href="classoomph_1_1LinearAlgebraDistribution.html#a3cab441019e738e4c6db6ee22dd71515">build</a>(&amp;serial_comm, <a class="code" href="classoomph_1_1SumOfMatrices.html#a4d305ca67acad2600f833accd4acf982">added_matrix_pt</a>(i_matrix)-&gt;<a class="code" href="classoomph_1_1SumOfMatrices.html#a5d3b790f7e4f1bce927ecfb61844a52a">nrow</a>(), <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="comment">// Create temporary output DoubleVector</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a> temp_soln(row_dist);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="comment">// Create a const iterator for the map (faster than .find() or []</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="comment">// access, const means can&#39;t change the map via the iterator).</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      std::map&lt;unsigned, unsigned&gt;::const_iterator it;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="comment">// Pull out the appropriate values into a temp vector</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="comment">//??ds not parallel</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a> temp_x(col_dist);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="keywordflow">for</span> (it = <a class="code" href="classoomph_1_1SumOfMatrices.html#a67b29b2c909a515cd328a45db2016a6c">Col_map_pt</a>[i_matrix]-&gt;main_to_added_mapping_pt()-&gt;begin();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;           it != <a class="code" href="classoomph_1_1SumOfMatrices.html#a67b29b2c909a515cd328a45db2016a6c">Col_map_pt</a>[i_matrix]-&gt;main_to_added_mapping_pt()-&gt;end();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;           it++)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        temp_x[it-&gt;second] = x[it-&gt;first];</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="comment">// Perform the multiplication</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <a class="code" href="classoomph_1_1SumOfMatrices.html#a65dfe9fb848ae855f9949f1621df4df8">Added_matrix_pt</a>[i_matrix]-&gt;multiply(temp_x, temp_soln);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <span class="comment">// Add result to solution vector</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="comment">//??ds not parallel</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      <span class="keywordflow">for</span> (it = <a class="code" href="classoomph_1_1SumOfMatrices.html#ab9c2057db624b4cfeb41dd5ffa117abf">Row_map_pt</a>[i_matrix]-&gt;main_to_added_mapping_pt()-&gt;begin();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;           it != <a class="code" href="classoomph_1_1SumOfMatrices.html#ab9c2057db624b4cfeb41dd5ffa117abf">Row_map_pt</a>[i_matrix]-&gt;main_to_added_mapping_pt()-&gt;end();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;           it++)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        soln[it-&gt;first] += temp_soln[it-&gt;second];</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  }</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;} <span class="comment">// namespace oomph</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_ada8abf72cfd7c3c74b2f656191f06a31"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#ada8abf72cfd7c3c74b2f656191f06a31">oomph::SumOfMatrices::Row_map_pt</a></div><div class="ttdeci">Vector&lt; const AddedMainNumberingLookup * &gt; Row_map_pt</div><div class="ttdoc">List of maps between row numbers of the main matrix and the added matrices.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00276">sum_of_matrices.h:276</a></div></div>
 <div class="ttc" id="asum__of__matrices_8h_html"><div class="ttname"><a href="sum__of__matrices_8h.html">sum_of_matrices.h</a></div></div>
 <div class="ttc" id="adouble__vector_8h_html"><div class="ttname"><a href="double__vector_8h.html">double_vector.h</a></div></div>
 <div class="ttc" id="aclassoomph_1_1OomphCommunicator_html"><div class="ttname"><a href="classoomph_1_1OomphCommunicator.html">oomph::OomphCommunicator</a></div><div class="ttdoc">An oomph-lib wrapper to the MPI_Comm communicator object. Just contains an MPI_Comm object (which is ...</div><div class="ttdef"><b>Definition:</b> <a href="communicator_8h_source.html#l00053">communicator.h:53</a></div></div>
-<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_ad18b4591850b5e89ee6695407aaeec54"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#ad18b4591850b5e89ee6695407aaeec54">oomph::SumOfMatrices::ncol</a></div><div class="ttdeci">unsigned long ncol() const</div><div class="ttdoc">Return the number of columns of the main matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00483">sum_of_matrices.h:483</a></div></div>
-<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html">oomph::LinearAlgebraDistribution</a></div><div class="ttdoc">Describes the distribution of a distributable linear algebra type object. Typically this is a contain...</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00064">linear_algebra_distribution.h:64</a></div></div>
-<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_a0c3227daf48147b18bc5360fafc53d1f"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#a0c3227daf48147b18bc5360fafc53d1f">oomph::SumOfMatrices::Col_map_pt</a></div><div class="ttdeci">Vector&lt; const AddedMainNumberingLookup * &gt; Col_map_pt</div><div class="ttdoc">List of maps between col numbers of the main matrix and the added matrices.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00280">sum_of_matrices.h:280</a></div></div>
-<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_a65dfe9fb848ae855f9949f1621df4df8"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#a65dfe9fb848ae855f9949f1621df4df8">oomph::SumOfMatrices::Added_matrix_pt</a></div><div class="ttdeci">Vector&lt; DoubleMatrixBase * &gt; Added_matrix_pt</div><div class="ttdoc">List of pointers to the matrices that are added to the main matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00272">sum_of_matrices.h:272</a></div></div>
-<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_ae6c97ff92220835df3c3eeb1b0a85cc5"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#ae6c97ff92220835df3c3eeb1b0a85cc5">oomph::SumOfMatrices::multiply</a></div><div class="ttdeci">void multiply(const DoubleVector &amp;x, DoubleVector &amp;soln) const</div><div class="ttdoc">Multiply: just call multiply on each of the matrices and add up the results (with appropriate bookeep...</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8cc_source.html#l00041">sum_of_matrices.cc:41</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_ad18b4591850b5e89ee6695407aaeec54"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#ad18b4591850b5e89ee6695407aaeec54">oomph::SumOfMatrices::ncol</a></div><div class="ttdeci">unsigned long ncol() const</div><div class="ttdoc">Return the number of columns of the main matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00527">sum_of_matrices.h:527</a></div></div>
+<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html">oomph::LinearAlgebraDistribution</a></div><div class="ttdoc">Describes the distribution of a distributable linear algebra type object. Typically this is a contain...</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8h_source.html#l00063">linear_algebra_distribution.h:63</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_a65dfe9fb848ae855f9949f1621df4df8"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#a65dfe9fb848ae855f9949f1621df4df8">oomph::SumOfMatrices::Added_matrix_pt</a></div><div class="ttdeci">Vector&lt; DoubleMatrixBase * &gt; Added_matrix_pt</div><div class="ttdoc">List of pointers to the matrices that are added to the main matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00274">sum_of_matrices.h:274</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_ae6c97ff92220835df3c3eeb1b0a85cc5"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#ae6c97ff92220835df3c3eeb1b0a85cc5">oomph::SumOfMatrices::multiply</a></div><div class="ttdeci">void multiply(const DoubleVector &amp;x, DoubleVector &amp;soln) const</div><div class="ttdoc">Multiply: just call multiply on each of the matrices and add up the results (with appropriate bookeep...</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8cc_source.html#l00040">sum_of_matrices.cc:40</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
-<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_a3cab441019e738e4c6db6ee22dd71515"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#a3cab441019e738e4c6db6ee22dd71515">oomph::LinearAlgebraDistribution::build</a></div><div class="ttdeci">void build(const OomphCommunicator *const comm_pt, const unsigned &amp;first_row, const unsigned &amp;nrow_local, const unsigned &amp;nrow=0)</div><div class="ttdoc">Sets the distribution. Takes first_row, nrow_local and nrow as arguments. If nrow is not provided or ...</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8cc_source.html#l00037">linear_algebra_distribution.cc:37</a></div></div>
-<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_a5d3b790f7e4f1bce927ecfb61844a52a"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#a5d3b790f7e4f1bce927ecfb61844a52a">oomph::SumOfMatrices::nrow</a></div><div class="ttdeci">unsigned long nrow() const</div><div class="ttdoc">Return the number of rows of the main matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00470">sum_of_matrices.h:470</a></div></div>
+<div class="ttc" id="aclassoomph_1_1LinearAlgebraDistribution_html_a3cab441019e738e4c6db6ee22dd71515"><div class="ttname"><a href="classoomph_1_1LinearAlgebraDistribution.html#a3cab441019e738e4c6db6ee22dd71515">oomph::LinearAlgebraDistribution::build</a></div><div class="ttdeci">void build(const OomphCommunicator *const comm_pt, const unsigned &amp;first_row, const unsigned &amp;nrow_local, const unsigned &amp;nrow=0)</div><div class="ttdoc">Sets the distribution. Takes first_row, nrow_local and nrow as arguments. If nrow is not provided or ...</div><div class="ttdef"><b>Definition:</b> <a href="linear__algebra__distribution_8cc_source.html#l00035">linear_algebra_distribution.cc:35</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_a5d3b790f7e4f1bce927ecfb61844a52a"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#a5d3b790f7e4f1bce927ecfb61844a52a">oomph::SumOfMatrices::nrow</a></div><div class="ttdeci">unsigned long nrow() const</div><div class="ttdoc">Return the number of rows of the main matrix.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00513">sum_of_matrices.h:513</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_ab9c2057db624b4cfeb41dd5ffa117abf"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#ab9c2057db624b4cfeb41dd5ffa117abf">oomph::SumOfMatrices::Row_map_pt</a></div><div class="ttdeci">Vector&lt; const AddedMainNumberingLookup * &gt; Row_map_pt</div><div class="ttdoc">List of maps between row numbers of the main matrix and the added matrices.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00278">sum_of_matrices.h:278</a></div></div>
 <div class="ttc" id="amatrices_8h_html"><div class="ttname"><a href="matrices_8h.html">matrices.h</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_a67b29b2c909a515cd328a45db2016a6c"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#a67b29b2c909a515cd328a45db2016a6c">oomph::SumOfMatrices::Col_map_pt</a></div><div class="ttdeci">Vector&lt; const AddedMainNumberingLookup * &gt; Col_map_pt</div><div class="ttdoc">List of maps between col numbers of the main matrix and the added matrices.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00282">sum_of_matrices.h:282</a></div></div>
 <div class="ttc" id="aclassoomph_1_1DoubleMatrixBase_html_a78204eab557e0dc99618e41a28a5c092"><div class="ttname"><a href="classoomph_1_1DoubleMatrixBase.html#a78204eab557e0dc99618e41a28a5c092">oomph::DoubleMatrixBase::multiply</a></div><div class="ttdeci">virtual void multiply(const DoubleVector &amp;x, DoubleVector &amp;soln) const =0</div><div class="ttdoc">Multiply the matrix by the vector x: soln=Ax.</div></div>
-<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_afa2c914fc55c972b1389de3d9b7a7266"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#afa2c914fc55c972b1389de3d9b7a7266">oomph::SumOfMatrices::Main_matrix_pt</a></div><div class="ttdeci">DoubleMatrixBase * Main_matrix_pt</div><div class="ttdoc">Pointer to the matrix which we are adding the others to.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00269">sum_of_matrices.h:269</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_afa2c914fc55c972b1389de3d9b7a7266"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#afa2c914fc55c972b1389de3d9b7a7266">oomph::SumOfMatrices::Main_matrix_pt</a></div><div class="ttdeci">DoubleMatrixBase * Main_matrix_pt</div><div class="ttdoc">Pointer to the matrix which we are adding the others to.</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00271">sum_of_matrices.h:271</a></div></div>
 <div class="ttc" id="aclassoomph_1_1DoubleVector_html"><div class="ttname"><a href="classoomph_1_1DoubleVector.html">oomph::DoubleVector</a></div><div class="ttdoc">A vector in the mathematical sense, initially developed for linear algebra type applications....</div><div class="ttdef"><b>Definition:</b> <a href="double__vector_8h_source.html#l00057">double_vector.h:57</a></div></div>
-<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_a4d305ca67acad2600f833accd4acf982"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#a4d305ca67acad2600f833accd4acf982">oomph::SumOfMatrices::added_matrix_pt</a></div><div class="ttdeci">DoubleMatrixBase * added_matrix_pt(const unsigned &amp;i) const</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00460">sum_of_matrices.h:460</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SumOfMatrices_html_a4d305ca67acad2600f833accd4acf982"><div class="ttname"><a href="classoomph_1_1SumOfMatrices.html#a4d305ca67acad2600f833accd4acf982">oomph::SumOfMatrices::added_matrix_pt</a></div><div class="ttdeci">DoubleMatrixBase * added_matrix_pt(const unsigned &amp;i) const</div><div class="ttdef"><b>Definition:</b> <a href="sum__of__matrices_8h_source.html#l00497">sum_of_matrices.h:497</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
     <script src="../../js/jquery-1.12.0.min.js"></script>
@@ -265,7 +263,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:11
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:34
         </div>
       </div>
     </footer>

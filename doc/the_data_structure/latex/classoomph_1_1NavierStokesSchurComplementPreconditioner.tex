@@ -63,8 +63,7 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_af7d68718453adc8e7b9e19ad30cc9171}{pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}} ()
 \begin{DoxyCompactList}\small\item\em Set boolean indicating that we want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a58c02e402f5c6103268da36097b4ad0e}{unpin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}} ()
-\begin{DoxyCompactList}\small\item\em Set boolean indicating that we do not want to pin first pressure ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set boolean indicating that we do not want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a1b42174c40c4fec1336c547aaa3d07f5}{validate}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$orig\+\_\+problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Validate auxiliary pressure advection diffusion problem in 2D. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03941c01d70ece07797301c8ac6a0a8a}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} ()
@@ -119,7 +118,7 @@ bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6
 \begin{DoxyCompactList}\small\item\em Boolean to indicate use of L\+SC (true) or Fp (false) variant. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a3aa99e654544365b78d4dca057ed53e0}{Use\+\_\+robin\+\_\+for\+\_\+fp}}
 \begin{DoxyCompactList}\small\item\em Use Robin BC elements for Fp preconditoner? \end{DoxyCompactList}\item 
-std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a7677eca3c799be64774cae9a23c8c858}{Eqn\+\_\+number\+\_\+backup}}
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_af34c14327511f1e7deb5726b85b05417}{Eqn\+\_\+number\+\_\+backup}}
 \begin{DoxyCompactList}\small\item\em Map to store original eqn numbers of various \mbox{\hyperlink{classoomph_1_1Data}{Data}} values when assembling pressure advection diffusion matrix. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a40ffaa90de4f861037cbd364789eb889}{Pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}}
 \begin{DoxyCompactList}\small\item\em Boolean indicating if we want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. \end{DoxyCompactList}\item 
@@ -147,7 +146,7 @@ In our implementation of the preconditioner, the linear systems can either be so
 \end{DoxyCode}
  
 
-Definition at line 678 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 651 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -164,7 +163,7 @@ Constructor -\/ sets defaults for control flags.
 
 
 
-Definition at line 685 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 656 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -182,7 +181,7 @@ Destructor.
 
 
 
-Definition at line 739 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 710 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -200,7 +199,7 @@ Broken copy constructor.
 
 
 
-Definition at line 745 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 716 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -221,7 +220,7 @@ Helper function to assemble the inverse diagonals of the pressure and velocity m
 
 Helper function to assemble the inverse diagonals of the pressure and velocity mass matrix from the elemental contributions defined in \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}}\+:\+: get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal(...) If do\+\_\+both=true, both are computed, otherwise only the velocity mass matrix (the L\+SC version of the preconditioner only needs that one) 
 
-Definition at line 863 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line 846 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
 
 
 
@@ -247,7 +246,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line 1680 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line 1672 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
 
 
 
@@ -269,7 +268,7 @@ Do not accept presence of elements that are not of type \mbox{\hyperlink{classoo
 
 
 
-Definition at line 791 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 764 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -287,7 +286,7 @@ Disable documentation of time.
 
 
 
-Definition at line 880 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 862 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -305,7 +304,7 @@ Don\textquotesingle{}t use Robin BC elements for the Fp preconditioenr.
 
 
 
-Definition at line 889 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 877 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -323,7 +322,7 @@ Accept presence of elements that are not of type \mbox{\hyperlink{classoomph_1_1
 
 
 
-Definition at line 783 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 756 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -341,7 +340,7 @@ Enable documentation of time.
 
 
 
-Definition at line 877 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 856 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -359,7 +358,7 @@ Use Robin BC elements for the Fp preconditioner.
 
 
 
-Definition at line 886 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 871 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -377,7 +376,7 @@ Get the pressure advection diffusion matrix.
 
 
 
-Definition at line 936 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 931 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -399,7 +398,7 @@ Pin all non-\/pressure dofs.
 
 
 
-Definition at line 918 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 913 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -421,7 +420,7 @@ Set boolean indicating that we want to pin first pressure dof in Navier Stokes m
 
 
 
-Definition at line 896 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 887 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -443,7 +442,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 669 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line 658 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
 
 
 
@@ -451,7 +450,7 @@ References Bt\+\_\+mat\+\_\+vec\+\_\+pt, oomph\+::\+Double\+Vector\+::build(), o
 
 
 
-Referenced by oomph\+::\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve().
+Referenced by oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), and oomph\+::\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve().
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_afc57fedbcd960d99c5ab3f135eacb612}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_afc57fedbcd960d99c5ab3f135eacb612}} 
 \index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!problem\_pt@{problem\_pt}}
@@ -461,7 +460,7 @@ Referenced by oomph\+::\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve().
 
 
 
-Definition at line 766 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 740 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -483,7 +482,7 @@ Reset pin status of all values.
 
 
 
-Definition at line 1117 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1111 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -505,7 +504,7 @@ Function to set a new momentum matrix preconditioner (inexact solver)
 
 
 
-Definition at line 847 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 820 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -523,7 +522,7 @@ Function to (re-\/)set momentum matrix preconditioner (inexact solver) to Super\
 
 
 
-Definition at line 867 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 846 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -537,11 +536,15 @@ References F\+\_\+preconditioner\+\_\+pt, and Using\+\_\+default\+\_\+f\+\_\+pre
 
 Specify the mesh containing the block-\/preconditionable Navier-\/\+Stokes elements. The optional argument indicates if there are multiple types of elements in the same mesh. 
 
-Definition at line 811 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 783 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
 References Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::mesh\+\_\+pt(), and Navier\+\_\+stokes\+\_\+mesh\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::setup(), and oomph\+::\+F\+S\+I\+Preconditioner\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a48f0d5e878eccab6e7f080c92d4bc6f5}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a48f0d5e878eccab6e7f080c92d4bc6f5}} 
 \index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!set\_p\_preconditioner@{set\_p\_preconditioner}}
@@ -555,7 +558,7 @@ Function to set a new pressure matrix preconditioner (inexact solver)
 
 
 
-Definition at line 823 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 796 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -573,7 +576,7 @@ Function to (re-\/)set pressure matrix preconditioner (inexact solver) to Super\
 
 
 
-Definition at line 837 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 810 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -591,7 +594,7 @@ Broken assignment operator.
 
 Set the problem pointer (non-\/const pointer, the problem W\+I\+LL be changed) for use in \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac3f40f62d33d33616cdb4bed48aaccde}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}. 
 
-Definition at line 763 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 735 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -613,11 +616,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 144 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line 147 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
 
 
 
-References Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh, assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), Bt\+\_\+mat\+\_\+vec\+\_\+pt, clean\+\_\+up\+\_\+memory(), oomph\+::\+Preconditioner\+::comm\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), Doc\+\_\+time, E\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner, F\+\_\+preconditioner\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+other\+\_\+matrix(), get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix(), i, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::matrix\+\_\+pt(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), Navier\+\_\+stokes\+\_\+mesh\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::ndof\+\_\+types(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh(), oomph\+::oomph\+\_\+info, P\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Q\+Bt\+\_\+mat\+\_\+vec\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+mesh(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+nmesh(), oomph\+::\+Preconditioner\+::setup(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product(), oomph\+::\+C\+R\+Double\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset(), oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), Use\+\_\+\+L\+SC, Using\+\_\+default\+\_\+f\+\_\+preconditioner, and Using\+\_\+default\+\_\+p\+\_\+preconditioner.
+References Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh, assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), Bt\+\_\+mat\+\_\+vec\+\_\+pt, clean\+\_\+up\+\_\+memory(), oomph\+::\+Preconditioner\+::comm\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), Doc\+\_\+time, E\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner, F\+\_\+preconditioner\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+other\+\_\+matrix(), get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix(), i, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::matrix\+\_\+pt(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), Navier\+\_\+stokes\+\_\+mesh\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::ndof\+\_\+types(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh(), oomph\+::oomph\+\_\+info, P\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Q\+Bt\+\_\+mat\+\_\+vec\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+mesh(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+nmesh(), oomph\+::\+Preconditioner\+::setup(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product(), oomph\+::\+C\+R\+Double\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset(), oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), Use\+\_\+\+L\+SC, Using\+\_\+default\+\_\+f\+\_\+preconditioner, and Using\+\_\+default\+\_\+p\+\_\+preconditioner.
 
 
 
@@ -645,7 +648,7 @@ for some reason we have to remind the compiler that there is a \mbox{\hyperlink{
 
 
 
-Definition at line 124 of file preconditioner.\+h.
+Definition at line 126 of file preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}} 
 \index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!setup@{setup}}
@@ -659,7 +662,7 @@ for some reason we have to remind the compiler that there is a \mbox{\hyperlink{
 
 
 
-Definition at line 98 of file preconditioner.\+h.
+Definition at line 100 of file preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a58c02e402f5c6103268da36097b4ad0e}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a58c02e402f5c6103268da36097b4ad0e}} 
 \index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!unpin\_first\_pressure\_dof\_in\_press\_adv\_diff@{unpin\_first\_pressure\_dof\_in\_press\_adv\_diff}}
@@ -669,12 +672,11 @@ Definition at line 98 of file preconditioner.\+h.
 
 
 
-Set boolean indicating that we do not want to pin first pressure ~\newline
- 
+Set boolean indicating that we do not want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. 
 
-dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case 
 
-Definition at line 904 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+
+Definition at line 897 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -692,7 +694,7 @@ Use Fp version of the preconditioner.
 
 
 
-Definition at line 863 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 839 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -710,7 +712,7 @@ Use L\+SC version of the preconditioner.
 
 
 
-Definition at line 860 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 833 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -729,7 +731,7 @@ Validate auxiliary pressure advection diffusion problem in 2D.
 
 
 
-Definition at line 910 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 905 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -750,7 +752,7 @@ Boolean to indicate that presence of elements that are not of type \mbox{\hyperl
 
 
 
-Definition at line 1197 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1188 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -768,7 +770,7 @@ Flag to indicate if there are multiple element types in the Navier-\/\+Stokes me
 
 
 
-Definition at line 1235 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1226 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -786,7 +788,7 @@ Referenced by Navier\+Stokes\+Schur\+Complement\+Preconditioner(), set\+\_\+navi
 
 
 
-Definition at line 1221 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1212 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -804,7 +806,7 @@ Set Doc\+\_\+time to true for outputting results of timings.
 
 
 
-Definition at line 1215 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1206 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -822,17 +824,17 @@ Referenced by disable\+\_\+doc\+\_\+time(), enable\+\_\+doc\+\_\+time(), Navier\
 
 
 
-Definition at line 1227 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1218 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
 Referenced by clean\+\_\+up\+\_\+memory(), Navier\+Stokes\+Schur\+Complement\+Preconditioner(), preconditioner\+\_\+solve(), and setup().
 
-\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a7677eca3c799be64774cae9a23c8c858}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a7677eca3c799be64774cae9a23c8c858}} 
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_af34c14327511f1e7deb5726b85b05417}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_af34c14327511f1e7deb5726b85b05417}} 
 \index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Eqn\_number\_backup@{Eqn\_number\_backup}}
 \index{Eqn\_number\_backup@{Eqn\_number\_backup}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Eqn\_number\_backup}{Eqn\_number\_backup}}
-{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,std\+::vector$<$int$>$ $>$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Eqn\+\_\+number\+\_\+backup\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, std\+::vector$<$int$>$ $>$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Eqn\+\_\+number\+\_\+backup\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -840,7 +842,7 @@ Map to store original eqn numbers of various \mbox{\hyperlink{classoomph_1_1Data
 
 
 
-Definition at line 1245 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1236 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -858,7 +860,7 @@ Referenced by pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), and reset\+\_\+pi
 
 
 
-Definition at line 1224 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1215 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -876,7 +878,7 @@ Boolean indicating whether the momentum system preconditioner is a block precond
 
 
 
-Definition at line 1212 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1203 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -894,7 +896,7 @@ Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the F matr
 
 
 
-Definition at line 1181 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1172 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -912,7 +914,7 @@ the pointer to the mesh of block preconditionable Navier Stokes elements.
 
 
 
-Definition at line 1231 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1222 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -930,7 +932,7 @@ Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the pressu
 
 
 
-Definition at line 1178 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1169 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -948,7 +950,7 @@ Boolean indicating if we want to pin first pressure dof in Navier Stokes mesh wh
 
 
 
-Definition at line 1252 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1243 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -966,7 +968,7 @@ Control flag is true if the preconditioner has been setup (used so we can wipe t
 
 
 
-Definition at line 1192 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1183 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -980,7 +982,7 @@ Referenced by clean\+\_\+up\+\_\+memory(), Navier\+Stokes\+Schur\+Complement\+Pr
 
 Storage for the (non-\/const!) problem pointer for use in \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac3f40f62d33d33616cdb4bed48aaccde}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}. 
 
-Definition at line 1256 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1247 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -998,7 +1000,7 @@ Referenced by problem\+\_\+pt(), and set\+\_\+problem\+\_\+pt().
 
 
 
-Definition at line 1218 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1209 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -1016,7 +1018,7 @@ Boolean to indicate use of L\+SC (true) or Fp (false) variant.
 
 
 
-Definition at line 1238 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1229 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -1034,7 +1036,7 @@ Use Robin BC elements for Fp preconditoner?
 
 
 
-Definition at line 1241 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1232 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -1052,7 +1054,7 @@ flag indicating whether the default F preconditioner is used
 
 
 
-Definition at line 1184 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1175 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 
@@ -1070,7 +1072,7 @@ flag indicating whether the default P preconditioner is used
 
 
 
-Definition at line 1187 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+Definition at line 1178 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
 
 
 

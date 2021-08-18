@@ -162,10 +162,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a45774807ce550b68de4f85ad0ffa904a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a45774807ce550b68de4f85ad0ffa904a">BodyForceFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;b)</td></tr>
-<tr class="memdesc:a45774807ce550b68de4f85ad0ffa904a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to function that specifies the body force as a function of the Cartesian coordinates FCT(x,b) &ndash; x and b are Vectors! <br  />
-  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a45774807ce550b68de4f85ad0ffa904a">More...</a><br /></td></tr>
-<tr class="separator:a45774807ce550b68de4f85ad0ffa904a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7e51fd604fffc42cb9a8a843fa09496"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7e51fd604fffc42cb9a8a843fa09496">BodyForceFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;b)</td></tr>
+<tr class="memdesc:ae7e51fd604fffc42cb9a8a843fa09496"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to function that specifies the body force as a function of the Cartesian coordinates FCT(x,b) &ndash; x and b are Vectors!  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7e51fd604fffc42cb9a8a843fa09496">More...</a><br /></td></tr>
+<tr class="separator:ae7e51fd604fffc42cb9a8a843fa09496"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classoomph_1_1FiniteElement"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classoomph_1_1FiniteElement')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classoomph_1_1FiniteElement.html">oomph::FiniteElement</a></td></tr>
 <tr class="memitem:a690fd33af26cc3e84f39bba6d5a85202 inherit pub_types_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">SteadyExactSolutionFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;)</td></tr>
 <tr class="memdesc:a690fd33af26cc3e84f39bba6d5a85202 inherit pub_types_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that computes vector-valued steady "exact solution" <img class="formulaInl" alt="$ {\bf f}({\bf x}) $" src="form_241.png"/> as <img class="formulaInl" alt="$ \mbox{\tt fct}({\bf x}, {\bf f}) $" src="form_242.png"/>.  <a href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">More...</a><br /></td></tr>
@@ -180,18 +179,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aafd00c124daa9b197a4364707b788d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Set null pointers for constitutive law and for isotropic growth function. Set physical parameter values to default values, and set body force to zero.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#aafd00c124daa9b197a4364707b788d43">More...</a><br /></td></tr>
 <tr class="separator:aafd00c124daa9b197a4364707b788d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81fa794623734812d0aa3116456d99ba"><td class="memItemLeft" align="right" valign="top">virtual std::complex&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a81fa794623734812d0aa3116456d99ba">u_index_time_harmonic_linear_elasticity</a> (const unsigned <a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
-<tr class="memdesc:a81fa794623734812d0aa3116456d99ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the index at which the i-th real or imag unknown displacement component is stored. The default value is appropriate for single-physics problems: <br  />
-  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a81fa794623734812d0aa3116456d99ba">More...</a><br /></td></tr>
+<tr class="memdesc:a81fa794623734812d0aa3116456d99ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the index at which the i-th real or imag unknown displacement component is stored. The default value is appropriate for single-physics problems:  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a81fa794623734812d0aa3116456d99ba">More...</a><br /></td></tr>
 <tr class="separator:a81fa794623734812d0aa3116456d99ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eda17e9f0e6973ca0f859f67746ab60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a0eda17e9f0e6973ca0f859f67746ab60">interpolated_u_time_harmonic_linear_elasticity</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;disp) const</td></tr>
-<tr class="memdesc:a0eda17e9f0e6973ca0f859f67746ab60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute vector of FE interpolated displacement u at local coordinate s.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a0eda17e9f0e6973ca0f859f67746ab60">More...</a><br /></td></tr>
-<tr class="separator:a0eda17e9f0e6973ca0f859f67746ab60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7ac55e5a3d92669e56ab492cbc2dddf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7ac55e5a3d92669e56ab492cbc2dddf">interpolated_u_time_harmonic_linear_elasticity</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;disp) const</td></tr>
+<tr class="memdesc:ae7ac55e5a3d92669e56ab492cbc2dddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute vector of FE interpolated displacement u at local coordinate s.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7ac55e5a3d92669e56ab492cbc2dddf">More...</a><br /></td></tr>
+<tr class="separator:ae7ac55e5a3d92669e56ab492cbc2dddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99f3853339d3570ac7afb7cbf486dd17"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a99f3853339d3570ac7afb7cbf486dd17">interpolated_u_time_harmonic_linear_elasticity</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
 <tr class="memdesc:a99f3853339d3570ac7afb7cbf486dd17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return FE interpolated displacement u[i] at local coordinate s.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a99f3853339d3570ac7afb7cbf486dd17">More...</a><br /></td></tr>
 <tr class="separator:a99f3853339d3570ac7afb7cbf486dd17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6278a1d6afdd232cf9160965b566b8fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html">PMLTimeHarmonicIsotropicElasticityTensor</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a6278a1d6afdd232cf9160965b566b8fb">elasticity_tensor_pt</a> ()</td></tr>
-<tr class="memdesc:a6278a1d6afdd232cf9160965b566b8fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the elasticity_tensor.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a6278a1d6afdd232cf9160965b566b8fb">More...</a><br /></td></tr>
-<tr class="separator:a6278a1d6afdd232cf9160965b566b8fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30cfbee8ab485cee53ecd8a666531557"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html">PMLTimeHarmonicIsotropicElasticityTensor</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a30cfbee8ab485cee53ecd8a666531557">elasticity_tensor_pt</a> ()</td></tr>
+<tr class="memdesc:a30cfbee8ab485cee53ecd8a666531557"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the elasticity_tensor.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a30cfbee8ab485cee53ecd8a666531557">More...</a><br /></td></tr>
+<tr class="separator:a30cfbee8ab485cee53ecd8a666531557"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c9ade99fa96e7cfe987e9e978d130da"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a1c9ade99fa96e7cfe987e9e978d130da">E</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</td></tr>
 <tr class="memdesc:a1c9ade99fa96e7cfe987e9e978d130da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the entries in the elasticity tensor.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a1c9ade99fa96e7cfe987e9e978d130da">More...</a><br /></td></tr>
 <tr class="separator:a1c9ade99fa96e7cfe987e9e978d130da"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,43 +199,42 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a82459926f0225f8acd062f0450abc6ed"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a82459926f0225f8acd062f0450abc6ed">omega_sq</a> () const</td></tr>
 <tr class="memdesc:a82459926f0225f8acd062f0450abc6ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for square of non-dim frequency.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a82459926f0225f8acd062f0450abc6ed">More...</a><br /></td></tr>
 <tr class="separator:a82459926f0225f8acd062f0450abc6ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91ba03261dd64d9111ca6399775161f2"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a91ba03261dd64d9111ca6399775161f2">omega_sq_pt</a> ()</td></tr>
-<tr class="memdesc:a91ba03261dd64d9111ca6399775161f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for square of non-dim frequency.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a91ba03261dd64d9111ca6399775161f2">More...</a><br /></td></tr>
-<tr class="separator:a91ba03261dd64d9111ca6399775161f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1af36445ad459fbb36c9c3646a323347"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a45774807ce550b68de4f85ad0ffa904a">BodyForceFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a1af36445ad459fbb36c9c3646a323347">body_force_fct_pt</a> ()</td></tr>
+<tr class="memitem:a060c7a034add2ded7e2dbf2fe9eaac0c"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a060c7a034add2ded7e2dbf2fe9eaac0c">omega_sq_pt</a> ()</td></tr>
+<tr class="memdesc:a060c7a034add2ded7e2dbf2fe9eaac0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for square of non-dim frequency.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a060c7a034add2ded7e2dbf2fe9eaac0c">More...</a><br /></td></tr>
+<tr class="separator:a060c7a034add2ded7e2dbf2fe9eaac0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1af36445ad459fbb36c9c3646a323347"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7e51fd604fffc42cb9a8a843fa09496">BodyForceFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a1af36445ad459fbb36c9c3646a323347">body_force_fct_pt</a> ()</td></tr>
 <tr class="memdesc:a1af36445ad459fbb36c9c3646a323347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to body force function.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a1af36445ad459fbb36c9c3646a323347">More...</a><br /></td></tr>
 <tr class="separator:a1af36445ad459fbb36c9c3646a323347"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a119cef0394bdfa2df62e439d935513a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a45774807ce550b68de4f85ad0ffa904a">BodyForceFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a119cef0394bdfa2df62e439d935513a2">body_force_fct_pt</a> () const</td></tr>
+<tr class="memitem:a119cef0394bdfa2df62e439d935513a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7e51fd604fffc42cb9a8a843fa09496">BodyForceFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a119cef0394bdfa2df62e439d935513a2">body_force_fct_pt</a> () const</td></tr>
 <tr class="memdesc:a119cef0394bdfa2df62e439d935513a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to body force function (const version)  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a119cef0394bdfa2df62e439d935513a2">More...</a><br /></td></tr>
 <tr class="separator:a119cef0394bdfa2df62e439d935513a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3f79308f146b472d4058bed523fc9c9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae3f79308f146b472d4058bed523fc9c9">get_stress</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; std::complex&lt; double &gt; &gt; &amp;sigma) const =0</td></tr>
-<tr class="memdesc:ae3f79308f146b472d4058bed523fc9c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the Cauchy stress tensor, as calculated from the elasticity tensor at specified local coordinate Virtual so separaete versions can (and must!) be provided for displacement and pressure-displacement formulations.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae3f79308f146b472d4058bed523fc9c9">More...</a><br /></td></tr>
-<tr class="separator:ae3f79308f146b472d4058bed523fc9c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9c0b4aeb96bee736791de3a1a0aa7b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#af9c0b4aeb96bee736791de3a1a0aa7b1">get_strain</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; std::complex&lt; double &gt; &gt; &amp;strain) const</td></tr>
-<tr class="memdesc:af9c0b4aeb96bee736791de3a1a0aa7b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the strain tensor.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#af9c0b4aeb96bee736791de3a1a0aa7b1">More...</a><br /></td></tr>
-<tr class="separator:af9c0b4aeb96bee736791de3a1a0aa7b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2993da51320515e959e7e395a3adb637"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a2993da51320515e959e7e395a3adb637">body_force</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;b) const</td></tr>
-<tr class="memdesc:a2993da51320515e959e7e395a3adb637"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate body force at Eulerian coordinate x (returns zero vector if no body force function pointer has been set)  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a2993da51320515e959e7e395a3adb637">More...</a><br /></td></tr>
-<tr class="separator:a2993da51320515e959e7e395a3adb637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3383c407d4d83b864ec7a0aa46af4fb9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a3383c407d4d83b864ec7a0aa46af4fb9">get_stress</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; std::complex&lt; double &gt;&gt; &amp;sigma) const =0</td></tr>
+<tr class="memdesc:a3383c407d4d83b864ec7a0aa46af4fb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the Cauchy stress tensor, as calculated from the elasticity tensor at specified local coordinate Virtual so separaete versions can (and must!) be provided for displacement and pressure-displacement formulations.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a3383c407d4d83b864ec7a0aa46af4fb9">More...</a><br /></td></tr>
+<tr class="separator:a3383c407d4d83b864ec7a0aa46af4fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e8ff48d11335eb5596e4016e5b617b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ab7e8ff48d11335eb5596e4016e5b617b">get_strain</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; std::complex&lt; double &gt;&gt; &amp;strain) const</td></tr>
+<tr class="memdesc:ab7e8ff48d11335eb5596e4016e5b617b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the strain tensor.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ab7e8ff48d11335eb5596e4016e5b617b">More...</a><br /></td></tr>
+<tr class="separator:ab7e8ff48d11335eb5596e4016e5b617b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a186ca62a78f072daf9637256718b6978"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a186ca62a78f072daf9637256718b6978">body_force</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;b) const</td></tr>
+<tr class="memdesc:a186ca62a78f072daf9637256718b6978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate body force at Eulerian coordinate x (returns zero vector if no body force function pointer has been set)  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a186ca62a78f072daf9637256718b6978">More...</a><br /></td></tr>
+<tr class="separator:a186ca62a78f072daf9637256718b6978"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cf2e81c08597a2bd242941846cafa77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a6cf2e81c08597a2bd242941846cafa77">values_to_be_pinned_on_outer_pml_boundary</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;values_to_pin)</td></tr>
 <tr class="memdesc:a6cf2e81c08597a2bd242941846cafa77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function in which we specify the values to be pinned (and set to zero) on the outer edge of the pml layer. All of them! <a class="el" href="classoomph_1_1Vector.html">Vector</a> is resized internally.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a6cf2e81c08597a2bd242941846cafa77">More...</a><br /></td></tr>
 <tr class="separator:a6cf2e81c08597a2bd242941846cafa77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16ddde4801bcb2ae3dda95490cb0d680"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a16ddde4801bcb2ae3dda95490cb0d680">ndof_types</a> () const</td></tr>
 <tr class="memdesc:a16ddde4801bcb2ae3dda95490cb0d680"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of "DOF types" that degrees of freedom in this element are sub-divided into: for now lump them all into one DOF type. Can be adjusted later.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a16ddde4801bcb2ae3dda95490cb0d680">More...</a><br /></td></tr>
 <tr class="separator:a16ddde4801bcb2ae3dda95490cb0d680"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae73d932e03d1105cad7f7f4a3cf7fefe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae73d932e03d1105cad7f7f4a3cf7fefe">get_dof_numbers_for_unknowns</a> (std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;dof_lookup_list) const</td></tr>
-<tr class="memdesc:ae73d932e03d1105cad7f7f4a3cf7fefe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF types" that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) <br  />
-  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae73d932e03d1105cad7f7f4a3cf7fefe">More...</a><br /></td></tr>
-<tr class="separator:ae73d932e03d1105cad7f7f4a3cf7fefe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa0ca76090994db0c20606ad2a536aec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#aaa0ca76090994db0c20606ad2a536aec">compute_pml_coefficients</a> (const unsigned &amp;ipt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;pml_inverse_jacobian_diagonal, std::complex&lt; double &gt; &amp;pml_jacobian_det)</td></tr>
-<tr class="memdesc:aaa0ca76090994db0c20606ad2a536aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute pml coefficients at position x and integration point ipt. pml_inverse_jacobian_diagonal contains the diagonal terms from the inverse of the Jacobian of the PML transformation. These are used to transform derivatives in real x to derivatives in transformed space <img class="formulaInl" alt="$\tilde x $" src="form_420.png"/>. This can be interpreted as an anisotropic stiffness. pml_jacobian_det is the determinant of the Jacobian of the PML transformation, this allows us to transform volume integrals in transformed space to real space. This can be interpreted as a mass factor If the PML is not enabled via enable_pml, both default to 1.0.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#aaa0ca76090994db0c20606ad2a536aec">More...</a><br /></td></tr>
-<tr class="separator:aaa0ca76090994db0c20606ad2a536aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbcbd2f016db3125a68bb81a8d94b366"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLMapping.html">PMLMapping</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#adbcbd2f016db3125a68bb81a8d94b366">pml_mapping_pt</a> ()</td></tr>
-<tr class="memdesc:adbcbd2f016db3125a68bb81a8d94b366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the PML Mapping object.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#adbcbd2f016db3125a68bb81a8d94b366">More...</a><br /></td></tr>
-<tr class="separator:adbcbd2f016db3125a68bb81a8d94b366"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e4d46ba2b7206c225c67a2851bdea4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLMapping.html">PMLMapping</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a0e4d46ba2b7206c225c67a2851bdea4b">pml_mapping_pt</a> () const</td></tr>
-<tr class="memdesc:a0e4d46ba2b7206c225c67a2851bdea4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the PML Mapping object (const version)  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a0e4d46ba2b7206c225c67a2851bdea4b">More...</a><br /></td></tr>
-<tr class="separator:a0e4d46ba2b7206c225c67a2851bdea4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6d68b4d4aa01cc4da3c26c50af7515c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ac6d68b4d4aa01cc4da3c26c50af7515c">get_dof_numbers_for_unknowns</a> (std::list&lt; std::pair&lt; unsigned long, unsigned &gt;&gt; &amp;dof_lookup_list) const</td></tr>
+<tr class="memdesc:ac6d68b4d4aa01cc4da3c26c50af7515c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF types" that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.)  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ac6d68b4d4aa01cc4da3c26c50af7515c">More...</a><br /></td></tr>
+<tr class="separator:ac6d68b4d4aa01cc4da3c26c50af7515c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4394df38bd1a15e3169f250a9972ac2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#af4394df38bd1a15e3169f250a9972ac2">compute_pml_coefficients</a> (const unsigned &amp;ipt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;pml_inverse_jacobian_diagonal, std::complex&lt; double &gt; &amp;pml_jacobian_det)</td></tr>
+<tr class="memdesc:af4394df38bd1a15e3169f250a9972ac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute pml coefficients at position x and integration point ipt. pml_inverse_jacobian_diagonal contains the diagonal terms from the inverse of the Jacobian of the PML transformation. These are used to transform derivatives in real x to derivatives in transformed space <img class="formulaInl" alt="$\tilde x $" src="form_420.png"/>. This can be interpreted as an anisotropic stiffness. pml_jacobian_det is the determinant of the Jacobian of the PML transformation, this allows us to transform volume integrals in transformed space to real space. This can be interpreted as a mass factor If the PML is not enabled via enable_pml, both default to 1.0.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#af4394df38bd1a15e3169f250a9972ac2">More...</a><br /></td></tr>
+<tr class="separator:af4394df38bd1a15e3169f250a9972ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac58d409c9b0c6f89446a14955cb8dc1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLMapping.html">PMLMapping</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ac58d409c9b0c6f89446a14955cb8dc1a">pml_mapping_pt</a> ()</td></tr>
+<tr class="memdesc:ac58d409c9b0c6f89446a14955cb8dc1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the PML Mapping object.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ac58d409c9b0c6f89446a14955cb8dc1a">More...</a><br /></td></tr>
+<tr class="separator:ac58d409c9b0c6f89446a14955cb8dc1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0be5c95a17f261e17e7e70ec15d25eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLMapping.html">PMLMapping</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ab0be5c95a17f261e17e7e70ec15d25eb">pml_mapping_pt</a> () const</td></tr>
+<tr class="memdesc:ab0be5c95a17f261e17e7e70ec15d25eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the PML Mapping object (const version)  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ab0be5c95a17f261e17e7e70ec15d25eb">More...</a><br /></td></tr>
+<tr class="separator:ab0be5c95a17f261e17e7e70ec15d25eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classoomph_1_1PMLElementBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1PMLElementBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1PMLElementBase.html">oomph::PMLElementBase&lt; DIM &gt;</a></td></tr>
 <tr class="memitem:ad29eae1793cca20aafa774086da1fc47 inherit pub_methods_classoomph_1_1PMLElementBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLElementBase.html#ad29eae1793cca20aafa774086da1fc47">PMLElementBase</a> ()</td></tr>
 <tr class="memdesc:ad29eae1793cca20aafa774086da1fc47 inherit pub_methods_classoomph_1_1PMLElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classoomph_1_1PMLElementBase.html#ad29eae1793cca20aafa774086da1fc47">More...</a><br /></td></tr>
@@ -315,12 +312,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac14a15f09e036608d889e3ab232760d4 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ac14a15f09e036608d889e3ab232760d4">get_x_from_macro_element</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x)</td></tr>
 <tr class="memdesc:ac14a15f09e036608d889e3ab232760d4 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global coordinates as function of local coordinates at previous time "level" t (t=0: present; t&gt;0: previous). using macro element representation (Broken virtual &ndash; overload in specific geometric element class if you want to use this functionality.)  <a href="classoomph_1_1FiniteElement.html#ac14a15f09e036608d889e3ab232760d4">More...</a><br /></td></tr>
 <tr class="separator:ac14a15f09e036608d889e3ab232760d4 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac80983f27f5bcbc08e2eeb6e4d03698b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ac80983f27f5bcbc08e2eeb6e4d03698b">set_integration_scheme</a> (<a class="el" href="classoomph_1_1Integral.html">Integral</a> *const &amp;<a class="el" href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">integral_pt</a>)</td></tr>
+<tr class="memitem:ac80983f27f5bcbc08e2eeb6e4d03698b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ac80983f27f5bcbc08e2eeb6e4d03698b">set_integration_scheme</a> (<a class="el" href="classoomph_1_1Integral.html">Integral</a> *const &amp;<a class="el" href="classoomph_1_1FiniteElement.html#a751dc02ff1325f799840d79ee415753a">integral_pt</a>)</td></tr>
 <tr class="memdesc:ac80983f27f5bcbc08e2eeb6e4d03698b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the spatial integration scheme.  <a href="classoomph_1_1FiniteElement.html#ac80983f27f5bcbc08e2eeb6e4d03698b">More...</a><br /></td></tr>
 <tr class="separator:ac80983f27f5bcbc08e2eeb6e4d03698b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79f1710873332823c47023d370f0596b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Integral.html">Integral</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">integral_pt</a> () const</td></tr>
-<tr class="memdesc:a79f1710873332823c47023d370f0596b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the integration scheme (const version)  <a href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">More...</a><br /></td></tr>
-<tr class="separator:a79f1710873332823c47023d370f0596b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a751dc02ff1325f799840d79ee415753a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Integral.html">Integral</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a751dc02ff1325f799840d79ee415753a">integral_pt</a> () const</td></tr>
+<tr class="memdesc:a751dc02ff1325f799840d79ee415753a inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the integration scheme (const version)  <a href="classoomph_1_1FiniteElement.html#a751dc02ff1325f799840d79ee415753a">More...</a><br /></td></tr>
+<tr class="separator:a751dc02ff1325f799840d79ee415753a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58a25b6859ddd43b7bfe64a19fee5023 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">shape</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Shape.html">Shape</a> &amp;psi) const =0</td></tr>
 <tr class="memdesc:a58a25b6859ddd43b7bfe64a19fee5023 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the geometric shape functions at local coordinate s. This function must be overloaded for each specific geometric element.  <a href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">More...</a><br /></td></tr>
 <tr class="separator:a58a25b6859ddd43b7bfe64a19fee5023 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -378,12 +375,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a564ba080f68132762510b1ec9465b05d inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a564ba080f68132762510b1ec9465b05d">assign_all_generic_local_eqn_numbers</a> (const bool &amp;store_local_dof_pt)</td></tr>
 <tr class="memdesc:a564ba080f68132762510b1ec9465b05d inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded version of the calculation of the local equation numbers. If the boolean argument is true then pointers to the degrees of freedom associated with each equation number are stored locally in the array Dof_pt.  <a href="classoomph_1_1FiniteElement.html#a564ba080f68132762510b1ec9465b05d">More...</a><br /></td></tr>
 <tr class="separator:a564ba080f68132762510b1ec9465b05d inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace0e7fb72a805b5c2c600347bfae7a9b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
-<tr class="memdesc:ace0e7fb72a805b5c2c600347bfae7a9b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the local node n.  <a href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">More...</a><br /></td></tr>
-<tr class="separator:ace0e7fb72a805b5c2c600347bfae7a9b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2faeb30f84c73294a2007ac8d1757af9 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a2faeb30f84c73294a2007ac8d1757af9">node_pt</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
-<tr class="memdesc:a2faeb30f84c73294a2007ac8d1757af9 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the local node n (const version)  <a href="classoomph_1_1FiniteElement.html#a2faeb30f84c73294a2007ac8d1757af9">More...</a><br /></td></tr>
-<tr class="separator:a2faeb30f84c73294a2007ac8d1757af9 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ae3eb7760edc5c9d6427611d8e6fb6 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a28ae3eb7760edc5c9d6427611d8e6fb6">node_pt</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
+<tr class="memdesc:a28ae3eb7760edc5c9d6427611d8e6fb6 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the local node n.  <a href="classoomph_1_1FiniteElement.html#a28ae3eb7760edc5c9d6427611d8e6fb6">More...</a><br /></td></tr>
+<tr class="separator:a28ae3eb7760edc5c9d6427611d8e6fb6 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a967cbf9da397a4600e794df605cf2676 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a967cbf9da397a4600e794df605cf2676">node_pt</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
+<tr class="memdesc:a967cbf9da397a4600e794df605cf2676 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the local node n (const version)  <a href="classoomph_1_1FiniteElement.html#a967cbf9da397a4600e794df605cf2676">More...</a><br /></td></tr>
+<tr class="separator:a967cbf9da397a4600e794df605cf2676 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6219ed269a6d89b5aa14659cce48905a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a> () const</td></tr>
 <tr class="memdesc:a6219ed269a6d89b5aa14659cce48905a inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of nodes.  <a href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">More...</a><br /></td></tr>
 <tr class="separator:a6219ed269a6d89b5aa14659cce48905a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -476,7 +473,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae49607dfdff1f24e9857d5b93d2ebf67 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ae49607dfdff1f24e9857d5b93d2ebf67">construct_boundary_node</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *const &amp;<a class="el" href="classoomph_1_1GeomObject.html#a3c92023891dd4a0e818022f467eeb7f1">time_stepper_pt</a>)</td></tr>
 <tr class="memdesc:ae49607dfdff1f24e9857d5b93d2ebf67 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the local node n, including storage for history values required by timestepper, as a boundary node; that is a node that MAY be placed on a mesh boundary and return a pointer to the newly created node object.  <a href="classoomph_1_1FiniteElement.html#ae49607dfdff1f24e9857d5b93d2ebf67">More...</a><br /></td></tr>
 <tr class="separator:ae49607dfdff1f24e9857d5b93d2ebf67 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb40d7a104d99e6f7d8123e801e53b5b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#aeb40d7a104d99e6f7d8123e801e53b5b">get_node_number</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>) const</td></tr>
+<tr class="memitem:aeb40d7a104d99e6f7d8123e801e53b5b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#aeb40d7a104d99e6f7d8123e801e53b5b">get_node_number</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1FiniteElement.html#a28ae3eb7760edc5c9d6427611d8e6fb6">node_pt</a>) const</td></tr>
 <tr class="memdesc:aeb40d7a104d99e6f7d8123e801e53b5b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of the node *node_pt if this node is in the element, else return -1;.  <a href="classoomph_1_1FiniteElement.html#aeb40d7a104d99e6f7d8123e801e53b5b">More...</a><br /></td></tr>
 <tr class="separator:aeb40d7a104d99e6f7d8123e801e53b5b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ddbb05c5f8bb35b64bec287d653105c inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a2ddbb05c5f8bb35b64bec287d653105c">get_node_at_local_coordinate</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
@@ -545,9 +542,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac27d707cb4f7c1429793c0fdb2fd093b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ac27d707cb4f7c1429793c0fdb2fd093b">node_update</a> ()</td></tr>
 <tr class="memdesc:ac27d707cb4f7c1429793c0fdb2fd093b inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the positions of all nodes in the element using each node update function. The default implementation may be overloaded so that more efficient versions can be written.  <a href="classoomph_1_1FiniteElement.html#ac27d707cb4f7c1429793c0fdb2fd093b">More...</a><br /></td></tr>
 <tr class="separator:ac27d707cb4f7c1429793c0fdb2fd093b inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee5883ba2e464257c3a9c775d8e24c02 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#aee5883ba2e464257c3a9c775d8e24c02">identify_field_data_for_interactions</a> (std::set&lt; std::pair&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> *, unsigned &gt; &gt; &amp;paired_field_data)</td></tr>
-<tr class="memdesc:aee5883ba2e464257c3a9c775d8e24c02 inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The purpose of this function is to identify all possible <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that can affect the fields interpolated by the <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a>. The information will typically be used in interaction problems in which the <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a> provides a forcing term for an <a class="el" href="classoomph_1_1ElementWithExternalElement.html">ElementWithExternalElement</a>. The <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> must be provided as <code>paired_load</code> data containing.  <a href="classoomph_1_1FiniteElement.html#aee5883ba2e464257c3a9c775d8e24c02">More...</a><br /></td></tr>
-<tr class="separator:aee5883ba2e464257c3a9c775d8e24c02 inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822208525e17c4e2493c512294fb6fcd inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a822208525e17c4e2493c512294fb6fcd">identify_field_data_for_interactions</a> (std::set&lt; std::pair&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> *, unsigned &gt;&gt; &amp;paired_field_data)</td></tr>
+<tr class="memdesc:a822208525e17c4e2493c512294fb6fcd inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The purpose of this function is to identify all possible <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that can affect the fields interpolated by the <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a>. The information will typically be used in interaction problems in which the <a class="el" href="classoomph_1_1FiniteElement.html" title="A general Finite Element class.">FiniteElement</a> provides a forcing term for an <a class="el" href="classoomph_1_1ElementWithExternalElement.html">ElementWithExternalElement</a>. The <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> must be provided as <code>paired_load</code> data containing.  <a href="classoomph_1_1FiniteElement.html#a822208525e17c4e2493c512294fb6fcd">More...</a><br /></td></tr>
+<tr class="separator:a822208525e17c4e2493c512294fb6fcd inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0eea5ad6500576d7874e471248026c8a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a0eea5ad6500576d7874e471248026c8a">identify_geometric_data</a> (std::set&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> * &gt; &amp;geometric_data_pt)</td></tr>
 <tr class="memdesc:a0eea5ad6500576d7874e471248026c8a inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The purpose of this function is to identify all <code><a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a></code> objects that affect the elements' geometry. This function is implemented as an empty virtual function since it can only be implemented in conjunction with a node-update strategy. A specific implementation is provided in the <a class="el" href="classoomph_1_1ElementWithMovingNodes.html" title="A policy class that serves to establish the common interfaces for elements that contain moving nodes....">ElementWithMovingNodes</a> class.  <a href="classoomph_1_1FiniteElement.html#a0eea5ad6500576d7874e471248026c8a">More...</a><br /></td></tr>
 <tr class="separator:a0eea5ad6500576d7874e471248026c8a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -690,7 +687,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a684fa2b9a5a85530d805e0c0f6e0d3bb inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Range check for face node numbers.  <a href="classoomph_1_1FiniteElement.html#a684fa2b9a5a85530d805e0c0f6e0d3bb">More...</a><br /></td></tr>
 <tr class="separator:a684fa2b9a5a85530d805e0c0f6e0d3bb inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af20f05fb162a90b7d8ae175ec5dfab1a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceoomph.html#afa5c7a93cae1917e874b392601be0bde">CoordinateMappingFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#af20f05fb162a90b7d8ae175ec5dfab1a">face_to_bulk_coordinate_fct_pt</a> (const int &amp;face_index) const</td></tr>
-<tr class="memdesc:af20f05fb162a90b7d8ae175ec5dfab1a inherit pub_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the function mapping face coordinates to bulk coordinates.  <a href="classoomph_1_1FiniteElement.html#af20f05fb162a90b7d8ae175ec5dfab1a">More...</a><br /></td></tr>
 <tr class="separator:af20f05fb162a90b7d8ae175ec5dfab1a inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b29bbf8e20cf2ccf91674ca09ed80aa inherit pub_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceoomph.html#a0a75fbfa1139f00cf88adeee835c8fe5">BulkCoordinateDerivativesFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a8b29bbf8e20cf2ccf91674ca09ed80aa">bulk_coordinate_derivatives_fct_pt</a> (const int &amp;face_index) const</td></tr>
 <tr class="separator:a8b29bbf8e20cf2ccf91674ca09ed80aa inherit pub_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -704,15 +700,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a45e32d895d4b3686e0f15fe455f4ed44 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">internal_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
 <tr class="memdesc:a45e32d895d4b3686e0f15fe455f4ed44 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th internal data object.  <a href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">More...</a><br /></td></tr>
 <tr class="separator:a45e32d895d4b3686e0f15fe455f4ed44 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4290f039c30e4a84a391025786cf72f6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a4290f039c30e4a84a391025786cf72f6">internal_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
-<tr class="memdesc:a4290f039c30e4a84a391025786cf72f6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th internal data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a4290f039c30e4a84a391025786cf72f6">More...</a><br /></td></tr>
-<tr class="separator:a4290f039c30e4a84a391025786cf72f6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21ff163046aeaab67983e4c862a78d17 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a21ff163046aeaab67983e4c862a78d17">internal_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a21ff163046aeaab67983e4c862a78d17 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th internal data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a21ff163046aeaab67983e4c862a78d17">More...</a><br /></td></tr>
+<tr class="separator:a21ff163046aeaab67983e4c862a78d17 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ec4e27a7a3d16122b00e2b5be0d1036 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a3ec4e27a7a3d16122b00e2b5be0d1036">external_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
 <tr class="memdesc:a3ec4e27a7a3d16122b00e2b5be0d1036 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th external data object.  <a href="classoomph_1_1GeneralisedElement.html#a3ec4e27a7a3d16122b00e2b5be0d1036">More...</a><br /></td></tr>
 <tr class="separator:a3ec4e27a7a3d16122b00e2b5be0d1036 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d81683e4c8177eff051838175188600 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a7d81683e4c8177eff051838175188600">external_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
-<tr class="memdesc:a7d81683e4c8177eff051838175188600 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th external data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a7d81683e4c8177eff051838175188600">More...</a><br /></td></tr>
-<tr class="separator:a7d81683e4c8177eff051838175188600 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59570d8174b7123613d8cbfe6957a21c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a59570d8174b7123613d8cbfe6957a21c">external_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a59570d8174b7123613d8cbfe6957a21c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th external data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a59570d8174b7123613d8cbfe6957a21c">More...</a><br /></td></tr>
+<tr class="separator:a59570d8174b7123613d8cbfe6957a21c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ac5a1d5234fa931ab710c0c74d55d2 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a37ac5a1d5234fa931ab710c0c74d55d2">eqn_number</a> (const unsigned &amp;ieqn_local) const</td></tr>
 <tr class="memdesc:a37ac5a1d5234fa931ab710c0c74d55d2 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the global equation number corresponding to the ieqn_local-th local equation number.  <a href="classoomph_1_1GeneralisedElement.html#a37ac5a1d5234fa931ab710c0c74d55d2">More...</a><br /></td></tr>
 <tr class="separator:a37ac5a1d5234fa931ab710c0c74d55d2 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -786,7 +782,8 @@ Data", i.e. the <a class="el" href="classoomph_1_1Data.html" title="A class that
 <tr class="memdesc:a53d348ab71c86b53619129a1dd411d30 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the vector of residuals of the equations in the element. By default initialise the vector to zero and then call the <a class="el" href="classoomph_1_1GeneralisedElement.html#a310c97f515e8504a48179c0e72c550d7" title="Add the elemental contribution to the residuals vector. Note that this function will NOT initialise t...">fill_in_contribution_to_residuals()</a> function. Note that this entire function can be overloaded if desired.  <a href="classoomph_1_1GeneralisedElement.html#a53d348ab71c86b53619129a1dd411d30">More...</a><br /></td></tr>
 <tr class="separator:a53d348ab71c86b53619129a1dd411d30 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a6d98bc7cf48e">get_jacobian</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
-<tr class="memdesc:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the elemental Jacobian matrix "d equation / d variable".  <a href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a6d98bc7cf48e">More...</a><br /></td></tr>
+<tr class="memdesc:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the elemental Jacobian matrix "d equation / d
+variable".  <a href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a6d98bc7cf48e">More...</a><br /></td></tr>
 <tr class="separator:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5be9add27c9e4a6bd05e6ccaec6263aa inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a5be9add27c9e4a6bd05e6ccaec6263aa">get_mass_matrix</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;mass_matrix)</td></tr>
 <tr class="memdesc:a5be9add27c9e4a6bd05e6ccaec6263aa inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the residuals and the elemental "mass" matrix, the matrix that multiplies the time derivative terms in a problem.  <a href="classoomph_1_1GeneralisedElement.html#a5be9add27c9e4a6bd05e6ccaec6263aa">More...</a><br /></td></tr>
@@ -806,12 +803,12 @@ Data", i.e. the <a class="el" href="classoomph_1_1Data.html" title="A class that
 <tr class="memitem:a1fbe77c663eefdf38a0c95f62f6e51bb inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a1fbe77c663eefdf38a0c95f62f6e51bb">get_hessian_vector_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;Y, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; const &amp;C, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;product)</td></tr>
 <tr class="memdesc:a1fbe77c663eefdf38a0c95f62f6e51bb inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the product of the Hessian (derivative of Jacobian with respect to all variables) an eigenvector, Y, and other specified vectors, C (d(J_{ij})/d u_{k}) Y_{j} C_{k}.  <a href="classoomph_1_1GeneralisedElement.html#a1fbe77c663eefdf38a0c95f62f6e51bb">More...</a><br /></td></tr>
 <tr class="separator:a1fbe77c663eefdf38a0c95f62f6e51bb inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50091d9dad94bd60d5b6fa6c6e9a6fbc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a50091d9dad94bd60d5b6fa6c6e9a6fbc">get_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt; &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
-<tr class="memdesc:a50091d9dad94bd60d5b6fa6c6e9a6fbc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vector of inner product of the given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#a50091d9dad94bd60d5b6fa6c6e9a6fbc">More...</a><br /></td></tr>
-<tr class="separator:a50091d9dad94bd60d5b6fa6c6e9a6fbc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a464659c067a0bdd21f3314491a429381 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a464659c067a0bdd21f3314491a429381">get_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;inner_product_vector)</td></tr>
-<tr class="memdesc:a464659c067a0bdd21f3314491a429381 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the vectors that when taken as a dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#a464659c067a0bdd21f3314491a429381">More...</a><br /></td></tr>
-<tr class="separator:a464659c067a0bdd21f3314491a429381 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a152745876d82aa34594de9f34e508de0 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a152745876d82aa34594de9f34e508de0">get_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt;&gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
+<tr class="memdesc:a152745876d82aa34594de9f34e508de0 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vector of inner product of the given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#a152745876d82aa34594de9f34e508de0">More...</a><br /></td></tr>
+<tr class="separator:a152745876d82aa34594de9f34e508de0 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa281dbacd944ee6fed56c55d1ba96466 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa281dbacd944ee6fed56c55d1ba96466">get_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;inner_product_vector)</td></tr>
+<tr class="memdesc:aa281dbacd944ee6fed56c55d1ba96466 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the vectors that when taken as a dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#aa281dbacd944ee6fed56c55d1ba96466">More...</a><br /></td></tr>
+<tr class="separator:aa281dbacd944ee6fed56c55d1ba96466 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf790e568048d203a4a954f3f8cd1f24 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acf790e568048d203a4a954f3f8cd1f24">compute_norm</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;norm)</td></tr>
 <tr class="memdesc:acf790e568048d203a4a954f3f8cd1f24 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute norm of solution &ndash; broken virtual can be overloaded by element writer to implement whatever norm is desired for the specific element.  <a href="classoomph_1_1GeneralisedElement.html#acf790e568048d203a4a954f3f8cd1f24">More...</a><br /></td></tr>
 <tr class="separator:acf790e568048d203a4a954f3f8cd1f24 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -900,17 +897,17 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:ad1caf78fe79a13d517d3eea2e605a84e inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ad1caf78fe79a13d517d3eea2e605a84e">Accept_negative_jacobian</a> = false</td></tr>
 <tr class="memdesc:ad1caf78fe79a13d517d3eea2e605a84e inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean that if set to true allows a negative jacobian in the transform between global and local coordinates (negative surface area = left-handed coordinate system).  <a href="classoomph_1_1FiniteElement.html#ad1caf78fe79a13d517d3eea2e605a84e">More...</a><br /></td></tr>
 <tr class="separator:ad1caf78fe79a13d517d3eea2e605a84e inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ae8357b9337e2148c57267f1d4c32fcfa">Suppress_output_while_checking_for_inverted_elements</a> =false</td></tr>
+<tr class="memitem:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ae8357b9337e2148c57267f1d4c32fcfa">Suppress_output_while_checking_for_inverted_elements</a></td></tr>
 <tr class="memdesc:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress output while checking for inverted elements.  <a href="classoomph_1_1FiniteElement.html#ae8357b9337e2148c57267f1d4c32fcfa">More...</a><br /></td></tr>
 <tr class="separator:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
-<tr class="memitem:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">Suppress_warning_about_repeated_internal_data</a> =false</td></tr>
+<tr class="memitem:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">Suppress_warning_about_repeated_internal_data</a></td></tr>
 <tr class="memdesc:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated internal data. Defaults to false.  <a href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">More...</a><br /></td></tr>
 <tr class="separator:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a1bf8531f4b0ba0a0008e9a25af9b0b8b">Suppress_warning_about_repeated_external_data</a> =true</td></tr>
+<tr class="memitem:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a1bf8531f4b0ba0a0008e9a25af9b0b8b">Suppress_warning_about_repeated_external_data</a> = true</td></tr>
 <tr class="memdesc:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated external data. Defaults to true.  <a href="classoomph_1_1GeneralisedElement.html#a1bf8531f4b0ba0a0008e9a25af9b0b8b">More...</a><br /></td></tr>
 <tr class="separator:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a156163c9f6fbd17548a9fa836616d19b">Default_fd_jacobian_step</a> =1.0e-8</td></tr>
+<tr class="memitem:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a156163c9f6fbd17548a9fa836616d19b">Default_fd_jacobian_step</a> = 1.0e-8</td></tr>
 <tr class="memdesc:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Double used for the default finite difference step in elemental jacobian calculations.  <a href="classoomph_1_1GeneralisedElement.html#a156163c9f6fbd17548a9fa836616d19b">More...</a><br /></td></tr>
 <tr class="separator:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -922,11 +919,10 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:afb14d5dd207ba369c68056b8537b8e41"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#afb14d5dd207ba369c68056b8537b8e41">Omega_sq_pt</a></td></tr>
 <tr class="memdesc:afb14d5dd207ba369c68056b8537b8e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of nondim frequency.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#afb14d5dd207ba369c68056b8537b8e41">More...</a><br /></td></tr>
 <tr class="separator:afb14d5dd207ba369c68056b8537b8e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cb45d4e41b4d1775e4206696eb3aaf7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a45774807ce550b68de4f85ad0ffa904a">BodyForceFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a7cb45d4e41b4d1775e4206696eb3aaf7">Body_force_fct_pt</a></td></tr>
+<tr class="memitem:a7cb45d4e41b4d1775e4206696eb3aaf7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7e51fd604fffc42cb9a8a843fa09496">BodyForceFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a7cb45d4e41b4d1775e4206696eb3aaf7">Body_force_fct_pt</a></td></tr>
 <tr class="memdesc:a7cb45d4e41b4d1775e4206696eb3aaf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to body force function.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a7cb45d4e41b4d1775e4206696eb3aaf7">More...</a><br /></td></tr>
 <tr class="separator:a7cb45d4e41b4d1775e4206696eb3aaf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78e8558aa4616b6a2859cb7e33ca59cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PMLMapping.html">PMLMapping</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a78e8558aa4616b6a2859cb7e33ca59cf">Pml_mapping_pt</a></td></tr>
-<tr class="memdesc:a78e8558aa4616b6a2859cb7e33ca59cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to class which holds the pml mapping function, also known as gamma.  <a href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a78e8558aa4616b6a2859cb7e33ca59cf">More...</a><br /></td></tr>
 <tr class="separator:a78e8558aa4616b6a2859cb7e33ca59cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classoomph_1_1PMLElementBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1PMLElementBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1PMLElementBase.html">oomph::PMLElementBase&lt; DIM &gt;</a></td></tr>
 <tr class="memitem:a0b0e980998764978801a1f0463a31989 inherit pro_attribs_classoomph_1_1PMLElementBase"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLElementBase.html#a0b0e980998764978801a1f0463a31989">Pml_is_enabled</a></td></tr>
@@ -975,7 +971,7 @@ Static Protected Attributes</h2></td></tr>
 <tr class="memitem:a56eb1d0614eb76ba1591285e3efed268 inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a56eb1d0614eb76ba1591285e3efed268">Node_location_tolerance</a> = 1.0e-14</td></tr>
 <tr class="memdesc:a56eb1d0614eb76ba1591285e3efed268 inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for the tolerance to be used when locating nodes via local coordinates.  <a href="classoomph_1_1FiniteElement.html#a56eb1d0614eb76ba1591285e3efed268">More...</a><br /></td></tr>
 <tr class="separator:a56eb1d0614eb76ba1591285e3efed268 inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1600b17efbe61db27a4c622af1f28cf inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ad1600b17efbe61db27a4c622af1f28cf">N2deriv</a> [] ={0,1,3,6}</td></tr>
+<tr class="memitem:ad1600b17efbe61db27a4c622af1f28cf inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">static const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ad1600b17efbe61db27a4c622af1f28cf">N2deriv</a> [] = {0, 1, 3, 6}</td></tr>
 <tr class="memdesc:ad1600b17efbe61db27a4c622af1f28cf inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static array that holds the number of second derivatives as a function of the dimension of the element.  <a href="classoomph_1_1FiniteElement.html#ad1600b17efbe61db27a4c622af1f28cf">More...</a><br /></td></tr>
 <tr class="separator:ad1600b17efbe61db27a4c622af1f28cf inherit pro_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
@@ -1080,7 +1076,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#ae35b7d576c38a08418d37c055e741c05">invert_jacobian</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;inverse_jacobian) const</td></tr>
-<tr class="memdesc:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Three-d specialisation of function to calculate inverse of jacobian mapping.  <a href="classoomph_1_1FiniteElement.html#ae35b7d576c38a08418d37c055e741c05">More...</a><br /></td></tr>
 <tr class="separator:ae35b7d576c38a08418d37c055e741c05 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bcd6094db5f1ee6d18f7231f22a76e4 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:a6bcd6094db5f1ee6d18f7231f22a76e4 inherit pro_methods_classoomph_1_1FiniteElement"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classoomph_1_1FiniteElement.html#a6bcd6094db5f1ee6d18f7231f22a76e4">dJ_eulerian_dnodal_coordinates_templated_helper</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, const <a class="el" href="classoomph_1_1DShape.html">DShape</a> &amp;dpsids, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;djacobian_dX) const</td></tr>
@@ -1206,12 +1201,12 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a94e118d65f31ce404963509e462b2d0e inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a94e118d65f31ce404963509e462b2d0e">fill_in_contribution_to_hessian_vector_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;Y, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; const &amp;C, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;product)</td></tr>
 <tr class="memdesc:a94e118d65f31ce404963509e462b2d0e inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in contribution to the product of the Hessian (derivative of Jacobian with respect to all variables) an eigenvector, Y, and other specified vectors, C (d(J_{ij})/d u_{k}) Y_{j} C_{k}.  <a href="classoomph_1_1GeneralisedElement.html#a94e118d65f31ce404963509e462b2d0e">More...</a><br /></td></tr>
 <tr class="separator:a94e118d65f31ce404963509e462b2d0e inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa69127912ea0def7044311c86e5d6eac inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa69127912ea0def7044311c86e5d6eac">fill_in_contribution_to_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt; &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
-<tr class="memdesc:aa69127912ea0def7044311c86e5d6eac inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contribution to the inner products between given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#aa69127912ea0def7044311c86e5d6eac">More...</a><br /></td></tr>
-<tr class="separator:aa69127912ea0def7044311c86e5d6eac inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7bd5d890614037d1023aae753a66957 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa7bd5d890614037d1023aae753a66957">fill_in_contribution_to_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;inner_product_vector)</td></tr>
-<tr class="memdesc:aa7bd5d890614037d1023aae753a66957 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contributions to the vectors that when taken as dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#aa7bd5d890614037d1023aae753a66957">More...</a><br /></td></tr>
-<tr class="separator:aa7bd5d890614037d1023aae753a66957 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8736a0903c1788c58038cd89fa8d2b43 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a8736a0903c1788c58038cd89fa8d2b43">fill_in_contribution_to_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt;&gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
+<tr class="memdesc:a8736a0903c1788c58038cd89fa8d2b43 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contribution to the inner products between given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#a8736a0903c1788c58038cd89fa8d2b43">More...</a><br /></td></tr>
+<tr class="separator:a8736a0903c1788c58038cd89fa8d2b43 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f3906e6ccab35b6c8172ca60efe8e19 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a2f3906e6ccab35b6c8172ca60efe8e19">fill_in_contribution_to_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;inner_product_vector)</td></tr>
+<tr class="memdesc:a2f3906e6ccab35b6c8172ca60efe8e19 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contributions to the vectors that when taken as dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#a2f3906e6ccab35b6c8172ca60efe8e19">More...</a><br /></td></tr>
+<tr class="separator:a2f3906e6ccab35b6c8172ca60efe8e19 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned DIM&gt;<br />
@@ -1219,10 +1214,10 @@ class oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;</h3>
 
 <p>A base class for elements that solve the equations of time-harmonic linear elasticity in Cartesian coordinates. Combines a few generic functions that are shared by <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquations.html">PMLTimeHarmonicLinearElasticityEquations</a> and PMLTimeHarmonicLinearElasticityEquationsWithPressure (Note: The latter don't exist yet but will be written as soon as somebody needs them...) </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00079">79</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00078">78</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a45774807ce550b68de4f85ad0ffa904a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45774807ce550b68de4f85ad0ffa904a">&#9670;&nbsp;</a></span>BodyForceFctPt</h2>
+<a id="ae7e51fd604fffc42cb9a8a843fa09496"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7e51fd604fffc42cb9a8a843fa09496">&#9670;&nbsp;</a></span>BodyForceFctPt</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1230,15 +1225,14 @@ class oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;</h3>
 template&lt;unsigned DIM&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::BodyForceFctPt) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;b)</td>
+          <td class="memname">typedef void(* <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::BodyForceFctPt) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;b)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function pointer to function that specifies the body force as a function of the Cartesian coordinates FCT(x,b) &ndash; x and b are Vectors! <br  />
- </p>
+<p>Function pointer to function that specifies the body force as a function of the Cartesian coordinates FCT(x,b) &ndash; x and b are Vectors! </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00178">178</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00175">175</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
 </div>
 </div>
@@ -1270,15 +1264,15 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Constructor: Set null pointers for constitutive law and for isotropic growth function. Set physical parameter values to default values, and set body force to zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00087">87</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00086">86</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00393">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Default_pml_mapping</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00410">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Pml_mapping_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00415">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Default_pml_mapping</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00432">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Pml_mapping_pt</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2993da51320515e959e7e395a3adb637"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2993da51320515e959e7e395a3adb637">&#9670;&nbsp;</a></span>body_force()</h2>
+<a id="a186ca62a78f072daf9637256718b6978"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a186ca62a78f072daf9637256718b6978">&#9670;&nbsp;</a></span>body_force()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1297,7 +1291,7 @@ template&lt;unsigned DIM&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -1315,9 +1309,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Evaluate body force at Eulerian coordinate x (returns zero vector if no body force function pointer has been set) </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00223">223</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00236">236</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00404">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>, <a class="el" href="elements_8h_source.html#l02495">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00425">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>, <a class="el" href="elements_8h_source.html#l02628">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>.</p>
 
 </div>
 </div>
@@ -1333,7 +1327,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a45774807ce550b68de4f85ad0ffa904a">BodyForceFctPt</a>&amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::body_force_fct_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7e51fd604fffc42cb9a8a843fa09496">BodyForceFctPt</a>&amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::body_force_fct_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1348,9 +1342,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function: Pointer to body force function. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00205">205</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00212">212</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00404">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00425">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>.</p>
 
 </div>
 </div>
@@ -1366,7 +1360,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a45774807ce550b68de4f85ad0ffa904a">BodyForceFctPt</a> <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::body_force_fct_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7e51fd604fffc42cb9a8a843fa09496">BodyForceFctPt</a> <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::body_force_fct_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1381,14 +1375,14 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function: Pointer to body force function (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00208">208</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00218">218</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00404">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00425">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Body_force_fct_pt</a>.</p>
 
 </div>
 </div>
-<a id="aaa0ca76090994db0c20606ad2a536aec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa0ca76090994db0c20606ad2a536aec">&#9670;&nbsp;</a></span>compute_pml_coefficients()</h2>
+<a id="af4394df38bd1a15e3169f250a9972ac2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4394df38bd1a15e3169f250a9972ac2">&#9670;&nbsp;</a></span>compute_pml_coefficients()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1413,7 +1407,7 @@ template&lt;unsigned DIM&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>pml_inverse_jacobian_diagonal</em>, </td>
         </tr>
         <tr>
@@ -1441,9 +1435,9 @@ template&lt;unsigned DIM&gt; </div>
 <p><a class="el" href="classoomph_1_1Vector.html">Vector</a> which points from the inner boundary to the edge of the boundary</p>
 <p>Calculate the square of the non-dimensional wavenumber</p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00320">320</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00331">331</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="classoomph_1_1PMLMapping.html#a4402061fe7e7b8a1d7a53f990c9a22fb">oomph::PMLMapping::gamma()</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00193">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::nu()</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00199">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::omega_sq()</a>, <a class="el" href="pml__meshes_8h_source.html#l00126">oomph::PMLElementBase&lt; DIM &gt;::Pml_direction_active</a>, <a class="el" href="pml__meshes_8h_source.html#l00131">oomph::PMLElementBase&lt; DIM &gt;::Pml_inner_boundary</a>, <a class="el" href="pml__meshes_8h_source.html#l00121">oomph::PMLElementBase&lt; DIM &gt;::Pml_is_enabled</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00410">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Pml_mapping_pt</a>, and <a class="el" href="pml__meshes_8h_source.html#l00136">oomph::PMLElementBase&lt; DIM &gt;::Pml_outer_boundary</a>.</p>
+<p class="reference">References <a class="el" href="classoomph_1_1PMLMapping.html#a4402061fe7e7b8a1d7a53f990c9a22fb">oomph::PMLMapping::gamma()</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00194">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::nu()</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00200">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::omega_sq()</a>, <a class="el" href="pml__meshes_8h_source.html#l00124">oomph::PMLElementBase&lt; DIM &gt;::Pml_direction_active</a>, <a class="el" href="pml__meshes_8h_source.html#l00129">oomph::PMLElementBase&lt; DIM &gt;::Pml_inner_boundary</a>, <a class="el" href="pml__meshes_8h_source.html#l00119">oomph::PMLElementBase&lt; DIM &gt;::Pml_is_enabled</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00432">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Pml_mapping_pt</a>, and <a class="el" href="pml__meshes_8h_source.html#l00134">oomph::PMLElementBase&lt; DIM &gt;::Pml_outer_boundary</a>.</p>
 
 </div>
 </div>
@@ -1497,14 +1491,14 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function to the entries in the elasticity tensor. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00186">186</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00185">185</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00398">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00419">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 </div>
 </div>
-<a id="a6278a1d6afdd232cf9160965b566b8fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6278a1d6afdd232cf9160965b566b8fb">&#9670;&nbsp;</a></span>elasticity_tensor_pt()</h2>
+<a id="a30cfbee8ab485cee53ecd8a666531557"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30cfbee8ab485cee53ecd8a666531557">&#9670;&nbsp;</a></span>elasticity_tensor_pt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1515,7 +1509,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html">PMLTimeHarmonicIsotropicElasticityTensor</a>* &amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::elasticity_tensor_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html">PMLTimeHarmonicIsotropicElasticityTensor</a>*&amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::elasticity_tensor_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1530,14 +1524,14 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return the pointer to the elasticity_tensor. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00182">182</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00179">179</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00398">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00419">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>.</p>
 
 </div>
 </div>
-<a id="ae73d932e03d1105cad7f7f4a3cf7fefe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae73d932e03d1105cad7f7f4a3cf7fefe">&#9670;&nbsp;</a></span>get_dof_numbers_for_unknowns()</h2>
+<a id="ac6d68b4d4aa01cc4da3c26c50af7515c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6d68b4d4aa01cc4da3c26c50af7515c">&#9670;&nbsp;</a></span>get_dof_numbers_for_unknowns()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1550,7 +1544,7 @@ template&lt;unsigned DIM&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::get_dof_numbers_for_unknowns </td>
           <td>(</td>
-          <td class="paramtype">std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::list&lt; std::pair&lt; unsigned long, unsigned &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_lookup_list</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -1562,19 +1556,18 @@ template&lt;unsigned DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF types" that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) <br  />
- </p>
+<p>Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF types" that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) </p>
 
-<p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a069f59bfc3e607a5bebba52c6314d777">oomph::GeneralisedElement</a>.</p>
+<p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a29c6fb71cd7cabb29b4c289598aec601">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00271">271</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00284">284</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l01399">oomph::FiniteElement::nodal_local_eqn()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00710">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l01438">oomph::FiniteElement::nodal_local_eqn()</a>.</p>
 
 </div>
 </div>
-<a id="af9c0b4aeb96bee736791de3a1a0aa7b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9c0b4aeb96bee736791de3a1a0aa7b1">&#9670;&nbsp;</a></span>get_strain()</h2>
+<a id="ab7e8ff48d11335eb5596e4016e5b617b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7e8ff48d11335eb5596e4016e5b617b">&#9670;&nbsp;</a></span>get_strain()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1590,7 +1583,7 @@ template&lt;unsigned DIM&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>strain</em>&#160;</td>
         </tr>
         <tr>
@@ -1609,12 +1602,12 @@ template&lt;unsigned DIM&gt; </div>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Tpml__time__harmonic__linear__elasticity__elements_8h_source.html#l00139">oomph::TPMLTimeHarmonicLinearElasticityElement&lt; DIM, NNODE_1D &gt;::get_Z2_flux()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Tpml__time__harmonic__linear__elasticity__elements_8h_source.html#l00146">oomph::TPMLTimeHarmonicLinearElasticityElement&lt; DIM, NNODE_1D &gt;::get_Z2_flux()</a>.</p>
 
 </div>
 </div>
-<a id="ae3f79308f146b472d4058bed523fc9c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3f79308f146b472d4058bed523fc9c9">&#9670;&nbsp;</a></span>get_stress()</h2>
+<a id="a3383c407d4d83b864ec7a0aa46af4fb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3383c407d4d83b864ec7a0aa46af4fb9">&#9670;&nbsp;</a></span>get_stress()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1633,7 +1626,7 @@ template&lt;unsigned DIM&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>sigma</em>&#160;</td>
         </tr>
         <tr>
@@ -1651,7 +1644,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return the Cauchy stress tensor, as calculated from the elasticity tensor at specified local coordinate Virtual so separaete versions can (and must!) be provided for displacement and pressure-displacement formulations. </p>
 
-<p>Implemented in <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquations.html#a4edaa3f2f191cfd6add376017c95a729">oomph::PMLTimeHarmonicLinearElasticityEquations&lt; DIM &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquations.html#a39706bfffbaf0b2dfd4e3c01e25010a3">oomph::PMLTimeHarmonicLinearElasticityEquations&lt; DIM &gt;</a>.</p>
 
 </div>
 </div>
@@ -1693,14 +1686,14 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return FE interpolated displacement u[i] at local coordinate s. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00141">141</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00139">139</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt.html#a5448c72da3359c7796cf0c5f800732a1">interpolated_u()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02483">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00099">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::u_index_time_harmonic_linear_elasticity()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt.html#a5448c72da3359c7796cf0c5f800732a1">interpolated_u()</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02610">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00098">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::u_index_time_harmonic_linear_elasticity()</a>.</p>
 
 </div>
 </div>
-<a id="a0eda17e9f0e6973ca0f859f67746ab60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0eda17e9f0e6973ca0f859f67746ab60">&#9670;&nbsp;</a></span>interpolated_u_time_harmonic_linear_elasticity() <span class="overload">[2/2]</span></h2>
+<a id="ae7ac55e5a3d92669e56ab492cbc2dddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7ac55e5a3d92669e56ab492cbc2dddf">&#9670;&nbsp;</a></span>interpolated_u_time_harmonic_linear_elasticity() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1719,7 +1712,7 @@ template&lt;unsigned DIM&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>disp</em>&#160;</td>
         </tr>
         <tr>
@@ -1739,7 +1732,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00105">105</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02483">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00099">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::u_index_time_harmonic_linear_elasticity()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02610">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00098">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::u_index_time_harmonic_linear_elasticity()</a>.</p>
 
 </div>
 </div>
@@ -1772,7 +1765,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a0c6037a870597b35dcf1c780710b9a56">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00260">260</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00273">273</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
 </div>
 </div>
@@ -1803,11 +1796,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function to nu in the elasticity tensor. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00193">193</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00194">194</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00398">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>, and <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00193">oomph::PMLTimeHarmonicIsotropicElasticityTensor::nu()</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00419">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Elasticity_tensor_pt</a>, and <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00194">oomph::PMLTimeHarmonicIsotropicElasticityTensor::nu()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00320">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::compute_pml_coefficients()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00331">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::compute_pml_coefficients()</a>.</p>
 
 </div>
 </div>
@@ -1838,16 +1831,16 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function for square of non-dim frequency. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00199">199</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00200">200</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00401">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Omega_sq_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00422">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Omega_sq_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00320">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::compute_pml_coefficients()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00331">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::compute_pml_coefficients()</a>.</p>
 
 </div>
 </div>
-<a id="a91ba03261dd64d9111ca6399775161f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91ba03261dd64d9111ca6399775161f2">&#9670;&nbsp;</a></span>omega_sq_pt()</h2>
+<a id="a060c7a034add2ded7e2dbf2fe9eaac0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a060c7a034add2ded7e2dbf2fe9eaac0c">&#9670;&nbsp;</a></span>omega_sq_pt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1858,7 +1851,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double* &amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::omega_sq_pt </td>
+          <td class="memname">double*&amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::omega_sq_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1873,14 +1866,14 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Access function for square of non-dim frequency. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00202">202</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00206">206</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00401">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Omega_sq_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00422">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Omega_sq_pt</a>.</p>
 
 </div>
 </div>
-<a id="adbcbd2f016db3125a68bb81a8d94b366"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbcbd2f016db3125a68bb81a8d94b366">&#9670;&nbsp;</a></span>pml_mapping_pt() <span class="overload">[1/2]</span></h2>
+<a id="ac58d409c9b0c6f89446a14955cb8dc1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac58d409c9b0c6f89446a14955cb8dc1a">&#9670;&nbsp;</a></span>pml_mapping_pt() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1891,7 +1884,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1PMLMapping.html">PMLMapping</a>* &amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::pml_mapping_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1PMLMapping.html">PMLMapping</a>*&amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::pml_mapping_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1906,14 +1899,14 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return a pointer to the PML Mapping object. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00386">386</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00402">402</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00410">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Pml_mapping_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00432">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Pml_mapping_pt</a>.</p>
 
 </div>
 </div>
-<a id="a0e4d46ba2b7206c225c67a2851bdea4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e4d46ba2b7206c225c67a2851bdea4b">&#9670;&nbsp;</a></span>pml_mapping_pt() <span class="overload">[2/2]</span></h2>
+<a id="ab0be5c95a17f261e17e7e70ec15d25eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0be5c95a17f261e17e7e70ec15d25eb">&#9670;&nbsp;</a></span>pml_mapping_pt() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1924,7 +1917,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1PMLMapping.html">PMLMapping</a>* const &amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::pml_mapping_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1PMLMapping.html">PMLMapping</a>* const&amp; <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::pml_mapping_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1939,9 +1932,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Return a pointer to the PML Mapping object (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00389">389</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00408">408</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00410">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Pml_mapping_pt</a>.</p>
+<p class="reference">References <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00432">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::Pml_mapping_pt</a>.</p>
 
 </div>
 </div>
@@ -1971,10 +1964,9 @@ template&lt;unsigned DIM&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Return the index at which the i-th real or imag unknown displacement component is stored. The default value is appropriate for single-physics problems: <br  />
- </p>
+<p>Return the index at which the i-th real or imag unknown displacement component is stored. The default value is appropriate for single-physics problems: </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00099">99</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00098">98</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
@@ -2012,7 +2004,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1PMLElementBase.html#ad63639f1966cd3191fad69852732fd90">oomph::PMLElementBase&lt; DIM &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00247">247</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00260">260</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
 </div>
 </div>
@@ -2029,7 +2021,7 @@ template&lt;unsigned DIM&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a45774807ce550b68de4f85ad0ffa904a">BodyForceFctPt</a> <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::Body_force_fct_pt</td>
+          <td class="memname"><a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#ae7e51fd604fffc42cb9a8a843fa09496">BodyForceFctPt</a> <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html">oomph::PMLTimeHarmonicLinearElasticityEquationsBase</a>&lt; DIM &gt;::Body_force_fct_pt</td>
         </tr>
       </table>
   </td>
@@ -2041,9 +2033,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to body force function. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00404">404</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00425">425</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00223">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::body_force()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00205">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::body_force_fct_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00236">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::body_force()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00212">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::body_force_fct_pt()</a>.</p>
 
 </div>
 </div>
@@ -2068,10 +2060,12 @@ template&lt;unsigned DIM&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      1.0</div>
+</div><!-- fragment -->
 <p>Static default value for square of frequency. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00407">407</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00428">428</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
 </div>
 </div>
@@ -2098,9 +2092,9 @@ template&lt;unsigned DIM&gt; </div>
 </div><div class="memdoc">
 <p>Static so that the class doesn't need to instantiate a new default everytime it uses it </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00393">393</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00415">415</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00087">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::PMLTimeHarmonicLinearElasticityEquationsBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00086">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::PMLTimeHarmonicLinearElasticityEquationsBase()</a>.</p>
 
 </div>
 </div>
@@ -2128,9 +2122,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to the elasticity tensor. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00398">398</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00419">419</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00186">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::E()</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00182">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::elasticity_tensor_pt()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00193">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::nu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00185">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::E()</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00179">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::elasticity_tensor_pt()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00194">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::nu()</a>.</p>
 
 </div>
 </div>
@@ -2158,9 +2152,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Square of nondim frequency. </p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00401">401</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00422">422</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00199">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::omega_sq()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00202">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::omega_sq_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00200">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::omega_sq()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00206">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::omega_sq_pt()</a>.</p>
 
 </div>
 </div>
@@ -2185,12 +2179,11 @@ template&lt;unsigned DIM&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Pointer to class which holds the pml mapping function, also known as gamma </p>
 
-<p>Pointer to class which holds the pml mapping function, also known as gamma. </p>
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00432">432</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00410">410</a> of file <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html">pml_time_harmonic_linear_elasticity_elements.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00320">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::compute_pml_coefficients()</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00386">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::pml_mapping_pt()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00087">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::PMLTimeHarmonicLinearElasticityEquationsBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00331">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::compute_pml_coefficients()</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00402">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::pml_mapping_pt()</a>, and <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00086">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::PMLTimeHarmonicLinearElasticityEquationsBase()</a>.</p>
 
 </div>
 </div>
@@ -2226,7 +2219,7 @@ template&lt;unsigned DIM&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:56:09
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:39:03
         </div>
       </div>
     </footer>

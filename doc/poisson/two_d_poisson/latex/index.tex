@@ -420,31 +420,31 @@ The procedure is illustrated in the alternative source code ~\newline
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{//LIC// ====================================================================}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// This file forms part of oomph-\/lib, the object-\/oriented, }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// License as published by the Free Software Foundation; either}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// version 2.1 of the License, or (at your option) any later version.}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// This library is distributed in the hope that it will be useful,}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Lesser General Public License for more details.}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// You should have received a copy of the GNU Lesser General Public}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// License along with this library; if not, write to the Free Software}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// 02110-\/1301  USA.}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
-\DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\textcolor{comment}{// LIC//====================================================================}}
 \DoxyCodeLine{\textcolor{comment}{// Mesh builder: This builds the mesh with a specific element}}
 \DoxyCodeLine{\textcolor{comment}{// so that the mesh sources don't have to be re-\/compiled over}}
 \DoxyCodeLine{\textcolor{comment}{// and over again in the driver code... Useful strategy if}}
@@ -459,13 +459,11 @@ The procedure is illustrated in the alternative source code ~\newline
 \DoxyCodeLine{\textcolor{comment}{// templated sources)}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/simple\_rectangular\_quadmesh.h"}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{using namespace }oomph;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Force build of specific mesh}}
-\DoxyCodeLine{\textcolor{keyword}{template} \textcolor{keyword}{class }SimpleRectangularQuadMesh<QPoissonElement<2,3> >;}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{comment}{// Force build of specific mesh}}
+\DoxyCodeLine{  \textcolor{keyword}{template} \textcolor{keyword}{class }SimpleRectangularQuadMesh<QPoissonElement<2, 3>>;}
+\DoxyCodeLine{\} \textcolor{comment}{// namespace oomph}}
 \end{DoxyCodeInclude}
 
 

@@ -38,14 +38,14 @@ void \mbox{\hyperlink{classoomph_1_1ExactSubBiharmonicPreconditioner_aaf4493aaa8
 \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1ExactSubBiharmonicPreconditioner_aa6ff92b55858721d83cf933d39484ed3}{Sub\+\_\+preconditioner\+\_\+pt}}
 \item 
 bool \mbox{\hyperlink{classoomph_1_1ExactSubBiharmonicPreconditioner_aa70a47f3675b510ae74ae11b86648f93}{Retain\+\_\+all\+\_\+blocks}}
-\begin{DoxyCompactList}\small\item\em Boolean indicating that all blocks are to be retained (defaults to false) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 Sub Biharmonic \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} -\/ an exact preconditioner for the 3x3 top left hand corner sub block matrix. Used as part of the Biharmonic\+Preconditioner$<$\+M\+A\+T\+R\+I\+X$>$ . By default this uses the B\+BD (block-\/bordered-\/diagonal/arrow-\/shaped) preconditioner; can also switch to full BD version (in which case all the 3x3 blocks are retained) 
 
-Definition at line 200 of file biharmonic\+\_\+preconditioner.\+h.
+Definition at line 192 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
@@ -62,7 +62,7 @@ Constructor -\/ for a preconditioner acting as a sub preconditioner.
 
 
 
-Definition at line 207 of file biharmonic\+\_\+preconditioner.\+h.
+Definition at line 197 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
@@ -80,7 +80,7 @@ destructor deletes the exact preconditioner
 
 
 
-Definition at line 226 of file biharmonic\+\_\+preconditioner.\+h.
+Definition at line 216 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
@@ -98,7 +98,7 @@ Broken copy constructor.
 
 
 
-Definition at line 238 of file biharmonic\+\_\+preconditioner.\+h.
+Definition at line 229 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
@@ -123,7 +123,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line 232 of file biharmonic\+\_\+preconditioner.\+h.
+Definition at line 222 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
@@ -145,7 +145,7 @@ Broken assignment operator.
 
 
 
-Definition at line 244 of file biharmonic\+\_\+preconditioner.\+h.
+Definition at line 235 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
@@ -167,7 +167,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 343 of file biharmonic\+\_\+preconditioner.\+cc.
+Definition at line 335 of file biharmonic\+\_\+preconditioner.\+cc.
+
+
+
+References oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), and Sub\+\_\+preconditioner\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ExactSubBiharmonicPreconditioner_af2c9a65ab49cdc6dd0b0d5339833c407}\label{classoomph_1_1ExactSubBiharmonicPreconditioner_af2c9a65ab49cdc6dd0b0d5339833c407}} 
 \index{oomph::ExactSubBiharmonicPreconditioner@{oomph::ExactSubBiharmonicPreconditioner}!setup@{setup}}
@@ -185,7 +189,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 280 of file biharmonic\+\_\+preconditioner.\+cc.
+Definition at line 274 of file biharmonic\+\_\+preconditioner.\+cc.
 
 
 
@@ -200,13 +204,9 @@ References oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block
 \doxysubsubsection{\texorpdfstring{Retain\_all\_blocks}{Retain\_all\_blocks}}
 {\footnotesize\ttfamily bool oomph\+::\+Exact\+Sub\+Biharmonic\+Preconditioner\+::\+Retain\+\_\+all\+\_\+blocks}
 
-
-
 Boolean indicating that all blocks are to be retained (defaults to false) 
 
-
-
-Definition at line 262 of file biharmonic\+\_\+preconditioner.\+h.
+Definition at line 254 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
@@ -220,11 +220,11 @@ Referenced by setup().
 
 
 
-Definition at line 258 of file biharmonic\+\_\+preconditioner.\+h.
+Definition at line 249 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), Exact\+Sub\+Biharmonic\+Preconditioner(), and setup().
+Referenced by clean\+\_\+up\+\_\+memory(), Exact\+Sub\+Biharmonic\+Preconditioner(), preconditioner\+\_\+solve(), and setup().
 
 
 

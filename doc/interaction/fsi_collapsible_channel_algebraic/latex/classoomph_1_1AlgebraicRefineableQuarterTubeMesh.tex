@@ -104,7 +104,7 @@ The Domain is built of slices each consisting of three Macro\+Elements as sketch
 
 Elements need to be derived from Algebraic\+Element\+Base. In addition to the refinement procedures available for the \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}} which forms the basis for this mesh, three algebraic node update functions are implemented for the nodes in the three regions defined by the Domain Macro\+Elements. Note\+: it is assumed the cross section down the tube is uniform when \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef}{setup\+\_\+algebraic\+\_\+node\+\_\+update()}} is called. 
 
-Definition at line 458 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 436 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -134,7 +134,7 @@ Upper\+\_\+left\+\_\+region&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 649 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 614 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -152,7 +152,7 @@ Constructor\+: Pass pointer to geometric object, start and end coordinates of th
 
 
 
-Definition at line 472 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 448 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -174,7 +174,7 @@ Implement the algebraic node update function for a node at time level t (t=0\+: 
 
 
 
-Definition at line 581 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 551 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -197,7 +197,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a5c880d6214a07
 
 
 
-Definition at line 532 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 505 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -216,7 +216,7 @@ Resolve mesh update\+: Update current nodal positions via algebraic node update.
 
 
 
-Definition at line 553 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 525 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -235,7 +235,7 @@ Algebraic update function for a node that is located in the central region.
 
 Algebraic update function\+: Update in central region according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 996 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
+Definition at line 961 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -254,7 +254,7 @@ Algebraic update function for a node that is located in the lower-\/right region
 
 Algebraic update function\+: Update in lower-\/right region according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 1087 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
+Definition at line 1051 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -273,7 +273,7 @@ Algebraic update function for a node that is located in the upper-\/left region.
 
 Algebraic update function\+: Update in upper left region according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 1207 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
+Definition at line 1168 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -292,7 +292,7 @@ Run self-\/test for algebraic mesh -- return 0/1 for O\+K/failure.
 
 
 
-Definition at line 522 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 495 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
@@ -312,7 +312,7 @@ Setup algebraic node update data, based on 3 regions, each undergoing a differen
 \item Nodes in the two outer regions (bottom right and top left) are located on straight lines running from the edges of the central region to the outer wall. 
 \end{DoxyItemize}Pointer to first algebraic element in central region
 
-Definition at line 687 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
+Definition at line 660 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -335,7 +335,7 @@ Update the node update info for specified algebraic node following any spatial m
 
 
 
-Definition at line 628 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 595 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -354,7 +354,7 @@ Update algebraic node update function for nodes in the region defined by region\
 
 Update algebraic update function for nodes in region defined by region\+\_\+id. 
 
-Definition at line 1330 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
+Definition at line 1288 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -380,7 +380,7 @@ Size of centre box.
 
 
 
-Definition at line 646 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 611 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a5bb15683ec46078f9e3ab6d9caba54cf}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a5bb15683ec46078f9e3ab6d9caba54cf}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Lambda\_x@{Lambda\_x}}
@@ -395,7 +395,7 @@ Fractional width of central region.
 
 
 
-Definition at line 652 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 622 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a8e3b05ebb0b69e3ca3cbedb39b5b8e47}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a8e3b05ebb0b69e3ca3cbedb39b5b8e47}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Lambda\_y@{Lambda\_y}}
@@ -410,7 +410,7 @@ Fractional height of central region.
 
 
 
-Definition at line 655 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line 625 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 

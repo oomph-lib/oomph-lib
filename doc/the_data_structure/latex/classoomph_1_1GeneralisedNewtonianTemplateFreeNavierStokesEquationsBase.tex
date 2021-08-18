@@ -21,7 +21,7 @@ virtual int \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTemplateFreeNavie
 \begin{DoxyCompactList}\small\item\em Return the index at which the pressure is stored if it is stored at the nodes. If not stored at the nodes this will return a negative number. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_abacdc7add36a8da0b68b9f991e7973d9}{p\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const =0
 \begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or $<$ 0 if pinned. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_ae5b2fd78047630a2be4d66c541184a46}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&eqn\+\_\+number\+\_\+backup)=0
+virtual void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_a9045bf583dad1009ef7ba6032b893b32}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&eqn\+\_\+number\+\_\+backup)=0
 \begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_a04ab7221559a058af6f0266197094320}{get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&press\+\_\+mass\+\_\+diag, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&veloc\+\_\+mass\+\_\+diag, const unsigned \&which\+\_\+one=0)=0
 \begin{DoxyCompactList}\small\item\em Compute the diagonal of the velocity/pressure mass matrices. If which one=0, both are computed, otherwise only the pressure (which\+\_\+one=1) or the velocity mass matrix (which\+\_\+one=2 -- the L\+SC version of the preconditioner only needs that one) \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -31,7 +31,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTemplateFreeNavi
 \doxysubsection{Detailed Description}
 Template-\/free base class for Navier-\/\+Stokes equations to avoid casting problems 
 
-Definition at line 57 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 55 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -48,7 +48,7 @@ Constructor (empty)
 
 
 
-Definition at line 65 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 61 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_af6bb8d2f9a6e2b1d70ec38b5779fd6f6}\label{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_af6bb8d2f9a6e2b1d70ec38b5779fd6f6}} 
 \index{oomph::GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase@{oomph::GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase}!````~GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase@{$\sim$GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase}}
@@ -62,7 +62,7 @@ Virtual destructor (empty)
 
 
 
-Definition at line 68 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 64 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -113,11 +113,11 @@ Return the index at which the pressure is stored if it is stored at the nodes. I
 
 Implemented in \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a1100787d48487bdb1ca3201b49c9c41f}{oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_af1aacc302260ae8d987bc48b560304f5}{oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_aae2c43cb69c84108e838b5aec8bd2a4b}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_ae5b2fd78047630a2be4d66c541184a46}\label{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_ae5b2fd78047630a2be4d66c541184a46}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_a9045bf583dad1009ef7ba6032b893b32}\label{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_a9045bf583dad1009ef7ba6032b893b32}} 
 \index{oomph::GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase@{oomph::GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
 \index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase@{oomph::GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Generalised\+Newtonian\+Template\+Free\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Generalised\+Newtonian\+Template\+Free\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -125,7 +125,7 @@ Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{class
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a5b85b22f90a38b141620ec1720070311}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a91a926a5c51e8223e46b0c6f95c27222}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
 
 
 

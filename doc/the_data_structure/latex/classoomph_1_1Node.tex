@@ -26,11 +26,9 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1Node_afcc4cc3e1e48964baf23fa4
 \mbox{\hyperlink{classoomph_1_1Node_af40c4014b1d7f30ed2142330fa5f1e68}{Node}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Node_aca6c40f3a7bb1943b413a466d32c6970}{Node}} (const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+n\+\_\+value, const bool \&allocate\+\_\+x\+\_\+position=true)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor, for a \mbox{\hyperlink{classoomph_1_1Node}{Node}} of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values. N\+Position\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor, for a \mbox{\hyperlink{classoomph_1_1Node}{Node}} of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values. N\+Position\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Node_a8a7c3c5e13ba0f434028ed2f93268a6e}{Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}{time\+\_\+stepper\+\_\+pt}}, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+n\+\_\+value, const bool \&allocate\+\_\+x\+\_\+position=true)
-\begin{DoxyCompactList}\small\item\em Unsteady constructor for a node of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates ~\newline
- (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unsteady constructor for a node of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1Node_afa67d364de717efb1bb8e2b61fc4a29f}{$\sim$\+Node}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: Clean up the memory allocated for nodal position. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Node_a86a9dce363f062e0215b63e0b86dec51}{Node}} (const \mbox{\hyperlink{classoomph_1_1Node}{Node}} \&\mbox{\hyperlink{the__data__structure_8txt_ae56499a02d89f315ab025070e7a0058f}{node}})
@@ -38,13 +36,12 @@ virtual \mbox{\hyperlink{classoomph_1_1Node_afa67d364de717efb1bb8e2b61fc4a29f}{$
 void \mbox{\hyperlink{classoomph_1_1Node_a984b28f8b689a85a4060baba377b1c0a}{operator=}} (const \mbox{\hyperlink{classoomph_1_1Node}{Node}} \&)
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Node_aee6f2b7a46fc9d875c6736895d7fc095}{nposition\+\_\+type}} () const
-\begin{DoxyCompactList}\small\item\em Number of coordinate types needed in the mapping between local and global coordinates. ~\newline
- \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\& \mbox{\hyperlink{classoomph_1_1Node_a89175b154594ba5b1a6cdde6f385dc71}{position\+\_\+time\+\_\+stepper\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Number of coordinate types needed in the mapping between local and global coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\& \mbox{\hyperlink{classoomph_1_1Node_a9e3bfae8bca41f38047d14546d3a1aab}{position\+\_\+time\+\_\+stepper\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the position timestepper. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1Node_ae104e770116a49b8b742233b7d43c961}{position\+\_\+time\+\_\+stepper\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1Node_a5719b9f80b4ca590d2d875dbf83fd342}{position\+\_\+time\+\_\+stepper\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the position timestepper (const version). \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1Node_a15d3962d66d92de44e32edc9c5c2fedf}{set\+\_\+position\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Node_a89175b154594ba5b1a6cdde6f385dc71}{position\+\_\+time\+\_\+stepper\+\_\+pt}}, const bool \&preserve\+\_\+existing\+\_\+data)
+virtual void \mbox{\hyperlink{classoomph_1_1Node_a15d3962d66d92de44e32edc9c5c2fedf}{set\+\_\+position\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Node_a9e3bfae8bca41f38047d14546d3a1aab}{position\+\_\+time\+\_\+stepper\+\_\+pt}}, const bool \&preserve\+\_\+existing\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Set a new position timestepper be resizing the appropriate storage. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{classoomph_1_1Node_ab5d4bea7ffc69a82fde5720a2a6d784c}{does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+position\+\_\+data}} (double $\ast$const \&parameter\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Check whether the pointer parameter\+\_\+pt addresses position data values. It never does for a standard node, because the positions are not data. \end{DoxyCompactList}\item 
@@ -71,8 +68,7 @@ virtual bool \mbox{\hyperlink{classoomph_1_1Node_a80fe9192b35baa5321e8d0ffba4b8b
 virtual bool \mbox{\hyperlink{classoomph_1_1Node_a0e1ad244c2b109fb54a2fa6430d6ad5b}{position\+\_\+is\+\_\+a\+\_\+copy}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return whether the position coordinate i has been copied (always false) \end{DoxyCompactList}\item 
 double \& \mbox{\hyperlink{classoomph_1_1Node_a072d2dc645e03ccd18061a5c616aa6af}{x\+\_\+gen}} (const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
-\begin{DoxyCompactList}\small\item\em Reference to the generalised position x(k,i). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Reference to the generalised position x(k,i). `Type'\+: k; Coordinate direction\+: i. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1Node_a81992a5a987a9ce239269febaeacdb1b}{x\+\_\+gen}} (const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Reference to the generalised position x(k,i). `Type'\+: k; Coordinate direction\+: i (const version). \end{DoxyCompactList}\item 
 double \& \mbox{\hyperlink{classoomph_1_1Node_a121f57d5d84246cbd01c255dc1af49b5}{x\+\_\+gen}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
@@ -84,8 +80,7 @@ double \mbox{\hyperlink{classoomph_1_1Node_a03ddcfc8146b7b54f2a3ee5fdf00fa3b}{dx
 double \mbox{\hyperlink{classoomph_1_1Node_af9f1c9522857a0cb5ee04ef111865be2}{dx\+\_\+gen\+\_\+dt}} (const unsigned \&j, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em i-\/th component of j-\/th time derivative (velocity) of the generalised position, d$^\wedge$jx(k,i)/dt$^\wedge$j. `Type'\+: k; Coordinate direction\+: i. \end{DoxyCompactList}\item 
 double $\ast$ \mbox{\hyperlink{classoomph_1_1Node_a9d28f9b05214856de687022a63e53e0f}{x\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
-\begin{DoxyCompactList}\small\item\em Direct access to the i-\/th coordinate at time level t ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Direct access to the i-\/th coordinate at time level t (t=0\+: present; t$>$0\+: previous) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Node_a103b12afe541e9bbe5c0790c1c0efe55}{copy}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$orig\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Copy all nodal data from specified \mbox{\hyperlink{classoomph_1_1Node}{Node}} object. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1Node_acd8bb142619d639d9bbfe813d0ba08df}{dump}} (std\+::ostream \&dump\+\_\+file) const
@@ -98,9 +93,9 @@ virtual void \mbox{\hyperlink{classoomph_1_1Node_a8ef38470acf00f344c9567bcc9cbd0
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classoomph_1_1Node_a8ef38470acf00f344c9567bcc9cbd000}{unpin\+\_\+all()}} function must be overloaded by \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}}, so we put the virtual interface here to avoid virtual functions in \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Node_aaa5ff8bea22ee29dfad3e631ae454961}{hang\+\_\+code}} ()
 \begin{DoxyCompactList}\small\item\em Code that encapsulates the hanging status of the node (incl. the geometric hanging status) as $ \sum_{i=-1}{nval-1} Node::is_hanging(i) 2^{i+1} $. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1Node_ab7b94371e9a8b62fe9a5cc7a03113ad9}{hanging\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1Node_a09e3993064a98e7986f392fd5b239603}{hanging\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return pointer to hanging node data (this refers to the geometric hanging node status) (const version). \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1Node_a4e0c64880499736a17f096157760f346}{hanging\+\_\+pt}} (const int \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1Node_a0c328b021e5eb9448920d8680d45e5c4}{hanging\+\_\+pt}} (const int \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return pointer to hanging node data for value i (const version) \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\+\_\+hanging}} () const
 \begin{DoxyCompactList}\small\item\em Test whether the node is geometrically hanging. \end{DoxyCompactList}\item 
@@ -187,11 +182,9 @@ double \mbox{\hyperlink{classoomph_1_1Node_ae2528428e2fd8fedf035a54e63cee692}{dp
 virtual void \mbox{\hyperlink{classoomph_1_1Node_aecf8c979266300d3609de2b4ddfa3cc8}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node=false)
 \begin{DoxyCompactList}\small\item\em Interface for functions that update the nodal position using algebraic remeshing strategies. The interface is common to Spine\+Nodes, Algebraic\+Nodes and Macro\+Element\+Node\+Update\+Nodes. The default is that the node does not \char`\"{}update itself\char`\"{} i.\+e. it is fixed in space. When implemented, this function should also execute the \mbox{\hyperlink{classoomph_1_1Node}{Node}}\textquotesingle{}s auxiliary node update function (if any). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Node_a638898508d6adc170afb1a2a203ac707}{set\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Node_afcc4cc3e1e48964baf23fa44c98293a9}{Aux\+Node\+Update\+Fct\+Pt}} aux\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Set pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1Node_ad5fe8ac9dcb705612903bc6945926375}{has\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Boolean to indicate if node has a pointer to and auxiliary update function. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Boolean to indicate if node has a pointer to and auxiliary update function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Node_a6c287aa85c19f2d37ed7952ece5c76dd}{perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct}} ()
 \begin{DoxyCompactList}\small\item\em Execute auxiliary update function (if any) -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1Node_ad20302b7992437075d3ca42390b39f24}{ngeom\+\_\+data}} () const
@@ -211,9 +204,8 @@ void \mbox{\hyperlink{classoomph_1_1Node_accb033ab8ed4f96331014f7c4cd131f9}{read
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static unsigned \mbox{\hyperlink{classoomph_1_1Node_a4c2238b9aeac6cf2236ec3e03f34736e}{No\+\_\+independent\+\_\+position}} =10
-\begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used to indicate that there is no independent position in a periodic node. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+static unsigned \mbox{\hyperlink{classoomph_1_1Node_a4c2238b9aeac6cf2236ec3e03f34736e}{No\+\_\+independent\+\_\+position}} = 10
+\begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used to indicate that there is no independent position in a periodic node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -228,18 +220,16 @@ double $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1Node_a908941e709ac28995147ab0
 \begin{DoxyCompactList}\small\item\em Array of pointers to the data holding the Eulerian positions. The storage format must be the same as the internal data storage so that we can implement the functions \mbox{\hyperlink{classoomph_1_1Node_a056f8e82da938369cd38541c5cdc598a}{x()}} in generality here without the need for virtual functions. The first index will be a flat array of position types and coordinates and the second will be the number of time history values at each position type. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ \mbox{\hyperlink{classoomph_1_1Node_a8cf734873ab29a412289f8ac2d3be348}{Position\+\_\+time\+\_\+stepper\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the timestepper associated with the position data. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1Node_a4efe1b8b72dd6eb748dd21109eb1bf54}{Hanging\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1Node_a9621d9d4dda3ebfe9578c180c5251484}{Hanging\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em C-\/style array of pointers to hanging node info. It\textquotesingle{}s set to N\+U\+LL if the node isn\textquotesingle{}t hanging. The first entry (0) is the geometric hanging node data. The remaining entries correspond to the hanging data for the other values stored at the node. Usually, these entries will be the same as the geometric hanging node data represented by Hanging\+\_\+pt\mbox{[}0\mbox{]}, but this is not necessarily the case; e.\+g. the pressure in Taylor Hood has different hanging node data from the velocities. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Node_aa8ce049e9f9de38fa20d886a5c6b8116}{Ndim}}
 \begin{DoxyCompactList}\small\item\em Eulerian dimension of the node. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Node_aa5419b3f46cb65976e1e1311eed9419d}{Nposition\+\_\+type}}
 \begin{DoxyCompactList}\small\item\em Number of coordinate types used in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1Node_ae25c446374781036779c46bd8c1a2d74}{Obsolete}}
-\begin{DoxyCompactList}\small\item\em Flag to indicate that the \mbox{\hyperlink{classoomph_1_1Node}{Node}} has become obsolete --- usually during mesh refinement process ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Flag to indicate that the \mbox{\hyperlink{classoomph_1_1Node}{Node}} has become obsolete --- usually during mesh refinement process. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Node_afcc4cc3e1e48964baf23fa44c98293a9}{Aux\+Node\+Update\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1Node_a8bfd206ba303b6d446f59974719b24b6}{Aux\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -275,7 +265,7 @@ Finally, some elements employ mappings that involve additional, generalised coor
 \end{DoxyCode}
  While this is all pretty straightforward, it does make the argument list of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} constructors rather lengthy. 
 
-Definition at line 847 of file nodes.\+h.
+Definition at line 924 of file nodes.\+h.
 
 
 
@@ -292,7 +282,7 @@ Function pointer to auxiliary node update function.
 
 
 
-Definition at line 854 of file nodes.\+h.
+Definition at line 928 of file nodes.\+h.
 
 
 
@@ -309,7 +299,7 @@ Default constructor.
 
 
 
-Definition at line 1513 of file nodes.\+cc.
+Definition at line 1574 of file nodes.\+cc.
 
 
 
@@ -323,12 +313,11 @@ References oomph\+::\+Leak\+Check\+Names\+::\+Node\+\_\+build.
 
 
 
-\mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor, for a \mbox{\hyperlink{classoomph_1_1Node}{Node}} of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values. N\+Position\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). ~\newline
- 
+\mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor, for a \mbox{\hyperlink{classoomph_1_1Node}{Node}} of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values. N\+Position\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). 
 
 \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} Constructor, allocates storage for initial\+\_\+n\+\_\+value values at a node of spatial dimension N\+Dim. nposition\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). 
 
-Definition at line 1531 of file nodes.\+cc.
+Definition at line 1595 of file nodes.\+cc.
 
 
 
@@ -342,13 +331,11 @@ References oomph\+::\+Leak\+Check\+Names\+::\+Node\+\_\+build, and X\+\_\+positi
 
 
 
-Unsteady constructor for a node of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates ~\newline
- (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). 
+Unsteady constructor for a node of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). 
 
-Unsteady Constructor for a node of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values with history values as required by timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates ~\newline
- (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements) 
+Unsteady Constructor for a node of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values with history values as required by timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements) 
 
-Definition at line 1579 of file nodes.\+cc.
+Definition at line 1644 of file nodes.\+cc.
 
 
 
@@ -366,7 +353,7 @@ Destructor\+: Clean up the memory allocated for nodal position.
 
 Destructor to clean up the memory allocated for nodal position. 
 
-Definition at line 1624 of file nodes.\+cc.
+Definition at line 1695 of file nodes.\+cc.
 
 
 
@@ -384,7 +371,7 @@ Broken copy constructor.
 
 
 
-Definition at line 944 of file nodes.\+h.
+Definition at line 1024 of file nodes.\+h.
 
 
 
@@ -405,7 +392,7 @@ Broken interface for adding the node to the mesh boundary b Essentially here for
 
 Interface for function to add the node to the mesh boundary b. Broken here in order to report run-\/time errors. Must be overloaded by all boundary nodes 
 
-Definition at line 2253 of file nodes.\+cc.
+Definition at line 2336 of file nodes.\+cc.
 
 
 
@@ -431,7 +418,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a20562ea5133c1150b6999
 
 
 
-Definition at line 2667 of file nodes.\+cc.
+Definition at line 2777 of file nodes.\+cc.
 
 
 
@@ -457,7 +444,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SpineNode_a0fbb7845412caffe3908f
 
 
 
-Definition at line 1519 of file nodes.\+h.
+Definition at line 1657 of file nodes.\+h.
 
 
 
@@ -479,7 +466,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SpineNode_a420fcf9b30eea60930829
 
 
 
-Definition at line 1527 of file nodes.\+h.
+Definition at line 1672 of file nodes.\+h.
 
 
 
@@ -505,7 +492,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_ae0f41fc05338192c3e9d4
 
 
 
-Definition at line 495 of file nodes.\+cc.
+Definition at line 534 of file nodes.\+cc.
 
 
 
@@ -521,7 +508,7 @@ Have boundary coordinates been set up? Broken virtual interface provides run-\/t
 
 Interface for function to report if boundary coordinates have been set up for this node Broken here in order to report run-\/time errors. Must be overloaded by all boundary nodes 
 
-Definition at line 2239 of file nodes.\+cc.
+Definition at line 2323 of file nodes.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1Node_a8758650a2e6d7312ad070bb8ce327c4b}\label{classoomph_1_1Node_a8758650a2e6d7312ad070bb8ce327c4b}} 
 \index{oomph::Node@{oomph::Node}!constrain\_positions@{constrain\_positions}}
@@ -539,7 +526,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a08b51c4154b8c399fa021
 
 
 
-Definition at line 1259 of file nodes.\+h.
+Definition at line 1370 of file nodes.\+h.
 
 
 
@@ -557,7 +544,7 @@ Return pointer to copied node (null if the current node is not a copy -- always 
 
 
 
-Definition at line 1037 of file nodes.\+h.
+Definition at line 1132 of file nodes.\+h.
 
 
 
@@ -575,7 +562,7 @@ Copy all nodal data from specified \mbox{\hyperlink{classoomph_1_1Node}{Node}} o
 
 
 
-Definition at line 1830 of file nodes.\+cc.
+Definition at line 1916 of file nodes.\+cc.
 
 
 
@@ -601,7 +588,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a33be0ea0fc6c0575d20f3
 
 
 
-Definition at line 978 of file nodes.\+h.
+Definition at line 1067 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Node_ad3d37ea1c80500645fa32cc43f1f29ce}\label{classoomph_1_1Node_ad3d37ea1c80500645fa32cc43f1f29ce}} 
 \index{oomph::Node@{oomph::Node}!dposition\_dt@{dposition\_dt}}
@@ -615,7 +602,7 @@ Return the i-\/th component of nodal velocity\+: dx/dt, either directly or via h
 
 Return the i-\/th component of nodal velocity\+: dx/dt / Use the hanging node representation if required. 
 
-Definition at line 2552 of file nodes.\+cc.
+Definition at line 2659 of file nodes.\+cc.
 
 
 
@@ -637,7 +624,7 @@ Return the i-\/th component of j-\/th derivative of nodal position\+: d$^\wedge$
 
 Return the i-\/th component of j-\/th derivative of nodal position\+: d$^\wedge$jx/dt$^\wedge$j. Use the hanging node representation. 
 
-Definition at line 2576 of file nodes.\+cc.
+Definition at line 2683 of file nodes.\+cc.
 
 
 
@@ -655,7 +642,7 @@ i-\/th component of j-\/th time derivative (velocity) of the generalised positio
 
 i-\/th component of j-\/th time derivative (velocity) of the generalised position, d$^\wedge$jx(k,i)/dt$^\wedge$j. `Type'\+: k; Coordinate direction\+: i. Use the hanging node representation. 
 
-Definition at line 2627 of file nodes.\+cc.
+Definition at line 2734 of file nodes.\+cc.
 
 
 
@@ -673,7 +660,7 @@ i-\/th component of time derivative (velocity) of the generalised position, dx(k
 
 i-\/th component of time derivative (velocity) of the generalised position, dx(k,i)/dt. `Type'\+: k; Coordinate direction\+: i. Use the hanging node representation 
 
-Definition at line 2601 of file nodes.\+cc.
+Definition at line 2708 of file nodes.\+cc.
 
 
 
@@ -699,7 +686,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_aad56eb7d55fcd10b3aaa3
 
 
 
-Definition at line 1888 of file nodes.\+cc.
+Definition at line 1969 of file nodes.\+cc.
 
 
 
@@ -721,7 +708,7 @@ Return the i-\/th component of nodal velocity\+: dx/dt.
 
 
 
-Definition at line 1731 of file nodes.\+cc.
+Definition at line 1817 of file nodes.\+cc.
 
 
 
@@ -743,7 +730,7 @@ Return the i-\/th component of j-\/th derivative of nodal position\+: d$^\wedge$
 
 Return the i-\/th component of j-\/th derivative of nodal position\+: d$^\wedge$jx/dt$^\wedge$j. 
 
-Definition at line 1755 of file nodes.\+cc.
+Definition at line 1841 of file nodes.\+cc.
 
 
 
@@ -761,7 +748,7 @@ i-\/th component of j-\/th time derivative (velocity) of the generalised positio
 
 
 
-Definition at line 1804 of file nodes.\+cc.
+Definition at line 1890 of file nodes.\+cc.
 
 
 
@@ -779,7 +766,7 @@ i-\/th component of time derivative (velocity) of the generalised position, dx(k
 
 
 
-Definition at line 1779 of file nodes.\+cc.
+Definition at line 1865 of file nodes.\+cc.
 
 
 
@@ -801,11 +788,11 @@ Return a pointer to set of mesh boundaries that this node occupies; this will be
 
 
 
-Definition at line 1279 of file nodes.\+h.
+Definition at line 1390 of file nodes.\+h.
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Geompack\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Simple\+Cubic\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Mesh\+::copy\+\_\+boundary\+\_\+node\+\_\+data\+\_\+from\+\_\+nodes(), oomph\+::\+T\+Face\+::get\+\_\+boundaries\+\_\+pt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Line\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Quad\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Triangle\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Brick\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Hermite\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Tet\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Geompack\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Simple\+Cubic\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Mesh\+::copy\+\_\+boundary\+\_\+node\+\_\+data\+\_\+from\+\_\+nodes(), oomph\+::\+T\+Face\+::get\+\_\+boundaries\+\_\+pt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Line\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Quad\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Triangle\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Brick\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Hermite\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Tet\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}\label{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}} 
 \index{oomph::Node@{oomph::Node}!get\_coordinates\_on\_boundary@{get\_coordinates\_on\_boundary}}
@@ -819,7 +806,7 @@ Return the vector of the k-\/th generalised boundary coordinates on mesh boundar
 
 Interface for function to get the k-\/th generalised boundary coordinate of the node on boundary b. Broken here in order to provide run-\/time error reporting. Must be overloaded by all boundary nodes. 
 
-Definition at line 2297 of file nodes.\+cc.
+Definition at line 2379 of file nodes.\+cc.
 
 
 
@@ -837,7 +824,7 @@ Return the vector of coordinates on mesh boundary b Broken virtual interface pro
 
 
 
-Definition at line 1323 of file nodes.\+h.
+Definition at line 1445 of file nodes.\+h.
 
 
 
@@ -855,7 +842,7 @@ Code that encapsulates the hanging status of the node (incl. the geometric hangi
 
 
 
-Definition at line 1128 of file nodes.\+h.
+Definition at line 1238 of file nodes.\+h.
 
 
 
@@ -865,11 +852,11 @@ References i, is\+\_\+hanging(), and oomph\+::\+Data\+::nvalue().
 
 Referenced by oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution().
 
-\mbox{\Hypertarget{classoomph_1_1Node_ab7b94371e9a8b62fe9a5cc7a03113ad9}\label{classoomph_1_1Node_ab7b94371e9a8b62fe9a5cc7a03113ad9}} 
+\mbox{\Hypertarget{classoomph_1_1Node_a09e3993064a98e7986f392fd5b239603}\label{classoomph_1_1Node_a09e3993064a98e7986f392fd5b239603}} 
 \index{oomph::Node@{oomph::Node}!hanging\_pt@{hanging\_pt}}
 \index{hanging\_pt@{hanging\_pt}!oomph::Node@{oomph::Node}}
 \doxysubsubsection{\texorpdfstring{hanging\_pt()}{hanging\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}}$\ast$ const \& oomph\+::\+Node\+::hanging\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}}$\ast$ const\& oomph\+::\+Node\+::hanging\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -877,7 +864,7 @@ Return pointer to hanging node data (this refers to the geometric hanging node s
 
 
 
-Definition at line 1143 of file nodes.\+h.
+Definition at line 1253 of file nodes.\+h.
 
 
 
@@ -885,13 +872,13 @@ References Hanging\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::additional\+\_\+synchronise\+\_\+hanging\+\_\+nodes(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assemble\+\_\+set\+\_\+of\+\_\+all\+\_\+geometric\+\_\+data(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Solid\+Element\+::assign\+\_\+solid\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::complete\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::complete\+\_\+hanging\+\_\+nodes\+\_\+recursively(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Refineable\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd(), oomph\+::\+Refineable\+Polar\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Solid\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T, A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic(), oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic(), oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element$<$ B\+A\+S\+I\+C, S\+O\+L\+I\+D $>$\+::fill\+\_\+in\+\_\+shape\+\_\+derivatives\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Solid\+Element\+::geom\+\_\+data\+\_\+pt(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::get\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Refineable\+Element\+::identify\+\_\+field\+\_\+data\+\_\+for\+\_\+interactions(), oomph\+::\+Refineable\+Solid\+Element\+::identify\+\_\+geometric\+\_\+data(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::insert\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position\+\_\+gen(), oomph\+::\+Refineable\+Solid\+Element\+::ngeom\+\_\+data(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Mesh\+::node\+\_\+update(), oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), position(), position\+\_\+gen(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+solid\+\_\+traction(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+hanging\+\_\+nodes(), and value().
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::additional\+\_\+synchronise\+\_\+hanging\+\_\+nodes(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assemble\+\_\+set\+\_\+of\+\_\+all\+\_\+geometric\+\_\+data(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Solid\+Element\+::assign\+\_\+solid\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::complete\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::complete\+\_\+hanging\+\_\+nodes\+\_\+recursively(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Refineable\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd(), oomph\+::\+Refineable\+Polar\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Solid\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T, A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic(), oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic(), oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element$<$ B\+A\+S\+I\+C, S\+O\+L\+I\+D $>$\+::fill\+\_\+in\+\_\+shape\+\_\+derivatives\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Solid\+Element\+::geom\+\_\+data\+\_\+pt(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::get\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Refineable\+Element\+::identify\+\_\+field\+\_\+data\+\_\+for\+\_\+interactions(), oomph\+::\+Refineable\+Solid\+Element\+::identify\+\_\+geometric\+\_\+data(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::insert\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position\+\_\+gen(), oomph\+::\+Refineable\+Solid\+Element\+::ngeom\+\_\+data(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Mesh\+::node\+\_\+update(), oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), position(), position\+\_\+gen(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+solid\+\_\+traction(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+hanging\+\_\+nodes(), and value().
 
-\mbox{\Hypertarget{classoomph_1_1Node_a4e0c64880499736a17f096157760f346}\label{classoomph_1_1Node_a4e0c64880499736a17f096157760f346}} 
+\mbox{\Hypertarget{classoomph_1_1Node_a0c328b021e5eb9448920d8680d45e5c4}\label{classoomph_1_1Node_a0c328b021e5eb9448920d8680d45e5c4}} 
 \index{oomph::Node@{oomph::Node}!hanging\_pt@{hanging\_pt}}
 \index{hanging\_pt@{hanging\_pt}!oomph::Node@{oomph::Node}}
 \doxysubsubsection{\texorpdfstring{hanging\_pt()}{hanging\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}}$\ast$ const \& oomph\+::\+Node\+::hanging\+\_\+pt (\begin{DoxyParamCaption}\item[{const int \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}}$\ast$ const\& oomph\+::\+Node\+::hanging\+\_\+pt (\begin{DoxyParamCaption}\item[{const int \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -899,7 +886,7 @@ Return pointer to hanging node data for value i (const version)
 
 
 
-Definition at line 1158 of file nodes.\+h.
+Definition at line 1268 of file nodes.\+h.
 
 
 
@@ -913,12 +900,11 @@ References oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::communicator\+\_\+pt(), Hanging\
 
 
 
-Boolean to indicate if node has a pointer to and auxiliary update function. ~\newline
- 
+Boolean to indicate if node has a pointer to and auxiliary update function. 
 
 
 
-Definition at line 1496 of file nodes.\+h.
+Definition at line 1631 of file nodes.\+h.
 
 
 
@@ -940,7 +926,7 @@ Test whether the node is geometrically hanging.
 
 
 
-Definition at line 1202 of file nodes.\+h.
+Definition at line 1310 of file nodes.\+h.
 
 
 
@@ -948,7 +934,7 @@ References Hanging\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::additional\+\_\+synchronise\+\_\+hanging\+\_\+nodes(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assemble\+\_\+set\+\_\+of\+\_\+all\+\_\+geometric\+\_\+data(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::complete\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::complete\+\_\+hanging\+\_\+nodes\+\_\+recursively(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Mesh\+::doc\+\_\+shared\+\_\+nodes(), oomph\+::\+Refineable\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd(), oomph\+::\+Refineable\+Polar\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Solid\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T, A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic(), oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic(), oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element$<$ B\+A\+S\+I\+C, S\+O\+L\+I\+D $>$\+::fill\+\_\+in\+\_\+shape\+\_\+derivatives\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::get\+\_\+mass\+\_\+matrix\+\_\+diagonal(), hang\+\_\+code(), oomph\+::\+Refineable\+Element\+::identify\+\_\+field\+\_\+data\+\_\+for\+\_\+interactions(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::insert\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data(), is\+\_\+hanging(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position\+\_\+gen(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Mesh\+::node\+\_\+update(), oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), position(), position\+\_\+gen(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+solid\+\_\+traction(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+nonhanging\+\_\+nodes(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), value(), and oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh().
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::additional\+\_\+synchronise\+\_\+hanging\+\_\+nodes(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assemble\+\_\+set\+\_\+of\+\_\+all\+\_\+geometric\+\_\+data(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::complete\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::complete\+\_\+hanging\+\_\+nodes\+\_\+recursively(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Mesh\+::doc\+\_\+shared\+\_\+nodes(), oomph\+::\+Refineable\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd(), oomph\+::\+Refineable\+Polar\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Solid\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T, A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic(), oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic(), oomph\+::\+Refineable\+Pseudo\+Solid\+Node\+Update\+Element$<$ B\+A\+S\+I\+C, S\+O\+L\+I\+D $>$\+::fill\+\_\+in\+\_\+shape\+\_\+derivatives\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::get\+\_\+mass\+\_\+matrix\+\_\+diagonal(), hang\+\_\+code(), oomph\+::\+Refineable\+Element\+::identify\+\_\+field\+\_\+data\+\_\+for\+\_\+interactions(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::insert\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data(), is\+\_\+hanging(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position(), oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position\+\_\+gen(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Mesh\+::node\+\_\+update(), oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), position(), position\+\_\+gen(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+solid\+\_\+traction(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+hanging\+\_\+nodes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+nonhanging\+\_\+nodes(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), value(), and oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1Node_a55991f57a3f949774da64c6947fef9b2}\label{classoomph_1_1Node_a55991f57a3f949774da64c6947fef9b2}} 
 \index{oomph::Node@{oomph::Node}!is\_hanging@{is\_hanging}}
@@ -962,7 +948,7 @@ Test whether the i-\/th value is hanging.
 
 
 
-Definition at line 1215 of file nodes.\+h.
+Definition at line 1323 of file nodes.\+h.
 
 
 
@@ -980,7 +966,7 @@ Test whether node is obsolete.
 
 
 
-Definition at line 1349 of file nodes.\+h.
+Definition at line 1473 of file nodes.\+h.
 
 
 
@@ -1002,7 +988,7 @@ Test whether the \mbox{\hyperlink{classoomph_1_1Node}{Node}} lies on a boundary.
 
 
 
-Definition at line 1285 of file nodes.\+h.
+Definition at line 1398 of file nodes.\+h.
 
 
 
@@ -1020,7 +1006,7 @@ Test whether the node lies on mesh boundary b. The \char`\"{}bulk\char`\"{} \mbo
 
 
 
-Definition at line 1290 of file nodes.\+h.
+Definition at line 1406 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Node_aeb07848c19b83fd8b9690b8fcc200d56}\label{classoomph_1_1Node_aeb07848c19b83fd8b9690b8fcc200d56}} 
 \index{oomph::Node@{oomph::Node}!make\_periodic@{make\_periodic}}
@@ -1034,11 +1020,11 @@ Make the node periodic by copying the values from node\+\_\+pt. Note that the co
 
 Make the node periodic by copying values from node\+\_\+pt. Broken virtual (only implemented in Boundary\+Nodes) 
 
-Definition at line 2176 of file nodes.\+cc.
+Definition at line 2257 of file nodes.\+cc.
 
 
 
-Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), and oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine().
+Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), and oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::\+Periodic\+Orbit\+Temporal\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1Node_a7b074cf3b864be50411fd9a34fde9d03}\label{classoomph_1_1Node_a7b074cf3b864be50411fd9a34fde9d03}} 
 \index{oomph::Node@{oomph::Node}!make\_periodic\_nodes@{make\_periodic\_nodes}}
@@ -1052,7 +1038,7 @@ Make the nodes passed in the vector periodic\+\_\+nodes share the same data as t
 
 Make the nodes passed in periodic\+\_\+nodes\+\_\+pt periodic by copying values across from this node. At present all the positions will be assumed to be independent. Broken virtual (only implemented in Boundary\+Nodes) 
 
-Definition at line 2189 of file nodes.\+cc.
+Definition at line 2270 of file nodes.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1Node_a245b0e182ca0877bda9bbcb978807273}\label{classoomph_1_1Node_a245b0e182ca0877bda9bbcb978807273}} 
 \index{oomph::Node@{oomph::Node}!ncoordinates\_on\_boundary@{ncoordinates\_on\_boundary}}
@@ -1066,7 +1052,7 @@ Get the number of boundary coordinates on mesh boundary b. Broken virtual interf
 
 Interface to get the number of boundary coordinates on mesh boundary b. Broken here in order to provide run-\/time error reporting. Must be overloaded by all boundary nodes. 
 
-Definition at line 2281 of file nodes.\+cc.
+Definition at line 2363 of file nodes.\+cc.
 
 
 
@@ -1084,7 +1070,7 @@ Return (Eulerian) spatial dimension of the node.
 
 
 
-Definition at line 987 of file nodes.\+h.
+Definition at line 1079 of file nodes.\+h.
 
 
 
@@ -1110,7 +1096,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SpineNode_a46735b4f430014997c525
 
 
 
-Definition at line 1515 of file nodes.\+h.
+Definition at line 1650 of file nodes.\+h.
 
 
 
@@ -1132,7 +1118,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SpineNode_afba3d62d2da3b8fa64219
 
 
 
-Definition at line 1523 of file nodes.\+h.
+Definition at line 1664 of file nodes.\+h.
 
 
 
@@ -1154,7 +1140,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_ae66793af1a576edd29523
 
 
 
-Definition at line 1477 of file nodes.\+h.
+Definition at line 1611 of file nodes.\+h.
 
 
 
@@ -1168,12 +1154,11 @@ Referenced by oomph\+::\+Finite\+Element\+::node\+\_\+update().
 
 
 
-Number of coordinate types needed in the mapping between local and global coordinates. ~\newline
- 
+Number of coordinate types needed in the mapping between local and global coordinates. 
 
 
 
-Definition at line 961 of file nodes.\+h.
+Definition at line 1041 of file nodes.\+h.
 
 
 
@@ -1195,7 +1180,7 @@ Broken assignment operator.
 
 
 
-Definition at line 950 of file nodes.\+h.
+Definition at line 1030 of file nodes.\+h.
 
 
 
@@ -1213,7 +1198,7 @@ Output nodal position.
 
 Output nodal coordinates. 
 
-Definition at line 2652 of file nodes.\+cc.
+Definition at line 2760 of file nodes.\+cc.
 
 
 
@@ -1231,7 +1216,7 @@ Execute auxiliary update function (if any) -- this can be used to update any nod
 
 
 
-Definition at line 1505 of file nodes.\+h.
+Definition at line 1640 of file nodes.\+h.
 
 
 
@@ -1257,7 +1242,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_ab051ba65aed07fe75f6cf
 
 
 
-Definition at line 1118 of file nodes.\+h.
+Definition at line 1222 of file nodes.\+h.
 
 
 
@@ -1279,7 +1264,7 @@ Return vector of position of node at current time.
 
 
 
-Definition at line 1418 of file nodes.\+h.
+Definition at line 1550 of file nodes.\+h.
 
 
 
@@ -1301,7 +1286,7 @@ Return i-\/th nodal coordinate either directly or via hanging node representatio
 
 Return i-\/th nodal coordinate either directly or via hanging node representation. 
 
-Definition at line 2432 of file nodes.\+cc.
+Definition at line 2528 of file nodes.\+cc.
 
 
 
@@ -1319,7 +1304,7 @@ Return i-\/th nodal coordinate at time level t (t=0\+: current; t$>$0\+: previou
 
 Return i-\/th nodal coordinate at time level t (t=0\+: current; t$>$0\+: previous time level), either directly or via hanging node representation. 
 
-Definition at line 2461 of file nodes.\+cc.
+Definition at line 2560 of file nodes.\+cc.
 
 
 
@@ -1337,7 +1322,7 @@ Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nodal position at tim
 
 Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nodal position at timestep t (t=0\+: current; t$>$0\+: previous timestep), either directly or via hanging node representation. 
 
-Definition at line 2421 of file nodes.\+cc.
+Definition at line 2514 of file nodes.\+cc.
 
 
 
@@ -1355,7 +1340,7 @@ Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nodal positions eithe
 
 Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nodal positions either directly or via hanging node representation 
 
-Definition at line 2409 of file nodes.\+cc.
+Definition at line 2499 of file nodes.\+cc.
 
 
 
@@ -1377,7 +1362,7 @@ Return generalised nodal coordinate either directly or via hanging node represen
 
 Return generalised nodal coordinate either directly or via hanging node representation. 
 
-Definition at line 2491 of file nodes.\+cc.
+Definition at line 2592 of file nodes.\+cc.
 
 
 
@@ -1399,7 +1384,7 @@ Return generalised nodal coordinate at time level t (t=0\+: current; t$>$0\+: pr
 
 Return generalised nodal coordinate at time level t (t=0\+: current; t$>$0\+: previous time level), either directly or via hanging node representation. 
 
-Definition at line 2521 of file nodes.\+cc.
+Definition at line 2624 of file nodes.\+cc.
 
 
 
@@ -1421,7 +1406,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_aa8d9a8e77ccc142be7776
 
 
 
-Definition at line 1043 of file nodes.\+h.
+Definition at line 1138 of file nodes.\+h.
 
 
 
@@ -1443,13 +1428,13 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_aa20d88cc797c6635bfd63
 
 
 
-Definition at line 1046 of file nodes.\+h.
+Definition at line 1144 of file nodes.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1Node_a89175b154594ba5b1a6cdde6f385dc71}\label{classoomph_1_1Node_a89175b154594ba5b1a6cdde6f385dc71}} 
+\mbox{\Hypertarget{classoomph_1_1Node_a9e3bfae8bca41f38047d14546d3a1aab}\label{classoomph_1_1Node_a9e3bfae8bca41f38047d14546d3a1aab}} 
 \index{oomph::Node@{oomph::Node}!position\_time\_stepper\_pt@{position\_time\_stepper\_pt}}
 \index{position\_time\_stepper\_pt@{position\_time\_stepper\_pt}!oomph::Node@{oomph::Node}}
 \doxysubsubsection{\texorpdfstring{position\_time\_stepper\_pt()}{position\_time\_stepper\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}$\ast$ \& oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}$\ast$\& oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1457,7 +1442,7 @@ Return a pointer to the position timestepper.
 
 
 
-Definition at line 964 of file nodes.\+h.
+Definition at line 1047 of file nodes.\+h.
 
 
 
@@ -1465,13 +1450,13 @@ References Position\+\_\+time\+\_\+stepper\+\_\+pt.
 
 
 
-Referenced by add\+\_\+values\+\_\+to\+\_\+vector(), oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), copy(), oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+for\+\_\+newmark\+\_\+accel(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Linear\+Elasticity\+Element$<$ L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+V\+D\+Element$<$ P\+V\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Poisson\+Element$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ A\+D\+R\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+M\+E\+T\+R\+I\+C\+\_\+\+P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ P\+V\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+central\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), read\+\_\+values\+\_\+from\+\_\+vector(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+positions(), set\+\_\+position\+\_\+time\+\_\+stepper(), oomph\+::\+Solid\+Node\+::set\+\_\+position\+\_\+time\+\_\+stepper(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), and oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects().
+Referenced by add\+\_\+values\+\_\+to\+\_\+vector(), oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), copy(), oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+for\+\_\+newmark\+\_\+accel(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Linear\+Elasticity\+Element$<$ L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+V\+D\+Element$<$ P\+V\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Poisson\+Element$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ A\+D\+R\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+M\+E\+T\+R\+I\+C\+\_\+\+P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ P\+V\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+central\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), read\+\_\+values\+\_\+from\+\_\+vector(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+positions(), set\+\_\+position\+\_\+time\+\_\+stepper(), oomph\+::\+Solid\+Node\+::set\+\_\+position\+\_\+time\+\_\+stepper(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), and oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects().
 
-\mbox{\Hypertarget{classoomph_1_1Node_ae104e770116a49b8b742233b7d43c961}\label{classoomph_1_1Node_ae104e770116a49b8b742233b7d43c961}} 
+\mbox{\Hypertarget{classoomph_1_1Node_a5719b9f80b4ca590d2d875dbf83fd342}\label{classoomph_1_1Node_a5719b9f80b4ca590d2d875dbf83fd342}} 
 \index{oomph::Node@{oomph::Node}!position\_time\_stepper\_pt@{position\_time\_stepper\_pt}}
 \index{position\_time\_stepper\_pt@{position\_time\_stepper\_pt}!oomph::Node@{oomph::Node}}
 \doxysubsubsection{\texorpdfstring{position\_time\_stepper\_pt()}{position\_time\_stepper\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}$\ast$ const \& oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}$\ast$ const\& oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1479,7 +1464,7 @@ Return a pointer to the position timestepper (const version).
 
 
 
-Definition at line 967 of file nodes.\+h.
+Definition at line 1053 of file nodes.\+h.
 
 
 
@@ -1497,7 +1482,7 @@ Return the i-\/th value stored at the \mbox{\hyperlink{classoomph_1_1Node}{Node}
 
 
 
-Definition at line 1353 of file nodes.\+h.
+Definition at line 1480 of file nodes.\+h.
 
 
 
@@ -1519,7 +1504,7 @@ Return the i-\/th value at time level t (t=0\+: present, t$>$0\+: previous). Thi
 
 
 
-Definition at line 1358 of file nodes.\+h.
+Definition at line 1488 of file nodes.\+h.
 
 
 
@@ -1537,7 +1522,7 @@ Read nodal position and associated data from file for restart.
 
 Read nodal positions and associated data from file for restart. 
 
-Definition at line 1915 of file nodes.\+cc.
+Definition at line 1996 of file nodes.\+cc.
 
 
 
@@ -1567,7 +1552,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a8884dfe9e2808883e90c7
 
 
 
-Definition at line 2722 of file nodes.\+cc.
+Definition at line 2832 of file nodes.\+cc.
 
 
 
@@ -1575,7 +1560,7 @@ References i, ndim(), nposition\+\_\+type(), oomph\+::\+Time\+Stepper\+::ntstora
 
 
 
-Referenced by oomph\+::\+Solid\+Node\+::read\+\_\+values\+\_\+from\+\_\+vector().
+Referenced by oomph\+::\+Solid\+Node\+::read\+\_\+values\+\_\+from\+\_\+vector(), and oomph\+::\+Problem\+::synchronise\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1Node_a68d4703f8c8aa9f504ec2111dc1908f4}\label{classoomph_1_1Node_a68d4703f8c8aa9f504ec2111dc1908f4}} 
 \index{oomph::Node@{oomph::Node}!remove\_from\_boundary@{remove\_from\_boundary}}
@@ -1589,7 +1574,7 @@ Broken interface for removing the node from the mesh boundary b Here to provide 
 
 Interface for function to remove the node from the mesh boundary b. Broken here in order to report run-\/time erorrs. Must be overloaded by all boundary nodes 
 
-Definition at line 2268 of file nodes.\+cc.
+Definition at line 2350 of file nodes.\+cc.
 
 
 
@@ -1611,7 +1596,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_ac68583834c9bef47f5c37c89
 
 
 
-Definition at line 2085 of file nodes.\+cc.
+Definition at line 2167 of file nodes.\+cc.
 
 
 
@@ -1629,12 +1614,11 @@ Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\
 
 
 
-Set pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. ~\newline
- 
+Set pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. 
 
 
 
-Definition at line 1485 of file nodes.\+h.
+Definition at line 1621 of file nodes.\+h.
 
 
 
@@ -1652,11 +1636,11 @@ Set the vector of the k-\/th generalised boundary coordinates on mesh boundary b
 
 Interface for function to set the k-\/th generalised boundary coordinate of the node on boundary b. Broken here to provide run-\/time error reports. Must be overloaded by all boundary nodes. 
 
-Definition at line 2311 of file nodes.\+cc.
+Definition at line 2394 of file nodes.\+cc.
 
 
 
-Referenced by oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh(), oomph\+::\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Cylinder\+With\+Flag\+Mesh(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Quarter\+Pipe\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Pipe\+Mesh(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Triangle\+Mesh\+Base\+::remesh\+\_\+from\+\_\+triangulateio(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::reposition\+\_\+spines(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::send\+\_\+boundary\+\_\+node\+\_\+info\+\_\+of\+\_\+shared\+\_\+nodes(), oomph\+::\+Elastic\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+coordinates(), set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Xda\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Tet\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::synchronize\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh(), and oomph\+::\+Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape().
+Referenced by oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh(), oomph\+::\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Collapsible\+Channel\+Mesh(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Cylinder\+With\+Flag\+Mesh(), oomph\+::\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Driven\+Cavity\+Mesh(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Quarter\+Pipe\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Pipe\+Mesh(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Triangle\+Mesh\+Base\+::remesh\+\_\+from\+\_\+triangulateio(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::reposition\+\_\+spines(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::send\+\_\+boundary\+\_\+node\+\_\+info\+\_\+of\+\_\+shared\+\_\+nodes(), oomph\+::\+Elastic\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+coordinates(), set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Xda\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Tet\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::synchronize\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh(), and oomph\+::\+Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape().
 
 \mbox{\Hypertarget{classoomph_1_1Node_a089465d789baa423cd30b3a792ad1e9e}\label{classoomph_1_1Node_a089465d789baa423cd30b3a792ad1e9e}} 
 \index{oomph::Node@{oomph::Node}!set\_coordinates\_on\_boundary@{set\_coordinates\_on\_boundary}}
@@ -1670,7 +1654,7 @@ Set the vector of coordinates on mesh boundary b Broken virtual interface provid
 
 
 
-Definition at line 1331 of file nodes.\+h.
+Definition at line 1453 of file nodes.\+h.
 
 
 
@@ -1688,7 +1672,7 @@ Set the hanging data for the i-\/th value. (hang\+\_\+pt=0 to make non-\/hanging
 
 Set the hanging data for the i-\/th value. If node is already hanging, simply overwrite the appropriate entry. If the node isn\textquotesingle{}t hanging (because it might not be hanging geometrically), create the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of hanging pointers and make the other entries point to the node\textquotesingle{}s geometric hanging data. Set hang\+\_\+pt=0 to make entry explicitly non-\/hanging. Use \mbox{\hyperlink{classoomph_1_1Node_a2517b670b4494f5421f5ec0d92cf8bb0}{Node\+::set\+\_\+nonhanging()}} to unhang everything and clear up storage. 
 
-Definition at line 1993 of file nodes.\+cc.
+Definition at line 2068 of file nodes.\+cc.
 
 
 
@@ -1710,7 +1694,7 @@ Mark node as non-\/obsolete.
 
 
 
-Definition at line 1346 of file nodes.\+h.
+Definition at line 1467 of file nodes.\+h.
 
 
 
@@ -1732,7 +1716,7 @@ Label node as non-\/hanging node by removing all hanging node data.
 
 
 
-Definition at line 2200 of file nodes.\+cc.
+Definition at line 2281 of file nodes.\+cc.
 
 
 
@@ -1754,7 +1738,7 @@ Mark node as obsolete.
 
 
 
-Definition at line 1343 of file nodes.\+h.
+Definition at line 1461 of file nodes.\+h.
 
 
 
@@ -1780,7 +1764,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a12b206264401d5b2ff6ae
 
 
 
-Definition at line 1674 of file nodes.\+cc.
+Definition at line 1752 of file nodes.\+cc.
 
 
 
@@ -1802,7 +1786,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a1959abfbb37f775a4d680
 
 
 
-Definition at line 1263 of file nodes.\+h.
+Definition at line 1374 of file nodes.\+h.
 
 
 
@@ -1824,7 +1808,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a0df372aae692d679cfcee
 
 
 
-Definition at line 1122 of file nodes.\+h.
+Definition at line 1229 of file nodes.\+h.
 
 
 
@@ -1846,7 +1830,7 @@ Return vector of values calculated using value(vector).
 
 
 
-Definition at line 1395 of file nodes.\+h.
+Definition at line 1527 of file nodes.\+h.
 
 
 
@@ -1868,7 +1852,7 @@ Return i-\/th value (dofs or pinned) at this node either directly or via hanging
 
 Return i-\/th value (free or pinned) at this node either directly or via hanging node representation. 
 
-Definition at line 2324 of file nodes.\+cc.
+Definition at line 2408 of file nodes.\+cc.
 
 
 
@@ -1890,7 +1874,7 @@ Return i-\/th value at time level t (t=0\+: present, t$>$0\+: previous) either d
 
 Return i-\/th value (free or pinned) at this node at time level t either directly or via hanging node representation. 
 
-Definition at line 2350 of file nodes.\+cc.
+Definition at line 2437 of file nodes.\+cc.
 
 
 
@@ -1908,7 +1892,7 @@ Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinne
 
 Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinned) at this node at time level t (t=0\+: present; t$>$0\+: previous) either directly or via hanging node representation. 
 
-Definition at line 2392 of file nodes.\+cc.
+Definition at line 2482 of file nodes.\+cc.
 
 
 
@@ -1926,7 +1910,7 @@ Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values for the \mbox{
 
 Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinned) at this \mbox{\hyperlink{classoomph_1_1Data}{Data}} object either directly or via hanging node representation. 
 
-Definition at line 2376 of file nodes.\+cc.
+Definition at line 2466 of file nodes.\+cc.
 
 
 
@@ -1944,7 +1928,7 @@ Return the i-\/th nodal coordinate.
 
 
 
-Definition at line 990 of file nodes.\+h.
+Definition at line 1085 of file nodes.\+h.
 
 
 
@@ -1952,7 +1936,7 @@ References i, Nposition\+\_\+type, x\+\_\+gen\+\_\+range\+\_\+check(), and X\+\_
 
 
 
-Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), oomph\+::\+Problem\+::adapt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::add\+\_\+non\+\_\+delete\+\_\+vertices\+\_\+from\+\_\+boundary\+\_\+helper(), oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Tet\+Mesh\+Base\+::assess\+\_\+mesh\+\_\+quality(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::backup(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Geompack\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Simple\+Cubic\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+positions(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+positions(), oomph\+::\+Mesh\+::check\+\_\+for\+\_\+repeated\+\_\+nodes(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), oomph\+::\+Finite\+Element\+::check\+\_\+jacobian(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+area\+\_\+target(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+boundary\+\_\+segments\+\_\+connectivity\+\_\+and\+\_\+initial\+\_\+zeta\+\_\+values(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+global\+\_\+node\+\_\+names\+\_\+and\+\_\+shared\+\_\+nodes(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+holes\+\_\+left\+\_\+by\+\_\+halo\+\_\+elements\+\_\+helper(), oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::compute\+\_\+volume\+\_\+target(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::create\+\_\+mesh\+\_\+from\+\_\+msh\+\_\+file(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::create\+\_\+new\+\_\+shared\+\_\+boundaries(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::create\+\_\+sorted\+\_\+face\+\_\+mesh\+\_\+representation(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Mesh\+::distribute(), oomph\+::\+F\+S\+I\+\_\+functions\+::doc\+\_\+fsi(), oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution(), oomph\+::\+Mesh\+::doc\+\_\+shared\+\_\+nodes(), oomph\+::\+Dummy\+Error\+Estimator\+::\+Dummy\+Error\+Estimator(), dx\+\_\+dt(), oomph\+::\+Eighth\+Sphere\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Eighth\+Sphere\+Mesh(), oomph\+::\+Elastic\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Rectangular\+Quad\+Mesh(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), oomph\+::\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Driven\+Cavity\+Mesh(), oomph\+::\+Full\+Circle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Full\+Circle\+Mesh(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Z2\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Dummy\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), hanging\+\_\+pt(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::maximum\+\_\+edge\+\_\+width(), oomph\+::\+Node\+Ordering\+::node\+\_\+global\+\_\+position\+\_\+comparison(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update(), oomph\+::\+Mesh\+::node\+\_\+update(), oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+central\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I\+I(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+body(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+fin(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+V(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+X(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I\+I(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+Linear\+Elasticity\+Smooth\+Mesh$<$ L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::operator$<$$<$(), output(), oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output\+\_\+boundary\+\_\+coordinates(), oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output\+\_\+integration\+\_\+points(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Tree\+::p\+\_\+refine\+\_\+if\+\_\+required(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pml\+\_\+locate\+\_\+zeta(), oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::position(), position(), oomph\+::\+Projection\+Problem$<$ P\+R\+O\+J\+E\+C\+T\+A\+B\+L\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::project(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+Quarter\+Pipe\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Pipe\+Mesh(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Tube\+Mesh(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::re\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values\+\_\+for\+\_\+internal\+\_\+boundary(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::re\+\_\+scale\+\_\+re\+\_\+assigned\+\_\+initial\+\_\+zeta\+\_\+values\+\_\+for\+\_\+internal\+\_\+boundary(), oomph\+::\+Data\+::read(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::scale\+\_\+basis(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::scale\+\_\+basis(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::scale\+\_\+basis(), oomph\+::\+Mesh\+::scale\+\_\+mesh(), oomph\+::\+Algebraic\+Node\+::self\+\_\+test(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::send\+\_\+boundary\+\_\+node\+\_\+info\+\_\+of\+\_\+shared\+\_\+nodes(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::set\+\_\+self\+\_\+test\+\_\+vector(), oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Xda\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Tet\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+Simple\+Cubic\+Scaffold\+Tet\+Mesh\+::\+Simple\+Cubic\+Scaffold\+Tet\+Mesh(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::sort\+\_\+nodes\+\_\+on\+\_\+shared\+\_\+boundaries(), oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper(), oomph\+::\+Tet\+Mesh\+Base\+::split\+\_\+elements\+\_\+in\+\_\+corners(), oomph\+::\+Tree\+::split\+\_\+if\+\_\+required(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+nonhanging\+\_\+nodes(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::synchronize\+\_\+boundary\+\_\+coordinates(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::temporal\+\_\+error\+\_\+in\+\_\+position(), oomph\+::\+T\+R\+::temporal\+\_\+error\+\_\+in\+\_\+position(), oomph\+::\+Tet\+Mesh\+Vertex\+::\+Tet\+Mesh\+Vertex(), oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh(), oomph\+::\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Tube\+Mesh(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+open\+\_\+curve\+\_\+after\+\_\+restart(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+open\+\_\+curve\+\_\+using\+\_\+elements\+\_\+area(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+open\+\_\+curve\+\_\+using\+\_\+face\+\_\+mesh(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+after\+\_\+restart(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+using\+\_\+elements\+\_\+area(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+using\+\_\+face\+\_\+mesh(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+triangulateio(), oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh(), and oomph\+::\+Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape().
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), oomph\+::\+Problem\+::adapt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::add\+\_\+non\+\_\+delete\+\_\+vertices\+\_\+from\+\_\+boundary\+\_\+helper(), oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Tet\+Mesh\+Base\+::assess\+\_\+mesh\+\_\+quality(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::backup(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Solid\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Geompack\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Simple\+Cubic\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+positions(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+positions(), oomph\+::\+Mesh\+::check\+\_\+for\+\_\+repeated\+\_\+nodes(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), oomph\+::\+Finite\+Element\+::check\+\_\+jacobian(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+area\+\_\+target(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+boundary\+\_\+segments\+\_\+connectivity\+\_\+and\+\_\+initial\+\_\+zeta\+\_\+values(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+global\+\_\+node\+\_\+names\+\_\+and\+\_\+shared\+\_\+nodes(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+holes\+\_\+left\+\_\+by\+\_\+halo\+\_\+elements\+\_\+helper(), oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::compute\+\_\+volume\+\_\+target(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::create\+\_\+mesh\+\_\+from\+\_\+msh\+\_\+file(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::create\+\_\+new\+\_\+shared\+\_\+boundaries(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::create\+\_\+sorted\+\_\+face\+\_\+mesh\+\_\+representation(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Mesh\+::distribute(), oomph\+::\+F\+S\+I\+\_\+functions\+::doc\+\_\+fsi(), oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution(), oomph\+::\+Mesh\+::doc\+\_\+shared\+\_\+nodes(), oomph\+::\+Dummy\+Error\+Estimator\+::\+Dummy\+Error\+Estimator(), dx\+\_\+dt(), oomph\+::\+Eighth\+Sphere\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Eighth\+Sphere\+Mesh(), oomph\+::\+Elastic\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Rectangular\+Quad\+Mesh(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), oomph\+::\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Driven\+Cavity\+Mesh(), oomph\+::\+Full\+Circle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Full\+Circle\+Mesh(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Z2\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Dummy\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), hanging\+\_\+pt(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::maximum\+\_\+edge\+\_\+width(), oomph\+::\+Node\+Ordering\+::node\+\_\+global\+\_\+position\+\_\+comparison(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update(), oomph\+::\+Mesh\+::node\+\_\+update(), oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+central\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I\+I(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+body(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+fin(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+V(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+X(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I\+I(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+Linear\+Elasticity\+Smooth\+Mesh$<$ L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::operator$<$$<$(), output(), oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output\+\_\+boundary\+\_\+coordinates(), oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output\+\_\+integration\+\_\+points(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Tree\+::p\+\_\+refine\+\_\+if\+\_\+required(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pml\+\_\+locate\+\_\+zeta(), oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::position(), position(), oomph\+::\+Projection\+Problem$<$ P\+R\+O\+J\+E\+C\+T\+A\+B\+L\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::project(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+Quarter\+Pipe\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Pipe\+Mesh(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Tube\+Mesh(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::re\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values\+\_\+for\+\_\+internal\+\_\+boundary(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::re\+\_\+scale\+\_\+re\+\_\+assigned\+\_\+initial\+\_\+zeta\+\_\+values\+\_\+for\+\_\+internal\+\_\+boundary(), oomph\+::\+Data\+::read(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::scale\+\_\+basis(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::scale\+\_\+basis(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::scale\+\_\+basis(), oomph\+::\+Mesh\+::scale\+\_\+mesh(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::select\+\_\+boundary\+\_\+face\+\_\+elements(), oomph\+::\+Algebraic\+Node\+::self\+\_\+test(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::send\+\_\+boundary\+\_\+node\+\_\+info\+\_\+of\+\_\+shared\+\_\+nodes(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::set\+\_\+self\+\_\+test\+\_\+vector(), oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Xda\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Tet\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma(), oomph\+::\+Simple\+Cubic\+Scaffold\+Tet\+Mesh\+::\+Simple\+Cubic\+Scaffold\+Tet\+Mesh(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::sort\+\_\+nodes\+\_\+on\+\_\+shared\+\_\+boundaries(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+bottom\+\_\+boundary(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+left\+\_\+boundary(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+right\+\_\+boundary(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+top\+\_\+boundary(), oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper(), oomph\+::\+Tet\+Mesh\+Base\+::split\+\_\+elements\+\_\+in\+\_\+corners(), oomph\+::\+Tree\+::split\+\_\+if\+\_\+required(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+nonhanging\+\_\+nodes(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::synchronize\+\_\+boundary\+\_\+coordinates(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::temporal\+\_\+error\+\_\+in\+\_\+position(), oomph\+::\+T\+R\+::temporal\+\_\+error\+\_\+in\+\_\+position(), oomph\+::\+Tet\+Mesh\+Vertex\+::\+Tet\+Mesh\+Vertex(), oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh(), oomph\+::\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Tube\+Mesh(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+open\+\_\+curve\+\_\+after\+\_\+restart(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+open\+\_\+curve\+\_\+using\+\_\+elements\+\_\+area(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+open\+\_\+curve\+\_\+using\+\_\+face\+\_\+mesh(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+after\+\_\+restart(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+using\+\_\+elements\+\_\+area(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+using\+\_\+face\+\_\+mesh(), oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+triangulateio(), oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh(), and oomph\+::\+Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape().
 
 \mbox{\Hypertarget{classoomph_1_1Node_aa222576ddc1a859fbbfe1f31f79cee7d}\label{classoomph_1_1Node_aa222576ddc1a859fbbfe1f31f79cee7d}} 
 \index{oomph::Node@{oomph::Node}!x@{x}}
@@ -1966,7 +1950,7 @@ Return the i-\/th nodal coordinate (const version).
 
 
 
-Definition at line 999 of file nodes.\+h.
+Definition at line 1094 of file nodes.\+h.
 
 
 
@@ -1984,7 +1968,7 @@ Return the position x(i) at previous timestep t (t=0\+: present; t$>$0 previous 
 
 
 
-Definition at line 1009 of file nodes.\+h.
+Definition at line 1104 of file nodes.\+h.
 
 
 
@@ -2002,7 +1986,7 @@ Return the position x(i) at previous timestep t (t=0\+: present; t$>$0 previous 
 
 
 
-Definition at line 1019 of file nodes.\+h.
+Definition at line 1114 of file nodes.\+h.
 
 
 
@@ -2016,12 +2000,11 @@ References i, Nposition\+\_\+type, t, x\+\_\+gen\+\_\+range\+\_\+check(), and X\
 
 
 
-Reference to the generalised position x(k,i). ~\newline
- 
+Reference to the generalised position x(k,i). `Type'\+: k; Coordinate direction\+: i. 
 
-`Type'\+: k; Coordinate direction\+: i. 
 
-Definition at line 1050 of file nodes.\+h.
+
+Definition at line 1151 of file nodes.\+h.
 
 
 
@@ -2043,7 +2026,7 @@ Reference to the generalised position x(k,i). `Type'\+: k; Coordinate direction\
 
 
 
-Definition at line 1060 of file nodes.\+h.
+Definition at line 1161 of file nodes.\+h.
 
 
 
@@ -2061,7 +2044,7 @@ Reference to the generalised position x(k,i) at the previous timestep \mbox{[}t=
 
 
 
-Definition at line 1071 of file nodes.\+h.
+Definition at line 1171 of file nodes.\+h.
 
 
 
@@ -2079,7 +2062,7 @@ Reference to the generalised position x(k,i) at the previous timestep \mbox{[}t=
 
 
 
-Definition at line 1083 of file nodes.\+h.
+Definition at line 1182 of file nodes.\+h.
 
 
 
@@ -2097,7 +2080,7 @@ Private function to check that the arguemnts to the position functions are in ra
 
 Private function to check that the arguments are within the range of the stored coordinates, position types and time history values. 
 
-Definition at line 1465 of file nodes.\+cc.
+Definition at line 1528 of file nodes.\+cc.
 
 
 
@@ -2119,7 +2102,7 @@ Direct access to the pointer to the i-\/th stored coordinate data.
 
 
 
-Definition at line 902 of file nodes.\+h.
+Definition at line 977 of file nodes.\+h.
 
 
 
@@ -2133,12 +2116,11 @@ References i, and X\+\_\+position.
 
 
 
-Direct access to the i-\/th coordinate at time level t ~\newline
- 
+Direct access to the i-\/th coordinate at time level t (t=0\+: present; t$>$0\+: previous) 
 
-(t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 1104 of file nodes.\+h.
+
+Definition at line 1206 of file nodes.\+h.
 
 
 
@@ -2159,7 +2141,7 @@ to construct periodic Nodes
 
 
 
-Definition at line 858 of file nodes.\+h.
+Definition at line 933 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Node_acdfb367cd4c2661ea1edf78baa40014c}\label{classoomph_1_1Node_acdfb367cd4c2661ea1edf78baa40014c}} 
 \index{oomph::Node@{oomph::Node}!operator$<$$<$@{operator$<$$<$}}
@@ -2171,7 +2153,7 @@ Output operator\+: output location and all values at all times, along with any e
 
 \mbox{\hyperlink{classoomph_1_1Node}{Node}} output operator\+: output equation numbers and values at all times, along with any extra information stored for the timestepper. 
 
-Definition at line 355 of file nodes.\+cc.
+Definition at line 373 of file nodes.\+cc.
 
 
 
@@ -2184,22 +2166,21 @@ Definition at line 355 of file nodes.\+cc.
 
 
 
-Pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. ~\newline
- 
+Pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. 
 
 
 
-Definition at line 908 of file nodes.\+h.
+Definition at line 986 of file nodes.\+h.
 
 
 
 Referenced by has\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update(), oomph\+::\+Spine\+Node\+::node\+\_\+update(), perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct(), and set\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1Node_a4efe1b8b72dd6eb748dd21109eb1bf54}\label{classoomph_1_1Node_a4efe1b8b72dd6eb748dd21109eb1bf54}} 
+\mbox{\Hypertarget{classoomph_1_1Node_a9621d9d4dda3ebfe9578c180c5251484}\label{classoomph_1_1Node_a9621d9d4dda3ebfe9578c180c5251484}} 
 \index{oomph::Node@{oomph::Node}!Hanging\_pt@{Hanging\_pt}}
 \index{Hanging\_pt@{Hanging\_pt}!oomph::Node@{oomph::Node}}
 \doxysubsubsection{\texorpdfstring{Hanging\_pt}{Hanging\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}}$\ast$ $\ast$ oomph\+::\+Node\+::\+Hanging\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}}$\ast$$\ast$ oomph\+::\+Node\+::\+Hanging\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -2207,7 +2188,7 @@ C-\/style array of pointers to hanging node info. It\textquotesingle{}s set to N
 
 
 
-Definition at line 886 of file nodes.\+h.
+Definition at line 961 of file nodes.\+h.
 
 
 
@@ -2225,7 +2206,7 @@ Eulerian dimension of the node.
 
 
 
-Definition at line 889 of file nodes.\+h.
+Definition at line 964 of file nodes.\+h.
 
 
 
@@ -2235,16 +2216,15 @@ Referenced by copy(), dump(), ndim(), read(), oomph\+::\+Solid\+Node\+::\+Solid\
 \index{oomph::Node@{oomph::Node}!No\_independent\_position@{No\_independent\_position}}
 \index{No\_independent\_position@{No\_independent\_position}!oomph::Node@{oomph::Node}}
 \doxysubsubsection{\texorpdfstring{No\_independent\_position}{No\_independent\_position}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Node\+::\+No\+\_\+independent\+\_\+position =10\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Node\+::\+No\+\_\+independent\+\_\+position = 10\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Static \char`\"{}\+Magic number\char`\"{} used to indicate that there is no independent position in a periodic node. ~\newline
- 
+Static \char`\"{}\+Magic number\char`\"{} used to indicate that there is no independent position in a periodic node. 
 
 Static \char`\"{}\+Magic number\char`\"{} passed as independent\+\_\+position when there is no independent position in the periodic node. For example, in a periodic mesh. 
 
-Definition at line 914 of file nodes.\+h.
+Definition at line 991 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Node_aa5419b3f46cb65976e1e1311eed9419d}\label{classoomph_1_1Node_aa5419b3f46cb65976e1e1311eed9419d}} 
 \index{oomph::Node@{oomph::Node}!Nposition\_type@{Nposition\_type}}
@@ -2258,7 +2238,7 @@ Number of coordinate types used in the mapping between local and global coordina
 
 
 
-Definition at line 895 of file nodes.\+h.
+Definition at line 970 of file nodes.\+h.
 
 
 
@@ -2272,12 +2252,11 @@ Referenced by copy(), dump(), nposition\+\_\+type(), oomph\+::\+Solid\+Node\+::p
 
 
 
-Flag to indicate that the \mbox{\hyperlink{classoomph_1_1Node}{Node}} has become obsolete --- usually during mesh refinement process ~\newline
- 
+Flag to indicate that the \mbox{\hyperlink{classoomph_1_1Node}{Node}} has become obsolete --- usually during mesh refinement process. 
 
 
 
-Definition at line 899 of file nodes.\+h.
+Definition at line 974 of file nodes.\+h.
 
 
 
@@ -2295,7 +2274,7 @@ Pointer to the timestepper associated with the position data.
 
 
 
-Definition at line 876 of file nodes.\+h.
+Definition at line 951 of file nodes.\+h.
 
 
 
@@ -2313,7 +2292,7 @@ Array of pointers to the data holding the Eulerian positions. The storage format
 
 
 
-Definition at line 873 of file nodes.\+h.
+Definition at line 948 of file nodes.\+h.
 
 
 

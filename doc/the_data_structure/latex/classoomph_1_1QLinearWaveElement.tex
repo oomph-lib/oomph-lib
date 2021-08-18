@@ -22,17 +22,13 @@ void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_acd9fed2d3150d2e129a80b7d
 unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a62c08bf0690b81184694b87424db4d46}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_ae7176ab05b31f360cc7c774e857242d9}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a4e44576ef363b7b9680a60da96b7687b}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a9b6c23f23a7f8e188241fe2698c7543d}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a4fe8053385a090049e459faa0e0cc3be}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af72b64dee3c8690aca4734d7f41515bc}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af991bd517d135fe1320074b28ed84b02}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
@@ -41,7 +37,7 @@ void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af991bd517d135fe1320074b2
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a97bfe7e067f0b8f3cf82b02ca1e7421e}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+lin\+\_\+wave}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+lin\+\_\+wave}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
@@ -81,7 +77,7 @@ class oomph\+::\+Q\+Linear\+Wave\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>
 
 Empty, just establishes the template parameters 
 
-Definition at line 401 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 407 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -99,7 +95,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\
 
 
 
-Definition at line 416 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 419 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a0379e5690ec0f285d0e6281204f357d5}\label{classoomph_1_1QLinearWaveElement_a0379e5690ec0f285d0e6281204f357d5}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!QLinearWaveElement@{QLinearWaveElement}}
@@ -114,7 +110,7 @@ Broken copy constructor.
 
 
 
-Definition at line 420 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 424 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -142,7 +138,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a8033ffc13e61d7adc
 
 
 
-Definition at line 541 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 558 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a97bfe7e067f0b8f3cf82b02ca1e7421e}\label{classoomph_1_1QLinearWaveElement_a97bfe7e067f0b8f3cf82b02ca1e7421e}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_lin\_wave@{dshape\_and\_dtest\_eulerian\_lin\_wave}}
@@ -151,9 +147,7 @@ Definition at line 541 of file linear\+\_\+wave\+\_\+elements.\+h.
 {\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -163,7 +157,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a57ed864bd1ecad66f
 
 
 
-Definition at line 509 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 525 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -177,7 +171,7 @@ References i, and s.
 
 
 
-Definition at line 51 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 48 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_ae3b48281ac6934a3db36bf3db3b095ef}\label{classoomph_1_1QLinearWaveElement_ae3b48281ac6934a3db36bf3db3b095ef}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -187,7 +181,7 @@ Definition at line 51 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
-Definition at line 65 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 60 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_ae2af2246b42c100dd88283716ca48580}\label{classoomph_1_1QLinearWaveElement_ae2af2246b42c100dd88283716ca48580}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -197,7 +191,7 @@ Definition at line 65 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
-Definition at line 47 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 45 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a32b3b8e189567a176b58f5c6d68ef5ed}\label{classoomph_1_1QLinearWaveElement_a32b3b8e189567a176b58f5c6d68ef5ed}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -207,7 +201,7 @@ Definition at line 47 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
-Definition at line 45 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 43 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_aa76d9d6ad69c263d38cbe2a75691fbd4}\label{classoomph_1_1QLinearWaveElement_aa76d9d6ad69c263d38cbe2a75691fbd4}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -221,7 +215,7 @@ Definition at line 45 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
-Definition at line 43 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 41 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_afbcae91b32ac279db6ade03cf0e736e8}\label{classoomph_1_1QLinearWaveElement_afbcae91b32ac279db6ade03cf0e736e8}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -231,7 +225,7 @@ Definition at line 43 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
-Definition at line 58 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 54 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_acce75f65012a63394481a61080ecf83c}\label{classoomph_1_1QLinearWaveElement_acce75f65012a63394481a61080ecf83c}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -241,7 +235,7 @@ Definition at line 58 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
-Definition at line 70 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 64 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a94179db43ea96f4297a3c42e494c5945}\label{classoomph_1_1QLinearWaveElement_a94179db43ea96f4297a3c42e494c5945}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -251,7 +245,7 @@ Definition at line 70 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
-Definition at line 62 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 57 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_ac47ebbcd60bbbfff4268c7d22569efe1}\label{classoomph_1_1QLinearWaveElement_ac47ebbcd60bbbfff4268c7d22569efe1}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -261,7 +255,7 @@ Definition at line 62 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
-Definition at line 55 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line 51 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_acd9fed2d3150d2e129a80b7df54dfb71}\label{classoomph_1_1QLinearWaveElement_acd9fed2d3150d2e129a80b7df54dfb71}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!operator=@{operator=}}
@@ -276,7 +270,7 @@ Broken assignment operator.
 
 
 
-Definition at line 427 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 431 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -291,8 +285,7 @@ void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wa
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -300,7 +293,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a7a1464dba
 
 
 
-Definition at line 449 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 459 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -315,8 +308,7 @@ void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wa
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -324,7 +316,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a2e3dd0d7c
 
 
 
-Definition at line 454 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 466 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -339,8 +331,7 @@ void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wa
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u. 
+Output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -348,7 +339,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ad5d68d2b3
 
 
 
-Definition at line 439 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 445 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -363,8 +354,7 @@ void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wa
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -372,7 +362,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a1830b4405
 
 
 
-Definition at line 444 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 452 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -395,7 +385,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aa0089c4e1
 
 
 
-Definition at line 470 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 485 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -418,7 +408,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a3ae24c98f
 
 
 
-Definition at line 460 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 474 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -441,7 +431,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 434 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 438 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 
@@ -463,7 +453,7 @@ Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nval
 
 
 
-Definition at line 409 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line 413 of file linear\+\_\+wave\+\_\+elements.\+h.
 
 
 

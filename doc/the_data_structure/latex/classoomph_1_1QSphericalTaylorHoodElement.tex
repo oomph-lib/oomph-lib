@@ -25,9 +25,9 @@ unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af923b447673
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_acc320cd97d3adae63e1775f24f63efe7}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a3f964db0b1ca6e1edd0c2b450b79af6d}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ae23f14a1aae4bdcdbcb38ec7911f586a}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a53b2b394a10a6a415a79c3d53aaf2a51}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af51646fd4bbdf6b3dd073e6858ec15e3}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af3864809dfd77246f0ec052480ac397f}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations}{Spherical\+Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -39,9 +39,8 @@ void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ad8e462b97fd0aa1
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations}{Spherical\+Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a3417f97997b87a5cddc499697e227717}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity (3 components) and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a62c62fd109c074654a239bcfb99522c6}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+Dof type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ab1482a506aa85a8d89bf1fb946f8b859}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+Dof type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -58,7 +57,7 @@ int \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a758be6fc4cc9d5e1
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af1726837de58e680ce2629e4281e4432}{Pconv}} \mbox{[}$\,$\mbox{]} =\{0,2,6,8\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af1726837de58e680ce2629e4281e4432}{Pconv}} \mbox{[}$\,$\mbox{]} = \{0, 2, 6, 8\}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold conversion from pressure node numbers to actual node numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
@@ -71,7 +70,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement
 \doxysubsection{Detailed Description}
 Taylor--Hood elements are Navier--Stokes elements with quadratic interpolation for velocities and positions and continous linear pressure interpolation. They can be used within oomph-\/lib\textquotesingle{}s block-\/preconditioning framework. 
 
-Definition at line 976 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1089 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -88,7 +87,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line 1021 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1138 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -109,7 +108,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a10ed6f
 
 
 
-Definition at line 1141 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1278 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -131,7 +130,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a3b9e9c
 
 
 
-Definition at line 1114 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1251 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -153,40 +152,39 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_ae4dc4c
 
 
 
-Definition at line 1042 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1171 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
-\mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_a62c62fd109c074654a239bcfb99522c6}\label{classoomph_1_1QSphericalTaylorHoodElement_a62c62fd109c074654a239bcfb99522c6}} 
+\mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_ab1482a506aa85a8d89bf1fb946f8b859}\label{classoomph_1_1QSphericalTaylorHoodElement_ab1482a506aa85a8d89bf1fb946f8b859}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+Dof type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+Dof type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
 Create a list of pairs for all unknowns in this element, so the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 2536 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2576 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
 References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::nvalue().
 
-\mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_a3f964db0b1ca6e1edd0c2b450b79af6d}\label{classoomph_1_1QSphericalTaylorHoodElement_a3f964db0b1ca6e1edd0c2b450b79af6d}} 
+\mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_ae23f14a1aae4bdcdbcb38ec7911f586a}\label{classoomph_1_1QSphericalTaylorHoodElement_ae23f14a1aae4bdcdbcb38ec7911f586a}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -204,21 +202,21 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
 
 
 
-Definition at line 2479 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2514 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
 References i, identify\+\_\+pressure\+\_\+data(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+nst().
 
-\mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_a53b2b394a10a6a415a79c3d53aaf2a51}\label{classoomph_1_1QSphericalTaylorHoodElement_a53b2b394a10a6a415a79c3d53aaf2a51}} 
+\mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_af51646fd4bbdf6b3dd073e6858ec15e3}\label{classoomph_1_1QSphericalTaylorHoodElement_af51646fd4bbdf6b3dd073e6858ec15e3}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -236,11 +234,11 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for pressure values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
 
 
 
-Definition at line 2511 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 2549 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -266,7 +264,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 1088 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1227 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_af923b447673c5a89772989e91d8f6603}\label{classoomph_1_1QSphericalTaylorHoodElement_af923b447673c5a89772989e91d8f6603}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!npres\_spherical\_nst@{npres\_spherical\_nst}}
@@ -284,7 +282,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_ae01203
 
 
 
-Definition at line 1039 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1165 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -306,7 +304,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 1079 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1213 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -328,7 +326,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 1082 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1219 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -350,7 +348,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 1071 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1201 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -372,7 +370,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 1075 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1207 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -394,7 +392,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_ad8d9a0
 
 
 
-Definition at line 1015 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1131 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -416,7 +414,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations
 
 
 
-Definition at line 1031 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1152 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -438,7 +436,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a5b50d5
 
 
 
-Definition at line 1035 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1159 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -460,7 +458,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a17799e
 
 
 
-Definition at line 1163 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1301 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -486,7 +484,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a862f1d
 
 
 
-Definition at line 1188 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1326 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -512,7 +510,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodEl
 
 
 
-Definition at line 1026 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1145 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -529,8 +527,8 @@ References Initial\+\_\+\+Nvalue, and n.
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{=}
-\DoxyCodeLine{\{4,3,4,3,3,3,4,3,4\}}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    4, 3, 4, 3, 3, 3, 4, 3, 4\}}
 
 \end{DoxyCode}
 
@@ -539,7 +537,7 @@ Static array of ints to hold number of variables at node.
 
 
 
-Definition at line 982 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1095 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -549,7 +547,7 @@ Referenced by required\+\_\+nvalue().
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!Pconv@{Pconv}}
 \index{Pconv@{Pconv}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Pconv}{Pconv}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::\+Pconv =\{0,2,6,8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::\+Pconv = \{0, 2, 6, 8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -557,7 +555,7 @@ Static array of ints to hold conversion from pressure node numbers to actual nod
 
 
 
-Definition at line 988 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 1100 of file spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

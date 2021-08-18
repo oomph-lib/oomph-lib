@@ -17,11 +17,9 @@ void \mbox{\hyperlink{classoomph_1_1BoundaryNode_a8310f571e69ee1d3f9de4fd4ac32c6
 \mbox{\hyperlink{classoomph_1_1BoundaryNode_aae4348d85debf5606c286e582bf0e475}{Boundary\+Node}} ()
 \begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BoundaryNode_a3d76a60cda13edec1549693fc6e49214}{Boundary\+Node}} (const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+n\+\_\+value)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor, for a \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlying \mbox{\hyperlink{classoomph_1_1Node}{Node}} constructor which allocates storage for initial\+\_\+n\+\_\+value values. N\+Position\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor, for a \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlying \mbox{\hyperlink{classoomph_1_1Node}{Node}} constructor which allocates storage for initial\+\_\+n\+\_\+value values. N\+Position\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BoundaryNode_a1a18c0a20d10ae670671de9600846edb}{Boundary\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&time\+\_\+stepper\+\_\+pt, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+n\+\_\+value)
-\begin{DoxyCompactList}\small\item\em Unsteady constructor for a \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlygin \mbox{\hyperlink{classoomph_1_1Node}{Node}} constructor which allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates ~\newline
- (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unsteady constructor for a \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlygin \mbox{\hyperlink{classoomph_1_1Node}{Node}} constructor which allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BoundaryNode_a65d27f75e6e015ceb1978be7d3cd83bc}{Boundary\+Node}} (const unsigned \&n\+\_\+lagrangian, const unsigned \&n\+\_\+lagrangian\+\_\+type, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor for Solid-\/type boundary nodes. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.). The Eulerian dimension of the \mbox{\hyperlink{classoomph_1_1Node}{Node}} is n\+\_\+dim and we have n\+\_\+position\+\_\+type (generalised) Eulerian coordinates. There are initial\+\_\+n\+\_\+value values stored at this node. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BoundaryNode_a969b9b49766f702d755c71f3981cfe98}{Boundary\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&time\+\_\+stepper\+\_\+pt, const unsigned \&n\+\_\+lagrangian, const unsigned \&n\+\_\+lagrangian\+\_\+type, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+n\+\_\+value)
@@ -107,7 +105,7 @@ Default Constructor.
 
 
 
-Definition at line 2237 of file nodes.\+h.
+Definition at line 2419 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a3d76a60cda13edec1549693fc6e49214}\label{classoomph_1_1BoundaryNode_a3d76a60cda13edec1549693fc6e49214}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
@@ -118,12 +116,11 @@ Definition at line 2237 of file nodes.\+h.
 
 
 
-\mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor, for a \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlying \mbox{\hyperlink{classoomph_1_1Node}{Node}} constructor which allocates storage for initial\+\_\+n\+\_\+value values. N\+Position\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). ~\newline
- 
+\mbox{\hyperlink{classoomph_1_1Steady}{Steady}} constructor, for a \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlying \mbox{\hyperlink{classoomph_1_1Node}{Node}} constructor which allocates storage for initial\+\_\+n\+\_\+value values. N\+Position\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). 
 
 
 
-Definition at line 2246 of file nodes.\+h.
+Definition at line 2428 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a1a18c0a20d10ae670671de9600846edb}\label{classoomph_1_1BoundaryNode_a1a18c0a20d10ae670671de9600846edb}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
@@ -134,12 +131,11 @@ Definition at line 2246 of file nodes.\+h.
 
 
 
-Unsteady constructor for a \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlygin \mbox{\hyperlink{classoomph_1_1Node}{Node}} constructor which allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates ~\newline
- (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). 
+Unsteady constructor for a \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlygin \mbox{\hyperlink{classoomph_1_1Node}{Node}} constructor which allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). 
 
 
 
-Definition at line 2259 of file nodes.\+h.
+Definition at line 2444 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a65d27f75e6e015ceb1978be7d3cd83bc}\label{classoomph_1_1BoundaryNode_a65d27f75e6e015ceb1978be7d3cd83bc}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
@@ -154,7 +150,7 @@ Definition at line 2259 of file nodes.\+h.
 
 
 
-Definition at line 2273 of file nodes.\+h.
+Definition at line 2461 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a969b9b49766f702d755c71f3981cfe98}\label{classoomph_1_1BoundaryNode_a969b9b49766f702d755c71f3981cfe98}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
@@ -169,7 +165,7 @@ Unsteady constructor for Solid-\/type boundary nodes Allocates storage for initi
 
 
 
-Definition at line 2288 of file nodes.\+h.
+Definition at line 2482 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a29f6d775e2f97943ad0588ed4df5de51}\label{classoomph_1_1BoundaryNode_a29f6d775e2f97943ad0588ed4df5de51}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!````~BoundaryNode@{$\sim$BoundaryNode}}
@@ -184,7 +180,7 @@ Destructor resets pointers if.
 
 
 
-Definition at line 2299 of file nodes.\+h.
+Definition at line 2499 of file nodes.\+h.
 
 
 
@@ -203,7 +199,7 @@ Broken copy constructor.
 
 
 
-Definition at line 2349 of file nodes.\+h.
+Definition at line 2548 of file nodes.\+h.
 
 
 
@@ -225,7 +221,7 @@ Add the node to mesh boundary b, final overload.
 
 
 
-Definition at line 2382 of file nodes.\+h.
+Definition at line 2588 of file nodes.\+h.
 
 
 
@@ -240,7 +236,7 @@ void \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$
 
 Member function to allocates storage for a given number of additional degrees of freedom, n\+\_\+additional\+\_\+value, associated with a particular face\+\_\+id to the \mbox{\hyperlink{classoomph_1_1Node}{Node}} node\+\_\+pt. Needs to be filled in here so that access to the nodal values is available. 
 
-Definition at line 2500 of file nodes.\+h.
+Definition at line 2720 of file nodes.\+h.
 
 
 
@@ -259,7 +255,7 @@ Overload the equation assignment operation.
 
 
 
-Definition at line 2619 of file nodes.\+h.
+Definition at line 2871 of file nodes.\+h.
 
 
 
@@ -278,7 +274,7 @@ Have boundary coordinates been set up?
 
 
 
-Definition at line 2361 of file nodes.\+h.
+Definition at line 2560 of file nodes.\+h.
 
 
 
@@ -297,7 +293,7 @@ Copy over additional information so that if the node is periodic it can remain a
 
 
 
-Definition at line 2145 of file nodes.\+h.
+Definition at line 2325 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a8310f571e69ee1d3f9de4fd4ac32c656}\label{classoomph_1_1BoundaryNode_a8310f571e69ee1d3f9de4fd4ac32c656}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!clear\_copied\_pointers@{clear\_copied\_pointers}}
@@ -312,7 +308,7 @@ Clear pointers to the copied data used when we have periodic nodes. The shallow 
 
 
 
-Definition at line 2189 of file nodes.\+h.
+Definition at line 2369 of file nodes.\+h.
 
 
 
@@ -331,7 +327,7 @@ Return pointer to copied node (null if the current node is not a copy)
 
 
 
-Definition at line 2613 of file nodes.\+h.
+Definition at line 2865 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_af0ed7828ec05bded2cd8d1c5576fbe5d}\label{classoomph_1_1BoundaryNode_af0ed7828ec05bded2cd8d1c5576fbe5d}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!get\_boundaries\_pt@{get\_boundaries\_pt}}
@@ -346,7 +342,7 @@ Access to pointer to set of mesh boundaries that this node occupies; N\+U\+LL if
 
 
 
-Definition at line 2369 of file nodes.\+h.
+Definition at line 2568 of file nodes.\+h.
 
 
 
@@ -365,7 +361,7 @@ Return the vector of k-\/th generalised boundary coordinates on mesh boundary b 
 
 
 
-Definition at line 2412 of file nodes.\+h.
+Definition at line 2626 of file nodes.\+h.
 
 
 
@@ -384,7 +380,7 @@ Return the vector of coordinates on mesh boundary b Final overload.
 
 
 
-Definition at line 2399 of file nodes.\+h.
+Definition at line 2609 of file nodes.\+h.
 
 
 
@@ -403,7 +399,7 @@ Return a boolean to indicate whether the data contains any copied values. If the
 
 
 
-Definition at line 2601 of file nodes.\+h.
+Definition at line 2835 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a787efb1b118065987222b4c40c15570d}\label{classoomph_1_1BoundaryNode_a787efb1b118065987222b4c40c15570d}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_a\_copy@{is\_a\_copy}}
@@ -418,7 +414,7 @@ Return a boolean to indicate whether the i-\/th value is a copied value. If the 
 
 
 
-Definition at line 2607 of file nodes.\+h.
+Definition at line 2850 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a70e488e087d1da3ec13c4412935e5644}\label{classoomph_1_1BoundaryNode_a70e488e087d1da3ec13c4412935e5644}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_on\_boundary@{is\_on\_boundary}}
@@ -433,7 +429,7 @@ Test whether the node lies on a boundary Final overload.
 
 
 
-Definition at line 2374 of file nodes.\+h.
+Definition at line 2575 of file nodes.\+h.
 
 
 
@@ -456,7 +452,7 @@ Test whether the node lies on mesh boundary b Final overload.
 
 
 
-Definition at line 2378 of file nodes.\+h.
+Definition at line 2582 of file nodes.\+h.
 
 
 
@@ -475,7 +471,7 @@ Make the node periodic.
 
 
 
-Definition at line 2591 of file nodes.\+h.
+Definition at line 2821 of file nodes.\+h.
 
 
 
@@ -493,7 +489,7 @@ Make the node periodic.
 
 
 
-Definition at line 2678 of file nodes.\+h.
+Definition at line 2928 of file nodes.\+h.
 
 
 
@@ -512,7 +508,7 @@ Make the nodes passed in periodic\+\_\+nodes periodic from this node.
 
 
 
-Definition at line 2596 of file nodes.\+h.
+Definition at line 2828 of file nodes.\+h.
 
 
 
@@ -531,7 +527,7 @@ Get the number of boundary coordinates on mesh boundary b.
 
 
 
-Definition at line 2391 of file nodes.\+h.
+Definition at line 2601 of file nodes.\+h.
 
 
 
@@ -550,7 +546,7 @@ Return the number of values associated with the i-\/th face element field. If no
 
 
 
-Definition at line 2434 of file nodes.\+h.
+Definition at line 2653 of file nodes.\+h.
 
 
 
@@ -569,7 +565,7 @@ Broken assignment operator.
 
 
 
-Definition at line 2355 of file nodes.\+h.
+Definition at line 2554 of file nodes.\+h.
 
 
 
@@ -588,7 +584,7 @@ Remover the node from mesh boundary b, final overload.
 
 
 
-Definition at line 2386 of file nodes.\+h.
+Definition at line 2594 of file nodes.\+h.
 
 
 
@@ -607,7 +603,7 @@ Set pointers to the copied data used when we have periodic nodes.
 
 
 
-Definition at line 2101 of file nodes.\+h.
+Definition at line 2282 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a8ceaf97ad0211572e251091f84e4f607}\label{classoomph_1_1BoundaryNode_a8ceaf97ad0211572e251091f84e4f607}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!resize@{resize}}
@@ -622,7 +618,7 @@ Resize the number of equations.
 
 
 
-Definition at line 2644 of file nodes.\+h.
+Definition at line 2897 of file nodes.\+h.
 
 
 
@@ -641,7 +637,7 @@ Set the vector of k-\/th generalised boundary coordinates on mesh boundary b. Fi
 
 
 
-Definition at line 2418 of file nodes.\+h.
+Definition at line 2635 of file nodes.\+h.
 
 
 
@@ -660,7 +656,7 @@ Set the vector of coordinates on mesh boundary b Final overload.
 
 
 
-Definition at line 2405 of file nodes.\+h.
+Definition at line 2617 of file nodes.\+h.
 
 
 

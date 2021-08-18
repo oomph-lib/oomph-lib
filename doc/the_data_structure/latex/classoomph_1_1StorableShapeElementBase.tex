@@ -16,8 +16,7 @@ Inheritance diagram for oomph\+::Storable\+Shape\+Element\+Base\+:\begin{figure}
 \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ad1edb32d057cccc152156d9fcaa48255}{Storable\+Shape\+Element\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, set most storage pointers to N\+U\+LL. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a3de37b4bf61a78da326aade3c9169f76}{$\sim$\+Storable\+Shape\+Element\+Base}} ()
-\begin{DoxyCompactList}\small\item\em The destructor cleans up the static memory allocated for shape function storage. Internal and external data get wiped by the \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} destructor; nodes get killed in mesh destructor. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The destructor cleans up the static memory allocated for shape function storage. Internal and external data get wiped by the \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} destructor; nodes get killed in mesh destructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ae8d14ecd9aeb3956fda2001a5129b818}{Storable\+Shape\+Element\+Base}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&)
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a16fe819cb078829ef2165749e4a6da24}{operator=}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&)
@@ -38,45 +37,38 @@ void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a8c90dd66f8d564ecb8
 \begin{DoxyCompactList}\small\item\em Delete stored second derivatives of shape functions w.\+r.\+t. to global Eulerian coordinates. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ab9e219f5624ced52f74ca4fefc2f711b}{delete\+\_\+\+J\+\_\+eulerian\+\_\+stored}} ()
 \begin{DoxyCompactList}\small\item\em Delete stored Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a1c20f4028654ec94f57037a3e3dc6582}{set\+\_\+integration\+\_\+scheme}} (\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a79f1710873332823c47023d370f0596b}{integral\+\_\+pt}})
+virtual void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a1c20f4028654ec94f57037a3e3dc6582}{set\+\_\+integration\+\_\+scheme}} (\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a751dc02ff1325f799840d79ee415753a}{integral\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set the spatial integration scheme -- overloaded from the finite element base class since a change in the integration scheme forces a recomputation of the shape fcts at the integration points. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a5566712150a548f9a9390c56e21d96c7}{shape\+\_\+stored\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored shape functions ~\newline
- \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a3a78911aa55b722e8a3b4ae1bda42cba}{shape\+\_\+stored\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_af829327af8fcc565e4ee86f2850b8231}{shape\+\_\+stored\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored shape functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$ $>$ $\ast$const  \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a17084430eb55019882cde322f01874a3}{shape\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored shape functions (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ab5f825cab04717ff08220a6b1fb754a3}{shape\+\_\+stored\+\_\+pt}} (const unsigned \&ipt)
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ada21d0b5a9145619ec359bbe2783645b}{shape\+\_\+stored\+\_\+pt}} (const unsigned \&ipt)
 \begin{DoxyCompactList}\small\item\em Return a pointer to the stored shape function at the ipt-\/th integration point. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a84e174adbe5169e2b56d162009fb73b5}{shape\+\_\+stored\+\_\+pt}} (const unsigned \&ipt) const
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a018c7e8eadda6f88001ae21f86d0c6ab}{shape\+\_\+stored\+\_\+pt}} (const unsigned \&ipt) const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the stored shape function at the ipt-\/th integration point (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a90f64349a5a609ddc42cf6bd15754282}{dshape\+\_\+local\+\_\+stored\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the local coordinates ~\newline
- \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_acfff5f142a8244db3fa7cecf54ed9dc7}{dshape\+\_\+local\+\_\+stored\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a54298901e94a117d1d4fb0b08769122d}{dshape\+\_\+local\+\_\+stored\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the local coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const  \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aeda3b465ee4fb0af2f55dffa53046cc9}{dshape\+\_\+local\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the local coordinates (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a49fd0060048f85f20f5d05a89323fb07}{d2shape\+\_\+local\+\_\+stored\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the local coordinates ~\newline
- \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a853c586e1190efe144ae8dfcae348828}{d2shape\+\_\+local\+\_\+stored\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a6eb8b35e479e6b09ef235dd21eb3b8b3}{d2shape\+\_\+local\+\_\+stored\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the local coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const  \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_abb20c7f9b53bd4b5347bd9d37e7f3b63}{d2shape\+\_\+local\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the local coordinates (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a7570ad21479b51361f2e7ac68af93387}{dshape\+\_\+eulerian\+\_\+stored\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates ~\newline
- \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_af4b5cabcd5f2f416eade5d09b3815d07}{dshape\+\_\+eulerian\+\_\+stored\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a0df2ca67a08701294ddf689067d232c4}{dshape\+\_\+eulerian\+\_\+stored\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const  \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a2749bd3901bf30859e463c2342161fbe}{dshape\+\_\+eulerian\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a536372ec41ec0216a79a01d363364712}{d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates ~\newline
- \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a0e644627b5e38ae949346276790755a8}{d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt}} () const
-\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) ~\newline
- coordinates (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_abbbdffd61883ede9cdfede77bc1c59f8}{jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a673c5f147838445dcd9dfccf7698f6e7}{d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const  \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_af5d9e3e3c93ea3b6cfd6be4e585044f3}{d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ad140f030bd21d23114d3f90ac00f73d4}{jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of Jacobians of the mapping between the local and global (eulerian) coordinates. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a50236fce0c88b556849b9f42b3517aef}{jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$const  \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_acfb1a733f32bd7df3f3f44d7e9778ee5}{jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of Jacobians of the mapping between the local and global (eulerian) coordinates (const version) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aa0f11d26e348ffbf3bef39ee76a43bfb}{set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$const \&element\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Set the shape functions pointed to internally to be those pointed to by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} element\+\_\+pt (In most cases all elements of the same type have the same number of integration points so the shape function values and their local derivatives are the same -\/-\/$>$ They only need to be stored by one element). Calling this function deletes the locally created storage and re-\/directs the pointers to the stored shape function of the specified element. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set the shape functions pointed to internally to be those pointed to by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} element\+\_\+pt (In most cases all elements of the same type have the same number of integration points so the shape function values and their local derivatives are the same -\/-\/$>$ They only need to be stored by one element). Calling this function deletes the locally created storage and re-\/directs the pointers to the stored shape function of the specified element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aab18b96b6ef256e161033ec16e099fa4}{set\+\_\+dshape\+\_\+eulerian\+\_\+stored\+\_\+from\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$const \&element\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set the derivatives of stored shape functions with respect to the global coordinates to be the same as those pointed to by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} element\+\_\+pt. Note that this function also calls set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element(element\+\_\+pt). so that the local derivatives are also stored. Calling this function only makes sense for uniformly-\/spaced meshes with elements of equal sizes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ad6900d26b449b3c58cba23bb58c631a7}{pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots}} ()
@@ -128,7 +120,7 @@ bool \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ac5a27ce82786d5e0b8
 \doxysubsection{Detailed Description}
 Base class for elements that allow storage of precomputed shape functions and their derivatives w.\+r.\+t to the local and global (Eulerian) coordinates at the element\textquotesingle{}s integration points. 
 
-Definition at line 55 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 54 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -145,7 +137,7 @@ Constructor, set most storage pointers to N\+U\+LL.
 
 
 
-Definition at line 103 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 100 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a3de37b4bf61a78da326aade3c9169f76}\label{classoomph_1_1StorableShapeElementBase_a3de37b4bf61a78da326aade3c9169f76}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!````~StorableShapeElementBase@{$\sim$StorableShapeElementBase}}
@@ -155,12 +147,11 @@ Definition at line 103 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h
 
 
 
-The destructor cleans up the static memory allocated for shape function storage. Internal and external data get wiped by the \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} destructor; nodes get killed in mesh destructor. ~\newline
- 
+The destructor cleans up the static memory allocated for shape function storage. Internal and external data get wiped by the \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} destructor; nodes get killed in mesh destructor. 
 
 The destructor cleans up the memory allocated for shape function storage. 
 
-Definition at line 210 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 205 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -178,7 +169,7 @@ Broken copy constructor.
 
 
 
-Definition at line 117 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 120 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -203,26 +194,25 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aee4c4dc82cab566
 
 
 
-Definition at line 749 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 765 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
 References oomph\+::\+Finite\+Element\+::d2shape\+\_\+eulerian\+\_\+at\+\_\+knot(), D2\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt, and Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a536372ec41ec0216a79a01d363364712}\label{classoomph_1_1StorableShapeElementBase_a536372ec41ec0216a79a01d363364712}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a673c5f147838445dcd9dfccf7698f6e7}\label{classoomph_1_1StorableShapeElementBase_a673c5f147838445dcd9dfccf7698f6e7}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_eulerian\_stored\_pt@{d2shape\_eulerian\_stored\_pt}}
 \index{d2shape\_eulerian\_stored\_pt@{d2shape\_eulerian\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{d2shape\_eulerian\_stored\_pt()}{d2shape\_eulerian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ \& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$\& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates ~\newline
- 
+Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates. 
 
 
 
-Definition at line 220 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 244 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -232,20 +222,19 @@ References D2\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt.
 
 Referenced by set\+\_\+dshape\+\_\+eulerian\+\_\+stored\+\_\+from\+\_\+element().
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a0e644627b5e38ae949346276790755a8}\label{classoomph_1_1StorableShapeElementBase_a0e644627b5e38ae949346276790755a8}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_af5d9e3e3c93ea3b6cfd6be4e585044f3}\label{classoomph_1_1StorableShapeElementBase_af5d9e3e3c93ea3b6cfd6be4e585044f3}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_eulerian\_stored\_pt@{d2shape\_eulerian\_stored\_pt}}
 \index{d2shape\_eulerian\_stored\_pt@{d2shape\_eulerian\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{d2shape\_eulerian\_stored\_pt()}{d2shape\_eulerian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const \& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const\& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) ~\newline
- coordinates (const version) 
+Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates (const version) 
 
 
 
-Definition at line 226 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 252 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -267,26 +256,25 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a5330790998d0b10
 
 
 
-Definition at line 698 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 714 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
 References oomph\+::\+Finite\+Element\+::d2shape\+\_\+local\+\_\+at\+\_\+knot(), and D2\+Shape\+\_\+local\+\_\+stored\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a49fd0060048f85f20f5d05a89323fb07}\label{classoomph_1_1StorableShapeElementBase_a49fd0060048f85f20f5d05a89323fb07}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a6eb8b35e479e6b09ef235dd21eb3b8b3}\label{classoomph_1_1StorableShapeElementBase_a6eb8b35e479e6b09ef235dd21eb3b8b3}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_local\_stored\_pt@{d2shape\_local\_stored\_pt}}
 \index{d2shape\_local\_stored\_pt@{d2shape\_local\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{d2shape\_local\_stored\_pt()}{d2shape\_local\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ \& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$\& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the local coordinates ~\newline
- 
+Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the local coordinates. 
 
 
 
-Definition at line 196 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 212 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -296,11 +284,11 @@ References D2\+Shape\+\_\+local\+\_\+stored\+\_\+pt.
 
 Referenced by set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element().
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a853c586e1190efe144ae8dfcae348828}\label{classoomph_1_1StorableShapeElementBase_a853c586e1190efe144ae8dfcae348828}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_abb20c7f9b53bd4b5347bd9d37e7f3b63}\label{classoomph_1_1StorableShapeElementBase_abb20c7f9b53bd4b5347bd9d37e7f3b63}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_local\_stored\_pt@{d2shape\_local\_stored\_pt}}
 \index{d2shape\_local\_stored\_pt@{d2shape\_local\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{d2shape\_local\_stored\_pt()}{d2shape\_local\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const \& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const\& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -308,7 +296,7 @@ Return a pointer to the vector of pointers to the stored second derivatives of t
 
 
 
-Definition at line 202 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 220 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -326,7 +314,7 @@ Delete all storage related to deriatives of shape fcts w.\+r.\+t. to global Eule
 
 Delete all stored quantities related to derivatives of shape fcts w.\+r.\+t. to global Eulerian coordinates 
 
-Definition at line 132 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 129 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -348,7 +336,7 @@ Delete all the objects stored in the \mbox{[}...\mbox{]}\+\_\+local\+\_\+stored\
 
 Delete all the objects stored in the vectors\+: Shape\+\_\+stored, D\+Shape\+\_\+local\+\_\+stored, and D2\+Shape\+\_\+local\+\_\+stored 
 
-Definition at line 49 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 46 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -370,7 +358,7 @@ Delete stored second derivatives of shape functions w.\+r.\+t. to global Euleria
 
 Delete stored 2nd derivatives w.\+r.\+t. Eulerian coordinates. 
 
-Definition at line 168 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 163 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -392,7 +380,7 @@ Delete stored 2nd derivatives of shape functions w.\+r.\+t. to local coordinates
 
 Delete stored second derivatives of shape functions w.\+r.\+t. to local coordinates 
 
-Definition at line 109 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 106 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -414,7 +402,7 @@ Delete stored deriatives of shape fcts w.\+r.\+t. to global Eulerian coords.
 
 Delete stored derivatives w.\+r.\+t. Eulerian coordinates. 
 
-Definition at line 142 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 139 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -436,7 +424,7 @@ Delete stored derivatives of shape functions w.\+r.\+t. to local coordinates.
 
 Delete stored derivatives of shape functions w.\+r.\+t. to local coordinates 
 
-Definition at line 86 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 83 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -458,7 +446,7 @@ Delete stored Jacobian of mapping between local and global (Eulerian) coordinate
 
 Delete stored Jacobian of mapping between local and global Eulerian coordinates 
 
-Definition at line 193 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 188 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -480,7 +468,7 @@ Delete stored shape functions.
 
 
 
-Definition at line 60 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 57 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -506,26 +494,25 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd
 
 
 
-Definition at line 724 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 740 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
 References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), D\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt, and Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a7570ad21479b51361f2e7ac68af93387}\label{classoomph_1_1StorableShapeElementBase_a7570ad21479b51361f2e7ac68af93387}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a0df2ca67a08701294ddf689067d232c4}\label{classoomph_1_1StorableShapeElementBase_a0df2ca67a08701294ddf689067d232c4}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_eulerian\_stored\_pt@{dshape\_eulerian\_stored\_pt}}
 \index{dshape\_eulerian\_stored\_pt@{dshape\_eulerian\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{dshape\_eulerian\_stored\_pt()}{dshape\_eulerian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ \& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$\& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates ~\newline
- 
+Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates. 
 
 
 
-Definition at line 208 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 228 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -535,11 +522,11 @@ References D\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt.
 
 Referenced by set\+\_\+dshape\+\_\+eulerian\+\_\+stored\+\_\+from\+\_\+element().
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_af4b5cabcd5f2f416eade5d09b3815d07}\label{classoomph_1_1StorableShapeElementBase_af4b5cabcd5f2f416eade5d09b3815d07}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a2749bd3901bf30859e463c2342161fbe}\label{classoomph_1_1StorableShapeElementBase_a2749bd3901bf30859e463c2342161fbe}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_eulerian\_stored\_pt@{dshape\_eulerian\_stored\_pt}}
 \index{dshape\_eulerian\_stored\_pt@{dshape\_eulerian\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{dshape\_eulerian\_stored\_pt()}{dshape\_eulerian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const \& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const\& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -547,7 +534,7 @@ Return a pointer to the vector of pointers to the stored first derivatives of th
 
 
 
-Definition at line 214 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 236 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -569,26 +556,25 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2214ae814100dcb
 
 
 
-Definition at line 676 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 692 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
 References oomph\+::\+Finite\+Element\+::dshape\+\_\+local\+\_\+at\+\_\+knot(), and D\+Shape\+\_\+local\+\_\+stored\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a90f64349a5a609ddc42cf6bd15754282}\label{classoomph_1_1StorableShapeElementBase_a90f64349a5a609ddc42cf6bd15754282}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a54298901e94a117d1d4fb0b08769122d}\label{classoomph_1_1StorableShapeElementBase_a54298901e94a117d1d4fb0b08769122d}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_local\_stored\_pt@{dshape\_local\_stored\_pt}}
 \index{dshape\_local\_stored\_pt@{dshape\_local\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{dshape\_local\_stored\_pt()}{dshape\_local\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ \& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$\& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the local coordinates ~\newline
- 
+Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the local coordinates. 
 
 
 
-Definition at line 185 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 197 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -598,11 +584,11 @@ References D\+Shape\+\_\+local\+\_\+stored\+\_\+pt.
 
 Referenced by set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element().
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_acfff5f142a8244db3fa7cecf54ed9dc7}\label{classoomph_1_1StorableShapeElementBase_acfff5f142a8244db3fa7cecf54ed9dc7}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_aeda3b465ee4fb0af2f55dffa53046cc9}\label{classoomph_1_1StorableShapeElementBase_aeda3b465ee4fb0af2f55dffa53046cc9}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_local\_stored\_pt@{dshape\_local\_stored\_pt}}
 \index{dshape\_local\_stored\_pt@{dshape\_local\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{dshape\_local\_stored\_pt()}{dshape\_local\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const \& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const\& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -610,7 +596,7 @@ Return a pointer to the vector of pointers to the stored first derivatives of th
 
 
 
-Definition at line 191 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 205 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -632,17 +618,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa8a201e448a9200
 
 
 
-Definition at line 773 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 789 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
 References oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), and Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_abbbdffd61883ede9cdfede77bc1c59f8}\label{classoomph_1_1StorableShapeElementBase_abbbdffd61883ede9cdfede77bc1c59f8}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_ad140f030bd21d23114d3f90ac00f73d4}\label{classoomph_1_1StorableShapeElementBase_ad140f030bd21d23114d3f90ac00f73d4}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!jacobian\_eulerian\_stored\_pt@{jacobian\_eulerian\_stored\_pt}}
 \index{jacobian\_eulerian\_stored\_pt@{jacobian\_eulerian\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{jacobian\_eulerian\_stored\_pt()}{jacobian\_eulerian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$ \& oomph\+::\+Storable\+Shape\+Element\+Base\+::jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$\& oomph\+::\+Storable\+Shape\+Element\+Base\+::jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -650,7 +636,7 @@ Return a pointer to the vector of Jacobians of the mapping between the local and
 
 
 
-Definition at line 231 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 259 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -660,11 +646,11 @@ References Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt.
 
 Referenced by set\+\_\+dshape\+\_\+eulerian\+\_\+stored\+\_\+from\+\_\+element().
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a50236fce0c88b556849b9f42b3517aef}\label{classoomph_1_1StorableShapeElementBase_a50236fce0c88b556849b9f42b3517aef}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_acfb1a733f32bd7df3f3f44d7e9778ee5}\label{classoomph_1_1StorableShapeElementBase_acfb1a733f32bd7df3f3f44d7e9778ee5}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!jacobian\_eulerian\_stored\_pt@{jacobian\_eulerian\_stored\_pt}}
 \index{jacobian\_eulerian\_stored\_pt@{jacobian\_eulerian\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{jacobian\_eulerian\_stored\_pt()}{jacobian\_eulerian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$ const \& oomph\+::\+Storable\+Shape\+Element\+Base\+::jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$ const\& oomph\+::\+Storable\+Shape\+Element\+Base\+::jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -672,7 +658,7 @@ Return a pointer to the vector of Jacobians of the mapping between the local and
 
 
 
-Definition at line 237 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 267 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -690,7 +676,7 @@ Broken assignment operator.
 
 
 
-Definition at line 123 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 126 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -708,7 +694,7 @@ Calculate the first and second derivatives of the shape functions w.\+r.\+t glob
 
 Calculate the values of the first and second derivatives of the shape functions at the integration points and store in the internal storage of the element 
 
-Definition at line 575 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 580 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -730,7 +716,7 @@ Calculate the second derivatives of the shape functions w.\+r.\+t. local coordin
 
 Calculate the shape functions and thir first and second derivatives w.\+r.\+t. local coordinates at the integration points and store in internal storage of the element 
 
-Definition at line 402 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 394 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -752,7 +738,7 @@ Calculate the first derivatives of the shape functions w.\+r.\+t the global coor
 
 Calculate the values of the derivatives of the shape functions at the integration points and store in the internal storage of the element 
 
-Definition at line 517 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 519 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -774,7 +760,7 @@ Calculate the shape functions and first derivatives w.\+r.\+t. local coordinates
 
 Calculate the shape functions and thir first derivatives w.\+r.\+t. local coordinates at the integration points and store in internal storage of the element 
 
-Definition at line 329 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 321 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -796,7 +782,7 @@ Calculate the Jacobian of the mapping from local to global coordinates at the in
 
 Calculate the value of the Jacobian of the mapping from local to global coordinates at the integration points and store internally 
 
-Definition at line 493 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 495 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -818,7 +804,7 @@ Calculate the shape functions at the integration points and store the results in
 
 Calculate the shape functions at the integration points and store in internal storage of the element 
 
-Definition at line 268 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 262 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -840,7 +826,7 @@ Set the derivatives of stored shape functions with respect to the global coordin
 
 Set the stored derivatives of shape functions w.\+r.\+t Eulerian coordinates to be those stored in the \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} pointed to by element\+\_\+pt. Using this function will allow a saving in the storage required for integration schemes in the (most common) case when a large number of elements have the same integration scheme 
 
-Definition at line 838 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 850 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -866,7 +852,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_ac
 
 
 
-Definition at line 224 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 218 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -884,12 +870,11 @@ Referenced by oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::set\+\_\+integ
 
 
 
-Set the shape functions pointed to internally to be those pointed to by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} element\+\_\+pt (In most cases all elements of the same type have the same number of integration points so the shape function values and their local derivatives are the same -\/-\/$>$ They only need to be stored by one element). Calling this function deletes the locally created storage and re-\/directs the pointers to the stored shape function of the specified element. ~\newline
- 
+Set the shape functions pointed to internally to be those pointed to by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} element\+\_\+pt (In most cases all elements of the same type have the same number of integration points so the shape function values and their local derivatives are the same -\/-\/$>$ They only need to be stored by one element). Calling this function deletes the locally created storage and re-\/directs the pointers to the stored shape function of the specified element. 
 
 Set the shape functions referenced in the internal vectors to be those stored in the \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} pointed to by element\+\_\+pt. Using this function will allow a saving in the storage required for integration schemes in the (most common) case when a large number of elements have the same integration scheme 
 
-Definition at line 795 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 810 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
@@ -915,26 +900,25 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8
 
 
 
-Definition at line 654 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+Definition at line 671 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
 
 
 
 References oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot(), and Shape\+\_\+stored\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a5566712150a548f9a9390c56e21d96c7}\label{classoomph_1_1StorableShapeElementBase_a5566712150a548f9a9390c56e21d96c7}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_af829327af8fcc565e4ee86f2850b8231}\label{classoomph_1_1StorableShapeElementBase_af829327af8fcc565e4ee86f2850b8231}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!shape\_stored\_pt@{shape\_stored\_pt}}
 \index{shape\_stored\_pt@{shape\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{shape\_stored\_pt()}{shape\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}$\ast$$>$$\ast$ \& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}$\ast$$>$$\ast$\& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Return a pointer to the vector of pointers to the stored shape functions ~\newline
- 
+Return a pointer to the vector of pointers to the stored shape functions. 
 
 
 
-Definition at line 166 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 169 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -944,11 +928,11 @@ References Shape\+\_\+stored\+\_\+pt.
 
 Referenced by oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot(), oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot(), and set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element().
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a3a78911aa55b722e8a3b4ae1bda42cba}\label{classoomph_1_1StorableShapeElementBase_a3a78911aa55b722e8a3b4ae1bda42cba}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a17084430eb55019882cde322f01874a3}\label{classoomph_1_1StorableShapeElementBase_a17084430eb55019882cde322f01874a3}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!shape\_stored\_pt@{shape\_stored\_pt}}
 \index{shape\_stored\_pt@{shape\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{shape\_stored\_pt()}{shape\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}$\ast$$>$$\ast$ const \& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}$\ast$$>$$\ast$ const\& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -956,17 +940,17 @@ Return a pointer to the vector of pointers to the stored shape functions (const 
 
 
 
-Definition at line 170 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 176 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
 References Shape\+\_\+stored\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_ab5f825cab04717ff08220a6b1fb754a3}\label{classoomph_1_1StorableShapeElementBase_ab5f825cab04717ff08220a6b1fb754a3}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_ada21d0b5a9145619ec359bbe2783645b}\label{classoomph_1_1StorableShapeElementBase_ada21d0b5a9145619ec359bbe2783645b}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!shape\_stored\_pt@{shape\_stored\_pt}}
 \index{shape\_stored\_pt@{shape\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{shape\_stored\_pt()}{shape\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}$\ast$ \& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}$\ast$\& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -974,17 +958,17 @@ Return a pointer to the stored shape function at the ipt-\/th integration point.
 
 
 
-Definition at line 175 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 183 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
 References Shape\+\_\+stored\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a84e174adbe5169e2b56d162009fb73b5}\label{classoomph_1_1StorableShapeElementBase_a84e174adbe5169e2b56d162009fb73b5}} 
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a018c7e8eadda6f88001ae21f86d0c6ab}\label{classoomph_1_1StorableShapeElementBase_a018c7e8eadda6f88001ae21f86d0c6ab}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!shape\_stored\_pt@{shape\_stored\_pt}}
 \index{shape\_stored\_pt@{shape\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{shape\_stored\_pt()}{shape\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}$\ast$ const \& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}$\ast$ const\& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -992,7 +976,7 @@ Return a pointer to the stored shape function at the ipt-\/th integration point 
 
 
 
-Definition at line 180 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 190 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -1013,7 +997,7 @@ Boolean to determine whether the element can delete the stored derivatives of sh
 
 
 
-Definition at line 97 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 95 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -1031,7 +1015,7 @@ Boolean to determine whether the element can delete the stored local shape funct
 
 
 
-Definition at line 81 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 79 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -1049,7 +1033,7 @@ Pointer to storage for the second derivatives of the shape functions w.\+r.\+t. 
 
 
 
-Definition at line 89 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 87 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -1067,7 +1051,7 @@ Pointer to storage for the pointers to the second derivatives of the nodal shape
 
 
 
-Definition at line 77 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 75 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -1085,7 +1069,7 @@ Pointer to storage for the derivatives of the shape functions w.\+r.\+t. global 
 
 
 
-Definition at line 85 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 83 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -1103,7 +1087,7 @@ Pointer to storage for the pointers to the derivatives of the nodal shape functi
 
 
 
-Definition at line 72 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 70 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -1121,7 +1105,7 @@ Pointer to storage for the Jacobian of the element w.\+r.\+t global coordinates.
 
 
 
-Definition at line 93 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 91 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 
@@ -1139,7 +1123,7 @@ Pointer to storage for the pointers to the nodal shape functions at the integrat
 
 
 
-Definition at line 68 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+Definition at line 66 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
 
 
 

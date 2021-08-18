@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a973ccadc769d98fed6bc9dd4eff32083}{Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a4ff7678ec433180e2245ea2147f222b7}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a45011f22dedd480392b1f376e4269921}{ny}}, const double \&lx, const double \&ly, const double \&gap\+\_\+fraction, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$wall\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, lengths, pointer to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that defines the collapsible segment and pointer to \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} (defaults to the default timestepper, \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, lengths, pointer to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that defines the collapsible segment and pointer to \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} (defaults to the default timestepper, \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}). \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a048a142aff0ca5fd62273f756bce4ab6}{$\sim$\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a56c72b78935e84f7fef3f6b5d85556c3}{algebraic\+\_\+node\+\_\+update}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})
@@ -44,7 +43,7 @@ Alebraic node update version of \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMe
 \item Boundary 5 is the gap above the moving lid on the left wall 
 \end{DoxyItemize}
 
-Definition at line 169 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line 158 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 
@@ -58,12 +57,11 @@ Definition at line 169 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.
 
 
 
-Constructor\+: Pass number of elements, lengths, pointer to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that defines the collapsible segment and pointer to \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} (defaults to the default timestepper, \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}). ~\newline
- 
+Constructor\+: Pass number of elements, lengths, pointer to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that defines the collapsible segment and pointer to \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} (defaults to the default timestepper, \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}). 
 
 
 
-Definition at line 180 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line 166 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 
@@ -82,7 +80,7 @@ Destructor\+: empty.
 
 
 
-Definition at line 199 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line 185 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 
@@ -104,7 +102,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ab01d6f93354f3c4e5c9d1f0
 
 
 
-Definition at line 199 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
+Definition at line 201 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -123,7 +121,7 @@ Function to setup the algebraic node update.
 
 Setup algebraic mesh update -- assumes that mesh has initially been set up with a flush upper wall. 
 
-Definition at line 289 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
+Definition at line 283 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -154,7 +152,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavi
 
 
 
-Definition at line 208 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line 194 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 

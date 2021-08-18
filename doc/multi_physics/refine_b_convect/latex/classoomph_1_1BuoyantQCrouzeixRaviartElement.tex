@@ -21,7 +21,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a64b84c9c
 \begin{DoxyCompactList}\small\item\em The required number of values stored at the nodes is the sum of the required values of the two single-\/physics elements. Note that this step is generic for any multi-\/physics element of this type. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5876310641d9f5028de6d4263013e247}{ra}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the Rayleigh number (const version) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_afa4d4ff16fa307b16feab1de7aaa90b6}{ra\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a73d4fa66488001d737e8a5ee595bd59b}{ra\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to the Rayleigh number. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a534fc134280b7447eecc4cad46b2e4c5}{disable\+\_\+\+A\+LE}} ()
 \begin{DoxyCompactList}\small\item\em Final override for disable A\+LE. \end{DoxyCompactList}\item 
@@ -36,8 +36,7 @@ std\+::string \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a26f
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a3817706dbf3c755b4029917dac80bad7}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the standard output function with the broken default. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a855783400ac22a61e151d1611ad8e47e}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- Output x, y, u, v, p, theta at Nplot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: Output x, y, u, v, p, theta at Nplot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9ba77409f12b80862262f6695829055b}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: Broken default. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a48039bbb2f32897b70fb0858ff739516}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
@@ -55,8 +54,7 @@ void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a2aa63b1b2ec1
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_ade5820ae7c44a9371dcc348ca5a3ab1c}{get\+\_\+wind\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&wind) const
 \begin{DoxyCompactList}\small\item\em Overload the wind function in the advection-\/diffusion equations. This provides the coupling from the Navier--Stokes equations to the advection-\/diffusion equations because the wind is the fluid velocity. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_aeeef7868070fd692b33e5afa811af1da}{get\+\_\+body\+\_\+force\+\_\+nst}} (const double \&time, const unsigned \&ipt, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&result)
-\begin{DoxyCompactList}\small\item\em Overload the body force in the Navier-\/\+Stokes equations This provides the coupling from the advection-\/diffusion equations to the Navier--Stokes equations, the body force is the temperature multiplied by the Rayleigh number acting in the direction opposite to gravity. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Overload the body force in the Navier-\/\+Stokes equations This provides the coupling from the advection-\/diffusion equations to the Navier--Stokes equations, the body force is the temperature multiplied by the Rayleigh number acting in the direction opposite to gravity. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_ab87ed100a54d40884a70a67fcc305ecf}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (Vector$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Calculate the element\textquotesingle{}s contribution to the residual vector. Recall that fill\+\_\+in\+\_\+$\ast$ functions M\+U\+ST N\+OT initialise the entries in the vector to zero. This allows us to call the fill\+\_\+in\+\_\+$\ast$ functions of the constituent single-\/physics elements sequentially, without wiping out any previously computed entries. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7bd9313dd697c1219cee4a65692388b5}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
@@ -100,7 +98,7 @@ class oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}
 
 A class that solves the Boussinesq approximation of the Navier--Stokes and energy equations by coupling two pre-\/existing classes. The Q\+Advection\+Diffusion\+Element with bi-\/quadratic interpolation for the scalar variable (temperature) and Q\+Crouzeix\+Raviart\+Element which solves the Navier--Stokes equations using bi-\/quadratic interpolation for the velocities and a discontinuous bi-\/linear interpolation for the pressure. Note that we are free to choose the order in which we store the variables at the nodes. In this case we choose to store the variables in the order fluid velocities followed by temperature. We must, therefore, overload the function Advection\+Diffusion\+Equations$<$\+D\+I\+M$>$\+::u\+\_\+index\+\_\+adv\+\_\+diff() to indicate that the temperature is stored at the D\+I\+M-\/th position not the 0-\/th. We do not need to overload the corresponding function in the Navier\+Stokes\+Equations$<$\+D\+I\+M$>$ class because the velocities are stored first. 
 
-Definition at line 67 of file boussinesq\+\_\+elements.\+h.
+Definition at line 65 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -118,7 +116,7 @@ Constructor\+: call the underlying constructors and initialise the pointer to th
 
 
 
-Definition at line 85 of file boussinesq\+\_\+elements.\+h.
+Definition at line 80 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -140,7 +138,7 @@ Validate against exact solution. Solution is provided via function pointer. Plot
 
 
 
-Definition at line 252 of file boussinesq\+\_\+elements.\+h.
+Definition at line 272 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a53d343548b707c62e9f11a04d2dda986}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a53d343548b707c62e9f11a04d2dda986}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!compute\_error@{compute\_error}}
@@ -155,7 +153,7 @@ Validate against exact solution at given time Solution is provided via function 
 
 
 
-Definition at line 240 of file boussinesq\+\_\+elements.\+h.
+Definition at line 258 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_aa720ea32e994671b46457fca078282b5}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_aa720ea32e994671b46457fca078282b5}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
@@ -169,7 +167,7 @@ Set the default physical value to be zero.
 
 
 
-Definition at line 700 of file boussinesq\+\_\+elements.\+h.
+Definition at line 744 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a4898e9179aebf392f1ffdfdb3fbea4a3}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a4898e9179aebf392f1ffdfdb3fbea4a3}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
@@ -179,7 +177,7 @@ Definition at line 700 of file boussinesq\+\_\+elements.\+h.
 
 
 
-Definition at line 702 of file boussinesq\+\_\+elements.\+h.
+Definition at line 747 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a534fc134280b7447eecc4cad46b2e4c5}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a534fc134280b7447eecc4cad46b2e4c5}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!disable\_ALE@{disable\_ALE}}
@@ -194,7 +192,7 @@ Final override for disable A\+LE.
 
 
 
-Definition at line 111 of file boussinesq\+\_\+elements.\+h.
+Definition at line 114 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_af551bb70aa118a8db4498f41272fe776}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_af551bb70aa118a8db4498f41272fe776}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!enable\_ALE@{enable\_ALE}}
@@ -209,7 +207,7 @@ Final override for enable A\+LE.
 
 
 
-Definition at line 119 of file boussinesq\+\_\+elements.\+h.
+Definition at line 122 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7bd9313dd697c1219cee4a65692388b5}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7bd9313dd697c1219cee4a65692388b5}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -224,7 +222,7 @@ Compute the element\textquotesingle{}s residual vector and the Jacobian matrix. 
 
 
 
-Definition at line 315 of file boussinesq\+\_\+elements.\+h.
+Definition at line 341 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -243,7 +241,7 @@ Compute the element\textquotesingle{}s residual Vector and the Jacobian matrix. 
 
 
 
-Definition at line 479 of file boussinesq\+\_\+elements.\+h.
+Definition at line 516 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -262,7 +260,7 @@ Compute the element\textquotesingle{}s residual Vector and the Jacobian matrix. 
 
 
 
-Definition at line 654 of file boussinesq\+\_\+elements.\+h.
+Definition at line 696 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -277,7 +275,11 @@ void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+B
 
 Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix 
 
-Definition at line 324 of file boussinesq\+\_\+elements.\+h.
+Definition at line 350 of file boussinesq\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -288,11 +290,11 @@ void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+B
 
 Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix 
 
-Definition at line 500 of file boussinesq\+\_\+elements.\+h.
+Definition at line 537 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd().
+References oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), and oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -303,11 +305,11 @@ void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+B
 
 Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix 
 
-Definition at line 674 of file boussinesq\+\_\+elements.\+h.
+Definition at line 716 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic().
+References oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), and oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_ab87ed100a54d40884a70a67fcc305ecf}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_ab87ed100a54d40884a70a67fcc305ecf}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -322,7 +324,7 @@ Calculate the element\textquotesingle{}s contribution to the residual vector. Re
 
 
 
-Definition at line 297 of file boussinesq\+\_\+elements.\+h.
+Definition at line 323 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_aa344d9c1a36501baefc4afd56f227b94}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_aa344d9c1a36501baefc4afd56f227b94}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_off\_diagonal\_jacobian\_blocks\_analytic@{fill\_in\_off\_diagonal\_jacobian\_blocks\_analytic}}
@@ -337,7 +339,7 @@ Helper function to get the off-\/diagonal blocks of the Jacobian matrix analytic
 
 
 
-Definition at line 524 of file boussinesq\+\_\+elements.\+h.
+Definition at line 564 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -360,7 +362,7 @@ Helper function to get the off-\/diagonal blocks of the Jacobian matrix by finit
 
 
 
-Definition at line 342 of file boussinesq\+\_\+elements.\+h.
+Definition at line 369 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -379,12 +381,11 @@ void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+B
 
 
 
-Overload the body force in the Navier-\/\+Stokes equations This provides the coupling from the advection-\/diffusion equations to the Navier--Stokes equations, the body force is the temperature multiplied by the Rayleigh number acting in the direction opposite to gravity. ~\newline
- 
+Overload the body force in the Navier-\/\+Stokes equations This provides the coupling from the advection-\/diffusion equations to the Navier--Stokes equations, the body force is the temperature multiplied by the Rayleigh number acting in the direction opposite to gravity. 
 
 
 
-Definition at line 274 of file boussinesq\+\_\+elements.\+h.
+Definition at line 298 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -403,7 +404,7 @@ Overload the wind function in the advection-\/diffusion equations. This provides
 
 
 
-Definition at line 260 of file boussinesq\+\_\+elements.\+h.
+Definition at line 283 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5103e49416e1a0e36a2e8e117fb78623}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5103e49416e1a0e36a2e8e117fb78623}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!nscalar\_paraview@{nscalar\_paraview}}
@@ -418,7 +419,7 @@ Number of scalars/fields output by this element. Broken virtual. Needs to be imp
 
 
 
-Definition at line 129 of file boussinesq\+\_\+elements.\+h.
+Definition at line 132 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9ba77409f12b80862262f6695829055b}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9ba77409f12b80862262f6695829055b}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
@@ -433,7 +434,7 @@ C-\/style output function\+: Broken default.
 
 
 
-Definition at line 206 of file boussinesq\+\_\+elements.\+h.
+Definition at line 216 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a48039bbb2f32897b70fb0858ff739516}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a48039bbb2f32897b70fb0858ff739516}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
@@ -448,7 +449,7 @@ C-\/style output function\+: Broken default.
 
 
 
-Definition at line 210 of file boussinesq\+\_\+elements.\+h.
+Definition at line 222 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a3817706dbf3c755b4029917dac80bad7}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a3817706dbf3c755b4029917dac80bad7}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
@@ -463,7 +464,7 @@ Overload the standard output function with the broken default.
 
 
 
-Definition at line 164 of file boussinesq\+\_\+elements.\+h.
+Definition at line 167 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a855783400ac22a61e151d1611ad8e47e}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a855783400ac22a61e151d1611ad8e47e}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
@@ -474,12 +475,11 @@ void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+B
 
 
 
-Output function\+: ~\newline
- Output x, y, u, v, p, theta at Nplot$^\wedge$\+D\+IM plot points. 
+Output function\+: Output x, y, u, v, p, theta at Nplot$^\wedge$\+D\+IM plot points. 
 
 
 
-Definition at line 169 of file boussinesq\+\_\+elements.\+h.
+Definition at line 175 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_ae1c6dc6850532af9ec618415ba31e053}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_ae1c6dc6850532af9ec618415ba31e053}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -494,7 +494,7 @@ Output function for a time-\/dependent exact solution\+: Broken default.
 
 
 
-Definition at line 222 of file boussinesq\+\_\+elements.\+h.
+Definition at line 238 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_ad36c2a18f2de8b00f76baccc15b768c2}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_ad36c2a18f2de8b00f76baccc15b768c2}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -509,7 +509,7 @@ Output function for an exact solution\+: Broken default.
 
 
 
-Definition at line 214 of file boussinesq\+\_\+elements.\+h.
+Definition at line 228 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5876310641d9f5028de6d4263013e247}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5876310641d9f5028de6d4263013e247}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!ra@{ra}}
@@ -524,7 +524,7 @@ Access function for the Rayleigh number (const version)
 
 
 
-Definition at line 105 of file boussinesq\+\_\+elements.\+h.
+Definition at line 102 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -534,12 +534,12 @@ References oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::\
 
 Referenced by oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic(), and oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::get\+\_\+body\+\_\+force\+\_\+nst().
 
-\mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_afa4d4ff16fa307b16feab1de7aaa90b6}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_afa4d4ff16fa307b16feab1de7aaa90b6}} 
+\mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a73d4fa66488001d737e8a5ee595bd59b}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a73d4fa66488001d737e8a5ee595bd59b}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!ra\_pt@{ra\_pt}}
 \index{ra\_pt@{ra\_pt}!oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{ra\_pt()}{ra\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element}}$<$ D\+IM $>$\+::ra\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element}}$<$ D\+IM $>$\+::ra\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -566,7 +566,7 @@ The required number of values stored at the nodes is the sum of the required val
 
 
 
-Definition at line 100 of file boussinesq\+\_\+elements.\+h.
+Definition at line 95 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a26f8112d2ba9c77087e534145a2477c9}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a26f8112d2ba9c77087e534145a2477c9}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!scalar\_name\_paraview@{scalar\_name\_paraview}}
@@ -581,7 +581,7 @@ Name of the i-\/th scalar field. Default implementation returns V1 for the first
 
 
 
-Definition at line 157 of file boussinesq\+\_\+elements.\+h.
+Definition at line 160 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a33130eacdbdee41536fce76166c4a769}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a33130eacdbdee41536fce76166c4a769}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!scalar\_value\_paraview@{scalar\_value\_paraview}}
@@ -596,7 +596,7 @@ Write values of the i-\/th scalar field at the plot points. Broken virtual. Need
 
 
 
-Definition at line 143 of file boussinesq\+\_\+elements.\+h.
+Definition at line 146 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_acf5fa44f694c5374c61a964020437bf4}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_acf5fa44f694c5374c61a964020437bf4}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!u\_index\_adv\_diff@{u\_index\_adv\_diff}}
@@ -611,7 +611,7 @@ Overload the index at which the temperature variable is stored. We choose to sto
 
 
 
-Definition at line 233 of file boussinesq\+\_\+elements.\+h.
+Definition at line 248 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -630,7 +630,7 @@ Unpin p\+\_\+dof-\/th pressure dof.
 
 
 
-Definition at line 92 of file boussinesq\+\_\+elements.\+h.
+Definition at line 87 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -648,7 +648,7 @@ The static default value of the Rayleigh number.
 
 
 
-Definition at line 78 of file boussinesq\+\_\+elements.\+h.
+Definition at line 74 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -667,7 +667,7 @@ Pointer to a private data member, the Rayleigh number.
 
 
 
-Definition at line 75 of file boussinesq\+\_\+elements.\+h.
+Definition at line 71 of file boussinesq\+\_\+elements.\+h.
 
 
 

@@ -22,23 +22,22 @@ void \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_abed851f68c2b68aa
 void \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a4c2485cc6e268e9201f914166852ca90}{set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid}} ()
 \begin{DoxyCompactList}\small\item\em Set the normal computed by Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal(...) to point out of the fluid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a96062fcb7f6329ceca0635ee5cc4d5f8}{dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&drdxi) const
-\begin{DoxyCompactList}\small\item\em Derivative of position vector w.\+r.\+t. the \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}\textquotesingle{}s. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Derivative of position vector w.\+r.\+t. the \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}\textquotesingle{}s Lagrangian coordinates; evaluated at current time. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_acf4aa46e9dc8969dbb409c761d457fd7}{fluid\+\_\+load\+\_\+rate\+\_\+of\+\_\+work}} ()
 \begin{DoxyCompactList}\small\item\em Get integral of instantaneous rate of work done on the wall due to the fluid load returned by the function fluid\+\_\+load\+\_\+vector(...). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a1ef92a7c7157b252fdfc624ab5bc6165}{load\+\_\+vector}} (const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
-\begin{DoxyCompactList}\small\item\em Get the load vector\+: Pass number of the integration point, Lagr. coordinate, Eulerian coordinate and normal vector and return the load vector. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases). We first evaluate the load function defined via \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a92a3f04077bfcfa5d0a7879003d93801}{Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()}} -- this represents the non-\/\+F\+SI load on the shell, e.\+g. an external pressure load. Then we add to this the F\+SI load due to the traction exerted by the adjacent F\+S\+I\+Fluid\+Elements, taking the sign of the normal into account. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get the load vector\+: Pass number of the integration point, Lagr. coordinate, Eulerian coordinate and normal vector and return the load vector. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases). We first evaluate the load function defined via \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a383871edd4bb29fb801c6fc09cafca68}{Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()}} -- this represents the non-\/\+F\+SI load on the shell, e.\+g. an external pressure load. Then we add to this the F\+SI load due to the traction exerted by the adjacent F\+S\+I\+Fluid\+Elements, taking the sign of the normal into account. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a5e48d1c0291cf16cacaa8b42112efe90}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Get the Jacobian and residuals. Wrapper to generic F\+SI version; that catches the case when we replace the Jacobian by the mass matrix (for the consistent assignment of initial conditions). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_aa190107f807910bf4e9d5a7e333d97a2}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a41c37ca0ac22147cc0b16dea14b70418}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a306f9251a35ce59631719b1ea8d4f77f}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual void \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_ad57fbbe43b255ff6429c43366fb5d64a}{load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation}} (const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
-\begin{DoxyCompactList}\small\item\em Get the load vector for the computation of the rate of work done by the load. Can switch between full load and fluid load only. Overloads the version in the shell element base class. Pass number of integration point (dummy) Lagr. coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the load vector for the computation of the rate of work done by the load. Can switch between full load and fluid load only. Overloads the version in the shell element base class. Pass number of integration point (dummy) Lagr. coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -52,7 +51,7 @@ bool \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a5506fa43f98736ba
 \doxysubsection{Detailed Description}
 Diag Hermite Kirchhoff Love shell \char`\"{}upgraded\char`\"{} to a \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}} (and thus, by inheritance, a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}), so it can be used in F\+SI. 
 
-Definition at line 407 of file shell\+\_\+elements.\+h.
+Definition at line 430 of file shell\+\_\+elements.\+h.
 
 
 
@@ -69,7 +68,7 @@ Constructor\+: Create shell element as \mbox{\hyperlink{classoomph_1_1FSIWallEle
 
 
 
-Definition at line 455 of file shell\+\_\+elements.\+h.
+Definition at line 476 of file shell\+\_\+elements.\+h.
 
 
 
@@ -87,7 +86,7 @@ Destructor\+: empty.
 
 
 
-Definition at line 465 of file shell\+\_\+elements.\+h.
+Definition at line 487 of file shell\+\_\+elements.\+h.
 
 
 
@@ -100,13 +99,11 @@ Definition at line 465 of file shell\+\_\+elements.\+h.
 
 
 
-Derivative of position vector w.\+r.\+t. the \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}\textquotesingle{}s. 
-
-Lagrangian coordinates; evaluated at current time.
+Derivative of position vector w.\+r.\+t. the \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}\textquotesingle{}s Lagrangian coordinates; evaluated at current time. 
 
 Define the dposition function. This is used to set no-\/slip boundary conditions in some F\+SI problems. 
 
-Definition at line 1291 of file shell\+\_\+elements.\+cc.
+Definition at line 1332 of file shell\+\_\+elements.\+cc.
 
 
 
@@ -128,7 +125,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c2454
 
 
 
-Definition at line 533 of file shell\+\_\+elements.\+h.
+Definition at line 564 of file shell\+\_\+elements.\+h.
 
 
 
@@ -146,17 +143,17 @@ Get integral of instantaneous rate of work done on the wall due to the fluid loa
 
 
 
-Definition at line 485 of file shell\+\_\+elements.\+h.
+Definition at line 513 of file shell\+\_\+elements.\+h.
 
 
 
 References Compute\+\_\+rate\+\_\+of\+\_\+work\+\_\+by\+\_\+load\+\_\+with\+\_\+fluid\+\_\+load\+\_\+only, and oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+rate\+\_\+of\+\_\+work().
 
-\mbox{\Hypertarget{classoomph_1_1FSIDiagHermiteShellElement_a41c37ca0ac22147cc0b16dea14b70418}\label{classoomph_1_1FSIDiagHermiteShellElement_a41c37ca0ac22147cc0b16dea14b70418}} 
+\mbox{\Hypertarget{classoomph_1_1FSIDiagHermiteShellElement_a306f9251a35ce59631719b1ea8d4f77f}\label{classoomph_1_1FSIDiagHermiteShellElement_a306f9251a35ce59631719b1ea8d4f77f}} 
 \index{oomph::FSIDiagHermiteShellElement@{oomph::FSIDiagHermiteShellElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::FSIDiagHermiteShellElement@{oomph::FSIDiagHermiteShellElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+F\+S\+I\+Diag\+Hermite\+Shell\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+F\+S\+I\+Diag\+Hermite\+Shell\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -164,11 +161,11 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) This element is only in charge of the solid dofs. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 1358 of file shell\+\_\+elements.\+cc.
+Definition at line 1398 of file shell\+\_\+elements.\+cc.
 
 
 
@@ -182,7 +179,7 @@ References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, n, oomph\+::
 
 
 
-Get the load vector\+: Pass number of the integration point, Lagr. coordinate, Eulerian coordinate and normal vector and return the load vector. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases). We first evaluate the load function defined via \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a92a3f04077bfcfa5d0a7879003d93801}{Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()}} -- this represents the non-\/\+F\+SI load on the shell, e.\+g. an external pressure load. Then we add to this the F\+SI load due to the traction exerted by the adjacent F\+S\+I\+Fluid\+Elements, taking the sign of the normal into account. 
+Get the load vector\+: Pass number of the integration point, Lagr. coordinate, Eulerian coordinate and normal vector and return the load vector. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases). We first evaluate the load function defined via \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a383871edd4bb29fb801c6fc09cafca68}{Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()}} -- this represents the non-\/\+F\+SI load on the shell, e.\+g. an external pressure load. Then we add to this the F\+SI load due to the traction exerted by the adjacent F\+S\+I\+Fluid\+Elements, taking the sign of the normal into account. 
 
 
 
@@ -190,7 +187,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad
 
 
 
-Definition at line 504 of file shell\+\_\+elements.\+h.
+Definition at line 532 of file shell\+\_\+elements.\+h.
 
 
 
@@ -208,8 +205,7 @@ Referenced by load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computa
 
 
 
-Get the load vector for the computation of the rate of work done by the load. Can switch between full load and fluid load only. Overloads the version in the shell element base class. Pass number of integration point (dummy) Lagr. coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). ~\newline
- 
+Get the load vector for the computation of the rate of work done by the load. Can switch between full load and fluid load only. Overloads the version in the shell element base class. Pass number of integration point (dummy) Lagr. coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). 
 
 Get fluid-\/only load vector
 
@@ -217,7 +213,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ae
 
 
 
-Definition at line 420 of file shell\+\_\+elements.\+h.
+Definition at line 442 of file shell\+\_\+elements.\+h.
 
 
 
@@ -239,7 +235,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 546 of file shell\+\_\+elements.\+h.
+Definition at line 577 of file shell\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIDiagHermiteShellElement_abed851f68c2b68aaa884c66592371966}\label{classoomph_1_1FSIDiagHermiteShellElement_abed851f68c2b68aaa884c66592371966}} 
 \index{oomph::FSIDiagHermiteShellElement@{oomph::FSIDiagHermiteShellElement}!set\_normal\_pointing\_into\_fluid@{set\_normal\_pointing\_into\_fluid}}
@@ -253,7 +249,7 @@ Set the normal computed by Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal(
 
 
 
-Definition at line 469 of file shell\+\_\+elements.\+h.
+Definition at line 491 of file shell\+\_\+elements.\+h.
 
 
 
@@ -271,7 +267,7 @@ Set the normal computed by Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal(
 
 
 
-Definition at line 473 of file shell\+\_\+elements.\+h.
+Definition at line 498 of file shell\+\_\+elements.\+h.
 
 
 
@@ -292,7 +288,7 @@ Boolean flag to indicate if rate-\/of-\/work by load is to be based on the fluid
 
 
 
-Definition at line 444 of file shell\+\_\+elements.\+h.
+Definition at line 466 of file shell\+\_\+elements.\+h.
 
 
 
@@ -310,7 +306,7 @@ Boolean flag to indicate whether the normal is directed into the fluid.
 
 
 
-Definition at line 440 of file shell\+\_\+elements.\+h.
+Definition at line 462 of file shell\+\_\+elements.\+h.
 
 
 

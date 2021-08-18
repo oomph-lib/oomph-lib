@@ -176,8 +176,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a9d909de1db84a3b7e42494535b152d92 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the geometric references that are used to update node after mesh adaptation. Empty &ndash; no update of node update required without adaptativity.  <a href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a9d909de1db84a3b7e42494535b152d92">More...</a><br /></td></tr>
 <tr class="separator:a9d909de1db84a3b7e42494535b152d92 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e1e770e82577e5702470d8b87f8599d inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a5e1e770e82577e5702470d8b87f8599d">algebraic_node_update</a> (const unsigned &amp;<a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a152339e6ee653f666802b0f8708a0ec3">t</a>, AlgebraicNode *&amp;node_pt)</td></tr>
-<tr class="memdesc:a5e1e770e82577e5702470d8b87f8599d inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update nodal position at time level t (t=0: present; <br  />
-  <a href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a5e1e770e82577e5702470d8b87f8599d">More...</a><br /></td></tr>
+<tr class="memdesc:a5e1e770e82577e5702470d8b87f8599d inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update nodal position at time level t (t=0: present; t&gt;0: previous)  <a href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a5e1e770e82577e5702470d8b87f8599d">More...</a><br /></td></tr>
 <tr class="separator:a5e1e770e82577e5702470d8b87f8599d inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classoomph_1_1CylinderWithFlagMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1CylinderWithFlagMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1CylinderWithFlagMesh.html">oomph::CylinderWithFlagMesh&lt; ELEMENT &gt;</a></td></tr>
 <tr class="memitem:a6591a2b9fdcb8080c899e34b9c8277cd inherit pub_methods_classoomph_1_1CylinderWithFlagMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CylinderWithFlagMesh.html#a6591a2b9fdcb8080c899e34b9c8277cd">CylinderWithFlagMesh</a> (Circle *cylinder_pt, <a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a9c6741891789e8156d85c39d4e3adaa7">GeomObject</a> *top_flag_pt, <a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a9c6741891789e8156d85c39d4e3adaa7">GeomObject</a> *bottom_flag_pt, <a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a9c6741891789e8156d85c39d4e3adaa7">GeomObject</a> *tip_flag_pt, const double &amp;length, const double &amp;height, const double &amp;flag_length, const double &amp;flag_height, const double &amp;centre_x, const double &amp;centre_y, const double &amp;a, <a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a76005d00b12acac8677ecc7c968ff865">TimeStepper</a> *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
@@ -268,7 +267,7 @@ class oomph::RefineableAlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt;</h3>
 
 <p>Refineable version of <a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html" title="Algebraic version of CylinderWithFlagMesh.">AlgebraicCylinderWithFlagMesh</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="cylinder__with__flag__mesh_8template_8h_source.html#l00340">340</a> of file <a class="el" href="cylinder__with__flag__mesh_8template_8h_source.html">cylinder_with_flag_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cylinder__with__flag__mesh_8template_8h_source.html#l00351">351</a> of file <a class="el" href="cylinder__with__flag__mesh_8template_8h_source.html">cylinder_with_flag_mesh.template.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9ddd203e89075036bfdfe6b695fb3395"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9ddd203e89075036bfdfe6b695fb3395">&#9670;&nbsp;</a></span>RefineableAlgebraicCylinderWithFlagMesh()</h2>
@@ -368,7 +367,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor: Pass the pointers to the GeomObjects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper. </p>
 
-<p class="definition">Definition at line <a class="el" href="cylinder__with__flag__mesh_8template_8h_source.html#l00352">352</a> of file <a class="el" href="cylinder__with__flag__mesh_8template_8h_source.html">cylinder_with_flag_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cylinder__with__flag__mesh_8template_8h_source.html#l00361">361</a> of file <a class="el" href="cylinder__with__flag__mesh_8template_8h_source.html">cylinder_with_flag_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -394,7 +393,7 @@ template&lt;class ELEMENT &gt; </div>
 <p>Update the node update data for specified node following any mesh adapation. </p>
 <p>Update the node update functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="cylinder__with__flag__mesh_8template_8cc_source.html#l01900">1900</a> of file <a class="el" href="cylinder__with__flag__mesh_8template_8cc_source.html">cylinder_with_flag_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cylinder__with__flag__mesh_8template_8cc_source.html#l01883">1883</a> of file <a class="el" href="cylinder__with__flag__mesh_8template_8cc_source.html">cylinder_with_flag_mesh.template.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="fsi__collapsible__channel__adapt_8txt_source.html#l00226">GeomObject</a>, and <a class="el" href="fsi__collapsible__channel__adapt_8txt_source.html#l00254">s</a>.</p>
 
@@ -432,7 +431,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:20:38
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:00:27
         </div>
       </div>
     </footer>

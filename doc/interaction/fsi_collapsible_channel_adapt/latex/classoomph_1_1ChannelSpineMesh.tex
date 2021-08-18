@@ -17,11 +17,11 @@ Inheritance diagram for oomph\+::Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction in regions 0,1 and 2, number of elements in y-\/direction, length in x direction in regions 0,1 and 2, height mesh, pointer to the Geom\+Object defining the heightof the central region and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_afb1b729691c03cef065d351094092406}{Channel\+Spine\+Mesh}} (const unsigned \&nx0, const unsigned \&nx1, const unsigned \&nx2, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx0, const double \&lx1, const double \&lx2, const double \&h, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a741893ef460f1275f1df43496bb7536c}{wall\+\_\+pt}}, const bool \&periodic\+\_\+in\+\_\+x, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction in regions 0,1 and 2, number of elements in y-\/direction, length in x direction in regions 0,1 and 2, height mesh, pointer to the Geom\+Object defining the heightof the central region, a boolean flag to indicate whether or not the mesh is periodic and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a84cbf50caead0aba0170246f4ce7330f}{left\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a7ab19923594c95e988268c70a9ee5d47}{left\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to the $ i $ -\/th element in the left region. \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a127dc05f48ad6af69f26dd1504eaeba5}{centre\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a32bfca8fac6e68f9c23c8d13c25c2045}{centre\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to the $ i $ -\/th element in the centre region. \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a599b1d10bc47ceb9903a01b12036f400}{right\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a8e98c7aa782bea996e15ca546f5ac2d5}{right\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to the $ i $ -\/th element in the right region. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a6f7b8f540855876e49b5f1c3f0214d9a}{nleft}} () const
 \begin{DoxyCompactList}\small\item\em Number of elements in left region. \end{DoxyCompactList}\item 
@@ -61,11 +61,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a12eae5013f54ae04f9
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Vector$<$ Finite\+Element $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aaa8df0751eebdab02466afa0253dedbd}{Left\+\_\+element\+\_\+pt}}
+Vector$<$ Finite\+Element $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aaf9d30e4c32739898e35ef458e3f6758}{Left\+\_\+element\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Vector of pointers to element in the left region. \end{DoxyCompactList}\item 
-Vector$<$ Finite\+Element $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aef52a18c46a4ec6121a129789d46db3e}{Centre\+\_\+element\+\_\+pt}}
+Vector$<$ Finite\+Element $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a0d1acf639c1923d7a9a929a5d50d69e8}{Centre\+\_\+element\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Vector of pointers to element in the centre region. \end{DoxyCompactList}\item 
-Vector$<$ Finite\+Element $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a1cc77e7badcd1756b03aa307534011ec}{Right\+\_\+element\+\_\+pt}}
+Vector$<$ Finite\+Element $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aa4471765fe56976ad91cfab075630f20}{Right\+\_\+element\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Vector of pointers to element in the right region. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a283ffaeb501cec43df629d3bf06fe3d2}{Nx0}}
 \begin{DoxyCompactList}\small\item\em Number of elements in the left region. \end{DoxyCompactList}\item 
@@ -97,7 +97,7 @@ class oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 Spine mesh class derived from standard 2D mesh. The mesh contains a Straight\+Line Geom\+Object which defines the height of the left and right regions (0,2) and another Geom\+Object is passed to the constructor to define the height in the central region. 
 
-Definition at line 43 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 42 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -117,7 +117,7 @@ Constructor for spine 2D mesh\+: Pass number of elements in x-\/direction, numbe
 
 The mesh contains a layer of spinified fluid elements (of type E\+L\+E\+M\+E\+NT; e.\+g Spine\+Element$<$Q\+Crouzeix\+Raviart\+Element$<$2$>$) and a surface layer of corresponding Spine interface elements of type I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ for 2D planar problems. 
 
-Definition at line 51 of file channel\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line 48 of file channel\+\_\+spine\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -138,7 +138,7 @@ Constuctor for spine 2D mesh\+: Pass number of elements in x-\/direction, number
 
 The mesh contains a layer of elements (of type E\+L\+E\+M\+E\+NT) and a surface layer of corresponding Spine interface elements (of type Spine\+Line\+Fluid\+Interface\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$). 
 
-Definition at line 99 of file channel\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line 103 of file channel\+\_\+spine\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -160,7 +160,7 @@ Helper function to actually build the channel-\/spine mesh (called from various 
 
 Helper function that actually builds the channel-\/spine mesh based on the parameters set in the various constructors 
 
-Definition at line 143 of file channel\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line 153 of file channel\+\_\+spine\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -170,12 +170,12 @@ References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::buil
 
 Referenced by oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Channel\+Spine\+Mesh().
 
-\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_a127dc05f48ad6af69f26dd1504eaeba5}\label{classoomph_1_1ChannelSpineMesh_a127dc05f48ad6af69f26dd1504eaeba5}} 
+\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_a32bfca8fac6e68f9c23c8d13c25c2045}\label{classoomph_1_1ChannelSpineMesh_a32bfca8fac6e68f9c23c8d13c25c2045}} 
 \index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!centre\_element\_pt@{centre\_element\_pt}}
 \index{centre\_element\_pt@{centre\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{centre\_element\_pt()}{centre\_element\_pt()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Finite\+Element$\ast$ \& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::centre\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Finite\+Element$\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::centre\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -183,7 +183,7 @@ Access functions for pointers to the $ i $ -\/th element in the centre region.
 
 
 
-Definition at line 89 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 88 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -202,7 +202,7 @@ Access function for spines in centre region.
 
 
 
-Definition at line 197 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 214 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -225,14 +225,14 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae1e1d6780
 
 
 
-Definition at line 676 of file channel\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line 694 of file channel\+\_\+spine\+\_\+mesh.\+template.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_a84cbf50caead0aba0170246f4ce7330f}\label{classoomph_1_1ChannelSpineMesh_a84cbf50caead0aba0170246f4ce7330f}} 
+\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_a7ab19923594c95e988268c70a9ee5d47}\label{classoomph_1_1ChannelSpineMesh_a7ab19923594c95e988268c70a9ee5d47}} 
 \index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!left\_element\_pt@{left\_element\_pt}}
 \index{left\_element\_pt@{left\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{left\_element\_pt()}{left\_element\_pt()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Finite\+Element$\ast$ \& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::left\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Finite\+Element$\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::left\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -240,7 +240,7 @@ Access functions for pointers to the $ i $ -\/th element in the left region.
 
 
 
-Definition at line 84 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 81 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -259,7 +259,7 @@ Access function for spines in left region.
 
 
 
-Definition at line 183 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 200 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -278,7 +278,7 @@ Number of elements in bulk.
 
 
 
-Definition at line 107 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 119 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -297,7 +297,7 @@ Number of elements in centre region.
 
 
 
-Definition at line 101 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 107 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -316,7 +316,7 @@ Access function for the number of spines in the centre region.
 
 
 
-Definition at line 230 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 250 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -335,7 +335,7 @@ Number of elements in left region.
 
 
 
-Definition at line 98 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 101 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -354,7 +354,7 @@ Access function for the number of spines in the left region.
 
 
 
-Definition at line 227 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 244 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -373,7 +373,7 @@ Number of elements in right region.
 
 
 
-Definition at line 104 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 113 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -392,18 +392,18 @@ Access function for the number of spines in the right region.
 
 
 
-Definition at line 233 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 256 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
 References oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Nright\+\_\+spine.
 
-\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_a599b1d10bc47ceb9903a01b12036f400}\label{classoomph_1_1ChannelSpineMesh_a599b1d10bc47ceb9903a01b12036f400}} 
+\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_a8e98c7aa782bea996e15ca546f5ac2d5}\label{classoomph_1_1ChannelSpineMesh_a8e98c7aa782bea996e15ca546f5ac2d5}} 
 \index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!right\_element\_pt@{right\_element\_pt}}
 \index{right\_element\_pt@{right\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{right\_element\_pt()}{right\_element\_pt()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Finite\+Element$\ast$ \& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::right\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Finite\+Element$\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::right\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -411,7 +411,7 @@ Access functions for pointers to the $ i $ -\/th element in the right region.
 
 
 
-Definition at line 94 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 95 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -430,7 +430,7 @@ Access function for spines in right region.
 
 
 
-Definition at line 212 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 229 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -449,7 +449,7 @@ General node update function implements pure virtual function defined in Spine\+
 
 
 
-Definition at line 121 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 133 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -468,7 +468,7 @@ Access function to the Geom\+Object for the straight upper wall.
 
 
 
-Definition at line 239 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 268 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -487,7 +487,7 @@ Access function to the Geom\+Object for upper wall.
 
 
 
-Definition at line 236 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 262 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -510,7 +510,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ad4c2f349c
 
 
 
-Definition at line 144 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 156 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -519,12 +519,12 @@ References oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Lx0, 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_aef52a18c46a4ec6121a129789d46db3e}\label{classoomph_1_1ChannelSpineMesh_aef52a18c46a4ec6121a129789d46db3e}} 
+\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_a0d1acf639c1923d7a9a929a5d50d69e8}\label{classoomph_1_1ChannelSpineMesh_a0d1acf639c1923d7a9a929a5d50d69e8}} 
 \index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Centre\_element\_pt@{Centre\_element\_pt}}
 \index{Centre\_element\_pt@{Centre\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Centre\_element\_pt}{Centre\_element\_pt}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$Finite\+Element $\ast$$>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Centre\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Centre\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -532,18 +532,18 @@ Vector of pointers to element in the centre region.
 
 
 
-Definition at line 247 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 278 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
 Referenced by oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::centre\+\_\+element\+\_\+pt(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nbulk(), and oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncentre().
 
-\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_aaa8df0751eebdab02466afa0253dedbd}\label{classoomph_1_1ChannelSpineMesh_aaa8df0751eebdab02466afa0253dedbd}} 
+\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_aaf9d30e4c32739898e35ef458e3f6758}\label{classoomph_1_1ChannelSpineMesh_aaf9d30e4c32739898e35ef458e3f6758}} 
 \index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Left\_element\_pt@{Left\_element\_pt}}
 \index{Left\_element\_pt@{Left\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Left\_element\_pt}{Left\_element\_pt}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$Finite\+Element $\ast$$>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Left\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Left\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -551,7 +551,7 @@ Vector of pointers to element in the left region.
 
 
 
-Definition at line 244 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 275 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -570,7 +570,7 @@ Length of left region.
 
 
 
-Definition at line 266 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 297 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -589,7 +589,7 @@ Length of centre region.
 
 
 
-Definition at line 269 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 300 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -608,7 +608,7 @@ Length of right region.
 
 
 
-Definition at line 272 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 303 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -627,7 +627,7 @@ Number of spines in centre region.
 
 
 
-Definition at line 278 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 309 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -646,7 +646,7 @@ Number of spines in left region.
 
 
 
-Definition at line 275 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 306 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -665,7 +665,7 @@ Number of spines in right region.
 
 
 
-Definition at line 281 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 312 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -684,7 +684,7 @@ Number of elements in the left region.
 
 
 
-Definition at line 257 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 288 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -703,7 +703,7 @@ Number of elements in the centre region.
 
 
 
-Definition at line 260 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 291 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -722,18 +722,18 @@ Number of elements in the right region.
 
 
 
-Definition at line 263 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 294 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
 Referenced by oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+spacing\+\_\+function().
 
-\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_a1cc77e7badcd1756b03aa307534011ec}\label{classoomph_1_1ChannelSpineMesh_a1cc77e7badcd1756b03aa307534011ec}} 
+\mbox{\Hypertarget{classoomph_1_1ChannelSpineMesh_aa4471765fe56976ad91cfab075630f20}\label{classoomph_1_1ChannelSpineMesh_aa4471765fe56976ad91cfab075630f20}} 
 \index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Right\_element\_pt@{Right\_element\_pt}}
 \index{Right\_element\_pt@{Right\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Right\_element\_pt}{Right\_element\_pt}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$Finite\+Element $\ast$$>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Right\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Right\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -741,7 +741,7 @@ Vector of pointers to element in the right region.
 
 
 
-Definition at line 250 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 281 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -760,7 +760,7 @@ Geom\+Object for the straight upper wall.
 
 
 
-Definition at line 287 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 318 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -779,7 +779,7 @@ Geom\+Object for upper wall.
 
 
 
-Definition at line 284 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line 315 of file channel\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 

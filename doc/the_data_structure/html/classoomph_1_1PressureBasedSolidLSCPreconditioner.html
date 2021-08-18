@@ -176,8 +176,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aeb7e9109194f8a468a2c6ffec13e3c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable mass matrix diagonal scaling in the Schur complement approximation.  <a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aeb7e9109194f8a468a2c6ffec13e3c9f">More...</a><br /></td></tr>
 <tr class="separator:aeb7e9109194f8a468a2c6ffec13e3c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1b8a157c96f347dcb5f23b14c88765f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa1b8a157c96f347dcb5f23b14c88765f">disable_p_matrix_scaling</a> ()</td></tr>
-<tr class="memdesc:aa1b8a157c96f347dcb5f23b14c88765f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable mass matrix diagonal scaling in the <br  />
-  <a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa1b8a157c96f347dcb5f23b14c88765f">More...</a><br /></td></tr>
+<tr class="memdesc:aa1b8a157c96f347dcb5f23b14c88765f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable mass matrix diagonal scaling in the Schur complement approximation.  <a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa1b8a157c96f347dcb5f23b14c88765f">More...</a><br /></td></tr>
 <tr class="separator:aa1b8a157c96f347dcb5f23b14c88765f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abefd3cc7c97fbdaad40c0231663c680f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#abefd3cc7c97fbdaad40c0231663c680f">is_p_matrix_using_scaling</a> () const</td></tr>
 <tr class="memdesc:abefd3cc7c97fbdaad40c0231663c680f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return whether the mass matrix is using diagonal scaling or not.  <a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#abefd3cc7c97fbdaad40c0231663c680f">More...</a><br /></td></tr>
@@ -240,9 +239,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ab8e2478caa8370dd12462f17e1cc8082">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse)</td></tr>
 <tr class="memdesc:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ab8e2478caa8370dd12462f17e1cc8082">More...</a><br /></td></tr>
 <tr class="separator:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ae9282acaaf19fa2cdb703d49f1a8de25">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt; &amp;doftype_coarsen_map_coarse)</td></tr>
-<tr class="memdesc:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ae9282acaaf19fa2cdb703d49f1a8de25">More...</a><br /></td></tr>
-<tr class="separator:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ac0d2887082cf856b680b4ae61b510d29">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&gt; &amp;doftype_coarsen_map_coarse)</td></tr>
+<tr class="memdesc:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ac0d2887082cf856b680b4ae61b510d29">More...</a><br /></td></tr>
+<tr class="separator:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#af704c4816469cef4fed9d35a9ad651ec">block_setup</a> ()</td></tr>
 <tr class="memdesc:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their "blocks" and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the internal blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if the identity dof-to-block mapping is okay, i.e. dof number 0 corresponds to block number 0 dof number 1 corresponds to block number 1 dof number 2 corresponds to block number 2 etc...  <a href="classoomph_1_1BlockPreconditioner.html#af704c4816469cef4fed9d35a9ad651ec">More...</a><br /></td></tr>
 <tr class="separator:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -374,9 +373,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a50b76a374797805f64e2af34d581cdc2">nfine_grain_dof_types_in</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
 <tr class="memdesc:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the number of most fine grain dof types in a (possibly coarsened) dof type.  <a href="classoomph_1_1BlockPreconditioner.html#a50b76a374797805f64e2af34d581cdc2">More...</a><br /></td></tr>
 <tr class="separator:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">replacement_dof_block_pt</a> () const</td></tr>
-<tr class="memdesc:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the replaced dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">More...</a><br /></td></tr>
-<tr class="separator:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">replacement_dof_block_pt</a> () const</td></tr>
+<tr class="memdesc:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the replaced dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">More...</a><br /></td></tr>
+<tr class="separator:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#adbe1ae854ee9831649249d50162bb6a9">setup_matrix_vector_product</a> (<a class="el" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a> *matvec_prod_pt, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *block_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;block_col_indices)</td></tr>
 <tr class="memdesc:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup a matrix vector product. matvec_prod_pt is a pointer to the MatrixVectorProduct, block_pt is a pointer to the block matrix, block_col_indices is a vector indicating which block indices does the RHS vector we want to multiply the matrix by.  <a href="classoomph_1_1BlockPreconditioner.html#adbe1ae854ee9831649249d50162bb6a9">More...</a><br /></td></tr>
 <tr class="separator:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -402,8 +401,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae3cf61f61e1aa50e2315e999827e7d59 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper function, takes the naturally ordered vector, v, and extracts the n-th block vector, b. Here n is the block number in the current preconditioner. NOTE: The ordering of the vector b is the same as the ordering of the block matrix from internal_get_block(...).  <a href="classoomph_1_1BlockPreconditioner.html#ae3cf61f61e1aa50e2315e999827e7d59">More...</a><br /></td></tr>
 <tr class="separator:ae3cf61f61e1aa50e2315e999827e7d59 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">internal_get_block_vectors</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;block_vec_number, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
-<tr class="memdesc:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. <br  />
-  <a href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">More...</a><br /></td></tr>
+<tr class="memdesc:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors.  <a href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">More...</a><br /></td></tr>
 <tr class="separator:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cde8af922cd8054dbf352527dd682b1 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a0cde8af922cd8054dbf352527dd682b1">internal_get_block_vectors</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
 <tr class="memdesc:a0cde8af922cd8054dbf352527dd682b1 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper function, takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. This is simply a wrapper around the other internal_get_block_vectors(...) function with the identity block_vec_number vector.  <a href="classoomph_1_1BlockPreconditioner.html#a0cde8af922cd8054dbf352527dd682b1">More...</a><br /></td></tr>
@@ -583,7 +581,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#af97821621b570d409e6662939e5f818d">set_mesh</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *const <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3c0e92cb77c3e3179007fe9fd99b6428">mesh_pt</a>, const bool &amp;allow_multiple_element_type_in_mesh=false)</td></tr>
 <tr class="memdesc:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the i-th mesh for this block preconditioner. Note: The method set_nmesh(...) must be called before this method to specify the number of meshes. By default, it is assumed that each mesh only contains elements of the same type. This condition may be relaxed by setting the boolean allow_multiple_element_type_in_mesh to true, however, each mesh must only contain elements with the same number of dof types.  <a href="classoomph_1_1BlockPreconditioner.html#af97821621b570d409e6662939e5f818d">More...</a><br /></td></tr>
 <tr class="separator:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">set_replacement_dof_block</a> (const unsigned &amp;block_i, const unsigned &amp;block_j, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *<a class="el" href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">replacement_dof_block_pt</a>)</td></tr>
+<tr class="memitem:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">set_replacement_dof_block</a> (const unsigned &amp;block_i, const unsigned &amp;block_j, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *<a class="el" href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">replacement_dof_block_pt</a>)</td></tr>
 <tr class="memdesc:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set replacement dof-level blocks. Only dof-level blocks can be set. This is important due to how the dof type coarsening feature operates.  <a href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">More...</a><br /></td></tr>
 <tr class="separator:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fb68db9e79048615984b005f8aa43b3 inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a6fb68db9e79048615984b005f8aa43b3">any_mesh_distributed</a> () const</td></tr>
@@ -618,9 +616,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">More...</a><br /></td></tr>
 <tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classoomph_1_1BlockPreconditioner"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1BlockPreconditioner')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1BlockPreconditioner.html">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;</a></td></tr>
-<tr class="memitem:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a6816cfc4c9d74a39aca7401f751bb235">Replacement_dof_block_pt</a></td></tr>
-<tr class="memdesc:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The replacement dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a6816cfc4c9d74a39aca7401f751bb235">More...</a><br /></td></tr>
-<tr class="separator:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ad2cd49c5c823c4202046e97038f6e080">Replacement_dof_block_pt</a></td></tr>
+<tr class="memdesc:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The replacement dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#ad2cd49c5c823c4202046e97038f6e080">More...</a><br /></td></tr>
+<tr class="separator:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a59e83eca59e3cdc41a93668539e138f1">Block_distribution_pt</a></td></tr>
 <tr class="memdesc:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The distribution for the blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a59e83eca59e3cdc41a93668539e138f1">More...</a><br /></td></tr>
 <tr class="separator:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -699,7 +697,7 @@ Additional Inherited Members</h2></td></tr>
 <p>In our implementation of the preconditioner, the linear systems can either be solved "exactly", using SuperLU (in its incarnation as an exact preconditioner; this is the default) or by any other <a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a> (inexact solver) specified via the access functions </p><div class="fragment"><div class="line"><a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac62a1112a99ae9503b97bd1c26f086f2">PressureBasedSolidLSCPreconditioner::set_f_preconditioner</a>(...)</div>
 </div><!-- fragment --><p> or </p><div class="fragment"><div class="line"><a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a921f36ec8af49017b799a3832d7f688f">PressureBasedSolidLSCPreconditioner::set_p_preconditioner</a>(...)</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00157">157</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00153">153</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a31b7034fb267b830594671d06b86f01a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a31b7034fb267b830594671d06b86f01a">&#9670;&nbsp;</a></span>PressureBasedSolidLSCPreconditioner() <span class="overload">[1/2]</span></h2>
@@ -726,9 +724,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor - sets defaults for control flags. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00164">164</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00158">158</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00376">Bt_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00367">Doc_time</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00379">E_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00370">F_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00340">F_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00393">Form_BFBt_product</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00355">P_matrix_using_scaling</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00337">P_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00351">Preconditioner_has_been_setup</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00373">QBt_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l02884">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::set_nmesh()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00397">Solid_mesh_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00343">Using_default_f_preconditioner</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00346">Using_default_p_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00393">Bt_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00384">Doc_time</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00396">E_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00387">F_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00357">F_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00410">Form_BFBt_product</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00372">P_matrix_using_scaling</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00354">P_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00368">Preconditioner_has_been_setup</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00390">QBt_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l02857">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::set_nmesh()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00414">Solid_mesh_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00360">Using_default_f_preconditioner</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00363">Using_default_p_preconditioner</a>.</p>
 
 </div>
 </div>
@@ -757,9 +755,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00209">209</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00204">204</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -789,9 +787,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00215">215</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00210">210</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -821,11 +819,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Helper function to assemble the diagonal of the mass matrix from the elemental contributions defined in PressureBasedSolidEquations&lt;DIM&gt;::get_mass_matrix_diagonal(...).</p>
 <p>Helper function to assemble the diagonal of the mass matrix from the elemental contributions defined in SolidElementWithDiagonalMassMatrix::get_mass_matrix_diagonal(...). </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8cc_source.html#l00726">726</a> of file <a class="el" href="solid__preconditioners_8cc_source.html">solid_preconditioners.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8cc_source.html#l00705">705</a> of file <a class="el" href="solid__preconditioners_8cc_source.html">solid_preconditioners.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l03066">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::any_mesh_distributed()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01924">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_distribution_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01843">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_number()</a>, <a class="el" href="matrices_8cc_source.html#l01727">oomph::CRDoubleMatrix::build_without_copy()</a>, <a class="el" href="preconditioner_8h_source.html#l00173">oomph::Preconditioner::comm_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00264">oomph::LinearAlgebraDistribution::first_row()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00494">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="classoomph_1_1SolidElementWithDiagonalMassMatrix.html#ad2335852a20987f6a6c8e0d6ce5bc3af">oomph::SolidElementWithDiagonalMassMatrix::get_mass_matrix_diagonal()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="block__preconditioner_8h_source.html#l01871">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::index_in_block()</a>, <a class="el" href="elements_8h_source.html#l01154">oomph::GeneralisedElement::is_halo()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02044">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::master_distribution_pt()</a>, <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00189">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00196">oomph::LinearAlgebraDistribution::nrow_local()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00482">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00397">Solid_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l03031">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::any_mesh_distributed()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01909">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_distribution_pt()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01828">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_number()</a>, <a class="el" href="matrices_8cc_source.html#l01710">oomph::CRDoubleMatrix::build_without_copy()</a>, <a class="el" href="preconditioner_8h_source.html#l00177">oomph::Preconditioner::comm_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00499">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00455">oomph::Mesh::element_pt()</a>, <a class="el" href="elements_8h_source.html#l00710">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00261">oomph::LinearAlgebraDistribution::first_row()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00487">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="classoomph_1_1SolidElementWithDiagonalMassMatrix.html#ad2335852a20987f6a6c8e0d6ce5bc3af">oomph::SolidElementWithDiagonalMassMatrix::get_mass_matrix_diagonal()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="block__preconditioner_8h_source.html#l01856">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::index_in_block()</a>, <a class="el" href="elements_8h_source.html#l01169">oomph::GeneralisedElement::is_halo()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02023">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::master_distribution_pt()</a>, <a class="el" href="elements_8h_source.html#l00841">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00186">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00193">oomph::LinearAlgebraDistribution::nrow_local()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00475">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00414">Solid_mesh_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -856,11 +854,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1Preconditioner.html#a46c31c416829bedcd9db238431262027">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8cc_source.html#l01393">1393</a> of file <a class="el" href="solid__preconditioners_8cc_source.html">solid_preconditioners.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8cc_source.html#l01357">1357</a> of file <a class="el" href="solid__preconditioners_8cc_source.html">solid_preconditioners.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00376">Bt_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00379">E_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00370">F_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00340">F_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00393">Form_BFBt_product</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00337">P_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00351">Preconditioner_has_been_setup</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00373">QBt_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00343">Using_default_f_preconditioner</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00346">Using_default_p_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00393">Bt_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00396">E_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00387">F_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00357">F_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00410">Form_BFBt_product</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00354">P_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00368">Preconditioner_has_been_setup</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00390">QBt_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00360">Using_default_f_preconditioner</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00363">Using_default_p_preconditioner</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00209">~PressureBasedSolidLSCPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00204">~PressureBasedSolidLSCPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -889,9 +887,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Disable documentation of time. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00309">309</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00318">318</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00367">Doc_time</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00384">Doc_time</a>.</p>
 
 </div>
 </div>
@@ -920,9 +918,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>if this function is called then: in setup(...) : the matrices B, F are assembled and stored (the default behaviour) . in preconditioner_solve(...) : a sequence of matrix vector products with B, F, and Bt is performed. (Note: in this discussion no scaling was considered but B and Bt are replaced with BQ and QBt with scaling) </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00324">324</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00339">339</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00393">Form_BFBt_product</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00410">Form_BFBt_product</a>.</p>
 
 </div>
 </div>
@@ -949,13 +947,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Enable mass matrix diagonal scaling in the <br  />
- </p>
-<p>Schur complement approximation </p>
+<p>Enable mass matrix diagonal scaling in the Schur complement approximation. </p>
 
 <p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00250">250</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00355">P_matrix_using_scaling</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00372">P_matrix_using_scaling</a>.</p>
 
 </div>
 </div>
@@ -984,9 +980,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Enable documentation of time. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00306">306</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00312">312</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00367">Doc_time</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00384">Doc_time</a>.</p>
 
 </div>
 </div>
@@ -1015,9 +1011,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>If this function is called then: in setup(...) : BFBt is computed. in preconditioner_solve(...) : a single matrix vector product with BFBt is performed. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00315">315</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00327">327</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00393">Form_BFBt_product</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00410">Form_BFBt_product</a>.</p>
 
 </div>
 </div>
@@ -1046,9 +1042,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Enable mass matrix diagonal scaling in the Schur complement approximation. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00246">246</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00243">243</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00355">P_matrix_using_scaling</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00372">P_matrix_using_scaling</a>.</p>
 
 </div>
 </div>
@@ -1077,9 +1073,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return whether the mass matrix is using diagonal scaling or not. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00254">254</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00257">257</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00355">P_matrix_using_scaling</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00372">P_matrix_using_scaling</a>.</p>
 
 </div>
 </div>
@@ -1122,9 +1118,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8cc_source.html#l00506">506</a> of file <a class="el" href="solid__preconditioners_8cc_source.html">solid_preconditioners.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8cc_source.html#l00493">493</a> of file <a class="el" href="solid__preconditioners_8cc_source.html">solid_preconditioners.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00376">Bt_mat_vec_pt</a>, <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="double__vector_8h_source.html#l00146">oomph::DoubleVector::clear()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00367">Doc_time</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00379">E_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00370">F_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00364">F_preconditioner_is_block_preconditioner</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00340">F_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00393">Form_BFBt_product</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04132">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vector()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00109">oomph::MatrixVectorProduct::multiply()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00178">oomph::MatrixVectorProduct::multiply_transpose()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00337">P_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00351">Preconditioner_has_been_setup</a>, <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner::preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00373">QBt_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04432">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vector()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00393">Bt_mat_vec_pt</a>, <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="double__vector_8h_source.html#l00142">oomph::DoubleVector::clear()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00384">Doc_time</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00396">E_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00387">F_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00381">F_preconditioner_is_block_preconditioner</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00357">F_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00410">Form_BFBt_product</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04186">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vector()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00108">oomph::MatrixVectorProduct::multiply()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00177">oomph::MatrixVectorProduct::multiply_transpose()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00354">P_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00368">Preconditioner_has_been_setup</a>, <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner::preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00390">QBt_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04489">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vector()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -1154,9 +1150,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Function to set a new momentum matrix preconditioner (inexact solver) </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00281">281</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00287">287</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00340">F_preconditioner_pt</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00343">Using_default_f_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00357">F_preconditioner_pt</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00360">Using_default_f_preconditioner</a>.</p>
 
 </div>
 </div>
@@ -1185,9 +1181,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Function to (re-)set momentum matrix preconditioner (inexact solver) to SuperLU. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00295">295</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00301">301</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00340">F_preconditioner_pt</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00343">Using_default_f_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00357">F_preconditioner_pt</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00360">Using_default_f_preconditioner</a>.</p>
 
 </div>
 </div>
@@ -1217,9 +1213,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Function to set a new pressure matrix preconditioner (inexact solver) </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00257">257</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00263">263</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00337">P_preconditioner_pt</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00346">Using_default_p_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00354">P_preconditioner_pt</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00363">Using_default_p_preconditioner</a>.</p>
 
 </div>
 </div>
@@ -1248,9 +1244,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Function to (re-)set pressure matrix preconditioner (inexact solver) to SuperLU. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00271">271</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00277">277</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00337">P_preconditioner_pt</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00346">Using_default_p_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8h_source.html#l00354">P_preconditioner_pt</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00363">Using_default_p_preconditioner</a>.</p>
 
 </div>
 </div>
@@ -1279,9 +1275,9 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>specify the mesh containing the mesh containing the block-preconditionable solid elements. The dimension of the problem must also be specified. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00239">239</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00236">236</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l01801">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::mesh_pt()</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00397">Solid_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8h_source.html#l01788">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::mesh_pt()</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00414">Solid_mesh_pt</a>.</p>
 
 </div>
 </div>
@@ -1314,9 +1310,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#af4886f4efe510e5c9b0eb19422943588">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8cc_source.html#l00043">43</a> of file <a class="el" href="solid__preconditioners_8cc_source.html">solid_preconditioners.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8cc_source.html#l00038">38</a> of file <a class="el" href="solid__preconditioners_8cc_source.html">solid_preconditioners.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="solid__preconditioners_8cc_source.html#l00726">assemble_mass_matrix_diagonal()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l02433">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_setup()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00376">Bt_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00367">Doc_time</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00379">E_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00370">F_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00364">F_preconditioner_is_block_preconditioner</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00340">F_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00393">Form_BFBt_product</a>, <a class="el" href="block__preconditioner_8h_source.html#l00688">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="block__preconditioner_8h_source.html#l02088">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::is_subsidiary_block_preconditioner()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00531">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::matrix_pt()</a>, <a class="el" href="matrices_8cc_source.html#l01801">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01711">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::ndof_types()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02064">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::ndof_types_in_mesh()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00355">P_matrix_using_scaling</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00337">P_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00351">Preconditioner_has_been_setup</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00373">QBt_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l02899">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::set_mesh()</a>, <a class="el" href="preconditioner_8h_source.html#l00098">oomph::Preconditioner::setup()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02425">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::setup_matrix_vector_product()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00397">Solid_mesh_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l02326">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::turn_into_subsidiary_block_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00343">Using_default_f_preconditioner</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00346">Using_default_p_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="solid__preconditioners_8cc_source.html#l00705">assemble_mass_matrix_diagonal()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l02483">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_setup()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00393">Bt_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00384">Doc_time</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00396">E_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00387">F_mat_vec_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00381">F_preconditioner_is_block_preconditioner</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00357">F_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00410">Form_BFBt_product</a>, <a class="el" href="block__preconditioner_8h_source.html#l00679">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="block__preconditioner_8h_source.html#l02067">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::is_subsidiary_block_preconditioner()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00526">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::matrix_pt()</a>, <a class="el" href="matrices_8cc_source.html#l01782">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01700">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::ndof_types()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02043">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::ndof_types_in_mesh()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00372">P_matrix_using_scaling</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00354">P_preconditioner_pt</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00368">Preconditioner_has_been_setup</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00390">QBt_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l02872">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::set_mesh()</a>, <a class="el" href="preconditioner_8h_source.html#l00100">oomph::Preconditioner::setup()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02403">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::setup_matrix_vector_product()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00414">Solid_mesh_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l02376">oomph::BlockPreconditioner&lt; MATRIX &gt;::turn_into_subsidiary_block_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00360">Using_default_f_preconditioner</a>, and <a class="el" href="solid__preconditioners_8h_source.html#l00363">Using_default_p_preconditioner</a>.</p>
 
 </div>
 </div>
@@ -1343,9 +1339,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1MatrixVectorProduct.html" title="Matrix vector product helper class - primarily a wrapper to Trilinos&#39;s Epetra matrix vector product m...">MatrixVectorProduct</a> operator for Bt;. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00376">376</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00393">393</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1371,9 +1367,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set Doc_time to true for outputting results of timings. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00367">367</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00384">384</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8h_source.html#l00309">disable_doc_time()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00306">enable_doc_time()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8h_source.html#l00318">disable_doc_time()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00312">enable_doc_time()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1399,9 +1395,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1MatrixVectorProduct.html" title="Matrix vector product helper class - primarily a wrapper to Trilinos&#39;s Epetra matrix vector product m...">MatrixVectorProduct</a> operator for E (BFBt) if BFBt is to be formed. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00379">379</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00396">396</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1427,9 +1423,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1MatrixVectorProduct.html" title="Matrix vector product helper class - primarily a wrapper to Trilinos&#39;s Epetra matrix vector product m...">MatrixVectorProduct</a> operator for F if BFBt is not to be formed. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00370">370</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00387">387</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1455,9 +1451,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Boolean indicating whether the momentum system preconditioner is a block preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00364">364</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00381">381</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1483,9 +1479,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the 'preconditioner' for the F matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00340">340</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00357">357</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00281">set_f_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00295">set_f_superlu_preconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00287">set_f_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00301">set_f_superlu_preconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1511,9 +1507,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>indicates whether BFBt should be formed or the component matrices should be retained. If true then: in setup(...) : BFBt is computed. in preconditioner_solve(...) : a single matrix vector product with BFBt is performed. if false then: in setup(...) : the matrices B, F are assembled and stored. in preconditioner_solve(...) : a sequence of matrix vector products with B, F, and Bt is performed. (Note: in this discussion no scaling was considered but B and Bt are replaced with BQ and QBt with scaling) </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00393">393</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00410">410</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00324">disable_form_BFBt_product()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00315">enable_form_BFBt_product()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00339">disable_form_BFBt_product()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00327">enable_form_BFBt_product()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1539,9 +1535,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Control flag is true if mass matrix diagonal scaling is used in the Schur complement approximation. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00355">355</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00372">372</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8h_source.html#l00250">disable_p_matrix_scaling()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00246">enable_p_matrix_scaling()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00254">is_p_matrix_using_scaling()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8h_source.html#l00250">disable_p_matrix_scaling()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00243">enable_p_matrix_scaling()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00257">is_p_matrix_using_scaling()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1567,9 +1563,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the 'preconditioner' for the pressure matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00337">337</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00354">354</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00257">set_p_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00271">set_p_superlu_preconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00263">set_p_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00277">set_p_superlu_preconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1595,9 +1591,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Control flag is true if the preconditioner has been setup (used so we can wipe the data when the preconditioner is called again) </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00351">351</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00368">368</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1623,9 +1619,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1MatrixVectorProduct.html" title="Matrix vector product helper class - primarily a wrapper to Trilinos&#39;s Epetra matrix vector product m...">MatrixVectorProduct</a> operator for QBt if BFBt is not to be formed. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00373">373</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00390">390</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00493">preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1651,9 +1647,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>the pointer to the mesh of block preconditionable solid elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00397">397</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00414">414</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l00726">assemble_mass_matrix_diagonal()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00239">set_solid_mesh()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l00705">assemble_mass_matrix_diagonal()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00236">set_solid_mesh()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1679,9 +1675,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>flag indicating whether the default F preconditioner is used </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00343">343</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00360">360</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00281">set_f_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00295">set_f_superlu_preconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00287">set_f_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00301">set_f_superlu_preconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1707,9 +1703,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>flag indicating whether the default P preconditioner is used </p>
 
-<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00346">346</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solid__preconditioners_8h_source.html#l00363">363</a> of file <a class="el" href="solid__preconditioners_8h_source.html">solid_preconditioners.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01393">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00164">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00257">set_p_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00271">set_p_superlu_preconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00043">setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l01357">clean_up_memory()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00158">PressureBasedSolidLSCPreconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00263">set_p_preconditioner()</a>, <a class="el" href="solid__preconditioners_8h_source.html#l00277">set_p_superlu_preconditioner()</a>, and <a class="el" href="solid__preconditioners_8cc_source.html#l00038">setup()</a>.</p>
 
 </div>
 </div>
@@ -1718,8 +1714,8 @@ Additional Inherited Members</h2></td></tr>
 <li><a class="el" href="solid__preconditioners_8cc_source.html">solid_preconditioners.cc</a></li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a921f36ec8af49017b799a3832d7f688f"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a921f36ec8af49017b799a3832d7f688f">oomph::PressureBasedSolidLSCPreconditioner::set_p_preconditioner</a></div><div class="ttdeci">void set_p_preconditioner(Preconditioner *new_p_preconditioner_pt)</div><div class="ttdoc">Function to set a new pressure matrix preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00257">solid_preconditioners.h:257</a></div></div>
-<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ac62a1112a99ae9503b97bd1c26f086f2"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac62a1112a99ae9503b97bd1c26f086f2">oomph::PressureBasedSolidLSCPreconditioner::set_f_preconditioner</a></div><div class="ttdeci">void set_f_preconditioner(Preconditioner *new_f_preconditioner_pt)</div><div class="ttdoc">Function to set a new momentum matrix preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00281">solid_preconditioners.h:281</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a921f36ec8af49017b799a3832d7f688f"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a921f36ec8af49017b799a3832d7f688f">oomph::PressureBasedSolidLSCPreconditioner::set_p_preconditioner</a></div><div class="ttdeci">void set_p_preconditioner(Preconditioner *new_p_preconditioner_pt)</div><div class="ttdoc">Function to set a new pressure matrix preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00263">solid_preconditioners.h:263</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ac62a1112a99ae9503b97bd1c26f086f2"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac62a1112a99ae9503b97bd1c26f086f2">oomph::PressureBasedSolidLSCPreconditioner::set_f_preconditioner</a></div><div class="ttdeci">void set_f_preconditioner(Preconditioner *new_f_preconditioner_pt)</div><div class="ttdoc">Function to set a new momentum matrix preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00287">solid_preconditioners.h:287</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
     <script src="../../js/jquery-1.12.0.min.js"></script>
@@ -1747,7 +1743,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:56:16
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:39:09
         </div>
       </div>
     </footer>

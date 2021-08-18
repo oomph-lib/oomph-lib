@@ -9,8 +9,7 @@ Namespace for \char`\"{}global\char`\"{} F\+SI functions.
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}{apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$node\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Apply no-\/slip condition for N.\+St. on a moving wall node, u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{F\+S\+I\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip}} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Apply no-\/slip condition for N.\+St. on a moving wall node, u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{F\+S\+I\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip}} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , unsigned D\+I\+M\+\_\+\+F\+L\+U\+ID$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac71732700aad0d671fa1285d173d5b27}{setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&boundary\+\_\+in\+\_\+fluid\+\_\+mesh, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&fluid\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ $>$ \&solid\+\_\+mesh\+\_\+pt, const unsigned \&face=0)
 \begin{DoxyCompactList}\small\item\em Set up the information that the F\+S\+I\+Wall\+Elements in the specified solid mesh require to obtain the fluid loading from the adjacent fluid elements in the specified fluid mesh. The parameter b specifies the boundary in the fluid mesh that is adjacent to the solid mesh. The template parameters specify the type of the fluid element and their spatial dimension. The optional final argument, face, identifies the face of the F\+S\+I\+Wall\+Elements that is exposed to the fluid. face defaults to 0, indicating that the front is loaded along the specified fluid mesh boundary. Set it to 1 to set up the F\+SI lookup schemes for fluid loading along the \char`\"{}back\char`\"{} of the F\+S\+I\+Wall\+Elements. This routine uses the procedures in the \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions}{Multi\+\_\+domain\+\_\+functions}} namespace to set up the interaction by locating the adjacent (source) elements for each integration point of each solid element. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , unsigned D\+I\+M\+\_\+\+F\+L\+U\+ID$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_adccd22c19d99eabffd72f7671df49598}{setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, const unsigned \&boundary\+\_\+in\+\_\+fluid\+\_\+mesh, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&fluid\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&solid\+\_\+mesh\+\_\+pt, const unsigned \&face=0)
@@ -18,14 +17,13 @@ void \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb7255
 {\footnotesize template$<$class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , unsigned D\+I\+M\+\_\+\+S\+O\+L\+ID$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aacfff5c6e8f9ee75e7d2ae490d28fb7b}{setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&b\+\_\+solid\+\_\+fsi, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&solid\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ $>$ \&lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Setup multi-\/domain interaction required for imposition of solid displacements onto the pseudo-\/solid fluid mesh by Lagrange multipliers\+: This function locates the bulk solid elements next to boundary b\+\_\+solid\+\_\+fsi (the F\+SI boundary) in the solid mesh pointed to by Solid\+\_\+mesh\+\_\+pt. The deformation of these elements drives the deformation of the pseudo-\/solid fluid mesh via the Lagrange multiplier elements stored in lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , unsigned D\+I\+M\+\_\+\+S\+O\+L\+ID$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ad638257ef97a089f5367edf5d2911e60}{setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, const unsigned \&b\+\_\+solid\+\_\+fsi, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&solid\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Setup multi-\/domain interaction required for imposition of solid displacements onto the pseudo-\/solid fluid mesh by Lagrange multipliers\+: This function locates the bulk solid elements next to boundary b\+\_\+solid\+\_\+fsi (the F\+SI boundary) in the solid mesh pointed to by Solid\+\_\+mesh\+\_\+pt. The deformation of these elements drives the deformation of the pseudo-\/solid fluid mesh via the Lagrange multiplier elements stored in l lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Setup multi-\/domain interaction required for imposition of solid displacements onto the pseudo-\/solid fluid mesh by Lagrange multipliers\+: This function locates the bulk solid elements next to boundary b\+\_\+solid\+\_\+fsi (the F\+SI boundary) in the solid mesh pointed to by Solid\+\_\+mesh\+\_\+pt. The deformation of these elements drives the deformation of the pseudo-\/solid fluid mesh via the Lagrange multiplier elements stored in l lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class N\+O\+DE $>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_afc4e716b0325ab47465bd6c312c829fe}{doc\+\_\+fsi}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$fluid\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$wall\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{Strouhal\+\_\+for\+\_\+no\+\_\+slip}} =1.\+0
+double \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{Strouhal\+\_\+for\+\_\+no\+\_\+slip}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -41,13 +39,11 @@ Namespace for \char`\"{}global\char`\"{} F\+SI functions.
 
 
 
-Apply no-\/slip condition for N.\+St. on a moving wall node, u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{F\+S\+I\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip}} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. ~\newline
- 
+Apply no-\/slip condition for N.\+St. on a moving wall node, u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{F\+S\+I\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip}} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. 
 
-Apply no-\/slip condition for N.\+St. on a moving wall node u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{F\+S\+I\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip}} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. ~\newline
- 
+Apply no-\/slip condition for N.\+St. on a moving wall node u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{F\+S\+I\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip}} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. 
 
-Definition at line 50 of file fsi.\+cc.
+Definition at line 48 of file fsi.\+cc.
 
 
 
@@ -68,7 +64,7 @@ Doc F\+SI\+:
 
 Pass pointer to fluid and solid meshes and pointer to the \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object that specifies the directory and the overall step number. Template parameter specifies the type of node that is used to implement the node update strategy. 
 
-Definition at line 747 of file fsi.\+h.
+Definition at line 736 of file fsi.\+h.
 
 
 
@@ -87,7 +83,7 @@ Set up the information that the F\+S\+I\+Wall\+Elements in the specified solid m
 
 
 
-Definition at line 641 of file fsi.\+h.
+Definition at line 644 of file fsi.\+h.
 
 
 
@@ -106,7 +102,7 @@ Set up the information that the F\+S\+I\+Wall\+Elements in the specified solid m
 
 This is the vector based version it works simultaneously on fluid fsi boundaries identified in the vector boundary\+\_\+in\+\_\+fluid\+\_\+mesh and the corresponding solid meshes in solid\+\_\+mesh\+\_\+pt. 
 
-Definition at line 608 of file fsi.\+h.
+Definition at line 613 of file fsi.\+h.
 
 
 
@@ -121,12 +117,11 @@ void oomph\+::\+F\+S\+I\+\_\+functions\+::setup\+\_\+solid\+\_\+elements\+\_\+fo
 
 
 
-Setup multi-\/domain interaction required for imposition of solid displacements onto the pseudo-\/solid fluid mesh by Lagrange multipliers\+: This function locates the bulk solid elements next to boundary b\+\_\+solid\+\_\+fsi (the F\+SI boundary) in the solid mesh pointed to by Solid\+\_\+mesh\+\_\+pt. The deformation of these elements drives the deformation of the pseudo-\/solid fluid mesh via the Lagrange multiplier elements stored in l lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. ~\newline
- 
+Setup multi-\/domain interaction required for imposition of solid displacements onto the pseudo-\/solid fluid mesh by Lagrange multipliers\+: This function locates the bulk solid elements next to boundary b\+\_\+solid\+\_\+fsi (the F\+SI boundary) in the solid mesh pointed to by Solid\+\_\+mesh\+\_\+pt. The deformation of these elements drives the deformation of the pseudo-\/solid fluid mesh via the Lagrange multiplier elements stored in l lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. 
 
 
 
-Definition at line 710 of file fsi.\+h.
+Definition at line 704 of file fsi.\+h.
 
 
 
@@ -145,7 +140,7 @@ Setup multi-\/domain interaction required for imposition of solid displacements 
 
 This is the vector based version it works simultaneously on solid fsi boundaries identified in the vector b\+\_\+solid\+\_\+fsi and the corresponding Lagrange multiplier meshes in lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. 
 
-Definition at line 678 of file fsi.\+h.
+Definition at line 677 of file fsi.\+h.
 
 
 
@@ -158,7 +153,7 @@ References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+e
 \index{oomph::FSI\_functions@{oomph::FSI\_functions}!Strouhal\_for\_no\_slip@{Strouhal\_for\_no\_slip}}
 \index{Strouhal\_for\_no\_slip@{Strouhal\_for\_no\_slip}!oomph::FSI\_functions@{oomph::FSI\_functions}}
 \doxysubsubsection{\texorpdfstring{Strouhal\_for\_no\_slip}{Strouhal\_for\_no\_slip}}
-{\footnotesize\ttfamily double oomph\+::\+F\+S\+I\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip =1.\+0}
+{\footnotesize\ttfamily double oomph\+::\+F\+S\+I\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip = 1.\+0}
 
 
 
@@ -166,7 +161,7 @@ Strouhal number St = a/(UT) for application of no slip condition. Initialised to
 
 Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1.\+0. 
 
-Definition at line 41 of file fsi.\+cc.
+Definition at line 39 of file fsi.\+cc.
 
 
 

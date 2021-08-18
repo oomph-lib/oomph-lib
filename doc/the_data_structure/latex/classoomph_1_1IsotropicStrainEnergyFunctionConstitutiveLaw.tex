@@ -18,11 +18,9 @@ Inheritance diagram for oomph\+::Isotropic\+Strain\+Energy\+Function\+Constituti
 void \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_af6c25617b8be6cc454d6b526ec6121fc}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma)
 \begin{DoxyCompactList}\small\item\em Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the stress tensor. Uses correct 3D invariants for 2D (plane strain) problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_acf61673ecc4f960fee908378ac48544a}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma\+\_\+dev, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G\+\_\+contra, double \&Gdet)
-\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_aa45d82d322fda480f88e78cddd557837}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma\+\_\+dev, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&Gcontra, double \&gen\+\_\+dil, double \&inv\+\_\+kappa)
-\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_a6b9a454988b023a42782f78e4e3eebc4}{requires\+\_\+incompressibility\+\_\+constraint}} ()
 \begin{DoxyCompactList}\small\item\em State if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in P\+A\+R\+A\+N\+O\+ID mode. This is determined by interrogating the associated strain energy function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -34,10 +32,9 @@ bool \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw
 
 
 \doxysubsection{Detailed Description}
-A class for constitutive laws derived from strain-\/energy functions. Theory is in Green and Zerna. ~\newline
- 
+A class for constitutive laws derived from strain-\/energy functions. Theory is in Green and Zerna. 
 
-Definition at line 806 of file constitutive\+\_\+laws.\+h.
+Definition at line 821 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -54,7 +51,7 @@ Constructor takes a pointer to the strain energy function.
 
 
 
-Definition at line 816 of file constitutive\+\_\+laws.\+h.
+Definition at line 829 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -75,7 +72,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8
 
 
 
-Definition at line 885 of file constitutive\+\_\+laws.\+cc.
+Definition at line 896 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -89,8 +86,7 @@ References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant(), oomph
 
 
 
-Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. ~\newline
- 
+Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. 
 
 Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. Uses correct 3D invariants for 2D (plane strain) problems. This is the version for the pure incompressible formulation. 
 
@@ -98,7 +94,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_ac8178b1b7cd7e
 
 
 
-Definition at line 1000 of file constitutive\+\_\+laws.\+cc.
+Definition at line 1010 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -112,8 +108,7 @@ References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant(), oomph
 
 
 
-Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. ~\newline
- 
+Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. 
 
 Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. Uses correct 3D invariants for 2D (plane strain) problems. This is the version for the near-\/incompressible formulation. 
 
@@ -121,7 +116,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a26f34355b626b
 
 
 
-Definition at line 1124 of file constitutive\+\_\+laws.\+cc.
+Definition at line 1137 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -143,7 +138,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a446452158a8ae9fbc3dde
 
 
 
-Definition at line 864 of file constitutive\+\_\+laws.\+h.
+Definition at line 882 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -164,7 +159,7 @@ Pointer to the strain energy function.
 
 
 
-Definition at line 811 of file constitutive\+\_\+laws.\+h.
+Definition at line 825 of file constitutive\+\_\+laws.\+h.
 
 
 

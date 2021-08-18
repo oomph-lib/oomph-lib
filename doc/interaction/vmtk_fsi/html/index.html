@@ -178,37 +178,21 @@ Sketch illustrating the degrees of freedom at each node after all FaceElements h
 </div><!-- fragment --><p> which does exactly what it says. If only a single type of <code>FaceElement</code> is attached to a (boundary) node, the unsigned that is returned by this function is exactly the same as the unsigned that is returned by the corresponding call to <code>FaceElement::nbulk_value(...)</code>. To cater for the case where multiple <code>FaceElements</code> are attached to the same node, the above function can take an ID (which defaults to zero) that identifies which type of <code>FaceElement</code> we are dealing with, so the full interface is, in fact, </p><div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> BoundaryNodeBase::index_of_first_value_assigned_by_face_element(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <span class="keywordtype">id</span>=0)</div>
 </div><!-- fragment --><p> The ID must be established by the user, typically when the constructor of the specific <code>FaceElement</code> is called. It can then be passed on to the <code>Nodes</code> when the number of values at the nodes is adjusted to accommodate the additional values required by the <code>FaceElement</code>.</p>
 <p>To illustrate this, the code extract shown below provides a (partial) listing of the constructor of the <code>ImposeDisplacementByLagrangeMultiplierElement</code> that was used in <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">the solid mechanics problem referred to earlier</a>. The constructor has the usual two arguments that specify the pointer to the "bulk" element, and the index of the face that the <code>FaceElement</code> is to be attached to. The final (optional) argument allows the specification of the ID referred to above. We store the ID in a private the element's private member data.</p>
- <div class="fragment"><div class="line"> <span class="comment">/// \short Constructor takes a &quot;bulk&quot; element and the </span></div>
-<div class="line"><span class="comment"> /// index that identifies which face the FaceElement is supposed</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// to be attached to. The optional identifier can be used</span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// to distinguish the additional nodal values created by </span></div>
-<div class="line"><span class="comment"></span><span class="comment"> /// this element from thos created by other FaceElements.</span></div>
-<div class="line"><span class="comment"></span>  ImposeDisplacementByLagrangeMultiplierElement(</div>
-<div class="line">   FiniteElement* <span class="keyword">const</span> &amp;element_pt, </div>
-<div class="line">   <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;face_index, </div>
-<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<span class="keywordtype">id</span>=0,</div>
-<div class="line">   <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; called_from_refineable_constructor=<span class="keyword">false</span>) : </div>
-<div class="line"> FaceGeometry&lt;ELEMENT&gt;(), FaceElement(), Boundary_shape_geom_object_pt(0)</div>
-<div class="line">  {   </div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">//  Store the ID of the FaceElement -- this is used to distinguish</span></div>
-<div class="line">   <span class="comment">// it from any others</span></div>
-<div class="line">   Id=id;</div>
+ <div class="fragment"><div class="line">    <span class="comment">/// \short Constructor takes a &quot;bulk&quot; element and the</span></div>
+<div class="line"><span class="comment">    /// index that identifies which face the FaceElement is supposed</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// to be attached to. The optional identifier can be used</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// to distinguish the additional nodal values created by</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// this element from thos created by other FaceElements.</span></div>
+<div class="line"><span class="comment"></span>    ImposeDisplacementByLagrangeMultiplierElement(</div>
+<div class="line">      FiniteElement* <span class="keyword">const</span>&amp; element_pt,</div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; face_index,</div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <span class="keywordtype">id</span> = 0,</div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; called_from_refineable_constructor = <span class="keyword">false</span>)</div>
+<div class="line">      : FaceGeometry&lt;ELEMENT&gt;(), FaceElement(), Boundary_shape_geom_object_pt(0)</div>
+<div class="line">    {</div>
 </div><!-- fragment --><p>[We omit a few lines of code that are irrelevant for the present discussion]. Next we specify the number of additional values required at each of the element's nodes and store them in a vector. For a <code>dim</code> -dimensional bulk element, we need <code>dim</code> additional values at each node to store the Lagrange multipliers.</p>
-<div class="fragment"><div class="line">   <span class="comment">// Dimension of the bulk element</span></div>
-<div class="line">   <span class="keywordtype">unsigned</span> dim=element_pt-&gt;dim();</div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">// We need dim additional values for each FaceElement node</span></div>
-<div class="line">   <span class="comment">// to store the dim Lagrange multipliers.</span></div>
-<div class="line">   Vector&lt;unsigned&gt; n_additional_values(nnode(), dim);</div>
-</div><!-- fragment --><p>Finally, we pass this vector, together with ID that identifies the type of the <code>FaceElement</code> to the function <code>FaceElement::add_additional_values(...)</code>:</p>
-<div class="fragment"><div class="line">   </div>
-<div class="line">   <span class="comment">// Now add storage for Lagrange multipliers and set the map containing </span></div>
-<div class="line">   <span class="comment">// the position of the first entry of this face element&#39;s </span></div>
-<div class="line">   <span class="comment">// additional values.</span></div>
-<div class="line">   add_additional_values(n_additional_values,<span class="keywordtype">id</span>);</div>
-<div class="line">  }</div>
-</div><!-- fragment --><p>This function creates the additional storage at each node and updates the node's internal lookup scheme that provides access to the first value associated with the specified ID.</p>
+<div class="fragment"></div><!-- fragment --><p>Finally, we pass this vector, together with ID that identifies the type of the <code>FaceElement</code> to the function <code>FaceElement::add_additional_values(...)</code>:</p>
+<div class="fragment"></div><!-- fragment --><p>This function creates the additional storage at each node and updates the node's internal lookup scheme that provides access to the first value associated with the specified ID.</p>
 <p>The fact that the ID is specified as an optional argument means that the user does not have to provide a dummy ID in cases where none is required, i.e. in problems involving just a single type of <code>FaceElement</code>, as in <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">the solid mechanics problem referred to earlier.</a> If a problem does involve multiple <code>FaceElements</code>, the user will be aware of this when writing the driver code and can then provide distinct IDs as and when required; see the section <a class="el" href="index.html#face_elements_code">Creating the Lagrange multiplier elements</a> below.</p>
 <hr  />
  <hr  />
@@ -469,7 +453,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 15:22:08
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:01:46
         </div>
       </div>
     </footer>

@@ -29,11 +29,9 @@ void \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a192eb7456b2174118b377bb749
 virtual \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a3d1e540fe046f1c55d59690932d4095d}{$\sim$\+Z2\+Error\+Estimator}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_aa38b3ecfbb223a91bfe049d4722af6d3}{get\+\_\+element\+\_\+errors}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&elemental\+\_\+error)
-\begin{DoxyCompactList}\small\item\em Compute the elemental error measures for a given mesh and store them in a vector. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Compute the elemental error measures for a given mesh and store them in a vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_ae0fd03123c518ed340bb534c2f6b8cc4}{get\+\_\+element\+\_\+errors}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&elemental\+\_\+error, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)
-\begin{DoxyCompactList}\small\item\em Compute the elemental error measures for a given mesh and store them in a vector. ~\newline
- If doc\+\_\+info.\+enable\+\_\+doc(), doc FE and recovered fluxes in. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Compute the elemental error measures for a given mesh and store them in a vector. If doc\+\_\+info.\+enable\+\_\+doc(), doc FE and recovered fluxes in. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_af7a3a28cfc05b291b438b80e87c7f5cc}{recovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Access function for order of recovery polynomials. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_ad463b5c01e6bb5b9e4ec9b3a02f9fb4a}{recovery\+\_\+order}} () const
@@ -45,8 +43,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_ad463b5c01e6bb5b9e4ec9b
 void \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a5c8a3d6e46d9b9ba31c768cb5b026bba}{setup\+\_\+patches}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{Element\+With\+Z2\+Error\+Estimator}} $\ast$ $>$ $\ast$ $>$ \&adjacent\+\_\+elements\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&vertex\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+elements\+\_\+pt\mbox{[}nod\+\_\+pt\mbox{]} contains the pointer to the vector that contains the pointers to the elements that the node is part of. \end{DoxyCompactList}\item 
 double \& \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a997dc6ba0b546a0f7363949a8d33d133}{reference\+\_\+flux\+\_\+norm}} ()
-\begin{DoxyCompactList}\small\item\em Access function for prescribed reference flux norm ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Access function for prescribed reference flux norm. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a4a7902d3e80dc64406e1f367c02ec4e3}{reference\+\_\+flux\+\_\+norm}} () const
 \begin{DoxyCompactList}\small\item\em Access function for prescribed reference flux norm (const. version) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a53d7a1ac66dd41b39d6794e1d00080fc}{get\+\_\+combined\+\_\+error\+\_\+estimate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&compound\+\_\+error)
@@ -99,15 +96,14 @@ Z2 error estimation works as follows\+:
 We determine the coefficients $ F^{(p)}_{ij} $ by enforcing $ f^{(p)}_i(x_k) = f^{[FE]}_i(x_k)$ in its weak form\+: \[ \int_{\mbox{Patch $p$}} \left( f^{[FE]}_i(x_k) - \sum_{j=1}^{N_{rec}} F^{(p)}_{ij} \ \psi^{[rec]}_j(x_k) \right) \psi^{[rec]}_l(x_k)\ dv = 0 \mbox{ \ \ \ \ for $l=1,...,N_{rec}$ and $i=1,...,N_{flux}$}. \] Once the $ F^{(p)}_{ij} $ are determined in a given patch, we determine the values of the recovered flux at all nodes that are part of the patch. We denote the value of the recovered flux at node $ k $ by $ {\cal F}^{(p)}_{ik}$.
 
 We repeat this procedure for every patch. For nodes that are part of multiple patches, the procedure will provide multiple, slightly different nodal values for the recovered flux. We average these values via \[ {\cal F}_{ij} = \frac{1}{N_p(j)} \sum_{\mbox{Node $j \in $ patch $p$}} {\cal F}^{(p)}_{ij}, \] where $N_p(j)$ denotes the number of patches that node $ j$ is a member of. This allows us to obtain a globally-\/continuous, finite-\/element based representation of the recovered flux as \[ f_i^{[rec]} = \sum_{j=1}^{N} {\cal F}_{ij}\ \psi_j, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1) \] where the $ \psi_j $ are the (global) finite element shape functions.
-\item Since the recovered flux in (1), is based on nodal values, we can evaluate it locally within each of the $ N_e$ elements in the mesh to obtain a normalised elemental error estimate via \[ E_{e} = \sqrt{ \frac{ \int_{\mbox{$e$}} \left( f_i^{[rec]} - f_i^{[FE]} \right)^2 dv} {\sum_{e\textnormal{\textquotesingle}=1}^{N_e} \int_{\mbox{$e\textnormal{\textquotesingle}$}} \left( f_i^{[rec]} \right)^2 dv} } \mbox{\ \ \ for $e=1,...,N_e$.} \] In this (default) form, mesh refinement, based on this error estimate will lead to an equidistribution of the error across all elements. Usually, this is the desired behaviour. However, there are cases in which the solution evolves towards a state in which ~\newline
- the flux tends to zero while the solution itself becomes so simple that it can be represented exactly on any finite element mesh (e.\+g. in spin-\/up problems in which the fluid motion approaches a rigid body rotation). In that case the mesh adaptation tries to equidistribute any small roundoff errors in the solution, causing strong, spatially uniform mesh refinement throughout the domain, even though the solution is already fully converged. For such cases, it is possible to replace the denominator in the above expression by a prescribed reference flux, which may be specified via the access function 
+\item Since the recovered flux in (1), is based on nodal values, we can evaluate it locally within each of the $ N_e$ elements in the mesh to obtain a normalised elemental error estimate via \[ E_{e} = \sqrt{ \frac{ \int_{\mbox{$e$}} \left( f_i^{[rec]} - f_i^{[FE]} \right)^2 dv} {\sum_{e\textnormal{\textquotesingle}=1}^{N_e} \int_{\mbox{$e\textnormal{\textquotesingle}$}} \left( f_i^{[rec]} \right)^2 dv} } \mbox{\ \ \ for $e=1,...,N_e$.} \] In this (default) form, mesh refinement, based on this error estimate will lead to an equidistribution of the error across all elements. Usually, this is the desired behaviour. However, there are cases in which the solution evolves towards a state in which the flux tends to zero while the solution itself becomes so simple that it can be represented exactly on any finite element mesh (e.\+g. in spin-\/up problems in which the fluid motion approaches a rigid body rotation). In that case the mesh adaptation tries to equidistribute any small roundoff errors in the solution, causing strong, spatially uniform mesh refinement throughout the domain, even though the solution is already fully converged. For such cases, it is possible to replace the denominator in the above expression by a prescribed reference flux, which may be specified via the access function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a997dc6ba0b546a0f7363949a8d33d133}{reference\_flux\_norm}}()}
 \end{DoxyCode}
  
 \end{DoxyEnumerate}
 
-Definition at line 309 of file error\+\_\+estimator.\+h.
+Definition at line 297 of file error\+\_\+estimator.\+h.
 
 
 
@@ -124,7 +120,7 @@ Function pointer to combined error estimator function.
 
 
 
-Definition at line 315 of file error\+\_\+estimator.\+h.
+Definition at line 301 of file error\+\_\+estimator.\+h.
 
 
 
@@ -141,7 +137,7 @@ Constructor\+: Set order of recovery shape functions.
 
 
 
-Definition at line 318 of file error\+\_\+estimator.\+h.
+Definition at line 304 of file error\+\_\+estimator.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a35186eeb792bf2b948239d19b2697ca0}\label{classoomph_1_1Z2ErrorEstimator_a35186eeb792bf2b948239d19b2697ca0}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!Z2ErrorEstimator@{Z2ErrorEstimator}}
@@ -155,7 +151,7 @@ Constructor\+: Leave order of recovery shape functions open for now -- they will
 
 
 
-Definition at line 327 of file error\+\_\+estimator.\+h.
+Definition at line 316 of file error\+\_\+estimator.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a4eb88b73062ae5dd42c597569179aeae}\label{classoomph_1_1Z2ErrorEstimator_a4eb88b73062ae5dd42c597569179aeae}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!Z2ErrorEstimator@{Z2ErrorEstimator}}
@@ -169,7 +165,7 @@ Broken copy constructor.
 
 
 
-Definition at line 333 of file error\+\_\+estimator.\+h.
+Definition at line 325 of file error\+\_\+estimator.\+h.
 
 
 
@@ -187,7 +183,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 345 of file error\+\_\+estimator.\+h.
+Definition at line 337 of file error\+\_\+estimator.\+h.
 
 
 
@@ -204,7 +200,7 @@ Access function\+: Pointer to combined error estimate function.
 
 
 
-Definition at line 375 of file error\+\_\+estimator.\+h.
+Definition at line 372 of file error\+\_\+estimator.\+h.
 
 
 
@@ -222,7 +218,7 @@ Access function\+: Pointer to combined error estimate function. Const version.
 
 
 
-Definition at line 380 of file error\+\_\+estimator.\+h.
+Definition at line 379 of file error\+\_\+estimator.\+h.
 
 
 
@@ -240,7 +236,7 @@ Doc flux and recovered flux.
 
 Doc FE and recovered flux. 
 
-Definition at line 1735 of file error\+\_\+estimator.\+cc.
+Definition at line 1802 of file error\+\_\+estimator.\+cc.
 
 
 
@@ -262,7 +258,7 @@ Return a combined error estimate from all compound errors.
 
 Return a combined error estimate from all compound flux errors The default is to return the maximum of the compound flux errors which will always force refinment if any field is above the single mesh error threshold and unrefinement if both are below the lower limit. Any other fancy combinations can be selected by specifying a user-\/defined combined estimate by setting a function pointer. 
 
-Definition at line 418 of file error\+\_\+estimator.\+cc.
+Definition at line 460 of file error\+\_\+estimator.\+cc.
 
 
 
@@ -280,12 +276,11 @@ Referenced by get\+\_\+element\+\_\+errors().
 
 
 
-Compute the elemental error measures for a given mesh and store them in a vector. ~\newline
- 
+Compute the elemental error measures for a given mesh and store them in a vector. 
 
 
 
-Definition at line 349 of file error\+\_\+estimator.\+h.
+Definition at line 341 of file error\+\_\+estimator.\+h.
 
 
 
@@ -299,32 +294,29 @@ References oomph\+::\+Doc\+Info\+::disable\+\_\+doc().
 
 
 
-Compute the elemental error measures for a given mesh and store them in a vector. ~\newline
- If doc\+\_\+info.\+enable\+\_\+doc(), doc FE and recovered fluxes in. 
+Compute the elemental error measures for a given mesh and store them in a vector. If doc\+\_\+info.\+enable\+\_\+doc(), doc FE and recovered fluxes in. 
 
 
 \begin{DoxyItemize}
 \item flux\+\_\+fe$\ast$.dat
-\item flux\+\_\+rec$\ast$.dat ~\newline
-
+\item flux\+\_\+rec$\ast$.dat
 \end{DoxyItemize}
 
 Get \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of Z2-\/based error estimates for all elements in mesh. If doc\+\_\+info.\+is\+\_\+doc\+\_\+enabled()=true, doc FE and recovered fluxes in
 \begin{DoxyItemize}
 \item flux\+\_\+fe$\ast$.dat
-\item flux\+\_\+rec$\ast$.dat ~\newline
- 
+\item flux\+\_\+rec$\ast$.dat 
 \end{DoxyItemize}
 
 Implements \mbox{\hyperlink{classoomph_1_1ErrorEstimator_a77e85262d309d6e7da0ca71e98b7afff}{oomph\+::\+Error\+Estimator}}.
 
 
 
-Definition at line 897 of file error\+\_\+estimator.\+cc.
+Definition at line 946 of file error\+\_\+estimator.\+cc.
 
 
 
-References oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::communicator\+\_\+pt(), oomph\+::\+Mesh\+::communicator\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), doc\+\_\+flux(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), elements, oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::geometric\+\_\+jacobian(), get\+\_\+combined\+\_\+error\+\_\+estimate(), get\+\_\+recovered\+\_\+flux\+\_\+in\+\_\+patch(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+compound\+\_\+flux\+\_\+indices(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+flux(), oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised(), n, oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::ncompound\+\_\+fluxes(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nrecovery\+\_\+order(), nrecovery\+\_\+terms(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms(), oomph\+::\+Integral\+::nweight(), recovery\+\_\+order(), Recovery\+\_\+order, Recovery\+\_\+order\+\_\+from\+\_\+first\+\_\+element, Reference\+\_\+flux\+\_\+norm, s, setup\+\_\+patches(), oomph\+::\+Finite\+Element\+::shape(), shape\+\_\+rec(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Node\+::x().
+References oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::communicator\+\_\+pt(), oomph\+::\+Mesh\+::communicator\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), doc\+\_\+flux(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), elements, oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::geometric\+\_\+jacobian(), get\+\_\+combined\+\_\+error\+\_\+estimate(), get\+\_\+recovered\+\_\+flux\+\_\+in\+\_\+patch(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+compound\+\_\+flux\+\_\+indices(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+flux(), oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised(), n, oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::ncompound\+\_\+fluxes(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nrecovery\+\_\+order(), nrecovery\+\_\+terms(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms(), oomph\+::\+Integral\+::nweight(), recovery\+\_\+order(), Recovery\+\_\+order, Recovery\+\_\+order\+\_\+from\+\_\+first\+\_\+element, Reference\+\_\+flux\+\_\+norm, s, setup\+\_\+patches(), oomph\+::\+Finite\+Element\+::shape(), shape\+\_\+rec(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a0384127746b7eea7fcf0d08f2d34c647}\label{classoomph_1_1Z2ErrorEstimator_a0384127746b7eea7fcf0d08f2d34c647}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!get\_recovered\_flux\_in\_patch@{get\_recovered\_flux\_in\_patch}}
@@ -338,7 +330,7 @@ Given the vector of elements that make up a patch, the number of recovery and fl
 
 Given the vector of elements that make up a patch, the number of recovery and flux terms, and the spatial dimension of the problem, compute the matrix of recovered flux coefficients and return a pointer to it. 
 
-Definition at line 614 of file error\+\_\+estimator.\+cc.
+Definition at line 666 of file error\+\_\+estimator.\+cc.
 
 
 
@@ -366,7 +358,7 @@ Find order of recovery shape functions
 
 Find order of recovery shape functions
 
-Definition at line 252 of file error\+\_\+estimator.\+cc.
+Definition at line 245 of file error\+\_\+estimator.\+cc.
 
 
 
@@ -388,7 +380,7 @@ Return number of coefficients for expansion of recovered fluxes for given spatia
 
 Number of coefficients for expansion of recovered fluxes for given spatial dimension of elements. Use complete polynomial of given order for recovery 
 
-Definition at line 758 of file error\+\_\+estimator.\+cc.
+Definition at line 812 of file error\+\_\+estimator.\+cc.
 
 
 
@@ -410,7 +402,7 @@ Broken assignment operator.
 
 
 
-Definition at line 339 of file error\+\_\+estimator.\+h.
+Definition at line 331 of file error\+\_\+estimator.\+h.
 
 
 
@@ -428,7 +420,7 @@ Access function for order of recovery polynomials.
 
 
 
-Definition at line 369 of file error\+\_\+estimator.\+h.
+Definition at line 360 of file error\+\_\+estimator.\+h.
 
 
 
@@ -450,7 +442,7 @@ Access function for order of recovery polynomials (const version)
 
 
 
-Definition at line 372 of file error\+\_\+estimator.\+h.
+Definition at line 366 of file error\+\_\+estimator.\+h.
 
 
 
@@ -464,8 +456,7 @@ References Recovery\+\_\+order.
 
 
 
-Access function for prescribed reference flux norm ~\newline
- 
+Access function for prescribed reference flux norm. 
 
 
 
@@ -487,7 +478,7 @@ Access function for prescribed reference flux norm (const. version)
 
 
 
-Definition at line 396 of file error\+\_\+estimator.\+h.
+Definition at line 399 of file error\+\_\+estimator.\+h.
 
 
 
@@ -505,11 +496,11 @@ Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+e
 
 Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+elements\+\_\+pt\mbox{[}nod\+\_\+pt\mbox{]} contains the pointer to the vector that contains the pointers to the elements that the node is part of. Also returns a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vertex nodes for use in get\+\_\+element\+\_\+errors. 
 
-Definition at line 459 of file error\+\_\+estimator.\+cc.
+Definition at line 505 of file error\+\_\+estimator.\+cc.
 
 
 
-References e, oomph\+::\+Mesh\+::element\+\_\+pt(), n, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nrecovery\+\_\+order(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nvertex\+\_\+node(), oomph\+::oomph\+\_\+info, and oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::vertex\+\_\+node\+\_\+pt().
+References e, oomph\+::\+Mesh\+::element\+\_\+pt(), n, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nrecovery\+\_\+order(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nvertex\+\_\+node(), oomph\+::oomph\+\_\+info, Recovery\+\_\+order, and oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::vertex\+\_\+node\+\_\+pt().
 
 
 
@@ -533,7 +524,7 @@ Find order of recovery shape functions
 
 Find order of recovery shape functions
 
-Definition at line 46 of file error\+\_\+estimator.\+cc.
+Definition at line 44 of file error\+\_\+estimator.\+cc.
 
 
 
@@ -558,7 +549,7 @@ Function pointer to combined error estimator function.
 
 
 
-Definition at line 452 of file error\+\_\+estimator.\+h.
+Definition at line 458 of file error\+\_\+estimator.\+h.
 
 
 
@@ -576,11 +567,11 @@ Order of recovery polynomials.
 
 
 
-Definition at line 435 of file error\+\_\+estimator.\+h.
+Definition at line 441 of file error\+\_\+estimator.\+h.
 
 
 
-Referenced by get\+\_\+element\+\_\+errors(), nrecovery\+\_\+terms(), and recovery\+\_\+order().
+Referenced by get\+\_\+element\+\_\+errors(), nrecovery\+\_\+terms(), recovery\+\_\+order(), and setup\+\_\+patches().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_afa024a307366bb987b1c9ba379b837e8}\label{classoomph_1_1Z2ErrorEstimator_afa024a307366bb987b1c9ba379b837e8}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!Recovery\_order\_from\_first\_element@{Recovery\_order\_from\_first\_element}}
@@ -590,7 +581,7 @@ Referenced by get\+\_\+element\+\_\+errors(), nrecovery\+\_\+terms(), and recove
 
 Bool to indicate if recovery order is to be read out from first element in mesh or set globally 
 
-Definition at line 439 of file error\+\_\+estimator.\+h.
+Definition at line 445 of file error\+\_\+estimator.\+h.
 
 
 
@@ -608,7 +599,7 @@ Prescribed reference flux norm.
 
 
 
-Definition at line 449 of file error\+\_\+estimator.\+h.
+Definition at line 455 of file error\+\_\+estimator.\+h.
 
 
 

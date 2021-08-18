@@ -58,39 +58,33 @@ void($\ast$\&)(const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c9
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Space\+Time\+Element representation, by default. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}{get\+\_\+traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Space\+Time\+Element representation, by default. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}{get\+\_\+traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Space\+Time\+Element representation, by default. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}{get\+\_\+traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
@@ -126,7 +120,7 @@ Definition at line 51 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\
 
 Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
 
-Definition at line 67 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 65 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -145,7 +139,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 122 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 121 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!NavierStokesSpaceTimeTractionElement@{NavierStokesSpaceTimeTractionElement}}
@@ -156,7 +150,7 @@ Definition at line 122 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order
 
 Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
 
-Definition at line 67 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 65 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -175,7 +169,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 122 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 121 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!NavierStokesSpaceTimeTractionElement@{NavierStokesSpaceTimeTractionElement}}
@@ -186,7 +180,7 @@ Definition at line 122 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+f
 
 Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
 
-Definition at line 68 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 66 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -205,7 +199,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 123 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 122 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -231,7 +225,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeT
 
 
 
-Definition at line 147 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 146 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -258,7 +252,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeT
 
 
 
-Definition at line 147 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 146 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -285,7 +279,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeT
 
 
 
-Definition at line 148 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 147 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -312,7 +306,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeT
 
 
 
-Definition at line 137 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 136 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -339,7 +333,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeT
 
 
 
-Definition at line 137 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 136 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -366,7 +360,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeT
 
 
 
-Definition at line 138 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 137 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -381,8 +375,7 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\
 
 
 
-This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Function that returns the residuals for the imposed traction Navier-\/\+Stokes equations 
 
@@ -405,8 +398,7 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\
 
 
 
-This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}
@@ -417,8 +409,7 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\
 
 
 
-This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!get\_traction@{get\_traction}}
@@ -433,7 +424,7 @@ Function to calculate the traction applied to the fluid.
 
 
 
-Definition at line 218 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 217 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -624,12 +615,11 @@ double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomp
 
 
 
-Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping. 
 
 
 
-Definition at line 201 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 200 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -644,12 +634,11 @@ double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomp
 
 
 
-Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping. 
 
 
 
-Definition at line 201 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 200 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -664,12 +653,11 @@ double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomp
 
 
 
-Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping. 
 
 
 
-Definition at line 202 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 201 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -688,7 +676,7 @@ Access function that returns the local equation numbers for velocity components.
 
 
 
-Definition at line 194 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 193 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -707,7 +695,7 @@ Access function that returns the local equation numbers for velocity components.
 
 
 
-Definition at line 194 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 193 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -726,7 +714,7 @@ Access function that returns the local equation numbers for velocity components.
 
 
 
-Definition at line 195 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 194 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -749,7 +737,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 181 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 180 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -772,7 +760,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 181 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 180 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -795,7 +783,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 182 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 181 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -836,7 +824,7 @@ Access function for the imposed traction pointer.
 
 
 
-Definition at line 126 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 125 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_aac86292b4e051a59922fd7a7032e361b}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_aac86292b4e051a59922fd7a7032e361b}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
@@ -851,7 +839,7 @@ Pointer to an imposed traction function.
 
 
 
-Definition at line 58 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 57 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 

@@ -77,7 +77,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a8ce6
 int \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a27d826493ef1ae3d2898409f302d37f8}{face\+\_\+outer\+\_\+unit\+\_\+normal\+\_\+sign}} (const int \&face\+\_\+index) const
 \begin{DoxyCompactList}\small\item\em Get the sign of the outer unit normal on the face given by face\+\_\+index. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespaceoomph_afa5c7a93cae1917e874b392601be0bde}{Coordinate\+Mapping\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a6803c44633cc3fccaddbfa7c3077adbb}{face\+\_\+to\+\_\+bulk\+\_\+coordinate\+\_\+fct\+\_\+pt}} (const int \&face\+\_\+index) const
-\begin{DoxyCompactList}\small\item\em Get a pointer to the function mapping face coordinates to bulk coordinates. \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{namespaceoomph_a0a75fbfa1139f00cf88adeee835c8fe5}{Bulk\+Coordinate\+Derivatives\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a2d0db26e0413a1df4885af59cbf57efd}{bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt}} (const int \&face\+\_\+index) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
@@ -94,7 +94,7 @@ class oomph\+::\+Q\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$}
 
 General \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} class specialised to three spatial dimensions. 
 
-Definition at line 1199 of file Qelements.\+h.
+Definition at line 1279 of file Qelements.\+h.
 
 
 
@@ -112,7 +112,7 @@ Constructor.
 
 
 
-Definition at line 1212 of file Qelements.\+h.
+Definition at line 1291 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a960c5fd835088e5e45cdc9abdfa04222}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a960c5fd835088e5e45cdc9abdfa04222}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!QElement@{QElement}}
@@ -127,7 +127,7 @@ Broken copy constructor.
 
 
 
-Definition at line 1224 of file Qelements.\+h.
+Definition at line 1303 of file Qelements.\+h.
 
 
 
@@ -149,7 +149,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8b29bbf8e20cf2c
 
 
 
-Definition at line 1571 of file Qelements.\+h.
+Definition at line 1734 of file Qelements.\+h.
 
 
 
@@ -166,14 +166,13 @@ void \mbox{\hyperlink{classoomph_1_1QElement}{oomph\+::\+Q\+Element}}$<$ 3, N\+N
 
 Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t. local coordinates at local coordinate s. d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_2^2 $ d2psids(i,3) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ d2psids(i,4) = $ \partial^2 \psi_j / \partial s_0 \partial s_2 $ d2psids(i,5) = $ \partial^2 \psi_j / \partial s_1 \partial s_2 $. 
 
-Second derivatives of shape functions for specific \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a67a7cfffb80e609cdfd1ec534a9c19bd}{Q\+Element$<$3,..$>$}}\+: d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_2^2 $ d2psids(i,3) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ d2psids(i,4) = $ \partial^2 \psi_j / \partial s_0 \partial s_2 $ d2psids(i,5) = $ \partial^2 \psi_j / \partial s_1 \partial s_2 $ ~\newline
- 
+Second derivatives of shape functions for specific \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a67a7cfffb80e609cdfd1ec534a9c19bd}{Q\+Element$<$3,..$>$}}\+: d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_2^2 $ d2psids(i,3) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ d2psids(i,4) = $ \partial^2 \psi_j / \partial s_0 \partial s_2 $ d2psids(i,5) = $ \partial^2 \psi_j / \partial s_1 \partial s_2 $ 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da07b9d35da9debd0cd7}{oomph\+::\+Finite\+Element}}.
 
 
 
-Definition at line 663 of file Qelements.\+cc.
+Definition at line 670 of file Qelements.\+cc.
 
 
 
@@ -196,7 +195,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line 615 of file Qelements.\+cc.
+Definition at line 621 of file Qelements.\+cc.
 
 
 
@@ -219,7 +218,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a09ec977bcf493ec
 
 
 
-Definition at line 1534 of file Qelements.\+h.
+Definition at line 1661 of file Qelements.\+h.
 
 
 
@@ -232,17 +231,13 @@ References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 \mbox{\hyperlink{namespaceoomph_afa5c7a93cae1917e874b392601be0bde}{Coordinate\+Mapping\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1QElement}{oomph\+::\+Q\+Element}}$<$ 3, N\+N\+O\+D\+E\+\_\+1D $>$\+::face\+\_\+to\+\_\+bulk\+\_\+coordinate\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
-
-Get a pointer to the function mapping face coordinates to bulk coordinates. 
-
-
+Get a pointer to the function mapping face coordinates to bulk coordinates 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af20f05fb162a90b7d8ae175ec5dfab1a}{oomph\+::\+Finite\+Element}}.
 
 
 
-Definition at line 1552 of file Qelements.\+h.
+Definition at line 1697 of file Qelements.\+h.
 
 
 
@@ -255,14 +250,13 @@ References oomph\+::\+Q\+Element3\+Face\+To\+Bulk\+Coordinates\+::face0(), oomph
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 unsigned \mbox{\hyperlink{classoomph_1_1QElement}{oomph\+::\+Q\+Element}}$<$ 3, N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+bulk\+\_\+node\+\_\+number (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-Get the number of the ith node on face face\+\_\+index in the bulk node vector. ~\newline
- 
+Get the number of the ith node on face face\+\_\+index in the bulk node vector. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2cd0ee849adf50dae1a70a20fab47119}{oomph\+::\+Finite\+Element}}.
 
 
 
-Definition at line 1512 of file Qelements.\+h.
+Definition at line 1621 of file Qelements.\+h.
 
 
 
@@ -285,7 +279,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ddbb05c5f8bb35
 
 
 
-Definition at line 530 of file Qelements.\+cc.
+Definition at line 533 of file Qelements.\+cc.
 
 
 
@@ -308,7 +302,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb20
 
 
 
-Definition at line 1456 of file Qelements.\+h.
+Definition at line 1562 of file Qelements.\+h.
 
 
 
@@ -331,7 +325,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a42c86a7628fee00
 
 
 
-Definition at line 1258 of file Qelements.\+h.
+Definition at line 1340 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_ae553b0a2f167d83dc7da8c57b82b5fdd}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_ae553b0a2f167d83dc7da8c57b82b5fdd}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
@@ -350,7 +344,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22bc4ee35e4f948
 
 
 
-Definition at line 1316 of file Qelements.\+h.
+Definition at line 1408 of file Qelements.\+h.
 
 
 
@@ -373,7 +367,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f646
 
 
 
-Definition at line 1331 of file Qelements.\+h.
+Definition at line 1423 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a1485bee3b772edabe9ab4e576031fd45}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a1485bee3b772edabe9ab4e576031fd45}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!local\_one\_d\_fraction\_of\_node@{local\_one\_d\_fraction\_of\_node}}
@@ -388,7 +382,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adb8ec7d2ceda375
 
 
 
-Definition at line 1345 of file Qelements.\+h.
+Definition at line 1436 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a3de3fa35517dc2b5bd7b2e90069dc761}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a3de3fa35517dc2b5bd7b2e90069dc761}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!nnode\_1d@{nnode\_1d}}
@@ -407,7 +401,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab65c7a94dda80c1
 
 
 
-Definition at line 1356 of file Qelements.\+h.
+Definition at line 1447 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a00c72c9e208bc8db3cd2203d65b30a60}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a00c72c9e208bc8db3cd2203d65b30a60}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!nplot\_points@{nplot\_points}}
@@ -422,7 +416,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8
 
 
 
-Definition at line 1502 of file Qelements.\+h.
+Definition at line 1608 of file Qelements.\+h.
 
 
 
@@ -445,7 +439,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a06d32c85753a1e3
 
 
 
-Definition at line 1360 of file Qelements.\+h.
+Definition at line 1454 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_ae10dea50eb35b969ebd996d21aa34c6b}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_ae10dea50eb35b969ebd996d21aa34c6b}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!nsub\_elements\_paraview@{nsub\_elements\_paraview}}
@@ -464,7 +458,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa1e11deffc8ee67
 
 
 
-Definition at line 1367 of file Qelements.\+h.
+Definition at line 1461 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a70472a8a3a9cd44d853c70b631062e9c}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a70472a8a3a9cd44d853c70b631062e9c}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
@@ -483,7 +477,7 @@ Implements \mbox{\hyperlink{classoomph_1_1BrickElementBase_a8a2f954fea0650a9641c
 
 
 
-Definition at line 1269 of file Qelements.\+h.
+Definition at line 1359 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a8fa9ec0d0b74e734fc7d4066145c392b}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a8fa9ec0d0b74e734fc7d4066145c392b}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!output@{output}}
@@ -506,7 +500,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQElement_3_013_00_01NNODE__
 
 
 
-Definition at line 770 of file Qelements.\+cc.
+Definition at line 777 of file Qelements.\+cc.
 
 
 
@@ -533,7 +527,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQElement_3_013_00_01NNODE__
 
 
 
-Definition at line 779 of file Qelements.\+cc.
+Definition at line 786 of file Qelements.\+cc.
 
 
 
@@ -560,7 +554,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQElement_3_013_00_01NNODE__
 
 
 
-Definition at line 718 of file Qelements.\+cc.
+Definition at line 727 of file Qelements.\+cc.
 
 
 
@@ -587,7 +581,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQElement_3_013_00_01NNODE__
 
 
 
-Definition at line 727 of file Qelements.\+cc.
+Definition at line 736 of file Qelements.\+cc.
 
 
 
@@ -610,7 +604,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a64adbe935692713
 
 
 
-Definition at line 1266 of file Qelements.\+h.
+Definition at line 1353 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a485dca6ed38c5c9653c5dcce3213ec2a}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a485dca6ed38c5c9653c5dcce3213ec2a}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!s\_min@{s\_min}}
@@ -629,7 +623,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a35f0803115b68bd
 
 
 
-Definition at line 1263 of file Qelements.\+h.
+Definition at line 1347 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a5cbada7a86a7f28510764921dd9b1978}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a5cbada7a86a7f28510764921dd9b1978}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!shape@{shape}}
@@ -650,7 +644,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line 580 of file Qelements.\+cc.
+Definition at line 587 of file Qelements.\+cc.
 
 
 
@@ -673,7 +667,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e
 
 
 
-Definition at line 1492 of file Qelements.\+h.
+Definition at line 1598 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a265f8f0f3d0067ff52648a7c3b50d9fe}\label{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a265f8f0f3d0067ff52648a7c3b50d9fe}} 
 \index{oomph::QElement$<$ 3, NNODE\_1D $>$@{oomph::QElement$<$ 3, NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
@@ -692,7 +686,7 @@ Implements \mbox{\hyperlink{classoomph_1_1BrickElementBase_a3b12dfa7761de6719dd6
 
 
 
-Definition at line 1273 of file Qelements.\+h.
+Definition at line 1365 of file Qelements.\+h.
 
 
 
@@ -715,7 +709,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af11d35779224185
 
 
 
-Definition at line 1430 of file Qelements.\+h.
+Definition at line 1536 of file Qelements.\+h.
 
 
 
@@ -738,7 +732,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afed006dd5b9ab6b
 
 
 
-Definition at line 1375 of file Qelements.\+h.
+Definition at line 1469 of file Qelements.\+h.
 
 
 
@@ -761,7 +755,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a68f0f8dc76f04e7
 
 
 
-Definition at line 1417 of file Qelements.\+h.
+Definition at line 1523 of file Qelements.\+h.
 
 
 
@@ -783,7 +777,7 @@ Default integration rule\+: Gaussian integration of same \textquotesingle{}order
 
 Assign the spatial integration scheme. 
 
-Definition at line 1207 of file Qelements.\+h.
+Definition at line 1287 of file Qelements.\+h.
 
 
 

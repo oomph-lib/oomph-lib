@@ -19,8 +19,7 @@ Inheritance diagram for oomph\+::Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_ab60a211e1cee492be6c9b93d6aa36883}{Unsteady\+Heat\+Prescribed\+Flux\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)
-\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -55,8 +54,7 @@ void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_a3d15dd6c50e869f72a2
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_ad8558d61594ce5f92ecc4a898f2221b6}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Compute the element residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Compute the element residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -75,7 +73,7 @@ class oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 A class for elements that allow the imposition of an applied flux on the boundaries of Unsteady\+Heat elements. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 55 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 54 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -89,12 +87,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement}{oomp
 
 
 
-Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector! ~\newline
- 
+Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector! 
 
 
 
-Definition at line 65 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 60 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -112,7 +109,7 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. 
 
-Definition at line 209 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 221 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -131,7 +128,7 @@ Broken copy constructor.
 
 
 
-Definition at line 74 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 71 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -157,7 +154,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 103 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 104 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -180,7 +177,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 93 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 94 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -195,12 +192,11 @@ void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement}{oomph\+::\+Unsteady
 
 
 
-Compute the element residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Compute the element residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
 
-Definition at line 368 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 373 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -223,7 +219,7 @@ Broken assignment operator.
 
 Access function for the prescribed-\/flux function pointer 
 
-Definition at line 90 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 88 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -238,7 +234,7 @@ void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement}{oomph\+::\+Unsteady
 
 Function to calculate the prescribed flux at a given spatial position and at a gien time 
 
-Definition at line 162 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 180 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -257,7 +253,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 131 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 141 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -280,7 +276,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 136 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 149 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -299,7 +295,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 122 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 127 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -322,7 +318,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 126 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 134 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -341,7 +337,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 144 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 158 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -364,7 +360,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 116 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 118 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -386,7 +382,7 @@ The spatial dimension of the problem.
 
 
 
-Definition at line 191 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 206 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -405,7 +401,7 @@ Function pointer to the (global) prescribed-\/flux function.
 
 
 
-Definition at line 188 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 203 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -424,7 +420,7 @@ The index at which the unknown is stored at the nodes.
 
 
 
-Definition at line 194 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
+Definition at line 209 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 

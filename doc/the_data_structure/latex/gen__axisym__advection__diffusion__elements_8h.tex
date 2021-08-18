@@ -18,13 +18,11 @@ class \mbox{\hyperlink{classFaceGeometry_3_01QGeneralisedAxisymAdvectionDiffusio
 virtual unsigned \mbox{\hyperlink{namespaceoomph_a03ba213638004c56b6417e159f16892f}{oomph\+::u\+\_\+index\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} () const
 \begin{DoxyCompactList}\small\item\em A class for all elements that solve the Advection Diffusion equations in conservative form using isoparametric elements in a cylindrical polar coordinate system. \textbackslash{}mbox\{\textbackslash{}boldmath\$\textbackslash{}nabla\textbackslash{}cdot\$\} \textbackslash{}left( Pe \textbackslash{}mbox\{\textbackslash{}boldmath\$w\$\}(\textbackslash{}mbox\{\textbackslash{}boldmath\$x\$\}) u. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceoomph_aae18c2f8b384a4a115d68ee5cbcdc84a}{oomph\+::du\+\_\+dt\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
-\begin{DoxyCompactList}\small\item\em du/dt at local node n. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em du/dt at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_aac9e9b485dd3b82c6c0b42989017c57f}{oomph\+::disable\+\_\+\+A\+LE}} ()
 \begin{DoxyCompactList}\small\item\em Disable A\+LE, i.\+e. assert the mesh is not moving -- you do this at your own risk! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_aad37abf393b70f7aa747525923469a08}{oomph\+::enable\+\_\+\+A\+LE}} ()
-\begin{DoxyCompactList}\small\item\em (Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em (Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_a2473930e2634d673e2a3bed63b6851f0}{oomph\+::output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output with default number of plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_ae53ff6c2852d72b8aa8801e40848e356}{oomph\+::output}} (std\+::ostream \&outfile, const unsigned \&nplot)
@@ -53,24 +51,20 @@ Generalised\+Axisym\+Advection\+Diffusion\+Diff\+Fct\+Pt \& \mbox{\hyperlink{nam
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to diffusion function. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{namespaceoomph_afc45e5b8613b10bb546b3400a996d8a2}{oomph\+::pe}} () const
 \begin{DoxyCompactList}\small\item\em Peclet number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{namespaceoomph_a92163fa29e433b796a345137e525b3af}{oomph\+::pe\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{namespaceoomph_adcf7c31a36ba0fdda457f926e141c340}{oomph\+::pe\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Peclet number. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{namespaceoomph_a7f4533f76fda86b1fe191b46ae452971}{oomph\+::pe\+\_\+st}} () const
 \begin{DoxyCompactList}\small\item\em Peclet number multiplied by Strouhal number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{namespaceoomph_a996fd022407db74d470a6989afe05add}{oomph\+::pe\+\_\+st\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{namespaceoomph_a7fcdde08224dce25a2a524fa23addd54}{oomph\+::pe\+\_\+st\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Peclet number multipled by Strouha number. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{namespaceoomph_aa0cdf7be6b3844c558f937572c4dfb5c}{oomph\+::get\+\_\+source\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&x, double \&source) const
-\begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{namespaceoomph_aa6e74f36ccca7009265f81f333c4b5df}{oomph\+::get\+\_\+wind\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&wind) const
-\begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{namespaceoomph_a82958379ca7e57f9f8c3f273eb83f55c}{oomph\+::get\+\_\+conserved\+\_\+wind\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&wind) const
-\begin{DoxyCompactList}\small\item\em Get additional (conservative) wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get additional (conservative) wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{namespaceoomph_a2e1c951324dd766cdaddac0eb376f78f}{oomph\+::get\+\_\+diff\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const Vector$<$ double $>$ \&x, Dense\+Matrix$<$ double $>$ \&D) const
-\begin{DoxyCompactList}\small\item\em Get diffusivity tensor at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get diffusivity tensor at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_af24fd3b21fc45dcbe4b87f8e4224bd15}{oomph\+::get\+\_\+flux}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, Vector$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: $\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i $. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_a6bbeae059a0f06fc51b97fd76be99067}{oomph\+::get\+\_\+total\+\_\+flux}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, Vector$<$ double $>$ \&total\+\_\+flux) const
@@ -90,8 +84,7 @@ virtual double \mbox{\hyperlink{namespaceoomph_af332902ab67ff475277342a07dcb8a9b
 virtual double \mbox{\hyperlink{namespaceoomph_a1302011e0b30d149dd485a356f901289}{oomph\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, Shape \&psi, D\+Shape \&dpsidx, Shape \&test, D\+Shape \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{namespaceoomph_a7d874a2081564c9490111b5fb936e46d}{oomph\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, Dense\+Matrix$<$ double $>$ \&jacobian, Dense\+Matrix$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 

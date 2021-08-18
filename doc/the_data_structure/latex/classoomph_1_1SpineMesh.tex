@@ -60,7 +60,7 @@ General \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}} class.
 
 Derived from \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} with virtual so that spine meshes can be derived from general meshes, without multiple copies of \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} objects. 
 
-Definition at line 561 of file spines.\+h.
+Definition at line 612 of file spines.\+h.
 
 
 
@@ -77,7 +77,7 @@ Destructor to clean up the memory allocated to the spines.
 
 
 
-Definition at line 71 of file spines.\+cc.
+Definition at line 66 of file spines.\+cc.
 
 
 
@@ -98,7 +98,7 @@ Add a spine to the mesh.
 
 
 
-Definition at line 583 of file spines.\+h.
+Definition at line 641 of file spines.\+h.
 
 
 
@@ -118,11 +118,11 @@ Assign (global) equation numbers to spines, nodes and elements.
 
 Assign equation numbers for spines 
 
-Definition at line 131 of file spines.\+cc.
+Definition at line 124 of file spines.\+cc.
 
 
 
-References i.
+References i, and Spine\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_a94766043ec96db8388476b62556bad16}\label{classoomph_1_1SpineMesh_a94766043ec96db8388476b62556bad16}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!describe\_spine\_dofs@{describe\_spine\_dofs}}
@@ -136,7 +136,7 @@ Function to describe the dofs of the \mbox{\hyperlink{classoomph_1_1Spine}{Spine
 
 
 
-Definition at line 159 of file spines.\+cc.
+Definition at line 154 of file spines.\+cc.
 
 
 
@@ -154,7 +154,7 @@ Check whether the pointer parameter\+\_\+pt addresses data stored in the spines.
 
 Return true if the pointer addresses data stored within the spines, false if not. 
 
-Definition at line 212 of file spines.\+cc.
+Definition at line 207 of file spines.\+cc.
 
 
 
@@ -172,7 +172,7 @@ Overload the dump function so that the spine data is dumped.
 
 Overload the dump function so that the spine data is also dumped. 
 
-Definition at line 231 of file spines.\+cc.
+Definition at line 229 of file spines.\+cc.
 
 
 
@@ -190,7 +190,7 @@ Return the n-\/th local \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} 
 
 
 
-Definition at line 610 of file spines.\+h.
+Definition at line 669 of file spines.\+h.
 
 
 
@@ -212,7 +212,7 @@ Return a pointer to the n-\/th global \mbox{\hyperlink{classoomph_1_1SpineNode}{
 
 
 
-Definition at line 588 of file spines.\+h.
+Definition at line 648 of file spines.\+h.
 
 
 
@@ -238,7 +238,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a95bf112e5e1b3892e70a41f9
 
 
 
-Definition at line 88 of file spines.\+cc.
+Definition at line 84 of file spines.\+cc.
 
 
 
@@ -256,7 +256,7 @@ Return the number of spines in the mesh.
 
 
 
-Definition at line 580 of file spines.\+h.
+Definition at line 635 of file spines.\+h.
 
 
 
@@ -282,7 +282,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_ac192b41d1a24297ff3885454
 
 
 
-Definition at line 255 of file spines.\+cc.
+Definition at line 253 of file spines.\+cc.
 
 
 
@@ -300,7 +300,7 @@ Set any pinned spine \char`\"{}history\char`\"{} values to be consistent for con
 
 Set the data associated with pinned spine values to be consistent for continuation when using the continuation storage scheme 
 
-Definition at line 194 of file spines.\+cc.
+Definition at line 189 of file spines.\+cc.
 
 
 
@@ -322,7 +322,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a52c30b4ebc67038e137a5de1
 
 
 
-Definition at line 662 of file spines.\+h.
+Definition at line 721 of file spines.\+h.
 
 
 
@@ -340,7 +340,7 @@ Set the time stepper forthe spine data that is stored in the mesh.
 
 Assign time stepper to spines data. 
 
-Definition at line 176 of file spines.\+cc.
+Definition at line 171 of file spines.\+cc.
 
 
 
@@ -380,7 +380,7 @@ Return the i-\/th spine in the mesh.
 
 
 
-Definition at line 574 of file spines.\+h.
+Definition at line 623 of file spines.\+h.
 
 
 
@@ -402,7 +402,7 @@ Return the i-\/th spine in the mesh (const version)
 
 
 
-Definition at line 577 of file spines.\+h.
+Definition at line 629 of file spines.\+h.
 
 
 
@@ -423,11 +423,11 @@ A \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} mesh contains a \mbox{\hyperlink
 
 
 
-Definition at line 566 of file spines.\+h.
+Definition at line 616 of file spines.\+h.
 
 
 
-Referenced by add\+\_\+spine\+\_\+pt(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::centre\+\_\+spine\+\_\+pt(), describe\+\_\+spine\+\_\+dofs(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::left\+\_\+spine\+\_\+pt(), nspine(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::right\+\_\+spine\+\_\+pt(), set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation(), set\+\_\+spine\+\_\+time\+\_\+stepper(), spine\+\_\+pt(), and $\sim$\+Spine\+Mesh().
+Referenced by add\+\_\+spine\+\_\+pt(), assign\+\_\+global\+\_\+spine\+\_\+eqn\+\_\+numbers(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::centre\+\_\+spine\+\_\+pt(), describe\+\_\+spine\+\_\+dofs(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::left\+\_\+spine\+\_\+pt(), nspine(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::right\+\_\+spine\+\_\+pt(), set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation(), set\+\_\+spine\+\_\+time\+\_\+stepper(), spine\+\_\+pt(), and $\sim$\+Spine\+Mesh().
 
 
 

@@ -19,8 +19,7 @@ Inheritance diagram for oomph\+::Hermite\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abebf4806b300591f976398404ed0ef3f}{Mesh\+Spacing\+Fn\+Ptr}}) (const Vector$<$ double $>$ \&m\+\_\+uniform\+\_\+spacing, Vector$<$ double $>$ \&m\+\_\+non\+\_\+uniform\+\_\+spacing)
-\begin{DoxyCompactList}\small\item\em Mesh Spacing Function Pointer -\/ an optional function pointer to prescibe the node spacing in a non-\/uniformly spaced mesh -\/ takes the position of a node (in macro element coordinates) in the uniformly spaced mesh and return the position in the non-\/uniformly spaced mesh ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Mesh Spacing Function Pointer -\/ an optional function pointer to prescibe the node spacing in a non-\/uniformly spaced mesh -\/ takes the position of a node (in macro element coordinates) in the uniformly spaced mesh and return the position in the non-\/uniformly spaced mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -55,8 +54,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a0e4cd3df0828e87a762
 Vector$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a0d02ca1a2769955ce57f09616195bd27}{Nelement}}
 \begin{DoxyCompactList}\small\item\em number of elements in each coordinate direction \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_af1c2c974dc0d2e599b6bbe3921c5bb77}{Xperiodic}}
-\begin{DoxyCompactList}\small\item\em boolean variable to determine whether the mesh is periodic in the ~\newline
- x-\/direction \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em boolean variable to determine whether the mesh is periodic in the x-\/direction \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_af6bae1864691e8fe94d7c61995ae560a}{Domain\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the topologically rectangular domain which prescribes the problem domain. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abebf4806b300591f976398404ed0ef3f}{Mesh\+Spacing\+Fn\+Ptr}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a3b3cc55576538fc29e6975def870536f}{Node\+\_\+spacing\+\_\+fn}}
@@ -69,7 +67,7 @@ class oomph\+::\+Hermite\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 A two dimensional Hermite bicubic element quadrilateral mesh for a topologically rectangular domain. The geometry of the problem must be prescribed using the \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}}. Non uniform node spacing can be prescribed using a function pointer. 
 
-Definition at line 54 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
+Definition at line 52 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
 
 
 
@@ -83,12 +81,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+H
 
 
 
-Mesh Spacing Function Pointer -\/ an optional function pointer to prescibe the node spacing in a non-\/uniformly spaced mesh -\/ takes the position of a node (in macro element coordinates) in the uniformly spaced mesh and return the position in the non-\/uniformly spaced mesh ~\newline
- 
+Mesh Spacing Function Pointer -\/ an optional function pointer to prescibe the node spacing in a non-\/uniformly spaced mesh -\/ takes the position of a node (in macro element coordinates) in the uniformly spaced mesh and return the position in the non-\/uniformly spaced mesh. 
 
 
 
-Definition at line 65 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
+Definition at line 59 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
 
 
 
@@ -106,7 +103,7 @@ Mesh Constructor (for a uniformly spaced mesh). Takes the following arguments \+
 
 
 
-Definition at line 77 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
+Definition at line 73 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
 
 
 
@@ -125,7 +122,7 @@ Mesh Constructor (for a non-\/uniformly spaced mesh). Takes the following argume
 
 build the mesh
 
-Definition at line 116 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
+Definition at line 114 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
 
 
 
@@ -144,7 +141,7 @@ Destructor -\/ does nothing -\/ handled in mesh base class.
 
 
 
-Definition at line 145 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
+Definition at line 144 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
 
 
 
@@ -181,7 +178,7 @@ computes the generalised position of the node at position (node\+\_\+num\+\_\+x,
 
 
 
-Definition at line 206 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc.
+Definition at line 200 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteQuadMesh_a745a06530e60580e95826bedcf2e3e01}\label{classoomph_1_1HermiteQuadMesh_a745a06530e60580e95826bedcf2e3e01}} 
 \index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!macro\_coordinate\_position@{macro\_coordinate\_position}}
@@ -196,7 +193,7 @@ returns the macro element position of the node that is the x-\/th node along fro
 
 
 
-Definition at line 159 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
+Definition at line 157 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
 
 
 
@@ -215,7 +212,7 @@ Access function for number of elements in mesh in each dimension.
 
 
 
-Definition at line 149 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
+Definition at line 148 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+h.
 
 
 
@@ -234,7 +231,7 @@ sets the generalised position of the node (i.\+e. -\/ x\+\_\+i, dx\+\_\+i/ds\+\_
 
 
 
-Definition at line 121 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc.
+Definition at line 116 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}\label{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}} 
 \index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!set\_position\_of\_node@{set\_position\_of\_node}}
@@ -249,7 +246,7 @@ sets the generalised position of the node (i.\+e. -\/ x\+\_\+i, dx\+\_\+i/ds\+\_
 
 
 
-Definition at line 50 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc.
+Definition at line 48 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteQuadMesh_a6eefe872b5bf8a06174b536d9727ea44}\label{classoomph_1_1HermiteQuadMesh_a6eefe872b5bf8a06174b536d9727ea44}} 
 \index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
@@ -275,7 +272,7 @@ Setup lookup schemes which establish which elements are located next to which bo
 
 
 
-Definition at line 1259 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc.
+Definition at line 1271 of file hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -346,8 +343,7 @@ bool \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+M
 
 
 
-boolean variable to determine whether the mesh is periodic in the ~\newline
- x-\/direction 
+boolean variable to determine whether the mesh is periodic in the x-\/direction 
 
 
 

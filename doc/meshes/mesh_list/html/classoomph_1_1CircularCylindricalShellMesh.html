@@ -153,8 +153,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a2382a9ed0cd210c7b697e6ba4f4e2b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the mesh &ndash; specify fct that maps axial Lagr. coordinates to new positions to allow for better resolution of bending boundary layer.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a2382a9ed0cd210c7b697e6ba4f4e2b0b">More...</a><br /></td></tr>
 <tr class="separator:a2382a9ed0cd210c7b697e6ba4f4e2b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba83d68289f90a8567887443c3b9c6f0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#aba83d68289f90a8567887443c3b9c6f0">CircularCylindricalShellMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, const unsigned &amp;nx_bl, const double &amp;delta_bl, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
-<tr class="memdesc:aba83d68289f90a8567887443c3b9c6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the mesh. nx_bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta_bl. <br  />
-  <a href="classoomph_1_1CircularCylindricalShellMesh.html#aba83d68289f90a8567887443c3b9c6f0">More...</a><br /></td></tr>
+<tr class="memdesc:aba83d68289f90a8567887443c3b9c6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the mesh. nx_bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta_bl.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#aba83d68289f90a8567887443c3b9c6f0">More...</a><br /></td></tr>
 <tr class="separator:aba83d68289f90a8567887443c3b9c6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03bba13301e4dec893d73716e146c71d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a03bba13301e4dec893d73716e146c71d">assign_undeformed_positions</a> (GeomObject *const &amp;undeformed_midplane_pt)</td></tr>
 <tr class="memdesc:a03bba13301e4dec893d73716e146c71d"><td class="mdescLeft">&#160;</td><td class="mdescRight">In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a03bba13301e4dec893d73716e146c71d">More...</a><br /></td></tr>
@@ -259,8 +258,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">More...</a><br /></td></tr>
 <tr class="separator:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">Xperiodic</a></td></tr>
-<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction <br  />
-  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
+<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
 <tr class="separator:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -269,7 +267,7 @@ class oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;</h3>
 
 <p>A 2D solid mesh for (topologically) circular cylindrical shells. The shell is represented by two Lagrangian coordinates that correspond to z and theta in cylindrical polars. The required mesh is therefore a 2D mesh and is therefore inherited from the generic <a class="el" href="classoomph_1_1RectangularQuadMesh.html">RectangularQuadMesh</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00053">53</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00051">51</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a770336fa72e8911f31b9fe3f70197a51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a770336fa72e8911f31b9fe3f70197a51">&#9670;&nbsp;</a></span>AxialBLStretchingFctPt</h2>
@@ -287,7 +285,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Typedef for fct that defines the axial stretching fct. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00060">60</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00057">57</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -348,9 +346,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor for the mesh &ndash; uniformly spaced elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">63</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00060">60</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00043">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00182">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::nx()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00189">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>.</p>
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00193">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00041">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00201">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00224">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::nx()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00197">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00231">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>.</p>
 
 </div>
 </div>
@@ -416,9 +414,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor for the mesh &ndash; specify fct that maps axial Lagr. coordinates to new positions to allow for better resolution of bending boundary layer. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00086">86</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00083">83</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00141">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::axial_bl_stretching_fct_pt()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00043">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00182">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::nx()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00189">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>.</p>
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00136">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::axial_bl_stretching_fct_pt()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00193">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00041">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00201">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00224">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::nx()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00197">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00231">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>.</p>
 
 </div>
 </div>
@@ -488,12 +486,11 @@ template&lt;class ELEMENT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor for the mesh. nx_bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta_bl. <br  />
- </p>
+<p>Constructor for the mesh. nx_bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta_bl. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00110">110</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00106">106</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00043">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00189">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>.</p>
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00193">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00041">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00201">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00197">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00231">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>.</p>
 
 </div>
 </div>
@@ -519,7 +516,7 @@ template&lt;class ELEMENT &gt; </div>
 <p>In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube. </p>
 <p>Set the undeformed coordinates of the nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00133">133</a> of file <a class="el" href="circular__shell__mesh_8template_8cc_source.html">circular_shell_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00127">127</a> of file <a class="el" href="circular__shell__mesh_8template_8cc_source.html">circular_shell_mesh.template.cc</a>.</p>
 
 </div>
 </div>
@@ -550,11 +547,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Access to fct pointer to fct that defines the axial stretching fct. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00141">141</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00136">136</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00193">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00086">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00083">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
 
 </div>
 </div>
@@ -609,9 +606,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Mesh build helper fct. </p>
 <p>Mesh build fct. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00043">43</a> of file <a class="el" href="circular__shell__mesh_8template_8cc_source.html">circular_shell_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00041">41</a> of file <a class="el" href="circular__shell__mesh_8template_8cc_source.html">circular_shell_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00060">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
 
 </div>
 </div>
@@ -643,11 +640,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Default axial scaling fct. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">170</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00165">165</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00064">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Nx</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00073">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00071">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmin</a>.</p>
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00201">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00063">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Nx</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00197">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00072">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00070">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmin</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00157">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::scaled_x()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00152">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::scaled_x()</a>.</p>
 
 </div>
 </div>
@@ -679,9 +676,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Fct that defines the axial stretching to accomodate bending boundary layers. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00157">157</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00152">152</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>.</p>
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00193">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00165">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>.</p>
 
 </div>
 </div>
@@ -710,9 +707,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Fct pointer to fct that defines the axial stretching fct. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">198</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00193">193</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00141">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::axial_bl_stretching_fct_pt()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00157">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::scaled_x()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00136">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::axial_bl_stretching_fct_pt()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00060">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00152">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::scaled_x()</a>.</p>
 
 </div>
 </div>
@@ -740,9 +737,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Axial extent of the squashed boundary layer part of the mesh occupied by Nx_bl elements (at each end of the tube) </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">206</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00201">201</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00060">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00165">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>.</p>
 
 </div>
 </div>
@@ -770,9 +767,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Number of azimuthal element layers that get squashed into each of the the two boundary layers at the ends of the tube. </p>
 
-<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">202</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00197">197</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00060">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00165">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>.</p>
 
 </div>
 </div>
@@ -808,7 +805,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:48:12
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:31:55
         </div>
       </div>
     </footer>

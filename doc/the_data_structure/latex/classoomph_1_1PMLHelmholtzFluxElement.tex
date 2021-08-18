@@ -49,7 +49,7 @@ virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmhol
 \begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxElement_a9a872ad9cdfe2400f2be301c7fd84e86}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: real and imaginary part. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxElement_ab0a237a8c1b4d1ce6d59861a49afa113}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxElement_a3d74c42529e151735da3b937c867e85b}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Real=0; Imag=1. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -80,7 +80,7 @@ class oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 A class for elements that allow the imposition of an applied flux on the boundaries of P\+M\+L\+Helmholtz elements. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 576 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 556 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -98,7 +98,7 @@ Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a \mbox{\
 
 
 
-Definition at line 586 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 563 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -116,7 +116,7 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. 
 
-Definition at line 831 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 833 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -135,7 +135,7 @@ Broken empty constructor.
 
 
 
-Definition at line 594 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 572 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzFluxElement_a9f38586456c3181bceff2de8d8b150fb}\label{classoomph_1_1PMLHelmholtzFluxElement_a9f38586456c3181bceff2de8d8b150fb}} 
 \index{oomph::PMLHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzFluxElement$<$ ELEMENT $>$}!PMLHelmholtzFluxElement@{PMLHelmholtzFluxElement}}
@@ -150,7 +150,7 @@ Broken copy constructor.
 
 
 
-Definition at line 603 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 581 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -176,7 +176,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 631 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 612 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -199,7 +199,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 620 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 601 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -218,7 +218,7 @@ Add the element\textquotesingle{}s contribution to its residual vector. flag=1(o
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
 
-Definition at line 986 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 985 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -241,18 +241,18 @@ Broken assignment operator.
 
 Access function for the prescribed-\/flux function pointer 
 
-Definition at line 616 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 594 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PMLHelmholtzFluxElement_ab0a237a8c1b4d1ce6d59861a49afa113}\label{classoomph_1_1PMLHelmholtzFluxElement_ab0a237a8c1b4d1ce6d59861a49afa113}} 
+\mbox{\Hypertarget{classoomph_1_1PMLHelmholtzFluxElement_a3d74c42529e151735da3b937c867e85b}\label{classoomph_1_1PMLHelmholtzFluxElement_a3d74c42529e151735da3b937c867e85b}} 
 \index{oomph::PMLHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzFluxElement$<$ ELEMENT $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::PMLHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -260,11 +260,11 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 689 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 687 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -279,7 +279,7 @@ void \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxElement}{oomph\+::\+P\+M\+L\
 
 Function to calculate the prescribed flux at a given spatial position 
 
-Definition at line 779 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 784 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -302,7 +302,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 678 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 676 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzFluxElement_ac4961df891c00c8f49fc804953c981ce}\label{classoomph_1_1PMLHelmholtzFluxElement_ac4961df891c00c8f49fc804953c981ce}} 
 \index{oomph::PMLHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -317,7 +317,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 661 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 651 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -340,7 +340,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 666 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 659 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -359,7 +359,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 651 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 636 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -382,7 +382,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 655 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 643 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -401,7 +401,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 739 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 737 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -420,7 +420,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 759 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 761 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -439,7 +439,7 @@ Return the index at which the unknown value is stored.
 
 
 
-Definition at line 672 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 667 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -462,7 +462,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 644 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 626 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -484,7 +484,7 @@ The spatial dimension of the problem.
 
 
 
-Definition at line 811 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 817 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -503,7 +503,7 @@ Function pointer to the (global) prescribed-\/flux function.
 
 
 
-Definition at line 808 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 814 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -522,7 +522,7 @@ The index at which the real and imag part of the unknown is stored at the nodes.
 
 
 
-Definition at line 796 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+Definition at line 801 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 

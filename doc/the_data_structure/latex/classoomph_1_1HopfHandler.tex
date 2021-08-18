@@ -26,7 +26,7 @@ unsigned long \mbox{\hyperlink{classoomph_1_1HopfHandler_a9feb8087e8b9554164c0de
 void \mbox{\hyperlink{classoomph_1_1HopfHandler_a61a4006161da6532a9acfec0f979aafa}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em Get the residuals. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HopfHandler_ab36c50421f53accced01dd9e04d904ef}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation 
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HopfHandler_a2953368ecc48dc22f8ea1f563064ece2}{get\+\_\+dresiduals\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam)
 \begin{DoxyCompactList}\small\item\em Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system. \end{DoxyCompactList}\item 
@@ -68,8 +68,7 @@ double \mbox{\hyperlink{classoomph_1_1HopfHandler_a1dc27019f4889918cd01207576eab
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1HopfHandler_a99aabcf5ac54311f1f7acb0dbd431b84}{C}}
 \begin{DoxyCompactList}\small\item\em A constant vector used to ensure that the null vector is not trivial. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1HopfHandler_a1b429a8220b316a487998cae04f46ec7}{Count}}
-\begin{DoxyCompactList}\small\item\em A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -80,7 +79,7 @@ class \mbox{\hyperlink{classoomph_1_1HopfHandler_a199677d64d3b2f908690d10a2398b7
 \doxysubsection{Detailed Description}
 A class that is used to assemble the augmented system that defines a Hopf bifurcation. The \char`\"{}standard\char`\"{} problem must be a function of a global parameter $ \lambda $ and a solution is $ R(u,\lambda) = 0 $, where $ u $ are the unknowns in the problem. A Hopf bifurcation may be specified by the augmented system of size $ 3N+2 $. \[ R(u,\lambda) = 0, \] \[ J\phi + \omega M \psi = 0, \] \[ J\psi - \omega M \phi = 0, \] \[ c \cdot \phi = 1. \] \[ c \cdot \psi = 0. \] In the above $ J $ is the usual Jacobian matrix, $ dR/du $ and $ M $ is the mass matrix that multiplies the time derivative terms. $ \phi + i\psi $ is the (complex) null vector of the complex matrix $ J - i\omega M $, where $ \omega $ is the critical frequency. $ c $ is a constant vector that is used to ensure that the null vector is non-\/trivial. 
 
-Definition at line 1007 of file assembly\+\_\+handler.\+h.
+Definition at line 1049 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -97,7 +96,7 @@ Constructor.
 
 Constructor\+: Initialise the hopf handler, by setting initial guesses for Phi, Psi and calculating Count. If the system changes, a new handler must be constructed. 
 
-Definition at line 4223 of file assembly\+\_\+handler.\+cc.
+Definition at line 4435 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -113,7 +112,7 @@ Constructor with initial guesses for the frequency and null vectors, such as mig
 
 Constructor\+: Initialise the hopf handler, by setting initial guesses for Phi, Psi, Omega and calculating Count. If the system changes, a new handler must be constructed. 
 
-Definition at line 4354 of file assembly\+\_\+handler.\+cc.
+Definition at line 4569 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -131,7 +130,7 @@ Destructor return the problem to its original (non-\/augmented) state.
 
 Destructor, return the problem to its original state, before the augmented system was added 
 
-Definition at line 4423 of file assembly\+\_\+handler.\+cc.
+Definition at line 4640 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -156,7 +155,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692c3d
 
 
 
-Definition at line 1104 of file assembly\+\_\+handler.\+h.
+Definition at line 1150 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -178,7 +177,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a22c5f240674e4
 
 
 
-Definition at line 1100 of file assembly\+\_\+handler.\+h.
+Definition at line 1143 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a9feb8087e8b9554164c0de002f4ec056}\label{classoomph_1_1HopfHandler_a9feb8087e8b9554164c0de002f4ec056}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!eqn\_number@{eqn\_number}}
@@ -196,7 +195,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559
 
 
 
-Definition at line 4476 of file assembly\+\_\+handler.\+cc.
+Definition at line 4693 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -222,7 +221,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_aefc0c13a65342
 
 
 
-Definition at line 4776 of file assembly\+\_\+handler.\+cc.
+Definition at line 4991 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a2953368ecc48dc22f8ea1f563064ece2}\label{classoomph_1_1HopfHandler_a2953368ecc48dc22f8ea1f563064ece2}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}}
@@ -240,7 +239,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0a
 
 
 
-Definition at line 4720 of file assembly\+\_\+handler.\+cc.
+Definition at line 4937 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -262,7 +261,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d
 
 
 
-Definition at line 4822 of file assembly\+\_\+handler.\+cc.
+Definition at line 5034 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -284,7 +283,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a296bef49838d2
 
 
 
-Definition at line 4799 of file assembly\+\_\+handler.\+cc.
+Definition at line 5012 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_ab36c50421f53accced01dd9e04d904ef}\label{classoomph_1_1HopfHandler_ab36c50421f53accced01dd9e04d904ef}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!get\_jacobian@{get\_jacobian}}
@@ -294,7 +293,7 @@ Definition at line 4799 of file assembly\+\_\+handler.\+cc.
 
 
 
-Calculate the elemental Jacobian matrix \char`\"{}d equation 
+Calculate the elemental Jacobian matrix \char`\"{}d equation
 / d variable\char`\"{}. 
 
 
@@ -303,7 +302,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0
 
 
 
-Definition at line 4566 of file assembly\+\_\+handler.\+cc.
+Definition at line 4782 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -325,7 +324,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90d
 
 
 
-Definition at line 4508 of file assembly\+\_\+handler.\+cc.
+Definition at line 4725 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -351,7 +350,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa0
 
 
 
-Definition at line 4448 of file assembly\+\_\+handler.\+cc.
+Definition at line 4665 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -373,7 +372,7 @@ Return the frequency of the bifurcation.
 
 
 
-Definition at line 1112 of file assembly\+\_\+handler.\+h.
+Definition at line 1160 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -391,7 +390,7 @@ Set to solve the complex system.
 
 Set to solve the complex (jacobian and mass matrix) system. 
 
-Definition at line 4860 of file assembly\+\_\+handler.\+cc.
+Definition at line 5071 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -413,7 +412,7 @@ Solve non-\/block system.
 
 Set to Solve full system system. 
 
-Definition at line 4886 of file assembly\+\_\+handler.\+cc.
+Definition at line 5097 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -435,7 +434,7 @@ Set to solve the standard system.
 
 Set to solve the standard (underlying jacobian) system. 
 
-Definition at line 4843 of file assembly\+\_\+handler.\+cc.
+Definition at line 5054 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -456,7 +455,7 @@ Referenced by oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), and oomph\+::\+
 
 
 
-Definition at line 1009 of file assembly\+\_\+handler.\+h.
+Definition at line 1051 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -473,7 +472,7 @@ A constant vector used to ensure that the null vector is not trivial.
 
 
 
-Definition at line 1039 of file assembly\+\_\+handler.\+h.
+Definition at line 1081 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -487,12 +486,11 @@ Referenced by get\+\_\+jacobian(), get\+\_\+residuals(), Hopf\+Handler(), oomph\
 
 
 
-A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. ~\newline
- 
+A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. 
 
 
 
-Definition at line 1044 of file assembly\+\_\+handler.\+h.
+Definition at line 1086 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -510,7 +508,7 @@ Store the number of degrees of freedom in the non-\/augmented problem.
 
 
 
-Definition at line 1026 of file assembly\+\_\+handler.\+h.
+Definition at line 1068 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -528,7 +526,7 @@ The critical frequency of the bifurcation.
 
 
 
-Definition at line 1029 of file assembly\+\_\+handler.\+h.
+Definition at line 1071 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -546,7 +544,7 @@ Pointer to the parameter.
 
 
 
-Definition at line 1022 of file assembly\+\_\+handler.\+h.
+Definition at line 1064 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -564,7 +562,7 @@ The real part of the null vector.
 
 
 
-Definition at line 1032 of file assembly\+\_\+handler.\+h.
+Definition at line 1074 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -582,7 +580,7 @@ Pointer to the problem.
 
 
 
-Definition at line 1019 of file assembly\+\_\+handler.\+h.
+Definition at line 1061 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -600,7 +598,7 @@ The imaginary part of the null vector.
 
 
 
-Definition at line 1035 of file assembly\+\_\+handler.\+h.
+Definition at line 1077 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -618,7 +616,7 @@ Integer flag to indicate which system should be assembled. There are three possi
 
 
 
-Definition at line 1016 of file assembly\+\_\+handler.\+h.
+Definition at line 1058 of file assembly\+\_\+handler.\+h.
 
 
 

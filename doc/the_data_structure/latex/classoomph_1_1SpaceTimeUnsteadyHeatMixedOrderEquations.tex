@@ -59,11 +59,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquat
 \begin{DoxyCompactList}\small\item\em Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multi-\/physics elements. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_acb1cb8dcc0513d54b01c37150d996f6a}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a2e5516dc8bb8bf15575cf4817317a6ce}{alpha\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_aadc3fee32782d81d56370f02c883956c}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a89ebf47c18017461ae63e0d6480c0960}{beta}} () const
 \begin{DoxyCompactList}\small\item\em Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a4c64923c482a4bec03986c9b9803e6a3}{beta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a66a4d378445eacda909cf74f6ae44f15}{beta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a0e0d13b68afb9e2d0eebb718bda2f6f7}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]}=du/dx\+\_\+i. \end{DoxyCompactList}\item 
@@ -80,7 +80,7 @@ double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_ab85a83d1e3a61f4faf0aac0356e906dd}{du\+\_\+dt\+\_\+ust\+\_\+heat}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Calculate du/dt at the n-\/th local node. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a4fd1e8d377f07019f542b6f56ec29395}{interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
-\begin{DoxyCompactList}\small\item\em Return FE representation of function value du/dt(s) at local coordinate s. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a0722803c9a6e65d93282ef6c86706690}{self\+\_\+test}} ()
 \begin{DoxyCompactList}\small\item\em Self-\/test\+: Return 0 for OK. \end{DoxyCompactList}\item 
 virtual double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_ab8bd219af2749df7446de1715612c9d0}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
@@ -112,9 +112,9 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEqua
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a44997962ddbdd93e70904e16e784244a}{Default\+\_\+alpha\+\_\+parameter}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a44997962ddbdd93e70904e16e784244a}{Default\+\_\+alpha\+\_\+parameter}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for the Alpha parameter (thermal inertia)\+: One for natural scaling. \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a61e64f95d1841f345277a26d1ed1c0c6}{Default\+\_\+beta\+\_\+parameter}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a61e64f95d1841f345277a26d1ed1c0c6}{Default\+\_\+beta\+\_\+parameter}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for the Beta parameter (thermal conductivity)\+: One for natural scaling. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -125,7 +125,7 @@ class oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations$<$ S\+P\+A
 
 A class for all isoparametric elements that solve the Space\+Time\+Unsteady\+Heat\+Mixed\+Order equations. \[ \frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f(t,x_j) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. Note that this class assumes an isoparametric formulation, i.\+e. that the scalar unknown is interpolated using the same shape funcitons as the position. 
 
-Definition at line 77 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 76 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -143,7 +143,7 @@ Constructor\+: Initialises the Source\+\_\+fct\+\_\+pt to null and sets flag to 
 
 
 
-Definition at line 86 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 84 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -162,7 +162,7 @@ Broken copy constructor.
 
 
 
-Definition at line 99 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 96 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -184,18 +184,18 @@ Alpha parameter (thermal inertia)
 
 
 
-Definition at line 422 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 416 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a2e5516dc8bb8bf15575cf4817317a6ce}\label{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a2e5516dc8bb8bf15575cf4817317a6ce}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_aadc3fee32782d81d56370f02c883956c}\label{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_aadc3fee32782d81d56370f02c883956c}} 
 \index{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$}!alpha\_pt@{alpha\_pt}}
 \index{alpha\_pt@{alpha\_pt}!oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -203,7 +203,7 @@ Pointer to Alpha parameter (thermal inertia)
 
 
 
-Definition at line 430 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 424 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -222,18 +222,18 @@ Beta parameter (thermal conductivity)
 
 
 
-Definition at line 438 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 432 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::\+Beta\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a4c64923c482a4bec03986c9b9803e6a3}\label{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a4c64923c482a4bec03986c9b9803e6a3}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a66a4d378445eacda909cf74f6ae44f15}\label{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a66a4d378445eacda909cf74f6ae44f15}} 
 \index{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$}!beta\_pt@{beta\_pt}}
 \index{beta\_pt@{beta\_pt}!oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{beta\_pt()}{beta\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -241,7 +241,7 @@ Pointer to Beta parameter (thermal conductivity)
 
 
 
-Definition at line 446 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 440 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -266,7 +266,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 519 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 525 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -291,7 +291,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 603 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 609 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -314,7 +314,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af2025a472d
 
 
 
-Definition at line 237 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 243 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -337,7 +337,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line 108 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 105 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -420,7 +420,7 @@ Calculate du/dt at the n-\/th local node. Uses suitably interpolated value for h
 
 
 
-Definition at line 604 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 599 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -443,7 +443,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6
 
 
 
-Definition at line 119 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 116 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -466,7 +466,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 517 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 511 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -489,7 +489,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 507 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 501 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -516,7 +516,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatM
 
 
 
-Definition at line 62 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 66 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -539,7 +539,7 @@ Get flux\+: flux\mbox{[}i\mbox{]}=du/dx\+\_\+i.
 
 
 
-Definition at line 454 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 448 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -558,7 +558,7 @@ Get source term at continous time t and (Eulerian) position x. Virtual so it can
 
 
 
-Definition at line 401 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 395 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -571,13 +571,9 @@ References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations$<$ S\
 {\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM$>$ \\
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
+Return FE representation of function value du/dt(s) at local coordinate s 
 
-
-Return FE representation of function value du/dt(s) at local coordinate s. 
-
-
-
-Definition at line 618 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 614 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -600,7 +596,7 @@ Return FE representation of function value u(s) at local coordinate s at previou
 
 
 
-Definition at line 572 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 567 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -619,7 +615,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 526 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 520 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -646,7 +642,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba
 
 
 
-Definition at line 199 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 197 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_ac28846ee66acb8f2f6cbf52b478c4619}\label{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_ac28846ee66acb8f2f6cbf52b478c4619}} 
 \index{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$}!output@{output}}
@@ -669,7 +665,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatMixedOrderSpaceTime
 
 
 
-Definition at line 147 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 144 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -696,7 +692,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatMixedOrderSpaceTime
 
 
 
-Definition at line 356 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 363 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -723,7 +719,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatMixedOrderSpaceTime
 
 
 
-Definition at line 131 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 128 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -750,7 +746,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatMixedOrderSpaceTime
 
 
 
-Definition at line 316 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 323 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -769,7 +765,7 @@ C-\/style output FE representation of soln\+: x,y,u or x,y,z,u at nplot$^\wedge$
 
 Output function\+: x,t,u or x,y,t,u at nplot points in each coordinate direction 
 
-Definition at line 724 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 731 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -796,7 +792,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatMixedOrderSpaceTime
 
 
 
-Definition at line 454 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 460 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -821,7 +817,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatMixedOrderSpaceTime
 
 
 
-Definition at line 397 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 403 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -848,7 +844,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a49cc2d4f7ed5772
 
 
 
-Definition at line 359 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 354 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -871,7 +867,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab566cc2b0a758b0
 
 
 
-Definition at line 298 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 294 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -894,7 +890,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac6ce34f52481195
 
 
 
-Definition at line 244 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 241 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -917,7 +913,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a02cf8832a5e2886
 
 
 
-Definition at line 208 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 206 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -940,7 +936,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 283 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
+Definition at line 290 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+cc.
 
 
 
@@ -982,7 +978,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_a93
 
 
 
-Definition at line 384 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 378 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -1005,7 +1001,7 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line 392 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 386 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -1024,7 +1020,7 @@ Return the index at which the unknown value is stored. The default value, 0, is 
 
 
 
-Definition at line 562 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 556 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -1046,7 +1042,7 @@ Boolean flag to indicate if A\+LE formulation is disabled when time-\/derivative
 
 
 
-Definition at line 717 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 714 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -1065,7 +1061,7 @@ Pointer to Alpha parameter (thermal inertia)
 
 
 
-Definition at line 720 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 717 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -1084,7 +1080,7 @@ Pointer to Beta parameter (thermal conductivity)
 
 
 
-Definition at line 723 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 720 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -1095,7 +1091,7 @@ Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations$<$
 \index{Default\_alpha\_parameter@{Default\_alpha\_parameter}!oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_alpha\_parameter}{Default\_alpha\_parameter}}
 {\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM $>$\+::Default\+\_\+alpha\+\_\+parameter =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM $>$\+::Default\+\_\+alpha\+\_\+parameter = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -1103,7 +1099,7 @@ Static default value for the Alpha parameter (thermal inertia)\+: One for natura
 
 Default value for Alpha parameter (thermal inertia) 
 
-Definition at line 729 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 725 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -1114,7 +1110,7 @@ Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations$<$
 \index{Default\_beta\_parameter@{Default\_beta\_parameter}!oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatMixedOrderEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_beta\_parameter}{Default\_beta\_parameter}}
 {\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM $>$\+::Default\+\_\+beta\+\_\+parameter =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM $>$\+::Default\+\_\+beta\+\_\+parameter = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -1122,7 +1118,7 @@ Static default value for the Beta parameter (thermal conductivity)\+: One for na
 
 Default value for Beta parameter (thermal conductivity) 
 
-Definition at line 733 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 729 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 
@@ -1141,7 +1137,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 712 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
+Definition at line 709 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h.
 
 
 

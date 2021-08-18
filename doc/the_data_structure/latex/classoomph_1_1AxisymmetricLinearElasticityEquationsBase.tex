@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Axisymmetric\+Linear\+Elasticity\+Equations\+Ba
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afa35b69a888eecae4b5f199a1adf88c5}{Body\+Force\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
-\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(x,b) -- x and b are Vectors! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(x,b) -- x and b are Vectors! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -55,9 +54,8 @@ void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_ad
 \begin{DoxyCompactList}\small\item\em Evaluate body force at Eulerian coordinate x at present time (returns zero vector if no body force function pointer has been set) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a46c5dca6d1bc3e471f71cb44bdc06284}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: for now lump them all into one D\+OF type. Can be adjusted later. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a714fb359257e5a262e2e1368fcfc1ccb}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_aec049301858c45e15bd00c7dcdc91e33}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -73,9 +71,8 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquatio
 \begin{DoxyCompactItemize}
 \item 
 static double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_ab805f3d2d1a92be924b68367c6f002dd}{Default\+\_\+youngs\+\_\+modulus\+\_\+value}}
-\begin{DoxyCompactList}\small\item\em Static default value for Young\textquotesingle{}s modulus (1.\+0 -- for natural scaling, i.\+e. all stresses have been non-\/dimensionalised by the same reference Young\textquotesingle{}s modulus. Setting the \char`\"{}non-\/dimensional\char`\"{} Young\textquotesingle{}s modulus (obtained by de-\/referencing Youngs\+\_\+modulus\+\_\+pt) to a number larger than one means that the material is stiffer than assumed in the non-\/dimensionalisation. ~\newline
- \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a9788b32107b4eacd99bdffe73e83245a}{Default\+\_\+lambda\+\_\+sq\+\_\+value}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Static default value for Young\textquotesingle{}s modulus (1.\+0 -- for natural scaling, i.\+e. all stresses have been non-\/dimensionalised by the same reference Young\textquotesingle{}s modulus. Setting the \char`\"{}non-\/dimensional\char`\"{} Young\textquotesingle{}s modulus (obtained by de-\/referencing Youngs\+\_\+modulus\+\_\+pt) to a number larger than one means that the material is stiffer than assumed in the non-\/dimensionalisation. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a9788b32107b4eacd99bdffe73e83245a}{Default\+\_\+lambda\+\_\+sq\+\_\+value}}
 \begin{DoxyCompactList}\small\item\em Static default value for timescale ratio (1.\+0 for natural scaling) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -96,12 +93,11 @@ Definition at line 53 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\
 
 
 
-Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(x,b) -- x and b are Vectors! ~\newline
- 
+Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(x,b) -- x and b are Vectors! 
 
 
 
-Definition at line 253 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 250 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -118,7 +114,7 @@ Constructor\+: Set null pointers for constitutive law. Set physical parameter va
 
 
 
-Definition at line 260 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 257 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -135,7 +131,7 @@ Evaluate body force at Eulerian coordinate x at present time (returns zero vecto
 
 
 
-Definition at line 308 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 325 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -157,7 +153,7 @@ Access function\+: Pointer to body force function.
 
 
 
-Definition at line 301 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 312 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -175,7 +171,7 @@ Access function\+: Pointer to body force function (const version)
 
 
 
-Definition at line 304 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 318 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -193,7 +189,7 @@ d$^\wedge$2u/dt$^\wedge$2 at local node n
 
 
 
-Definition at line 69 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 67 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -225,24 +221,23 @@ References i, oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), n, oomph\+::\+Finite
 
 Referenced by interpolated\+\_\+du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity().
 
-\mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a714fb359257e5a262e2e1368fcfc1ccb}\label{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a714fb359257e5a262e2e1368fcfc1ccb}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_aec049301858c45e15bd00c7dcdc91e33}\label{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_aec049301858c45e15bd00c7dcdc91e33}} 
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 342 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 359 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -260,7 +255,7 @@ Compute vector of FE interpolated accel d2u/dt2 at local coordinate s.
 
 
 
-Definition at line 224 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 221 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -282,7 +277,7 @@ Compute vector of FE interpolated velocity du/dt at local coordinate s.
 
 
 
-Definition at line 197 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 194 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -304,7 +299,7 @@ Return FE interpolated displacement u\mbox{[}i\mbox{]} (i=0\+: r, i=1\+: z; i=2\
 
 
 
-Definition at line 164 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 163 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -322,7 +317,7 @@ Compute vector of FE interpolated displacement u at local coordinate s.
 
 
 
-Definition at line 129 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 131 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -344,7 +339,7 @@ Access function for timescale ratio (nondim density)
 
 
 
-Definition at line 298 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 306 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -366,7 +361,7 @@ Access function for pointer to timescale ratio (nondim density)
 
 
 
-Definition at line 295 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 300 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -388,7 +383,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 331 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 348 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a73ee5401b8cfcd059cec299c0e0ff616}\label{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a73ee5401b8cfcd059cec299c0e0ff616}} 
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!nu@{nu}}
@@ -402,7 +397,7 @@ Access function for Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 275 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 278 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -424,7 +419,7 @@ Access function for pointer to Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 292 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 294 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -442,7 +437,7 @@ Return the index at which the i-\/th (i=0\+: r, i=1\+: z; i=2\+: theta) unknown 
 
 
 
-Definition at line 63 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 60 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -464,7 +459,7 @@ Access function to Young\textquotesingle{}s modulus.
 
 
 
-Definition at line 269 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 272 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -507,7 +502,7 @@ Pointer to body force function.
 
 
 
-Definition at line 393 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 408 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -517,15 +512,21 @@ Referenced by body\+\_\+force(), and body\+\_\+force\+\_\+fct\+\_\+pt().
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!Default\_lambda\_sq\_value@{Default\_lambda\_sq\_value}}
 \index{Default\_lambda\_sq\_value@{Default\_lambda\_sq\_value}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{Default\_lambda\_sq\_value}{Default\_lambda\_sq\_value}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::\+Default\+\_\+lambda\+\_\+sq\+\_\+value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::\+Default\+\_\+lambda\+\_\+sq\+\_\+value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    1.0}
+
+\end{DoxyCode}
 
 
 Static default value for timescale ratio (1.\+0 for natural scaling) 
 
 Static default value for timescale ratio (1.\+0 -- for natural scaling) 
 
-Definition at line 404 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 419 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_ab805f3d2d1a92be924b68367c6f002dd}\label{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_ab805f3d2d1a92be924b68367c6f002dd}} 
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!Default\_youngs\_modulus\_value@{Default\_youngs\_modulus\_value}}
@@ -533,14 +534,19 @@ Definition at line 404 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.
 \doxysubsubsection{\texorpdfstring{Default\_youngs\_modulus\_value}{Default\_youngs\_modulus\_value}}
 {\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::\+Default\+\_\+youngs\+\_\+modulus\+\_\+value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      1.0}
+
+\end{DoxyCode}
 
 
-Static default value for Young\textquotesingle{}s modulus (1.\+0 -- for natural scaling, i.\+e. all stresses have been non-\/dimensionalised by the same reference Young\textquotesingle{}s modulus. Setting the \char`\"{}non-\/dimensional\char`\"{} Young\textquotesingle{}s modulus (obtained by de-\/referencing Youngs\+\_\+modulus\+\_\+pt) to a number larger than one means that the material is stiffer than assumed in the non-\/dimensionalisation. ~\newline
- 
+Static default value for Young\textquotesingle{}s modulus (1.\+0 -- for natural scaling, i.\+e. all stresses have been non-\/dimensionalised by the same reference Young\textquotesingle{}s modulus. Setting the \char`\"{}non-\/dimensional\char`\"{} Young\textquotesingle{}s modulus (obtained by de-\/referencing Youngs\+\_\+modulus\+\_\+pt) to a number larger than one means that the material is stiffer than assumed in the non-\/dimensionalisation. 
 
 
 
-Definition at line 401 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 416 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_af4c300075ee05691d784682a7b02e2a6}\label{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_af4c300075ee05691d784682a7b02e2a6}} 
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!Lambda\_sq\_pt@{Lambda\_sq\_pt}}
@@ -554,7 +560,7 @@ Timescale ratio (non-\/dim. density)
 
 
 
-Definition at line 390 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 405 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -572,7 +578,7 @@ Pointer to Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 387 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 402 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -590,7 +596,7 @@ Pointer to the Young\textquotesingle{}s modulus.
 
 
 
-Definition at line 384 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 399 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 

@@ -28,8 +28,7 @@ void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a49dfdd0687d3a3
 unsigned \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a38c80629b1befeb65014659c7e14ab09}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a625465ff6702c623efd252d758832445}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
-\begin{DoxyCompactList}\small\item\em Number of flux terms for Z2 error estimation This will be used to represent all spatial values, ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of flux terms for Z2 error estimation This will be used to represent all spatial values,. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_aee2d7222e52f4d59692b8f1ac3964b17}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get the fluxes for the recovert. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a3ec38d16dfb22d1e7090b230db3479d5}{nvertex\+\_\+node}} () const
@@ -39,19 +38,16 @@ unsigned \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a3ec38d16df
 void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_ac2b85b567337f5126c4dea2e8c82ed17}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Function to return the number of values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_ab4c88a199b195d8e06630c4750ce06cf}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a2a16805778b8497d7b394f3cbd010fc0}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_ae8bcd7bd13389fe289242750880cd9bf}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a09b5fc5cee00d470952242dfea75de69}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+orbit}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdt) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a0468d601cfa2cda0a7fc3312575bb252}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+orbit}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdt) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -63,7 +59,7 @@ class oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $
 
 \mbox{\hyperlink{classoomph_1_1QPoissonElement}{Q\+Poisson\+Element}} elements are linear/quadrilateral/brick-\/shaped Poisson elements with isoparametric interpolation for the function. 
 
-Definition at line 340 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 359 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -81,7 +77,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\
 
 
 
-Definition at line 353 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 368 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpectralPeriodicOrbitElement_ab700f3cb2925783af85c42080be87554}\label{classoomph_1_1SpectralPeriodicOrbitElement_ab700f3cb2925783af85c42080be87554}} 
 \index{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$@{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$}!SpectralPeriodicOrbitElement@{SpectralPeriodicOrbitElement}}
@@ -96,7 +92,7 @@ Broken copy constructor.
 
 
 
-Definition at line 359 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 376 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -124,7 +120,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a2bf0f39d52d141
 
 
 
-Definition at line 541 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 580 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpectralPeriodicOrbitElement_a09b5fc5cee00d470952242dfea75de69}\label{classoomph_1_1SpectralPeriodicOrbitElement_a09b5fc5cee00d470952242dfea75de69}} 
 \index{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$@{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_orbit@{dshape\_and\_dtest\_eulerian\_orbit}}
@@ -133,9 +129,7 @@ Definition at line 541 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 double \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{oomph\+::\+Spectral\+Periodic\+Orbit\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+orbit (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
@@ -145,7 +139,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a745c25bf4dc333
 
 
 
-Definition at line 513 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 554 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -168,7 +162,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 389 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 411 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -191,7 +185,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 383 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 405 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -214,7 +208,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 414 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 442 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -237,7 +231,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db9
 
 
 
-Definition at line 380 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 399 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpectralPeriodicOrbitElement_a38c80629b1befeb65014659c7e14ab09}\label{classoomph_1_1SpectralPeriodicOrbitElement_a38c80629b1befeb65014659c7e14ab09}} 
 \index{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$@{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -256,7 +250,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 406 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 429 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpectralPeriodicOrbitElement_a625465ff6702c623efd252d758832445}\label{classoomph_1_1SpectralPeriodicOrbitElement_a625465ff6702c623efd252d758832445}} 
 \index{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$@{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -267,8 +261,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{oomph\+::\
 
 
 
-Number of flux terms for Z2 error estimation This will be used to represent all spatial values, ~\newline
- 
+Number of flux terms for Z2 error estimation This will be used to represent all spatial values,. 
 
 
 
@@ -276,7 +269,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 410 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 436 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -299,7 +292,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 447 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 475 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpectralPeriodicOrbitElement_a2a16805778b8497d7b394f3cbd010fc0}\label{classoomph_1_1SpectralPeriodicOrbitElement_a2a16805778b8497d7b394f3cbd010fc0}} 
 \index{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$@{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$}!output@{output}}
@@ -310,8 +303,7 @@ void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{oomph\+::\+Spe
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u. 
+C-\/style output function\+: x,y,u or x,y,z,u. 
 
 
 
@@ -319,7 +311,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 471 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 508 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -334,8 +326,7 @@ void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{oomph\+::\+Spe
 
 
 
-C-\/style output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -343,7 +334,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 477 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 516 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -360,14 +351,13 @@ void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{oomph\+::\+Spe
 
 Function to return the number of values. 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u 
+Output function\+: x,y,u or x,y,z,u 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
 
 
 
-Definition at line 459 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 492 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -382,8 +372,7 @@ void \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{oomph\+::\+Spe
 
 
 
-Output function\+: ~\newline
- x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
 
 
 
@@ -391,7 +380,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 465 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 500 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 
@@ -414,7 +403,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 376 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 393 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpectralPeriodicOrbitElement_a1bcd63d9abbf001bf4beb903a18dfc2e}\label{classoomph_1_1SpectralPeriodicOrbitElement_a1bcd63d9abbf001bf4beb903a18dfc2e}} 
 \index{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$@{oomph::SpectralPeriodicOrbitElement$<$ NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
@@ -433,7 +422,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33
 
 
 
-Definition at line 450 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line 481 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 
 
 

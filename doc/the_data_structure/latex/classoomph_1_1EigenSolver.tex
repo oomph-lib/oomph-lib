@@ -19,7 +19,7 @@ Inheritance diagram for oomph\+::Eigen\+Solver\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Empty copy constructor. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5}{$\sim$\+Eigen\+Solver}} ()
 \begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1EigenSolver_a6a6b09612ce16457b26fa0cfe996fa71}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector)=0
+virtual void \mbox{\hyperlink{classoomph_1_1EigenSolver_a67b1178450cd4b229432d1b497299b73}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector)=0
 \begin{DoxyCompactList}\small\item\em Actual eigensolver. This takes a pointer to a problem and returns a vector of complex numbers representing the eigenvalues and a corresponding vector of eigenvectors. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1EigenSolver_a8ab55677b39f98ed8ddb1b1ae682f07b}{set\+\_\+shift}} (const double \&shift\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Set the value of the shift. \end{DoxyCompactList}\item 
@@ -36,7 +36,7 @@ double \mbox{\hyperlink{classoomph_1_1EigenSolver_ab0ead9f50f12f8d6acf9be4521de9
 \doxysubsection{Detailed Description}
 Base class for all Eigen\+Problem solves. This simply defines standard interfaces so that different solvers can be used easily. 
 
-Definition at line 61 of file eigen\+\_\+solver.\+h.
+Definition at line 60 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -53,7 +53,7 @@ Empty constructor.
 
 
 
-Definition at line 71 of file eigen\+\_\+solver.\+h.
+Definition at line 69 of file eigen\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1EigenSolver_a2ab3e3ffc0a171dd5299d12d8be5d1b2}\label{classoomph_1_1EigenSolver_a2ab3e3ffc0a171dd5299d12d8be5d1b2}} 
 \index{oomph::EigenSolver@{oomph::EigenSolver}!EigenSolver@{EigenSolver}}
@@ -67,7 +67,7 @@ Empty copy constructor.
 
 
 
-Definition at line 74 of file eigen\+\_\+solver.\+h.
+Definition at line 72 of file eigen\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5}\label{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5}} 
 \index{oomph::EigenSolver@{oomph::EigenSolver}!````~EigenSolver@{$\sim$EigenSolver}}
@@ -81,7 +81,7 @@ Empty destructor.
 
 
 
-Definition at line 77 of file eigen\+\_\+solver.\+h.
+Definition at line 75 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -98,7 +98,7 @@ Return the value of the shift (const version)
 
 
 
-Definition at line 92 of file eigen\+\_\+solver.\+h.
+Definition at line 93 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -116,17 +116,17 @@ Set the value of the shift.
 
 
 
-Definition at line 89 of file eigen\+\_\+solver.\+h.
+Definition at line 87 of file eigen\+\_\+solver.\+h.
 
 
 
 References Sigma\+\_\+real.
 
-\mbox{\Hypertarget{classoomph_1_1EigenSolver_a6a6b09612ce16457b26fa0cfe996fa71}\label{classoomph_1_1EigenSolver_a6a6b09612ce16457b26fa0cfe996fa71}} 
+\mbox{\Hypertarget{classoomph_1_1EigenSolver_a67b1178450cd4b229432d1b497299b73}\label{classoomph_1_1EigenSolver_a67b1178450cd4b229432d1b497299b73}} 
 \index{oomph::EigenSolver@{oomph::EigenSolver}!solve\_eigenproblem@{solve\_eigenproblem}}
 \index{solve\_eigenproblem@{solve\_eigenproblem}!oomph::EigenSolver@{oomph::EigenSolver}}
 \doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -134,7 +134,7 @@ Actual eigensolver. This takes a pointer to a problem and returns a vector of co
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1ANASAZI_a5b13a2a77a422033c6a522ec68549fa5}{oomph\+::\+A\+N\+A\+S\+A\+ZI}}, \mbox{\hyperlink{classoomph_1_1LAPACK__QZ_ae1efb27c494ea6fb0ce1267233c78f74}{oomph\+::\+L\+A\+P\+A\+C\+K\+\_\+\+QZ}}, and \mbox{\hyperlink{classoomph_1_1ARPACK_ac644213623ea3d91a42cf1ea4608cdf3}{oomph\+::\+A\+R\+P\+A\+CK}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1ANASAZI_af3084c6ec6fc86b5758bb853088c7f8a}{oomph\+::\+A\+N\+A\+S\+A\+ZI}}, \mbox{\hyperlink{classoomph_1_1LAPACK__QZ_a6f06580f8907d38c7e7c36e12da44b59}{oomph\+::\+L\+A\+P\+A\+C\+K\+\_\+\+QZ}}, and \mbox{\hyperlink{classoomph_1_1ARPACK_a22a914045a51a8ad89158cffd81127fe}{oomph\+::\+A\+R\+P\+A\+CK}}.
 
 
 
@@ -155,7 +155,7 @@ Double value that represents the real part of the shift in shifted eigensolvers.
 
 
 
-Definition at line 67 of file eigen\+\_\+solver.\+h.
+Definition at line 65 of file eigen\+\_\+solver.\+h.
 
 
 

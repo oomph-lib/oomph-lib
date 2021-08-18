@@ -2,7 +2,7 @@
 \label{classoomph_1_1Hijacked}\index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}}
 
 
-\mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} elements are elements in which one or more \mbox{\hyperlink{classoomph_1_1Data}{Data}} values that affect the element\textquotesingle{}s residuals, are determined by another element -- the data values are then said to have been hijacked by another element. The main functionality added by the \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} element class is that it wipes out those entries in the element\textquotesingle{}s residual vector and those rows in the element\textquotesingle{}s Jacobian matrix that are determined by the \char`\"{}other\char`\"{} elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a \char`\"{}homotopy parameter\char`\"{}. The value of this parameter can be set by assigning \mbox{\hyperlink{classoomph_1_1HijackedElementBase_affdb1888fb6b2de051bc0345e6f5d934}{residual\+\_\+multiplier\+\_\+pt()}} which has a default value of zero. Note\+: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required?  
+\mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} elements are elements in which one or more \mbox{\hyperlink{classoomph_1_1Data}{Data}} values that affect the element\textquotesingle{}s residuals, are determined by another element -- the data values are then said to have been hijacked by another element. The main functionality added by the \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} element class is that it wipes out those entries in the element\textquotesingle{}s residual vector and those rows in the element\textquotesingle{}s Jacobian matrix that are determined by the \char`\"{}other\char`\"{} elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a \char`\"{}homotopy parameter\char`\"{}. The value of this parameter can be set by assigning \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}{residual\+\_\+multiplier\+\_\+pt()}} which has a default value of zero. Note\+: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required?  
 
 
 
@@ -47,9 +47,9 @@ void \mbox{\hyperlink{classoomph_1_1Hijacked_a35778dccc9cf036c37ee569efe5b5f7c}{
 \subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
 class oomph\+::\+Hijacked$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
-\mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} elements are elements in which one or more \mbox{\hyperlink{classoomph_1_1Data}{Data}} values that affect the element\textquotesingle{}s residuals, are determined by another element -- the data values are then said to have been hijacked by another element. The main functionality added by the \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} element class is that it wipes out those entries in the element\textquotesingle{}s residual vector and those rows in the element\textquotesingle{}s Jacobian matrix that are determined by the \char`\"{}other\char`\"{} elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a \char`\"{}homotopy parameter\char`\"{}. The value of this parameter can be set by assigning \mbox{\hyperlink{classoomph_1_1HijackedElementBase_affdb1888fb6b2de051bc0345e6f5d934}{residual\+\_\+multiplier\+\_\+pt()}} which has a default value of zero. Note\+: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required? 
+\mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} elements are elements in which one or more \mbox{\hyperlink{classoomph_1_1Data}{Data}} values that affect the element\textquotesingle{}s residuals, are determined by another element -- the data values are then said to have been hijacked by another element. The main functionality added by the \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} element class is that it wipes out those entries in the element\textquotesingle{}s residual vector and those rows in the element\textquotesingle{}s Jacobian matrix that are determined by the \char`\"{}other\char`\"{} elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a \char`\"{}homotopy parameter\char`\"{}. The value of this parameter can be set by assigning \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}{residual\+\_\+multiplier\+\_\+pt()}} which has a default value of zero. Note\+: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required? 
 
-Definition at line 126 of file hijacked\+\_\+elements.\+h.
+Definition at line 131 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -67,7 +67,7 @@ Constructor, call the constructors of the base elements.
 
 
 
-Definition at line 132 of file hijacked\+\_\+elements.\+h.
+Definition at line 135 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_a5e4aa47011d8141757f9ecbd8f787811}\label{classoomph_1_1Hijacked_a5e4aa47011d8141757f9ecbd8f787811}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!Hijacked@{Hijacked}}
@@ -82,7 +82,7 @@ Constructor used for hijacking face elements.
 
 
 
-Definition at line 135 of file hijacked\+\_\+elements.\+h.
+Definition at line 138 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_ac03d9be9ce8252556d41ef643b3658be}\label{classoomph_1_1Hijacked_ac03d9be9ce8252556d41ef643b3658be}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!Hijacked@{Hijacked}}
@@ -97,7 +97,7 @@ Constructor used for hijacking face elements with specification of ID of additio
 
 
 
-Definition at line 142 of file hijacked\+\_\+elements.\+h.
+Definition at line 146 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -115,7 +115,7 @@ Set up the local equation numbers for the underlying element, then set up the lo
 
 
 
-Definition at line 299 of file hijacked\+\_\+elements.\+h.
+Definition at line 318 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_a35778dccc9cf036c37ee569efe5b5f7c}\label{classoomph_1_1Hijacked_a35778dccc9cf036c37ee569efe5b5f7c}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!get\_jacobian@{get\_jacobian}}
@@ -130,7 +130,7 @@ Get the residuals and Jacobian matrix from the underlying element, but then wipe
 
 
 
-Definition at line 371 of file hijacked\+\_\+elements.\+h.
+Definition at line 395 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_adb1760705326df86f6289cc3774d37b9}\label{classoomph_1_1Hijacked_adb1760705326df86f6289cc3774d37b9}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!get\_residuals@{get\_residuals}}
@@ -145,7 +145,7 @@ Get the residuals from the underlying element, but then wipe the entries in the 
 
 
 
-Definition at line 353 of file hijacked\+\_\+elements.\+h.
+Definition at line 377 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_a9e11fa249f667b130e93af9379322182}\label{classoomph_1_1Hijacked_a9e11fa249f667b130e93af9379322182}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_external\_value@{hijack\_external\_value}}
@@ -160,7 +160,7 @@ Hijack the i-\/th value stored at external data n. Optionally return a custom-\/
 
 
 
-Definition at line 179 of file hijacked\+\_\+elements.\+h.
+Definition at line 188 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_a835ce930b91c2c138f3b4de12aeba216}\label{classoomph_1_1Hijacked_a835ce930b91c2c138f3b4de12aeba216}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_internal\_value@{hijack\_internal\_value}}
@@ -175,7 +175,7 @@ Hijack the i-\/th value stored at internal data n. Optionally return a custom-\/
 
 
 
-Definition at line 155 of file hijacked\+\_\+elements.\+h.
+Definition at line 160 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_a3c4a0ed281996d74c30f5d4af9a5a324}\label{classoomph_1_1Hijacked_a3c4a0ed281996d74c30f5d4af9a5a324}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_nodal\_position\_value@{hijack\_nodal\_position\_value}}
@@ -190,7 +190,7 @@ Hijack the i-\/th positional value stored at node n. Optionaly return a custom-\
 
 
 
-Definition at line 223 of file hijacked\+\_\+elements.\+h.
+Definition at line 240 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_a3d4f055a9ade75b19d69d8aa7eb26417}\label{classoomph_1_1Hijacked_a3d4f055a9ade75b19d69d8aa7eb26417}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_nodal\_spine\_value@{hijack\_nodal\_spine\_value}}
@@ -205,7 +205,7 @@ Hijack the i-\/th value stored at the spine that affects local node n. Optionall
 
 
 
-Definition at line 260 of file hijacked\+\_\+elements.\+h.
+Definition at line 279 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_acd1255b8d3783d0bce222095f9f78aa2}\label{classoomph_1_1Hijacked_acd1255b8d3783d0bce222095f9f78aa2}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_nodal\_value@{hijack\_nodal\_value}}
@@ -220,7 +220,7 @@ Hijack the i-\/th value stored at node n. Optionally return a custom-\/made (cop
 
 
 
-Definition at line 201 of file hijacked\+\_\+elements.\+h.
+Definition at line 214 of file hijacked\+\_\+elements.\+h.
 
 
 

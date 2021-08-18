@@ -278,9 +278,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">time_derivative</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, const unsigned &amp;j)</td></tr>
 <tr class="memdesc:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of j-th value in <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>. Note the use of the node's <a class="el" href="the__data__structure_8txt.html#a3b0d20781021ec2f0e788713f8b0fec8">value()</a> function so that hanging nodes are taken into account (this is why the functions for <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> cannot be combined through simple polymorphism: value is not virtual).  <a href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">More...</a><br /></td></tr>
 <tr class="separator:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">time_pt</a> () const</td></tr>
-<tr class="memdesc:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <a href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">More...</a><br /></td></tr>
-<tr class="separator:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af85e8103c08de76d5a9399d30fc2211c">time_pt</a> () const</td></tr>
+<tr class="memdesc:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <a href="classoomph_1_1TimeStepper.html#af85e8103c08de76d5a9399d30fc2211c">More...</a><br /></td></tr>
+<tr class="separator:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a3219b7e7ccdc37f733961eeb8cce0a49">time_pt</a> ()</td></tr>
 <tr class="separator:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a4cb0aecb044b77ba0553cdd54b586d8a">weight</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j) const</td></tr>
@@ -342,7 +342,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>The "real" implementation of the implicit midpoint rule. Implemented by calculation of residuals etc. at half step. This requires non-trivial modifications to the element's residual and Jacobian calculation functions to interpolate values to the midpoint. As such <a class="el" href="classoomph_1_1IMRByBDF.html">IMRByBDF</a> should be preferred.</p>
 <p>However this class must be used when multiple different time steppers are being used simultaneously for different parts of the problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00159">159</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00166">166</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa28c3f9d2eea177280f0868e16127285"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa28c3f9d2eea177280f0868e16127285">&#9670;&nbsp;</a></span>IMR() <span class="overload">[1/2]</span></h2>
@@ -374,7 +374,7 @@ Additional Inherited Members</h2></td></tr>
 <li>Didn't properly interpolate time/values/x/derivatives in jacobian/residual (all of these MUST be evaluated at the midpoint). </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00169">169</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00176">176</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
 
 </div>
 </div>
@@ -403,7 +403,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor, predictor_pt handled by base. </p>
 
-<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00172">172</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00179">179</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
 
 </div>
 </div>
@@ -433,7 +433,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Inaccessible copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00196">196</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00205">205</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
 
 </div>
 </div>
@@ -465,7 +465,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1IMRBase.html#a93df756c834f8ba27956b8efb2af3636">oomph::IMRBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00191">191</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00198">198</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
 
 </div>
 </div>
@@ -495,7 +495,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Inaccessible assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00199">199</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00208">208</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
 
 </div>
 </div>
@@ -526,9 +526,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1IMRBase.html#a36b8a37b4c0bb9e8cca821bfb74fd373">oomph::IMRBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00175">175</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00182">182</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00133">oomph::Time::dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00220">oomph::TimeStepper::Time_pt</a>, and <a class="el" href="timesteppers_8h_source.html#l00223">oomph::TimeStepper::Weight</a>.</p>
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00142">oomph::Time::dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00240">oomph::TimeStepper::Time_pt</a>, and <a class="el" href="timesteppers_8h_source.html#l00243">oomph::TimeStepper::Weight</a>.</p>
 
 </div>
 </div>
@@ -563,7 +563,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:55:38
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:37
         </div>
       </div>
     </footer>

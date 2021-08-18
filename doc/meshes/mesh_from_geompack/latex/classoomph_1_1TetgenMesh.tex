@@ -25,11 +25,9 @@ Inheritance diagram for oomph\+::Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{
 \mbox{\hyperlink{classoomph_1_1TetgenMesh_ace863f736d0dfa0a059b28959fced51d}{Tetgen\+Mesh}} (tetgenio \&tetgen\+\_\+data, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false)
 \begin{DoxyCompactList}\small\item\em Constructor with tetgenio data structure. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TetgenMesh_a867b3f70bd0f5063901720d04f28e95e}{Tetgen\+Mesh}} (const std\+::string \&node\+\_\+file\+\_\+name, const std\+::string \&element\+\_\+file\+\_\+name, const std\+::string \&face\+\_\+file\+\_\+name, const bool \&split\+\_\+corner\+\_\+elements, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false)
-\begin{DoxyCompactList}\small\item\em Constructor with the input files. Setting the boolean flag to true splits \char`\"{}corner\char`\"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a \char`\"{}worse\char`\"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such \char`\"{}corner\char`\"{} elements can overconstrain the solution. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor with the input files. Setting the boolean flag to true splits \char`\"{}corner\char`\"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a \char`\"{}worse\char`\"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such \char`\"{}corner\char`\"{} elements can overconstrain the solution. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TetgenMesh_a0fa783641ea515a942941425c468df01}{Tetgen\+Mesh}} (tetgenio \&tetgen\+\_\+data, const bool \&split\+\_\+corner\+\_\+elements, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false)
-\begin{DoxyCompactList}\small\item\em Constructor with tetgen data structure Setting the boolean flag to true splits \char`\"{}corner\char`\"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a \char`\"{}worse\char`\"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such \char`\"{}corner\char`\"{} elements can overconstrain the solution. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor with tetgen data structure Setting the boolean flag to true splits \char`\"{}corner\char`\"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a \char`\"{}worse\char`\"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such \char`\"{}corner\char`\"{} elements can overconstrain the solution. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TetgenMesh_a5eb01196bfadb426bb926f34f50261d6}{Tetgen\+Mesh}} (Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&outer\+\_\+boundary\+\_\+pt, Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&internal\+\_\+surface\+\_\+pt, const double \&element\+\_\+volume, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false, const bool \&split\+\_\+corner\+\_\+elements=false)
 \begin{DoxyCompactList}\small\item\em Build mesh, based on a Tetgen\+Mesh\+Facted\+Closed\+Surface that specifies the outer boundary of the domain and any number of internal boundaries, specified by Tet\+Mesh\+Faceted\+Surfaces. Also specify target size for uniform element size. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TetgenMesh_ab730bd5c3d87754b679c284fd37733ff}{build\+\_\+tetgenio}} (Tet\+Mesh\+Faceted\+Surface $\ast$const \&outer\+\_\+boundary\+\_\+pt, Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&internal\+\_\+surface\+\_\+pt, tetgenio \&tetgen\+\_\+io)
@@ -40,9 +38,9 @@ void \mbox{\hyperlink{classoomph_1_1TetgenMesh_a9c0441ea7404e7ea404979955ffbb5dd
 \begin{DoxyCompactList}\small\item\em Overload set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper so that the stored time stepper now corresponds to the new timestepper. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1TetgenMesh_aeab19209f141e65511a52f195d89d6ac}{tetgenio\+\_\+exists}} () const
 \begin{DoxyCompactList}\small\item\em Boolen defining whether tetgenio object has been built or not. \end{DoxyCompactList}\item 
-tetgenio $\ast$\& \mbox{\hyperlink{classoomph_1_1TetgenMesh_a47071bb8a8c0df965a5e013f0a8fb1ba}{tetgenio\+\_\+pt}} ()
+tetgenio $\ast$\& \mbox{\hyperlink{classoomph_1_1TetgenMesh_a0bab3fa6decfe7f79a7b8b9ff558543e}{tetgenio\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access to the triangulateio representation of the mesh. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TetgenMesh_a8758320eb646d20b578414c35145f0d7}{set\+\_\+deep\+\_\+copy\+\_\+tetgenio\+\_\+pt}} (tetgenio $\ast$const \&\mbox{\hyperlink{classoomph_1_1TetgenMesh_a47071bb8a8c0df965a5e013f0a8fb1ba}{tetgenio\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1TetgenMesh_a8758320eb646d20b578414c35145f0d7}{set\+\_\+deep\+\_\+copy\+\_\+tetgenio\+\_\+pt}} (tetgenio $\ast$const \&\mbox{\hyperlink{classoomph_1_1TetgenMesh_a0bab3fa6decfe7f79a7b8b9ff558543e}{tetgenio\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set the tetgen pointer by a deep copy. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TetgenMesh_a93e764a63a21a93d4a2548058eb1a7c4}{deep\+\_\+copy\+\_\+of\+\_\+tetgenio}} (tetgenio $\ast$const \&input\+\_\+pt, tetgenio $\ast$\&output\+\_\+pt)
 \end{DoxyCompactItemize}
@@ -72,7 +70,7 @@ class oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 Unstructured tet mesh based on output from Tetgen\+: \href{http://wias-berlin.de/software/tetgen/}{\texttt{ http\+://wias-\/berlin.\+de/software/tetgen/}}. 
 
-Definition at line 52 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 51 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -90,7 +88,7 @@ Empty constructor.
 
 
 
-Definition at line 58 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 55 of file tetgen\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TetgenMesh_a10976b817c361f04da4ce996bd019c02}\label{classoomph_1_1TetgenMesh_a10976b817c361f04da4ce996bd019c02}} 
 \index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!TetgenMesh@{TetgenMesh}}
@@ -105,7 +103,7 @@ Constructor with the input files.
 
 
 
-Definition at line 65 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 62 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -124,7 +122,7 @@ Constructor with tetgenio data structure.
 
 
 
-Definition at line 105 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 100 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -139,12 +137,11 @@ References oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from
 
 
 
-Constructor with the input files. Setting the boolean flag to true splits \char`\"{}corner\char`\"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a \char`\"{}worse\char`\"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such \char`\"{}corner\char`\"{} elements can overconstrain the solution. ~\newline
- 
+Constructor with the input files. Setting the boolean flag to true splits \char`\"{}corner\char`\"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a \char`\"{}worse\char`\"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such \char`\"{}corner\char`\"{} elements can overconstrain the solution. 
 
 
 
-Definition at line 154 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 147 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -159,12 +156,11 @@ References oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from
 
 
 
-Constructor with tetgen data structure Setting the boolean flag to true splits \char`\"{}corner\char`\"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a \char`\"{}worse\char`\"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such \char`\"{}corner\char`\"{} elements can overconstrain the solution. ~\newline
- 
+Constructor with tetgen data structure Setting the boolean flag to true splits \char`\"{}corner\char`\"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a \char`\"{}worse\char`\"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such \char`\"{}corner\char`\"{} elements can overconstrain the solution. 
 
 
 
-Definition at line 211 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 203 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -183,7 +179,7 @@ Build mesh, based on a Tetgen\+Mesh\+Facted\+Closed\+Surface that specifies the 
 
 
 
-Definition at line 261 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 253 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -202,7 +198,7 @@ Empty destructor.
 
 
 
-Definition at line 628 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 623 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -224,7 +220,7 @@ Build mesh from scaffold.
 
 Build unstructured tet mesh based on output from scaffold. 
 
-Definition at line 53 of file tetgen\+\_\+mesh.\+template.\+cc.
+Definition at line 48 of file tetgen\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -243,7 +239,7 @@ Build tetgenio object from the Tet\+Mesh\+Faceted\+Surfaces.
 
 A\+LH\+: This may not be needed
 
-Definition at line 388 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 382 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -258,7 +254,7 @@ void \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ E\+
 
 Transfer tetgenio data from the input to the output The output is assumed to have been constructed and \char`\"{}empty\char`\"{} 
 
-Definition at line 871 of file tetgen\+\_\+mesh.\+template.\+cc.
+Definition at line 865 of file tetgen\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -277,7 +273,7 @@ Set the tetgen pointer by a deep copy.
 
 
 
-Definition at line 653 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 655 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -296,7 +292,7 @@ Overload set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper so that the stored time
 
 
 
-Definition at line 639 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 634 of file tetgen\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TetgenMesh_a685e57d2adeb2a378ffc7e244e38c910}\label{classoomph_1_1TetgenMesh_a685e57d2adeb2a378ffc7e244e38c910}} 
 \index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!setup\_reverse\_lookup\_schemes\_for\_faceted\_surface@{setup\_reverse\_lookup\_schemes\_for\_faceted\_surface}}
@@ -311,7 +307,7 @@ Function to setup the reverse look-\/up schemes.
 
 Helper function to set up the reverse look up scheme for facets. This is used to set up boundary coordinates. 
 
-Definition at line 833 of file tetgen\+\_\+mesh.\+template.\+cc.
+Definition at line 828 of file tetgen\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -330,18 +326,18 @@ Boolen defining whether tetgenio object has been built or not.
 
 
 
-Definition at line 646 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 642 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
 References oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Tetgenio\+\_\+exists.
 
-\mbox{\Hypertarget{classoomph_1_1TetgenMesh_a47071bb8a8c0df965a5e013f0a8fb1ba}\label{classoomph_1_1TetgenMesh_a47071bb8a8c0df965a5e013f0a8fb1ba}} 
+\mbox{\Hypertarget{classoomph_1_1TetgenMesh_a0bab3fa6decfe7f79a7b8b9ff558543e}\label{classoomph_1_1TetgenMesh_a0bab3fa6decfe7f79a7b8b9ff558543e}} 
 \index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!tetgenio\_pt@{tetgenio\_pt}}
 \index{tetgenio\_pt@{tetgenio\_pt}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{tetgenio\_pt()}{tetgenio\_pt()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-tetgenio$\ast$ \& \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::tetgenio\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+tetgenio$\ast$\& \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::tetgenio\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -349,7 +345,7 @@ Access to the triangulateio representation of the mesh.
 
 
 
-Definition at line 650 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 649 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -375,7 +371,7 @@ Boolean to indicate whether a tetgenio representation of the mesh exists.
 
 
 
-Definition at line 686 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 687 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -394,7 +390,7 @@ Tetgen representation of mesh.
 
 
 
-Definition at line 689 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 690 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -413,7 +409,7 @@ Temporary scaffold mesh.
 
 
 
-Definition at line 682 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 683 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 
@@ -432,7 +428,7 @@ Boolean flag to indicate whether to use attributes or not (required for multidom
 
 
 
-Definition at line 693 of file tetgen\+\_\+mesh.\+template.\+h.
+Definition at line 694 of file tetgen\+\_\+mesh.\+template.\+h.
 
 
 

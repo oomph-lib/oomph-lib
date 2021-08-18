@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Linear\+Elasticity\+Equations\+Base$<$ D\+IM $>
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_ada2fc7aa2569c35e28982f93a0749903}{Body\+Force\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
-\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(t,x,b) -- x and b are Vectors! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(t,x,b) -- x and b are Vectors! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,13 +28,13 @@ double \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_a5e3f41d1c36
 \begin{DoxyCompactList}\small\item\em Return FE interpolated displacement u\mbox{[}i\mbox{]} at local coordinate s. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_af8288b11bc988ad9ef413ea9bee5d535}{Linear\+Elasticity\+Equations\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set null pointers for constitutive law and for isotropic growth function. Set physical parameter values to default values, switch on inertia and set body force to zero. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ElasticityTensor}{Elasticity\+Tensor}} $\ast$\& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_ac12fbacdae9347b1a570dc1a86c893c3}{elasticity\+\_\+tensor\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1ElasticityTensor}{Elasticity\+Tensor}} $\ast$\& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_a1d6902388208c44c04c653f88360f306}{elasticity\+\_\+tensor\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to the elasticity\+\_\+tensor. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_ad9171d2f6ee9e0c947bdcfecbac7c1f7}{E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, const unsigned \&k, const unsigned \&l) const
 \begin{DoxyCompactList}\small\item\em Access function to the entries in the elasticity tensor. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_a2a2ba588a8aee3eb327102fd3c0bbaf0}{lambda\+\_\+sq}} () const
 \begin{DoxyCompactList}\small\item\em Access function for timescale ratio (nondim density) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_a0109438765421ac09ae6905ccc51642a}{lambda\+\_\+sq\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_a116f2d6627675f78acba8795a383933c}{lambda\+\_\+sq\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to timescale ratio (nondim density) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_ada2fc7aa2569c35e28982f93a0749903}{Body\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_abf9d9078297a4df99d48862288aecf8e}{body\+\_\+force\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function. \end{DoxyCompactList}\item 
@@ -57,9 +56,8 @@ void \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_a6d1d79dd1b1dc
 \begin{DoxyCompactList}\small\item\em Evaluate body force at Eulerian coordinate x at present time (returns zero vector if no body force function pointer has been set) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_adf786bf2d8fe20b864d7f2bf90b20242}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: for now lump them all into one D\+OF type. Can be adjusted later. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_add3ab9f1bbd914e5a460bfefb4eff5c9}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_a1211abcef7585d5dada67e66a2bed93c}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -79,7 +77,7 @@ bool \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_ab90306067812b
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_a1e211e506e98ab5f1b0276d0746f4985}{Default\+\_\+lambda\+\_\+sq\+\_\+value}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase_a1e211e506e98ab5f1b0276d0746f4985}{Default\+\_\+lambda\+\_\+sq\+\_\+value}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for timescale ratio (1.\+0 -- for natural scaling) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -104,8 +102,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase
 
 
 
-Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(t,x,b) -- x and b are Vectors! ~\newline
- 
+Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time F\+C\+T(t,x,b) -- x and b are Vectors! 
 
 
 
@@ -145,7 +142,7 @@ Evaluate body force at Eulerian coordinate x at present time (returns zero vecto
 
 
 
-Definition at line 239 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 270 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -164,7 +161,7 @@ Access function\+: Pointer to body force function.
 
 
 
-Definition at line 186 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 201 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -187,7 +184,7 @@ Access function\+: Pointer to body force function (const version)
 
 
 
-Definition at line 189 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 207 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -206,7 +203,7 @@ d$^\wedge$2u/dt$^\wedge$2 at local node n
 
 
 
-Definition at line 67 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 68 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -225,7 +222,7 @@ Switch off solid inertia.
 
 
 
-Definition at line 196 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 220 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -244,18 +241,18 @@ Access function to the entries in the elasticity tensor.
 
 
 
-Definition at line 173 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 180 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::\+Elasticity\+\_\+tensor\+\_\+pt, and i.
 
-\mbox{\Hypertarget{classoomph_1_1LinearElasticityEquationsBase_ac12fbacdae9347b1a570dc1a86c893c3}\label{classoomph_1_1LinearElasticityEquationsBase_ac12fbacdae9347b1a570dc1a86c893c3}} 
+\mbox{\Hypertarget{classoomph_1_1LinearElasticityEquationsBase_a1d6902388208c44c04c653f88360f306}\label{classoomph_1_1LinearElasticityEquationsBase_a1d6902388208c44c04c653f88360f306}} 
 \index{oomph::LinearElasticityEquationsBase$<$ DIM $>$@{oomph::LinearElasticityEquationsBase$<$ DIM $>$}!elasticity\_tensor\_pt@{elasticity\_tensor\_pt}}
 \index{elasticity\_tensor\_pt@{elasticity\_tensor\_pt}!oomph::LinearElasticityEquationsBase$<$ DIM $>$@{oomph::LinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{elasticity\_tensor\_pt()}{elasticity\_tensor\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1ElasticityTensor}{Elasticity\+Tensor}}$\ast$ \& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase}{oomph\+::\+Linear\+Elasticity\+Equations\+Base}}$<$ D\+IM $>$\+::elasticity\+\_\+tensor\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1ElasticityTensor}{Elasticity\+Tensor}}$\ast$\& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase}{oomph\+::\+Linear\+Elasticity\+Equations\+Base}}$<$ D\+IM $>$\+::elasticity\+\_\+tensor\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -263,7 +260,7 @@ Return the pointer to the elasticity\+\_\+tensor.
 
 
 
-Definition at line 170 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 174 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -286,31 +283,30 @@ Switch on solid inertia.
 
 
 
-Definition at line 193 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 214 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::\+Unsteady.
 
-\mbox{\Hypertarget{classoomph_1_1LinearElasticityEquationsBase_add3ab9f1bbd914e5a460bfefb4eff5c9}\label{classoomph_1_1LinearElasticityEquationsBase_add3ab9f1bbd914e5a460bfefb4eff5c9}} 
+\mbox{\Hypertarget{classoomph_1_1LinearElasticityEquationsBase_a1211abcef7585d5dada67e66a2bed93c}\label{classoomph_1_1LinearElasticityEquationsBase_a1211abcef7585d5dada67e66a2bed93c}} 
 \index{oomph::LinearElasticityEquationsBase$<$ DIM $>$@{oomph::LinearElasticityEquationsBase$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::LinearElasticityEquationsBase$<$ DIM $>$@{oomph::LinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase}{oomph\+::\+Linear\+Elasticity\+Equations\+Base}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase}{oomph\+::\+Linear\+Elasticity\+Equations\+Base}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 283 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 311 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -329,7 +325,7 @@ Return the strain tensor.
 
 Compute the strain tensor at local coordinate s. Now fill in the entries of the strain tensor
 
-Definition at line 49 of file linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line 47 of file linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
@@ -386,7 +382,7 @@ Compute vector of FE interpolated displacement u at local coordinate s.
 
 
 
-Definition at line 97 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 98 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -409,7 +405,7 @@ Access function to flag that switches inertia on/off (const version)
 
 
 
-Definition at line 199 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 226 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -432,18 +428,18 @@ Access function for timescale ratio (nondim density)
 
 
 
-Definition at line 180 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 189 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::\+Lambda\+\_\+sq\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1LinearElasticityEquationsBase_a0109438765421ac09ae6905ccc51642a}\label{classoomph_1_1LinearElasticityEquationsBase_a0109438765421ac09ae6905ccc51642a}} 
+\mbox{\Hypertarget{classoomph_1_1LinearElasticityEquationsBase_a116f2d6627675f78acba8795a383933c}\label{classoomph_1_1LinearElasticityEquationsBase_a116f2d6627675f78acba8795a383933c}} 
 \index{oomph::LinearElasticityEquationsBase$<$ DIM $>$@{oomph::LinearElasticityEquationsBase$<$ DIM $>$}!lambda\_sq\_pt@{lambda\_sq\_pt}}
 \index{lambda\_sq\_pt@{lambda\_sq\_pt}!oomph::LinearElasticityEquationsBase$<$ DIM $>$@{oomph::LinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{lambda\_sq\_pt()}{lambda\_sq\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase}{oomph\+::\+Linear\+Elasticity\+Equations\+Base}}$<$ D\+IM $>$\+::lambda\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase}{oomph\+::\+Linear\+Elasticity\+Equations\+Base}}$<$ D\+IM $>$\+::lambda\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -451,7 +447,7 @@ Access function for pointer to timescale ratio (nondim density)
 
 
 
-Definition at line 183 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 195 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -478,7 +474,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 271 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 299 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityEquationsBase_aee2dbde46c2c5eae21e47cc0fa3b9362}\label{classoomph_1_1LinearElasticityEquationsBase_aee2dbde46c2c5eae21e47cc0fa3b9362}} 
 \index{oomph::LinearElasticityEquationsBase$<$ DIM $>$@{oomph::LinearElasticityEquationsBase$<$ DIM $>$}!pin\_elemental\_redundant\_nodal\_solid\_pressures@{pin\_elemental\_redundant\_nodal\_solid\_pressures}}
@@ -493,7 +489,7 @@ Pin the element\textquotesingle{}s redundant solid pressures (needed for refinem
 
 
 
-Definition at line 202 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 232 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -513,10 +509,9 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 
 \begin{DoxyItemize}
 \item {\ttfamily Linear\+Elasticity\+Equations\+Base$<$\+D\+I\+M$>$\+::} pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()
-\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal solid pressure degrees of freedom ~\newline
- (e.\+g. linear elasticity elements with continuous pressure interpolation.) 
+\end{DoxyItemize}which is empty by default and should be implemented for elements with nodal solid pressure degrees of freedom (e.\+g. linear elasticity elements with continuous pressure interpolation.) 
 
-Definition at line 214 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 245 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -535,7 +530,7 @@ Return the index at which the i-\/th unknown displacement component is stored. T
 
 
 
-Definition at line 63 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 62 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -561,7 +556,7 @@ Pointer to body force function.
 
 
 
-Definition at line 336 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 361 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -572,7 +567,7 @@ Referenced by oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::b
 \index{Default\_lambda\_sq\_value@{Default\_lambda\_sq\_value}!oomph::LinearElasticityEquationsBase$<$ DIM $>$@{oomph::LinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_lambda\_sq\_value}{Default\_lambda\_sq\_value}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase}{oomph\+::\+Linear\+Elasticity\+Equations\+Base}}$<$ D\+IM $>$\+::Default\+\_\+lambda\+\_\+sq\+\_\+value =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1LinearElasticityEquationsBase}{oomph\+::\+Linear\+Elasticity\+Equations\+Base}}$<$ D\+IM $>$\+::Default\+\_\+lambda\+\_\+sq\+\_\+value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -580,7 +575,7 @@ Static default value for timescale ratio (1.\+0 -- for natural scaling)
 
 
 
-Definition at line 339 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 364 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityEquationsBase_a0d7307299ede86c07c002a86cf965a70}\label{classoomph_1_1LinearElasticityEquationsBase_a0d7307299ede86c07c002a86cf965a70}} 
 \index{oomph::LinearElasticityEquationsBase$<$ DIM $>$@{oomph::LinearElasticityEquationsBase$<$ DIM $>$}!Elasticity\_tensor\_pt@{Elasticity\_tensor\_pt}}
@@ -595,7 +590,7 @@ Pointer to the elasticity tensor.
 
 
 
-Definition at line 327 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 352 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -614,7 +609,7 @@ Timescale ratio (non-\/dim. density)
 
 
 
-Definition at line 330 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 355 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -633,7 +628,7 @@ Flag that switches inertia on/off.
 
 
 
-Definition at line 333 of file linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line 358 of file linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 

@@ -23,7 +23,7 @@ void \mbox{\hyperlink{classoomph_1_1QuadTree_a5aa0ce0775cb4295ccdd6e7a20c80e11}{
 \begin{DoxyCompactList}\small\item\em Overload the function construct\+\_\+son to ensure that the son is a specific \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} and not a general \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1QuadTree_ab8cf08ddd68ec671c111bc55f9b37e70}{gteq\+\_\+edge\+\_\+neighbour}} (const int \&direction, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&translate\+\_\+s, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+lo, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+hi, int \&edge, int \&diff\+\_\+level, bool \&in\+\_\+neighbouring\+\_\+tree) const
 \begin{DoxyCompactList}\small\item\em Return pointer to greater or equal-\/sized edge neighbour in specified {\ttfamily direction}; also provide info regarding the relative size and orientation of neighbour\+: \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuadTree_ae84ef914439549e7582bf3e58286f53e}{stick\+\_\+neighbouring\+\_\+leaves\+\_\+into\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ const \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} $\ast$ $>$ \&tree\+\_\+neighbouring\+\_\+nodes, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&tree\+\_\+neighbouring\+\_\+s\+\_\+lo, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&tree\+\_\+neighbouring\+\_\+s\+\_\+hi, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&tree\+\_\+neighbouring\+\_\+diff\+\_\+level, const \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} $\ast$my\+\_\+neigh\+\_\+pt, const int \&direction) const
+void \mbox{\hyperlink{classoomph_1_1QuadTree_a341a1e5ace5a7aca56b38328cc8db093}{stick\+\_\+neighbouring\+\_\+leaves\+\_\+into\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ const \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} $\ast$ $>$ \&tree\+\_\+neighbouring\+\_\+nodes, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&tree\+\_\+neighbouring\+\_\+s\+\_\+lo, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&tree\+\_\+neighbouring\+\_\+s\+\_\+hi, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&tree\+\_\+neighbouring\+\_\+diff\+\_\+level, const \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} $\ast$my\+\_\+neigh\+\_\+pt, const int \&direction) const
 \begin{DoxyCompactList}\small\item\em Traverse \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Preorder traverse and stick pointers to neighbouring leaf nodes (only) into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1QuadTree_aa8bb42eac81f1b1b8bc7eb3e82fc5e29}{self\+\_\+test}} ()
 \begin{DoxyCompactList}\small\item\em Self-\/test\+: Check all neighbours. Return success (0) if the max. distance between corresponding points in the neighbours is less than the tolerance specified in the static value \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Quad\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -45,15 +45,13 @@ static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbo
 \mbox{\hyperlink{classoomph_1_1QuadTree_aa56c6ca60d708eee10217cb341399fe3}{Quad\+Tree}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1QuadTree_a41f19525579fbf151a0e73eefca43a0b}{Quad\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Quad\+Trees can only be created internally, during the split operation. Only Quad\+Tree\+Roots can be created externally. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Quad\+Trees can only be created internally, during the split operation. Only Quad\+Tree\+Roots can be created externally. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1QuadTree_aef8906aed3a32ba3f7c1723d8dc26015}{Quad\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
-\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (S\+E/\+S\+W/\+N\+E/\+NW) it is. Protected because Quad\+Trees can only be created internally, during the split operation. Only Quad\+Tree\+Roots can be created externally. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (S\+E/\+S\+W/\+N\+E/\+NW) it is. Protected because Quad\+Trees can only be created internally, during the split operation. Only Quad\+Tree\+Roots can be created externally. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static bool \mbox{\hyperlink{classoomph_1_1QuadTree_af41a83bfcd8c5eb535f7d2828ff712d1}{Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}} =false
+static bool \mbox{\hyperlink{classoomph_1_1QuadTree_af41a83bfcd8c5eb535f7d2828ff712d1}{Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}} = false
 \begin{DoxyCompactList}\small\item\em Bool indicating that static member data has been setup. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -66,8 +64,7 @@ static bool \mbox{\hyperlink{classoomph_1_1QuadTree_af41a83bfcd8c5eb535f7d2828ff
 static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbox{\hyperlink{classoomph_1_1QuadTree_ab882ad3e12fec441f97ef526bae1f497}{Colour}}
 \begin{DoxyCompactList}\small\item\em Colours for neighbours in various directions. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1QuadTree_a89acef2846ba5c3f00e424575385527e}{S\+\_\+base}}
-\begin{DoxyCompactList}\small\item\em S\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the edge indicated by direction (S/\+E/\+N/W) ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em S\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the edge indicated by direction (S/\+E/\+N/W) \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1QuadTree_a24da4f560f767a69d2dfbee82e404ad9}{S\+\_\+step}}
 \begin{DoxyCompactList}\small\item\em S\+\_\+step(i,direction) Increments for coordinate s\mbox{[}i\mbox{]} when progressing along the edge indicated by direction (S/\+E/\+N/W); Left/lower vertex\+: S\+\_\+base; Right/upper vertex\+: S\+\_\+base + S\+\_\+step. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1QuadTree_a40d403ca6058b1f8cdef2e0b21972050}{Reflect\+\_\+edge}}
@@ -105,7 +102,7 @@ Finally, the leaf \char`\"{}nodes\char`\"{} can be split depending on a criteria
 
 Note that Quad\+Trees are only generated by splitting existing Quad\+Trees. Therefore, the constructors are protected. The only \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} that \char`\"{}\+Joe User\char`\"{} can create is the (derived) class \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}}. 
 
-Definition at line 94 of file quadtree.\+h.
+Definition at line 103 of file quadtree.\+h.
 
 
 
@@ -122,7 +119,7 @@ Destructor. Note\+: Deleting a quadtree also deletes the objects associated with
 
 
 
-Definition at line 100 of file quadtree.\+h.
+Definition at line 108 of file quadtree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QuadTree_a6eaeaee810370ab90cec37e70d9cdaa3}\label{classoomph_1_1QuadTree_a6eaeaee810370ab90cec37e70d9cdaa3}} 
 \index{oomph::QuadTree@{oomph::QuadTree}!QuadTree@{QuadTree}}
@@ -136,7 +133,7 @@ Broken copy constructor.
 
 
 
-Definition at line 103 of file quadtree.\+h.
+Definition at line 111 of file quadtree.\+h.
 
 
 
@@ -154,7 +151,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line 199 of file quadtree.\+h.
+Definition at line 209 of file quadtree.\+h.
 
 
 
@@ -168,12 +165,11 @@ Referenced by construct\+\_\+son().
 
 
 
-Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Quad\+Trees can only be created internally, during the split operation. Only Quad\+Tree\+Roots can be created externally. ~\newline
- 
+Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Quad\+Trees can only be created internally, during the split operation. Only Quad\+Tree\+Roots can be created externally. 
 
 
 
-Definition at line 210 of file quadtree.\+h.
+Definition at line 222 of file quadtree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QuadTree_aef8906aed3a32ba3f7c1723d8dc26015}\label{classoomph_1_1QuadTree_aef8906aed3a32ba3f7c1723d8dc26015}} 
 \index{oomph::QuadTree@{oomph::QuadTree}!QuadTree@{QuadTree}}
@@ -183,12 +179,11 @@ Definition at line 210 of file quadtree.\+h.
 
 
 
-Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (S\+E/\+S\+W/\+N\+E/\+NW) it is. Protected because Quad\+Trees can only be created internally, during the split operation. Only Quad\+Tree\+Roots can be created externally. ~\newline
- 
+Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (S\+E/\+S\+W/\+N\+E/\+NW) it is. Protected because Quad\+Trees can only be created internally, during the split operation. Only Quad\+Tree\+Roots can be created externally. 
 
 
 
-Definition at line 218 of file quadtree.\+h.
+Definition at line 230 of file quadtree.\+h.
 
 
 
@@ -209,7 +204,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Tree_a5eb29718044b1bc56403ee9bd15a60b6
 
 
 
-Definition at line 116 of file quadtree.\+h.
+Definition at line 124 of file quadtree.\+h.
 
 
 
@@ -227,7 +222,7 @@ Doc/check all neighbours of quadtree (nodes) contained in the \mbox{\hyperlink{c
 
 Doc/check all neighbours of quadtree (\char`\"{}nodes\char`\"{}) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Quad\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. Output is suppressed if the output streams are closed. 
 
-Definition at line 1378 of file quadtree.\+cc.
+Definition at line 1402 of file quadtree.\+cc.
 
 
 
@@ -263,7 +258,7 @@ Parameters\+:
 \item orig\+\_\+root\+\_\+pt identifies the root node of the element whose neighbour we\textquotesingle{}re really trying to find by all these recursive calls. 
 \end{DoxyItemize}
 
-Definition at line 588 of file quadtree.\+cc.
+Definition at line 601 of file quadtree.\+cc.
 
 
 
@@ -299,7 +294,7 @@ Return pointer to greater or equal-\/sized edge neighbour in specified {\ttfamil
 \item {\ttfamily in\+\_\+neighbouring\+\_\+tree} returns true is we have had to flip to a different root, even if that root is actually the same as it can be in periodic problems. 
 \end{DoxyItemize}
 
-Definition at line 419 of file quadtree.\+cc.
+Definition at line 413 of file quadtree.\+cc.
 
 
 
@@ -307,7 +302,7 @@ References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Tree\+::\+Level, oomph\
 
 
 
-Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), doc\+\_\+neighbours(), gteq\+\_\+edge\+\_\+neighbour(), and stick\+\_\+neighbouring\+\_\+leaves\+\_\+into\+\_\+vector().
+Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), doc\+\_\+neighbours(), gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::quad\+\_\+hang\+\_\+helper(), and stick\+\_\+neighbouring\+\_\+leaves\+\_\+into\+\_\+vector().
 
 \mbox{\Hypertarget{classoomph_1_1QuadTree_a5aa0ce0775cb4295ccdd6e7a20c80e11}\label{classoomph_1_1QuadTree_a5aa0ce0775cb4295ccdd6e7a20c80e11}} 
 \index{oomph::QuadTree@{oomph::QuadTree}!operator=@{operator=}}
@@ -321,7 +316,7 @@ Broken assignment operator.
 
 
 
-Definition at line 109 of file quadtree.\+h.
+Definition at line 117 of file quadtree.\+h.
 
 
 
@@ -339,7 +334,7 @@ Self-\/test\+: Check all neighbours. Return success (0) if the max. distance bet
 
 Self-\/test\+: Check neighbour finding routine. For each element in the tree and for each vertex, determine the distance between the vertex and its position in the neigbour. If the difference is less than \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}. return success (0), otherwise failure (1) 
 
-Definition at line 793 of file quadtree.\+cc.
+Definition at line 814 of file quadtree.\+cc.
 
 
 
@@ -355,10 +350,9 @@ References doc\+\_\+neighbours(), i, oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_
 
 Setup the static data, rotation and reflection schemes, etc. 
 
-Setup the static data stored in the \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} -- this needs to be called before Quad\+Trees can be used. Automatically called by \mbox{\hyperlink{classoomph_1_1RefineableQuadMesh}{Refineable\+Quad\+Mesh}} constructor. ~\newline
- 
+Setup the static data stored in the \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} -- this needs to be called before Quad\+Trees can be used. Automatically called by \mbox{\hyperlink{classoomph_1_1RefineableQuadMesh}{Refineable\+Quad\+Mesh}} constructor. 
 
-Definition at line 122 of file quadtree.\+cc.
+Definition at line 120 of file quadtree.\+cc.
 
 
 
@@ -368,11 +362,11 @@ References Colour, Direct\+\_\+string, oomph\+::\+Quad\+Tree\+Names\+::E, Is\+\_
 
 Referenced by oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Quad\+Mesh().
 
-\mbox{\Hypertarget{classoomph_1_1QuadTree_ae84ef914439549e7582bf3e58286f53e}\label{classoomph_1_1QuadTree_ae84ef914439549e7582bf3e58286f53e}} 
+\mbox{\Hypertarget{classoomph_1_1QuadTree_a341a1e5ace5a7aca56b38328cc8db093}\label{classoomph_1_1QuadTree_a341a1e5ace5a7aca56b38328cc8db093}} 
 \index{oomph::QuadTree@{oomph::QuadTree}!stick\_neighbouring\_leaves\_into\_vector@{stick\_neighbouring\_leaves\_into\_vector}}
 \index{stick\_neighbouring\_leaves\_into\_vector@{stick\_neighbouring\_leaves\_into\_vector}!oomph::QuadTree@{oomph::QuadTree}}
 \doxysubsubsection{\texorpdfstring{stick\_neighbouring\_leaves\_into\_vector()}{stick\_neighbouring\_leaves\_into\_vector()}}
-{\footnotesize\ttfamily void oomph\+::\+Quad\+Tree\+::stick\+\_\+neighbouring\+\_\+leaves\+\_\+into\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ const \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} $\ast$ $>$ \&}]{tree\+\_\+neighbouring\+\_\+nodes,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{tree\+\_\+neighbouring\+\_\+s\+\_\+lo,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{tree\+\_\+neighbouring\+\_\+s\+\_\+hi,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{tree\+\_\+neighbouring\+\_\+diff\+\_\+level,  }\item[{const \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} $\ast$}]{my\+\_\+neigh\+\_\+pt,  }\item[{const int \&}]{direction }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void oomph\+::\+Quad\+Tree\+::stick\+\_\+neighbouring\+\_\+leaves\+\_\+into\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ const \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} $\ast$ $>$ \&}]{tree\+\_\+neighbouring\+\_\+nodes,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{tree\+\_\+neighbouring\+\_\+s\+\_\+lo,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{tree\+\_\+neighbouring\+\_\+s\+\_\+hi,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{tree\+\_\+neighbouring\+\_\+diff\+\_\+level,  }\item[{const \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} $\ast$}]{my\+\_\+neigh\+\_\+pt,  }\item[{const int \&}]{direction }\end{DoxyParamCaption}) const}
 
 
 
@@ -380,7 +374,7 @@ Traverse \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Preorder traverse and st
 
 Traverse \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Preorder traverse and stick pointers to neighbouring leaf nodes (only) into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} 
 
-Definition at line 735 of file quadtree.\+cc.
+Definition at line 751 of file quadtree.\+cc.
 
 
 
@@ -401,7 +395,7 @@ Colours for neighbours in various directions.
 
 Colours for neighbours in various directions (static data) 
 
-Definition at line 238 of file quadtree.\+h.
+Definition at line 252 of file quadtree.\+h.
 
 
 
@@ -419,7 +413,7 @@ Translate (enumerated) directions into strings.
 
 Translate (enumerated) directions into strings (static data) 
 
-Definition at line 193 of file quadtree.\+h.
+Definition at line 205 of file quadtree.\+h.
 
 
 
@@ -437,7 +431,7 @@ Array of direction/quadrant adjacency scheme\+: Is\+\_\+adjacent(i\+\_\+vertex\+
 
 Array of direction/quadrant adjacency scheme\+: Is\+\_\+adjacent(i\+\_\+vertex\+\_\+or\+\_\+edge,j\+\_\+quadrant)\+: Is edge/vertex adjacent to quadrant? (static data) 
 
-Definition at line 255 of file quadtree.\+h.
+Definition at line 269 of file quadtree.\+h.
 
 
 
@@ -455,7 +449,7 @@ Reflection scheme\+: Reflect(direction,quadrant)\+: Get mirror of quadrant in sp
 
 Reflection scheme\+: Reflect(direction,quadrant)\+: Get mirror of quadrant in specified direction. E.\+g. Reflect(\+S,\+N\+E)=SE (static data) 
 
-Definition at line 259 of file quadtree.\+h.
+Definition at line 273 of file quadtree.\+h.
 
 
 
@@ -473,7 +467,7 @@ Get opposite edge, e.\+g. Reflect\+\_\+edge\mbox{[}N\mbox{]}=S.
 
 Get opposite edge, e.\+g. Reflect\+\_\+edge\mbox{[}N\mbox{]}=S (static data) 
 
-Definition at line 250 of file quadtree.\+h.
+Definition at line 264 of file quadtree.\+h.
 
 
 
@@ -491,7 +485,7 @@ Rotate coordinates\+: If North becomes North\+Is then direction becomes Rotate(\
 
 Rotate coordinates\+: If north becomes North\+Is then direction becomes Rotate(\+North\+Is,direction). E.\+g. Rotate(\+E,\+N\+W)=NE; (static data) 
 
-Definition at line 263 of file quadtree.\+h.
+Definition at line 277 of file quadtree.\+h.
 
 
 
@@ -509,7 +503,7 @@ Angle betwen rotated coordinates\+: If old\+\_\+direction becomes new\+\_\+direc
 
 Angle betwen rotated coordinates\+: If old\+\_\+direction becomes new\+\_\+direction then the angle between the axes (in anti-\/clockwise direction is Rotate\+\_\+angle(old\+\_\+direction,new\+\_\+direction); E.\+g. Rotate\+\_\+angle(\+E,\+N)=90; (static data) 
 
-Definition at line 269 of file quadtree.\+h.
+Definition at line 283 of file quadtree.\+h.
 
 
 
@@ -523,12 +517,11 @@ Referenced by gteq\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data()
 
 
 
-S\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the edge indicated by direction (S/\+E/\+N/W) ~\newline
- 
+S\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the edge indicated by direction (S/\+E/\+N/W) 
 
 S\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on the edge indicated by direction (S/\+E/\+N/W) (static data) 
 
-Definition at line 242 of file quadtree.\+h.
+Definition at line 256 of file quadtree.\+h.
 
 
 
@@ -546,7 +539,7 @@ S\+\_\+direct(direction,son\+\_\+quadrant)\+: The lower left corner of son\+\_\+
 
 S\+\_\+direct(direction,son\+\_\+quadrant)\+: The lower left corner of son\+\_\+quadrant has an offset of h/2 S\+\_\+direct(direction,son\+\_\+quadrant) in the specified direction. E.\+g. S\+\_\+direct(\+S,\+N\+E)=1 and S\+\_\+direct(\+S,\+N\+W)=0 (static data) 
 
-Definition at line 274 of file quadtree.\+h.
+Definition at line 288 of file quadtree.\+h.
 
 
 
@@ -564,7 +557,7 @@ S\+\_\+step(i,direction) Increments for coordinate s\mbox{[}i\mbox{]} when progr
 
 S\+\_\+step(i,direction) Increments for coordinate s\mbox{[}i\mbox{]} when progressing along the edge indicated by direction (S/\+E/\+N/W); Left/lower vertex\+: S\+\_\+base; Right/upper vertex\+: S\+\_\+base + S\+\_\+step (static data) 
 
-Definition at line 247 of file quadtree.\+h.
+Definition at line 261 of file quadtree.\+h.
 
 
 
@@ -574,7 +567,7 @@ Referenced by gteq\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data()
 \index{oomph::QuadTree@{oomph::QuadTree}!Static\_data\_has\_been\_setup@{Static\_data\_has\_been\_setup}}
 \index{Static\_data\_has\_been\_setup@{Static\_data\_has\_been\_setup}!oomph::QuadTree@{oomph::QuadTree}}
 \doxysubsubsection{\texorpdfstring{Static\_data\_has\_been\_setup}{Static\_data\_has\_been\_setup}}
-{\footnotesize\ttfamily bool oomph\+::\+Quad\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup =false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily bool oomph\+::\+Quad\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -582,7 +575,7 @@ Bool indicating that static member data has been setup.
 
 
 
-Definition at line 223 of file quadtree.\+h.
+Definition at line 238 of file quadtree.\+h.
 
 
 

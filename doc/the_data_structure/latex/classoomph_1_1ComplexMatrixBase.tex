@@ -34,26 +34,26 @@ virtual std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ComplexMatri
 \begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re not providing a general interface for component-\/wise write access since not all matrix formats allow efficient direct access!) \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a11e1beeb7767e9bc5e511c17f80f097f}{ludecompose}} ()
 \begin{DoxyCompactList}\small\item\em LU decomposition of the matrix using the appropriate linear solver. Return the sign of the determinant. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa0e444d60d4ec9e35a6903ab88baaf62}{lubksub}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs)
+virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a97f5b56fd405e9a288879c256529568c}{lubksub}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&rhs)
 \begin{DoxyCompactList}\small\item\em LU backsubstitue a previously L\+U-\/decomposed matrix; The passed rhs will be over-\/written with the solution vector. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a131e601fd0e82e811b26a3c11a455d0e}{solve}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs)
+virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_af74c169df7a5bee5f481686e066487d1}{solve}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&rhs)
 \begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a223cef84c48a2aa9fb387ed4ffaaf48a}{solve}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)
+virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a3f9224c589327ef00378b27486d660b4}{solve}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aec72875402b9ba387e0724d6c2597430}{residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&residual)=0
+virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa33932d1eb105818a9ccfd3857b26d25}{residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&residual)=0
 \begin{DoxyCompactList}\small\item\em Find the residual, i.\+e. r=b-\/\+Ax the residual. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_ab5ad285a4cb503c9c962ff7e8d89857f}{max\+\_\+residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs)
+virtual double \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a716a8b0da3a475169c2847e4d7d9d776}{max\+\_\+residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&rhs)
 \begin{DoxyCompactList}\small\item\em Find the maximum residual r=b-\/\+Ax -- generic version, can be overloaded for specific derived classes where the max. can be determined \char`\"{}on the fly\char`\"{}. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a730c106643464a29ebf0660a6921ebaa}{multiply}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)=0
+virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a95d43a8daf989523467c1a70c005bf37}{multiply}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&soln)=0
 \begin{DoxyCompactList}\small\item\em Multiply the matrix by the vector x\+: soln=Ax. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a90c7832bad84aad3d0f437925efb089a}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)=0
+virtual void \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa6541eade56b7c4ea786f6d1a80c22e3}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&soln)=0
 \begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Abstract base class for matrices of complex doubles -- adds abstract interfaces for solving, LU decomposition and multiplication by vectors. 
 
-Definition at line 56 of file complex\+\_\+matrices.\+h.
+Definition at line 55 of file complex\+\_\+matrices.\+h.
 
 
 
@@ -70,7 +70,7 @@ Definition at line 56 of file complex\+\_\+matrices.\+h.
 
 
 
-Definition at line 61 of file complex\+\_\+matrices.\+h.
+Definition at line 59 of file complex\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a000722ba16915a4b9770238997b43d19}\label{classoomph_1_1ComplexMatrixBase_a000722ba16915a4b9770238997b43d19}} 
 \index{oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}!ComplexMatrixBase@{ComplexMatrixBase}}
@@ -84,7 +84,7 @@ Broken copy constructor.
 
 
 
-Definition at line 64 of file complex\+\_\+matrices.\+h.
+Definition at line 62 of file complex\+\_\+matrices.\+h.
 
 
 
@@ -102,16 +102,16 @@ virtual (empty) destructor
 
 
 
-Definition at line 82 of file complex\+\_\+matrices.\+h.
+Definition at line 80 of file complex\+\_\+matrices.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_aa0e444d60d4ec9e35a6903ab88baaf62}\label{classoomph_1_1ComplexMatrixBase_aa0e444d60d4ec9e35a6903ab88baaf62}} 
+\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a97f5b56fd405e9a288879c256529568c}\label{classoomph_1_1ComplexMatrixBase_a97f5b56fd405e9a288879c256529568c}} 
 \index{oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}!lubksub@{lubksub}}
 \index{lubksub@{lubksub}!oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}}
 \doxysubsubsection{\texorpdfstring{lubksub()}{lubksub()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Complex\+Matrix\+Base\+::lubksub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Complex\+Matrix\+Base\+::lubksub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -119,11 +119,11 @@ LU backsubstitue a previously L\+U-\/decomposed matrix; The passed rhs will be o
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade5d51dc8e2a44b6c011184366ce052c}{oomph\+::\+C\+C\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ac3cac0e74a1ac57526192a37fd9a1f5b}{oomph\+::\+C\+R\+Complex\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_abcd909e71bdcae1059eb8779de72a99d}{oomph\+::\+Dense\+Complex\+Matrix}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a30ad08f706a6ee9e42ca712befb78501}{oomph\+::\+C\+C\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ac7cd6c4c59135dcf74db058939f3e0a2}{oomph\+::\+C\+R\+Complex\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a0be350659466e46db23ce926c2acb959}{oomph\+::\+Dense\+Complex\+Matrix}}.
 
 
 
-Definition at line 106 of file complex\+\_\+matrices.\+h.
+Definition at line 103 of file complex\+\_\+matrices.\+h.
 
 
 
@@ -145,17 +145,17 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a7076d4dc153b80f
 
 
 
-Definition at line 93 of file complex\+\_\+matrices.\+h.
+Definition at line 90 of file complex\+\_\+matrices.\+h.
 
 
 
 Referenced by solve().
 
-\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_ab5ad285a4cb503c9c962ff7e8d89857f}\label{classoomph_1_1ComplexMatrixBase_ab5ad285a4cb503c9c962ff7e8d89857f}} 
+\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a716a8b0da3a475169c2847e4d7d9d776}\label{classoomph_1_1ComplexMatrixBase_a716a8b0da3a475169c2847e4d7d9d776}} 
 \index{oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}!max\_residual@{max\_residual}}
 \index{max\_residual@{max\_residual}!oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}}
 \doxysubsubsection{\texorpdfstring{max\_residual()}{max\_residual()}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Complex\+Matrix\+Base\+::max\+\_\+residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Complex\+Matrix\+Base\+::max\+\_\+residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -163,17 +163,17 @@ Find the maximum residual r=b-\/\+Ax -- generic version, can be overloaded for s
 
 
 
-Definition at line 133 of file complex\+\_\+matrices.\+h.
+Definition at line 130 of file complex\+\_\+matrices.\+h.
 
 
 
 References i, n, and residual().
 
-\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a730c106643464a29ebf0660a6921ebaa}\label{classoomph_1_1ComplexMatrixBase_a730c106643464a29ebf0660a6921ebaa}} 
+\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a95d43a8daf989523467c1a70c005bf37}\label{classoomph_1_1ComplexMatrixBase_a95d43a8daf989523467c1a70c005bf37}} 
 \index{oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}!multiply@{multiply}}
 \index{multiply@{multiply}!oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}}
 \doxysubsubsection{\texorpdfstring{multiply()}{multiply()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Complex\+Matrix\+Base\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Complex\+Matrix\+Base\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -181,13 +181,13 @@ Multiply the matrix by the vector x\+: soln=Ax.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a6c7ba50bf29c2e9f40a68a073534f261}{oomph\+::\+C\+C\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5ebf5f24c1bd1b4e4e3df6ebcceb189e}{oomph\+::\+C\+R\+Complex\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}{oomph\+::\+Dense\+Complex\+Matrix}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a271763678ac6d1cce53fca2f45c48749}{oomph\+::\+C\+C\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a31d464d6fa6bfd14c5ad832532ce9ebe}{oomph\+::\+C\+R\+Complex\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a77f901f23531551596ddd03725b27fcf}{oomph\+::\+Dense\+Complex\+Matrix}}.
 
-\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a90c7832bad84aad3d0f437925efb089a}\label{classoomph_1_1ComplexMatrixBase_a90c7832bad84aad3d0f437925efb089a}} 
+\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_aa6541eade56b7c4ea786f6d1a80c22e3}\label{classoomph_1_1ComplexMatrixBase_aa6541eade56b7c4ea786f6d1a80c22e3}} 
 \index{oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}!multiply\_transpose@{multiply\_transpose}}
 \index{multiply\_transpose@{multiply\_transpose}!oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}}
 \doxysubsubsection{\texorpdfstring{multiply\_transpose()}{multiply\_transpose()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Complex\+Matrix\+Base\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Complex\+Matrix\+Base\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -195,7 +195,7 @@ Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a85c89a6e460b6eb0a1ab704b6272c4d7}{oomph\+::\+C\+C\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5df8a8b3bb15ce5627e7300448b13d28}{oomph\+::\+C\+R\+Complex\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}{oomph\+::\+Dense\+Complex\+Matrix}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ad165822fdea50c00032c16cd58827465}{oomph\+::\+C\+C\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae2a983abdbc42225fb3ced8415114d81}{oomph\+::\+C\+R\+Complex\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_af1109c8719d047682157145bb95af487}{oomph\+::\+Dense\+Complex\+Matrix}}.
 
 \mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a849b63e50dad36ca8b20b7bdefd34b8d}\label{classoomph_1_1ComplexMatrixBase_a849b63e50dad36ca8b20b7bdefd34b8d}} 
 \index{oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}!ncol@{ncol}}
@@ -259,17 +259,17 @@ Broken assignment operator.
 
 
 
-Definition at line 70 of file complex\+\_\+matrices.\+h.
+Definition at line 68 of file complex\+\_\+matrices.\+h.
 
 
 
 References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
-\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_aec72875402b9ba387e0724d6c2597430}\label{classoomph_1_1ComplexMatrixBase_aec72875402b9ba387e0724d6c2597430}} 
+\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_aa33932d1eb105818a9ccfd3857b26d25}\label{classoomph_1_1ComplexMatrixBase_aa33932d1eb105818a9ccfd3857b26d25}} 
 \index{oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}!residual@{residual}}
 \index{residual@{residual}!oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}}
 \doxysubsubsection{\texorpdfstring{residual()}{residual()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Complex\+Matrix\+Base\+::residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Complex\+Matrix\+Base\+::residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -277,17 +277,17 @@ Find the residual, i.\+e. r=b-\/\+Ax the residual.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{oomph\+::\+Dense\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90}{oomph\+::\+C\+C\+Complex\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}{oomph\+::\+C\+R\+Complex\+Matrix}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a4b285b43e6afd8c825322d0de30351ab}{oomph\+::\+Dense\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ac00e4ce34734b3c40401198047cdbb6c}{oomph\+::\+C\+C\+Complex\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae25e4a5c9fb45af4a1ef2b1f69c0681e}{oomph\+::\+C\+R\+Complex\+Matrix}}.
 
 
 
 Referenced by max\+\_\+residual().
 
-\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a223cef84c48a2aa9fb387ed4ffaaf48a}\label{classoomph_1_1ComplexMatrixBase_a223cef84c48a2aa9fb387ed4ffaaf48a}} 
+\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a3f9224c589327ef00378b27486d660b4}\label{classoomph_1_1ComplexMatrixBase_a3f9224c589327ef00378b27486d660b4}} 
 \index{oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}!solve@{solve}}
 \index{solve@{solve}!oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Complex\+Matrix\+Base\+::solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Complex\+Matrix\+Base\+::solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -295,17 +295,17 @@ Complete LU solve (Nothing gets overwritten!). The default should not need to be
 
 Complete LU solve (Nothing gets overwritten!). This generic version should never need to be overwritten 
 
-Definition at line 72 of file complex\+\_\+matrices.\+cc.
+Definition at line 71 of file complex\+\_\+matrices.\+cc.
 
 
 
 References solve().
 
-\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_a131e601fd0e82e811b26a3c11a455d0e}\label{classoomph_1_1ComplexMatrixBase_a131e601fd0e82e811b26a3c11a455d0e}} 
+\mbox{\Hypertarget{classoomph_1_1ComplexMatrixBase_af74c169df7a5bee5f481686e066487d1}\label{classoomph_1_1ComplexMatrixBase_af74c169df7a5bee5f481686e066487d1}} 
 \index{oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}!solve@{solve}}
 \index{solve@{solve}!oomph::ComplexMatrixBase@{oomph::ComplexMatrixBase}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Complex\+Matrix\+Base\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Complex\+Matrix\+Base\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -313,7 +313,7 @@ Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS 
 
 Complete LU solve (overwrites R\+HS with solution). This is the generic version which should not need to be over-\/written. 
 
-Definition at line 36 of file complex\+\_\+matrices.\+cc.
+Definition at line 34 of file complex\+\_\+matrices.\+cc.
 
 
 

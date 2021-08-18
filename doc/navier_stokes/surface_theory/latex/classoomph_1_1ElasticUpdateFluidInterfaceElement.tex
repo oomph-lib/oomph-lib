@@ -37,8 +37,7 @@ void \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a46
 void \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const D\+Shape \&dpsifds, const D\+Shape \&dpsifdS, const D\+Shape \&dpsifd\+S\+\_\+div, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&interpolated\+\_\+x, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
 \begin{DoxyCompactList}\small\item\em Helper function to calculate the additional contributions to be added at each integration point. This deals with Lagrange multiplier contribution, as well as any additional contributions by the other equations. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a91c59905720a4417447fcce09032ce7f}{make\+\_\+bounding\+\_\+element}} (const int \&face\+\_\+index)
-\begin{DoxyCompactList}\small\item\em Create an \char`\"{}bounding\char`\"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ that allows the application of a contact angle boundary condition on the the specified face. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Create an \char`\"{}bounding\char`\"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ that allows the application of a contact angle boundary condition on the the specified face. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -50,8 +49,7 @@ double \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c
 unsigned \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186}{lagrange\+\_\+index}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Return the index at which the lagrange multiplier is stored at the n-\/th node. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811}{kinematic\+\_\+local\+\_\+eqn}} (const unsigned \&n)
-\begin{DoxyCompactList}\small\item\em Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier) ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0}{hijack\+\_\+kinematic\+\_\+conditions}} (const Vector$<$ unsigned $>$ \&bulk\+\_\+node\+\_\+number)
 \begin{DoxyCompactList}\small\item\em Hijacking the kinematic condition corresponds to hijacking the variables associated with the Lagrange multipliers that are assigned on construction of this element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -67,7 +65,7 @@ class oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ E\+Q\+U\+A\+T\+I\
 
 Generic Elastic node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses elastic node updates. 
 
-Definition at line 591 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 672 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
@@ -85,7 +83,7 @@ Constructor, pass a pointer to the bulk element and the face index of the bulk e
 
 
 
-Definition at line 650 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 739 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
@@ -103,7 +101,7 @@ Helper function to calculate the additional contributions to be added at each in
 
 
 
-Definition at line 768 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 877 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
@@ -118,7 +116,7 @@ Fill in the specific surface derivative calculations by calling the appropriate 
 
 
 
-Definition at line 633 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 716 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -133,7 +131,7 @@ Fill in contribution to residuals and Jacobian.
 
 
 
-Definition at line 739 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 837 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!hijack\_kinematic\_conditions@{hijack\_kinematic\_conditions}}
@@ -148,7 +146,7 @@ Hijacking the kinematic condition corresponds to hijacking the variables associa
 
 
 
-Definition at line 618 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 701 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!kinematic\_local\_eqn@{kinematic\_local\_eqn}}
@@ -159,12 +157,11 @@ int \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::
 
 
 
-Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier) ~\newline
- 
+Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier) 
 
 
 
-Definition at line 609 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 692 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
@@ -183,7 +180,7 @@ Return the lagrange multiplier at local node n.
 
 
 
-Definition at line 732 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 830 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
@@ -202,7 +199,7 @@ Return the index at which the lagrange multiplier is stored at the n-\/th node.
 
 
 
-Definition at line 604 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 685 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
@@ -217,12 +214,11 @@ virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Int
 
 
 
-Create an \char`\"{}bounding\char`\"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ that allows the application of a contact angle boundary condition on the the specified face. ~\newline
- 
+Create an \char`\"{}bounding\char`\"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ that allows the application of a contact angle boundary condition on the the specified face. 
 
 
 
-Definition at line 842 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 960 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
@@ -237,7 +233,7 @@ Overload the C-\/style output function.
 
 
 
-Definition at line 757 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 861 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
@@ -252,7 +248,7 @@ C-\/style Output function.
 
 
 
-Definition at line 760 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 867 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
@@ -267,7 +263,7 @@ Overload the output function.
 
 
 
-Definition at line 750 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 849 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
@@ -282,7 +278,7 @@ Output the element.
 
 
 
-Definition at line 753 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 855 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -297,7 +293,7 @@ The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed a
 
 
 
-Definition at line 727 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 822 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
@@ -315,7 +311,7 @@ Storage for the location of the Lagrange multiplier (If other additional values 
 
 
 
-Definition at line 600 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line 681 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 

@@ -41,8 +41,7 @@ void \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner_a2cd1e39d9
 void \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner_a8a92f8e0db68105f2fb548e5f7cd0732}{add\+\_\+mesh}} (const \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3c0e92cb77c3e3179007fe9fd99b6428}{mesh\+\_\+pt}}, const bool \&allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh=false)
 \begin{DoxyCompactList}\small\item\em Adds a mesh to be used by the block preconditioning framework for classifying D\+OF types. Optional boolean argument (default\+: false) allows the mesh to contain multiple element types. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner_af4bfec71b00d7d7e8021c691d1cbe076}{gp\+\_\+nmesh}} ()
-\begin{DoxyCompactList}\small\item\em Returns the number of meshes currently set in the \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{General\+Purpose\+Block\+Preconditioner}} base class. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the number of meshes currently set in the \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{General\+Purpose\+Block\+Preconditioner}} base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -74,7 +73,7 @@ class oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$
 
 Base class for general purpose block preconditioners. Deals with setting subsidiary preconditioners and dof to block maps. Subsidiary preconditioners can be set in two ways\+: 1) A pointer to a subsidiary preconditioner for block i can be passed to set\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt(prec, i). 2) A default subsidiary preconditioner can be set up by providing a function pointer to a function which creates a preconditioner. During \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{setup()}} all unset subsidiary preconditioner pointers will be filled in using this function. By default this uses Super\+LU. 
 
-Definition at line 75 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 76 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -92,7 +91,7 @@ typedef for a function that allows other preconditioners to be employed to solve
 
 
 
-Definition at line 85 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 84 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -110,7 +109,7 @@ constructor
 
 
 
-Definition at line 88 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 87 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -125,7 +124,7 @@ virtual \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{oomph\
 
 Destructor\+: clean up memory then delete all subsidiary preconditioners. 
 
-Definition at line 99 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 98 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -144,7 +143,7 @@ Broken copy constructor.
 
 
 
-Definition at line 128 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 129 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -166,7 +165,7 @@ Adds a mesh to be used by the block preconditioning framework for classifying D\
 
 
 
-Definition at line 191 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 196 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -216,7 +215,7 @@ Create any subsidiary preconditioners needed. Usually nprec\+\_\+needed = nblock
 
 
 
-Definition at line 260 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 261 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -235,12 +234,11 @@ unsigned \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{oomph
 
 
 
-Returns the number of meshes currently set in the \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{General\+Purpose\+Block\+Preconditioner}} base class. ~\newline
- 
+Returns the number of meshes currently set in the \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{General\+Purpose\+Block\+Preconditioner}} base class. 
 
 
 
-Definition at line 212 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 216 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -263,7 +261,7 @@ Modified block setup for general purpose block preconditioners.
 
 
 
-Definition at line 245 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 246 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -282,7 +280,7 @@ Set the mesh in the block preconditioning framework.
 
 
 
-Definition at line 220 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 223 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -301,7 +299,7 @@ Broken assignment operator.
 
 
 
-Definition at line 134 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 135 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -320,7 +318,7 @@ Reset the subsidiary preconditioner function to its default.
 
 
 
-Definition at line 147 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 148 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -339,7 +337,7 @@ Specify a D\+OF to block map.
 
 
 
-Definition at line 183 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 187 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -385,7 +383,7 @@ Set the subsidiary preconditioner to use for block i. The subsidiary preconditio
 
 
 
-Definition at line 158 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 159 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -404,7 +402,7 @@ Get the subsidiary precondtioner pointer in block i (is allowed to be null if no
 
 
 
-Definition at line 179 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 181 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 
@@ -456,7 +454,7 @@ Referenced by oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+
 
 Function to create any subsidiary preconditioners not set in Subsidiary\+\_\+preconditioner\+\_\+pt. 
 
-Definition at line 303 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line 304 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
 
 
 

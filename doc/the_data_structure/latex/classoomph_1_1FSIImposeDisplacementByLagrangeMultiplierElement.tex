@@ -31,13 +31,11 @@ void \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierEle
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_abf26cdce6da0f50ff1169d79d4319c4a}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
-\begin{DoxyCompactList}\small\item\em Helper function to compute the residuals and, if flag==1, the Jacobian ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Helper function to compute the residuals and, if flag==1, the Jacobian. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_ad34707237f7a7bdeb3b89cff465ecb67}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_a7134be65db436042a327e7e9d49fb507}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the dof that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_af8b0bb38910c4ee363e07f10cd0252f3}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the dof that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -52,7 +50,7 @@ class oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elemen
 
 A class for elements that allow the imposition of a displacement constraint for bulk solid elements via a Lagrange multiplier. Prescribed displaced is obtained from an adjacent bulk solid element (rather than from a lower-\/dimensional \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} as in the corresponding \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}} class. The present class is particularly suited for parallel F\+SI computations. {\bfseries{N\+O\+TE\+:}} Currently (and for the foreseeable future) this element only works with bulk elements that do not have generalised degrees of freedom (so it won\textquotesingle{}t work with Hermite-\/type elements, say). The additional functionality to deal with such elements could easily be added (once a a suitable test case is written). For now we simply throw errors if an attempt is made to use the element with an unsuitable bulk element. 
 
-Definition at line 2555 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2534 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -70,7 +68,7 @@ Constructor takes a \char`\"{}bulk\char`\"{} element and the index that identifi
 
 
 
-Definition at line 2582 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2560 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -96,7 +94,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a2a
 
 
 
-Definition at line 2570 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2548 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -123,7 +121,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableFSIImposeDisplacementB
 
 
 
-Definition at line 2660 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2640 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -150,7 +148,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 2676 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2656 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -177,7 +175,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableFSIImposeDisplacementB
 
 
 
-Definition at line 2651 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2631 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -192,12 +190,11 @@ void \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierEle
 
 
 
-Helper function to compute the residuals and, if flag==1, the Jacobian ~\newline
- 
+Helper function to compute the residuals and, if flag==1, the Jacobian. 
 
 
 
-Definition at line 2802 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2780 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -207,25 +204,24 @@ References a(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\
 
 Referenced by oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_a7134be65db436042a327e7e9d49fb507}\label{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_a7134be65db436042a327e7e9d49fb507}} 
+\mbox{\Hypertarget{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_af8b0bb38910c4ee363e07f10cd0252f3}\label{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_af8b0bb38910c4ee363e07f10cd0252f3}} 
 \index{oomph::FSIImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::FSIImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::FSIImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::FSIImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the dof that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
- 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the dof that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 3024 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 3002 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -248,7 +244,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 3012 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2990 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -271,7 +267,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 2791 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2770 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -294,7 +290,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 2699 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 2678 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -320,7 +316,7 @@ Lagrange Id.
 
 
 
-Definition at line 3063 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 3040 of file solid\+\_\+traction\+\_\+elements.\+h.
 
 
 

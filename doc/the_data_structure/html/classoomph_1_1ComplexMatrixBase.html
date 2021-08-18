@@ -177,32 +177,32 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a11e1beeb7767e9bc5e511c17f80f097f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a11e1beeb7767e9bc5e511c17f80f097f">ludecompose</a> ()</td></tr>
 <tr class="memdesc:a11e1beeb7767e9bc5e511c17f80f097f"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU decomposition of the matrix using the appropriate linear solver. Return the sign of the determinant.  <a href="classoomph_1_1ComplexMatrixBase.html#a11e1beeb7767e9bc5e511c17f80f097f">More...</a><br /></td></tr>
 <tr class="separator:a11e1beeb7767e9bc5e511c17f80f097f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0e444d60d4ec9e35a6903ab88baaf62"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa0e444d60d4ec9e35a6903ab88baaf62">lubksub</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:aa0e444d60d4ec9e35a6903ab88baaf62"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU backsubstitue a previously LU-decomposed matrix; The passed rhs will be over-written with the solution vector.  <a href="classoomph_1_1ComplexMatrixBase.html#aa0e444d60d4ec9e35a6903ab88baaf62">More...</a><br /></td></tr>
-<tr class="separator:aa0e444d60d4ec9e35a6903ab88baaf62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a131e601fd0e82e811b26a3c11a455d0e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a131e601fd0e82e811b26a3c11a455d0e">solve</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:a131e601fd0e82e811b26a3c11a455d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <a href="classoomph_1_1ComplexMatrixBase.html#a131e601fd0e82e811b26a3c11a455d0e">More...</a><br /></td></tr>
-<tr class="separator:a131e601fd0e82e811b26a3c11a455d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a223cef84c48a2aa9fb387ed4ffaaf48a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a223cef84c48a2aa9fb387ed4ffaaf48a">solve</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;soln)</td></tr>
-<tr class="memdesc:a223cef84c48a2aa9fb387ed4ffaaf48a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <a href="classoomph_1_1ComplexMatrixBase.html#a223cef84c48a2aa9fb387ed4ffaaf48a">More...</a><br /></td></tr>
-<tr class="separator:a223cef84c48a2aa9fb387ed4ffaaf48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec72875402b9ba387e0724d6c2597430"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#aec72875402b9ba387e0724d6c2597430">residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;b, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;residual)=0</td></tr>
-<tr class="memdesc:aec72875402b9ba387e0724d6c2597430"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the residual, i.e. r=b-Ax the residual.  <a href="classoomph_1_1ComplexMatrixBase.html#aec72875402b9ba387e0724d6c2597430">More...</a><br /></td></tr>
-<tr class="separator:aec72875402b9ba387e0724d6c2597430"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5ad285a4cb503c9c962ff7e8d89857f"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#ab5ad285a4cb503c9c962ff7e8d89857f">max_residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:ab5ad285a4cb503c9c962ff7e8d89857f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum residual r=b-Ax &ndash; generic version, can be overloaded for specific derived classes where the max. can be determined "on the fly".  <a href="classoomph_1_1ComplexMatrixBase.html#ab5ad285a4cb503c9c962ff7e8d89857f">More...</a><br /></td></tr>
-<tr class="separator:ab5ad285a4cb503c9c962ff7e8d89857f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a730c106643464a29ebf0660a6921ebaa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a730c106643464a29ebf0660a6921ebaa">multiply</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;soln)=0</td></tr>
-<tr class="memdesc:a730c106643464a29ebf0660a6921ebaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the matrix by the vector x: soln=Ax.  <a href="classoomph_1_1ComplexMatrixBase.html#a730c106643464a29ebf0660a6921ebaa">More...</a><br /></td></tr>
-<tr class="separator:a730c106643464a29ebf0660a6921ebaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90c7832bad84aad3d0f437925efb089a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a90c7832bad84aad3d0f437925efb089a">multiply_transpose</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;soln)=0</td></tr>
-<tr class="memdesc:a90c7832bad84aad3d0f437925efb089a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the transposed matrix by the vector x: soln=A^T x.  <a href="classoomph_1_1ComplexMatrixBase.html#a90c7832bad84aad3d0f437925efb089a">More...</a><br /></td></tr>
-<tr class="separator:a90c7832bad84aad3d0f437925efb089a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97f5b56fd405e9a288879c256529568c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a97f5b56fd405e9a288879c256529568c">lubksub</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a97f5b56fd405e9a288879c256529568c"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU backsubstitue a previously LU-decomposed matrix; The passed rhs will be over-written with the solution vector.  <a href="classoomph_1_1ComplexMatrixBase.html#a97f5b56fd405e9a288879c256529568c">More...</a><br /></td></tr>
+<tr class="separator:a97f5b56fd405e9a288879c256529568c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af74c169df7a5bee5f481686e066487d1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#af74c169df7a5bee5f481686e066487d1">solve</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;rhs)</td></tr>
+<tr class="memdesc:af74c169df7a5bee5f481686e066487d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <a href="classoomph_1_1ComplexMatrixBase.html#af74c169df7a5bee5f481686e066487d1">More...</a><br /></td></tr>
+<tr class="separator:af74c169df7a5bee5f481686e066487d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f9224c589327ef00378b27486d660b4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a3f9224c589327ef00378b27486d660b4">solve</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;soln)</td></tr>
+<tr class="memdesc:a3f9224c589327ef00378b27486d660b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <a href="classoomph_1_1ComplexMatrixBase.html#a3f9224c589327ef00378b27486d660b4">More...</a><br /></td></tr>
+<tr class="separator:a3f9224c589327ef00378b27486d660b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa33932d1eb105818a9ccfd3857b26d25"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa33932d1eb105818a9ccfd3857b26d25">residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;b, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;residual)=0</td></tr>
+<tr class="memdesc:aa33932d1eb105818a9ccfd3857b26d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the residual, i.e. r=b-Ax the residual.  <a href="classoomph_1_1ComplexMatrixBase.html#aa33932d1eb105818a9ccfd3857b26d25">More...</a><br /></td></tr>
+<tr class="separator:aa33932d1eb105818a9ccfd3857b26d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a716a8b0da3a475169c2847e4d7d9d776"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a716a8b0da3a475169c2847e4d7d9d776">max_residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a716a8b0da3a475169c2847e4d7d9d776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum residual r=b-Ax &ndash; generic version, can be overloaded for specific derived classes where the max. can be determined "on the fly".  <a href="classoomph_1_1ComplexMatrixBase.html#a716a8b0da3a475169c2847e4d7d9d776">More...</a><br /></td></tr>
+<tr class="separator:a716a8b0da3a475169c2847e4d7d9d776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95d43a8daf989523467c1a70c005bf37"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a95d43a8daf989523467c1a70c005bf37">multiply</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;soln)=0</td></tr>
+<tr class="memdesc:a95d43a8daf989523467c1a70c005bf37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the matrix by the vector x: soln=Ax.  <a href="classoomph_1_1ComplexMatrixBase.html#a95d43a8daf989523467c1a70c005bf37">More...</a><br /></td></tr>
+<tr class="separator:a95d43a8daf989523467c1a70c005bf37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6541eade56b7c4ea786f6d1a80c22e3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa6541eade56b7c4ea786f6d1a80c22e3">multiply_transpose</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;soln)=0</td></tr>
+<tr class="memdesc:aa6541eade56b7c4ea786f6d1a80c22e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the transposed matrix by the vector x: soln=A^T x.  <a href="classoomph_1_1ComplexMatrixBase.html#aa6541eade56b7c4ea786f6d1a80c22e3">More...</a><br /></td></tr>
+<tr class="separator:aa6541eade56b7c4ea786f6d1a80c22e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract base class for matrices of complex doubles &ndash; adds abstract interfaces for solving, LU decomposition and multiplication by vectors. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00056">56</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00055">55</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aecfeaf77e3e03743b0b87f677470c56d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aecfeaf77e3e03743b0b87f677470c56d">&#9670;&nbsp;</a></span>ComplexMatrixBase() <span class="overload">[1/2]</span></h2>
@@ -229,7 +229,7 @@ Public Member Functions</h2></td></tr>
 
 <p>(Empty) constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00061">61</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00059">59</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
 </div>
 </div>
@@ -259,9 +259,9 @@ Public Member Functions</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00064">64</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00062">62</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -290,13 +290,13 @@ Public Member Functions</h2></td></tr>
 
 <p>virtual (empty) destructor </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00082">82</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00080">80</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa0e444d60d4ec9e35a6903ab88baaf62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0e444d60d4ec9e35a6903ab88baaf62">&#9670;&nbsp;</a></span>lubksub()</h2>
+<a id="a97f5b56fd405e9a288879c256529568c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97f5b56fd405e9a288879c256529568c">&#9670;&nbsp;</a></span>lubksub()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,7 +307,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void oomph::ComplexMatrixBase::lubksub </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -321,11 +321,11 @@ Public Member Functions</h2></td></tr>
 
 <p>LU backsubstitue a previously LU-decomposed matrix; The passed rhs will be over-written with the solution vector. </p>
 
-<p>Reimplemented in <a class="el" href="classoomph_1_1CCComplexMatrix.html#ade5d51dc8e2a44b6c011184366ce052c">oomph::CCComplexMatrix</a>, <a class="el" href="classoomph_1_1CRComplexMatrix.html#ac3cac0e74a1ac57526192a37fd9a1f5b">oomph::CRComplexMatrix</a>, and <a class="el" href="classoomph_1_1DenseComplexMatrix.html#abcd909e71bdcae1059eb8779de72a99d">oomph::DenseComplexMatrix</a>.</p>
+<p>Reimplemented in <a class="el" href="classoomph_1_1CCComplexMatrix.html#a30ad08f706a6ee9e42ca712befb78501">oomph::CCComplexMatrix</a>, <a class="el" href="classoomph_1_1CRComplexMatrix.html#ac7cd6c4c59135dcf74db058939f3e0a2">oomph::CRComplexMatrix</a>, and <a class="el" href="classoomph_1_1DenseComplexMatrix.html#a0be350659466e46db23ce926c2acb959">oomph::DenseComplexMatrix</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00106">106</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00103">103</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00036">solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00034">solve()</a>.</p>
 
 </div>
 </div>
@@ -357,14 +357,14 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1CCComplexMatrix.html#a7076d4dc153b80fe4adbedbfb916b395">oomph::CCComplexMatrix</a>, <a class="el" href="classoomph_1_1CRComplexMatrix.html#a8f2e601ccd4bb7c74af3c55cf6c3290b">oomph::CRComplexMatrix</a>, and <a class="el" href="classoomph_1_1DenseComplexMatrix.html#a8503c0e46409613c58261ce6136f88b9">oomph::DenseComplexMatrix</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00093">93</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00090">90</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00036">solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00034">solve()</a>.</p>
 
 </div>
 </div>
-<a id="ab5ad285a4cb503c9c962ff7e8d89857f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5ad285a4cb503c9c962ff7e8d89857f">&#9670;&nbsp;</a></span>max_residual()</h2>
+<a id="a716a8b0da3a475169c2847e4d7d9d776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a716a8b0da3a475169c2847e4d7d9d776">&#9670;&nbsp;</a></span>max_residual()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -375,13 +375,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual double oomph::ComplexMatrixBase::max_residual </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -399,14 +399,14 @@ Public Member Functions</h2></td></tr>
 
 <p>Find the maximum residual r=b-Ax &ndash; generic version, can be overloaded for specific derived classes where the max. can be determined "on the fly". </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00133">133</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00130">130</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aec72875402b9ba387e0724d6c2597430">residual()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa33932d1eb105818a9ccfd3857b26d25">residual()</a>.</p>
 
 </div>
 </div>
-<a id="a730c106643464a29ebf0660a6921ebaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a730c106643464a29ebf0660a6921ebaa">&#9670;&nbsp;</a></span>multiply()</h2>
+<a id="a95d43a8daf989523467c1a70c005bf37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95d43a8daf989523467c1a70c005bf37">&#9670;&nbsp;</a></span>multiply()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -417,13 +417,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void oomph::ComplexMatrixBase::multiply </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>soln</em>&#160;</td>
         </tr>
         <tr>
@@ -441,12 +441,12 @@ Public Member Functions</h2></td></tr>
 
 <p>Multiply the matrix by the vector x: soln=Ax. </p>
 
-<p>Implemented in <a class="el" href="classoomph_1_1CCComplexMatrix.html#a6c7ba50bf29c2e9f40a68a073534f261">oomph::CCComplexMatrix</a>, <a class="el" href="classoomph_1_1CRComplexMatrix.html#a5ebf5f24c1bd1b4e4e3df6ebcceb189e">oomph::CRComplexMatrix</a>, and <a class="el" href="classoomph_1_1DenseComplexMatrix.html#afcc47dd450a1ab37d2790b5d0279cadf">oomph::DenseComplexMatrix</a>.</p>
+<p>Implemented in <a class="el" href="classoomph_1_1CCComplexMatrix.html#a271763678ac6d1cce53fca2f45c48749">oomph::CCComplexMatrix</a>, <a class="el" href="classoomph_1_1CRComplexMatrix.html#a31d464d6fa6bfd14c5ad832532ce9ebe">oomph::CRComplexMatrix</a>, and <a class="el" href="classoomph_1_1DenseComplexMatrix.html#a77f901f23531551596ddd03725b27fcf">oomph::DenseComplexMatrix</a>.</p>
 
 </div>
 </div>
-<a id="a90c7832bad84aad3d0f437925efb089a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90c7832bad84aad3d0f437925efb089a">&#9670;&nbsp;</a></span>multiply_transpose()</h2>
+<a id="aa6541eade56b7c4ea786f6d1a80c22e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6541eade56b7c4ea786f6d1a80c22e3">&#9670;&nbsp;</a></span>multiply_transpose()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -457,13 +457,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void oomph::ComplexMatrixBase::multiply_transpose </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>soln</em>&#160;</td>
         </tr>
         <tr>
@@ -481,7 +481,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Multiply the transposed matrix by the vector x: soln=A^T x. </p>
 
-<p>Implemented in <a class="el" href="classoomph_1_1CCComplexMatrix.html#a85c89a6e460b6eb0a1ab704b6272c4d7">oomph::CCComplexMatrix</a>, <a class="el" href="classoomph_1_1CRComplexMatrix.html#a5df8a8b3bb15ce5627e7300448b13d28">oomph::CRComplexMatrix</a>, and <a class="el" href="classoomph_1_1DenseComplexMatrix.html#aaaf8f0589e011bf720791058711fa952">oomph::DenseComplexMatrix</a>.</p>
+<p>Implemented in <a class="el" href="classoomph_1_1CCComplexMatrix.html#ad165822fdea50c00032c16cd58827465">oomph::CCComplexMatrix</a>, <a class="el" href="classoomph_1_1CRComplexMatrix.html#ae2a983abdbc42225fb3ced8415114d81">oomph::CRComplexMatrix</a>, and <a class="el" href="classoomph_1_1DenseComplexMatrix.html#af1109c8719d047682157145bb95af487">oomph::DenseComplexMatrix</a>.</p>
 
 </div>
 </div>
@@ -512,7 +512,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implemented in <a class="el" href="classoomph_1_1CCComplexMatrix.html#a62540288d116687aa4bd201787845b4d">oomph::CCComplexMatrix</a>, <a class="el" href="classoomph_1_1CRComplexMatrix.html#a4151bc429f2da548cee234e147003bfa">oomph::CRComplexMatrix</a>, and <a class="el" href="classoomph_1_1DenseComplexMatrix.html#a4101f581e470c940bf7daf12ec1b234f">oomph::DenseComplexMatrix</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00036">solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00034">solve()</a>.</p>
 
 </div>
 </div>
@@ -543,7 +543,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implemented in <a class="el" href="classoomph_1_1CCComplexMatrix.html#a52c78210ebe95b72ead8d938f5c7a9bb">oomph::CCComplexMatrix</a>, <a class="el" href="classoomph_1_1CRComplexMatrix.html#a08280a10665278ab233777ca7f510345">oomph::CRComplexMatrix</a>, and <a class="el" href="classoomph_1_1DenseComplexMatrix.html#aea9edba37ef5fd679d17f22eaeb85369">oomph::DenseComplexMatrix</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00594">oomph::LAPACK_QZ::find_eigenvalues()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00036">solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00707">oomph::LAPACK_QZ::find_eigenvalues()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00034">solve()</a>.</p>
 
 </div>
 </div>
@@ -613,14 +613,14 @@ Public Member Functions</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00070">70</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00068">68</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
-<a id="aec72875402b9ba387e0724d6c2597430"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec72875402b9ba387e0724d6c2597430">&#9670;&nbsp;</a></span>residual()</h2>
+<a id="aa33932d1eb105818a9ccfd3857b26d25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa33932d1eb105818a9ccfd3857b26d25">&#9670;&nbsp;</a></span>residual()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -631,19 +631,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void oomph::ComplexMatrixBase::residual </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>residual</em>&#160;</td>
         </tr>
         <tr>
@@ -661,14 +661,14 @@ Public Member Functions</h2></td></tr>
 
 <p>Find the residual, i.e. r=b-Ax the residual. </p>
 
-<p>Implemented in <a class="el" href="classoomph_1_1DenseComplexMatrix.html#a76146afe81a055af475a107231468afb">oomph::DenseComplexMatrix</a>, <a class="el" href="classoomph_1_1CCComplexMatrix.html#ade719948640907a8f338f83ee1587a90">oomph::CCComplexMatrix</a>, and <a class="el" href="classoomph_1_1CRComplexMatrix.html#ae117c59a8e27c2e909338847044a2968">oomph::CRComplexMatrix</a>.</p>
+<p>Implemented in <a class="el" href="classoomph_1_1DenseComplexMatrix.html#a4b285b43e6afd8c825322d0de30351ab">oomph::DenseComplexMatrix</a>, <a class="el" href="classoomph_1_1CCComplexMatrix.html#ac00e4ce34734b3c40401198047cdbb6c">oomph::CCComplexMatrix</a>, and <a class="el" href="classoomph_1_1CRComplexMatrix.html#ae25e4a5c9fb45af4a1ef2b1f69c0681e">oomph::CRComplexMatrix</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8h_source.html#l00133">max_residual()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8h_source.html#l00130">max_residual()</a>.</p>
 
 </div>
 </div>
-<a id="a223cef84c48a2aa9fb387ed4ffaaf48a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a223cef84c48a2aa9fb387ed4ffaaf48a">&#9670;&nbsp;</a></span>solve() <span class="overload">[1/2]</span></h2>
+<a id="a3f9224c589327ef00378b27486d660b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f9224c589327ef00378b27486d660b4">&#9670;&nbsp;</a></span>solve() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -679,13 +679,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void oomph::ComplexMatrixBase::solve </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>soln</em>&#160;</td>
         </tr>
         <tr>
@@ -704,14 +704,14 @@ Public Member Functions</h2></td></tr>
 <p>Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. </p>
 <p>Complete LU solve (Nothing gets overwritten!). This generic version should never need to be overwritten </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00072">72</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00071">71</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__matrices_8cc_source.html#l00036">solve()</a>.</p>
+<p class="reference">References <a class="el" href="complex__matrices_8cc_source.html#l00034">solve()</a>.</p>
 
 </div>
 </div>
-<a id="a131e601fd0e82e811b26a3c11a455d0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a131e601fd0e82e811b26a3c11a455d0e">&#9670;&nbsp;</a></span>solve() <span class="overload">[2/2]</span></h2>
+<a id="af74c169df7a5bee5f481686e066487d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af74c169df7a5bee5f481686e066487d1">&#9670;&nbsp;</a></span>solve() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -722,7 +722,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void oomph::ComplexMatrixBase::solve </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -737,11 +737,11 @@ Public Member Functions</h2></td></tr>
 <p>Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written. </p>
 <p>Complete LU solve (overwrites RHS with solution). This is the generic version which should not need to be over-written. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00036">36</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00034">34</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00106">lubksub()</a>, <a class="el" href="complex__matrices_8h_source.html#l00093">ludecompose()</a>, <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a849b63e50dad36ca8b20b7bdefd34b8d">ncol()</a>, and <a class="el" href="classoomph_1_1ComplexMatrixBase.html#adcbdf19bc82c61c0a4fbfd8c8de97b3b">nrow()</a>.</p>
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00103">lubksub()</a>, <a class="el" href="complex__matrices_8h_source.html#l00090">ludecompose()</a>, <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a849b63e50dad36ca8b20b7bdefd34b8d">ncol()</a>, and <a class="el" href="classoomph_1_1ComplexMatrixBase.html#adcbdf19bc82c61c0a4fbfd8c8de97b3b">nrow()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00072">solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00071">solve()</a>.</p>
 
 </div>
 </div>
@@ -777,7 +777,7 @@ Public Member Functions</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:45
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:37:02
         </div>
       </div>
     </footer>

@@ -42,8 +42,7 @@ void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_a2533d2574d2c7d6
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_ae115b58574a36c2c8fecb2524afa54f1}{set\+\_\+elastic\+\_\+mesh}} (Mesh $\ast$mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Access function to mesh containing the block-\/preconditionable elastic elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_a6030c2461383ee1a0b8ac6ed56b0daf6}{set\+\_\+lagrange\+\_\+multiplier\+\_\+mesh}} (Mesh $\ast$mesh\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Access function to mesh containing the block-\/preconditionable lagrange multiplier elements ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Access function to mesh containing the block-\/preconditionable lagrange multiplier elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_a917caf20e03fc8bdb45336206ce5365e}{enable\+\_\+inf\+\_\+norm\+\_\+of\+\_\+s\+\_\+scaling}} ()
 \begin{DoxyCompactList}\small\item\em Call to use the inf norm of S as scaling. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_a038e7d2eaea4346c3ea6ba2b34ae824c}{disable\+\_\+inf\+\_\+norm\+\_\+of\+\_\+s\+\_\+scaling}} ()
@@ -53,8 +52,7 @@ void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_a64865a85f35ae93
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_a8c75fe5786d64a042056df16a062c055}{set\+\_\+elastic\+\_\+subsidiary\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_a1462e1ef48ed2668c06dfd36c783d1a5}{Subsidiary\+Preconditioner\+Fct\+Pt}} prec\+\_\+fn)
 \begin{DoxyCompactList}\small\item\em By default the elastic subsidiary systems are preconditioner with Super\+L\+U\+Preconditioner. For a different preconditioner, pass a function to this method returning a different subsidiary operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_acde733e1a111a961d1e714add4e8015d}{Elastic\+\_\+preconditioner\+\_\+type}} \& \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_a1bae7b43cffbfbce246b736d9e70f908}{elastic\+\_\+preconditioner\+\_\+type}} ()
-\begin{DoxyCompactList}\small\item\em Set the type of preconditioner applied to the elastic\+: 0 -\/ Exact preconditioner 1 -\/ Block diagonal preconditioning ~\newline
- 2 -\/ Block upper triangular preconditioner 3 -\/ Block lower triangular preconditioner We group together the different components of the displacement vector field for the block decomposition. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set the type of preconditioner applied to the elastic\+: 0 -\/ Exact preconditioner 1 -\/ Block diagonal preconditioning 2 -\/ Block upper triangular preconditioner 3 -\/ Block lower triangular preconditioner We group together the different components of the displacement vector field for the block decomposition. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_adcc9487ec16eea12912b2f3a023b4129}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Clears the memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
@@ -97,7 +95,7 @@ class \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_aaaea2b4795566f
 \doxysubsection{Detailed Description}
 A subsidiary preconditioner for the pseudo-\/elastic F\+SI preconditioner. Also a stand-\/alone preconditioner for the problem of non-\/linear elasticity subject to prescribed displacement by Lagrange multiplier. {\bfseries{Enumeration}} of Elastic D\+OF types in the Pseudo-\/\+Elastic Elements The method get\+\_\+dof\+\_\+types\+\_\+for\+\_\+unknowns() must be implemented such that D\+O\+Fs subject be Lagrange multiplier and D\+O\+Fs N\+OT subject to Lagrange multiplier have different labels. For example in a 3D problem there are 6 D\+OF types and the following labelling must be implemented\+: 0 -\/ x displacement (without lagr mult traction) 1 -\/ y displacement (without lagr mult traction) 2 -\/ z displacement (without lagr mult traction) 4 -\/ x displacement (with lagr mult traction) 5 -\/ y displacement (with lagr mult traction) 6 -\/ z displacement (with lagr mult traction) 
 
-Definition at line 103 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 99 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -114,7 +112,7 @@ This preconditioner includes the option to use subsidiary operators other than S
 
 
 
-Definition at line 117 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 111 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -149,7 +147,7 @@ Block\+\_\+upper\+\_\+triangular\+\_\+preconditioner&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 127 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 121 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -166,7 +164,7 @@ Default (and only) constructor.
 
 
 
-Definition at line 133 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 130 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -184,7 +182,7 @@ destructor
 
 
 
-Definition at line 150 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 147 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -202,7 +200,7 @@ Broken copy constructor.
 
 
 
-Definition at line 157 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 153 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -219,7 +217,7 @@ Clears the memory.
 
 
 
-Definition at line 533 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
+Definition at line 527 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
 
 
 
@@ -241,7 +239,7 @@ Call to use no scaling.
 
 
 
-Definition at line 204 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 203 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -259,11 +257,15 @@ Apply the elastic subsidiary preconditioner.
 
 
 
-Definition at line 499 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
+Definition at line 493 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
 
 
 
-Referenced by preconditioner\+\_\+solve().
+References Elastic\+\_\+preconditioner\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), and preconditioner\+\_\+solve().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditioner_a1bae7b43cffbfbce246b736d9e70f908}\label{classoomph_1_1PseudoElasticPreconditioner_a1bae7b43cffbfbce246b736d9e70f908}} 
 \index{oomph::PseudoElasticPreconditioner@{oomph::PseudoElasticPreconditioner}!elastic\_preconditioner\_type@{elastic\_preconditioner\_type}}
@@ -273,12 +275,11 @@ Referenced by preconditioner\+\_\+solve().
 
 
 
-Set the type of preconditioner applied to the elastic\+: 0 -\/ Exact preconditioner 1 -\/ Block diagonal preconditioning ~\newline
- 2 -\/ Block upper triangular preconditioner 3 -\/ Block lower triangular preconditioner We group together the different components of the displacement vector field for the block decomposition. 
+Set the type of preconditioner applied to the elastic\+: 0 -\/ Exact preconditioner 1 -\/ Block diagonal preconditioning 2 -\/ Block upper triangular preconditioner 3 -\/ Block lower triangular preconditioner We group together the different components of the displacement vector field for the block decomposition. 
 
 
 
-Definition at line 234 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 235 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -296,7 +297,7 @@ Call to use the inf norm of S as scaling.
 
 
 
-Definition at line 200 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 197 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -314,7 +315,7 @@ Apply the lagrange multiplier subsidiary preconditioner.
 
 
 
-Definition at line 509 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
+Definition at line 503 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
 
 
 
@@ -322,7 +323,7 @@ References Dim, Lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+pt, and Scalin
 
 
 
-Referenced by preconditioner\+\_\+solve().
+Referenced by oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), and preconditioner\+\_\+solve().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditioner_a2533d2574d2c7d6613fda72b96a5f885}\label{classoomph_1_1PseudoElasticPreconditioner_a2533d2574d2c7d6613fda72b96a5f885}} 
 \index{oomph::PseudoElasticPreconditioner@{oomph::PseudoElasticPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
@@ -336,7 +337,7 @@ Apply the preconditioner. Method implemented in two other methods (elastic and l
 
 
 
-Definition at line 179 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 176 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -354,11 +355,15 @@ Access function to mesh containing the block-\/preconditionable elastic elements
 
 
 
-Definition at line 187 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 184 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
 References Elastic\+\_\+mesh\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditioner_a8c75fe5786d64a042056df16a062c055}\label{classoomph_1_1PseudoElasticPreconditioner_a8c75fe5786d64a042056df16a062c055}} 
 \index{oomph::PseudoElasticPreconditioner@{oomph::PseudoElasticPreconditioner}!set\_elastic\_subsidiary\_preconditioner@{set\_elastic\_subsidiary\_preconditioner}}
@@ -386,16 +391,19 @@ References Elastic\+\_\+subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt.
 
 
 
-Access function to mesh containing the block-\/preconditionable lagrange multiplier elements ~\newline
- 
+Access function to mesh containing the block-\/preconditionable lagrange multiplier elements. 
 
 
 
-Definition at line 194 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 191 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
 References Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditioner_a64865a85f35ae9385f9f8d68e75595e0}\label{classoomph_1_1PseudoElasticPreconditioner_a64865a85f35ae9385f9f8d68e75595e0}} 
 \index{oomph::PseudoElasticPreconditioner@{oomph::PseudoElasticPreconditioner}!set\_lagrange\_multiplier\_subsidiary\_preconditioner@{set\_lagrange\_multiplier\_subsidiary\_preconditioner}}
@@ -427,7 +435,7 @@ Broken assignment operator.
 
 Setup method for the \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}. 
 
-Definition at line 117 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
+Definition at line 114 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
 
 
 
@@ -448,7 +456,7 @@ References Block\+\_\+diagonal\+\_\+preconditioner, Block\+\_\+lower\+\_\+triang
 
 
 
-Definition at line 108 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+Definition at line 103 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -523,7 +531,7 @@ Definition at line 266 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), Pseudo\+Elastic\+Preconditioner(), and setup().
+Referenced by clean\+\_\+up\+\_\+memory(), elastic\+\_\+preconditioner\+\_\+solve(), Pseudo\+Elastic\+Preconditioner(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditioner_aa3ca9f5ccba13b8a2038afb386f73b2d}\label{classoomph_1_1PseudoElasticPreconditioner_aa3ca9f5ccba13b8a2038afb386f73b2d}} 
 \index{oomph::PseudoElasticPreconditioner@{oomph::PseudoElasticPreconditioner}!Elastic\_subsidiary\_preconditioner\_function\_pt@{Elastic\_subsidiary\_preconditioner\_function\_pt}}

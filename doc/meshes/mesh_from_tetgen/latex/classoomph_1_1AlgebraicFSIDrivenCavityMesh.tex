@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a973ccadc769d98fed6bc9dd4eff32083}{Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a4ff7678ec433180e2245ea2147f222b7}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a45011f22dedd480392b1f376e4269921}{ny}}, const double \&lx, const double \&ly, const double \&gap\+\_\+fraction, Geom\+Object $\ast$wall\+\_\+pt, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, lengths, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, lengths, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a048a142aff0ca5fd62273f756bce4ab6}{$\sim$\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a56c72b78935e84f7fef3f6b5d85556c3}{algebraic\+\_\+node\+\_\+update}} (const unsigned \&t, Algebraic\+Node $\ast$\&node\+\_\+pt)
@@ -44,7 +43,7 @@ Alebraic node update version of \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMe
 \item Boundary 5 is the gap above the moving lid on the left wall 
 \end{DoxyItemize}
 
-Definition at line 169 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line 158 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 
@@ -58,12 +57,11 @@ Definition at line 169 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.
 
 
 
-Constructor\+: Pass number of elements, lengths, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). ~\newline
- 
+Constructor\+: Pass number of elements, lengths, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). 
 
 
 
-Definition at line 180 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line 166 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 
@@ -82,7 +80,7 @@ Destructor\+: empty.
 
 
 
-Definition at line 199 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line 185 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 
@@ -100,7 +98,7 @@ Update nodal position at time level t (t=0\+: present; t$>$0\+: previous)
 
 Perform algebraic mesh update at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line 199 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
+Definition at line 201 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a7f6b7c3dae1c61c2cdb0cbd229173114}\label{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a7f6b7c3dae1c61c2cdb0cbd229173114}} 
 \index{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
@@ -115,7 +113,7 @@ Function to setup the algebraic node update.
 
 Setup algebraic mesh update -- assumes that mesh has initially been set up with a flush upper wall. 
 
-Definition at line 289 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
+Definition at line 283 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -134,7 +132,7 @@ Update the node-\/udate data after mesh adaptation. Empty -- no update of node u
 
 
 
-Definition at line 208 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line 194 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 

@@ -25,7 +25,7 @@ void \mbox{\hyperlink{classoomph_1_1WomersleyEquations_ada82ee649d9a6d7469166fd4
 \begin{DoxyCompactList}\small\item\em Read-\/only access to pointer to pressure gradient. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a4db194b9f71a69779b3450d40288b55d}{re\+\_\+st}} () const
 \begin{DoxyCompactList}\small\item\em Product of Reynolds and Strouhal number (=Womersley number) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1WomersleyEquations_aaca21f4cfb0b6614b9b796073ce9c8b8}{re\+\_\+st\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1WomersleyEquations_aec3a88cf82056c894e7503f791328ad9}{re\+\_\+st\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to product of Reynolds and Strouhal number (=Womersley number) \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1WomersleyEquations_afd739de1c8e01b1d9409c05db9ced366}{u\+\_\+index\+\_\+womersley}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. The default value, 0, is appropriate for single-\/physics problems, when there is only one variable, the value that satisfies the Womersley equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
@@ -69,8 +69,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a26d31e02c3fb48
 virtual double \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a5f8bd506dbebc304f30f86ef4acfbd9d}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+womersley}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a5aebac86c117c1cc99437d26686d000e}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+womersley}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -108,7 +107,7 @@ Generally, the instantaneous value of the pressure gradient, g, is prescribed (a
 
 It is also possible to prescribe the flow rate through a mesh of Womersley elements and to determine the pressure gradient required to achieve this flow rate as an unknown. In that case the external pressure is treated as an external \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that an associated \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement}{Impose\+Flux\+For\+Womersley\+Element}} is in charge of. Note that only the \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement}{Impose\+Flux\+For\+Womersley\+Element}} can set the pressure gradient \mbox{\hyperlink{classoomph_1_1Data}{Data}} object as external \mbox{\hyperlink{classoomph_1_1Data}{Data}}. This is because (counter to general practice) the \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{Womersley\+Equations}} make contributions to the residuals of the Impose\+Flux\+For\+Womersley\+Elements in order to keep the elemental Jacobians as small as possible. 
 
-Definition at line 203 of file womersley\+\_\+elements.\+h.
+Definition at line 188 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -126,7 +125,7 @@ Constructor\+: Initialises the Pressure\+\_\+gradient\+\_\+data\+\_\+pt to null.
 
 
 
-Definition at line 209 of file womersley\+\_\+elements.\+h.
+Definition at line 192 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -145,7 +144,7 @@ Broken copy constructor.
 
 
 
-Definition at line 216 of file womersley\+\_\+elements.\+h.
+Definition at line 199 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -173,7 +172,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 565 of file womersley\+\_\+elements.\+cc.
+Definition at line 524 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -198,7 +197,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 646 of file womersley\+\_\+elements.\+cc.
+Definition at line 603 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -247,7 +246,7 @@ du/dt at local node n. Uses suitably interpolated value for hanging nodes.
 
 
 
-Definition at line 273 of file womersley\+\_\+elements.\+h.
+Definition at line 264 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -270,7 +269,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 401 of file womersley\+\_\+elements.\+h.
+Definition at line 397 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -293,7 +292,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 391 of file womersley\+\_\+elements.\+h.
+Definition at line 387 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -308,8 +307,7 @@ void \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{oomph\+::\+Womersley\+Eq
 
 
 
-Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- 
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. 
 
 Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and/or element Jacobian matrix
 
@@ -317,7 +315,7 @@ flag=1\+: compute both flag=0\+: compute only residual \mbox{\hyperlink{classoom
 
 Pure version without hanging nodes 
 
-Definition at line 72 of file womersley\+\_\+elements.\+cc.
+Definition at line 67 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -340,7 +338,7 @@ Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i.
 
 
 
-Definition at line 360 of file womersley\+\_\+elements.\+h.
+Definition at line 353 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -359,7 +357,7 @@ Compute total volume flux through element.
 
 Compute volume flux through element. 
 
-Definition at line 232 of file womersley\+\_\+elements.\+cc.
+Definition at line 219 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -382,7 +380,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 410 of file womersley\+\_\+elements.\+h.
+Definition at line 406 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -401,7 +399,7 @@ Broken assignment operator.
 
 
 
-Definition at line 223 of file womersley\+\_\+elements.\+h.
+Definition at line 206 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -428,7 +426,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a2d73507033cac
 
 
 
-Definition at line 319 of file womersley\+\_\+elements.\+h.
+Definition at line 311 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -459,7 +457,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_aedac8e0c2b41e
 
 
 
-Definition at line 409 of file womersley\+\_\+elements.\+cc.
+Definition at line 382 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -486,7 +484,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a5a8951b6a947e
 
 
 
-Definition at line 301 of file womersley\+\_\+elements.\+h.
+Definition at line 293 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -517,7 +515,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a98968ff614577
 
 
 
-Definition at line 370 of file womersley\+\_\+elements.\+cc.
+Definition at line 346 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -536,7 +534,7 @@ Output function\+: x,y,z\+\_\+out,0,0,u,0 to allow comparison against full Navie
 
 Output function\+: x,y,z\+\_\+out,0,0,u,0 to allow comparison against full Navier Stokes at n\+\_\+nplot x n\+\_\+plot points (2D) 
 
-Definition at line 331 of file womersley\+\_\+elements.\+cc.
+Definition at line 308 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -567,7 +565,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a2730f3cf9212c
 
 
 
-Definition at line 506 of file womersley\+\_\+elements.\+cc.
+Definition at line 470 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -598,7 +596,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_ae15d32d03c1e6
 
 
 
-Definition at line 450 of file womersley\+\_\+elements.\+cc.
+Definition at line 418 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -621,18 +619,18 @@ Product of Reynolds and Strouhal number (=Womersley number)
 
 
 
-Definition at line 254 of file womersley\+\_\+elements.\+h.
+Definition at line 236 of file womersley\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Womersley\+Equations$<$ D\+I\+M $>$\+::\+Re\+St\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1WomersleyEquations_aaca21f4cfb0b6614b9b796073ce9c8b8}\label{classoomph_1_1WomersleyEquations_aaca21f4cfb0b6614b9b796073ce9c8b8}} 
+\mbox{\Hypertarget{classoomph_1_1WomersleyEquations_aec3a88cf82056c894e7503f791328ad9}\label{classoomph_1_1WomersleyEquations_aec3a88cf82056c894e7503f791328ad9}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!re\_st\_pt@{re\_st\_pt}}
 \index{re\_st\_pt@{re\_st\_pt}!oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{re\_st\_pt()}{re\_st\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{oomph\+::\+Womersley\+Equations}}$<$ D\+IM $>$\+::re\+\_\+st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{oomph\+::\+Womersley\+Equations}}$<$ D\+IM $>$\+::re\+\_\+st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -640,7 +638,7 @@ Pointer to product of Reynolds and Strouhal number (=Womersley number)
 
 
 
-Definition at line 258 of file womersley\+\_\+elements.\+h.
+Definition at line 243 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -663,7 +661,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 300 of file womersley\+\_\+elements.\+cc.
+Definition at line 281 of file womersley\+\_\+elements.\+cc.
 
 
 
@@ -682,7 +680,7 @@ Set pointer to pressure gradient (single-\/valued \mbox{\hyperlink{classoomph_1_
 
 
 
-Definition at line 496 of file womersley\+\_\+elements.\+h.
+Definition at line 489 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -705,7 +703,7 @@ Read-\/only access to pointer to pressure gradient.
 
 
 
-Definition at line 247 of file womersley\+\_\+elements.\+h.
+Definition at line 229 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -724,7 +722,7 @@ Set pointer to pressure gradient (single-\/valued \mbox{\hyperlink{classoomph_1_
 
 
 
-Definition at line 230 of file womersley\+\_\+elements.\+h.
+Definition at line 213 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -743,7 +741,7 @@ Return the index at which the unknown value is stored. The default value, 0, is 
 
 
 
-Definition at line 268 of file womersley\+\_\+elements.\+h.
+Definition at line 256 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -762,7 +760,7 @@ friend class \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement}{Impos
 
 
 
-Definition at line 481 of file womersley\+\_\+elements.\+h.
+Definition at line 474 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -780,7 +778,7 @@ Static default value for the Womersley number.
 
 Default Womersley number. 
 
-Definition at line 476 of file womersley\+\_\+elements.\+h.
+Definition at line 470 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -799,7 +797,7 @@ Pointer to pressure gradient \mbox{\hyperlink{classoomph_1_1Data}{Data}} (single
 
 
 
-Definition at line 470 of file womersley\+\_\+elements.\+h.
+Definition at line 464 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -818,7 +816,7 @@ Pointer to global Reynolds number x Strouhal number (=Womersley)
 
 
 
-Definition at line 473 of file womersley\+\_\+elements.\+h.
+Definition at line 467 of file womersley\+\_\+elements.\+h.
 
 
 

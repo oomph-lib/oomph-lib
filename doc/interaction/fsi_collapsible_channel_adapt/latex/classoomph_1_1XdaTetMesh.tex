@@ -41,7 +41,7 @@ class oomph\+::\+Xda\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 Tet mesh made of quadratic (ten node) tets built from xda input file. 
 
-Definition at line 55 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 53 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -59,11 +59,7 @@ Constructor\+: Pass name of xda file. Note that all boundary elements get their 
 
 Constructor\+: Pass name of xda file. Note that all boundary elements get their own ID -- this is required for F\+SI problems. The vector containing the oomph-\/lib boundary I\+Ds of all oomph-\/lib boundaries that collectively form a given boundary as specified in the xda input file can be obtained from the access function oomph\+\_\+lib\+\_\+boundary\+\_\+ids(...). Timestepper defaults to steady pseudo-\/timestepper. 
 
-Definition at line 48 of file xda\+\_\+tet\+\_\+mesh.\+template.\+cc.
-
-
-
-References default.
+Definition at line 46 of file xda\+\_\+tet\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -81,7 +77,7 @@ Access function to the number of distinct boundaries specified in the original x
 
 
 
-Definition at line 103 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 98 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -100,7 +96,7 @@ Access functions to the Vector of oomph-\/lib boundary ids that make up boundary
 
 
 
-Definition at line 110 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 105 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -119,7 +115,7 @@ Setup boundary coordinate on boundary b while is temporarily flattened to simple
 
 
 
-Definition at line 80 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 75 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1XdaTetMesh_a415f0211f064766f8c38bca6f877c192}\label{classoomph_1_1XdaTetMesh_a415f0211f064766f8c38bca6f877c192}} 
 \index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!setup\_boundary\_coordinates@{setup\_boundary\_coordinates}}
@@ -130,7 +126,7 @@ void \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh}}$<$ E
 
 Setup boundary coordinate on boundary b while is temporarily flattened to simplex faces. Boundary coordinates are the x-\/y coordinates in the plane of that boundary with the x-\/axis along the line from the (lexicographically) \char`\"{}lower left\char`\"{} to the \char`\"{}upper right\char`\"{} node. The y axis is obtained by taking the cross-\/product of the positive x direction with the outer unit normal computed by the face elements (or its negative if switch\+\_\+normal is set to true). Doc faces in output file. 
 
-Definition at line 348 of file xda\+\_\+tet\+\_\+mesh.\+template.\+cc.
+Definition at line 345 of file xda\+\_\+tet\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -152,7 +148,7 @@ Vector of vectors containing the boundary I\+Ds of the overall boundary specifie
 
 
 
-Definition at line 119 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 113 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 

@@ -35,7 +35,7 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df2ebe39fcdb7a
 \item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a8bfd5045cf99bbeaf94b69ede3ccf0ad}{solve\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
 \begin{DoxyCompactList}\small\item\em General interface to solve function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_ac6e87c2d59dcee71ce599dcbabae5445}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&z\+\_\+m, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a06cc1b10a4c5dad55b0497ce5c39a34e}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$$>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$$>$ \&z\+\_\+m, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Helper function to update the result vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -46,7 +46,7 @@ class oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}
 
 The F\+G\+M\+R\+ES method, i.\+e. the flexible variant of the \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} method which allows for nonconstant preconditioners \mbox{[}see Saad Y, \char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+287\mbox{]}. Note, F\+G\+M\+R\+ES can only cater to right preconditioning; if the user tries to switch to left preconditioning they will be notified of this. 
 
-Definition at line 3310 of file complex\+\_\+smoother.\+h.
+Definition at line 3326 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -64,7 +64,7 @@ Constructor (empty)
 
 
 
-Definition at line 3316 of file complex\+\_\+smoother.\+h.
+Definition at line 3330 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -83,7 +83,7 @@ Destructor (cleanup storage)
 
 
 
-Definition at line 3323 of file complex\+\_\+smoother.\+h.
+Definition at line 3337 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -102,7 +102,7 @@ Broken copy constructor.
 
 
 
-Definition at line 3330 of file complex\+\_\+smoother.\+h.
+Definition at line 3344 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -124,7 +124,7 @@ Broken assignment operator.
 
 
 
-Definition at line 3336 of file complex\+\_\+smoother.\+h.
+Definition at line 3350 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -143,7 +143,7 @@ Overloaded function to let the user know that left preconditioning is not possib
 
 
 
-Definition at line 3343 of file complex\+\_\+smoother.\+h.
+Definition at line 3357 of file complex\+\_\+smoother.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df2ebe39fcdb7a0837864}\label{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df2ebe39fcdb7a0837864}} 
 \index{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$}!solve@{solve}}
@@ -162,7 +162,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a5806236b991a
 
 
 
-Definition at line 3362 of file complex\+\_\+smoother.\+h.
+Definition at line 3376 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -179,10 +179,9 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG}{oomph\+::\+Helmholtz\+F\+
 
 General interface to solve function. 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. based on the algorithm presented in Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, Barrett, Berry et al, S\+I\+AM, 2006 and the implementation in the I\+M\+L++ library \+: \href{http://math.nist.gov/iml++/}{\texttt{ http\+://math.\+nist.\+gov/iml++/}} ~\newline
- 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. based on the algorithm presented in Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, Barrett, Berry et al, S\+I\+AM, 2006 and the implementation in the I\+M\+L++ library \+: \href{http://math.nist.gov/iml++/}{\texttt{ http\+://math.\+nist.\+gov/iml++/}} 
 
-Definition at line 3628 of file complex\+\_\+smoother.\+h.
+Definition at line 3643 of file complex\+\_\+smoother.\+h.
 
 
 
@@ -192,12 +191,12 @@ References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::bu
 
 Referenced by oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
 
-\mbox{\Hypertarget{classoomph_1_1HelmholtzFGMRESMG_ac6e87c2d59dcee71ce599dcbabae5445}\label{classoomph_1_1HelmholtzFGMRESMG_ac6e87c2d59dcee71ce599dcbabae5445}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzFGMRESMG_a06cc1b10a4c5dad55b0497ce5c39a34e}\label{classoomph_1_1HelmholtzFGMRESMG_a06cc1b10a4c5dad55b0497ce5c39a34e}} 
 \index{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$}!update@{update}}
 \index{update@{update}!oomph::HelmholtzFGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
 {\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG}{oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&}]{hessenberg,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&}]{z\+\_\+m,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG}{oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$$>$ \&}]{hessenberg,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$$>$ \&}]{z\+\_\+m,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -205,7 +204,7 @@ Helper function to update the result vector.
 
 
 
-Definition at line 3524 of file complex\+\_\+smoother.\+h.
+Definition at line 3538 of file complex\+\_\+smoother.\+h.
 
 
 

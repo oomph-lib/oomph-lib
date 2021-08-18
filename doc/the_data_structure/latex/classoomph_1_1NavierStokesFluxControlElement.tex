@@ -20,8 +20,7 @@ Inheritance diagram for oomph\+::Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\
 void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_ad612e8f706ba627f11dd380cc20bfab2}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
 \begin{DoxyCompactList}\small\item\em This function returns just the residuals. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6a745b0b8b1417b7f61782e959c31f69}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals and the Jacobian including the Jacobian contribution from the flux control master element with respect to dof in this element ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This function returns the residuals and the Jacobian including the Jacobian contribution from the flux control master element with respect to dof in this element. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a3a2ff525c8a522dff91efc61c0b52a80}{get\+\_\+volume\+\_\+flux}} ()
 \begin{DoxyCompactList}\small\item\em Function to get the integral of the volume flux. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
@@ -30,8 +29,7 @@ double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a3a2ff525c8
 virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_ab09c37065b0b92bf7d44973a0a6dcade}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a4c203742bc44ab562fcb98eaa2380e3a}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a61f129d70845f43c8cb592a4f1258a9f}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
 \begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. This function also calculates the Jacobian contribution for the \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
@@ -50,7 +48,7 @@ A class of element to impose an applied boundary pressure to Navier-\/\+Stokes e
 
 Note\+: This element calculates Jacobian contributions for both itself and also for the \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}} with respect to its unknowns. 
 
-Definition at line 356 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 355 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -68,7 +66,7 @@ Constructor, which takes a \char`\"{}bulk\char`\"{} element and face index.
 
 
 
-Definition at line 363 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 361 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -87,7 +85,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 403 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 400 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -101,8 +99,7 @@ void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+N
 
 
 
-This function returns the residuals and the Jacobian including the Jacobian contribution from the flux control master element with respect to dof in this element ~\newline
- 
+This function returns the residuals and the Jacobian including the Jacobian contribution from the flux control master element with respect to dof in this element. 
 
 
 
@@ -114,7 +111,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxContro
 
 
 
-Definition at line 417 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 414 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -141,7 +138,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxContro
 
 
 
-Definition at line 406 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 403 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -160,7 +157,7 @@ This function returns the residuals for the traction function flag=1(or 0)\+: do
 
 
 
-Definition at line 462 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 463 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -187,7 +184,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlEle
 
 
 
-Definition at line 425 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 423 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -202,12 +199,11 @@ double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\
 
 
 
-Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping. 
 
 
 
-Definition at line 443 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 441 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -230,7 +226,7 @@ Access function that returns the local equation numbers for velocity components.
 
 
 
-Definition at line 438 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 434 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 
@@ -256,7 +252,7 @@ The highest dimension of the problem.
 
 
 
-Definition at line 551 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line 549 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
 
 
 

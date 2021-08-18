@@ -170,9 +170,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab8cf08ddd68ec671c111bc55f9b37e70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuadTree.html">QuadTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#ab8cf08ddd68ec671c111bc55f9b37e70">gteq_edge_neighbour</a> (const int &amp;direction, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;translate_s, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;s_lo, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;s_hi, int &amp;edge, int &amp;diff_level, bool &amp;in_neighbouring_tree) const</td></tr>
 <tr class="memdesc:ab8cf08ddd68ec671c111bc55f9b37e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to greater or equal-sized edge neighbour in specified <code>direction</code>; also provide info regarding the relative size and orientation of neighbour:  <a href="classoomph_1_1QuadTree.html#ab8cf08ddd68ec671c111bc55f9b37e70">More...</a><br /></td></tr>
 <tr class="separator:ab8cf08ddd68ec671c111bc55f9b37e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae84ef914439549e7582bf3e58286f53e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#ae84ef914439549e7582bf3e58286f53e">stick_neighbouring_leaves_into_vector</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; const <a class="el" href="classoomph_1_1QuadTree.html">QuadTree</a> * &gt; &amp;tree_neighbouring_nodes, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;tree_neighbouring_s_lo, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;tree_neighbouring_s_hi, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;tree_neighbouring_diff_level, const <a class="el" href="classoomph_1_1QuadTree.html">QuadTree</a> *my_neigh_pt, const int &amp;direction) const</td></tr>
-<tr class="memdesc:ae84ef914439549e7582bf3e58286f53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse <a class="el" href="classoomph_1_1Tree.html">Tree</a>: Preorder traverse and stick pointers to neighbouring leaf nodes (only) into <a class="el" href="classoomph_1_1Vector.html">Vector</a>.  <a href="classoomph_1_1QuadTree.html#ae84ef914439549e7582bf3e58286f53e">More...</a><br /></td></tr>
-<tr class="separator:ae84ef914439549e7582bf3e58286f53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a341a1e5ace5a7aca56b38328cc8db093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#a341a1e5ace5a7aca56b38328cc8db093">stick_neighbouring_leaves_into_vector</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; const <a class="el" href="classoomph_1_1QuadTree.html">QuadTree</a> * &gt; &amp;tree_neighbouring_nodes, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;tree_neighbouring_s_lo, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;tree_neighbouring_s_hi, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;tree_neighbouring_diff_level, const <a class="el" href="classoomph_1_1QuadTree.html">QuadTree</a> *my_neigh_pt, const int &amp;direction) const</td></tr>
+<tr class="memdesc:a341a1e5ace5a7aca56b38328cc8db093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse <a class="el" href="classoomph_1_1Tree.html">Tree</a>: Preorder traverse and stick pointers to neighbouring leaf nodes (only) into <a class="el" href="classoomph_1_1Vector.html">Vector</a>.  <a href="classoomph_1_1QuadTree.html#a341a1e5ace5a7aca56b38328cc8db093">More...</a><br /></td></tr>
+<tr class="separator:a341a1e5ace5a7aca56b38328cc8db093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8bb42eac81f1b1b8bc7eb3e82fc5e29"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#aa8bb42eac81f1b1b8bc7eb3e82fc5e29">self_test</a> ()</td></tr>
 <tr class="memdesc:aa8bb42eac81f1b1b8bc7eb3e82fc5e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Self-test: Check all neighbours. Return success (0) if the max. distance between corresponding points in the neighbours is less than the tolerance specified in the static value <a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2" title="Max. allowed discrepancy in neighbour finding routine (distance between points when identified from t...">QuadTree::Max_neighbour_finding_tolerance</a>.  <a href="classoomph_1_1QuadTree.html#aa8bb42eac81f1b1b8bc7eb3e82fc5e29">More...</a><br /></td></tr>
 <tr class="separator:aa8bb42eac81f1b1b8bc7eb3e82fc5e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,8 +196,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab2ca6416d7a368e29da6a6a998f460c7 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to the son for a given index. Note that to aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here.  <a href="classoomph_1_1Tree.html#ab2ca6416d7a368e29da6a6a998f460c7">More...</a><br /></td></tr>
 <tr class="separator:ab2ca6416d7a368e29da6a6a998f460c7 inherit pub_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7026d14ead1a8d91ce417dfd0cd9478 inherit pub_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ab7026d14ead1a8d91ce417dfd0cd9478">set_son_pt</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;<a class="el" href="classoomph_1_1Tree.html#ab2ca6416d7a368e29da6a6a998f460c7">son_pt</a>)</td></tr>
-<tr class="memdesc:ab7026d14ead1a8d91ce417dfd0cd9478 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). <br  />
-  <a href="classoomph_1_1Tree.html#ab7026d14ead1a8d91ce417dfd0cd9478">More...</a><br /></td></tr>
+<tr class="memdesc:ab7026d14ead1a8d91ce417dfd0cd9478 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here).  <a href="classoomph_1_1Tree.html#ab7026d14ead1a8d91ce417dfd0cd9478">More...</a><br /></td></tr>
 <tr class="separator:ab7026d14ead1a8d91ce417dfd0cd9478 inherit pub_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31e4123b40f6fb52d180a154c9123e85 inherit pub_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a31e4123b40f6fb52d180a154c9123e85">nsons</a> () const</td></tr>
 <tr class="memdesc:a31e4123b40f6fb52d180a154c9123e85 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of sons (zero if it's a leaf node)  <a href="classoomph_1_1Tree.html#a31e4123b40f6fb52d180a154c9123e85">More...</a><br /></td></tr>
@@ -232,8 +231,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af5c67186ca9c87eef9ce7eaa0af41057 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and excute void <a class="el" href="classoomph_1_1Tree.html">Tree</a> member function that takes a pointer to a mesh as an argument.  <a href="classoomph_1_1Tree.html#af5c67186ca9c87eef9ce7eaa0af41057">More...</a><br /></td></tr>
 <tr class="separator:af5c67186ca9c87eef9ce7eaa0af41057 inherit pub_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef175445b09edb47624c4b88c6d548bc inherit pub_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aef175445b09edb47624c4b88c6d548bc">traverse_all_but_leaves</a> (<a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a> member_function)</td></tr>
-<tr class="memdesc:aef175445b09edb47624c4b88c6d548bc inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html">Tree</a> member function <br  />
-  <a href="classoomph_1_1Tree.html#aef175445b09edb47624c4b88c6d548bc">More...</a><br /></td></tr>
+<tr class="memdesc:aef175445b09edb47624c4b88c6d548bc inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html">Tree</a> member function member_function() at all its "nodes" aparat from the leaves.  <a href="classoomph_1_1Tree.html#aef175445b09edb47624c4b88c6d548bc">More...</a><br /></td></tr>
 <tr class="separator:aef175445b09edb47624c4b88c6d548bc inherit pub_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22e0e3695dd8986e439927b7657ff741 inherit pub_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a22e0e3695dd8986e439927b7657ff741">traverse_leaves</a> (<a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a> member_function)</td></tr>
 <tr class="memdesc:a22e0e3695dd8986e439927b7657ff741 inherit pub_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html">Tree</a> member function member_function() only at its leaves.  <a href="classoomph_1_1Tree.html#a22e0e3695dd8986e439927b7657ff741">More...</a><br /></td></tr>
@@ -282,7 +280,7 @@ Static Public Attributes</h2></td></tr>
 <tr class="memdesc:a1b8f4dd684238115e0c4de4860187e4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translate (enumerated) directions into strings.  <a href="classoomph_1_1QuadTree.html#a1b8f4dd684238115e0c4de4860187e4a">More...</a><br /></td></tr>
 <tr class="separator:a1b8f4dd684238115e0c4de4860187e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_classoomph_1_1Tree"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1Tree')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1Tree.html">oomph::Tree</a></td></tr>
-<tr class="memitem:a9e532196340dcd859ff8207eea2ddbbc inherit pub_static_attribs_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9e532196340dcd859ff8207eea2ddbbc">OMEGA</a> =26</td></tr>
+<tr class="memitem:a9e532196340dcd859ff8207eea2ddbbc inherit pub_static_attribs_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9e532196340dcd859ff8207eea2ddbbc">OMEGA</a> = 26</td></tr>
 <tr class="memdesc:a9e532196340dcd859ff8207eea2ddbbc inherit pub_static_attribs_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for an unassigned neighbour.  <a href="classoomph_1_1Tree.html#a9e532196340dcd859ff8207eea2ddbbc">More...</a><br /></td></tr>
 <tr class="separator:a9e532196340dcd859ff8207eea2ddbbc inherit pub_static_attribs_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -292,33 +290,29 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:aa56c6ca60d708eee10217cb341399fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <a href="classoomph_1_1QuadTree.html#aa56c6ca60d708eee10217cb341399fe3">More...</a><br /></td></tr>
 <tr class="separator:aa56c6ca60d708eee10217cb341399fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41f19525579fbf151a0e73eefca43a0b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#a41f19525579fbf151a0e73eefca43a0b">QuadTree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a2f2eeb0f1dd161f696cccc652974ff4c">object_pt</a>)</td></tr>
-<tr class="memdesc:a41f19525579fbf151a0e73eefca43a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because QuadTrees can only be created internally, during the split operation. Only QuadTreeRoots can be created externally. <br  />
-  <a href="classoomph_1_1QuadTree.html#a41f19525579fbf151a0e73eefca43a0b">More...</a><br /></td></tr>
+<tr class="memdesc:a41f19525579fbf151a0e73eefca43a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because QuadTrees can only be created internally, during the split operation. Only QuadTreeRoots can be created externally.  <a href="classoomph_1_1QuadTree.html#a41f19525579fbf151a0e73eefca43a0b">More...</a><br /></td></tr>
 <tr class="separator:a41f19525579fbf151a0e73eefca43a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef8906aed3a32ba3f7c1723d8dc26015"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#aef8906aed3a32ba3f7c1723d8dc26015">QuadTree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a2f2eeb0f1dd161f696cccc652974ff4c">object_pt</a>, <a class="el" href="classoomph_1_1Tree.html">Tree</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a5f8444ddeda272b70669b8bbe929708a">father_pt</a>, const int &amp;<a class="el" href="classoomph_1_1Tree.html#a7537f8fe7c896d2220eb2da03567b34d">son_type</a>)</td></tr>
-<tr class="memdesc:aef8906aed3a32ba3f7c1723d8dc26015"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son (SE/SW/NE/NW) it is. Protected because QuadTrees can only be created internally, during the split operation. Only QuadTreeRoots can be created externally. <br  />
-  <a href="classoomph_1_1QuadTree.html#aef8906aed3a32ba3f7c1723d8dc26015">More...</a><br /></td></tr>
+<tr class="memdesc:aef8906aed3a32ba3f7c1723d8dc26015"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son (SE/SW/NE/NW) it is. Protected because QuadTrees can only be created internally, during the split operation. Only QuadTreeRoots can be created externally.  <a href="classoomph_1_1QuadTree.html#aef8906aed3a32ba3f7c1723d8dc26015">More...</a><br /></td></tr>
 <tr class="separator:aef8906aed3a32ba3f7c1723d8dc26015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classoomph_1_1Tree"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1Tree')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1Tree.html">oomph::Tree</a></td></tr>
 <tr class="memitem:ada92f1aa44ee6ef5b52ec5ad0af00359 inherit pro_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ada92f1aa44ee6ef5b52ec5ad0af00359">Tree</a> ()</td></tr>
 <tr class="memdesc:ada92f1aa44ee6ef5b52ec5ad0af00359 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <a href="classoomph_1_1Tree.html#ada92f1aa44ee6ef5b52ec5ad0af00359">More...</a><br /></td></tr>
 <tr class="separator:ada92f1aa44ee6ef5b52ec5ad0af00359 inherit pro_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e78c3a130add917de182ab5f1674531 inherit pro_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a6e78c3a130add917de182ab5f1674531">Tree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a2f2eeb0f1dd161f696cccc652974ff4c">object_pt</a>)</td></tr>
-<tr class="memdesc:a6e78c3a130add917de182ab5f1674531 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally. <br  />
-  <a href="classoomph_1_1Tree.html#a6e78c3a130add917de182ab5f1674531">More...</a><br /></td></tr>
+<tr class="memdesc:a6e78c3a130add917de182ab5f1674531 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally.  <a href="classoomph_1_1Tree.html#a6e78c3a130add917de182ab5f1674531">More...</a><br /></td></tr>
 <tr class="separator:a6e78c3a130add917de182ab5f1674531 inherit pro_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d611dde1f429500330f28e56ee71883 inherit pro_methods_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9d611dde1f429500330f28e56ee71883">Tree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a2f2eeb0f1dd161f696cccc652974ff4c">object_pt</a>, <a class="el" href="classoomph_1_1Tree.html">Tree</a> *const &amp;<a class="el" href="classoomph_1_1Tree.html#a5f8444ddeda272b70669b8bbe929708a">father_pt</a>, const int &amp;<a class="el" href="classoomph_1_1Tree.html#a7537f8fe7c896d2220eb2da03567b34d">son_type</a>)</td></tr>
-<tr class="memdesc:a9d611dde1f429500330f28e56ee71883 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally. <br  />
-  <a href="classoomph_1_1Tree.html#a9d611dde1f429500330f28e56ee71883">More...</a><br /></td></tr>
+<tr class="memdesc:a9d611dde1f429500330f28e56ee71883 inherit pro_methods_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally.  <a href="classoomph_1_1Tree.html#a9d611dde1f429500330f28e56ee71883">More...</a><br /></td></tr>
 <tr class="separator:a9d611dde1f429500330f28e56ee71883 inherit pro_methods_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:af41a83bfcd8c5eb535f7d2828ff712d1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#af41a83bfcd8c5eb535f7d2828ff712d1">Static_data_has_been_setup</a> =false</td></tr>
+<tr class="memitem:af41a83bfcd8c5eb535f7d2828ff712d1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#af41a83bfcd8c5eb535f7d2828ff712d1">Static_data_has_been_setup</a> = false</td></tr>
 <tr class="memdesc:af41a83bfcd8c5eb535f7d2828ff712d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool indicating that static member data has been setup.  <a href="classoomph_1_1QuadTree.html#af41a83bfcd8c5eb535f7d2828ff712d1">More...</a><br /></td></tr>
 <tr class="separator:af41a83bfcd8c5eb535f7d2828ff712d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classoomph_1_1Tree"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1Tree')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1Tree.html">oomph::Tree</a></td></tr>
-<tr class="memitem:aef9abebc166fa3bf81ecb59ec0d5d6b2 inherit pro_static_attribs_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2">Max_neighbour_finding_tolerance</a> =1.0e-14</td></tr>
+<tr class="memitem:aef9abebc166fa3bf81ecb59ec0d5d6b2 inherit pro_static_attribs_classoomph_1_1Tree"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2">Max_neighbour_finding_tolerance</a> = 1.0e-14</td></tr>
 <tr class="memdesc:aef9abebc166fa3bf81ecb59ec0d5d6b2 inherit pro_static_attribs_classoomph_1_1Tree"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements)  <a href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2">More...</a><br /></td></tr>
 <tr class="separator:aef9abebc166fa3bf81ecb59ec0d5d6b2 inherit pro_static_attribs_classoomph_1_1Tree"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -334,8 +328,7 @@ Static Private Attributes</h2></td></tr>
 <tr class="memdesc:ab882ad3e12fec441f97ef526bae1f497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colours for neighbours in various directions.  <a href="classoomph_1_1QuadTree.html#ab882ad3e12fec441f97ef526bae1f497">More...</a><br /></td></tr>
 <tr class="separator:ab882ad3e12fec441f97ef526bae1f497"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89acef2846ba5c3f00e424575385527e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#a89acef2846ba5c3f00e424575385527e">S_base</a></td></tr>
-<tr class="memdesc:a89acef2846ba5c3f00e424575385527e"><td class="mdescLeft">&#160;</td><td class="mdescRight">S_base(i,direction): Initial value for coordinate s[i] on the edge indicated by direction (S/E/N/W) <br  />
-  <a href="classoomph_1_1QuadTree.html#a89acef2846ba5c3f00e424575385527e">More...</a><br /></td></tr>
+<tr class="memdesc:a89acef2846ba5c3f00e424575385527e"><td class="mdescLeft">&#160;</td><td class="mdescRight">S_base(i,direction): Initial value for coordinate s[i] on the edge indicated by direction (S/E/N/W)  <a href="classoomph_1_1QuadTree.html#a89acef2846ba5c3f00e424575385527e">More...</a><br /></td></tr>
 <tr class="separator:a89acef2846ba5c3f00e424575385527e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24da4f560f767a69d2dfbee82e404ad9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadTree.html#a24da4f560f767a69d2dfbee82e404ad9">S_step</a></td></tr>
 <tr class="memdesc:a24da4f560f767a69d2dfbee82e404ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">S_step(i,direction) Increments for coordinate s[i] when progressing along the edge indicated by direction (S/E/N/W); Left/lower vertex: S_base; Right/upper vertex: S_base + S_step.  <a href="classoomph_1_1QuadTree.html#a24da4f560f767a69d2dfbee82e404ad9">More...</a><br /></td></tr>
@@ -400,7 +393,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Finally, the leaf "nodes" can be split depending on a criteria defined by the object.</p>
 <p>Note that QuadTrees are only generated by splitting existing QuadTrees. Therefore, the constructors are protected. The only <a class="el" href="classoomph_1_1QuadTree.html">QuadTree</a> that "Joe User" can create is the (derived) class <a class="el" href="classoomph_1_1QuadTreeRoot.html">QuadTreeRoot</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00094">94</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00103">103</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab6dd217086350735063424dc6f7a02fb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab6dd217086350735063424dc6f7a02fb">&#9670;&nbsp;</a></span>~QuadTree()</h2>
@@ -427,7 +420,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor. Note: Deleting a quadtree also deletes the objects associated with all non-leaf nodes! </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00100">100</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00108">108</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
 </div>
 </div>
@@ -457,9 +450,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00103">103</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00111">111</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -488,9 +481,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Default constructor (empty and broken) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00199">199</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00209">209</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8h_source.html#l00116">construct_son()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8h_source.html#l00124">construct_son()</a>.</p>
 
 </div>
 </div>
@@ -518,10 +511,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because QuadTrees can only be created internally, during the split operation. Only QuadTreeRoots can be created externally. <br  />
- </p>
+<p>Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because QuadTrees can only be created internally, during the split operation. Only QuadTreeRoots can be created externally. </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00210">210</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00222">222</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
 </div>
 </div>
@@ -565,10 +557,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son (SE/SW/NE/NW) it is. Protected because QuadTrees can only be created internally, during the split operation. Only QuadTreeRoots can be created externally. <br  />
- </p>
+<p>Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son (SE/SW/NE/NW) it is. Protected because QuadTrees can only be created internally, during the split operation. Only QuadTreeRoots can be created externally. </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00218">218</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00230">230</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
 </div>
 </div>
@@ -617,9 +608,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1Tree.html#a5eb29718044b1bc56403ee9bd15a60b6">oomph::Tree</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00116">116</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00124">124</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tree_8h_source.html#l00217">oomph::Tree::father_pt()</a>, <a class="el" href="tree_8h_source.html#l00098">oomph::Tree::object_pt()</a>, <a class="el" href="quadtree_8h_source.html#l00199">QuadTree()</a>, and <a class="el" href="tree_8h_source.html#l00205">oomph::Tree::son_type()</a>.</p>
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00241">oomph::Tree::father_pt()</a>, <a class="el" href="tree_8h_source.html#l00094">oomph::Tree::object_pt()</a>, <a class="el" href="quadtree_8h_source.html#l00209">QuadTree()</a>, and <a class="el" href="tree_8h_source.html#l00220">oomph::Tree::son_type()</a>.</p>
 
 </div>
 </div>
@@ -672,11 +663,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Doc/check all neighbours of quadtree (nodes) contained in the <a class="el" href="classoomph_1_1Vector.html">Vector</a> forest_node_pt. Output into neighbours_file which can be viewed from tecplot with QuadTreeNeighbours.mcr Neighbour info and errors are displayed on neighbours_txt_file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. </p>
 <p>Doc/check all neighbours of quadtree ("nodes") contained in the <a class="el" href="classoomph_1_1Vector.html">Vector</a> forest_node_pt. Output into neighbours_file which can be viewed from tecplot with QuadTreeNeighbours.mcr Neighbour info and errors are displayed on neighbours_txt_file. Finally, compute the max. error between vertices when viewed from neighhbouring element. Output is suppressed if the output streams are closed. </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l01378">1378</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l01402">1402</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l01854">oomph::FiniteElement::get_x()</a>, <a class="el" href="quadtree_8cc_source.html#l00419">gteq_edge_neighbour()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="tree_8h_source.html#l00346">oomph::TreeRoot::is_neighbour_periodic()</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::N</a>, <a class="el" href="refineable__elements_8h_source.html#l00346">oomph::RefineableElement::nodes_built()</a>, <a class="el" href="refineable__elements_8h_source.html#l00349">oomph::RefineableElement::number()</a>, <a class="el" href="tree_8h_source.html#l00098">oomph::Tree::object_pt()</a>, <a class="el" href="binary__tree_8h_source.html#l00048">oomph::BinaryTreeNames::OMEGA</a>, <a class="el" href="tree_8h_source.html#l00139">oomph::Tree::root_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::W</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l01902">oomph::FiniteElement::get_x()</a>, <a class="el" href="quadtree_8cc_source.html#l00413">gteq_edge_neighbour()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="tree_8h_source.html#l00376">oomph::TreeRoot::is_neighbour_periodic()</a>, <a class="el" href="quadtree_8h_source.html#l00060">oomph::QuadTreeNames::N</a>, <a class="el" href="refineable__elements_8h_source.html#l00395">oomph::RefineableElement::nodes_built()</a>, <a class="el" href="refineable__elements_8h_source.html#l00401">oomph::RefineableElement::number()</a>, <a class="el" href="tree_8h_source.html#l00094">oomph::Tree::object_pt()</a>, <a class="el" href="binary__tree_8h_source.html#l00052">oomph::BinaryTreeNames::OMEGA</a>, <a class="el" href="tree_8h_source.html#l00147">oomph::Tree::root_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l01223">oomph::QuadTreeForest::check_all_neighbours()</a>, <a class="el" href="quadtree_8cc_source.html#l00793">self_test()</a>, and <a class="el" href="quadtree_8cc_source.html#l01334">oomph::QuadTreeForest::self_test()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l01245">oomph::QuadTreeForest::check_all_neighbours()</a>, <a class="el" href="quadtree_8cc_source.html#l00814">self_test()</a>, and <a class="el" href="quadtree_8cc_source.html#l01357">oomph::QuadTreeForest::self_test()</a>.</p>
 
 </div>
 </div>
@@ -751,9 +742,9 @@ Additional Inherited Members</h2></td></tr>
 <li>orig_root_pt identifies the root node of the element whose neighbour we're really trying to find by all these recursive calls. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00588">588</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00601">601</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::E</a>, <a class="el" href="tree_8h_source.html#l00271">oomph::Tree::Father_pt</a>, <a class="el" href="quadtree_8cc_source.html#l00419">gteq_edge_neighbour()</a>, <a class="el" href="quadtree_8h_source.html#l00255">Is_adjacent</a>, <a class="el" href="tree_8h_source.html#l00277">oomph::Tree::Level</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::N</a>, <a class="el" href="tree_8h_source.html#l00341">oomph::TreeRoot::neighbour_pt()</a>, <a class="el" href="quadtree_8h_source.html#l00259">Reflect</a>, <a class="el" href="tree_8h_source.html#l00266">oomph::Tree::Root_pt</a>, <a class="el" href="quadtree_8h_source.html#l00263">Rotate</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::S</a>, <a class="el" href="quadtree_8h_source.html#l00274">S_direct</a>, <a class="el" href="tree_8h_source.html#l00274">oomph::Tree::Son_pt</a>, <a class="el" href="tree_8h_source.html#l00280">oomph::Tree::Son_type</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::W</a>.</p>
+<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00061">oomph::QuadTreeNames::E</a>, <a class="el" href="tree_8h_source.html#l00302">oomph::Tree::Father_pt</a>, <a class="el" href="quadtree_8cc_source.html#l00413">gteq_edge_neighbour()</a>, <a class="el" href="quadtree_8h_source.html#l00269">Is_adjacent</a>, <a class="el" href="tree_8h_source.html#l00308">oomph::Tree::Level</a>, <a class="el" href="quadtree_8h_source.html#l00060">oomph::QuadTreeNames::N</a>, <a class="el" href="tree_8h_source.html#l00369">oomph::TreeRoot::neighbour_pt()</a>, <a class="el" href="quadtree_8h_source.html#l00273">Reflect</a>, <a class="el" href="tree_8h_source.html#l00298">oomph::Tree::Root_pt</a>, <a class="el" href="quadtree_8h_source.html#l00277">Rotate</a>, <a class="el" href="quadtree_8h_source.html#l00062">oomph::QuadTreeNames::S</a>, <a class="el" href="quadtree_8h_source.html#l00288">S_direct</a>, <a class="el" href="tree_8h_source.html#l00305">oomph::Tree::Son_pt</a>, <a class="el" href="tree_8h_source.html#l00311">oomph::Tree::Son_type</a>, and <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>.</p>
 
 </div>
 </div>
@@ -831,11 +822,11 @@ Additional Inherited Members</h2></td></tr>
 <li><code>in_neighbouring_tree</code> returns true is we have had to flip to a different root, even if that root is actually the same as it can be in periodic problems. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00419">419</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00413">413</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::E</a>, <a class="el" href="tree_8h_source.html#l00277">oomph::Tree::Level</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::N</a>, <a class="el" href="quadtree_8h_source.html#l00359">oomph::QuadTreeRoot::north_equivalent()</a>, <a class="el" href="quadtree_8h_source.html#l00250">Reflect_edge</a>, <a class="el" href="tree_8h_source.html#l00139">oomph::Tree::root_pt()</a>, <a class="el" href="tree_8h_source.html#l00266">oomph::Tree::Root_pt</a>, <a class="el" href="quadtree_8h_source.html#l00263">Rotate</a>, <a class="el" href="quadtree_8h_source.html#l00269">Rotate_angle</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::S</a>, <a class="el" href="quadtree_8h_source.html#l00242">S_base</a>, <a class="el" href="quadtree_8h_source.html#l00247">S_step</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::W</a>.</p>
+<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00061">oomph::QuadTreeNames::E</a>, <a class="el" href="tree_8h_source.html#l00308">oomph::Tree::Level</a>, <a class="el" href="quadtree_8h_source.html#l00060">oomph::QuadTreeNames::N</a>, <a class="el" href="quadtree_8h_source.html#l00366">oomph::QuadTreeRoot::north_equivalent()</a>, <a class="el" href="quadtree_8h_source.html#l00264">Reflect_edge</a>, <a class="el" href="tree_8h_source.html#l00147">oomph::Tree::root_pt()</a>, <a class="el" href="tree_8h_source.html#l00298">oomph::Tree::Root_pt</a>, <a class="el" href="quadtree_8h_source.html#l00277">Rotate</a>, <a class="el" href="quadtree_8h_source.html#l00283">Rotate_angle</a>, <a class="el" href="quadtree_8h_source.html#l00062">oomph::QuadTreeNames::S</a>, <a class="el" href="quadtree_8h_source.html#l00256">S_base</a>, <a class="el" href="quadtree_8h_source.html#l00261">S_step</a>, and <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__quad__element_8cc_source.html#l01780">oomph::RefineableQElement&lt; 2 &gt;::check_integrity()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l03665">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::check_integrity()</a>, <a class="el" href="quadtree_8cc_source.html#l01378">doc_neighbours()</a>, <a class="el" href="quadtree_8cc_source.html#l00588">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00735">stick_neighbouring_leaves_into_vector()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__quad__element_8cc_source.html#l01837">oomph::RefineableQElement&lt; 2 &gt;::check_integrity()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l03748">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::check_integrity()</a>, <a class="el" href="quadtree_8cc_source.html#l01402">doc_neighbours()</a>, <a class="el" href="quadtree_8cc_source.html#l00601">gteq_edge_neighbour()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l00516">oomph::RefineableQElement&lt; 2 &gt;::node_created_by_neighbour()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01382">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::node_created_by_neighbour()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01507">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::node_created_by_son_of_neighbour()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l01522">oomph::RefineableQElement&lt; 2 &gt;::quad_hang_helper()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l04051">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::quad_hang_helper()</a>, and <a class="el" href="quadtree_8cc_source.html#l00751">stick_neighbouring_leaves_into_vector()</a>.</p>
 
 </div>
 </div>
@@ -865,9 +856,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00109">109</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00117">117</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -889,9 +880,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Self-test: Check all neighbours. Return success (0) if the max. distance between corresponding points in the neighbours is less than the tolerance specified in the static value <a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2" title="Max. allowed discrepancy in neighbour finding routine (distance between points when identified from t...">QuadTree::Max_neighbour_finding_tolerance</a>. </p>
 <p>Self-test: Check neighbour finding routine. For each element in the tree and for each vertex, determine the distance between the vertex and its position in the neigbour. If the difference is less than <a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2" title="Max. allowed discrepancy in neighbour finding routine (distance between points when identified from t...">Tree::Max_neighbour_finding_tolerance</a>. return success (0), otherwise failure (1) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00793">793</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00814">814</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="quadtree_8cc_source.html#l01378">doc_neighbours()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="tree_8h_source.html#l00288">oomph::Tree::Max_neighbour_finding_tolerance</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="tree_8cc_source.html#l00272">oomph::Tree::stick_all_tree_nodes_into_vector()</a>.</p>
+<p class="reference">References <a class="el" href="quadtree_8cc_source.html#l01402">doc_neighbours()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="tree_8h_source.html#l00319">oomph::Tree::Max_neighbour_finding_tolerance</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, and <a class="el" href="tree_8cc_source.html#l00277">oomph::Tree::stick_all_tree_nodes_into_vector()</a>.</p>
 
 </div>
 </div>
@@ -919,19 +910,18 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Setup the static data, rotation and reflection schemes, etc. </p>
-<p>Setup the static data stored in the <a class="el" href="classoomph_1_1QuadTree.html">QuadTree</a> &ndash; this needs to be called before QuadTrees can be used. Automatically called by <a class="el" href="classoomph_1_1RefineableQuadMesh.html">RefineableQuadMesh</a> constructor. <br  />
- </p>
+<p>Setup the static data stored in the <a class="el" href="classoomph_1_1QuadTree.html">QuadTree</a> &ndash; this needs to be called before QuadTrees can be used. Automatically called by <a class="el" href="classoomph_1_1RefineableQuadMesh.html">RefineableQuadMesh</a> constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00122">122</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00120">120</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00238">Colour</a>, <a class="el" href="quadtree_8h_source.html#l00193">Direct_string</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::E</a>, <a class="el" href="quadtree_8h_source.html#l00255">Is_adjacent</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::N</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::NE</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::NW</a>, <a class="el" href="tree_8h_source.html#l00237">oomph::Tree::OMEGA</a>, <a class="el" href="quadtree_8h_source.html#l00259">Reflect</a>, <a class="el" href="quadtree_8h_source.html#l00250">Reflect_edge</a>, <a class="el" href="matrices_8h_source.html#l00507">oomph::DenseMatrix&lt; T &gt;::resize()</a>, <a class="el" href="quadtree_8h_source.html#l00263">Rotate</a>, <a class="el" href="quadtree_8h_source.html#l00269">Rotate_angle</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::S</a>, <a class="el" href="quadtree_8h_source.html#l00242">S_base</a>, <a class="el" href="quadtree_8h_source.html#l00274">S_direct</a>, <a class="el" href="quadtree_8h_source.html#l00247">S_step</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::SE</a>, <a class="el" href="quadtree_8h_source.html#l00223">Static_data_has_been_setup</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::SW</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::W</a>.</p>
+<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00252">Colour</a>, <a class="el" href="quadtree_8h_source.html#l00205">Direct_string</a>, <a class="el" href="quadtree_8h_source.html#l00061">oomph::QuadTreeNames::E</a>, <a class="el" href="quadtree_8h_source.html#l00269">Is_adjacent</a>, <a class="el" href="quadtree_8h_source.html#l00060">oomph::QuadTreeNames::N</a>, <a class="el" href="quadtree_8h_source.html#l00059">oomph::QuadTreeNames::NE</a>, <a class="el" href="quadtree_8h_source.html#l00058">oomph::QuadTreeNames::NW</a>, <a class="el" href="tree_8h_source.html#l00268">oomph::Tree::OMEGA</a>, <a class="el" href="quadtree_8h_source.html#l00273">Reflect</a>, <a class="el" href="quadtree_8h_source.html#l00264">Reflect_edge</a>, <a class="el" href="matrices_8h_source.html#l00510">oomph::DenseMatrix&lt; T &gt;::resize()</a>, <a class="el" href="quadtree_8h_source.html#l00277">Rotate</a>, <a class="el" href="quadtree_8h_source.html#l00283">Rotate_angle</a>, <a class="el" href="quadtree_8h_source.html#l00062">oomph::QuadTreeNames::S</a>, <a class="el" href="quadtree_8h_source.html#l00256">S_base</a>, <a class="el" href="quadtree_8h_source.html#l00288">S_direct</a>, <a class="el" href="quadtree_8h_source.html#l00261">S_step</a>, <a class="el" href="quadtree_8h_source.html#l00057">oomph::QuadTreeNames::SE</a>, <a class="el" href="quadtree_8h_source.html#l00238">Static_data_has_been_setup</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::SW</a>, and <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__quad__mesh_8h_source.html#l00059">oomph::RefineableQuadMesh&lt; ELEMENT &gt;::RefineableQuadMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__quad__mesh_8h_source.html#l00056">oomph::RefineableQuadMesh&lt; ELEMENT &gt;::RefineableQuadMesh()</a>.</p>
 
 </div>
 </div>
-<a id="ae84ef914439549e7582bf3e58286f53e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae84ef914439549e7582bf3e58286f53e">&#9670;&nbsp;</a></span>stick_neighbouring_leaves_into_vector()</h2>
+<a id="a341a1e5ace5a7aca56b38328cc8db093"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a341a1e5ace5a7aca56b38328cc8db093">&#9670;&nbsp;</a></span>stick_neighbouring_leaves_into_vector()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -945,13 +935,13 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>tree_neighbouring_s_lo</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>tree_neighbouring_s_hi</em>, </td>
         </tr>
         <tr>
@@ -983,9 +973,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Traverse <a class="el" href="classoomph_1_1Tree.html">Tree</a>: Preorder traverse and stick pointers to neighbouring leaf nodes (only) into <a class="el" href="classoomph_1_1Vector.html">Vector</a>. </p>
 <p>Traverse <a class="el" href="classoomph_1_1Tree.html">Tree</a>: Preorder traverse and stick pointers to neighbouring leaf nodes (only) into <a class="el" href="classoomph_1_1Vector.html">Vector</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00735">735</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8cc_source.html#l00751">751</a> of file <a class="el" href="quadtree_8cc_source.html">quadtree.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="quadtree_8cc_source.html#l00419">gteq_edge_neighbour()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tree_8h_source.html#l00274">oomph::Tree::Son_pt</a>.</p>
+<p class="reference">References <a class="el" href="quadtree_8cc_source.html#l00413">gteq_edge_neighbour()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tree_8h_source.html#l00305">oomph::Tree::Son_pt</a>.</p>
 
 </div>
 </div>
@@ -1013,9 +1003,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Colours for neighbours in various directions. </p>
 <p>Colours for neighbours in various directions (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00238">238</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00252">252</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1042,9 +1032,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Translate (enumerated) directions into strings. </p>
 <p>Translate (enumerated) directions into strings (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00193">193</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00205">205</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8h_source.html#l00359">oomph::QuadTreeRoot::north_equivalent()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8h_source.html#l00366">oomph::QuadTreeRoot::north_equivalent()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1071,9 +1061,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Array of direction/quadrant adjacency scheme: Is_adjacent(i_vertex_or_edge,j_quadrant): Is edge/vertex adjacent to quadrant? </p>
 <p>Array of direction/quadrant adjacency scheme: Is_adjacent(i_vertex_or_edge,j_quadrant): Is edge/vertex adjacent to quadrant? (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00255">255</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00269">269</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00588">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00601">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1100,9 +1090,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Reflection scheme: Reflect(direction,quadrant): Get mirror of quadrant in specified direction. E.g. Reflect(S,NE)=SE. </p>
 <p>Reflection scheme: Reflect(direction,quadrant): Get mirror of quadrant in specified direction. E.g. Reflect(S,NE)=SE (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00259">259</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00273">273</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00588">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00601">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1129,9 +1119,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Get opposite edge, e.g. Reflect_edge[N]=S. </p>
 <p>Get opposite edge, e.g. Reflect_edge[N]=S (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00250">250</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00264">264</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00419">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00413">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1158,9 +1148,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Rotate coordinates: If North becomes NorthIs then direction becomes Rotate(NorthIs,direction). E.g. Rotate(E,NW)=NE;. </p>
 <p>Rotate coordinates: If north becomes NorthIs then direction becomes Rotate(NorthIs,direction). E.g. Rotate(E,NW)=NE; (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00263">263</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00277">277</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00419">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00413">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1187,9 +1177,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Angle betwen rotated coordinates: If old_direction becomes new_direction then the angle between the axes (in anti-clockwise direction is Rotate_angle(old_direction,new_direction); E.g. Rotate_angle(E,N)=90;. </p>
 <p>Angle betwen rotated coordinates: If old_direction becomes new_direction then the angle between the axes (in anti-clockwise direction is Rotate_angle(old_direction,new_direction); E.g. Rotate_angle(E,N)=90; (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00269">269</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00283">283</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00419">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00413">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1213,13 +1203,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>S_base(i,direction): Initial value for coordinate s[i] on the edge indicated by direction (S/E/N/W) <br  />
- </p>
+<p>S_base(i,direction): Initial value for coordinate s[i] on the edge indicated by direction (S/E/N/W) </p>
 <p>S_base(i,direction): Initial value for coordinate s[i] on the edge indicated by direction (S/E/N/W) (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00242">242</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00256">256</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00419">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00413">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1246,9 +1235,9 @@ Additional Inherited Members</h2></td></tr>
 <p>S_direct(direction,son_quadrant): The lower left corner of son_quadrant has an offset of h/2 S_direct(direction,son_quadrant) in the specified direction. E.g. S_direct(S,NE)=1 and S_direct(S,NW)=0. </p>
 <p>S_direct(direction,son_quadrant): The lower left corner of son_quadrant has an offset of h/2 S_direct(direction,son_quadrant) in the specified direction. E.g. S_direct(S,NE)=1 and S_direct(S,NW)=0 (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00274">274</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00288">288</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00588">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00601">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1275,9 +1264,9 @@ Additional Inherited Members</h2></td></tr>
 <p>S_step(i,direction) Increments for coordinate s[i] when progressing along the edge indicated by direction (S/E/N/W); Left/lower vertex: S_base; Right/upper vertex: S_base + S_step. </p>
 <p>S_step(i,direction) Increments for coordinate s[i] when progressing along the edge indicated by direction (S/E/N/W); Left/lower vertex: S_base; Right/upper vertex: S_base + S_step (static data) </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00247">247</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00261">261</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00419">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8cc_source.html#l00413">gteq_edge_neighbour()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1291,7 +1280,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool oomph::QuadTree::Static_data_has_been_setup =false</td>
+          <td class="memname">bool oomph::QuadTree::Static_data_has_been_setup = false</td>
         </tr>
       </table>
   </td>
@@ -1303,9 +1292,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Bool indicating that static member data has been setup. </p>
 
-<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00223">223</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quadtree_8h_source.html#l00238">238</a> of file <a class="el" href="quadtree_8h_source.html">quadtree.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quadtree_8h_source.html#l00305">oomph::QuadTreeRoot::QuadTreeRoot()</a>, and <a class="el" href="quadtree_8cc_source.html#l00122">setup_static_data()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quadtree_8h_source.html#l00315">oomph::QuadTreeRoot::QuadTreeRoot()</a>, and <a class="el" href="quadtree_8cc_source.html#l00120">setup_static_data()</a>.</p>
 
 </div>
 </div>
@@ -1341,7 +1330,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:56:41
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:39:30
         </div>
       </div>
     </footer>

@@ -286,9 +286,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">time_derivative</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, const unsigned &amp;j)</td></tr>
 <tr class="memdesc:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of j-th value in <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>. Note the use of the node's <a class="el" href="the__data__structure_8txt.html#a3b0d20781021ec2f0e788713f8b0fec8">value()</a> function so that hanging nodes are taken into account (this is why the functions for <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> cannot be combined through simple polymorphism: value is not virtual).  <a href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">More...</a><br /></td></tr>
 <tr class="separator:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">time_pt</a> () const</td></tr>
-<tr class="memdesc:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <a href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">More...</a><br /></td></tr>
-<tr class="separator:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af85e8103c08de76d5a9399d30fc2211c">time_pt</a> () const</td></tr>
+<tr class="memdesc:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <a href="classoomph_1_1TimeStepper.html#af85e8103c08de76d5a9399d30fc2211c">More...</a><br /></td></tr>
+<tr class="separator:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a3219b7e7ccdc37f733961eeb8cce0a49">time_pt</a> ()</td></tr>
 <tr class="separator:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a4cb0aecb044b77ba0553cdd54b586d8a">weight</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j) const</td></tr>
@@ -364,7 +364,7 @@ Additional Inherited Members</h2></td></tr>
 <p>The function <a class="el" href="classoomph_1_1TR.html#abde5c3804dd51162f11c50dacb65b315">setup_initial_derivative(Problem* problem_pt)</a> should be called after the initial conditions have been set, but before beginning time stepping, to compute this initial value of dy/dt.</p>
 <p>Warning: moving nodes not implemented (I have no test case). </p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00046">46</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00045">45</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac83377c97c81b2fa5afbf12c56bbb52f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac83377c97c81b2fa5afbf12c56bbb52f">&#9670;&nbsp;</a></span>TR() <span class="overload">[1/2]</span></h2>
@@ -391,9 +391,9 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Constructor, storage for two history derivatives (one for <a class="el" href="classoomph_1_1TR.html">TR</a> and one for the predictor step), one history value, present value and predicted value. </p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00064">64</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00063">63</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00231">oomph::TimeStepper::Adaptive_Flag</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00327">Error_weight</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00239">Initial_derivative_set</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00324">Predictor_weight</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00241">Shift_f</a>, and <a class="el" href="timesteppers_8h_source.html#l00223">oomph::TimeStepper::Weight</a>.</p>
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00251">oomph::TimeStepper::Adaptive_Flag</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00334">Error_weight</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00251">Initial_derivative_set</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00331">Predictor_weight</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00253">Shift_f</a>, and <a class="el" href="timesteppers_8h_source.html#l00243">oomph::TimeStepper::Weight</a>.</p>
 
 </div>
 </div>
@@ -422,7 +422,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00081">81</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00080">80</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
 </div>
 </div>
@@ -452,9 +452,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00330">330</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00337">337</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -486,9 +486,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a3a0fabf83f9bdc89800cd3501df2c586">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00158">158</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00171">171</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00241">Shift_f</a>.</p>
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00253">Shift_f</a>.</p>
 
 </div>
 </div>
@@ -519,9 +519,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a36cbcee0c1127085ba3aa2331bfc0f74">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00164">164</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00177">177</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00239">Initial_derivative_set</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00251">Initial_derivative_set</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>.</p>
 
 </div>
 </div>
@@ -553,7 +553,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#ab66972f0eaf3ba34645793e23e46afd5">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00152">152</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00164">164</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
 </div>
 </div>
@@ -585,7 +585,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a7e894df13c88c96dd8eced2700228225">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00144">144</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00155">155</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
 </div>
 </div>
@@ -617,9 +617,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a2e7fafceb9330ac971078cf9dc248701">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00253">253</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00264">264</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l01043">oomph::Node::position_is_a_copy()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00137">predicted_value_index()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00324">Predictor_weight</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l01138">oomph::Node::position_is_a_copy()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00331">Predictor_weight</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -651,9 +651,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a159d508b1ae643fe31b55da9ee789dbf">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00279">279</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00290">290</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00251">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00137">predicted_value_index()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00324">Predictor_weight</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, and <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00259">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00331">Predictor_weight</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, and <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>.</p>
 
 </div>
 </div>
@@ -683,11 +683,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Location in data of derivatives. </p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00123">123</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00128">128</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00137">predicted_value_index()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00103">set_predictor_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00087">set_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00176">setup_initial_derivative()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00196">shift_time_values()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00105">set_predictor_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00089">set_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00189">setup_initial_derivative()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00210">shift_time_values()</a>.</p>
 
 </div>
 </div>
@@ -718,7 +718,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a00e57b6436cff4fc82af481b81a78a1a">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00140">140</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00148">148</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
 </div>
 </div>
@@ -749,7 +749,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a0f38713ed304c18d9f7b5cf8131664c1">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00120">120</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00122">122</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
 </div>
 </div>
@@ -779,9 +779,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00334">334</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00343">343</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -812,7 +812,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a251e5d4b37381e582b7cf4c554e2e724">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00084">84</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00083">83</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
 </div>
 </div>
@@ -841,11 +841,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Location of predicted value. </p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00137">137</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00142">142</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00123">derivative_index()</a>.</p>
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00253">calculate_predicted_positions()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00279">calculate_predicted_values()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00304">temporal_error_in_position()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00312">temporal_error_in_value()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00264">calculate_predicted_positions()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00290">calculate_predicted_values()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00315">temporal_error_in_position()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00322">temporal_error_in_value()</a>.</p>
 
 </div>
 </div>
@@ -876,9 +876,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#aee0c1da870a603e64efebb51dfc96a3d">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00095">95</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00097">97</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00133">oomph::Time::dt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00327">Error_weight</a>, and <a class="el" href="timesteppers_8h_source.html#l00220">oomph::TimeStepper::Time_pt</a>.</p>
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00142">oomph::Time::dt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00334">Error_weight</a>, and <a class="el" href="timesteppers_8h_source.html#l00240">oomph::TimeStepper::Time_pt</a>.</p>
 
 </div>
 </div>
@@ -909,9 +909,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a2dfb949155ba433066fd69dc427ba1ce">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00103">103</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00105">105</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00123">derivative_index()</a>, <a class="el" href="timesteppers_8h_source.html#l00133">oomph::Time::dt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00324">Predictor_weight</a>, and <a class="el" href="timesteppers_8h_source.html#l00220">oomph::TimeStepper::Time_pt</a>.</p>
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>, <a class="el" href="timesteppers_8h_source.html#l00142">oomph::Time::dt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00331">Predictor_weight</a>, and <a class="el" href="timesteppers_8h_source.html#l00240">oomph::TimeStepper::Time_pt</a>.</p>
 
 </div>
 </div>
@@ -942,9 +942,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a028fa3a8d3c6db6b0ddf580cb0468d55">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00087">87</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00089">89</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00123">derivative_index()</a>, <a class="el" href="timesteppers_8h_source.html#l00133">oomph::Time::dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00220">oomph::TimeStepper::Time_pt</a>, and <a class="el" href="timesteppers_8h_source.html#l00223">oomph::TimeStepper::Weight</a>.</p>
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>, <a class="el" href="timesteppers_8h_source.html#l00142">oomph::Time::dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00240">oomph::TimeStepper::Time_pt</a>, and <a class="el" href="timesteppers_8h_source.html#l00243">oomph::TimeStepper::Weight</a>.</p>
 
 </div>
 </div>
@@ -972,9 +972,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00176">176</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00189">189</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00123">derivative_index()</a>, <a class="el" href="problem_8cc_source.html#l03643">oomph::Problem::get_dvaluesdt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00239">Initial_derivative_set</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="problem_8cc_source.html#l03364">oomph::Problem::set_dofs()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00241">Shift_f</a>.</p>
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>, <a class="el" href="problem_8cc_source.html#l03684">oomph::Problem::get_dvaluesdt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00251">Initial_derivative_set</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="problem_8cc_source.html#l03411">oomph::Problem::set_dofs()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00253">Shift_f</a>.</p>
 
 </div>
 </div>
@@ -1006,7 +1006,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a518b1bee5dc3aae8c5ef13560d1954ac">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00245">245</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00257">257</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
 </div>
 </div>
@@ -1038,9 +1038,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a010a3b03a23a1c48dd8ca10641427255">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00196">196</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00210">210</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00123">derivative_index()</a>, <a class="el" href="timesteppers_8h_source.html#l00133">oomph::Time::dt()</a>, <a class="el" href="nodes_8h_source.html#l00251">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00241">Shift_f</a>, <a class="el" href="timesteppers_8h_source.html#l00536">oomph::TimeStepper::time_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>.</p>
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>, <a class="el" href="timesteppers_8h_source.html#l00142">oomph::Time::dt()</a>, <a class="el" href="nodes_8h_source.html#l00259">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00253">Shift_f</a>, <a class="el" href="timesteppers_8h_source.html#l00584">oomph::TimeStepper::time_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>.</p>
 
 </div>
 </div>
@@ -1082,9 +1082,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#ac463807aff4bcbedd6e8a463c7390536">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00304">304</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00315">315</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00327">Error_weight</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00137">predicted_value_index()</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00334">Error_weight</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -1126,9 +1126,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a27f66759f6d9b2040d26918adb998c78">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00312">312</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00322">322</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00327">Error_weight</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00137">predicted_value_index()</a>, and <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>.</p>
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00334">Error_weight</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>, and <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>.</p>
 
 </div>
 </div>
@@ -1155,9 +1155,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Private data for the error weight. </p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00327">327</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00334">334</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00095">set_error_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00304">temporal_error_in_position()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00312">temporal_error_in_value()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00064">TR()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00097">set_error_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00315">temporal_error_in_position()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00322">temporal_error_in_value()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00063">TR()</a>.</p>
 
 </div>
 </div>
@@ -1173,9 +1173,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00239">239</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00251">251</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00164">actions_before_timestep()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00176">setup_initial_derivative()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00064">TR()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00177">actions_before_timestep()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00189">setup_initial_derivative()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00063">TR()</a>.</p>
 
 </div>
 </div>
@@ -1201,9 +1201,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Private data for the predictor weights. </p>
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00324">324</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00331">331</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00253">calculate_predicted_positions()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00279">calculate_predicted_values()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00103">set_predictor_weights()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00064">TR()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00264">calculate_predicted_positions()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00290">calculate_predicted_values()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00105">set_predictor_weights()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00063">TR()</a>.</p>
 
 </div>
 </div>
@@ -1219,9 +1219,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00241">241</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00253">253</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00158">actions_after_timestep()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00176">setup_initial_derivative()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00196">shift_time_values()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00064">TR()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00171">actions_after_timestep()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00189">setup_initial_derivative()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00210">shift_time_values()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00063">TR()</a>.</p>
 
 </div>
 </div>
@@ -1256,7 +1256,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:57:59
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:36
         </div>
       </div>
     </footer>

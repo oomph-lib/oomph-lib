@@ -22,13 +22,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035fe
 virtual void \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a6076752384082cfa3de3e0cf17daa9aa}{calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+dG}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+sigma\+\_\+dG, const bool \&symmetrize\+\_\+tensor=true)
 \begin{DoxyCompactList}\small\item\em Calculate the derivatives of the contravariant 2nd Piola Kirchhoff stress tensor with respect to the deformed metric tensor. Arguments are the covariant undeformed and deformed metric tensor, the current value of the stress tensor and the rank four tensor in which to return the derivatives of the stress tensor The default implementation uses finite differences, but can be overloaded for constitutive laws in which an analytic formulation is possible. If the boolean flag symmetrize\+\_\+tensor is false, only the \char`\"{}upper  triangular\char`\"{} entries of the tensor will be filled in. This is a useful efficiency when using the derivatives in Jacobian calculations. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_ac8178b1b7cd7e6a64942dba9e0997b30}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma\+\_\+dev, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G\+\_\+contra, double \&Gdet)
-\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_af13f9d05db09870d1b90b7ef389bdb71}{calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+dG}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma, const double \&detG, const double \&interpolated\+\_\+solid\+\_\+p, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+sigma\+\_\+dG, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&d\+\_\+det\+G\+\_\+dG, const bool \&symmetrize\+\_\+tensor=true)
 \begin{DoxyCompactList}\small\item\em Calculate the derivatives of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. with respect to the deformed metric tensor. Also return the derivatives of the determinant of the deformed metric tensor with respect to the deformed metric tensor. This form is appropriate for truly-\/incompressible materials. The default implementation uses finite differences for the derivatives that depend on the constitutive law, but not for the derivatives of the determinant, which are generic. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a26f34355b626bebcad8f498fa5271d20}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma\+\_\+dev, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&Gcontra, double \&gen\+\_\+dil, double \&inv\+\_\+kappa)
-\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a4f1bcac8d308d9ad0013ddf5def505}{calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+dG}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma, const double \&gen\+\_\+dil, const double \&inv\+\_\+kappa, const double \&interpolated\+\_\+solid\+\_\+p, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+sigma\+\_\+dG, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&d\+\_\+gen\+\_\+dil\+\_\+dG, const bool \&symmetrize\+\_\+tensor=true)
 \begin{DoxyCompactList}\small\item\em Calculate the derivatives of the contravariant 2nd Piola Kirchoff stress tensor with respect to the deformed metric tensor. Also return the derivatives of the generalised dilatation, $ d, $ with respect to the deformed metric tensor. This form is appropriate for near-\/incompressible materials. The default implementation uses finite differences. If the boolean flag symmetrize\+\_\+tensor is false, only the \char`\"{}upper  triangular\char`\"{} entries of the tensor will be filled in. This is a useful efficiency when using the derivatives in Jacobian calculations. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a446452158a8ae9fbc3dde4277155f824}{requires\+\_\+incompressibility\+\_\+constraint}} ()=0
@@ -109,8 +107,7 @@ The functional form of the constitutive equation is different for compressible/i
  ~\newline
 
 \item {\bfseries{Nearly}} {\bfseries{Incompressible}} {\bfseries{Behaviour\+:}} ~\newline
- If the material is nearly incompressible, it is advantageous to split the stress into its deviatoric and hydrostatic parts by writing the constitutive law in the form \[ \sigma^{ij} = -p G^{ij} + \overline{\sigma}^{ij}\big(\gamma_{kl}\big), \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) \] where the deviatoric part of the stress tensor, $ \overline{\sigma}^{ij}, $ depends on the strain. This form of the constitutive law is identical to that of the incompressible case and it involves a pressure $ p $ which needs to be determined from an additional equation. In the incompressible case, this equation was given by the incompressibility constraint (2). Here, we need to augment the constitutive law (3) by a separate equation for the pressure. Generally this takes the form \[ p = - \kappa \ d \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) \] where $ \kappa $ is the \char`\"{}bulk modulus\char`\"{}, a material property that needs to be specified by the constitutive law. ~\newline
- $ d $ is the (generalised) dilatation, i.\+e. the relative change in the volume of an infinitesimal material element (or some suitable generalised quantitiy that is related to it). As the material approaches incompressibility, $ \kappa \to \infty$, so that infinitely large pressures would be required to achieve any change in volume. To facilitate the implementation of (4) as the equation for the pressure, we re-\/write it in the form \[ p \ \frac{1}{\kappa} + d\big(g_{ij},G_{ij}\big) = 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \] which only involves quantities that remain finite as we approach true incompressibility. ~\newline
+ If the material is nearly incompressible, it is advantageous to split the stress into its deviatoric and hydrostatic parts by writing the constitutive law in the form \[ \sigma^{ij} = -p G^{ij} + \overline{\sigma}^{ij}\big(\gamma_{kl}\big), \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) \] where the deviatoric part of the stress tensor, $ \overline{\sigma}^{ij}, $ depends on the strain. This form of the constitutive law is identical to that of the incompressible case and it involves a pressure $ p $ which needs to be determined from an additional equation. In the incompressible case, this equation was given by the incompressibility constraint (2). Here, we need to augment the constitutive law (3) by a separate equation for the pressure. Generally this takes the form \[ p = - \kappa \ d \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) \] where $ \kappa $ is the \char`\"{}bulk modulus\char`\"{}, a material property that needs to be specified by the constitutive law. $ d $ is the (generalised) dilatation, i.\+e. the relative change in the volume of an infinitesimal material element (or some suitable generalised quantitiy that is related to it). As the material approaches incompressibility, $ \kappa \to \infty$, so that infinitely large pressures would be required to achieve any change in volume. To facilitate the implementation of (4) as the equation for the pressure, we re-\/write it in the form \[ p \ \frac{1}{\kappa} + d\big(g_{ij},G_{ij}\big) = 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \] which only involves quantities that remain finite as we approach true incompressibility. ~\newline
  Given the deformed and undeformed metric tensors, the computation of the stress tensor $ \sigma^{ij} $ for a nearly incompressible material therefore requires the computation of the following quantities\+:
 \begin{DoxyItemize}
 \item The deviatoric stress $ \overline{\sigma}^{ij} $
@@ -145,7 +142,7 @@ The functional form of the constitutive equation is different for compressible/i
  
 \end{DoxyEnumerate}
 
-Definition at line 485 of file constitutive\+\_\+laws.\+h.
+Definition at line 488 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -162,7 +159,7 @@ Empty constructor.
 
 
 
-Definition at line 518 of file constitutive\+\_\+laws.\+h.
+Definition at line 519 of file constitutive\+\_\+laws.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ConstitutiveLaw_aa75b88c826723ba090ace39c26da0ae6}\label{classoomph_1_1ConstitutiveLaw_aa75b88c826723ba090ace39c26da0ae6}} 
 \index{oomph::ConstitutiveLaw@{oomph::ConstitutiveLaw}!````~ConstitutiveLaw@{$\sim$ConstitutiveLaw}}
@@ -176,7 +173,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 522 of file constitutive\+\_\+laws.\+h.
+Definition at line 523 of file constitutive\+\_\+laws.\+h.
 
 
 
@@ -193,7 +190,7 @@ Test whether two matrices are of equal dimensions.
 
 This function is used to check whether matrices are of equal dimension. 
 
-Definition at line 47 of file constitutive\+\_\+laws.\+cc.
+Definition at line 52 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -215,7 +212,7 @@ Calculate a contravariant tensor from a covariant tensor, and return the determi
 
 The function to calculate the contravariant tensor from a covariant one. Three dimensions
 
-Definition at line 107 of file constitutive\+\_\+laws.\+cc.
+Definition at line 113 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -237,7 +234,7 @@ Calculate the derivatives of the contravariant tensor and the derivatives of the
 
 The function to calculate the derivatives of the contravariant tensor and determinant of covariant tensor with respect to the components of the covariant tensor Three dimensions
 
-Definition at line 214 of file constitutive\+\_\+laws.\+cc.
+Definition at line 225 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -255,7 +252,7 @@ Calculate the derivatives of the contravariant 2nd Piola Kirchhoff stress tensor
 
 If the boolean flag symmetrize\+\_\+tensor is false, only the \char`\"{}upper  triangular\char`\"{} entries of the tensor will be filled in. This is a useful efficiency when using the derivatives in Jacobian calculations. 
 
-Definition at line 440 of file constitutive\+\_\+laws.\+cc.
+Definition at line 453 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -273,7 +270,7 @@ Calculate the derivatives of the contravariant 2nd Piola Kirchoff stress tensor 
 
 Calculate the derivatives of the contravariant 2nd Piola Kirchoff stress tensor with respect to the deformed metric tensor. Also return the derivatives of the generalised dilatation, $ d, $ with respect to the deformed metric tensor. This form is appropriate for near-\/incompressible materials. The default implementation uses finite differences. 
 
-Definition at line 552 of file constitutive\+\_\+laws.\+cc.
+Definition at line 566 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -291,7 +288,7 @@ Calculate the derivatives of the contravariant 2nd Piola Kirchhoff stress tensor
 
 Calculate the derivatives of the contravariant 2nd Piola Kirchhoff stress tensor with respect to the deformed metric tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the derivatives of the stress tensor The default implementation uses finite differences, but can be overloaded for constitutive laws in which an analytic formulation is possible. 
 
-Definition at line 340 of file constitutive\+\_\+laws.\+cc.
+Definition at line 352 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -299,7 +296,7 @@ References are\+\_\+matrices\+\_\+of\+\_\+equal\+\_\+dimensions(), calculate\+\_
 
 
 
-Referenced by oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper().
+Referenced by oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper(), and oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper().
 
 \mbox{\Hypertarget{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}\label{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}} 
 \index{oomph::ConstitutiveLaw@{oomph::ConstitutiveLaw}!calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}}
@@ -317,7 +314,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConst
 
 
 
-Referenced by calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G(), oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+::get\+\_\+stress(), and oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::get\+\_\+stress().
+Referenced by calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G(), oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+::get\+\_\+stress(), oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::get\+\_\+stress(), oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::get\+\_\+stress(), and oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::get\+\_\+stress().
 
 \mbox{\Hypertarget{classoomph_1_1ConstitutiveLaw_ac8178b1b7cd7e6a64942dba9e0997b30}\label{classoomph_1_1ConstitutiveLaw_ac8178b1b7cd7e6a64942dba9e0997b30}} 
 \index{oomph::ConstitutiveLaw@{oomph::ConstitutiveLaw}!calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}}
@@ -327,8 +324,7 @@ Referenced by calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress
 
 
 
-Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. ~\newline
- 
+Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. 
 
 
 
@@ -336,7 +332,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionCon
 
 
 
-Definition at line 561 of file constitutive\+\_\+laws.\+h.
+Definition at line 565 of file constitutive\+\_\+laws.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ConstitutiveLaw_a26f34355b626bebcad8f498fa5271d20}\label{classoomph_1_1ConstitutiveLaw_a26f34355b626bebcad8f498fa5271d20}} 
 \index{oomph::ConstitutiveLaw@{oomph::ConstitutiveLaw}!calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}}
@@ -346,8 +342,7 @@ Definition at line 561 of file constitutive\+\_\+laws.\+h.
 
 
 
-Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. ~\newline
- 
+Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined from $ p / \kappa - d =0 $. 
 
 
 
@@ -355,7 +350,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionCon
 
 
 
-Definition at line 602 of file constitutive\+\_\+laws.\+h.
+Definition at line 610 of file constitutive\+\_\+laws.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}\label{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}} 
 \index{oomph::ConstitutiveLaw@{oomph::ConstitutiveLaw}!error\_checking\_in\_input@{error\_checking\_in\_input}}
@@ -369,7 +364,7 @@ Check for errors in the input, i.\+e. check that the dimensions of the arrays ar
 
 This function is used to provide simple error (bounce) checks on the input to any calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress 
 
-Definition at line 60 of file constitutive\+\_\+laws.\+cc.
+Definition at line 71 of file constitutive\+\_\+laws.\+cc.
 
 
 
@@ -391,7 +386,7 @@ Test whether a matrix is square.
 
 This function is used to check whether a matrix is square. 
 
-Definition at line 37 of file constitutive\+\_\+laws.\+cc.
+Definition at line 36 of file constitutive\+\_\+laws.\+cc.
 
 
 

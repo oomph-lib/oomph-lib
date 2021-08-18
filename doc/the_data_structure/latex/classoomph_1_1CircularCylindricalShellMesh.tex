@@ -23,8 +23,7 @@ typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMes
 \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a2382a9ed0cd210c7b697e6ba4f4e2b0b}{Circular\+Cylindrical\+Shell\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx, const double \&ly, \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+B\+L\+Stretching\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_aa9c69dc3c6692d19706178d558d07f86}{axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor for the mesh -- specify fct that maps axial Lagr. coordinates to new positions to allow for better resolution of bending boundary layer. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_aba83d68289f90a8567887443c3b9c6f0}{Circular\+Cylindrical\+Shell\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx, const double \&ly, const unsigned \&nx\+\_\+bl, const double \&delta\+\_\+bl, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
-\begin{DoxyCompactList}\small\item\em Constructor for the mesh. nx\+\_\+bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta\+\_\+bl. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor for the mesh. nx\+\_\+bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta\+\_\+bl. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a03bba13301e4dec893d73716e146c71d}{assign\+\_\+undeformed\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$const \&undeformed\+\_\+midplane\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-\/free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+B\+L\+Stretching\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_aa9c69dc3c6692d19706178d558d07f86}{axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}} () const
@@ -56,7 +55,7 @@ class oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
 
 A 2D solid mesh for (topologically) circular cylindrical shells. The shell is represented by two Lagrangian coordinates that correspond to z and theta in cylindrical polars. The required mesh is therefore a 2D mesh and is therefore inherited from the generic \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} 
 
-Definition at line 53 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 51 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -74,7 +73,7 @@ Typedef for fct that defines the axial stretching fct.
 
 
 
-Definition at line 60 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 57 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -92,7 +91,7 @@ Constructor for the mesh -- uniformly spaced elements.
 
 
 
-Definition at line 63 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 60 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -111,7 +110,7 @@ Constructor for the mesh -- specify fct that maps axial Lagr. coordinates to new
 
 
 
-Definition at line 86 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 83 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -126,12 +125,11 @@ References oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ E\+L\+E\+M\+E\+N\+T 
 
 
 
-Constructor for the mesh. nx\+\_\+bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta\+\_\+bl. ~\newline
- 
+Constructor for the mesh. nx\+\_\+bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta\+\_\+bl. 
 
 
 
-Definition at line 110 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 106 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -153,7 +151,7 @@ In all elastic problems, the nodes must be assigned an undeformed, or reference,
 
 Set the undeformed coordinates of the nodes. 
 
-Definition at line 133 of file circular\+\_\+shell\+\_\+mesh.\+template.\+cc.
+Definition at line 127 of file circular\+\_\+shell\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -172,7 +170,7 @@ Access to fct pointer to fct that defines the axial stretching fct.
 
 
 
-Definition at line 141 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 136 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -195,7 +193,7 @@ void \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Cir
 
 \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} build fct. 
 
-Definition at line 43 of file circular\+\_\+shell\+\_\+mesh.\+template.\+cc.
+Definition at line 41 of file circular\+\_\+shell\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -218,7 +216,7 @@ Default axial scaling fct.
 
 
 
-Definition at line 170 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 165 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -241,7 +239,7 @@ Fct that defines the axial stretching to accomodate bending boundary layers.
 
 
 
-Definition at line 157 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 152 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -263,7 +261,7 @@ Fct pointer to fct that defines the axial stretching fct.
 
 
 
-Definition at line 198 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 193 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -282,7 +280,7 @@ Axial extent of the squashed boundary layer part of the mesh occupied by Nx\+\_\
 
 
 
-Definition at line 206 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 201 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 
@@ -301,7 +299,7 @@ Number of azimuthal element layers that get squashed into each of the the two bo
 
 
 
-Definition at line 202 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
+Definition at line 197 of file circular\+\_\+shell\+\_\+mesh.\+template.\+h.
 
 
 

@@ -18,7 +18,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ac06a05511ae55f0d554e940789661de1}{Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (Mesh $\ast$tet\+\_\+mesh\+\_\+pt, const Vector$<$ unsigned $>$ \&boundary\+\_\+ids, \mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ae4289650b0c0eccb2fd3d661b85e85ee}{Thickness\+Fct\+Pt}} thickness\+\_\+fct\+\_\+pt, const unsigned \&nlayer, const Vector$<$ Vector$<$ unsigned $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_a3cfd55eb5bbd6801e9d4cd271e602cd8}{in\+\_\+out\+\_\+boundary\+\_\+id}}, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ad63a299cf5157306eff782d46b684960}{Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (Mesh $\ast$tet\+\_\+mesh\+\_\+pt, const Vector$<$ unsigned $>$ \&boundary\+\_\+ids, \mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ae4289650b0c0eccb2fd3d661b85e85ee}{Thickness\+Fct\+Pt}} thickness\+\_\+fct\+\_\+pt, const unsigned \&nlayer, const Vector$<$ Vector$<$ unsigned $>$$>$ \&\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_a3cfd55eb5bbd6801e9d4cd271e602cd8}{in\+\_\+out\+\_\+boundary\+\_\+id}}, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Specify (quadratic) tet mesh, boundary I\+Ds of boundary on which the current mesh is to be erected (in an F\+SI context this boundary tends to be the F\+SI boundary of the fluid mesh. Also specify the uniform thickness of layer, and the number of element layers. The vectors stored in in\+\_\+out\+\_\+boundary\+\_\+ids contain the boundary I\+Ds of the other boundaries in the tet mesh. In an F\+SI context these typically identify the in/outflow boundaries in the fluid mesh. The boundary enumeration of the current mesh follows the one of the underlying fluid mesh\+: The enumeration of the F\+SI boundary matches (to enable the setup of the F\+SI matching); the \char`\"{}in/outflow\char`\"{} faces in this mesh inherit the same enumeration as the in/outflow faces in the underlying fluid mesh. Finally, the \char`\"{}outer\char`\"{} boundary gets its own boundary ID. Timestepper defaults to steady pseudo-\/timestepper. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -28,7 +28,7 @@ class oomph\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T
 
 Solid brick mesh layer built on top of a given tet mesh. Typically used in F\+SI problems where the tet mesh is the fluid mesh and this mesh acts as the solid mesh that surrounds the F\+SI interface. 
 
-Definition at line 196 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 182 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -46,17 +46,17 @@ Function pointer to function that specifies the wall thickness as a fct of the c
 
 
 
-Definition at line 205 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 189 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1SolidThinLayerBrickOnTetMesh_ac06a05511ae55f0d554e940789661de1}\label{classoomph_1_1SolidThinLayerBrickOnTetMesh_ac06a05511ae55f0d554e940789661de1}} 
+\mbox{\Hypertarget{classoomph_1_1SolidThinLayerBrickOnTetMesh_ad63a299cf5157306eff782d46b684960}\label{classoomph_1_1SolidThinLayerBrickOnTetMesh_ad63a299cf5157306eff782d46b684960}} 
 \index{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!SolidThinLayerBrickOnTetMesh@{SolidThinLayerBrickOnTetMesh}}
 \index{SolidThinLayerBrickOnTetMesh@{SolidThinLayerBrickOnTetMesh}!oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{SolidThinLayerBrickOnTetMesh()}{SolidThinLayerBrickOnTetMesh()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh}{oomph\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh}{Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{const Vector$<$ unsigned $>$ \&}]{boundary\+\_\+ids,  }\item[{\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ae4289650b0c0eccb2fd3d661b85e85ee}{Thickness\+Fct\+Pt}}}]{thickness\+\_\+fct\+\_\+pt,  }\item[{const unsigned \&}]{nlayer,  }\item[{const Vector$<$ Vector$<$ unsigned $>$ $>$ \&}]{in\+\_\+out\+\_\+boundary\+\_\+id,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh}{oomph\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh}{Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{const Vector$<$ unsigned $>$ \&}]{boundary\+\_\+ids,  }\item[{\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ae4289650b0c0eccb2fd3d661b85e85ee}{Thickness\+Fct\+Pt}}}]{thickness\+\_\+fct\+\_\+pt,  }\item[{const unsigned \&}]{nlayer,  }\item[{const Vector$<$ Vector$<$ unsigned $>$$>$ \&}]{in\+\_\+out\+\_\+boundary\+\_\+id,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -64,7 +64,7 @@ Constructor\+: Specify (quadratic) tet mesh, boundary I\+Ds of boundary on which
 
 
 
-Definition at line 221 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
+Definition at line 205 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 

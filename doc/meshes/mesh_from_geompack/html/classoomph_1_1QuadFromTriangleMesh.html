@@ -149,9 +149,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a78f9c12882d4554e4484255640b6bf51"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadFromTriangleMesh.html#a78f9c12882d4554e4484255640b6bf51">QuadFromTriangleMesh</a> (<a class="el" href="classoomph_1_1TriangleMeshParameters.html">TriangleMeshParameters</a> &amp;triangle_mesh_parameters, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
 <tr class="memdesc:a78f9c12882d4554e4484255640b6bf51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh, based on the specifications on <a class="el" href="classoomph_1_1TriangleMeshParameters.html" title="Helper object for dealing with the parameters used for the TriangleMesh objects.">TriangleMeshParameters</a>. All the actual work is done in UnstructuredTwoDMeshGeometryBase.  <a href="classoomph_1_1QuadFromTriangleMesh.html#a78f9c12882d4554e4484255640b6bf51">More...</a><br /></td></tr>
 <tr class="separator:a78f9c12882d4554e4484255640b6bf51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc09586ae510ea1a6bd021bdc0424cc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadFromTriangleMesh.html#acc09586ae510ea1a6bd021bdc0424cc1">generic_constructor</a> (Vector&lt; TriangleMeshPolygon * &gt; &amp;outer_boundary_pt, Vector&lt; TriangleMeshPolygon * &gt; &amp;internal_polygon_pt, Vector&lt; TriangleMeshOpenCurve * &gt; &amp;open_polylines_pt, const double &amp;element_area, Vector&lt; Vector&lt; double &gt; &gt; &amp;extra_holes_coordinates, std::map&lt; unsigned, Vector&lt; double &gt; &gt; &amp;regions_coordinates, std::map&lt; unsigned, double &gt; &amp;regions_areas, TimeStepper *time_stepper_pt, const bool &amp;use_attributes, const bool &amp;refine_boundary, const bool &amp;refine_internal_boundary)</td></tr>
-<tr class="memdesc:acc09586ae510ea1a6bd021bdc0424cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">A general-purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information.  <a href="classoomph_1_1QuadFromTriangleMesh.html#acc09586ae510ea1a6bd021bdc0424cc1">More...</a><br /></td></tr>
-<tr class="separator:acc09586ae510ea1a6bd021bdc0424cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0de5a4ea20629da1d467d8a95e3b1dca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadFromTriangleMesh.html#a0de5a4ea20629da1d467d8a95e3b1dca">generic_constructor</a> (Vector&lt; TriangleMeshPolygon * &gt; &amp;outer_boundary_pt, Vector&lt; TriangleMeshPolygon * &gt; &amp;internal_polygon_pt, Vector&lt; TriangleMeshOpenCurve * &gt; &amp;open_polylines_pt, const double &amp;element_area, Vector&lt; Vector&lt; double &gt;&gt; &amp;extra_holes_coordinates, std::map&lt; unsigned, Vector&lt; double &gt;&gt; &amp;regions_coordinates, std::map&lt; unsigned, double &gt; &amp;regions_areas, TimeStepper *time_stepper_pt, const bool &amp;use_attributes, const bool &amp;refine_boundary, const bool &amp;refine_internal_boundary)</td></tr>
+<tr class="memdesc:a0de5a4ea20629da1d467d8a95e3b1dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">A general-purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information.  <a href="classoomph_1_1QuadFromTriangleMesh.html#a0de5a4ea20629da1d467d8a95e3b1dca">More...</a><br /></td></tr>
+<tr class="separator:a0de5a4ea20629da1d467d8a95e3b1dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc45cf7389f505a2f05d477474b2dcbb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuadFromTriangleMesh.html#adc45cf7389f505a2f05d477474b2dcbb">QuadFromTriangleMesh</a> (const <a class="el" href="classoomph_1_1QuadFromTriangleMesh.html">QuadFromTriangleMesh</a> &amp;dummy)</td></tr>
 <tr class="memdesc:adc45cf7389f505a2f05d477474b2dcbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1QuadFromTriangleMesh.html#adc45cf7389f505a2f05d477474b2dcbb">More...</a><br /></td></tr>
 <tr class="separator:adc45cf7389f505a2f05d477474b2dcbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,10 +177,9 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
 class oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;</h3>
 
-<p>Quad mesh built on top of triangle scaffold mesh coming <br  />
- from the triangle mesh generator Triangle. <a href="http://www.cs.cmu.edu/~quake/triangle.html">http://www.cs.cmu.edu/~quake/triangle.html</a> </p>
+<p>Quad mesh built on top of triangle scaffold mesh coming from the triangle mesh generator Triangle. <a href="http://www.cs.cmu.edu/~quake/triangle.html">http://www.cs.cmu.edu/~quake/triangle.html</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00072">72</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00070">70</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af94e552be1bd35ec03eed1bcfcbc40af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af94e552be1bd35ec03eed1bcfcbc40af">&#9670;&nbsp;</a></span>QuadFromTriangleMesh() <span class="overload">[1/4]</span></h2>
@@ -209,7 +208,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Empty constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00079">79</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00075">75</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -275,9 +274,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor with the input files. </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00092">92</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00088">88</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="quad__from__triangle__mesh_8template_8cc_source.html#l00073">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00558">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00562">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="quad__from__triangle__mesh_8template_8cc_source.html#l00071">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00565">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00569">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
 </div>
 </div>
@@ -319,9 +318,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Build mesh, based on the specifications on <a class="el" href="classoomph_1_1TriangleMeshParameters.html" title="Helper object for dealing with the parameters used for the TriangleMesh objects.">TriangleMeshParameters</a>. All the actual work is done in UnstructuredTwoDMeshGeometryBase. </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00138">138</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00133">133</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l00264">oomph::TriangleMeshParameters::communicator_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00176">oomph::TriangleMeshParameters::element_area()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00182">oomph::TriangleMeshParameters::extra_holes_coordinates()</a>, <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00364">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00158">oomph::TriangleMeshParameters::internal_closed_curve_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00167">oomph::TriangleMeshParameters::internal_open_curves_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00301">oomph::TriangleMeshParameters::is_automatic_creation_of_vertices_on_boundaries_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00271">oomph::TriangleMeshParameters::is_boundary_refinement_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00282">oomph::TriangleMeshParameters::is_internal_boundary_refinement_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00257">oomph::TriangleMeshParameters::is_mesh_distributed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00251">oomph::TriangleMeshParameters::is_use_attributes()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00142">oomph::TriangleMeshParameters::outer_boundary_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00230">oomph::TriangleMeshParameters::regions_coordinates()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00240">oomph::TriangleMeshParameters::target_area_for_region()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00558">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>.</p>
+<p class="reference">References <a class="el" href="triangle__mesh_8template_8h_source.html#l00310">oomph::TriangleMeshParameters::communicator_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00189">oomph::TriangleMeshParameters::element_area()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00201">oomph::TriangleMeshParameters::extra_holes_coordinates()</a>, <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00368">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00163">oomph::TriangleMeshParameters::internal_closed_curve_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00176">oomph::TriangleMeshParameters::internal_open_curves_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00361">oomph::TriangleMeshParameters::is_automatic_creation_of_vertices_on_boundaries_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00322">oomph::TriangleMeshParameters::is_boundary_refinement_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00340">oomph::TriangleMeshParameters::is_internal_boundary_refinement_allowed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00298">oomph::TriangleMeshParameters::is_mesh_distributed()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00286">oomph::TriangleMeshParameters::is_use_attributes()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00139">oomph::TriangleMeshParameters::outer_boundary_pt()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00255">oomph::TriangleMeshParameters::regions_coordinates()</a>, <a class="el" href="triangle__mesh_8template_8h_source.html#l00267">oomph::TriangleMeshParameters::target_area_for_region()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00565">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>.</p>
 
 </div>
 </div>
@@ -353,7 +352,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00508">508</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00515">515</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -384,7 +383,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Empty destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00521">521</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00528">528</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -425,15 +424,15 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Build the quad mesh from the given scaffold mesh. </p>
 <p>Build the full mesh with the help of the scaffold mesh coming from the triangle mesh generator, Triangle. To build this quad element based mesh we make use of the fact that a triangle element can be split as shown in the diagram below:</p>
-<pre class="fragment">             N2 
-            | |                 N0 : 1st scaffold element node       
+<pre class="fragment">             N2
+            | |                 N0 : 1st scaffold element node
            |   |                N1 : 2nd scaffold element node
           |     |               N2 : 3rd scaffold element node
-         |       |  
+         |       |
       C |   Q_2   | B           Edge 0 : N0 --&gt; N1
        | |       | |            Edge 1 : N1 --&gt; N2
       |   |     |   |           Edge 2 : N2 --&gt; N0
-     |     |   |     | 
+     |     |   |     |
     |       | |       |         A : Midpoint of edge 0
    |   Q_0   |   Q_1   |        B : Midpoint of edge 1
   |          |          |       C : Midpoint of edge 2
@@ -442,14 +441,14 @@ N0 __________|__________ N1
              A
 </pre><p>The intersection of all three quad elements is the centroid. Using this splitting, the subsequent mesh will consist of quadrilaterals whose shape which depend on the structure of the underlying mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8cc_source.html#l00073">73</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8cc_source.html">quad_from_triangle_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8cc_source.html#l00071">71</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8cc_source.html">quad_from_triangle_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00364">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00092">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::QuadFromTriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00368">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00088">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::QuadFromTriangleMesh()</a>.</p>
 
 </div>
 </div>
-<a id="acc09586ae510ea1a6bd021bdc0424cc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc09586ae510ea1a6bd021bdc0424cc1">&#9670;&nbsp;</a></span>generic_constructor()</h2>
+<a id="a0de5a4ea20629da1d467d8a95e3b1dca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0de5a4ea20629da1d467d8a95e3b1dca">&#9670;&nbsp;</a></span>generic_constructor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -486,13 +485,13 @@ template&lt;class ELEMENT &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector&lt; Vector&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">Vector&lt; Vector&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>extra_holes_coordinates</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; unsigned, Vector&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::map&lt; unsigned, Vector&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>regions_coordinates</em>, </td>
         </tr>
         <tr>
@@ -540,11 +539,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>A general-purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information. </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00364">364</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00368">368</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 
-<p class="reference">References <a class="el" href="quad__from__triangle__mesh_8template_8cc_source.html#l00073">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00558">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="namespaceoomph.html#a3af531b221ad8fe56e4f9e3364435b87">oomph::triangulate()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00562">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+<p class="reference">References <a class="el" href="quad__from__triangle__mesh_8template_8cc_source.html#l00071">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00565">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Time_stepper_pt</a>, <a class="el" href="namespaceoomph.html#a3af531b221ad8fe56e4f9e3364435b87">oomph::triangulate()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00569">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00138">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::QuadFromTriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00133">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::QuadFromTriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -576,7 +575,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00514">514</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00521">521</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -597,9 +596,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Timestepper used to build elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00558">558</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00565">565</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00364">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00092">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::QuadFromTriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00368">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00088">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::QuadFromTriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -618,9 +617,9 @@ template&lt;class ELEMENT &gt; </div>
 </div><div class="memdoc">
 <p>Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) </p>
 
-<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00562">562</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00569">569</a> of file <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html">quad_from_triangle_mesh.template.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00364">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00092">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::QuadFromTriangleMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00368">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::generic_constructor()</a>, and <a class="el" href="quad__from__triangle__mesh_8template_8h_source.html#l00088">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::QuadFromTriangleMesh()</a>.</p>
 
 </div>
 </div>
@@ -656,7 +655,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:51:50
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:35:24
         </div>
       </div>
     </footer>

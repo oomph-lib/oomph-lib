@@ -181,7 +181,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class to indicate which derivatives of the vorticity/ velocity we want to recover. We choose to immediately instantiate an object of this class by dropping the semi-colon after the class description. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00058">58</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00054">54</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a588568f558fcea66735e8fb62c7c80f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a588568f558fcea66735e8fb62c7c80f1">&#9670;&nbsp;</a></span>RecoveryHelper()</h2>
@@ -208,9 +208,9 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00062">62</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00058">58</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00212">Maximum_order_of_velocity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00207">Maximum_order_of_vorticity_derivative</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00211">Maximum_order_of_velocity_derivative</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00206">Maximum_order_of_vorticity_derivative</a>.</p>
 
 </div>
 </div>
@@ -240,11 +240,11 @@ Private Attributes</h2></td></tr>
 
 <p>Calculates the number of values per field given the number of vorticity and velocity derivatives to recover (stored as private data) </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00129">129</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00126">126</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00212">Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00207">Maximum_order_of_vorticity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00154">npartial_derivative()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00203">Number_of_values_per_field</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00211">Maximum_order_of_velocity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00206">Maximum_order_of_vorticity_derivative</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00155">npartial_derivative()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00202">Number_of_values_per_field</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00106">set_maximum_order_of_velocity_derivative()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00086">set_maximum_order_of_vorticity_derivative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00103">set_maximum_order_of_velocity_derivative()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00082">set_maximum_order_of_vorticity_derivative()</a>.</p>
 
 </div>
 </div>
@@ -273,9 +273,11 @@ Private Attributes</h2></td></tr>
 
 <p>The maximum order of derivatives calculated in the velocity recovery. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00079">79</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00075">75</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00212">Maximum_order_of_velocity_derivative</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00211">Maximum_order_of_velocity_derivative</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -304,9 +306,11 @@ Private Attributes</h2></td></tr>
 
 <p>The maximum order of derivatives calculated in the vorticity recovery. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00072">72</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00068">68</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00207">Maximum_order_of_vorticity_derivative</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00206">Maximum_order_of_vorticity_derivative</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -335,9 +339,11 @@ Private Attributes</h2></td></tr>
 
 <p>Number of continuously interpolated values: </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00190">190</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00191">191</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00203">Number_of_values_per_field</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00202">Number_of_values_per_field</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00227">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::VorticitySmootherElement()</a>.</p>
 
 </div>
 </div>
@@ -367,11 +373,11 @@ Private Attributes</h2></td></tr>
 
 <p>Helper function that determines the number of n-th order partial derivatives in d-dimensions. Specifically there are (n+d-1)(choose)(d-1) possible n-th order partial derivatives in d-dimensions. Implementation makes use of the code found at: www.geeksforgeeks.org/space-and-time-efficient-binomial-coefficient/. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00154">154</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00155">155</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00691">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00126">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00702">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::npartial_derivative()</a>.</p>
 
 </div>
 </div>
@@ -401,9 +407,9 @@ Private Attributes</h2></td></tr>
 
 <p>The maximum order of derivatives calculated in the velocity recovery. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00106">106</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00103">103</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00212">Maximum_order_of_velocity_derivative</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00126">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00211">Maximum_order_of_velocity_derivative</a>.</p>
 
 </div>
 </div>
@@ -433,9 +439,9 @@ Private Attributes</h2></td></tr>
 
 <p>The maximum order of derivatives calculated in the vorticity recovery. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00086">86</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00082">82</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00207">Maximum_order_of_vorticity_derivative</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00126">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00206">Maximum_order_of_vorticity_derivative</a>.</p>
 
 </div>
 </div>
@@ -462,9 +468,9 @@ Private Attributes</h2></td></tr>
 
 <p>Maximum number of derivatives to retain in the velocity recovery. Note, the value 0 means we don't calculate the derivatives of the velocity. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00212">212</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00211">211</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00079">maximum_order_of_velocity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00062">RecoveryHelper()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00106">set_maximum_order_of_velocity_derivative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00126">calculate_number_of_values_per_field()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00075">maximum_order_of_velocity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00058">RecoveryHelper()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00103">set_maximum_order_of_velocity_derivative()</a>.</p>
 
 </div>
 </div>
@@ -490,9 +496,9 @@ Private Attributes</h2></td></tr>
 
 <p>Maximum number of derivatives to retain in the vorticity recovery. Note, the value -1 means we ONLY output u,v[,w],p. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00207">207</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00206">206</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00072">maximum_order_of_vorticity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00062">RecoveryHelper()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00086">set_maximum_order_of_vorticity_derivative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00126">calculate_number_of_values_per_field()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00068">maximum_order_of_vorticity_derivative()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00058">RecoveryHelper()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00082">set_maximum_order_of_vorticity_derivative()</a>.</p>
 
 </div>
 </div>
@@ -518,9 +524,9 @@ Private Attributes</h2></td></tr>
 
 <p>Number of values per field; how many of the following do we want: u,v,p,omega,d/dx,d/dy, d^2/dx^2,d^2/dxdy,d^2/dy^2, d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3, du/dx,du/dy,dv/dx,dv/dy. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00203">203</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00202">202</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00129">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00190">ncont_interpolated_values()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l00126">calculate_number_of_values_per_field()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l00191">ncont_interpolated_values()</a>.</p>
 
 </div>
 </div>
@@ -555,7 +561,7 @@ Private Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:58:10
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:45
         </div>
       </div>
     </footer>

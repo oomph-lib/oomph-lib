@@ -180,16 +180,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a668500db9bcaab7aa983d3c92f94e34b inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a668500db9bcaab7aa983d3c92f94e34b">~ProjectableElementBase</a> ()</td></tr>
 <tr class="memdesc:a668500db9bcaab7aa983d3c92f94e34b inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <a href="classoomph_1_1ProjectableElementBase.html#a668500db9bcaab7aa983d3c92f94e34b">More...</a><br /></td></tr>
 <tr class="separator:a668500db9bcaab7aa983d3c92f94e34b inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a644306ebdf16f334344c2d27d72f18b7 inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memItemLeft" align="right" valign="top">virtual Vector&lt; std::pair&lt; Data *, unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a644306ebdf16f334344c2d27d72f18b7">data_values_of_field</a> (const unsigned &amp;fld)=0</td></tr>
-<tr class="memdesc:a644306ebdf16f334344c2d27d72f18b7 inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.g. in Taylor Hood elements the fld-th velocities are stored at the fld-th value of the nodes; the pressures (the DIM-th field) are the DIM-th values at the vertex nodes etc. <br  />
-  <a href="classoomph_1_1ProjectableElementBase.html#a644306ebdf16f334344c2d27d72f18b7">More...</a><br /></td></tr>
-<tr class="separator:a644306ebdf16f334344c2d27d72f18b7 inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b0053dde1172be726f9a6c75fb66ea inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memItemLeft" align="right" valign="top">virtual Vector&lt; std::pair&lt; Data *, unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a63b0053dde1172be726f9a6c75fb66ea">data_values_of_field</a> (const unsigned &amp;fld)=0</td></tr>
+<tr class="memdesc:a63b0053dde1172be726f9a6c75fb66ea inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.g. in Taylor Hood elements the fld-th velocities are stored at the fld-th value of the nodes; the pressures (the DIM-th field) are the DIM-th values at the vertex nodes etc.  <a href="classoomph_1_1ProjectableElementBase.html#a63b0053dde1172be726f9a6c75fb66ea">More...</a><br /></td></tr>
+<tr class="separator:a63b0053dde1172be726f9a6c75fb66ea inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44634aa4049332a580d249c25564638c inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a44634aa4049332a580d249c25564638c">nfields_for_projection</a> ()=0</td></tr>
 <tr class="memdesc:a44634aa4049332a580d249c25564638c inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of fields of the problem, so e.g. for 2D Navier Stokes this would be 3 (for the two velocities and one pressure)  <a href="classoomph_1_1ProjectableElementBase.html#a44634aa4049332a580d249c25564638c">More...</a><br /></td></tr>
 <tr class="separator:a44634aa4049332a580d249c25564638c inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6790f394630b964663281f8740f43a5 inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ac6790f394630b964663281f8740f43a5">nhistory_values_for_projection</a> (const unsigned &amp;fld)=0</td></tr>
-<tr class="memdesc:ac6790f394630b964663281f8740f43a5 inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of history values to be stored for fld-th field <br  />
- (includes current value!)  <a href="classoomph_1_1ProjectableElementBase.html#ac6790f394630b964663281f8740f43a5">More...</a><br /></td></tr>
+<tr class="memdesc:ac6790f394630b964663281f8740f43a5 inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of history values to be stored for fld-th field (includes current value!)  <a href="classoomph_1_1ProjectableElementBase.html#ac6790f394630b964663281f8740f43a5">More...</a><br /></td></tr>
 <tr class="separator:ac6790f394630b964663281f8740f43a5 inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4ecd0cd24000a3ed675dc7198203c1f inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ab4ecd0cd24000a3ed675dc7198203c1f">nhistory_values_for_coordinate_projection</a> ()=0</td></tr>
 <tr class="memdesc:ab4ecd0cd24000a3ed675dc7198203c1f inherit pub_methods_classoomph_1_1ProjectableElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of history values to be stored when projecting the history values of the nodal coordinates (includes current value!)  <a href="classoomph_1_1ProjectableElementBase.html#ab4ecd0cd24000a3ed675dc7198203c1f">More...</a><br /></td></tr>
@@ -263,7 +261,7 @@ class oomph::ProjectableElement&lt; ELEMENT &gt;</h3>
 
 <p>Wrapper class for projectable elements. Adds "projectability" to the underlying ELEMENT. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00175">175</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00180">180</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1892a2e757d35952be803d56078a3320"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1892a2e757d35952be803d56078a3320">&#9670;&nbsp;</a></span>ProjectableElement()</h2>
@@ -292,7 +290,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor [this was only required explicitly from gcc 4.5.2 onwards...]. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00234">234</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00235">235</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
 </div>
 </div>
@@ -335,7 +333,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data::describe_dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem::describe_dofs(...) </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00206">206</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00209">209</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
 </div>
 </div>
@@ -366,9 +364,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Helper function to restore the element to the state it was in before we entered the projection mode and switch off projection mode. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00579">579</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00583">583</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00096">oomph::ProjectableElementBase::Backup_external_geometric_data</a>, <a class="el" href="projection_8h_source.html#l00102">oomph::ProjectableElementBase::Backup_external_interaction_data</a>, <a class="el" href="projection_8h_source.html#l00091">oomph::ProjectableElementBase::Backup_ninteraction</a>, and <a class="el" href="projection_8h_source.html#l00086">oomph::ProjectableElementBase::Do_projection</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00098">oomph::ProjectableElementBase::Backup_external_geometric_data</a>, <a class="el" href="projection_8h_source.html#l00104">oomph::ProjectableElementBase::Backup_external_interaction_data</a>, <a class="el" href="projection_8h_source.html#l00093">oomph::ProjectableElementBase::Backup_ninteraction</a>, and <a class="el" href="projection_8h_source.html#l00088">oomph::ProjectableElementBase::Do_projection</a>.</p>
 
 </div>
 </div>
@@ -399,9 +397,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Backup the element's state and switch it to projection mode. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00544">544</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00548">548</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00096">oomph::ProjectableElementBase::Backup_external_geometric_data</a>, <a class="el" href="projection_8h_source.html#l00102">oomph::ProjectableElementBase::Backup_external_interaction_data</a>, <a class="el" href="projection_8h_source.html#l00091">oomph::ProjectableElementBase::Backup_ninteraction</a>, and <a class="el" href="projection_8h_source.html#l00086">oomph::ProjectableElementBase::Do_projection</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00098">oomph::ProjectableElementBase::Backup_external_geometric_data</a>, <a class="el" href="projection_8h_source.html#l00104">oomph::ProjectableElementBase::Backup_external_interaction_data</a>, <a class="el" href="projection_8h_source.html#l00093">oomph::ProjectableElementBase::Backup_ninteraction</a>, and <a class="el" href="projection_8h_source.html#l00088">oomph::ProjectableElementBase::Do_projection</a>.</p>
 
 </div>
 </div>
@@ -443,9 +441,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Overloaded version of fill_in_contribution_to_jacobian. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00214">214</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00217">217</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00086">oomph::ProjectableElementBase::Do_projection</a>, and <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00088">oomph::ProjectableElementBase::Do_projection</a>, and <a class="el" href="projection_8h_source.html#l00240">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
 
 </div>
 </div>
@@ -477,9 +475,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Overloaded version of fill_in_contribution_to_residuals. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00183">183</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00186">186</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00086">oomph::ProjectableElementBase::Do_projection</a>, and <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00088">oomph::ProjectableElementBase::Do_projection</a>, and <a class="el" href="projection_8h_source.html#l00240">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
 
 </div>
 </div>
@@ -510,9 +508,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>When projecting the history values of the nodal coordinates, this is the coordinate we're projecting. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00628">628</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00645">645</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00072">oomph::ProjectableElementBase::Projected_coordinate</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00074">oomph::ProjectableElementBase::Projected_coordinate</a>.</p>
 
 </div>
 </div>
@@ -543,9 +541,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Field that is currently being projected. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00619">619</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00632">632</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00065">oomph::ProjectableElementBase::Projected_field</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00067">oomph::ProjectableElementBase::Projected_field</a>.</p>
 
 </div>
 </div>
@@ -576,9 +574,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>When projecting the Lagrangian coordinates this is the coordinate that is being projected. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00633">633</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00652">652</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00076">oomph::ProjectableElementBase::Projected_lagrangian</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00078">oomph::ProjectableElementBase::Projected_lagrangian</a>.</p>
 
 </div>
 </div>
@@ -626,11 +624,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Residual for the projection step. Flag indicates if we want the Jacobian (1) or not (0). Virtual so it can be overloaded if necessary. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00239">239</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00240">240</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00062">oomph::ProjectableElementBase::Coordinate</a>, <a class="el" href="classoomph_1_1ProjectableElementBase.html#ae4da5b565b6d333be2f5920f7be763cd">oomph::ProjectableElementBase::get_field()</a>, <a class="el" href="classoomph_1_1ProjectableElementBase.html#ad45c21b58c0985d52f68ab2d79cbb488">oomph::ProjectableElementBase::jacobian_and_shape_of_field()</a>, <a class="el" href="projection_8h_source.html#l00062">oomph::ProjectableElementBase::Lagrangian</a>, <a class="el" href="classoomph_1_1ProjectableElementBase.html#ac5c27ae929ff636dc7747fe23fd4f738">oomph::ProjectableElementBase::local_equation()</a>, <a class="el" href="classoomph_1_1ProjectableElementBase.html#a1a9a6de16f3511bca8e8be770abb9c2e">oomph::ProjectableElementBase::nvalue_of_field()</a>, <a class="el" href="projection_8h_source.html#l00072">oomph::ProjectableElementBase::Projected_coordinate</a>, <a class="el" href="projection_8h_source.html#l00065">oomph::ProjectableElementBase::Projected_field</a>, <a class="el" href="projection_8h_source.html#l00076">oomph::ProjectableElementBase::Projected_lagrangian</a>, <a class="el" href="projection_8h_source.html#l00081">oomph::ProjectableElementBase::Projection_type</a>, <a class="el" href="projection_8h_source.html#l00068">oomph::ProjectableElementBase::Time_level_for_projection</a>, and <a class="el" href="projection_8h_source.html#l00062">oomph::ProjectableElementBase::Value</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00061">oomph::ProjectableElementBase::Coordinate</a>, <a class="el" href="classoomph_1_1ProjectableElementBase.html#ae4da5b565b6d333be2f5920f7be763cd">oomph::ProjectableElementBase::get_field()</a>, <a class="el" href="classoomph_1_1ProjectableElementBase.html#ad45c21b58c0985d52f68ab2d79cbb488">oomph::ProjectableElementBase::jacobian_and_shape_of_field()</a>, <a class="el" href="projection_8h_source.html#l00062">oomph::ProjectableElementBase::Lagrangian</a>, <a class="el" href="classoomph_1_1ProjectableElementBase.html#ac5c27ae929ff636dc7747fe23fd4f738">oomph::ProjectableElementBase::local_equation()</a>, <a class="el" href="classoomph_1_1ProjectableElementBase.html#a1a9a6de16f3511bca8e8be770abb9c2e">oomph::ProjectableElementBase::nvalue_of_field()</a>, <a class="el" href="projection_8h_source.html#l00074">oomph::ProjectableElementBase::Projected_coordinate</a>, <a class="el" href="projection_8h_source.html#l00067">oomph::ProjectableElementBase::Projected_field</a>, <a class="el" href="projection_8h_source.html#l00078">oomph::ProjectableElementBase::Projected_lagrangian</a>, <a class="el" href="projection_8h_source.html#l00083">oomph::ProjectableElementBase::Projection_type</a>, <a class="el" href="projection_8h_source.html#l00070">oomph::ProjectableElementBase::Time_level_for_projection</a>, and <a class="el" href="projection_8h_source.html#l00063">oomph::ProjectableElementBase::Value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00214">oomph::ProjectableElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="projection_8h_source.html#l00183">oomph::ProjectableElement&lt; ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00217">oomph::ProjectableElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="projection_8h_source.html#l00186">oomph::ProjectableElement&lt; ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
 
 </div>
 </div>
@@ -661,9 +659,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Project (history values of) coordintes. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00609">609</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00613">613</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00062">oomph::ProjectableElementBase::Coordinate</a>, and <a class="el" href="projection_8h_source.html#l00081">oomph::ProjectableElementBase::Projection_type</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00061">oomph::ProjectableElementBase::Coordinate</a>, and <a class="el" href="projection_8h_source.html#l00083">oomph::ProjectableElementBase::Projection_type</a>.</p>
 
 </div>
 </div>
@@ -694,9 +692,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Project (current and only values of) lagrangian coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00615">615</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00625">625</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00062">oomph::ProjectableElementBase::Lagrangian</a>, and <a class="el" href="projection_8h_source.html#l00081">oomph::ProjectableElementBase::Projection_type</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00062">oomph::ProjectableElementBase::Lagrangian</a>, and <a class="el" href="projection_8h_source.html#l00083">oomph::ProjectableElementBase::Projection_type</a>.</p>
 
 </div>
 </div>
@@ -727,9 +725,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Project (history values of) values. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00612">612</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00619">619</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00081">oomph::ProjectableElementBase::Projection_type</a>, and <a class="el" href="projection_8h_source.html#l00062">oomph::ProjectableElementBase::Value</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00083">oomph::ProjectableElementBase::Projection_type</a>, and <a class="el" href="projection_8h_source.html#l00063">oomph::ProjectableElementBase::Value</a>.</p>
 
 </div>
 </div>
@@ -760,9 +758,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Which history value are we projecting? </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00623">623</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00638">638</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00068">oomph::ProjectableElementBase::Time_level_for_projection</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00070">oomph::ProjectableElementBase::Time_level_for_projection</a>.</p>
 
 </div>
 </div>
@@ -810,9 +808,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Use Eulerian coordinates for matching in locate_zeta when doing projection. </p>
 
-<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00527">527</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00531">531</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
 
-<p class="reference">References <a class="el" href="projection_8h_source.html#l00086">oomph::ProjectableElementBase::Do_projection</a>.</p>
+<p class="reference">References <a class="el" href="projection_8h_source.html#l00088">oomph::ProjectableElementBase::Do_projection</a>.</p>
 
 </div>
 </div>
@@ -847,7 +845,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:49:54
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:33:29
         </div>
       </div>
     </footer>

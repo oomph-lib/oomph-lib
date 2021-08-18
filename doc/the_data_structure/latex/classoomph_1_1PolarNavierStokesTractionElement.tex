@@ -15,7 +15,7 @@ Inheritance diagram for oomph\+::Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+
 \item 
 const double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_af67d69b32f607b34b642f26b663a0777}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Alpha. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ab9bd68ca6e8e237a3e95862baaac2450}{alpha\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ad7279299c89c15cde5debad6af0658a8}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Alpha. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ac1b44b5788d5f5f54905a011744f6511}{set\+\_\+external\+\_\+pressure\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$pext\+\_\+data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function for setting up external pressure. \end{DoxyCompactList}\item 
@@ -56,13 +56,11 @@ void($\ast$\&)(const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c9
 virtual int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ae49f57135d1fdd4ed3e4117b4e9c5801}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_aa4c33668b9cf2a9c38cc10c72466f32d}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
-\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a19fbac9a9a627b4565440c8ca38ce1da}{get\+\_\+traction}} (double time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a5708f04fc0d30cc4a8000680adc8f2cf}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
-\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -92,7 +90,7 @@ class oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T
 
 A class for elements that allow the imposition of an applied traction to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometery$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class 
 
-Definition at line 53 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 52 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -106,7 +104,7 @@ Definition at line 53 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
 
-Definition at line 171 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 192 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -125,7 +123,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 218 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 238 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -143,18 +141,18 @@ Alpha.
 
 
 
-Definition at line 140 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 144 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_ab9bd68ca6e8e237a3e95862baaac2450}\label{classoomph_1_1PolarNavierStokesTractionElement_ab9bd68ca6e8e237a3e95862baaac2450}} 
+\mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_ad7279299c89c15cde5debad6af0658a8}\label{classoomph_1_1PolarNavierStokesTractionElement_ad7279299c89c15cde5debad6af0658a8}} 
 \index{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}!alpha\_pt@{alpha\_pt}}
 \index{alpha\_pt@{alpha\_pt}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}}
 {\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -162,7 +160,7 @@ Pointer to Alpha.
 
 
 
-Definition at line 143 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 150 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -181,7 +179,7 @@ Boundary.
 
 
 
-Definition at line 158 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 167 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -204,7 +202,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 235 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 260 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -227,7 +225,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line 244 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 270 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -250,7 +248,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 226 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 249 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -265,12 +263,11 @@ void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\
 
 
 
-This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Function that returns the residuals for the imposed traction Navier\+\_\+\+Stokes equations The additional residual for the mass flux (ie. the extra equation for pext) This is an integral equation along the whole boundary It lies outside the loop over shape functions above
 
-Definition at line 283 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 317 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -293,7 +290,7 @@ Eta.
 
 
 
-Definition at line 164 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 179 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -312,7 +309,7 @@ Function to calculate the traction applied to the fluid.
 
 
 
-Definition at line 95 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 96 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -335,7 +332,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 253 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 281 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -358,7 +355,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 256 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 287 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -377,7 +374,7 @@ Function to set boundary.
 
 
 
-Definition at line 161 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 173 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -396,7 +393,7 @@ Function to set Eta.
 
 
 
-Definition at line 167 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 185 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -415,7 +412,7 @@ Function for setting up external pressure.
 
 
 
-Definition at line 146 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 156 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -430,12 +427,11 @@ double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+:
 
 
 
-Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
- 
+Function to compute the shape and test functions and to return the Jacobian of mapping. 
 
 
 
-Definition at line 79 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 77 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -454,7 +450,7 @@ local velocities
 
 
 
-Definition at line 260 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 293 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -473,7 +469,7 @@ Access function that returns the local equation numbers for velocity components.
 
 
 
-Definition at line 74 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 70 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -492,7 +488,7 @@ local position
 
 
 
-Definition at line 264 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 299 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -518,7 +514,7 @@ Pointer to the angle alpha.
 
 
 
-Definition at line 119 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 124 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -533,7 +529,7 @@ int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+
 
 
 
-Definition at line 132 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 137 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -552,7 +548,7 @@ The highest dimension of the problem.
 
 
 
-Definition at line 64 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 62 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -567,7 +563,7 @@ double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+:
 
 
 
-Definition at line 135 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 140 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -586,7 +582,7 @@ The \mbox{\hyperlink{classoomph_1_1Data}{Data}} that contains the traded pressur
 
 
 
-Definition at line 126 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 131 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -605,7 +601,7 @@ Pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that stores the 
 
 
 
-Definition at line 122 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 127 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -620,7 +616,7 @@ void($\ast$\&)(const double\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c9
 
 
 
-Definition at line 221 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 241 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_a6ed7d56215a72c40a48ddba355de0fb5}\label{classoomph_1_1PolarNavierStokesTractionElement_a6ed7d56215a72c40a48ddba355de0fb5}} 
 \index{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
@@ -635,7 +631,7 @@ Pointer to an imposed traction function.
 
 
 
-Definition at line 60 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line 57 of file polar\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
 
 
 

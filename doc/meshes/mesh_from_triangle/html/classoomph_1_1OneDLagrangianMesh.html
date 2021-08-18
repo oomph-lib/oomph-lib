@@ -196,7 +196,7 @@ class oomph::OneDLagrangianMesh&lt; ELEMENT &gt;</h3>
 
 <p>1D mesh parametrised in terms of a 1D Lagrangian coordinate. The Eulerian positions of the nodes are determined by the GeomObject. </p>
 
-<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8h_source.html#l00046">46</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8h_source.html">one_d_lagrangian_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8h_source.html#l00045">45</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8h_source.html">one_d_lagrangian_mesh.template.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7061998be3fb4131c6b58c4943595d49"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7061998be3fb4131c6b58c4943595d49">&#9670;&nbsp;</a></span>OneDLagrangianMesh() <span class="overload">[1/2]</span></h2>
@@ -241,9 +241,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Constructor: Pass number of elements, length, pointer to GeomObject that defines the undeformed Eulerian position, and the timestepper &ndash; defaults to (Steady) default timestepper defined in the Mesh base class. </p>
 <p>Constructor for 1D mesh: n_element : number of elements length : length of domain undef_eulerian_posn_pt: pointer to geom object that describes the initial Eulerian position of the mesh. time_stepper_pt : timestepper </p>
 
-<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00051">51</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html">one_d_lagrangian_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00047">47</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html">one_d_lagrangian_mesh.template.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00112">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::assign_default_element_gradients()</a>, and <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00139">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::assign_undeformed_positions()</a>.</p>
+<p class="reference">References <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00108">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::assign_default_element_gradients()</a>, and <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00138">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::assign_undeformed_positions()</a>.</p>
 
 </div>
 </div>
@@ -296,9 +296,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Constructor: Pass number of elements, xmin, xmax pointer to GeomObject that defines the undeformed Eulerian position, and the timestepper &ndash; defaults to (Steady) default timestepper defined in the Mesh base class. </p>
 <p>Constructor for 1D mesh: n_element : number of elements xmin : minimum coordinate value (LH end) xmax : maximum coordinate value (RH end) undef_eulerian_posn_pt: pointer to geom object that describes the initial Eulerian position of the mesh. time_stepper_pt : timestepper </p>
 
-<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00082">82</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html">one_d_lagrangian_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00078">78</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html">one_d_lagrangian_mesh.template.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00112">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::assign_default_element_gradients()</a>, and <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00139">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::assign_undeformed_positions()</a>.</p>
+<p class="reference">References <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00108">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::assign_default_element_gradients()</a>, and <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00138">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::assign_undeformed_positions()</a>.</p>
 
 </div>
 </div>
@@ -328,9 +328,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Set the default gradients of the elements. </p>
 <p>Set the default (initial) gradients within each element, which are merely the distances between the nodes, scaled by 0.5 because the elements have length 2 in local coordinates. N.B. This only works for QHermiteElements at the moment </p>
 
-<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00112">112</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html">one_d_lagrangian_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00108">108</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html">one_d_lagrangian_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00051">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::OneDLagrangianMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00047">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::OneDLagrangianMesh()</a>.</p>
 
 </div>
 </div>
@@ -351,9 +351,9 @@ template&lt;class ELEMENT &gt; </div>
 <p>Assign the undeformed Eulerian positions to the nodes. </p>
 <p>Set the initial (2D Eulerian!) positions of the nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00139">139</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html">one_d_lagrangian_mesh.template.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00138">138</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html">one_d_lagrangian_mesh.template.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00051">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::OneDLagrangianMesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="one__d__lagrangian__mesh_8template_8cc_source.html#l00047">oomph::OneDLagrangianMesh&lt; ELEMENT &gt;::OneDLagrangianMesh()</a>.</p>
 
 </div>
 </div>
@@ -382,7 +382,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Undeformed Eulerian shape. </p>
 
-<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8h_source.html#l00052">52</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8h_source.html">one_d_lagrangian_mesh.template.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="one__d__lagrangian__mesh_8template_8h_source.html#l00049">49</a> of file <a class="el" href="one__d__lagrangian__mesh_8template_8h_source.html">one_d_lagrangian_mesh.template.h</a>.</p>
 
 </div>
 </div>
@@ -418,7 +418,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:50:10
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:33:42
         </div>
       </div>
     </footer>

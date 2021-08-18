@@ -20,14 +20,12 @@ Inheritance diagram for oomph\+::Projectable\+Generalised\+Newtonian\+Taylor\+Ho
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a84e5e27501f7bd74aeb2ed595b674884}{Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a1734ba15f3c3062571a83c3e23933e6a}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
-\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. ~\newline
- \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a3e9ee360991e68cb2c745ca336ddaf5d}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a34bc56caf12c251a15509f1be90debf1}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a5a7f30af042df73e5a62a29830333b33}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
-\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field. ~\newline
- (Note\+: count includes current value!) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field. (Note\+: count includes current value!) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a126d79b6d873a2e4e73ea300089cef85}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of positional history values (Note\+: count includes current value!) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a14569ba6c03489a0ad3cee644794ee2e}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
@@ -47,7 +45,7 @@ class oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element$<$ T
 
 Taylor Hood upgraded to become projectable. 
 
-Definition at line 2351 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2454 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -65,30 +63,29 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line 2359 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2460 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a1734ba15f3c3062571a83c3e23933e6a}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a1734ba15f3c3062571a83c3e23933e6a}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a3e9ee360991e68cb2c745ca336ddaf5d}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a3e9ee360991e68cb2c745ca336ddaf5d}} 
 \index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement}{oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement}{oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. ~\newline
- 
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. 
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line 2368 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2469 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -111,7 +108,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line 2471 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2571 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -134,7 +131,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line 2435 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2536 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -157,7 +154,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line 2524 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2623 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -180,7 +177,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line 2404 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2505 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -203,7 +200,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line 2428 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2529 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -218,8 +215,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoo
 
 
 
-Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field. ~\newline
- (Note\+: count includes current value!) 
+Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field. (Note\+: count includes current value!) 
 
 
 
@@ -227,7 +223,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line 2413 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2514 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -250,7 +246,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line 2510 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 2609 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

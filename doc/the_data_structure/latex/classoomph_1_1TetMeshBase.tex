@@ -53,8 +53,7 @@ double \mbox{\hyperlink{classoomph_1_1TetMeshBase_a2a185b3c2ad528a74d2e6c27f7ffe
 {\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{classoomph_1_1TetMeshBase_a170ad79a306435b4a6ed828f6b5739ff}{snap\+\_\+to\+\_\+quadratic\+\_\+surface}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&boundary\+\_\+id, const std\+::string \&quadratic\+\_\+surface\+\_\+file\+\_\+name, const bool \&switch\+\_\+normal, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)
 \begin{DoxyCompactList}\small\item\em Snap boundaries specified by the I\+Ds listed in boundary\+\_\+id to a quadratric surface, specified in the file quadratic\+\_\+surface\+\_\+file\+\_\+name. This is usually used with vmtk-\/based meshes for which oomph-\/lib\textquotesingle{}s xda to poly conversion code produces the files \char`\"{}quadratic\+\_\+fsi\+\_\+boundary.\+dat\char`\"{} and \char`\"{}quadratic\+\_\+outer\+\_\+solid\+\_\+boundary.\+dat\char`\"{} which specify the quadratic F\+SI boundary (for the fluid and the solid) and the quadratic representation of the outer boundary of the solid. When used with these files, the flag switch\+\_\+normal should be set to true when calling the function for the outer boundary of the solid. The \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object can be used to label optional output files. (Uses directory and label). \end{DoxyCompactList}\item 
 {\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{classoomph_1_1TetMeshBase_ac067df5d8df1ab20ab6ab26ab0c52399}{snap\+\_\+to\+\_\+quadratic\+\_\+surface}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&boundary\+\_\+id, const std\+::string \&quadratic\+\_\+surface\+\_\+file\+\_\+name, const bool \&switch\+\_\+normal)
-\begin{DoxyCompactList}\small\item\em Snap boundaries specified by the I\+Ds listed in boundary\+\_\+id to a quadratric surface, specified in the file quadratic\+\_\+surface\+\_\+file\+\_\+name. This is usually used with vmtk-\/based meshes for which oomph-\/lib\textquotesingle{}s xda to poly conversion code produces the files \char`\"{}quadratic\+\_\+fsi\+\_\+boundary.\+dat\char`\"{} and \char`\"{}quadratic\+\_\+outer\+\_\+solid\+\_\+boundary.\+dat\char`\"{} which specify the quadratic F\+SI boundary (for the fluid and the solid) and the quadratic representation of the outer boundary of the solid. When used with these files, the flag switch\+\_\+normal should be set to true when calling the function for the outer boundary of the solid. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Snap boundaries specified by the I\+Ds listed in boundary\+\_\+id to a quadratric surface, specified in the file quadratic\+\_\+surface\+\_\+file\+\_\+name. This is usually used with vmtk-\/based meshes for which oomph-\/lib\textquotesingle{}s xda to poly conversion code produces the files \char`\"{}quadratic\+\_\+fsi\+\_\+boundary.\+dat\char`\"{} and \char`\"{}quadratic\+\_\+outer\+\_\+solid\+\_\+boundary.\+dat\char`\"{} which specify the quadratic F\+SI boundary (for the fluid and the solid) and the quadratic representation of the outer boundary of the solid. When used with these files, the flag switch\+\_\+normal should be set to true when calling the function for the outer boundary of the solid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TetMeshBase_a1670b81c0ed5509661c179d9e46bdd1c}{snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects}} ()
 \begin{DoxyCompactList}\small\item\em Move the nodes on boundaries with associated Geom\+Objects so that they exactly coincide with the geometric object. This requires that the boundary coordinates are set up consistently. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{classoomph_1_1TetMeshBase_ae4d5a602fb4a4c6a4ee2fe2a027d0ef6}{split\+\_\+elements\+\_\+in\+\_\+corners}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
@@ -66,7 +65,7 @@ void \mbox{\hyperlink{classoomph_1_1TetMeshBase_a5982b96584e7f60eeb62f51153ef29f
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1TetMeshBase_a8ec167eda551633acb8896cb0e87be40}{Tolerance\+\_\+for\+\_\+boundary\+\_\+finding}} =1.\+0e-\/5
+static double \mbox{\hyperlink{classoomph_1_1TetMeshBase_a8ec167eda551633acb8896cb0e87be40}{Tolerance\+\_\+for\+\_\+boundary\+\_\+finding}} = 1.\+0e-\/5
 \begin{DoxyCompactList}\small\item\em Global static data that specifies the permitted error in the setup of the boundary coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -75,19 +74,19 @@ static double \mbox{\hyperlink{classoomph_1_1TetMeshBase_a8ec167eda551633acb8896
 \begin{DoxyCompactList}\small\item\em Vectors of vectors of elements in each region (note\+: this just stores them; the region I\+Ds are contained in Region\+\_\+attribute!) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a27ed0a5a15bb0eb66646ff6f55363a6a}{Region\+\_\+attribute}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of attributes associated with the elements in each region N\+O\+TE\+: double is enforced on us by tetgen. We use it as an unsigned to indicate the actual (zero-\/based) region ID. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a674ccfa46efe3de473a3daafe65dc537}{Boundary\+\_\+region\+\_\+element\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a725ae2c7208dc0315225aaf331536b4e}{Boundary\+\_\+region\+\_\+element\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Storage for elements adjacent to a boundary in a particular region. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a79260313236fa264d56b2736f7347e35}{Face\+\_\+index\+\_\+region\+\_\+at\+\_\+boundary}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ac639f2e3ebc323a48006017a147c33f1}{Face\+\_\+index\+\_\+region\+\_\+at\+\_\+boundary}}
 \begin{DoxyCompactList}\small\item\em Storage for the face index adjacent to a boundary in a particular region. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface}{Tet\+Mesh\+Faceted\+Closed\+Surface}} $\ast$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a8824b79dcd8c46e4e2c1132c39bb0172}{Outer\+\_\+boundary\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Faceted surface that defines outer boundaries. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface}{Tet\+Mesh\+Faceted\+Surface}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a6bcbc45a690d7878c5ca8ccf71165b83}{Internal\+\_\+surface\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to faceted surfaces that define internal boundaries. \end{DoxyCompactList}\item 
-std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface}{Tet\+Mesh\+Faceted\+Surface}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a6d73f6699d303ec13a1f39c97b2e2c27}{Tet\+\_\+mesh\+\_\+faceted\+\_\+surface\+\_\+pt}}
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface}{Tet\+Mesh\+Faceted\+Surface}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a6ac02bd3a8ba954a82e14fe3d120c62b}{Tet\+\_\+mesh\+\_\+faceted\+\_\+surface\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Reverse lookup scheme\+: Pointer to faceted surface (if any!) associated with boundary b. \end{DoxyCompactList}\item 
-std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a31eb99c38149fd9038cfb4f383cfa252}{Tet\+\_\+mesh\+\_\+facet\+\_\+pt}}
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a782002517d8a6119021b178605a64e00}{Tet\+\_\+mesh\+\_\+facet\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Reverse lookup scheme\+: Pointer to facet (if any!) associated with boundary b. \end{DoxyCompactList}\item 
-std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a293595d36c274c03a1cf8d66d233e5ad}{Triangular\+\_\+facet\+\_\+vertex\+\_\+boundary\+\_\+coordinate}}
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}{Triangular\+\_\+facet\+\_\+vertex\+\_\+boundary\+\_\+coordinate}}
 \begin{DoxyCompactList}\small\item\em Boundary coordinates of vertices in triangular facets associated with given boundary. Is only set up for triangular facets! \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a4cbd314c973492b0f6e50df69075f2a0}{Time\+\_\+stepper\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Timestepper used to build nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -97,7 +96,7 @@ std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox
 \doxysubsection{Detailed Description}
 Base class for tet meshes (meshes made of 3D tet elements). 
 
-Definition at line 681 of file tet\+\_\+mesh.\+h.
+Definition at line 660 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -114,7 +113,7 @@ Constructor.
 
 
 
-Definition at line 687 of file tet\+\_\+mesh.\+h.
+Definition at line 664 of file tet\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshBase_af324e7f2cc2f1ae8efd510786331684f}\label{classoomph_1_1TetMeshBase_af324e7f2cc2f1ae8efd510786331684f}} 
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!TetMeshBase@{TetMeshBase}}
@@ -128,7 +127,7 @@ Broken copy constructor.
 
 
 
-Definition at line 690 of file tet\+\_\+mesh.\+h.
+Definition at line 667 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -146,7 +145,7 @@ Destructor (empty)
 
 
 
-Definition at line 702 of file tet\+\_\+mesh.\+h.
+Definition at line 679 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -163,7 +162,7 @@ Assess mesh quality\+: Ratio of max. edge length to min. height, so if it\textqu
 
 Assess mesh quality\+: Ratio of max. edge length to min. height, so if it\textquotesingle{}s very large it\textquotesingle{}s B\+A\+A\+A\+A\+AD. 
 
-Definition at line 357 of file tet\+\_\+mesh.\+cc.
+Definition at line 373 of file tet\+\_\+mesh.\+cc.
 
 
 
@@ -181,7 +180,7 @@ Return pointer to the e-\/th element adjacent to boundary b in region r.
 
 
 
-Definition at line 844 of file tet\+\_\+mesh.\+h.
+Definition at line 822 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -203,7 +202,7 @@ Return face index of the e-\/th element adjacent to boundary b in region r.
 
 
 
-Definition at line 862 of file tet\+\_\+mesh.\+h.
+Definition at line 840 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -225,7 +224,7 @@ Return the number of elements adjacent to boundary b in region r.
 
 
 
-Definition at line 825 of file tet\+\_\+mesh.\+h.
+Definition at line 803 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -247,7 +246,7 @@ Return the number of regions specified by attributes.
 
 
 
-Definition at line 888 of file tet\+\_\+mesh.\+h.
+Definition at line 866 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -269,7 +268,7 @@ Return the number of elements in region r.
 
 
 
-Definition at line 894 of file tet\+\_\+mesh.\+h.
+Definition at line 872 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -291,7 +290,7 @@ Broken assignment operator.
 
 
 
-Definition at line 696 of file tet\+\_\+mesh.\+h.
+Definition at line 673 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -309,7 +308,7 @@ Return the i-\/th region attribute (here only used as the (assumed to be unsigne
 
 
 
-Definition at line 935 of file tet\+\_\+mesh.\+h.
+Definition at line 912 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -331,7 +330,7 @@ Return the e-\/th element in the r-\/th region.
 
 
 
-Definition at line 941 of file tet\+\_\+mesh.\+h.
+Definition at line 918 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -356,7 +355,7 @@ Note 1\+: Setup of boundary coordinates is not done if the boundary in question 
 
 Note 2\+: If a triangular \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} is associated with a boundary we also store the boundary coordinates of its vertices. They are needed to interpolated intrinsic coordinates of an associated \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (if any) into the interior. 
 
-Definition at line 730 of file tet\+\_\+mesh.\+h.
+Definition at line 708 of file tet\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshBase_a310a2204aabf22555f22ca9117e9ebc7}\label{classoomph_1_1TetMeshBase_a310a2204aabf22555f22ca9117e9ebc7}} 
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!setup\_boundary\_coordinates@{setup\_boundary\_coordinates}}
@@ -373,7 +372,7 @@ Note 1\+: Setup of boundary coordinates is not done if the boundary in question 
 
 Note 2\+: If a triangular \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} is associated with a boundary we also store the boundary coordinates of its vertices. They are needed to interpolated intrinsic coordinates of an associated \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (if any) into the interior. Final boolean argument allows switching of the direction of the outer unit normal. 
 
-Definition at line 761 of file tet\+\_\+mesh.\+h.
+Definition at line 739 of file tet\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshBase_a735a6e9b8ba1937d442965ca8546f8a5}\label{classoomph_1_1TetMeshBase_a735a6e9b8ba1937d442965ca8546f8a5}} 
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!setup\_boundary\_coordinates@{setup\_boundary\_coordinates}}
@@ -396,7 +395,7 @@ Note 1\+: Setup of boundary coordinates is not done if the boundary in question 
 
 Note 2\+: If a triangular \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} is associated with a boundary we also store the boundary coordinates of its vertices. They are needed to interpolated intrinsic coordinates of an associated \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (if any) into the interior. 
 
-Definition at line 1130 of file tet\+\_\+mesh.\+h.
+Definition at line 1098 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -417,7 +416,7 @@ Note 1\+: Setup of boundary coordinates is not done if the boundary in question 
 
 Note 2\+: If a triangular \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} is associated with a boundary we also store the boundary coordinates of its vertices. They are needed to interpolated intrinsic coordinates of an associated \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (if any) into the interior. Output file for doc. 
 
-Definition at line 814 of file tet\+\_\+mesh.\+h.
+Definition at line 794 of file tet\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshBase_ac372c93f2834c864f7376f1aceda718f}\label{classoomph_1_1TetMeshBase_ac372c93f2834c864f7376f1aceda718f}} 
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
@@ -431,7 +430,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a6cc8bcd6b41209f0e9295cc9
 
 
 
-Definition at line 1040 of file tet\+\_\+mesh.\+h.
+Definition at line 1013 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -453,7 +452,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a413cbcbea4fb1111703da9ee
 
 
 
-Definition at line 94 of file tet\+\_\+mesh.\+cc.
+Definition at line 100 of file tet\+\_\+mesh.\+cc.
 
 
 
@@ -471,11 +470,11 @@ Move the nodes on boundaries with associated Geom\+Objects so that they exactly 
 
 Move the nodes on boundaries with associated Geometric Objects (if any) so that they exactly coincide with the geometric object. This requires that the boundary coordinates are set up consistently 
 
-Definition at line 472 of file tet\+\_\+mesh.\+cc.
+Definition at line 483 of file tet\+\_\+mesh.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt(), oomph\+::\+Finite\+Element\+::check\+\_\+\+J\+\_\+eulerian\+\_\+at\+\_\+knots(), e, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt(), oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary(), i, n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+node(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::nfacet(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Tet\+Mesh\+Facet\+::nvertex(), oomph\+::oomph\+\_\+info, oomph\+::\+Finite\+Element\+::output(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Node\+::position(), oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt(), t, Tet\+\_\+mesh\+\_\+faceted\+\_\+surface\+\_\+pt, Triangular\+\_\+facet\+\_\+vertex\+\_\+boundary\+\_\+coordinate, oomph\+::\+Tet\+Mesh\+Facet\+::vertex\+\_\+pt(), oomph\+::\+Node\+::x(), and oomph\+::\+Tet\+Mesh\+Vertex\+::zeta\+\_\+in\+\_\+geom\+\_\+object().
+References oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt(), oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::boundary\+\_\+zeta01(), oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::boundary\+\_\+zeta12(), oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::boundary\+\_\+zeta20(), oomph\+::\+Finite\+Element\+::check\+\_\+\+J\+\_\+eulerian\+\_\+at\+\_\+knots(), e, oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::facet\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt(), oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary(), i, n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+node(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::nfacet(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Tet\+Mesh\+Facet\+::nvertex(), oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::one\+\_\+based\+\_\+facet\+\_\+boundary\+\_\+id(), oomph\+::oomph\+\_\+info, oomph\+::\+Finite\+Element\+::output(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Node\+::position(), oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt(), t, Tet\+\_\+mesh\+\_\+faceted\+\_\+surface\+\_\+pt, Triangular\+\_\+facet\+\_\+vertex\+\_\+boundary\+\_\+coordinate, oomph\+::\+Tet\+Mesh\+Facet\+::vertex\+\_\+pt(), oomph\+::\+Node\+::x(), and oomph\+::\+Tet\+Mesh\+Vertex\+::zeta\+\_\+in\+\_\+geom\+\_\+object().
 
 
 
@@ -490,12 +489,11 @@ void oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface (\be
 
 
 
-Snap boundaries specified by the I\+Ds listed in boundary\+\_\+id to a quadratric surface, specified in the file quadratic\+\_\+surface\+\_\+file\+\_\+name. This is usually used with vmtk-\/based meshes for which oomph-\/lib\textquotesingle{}s xda to poly conversion code produces the files \char`\"{}quadratic\+\_\+fsi\+\_\+boundary.\+dat\char`\"{} and \char`\"{}quadratic\+\_\+outer\+\_\+solid\+\_\+boundary.\+dat\char`\"{} which specify the quadratic F\+SI boundary (for the fluid and the solid) and the quadratic representation of the outer boundary of the solid. When used with these files, the flag switch\+\_\+normal should be set to true when calling the function for the outer boundary of the solid. ~\newline
- 
+Snap boundaries specified by the I\+Ds listed in boundary\+\_\+id to a quadratric surface, specified in the file quadratic\+\_\+surface\+\_\+file\+\_\+name. This is usually used with vmtk-\/based meshes for which oomph-\/lib\textquotesingle{}s xda to poly conversion code produces the files \char`\"{}quadratic\+\_\+fsi\+\_\+boundary.\+dat\char`\"{} and \char`\"{}quadratic\+\_\+outer\+\_\+solid\+\_\+boundary.\+dat\char`\"{} which specify the quadratic F\+SI boundary (for the fluid and the solid) and the quadratic representation of the outer boundary of the solid. When used with these files, the flag switch\+\_\+normal should be set to true when calling the function for the outer boundary of the solid. 
 
 
 
-Definition at line 1009 of file tet\+\_\+mesh.\+h.
+Definition at line 985 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -514,7 +512,7 @@ Snap boundaries specified by the I\+Ds listed in boundary\+\_\+id to a quadratri
 
 Snap boundaries specified by the I\+Ds listed in boundary\+\_\+id to a quadratric surface, specified in the file quadratic\+\_\+surface\+\_\+file\+\_\+name. This is usually used with vmtk-\/based meshes for which oomph-\/lib\textquotesingle{}s xda to poly conversion code produces the files \char`\"{}quadratic\+\_\+fsi\+\_\+boundary.\+dat\char`\"{} and \char`\"{}quadratic\+\_\+outer\+\_\+solid\+\_\+boundary.\+dat\char`\"{} which specify the quadratic F\+SI boundary (for the fluid and the solid) and the quadratic representation of the outer boundary of the solid. When used with these files, the flag switch\+\_\+normal should be set to true when calling the function for the outer boundary of the solid. The \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object can be used to label optional output files. (Uses directory and label). 
 
-Definition at line 1522 of file tet\+\_\+mesh.\+h.
+Definition at line 1465 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -533,7 +531,7 @@ Non-\/\+Delaunay split elements that have three faces on a boundary into sons. T
 
 Non-\/delaunay split elements that have three faces on a boundary into sons. 
 
-Definition at line 2006 of file tet\+\_\+mesh.\+h.
+Definition at line 1956 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -542,11 +540,11 @@ References oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), oomph\+::\+Mesh\+::bounda
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1TetMeshBase_a674ccfa46efe3de473a3daafe65dc537}\label{classoomph_1_1TetMeshBase_a674ccfa46efe3de473a3daafe65dc537}} 
+\mbox{\Hypertarget{classoomph_1_1TetMeshBase_a725ae2c7208dc0315225aaf331536b4e}\label{classoomph_1_1TetMeshBase_a725ae2c7208dc0315225aaf331536b4e}} 
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!Boundary\_region\_element\_pt@{Boundary\_region\_element\_pt}}
 \index{Boundary\_region\_element\_pt@{Boundary\_region\_element\_pt}!oomph::TetMeshBase@{oomph::TetMeshBase}}
 \doxysubsubsection{\texorpdfstring{Boundary\_region\_element\_pt}{Boundary\_region\_element\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$$>$ $>$ $>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Boundary\+\_\+region\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$$>$ $>$ $>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Boundary\+\_\+region\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -554,17 +552,17 @@ Storage for elements adjacent to a boundary in a particular region.
 
 
 
-Definition at line 1065 of file tet\+\_\+mesh.\+h.
+Definition at line 1037 of file tet\+\_\+mesh.\+h.
 
 
 
 Referenced by boundary\+\_\+element\+\_\+in\+\_\+region\+\_\+pt(), nboundary\+\_\+element\+\_\+in\+\_\+region(), and split\+\_\+elements\+\_\+in\+\_\+corners().
 
-\mbox{\Hypertarget{classoomph_1_1TetMeshBase_a79260313236fa264d56b2736f7347e35}\label{classoomph_1_1TetMeshBase_a79260313236fa264d56b2736f7347e35}} 
+\mbox{\Hypertarget{classoomph_1_1TetMeshBase_ac639f2e3ebc323a48006017a147c33f1}\label{classoomph_1_1TetMeshBase_ac639f2e3ebc323a48006017a147c33f1}} 
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!Face\_index\_region\_at\_boundary@{Face\_index\_region\_at\_boundary}}
 \index{Face\_index\_region\_at\_boundary@{Face\_index\_region\_at\_boundary}!oomph::TetMeshBase@{oomph::TetMeshBase}}
 \doxysubsubsection{\texorpdfstring{Face\_index\_region\_at\_boundary}{Face\_index\_region\_at\_boundary}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$int$>$ $>$ $>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Face\+\_\+index\+\_\+region\+\_\+at\+\_\+boundary\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$int$>$ $>$ $>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Face\+\_\+index\+\_\+region\+\_\+at\+\_\+boundary\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -572,7 +570,7 @@ Storage for the face index adjacent to a boundary in a particular region.
 
 
 
-Definition at line 1069 of file tet\+\_\+mesh.\+h.
+Definition at line 1041 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -590,7 +588,7 @@ Referenced by face\+\_\+index\+\_\+at\+\_\+boundary\+\_\+in\+\_\+region(), and s
 
 
 
-Definition at line 1075 of file tet\+\_\+mesh.\+h.
+Definition at line 1047 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -608,7 +606,7 @@ Faceted surface that defines outer boundaries.
 
 
 
-Definition at line 1072 of file tet\+\_\+mesh.\+h.
+Definition at line 1044 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -626,7 +624,7 @@ Referenced by oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::
 
 
 
-Definition at line 1061 of file tet\+\_\+mesh.\+h.
+Definition at line 1033 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -644,17 +642,17 @@ Vectors of vectors of elements in each region (note\+: this just stores them; th
 
 
 
-Definition at line 1056 of file tet\+\_\+mesh.\+h.
+Definition at line 1028 of file tet\+\_\+mesh.\+h.
 
 
 
 Referenced by oomph\+::\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::create\+\_\+mesh\+\_\+from\+\_\+msh\+\_\+file(), nregion(), nregion\+\_\+element(), region\+\_\+element\+\_\+pt(), and split\+\_\+elements\+\_\+in\+\_\+corners().
 
-\mbox{\Hypertarget{classoomph_1_1TetMeshBase_a31eb99c38149fd9038cfb4f383cfa252}\label{classoomph_1_1TetMeshBase_a31eb99c38149fd9038cfb4f383cfa252}} 
+\mbox{\Hypertarget{classoomph_1_1TetMeshBase_a782002517d8a6119021b178605a64e00}\label{classoomph_1_1TetMeshBase_a782002517d8a6119021b178605a64e00}} 
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!Tet\_mesh\_facet\_pt@{Tet\_mesh\_facet\_pt}}
 \index{Tet\_mesh\_facet\_pt@{Tet\_mesh\_facet\_pt}!oomph::TetMeshBase@{oomph::TetMeshBase}}
 \doxysubsubsection{\texorpdfstring{Tet\_mesh\_facet\_pt}{Tet\_mesh\_facet\_pt}}
-{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}}$\ast$$>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Tet\+\_\+mesh\+\_\+facet\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}}$\ast$$>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Tet\+\_\+mesh\+\_\+facet\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -662,17 +660,17 @@ Reverse lookup scheme\+: Pointer to facet (if any!) associated with boundary b.
 
 
 
-Definition at line 1083 of file tet\+\_\+mesh.\+h.
+Definition at line 1055 of file tet\+\_\+mesh.\+h.
 
 
 
 Referenced by setup\+\_\+boundary\+\_\+coordinates().
 
-\mbox{\Hypertarget{classoomph_1_1TetMeshBase_a6d73f6699d303ec13a1f39c97b2e2c27}\label{classoomph_1_1TetMeshBase_a6d73f6699d303ec13a1f39c97b2e2c27}} 
+\mbox{\Hypertarget{classoomph_1_1TetMeshBase_a6ac02bd3a8ba954a82e14fe3d120c62b}\label{classoomph_1_1TetMeshBase_a6ac02bd3a8ba954a82e14fe3d120c62b}} 
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!Tet\_mesh\_faceted\_surface\_pt@{Tet\_mesh\_faceted\_surface\_pt}}
 \index{Tet\_mesh\_faceted\_surface\_pt@{Tet\_mesh\_faceted\_surface\_pt}!oomph::TetMeshBase@{oomph::TetMeshBase}}
 \doxysubsubsection{\texorpdfstring{Tet\_mesh\_faceted\_surface\_pt}{Tet\_mesh\_faceted\_surface\_pt}}
-{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface}{Tet\+Mesh\+Faceted\+Surface}}$\ast$$>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Tet\+\_\+mesh\+\_\+faceted\+\_\+surface\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface}{Tet\+Mesh\+Faceted\+Surface}}$\ast$$>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Tet\+\_\+mesh\+\_\+faceted\+\_\+surface\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -680,7 +678,7 @@ Reverse lookup scheme\+: Pointer to faceted surface (if any!) associated with bo
 
 
 
-Definition at line 1079 of file tet\+\_\+mesh.\+h.
+Definition at line 1051 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -698,7 +696,7 @@ Timestepper used to build nodes.
 
 
 
-Definition at line 1091 of file tet\+\_\+mesh.\+h.
+Definition at line 1063 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -708,7 +706,7 @@ Referenced by oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!Tolerance\_for\_boundary\_finding@{Tolerance\_for\_boundary\_finding}}
 \index{Tolerance\_for\_boundary\_finding@{Tolerance\_for\_boundary\_finding}!oomph::TetMeshBase@{oomph::TetMeshBase}}
 \doxysubsubsection{\texorpdfstring{Tolerance\_for\_boundary\_finding}{Tolerance\_for\_boundary\_finding}}
-{\footnotesize\ttfamily double oomph\+::\+Tet\+Mesh\+Base\+::\+Tolerance\+\_\+for\+\_\+boundary\+\_\+finding =1.\+0e-\/5\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily double oomph\+::\+Tet\+Mesh\+Base\+::\+Tolerance\+\_\+for\+\_\+boundary\+\_\+finding = 1.\+0e-\/5\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -716,17 +714,17 @@ Global static data that specifies the permitted error in the setup of the bounda
 
 Global static data that specifies the permitted error in the setup of the boundary coordinates 
 
-Definition at line 706 of file tet\+\_\+mesh.\+h.
+Definition at line 683 of file tet\+\_\+mesh.\+h.
 
 
 
 Referenced by setup\+\_\+boundary\+\_\+coordinates(), and snap\+\_\+to\+\_\+quadratic\+\_\+surface().
 
-\mbox{\Hypertarget{classoomph_1_1TetMeshBase_a293595d36c274c03a1cf8d66d233e5ad}\label{classoomph_1_1TetMeshBase_a293595d36c274c03a1cf8d66d233e5ad}} 
+\mbox{\Hypertarget{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}\label{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}} 
 \index{oomph::TetMeshBase@{oomph::TetMeshBase}!Triangular\_facet\_vertex\_boundary\_coordinate@{Triangular\_facet\_vertex\_boundary\_coordinate}}
 \index{Triangular\_facet\_vertex\_boundary\_coordinate@{Triangular\_facet\_vertex\_boundary\_coordinate}!oomph::TetMeshBase@{oomph::TetMeshBase}}
 \doxysubsubsection{\texorpdfstring{Triangular\_facet\_vertex\_boundary\_coordinate}{Triangular\_facet\_vertex\_boundary\_coordinate}}
-{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ $>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Triangular\+\_\+facet\+\_\+vertex\+\_\+boundary\+\_\+coordinate\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ $>$ oomph\+::\+Tet\+Mesh\+Base\+::\+Triangular\+\_\+facet\+\_\+vertex\+\_\+boundary\+\_\+coordinate\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -734,7 +732,7 @@ Boundary coordinates of vertices in triangular facets associated with given boun
 
 
 
-Definition at line 1088 of file tet\+\_\+mesh.\+h.
+Definition at line 1060 of file tet\+\_\+mesh.\+h.
 
 
 

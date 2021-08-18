@@ -20,8 +20,7 @@ Inheritance diagram for oomph\+::Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+
 void \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a0cbeb150ac83d5be1a1e30c0f728a70b}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em The solve function uses the block factorisation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a495eeac9b790841fb0b8b1d1c8222667}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
-\begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a8569368b8772d6642a50fb1279f4b61f}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a1d617896a3f1c1b1236ff18dc87ed8d7}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
@@ -45,7 +44,7 @@ void \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a1d61789
 \doxysubsection{Detailed Description}
 A custom linear solver class that is used to solve a block-\/factorised version of the Pitch\+Fork bifurcation detection problem. 
 
-Definition at line 661 of file assembly\+\_\+handler.\+h.
+Definition at line 687 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -62,7 +61,7 @@ Constructor, inherits the original linear solver.
 
 
 
-Definition at line 678 of file assembly\+\_\+handler.\+h.
+Definition at line 703 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedBlockPitchForkLinearSolver_ab2d75883791a469b2ce32295ed39ab7d}\label{classoomph_1_1AugmentedBlockPitchForkLinearSolver_ab2d75883791a469b2ce32295ed39ab7d}} 
 \index{oomph::AugmentedBlockPitchForkLinearSolver@{oomph::AugmentedBlockPitchForkLinearSolver}!````~AugmentedBlockPitchForkLinearSolver@{$\sim$AugmentedBlockPitchForkLinearSolver}}
@@ -76,7 +75,7 @@ Destructor\+: clean up the allocated memory.
 
 Clean up the memory that may have been allocated by the solver. 
 
-Definition at line 2150 of file assembly\+\_\+handler.\+cc.
+Definition at line 2259 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -97,7 +96,7 @@ Access function to the original linear solver.
 
 
 
-Definition at line 717 of file assembly\+\_\+handler.\+h.
+Definition at line 743 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -123,7 +122,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line 2376 of file assembly\+\_\+handler.\+cc.
+Definition at line 2510 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -137,16 +136,15 @@ References a(), oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_
 
 
 
-The linear-\/algebra-\/type solver does not make sense. ~\newline
- 
+The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. 
 
-The interface is deliberately broken 
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Definition at line 690 of file assembly\+\_\+handler.\+h.
+Definition at line 716 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a8569368b8772d6642a50fb1279f4b61f}\label{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a8569368b8772d6642a50fb1279f4b61f}} 
 \index{oomph::AugmentedBlockPitchForkLinearSolver@{oomph::AugmentedBlockPitchForkLinearSolver}!solve@{solve}}
@@ -164,7 +162,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Definition at line 702 of file assembly\+\_\+handler.\+h.
+Definition at line 728 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a0cbeb150ac83d5be1a1e30c0f728a70b}\label{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a0cbeb150ac83d5be1a1e30c0f728a70b}} 
 \index{oomph::AugmentedBlockPitchForkLinearSolver@{oomph::AugmentedBlockPitchForkLinearSolver}!solve@{solve}}
@@ -182,7 +180,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 2160 of file assembly\+\_\+handler.\+cc.
+Definition at line 2275 of file assembly\+\_\+handler.\+cc.
 
 
 
@@ -203,7 +201,7 @@ Pointer to the storage for the vector alpha.
 
 
 
-Definition at line 670 of file assembly\+\_\+handler.\+h.
+Definition at line 696 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -221,7 +219,7 @@ Pointer to the storage for the vector e.
 
 
 
-Definition at line 673 of file assembly\+\_\+handler.\+h.
+Definition at line 699 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -239,7 +237,7 @@ Pointer to the original linear solver.
 
 
 
-Definition at line 664 of file assembly\+\_\+handler.\+h.
+Definition at line 690 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -257,7 +255,7 @@ Pointer to the problem, used in the resolve.
 
 
 
-Definition at line 667 of file assembly\+\_\+handler.\+h.
+Definition at line 693 of file assembly\+\_\+handler.\+h.
 
 
 

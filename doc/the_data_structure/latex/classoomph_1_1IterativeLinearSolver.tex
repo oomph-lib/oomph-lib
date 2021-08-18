@@ -28,7 +28,7 @@ virtual \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a655eb19872606c2d05
 \begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$\& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a800f699ec8dda290105807cb91297850}{preconditioner\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to preconditioner. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ab5e122965d91017dee39249c0034773d}{preconditioner\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a40dc3e8bcb0ca6963d91b7c999d9b0c6}{preconditioner\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function to preconditioner (const version) \end{DoxyCompactList}\item 
 double \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_aa76d0f94116e2bfa615652b9de9b1af7}{tolerance}} ()
 \begin{DoxyCompactList}\small\item\em Access to convergence tolerance. \end{DoxyCompactList}\item 
@@ -100,7 +100,7 @@ static \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Precondi
 \doxysubsection{Detailed Description}
 Base class for all linear iterative solvers. This merely defines standard interfaces for linear iterative solvers, so that different solvers can be used in a clean and transparent manner. 
 
-Definition at line 56 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 53 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -117,7 +117,7 @@ Constructor\+: Set (default) trivial preconditioner and set defaults for toleran
 
 
 
-Definition at line 63 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 58 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -135,7 +135,7 @@ Broken copy constructor.
 
 
 
-Definition at line 91 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 86 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -153,7 +153,7 @@ Destructor (empty)
 
 
 
-Definition at line 103 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 98 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -170,7 +170,7 @@ Close convergence history output stream.
 
 
 
-Definition at line 155 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 167 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -188,7 +188,7 @@ Disable documentation of the convergence history.
 
 
 
-Definition at line 124 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 134 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -206,7 +206,7 @@ Don\textquotesingle{}t throw an error if we don\textquotesingle{}t converge with
 
 
 
-Definition at line 192 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 210 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -220,7 +220,7 @@ References Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter.
 
 Disables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) 
 
-Definition at line 204 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 226 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -238,7 +238,7 @@ Don\textquotesingle{}t set up the preconditioner before the solve.
 
 
 
-Definition at line 184 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 198 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -256,7 +256,7 @@ Enable documentation of the convergence history.
 
 
 
-Definition at line 121 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 128 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -274,7 +274,7 @@ Throw an error if we don\textquotesingle{}t converge within max\+\_\+iter.
 
 
 
-Definition at line 188 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 204 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -288,7 +288,7 @@ References Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter.
 
 Enables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) 
 
-Definition at line 198 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 218 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -306,7 +306,7 @@ Setup the preconditioner before the solve.
 
 
 
-Definition at line 180 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 192 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -324,7 +324,7 @@ Number of iterations taken.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ad2ae5c641eae7da8c7556b646fe38d36}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e6fb26306985fc6bde851d372b78708}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_a879927e08b79ad4744a10b360ccd5ff3}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1DampedJacobi_aa72fe9dcf19728a8b5a75f0cadb36013}{oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a0fe8a3e90df149b2ad6a247afe1adf2a}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a10760c61c62771773e2adc57055717aa}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_ad182a2d91cb9d629cb516102f9a3c649}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1MGSolver_ace1b91d44c67c990259807ee746a6363}{oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a34e565b3536b286b5544f5e30935b9e9}{oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a2550adba752e02423254dc0a6c592f7f}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_aaa90619b05f448d7bd610f474a9f750d}{oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver}}, \mbox{\hyperlink{classoomph_1_1CG_a17db796814dc11cb67eac960df85d5f7}{oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, and \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ad2ae5c641eae7da8c7556b646fe38d36}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e6fb26306985fc6bde851d372b78708}{oomph\+::\+Augmented\+Problem\+G\+M\+R\+ES}}, \mbox{\hyperlink{classoomph_1_1GMRES_a879927e08b79ad4744a10b360ccd5ff3}{oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1DampedJacobi_aa72fe9dcf19728a8b5a75f0cadb36013}{oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a0fe8a3e90df149b2ad6a247afe1adf2a}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a10760c61c62771773e2adc57055717aa}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_ad182a2d91cb9d629cb516102f9a3c649}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1MGSolver_ace1b91d44c67c990259807ee746a6363}{oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a2550adba752e02423254dc0a6c592f7f}{oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a34e565b3536b286b5544f5e30935b9e9}{oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_aaa90619b05f448d7bd610f474a9f750d}{oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver}}, \mbox{\hyperlink{classoomph_1_1CG_a17db796814dc11cb67eac960df85d5f7}{oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}, and \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}{oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner}}.
 
 \mbox{\Hypertarget{classoomph_1_1IterativeLinearSolver_aed10c606a26c8084e1fa482f3409f9b3}\label{classoomph_1_1IterativeLinearSolver_aed10c606a26c8084e1fa482f3409f9b3}} 
 \index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!jacobian\_setup\_time@{jacobian\_setup\_time}}
@@ -342,7 +342,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a0fedfb9d9855d0e9
 
 
 
-Definition at line 162 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 174 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -364,7 +364,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3c66f77db812a9c1
 
 
 
-Definition at line 168 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 180 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -382,7 +382,7 @@ Access to max. number of iterations.
 
 
 
-Definition at line 115 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 119 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -400,7 +400,7 @@ Write convergence history into file with specified filename (automatically switc
 
 
 
-Definition at line 131 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 144 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -418,7 +418,7 @@ Broken assignment operator.
 
 
 
-Definition at line 97 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 92 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -436,7 +436,7 @@ Access function to preconditioner.
 
 
 
-Definition at line 106 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 101 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -446,11 +446,11 @@ References Preconditioner\+\_\+pt.
 
 Referenced by oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::apply\+\_\+schur\+\_\+complement\+\_\+preconditioner(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Projection\+Problem$<$ P\+R\+O\+J\+E\+C\+T\+A\+B\+L\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::project(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::update(), and oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::update().
 
-\mbox{\Hypertarget{classoomph_1_1IterativeLinearSolver_ab5e122965d91017dee39249c0034773d}\label{classoomph_1_1IterativeLinearSolver_ab5e122965d91017dee39249c0034773d}} 
+\mbox{\Hypertarget{classoomph_1_1IterativeLinearSolver_a40dc3e8bcb0ca6963d91b7c999d9b0c6}\label{classoomph_1_1IterativeLinearSolver_a40dc3e8bcb0ca6963d91b7c999d9b0c6}} 
 \index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!preconditioner\_pt@{preconditioner\_pt}}
 \index{preconditioner\_pt@{preconditioner\_pt}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
 \doxysubsubsection{\texorpdfstring{preconditioner\_pt()}{preconditioner\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}$\ast$ const \& oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}$\ast$ const\& oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -458,7 +458,7 @@ Access function to preconditioner (const version)
 
 
 
-Definition at line 109 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 107 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -480,7 +480,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_af3dd
 
 
 
-Definition at line 174 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 186 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -498,7 +498,7 @@ Access to convergence tolerance.
 
 
 
-Definition at line 112 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 113 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -523,7 +523,7 @@ Default preconditioner\+: The base class for preconditioners is a fully function
 
 Default preconditioner for iterative solvers\+: The base class for preconditioners is a fully functional (if trivial!) preconditioner. 
 
-Definition at line 219 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 242 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -541,7 +541,7 @@ Flag indicating if the convergence history is to be documented.
 
 
 
-Definition at line 211 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 234 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -555,7 +555,7 @@ Referenced by disable\+\_\+doc\+\_\+convergence\+\_\+history(), enable\+\_\+doc\
 
 When the iterative solver is used a preconditioner then we call the setup of solver method only once (the first time the solve method is called) 
 
-Definition at line 253 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 276 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -573,7 +573,7 @@ Jacobian setup time.
 
 
 
-Definition at line 231 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 254 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -591,7 +591,7 @@ Maximum number of iterations.
 
 
 
-Definition at line 225 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 248 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -609,7 +609,7 @@ Output file stream for convergence history.
 
 
 
-Definition at line 214 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 237 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -627,7 +627,7 @@ Pointer to the preconditioner.
 
 
 
-Definition at line 228 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 251 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -645,7 +645,7 @@ Referenced by Iterative\+Linear\+Solver(), preconditioner\+\_\+pt(), and oomph\+
 
 
 
-Definition at line 237 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 260 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -663,7 +663,7 @@ indicates whether the preconditioner should be setup before solve. Default = tru
 
 
 
-Definition at line 241 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 264 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -681,7 +681,7 @@ linear solver solution time
 
 
 
-Definition at line 234 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 257 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -699,7 +699,7 @@ Should we throw an error instead of just returning when we hit the max iteration
 
 
 
-Definition at line 245 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 268 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -717,7 +717,7 @@ Convergence tolerance.
 
 
 
-Definition at line 222 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 245 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -735,7 +735,7 @@ Use the iterative solver as preconditioner.
 
 
 
-Definition at line 248 of file iterative\+\_\+linear\+\_\+solver.\+h.
+Definition at line 271 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 

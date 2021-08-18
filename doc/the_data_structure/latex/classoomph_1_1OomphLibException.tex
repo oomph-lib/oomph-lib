@@ -26,8 +26,7 @@ void \mbox{\hyperlink{classoomph_1_1OomphLibException_a92da7bc6b484044587ca2e8db
 \begin{DoxyCompactItemize}
 \item 
 std\+::ostream $\ast$ \mbox{\hyperlink{classoomph_1_1OomphLibException_ab9177b3f4d969f3e4d102487165103c7}{Exception\+\_\+stream\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Exception stream to which we write message in destructor ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Exception stream to which we write message in destructor. \end{DoxyCompactList}\item 
 std\+::stringstream $\ast$ \mbox{\hyperlink{classoomph_1_1OomphLibException_a94df333a8bdcb4b89eeb516a64a3429e}{Exception\+\_\+stringstream\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em String stream that records the error message. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1OomphLibException_ac374cd3358bf26639860a6778779786d}{Suppress\+\_\+error\+\_\+message}}
@@ -56,7 +55,7 @@ Constructor takes the error description, function name and a location string pro
 
 The \mbox{\hyperlink{classoomph_1_1OomphLibException}{Oomph\+Lib\+Exception}} constructor takes the error description, function name, a location string provided by the O\+O\+M\+P\+H\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+L\+O\+C\+A\+T\+I\+ON and an exception type \char`\"{}\+W\+A\+R\+N\+I\+N\+G\char`\"{} or \char`\"{}\+E\+R\+R\+O\+R\char`\"{} and combines them into a standard error message that is written to the exception stream. The output\+\_\+width of the message can also be specified. Optionally provide a traceback of the function calls. 
 
-Definition at line 150 of file oomph\+\_\+definitions.\+cc.
+Definition at line 144 of file oomph\+\_\+definitions.\+cc.
 
 
 
@@ -72,11 +71,9 @@ References Exception\+\_\+stream\+\_\+pt, Exception\+\_\+stringstream\+\_\+pt, i
 
 The destructor cannot throw an exception (C++ S\+TL standard) 
 
-created in the constructor (unless suppresed)
+The \mbox{\hyperlink{classoomph_1_1OomphLibException}{Oomph\+Lib\+Exception}} destructor actually spawns the error message created in the constructor (unless suppresed) 
 
-The \mbox{\hyperlink{classoomph_1_1OomphLibException}{Oomph\+Lib\+Exception}} destructor actually spawns the error message 
-
-Definition at line 132 of file oomph\+\_\+definitions.\+cc.
+Definition at line 126 of file oomph\+\_\+definitions.\+cc.
 
 
 
@@ -97,7 +94,7 @@ Suppress issueing of the error message in destructor (useful if error is caught 
 
 
 
-Definition at line 180 of file oomph\+\_\+definitions.\+h.
+Definition at line 178 of file oomph\+\_\+definitions.\+h.
 
 
 
@@ -118,12 +115,11 @@ Referenced by oomph\+::\+Finite\+Element\+::locate\+\_\+zeta().
 
 
 
-Exception stream to which we write message in destructor ~\newline
- 
+Exception stream to which we write message in destructor. 
 
 
 
-Definition at line 209 of file oomph\+\_\+definitions.\+h.
+Definition at line 206 of file oomph\+\_\+definitions.\+h.
 
 
 
@@ -141,7 +137,7 @@ String stream that records the error message.
 
 
 
-Definition at line 212 of file oomph\+\_\+definitions.\+h.
+Definition at line 209 of file oomph\+\_\+definitions.\+h.
 
 
 
@@ -159,7 +155,7 @@ Boolean to suppress issuing of the error message in destructor (useful if error 
 
 
 
-Definition at line 216 of file oomph\+\_\+definitions.\+h.
+Definition at line 213 of file oomph\+\_\+definitions.\+h.
 
 
 

@@ -164,7 +164,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for algebraic elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="algebraic__elements_8h_source.html#l00516">516</a> of file <a class="el" href="algebraic__elements_8h_source.html">algebraic_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algebraic__elements_8h_source.html#l00511">511</a> of file <a class="el" href="algebraic__elements_8h_source.html">algebraic_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac94e4a7116416add9539def19791f1b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac94e4a7116416add9539def19791f1b4">&#9670;&nbsp;</a></span>AlgebraicElementBase() <span class="overload">[1/2]</span></h2>
@@ -191,7 +191,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Empty constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="algebraic__elements_8h_source.html#l00522">522</a> of file <a class="el" href="algebraic__elements_8h_source.html">algebraic_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algebraic__elements_8h_source.html#l00515">515</a> of file <a class="el" href="algebraic__elements_8h_source.html">algebraic_elements.h</a>.</p>
 
 </div>
 </div>
@@ -221,9 +221,9 @@ Public Member Functions</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="algebraic__elements_8h_source.html#l00525">525</a> of file <a class="el" href="algebraic__elements_8h_source.html">algebraic_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algebraic__elements_8h_source.html#l00518">518</a> of file <a class="el" href="algebraic__elements_8h_source.html">algebraic_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -254,9 +254,9 @@ Public Member Functions</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="algebraic__elements_8h_source.html#l00531">531</a> of file <a class="el" href="algebraic__elements_8h_source.html">algebraic_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algebraic__elements_8h_source.html#l00524">524</a> of file <a class="el" href="algebraic__elements_8h_source.html">algebraic_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -293,15 +293,14 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set up node update info for (newly created) algebraic node: I.e. work out its node update information by interpolation from the father element. Pass pointer to father element and the newly created node's local coordinate in the father element. </p>
-<p>Set up node update info for (newly created) algebraic node: Work out its node update information by interpolation from its father element, based on pointer to father element and its local coordinate in the father element. We're creating the node update info for update functions that are shared by all nodes in the father element. <br  />
- </p>
+<p>Set up node update info for (newly created) algebraic node: Work out its node update information by interpolation from its father element, based on pointer to father element and its local coordinate in the father element. We're creating the node update info for update functions that are shared by all nodes in the father element. </p>
 <p>Now loop over the ids and check if they appear in all nodes</p>
 
-<p class="definition">Definition at line <a class="el" href="algebraic__elements_8cc_source.html#l00050">50</a> of file <a class="el" href="algebraic__elements_8cc_source.html">algebraic_elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algebraic__elements_8cc_source.html#l00048">48</a> of file <a class="el" href="algebraic__elements_8cc_source.html">algebraic_elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="algebraic__elements_8h_source.html#l00285">oomph::AlgebraicNode::add_node_update_info()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="algebraic__elements_8h_source.html#l00181">oomph::AlgebraicNode::mesh_pt()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="algebraic__elements_8cc_source.html#l00242">oomph::AlgebraicNode::node_update()</a>, <a class="el" href="algebraic__elements_8h_source.html#l00240">oomph::AlgebraicNode::nref_value()</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="classoomph_1_1AlgebraicMesh.html#a6c6a35ae2be6e2766f5b80d85693c1ce">oomph::AlgebraicMesh::update_node_update()</a>.</p>
+<p class="reference">References <a class="el" href="algebraic__elements_8h_source.html#l00286">oomph::AlgebraicNode::add_node_update_info()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="algebraic__elements_8h_source.html#l00176">oomph::AlgebraicNode::mesh_pt()</a>, <a class="el" href="elements_8h_source.html#l02227">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02192">oomph::FiniteElement::node_pt()</a>, <a class="el" href="algebraic__elements_8cc_source.html#l00231">oomph::AlgebraicNode::node_update()</a>, <a class="el" href="algebraic__elements_8h_source.html#l00241">oomph::AlgebraicNode::nref_value()</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="classoomph_1_1AlgebraicMesh.html#a6c6a35ae2be6e2766f5b80d85693c1ce">oomph::AlgebraicMesh::update_node_update()</a>, <a class="el" href="algebraic__elements_8h_source.html#l00206">oomph::AlgebraicNode::vector_geom_object_pt()</a>, and <a class="el" href="algebraic__elements_8h_source.html#l00257">oomph::AlgebraicNode::vector_ref_value()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__brick__element_8cc_source.html#l01229">oomph::RefineableQElement&lt; 3 &gt;::build()</a>, <a class="el" href="refineable__line__element_8cc_source.html#l00204">oomph::RefineableQElement&lt; 1 &gt;::build()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l00600">oomph::RefineableQElement&lt; 2 &gt;::build()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l00323">oomph::PRefineableQElement&lt; 1, INITIAL_NNODE_1D &gt;::p_refine()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01931">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::p_refine()</a>, and <a class="el" href="hp__refineable__elements_8cc_source.html#l05870">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::p_refine()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__brick__element_8cc_source.html#l01293">oomph::RefineableQElement&lt; 3 &gt;::build()</a>, <a class="el" href="refineable__line__element_8cc_source.html#l00212">oomph::RefineableQElement&lt; 1 &gt;::build()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l00642">oomph::RefineableQElement&lt; 2 &gt;::build()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l00327">oomph::PRefineableQElement&lt; 1, INITIAL_NNODE_1D &gt;::p_refine()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01990">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::p_refine()</a>, and <a class="el" href="hp__refineable__elements_8cc_source.html#l06104">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::p_refine()</a>.</p>
 
 </div>
 </div>
@@ -337,7 +336,7 @@ Public Member Functions</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:20
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:42
         </div>
       </div>
     </footer>

@@ -13,33 +13,33 @@ enum \{ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3
 \item 
 void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fb1a620c45f362039bef826b32b6785}{send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to send any \char`\"{}missing\char`\"{} zeta coordinates to the next process and receive any coordinates from previous process. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a131c53d0a1557066df4719d24796b3a8}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
+void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5ae4961853991e4a63a86b946f6baa4a}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \&external\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function to send back any located information. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values)
 \begin{DoxyCompactList}\small\item\em Helper function to add external haloed nodes, including any masters. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values)
+void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa30723dc864a8d00c5aac7e0a2c529e8}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \&external\+\_\+mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values)
 \begin{DoxyCompactList}\small\item\em Recursively add any master nodes (and their master nodes etc) of external haloed nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aac4036d305c98081e778e16d568ae560}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values)
 \begin{DoxyCompactList}\small\item\em Helper to add external haloed node that is not a master. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$master\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values)
 \begin{DoxyCompactList}\small\item\em Helper function to add external haloed node that is a master. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values)
+void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a8bab6f3d3dcb1900c5cb8a0c501e6b45}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \&external\+\_\+mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values)
 \begin{DoxyCompactList}\small\item\em Helper function to get the required nodal information from an external haloed node so that a fully-\/functional external halo node (and therefore element) can be created on the receiving process. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$master\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values)
+void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a44866c69462a4c96fa4553b8041bcf11}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$master\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \&external\+\_\+mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values)
 \begin{DoxyCompactList}\small\item\em Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving proc. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, unsigned \&loc\+\_\+p, unsigned \&node\+\_\+index, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&new\+\_\+el\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper functiono to add external halo node that is not a master. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+nod\+\_\+pt, unsigned \&loc\+\_\+p, unsigned \&node\+\_\+index, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&new\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
+void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a07c64eb715bc78244fc4a5dae19d4788}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+nod\+\_\+pt, unsigned \&loc\+\_\+p, unsigned \&node\+\_\+index, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const  \&new\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \&external\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function which constructs a new external halo node (on an element) with the information sent from the haloed process. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_af094851b9ae730f6e8a37a793be05bc9}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} $\ast$ $>$ \&mesh\+\_\+geom\+\_\+obj\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Locate zeta for current set of missing coordinates; vector-\/based version. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a969b893c0f6f013c78076e4013c0f34c}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ $>$ \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} $\ast$ $>$ \&mesh\+\_\+geom\+\_\+obj\+\_\+pt, const unsigned \&interaction\+\_\+index)
+void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_af4c19fa79d113ff9ff2db2239c6de170}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ $>$ \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \&external\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} $\ast$ $>$ \&mesh\+\_\+geom\+\_\+obj\+\_\+pt, const unsigned \&interaction\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Helper function to locate \char`\"{}local\char`\"{} zeta coordinates This is the vector-\/based version which operates simultaenously on the meshes contained in the Vectors. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a81f7a581bfb6abfcce009546b80b9898}{get\+\_\+dim\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&external\+\_\+mesh\+\_\+pt)
+void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_afa49060513f3a28264f988ecb76df1a7}{get\+\_\+dim\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \&external\+\_\+mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Helper function that computes the dimension of the elements within each of the specified meshes (and checks they are the same) Stores result in Dim. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a45a7960bff85287284bea3939dcda5c2}{clean\+\_\+up}} ()
 \begin{DoxyCompactList}\small\item\em Helper function that clears all the intermediate information used during the external storage creation at the end of the procedure. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a26cd46b6f717aa1d6c2}{first\+\_\+closer\+\_\+than\+\_\+second}} (const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&p1, const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&p2)
+bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ad9baf8c647dbd10164c28f12cbb04f85}{first\+\_\+closer\+\_\+than\+\_\+second}} (const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&p1, const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&p2)
 \item 
 {\footnotesize template$<$class B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a35d48459a5261d565afbc106cb61fe60}{setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&boundary\+\_\+in\+\_\+bulk\+\_\+mesh, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&bulk\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ $>$ \&face\+\_\+mesh\+\_\+pt, const unsigned \&interaction=0)
 \begin{DoxyCompactList}\small\item\em Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfamily face\+\_\+mesh\+\_\+pt}) that are adjacent to the bulk elements next to the {\ttfamily boundary\+\_\+in\+\_\+bulk\+\_\+mesh} -\/th boundary of the mesh pointed to by {\ttfamily bulk\+\_\+mesh\+\_\+pt}. The {\ttfamily Face\+Elements} must be derived from the {\ttfamily \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element}}} base class and the adjacent bulk elements are stored as their external elements. \end{DoxyCompactList}\item 
@@ -72,7 +72,7 @@ bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a2
 \item 
 std\+::ofstream \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a87a54c04fcc68b716adf10ca29a1f449}{Doc\+\_\+boundary\+\_\+coordinate\+\_\+file}}
 \begin{DoxyCompactList}\small\item\em Output file to document the boundary coordinate along the mesh boundary of the bulk mesh during call to setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh(...) \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_af4e0a3d3191c370209c6a7830a0dc368}{Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction}} =false
+bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_af4e0a3d3191c370209c6a7830a0dc368}{Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction}} = false
 \begin{DoxyCompactList}\small\item\em Boolean to indicate that failure in setup multi domain functions is acceptable; defaults to false. If set to true external element pointers are set to null for those elements for which external elements couldn\textquotesingle{}t be located. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}{Dim}}
 \begin{DoxyCompactList}\small\item\em Dimension of zeta tuples (set by get\+\_\+dim\+\_\+helper) -- needed because we store the scalar coordinates in flat-\/packed form. \end{DoxyCompactList}\item 
@@ -98,17 +98,17 @@ unsigned \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aeb7431547a
 \item 
 unsigned \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a20f6de2e1bd15cb40c461d2ca3940bd7}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}
 \begin{DoxyCompactList}\small\item\em Counter used when processing vector of flat-\/packed unsigneds -- this is really \char`\"{}private\char`\"{} data, declared here to avoid having to pass it (and the associated array) between the various helper functions. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abc1119753cf68493ba6ea43c2a8bc378}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}} =false
+bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abc1119753cf68493ba6ea43c2a8bc378}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}} = false
 \begin{DoxyCompactList}\small\item\em Boolean to indicate when to use the bulk element as the external element. Defaults to false, you must have set up Face\+Elements properly first in order for it to work. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa3b57b233a416885018e8993db0b291c}{Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements}} =true
+bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa3b57b233a416885018e8993db0b291c}{Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements}} = true
 \begin{DoxyCompactList}\small\item\em Boolean to indicate if we\textquotesingle{}re allowed to use halo elements as external elements. Can drastically reduce the number of external halo elements -- currently not aware of any problems therefore set to true by default but retention of this flag allows easy return to previous implementation. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa45f040b8ffc6448777fae76190d308c}{Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements\+\_\+for\+\_\+projection}} =true
+bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa45f040b8ffc6448777fae76190d308c}{Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements\+\_\+for\+\_\+projection}} = true
 \begin{DoxyCompactList}\small\item\em Indicate whether we are allowed to use halo elements as external elements for projection, possibly only required in parallel unstructured mesh generation during the projection stage. Default set to true. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a64dc4667540a9a2591b00635dea88423}{Doc\+\_\+timings}} =false
+bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a64dc4667540a9a2591b00635dea88423}{Doc\+\_\+timings}} = false
 \begin{DoxyCompactList}\small\item\em Boolean to indicate whether to doc timings or not. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa490ae6349c68dc3c5b40f6a4a40e718}{Doc\+\_\+stats}} =false
+bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa490ae6349c68dc3c5b40f6a4a40e718}{Doc\+\_\+stats}} = false
 \begin{DoxyCompactList}\small\item\em Boolean to indicate whether to output basic info during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa5969c7c730e13e9d5a2c268f3045203}{Doc\+\_\+full\+\_\+stats}} =false
+bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa5969c7c730e13e9d5a2c268f3045203}{Doc\+\_\+full\+\_\+stats}} = false
 \begin{DoxyCompactList}\small\item\em Boolean to indicate whether to output further info during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5f14db731fddbd057f4099fbdba95cc0}{Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison}}
 \end{DoxyCompactItemize}
@@ -139,7 +139,7 @@ Not\+\_\+found&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 149 of file multi\+\_\+domain.\+h.
+Definition at line 147 of file multi\+\_\+domain.\+h.
 
 
 
@@ -157,7 +157,7 @@ Helper function to add external halo node that is a master.
 
 
 
-Definition at line 2007 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 2027 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
@@ -175,7 +175,7 @@ Helper functiono to add external halo node that is not a master.
 
 Helper function to add external halo node that is not a master. 
 
-Definition at line 1282 of file multi\+\_\+domain.\+cc.
+Definition at line 1404 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -194,7 +194,7 @@ Helper function to add external halo nodes, including any masters, based on info
 
 Helper function to add external halo nodes, including any masters, based on information received from the haloed process 
 
-Definition at line 1921 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 1924 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
@@ -212,7 +212,7 @@ Helper function to add external haloed node that is a master.
 
 
 
-Definition at line 586 of file multi\+\_\+domain.\+cc.
+Definition at line 699 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -234,7 +234,7 @@ Helper to add external haloed node that is not a master.
 
 Helper function to add external haloed node that is not a master. 
 
-Definition at line 528 of file multi\+\_\+domain.\+cc.
+Definition at line 643 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -256,7 +256,7 @@ Helper function to add external haloed nodes, including any masters.
 
 Helper function to add external haloed nodes, inc. masters of external haloed nodes. 
 
-Definition at line 442 of file multi\+\_\+domain.\+cc.
+Definition at line 557 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -281,11 +281,11 @@ This routine calls the locate\+\_\+zeta routine (simultaneously on each processo
 
 Vector-\/based version operates simultaneously on the meshes contained in the vectors. If it\textquotesingle{}s is now zero then break out of the spirals loop
 
-Definition at line 529 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 524 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction, clean\+\_\+up(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Non\+Refineable\+Bin\+Array\+::current\+\_\+max\+\_\+spiral\+\_\+level(), Non\+Refineable\+Bin\+Array\+::current\+\_\+min\+\_\+spiral\+\_\+level(), oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Default\+\_\+nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element, Dim, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+full\+\_\+stats, oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+stats, oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+timings, e, oomph\+::\+Mesh\+::element\+\_\+pt(), External\+\_\+element\+\_\+located, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally, i, oomph\+::\+Element\+With\+External\+Element\+::initialise\+\_\+external\+\_\+element\+\_\+storage(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Integral\+::knot(), level, locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), Bin\+Array\+::max\+\_\+bin\+\_\+dimension(), n, Non\+Refineable\+Bin\+Array\+::n\+\_\+spiral\+\_\+chunk(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+element(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+node(), oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element(), oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node(), oomph\+::\+Mesh\+::nhalo\+\_\+node(), oomph\+::\+Mesh\+::nhaloed\+\_\+node(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Mesh\+::nroot\+\_\+halo\+\_\+element(), oomph\+::\+Mesh\+::nroot\+\_\+haloed\+\_\+element(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, oomph\+::\+Finite\+Element\+::output(), Bin\+Array\+::output\+\_\+bins(), oomph\+::\+Problem\+::problem\+\_\+has\+\_\+been\+\_\+distributed(), s, send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info(), send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas(), t, oomph\+::\+Timing\+Helpers\+::timer(), Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external, oomph\+::\+Use\+C\+G\+A\+L\+Sample\+Point\+Container, oomph\+::\+Use\+Non\+Refineable\+Bin\+Array, and oomph\+::\+Use\+Refineable\+Bin\+Array.
+References Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction, clean\+\_\+up(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Non\+Refineable\+Bin\+Array\+::current\+\_\+max\+\_\+spiral\+\_\+level(), Non\+Refineable\+Bin\+Array\+::current\+\_\+min\+\_\+spiral\+\_\+level(), Dim, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+full\+\_\+stats, oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+stats, oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+timings, e, oomph\+::\+Mesh\+::element\+\_\+pt(), External\+\_\+element\+\_\+located, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), Refineable\+Bin\+Array\+::first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), C\+G\+A\+L\+Sample\+Point\+Container\+::first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally, i, Refineable\+Bin\+Array\+::initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), C\+G\+A\+L\+Sample\+Point\+Container\+::initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), oomph\+::\+Element\+With\+External\+Element\+::initialise\+\_\+external\+\_\+element\+\_\+storage(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Integral\+::knot(), Refineable\+Bin\+Array\+::last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), C\+G\+A\+L\+Sample\+Point\+Container\+::last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), level, locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), Bin\+Array\+::max\+\_\+bin\+\_\+dimension(), Refineable\+Bin\+Array\+::multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), C\+G\+A\+L\+Sample\+Point\+Container\+::multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), n, Non\+Refineable\+Bin\+Array\+::n\+\_\+spiral\+\_\+chunk(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+element(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+node(), oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element(), oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node(), oomph\+::\+Mesh\+::nhalo\+\_\+node(), oomph\+::\+Mesh\+::nhaloed\+\_\+node(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Mesh\+::nroot\+\_\+halo\+\_\+element(), oomph\+::\+Mesh\+::nroot\+\_\+haloed\+\_\+element(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, oomph\+::\+Finite\+Element\+::output(), Bin\+Array\+::output\+\_\+bins(), oomph\+::\+Problem\+::problem\+\_\+has\+\_\+been\+\_\+distributed(), s, send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info(), send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas(), t, oomph\+::\+Timing\+Helpers\+::timer(), Refineable\+Bin\+Array\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively(), C\+G\+A\+L\+Sample\+Point\+Container\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively(), Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external, oomph\+::\+Use\+C\+G\+A\+L\+Sample\+Point\+Container, oomph\+::\+Use\+Non\+Refineable\+Bin\+Array, and oomph\+::\+Use\+Refineable\+Bin\+Array.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ae63441bb68e6512082f1248c65f6208d}\label{namespaceoomph_1_1Multi__domain__functions_ae63441bb68e6512082f1248c65f6208d}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!aux\_setup\_multi\_domain\_interaction@{aux\_setup\_multi\_domain\_interaction}}
@@ -300,11 +300,7 @@ Auxiliary helper function.
 
 This routine calls the locate\+\_\+zeta routine (simultaneously on each processor for each individual processor\textquotesingle{}s element set if necessary) and sets up the external (halo) element and node storage as necessary. The locate\+\_\+zeta procedure here works for all multi-\/domain problems where either two meshes occupy the same physical space but have differing element types (e.\+g. a Boussinesq convection problem where Advection\+Diffusion elements interact with Navier-\/\+Stokes type elements) or two meshes interact along some boundary of the external mesh, represented by a \char`\"{}face mesh\char`\"{}, such as an F\+SI problem. 
 
-Definition at line 492 of file multi\+\_\+domain.\+template.\+cc.
-
-
-
-Referenced by setup\+\_\+multi\+\_\+domain\+\_\+interaction().
+Definition at line 485 of file multi\+\_\+domain.\+template.\+cc.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a45a7960bff85287284bea3939dcda5c2}\label{namespaceoomph_1_1Multi__domain__functions_a45a7960bff85287284bea3939dcda5c2}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!clean\_up@{clean\_up}}
@@ -318,7 +314,7 @@ Helper function that clears all the intermediate information used during the ext
 
 Helper function that clears all the information used during the external storage creation 
 
-Definition at line 2272 of file multi\+\_\+domain.\+cc.
+Definition at line 2413 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -345,13 +341,13 @@ Helper function which constructs a new external halo master node with the requir
 
 Now call update\+\_\+node\+\_\+update
 
-Definition at line 2046 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 2068 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
 References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt(), Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt(), oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), Node, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update\+\_\+element\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
-\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}\label{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}} 
+\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a07c64eb715bc78244fc4a5dae19d4788}\label{namespaceoomph_1_1Multi__domain__functions_a07c64eb715bc78244fc4a5dae19d4788}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!construct\_new\_external\_halo\_node\_helper@{construct\_new\_external\_halo\_node\_helper}}
 \index{construct\_new\_external\_halo\_node\_helper@{construct\_new\_external\_halo\_node\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{construct\_new\_external\_halo\_node\_helper()}{construct\_new\_external\_halo\_node\_helper()}}
@@ -369,11 +365,11 @@ For the received update\+\_\+id, ref\+\_\+value, geom\+\_\+object call add\+\_\+
 
 Now call update\+\_\+node\+\_\+update
 
-Definition at line 1329 of file multi\+\_\+domain.\+cc.
+Definition at line 1452 of file multi\+\_\+domain.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Node\+::ndim(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Node\+::resize(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Node\+::ndim(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Node\+::resize(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 
 
@@ -392,27 +388,27 @@ Create external (halo) elements on the loop process based on the information rec
 
 Creates external (halo) elements on the loop process based on the information received from each locate\+\_\+zeta call on other processes. vector based version 
 
-Definition at line 1679 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 1677 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References oomph\+::\+Problem\+::communicator\+\_\+pt(), Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Finite\+Element\+::dim(), e, External\+\_\+element\+\_\+located, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+located\+\_\+coordinates, Flat\+\_\+packed\+\_\+unsigneds, i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), Located\+\_\+element\+\_\+status, oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt(), New, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), and oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt().
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+element\+\_\+pt(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Finite\+Element\+::dim(), e, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord(), External\+\_\+element\+\_\+located, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt(), Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+located\+\_\+coordinates, Flat\+\_\+packed\+\_\+unsigneds, i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), Located\+\_\+element\+\_\+status, oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt(), oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), New, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), and oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt().
 
-\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a26cd46b6f717aa1d6c2}\label{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a26cd46b6f717aa1d6c2}} 
+\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ad9baf8c647dbd10164c28f12cbb04f85}\label{namespaceoomph_1_1Multi__domain__functions_ad9baf8c647dbd10164c28f12cbb04f85}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!first\_closer\_than\_second@{first\_closer\_than\_second}}
 \index{first\_closer\_than\_second@{first\_closer\_than\_second}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{first\_closer\_than\_second()}{first\_closer\_than\_second()}}
-{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::first\+\_\+closer\+\_\+than\+\_\+second (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{p1,  }\item[{const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{p2 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::first\+\_\+closer\+\_\+than\+\_\+second (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{p1,  }\item[{const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{p2 }\end{DoxyParamCaption})}
 
 Comparison function for sorting entries in bin\+: Returns true if point identified by p1 (comprising pointer to finite element and vector of local coordinates within that element) is closer to Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison than p2 
 
-Definition at line 2292 of file multi\+\_\+domain.\+cc.
+Definition at line 2433 of file multi\+\_\+domain.\+cc.
 
 
 
 References Dim, i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta(), s, and Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison.
 
-\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a81f7a581bfb6abfcce009546b80b9898}\label{namespaceoomph_1_1Multi__domain__functions_a81f7a581bfb6abfcce009546b80b9898}} 
+\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_afa49060513f3a28264f988ecb76df1a7}\label{namespaceoomph_1_1Multi__domain__functions_afa49060513f3a28264f988ecb76df1a7}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!get\_dim\_helper@{get\_dim\_helper}}
 \index{get\_dim\_helper@{get\_dim\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{get\_dim\_helper()}{get\_dim\_helper()}}
@@ -424,7 +420,7 @@ Helper function that computes the dimension of the elements within each of the s
 
 Helper function that computes the dimension of the elements within each of the specified meshes (and checks they are the same). Stores result in Dim. 
 
-Definition at line 2208 of file multi\+\_\+domain.\+cc.
+Definition at line 2343 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -434,7 +430,7 @@ References oomph\+::\+Problem\+::communicator\+\_\+pt(), Dim, oomph\+::\+Mesh\+:
 
 Referenced by setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
-\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}\label{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}} 
+\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a44866c69462a4c96fa4553b8041bcf11}\label{namespaceoomph_1_1Multi__domain__functions_a44866c69462a4c96fa4553b8041bcf11}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!get\_required\_master\_nodal\_information\_helper@{get\_required\_master\_nodal\_information\_helper}}
 \index{get\_required\_master\_nodal\_information\_helper@{get\_required\_master\_nodal\_information\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{get\_required\_master\_nodal\_information\_helper()}{get\_required\_master\_nodal\_information\_helper()}}
@@ -446,17 +442,17 @@ Helper function to get the required master nodal information from an external ha
 
 Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving process 
 
-Definition at line 895 of file multi\+\_\+domain.\+cc.
+Definition at line 1010 of file multi\+\_\+domain.\+cc.
 
 
 
-References add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage(), boundaries, oomph\+::\+Finite\+Element\+::dim(), Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Node\+::ndim(), oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object(), oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Solid\+Node\+::nlagrangian\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update\+\_\+element\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Problem\+::ntime\+\_\+stepper(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Algebraic\+Node\+::ref\+\_\+value(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), value, oomph\+::\+Node\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+element\+\_\+pt(), add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage(), boundaries, oomph\+::\+Finite\+Element\+::dim(), Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element(), oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object(), oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Solid\+Node\+::nlagrangian\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update\+\_\+element\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Problem\+::ntime\+\_\+stepper(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Algebraic\+Node\+::ref\+\_\+value(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::value(), oomph\+::\+Node\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 
 
 Referenced by add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper().
 
-\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}\label{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}} 
+\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a8bab6f3d3dcb1900c5cb8a0c501e6b45}\label{namespaceoomph_1_1Multi__domain__functions_a8bab6f3d3dcb1900c5cb8a0c501e6b45}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}}
 \index{get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{get\_required\_nodal\_information\_helper()}{get\_required\_nodal\_information\_helper()}}
@@ -468,17 +464,17 @@ Helper function to get the required nodal information from an external haloed no
 
 Helper function to get the required nodal information from an external haloed node so that a fully-\/functional external halo node (and therefore element) can be created on the receiving process 
 
-Definition at line 639 of file multi\+\_\+domain.\+cc.
+Definition at line 754 of file multi\+\_\+domain.\+cc.
 
 
 
-References boundaries, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Node\+::ndim(), oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object(), oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Problem\+::ntime\+\_\+stepper(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Algebraic\+Node\+::ref\+\_\+value(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), value, oomph\+::\+Node\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
+References boundaries, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Node\+::ndim(), oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object(), oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Problem\+::ntime\+\_\+stepper(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Algebraic\+Node\+::ref\+\_\+value(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::value(), oomph\+::\+Node\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 
 
 Referenced by add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper().
 
-\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a969b893c0f6f013c78076e4013c0f34c}\label{namespaceoomph_1_1Multi__domain__functions_a969b893c0f6f013c78076e4013c0f34c}} 
+\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_af4c19fa79d113ff9ff2db2239c6de170}\label{namespaceoomph_1_1Multi__domain__functions_af4c19fa79d113ff9ff2db2239c6de170}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!locate\_zeta\_for\_local\_coordinates@{locate\_zeta\_for\_local\_coordinates}}
 \index{locate\_zeta\_for\_local\_coordinates@{locate\_zeta\_for\_local\_coordinates}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{locate\_zeta\_for\_local\_coordinates()}{locate\_zeta\_for\_local\_coordinates()}}
@@ -490,7 +486,7 @@ Helper function to locate \char`\"{}local\char`\"{} zeta coordinates This is the
 
 locate zeta for current set of \char`\"{}local\char`\"{} coordinates vector-\/based version 
 
-Definition at line 2018 of file multi\+\_\+domain.\+cc.
+Definition at line 2153 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -512,11 +508,11 @@ Locate zeta for current set of missing coordinates; vector-\/based version.
 
 Helper function to locate these \char`\"{}missing\char`\"{} zeta coordinates. This is the vector-\/based function which operates simultaneously on the meshes contained in the vectors. 
 
-Definition at line 1673 of file multi\+\_\+domain.\+cc.
+Definition at line 1797 of file multi\+\_\+domain.\+cc.
 
 
 
-References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+element\+\_\+pt(), add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Dim, oomph\+::\+Finite\+Element\+::dim(), Exists, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+located\+\_\+coordinates, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally, oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), Located\+\_\+element\+\_\+status, oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number(), New, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Not\+\_\+found, Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element, Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+element\+\_\+pt(), add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage(), oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Dim, oomph\+::\+Finite\+Element\+::dim(), Exists, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+located\+\_\+coordinates, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally, oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), Located\+\_\+element\+\_\+status, oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number(), New, oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Not\+\_\+found, Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element, Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
 
 
 
@@ -535,13 +531,13 @@ Recursively add masters of external halo nodes (and their masters, etc) based on
 
 Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process 
 
-Definition at line 1947 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 1960 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
 References Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, oomph\+::oomph\+\_\+info, oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), and oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt().
 
-\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}\label{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}} 
+\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa30723dc864a8d00c5aac7e0a2c529e8}\label{namespaceoomph_1_1Multi__domain__functions_aa30723dc864a8d00c5aac7e0a2c529e8}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!recursively\_add\_masters\_of\_external\_haloed\_node@{recursively\_add\_masters\_of\_external\_haloed\_node}}
 \index{recursively\_add\_masters\_of\_external\_haloed\_node@{recursively\_add\_masters\_of\_external\_haloed\_node}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{recursively\_add\_masters\_of\_external\_haloed\_node()}{recursively\_add\_masters\_of\_external\_haloed\_node()}}
@@ -553,7 +549,7 @@ Recursively add any master nodes (and their master nodes etc) of external haloed
 
 Recursively add any master nodes (and their master nodes etc) of external nodes 
 
-Definition at line 464 of file multi\+\_\+domain.\+cc.
+Definition at line 577 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -563,7 +559,7 @@ References add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper(), Fl
 
 Referenced by add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage().
 
-\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a131c53d0a1557066df4719d24796b3a8}\label{namespaceoomph_1_1Multi__domain__functions_a131c53d0a1557066df4719d24796b3a8}} 
+\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a5ae4961853991e4a63a86b946f6baa4a}\label{namespaceoomph_1_1Multi__domain__functions_a5ae4961853991e4a63a86b946f6baa4a}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!send\_and\_receive\_located\_info@{send\_and\_receive\_located\_info}}
 \index{send\_and\_receive\_located\_info@{send\_and\_receive\_located\_info}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{send\_and\_receive\_located\_info()}{send\_and\_receive\_located\_info()}}
@@ -575,7 +571,7 @@ Helper function to send back any located information.
 
 Send location information from current process; Received location information from (current process + iproc) modulo (nproc) 
 
-Definition at line 244 of file multi\+\_\+domain.\+cc.
+Definition at line 264 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -597,7 +593,7 @@ Helper function to send any \char`\"{}missing\char`\"{} zeta coordinates to the 
 
 Send the zeta coordinates from the current process to the next process; receive from the previous process 
 
-Definition at line 180 of file multi\+\_\+domain.\+cc.
+Definition at line 177 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -620,7 +616,7 @@ Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfa
 
 Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfamily face\+\_\+mesh\+\_\+pt}) that are adjacent to the bulk elements next to the {\ttfamily boundary\+\_\+in\+\_\+bulk\+\_\+mesh} -\/th boundary of the mesh pointed to by {\ttfamily bulk\+\_\+mesh\+\_\+pt}. The {\ttfamily Face\+Elements} must be derived from the {\ttfamily \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element}}} base class and the adjacent bulk elements are stored as their external elements. 
 
-Definition at line 212 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 207 of file multi\+\_\+domain.\+template.\+cc.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a35d48459a5261d565afbc106cb61fe60}\label{namespaceoomph_1_1Multi__domain__functions_a35d48459a5261d565afbc106cb61fe60}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_bulk\_elements\_adjacent\_to\_face\_mesh@{setup\_bulk\_elements\_adjacent\_to\_face\_mesh}}
@@ -639,7 +635,7 @@ Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfa
 
 This is the vector-\/based version which deals with multiple bulk mesh boundaries at the same time. 
 
-Definition at line 74 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 72 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
@@ -682,7 +678,7 @@ Definition at line 400 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), Dim, get\+\_\+dim\+\_\+helper(), i, and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
+References Dim, get\+\_\+dim\+\_\+helper(), i, and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}\label{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}}
@@ -709,7 +705,7 @@ Function to set up the one-\/way multi-\/domain interaction for problems where t
 \item The interaction\+\_\+index parameter defaults to zero and must be otherwise set by the user if there is more than one mesh that provides sources for the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} pointed to by mesh\+\_\+pt. 
 \end{DoxyItemize}
 
-Definition at line 282 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 280 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
@@ -748,11 +744,11 @@ Function to set up the one-\/way multi-\/domain interaction for F\+S\+I-\/like p
   elements\char`\"{} for the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} pointed to by mesh\+\_\+pt (e.\+g. in the case when a beam or shell structure is loaded by fluid from both sides.) 
 \end{DoxyItemize}
 
-Definition at line 339 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 336 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), Dim, get\+\_\+dim\+\_\+helper(), and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
+References Dim, get\+\_\+dim\+\_\+helper(), and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a4a7ac2c45985582b30ed3ecb5d2623d2}\label{namespaceoomph_1_1Multi__domain__functions_a4a7ac2c45985582b30ed3ecb5d2623d2}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interactions@{setup\_multi\_domain\_interactions}}
@@ -767,7 +763,7 @@ Set up the two-\/way multi-\/domain interactions for the problem pointed to by {
 
 Set up the two-\/way multi-\/domain interactions for the problem pointed to by {\ttfamily problem\+\_\+pt}. Use this for cases where first\+\_\+mesh\+\_\+pt and second\+\_\+mesh\+\_\+pt occupy the same physical space and are populated by E\+L\+E\+M\+E\+N\+T\+\_\+0 and E\+L\+E\+M\+E\+N\+T\+\_\+1 respectively, and are combined to solve a single problem. The elements in two meshes interact both ways the elements in each mesh act as \char`\"{}external elements\char`\"{} for the elements in the \char`\"{}other\char`\"{} mesh. The interaction indices allow the specification of which interaction we\textquotesingle{}re setting up in the two meshes. They default to zero, which is appropriate if there\textquotesingle{}s only a single interaction. 
 
-Definition at line 248 of file multi\+\_\+domain.\+template.\+cc.
+Definition at line 244 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
@@ -780,7 +776,7 @@ References oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage().
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction@{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction}}
 \index{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction@{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction}{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction}}
-{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction =false}
+{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction = false}
 
 
 
@@ -788,7 +784,7 @@ Boolean to indicate that failure in setup multi domain functions is acceptable; 
 
 
 
-Definition at line 58 of file multi\+\_\+domain.\+cc.
+Definition at line 56 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -798,7 +794,7 @@ Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Allow\_use\_of\_halo\_elements\_as\_external\_elements@{Allow\_use\_of\_halo\_elements\_as\_external\_elements}}
 \index{Allow\_use\_of\_halo\_elements\_as\_external\_elements@{Allow\_use\_of\_halo\_elements\_as\_external\_elements}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{Allow\_use\_of\_halo\_elements\_as\_external\_elements}{Allow\_use\_of\_halo\_elements\_as\_external\_elements}}
-{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements =true}
+{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements = true}
 
 
 
@@ -806,7 +802,7 @@ Boolean to indicate if we\textquotesingle{}re allowed to use halo elements as ex
 
 
 
-Definition at line 151 of file multi\+\_\+domain.\+cc.
+Definition at line 149 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -816,7 +812,7 @@ Referenced by locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates().
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection@{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection}}
 \index{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection@{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection}{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection}}
-{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements\+\_\+for\+\_\+projection =true}
+{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements\+\_\+for\+\_\+projection = true}
 
 
 
@@ -824,7 +820,7 @@ Indicate whether we are allowed to use halo elements as external elements for pr
 
 
 
-Definition at line 157 of file multi\+\_\+domain.\+cc.
+Definition at line 155 of file multi\+\_\+domain.\+cc.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aeb7431547acc61e750fcc456a25ffc13}\label{namespaceoomph_1_1Multi__domain__functions_aeb7431547acc61e750fcc456a25ffc13}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Counter\_for\_flat\_packed\_doubles@{Counter\_for\_flat\_packed\_doubles}}
@@ -838,7 +834,7 @@ Counter used when processing vector of flat-\/packed doubles -- this is really \
 
 
 
-Definition at line 114 of file multi\+\_\+domain.\+cc.
+Definition at line 112 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -856,7 +852,7 @@ Counter used when processing vector of flat-\/packed unsigneds -- this is really
 
 
 
-Definition at line 136 of file multi\+\_\+domain.\+cc.
+Definition at line 134 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -874,7 +870,7 @@ Dimension of zeta tuples (set by get\+\_\+dim\+\_\+helper) -- needed because we 
 
 
 
-Definition at line 62 of file multi\+\_\+domain.\+cc.
+Definition at line 60 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -892,7 +888,7 @@ Output file to document the boundary coordinate along the mesh boundary of the b
 
 
 
-Definition at line 49 of file multi\+\_\+domain.\+cc.
+Definition at line 47 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -902,7 +898,7 @@ Referenced by setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_full\_stats@{Doc\_full\_stats}}
 \index{Doc\_full\_stats@{Doc\_full\_stats}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{Doc\_full\_stats}{Doc\_full\_stats}}
-{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+full\+\_\+stats =false}
+{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+full\+\_\+stats = false}
 
 
 
@@ -910,7 +906,7 @@ Boolean to indicate whether to output further info during \mbox{\hyperlink{names
 
 Boolean to indicate whether to document further info (to screen) during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. 
 
-Definition at line 168 of file multi\+\_\+domain.\+cc.
+Definition at line 166 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -920,7 +916,7 @@ Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_stats@{Doc\_stats}}
 \index{Doc\_stats@{Doc\_stats}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{Doc\_stats}{Doc\_stats}}
-{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+stats =false}
+{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+stats = false}
 
 
 
@@ -928,7 +924,7 @@ Boolean to indicate whether to output basic info during \mbox{\hyperlink{namespa
 
 Boolean to indicate whether to document basic info (to screen) during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. 
 
-Definition at line 164 of file multi\+\_\+domain.\+cc.
+Definition at line 162 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -938,7 +934,7 @@ Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_timings@{Doc\_timings}}
 \index{Doc\_timings@{Doc\_timings}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{Doc\_timings}{Doc\_timings}}
-{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+timings =false}
+{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+timings = false}
 
 
 
@@ -946,7 +942,7 @@ Boolean to indicate whether to doc timings or not.
 
 
 
-Definition at line 160 of file multi\+\_\+domain.\+cc.
+Definition at line 158 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -964,7 +960,7 @@ Lookup scheme for whether a local element\textquotesingle{}s integration point h
 
 
 
-Definition at line 70 of file multi\+\_\+domain.\+cc.
+Definition at line 68 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -982,7 +978,7 @@ Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), clean\+\
 
 
 
-Definition at line 108 of file multi\+\_\+domain.\+cc.
+Definition at line 106 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -1000,7 +996,7 @@ Referenced by clean\+\_\+up(), construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+m
 
 
 
-Definition at line 104 of file multi\+\_\+domain.\+cc.
+Definition at line 102 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -1018,7 +1014,7 @@ Referenced by clean\+\_\+up(), create\+\_\+external\+\_\+halo\+\_\+elements(), l
 
 
 
-Definition at line 120 of file multi\+\_\+domain.\+cc.
+Definition at line 118 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -1032,7 +1028,7 @@ Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+
 
 
 
-Definition at line 127 of file multi\+\_\+domain.\+cc.
+Definition at line 125 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -1050,7 +1046,7 @@ Referenced by add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper(),
 
 
 
-Definition at line 76 of file multi\+\_\+domain.\+cc.
+Definition at line 74 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -1068,7 +1064,7 @@ Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), clean\+\
 
 
 
-Definition at line 100 of file multi\+\_\+domain.\+cc.
+Definition at line 98 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -1086,7 +1082,7 @@ Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element\mbox{[}i\mbox
 
 
 
-Definition at line 93 of file multi\+\_\+domain.\+cc.
+Definition at line 91 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -1104,7 +1100,7 @@ Referenced by clean\+\_\+up(), create\+\_\+external\+\_\+halo\+\_\+elements(), l
 
 
 
-Definition at line 84 of file multi\+\_\+domain.\+cc.
+Definition at line 82 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -1114,7 +1110,7 @@ Referenced by clean\+\_\+up(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coord
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Use\_bulk\_element\_as\_external@{Use\_bulk\_element\_as\_external}}
 \index{Use\_bulk\_element\_as\_external@{Use\_bulk\_element\_as\_external}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{Use\_bulk\_element\_as\_external}{Use\_bulk\_element\_as\_external}}
-{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external =false}
+{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external = false}
 
 
 
@@ -1122,7 +1118,7 @@ Boolean to indicate when to use the bulk element as the external element. Defaul
 
 
 
-Definition at line 144 of file multi\+\_\+domain.\+cc.
+Definition at line 142 of file multi\+\_\+domain.\+cc.
 
 
 
@@ -1136,7 +1132,7 @@ Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), locate\+
 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of zeta coordinates that we\textquotesingle{}re currently trying to locate; used in sorting of bin entries in further\+\_\+away() comparison function 
 
-Definition at line 2286 of file multi\+\_\+domain.\+cc.
+Definition at line 2427 of file multi\+\_\+domain.\+cc.
 
 
 

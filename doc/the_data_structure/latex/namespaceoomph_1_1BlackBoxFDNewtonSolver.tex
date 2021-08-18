@@ -22,17 +22,17 @@ void \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a4a1361a9b08163b5
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-unsigned \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a20ac8568daf0d63afa3945a817ff3e2d}{Max\+\_\+iter}} =20
+unsigned \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a20ac8568daf0d63afa3945a817ff3e2d}{Max\+\_\+iter}} = 20
 \begin{DoxyCompactList}\small\item\em Max. \# of Newton iterations. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a3067ba88fad991fdb619eae7533028bd}{N\+\_\+iter\+\_\+taken}} =0
+unsigned \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a3067ba88fad991fdb619eae7533028bd}{N\+\_\+iter\+\_\+taken}} = 0
 \begin{DoxyCompactList}\small\item\em Number of Newton iterations taken in most recent invocation. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_ac2603699f47446716ca5a818f46a7f17}{Doc\+\_\+\+Progress}} =false
+bool \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_ac2603699f47446716ca5a818f46a7f17}{Doc\+\_\+\+Progress}} = false
 \begin{DoxyCompactList}\small\item\em Flag to indicate if progress of Newton iteration is to be documented (defaults to false) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a6f0d2ceb4451e66bb7ef4ab4fdb62bcf}{F\+D\+\_\+step}} =1.\+0e-\/8
+double \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a6f0d2ceb4451e66bb7ef4ab4fdb62bcf}{F\+D\+\_\+step}} = 1.\+0e-\/8
 \begin{DoxyCompactList}\small\item\em FD step. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a4bacc59c8e1194e553f698530e9e945e}{Tol}} =1.\+0e-\/8
+double \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_a4bacc59c8e1194e553f698530e9e945e}{Tol}} = 1.\+0e-\/8
 \begin{DoxyCompactList}\small\item\em Tolerance. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_afd90cb451fb7ae5a8e30cab0a1884568}{Use\+\_\+step\+\_\+length\+\_\+control}} =false
+bool \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_afd90cb451fb7ae5a8e30cab0a1884568}{Use\+\_\+step\+\_\+length\+\_\+control}} = false
 \begin{DoxyCompactList}\small\item\em Use steplength control do make globally convergent (default false) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -48,7 +48,7 @@ Namespace for black-\/box FD Newton solver.
 
 
 
-Definition at line 65 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+h.
+Definition at line 60 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{namespaceoomph_1_1BlackBoxFDNewtonSolver_ae43745d4b8933505d52d50820c5ed5bf}\label{namespaceoomph_1_1BlackBoxFDNewtonSolver_ae43745d4b8933505d52d50820c5ed5bf}} 
 \index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!ResidualFctPt@{ResidualFctPt}}
@@ -58,7 +58,7 @@ Definition at line 65 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+h.
 
 
 
-Definition at line 60 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+h.
+Definition at line 55 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+h.
 
 
 
@@ -79,7 +79,7 @@ Black-\/box FD Newton solver\+: Calling sequence for residual function is.
 \end{DoxyCode}
  where all arguments are double Vectors. unknowns.\+size() = residuals.\+size() Reset number of Newton iterations taken in most recent invocation
 
-Definition at line 71 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
+Definition at line 67 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
 
 
 
@@ -97,7 +97,7 @@ Line search helper for globally convergent Newton method.
 
 
 
-Definition at line 249 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
+Definition at line 233 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
 
 
 
@@ -114,65 +114,11 @@ Referenced by black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve().
 \index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!Doc\_Progress@{Doc\_Progress}}
 \index{Doc\_Progress@{Doc\_Progress}!oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}}
 \doxysubsubsection{\texorpdfstring{Doc\_Progress}{Doc\_Progress}}
-{\footnotesize\ttfamily bool oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Doc\+\_\+\+Progress =false}
+{\footnotesize\ttfamily bool oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Doc\+\_\+\+Progress = false}
 
 
 
 Flag to indicate if progress of Newton iteration is to be documented (defaults to false) 
-
-
-
-Definition at line 55 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
-
-
-
-Referenced by black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve().
-
-\mbox{\Hypertarget{namespaceoomph_1_1BlackBoxFDNewtonSolver_a6f0d2ceb4451e66bb7ef4ab4fdb62bcf}\label{namespaceoomph_1_1BlackBoxFDNewtonSolver_a6f0d2ceb4451e66bb7ef4ab4fdb62bcf}} 
-\index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!FD\_step@{FD\_step}}
-\index{FD\_step@{FD\_step}!oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}}
-\doxysubsubsection{\texorpdfstring{FD\_step}{FD\_step}}
-{\footnotesize\ttfamily double oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+F\+D\+\_\+step =1.\+0e-\/8}
-
-
-
-FD step. 
-
-
-
-Definition at line 58 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
-
-
-
-Referenced by black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve(), oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter(), oomph\+::\+Problem\+::get\+\_\+fd\+\_\+jacobian(), oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Fold\+Handler\+::get\+\_\+jacobian(), oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+jacobian(), oomph\+::\+Hopf\+Handler\+::get\+\_\+jacobian(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), and oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs().
-
-\mbox{\Hypertarget{namespaceoomph_1_1BlackBoxFDNewtonSolver_a20ac8568daf0d63afa3945a817ff3e2d}\label{namespaceoomph_1_1BlackBoxFDNewtonSolver_a20ac8568daf0d63afa3945a817ff3e2d}} 
-\index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!Max\_iter@{Max\_iter}}
-\index{Max\_iter@{Max\_iter}!oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}}
-\doxysubsubsection{\texorpdfstring{Max\_iter}{Max\_iter}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Max\+\_\+iter =20}
-
-
-
-Max. \# of Newton iterations. 
-
-
-
-Definition at line 48 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
-
-
-
-Referenced by black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve(), oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+solve\+\_\+helper(), oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+solve\+\_\+helper(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper().
-
-\mbox{\Hypertarget{namespaceoomph_1_1BlackBoxFDNewtonSolver_a3067ba88fad991fdb619eae7533028bd}\label{namespaceoomph_1_1BlackBoxFDNewtonSolver_a3067ba88fad991fdb619eae7533028bd}} 
-\index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!N\_iter\_taken@{N\_iter\_taken}}
-\index{N\_iter\_taken@{N\_iter\_taken}!oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}}
-\doxysubsubsection{\texorpdfstring{N\_iter\_taken}{N\_iter\_taken}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+N\+\_\+iter\+\_\+taken =0}
-
-
-
-Number of Newton iterations taken in most recent invocation. 
 
 
 
@@ -182,11 +128,65 @@ Definition at line 51 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
 
 Referenced by black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve().
 
+\mbox{\Hypertarget{namespaceoomph_1_1BlackBoxFDNewtonSolver_a6f0d2ceb4451e66bb7ef4ab4fdb62bcf}\label{namespaceoomph_1_1BlackBoxFDNewtonSolver_a6f0d2ceb4451e66bb7ef4ab4fdb62bcf}} 
+\index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!FD\_step@{FD\_step}}
+\index{FD\_step@{FD\_step}!oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}}
+\doxysubsubsection{\texorpdfstring{FD\_step}{FD\_step}}
+{\footnotesize\ttfamily double oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+F\+D\+\_\+step = 1.\+0e-\/8}
+
+
+
+FD step. 
+
+
+
+Definition at line 54 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
+
+
+
+Referenced by black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve(), oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter(), oomph\+::\+Problem\+::get\+\_\+fd\+\_\+jacobian(), oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Fold\+Handler\+::get\+\_\+jacobian(), oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+jacobian(), oomph\+::\+Hopf\+Handler\+::get\+\_\+jacobian(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), and oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs().
+
+\mbox{\Hypertarget{namespaceoomph_1_1BlackBoxFDNewtonSolver_a20ac8568daf0d63afa3945a817ff3e2d}\label{namespaceoomph_1_1BlackBoxFDNewtonSolver_a20ac8568daf0d63afa3945a817ff3e2d}} 
+\index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!Max\_iter@{Max\_iter}}
+\index{Max\_iter@{Max\_iter}!oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}}
+\doxysubsubsection{\texorpdfstring{Max\_iter}{Max\_iter}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Max\+\_\+iter = 20}
+
+
+
+Max. \# of Newton iterations. 
+
+
+
+Definition at line 44 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
+
+
+
+Referenced by black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve(), oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+solve\+\_\+helper(), oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+solve\+\_\+helper(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper().
+
+\mbox{\Hypertarget{namespaceoomph_1_1BlackBoxFDNewtonSolver_a3067ba88fad991fdb619eae7533028bd}\label{namespaceoomph_1_1BlackBoxFDNewtonSolver_a3067ba88fad991fdb619eae7533028bd}} 
+\index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!N\_iter\_taken@{N\_iter\_taken}}
+\index{N\_iter\_taken@{N\_iter\_taken}!oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}}
+\doxysubsubsection{\texorpdfstring{N\_iter\_taken}{N\_iter\_taken}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+N\+\_\+iter\+\_\+taken = 0}
+
+
+
+Number of Newton iterations taken in most recent invocation. 
+
+
+
+Definition at line 47 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
+
+
+
+Referenced by black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve().
+
 \mbox{\Hypertarget{namespaceoomph_1_1BlackBoxFDNewtonSolver_a4bacc59c8e1194e553f698530e9e945e}\label{namespaceoomph_1_1BlackBoxFDNewtonSolver_a4bacc59c8e1194e553f698530e9e945e}} 
 \index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!Tol@{Tol}}
 \index{Tol@{Tol}!oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}}
 \doxysubsubsection{\texorpdfstring{Tol}{Tol}}
-{\footnotesize\ttfamily double oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Tol =1.\+0e-\/8}
+{\footnotesize\ttfamily double oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Tol = 1.\+0e-\/8}
 
 
 
@@ -194,7 +194,7 @@ Tolerance.
 
 
 
-Definition at line 61 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
+Definition at line 57 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
 
 
 
@@ -204,7 +204,7 @@ Referenced by black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve().
 \index{oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}!Use\_step\_length\_control@{Use\_step\_length\_control}}
 \index{Use\_step\_length\_control@{Use\_step\_length\_control}!oomph::BlackBoxFDNewtonSolver@{oomph::BlackBoxFDNewtonSolver}}
 \doxysubsubsection{\texorpdfstring{Use\_step\_length\_control}{Use\_step\_length\_control}}
-{\footnotesize\ttfamily bool oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Use\+\_\+step\+\_\+length\+\_\+control =false}
+{\footnotesize\ttfamily bool oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Use\+\_\+step\+\_\+length\+\_\+control = false}
 
 
 
@@ -212,7 +212,7 @@ Use steplength control do make globally convergent (default false)
 
 
 
-Definition at line 64 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
+Definition at line 60 of file black\+\_\+box\+\_\+newton\+\_\+solver.\+cc.
 
 
 

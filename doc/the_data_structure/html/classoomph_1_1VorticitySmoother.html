@@ -189,7 +189,7 @@ class oomph::VorticitySmoother&lt; ELEMENT &gt;</h3>
 
 <p><a class="el" href="classoomph_1_1Smoother.html">Smoother</a> for vorticity in 2D. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01809">1809</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01836">1836</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa848dd59d224d397c568e86922962c4b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa848dd59d224d397c568e86922962c4b">&#9670;&nbsp;</a></span>VorticitySmoother() <span class="overload">[1/2]</span></h2>
@@ -219,7 +219,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor: Set order of recovery shape functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01814">1814</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01840">1840</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
 </div>
 </div>
@@ -251,9 +251,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01819">1819</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01846">1846</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -284,7 +284,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Empty virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01831">1831</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01858">1858</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
 </div>
 </div>
@@ -339,11 +339,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Given the vector of elements that make up a patch, compute the vector of recovered vorticity coefficients and return a pointer to it. n_deriv indicates which derivative of the vorticity is supposed to be smoothed: 0: zeroth (i.e. the vorticity itself) 1: d/dx; 2: d/dy; 3: d^2/dx^2; 4: d^2/dxdy 5: d^2/dy^2 6: d^3/dx^3, 7: d^3/dx^2dy, 8: d^3/dxdy^2, 9: d^3/dy^3, 10: du/dx, 11: du/dy, 12: dv/dx, 13: dv/dy. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02089">2089</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02121">2121</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01906">oomph::VorticitySmoother&lt; ELEMENT &gt;::integral_rec()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="matrices_8cc_source.html#l00205">oomph::DenseDoubleMatrix::lubksub()</a>, <a class="el" href="matrices_8cc_source.html#l00195">oomph::DenseDoubleMatrix::ludecompose()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01843">oomph::VorticitySmoother&lt; ELEMENT &gt;::shape_rec()</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::W</a>, and <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01932">oomph::VorticitySmoother&lt; ELEMENT &gt;::integral_rec()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="matrices_8cc_source.html#l00202">oomph::DenseDoubleMatrix::lubksub()</a>, <a class="el" href="matrices_8cc_source.html#l00192">oomph::DenseDoubleMatrix::ludecompose()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01870">oomph::VorticitySmoother&lt; ELEMENT &gt;::shape_rec()</a>, <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>, and <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02417">oomph::VorticitySmoother&lt; ELEMENT &gt;::recover_vorticity()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02454">oomph::VorticitySmoother&lt; ELEMENT &gt;::recover_vorticity()</a>.</p>
 
 </div>
 </div>
@@ -375,11 +375,11 @@ template&lt;class ELEMENT &gt; </div>
 <p>Integation scheme associated with the recovery shape functions must be of sufficiently high order to integrate the mass matrix associated with the recovery shape functions. The argument is the dimension of the elements. The integration is performed locally over the elements, so the integration scheme does depend on the geometry of the element. The type of element is specified by the boolean which is true if elements in the patch are QElements and false if they are TElements (will need change if we ever have other element types) </p>
 <p>Find order of recovery shape functions</p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01906">1906</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01932">1932</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01834">oomph::VorticitySmoother&lt; ELEMENT &gt;::recovery_order()</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01861">oomph::VorticitySmoother&lt; ELEMENT &gt;::recovery_order()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02089">oomph::VorticitySmoother&lt; ELEMENT &gt;::get_recovered_vorticity_in_patch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02121">oomph::VorticitySmoother&lt; ELEMENT &gt;::get_recovered_vorticity_in_patch()</a>.</p>
 
 </div>
 </div>
@@ -410,11 +410,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get the recovery order. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02363">2363</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02399">2399</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l02625">oomph::VorticitySmoother&lt; ELEMENT &gt;::Recovery_order</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l02671">oomph::VorticitySmoother&lt; ELEMENT &gt;::Recovery_order</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02417">oomph::VorticitySmoother&lt; ELEMENT &gt;::recover_vorticity()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02454">oomph::VorticitySmoother&lt; ELEMENT &gt;::recover_vorticity()</a>.</p>
 
 </div>
 </div>
@@ -446,9 +446,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01825">1825</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01852">1852</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -480,9 +480,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Recover vorticity from patches. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02403">2403</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02440">2440</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00527">oomph::DocInfo::disable_doc()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00542">oomph::DocInfo::disable_doc()</a>.</p>
 
 </div>
 </div>
@@ -524,9 +524,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Recover vorticity from patches &ndash; output intermediate steps to directory specified by <a class="el" href="classoomph_1_1DocInfo.html" title="Information for documentation of results: Directory and file number to enable output in the form RESL...">DocInfo</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02417">2417</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02454">2454</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l02089">oomph::VorticitySmoother&lt; ELEMENT &gt;::get_recovered_vorticity_in_patch()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l02363">oomph::VorticitySmoother&lt; ELEMENT &gt;::nrecovery_order()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01979">oomph::VorticitySmoother&lt; ELEMENT &gt;::setup_patches()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01843">oomph::VorticitySmoother&lt; ELEMENT &gt;::shape_rec()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00455">oomph::Mesh::element_pt()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l02121">oomph::VorticitySmoother&lt; ELEMENT &gt;::get_recovered_vorticity_in_patch()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="mesh_8h_source.html#l00603">oomph::Mesh::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00443">oomph::Mesh::node_pt()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l02399">oomph::VorticitySmoother&lt; ELEMENT &gt;::nrecovery_order()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l02005">oomph::VorticitySmoother&lt; ELEMENT &gt;::setup_patches()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01870">oomph::VorticitySmoother&lt; ELEMENT &gt;::shape_rec()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 </div>
 </div>
@@ -557,11 +557,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Access function for order of recovery polynomials. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01834">1834</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01861">1861</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l02625">oomph::VorticitySmoother&lt; ELEMENT &gt;::Recovery_order</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l02671">oomph::VorticitySmoother&lt; ELEMENT &gt;::Recovery_order</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01906">oomph::VorticitySmoother&lt; ELEMENT &gt;::integral_rec()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01843">oomph::VorticitySmoother&lt; ELEMENT &gt;::shape_rec()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l01932">oomph::VorticitySmoother&lt; ELEMENT &gt;::integral_rec()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01870">oomph::VorticitySmoother&lt; ELEMENT &gt;::shape_rec()</a>.</p>
 
 </div>
 </div>
@@ -609,11 +609,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Setup patches: For each vertex node pointed to by nod_pt, adjacent_elements_pt[nod_pt] contains the pointer to the vector that contains the pointers to the elements that the node is part of. Also returns a <a class="el" href="classoomph_1_1Vector.html">Vector</a> of vertex nodes for use in get_element_errors. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01979">1979</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02005">2005</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l02625">oomph::VorticitySmoother&lt; ELEMENT &gt;::Recovery_order</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00455">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l02671">oomph::VorticitySmoother&lt; ELEMENT &gt;::Recovery_order</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02417">oomph::VorticitySmoother&lt; ELEMENT &gt;::recover_vorticity()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02454">oomph::VorticitySmoother&lt; ELEMENT &gt;::recover_vorticity()</a>.</p>
 
 </div>
 </div>
@@ -655,11 +655,11 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Recovery shape functions as functions of the global, Eulerian coordinate x of dimension dim. The recovery shape functions are complete polynomials of the order specified by Recovery_order. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01843">1843</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01870">1870</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01834">oomph::VorticitySmoother&lt; ELEMENT &gt;::recovery_order()</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l01861">oomph::VorticitySmoother&lt; ELEMENT &gt;::recovery_order()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02089">oomph::VorticitySmoother&lt; ELEMENT &gt;::get_recovered_vorticity_in_patch()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l02417">oomph::VorticitySmoother&lt; ELEMENT &gt;::recover_vorticity()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02121">oomph::VorticitySmoother&lt; ELEMENT &gt;::get_recovered_vorticity_in_patch()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l02454">oomph::VorticitySmoother&lt; ELEMENT &gt;::recover_vorticity()</a>.</p>
 
 </div>
 </div>
@@ -688,9 +688,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Order of recovery polynomials. </p>
 
-<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02625">2625</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l02671">2671</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02363">oomph::VorticitySmoother&lt; ELEMENT &gt;::nrecovery_order()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01834">oomph::VorticitySmoother&lt; ELEMENT &gt;::recovery_order()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01979">oomph::VorticitySmoother&lt; ELEMENT &gt;::setup_patches()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vorticity__smoother_8h_source.html#l02399">oomph::VorticitySmoother&lt; ELEMENT &gt;::nrecovery_order()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01861">oomph::VorticitySmoother&lt; ELEMENT &gt;::recovery_order()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l02005">oomph::VorticitySmoother&lt; ELEMENT &gt;::setup_patches()</a>.</p>
 
 </div>
 </div>
@@ -725,7 +725,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:58:07
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:42
         </div>
       </div>
     </footer>

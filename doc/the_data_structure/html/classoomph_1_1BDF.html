@@ -184,8 +184,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a037ce83f202e4ba2e61666bfdb1ce4b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function updates the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>'s time history so that we can advance to the next timestep. For <a class="el" href="classoomph_1_1BDF.html" title="Templated class for BDF-type time-steppers with fixed or variable timestep. 1st time derivative recov...">BDF</a> schemes, we simply push the values backwards...  <a href="classoomph_1_1BDF.html#a037ce83f202e4ba2e61666bfdb1ce4b9">More...</a><br /></td></tr>
 <tr class="separator:a037ce83f202e4ba2e61666bfdb1ce4b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad5191a5605337d43458d42f67460dbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BDF.html#aad5191a5605337d43458d42f67460dbd">shift_time_positions</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt)</td></tr>
-<tr class="memdesc:aad5191a5605337d43458d42f67460dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function advances the time history of the positions at a node. <br  />
-  <a href="classoomph_1_1BDF.html#aad5191a5605337d43458d42f67460dbd">More...</a><br /></td></tr>
+<tr class="memdesc:aad5191a5605337d43458d42f67460dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function advances the time history of the positions at a node.  <a href="classoomph_1_1BDF.html#aad5191a5605337d43458d42f67460dbd">More...</a><br /></td></tr>
 <tr class="separator:aad5191a5605337d43458d42f67460dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59cfd069cfa09e8b342cbf2d5234c7ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BDF.html#a59cfd069cfa09e8b342cbf2d5234c7ce">set_weights</a> ()</td></tr>
 <tr class="memdesc:a59cfd069cfa09e8b342cbf2d5234c7ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the weights.  <a href="classoomph_1_1BDF.html#a59cfd069cfa09e8b342cbf2d5234c7ce">More...</a><br /></td></tr>
@@ -348,9 +347,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">time_derivative</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, const unsigned &amp;j)</td></tr>
 <tr class="memdesc:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of j-th value in <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>. Note the use of the node's <a class="el" href="the__data__structure_8txt.html#a3b0d20781021ec2f0e788713f8b0fec8">value()</a> function so that hanging nodes are taken into account (this is why the functions for <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> cannot be combined through simple polymorphism: value is not virtual).  <a href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">More...</a><br /></td></tr>
 <tr class="separator:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">time_pt</a> () const</td></tr>
-<tr class="memdesc:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <a href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">More...</a><br /></td></tr>
-<tr class="separator:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af85e8103c08de76d5a9399d30fc2211c">time_pt</a> () const</td></tr>
+<tr class="memdesc:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <a href="classoomph_1_1TimeStepper.html#af85e8103c08de76d5a9399d30fc2211c">More...</a><br /></td></tr>
+<tr class="separator:af85e8103c08de76d5a9399d30fc2211c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a3219b7e7ccdc37f733961eeb8cce0a49">time_pt</a> ()</td></tr>
 <tr class="separator:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a4cb0aecb044b77ba0553cdd54b586d8a">weight</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j) const</td></tr>
@@ -414,7 +413,7 @@ class oomph::BDF&lt; NSTEPS &gt;</h3>
 
 <p>Templated class for BDF-type time-steppers with fixed or variable timestep. 1st time derivative recovered directly from the previous function values. Template parameter represents the number of previous timesteps stored, so that BDF&lt;1&gt; is the classical first order backward <a class="el" href="classoomph_1_1Euler.html">Euler</a> scheme. Need to reset weights after every change in timestep. </p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01137">1137</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01194">1194</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a7b4271c53928ee107dc9b5ab218bfe74"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b4271c53928ee107dc9b5ab218bfe74">&#9670;&nbsp;</a></span>InitialConditionFctPt</h2>
@@ -432,7 +431,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Typedef for function that returns the (scalar) initial value at a given value of the continuous time t. </p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01280">1280</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01338">1338</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
 </div>
 </div>
@@ -465,7 +464,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Constructor for the case when we allow adaptive timestepping. </p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01168">1168</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01223">1223</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
 </div>
 </div>
@@ -497,9 +496,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01196">1196</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01251">1251</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -542,9 +541,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Initialise the time-history for the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> values, corresponding to given time history, specified by <a class="el" href="classoomph_1_1Vector.html">Vector</a> of function pointers. </p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01285">1285</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01343">1343</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
 </div>
 </div>
@@ -578,9 +577,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#ab66972f0eaf3ba34645793e23e46afd5">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01241">1241</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01299">1299</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l00961">oomph::Node::nposition_type()</a>, <a class="el" href="nodes_8h_source.html#l01043">oomph::Node::position_is_a_copy()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l01050">oomph::Node::x_gen()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l01041">oomph::Node::nposition_type()</a>, <a class="el" href="nodes_8h_source.html#l01138">oomph::Node::position_is_a_copy()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l01151">oomph::Node::x_gen()</a>.</p>
 
 </div>
 </div>
@@ -614,9 +613,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a7e894df13c88c96dd8eced2700228225">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01212">1212</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01270">1270</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l00251">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00259">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>.</p>
 
 </div>
 </div>
@@ -650,7 +649,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00148">148</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l01043">oomph::Node::position_is_a_copy()</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l01138">oomph::Node::position_is_a_copy()</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -682,9 +681,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a2e7fafceb9330ac971078cf9dc248701">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00308">308</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00310">310</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l01043">oomph::Node::position_is_a_copy()</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l01138">oomph::Node::position_is_a_copy()</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -781,7 +780,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00115">115</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00251">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, and <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00259">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, and <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>.</p>
 
 </div>
 </div>
@@ -812,9 +811,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a159d508b1ae643fe31b55da9ee789dbf">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00275">275</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00277">277</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00251">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, and <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00259">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, and <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>.</p>
 
 </div>
 </div>
@@ -845,7 +844,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a159d508b1ae643fe31b55da9ee789dbf">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00443">443</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00445">445</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
 </div>
 </div>
@@ -910,7 +909,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a00e57b6436cff4fc82af481b81a78a1a">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01414">1414</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01476">1476</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
 </div>
 </div>
@@ -943,7 +942,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a0f38713ed304c18d9f7b5cf8131664c1">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01411">1411</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01470">1470</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
 </div>
 </div>
@@ -975,9 +974,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01202">1202</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01257">1257</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -1010,7 +1009,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a251e5d4b37381e582b7cf4c554e2e724">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01208">1208</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01263">1263</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
 </div>
 </div>
@@ -1072,7 +1071,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#aee0c1da870a603e64efebb51dfc96a3d">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00341">341</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00343">343</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
 </div>
 </div>
@@ -1103,7 +1102,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#aee0c1da870a603e64efebb51dfc96a3d">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00462">462</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00461">461</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
 </div>
 </div>
@@ -1195,7 +1194,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a2dfb949155ba433066fd69dc427ba1ce">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00251">251</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00253">253</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
 </div>
 </div>
@@ -1226,7 +1225,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a2dfb949155ba433066fd69dc427ba1ce">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00426">426</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00429">429</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
 </div>
 </div>
@@ -1318,7 +1317,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a028fa3a8d3c6db6b0ddf580cb0468d55">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00230">230</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00232">232</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
 </div>
 </div>
@@ -1349,7 +1348,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a028fa3a8d3c6db6b0ddf580cb0468d55">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00398">398</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00402">402</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
@@ -1412,14 +1411,13 @@ template&lt;unsigned NSTEPS&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>This function advances the time history of the positions at a node. <br  />
- </p>
+<p>This function advances the time history of the positions at a node. </p>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a518b1bee5dc3aae8c5ef13560d1954ac">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01350">1350</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01409">1409</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l00961">oomph::Node::nposition_type()</a>, <a class="el" href="nodes_8h_source.html#l01043">oomph::Node::position_is_a_copy()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l01050">oomph::Node::x_gen()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01079">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l01041">oomph::Node::nposition_type()</a>, <a class="el" href="nodes_8h_source.html#l01138">oomph::Node::position_is_a_copy()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l01151">oomph::Node::x_gen()</a>.</p>
 
 </div>
 </div>
@@ -1453,9 +1451,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a010a3b03a23a1c48dd8ca10641427255">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01313">1313</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01369">1369</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l00251">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00259">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>.</p>
 
 </div>
 </div>
@@ -1499,7 +1497,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00190">190</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -1541,9 +1539,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#ac463807aff4bcbedd6e8a463c7390536">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00359">359</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00362">362</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l01085">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -1585,7 +1583,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#ac463807aff4bcbedd6e8a463c7390536">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00473">473</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00471">471</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
 </div>
 </div>
@@ -1669,9 +1667,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a27f66759f6d9b2040d26918adb998c78">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00209">209</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00210">210</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>.</p>
 
 </div>
 </div>
@@ -1713,9 +1711,9 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a27f66759f6d9b2040d26918adb998c78">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00379">379</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00382">382</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>.</p>
 
 </div>
 </div>
@@ -1757,7 +1755,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a27f66759f6d9b2040d26918adb998c78">oomph::TimeStepper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00487">487</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8cc_source.html#l00484">484</a> of file <a class="el" href="timesteppers_8cc_source.html">timesteppers.cc</a>.</p>
 
 </div>
 </div>
@@ -1828,7 +1826,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Private data for the error weight. </p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01163">1163</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01219">1219</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
 </div>
 </div>
@@ -1856,7 +1854,7 @@ template&lt;unsigned NSTEPS&gt; </div>
 
 <p>Private data for the predictor weights. </p>
 
-<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01160">1160</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l01216">1216</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
 
 </div>
 </div>
@@ -1891,7 +1889,7 @@ template&lt;unsigned NSTEPS&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:53:29
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:50
         </div>
       </div>
     </footer>

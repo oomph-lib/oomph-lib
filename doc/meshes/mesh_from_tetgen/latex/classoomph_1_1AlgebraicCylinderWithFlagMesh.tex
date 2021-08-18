@@ -37,8 +37,7 @@ Geom\+Object $\ast$ \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh
 void \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a9d909de1db84a3b7e42494535b152d92}{update\+\_\+node\+\_\+update}} (Algebraic\+Node $\ast$\&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Update the geometric references that are used to update node after mesh adaptation. Empty -- no update of node update required without adaptativity. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a5e1e770e82577e5702470d8b87f8599d}{algebraic\+\_\+node\+\_\+update}} (const unsigned \&t, Algebraic\+Node $\ast$\&node\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Update nodal position at time level t (t=0\+: present; ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Update nodal position at time level t (t=0\+: present; t$>$0\+: previous) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -95,7 +94,7 @@ class oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>
 
 Algebraic version of \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh}{Cylinder\+With\+Flag\+Mesh}}. 
 
-Definition at line 157 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 155 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -113,7 +112,7 @@ Constructor. Pass the pointers to the Geom\+Objects that parametrise the cylinde
 
 
 
-Definition at line 168 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 165 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -132,7 +131,7 @@ Destructor\+: empty.
 
 
 
-Definition at line 201 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 214 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -146,14 +145,11 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh}{oomph\+::\+Al
 
 
 
-Update nodal position at time level t (t=0\+: present; ~\newline
- 
+Update nodal position at time level t (t=0\+: present; t$>$0\+: previous) 
 
-The algebraic node update function.
+The algebraic node update function. 
 
-t$>$0\+: previous) 
-
-Definition at line 1363 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1344 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a9c362fcc5edeb1b6e773f27a83778495}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a9c362fcc5edeb1b6e773f27a83778495}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!bottom\_flag\_pt@{bottom\_flag\_pt}}
@@ -168,7 +164,7 @@ Read-\/only access to geometric object that defines the bottom face of the flag.
 
 
 
-Definition at line 233 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 246 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -191,7 +187,7 @@ Helper function.
 
 Node update for region I. 
 
-Definition at line 1422 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1402 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a2717b4ae70a9641c24becc8176410b3e}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a2717b4ae70a9641c24becc8176410b3e}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!node\_update\_II@{node\_update\_II}}
@@ -206,7 +202,7 @@ Helper function.
 
 Node update for region II. 
 
-Definition at line 1461 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1441 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a3e8c71cc3ab123864b4f999e612345ee}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a3e8c71cc3ab123864b4f999e612345ee}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!node\_update\_III@{node\_update\_III}}
@@ -221,7 +217,7 @@ Helper function.
 
 Node update for region I\+II. 
 
-Definition at line 1497 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1477 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a69ab465aa28dd9a65a0c50762c0a6d89}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a69ab465aa28dd9a65a0c50762c0a6d89}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!node\_update\_IV@{node\_update\_IV}}
@@ -236,7 +232,7 @@ Helper function.
 
 Node update for region IV. 
 
-Definition at line 1545 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1523 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_ae8e85400abd282b64463b67e21e9c13a}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_ae8e85400abd282b64463b67e21e9c13a}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!node\_update\_IX@{node\_update\_IX}}
@@ -251,7 +247,7 @@ Helper function.
 
 Node update for region IX. Extreme angles on circle
 
-Definition at line 1812 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1793 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a035216f13c9758881ce2b7e33ad27926}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a035216f13c9758881ce2b7e33ad27926}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!node\_update\_V@{node\_update\_V}}
@@ -266,7 +262,7 @@ Helper function.
 
 Node update for region V. 
 
-Definition at line 1592 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1571 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a989fe557f03ac20812e69a8de2dbb9a4}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a989fe557f03ac20812e69a8de2dbb9a4}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!node\_update\_VI@{node\_update\_VI}}
@@ -281,7 +277,7 @@ Helper function.
 
 Node update for region VI. 
 
-Definition at line 1641 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1620 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_abb0565f0624583d2549f38602fd11e48}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_abb0565f0624583d2549f38602fd11e48}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!node\_update\_VII@{node\_update\_VII}}
@@ -296,7 +292,7 @@ Helper function.
 
 Node update for region V\+II. 
 
-Definition at line 1684 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1662 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a85336e587d9c4cac7f4d77890dd7690b}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a85336e587d9c4cac7f4d77890dd7690b}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!node\_update\_VIII@{node\_update\_VIII}}
@@ -311,7 +307,7 @@ Helper function.
 
 Node update for region V\+I\+II. Extreme angles on circle
 
-Definition at line 1728 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 1707 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a6aeef710528a9d8dd51023dd6ee131ea}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a6aeef710528a9d8dd51023dd6ee131ea}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!set\_bottom\_flag\_pt@{set\_bottom\_flag\_pt}}
@@ -326,7 +322,7 @@ Set geometric object that defines the bottom face of the flag.
 
 
 
-Definition at line 206 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 219 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -345,7 +341,7 @@ Set the geometric object that defines the tip of the flag.
 
 
 
-Definition at line 224 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 237 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -364,7 +360,7 @@ Set the geometric object that defines the top face of the flag.
 
 
 
-Definition at line 215 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 228 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -383,7 +379,7 @@ Function to setup the algebraic node update.
 
 Setup algebraic node update. set the size ??
 
-Definition at line 931 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+Definition at line 915 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
 
 
 
@@ -402,7 +398,7 @@ Read-\/only access to geometric object that defines the tip of the flag.
 
 
 
-Definition at line 248 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 261 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -425,7 +421,7 @@ Read-\/only access to geometric object that defines the top face of the flag.
 
 
 
-Definition at line 241 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 254 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -448,7 +444,7 @@ Update the geometric references that are used to update node after mesh adaptati
 
 
 
-Definition at line 257 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 270 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -466,7 +462,7 @@ radius of the cylinder
 
 
 
-Definition at line 327 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 339 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_ac1f7e1ba183ba813229302c5688ea1ba}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_ac1f7e1ba183ba813229302c5688ea1ba}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!Bottom\_flag\_pt@{Bottom\_flag\_pt}}
@@ -481,7 +477,7 @@ Bottom flag.
 
 
 
-Definition at line 303 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 315 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -500,7 +496,7 @@ x position of the centre of the cylinder
 
 
 
-Definition at line 321 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 333 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a6b4575a9c3818e04bdb00d4150d49290}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a6b4575a9c3818e04bdb00d4150d49290}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!Centre\_y@{Centre\_y}}
@@ -515,7 +511,7 @@ x position of the centre of the cylinder
 
 
 
-Definition at line 324 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 336 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a423d4aa7ffcca5e707b2e5d820984957}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a423d4aa7ffcca5e707b2e5d820984957}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!Cylinder\_pt@{Cylinder\_pt}}
@@ -530,7 +526,7 @@ Cylinder.
 
 
 
-Definition at line 297 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 309 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a76a19a39dd500d5a48c10baae59797e0}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a76a19a39dd500d5a48c10baae59797e0}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!Flag\_height@{Flag\_height}}
@@ -545,7 +541,7 @@ Flag thickness.
 
 
 
-Definition at line 318 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 330 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a822ed90585320576084667f88c236396}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a822ed90585320576084667f88c236396}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!Flag\_length@{Flag\_length}}
@@ -560,7 +556,7 @@ Flag length.
 
 
 
-Definition at line 315 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 327 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a29a0c970a11d46bdf03f3b5053d3ece2}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a29a0c970a11d46bdf03f3b5053d3ece2}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!Height@{Height}}
@@ -575,7 +571,7 @@ Height of the domain.
 
 
 
-Definition at line 312 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 324 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_a7620fa5a4c36f638fb22c81b346b74a2}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_a7620fa5a4c36f638fb22c81b346b74a2}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!Length@{Length}}
@@ -590,7 +586,7 @@ Length of the domain.
 
 
 
-Definition at line 309 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 321 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicCylinderWithFlagMesh_ad22c8bfa595f4b1f129be85a1904762f}\label{classoomph_1_1AlgebraicCylinderWithFlagMesh_ad22c8bfa595f4b1f129be85a1904762f}} 
 \index{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::AlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!Tip\_flag\_pt@{Tip\_flag\_pt}}
@@ -605,7 +601,7 @@ Tip flag.
 
 
 
-Definition at line 306 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 318 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 
@@ -624,7 +620,7 @@ Top flag.
 
 
 
-Definition at line 300 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+Definition at line 312 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
 
 
 

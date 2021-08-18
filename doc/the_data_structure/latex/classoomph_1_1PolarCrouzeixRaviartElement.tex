@@ -22,15 +22,13 @@ double \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a9c214952496bb
 double \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a0c61f886e4869b04ef14e4f160812985}{u\+\_\+pnst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the velocity component u\mbox{[}i\mbox{]} at local node n at timestep t (t=0\+: present; t$>$0\+: previous timestep). Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_ac11e6ee68acf235bb6d2b41a2bd77d89}{p\+\_\+pnst}} (const unsigned \&i\+\_\+internal) const
-\begin{DoxyCompactList}\small\item\em Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a22bc07f82b9e2c5b373db917ca071085}{npres\+\_\+pnst}} () const
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a10ce59c8e1796c0fcac9c0b3b6a89568}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a575257c6dc7b44e56c687066cbda3791}{get\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
-\begin{DoxyCompactList}\small\item\em Add to the set paired\+\_\+load\+\_\+data pairs of pointers to data objects and unsigned integers that index the values in the data object that affect the load (traction), as specified in the \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{get\+\_\+load()}} function. ~\newline
- \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a672a020c7722d5b71cae4baa653898f5}{get\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Add to the set paired\+\_\+load\+\_\+data pairs of pointers to data objects and unsigned integers that index the values in the data object that affect the load (traction), as specified in the \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{get\+\_\+load()}} function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_ad93900ce702a77bb8d7710cf0f22ea8d}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_ac170ddb5c2a7047d46a20d8c41da22df}{output}} (std\+::ostream \&outfile, const unsigned \&Nplot)
@@ -64,7 +62,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a7d41e3c313c
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_aed13ef3c1adcea8f31184f91dedaff28}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]} =\{2,2,2,2,2,2,2,2,2\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_aed13ef3c1adcea8f31184f91dedaff28}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold required number of variables at nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -72,7 +70,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement
 \doxysubsection{Detailed Description}
 Crouzeix\+\_\+\+Raviart elements are Navier--Stokes elements with quadratic interpolation for velocities and positions, but a discontinuous linear pressure interpolation 
 
-Definition at line 674 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 770 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -89,7 +87,7 @@ Constructor, there are D\+I\+M+1 internal values (for the pressure)
 
 
 
-Definition at line 716 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 816 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -114,7 +112,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7fda7aac0b
 
 
 
-Definition at line 824 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 950 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -136,7 +134,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a5be752caef
 
 
 
-Definition at line 798 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 921 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -158,7 +156,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a80333b6021
 
 
 
-Definition at line 748 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 858 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -176,7 +174,7 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line 779 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 899 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -194,26 +192,25 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line 785 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 907 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::full\+\_\+output().
 
-\mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a575257c6dc7b44e56c687066cbda3791}\label{classoomph_1_1PolarCrouzeixRaviartElement_a575257c6dc7b44e56c687066cbda3791}} 
+\mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a672a020c7722d5b71cae4baa653898f5}\label{classoomph_1_1PolarCrouzeixRaviartElement_a672a020c7722d5b71cae4baa653898f5}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!get\_load\_data@{get\_load\_data}}
 \index{get\_load\_data@{get\_load\_data}!oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{get\_load\_data()}{get\_load\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
 
 
 
-Add to the set paired\+\_\+load\+\_\+data pairs of pointers to data objects and unsigned integers that index the values in the data object that affect the load (traction), as specified in the \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{get\+\_\+load()}} function. ~\newline
- 
+Add to the set paired\+\_\+load\+\_\+data pairs of pointers to data objects and unsigned integers that index the values in the data object that affect the load (traction), as specified in the \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{get\+\_\+load()}} function. 
 
 Add pointers to \mbox{\hyperlink{classoomph_1_1Data}{Data}} and indices of the values that affect the potential load (traction) applied to the Solid\+Elements to the set paired\+\_\+load\+\_\+data 
 
-Definition at line 1533 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1577 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -235,7 +232,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af66cafead0
 
 
 
-Definition at line 745 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 852 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -257,7 +254,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_aad
 
 
 
-Definition at line 769 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 884 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -279,7 +276,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1d
 
 
 
-Definition at line 772 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 890 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -301,7 +298,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a72
 
 
 
-Definition at line 761 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 871 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -323,7 +320,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a83
 
 
 
-Definition at line 764 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 877 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -345,7 +342,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4738c2cb0d
 
 
 
-Definition at line 710 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 809 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -359,8 +356,7 @@ References oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn(), an
 
 
 
-Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). ~\newline
- 
+Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). 
 
 
 
@@ -368,7 +364,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4db8f8149f
 
 
 
-Definition at line 741 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 845 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -390,7 +386,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1b382bf38d
 
 
 
-Definition at line 847 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 974 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -416,7 +412,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2ec5597d86
 
 
 
-Definition at line 856 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 983 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -438,7 +434,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 1523 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line 1566 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
@@ -460,7 +456,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c5
 
 
 
-Definition at line 728 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 829 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -482,7 +478,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ace9bb9807c
 
 
 
-Definition at line 734 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 837 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -495,15 +491,21 @@ References i, n, and oomph\+::\+Finite\+Element\+::nodal\+\_\+value().
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::\+Initial\+\_\+\+Nvalue =\{2,2,2,2,2,2,2,2,2\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    2, 2, 2, 2, 2, 2, 2, 2, 2\}}
+
+\end{DoxyCode}
 
 
 Static array of ints to hold required number of variables at nodes. 
 
 2D Crouzeix-\/\+Raviart elements 
 
-Definition at line 680 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 775 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -517,7 +519,7 @@ Referenced by required\+\_\+nvalue().
 
 Internal index that indicates at which internal data the pressure is stored 
 
-Definition at line 686 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 780 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

@@ -263,9 +263,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ab8e2478caa8370dd12462f17e1cc8082">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse)</td></tr>
 <tr class="memdesc:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ab8e2478caa8370dd12462f17e1cc8082">More...</a><br /></td></tr>
 <tr class="separator:ab8e2478caa8370dd12462f17e1cc8082 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ae9282acaaf19fa2cdb703d49f1a8de25">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt; &amp;doftype_coarsen_map_coarse)</td></tr>
-<tr class="memdesc:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ae9282acaaf19fa2cdb703d49f1a8de25">More...</a><br /></td></tr>
-<tr class="separator:ae9282acaaf19fa2cdb703d49f1a8de25 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ac0d2887082cf856b680b4ae61b510d29">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *master_block_prec_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;doftype_in_master_preconditioner_coarse, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&gt; &amp;doftype_coarsen_map_coarse)</td></tr>
+<tr class="memdesc:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "master block preconditioner (e.g. a Navier-Stokes 2x2 block preconditioner dealing with the fluid sub-blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype_in_master_preconditioner_coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. <b>1</b>. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. <b>2</b>. block_setup(...) should be called in the master preconditioner before this method is called. <b>3</b>. block_setup(...) should be called in the corresponding subsidiary preconditioner after this method is called.  <a href="classoomph_1_1BlockPreconditioner.html#ac0d2887082cf856b680b4ae61b510d29">More...</a><br /></td></tr>
+<tr class="separator:ac0d2887082cf856b680b4ae61b510d29 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#af704c4816469cef4fed9d35a9ad651ec">block_setup</a> ()</td></tr>
 <tr class="memdesc:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their "blocks" and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the internal blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if the identity dof-to-block mapping is okay, i.e. dof number 0 corresponds to block number 0 dof number 1 corresponds to block number 1 dof number 2 corresponds to block number 2 etc...  <a href="classoomph_1_1BlockPreconditioner.html#af704c4816469cef4fed9d35a9ad651ec">More...</a><br /></td></tr>
 <tr class="separator:af704c4816469cef4fed9d35a9ad651ec inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -397,9 +397,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a50b76a374797805f64e2af34d581cdc2">nfine_grain_dof_types_in</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
 <tr class="memdesc:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the number of most fine grain dof types in a (possibly coarsened) dof type.  <a href="classoomph_1_1BlockPreconditioner.html#a50b76a374797805f64e2af34d581cdc2">More...</a><br /></td></tr>
 <tr class="separator:a50b76a374797805f64e2af34d581cdc2 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">replacement_dof_block_pt</a> () const</td></tr>
-<tr class="memdesc:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the replaced dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">More...</a><br /></td></tr>
-<tr class="separator:ac8ef0e69b712d9ab7902d277a14ed8f5 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">replacement_dof_block_pt</a> () const</td></tr>
+<tr class="memdesc:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the replaced dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">More...</a><br /></td></tr>
+<tr class="separator:a571824cedc7e458a612111b51f20e5fb inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#adbe1ae854ee9831649249d50162bb6a9">setup_matrix_vector_product</a> (<a class="el" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a> *matvec_prod_pt, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *block_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;block_col_indices)</td></tr>
 <tr class="memdesc:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup a matrix vector product. matvec_prod_pt is a pointer to the MatrixVectorProduct, block_pt is a pointer to the block matrix, block_col_indices is a vector indicating which block indices does the RHS vector we want to multiply the matrix by.  <a href="classoomph_1_1BlockPreconditioner.html#adbe1ae854ee9831649249d50162bb6a9">More...</a><br /></td></tr>
 <tr class="separator:adbe1ae854ee9831649249d50162bb6a9 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -425,8 +425,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae3cf61f61e1aa50e2315e999827e7d59 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper function, takes the naturally ordered vector, v, and extracts the n-th block vector, b. Here n is the block number in the current preconditioner. NOTE: The ordering of the vector b is the same as the ordering of the block matrix from internal_get_block(...).  <a href="classoomph_1_1BlockPreconditioner.html#ae3cf61f61e1aa50e2315e999827e7d59">More...</a><br /></td></tr>
 <tr class="separator:ae3cf61f61e1aa50e2315e999827e7d59 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">internal_get_block_vectors</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;block_vec_number, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
-<tr class="memdesc:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. <br  />
-  <a href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">More...</a><br /></td></tr>
+<tr class="memdesc:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors.  <a href="classoomph_1_1BlockPreconditioner.html#ace6e9dbdfe9a1c3571452e2cd6ec9780">More...</a><br /></td></tr>
 <tr class="separator:ace6e9dbdfe9a1c3571452e2cd6ec9780 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cde8af922cd8054dbf352527dd682b1 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a0cde8af922cd8054dbf352527dd682b1">internal_get_block_vectors</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
 <tr class="memdesc:a0cde8af922cd8054dbf352527dd682b1 inherit pub_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper function, takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s[b][i] contains the i-th entry in the vector associated with block b. The block_vec_number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note: If the preconditioner is a subsidiary preconditioner then only the sub-vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3e5b553f65e6c25354a5c908d507e8ee" title="Return the number of dofs (number of rows or columns) in the overall problem. The prefix &quot;master_&quot; is...">master_nrow()</a> whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. This is simply a wrapper around the other internal_get_block_vectors(...) function with the identity block_vec_number vector.  <a href="classoomph_1_1BlockPreconditioner.html#a0cde8af922cd8054dbf352527dd682b1">More...</a><br /></td></tr>
@@ -586,7 +585,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#af97821621b570d409e6662939e5f818d">set_mesh</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *const <a class="el" href="classoomph_1_1BlockPreconditioner.html#a3c0e92cb77c3e3179007fe9fd99b6428">mesh_pt</a>, const bool &amp;allow_multiple_element_type_in_mesh=false)</td></tr>
 <tr class="memdesc:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the i-th mesh for this block preconditioner. Note: The method set_nmesh(...) must be called before this method to specify the number of meshes. By default, it is assumed that each mesh only contains elements of the same type. This condition may be relaxed by setting the boolean allow_multiple_element_type_in_mesh to true, however, each mesh must only contain elements with the same number of dof types.  <a href="classoomph_1_1BlockPreconditioner.html#af97821621b570d409e6662939e5f818d">More...</a><br /></td></tr>
 <tr class="separator:af97821621b570d409e6662939e5f818d inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">set_replacement_dof_block</a> (const unsigned &amp;block_i, const unsigned &amp;block_j, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *<a class="el" href="classoomph_1_1BlockPreconditioner.html#ac8ef0e69b712d9ab7902d277a14ed8f5">replacement_dof_block_pt</a>)</td></tr>
+<tr class="memitem:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">set_replacement_dof_block</a> (const unsigned &amp;block_i, const unsigned &amp;block_j, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *<a class="el" href="classoomph_1_1BlockPreconditioner.html#a571824cedc7e458a612111b51f20e5fb">replacement_dof_block_pt</a>)</td></tr>
 <tr class="memdesc:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set replacement dof-level blocks. Only dof-level blocks can be set. This is important due to how the dof type coarsening feature operates.  <a href="classoomph_1_1BlockPreconditioner.html#a8a0ae880f098d5b1e9df78fc74c31dbf">More...</a><br /></td></tr>
 <tr class="separator:a8a0ae880f098d5b1e9df78fc74c31dbf inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fb68db9e79048615984b005f8aa43b3 inherit pro_methods_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a6fb68db9e79048615984b005f8aa43b3">any_mesh_distributed</a> () const</td></tr>
@@ -621,9 +620,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">More...</a><br /></td></tr>
 <tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classoomph_1_1BlockPreconditioner"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1BlockPreconditioner')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1BlockPreconditioner.html">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;</a></td></tr>
-<tr class="memitem:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a6816cfc4c9d74a39aca7401f751bb235">Replacement_dof_block_pt</a></td></tr>
-<tr class="memdesc:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The replacement dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a6816cfc4c9d74a39aca7401f751bb235">More...</a><br /></td></tr>
-<tr class="separator:a6816cfc4c9d74a39aca7401f751bb235 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; unsigned, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#ad2cd49c5c823c4202046e97038f6e080">Replacement_dof_block_pt</a></td></tr>
+<tr class="memdesc:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The replacement dof-level blocks.  <a href="classoomph_1_1BlockPreconditioner.html#ad2cd49c5c823c4202046e97038f6e080">More...</a><br /></td></tr>
+<tr class="separator:ad2cd49c5c823c4202046e97038f6e080 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BlockPreconditioner.html#a59e83eca59e3cdc41a93668539e138f1">Block_distribution_pt</a></td></tr>
 <tr class="memdesc:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">The distribution for the blocks.  <a href="classoomph_1_1BlockPreconditioner.html#a59e83eca59e3cdc41a93668539e138f1">More...</a><br /></td></tr>
 <tr class="separator:a59e83eca59e3cdc41a93668539e138f1 inherit pro_attribs_classoomph_1_1BlockPreconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -698,9 +697,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor. (By default this preconditioner is upper triangular). </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">60</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">59</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">Compute_memory_statistics</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00239">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00215">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00242">G_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00236">Memory_usage_in_bytes</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00218">P_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00228">Preconditioner_has_been_setup</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00221">Using_default_f_preconditioner</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00224">Using_default_p_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">Compute_memory_statistics</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00238">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00214">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00241">G_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00235">Memory_usage_in_bytes</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00217">P_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00227">Preconditioner_has_been_setup</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00220">Using_default_f_preconditioner</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00223">Using_default_p_preconditioner</a>.</p>
 
 </div>
 </div>
@@ -729,9 +728,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor - delete the preconditioner matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00091">91</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00090">90</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00097">clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -761,9 +760,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00121">121</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00120">120</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -792,9 +791,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor. (By default this preconditioner is upper triangular). </p>
 
-<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00061">61</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00060">60</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">Compute_memory_statistics</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00239">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00215">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00242">G_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00236">Memory_usage_in_bytes</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00218">P_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00228">Preconditioner_has_been_setup</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00221">Using_default_f_preconditioner</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00224">Using_default_p_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">Compute_memory_statistics</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00238">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00214">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00241">G_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00235">Memory_usage_in_bytes</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00217">P_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00227">Preconditioner_has_been_setup</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00220">Using_default_f_preconditioner</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00223">Using_default_p_preconditioner</a>.</p>
 
 </div>
 </div>
@@ -823,9 +822,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor - delete the preconditioner matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00092">92</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00091">91</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00097">clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -855,9 +854,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00128">128</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00127">127</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00212">oomph::BrokenCopy::broken_copy()</a>.</p>
 
 </div>
 </div>
@@ -889,11 +888,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1Preconditioner.html#a46c31c416829bedcd9db238431262027">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00098">98</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00097">97</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00239">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00215">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00242">G_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00218">P_preconditioner_pt</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00228">Preconditioner_has_been_setup</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00238">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00214">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00241">G_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00217">P_preconditioner_pt</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00227">Preconditioner_has_been_setup</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00091">~SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00090">~SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -924,9 +923,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1Preconditioner.html#a46c31c416829bedcd9db238431262027">oomph::Preconditioner</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00099">99</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00098">98</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00239">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00215">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00242">G_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00218">P_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00228">Preconditioner_has_been_setup</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00221">Using_default_f_preconditioner</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00224">Using_default_p_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00238">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00214">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00241">G_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00217">P_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00227">Preconditioner_has_been_setup</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00220">Using_default_f_preconditioner</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00223">Using_default_p_preconditioner</a>.</p>
 
 </div>
 </div>
@@ -956,9 +955,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Don't document the memory usage! </p>
 <p>Set the appropriate flag to false</p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00155">155</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00153">153</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">Compute_memory_statistics</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">Compute_memory_statistics</a>.</p>
 
 </div>
 </div>
@@ -988,9 +987,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Don't document the memory usage! </p>
 <p>Set the appropriate flag to false</p>
 
-<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00162">162</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00160">160</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">Compute_memory_statistics</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">Compute_memory_statistics</a>.</p>
 
 </div>
 </div>
@@ -1020,11 +1019,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Document the memory usage. </p>
 <p>Set the appropriate flag to true</p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00147">147</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00145">145</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">Compute_memory_statistics</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">Compute_memory_statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00574">oomph::GMRESBlockPreconditioner::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00575">oomph::GMRESBlockPreconditioner::setup()</a>.</p>
 
 </div>
 </div>
@@ -1054,9 +1053,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Document the memory usage. </p>
 <p>Set the appropriate flag to true</p>
 
-<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00154">154</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00152">152</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">Compute_memory_statistics</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">Compute_memory_statistics</a>.</p>
 
 </div>
 </div>
@@ -1085,9 +1084,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Get the memory statistics. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00163">163</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00161">161</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">Compute_memory_statistics</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00236">Memory_usage_in_bytes</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00228">Preconditioner_has_been_setup</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">Compute_memory_statistics</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00235">Memory_usage_in_bytes</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00227">Preconditioner_has_been_setup</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__block__preconditioner_8cc_source.html#l00218">oomph::BandedBlockTriangularPreconditioner&lt; MATRIX &gt;::setup()</a>.</p>
 
 </div>
 </div>
@@ -1116,9 +1117,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Get the memory statistics. </p>
 
-<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00170">170</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00168">168</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">Compute_memory_statistics</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00236">Memory_usage_in_bytes</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00228">Preconditioner_has_been_setup</a>.</p>
+<p class="reference">References <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">Compute_memory_statistics</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00235">Memory_usage_in_bytes</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00227">Preconditioner_has_been_setup</a>.</p>
 
 </div>
 </div>
@@ -1148,9 +1149,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00129">129</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00127">127</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -1180,9 +1181,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Broken assignment operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00136">136</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00134">134</a> of file <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html">spacetime_navier_stokes_block_preconditioner.h</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00195">oomph::BrokenCopy::broken_assign()</a>.</p>
 
 </div>
 </div>
@@ -1227,7 +1228,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">482</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html">general_purpose_space_time_subsidiary_block_preconditioner.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00346">oomph::LinearAlgebraDistribution::built()</a>, <a class="el" href="double__vector_8h_source.html#l00146">oomph::DoubleVector::clear()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00239">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00215">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00242">G_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04132">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vector()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00109">oomph::MatrixVectorProduct::multiply()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00178">oomph::MatrixVectorProduct::multiply_transpose()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00218">P_preconditioner_pt</a>, <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner::preconditioner_solve()</a>, and <a class="el" href="block__preconditioner_8cc_source.html#l04432">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vector()</a>.</p>
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00342">oomph::LinearAlgebraDistribution::built()</a>, <a class="el" href="double__vector_8h_source.html#l00142">oomph::DoubleVector::clear()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00238">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00214">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00241">G_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04186">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vector()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00108">oomph::MatrixVectorProduct::multiply()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00177">oomph::MatrixVectorProduct::multiply_transpose()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00217">P_preconditioner_pt</a>, <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner::preconditioner_solve()</a>, and <a class="el" href="block__preconditioner_8cc_source.html#l04489">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vector()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00729">oomph::GMRESBlockPreconditioner::preconditioner_solve()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00432">oomph::GMRESBlockPreconditioner::update()</a>.</p>
 
 </div>
 </div>
@@ -1301,9 +1304,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">61</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html">general_purpose_space_time_subsidiary_block_preconditioner.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="block__preconditioner_8cc_source.html#l02433">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_setup()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">Compute_memory_statistics</a>, <a class="el" href="matrices_8cc_source.html#l04305">oomph::CRDoubleMatrixHelpers::concatenate()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00239">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00215">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00242">G_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00688">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="block__preconditioner_8h_source.html#l02088">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::is_subsidiary_block_preconditioner()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00531">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::matrix_pt()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00236">Memory_usage_in_bytes</a>, <a class="el" href="matrices_8cc_source.html#l01801">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01687">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::nblock_types()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01711">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::ndof_types()</a>, <a class="el" href="matrices_8h_source.html#l01064">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00316">oomph::oomph_nullstream</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00218">P_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00228">Preconditioner_has_been_setup</a>, <a class="el" href="hypre__solver_8cc_source.html#l00046">oomph::Hypre_default_settings::set_defaults_for_2D_poisson_problem()</a>, <a class="el" href="preconditioner_8h_source.html#l00098">oomph::Preconditioner::setup()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02425">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::setup_matrix_vector_product()</a>, <a class="el" href="preconditioner_8h_source.html#l00224">oomph::Preconditioner::Silent_preconditioner_setup</a>, <a class="el" href="matrices_8h_source.html#l01017">oomph::CRDoubleMatrix::sparse_indexed_output_with_offset()</a>, <a class="el" href="preconditioner_8h_source.html#l00227">oomph::Preconditioner::Stream_pt</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01304">oomph::TimingHelpers::timer()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00221">Using_default_f_preconditioner</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00224">Using_default_p_preconditioner</a>.</p>
+<p class="reference">References <a class="el" href="block__preconditioner_8cc_source.html#l02483">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_setup()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00097">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">Compute_memory_statistics</a>, <a class="el" href="matrices_8cc_source.html#l04349">oomph::CRDoubleMatrixHelpers::concatenate()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00238">F_mat_vec_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00214">F_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00241">G_mat_vec_pt</a>, <a class="el" href="block__preconditioner_8h_source.html#l00679">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="block__preconditioner_8h_source.html#l02067">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::is_subsidiary_block_preconditioner()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00526">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::matrix_pt()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00235">Memory_usage_in_bytes</a>, <a class="el" href="matrices_8cc_source.html#l01782">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01676">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::nblock_types()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01700">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::ndof_types()</a>, <a class="el" href="matrices_8h_source.html#l01117">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="matrices_8h_source.html#l01023">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00313">oomph::oomph_nullstream</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00217">P_preconditioner_pt</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00227">Preconditioner_has_been_setup</a>, <a class="el" href="hypre__solver_8cc_source.html#l00045">oomph::Hypre_default_settings::set_defaults_for_2D_poisson_problem()</a>, <a class="el" href="preconditioner_8h_source.html#l00100">oomph::Preconditioner::setup()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02403">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::setup_matrix_vector_product()</a>, <a class="el" href="preconditioner_8h_source.html#l00235">oomph::Preconditioner::Silent_preconditioner_setup</a>, <a class="el" href="matrices_8h_source.html#l01052">oomph::CRDoubleMatrix::sparse_indexed_output_with_offset()</a>, <a class="el" href="preconditioner_8h_source.html#l00238">oomph::Preconditioner::Stream_pt</a>, <a class="el" href="oomph__definitions_8h_source.html#l00464">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00220">Using_default_f_preconditioner</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00223">Using_default_p_preconditioner</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00574">oomph::GMRESBlockPreconditioner::setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00575">oomph::GMRESBlockPreconditioner::setup()</a>.</p>
 
 </div>
 </div>
@@ -1390,7 +1393,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>For some reason we need to remind the compiler that there is also a function named setup in the base class. </p>
 
-<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00124">124</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00126">126</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
 
 </div>
 </div>
@@ -1416,7 +1419,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>For some reason we need to remind the compiler that there is also a function named setup in the base class. </p>
 
-<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00124">124</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00126">126</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
 
 </div>
 </div>
@@ -1442,7 +1445,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>For some reason we need to remind the compiler that there is also a function named setup in the base class. </p>
 
-<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00098">98</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00100">100</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
 
 </div>
 </div>
@@ -1468,7 +1471,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>For some reason we need to remind the compiler that there is also a function named setup in the base class. </p>
 
-<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00098">98</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00100">100</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
 
 </div>
 </div>
@@ -1495,9 +1498,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag to indicate whether or not to record the memory statistics this preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00232">232</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00231">231</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00155">disable_doc_memory_usage()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00147">enable_doc_memory_usage()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00163">get_memory_usage_in_bytes()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00153">disable_doc_memory_usage()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00145">enable_doc_memory_usage()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00161">get_memory_usage_in_bytes()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1523,9 +1526,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1MatrixVectorProduct.html" title="Matrix vector product helper class - primarily a wrapper to Trilinos&#39;s Epetra matrix vector product m...">MatrixVectorProduct</a> operator for F. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00239">239</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00238">238</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00097">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1551,9 +1554,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the 'preconditioner' for the F matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00215">215</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00214">214</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00097">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1579,9 +1582,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1MatrixVectorProduct.html" title="Matrix vector product helper class - primarily a wrapper to Trilinos&#39;s Epetra matrix vector product m...">MatrixVectorProduct</a> operator for G. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00242">242</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00241">241</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00097">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1607,9 +1610,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Storage for the memory usage of the solver if the flag above is set to true (in bytes) </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00236">236</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00235">235</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00163">get_memory_usage_in_bytes()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00161">get_memory_usage_in_bytes()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1635,9 +1638,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the 'preconditioner' for the pressure matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00218">218</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00217">217</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00097">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1663,9 +1666,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Control flag is true if the preconditioner has been setup (used so we can wipe the data when the preconditioner is called again) </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00228">228</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00227">227</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00163">get_memory_usage_in_bytes()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00097">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00161">get_memory_usage_in_bytes()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1691,9 +1694,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag indicating whether the default F preconditioner is used. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00221">221</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00220">220</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00099">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1719,9 +1722,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag indicating whether the default P preconditioner is used. </p>
 
-<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00224">224</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00223">223</a> of file <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html">general_purpose_space_time_subsidiary_block_preconditioner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00099">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00060">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="spacetime__navier__stokes__block__preconditioner_8h_source.html#l00098">clean_up_memory()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">setup()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00059">SpaceTimeNavierStokesSubsidiaryPreconditioner()</a>.</p>
 
 </div>
 </div>
@@ -1759,7 +1762,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:57:34
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:14
         </div>
       </div>
     </footer>

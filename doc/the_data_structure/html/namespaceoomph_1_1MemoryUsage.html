@@ -168,28 +168,28 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a77ed83cae1c77e9a046bc6b1ff55645a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a77ed83cae1c77e9a046bc6b1ff55645a">Suppress_mpi_synchronisation</a> =true</td></tr>
+<tr class="memitem:a77ed83cae1c77e9a046bc6b1ff55645a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a77ed83cae1c77e9a046bc6b1ff55645a">Suppress_mpi_synchronisation</a> = true</td></tr>
 <tr class="memdesc:a77ed83cae1c77e9a046bc6b1ff55645a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to suppress synchronisation of doc memory usage on processors (via mpi barriers). True (i.e. sync is suppressed) by default because not all processors may reach the relevant doc memory usage statements causing the code to hang).  <a href="namespaceoomph_1_1MemoryUsage.html#a77ed83cae1c77e9a046bc6b1ff55645a">More...</a><br /></td></tr>
 <tr class="separator:a77ed83cae1c77e9a046bc6b1ff55645a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5280b46bc1ce506ba96494d6dacbdbe"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#ae5280b46bc1ce506ba96494d6dacbdbe">My_memory_usage_system_string</a> =&quot;ps aux&quot;</td></tr>
+<tr class="memitem:ae5280b46bc1ce506ba96494d6dacbdbe"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#ae5280b46bc1ce506ba96494d6dacbdbe">My_memory_usage_system_string</a> = &quot;ps aux&quot;</td></tr>
 <tr class="memdesc:ae5280b46bc1ce506ba96494d6dacbdbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing system command that obtains memory usage of all processes. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH].  <a href="namespaceoomph_1_1MemoryUsage.html#ae5280b46bc1ce506ba96494d6dacbdbe">More...</a><br /></td></tr>
 <tr class="separator:ae5280b46bc1ce506ba96494d6dacbdbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b52934e2d3ddd6779f5f9581d14abc1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a1b52934e2d3ddd6779f5f9581d14abc1">Bypass_all_memory_usage_monitoring</a> =false</td></tr>
+<tr class="memitem:a1b52934e2d3ddd6779f5f9581d14abc1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a1b52934e2d3ddd6779f5f9581d14abc1">Bypass_all_memory_usage_monitoring</a> = false</td></tr>
 <tr class="memdesc:a1b52934e2d3ddd6779f5f9581d14abc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool allowing quick bypassing of ALL operations related to memory usage monitoring &ndash; this allows the code to remain "instrumented" without incurring the heavy penalties associated with the system calls and i/o. Default setting: false.  <a href="namespaceoomph_1_1MemoryUsage.html#a1b52934e2d3ddd6779f5f9581d14abc1">More...</a><br /></td></tr>
 <tr class="separator:a1b52934e2d3ddd6779f5f9581d14abc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa764cf2d9bfd321a3784aafdd32714bf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#aa764cf2d9bfd321a3784aafdd32714bf">My_memory_usage_filename</a> =&quot;my_memory_usage.dat&quot;</td></tr>
+<tr class="memitem:aa764cf2d9bfd321a3784aafdd32714bf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#aa764cf2d9bfd321a3784aafdd32714bf">My_memory_usage_filename</a> = &quot;my_memory_usage.dat&quot;</td></tr>
 <tr class="memdesc:aa764cf2d9bfd321a3784aafdd32714bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing name of file in which we document my memory usage &ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function empty_memory_usage_file()  <a href="namespaceoomph_1_1MemoryUsage.html#aa764cf2d9bfd321a3784aafdd32714bf">More...</a><br /></td></tr>
 <tr class="separator:aa764cf2d9bfd321a3784aafdd32714bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b915316a3658a60e8fa86490c8d013a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a9b915316a3658a60e8fa86490c8d013a">Total_memory_usage_system_string</a></td></tr>
 <tr class="memdesc:a9b915316a3658a60e8fa86490c8d013a"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing system command that obtains total memory usage. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH].  <a href="namespaceoomph_1_1MemoryUsage.html#a9b915316a3658a60e8fa86490c8d013a">More...</a><br /></td></tr>
 <tr class="separator:a9b915316a3658a60e8fa86490c8d013a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd9a74c901df404ddb665921e408a3a3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#afd9a74c901df404ddb665921e408a3a3">Total_memory_usage_filename</a> =&quot;memory_usage.dat&quot;</td></tr>
+<tr class="memitem:afd9a74c901df404ddb665921e408a3a3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#afd9a74c901df404ddb665921e408a3a3">Total_memory_usage_filename</a> = &quot;memory_usage.dat&quot;</td></tr>
 <tr class="memdesc:afd9a74c901df404ddb665921e408a3a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing name of file in which we document total memory usage &ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function empty_memory_usage_file()  <a href="namespaceoomph_1_1MemoryUsage.html#afd9a74c901df404ddb665921e408a3a3">More...</a><br /></td></tr>
 <tr class="separator:afd9a74c901df404ddb665921e408a3a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61c07afc6531dcc4f77ae2f2b738383f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a61c07afc6531dcc4f77ae2f2b738383f">Top_system_string</a> =&quot;while true; do top -b -<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a> 2 ; done &quot;</td></tr>
+<tr class="memitem:a61c07afc6531dcc4f77ae2f2b738383f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a61c07afc6531dcc4f77ae2f2b738383f">Top_system_string</a> = &quot;while true; do top -b -<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a> 2 ; done &quot;</td></tr>
 <tr class="memdesc:a61c07afc6531dcc4f77ae2f2b738383f"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing system command that runs "top" (or equivalent) "indefinitely" and writes to file specified in Top_output_filename. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH].  <a href="namespaceoomph_1_1MemoryUsage.html#a61c07afc6531dcc4f77ae2f2b738383f">More...</a><br /></td></tr>
 <tr class="separator:a61c07afc6531dcc4f77ae2f2b738383f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03231c21b4d9a8b4a08cecc3d688c7d3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a03231c21b4d9a8b4a08cecc3d688c7d3">Top_output_filename</a> =&quot;top_output.dat&quot;</td></tr>
+<tr class="memitem:a03231c21b4d9a8b4a08cecc3d688c7d3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a03231c21b4d9a8b4a08cecc3d688c7d3">Top_output_filename</a> = &quot;top_output.dat&quot;</td></tr>
 <tr class="memdesc:a03231c21b4d9a8b4a08cecc3d688c7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing name of file in which we document "continuous" output from "top" (or equivalent)&ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453" title="Function to empty file that records continuous output from top in file whose name is specified by Top...">empty_top_file()</a>  <a href="namespaceoomph_1_1MemoryUsage.html#a03231c21b4d9a8b4a08cecc3d688c7d3">More...</a><br /></td></tr>
 <tr class="separator:a03231c21b4d9a8b4a08cecc3d688c7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -216,9 +216,9 @@ Variables</h2></td></tr>
 <p>Doc total and local memory usage, prepended by string (which allows identification from where the function is called, say). NOTE: Local memory usage only works if we have unistd.h header. </p>
 <p>Doc total and local memory usage, prepended by string (which allows identification from where the function is called, say) </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01502">1502</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01491">1491</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01390">doc_my_memory_usage()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01455">doc_total_memory_usage()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01380">doc_my_memory_usage()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01445">doc_total_memory_usage()</a>.</p>
 
 </div>
 </div>
@@ -240,11 +240,11 @@ Variables</h2></td></tr>
 
 <p>Doc my memory usage, prepended by string (which allows identification from where the function is called, say) that records memory usage in file whose name is specified by My_memory_usage_filename. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is appended to that file; wipe it with <a class="el" href="namespaceoomph_1_1MemoryUsage.html#aadcb42d5c4ca8099981d75b2d5adcd96" title="Function to empty file that records my memory usage in file whose name is specified by My_memory_usag...">empty_my_memory_usage_file()</a>. Note: This requires getpid() which is defined in unistd.h so if you don't have that we won't build that function! </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01390">1390</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01380">1380</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01041">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00817">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01365">My_memory_usage_filename</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01351">My_memory_usage_system_string</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01345">Suppress_mpi_synchronisation</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00851">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01354">My_memory_usage_filename</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01340">My_memory_usage_system_string</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01334">Suppress_mpi_synchronisation</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01502">doc_memory_usage()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01491">doc_memory_usage()</a>.</p>
 
 </div>
 </div>
@@ -267,11 +267,11 @@ Variables</h2></td></tr>
 <p>Doc total memory usage, prepended by string (which allows identification from where the function is called, say) that records memory usage in file whose name is specified by Total_memory_usage_filename. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is appended to that file; wipe it with empty_memory_usage_file(). </p>
 <p>Doc total memory usage, prepended by string (which allows identification from where the function is called, say) that records mem usage in file whose name is specified by Total_memory_usage_filename. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is appended to that file; wipe it with empty_memory_usage_file(). </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01455">1455</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01445">1445</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01041">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00817">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01345">Suppress_mpi_synchronisation</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01435">Total_memory_usage_filename</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01426">Total_memory_usage_system_string</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00851">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01334">Suppress_mpi_synchronisation</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01424">Total_memory_usage_filename</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01415">Total_memory_usage_system_string</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01502">doc_memory_usage()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01491">doc_memory_usage()</a>.</p>
 
 </div>
 </div>
@@ -292,9 +292,9 @@ Variables</h2></td></tr>
 
 <p>Function to empty file that records total and local memory usage in appropriate files. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01489">1489</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01478">1478</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01369">empty_my_memory_usage_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01533">empty_top_file()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01439">empty_total_memory_usage_file()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01358">empty_my_memory_usage_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01520">empty_top_file()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01428">empty_total_memory_usage_file()</a>.</p>
 
 </div>
 </div>
@@ -315,11 +315,11 @@ Variables</h2></td></tr>
 
 <p>Function to empty file that records my memory usage in file whose name is specified by My_memory_usage_filename. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01369">1369</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01358">1358</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01365">My_memory_usage_filename</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01354">My_memory_usage_filename</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01489">empty_memory_usage_files()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01478">empty_memory_usage_files()</a>.</p>
 
 </div>
 </div>
@@ -340,11 +340,11 @@ Variables</h2></td></tr>
 
 <p>Function to empty file that records continuous output from top in file whose name is specified by Top_output_filename. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01533">1533</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01520">1520</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01529">Top_output_filename</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01521">Top_system_string</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01516">Top_output_filename</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01508">Top_system_string</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01489">empty_memory_usage_files()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01478">empty_memory_usage_files()</a>.</p>
 
 </div>
 </div>
@@ -365,11 +365,11 @@ Variables</h2></td></tr>
 
 <p>Function to empty file that records total memory usage in file whose name is specified by Total_memory_usage_filename. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01439">1439</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01428">1428</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01435">Total_memory_usage_filename</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01424">Total_memory_usage_filename</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01489">empty_memory_usage_files()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01478">empty_memory_usage_files()</a>.</p>
 
 </div>
 </div>
@@ -391,11 +391,11 @@ Variables</h2></td></tr>
 
 <p>Insert comment into running continuous top output. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01652">1652</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01636">1636</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01529">Top_output_filename</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01516">Top_output_filename</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01552">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01613">stop_continous_top()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01539">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01597">stop_continous_top()</a>.</p>
 
 </div>
 </div>
@@ -418,9 +418,9 @@ Variables</h2></td></tr>
 <p>Start running top continuously and output (append) into file specified by Top_output_filename. Wipe that file with <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453" title="Function to empty file that records continuous output from top in file whose name is specified by Top...">empty_top_file()</a> if you wish. Note that this is again quite Linux specific and unlikely to work on other operating systems. Insert optional comment into output file before starting. </p>
 <p>Start running top continuously and output (append) into file specified by Top_output_filename. Wipe that file with <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453" title="Function to empty file that records continuous output from top in file whose name is specified by Top...">empty_top_file()</a> first if you wish. Note that this is again quite Linux specific and unlikely to work on other operating systems. Insert optional comment into output file before starting. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01552">1552</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01539">1539</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01041">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01652">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00817">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01345">Suppress_mpi_synchronisation</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01529">Top_output_filename</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01521">Top_system_string</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01636">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00851">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01334">Suppress_mpi_synchronisation</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01516">Top_output_filename</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01508">Top_system_string</a>.</p>
 
 </div>
 </div>
@@ -442,9 +442,9 @@ Variables</h2></td></tr>
 
 <p>Stop running top continuously. Note that this is again quite Linux specific and unlikely to work on other operating systems. Insert optional comment into output file before stopping. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01613">1613</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01597">1597</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01357">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01041">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01652">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00817">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01345">Suppress_mpi_synchronisation</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01529">Top_output_filename</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01346">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01636">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00851">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01334">Suppress_mpi_synchronisation</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01516">Top_output_filename</a>.</p>
 
 </div>
 </div>
@@ -456,16 +456,16 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool oomph::MemoryUsage::Bypass_all_memory_usage_monitoring =false</td>
+          <td class="memname">bool oomph::MemoryUsage::Bypass_all_memory_usage_monitoring = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Bool allowing quick bypassing of ALL operations related to memory usage monitoring &ndash; this allows the code to remain "instrumented" without incurring the heavy penalties associated with the system calls and i/o. Default setting: false. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01357">1357</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01346">1346</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01502">doc_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01390">doc_my_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01455">doc_total_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01489">empty_memory_usage_files()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01369">empty_my_memory_usage_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01533">empty_top_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01439">empty_total_memory_usage_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01652">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01552">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01613">stop_continous_top()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01491">doc_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01380">doc_my_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01445">doc_total_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01478">empty_memory_usage_files()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01358">empty_my_memory_usage_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01520">empty_top_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01428">empty_total_memory_usage_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01636">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01539">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01597">stop_continous_top()</a>.</p>
 
 </div>
 </div>
@@ -476,16 +476,16 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string oomph::MemoryUsage::My_memory_usage_filename =&quot;my_memory_usage.dat&quot;</td>
+          <td class="memname">std::string oomph::MemoryUsage::My_memory_usage_filename = &quot;my_memory_usage.dat&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>String containing name of file in which we document my memory usage &ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function empty_memory_usage_file() </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01365">1365</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01354">1354</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01390">doc_my_memory_usage()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01369">empty_my_memory_usage_file()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01380">doc_my_memory_usage()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01358">empty_my_memory_usage_file()</a>.</p>
 
 </div>
 </div>
@@ -496,7 +496,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string oomph::MemoryUsage::My_memory_usage_system_string =&quot;ps aux&quot;</td>
+          <td class="memname">std::string oomph::MemoryUsage::My_memory_usage_system_string = &quot;ps aux&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -504,9 +504,9 @@ Variables</h2></td></tr>
 <p>String containing system command that obtains memory usage of all processes. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH]. </p>
 <p>String containing system command that obtains memory usage of all processes. Default assignment for Linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; Linux or not. MH]. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01351">1351</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01340">1340</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01390">doc_my_memory_usage()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01380">doc_my_memory_usage()</a>.</p>
 
 </div>
 </div>
@@ -517,7 +517,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool oomph::MemoryUsage::Suppress_mpi_synchronisation =true</td>
+          <td class="memname">bool oomph::MemoryUsage::Suppress_mpi_synchronisation = true</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -525,9 +525,9 @@ Variables</h2></td></tr>
 <p>Boolean to suppress synchronisation of doc memory usage on processors (via mpi barriers). True (i.e. sync is suppressed) by default because not all processors may reach the relevant doc memory usage statements causing the code to hang). </p>
 <p>Boolean to suppress synchronisation of doc memory usage on processors (via mpi barriers). True (i.e. sync is is suppressed by default because not all processors may execute the reach the relevant doc memory usage statements causing the code to hang). </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01345">1345</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01334">1334</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01390">doc_my_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01455">doc_total_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01552">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01613">stop_continous_top()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01380">doc_my_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01445">doc_total_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01539">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01597">stop_continous_top()</a>.</p>
 
 </div>
 </div>
@@ -538,16 +538,16 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string oomph::MemoryUsage::Top_output_filename =&quot;top_output.dat&quot;</td>
+          <td class="memname">std::string oomph::MemoryUsage::Top_output_filename = &quot;top_output.dat&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>String containing name of file in which we document "continuous" output from "top" (or equivalent)&ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453" title="Function to empty file that records continuous output from top in file whose name is specified by Top...">empty_top_file()</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01529">1529</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01516">1516</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01533">empty_top_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01652">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01552">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01613">stop_continous_top()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01520">empty_top_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01636">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01539">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01597">stop_continous_top()</a>.</p>
 
 </div>
 </div>
@@ -558,7 +558,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string oomph::MemoryUsage::Top_system_string =&quot;while true; do top -b -<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a> 2 ; done &quot;</td>
+          <td class="memname">std::string oomph::MemoryUsage::Top_system_string = &quot;while true; do top -b -<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a> 2 ; done &quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -566,9 +566,9 @@ Variables</h2></td></tr>
 <p>String containing system command that runs "top" (or equivalent) "indefinitely" and writes to file specified in Top_output_filename. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH]. </p>
 <p>String containing system command that runs "top" (or equivalent) "indefinitely" and writes to file specified in Top_output_filename. Default assignment for Linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; Linux or not. MH]. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01521">1521</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01508">1508</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01533">empty_top_file()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01552">run_continous_top()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01520">empty_top_file()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01539">run_continous_top()</a>.</p>
 
 </div>
 </div>
@@ -579,16 +579,16 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string oomph::MemoryUsage::Total_memory_usage_filename =&quot;memory_usage.dat&quot;</td>
+          <td class="memname">std::string oomph::MemoryUsage::Total_memory_usage_filename = &quot;memory_usage.dat&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>String containing name of file in which we document total memory usage &ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function empty_memory_usage_file() </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01435">1435</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01424">1424</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01455">doc_total_memory_usage()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01439">empty_total_memory_usage_file()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01445">doc_total_memory_usage()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01428">empty_total_memory_usage_file()</a>.</p>
 
 </div>
 </div>
@@ -609,9 +609,9 @@ Variables</h2></td></tr>
 <p>String containing system command that obtains total memory usage. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH]. </p>
 <p>String containing system command that obtains total memory usage. Default assignment for Linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; Linux or not. MH]. </p>
 
-<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01426">1426</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01415">1415</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01455">doc_total_memory_usage()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01445">doc_total_memory_usage()</a>.</p>
 
 </div>
 </div>
@@ -643,7 +643,7 @@ Variables</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:58:10
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:40:45
         </div>
       </div>
     </footer>

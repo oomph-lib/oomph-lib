@@ -27,8 +27,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_aad3ee
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_a19d216ae9ab2602a9da97babe7b66c21}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_ae28af2d25f78d02a4cbe6b382dcc9546}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
-\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
- Standard flux.\+from Advection\+Diffusion equations. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Advection\+Diffusion equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_af9dd36503e3196a7f640dbcebb22551d}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_a0a916bc1f20ff94e7feed984d41148fb}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
@@ -51,7 +50,7 @@ class oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$}
 
 A version of the Advection Diffusion equations that can be used with non-\/uniform mesh refinement. In essence, the class overloads the \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_aa42c5000c45380b8370565fac3990320}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}} function so that contributions from hanging nodes (or alternatively in-\/compatible function values) are taken into account. 
 
-Definition at line 55 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 54 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -69,7 +68,7 @@ Empty Constructor.
 
 
 
-Definition at line 63 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 61 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_a1ee8dc50b30ebc4bb1aee7635dcde89f}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_a1ee8dc50b30ebc4bb1aee7635dcde89f}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!RefineableAdvectionDiffusionEquations@{RefineableAdvectionDiffusionEquations}}
@@ -84,7 +83,7 @@ Broken copy constructor.
 
 
 
-Definition at line 71 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 70 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -110,11 +109,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a7
 
 
 
-Definition at line 199 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 205 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff().
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_aa42c5000c45380b8370565fac3990320}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_aa42c5000c45380b8370565fac3990320}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_adv\_diff@{fill\_in\_generic\_residual\_contribution\_adv\_diff}}
@@ -133,7 +132,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a3
 
 
 
-Definition at line 40 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line 38 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
@@ -160,7 +159,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 177 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 183 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -191,7 +190,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 127 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 132 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -218,7 +217,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 96 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 100 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -237,8 +236,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph
 
 
 
-Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
- Standard flux.\+from Advection\+Diffusion equations. 
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Advection\+Diffusion equations. 
 
 
 
@@ -250,7 +248,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 88 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 90 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -281,7 +279,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviar
 
 
 
-Definition at line 84 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 83 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -300,7 +298,7 @@ Broken assignment operator.
 
 
 
-Definition at line 78 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 77 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

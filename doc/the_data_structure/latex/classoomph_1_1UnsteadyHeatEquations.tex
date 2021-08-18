@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Unsteady\+Heat\+Equations$<$ D\+IM $>$\+:\begin
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a967135cc2be2cb4b16fe0dc0b4d68a68}{Unsteady\+Heat\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})
-\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -30,8 +29,7 @@ double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ad5a19b842365b704972
 void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a25113368ba4d7b4b054ca4a046fe9ff7}{disable\+\_\+\+A\+LE}} ()
 \begin{DoxyCompactList}\small\item\em Disable A\+LE, i.\+e. assert the mesh is not moving -- you do this at your own risk! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a38abdb9f1afd465289bb31d684daa360}{enable\+\_\+\+A\+LE}} ()
-\begin{DoxyCompactList}\small\item\em (Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em (Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a0b5413cd78f410efd7ab3273a34cca5f}{compute\+\_\+norm}} (double \&norm)
 \begin{DoxyCompactList}\small\item\em Compute norm of fe solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a1d73897c7329f0b82f29542cb5c72fff}{output}} (std\+::ostream \&outfile)
@@ -55,15 +53,14 @@ void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ab6d9162fbdc253de4cc70
 \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a967135cc2be2cb4b16fe0dc0b4d68a68}{Unsteady\+Heat\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a97883b388b84d415b8954ce9670f73af}{source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. Const version. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a8907d972136ac4e81f297b196968ebe8}{get\+\_\+source\+\_\+ust\+\_\+heat}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
-\begin{DoxyCompactList}\small\item\em Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a840e6d385ae22b44795f73fdd008fc3e}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ac1607b3b8cf1a1cd52b61f8bbc45a210}{alpha\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_aacedcce21ecb4da2f6fda094da3aa057}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
 const double \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_aca11360903e1f4c7513e1f91e8a1e4b7}{beta}} () const
 \begin{DoxyCompactList}\small\item\em Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a73b52f5aa092ab1d836843d30273d9a8}{beta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_acec4dab1c04bee562e953153bf39159e}{beta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a16a237c1055f7d8f577eab77ca00a03c}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i. \end{DoxyCompactList}\item 
@@ -76,7 +73,7 @@ double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a6e9c1454f84d2b55e5c
 double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a267490c49a2e6556ac74e37220882ad3}{interpolated\+\_\+u\+\_\+ust\+\_\+heat}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
 \begin{DoxyCompactList}\small\item\em Return FE representation of function value u(s) at local coordinate s at previous time t (t=0\+: present) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ac113fbfb338fa3d20b937035ba8f6fd3}{interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
-\begin{DoxyCompactList}\small\item\em Return FE representation of function value du/dt(s) at local coordinate s. \end{DoxyCompactList}\item 
+\item 
 unsigned \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a6f16f48984d7edf9e67818d9e4bbcf13}{self\+\_\+test}} ()
 \begin{DoxyCompactList}\small\item\em Self-\/test\+: Return 0 for OK. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
@@ -87,8 +84,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a70c72c1d6e7
 virtual double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_aa6ab5a2e2bbf3830dfb17f8f2d1281b0}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_acde24104d5adcabe8a76a3a52c17ab5f}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -103,9 +99,9 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ad1b36eb20c42
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ad2647a621a4cb3f4a8301a56badd1e4e}{Default\+\_\+alpha\+\_\+parameter}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ad2647a621a4cb3f4a8301a56badd1e4e}{Default\+\_\+alpha\+\_\+parameter}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for the Alpha parameter\+: (thermal inertia)\+: One for natural scaling. \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a85ec71a0ce9a5b85ce30b0aab0495ee4}{Default\+\_\+beta\+\_\+parameter}} =1.\+0
+static double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a85ec71a0ce9a5b85ce30b0aab0495ee4}{Default\+\_\+beta\+\_\+parameter}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Static default value for the Beta parameter (thermal conductivity)\+: One for natural scaling. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -116,7 +112,7 @@ class oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$}
 
 A class for all isoparametric elements that solve the Unsteady\+Heat equations. \[ \frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f(t,x_j) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. Note that this class assumes an isoparametric formulation, i.\+e. that the scalar unknown is interpolated using the same shape funcitons as the position. 
 
-Definition at line 74 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 73 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -130,12 +126,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\
 
 
 
-Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! ~\newline
- 
+Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! 
 
 
 
-Definition at line 81 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 78 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -153,7 +148,7 @@ Constructor\+: Initialises the Source\+\_\+fct\+\_\+pt to null and sets flag to 
 
 
 
-Definition at line 90 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 87 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -172,7 +167,7 @@ Broken copy constructor.
 
 
 
-Definition at line 99 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 97 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -194,18 +189,18 @@ Alpha parameter (thermal inertia)
 
 
 
-Definition at line 250 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 263 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_ac1607b3b8cf1a1cd52b61f8bbc45a210}\label{classoomph_1_1UnsteadyHeatEquations_ac1607b3b8cf1a1cd52b61f8bbc45a210}} 
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_aacedcce21ecb4da2f6fda094da3aa057}\label{classoomph_1_1UnsteadyHeatEquations_aacedcce21ecb4da2f6fda094da3aa057}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!alpha\_pt@{alpha\_pt}}
 \index{alpha\_pt@{alpha\_pt}!oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ D\+IM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ D\+IM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -213,7 +208,7 @@ Pointer to Alpha parameter (thermal inertia)
 
 
 
-Definition at line 253 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 269 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -232,18 +227,18 @@ Beta parameter (thermal conductivity)
 
 
 
-Definition at line 257 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 276 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::\+Beta\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a73b52f5aa092ab1d836843d30273d9a8}\label{classoomph_1_1UnsteadyHeatEquations_a73b52f5aa092ab1d836843d30273d9a8}} 
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_acec4dab1c04bee562e953153bf39159e}\label{classoomph_1_1UnsteadyHeatEquations_acec4dab1c04bee562e953153bf39159e}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!beta\_pt@{beta\_pt}}
 \index{beta\_pt@{beta\_pt}!oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{beta\_pt()}{beta\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ D\+IM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ D\+IM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -251,7 +246,7 @@ Pointer to Beta parameter (thermal conductivity)
 
 
 
-Definition at line 260 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 282 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -276,7 +271,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 498 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
+Definition at line 472 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
@@ -301,7 +296,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line 579 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
+Definition at line 551 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
@@ -324,7 +319,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af2025a472d
 
 
 
-Definition at line 220 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
+Definition at line 215 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
@@ -347,7 +342,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line 153 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 156 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -396,7 +391,7 @@ du/dt at local node n. Uses suitably interpolated value for hanging nodes.
 
 
 
-Definition at line 125 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 127 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -415,8 +410,7 @@ void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+
 
 
 
-(Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. ~\newline
- 
+(Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. 
 
 
 
@@ -424,7 +418,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6
 
 
 
-Definition at line 163 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 166 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -447,7 +441,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 304 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 332 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -470,7 +464,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 294 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 322 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -485,8 +479,7 @@ void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+
 
 
 
-Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix ~\newline
- 
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. 
 
 Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and/or element Jacobian matrix
 
@@ -498,7 +491,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableUnsteadyHeatEquations_
 
 
 
-Definition at line 61 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
+Definition at line 60 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
@@ -521,7 +514,7 @@ Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i.
 
 
 
-Definition at line 263 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 288 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -540,12 +533,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Un
 
 
 
-Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. ~\newline
- 
+Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. 
 
 
 
-Definition at line 235 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 245 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -558,13 +550,9 @@ References oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::\+Source\+\_\+
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ D\+IM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
+Return FE representation of function value du/dt(s) at local coordinate s 
 
-
-Return FE representation of function value du/dt(s) at local coordinate s. 
-
-
-
-Definition at line 371 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 400 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -583,7 +571,7 @@ Return FE representation of function value u(s) at local coordinate s at previou
 
 
 
-Definition at line 342 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 370 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -602,7 +590,7 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line 313 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 341 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -629,7 +617,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_a8fc87ff881
 
 
 
-Definition at line 184 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 187 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -660,7 +648,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_af582182bc9
 
 
 
-Definition at line 343 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
+Definition at line 330 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
@@ -687,7 +675,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_a50c15ed85f
 
 
 
-Definition at line 172 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 175 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -718,7 +706,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ae54ed4ee8b
 
 
 
-Definition at line 305 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
+Definition at line 294 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
@@ -749,7 +737,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_acf12936a99
 
 
 
-Definition at line 440 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
+Definition at line 418 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
@@ -780,7 +768,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_a4a9b973582
 
 
 
-Definition at line 384 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
+Definition at line 366 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
@@ -807,7 +795,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 272 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
+Definition at line 264 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
@@ -830,7 +818,7 @@ Implements \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_a723b841dae0
 
 
 
-Definition at line 226 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 230 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -853,7 +841,7 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line 230 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 237 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -872,7 +860,7 @@ Broken assignment operator.
 
 Return the index at which the unknown value is stored. The default value, 0, is appropriate for single-\/physics problems, when there is only one variable, the value that satisfies the unsteady heat equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. 
 
-Definition at line 121 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 120 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -894,7 +882,7 @@ Boolean flag to indicate if A\+LE formulation is disabled when time-\/derivative
 
 
 
-Definition at line 432 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 459 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -913,7 +901,7 @@ Pointer to Alpha parameter (thermal inertia)
 
 
 
-Definition at line 435 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 462 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -932,7 +920,7 @@ Pointer to Beta parameter (thermal conductivity)
 
 
 
-Definition at line 438 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 465 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -943,7 +931,7 @@ Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::beta(), oom
 \index{Default\_alpha\_parameter@{Default\_alpha\_parameter}!oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_alpha\_parameter}{Default\_alpha\_parameter}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+alpha\+\_\+parameter =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+alpha\+\_\+parameter = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -953,7 +941,7 @@ Static default value for the Alpha parameter\+: (thermal inertia)\+: One for nat
 
 Default value for Alpha parameter (thermal inertia) 
 
-Definition at line 444 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 470 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -964,7 +952,7 @@ Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::\+Unsteady\
 \index{Default\_beta\_parameter@{Default\_beta\_parameter}!oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_beta\_parameter}{Default\_beta\_parameter}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+beta\+\_\+parameter =1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+beta\+\_\+parameter = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -972,7 +960,7 @@ Static default value for the Beta parameter (thermal conductivity)\+: One for na
 
 Default value for Beta parameter (thermal conductivity) 
 
-Definition at line 448 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 474 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -991,7 +979,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 427 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line 454 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 

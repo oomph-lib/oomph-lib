@@ -53,8 +53,7 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a
 void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a8951704e35bc73c46e22554c75821803}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output at n\+\_\+plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_aea5a330832dea0920a948660745e6f01}{get\+\_\+s\+\_\+plot}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const bool \&use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points=false) const
-\begin{DoxyCompactList}\small\item\em Get cector of local coordinates of plot point i (when plotting ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get cector of local coordinates of plot point i (when plotting nplot points in each "coordinate direction). \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a250b5613ab76f43d9cd67dc01b8eb8fe}{tecplot\+\_\+zone\+\_\+string}} (const unsigned \&nplot) const
 \begin{DoxyCompactList}\small\item\em Return string for tecplot zone header (when plotting nplot points in each "coordinate direction) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a5f590bfd5cc59a282f970a8853ad0008}{nplot\+\_\+points}} (const unsigned \&nplot) const
@@ -75,7 +74,7 @@ class oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}
 
 General \mbox{\hyperlink{classoomph_1_1QSpectralElement}{Q\+Spectral\+Element}} class specialised to one spatial dimension. 
 
-Definition at line 360 of file Qspectral\+\_\+elements.\+h.
+Definition at line 371 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -93,7 +92,7 @@ Constructor.
 
 
 
-Definition at line 374 of file Qspectral\+\_\+elements.\+h.
+Definition at line 384 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -119,7 +118,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd
 
 
 
-Definition at line 122 of file Qspectral\+\_\+elements.\+cc.
+Definition at line 119 of file Qspectral\+\_\+elements.\+cc.
 
 
 
@@ -142,7 +141,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da0
 
 
 
-Definition at line 584 of file Qspectral\+\_\+elements.\+h.
+Definition at line 619 of file Qspectral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9118f192015bc057bf90eb0f741d5c27}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9118f192015bc057bf90eb0f741d5c27}} 
 \index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!dshape\_local@{dshape\_local}}
@@ -161,7 +160,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line 560 of file Qspectral\+\_\+elements.\+h.
+Definition at line 595 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -176,16 +175,15 @@ void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+El
 
 
 
-Get cector of local coordinates of plot point i (when plotting ~\newline
- 
+Get cector of local coordinates of plot point i (when plotting nplot points in each "coordinate direction). 
 
-nplot points in each "coordinate direction). 
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{oomph\+::\+Finite\+Element}}.
 
 
 
-Definition at line 487 of file Qspectral\+\_\+elements.\+h.
+Definition at line 517 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -208,7 +206,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a42c86a7628fee00
 
 
 
-Definition at line 463 of file Qspectral\+\_\+elements.\+h.
+Definition at line 484 of file Qspectral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a7ef460d4eecb38fb0fa33b331965265c}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a7ef460d4eecb38fb0fa33b331965265c}} 
 \index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
@@ -227,7 +225,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22bc4ee35e4f948
 
 
 
-Definition at line 425 of file Qspectral\+\_\+elements.\+h.
+Definition at line 443 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -250,7 +248,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f646
 
 
 
-Definition at line 432 of file Qspectral\+\_\+elements.\+h.
+Definition at line 450 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -273,7 +271,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adb8ec7d2ceda375
 
 
 
-Definition at line 440 of file Qspectral\+\_\+elements.\+h.
+Definition at line 458 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -296,7 +294,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab65c7a94dda80c1
 
 
 
-Definition at line 469 of file Qspectral\+\_\+elements.\+h.
+Definition at line 492 of file Qspectral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a5f590bfd5cc59a282f970a8853ad0008}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a5f590bfd5cc59a282f970a8853ad0008}} 
 \index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!nplot\_points@{nplot\_points}}
@@ -315,7 +313,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8
 
 
 
-Definition at line 521 of file Qspectral\+\_\+elements.\+h.
+Definition at line 551 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -338,7 +336,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LineElementBase_ad80307523c850d58bca7b
 
 
 
-Definition at line 396 of file Qspectral\+\_\+elements.\+h.
+Definition at line 412 of file Qspectral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9f8defda0dbde54edfb84353c6f3f794}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9f8defda0dbde54edfb84353c6f3f794}} 
 \index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!output@{output}}
@@ -357,7 +355,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 472 of file Qspectral\+\_\+elements.\+h.
+Definition at line 498 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -380,7 +378,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 476 of file Qspectral\+\_\+elements.\+h.
+Definition at line 504 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -403,7 +401,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 52 of file Qspectral\+\_\+elements.\+cc.
+Definition at line 50 of file Qspectral\+\_\+elements.\+cc.
 
 
 
@@ -426,7 +424,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 84 of file Qspectral\+\_\+elements.\+cc.
+Definition at line 82 of file Qspectral\+\_\+elements.\+cc.
 
 
 
@@ -449,7 +447,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a64adbe935692713
 
 
 
-Definition at line 393 of file Qspectral\+\_\+elements.\+h.
+Definition at line 406 of file Qspectral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a32d567a3c558e28710aed1e8fd83c4ae}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a32d567a3c558e28710aed1e8fd83c4ae}} 
 \index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!s\_min@{s\_min}}
@@ -468,7 +466,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a35f0803115b68bd
 
 
 
-Definition at line 390 of file Qspectral\+\_\+elements.\+h.
+Definition at line 400 of file Qspectral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a20a70f397d718449bcb16e6e60ea74a1}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a20a70f397d718449bcb16e6e60ea74a1}} 
 \index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!shape@{shape}}
@@ -487,7 +485,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line 544 of file Qspectral\+\_\+elements.\+h.
+Definition at line 576 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -514,7 +512,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e
 
 
 
-Definition at line 512 of file Qspectral\+\_\+elements.\+h.
+Definition at line 542 of file Qspectral\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a6106b1fc74eeab6848f3b03dba512f09}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a6106b1fc74eeab6848f3b03dba512f09}} 
 \index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
@@ -533,7 +531,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LineElementBase_ab878e4c4276da4cefa430
 
 
 
-Definition at line 400 of file Qspectral\+\_\+elements.\+h.
+Definition at line 418 of file Qspectral\+\_\+elements.\+h.
 
 
 
@@ -553,7 +551,7 @@ Default integration rule\+: Gaussian integration of same \textquotesingle{}order
 
 Assign the static integral 
 
-Definition at line 369 of file Qspectral\+\_\+elements.\+h.
+Definition at line 380 of file Qspectral\+\_\+elements.\+h.
 
 
 

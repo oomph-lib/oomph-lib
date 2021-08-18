@@ -2,8 +2,7 @@
 \label{classoomph_1_1SuperLUSolver}\index{oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 
 
-. Super\+LU Project Solver class. This is a combined wrapper for both Super\+LU and Super\+LU Dist. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/$\sim$xiaoye/\+Super\+L\+U/}} Default Behaviour\+: If this solver is distributed over more than one processor then Super\+LU Dist is used. Member data naming convention\+: member data associated with the Super\+LU Dist solver begins Dist\+\_\+... and member data associated with the serial Super\+LU solver begins Serial\+\_\+... . ~\newline
-  
+. Super\+LU Project Solver class. This is a combined wrapper for both Super\+LU and Super\+LU Dist. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/$\sim$xiaoye/\+Super\+L\+U/}} Default Behaviour\+: If this solver is distributed over more than one processor then Super\+LU Dist is used. Member data naming convention\+: member data associated with the Super\+LU Dist solver begins Dist\+\_\+... and member data associated with the serial Super\+LU solver begins Serial\+\_\+... .  
 
 
 
@@ -76,13 +75,11 @@ void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_abd96a292e666e7553651add727265
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a9b8487741998c97db3f41493ca427c1d}{enable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist}} ()
 \begin{DoxyCompactList}\small\item\em Set Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a887c4a5fd19034f7a74d91d453d4f425}{disable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist}} ()
-\begin{DoxyCompactList}\small\item\em Unset Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unset Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a9489a249d736316901e1644e73aa55b9}{enable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist}} ()
 \begin{DoxyCompactList}\small\item\em Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is allowed to permute matrix rows and columns during factorisation. This is the default for Super\+L\+U\+\_\+\+D\+I\+ST, and can lead to significantly faster solves. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a3386eb5e27caa80d9c63a6061a304680}{disable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist}} ()
-\begin{DoxyCompactList}\small\item\em Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is not allowed to permute matrix rows and columns during factorisation. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is not allowed to permute matrix rows and columns during factorisation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a4eac19f126f7da82f6af48416410442a}{use\+\_\+global\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist}} ()
 \begin{DoxyCompactList}\small\item\em Calling this method will ensure that when the problem based solve interface is used, a global (serial) jacobian will be assembled. Note\+: calling this function will delete any distributed solve data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a400adf19a2051b05baec7a300bda5406}{use\+\_\+distributed\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist}} ()
@@ -94,7 +91,7 @@ double \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ac61498d3c80a4ed13c2df101766
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a11c89f3138e42a38eb0cd5def128eabf}{Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve}} =false
+static bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a11c89f3138e42a38eb0cd5def128eabf}{Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve}}
 \begin{DoxyCompactList}\small\item\em Static flag that determines whether the warning about incorrect distribution of R\+H\+Ss will be printed or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -164,10 +161,9 @@ int $\ast$ \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a7b5c61ed28e441622bfe3f6
 
 
 \doxysubsection{Detailed Description}
-. Super\+LU Project Solver class. This is a combined wrapper for both Super\+LU and Super\+LU Dist. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/$\sim$xiaoye/\+Super\+L\+U/}} Default Behaviour\+: If this solver is distributed over more than one processor then Super\+LU Dist is used. Member data naming convention\+: member data associated with the Super\+LU Dist solver begins Dist\+\_\+... and member data associated with the serial Super\+LU solver begins Serial\+\_\+... . ~\newline
- 
+. Super\+LU Project Solver class. This is a combined wrapper for both Super\+LU and Super\+LU Dist. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/$\sim$xiaoye/\+Super\+L\+U/}} Default Behaviour\+: If this solver is distributed over more than one processor then Super\+LU Dist is used. Member data naming convention\+: member data associated with the Super\+LU Dist solver begins Dist\+\_\+... and member data associated with the serial Super\+LU solver begins Serial\+\_\+... . 
 
-Definition at line 484 of file linear\+\_\+solver.\+h.
+Definition at line 503 of file linear\+\_\+solver.\+h.
 
 
 
@@ -198,7 +194,7 @@ Distributed&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 493 of file linear\+\_\+solver.\+h.
+Definition at line 510 of file linear\+\_\+solver.\+h.
 
 
 
@@ -215,7 +211,7 @@ Constructor. Set the defaults.
 
 
 
-Definition at line 496 of file linear\+\_\+solver.\+h.
+Definition at line 518 of file linear\+\_\+solver.\+h.
 
 
 
@@ -233,7 +229,7 @@ Broken copy constructor.
 
 
 
-Definition at line 525 of file linear\+\_\+solver.\+h.
+Definition at line 546 of file linear\+\_\+solver.\+h.
 
 
 
@@ -251,7 +247,7 @@ Destructor, clean up the stored matrices.
 
 
 
-Definition at line 537 of file linear\+\_\+solver.\+h.
+Definition at line 558 of file linear\+\_\+solver.\+h.
 
 
 
@@ -272,7 +268,7 @@ Do the backsubstitution for Super\+LU solver Note\+: returns the global result \
 
 Do the backsubstitution for \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}}. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
 
-Definition at line 2178 of file linear\+\_\+solver.\+cc.
+Definition at line 2254 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -294,7 +290,7 @@ backsub method for Super\+LU Dist
 
 Do the backsubstitution for Super\+LU solver. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
 
-Definition at line 2227 of file linear\+\_\+solver.\+cc.
+Definition at line 2302 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -316,7 +312,7 @@ backsub method for Super\+LU (serial)
 
 Do the backsubstitution for Super\+LU. 
 
-Definition at line 2369 of file linear\+\_\+solver.\+cc.
+Definition at line 2465 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -338,7 +334,7 @@ Do the back-\/substitution for transposed system of the Super\+LU solver Note\+:
 
 Do the backsubstitution of the transposed system for \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}}. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
 
-Definition at line 2199 of file linear\+\_\+solver.\+cc.
+Definition at line 2274 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -360,7 +356,7 @@ backsub method for Super\+LU Dist
 
 Do the backsubstitution for Super\+LU solver. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
 
-Definition at line 2349 of file linear\+\_\+solver.\+cc.
+Definition at line 2445 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -378,7 +374,7 @@ backsub method for Super\+LU (serial)
 
 Do the backsubstitution for Super\+LU. 
 
-Definition at line 2454 of file linear\+\_\+solver.\+cc.
+Definition at line 2555 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -404,7 +400,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 2539 of file linear\+\_\+solver.\+cc.
+Definition at line 2645 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -422,12 +418,11 @@ Referenced by oomph\+::\+Super\+L\+U\+Preconditioner\+::clean\+\_\+up\+\_\+memor
 
 
 
-Unset Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be ~\newline
- 
+Unset Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be. 
 
 
 
-Definition at line 679 of file linear\+\_\+solver.\+h.
+Definition at line 710 of file linear\+\_\+solver.\+h.
 
 
 
@@ -445,7 +440,7 @@ Disable documentation of solver statistics.
 
 
 
-Definition at line 609 of file linear\+\_\+solver.\+h.
+Definition at line 633 of file linear\+\_\+solver.\+h.
 
 
 
@@ -471,7 +466,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line 552 of file linear\+\_\+solver.\+h.
+Definition at line 573 of file linear\+\_\+solver.\+h.
 
 
 
@@ -485,12 +480,11 @@ References clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::disable
 
 
 
-Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is not allowed to permute matrix rows and columns during factorisation. ~\newline
- 
+Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is not allowed to permute matrix rows and columns during factorisation. 
 
 
 
-Definition at line 690 of file linear\+\_\+solver.\+h.
+Definition at line 725 of file linear\+\_\+solver.\+h.
 
 
 
@@ -512,7 +506,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a37f1f8b8c6d45115
 
 
 
-Definition at line 543 of file linear\+\_\+solver.\+h.
+Definition at line 564 of file linear\+\_\+solver.\+h.
 
 
 
@@ -530,7 +524,7 @@ Set Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy 
 
 
 
-Definition at line 673 of file linear\+\_\+solver.\+h.
+Definition at line 702 of file linear\+\_\+solver.\+h.
 
 
 
@@ -548,7 +542,7 @@ Enable documentation of solver statistics.
 
 
 
-Definition at line 606 of file linear\+\_\+solver.\+h.
+Definition at line 627 of file linear\+\_\+solver.\+h.
 
 
 
@@ -570,7 +564,7 @@ Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is allowed to permute matrix rows a
 
 
 
-Definition at line 685 of file linear\+\_\+solver.\+h.
+Definition at line 718 of file linear\+\_\+solver.\+h.
 
 
 
@@ -588,7 +582,7 @@ Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the f
 
 LU decompose the matrix addressed by matrix\+\_\+pt by using the Super\+LU solver. The resulting matrix factors are stored internally. 
 
-Definition at line 1743 of file linear\+\_\+solver.\+cc.
+Definition at line 1782 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -610,7 +604,7 @@ factorise method for Super\+LU Dist
 
 LU decompose the matrix addressed by matrix\+\_\+pt using the Super\+L\+U\+\_\+\+D\+I\+ST solver. The resulting matrix factors are stored internally. 
 
-Definition at line 1790 of file linear\+\_\+solver.\+cc.
+Definition at line 1827 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -632,7 +626,7 @@ factorise method for Super\+LU (serial)
 
 LU decompose the matrix addressed by matrix\+\_\+pt by using the Super\+LU solver. The resulting matrix factors are stored internally. 
 
-Definition at line 2052 of file linear\+\_\+solver.\+cc.
+Definition at line 2123 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -654,7 +648,7 @@ How much memory do the LU factors take up? In bytes.
 
 How much memory do the LU factors take up? In bytes N\+O\+TE\+: This has been scraped from d\+Query\+Space(...) in dmemory.\+c in external\+\_\+src/oomph\+\_\+superlu\+\_\+4.\+3. 
 
-Definition at line 703 of file linear\+\_\+solver.\+cc.
+Definition at line 748 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -676,7 +670,7 @@ How much memory was allocated by Super\+LU? In bytes.
 
 How much memory was used in total? In bytes N\+O\+TE\+: This has been scraped from d\+Query\+Space(...) in dmemory.\+c in external\+\_\+src/oomph\+\_\+superlu\+\_\+4.\+3. 
 
-Definition at line 731 of file linear\+\_\+solver.\+cc.
+Definition at line 776 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -702,7 +696,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a0fedfb9d9855d0e9
 
 
 
-Definition at line 613 of file linear\+\_\+solver.\+h.
+Definition at line 640 of file linear\+\_\+solver.\+h.
 
 
 
@@ -724,7 +718,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3c66f77db812a9c1
 
 
 
-Definition at line 620 of file linear\+\_\+solver.\+h.
+Definition at line 647 of file linear\+\_\+solver.\+h.
 
 
 
@@ -742,7 +736,7 @@ Broken assignment operator.
 
 
 
-Definition at line 531 of file linear\+\_\+solver.\+h.
+Definition at line 552 of file linear\+\_\+solver.\+h.
 
 
 
@@ -764,7 +758,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line 1695 of file linear\+\_\+solver.\+cc.
+Definition at line 1735 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -790,7 +784,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e
 
 
 
-Definition at line 1718 of file linear\+\_\+solver.\+cc.
+Definition at line 1757 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -812,7 +806,7 @@ Specify the solve type. Either default, serial or distributed. See enum Super\+L
 
 
 
-Definition at line 645 of file linear\+\_\+solver.\+h.
+Definition at line 670 of file linear\+\_\+solver.\+h.
 
 
 
@@ -834,7 +828,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line 1014 of file linear\+\_\+solver.\+cc.
+Definition at line 1056 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -856,7 +850,7 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 759 of file linear\+\_\+solver.\+cc.
+Definition at line 804 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -878,7 +872,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238b
 
 
 
-Definition at line 1485 of file linear\+\_\+solver.\+cc.
+Definition at line 1524 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -900,7 +894,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f61
 
 
 
-Definition at line 1229 of file linear\+\_\+solver.\+cc.
+Definition at line 1271 of file linear\+\_\+solver.\+cc.
 
 
 
@@ -918,7 +912,7 @@ Use the compressed column format in superlu serial.
 
 
 
-Definition at line 659 of file linear\+\_\+solver.\+h.
+Definition at line 686 of file linear\+\_\+solver.\+h.
 
 
 
@@ -936,7 +930,7 @@ Use the compressed row format in superlu serial.
 
 
 
-Definition at line 655 of file linear\+\_\+solver.\+h.
+Definition at line 680 of file linear\+\_\+solver.\+h.
 
 
 
@@ -954,7 +948,7 @@ Calling this method will ensure that when the problem based solve interface is u
 
 
 
-Definition at line 710 of file linear\+\_\+solver.\+h.
+Definition at line 747 of file linear\+\_\+solver.\+h.
 
 
 
@@ -972,7 +966,7 @@ Calling this method will ensure that when the problem based solve interface is u
 
 
 
-Definition at line 697 of file linear\+\_\+solver.\+h.
+Definition at line 734 of file linear\+\_\+solver.\+h.
 
 
 
@@ -993,7 +987,7 @@ If true then Super\+L\+U\+\_\+\+D\+I\+ST is allowed to permute matrix rows and c
 
 
 
-Definition at line 833 of file linear\+\_\+solver.\+h.
+Definition at line 865 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1011,7 +1005,7 @@ Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of t
 
 
 
-Definition at line 841 of file linear\+\_\+solver.\+h.
+Definition at line 873 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1029,7 +1023,7 @@ Flag is true if solve data has been generated for distributed matrix.
 
 
 
-Definition at line 815 of file linear\+\_\+solver.\+h.
+Definition at line 847 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1047,7 +1041,7 @@ Flag is true if solve data has been generated for a global matrix.
 
 
 
-Definition at line 812 of file linear\+\_\+solver.\+h.
+Definition at line 844 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1065,7 +1059,7 @@ Pointer for storage of matrix rows or column indices required by Super\+L\+U\+\_
 
 
 
-Definition at line 848 of file linear\+\_\+solver.\+h.
+Definition at line 880 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1083,7 +1077,7 @@ Info flag for the Super\+LU solver.
 
 
 
-Definition at line 827 of file linear\+\_\+solver.\+h.
+Definition at line 859 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1101,7 +1095,7 @@ Number of columns for the process grid.
 
 
 
-Definition at line 824 of file linear\+\_\+solver.\+h.
+Definition at line 856 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1119,7 +1113,7 @@ Number of rows for the process grid.
 
 
 
-Definition at line 821 of file linear\+\_\+solver.\+h.
+Definition at line 853 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1137,7 +1131,7 @@ Storage for the LU factors and other data required by Super\+LU.
 
 
 
-Definition at line 818 of file linear\+\_\+solver.\+h.
+Definition at line 850 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1155,7 +1149,7 @@ Pointers for storage of matrix column or row starts.
 
 
 
-Definition at line 852 of file linear\+\_\+solver.\+h.
+Definition at line 884 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1173,7 +1167,7 @@ Flag that determines whether the M\+P\+I\+Problem based solve function uses the 
 
 
 
-Definition at line 809 of file linear\+\_\+solver.\+h.
+Definition at line 841 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1191,7 +1185,7 @@ Pointer for storage of the matrix values required by Super\+L\+U\+\_\+\+D\+I\+ST
 
 
 
-Definition at line 844 of file linear\+\_\+solver.\+h.
+Definition at line 876 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1209,7 +1203,7 @@ Set to true to output statistics (false by default).
 
 
 
-Definition at line 760 of file linear\+\_\+solver.\+h.
+Definition at line 794 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1227,7 +1221,7 @@ Jacobian setup time.
 
 
 
-Definition at line 751 of file linear\+\_\+solver.\+h.
+Definition at line 785 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1245,7 +1239,7 @@ Use compressed row version?
 
 
 
-Definition at line 784 of file linear\+\_\+solver.\+h.
+Definition at line 818 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1263,7 +1257,7 @@ Storage for the LU factors as required by Super\+LU.
 
 
 
-Definition at line 772 of file linear\+\_\+solver.\+h.
+Definition at line 806 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1281,7 +1275,7 @@ Info flag for the Super\+LU solver.
 
 
 
-Definition at line 775 of file linear\+\_\+solver.\+h.
+Definition at line 809 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1299,7 +1293,7 @@ The number of unknowns in the linear system.
 
 
 
-Definition at line 778 of file linear\+\_\+solver.\+h.
+Definition at line 812 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1317,7 +1311,7 @@ Sign of the determinant of the matrix.
 
 
 
-Definition at line 781 of file linear\+\_\+solver.\+h.
+Definition at line 815 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1335,7 +1329,7 @@ Solution time.
 
 
 
-Definition at line 754 of file linear\+\_\+solver.\+h.
+Definition at line 788 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1353,7 +1347,7 @@ the solver type. see Super\+L\+U\+\_\+solver\+\_\+type for details.
 
 
 
-Definition at line 763 of file linear\+\_\+solver.\+h.
+Definition at line 797 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1363,15 +1357,21 @@ Referenced by factorise(), get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+fact
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
 \index{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve =false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve\hspace{0.3cm}{\ttfamily [static]}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    \textcolor{keyword}{false}}
+
+\end{DoxyCode}
 
 
 Static flag that determines whether the warning about incorrect distribution of R\+H\+Ss will be printed or not. 
 
 Static warning to suppress warnings about incorrect distribution of R\+HS vector. Default is false 
 
-Definition at line 803 of file linear\+\_\+solver.\+h.
+Definition at line 835 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1389,7 +1389,7 @@ Suppress solve?
 
 
 
-Definition at line 757 of file linear\+\_\+solver.\+h.
+Definition at line 791 of file linear\+\_\+solver.\+h.
 
 
 
@@ -1407,7 +1407,7 @@ boolean flag indicating whether superlu dist is being used
 
 
 
-Definition at line 766 of file linear\+\_\+solver.\+h.
+Definition at line 800 of file linear\+\_\+solver.\+h.
 
 
 

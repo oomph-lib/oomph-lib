@@ -27,7 +27,7 @@ virtual int \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase
 \begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or $<$ 0 if pinned. \end{DoxyCompactList}\item 
 virtual int \& \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a7b4c21107580d63e358ae7469f04399c}{pinned\+\_\+fp\+\_\+pressure\+\_\+eqn}} ()=0
 \begin{DoxyCompactList}\small\item\em Global eqn number of pressure dof that\textquotesingle{}s pinned in pressure adv diff problem. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a4db23eff5a82f7b8478c7f9d21857d0a}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&eqn\+\_\+number\+\_\+backup)=0
+virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a23454a4f135b844b187dbe13c0a3c36f}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&eqn\+\_\+number\+\_\+backup)=0
 \begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a8e896ce593f2dad7d21fade4afabe2c4}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)=0
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
@@ -41,7 +41,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBas
 \doxysubsection{Detailed Description}
 Template-\/free base class for Navier-\/\+Stokes equations to avoid casting problems 
 
-Definition at line 321 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 305 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -58,7 +58,7 @@ Constructor (empty)
 
 
 
-Definition at line 329 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 311 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a43ed4e136aa68a4ea6cf9bef6347b10d}\label{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a43ed4e136aa68a4ea6cf9bef6347b10d}} 
 \index{oomph::TemplateFreeNavierStokesEquationsBase@{oomph::TemplateFreeNavierStokesEquationsBase}!````~TemplateFreeNavierStokesEquationsBase@{$\sim$TemplateFreeNavierStokesEquationsBase}}
@@ -72,7 +72,7 @@ Virtual destructor (empty)
 
 
 
-Definition at line 332 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line 314 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -191,11 +191,11 @@ Return the index at which the pressure is stored if it is stored at the nodes. I
 
 Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a86f85131d3383d74ab40dfdb2213d8d5}{oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a3694d3e2f09259cfda71547259f031ed}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_abbf584f29e53f15d5b0b263882138eac}{oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a4db23eff5a82f7b8478c7f9d21857d0a}\label{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a4db23eff5a82f7b8478c7f9d21857d0a}} 
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a23454a4f135b844b187dbe13c0a3c36f}\label{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a23454a4f135b844b187dbe13c0a3c36f}} 
 \index{oomph::TemplateFreeNavierStokesEquationsBase@{oomph::TemplateFreeNavierStokesEquationsBase}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
 \index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::TemplateFreeNavierStokesEquationsBase@{oomph::TemplateFreeNavierStokesEquationsBase}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -203,7 +203,7 @@ Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{class
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_ae3a5de7bed7c884731e3bb2afc437758}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_abffb5da1c9d2f70161da01622cc1d11b}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
 
 
 

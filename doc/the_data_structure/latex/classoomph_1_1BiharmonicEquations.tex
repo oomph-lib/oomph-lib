@@ -32,8 +32,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aebe4e72a90f24
 virtual void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a38a2cd656bff448e982512af9b85276f}{get\+\_\+source}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
 \begin{DoxyCompactList}\small\item\em gets source strength \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a04d86cdba2132d715ecc6d1a95e7afa6}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
-\begin{DoxyCompactList}\small\item\em wrapper function, adds contribution to residual ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em wrapper function, adds contribution to residual \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ab96faece91161d22770aba9c3e6747f1}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residual, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em wrapper function, adds contribution to residual and generic \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a9935b51b6c635f457d0fa2c}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
@@ -64,7 +63,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ade58315d59e79499aec
 \begin{DoxyCompactList}\small\item\em return number of second derivate degrees of freedom \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_abf1fbd964ed367a0bf24854ee76aa8f4}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into (for block preconditioning) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_af36d72e588624eccb8956a3d0d4959b2}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ade46fd6e737d18c70d0a8e4829d9208b}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) (for block preconditioning) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_adc6fb5197bfb8635b43e3bdfcc91d676}{source\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access functions for the source function pointer. \end{DoxyCompactList}\item 
@@ -74,8 +73,7 @@ void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_af36d72e588624eccb8956a3
 \begin{DoxyCompactItemize}
 \item 
 virtual void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a63bf0dbf59b9355563e71cf0b9eff2ee}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+biharmonic}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned J\+F\+L\+AG)
-\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if J\+F\+L\+AG=and/or element Jacobian matrix ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if J\+F\+L\+AG=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -86,7 +84,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a63bf0dbf59b9355
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a43f2c15a2438a7710738a3f6faca6e61}{d2\+\_\+dof}} \mbox{[}$\,$\mbox{]} =\{1,3,6\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a43f2c15a2438a7710738a3f6faca6e61}{d2\+\_\+dof}} \mbox{[}$\,$\mbox{]} = \{1, 3, 6\}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -97,7 +95,7 @@ class oomph\+::\+Biharmonic\+Equations$<$ D\+I\+M $>$}
 
 Biharmonic Equation Class -\/ contains the equations. 
 
-Definition at line 57 of file biharmonic\+\_\+elements.\+h.
+Definition at line 55 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -115,7 +113,7 @@ source function type definition
 
 
 
-Definition at line 63 of file biharmonic\+\_\+elements.\+h.
+Definition at line 59 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -133,7 +131,7 @@ Constructor (must initialise the Source\+\_\+fct\+\_\+pt to null)
 
 
 
-Definition at line 67 of file biharmonic\+\_\+elements.\+h.
+Definition at line 63 of file biharmonic\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicEquations_a8e0024f4f9cd62f63515cd24f3c6af1e}\label{classoomph_1_1BiharmonicEquations_a8e0024f4f9cd62f63515cd24f3c6af1e}} 
 \index{oomph::BiharmonicEquations$<$ DIM $>$@{oomph::BiharmonicEquations$<$ DIM $>$}!````~BiharmonicEquations@{$\sim$BiharmonicEquations}}
@@ -144,7 +142,7 @@ Definition at line 67 of file biharmonic\+\_\+elements.\+h.
 
 
 
-Definition at line 71 of file biharmonic\+\_\+elements.\+h.
+Definition at line 66 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -201,7 +199,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a0b1d07f8300af
 
 
 
-Definition at line 365 of file biharmonic\+\_\+elements.\+h.
+Definition at line 363 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -224,7 +222,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 102 of file biharmonic\+\_\+elements.\+h.
+Definition at line 104 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -239,8 +237,7 @@ void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{oomph\+::\+Biharmonic\+
 
 
 
-wrapper function, adds contribution to residual ~\newline
- 
+wrapper function, adds contribution to residual 
 
 
 
@@ -248,7 +245,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 91 of file biharmonic\+\_\+elements.\+h.
+Definition at line 93 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -263,12 +260,11 @@ void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{oomph\+::\+Biharmonic\+
 
 
 
-Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if J\+F\+L\+AG=and/or element Jacobian matrix ~\newline
- 
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if J\+F\+L\+AG=and/or element Jacobian matrix. 
 
 
 
-Definition at line 42 of file biharmonic\+\_\+elements.\+cc.
+Definition at line 41 of file biharmonic\+\_\+elements.\+cc.
 
 
 
@@ -291,18 +287,18 @@ return number of second derivate degrees of freedom
 
 
 
-Definition at line 418 of file biharmonic\+\_\+elements.\+h.
+Definition at line 428 of file biharmonic\+\_\+elements.\+h.
 
 
 
 References oomph\+::\+Biharmonic\+Equations$<$ D\+I\+M $>$\+::d2\+\_\+dof.
 
-\mbox{\Hypertarget{classoomph_1_1BiharmonicEquations_af36d72e588624eccb8956a3d0d4959b2}\label{classoomph_1_1BiharmonicEquations_af36d72e588624eccb8956a3d0d4959b2}} 
+\mbox{\Hypertarget{classoomph_1_1BiharmonicEquations_ade46fd6e737d18c70d0a8e4829d9208b}\label{classoomph_1_1BiharmonicEquations_ade46fd6e737d18c70d0a8e4829d9208b}} 
 \index{oomph::BiharmonicEquations$<$ DIM $>$@{oomph::BiharmonicEquations$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::BiharmonicEquations$<$ DIM $>$@{oomph::BiharmonicEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{oomph\+::\+Biharmonic\+Equations}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{oomph\+::\+Biharmonic\+Equations}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -310,11 +306,11 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 438 of file biharmonic\+\_\+elements.\+h.
+Definition at line 448 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -333,7 +329,7 @@ gets source strength
 
 
 
-Definition at line 79 of file biharmonic\+\_\+elements.\+h.
+Definition at line 74 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -352,7 +348,7 @@ output with nplot points
 
 
 
-Definition at line 190 of file biharmonic\+\_\+elements.\+h.
+Definition at line 193 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -375,7 +371,7 @@ calculates interpolated u at s
 
 
 
-Definition at line 371 of file biharmonic\+\_\+elements.\+h.
+Definition at line 373 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -402,7 +398,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 426 of file biharmonic\+\_\+elements.\+h.
+Definition at line 436 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -429,7 +425,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a405526be1bc18
 
 
 
-Definition at line 146 of file biharmonic\+\_\+elements.\+h.
+Definition at line 148 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -456,7 +452,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a6466cb310679b
 
 
 
-Definition at line 150 of file biharmonic\+\_\+elements.\+h.
+Definition at line 154 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -510,7 +506,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae21ebdb90932f
 
 
 
-Definition at line 111 of file biharmonic\+\_\+elements.\+h.
+Definition at line 113 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -541,7 +537,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ad8a8d7e9f5344
 
 
 
-Definition at line 276 of file biharmonic\+\_\+elements.\+h.
+Definition at line 273 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -591,7 +587,7 @@ output fluid velocity field
 
 
 
-Definition at line 155 of file biharmonic\+\_\+elements.\+h.
+Definition at line 161 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -618,7 +614,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line 403 of file biharmonic\+\_\+elements.\+h.
+Definition at line 405 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -637,7 +633,7 @@ Access functions for the source function pointer.
 
 
 
-Definition at line 482 of file biharmonic\+\_\+elements.\+h.
+Definition at line 485 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -660,7 +656,7 @@ Access functions for the source function pointers (const version)
 
 
 
-Definition at line 485 of file biharmonic\+\_\+elements.\+h.
+Definition at line 491 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -689,11 +685,11 @@ Referenced by oomph\+::\+Biharmonic\+Equations$<$ D\+I\+M $>$\+::interpolated\+\
 \index{d2\_dof@{d2\_dof}!oomph::BiharmonicEquations$<$ DIM $>$@{oomph::BiharmonicEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{d2\_dof}{d2\_dof}}
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-const unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{oomph\+::\+Biharmonic\+Equations}}$<$ D\+IM $>$\+::d2\+\_\+dof =\{1,3,6\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+const unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{oomph\+::\+Biharmonic\+Equations}}$<$ D\+IM $>$\+::d2\+\_\+dof = \{1, 3, 6\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
-Definition at line 510 of file biharmonic\+\_\+elements.\+h.
+Definition at line 513 of file biharmonic\+\_\+elements.\+h.
 
 
 
@@ -712,7 +708,7 @@ Array to hold local eqn numbers\+: Local\+\_\+eqn\mbox{[}n\mbox{]} (=-\/1 for BC
 
 
 
-Definition at line 504 of file biharmonic\+\_\+elements.\+h.
+Definition at line 509 of file biharmonic\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}\label{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}} 
 \index{oomph::BiharmonicEquations$<$ DIM $>$@{oomph::BiharmonicEquations$<$ DIM $>$}!Source\_fct\_pt@{Source\_fct\_pt}}
@@ -727,7 +723,7 @@ Pointer to source function\+:
 
 
 
-Definition at line 500 of file biharmonic\+\_\+elements.\+h.
+Definition at line 505 of file biharmonic\+\_\+elements.\+h.
 
 
 

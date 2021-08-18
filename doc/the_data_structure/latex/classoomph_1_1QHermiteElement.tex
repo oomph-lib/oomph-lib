@@ -24,12 +24,11 @@ bool \mbox{\hyperlink{classoomph_1_1QHermiteElement_a29a36f3b1e8f07d4d7b5e14aeb7
 void \mbox{\hyperlink{classoomph_1_1QHermiteElement_a2c0eb92b2d66f0c67abebf96bb7922fc}{move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
 \begin{DoxyCompactList}\small\item\em Adjust local coordinates so that they\textquotesingle{}re located inside the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHermiteElement_a0e5d50fb86a7eb4c8a30ca8392d5a216}{shape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
-\begin{DoxyCompactList}\small\item\em Function to calculate the geometric shape functions at local coordinate s. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classoomph_1_1QHermiteElement_a8b44fee3bf2a9d1b7587b56e434b594e}{dshape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids) const
 \begin{DoxyCompactList}\small\item\em Function to compute the geometric shape functions and derivatives w.\+r.\+t. local coordinates at local coordinate s. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHermiteElement_aef2bb1abc43f207edd57f6e38cbbe297}{d2shape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psids) const
-\begin{DoxyCompactList}\small\item\em Function to compute the geometric shape functions and also first and second derivatives wrt local coordinates at local coordinate s. Numbering\+: {\bfseries{1D\+:}} d2psids(i,0) = $ d^2 \psi_j / d s^2 $ {\bfseries{2D\+:}} d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ {\bfseries{3D\+:}} d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_2^2 $ d2psids(i,3) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ d2psids(i,4) = $ \partial^2 \psi_j / \partial s_0 \partial s_2 $ d2psids(i,5) = $ \partial^2 \psi_j / \partial s_1 \partial s_2 $ ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the geometric shape functions and also first and second derivatives wrt local coordinates at local coordinate s. Numbering\+: {\bfseries{1D\+:}} d2psids(i,0) = $ d^2 \psi_j / d s^2 $ {\bfseries{2D\+:}} d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ {\bfseries{3D\+:}} d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_2^2 $ d2psids(i,3) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ d2psids(i,4) = $ \partial^2 \psi_j / \partial s_0 \partial s_2 $ d2psids(i,5) = $ \partial^2 \psi_j / \partial s_1 \partial s_2 $. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QHermiteElement_a1b5cb1c9b780010ae16a5107d811ce03}{invert\+\_\+jacobian\+\_\+mapping}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inverse\+\_\+jacobian) const
 \begin{DoxyCompactList}\small\item\em Overload the template-\/free interface for the calculation of the inverse jacobian. The element dimension must be passed to the function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHermiteElement_a0f000889085286deef3b273043522834}{transform\+\_\+second\+\_\+derivatives}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inverse\+\_\+jacobian, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian2, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dbasis, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2basis) const
@@ -120,7 +119,7 @@ class oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}
 
 General \mbox{\hyperlink{classoomph_1_1QHermiteElement}{Q\+Hermite\+Element}} class. Local coordinates are not assumed to be aligned with the global coordinates so the Jacobian of the mapping between local and global coordinates is a full matrix. For cases where the coordinates are aligned, you should use the derived class, \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+Q\+Hermite\+Element}}, which uses a simplified mapping that makes the evaluation of derivatives of the shape functions much cheaper. 
 
-Definition at line 94 of file hermite\+\_\+elements.\+h.
+Definition at line 91 of file hermite\+\_\+elements.\+h.
 
 
 
@@ -138,7 +137,7 @@ Constructor.
 
 
 
-Definition at line 108 of file hermite\+\_\+elements.\+h.
+Definition at line 104 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a6dce1c70656dfcd8da365462b959e709}\label{classoomph_1_1QHermiteElement_a6dce1c70656dfcd8da365462b959e709}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!QHermiteElement@{QHermiteElement}}
@@ -153,7 +152,7 @@ Broken copy constructor.
 
 
 
-Definition at line 125 of file hermite\+\_\+elements.\+h.
+Definition at line 120 of file hermite\+\_\+elements.\+h.
 
 
 
@@ -174,7 +173,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a4e81780865
 
 
 
-Definition at line 285 of file hermite\+\_\+elements.\+cc.
+Definition at line 278 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a796c8d180b039c5e753b373ba7aa720a}\label{classoomph_1_1QHermiteElement_a796c8d180b039c5e753b373ba7aa720a}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!build\_face\_element@{build\_face\_element}}
@@ -215,7 +214,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a4e81780865
 
 
 
-Definition at line 938 of file hermite\+\_\+elements.\+cc.
+Definition at line 913 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a115b335650d42b874155e426ede84e94}\label{classoomph_1_1QHermiteElement_a115b335650d42b874155e426ede84e94}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!d2shape\_local@{d2shape\_local}}
@@ -223,14 +222,13 @@ Definition at line 938 of file hermite\+\_\+elements.\+cc.
 \doxysubsubsection{\texorpdfstring{d2shape\_local()}{d2shape\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1QHermiteElement}{oomph\+::\+Q\+Hermite\+Element}}$<$ 1 $>$\+::d2shape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{d2psids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
-Derivatives and second derivatives of shape functions for specific ~\newline
- Q\+Hermite\+Element$<$1$>$ d2psids(i,0) = $ d^2 \psi_j / d s^2 $ 
+Derivatives and second derivatives of shape functions for specific Q\+Hermite\+Element$<$1$>$ d2psids(i,0) = $ d^2 \psi_j / d s^2 $ 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da07b9d35da9debd0cd7}{oomph\+::\+Finite\+Element}}.
 
 
 
-Definition at line 101 of file hermite\+\_\+elements.\+cc.
+Definition at line 98 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_aef2bb1abc43f207edd57f6e38cbbe297}\label{classoomph_1_1QHermiteElement_aef2bb1abc43f207edd57f6e38cbbe297}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!d2shape\_local@{d2shape\_local}}
@@ -241,8 +239,7 @@ void \mbox{\hyperlink{classoomph_1_1QHermiteElement}{oomph\+::\+Q\+Hermite\+Elem
 
 
 
-Function to compute the geometric shape functions and also first and second derivatives wrt local coordinates at local coordinate s. Numbering\+: {\bfseries{1D\+:}} d2psids(i,0) = $ d^2 \psi_j / d s^2 $ {\bfseries{2D\+:}} d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ {\bfseries{3D\+:}} d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_2^2 $ d2psids(i,3) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ d2psids(i,4) = $ \partial^2 \psi_j / \partial s_0 \partial s_2 $ d2psids(i,5) = $ \partial^2 \psi_j / \partial s_1 \partial s_2 $ ~\newline
- 
+Function to compute the geometric shape functions and also first and second derivatives wrt local coordinates at local coordinate s. Numbering\+: {\bfseries{1D\+:}} d2psids(i,0) = $ d^2 \psi_j / d s^2 $ {\bfseries{2D\+:}} d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ {\bfseries{3D\+:}} d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_2^2 $ d2psids(i,3) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ d2psids(i,4) = $ \partial^2 \psi_j / \partial s_0 \partial s_2 $ d2psids(i,5) = $ \partial^2 \psi_j / \partial s_1 \partial s_2 $. 
 
 
 
@@ -254,14 +251,13 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da0
 \doxysubsubsection{\texorpdfstring{d2shape\_local()}{d2shape\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1QHermiteElement}{oomph\+::\+Q\+Hermite\+Element}}$<$ 2 $>$\+::d2shape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{d2psids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
-Second derivatives of the shape functions wrt local coordinates. d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ ~\newline
- 
+Second derivatives of the shape functions wrt local coordinates. d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $ 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da07b9d35da9debd0cd7}{oomph\+::\+Finite\+Element}}.
 
 
 
-Definition at line 552 of file hermite\+\_\+elements.\+cc.
+Definition at line 543 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_abeced659516958f2197856c3b2ccc910}\label{classoomph_1_1QHermiteElement_abeced659516958f2197856c3b2ccc910}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!dshape\_local@{dshape\_local}}
@@ -279,7 +275,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line 73 of file hermite\+\_\+elements.\+cc.
+Definition at line 70 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a8b44fee3bf2a9d1b7587b56e434b594e}\label{classoomph_1_1QHermiteElement_a8b44fee3bf2a9d1b7587b56e434b594e}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!dshape\_local@{dshape\_local}}
@@ -316,7 +312,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line 434 of file hermite\+\_\+elements.\+cc.
+Definition at line 426 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a176a00e3ea5097fc1eacfaf82f874e3e}\label{classoomph_1_1QHermiteElement_a176a00e3ea5097fc1eacfaf82f874e3e}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!get\_s\_plot@{get\_s\_plot}}
@@ -330,7 +326,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb20
 
 
 
-Definition at line 329 of file hermite\+\_\+elements.\+h.
+Definition at line 335 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a352698e9c7294cacd358cb850a8d6096}\label{classoomph_1_1QHermiteElement_a352698e9c7294cacd358cb850a8d6096}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!get\_s\_plot@{get\_s\_plot}}
@@ -344,7 +340,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb20
 
 
 
-Definition at line 379 of file hermite\+\_\+elements.\+h.
+Definition at line 387 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a2b275f67da74572fb761d067bfaa71d1}\label{classoomph_1_1QHermiteElement_a2b275f67da74572fb761d067bfaa71d1}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!get\_s\_plot@{get\_s\_plot}}
@@ -382,7 +378,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a07bdc47a91a
 
 
 
-Definition at line 198 of file hermite\+\_\+elements.\+h.
+Definition at line 196 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a29a36f3b1e8f07d4d7b5e14aeb79c422}\label{classoomph_1_1QHermiteElement_a29a36f3b1e8f07d4d7b5e14aeb79c422}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!local\_coord\_is\_valid@{local\_coord\_is\_valid}}
@@ -401,7 +397,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9ae98c5b577d833
 
 
 
-Definition at line 138 of file hermite\+\_\+elements.\+h.
+Definition at line 133 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a40d6a579987b39c4427f88745de83c89}\label{classoomph_1_1QHermiteElement_a40d6a579987b39c4427f88745de83c89}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
@@ -420,7 +416,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22bc4ee35e4f948
 
 
 
-Definition at line 226 of file hermite\+\_\+elements.\+h.
+Definition at line 230 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a7265d98ba824ff594c7eae3b14ebcf46}\label{classoomph_1_1QHermiteElement_a7265d98ba824ff594c7eae3b14ebcf46}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!local\_fraction\_of\_node@{local\_fraction\_of\_node}}
@@ -439,7 +435,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f646
 
 
 
-Definition at line 243 of file hermite\+\_\+elements.\+h.
+Definition at line 247 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a08477703be4ee27e1883f320c098298c}\label{classoomph_1_1QHermiteElement_a08477703be4ee27e1883f320c098298c}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!local\_one\_d\_fraction\_of\_node@{local\_one\_d\_fraction\_of\_node}}
@@ -458,7 +454,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adb8ec7d2ceda375
 
 
 
-Definition at line 259 of file hermite\+\_\+elements.\+h.
+Definition at line 263 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a2c0eb92b2d66f0c67abebf96bb7922fc}\label{classoomph_1_1QHermiteElement_a2c0eb92b2d66f0c67abebf96bb7922fc}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!move\_local\_coord\_back\_into\_element@{move\_local\_coord\_back\_into\_element}}
@@ -477,7 +473,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa042b56813a8dd8
 
 
 
-Definition at line 155 of file hermite\+\_\+elements.\+h.
+Definition at line 149 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a30b57c285bdbe9687cb5cc4771393363}\label{classoomph_1_1QHermiteElement_a30b57c285bdbe9687cb5cc4771393363}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!nnode\_1d@{nnode\_1d}}
@@ -496,7 +492,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab65c7a94dda80c1
 
 
 
-Definition at line 268 of file hermite\+\_\+elements.\+h.
+Definition at line 271 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a4afca94e16e9a63c4e2a0fa4ee2853db}\label{classoomph_1_1QHermiteElement_a4afca94e16e9a63c4e2a0fa4ee2853db}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!nplot\_points@{nplot\_points}}
@@ -521,7 +517,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8
 
 
 
-Definition at line 370 of file hermite\+\_\+elements.\+h.
+Definition at line 376 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a96f20eb759a1225d81242348f9623c19}\label{classoomph_1_1QHermiteElement_a96f20eb759a1225d81242348f9623c19}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!nplot\_points@{nplot\_points}}
@@ -535,7 +531,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8
 
 
 
-Definition at line 429 of file hermite\+\_\+elements.\+h.
+Definition at line 435 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a2c631218863046da393b0a137ccecee9}\label{classoomph_1_1QHermiteElement_a2c631218863046da393b0a137ccecee9}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!operator=@{operator=}}
@@ -550,7 +546,7 @@ Broken assignment operator.
 
 
 
-Definition at line 131 of file hermite\+\_\+elements.\+h.
+Definition at line 126 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a1bea8b1aef369b6f7dabcc2c1229a2b9}\label{classoomph_1_1QHermiteElement_a1bea8b1aef369b6f7dabcc2c1229a2b9}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -572,7 +568,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca93
 
 
 
-Definition at line 209 of file hermite\+\_\+elements.\+cc.
+Definition at line 203 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_ae69bd9e9d2e2e90ff3116995483b87dd}\label{classoomph_1_1QHermiteElement_ae69bd9e9d2e2e90ff3116995483b87dd}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -613,7 +609,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca93
 
 
 
-Definition at line 846 of file hermite\+\_\+elements.\+cc.
+Definition at line 829 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a21e46c3179cda3c9c7e2832208144d65}\label{classoomph_1_1QHermiteElement_a21e46c3179cda3c9c7e2832208144d65}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -635,7 +631,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7
 
 
 
-Definition at line 254 of file hermite\+\_\+elements.\+cc.
+Definition at line 248 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a12a4346480e45d82cbfca1f324cd4878}\label{classoomph_1_1QHermiteElement_a12a4346480e45d82cbfca1f324cd4878}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -676,7 +672,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7
 
 
 
-Definition at line 895 of file hermite\+\_\+elements.\+cc.
+Definition at line 878 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_aa3db89457e9b7cd73ad2c3672f15f6af}\label{classoomph_1_1QHermiteElement_aa3db89457e9b7cd73ad2c3672f15f6af}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -698,7 +694,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b5
 
 
 
-Definition at line 132 of file hermite\+\_\+elements.\+cc.
+Definition at line 128 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_aed2b691a0b8effb35840561b5112a3af}\label{classoomph_1_1QHermiteElement_aed2b691a0b8effb35840561b5112a3af}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -743,7 +739,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b5
 
 
 
-Definition at line 755 of file hermite\+\_\+elements.\+cc.
+Definition at line 745 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a3a8586cf4b69353730e1b99e77d81c6d}\label{classoomph_1_1QHermiteElement_a3a8586cf4b69353730e1b99e77d81c6d}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -765,7 +761,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26
 
 
 
-Definition at line 176 of file hermite\+\_\+elements.\+cc.
+Definition at line 172 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a8053b3b58ea769a5e7be72982d594c0d}\label{classoomph_1_1QHermiteElement_a8053b3b58ea769a5e7be72982d594c0d}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -806,7 +802,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26
 
 
 
-Definition at line 804 of file hermite\+\_\+elements.\+cc.
+Definition at line 794 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a9f603f92a0aae12188dcb6bcf105b8b9}\label{classoomph_1_1QHermiteElement_a9f603f92a0aae12188dcb6bcf105b8b9}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!s\_max@{s\_max}}
@@ -825,11 +821,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a64adbe935692713
 
 
 
-Definition at line 222 of file hermite\+\_\+elements.\+h.
+Definition at line 223 of file hermite\+\_\+elements.\+h.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::local\+\_\+coord\+\_\+is\+\_\+valid(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), and oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::local\+\_\+coord\+\_\+is\+\_\+valid(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), and oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a913af787533d6c0fae4269c601ac62af}\label{classoomph_1_1QHermiteElement_a913af787533d6c0fae4269c601ac62af}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!s\_min@{s\_min}}
@@ -848,11 +844,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a35f0803115b68bd
 
 
 
-Definition at line 219 of file hermite\+\_\+elements.\+h.
+Definition at line 217 of file hermite\+\_\+elements.\+h.
 
 
 
-Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::local\+\_\+coord\+\_\+is\+\_\+valid(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), and oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element().
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::local\+\_\+coord\+\_\+is\+\_\+valid(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), and oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_ab389bd7cae8a81e022084955b5e5f12b}\label{classoomph_1_1QHermiteElement_ab389bd7cae8a81e022084955b5e5f12b}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!shape@{shape}}
@@ -870,7 +866,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line 50 of file hermite\+\_\+elements.\+cc.
+Definition at line 48 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a0e5d50fb86a7eb4c8a30ca8392d5a216}\label{classoomph_1_1QHermiteElement_a0e5d50fb86a7eb4c8a30ca8392d5a216}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!shape@{shape}}
@@ -879,11 +875,7 @@ Definition at line 50 of file hermite\+\_\+elements.\+cc.
 {\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
 void \mbox{\hyperlink{classoomph_1_1QHermiteElement}{oomph\+::\+Q\+Hermite\+Element}}$<$ D\+IM $>$\+::shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
-
-
-Function to calculate the geometric shape functions at local coordinate s. 
-
-
+Function to calculate the geometric shape functions at local coordinate s 
 
 Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element}}.
 
@@ -911,7 +903,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line 378 of file hermite\+\_\+elements.\+cc.
+Definition at line 371 of file hermite\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a29a26af721af282e5c03f93a0005ce5f}\label{classoomph_1_1QHermiteElement_a29a26af721af282e5c03f93a0005ce5f}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!tecplot\_zone\_string@{tecplot\_zone\_string}}
@@ -940,7 +932,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e
 
 
 
-Definition at line 358 of file hermite\+\_\+elements.\+h.
+Definition at line 363 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_ab31005ae86142a1ea5c9d119994ef697}\label{classoomph_1_1QHermiteElement_ab31005ae86142a1ea5c9d119994ef697}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!tecplot\_zone\_string@{tecplot\_zone\_string}}
@@ -954,7 +946,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e
 
 
 
-Definition at line 416 of file hermite\+\_\+elements.\+h.
+Definition at line 422 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a0f000889085286deef3b273043522834}\label{classoomph_1_1QHermiteElement_a0f000889085286deef3b273043522834}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!transform\_second\_derivatives@{transform\_second\_derivatives}}
@@ -995,7 +987,7 @@ Default integration rule\+: Gaussian integration of same \textquotesingle{}order
 
 Assign the static Default\+\_\+integration\+\_\+scheme. 
 
-Definition at line 103 of file hermite\+\_\+elements.\+h.
+Definition at line 100 of file hermite\+\_\+elements.\+h.
 
 
 

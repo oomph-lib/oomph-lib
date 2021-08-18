@@ -50,8 +50,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_a49a851713b2d274
 virtual void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_aedb2b90914f244cd86b2565a658cb9eb}{d2test\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&phi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dphids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2phids) const
 \item 
 void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_a5b3e87cecd6887bfc7bcae8f52ebe9e4}{basis\+\_\+at\+\_\+knot\+\_\+straight}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
-\begin{DoxyCompactList}\small\item\em Return the c1-\/shape function associated with a straight-\/sided ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the c1-\/shape function associated with a straight-\/sided boundary stored at the ipt-\/th integration point. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_a74fedb14f6c859fdc0d0c37d77f63963}{dbasis\+\_\+local\+\_\+at\+\_\+knot\+\_\+straight}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids) const
 \begin{DoxyCompactList}\small\item\em Return the c1-\/shape function associated with a straight-\/sided boundary and its derivatives w.\+r.\+t. the global coordinates at the ipt-\/th integration point. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_a103822347941f4ac149d86066ca121a1}{d2basis\+\_\+local\+\_\+at\+\_\+knot\+\_\+straight}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psids) const
@@ -63,7 +62,7 @@ void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_a834ee576efd64a3b9f70f6b
 void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_a3062f4ef25e52d39a9b9ced665a361d0}{d2basis\+\_\+local\+\_\+at\+\_\+knot\+\_\+curve}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psids) const
 \item 
 void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_a8f49d1ed702baf3693960c5d278d1495}{basis\+\_\+c0\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
-\begin{DoxyCompactList}\small\item\em Return the c0-\/shape function stored at the ipt-\/th integration. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the c0-\/shape function stored at the ipt-\/th integration point. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_a3c986f9ab0c04b4d7a8ca2ae39c37902}{dbasis\+\_\+c0\+\_\+local\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids) const
 \begin{DoxyCompactList}\small\item\em Return the c0-\/shape function and its derivatives w.\+r.\+t. the local coordinates at the ipt-\/th integration point. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase_a77dd032b44618de5e12187e88a1c7007}{d2basis\+\_\+c0\+\_\+local\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psids) const
@@ -123,7 +122,7 @@ class oomph\+::\+C1\+Curved\+Element\+Base$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}
 
 Empty base class for C1\+Curvedelements (created so that we can use dynamic\+\_\+cast$<$$>$() to figure out if a an element is a C1\+Curvedelement). This element is sup-\/parametric Note that this type of element carries three kinds of shape functions shape\+\_\+straight \+: denotes C1-\/shape functions for straight-\/edged triangle shape\+\_\+curve \+: denotes C1-\/shape functions for curve-\/edged triangle shape\+\_\+geom \+: denotes C0-\/shape functions for geometry 
 
-Definition at line 3900 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5857 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -141,7 +140,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1FiniteElemen
 
 
 
-Definition at line 3904 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5861 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -159,7 +158,7 @@ Return the c1-\/shape function associated with a curvilinear boundary stored at 
 
 
 
-Definition at line 4049 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6039 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -174,12 +173,11 @@ void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase}{oomph\+::\+C1\+Curved\+
 
 
 
-Return the c1-\/shape function associated with a straight-\/sided ~\newline
- 
+Return the c1-\/shape function associated with a straight-\/sided boundary stored at the ipt-\/th integration point. 
 
-boundary stored at the ipt-\/th integration point. 
 
-Definition at line 3993 of file Subparametric\+\_\+\+Telements.\+h.
+
+Definition at line 5974 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -198,7 +196,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3959 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5936 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -213,11 +211,11 @@ void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase}{oomph\+::\+C1\+Curved\+
 
 
 
-Return the c0-\/shape function stored at the ipt-\/th integration. 
+Return the c0-\/shape function stored at the ipt-\/th integration point. 
 
-point. 
 
-Definition at line 4103 of file Subparametric\+\_\+\+Telements.\+h.
+
+Definition at line 6104 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -236,7 +234,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3945 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5920 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -255,7 +253,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3913 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5879 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -274,7 +272,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3909 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5872 of file Subparametric\+\_\+\+Telements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1C1CurvedElementBase_ad4a034b3edc770df5b37cf8a15595fd8}\label{classoomph_1_1C1CurvedElementBase_ad4a034b3edc770df5b37cf8a15595fd8}} 
 \index{oomph::C1CurvedElementBase$<$ NNODE\_1D $>$@{oomph::C1CurvedElementBase$<$ NNODE\_1D $>$}!d2basis\_c0\_eulerian@{d2basis\_c0\_eulerian}}
@@ -289,7 +287,7 @@ Compute the c0-\/shape functions and also the first and the second derivatives w
 
 
 
-Definition at line 4583 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6631 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -308,7 +306,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3967 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5945 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -325,7 +323,7 @@ Calculate the c0-\/shape function and its first and second derivatives w.\+r.\+t
 ~\newline
  Numbering\+: 
 
-Definition at line 4137 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6145 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -344,7 +342,7 @@ Compute the cuved-\/element shape functions and also first and second derivative
 
 
 
-Definition at line 4660 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6711 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -365,7 +363,7 @@ Calculate the c1-\/shape function associated with a curvilinear boundary and its
 ~\newline
  Numbering\+: 
 
-Definition at line 4085 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6082 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -382,7 +380,7 @@ Calculate the c1-\/shape function associated with a straight-\/sided boundary an
 ~\newline
  Numbering\+: 
 
-Definition at line 4030 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6017 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -405,7 +403,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3953 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5929 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -424,7 +422,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3921 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5888 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -443,7 +441,7 @@ Compute the c1-\/shape functions that associated with the straight-\/ boundary e
 
 
 
-Definition at line 4306 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6346 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -460,7 +458,7 @@ Calculate the geometric shape function and its first and second derivatives w.\+
 ~\newline
  Numbering\+: 
 
-Definition at line 4191 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6211 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -483,7 +481,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3936 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5910 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -502,7 +500,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3982 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5962 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -519,7 +517,7 @@ Calculate the test function and its first and second derivatives w.\+r.\+t. loca
 ~\newline
  Numbering\+: 
 
-Definition at line 4244 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6277 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -542,7 +540,7 @@ Compute the c0-\/shape functions and also first derivatives w.\+r.\+t. global co
 
 
 
-Definition at line 4547 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6594 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -565,7 +563,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3963 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5939 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -584,7 +582,7 @@ Return the c0-\/shape function and its derivatives w.\+r.\+t. the local coordina
 
 
 
-Definition at line 4119 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6123 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -603,7 +601,7 @@ Compute the curved-\/element shape functions and also first derivatives w.\+r.\+
 
 
 
-Definition at line 4625 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6675 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -618,7 +616,7 @@ void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase}{oomph\+::\+C1\+Curved\+
 
 Return the c1-\/shape function associated with a curvilinear boundary and its derivatives w.\+r.\+t. the local coordinates at the ipt-\/th integration point. 
 
-Definition at line 4066 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6059 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -637,7 +635,7 @@ Return the c1-\/shape function associated with a straight-\/sided boundary and i
 
 
 
-Definition at line 4010 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5994 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -656,7 +654,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3949 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5923 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -675,7 +673,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3917 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5882 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -692,7 +690,7 @@ Calculate the shape function and its first and second derivatives w.\+r.\+t. loc
 ~\newline
  Numbering\+: 
 
-Definition at line 4263 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6300 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -711,7 +709,7 @@ Return the geometric shape function and its derivatives w.\+r.\+t. the local coo
 
 
 
-Definition at line 4171 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6186 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -734,7 +732,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3931 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5902 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -753,7 +751,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3978 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5956 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -772,7 +770,7 @@ Return the test function and its derivatives w.\+r.\+t. the local coordinates at
 
 
 
-Definition at line 4226 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6255 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -791,7 +789,7 @@ void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase}{oomph\+::\+C1\+Curved\+
 
 Return raw nodal equations for nodes specified on the curved triangle This function will be employed for the post-\/permutation as the nodal values defined on the element doesn\textquotesingle{}t match with the defined shape functions 
 
-Definition at line 4772 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6826 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -810,7 +808,7 @@ Return raw nodal value for nodes specified on the reference triangle.
 
 
 
-Definition at line 4698 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6752 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -833,7 +831,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3905 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5862 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -848,7 +846,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase}{oomph\+::\+C1\+Curv
 
 
 
-Definition at line 4515 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6562 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -871,7 +869,7 @@ Calculate the Jacobian of the mapping between local and global coordinates at th
 
 
 
-Definition at line 4437 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6481 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -890,7 +888,7 @@ Calculate the mapping from local to Eulerian coordinates, given the derivatives 
 
 
 
-Definition at line 4350 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6391 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -909,7 +907,7 @@ virtual double \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase}{oomph\+::\+C1
 
 
 
-Definition at line 4362 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6406 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -924,7 +922,7 @@ void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase}{oomph\+::\+C1\+Curved\+
 
 Return FE interpolated value u\mbox{[}\mbox{]} at local coordinate s as \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} using Bell interpolations for the straight-\/edges triangle using C1-\/curved interpolations for the curve-\/edges triangle 
 
-Definition at line 4915 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6975 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -939,7 +937,7 @@ void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase}{oomph\+::\+C1\+Curved\+
 
 Return FE interpolated value u\mbox{[}\mbox{]} at local coordinate s as \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} using Bell interpolations for the straight-\/edges triangle using C1-\/curved interpolations for the curve-\/edges triangle 
 
-Definition at line 4844 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6899 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -958,7 +956,7 @@ Return FE interpolated value u\mbox{[}\mbox{]} at local coordinate s as \mbox{\h
 
 
 
-Definition at line 5103 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 7168 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -977,7 +975,7 @@ Return FE interpolated position x\mbox{[}\mbox{]} at local coordinate s as \mbox
 
 
 
-Definition at line 4418 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6463 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -990,10 +988,9 @@ References s, and oomph\+::\+C1\+Curved\+Element\+Base$<$ N\+N\+O\+D\+E\+\_\+1\+
 {\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
 void \mbox{\hyperlink{classoomph_1_1C1CurvedElementBase}{oomph\+::\+C1\+Curved\+Element\+Base}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::myassemble\+\_\+local\+\_\+to\+\_\+eulerian\+\_\+jacobian2 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{d2psids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Internal function that is used to assemble the jacobian of second derivatives of the the mapping from local coordinates (s) to the eulerian coordinates (x), given the second derivatives of the shape functions. ~\newline
- 
+Internal function that is used to assemble the jacobian of second derivatives of the the mapping from local coordinates (s) to the eulerian coordinates (x), given the second derivatives of the shape functions. 
 
-Definition at line 4392 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6437 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -1016,7 +1013,7 @@ Return the geometric shape function stored at the ipt-\/th integration point.
 
 
 
-Definition at line 4155 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6167 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -1035,7 +1032,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3927 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5895 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -1054,7 +1051,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1C1CurvedElement_3_012_00_01NNODE
 
 
 
-Definition at line 3974 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 5953 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 
@@ -1073,7 +1070,7 @@ Return the test function stored at the ipt-\/th integration point.
 
 
 
-Definition at line 4210 of file Subparametric\+\_\+\+Telements.\+h.
+Definition at line 6236 of file Subparametric\+\_\+\+Telements.\+h.
 
 
 

@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection_a15032c7709e65ad4e1d00a6406786c6c}{Backup\+Mesh\+For\+Projection}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const unsigned \&boundary\+\_\+id, const unsigned \&id\+\_\+of\+\_\+field\+\_\+to\+\_\+be\+\_\+projected=U\+I\+N\+T\+\_\+\+M\+AX)
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass existing mesh and the boundary ID (need to find the boundary coordinates that are used for the projection. Optional final argument specifies the ID of the field (i.\+e. the index of the relevant nodal value!) to be projected. If omitted, we project all of them. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass existing mesh and the boundary ID (need to find the boundary coordinates that are used for the projection. Optional final argument specifies the ID of the field (i.\+e. the index of the relevant nodal value!) to be projected. If omitted, we project all of them. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection_ab96a32a5934ef0edfbc50eb846cb3641}{project\+\_\+onto\+\_\+new\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$new\+\_\+mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Project the solution that was present in the original mesh and from which this backup mesh was created onto the mesh pointed to by new\+\_\+mesh\+\_\+pt. Note that elements in the new mesh do not have to be projectable. The original mesh may by now have been deleted. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection_a228c554024e2651071bc0e1282641e1f}{copy\+\_\+onto\+\_\+original\+\_\+mesh}} ()
@@ -23,7 +22,7 @@ void \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection_a228c554024e2651071b
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection_ae921b83792e20e1a5d974e1e89be6489}{New\+\_\+node\+\_\+pt}}
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection_a1bbddbe0f3fe21915a13578844f1c17d}{New\+\_\+node\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Map returning new node, labeled by node point in original mesh. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection_a41581d95e01ec252aaa05b73f596d431}{Boundary\+\_\+id}}
 \begin{DoxyCompactList}\small\item\em Boundary id. \end{DoxyCompactList}\item 
@@ -38,7 +37,7 @@ class oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\
 
 Class that makes backup (via a deep copy) of a mesh, keeping alive enough information to allow the solution that is currently stored on the mesh to be projected onto another mesh sometime in the future (when the original mesh may already have been deleted). This is mainly useful for the projection of additional nodal values (such as Lagrange multipliers) created by Face\+Elements. A\+S\+S\+U\+M\+P\+T\+I\+ON\+: All fields in the element are represented by isoparametric Lagrange interpolation between the nodal values. Any fields that do not fall into this category will not be copied across correctly and if you\textquotesingle{}re unlucky the code may die...). 
 
-Definition at line 233 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 222 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -52,12 +51,11 @@ Definition at line 233 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
-Constructor\+: Pass existing mesh and the boundary ID (need to find the boundary coordinates that are used for the projection. Optional final argument specifies the ID of the field (i.\+e. the index of the relevant nodal value!) to be projected. If omitted, we project all of them. ~\newline
- 
+Constructor\+: Pass existing mesh and the boundary ID (need to find the boundary coordinates that are used for the projection. Optional final argument specifies the ID of the field (i.\+e. the index of the relevant nodal value!) to be projected. If omitted, we project all of them. 
 
 
 
-Definition at line 243 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 230 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -79,7 +77,7 @@ Copy nodal values back onto original mesh from which this mesh was built. This o
 
 
 
-Definition at line 439 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 426 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -102,7 +100,7 @@ Project the solution that was present in the original mesh and from which this b
 
 
 
-Definition at line 406 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 394 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -124,7 +122,7 @@ Boundary id.
 
 
 
-Definition at line 485 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 471 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -143,18 +141,18 @@ ID of field to be projected (U\+I\+N\+T\+\_\+\+M\+AX if there isn\textquotesingl
 
 
 
-Definition at line 489 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 475 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
 Referenced by oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), and oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::project\+\_\+onto\+\_\+new\+\_\+mesh().
 
-\mbox{\Hypertarget{classoomph_1_1BackupMeshForProjection_ae921b83792e20e1a5d974e1e89be6489}\label{classoomph_1_1BackupMeshForProjection_ae921b83792e20e1a5d974e1e89be6489}} 
+\mbox{\Hypertarget{classoomph_1_1BackupMeshForProjection_a1bbddbe0f3fe21915a13578844f1c17d}\label{classoomph_1_1BackupMeshForProjection_a1bbddbe0f3fe21915a13578844f1c17d}} 
 \index{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$@{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$}!New\_node\_pt@{New\_node\_pt}}
 \index{New\_node\_pt@{New\_node\_pt}!oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$@{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{New\_node\_pt}{New\_node\_pt}}
 {\footnotesize\ttfamily template$<$class G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-std\+::map$<$\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$,\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection}{oomph\+::\+Backup\+Mesh\+For\+Projection}}$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::New\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+std\+::map$<$\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$, \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection}{oomph\+::\+Backup\+Mesh\+For\+Projection}}$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::New\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -162,7 +160,7 @@ Map returning new node, labeled by node point in original mesh.
 
 
 
-Definition at line 482 of file face\+\_\+mesh\+\_\+project.\+h.
+Definition at line 468 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 

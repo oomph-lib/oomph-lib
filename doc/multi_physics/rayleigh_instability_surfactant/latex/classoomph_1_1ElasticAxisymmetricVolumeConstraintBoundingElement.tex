@@ -14,8 +14,7 @@ Inheritance diagram for oomph\+::Elastic\+Axisymmetric\+Volume\+Constraint\+Boun
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement_a533376e1f314fabc4c014f9c7547f5e8}{Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element}} (Finite\+Element $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index)
-\begin{DoxyCompactList}\small\item\em Contructor\+: Specify bulk element and index of face to which this face element is to be attached ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Contructor\+: Specify bulk element and index of face to which this face element is to be attached. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement_adc7f5296f867251fe4b97b01f40c11e7}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
 \item 
 double \mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement_a8fe8843e542a626dd374cc4cd6850bcb}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&i) const
@@ -29,7 +28,7 @@ class oomph\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$
 
 The axisymmetric (one-\/dimensional) interface elements that allow imposition of a volume constraint specialised for the case when the nodal positions of the bulk elements are treated as solid degrees of freedom. To enforce that a fluid volume has a certain volume, attach these elements to all faces of the (2D axisymmetric) bulk fluid elements (of type E\+L\+E\+M\+E\+NT) that bound that region and then specify the \char`\"{}pressure\char`\"{} value that is traded for the constraint. 
 
-Definition at line 608 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line 602 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
@@ -43,12 +42,11 @@ Definition at line 608 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
-Contructor\+: Specify bulk element and index of face to which this face element is to be attached ~\newline
- 
+Contructor\+: Specify bulk element and index of face to which this face element is to be attached. 
 
 
 
-Definition at line 617 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line 609 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
@@ -62,7 +60,7 @@ void \mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingE
 
 Fill in contribution to residuals and Jacobian. This is specific to solid-\/based elements in which derivatives w.\+r.\+t. to nodal positions are evaluated by finite differencing 
 
-Definition at line 631 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line 621 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
@@ -81,7 +79,7 @@ The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed a
 
 
 
-Definition at line 645 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line 635 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 

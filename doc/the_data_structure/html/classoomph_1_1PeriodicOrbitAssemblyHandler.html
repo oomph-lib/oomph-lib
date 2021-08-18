@@ -160,7 +160,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3d1d9f709e983495dac3113b8e716843"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a3d1d9f709e983495dac3113b8e716843">set_dofs_for_element</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;dofs)</td></tr>
 <tr class="separator:a3d1d9f709e983495dac3113b8e716843"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d901ecdefca1c59403a4ae4b215446f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a6d901ecdefca1c59403a4ae4b215446f">get_jacobian</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
-<tr class="memdesc:a6d901ecdefca1c59403a4ae4b215446f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the elemental Jacobian matrix "d equation 
+<tr class="memdesc:a6d901ecdefca1c59403a4ae4b215446f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the elemental Jacobian matrix "d equation
 / d variable" for elem_pt.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a6d901ecdefca1c59403a4ae4b215446f">More...</a><br /></td></tr>
 <tr class="separator:a6d901ecdefca1c59403a4ae4b215446f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51b7db6467c46b417b3e630d0ef96a8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a51b7db6467c46b417b3e630d0ef96a8f">orbit_output</a> (std::ostream &amp;outfile, const unsigned &amp;n_plot)</td></tr>
@@ -212,7 +212,7 @@ class oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;</h3>
 
 <p>A class that is used to assemble and solve the augmented system of equations associated with calculating periodic orbits directly </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00563">563</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00599">599</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abe3fe6f2f74260df121bbf115ef3a5ee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abe3fe6f2f74260df121bbf115ef3a5ee">&#9670;&nbsp;</a></span>PeriodicOrbitAssemblyHandler()</h2>
@@ -264,9 +264,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Constructor, initialises values and constructs mesh of elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">707</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00740">740</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8cc_source.html#l01968">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00687">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Basic_time_mesh_pt</a>, <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="problem_8h_source.html#l01699">oomph::Problem::dof()</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00619">oomph::GeneralisedElement::internal_data_pt()</a>, <a class="el" href="nodes_8h_source.html#l00399">oomph::Data::is_pinned()</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00693">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Ndof</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l00824">oomph::GeneralisedElement::ninternal_data()</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="problem_8h_source.html#l01292">oomph::Problem::nsub_mesh()</a>, <a class="el" href="nodes_8cc_source.html#l00843">oomph::Data::ntstorage()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00702">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Omega</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00210">oomph::PeriodicOrbitEquations::omega_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00216">oomph::PeriodicOrbitEquations::set_ntstorage()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>, <a class="el" href="nodes_8cc_source.html#l00388">oomph::Data::set_time_stepper()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00219">oomph::PeriodicOrbitEquations::time_pt()</a>, <a class="el" href="problem_8h_source.html#l01449">oomph::Problem::time_pt()</a>, <a class="el" href="geom__objects_8h_source.html#l00193">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00677">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_stepper_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>, <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>, and <a class="el" href="nodes_8cc_source.html#l02324">oomph::Node::value()</a>.</p>
+<p class="reference">References <a class="el" href="problem_8cc_source.html#l01989">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00721">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Basic_time_mesh_pt</a>, <a class="el" href="linear__algebra__distribution_8cc_source.html#l00035">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01246">oomph::Problem::communicator_pt()</a>, <a class="el" href="problem_8h_source.html#l01820">oomph::Problem::dof()</a>, <a class="el" href="problem_8h_source.html#l00460">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00554">oomph::Problem::Dof_pt</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00455">oomph::Mesh::element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00628">oomph::GeneralisedElement::internal_data_pt()</a>, <a class="el" href="nodes_8h_source.html#l00423">oomph::Data::is_pinned()</a>, <a class="el" href="problem_8h_source.html#l01287">oomph::Problem::mesh_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00733">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00727">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Ndof</a>, <a class="el" href="problem_8h_source.html#l01681">oomph::Problem::ndof()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l00829">oomph::GeneralisedElement::ninternal_data()</a>, <a class="el" href="mesh_8h_source.html#l00603">oomph::Mesh::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00443">oomph::Mesh::node_pt()</a>, <a class="el" href="problem_8h_source.html#l01330">oomph::Problem::nsub_mesh()</a>, <a class="el" href="nodes_8cc_source.html#l00879">oomph::Data::ntstorage()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00736">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Omega</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00207">oomph::PeriodicOrbitEquations::omega_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00724">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00219">oomph::PeriodicOrbitEquations::set_ntstorage()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>, <a class="el" href="nodes_8cc_source.html#l00406">oomph::Data::set_time_stepper()</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00718">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00225">oomph::PeriodicOrbitEquations::time_pt()</a>, <a class="el" href="problem_8h_source.html#l01511">oomph::Problem::time_pt()</a>, <a class="el" href="geom__objects_8h_source.html#l00198">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00711">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_stepper_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>, <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>, and <a class="el" href="nodes_8cc_source.html#l02408">oomph::Node::value()</a>.</p>
 
 </div>
 </div>
@@ -297,9 +297,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Destructor, destroy the time mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01426">1426</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01467">1467</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="periodic__orbit__handler_8h_source.html#l00718">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
 
 </div>
 </div>
@@ -331,9 +331,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Adapt the time mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">1018</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">1062</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8cc_source.html#l01968">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00687">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Basic_time_mesh_pt</a>, <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="mesh_8h_source.html#l00081">oomph::Mesh::Default_TimeStepper</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="problem_8h_source.html#l01560">oomph::Problem::global_data_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00619">oomph::GeneralisedElement::internal_data_pt()</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00696">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_element_in_period</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00693">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Ndof</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="problem_8h_source.html#l01584">oomph::Problem::nglobal_data()</a>, <a class="el" href="elements_8h_source.html#l00824">oomph::GeneralisedElement::ninternal_data()</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="problem_8h_source.html#l01292">oomph::Problem::nsub_mesh()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00702">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Omega</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00210">oomph::PeriodicOrbitEquations::omega_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00216">oomph::PeriodicOrbitEquations::set_ntstorage()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>, <a class="el" href="nodes_8cc_source.html#l00388">oomph::Data::set_time_stepper()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00219">oomph::PeriodicOrbitEquations::time_pt()</a>, <a class="el" href="problem_8h_source.html#l01449">oomph::Problem::time_pt()</a>, <a class="el" href="geom__objects_8h_source.html#l00193">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00677">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_stepper_pt</a>, <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>, <a class="el" href="nodes_8cc_source.html#l02324">oomph::Node::value()</a>, and <a class="el" href="nodes_8h_source.html#l01650">oomph::SolidNode::variable_position_pt()</a>.</p>
+<p class="reference">References <a class="el" href="problem_8cc_source.html#l01989">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00721">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Basic_time_mesh_pt</a>, <a class="el" href="linear__algebra__distribution_8cc_source.html#l00035">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01246">oomph::Problem::communicator_pt()</a>, <a class="el" href="mesh_8h_source.html#l00075">oomph::Mesh::Default_TimeStepper</a>, <a class="el" href="problem_8h_source.html#l00460">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00554">oomph::Problem::Dof_pt</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00455">oomph::Mesh::element_pt()</a>, <a class="el" href="problem_8h_source.html#l01654">oomph::Problem::global_data_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00628">oomph::GeneralisedElement::internal_data_pt()</a>, <a class="el" href="problem_8h_source.html#l01287">oomph::Problem::mesh_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00730">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_element_in_period</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00733">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00727">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Ndof</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="problem_8h_source.html#l01693">oomph::Problem::nglobal_data()</a>, <a class="el" href="elements_8h_source.html#l00829">oomph::GeneralisedElement::ninternal_data()</a>, <a class="el" href="mesh_8h_source.html#l00603">oomph::Mesh::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00443">oomph::Mesh::node_pt()</a>, <a class="el" href="problem_8h_source.html#l01330">oomph::Problem::nsub_mesh()</a>, <a class="el" href="nodes_8h_source.html#l00489">oomph::Data::nvalue()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00736">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Omega</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00207">oomph::PeriodicOrbitEquations::omega_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00724">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00714">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00219">oomph::PeriodicOrbitEquations::set_ntstorage()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>, <a class="el" href="nodes_8cc_source.html#l00406">oomph::Data::set_time_stepper()</a>, <a class="el" href="nodes_8h_source.html#l00277">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00718">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00225">oomph::PeriodicOrbitEquations::time_pt()</a>, <a class="el" href="problem_8h_source.html#l01511">oomph::Problem::time_pt()</a>, <a class="el" href="geom__objects_8h_source.html#l00198">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00711">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_stepper_pt</a>, <a class="el" href="nodes_8h_source.html#l00299">oomph::Data::value()</a>, <a class="el" href="nodes_8cc_source.html#l02408">oomph::Node::value()</a>, and <a class="el" href="nodes_8h_source.html#l01796">oomph::SolidNode::variable_position_pt()</a>.</p>
 
 </div>
 </div>
@@ -365,9 +365,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Tell me the times at which you want the solution. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01010">1010</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01051">1051</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00718">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
 
 </div>
 </div>
@@ -409,11 +409,11 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Return the global equation number of the local unknown ieqn_local in elem_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">899</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00935">935</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00693">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Ndof</a>, <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00710">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00733">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00727">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Ndof</a>, <a class="el" href="elements_8h_source.html#l00841">oomph::GeneralisedElement::ndof()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l00926">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00940">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_previous_dofs_for_element()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00955">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_dofs_for_element()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l00966">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00980">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_previous_dofs_for_element()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00995">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_dofs_for_element()</a>.</p>
 
 </div>
 </div>
@@ -453,9 +453,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00926">926</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00966">966</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l01699">oomph::Problem::dof()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01820">oomph::Problem::dof()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00935">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00928">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00714">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>.</p>
 
 </div>
 </div>
@@ -501,12 +501,12 @@ template&lt;unsigned NNODE_1D&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Calculate the elemental Jacobian matrix "d equation 
+<p>Calculate the elemental Jacobian matrix "d equation
 / d variable" for elem_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00971">971</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01011">1011</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00718">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
 
 </div>
 </div>
@@ -546,9 +546,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00940">940</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00980">980</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>.</p>
+<p class="reference">References <a class="el" href="periodic__orbit__handler_8h_source.html#l00935">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00928">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00724">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>.</p>
 
 </div>
 </div>
@@ -590,9 +590,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Return the contribution to the residuals of the element elem_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">919</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00958">958</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00718">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
 
 </div>
 </div>
@@ -624,11 +624,11 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Return the number of degrees of freedom in the element elem_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">894</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00928">928</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, and <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>.</p>
+<p class="reference">References <a class="el" href="periodic__orbit__handler_8h_source.html#l00733">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, and <a class="el" href="elements_8h_source.html#l00841">oomph::GeneralisedElement::ndof()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l00926">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00940">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_previous_dofs_for_element()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00955">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_dofs_for_element()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l00966">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00980">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_previous_dofs_for_element()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00995">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_dofs_for_element()</a>.</p>
 
 </div>
 </div>
@@ -673,9 +673,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 <p>Return a pointer to the bifurcation parameter in bifurcation tracking problems</p>
 <p>Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems Return the contribution to the residuals of the element elem_pt </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00999">999</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01039">1039</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00455">oomph::Mesh::element_pt()</a>, <a class="el" href="problem_8h_source.html#l01287">oomph::Problem::mesh_pt()</a>, <a class="el" href="mesh_8h_source.html#l00597">oomph::Mesh::nelement()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00714">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00718">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
 
 </div>
 </div>
@@ -715,9 +715,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00955">955</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00995">995</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l01699">oomph::Problem::dof()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01820">oomph::Problem::dof()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00935">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00928">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00714">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>.</p>
 
 </div>
 </div>
@@ -748,11 +748,11 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Update the previous dofs. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">885</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">919</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l01699">oomph::Problem::dof()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01820">oomph::Problem::dof()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00733">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00724">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00714">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00740">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
 
 </div>
 </div>
@@ -781,9 +781,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Storage for the mesh of temporal elements with a simple mesh pointer. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00687">687</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00721">721</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00740">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
 
 </div>
 </div>
@@ -811,9 +811,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Storage for number of elements in the period. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00696">696</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00730">730</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>.</p>
 
 </div>
 </div>
@@ -841,9 +841,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Storage for the number of unknown time values. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">699</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00733">733</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00935">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00928">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00740">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>.</p>
 
 </div>
 </div>
@@ -871,9 +871,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Store number of degrees of freedom in the original problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00693">693</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00727">727</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00935">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00740">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
 
 </div>
 </div>
@@ -901,9 +901,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Storage for the frequency of the orbit (scaled by 2pi) </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00702">702</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00736">736</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00740">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
 
 </div>
 </div>
@@ -931,9 +931,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Storage for the previous solution. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">690</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00724">724</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00940">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_previous_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00980">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_previous_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00740">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>.</p>
 
 </div>
 </div>
@@ -961,9 +961,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Pointer to the problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">680</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00714">714</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00926">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00999">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::orbit_output()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00955">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_dofs_for_element()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00966">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l01039">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::orbit_output()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00995">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_dofs_for_element()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>.</p>
 
 </div>
 </div>
@@ -991,9 +991,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Storage for mesh of temporal elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">684</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00718">718</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l01010">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::discrete_times()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00971">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_jacobian()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_residuals()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00999">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::orbit_output()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l01426">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::~PeriodicOrbitAssemblyHandler()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l01051">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::discrete_times()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l01011">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_jacobian()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00958">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_residuals()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l01039">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::orbit_output()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00740">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l01467">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::~PeriodicOrbitAssemblyHandler()</a>.</p>
 
 </div>
 </div>
@@ -1021,9 +1021,9 @@ template&lt;unsigned NNODE_1D&gt; </div>
 
 <p>Pointer to the timestepper. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00677">677</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00711">711</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01062">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00740">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
 
 </div>
 </div>
@@ -1058,7 +1058,7 @@ template&lt;unsigned NNODE_1D&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Aug 13 2021 14:56:01
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:38:56
         </div>
       </div>
     </footer>

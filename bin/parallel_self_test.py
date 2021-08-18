@@ -22,7 +22,6 @@
 # but this is easy to change by modifying e.g. check_if_mpi_driver(...)
 
 
-
 # Some python 3 compatability. With these imports most scripts should work
 # in both python 2.7 and python 3.x.
 from __future__ import print_function
@@ -69,6 +68,7 @@ class Colours:
         self.TestFail = ''
         self.Endc = ''
 
+
 # Make a GLOBAL colours object to tell print functions how to make things
 # pretty. Easier to make it global because we want to be able to disable it
 # from inside main() without passing around a Colours object all over the
@@ -76,6 +76,8 @@ class Colours:
 COLOURS = Colours()
 
 # Various functions for printing with pretty colours
+
+
 def highlight(directorypath):
     return os.path.dirname(directorypath) + "/" + COLOURS.Header + \
         os.path.basename(directorypath) + COLOURS.Endc
@@ -135,7 +137,7 @@ def variable_from_makefile(variable_name, makefile_path="Makefile"):
     # the pwd, which dirname fails a bit on...
     makefile_dir = os.path.dirname(makefile_path)
     if makefile_dir == "":
-        makefile_dir = pjoin('.','')
+        makefile_dir = pjoin('.', '')
 
     # Run make using both a real makefile and a dummy one we are about to
     # create. Call the "print-var" command which will be in the dummy
@@ -146,7 +148,8 @@ def variable_from_makefile(variable_name, makefile_path="Makefile"):
 
     # Send in a dummy makefile with a print command, output should be the
     # value of the variable.
-    stdout, _ = process.communicate(("print-var:; @echo $(" + variable_name + ")").encode())
+    stdout, _ = process.communicate(
+        ("print-var:; @echo $(" + variable_name + ")").encode())
 
     # Check that make exited with a success code (0)
     returncode = process.wait()
@@ -180,6 +183,7 @@ def get_oomph_root():
 # Validation functions
 # ============================================================
 
+
 def find_validate_dirs(base_dirs):
     """Construct a list of validation directories by searching for
     validate.sh scripts."""
@@ -202,16 +206,22 @@ def dispatch_dir(dirname, features, **kwargs):
     # run the check.
     for feature in features:
         if not feature['have_feature']:
-           if feature['check_driver_function'](dirname):
-               missing_feature_message(dirname, feature['feature_name'])
-               return
+            if feature['check_driver_function'](dirname):
+                missing_feature_message(dirname, feature['feature_name'])
+                return
 
     make_check_in_dir(dirname, **kwargs)
 
 
 # Functions for checking if a test needs a certain feature
-def check_if_mpi_driver(d): return "mpi" in d
-def check_if_arpack_driver(d): return "eigenproblems" in d
+def check_if_mpi_driver(d):
+    return "mpi" in d
+
+
+def check_if_arpack_driver(d):
+    return "eigenproblems" in d
+
+
 def check_if_hlib_driver(d):
     # hlib is in "oomphlib", so take it out in case people use dirs called
     # oomphlib with no -.
@@ -233,7 +243,6 @@ def make_check_in_dir(directory, just_build=False):
     sure the folder exists.
     """
 
-
     # Write make output into a file in test rootdir (in case Validation dir
     # doesn't exist yet).
     tracefile_path = pjoin(directory, "make_check_output")
@@ -250,9 +259,9 @@ def make_check_in_dir(directory, just_build=False):
         build_return = subp.call(['make', 'check', '--silent',
                                   'LIBTOOLFLAGS=--silent',
                                   'TESTS_ENVIRONMENT=true'],
-                                  cwd = directory,
-                                  stdout=tracefile,
-                                  stderr=subp.STDOUT)
+                                 cwd=directory,
+                                 stdout=tracefile,
+                                 stderr=subp.STDOUT)
 
         # If it failed then return a build failure immediately
         if build_return != 0:
@@ -266,7 +275,7 @@ def make_check_in_dir(directory, just_build=False):
             # Run make check (runs the actual test)
             test_result = subp.call(['make', 'check', '--silent',
                                     'LIBTOOLFLAGS=--silent'],
-                                    cwd = directory,
+                                    cwd=directory,
                                     stdout=tracefile,
                                     stderr=subp.STDOUT)
 
@@ -282,17 +291,18 @@ def make_check_in_dir(directory, just_build=False):
     # Validation dir should exist now. Move the output file there if so,
     # otherwise issue a warning.
     if not os.path.isdir(os.path.dirname(final_tracefile_path)):
-        sys.stderr.write("Warning: no Validation directory in "+directory
-                         +" so I couldn't put make_check_output in there\n")
+        sys.stderr.write("WARNING: no Validation directory in "+directory
+                         + " so I couldn't put make_check_output in there\n")
         sys.stderr.flush()
     else:
         os.rename(tracefile_path, final_tracefile_path)
-
 
     if test_result == 0:
         check_success_message(directory)
         return
     else:
+        with open(tracefile_path, 'r') as tracefile:
+            print(tracefile.read())
         check_fail_message(directory)
         return
 
@@ -331,44 +341,61 @@ def main():
 
         # Don't mess up my formating in the help message
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        )
+    )
 
     # make uses -C for "run make in this directory" so copy it
-    parser.add_argument('-C', dest='oomph_root',
-                        help='Set the root directory of oomph-lib, by default try to \
-    extract it from a Makefile.')
+    parser.add_argument(
+        '-C', dest='oomph_root',
+        help='Set the root directory of oomph-lib, by default try to extract it from a Makefile.'
+    )
 
-    parser.add_argument('-a', action='store_true', dest='makeclean',
-                        help='Run make clean on test folders before starting.')
+    parser.add_argument(
+        '-a', action='store_true', dest='makeclean',
+        help='Run make clean on test folders before starting.'
+    )
 
-    parser.add_argument('-l', '--base-dir', action='append', dest='base_dirs',
-                        default=[],
-                        help='Specify directories relative to the root to (recursively)'
-                        + ' look for tests in.'
-                        + ' Uses "demo_drivers" and "self_test" by default.')
+    parser.add_argument(
+        '-l', '--base-dir', action='append', dest='base_dirs',
+        default=[],
+        help='Specify directories relative to the root to (recursively)'
+        + ' look for tests in.'
+        + ' Uses "demo_drivers" and "self_test" by default.'
+    )
 
-    parser.add_argument('-L', '--base-dirs-file', action='append', dest='base_dirs_files',
-                        default=[],
-                        help='Specify files containing a list of directories relative to the root to (recursively) look for tests in. Uses "demo_drivers" and "self_test" by default.')
+    parser.add_argument(
+        '-L', '--base-dirs-file', action='append', dest='base_dirs_files',
+        default=[],
+        help='Specify files containing a list of directories relative to the root to (recursively) look for tests in. Uses "demo_drivers" and "self_test" by default.'
+    )
 
-    parser.add_argument('-j', '-n', dest='ncores',
-                        help='Specifiy how many cores should be used altogether \
+    parser.add_argument(
+        '-j', '-n', dest='ncores',
+        help='Specifiy how many cores should be used altogether \
                         (taking mpi runs into account). By default use all cores.',
-                        default=multiprocessing.cpu_count())
+        default=multiprocessing.cpu_count()
+    )
 
-    parser.add_argument('--no-colour', action='store_true',
-                        help='Disable colours in output.')
+    parser.add_argument(
+        '--no-colour', action='store_true',
+        help='Disable colours in output.'
+    )
 
-    parser.add_argument('--check-scripts', action='store_true',
-                        help='Check all the validate.sh scripts using a simple '
-                        + 'regex to make sure that they set an exit status.')
+    parser.add_argument(
+        '--check-scripts', action='store_true',
+        help='Check all the validate.sh scripts using a simple '
+        + 'regex to make sure that they set an exit status.'
+    )
 
-    parser.add_argument('--just-build', action='store_true',
-                        help="Only build the tests, don't run them")
+    parser.add_argument(
+        '--just-build', action='store_true',
+        help="Only build the tests, don't run them"
+    )
 
-    parser.add_argument('--serial-mode', action='store_true',
-                        help='Run the script without parallelism (for debugging'
-                        +' purposes).')
+    parser.add_argument(
+        '--serial-mode', action='store_true',
+        help='Run the script without parallelism (for debugging'
+        + ' purposes).'
+    )
 
     args = parser.parse_args()
 
@@ -380,63 +407,62 @@ def main():
     if args.oomph_root is None:
         args.oomph_root = get_oomph_root()
 
-
     # If we requested just checking the validate.sh scripts instead of
     # running the tests
     if args.check_scripts:
         # Grep for some way of returning an exit status in validate.sh scripts,
         # print out those that don't contain one.
-        print("Checking validate.sh scripts. Any scripts printed below do not set\n"+
-              "their exit status properly and so the results cannot be correctly\n"+
+        print("Checking validate.sh scripts. Any scripts printed below do not set\n" +
+              "their exit status properly and so the results cannot be correctly\n" +
               "reported by this script.")
         print("Look in other validate scripts to see how to fix this.")
         subp.call('find -name "validate.sh" | xargs grep -i -L "^exit \|^set -o errexit"',
                   shell=True, cwd=args.oomph_root)
         return 0
 
-
     # Figure out if we have various features
     # ============================================================
 
-    #??ds there MUST be a way to detect this somehow...
+    # ??ds there MUST be a way to detect this somehow...
     have_arpack = False
 
     # Find out if we have mpi by looking for "OOMPH_HAS_MPI" in flags in
     # Makefile.
     have_mpi = "OOMPH_HAS_MPI" in \
-      variable_from_makefile("AM_CPPFLAGS", pjoin(args.oomph_root, "Makefile"))
+        variable_from_makefile(
+            "AM_CPPFLAGS", pjoin(args.oomph_root, "Makefile"))
 
     # Similarly for hlib
     have_hlib = "OOMPH_HAS_HLIB" in \
-      variable_from_makefile("AM_CPPFLAGS", pjoin(args.oomph_root, "Makefile"))
-
+        variable_from_makefile(
+            "AM_CPPFLAGS", pjoin(args.oomph_root, "Makefile"))
 
     # List of possible features. Each one must contain: "feature_name",
     # check_driver_function--a function to find out if a directory requires
     # this feature and have_feature--a boolean for if we have this feature
     # or not.
-    oomph_features =\
-      ([ {'feature_name' : "arpack",
-          'check_driver_function' : check_if_arpack_driver,
-          'have_feature' : have_arpack
-       },
-
-       {'feature_name' : "mpi",
-        'check_driver_function' : check_if_mpi_driver,
-        'have_feature' : have_mpi
+    oomph_features = ([
+        {
+            'feature_name': "arpack",
+            'check_driver_function': check_if_arpack_driver,
+            'have_feature': have_arpack
         },
-
-       {'feature_name' : "hlib",
-        'check_driver_function' : check_if_hlib_driver,
-        'have_feature' : have_hlib
+        {
+            'feature_name': "mpi",
+            'check_driver_function': check_if_mpi_driver,
+            'have_feature': have_mpi
+        },
+        {
+            'feature_name': "hlib",
+            'check_driver_function': check_if_hlib_driver,
+            'have_feature': have_hlib,
         }
-        ])
+    ])
 
     # Print our findings:
     print("\nChecked for the following features:")
     for feature in oomph_features:
         print("    ", feature['feature_name'], ":", feature['have_feature'])
-
 
     # Gather directory lists etc.
     # ============================================================
@@ -447,7 +473,7 @@ def main():
         with open(dirs_file_name) as f:
             # Strip whitespace and ignore blank lines
             base_dirs = base_dirs + \
-              [l.strip() for l in f.readlines() if l.strip() != ""]
+                [l.strip() for l in f.readlines() if l.strip() != ""]
 
     # If there are no base dirs given in either list then use defaults:
     if len(base_dirs) == 0:
@@ -455,12 +481,11 @@ def main():
 
     # Convert to absolute paths
     abs_base_dirs = [os.path.abspath(os.path.join(args.oomph_root, b))
-                      for b in base_dirs]
+                     for b in base_dirs]
 
     print("\nLooking for validate.sh scripts in directories:")
     pprint.pprint(abs_base_dirs)
     print()
-
 
     # Run tests
     # =========================================================================
@@ -472,8 +497,8 @@ def main():
             # Make clean in "directory" with stdout thrown away.
             subp.check_call(['make', 'clean', '-k',
                              '-j', str(args.ncores)],
-                             stdout = open(os.devnull, 'w'),
-                             cwd = directory)
+                            stdout=open(os.devnull, 'w'),
+                            cwd=directory)
 
     # Construct a list of validation directories
     validation_dirs = find_validate_dirs(abs_base_dirs)
@@ -482,7 +507,7 @@ def main():
     f = pt(dispatch_dir, features=oomph_features, just_build=args.just_build)
 
     if args.serial_mode:
-        list(map(f, validation_dirs)) # list forces evaluation of the map
+        list(map(f, validation_dirs))  # list forces evaluation of the map
     else:
         # Run it in parallel.
         Pool(processes=int(args.ncores)).map(f, validation_dirs, 1)

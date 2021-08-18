@@ -19,11 +19,9 @@ Inheritance diagram for oomph\+::Steady\+Axisym\+Advection\+Diffusion\+Flux\+Ele
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_acaec4345326b85f4689043efd2cd1e1c}{Steady\+Axisym\+Advection\+Diffusion\+Prescribed\+Beta\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&beta)
-\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/beta function fct(x,beta(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/beta function fct(x,beta(x)) -- x is a Vector! \end{DoxyCompactList}\item 
 typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_a28cea997740e6174b3e3583d704229ce}{Steady\+Axisym\+Advection\+Diffusion\+Prescribed\+Alpha\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&alpha)
-\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/alpha function fct(x,alpha(x)) -- x is a Vector! ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/alpha function fct(x,alpha(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -62,8 +60,7 @@ void \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_a0
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_ab9bb9d085a2f05045a0c78cc7210a25f}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -84,7 +81,7 @@ A class for elements that allow the imposition of an applied Robin boundary cond
 
 \[ -\Delta u \cdot \mathbf{n} + \alpha(r,z) u = \beta(r,z) \] The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
 
-Definition at line 630 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 621 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -98,12 +95,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusio
 
 
 
-Function pointer to the prescribed-\/alpha function fct(x,alpha(x)) -- x is a Vector! ~\newline
- 
+Function pointer to the prescribed-\/alpha function fct(x,alpha(x)) -- x is a Vector! 
 
 
 
-Definition at line 645 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 633 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_acaec4345326b85f4689043efd2cd1e1c}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_acaec4345326b85f4689043efd2cd1e1c}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::SteadyAxisymAdvectionDiffusionFluxElement$<$ ELEMENT $>$}!SteadyAxisymAdvectionDiffusionPrescribedBetaFctPt@{SteadyAxisymAdvectionDiffusionPrescribedBetaFctPt}}
@@ -114,12 +110,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusio
 
 
 
-Function pointer to the prescribed-\/beta function fct(x,beta(x)) -- x is a Vector! ~\newline
- 
+Function pointer to the prescribed-\/beta function fct(x,beta(x)) -- x is a Vector! 
 
 
 
-Definition at line 640 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 628 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -135,10 +130,9 @@ Definition at line 640 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. 
 
-Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created ~\newline
- 
 
-Definition at line 852 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+Definition at line 838 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -157,7 +151,7 @@ Broken empty constructor.
 
 
 
-Definition at line 656 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 644 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_a0baf681da17e525890c7115e87510aad}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement_a0baf681da17e525890c7115e87510aad}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::SteadyAxisymAdvectionDiffusionFluxElement$<$ ELEMENT $>$}!SteadyAxisymAdvectionDiffusionFluxElement@{SteadyAxisymAdvectionDiffusionFluxElement}}
@@ -172,7 +166,7 @@ Broken copy constructor.
 
 
 
-Definition at line 665 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 653 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -194,7 +188,7 @@ Access function for the prescribed-\/alpha function pointer.
 
 
 
-Definition at line 683 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 672 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -213,7 +207,7 @@ Broken assignment operator.
 
 Access function for the prescribed-\/beta function pointer 
 
-Definition at line 677 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 666 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -236,7 +230,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 702 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 690 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -259,7 +253,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 690 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 679 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -274,14 +268,13 @@ void \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement}{o
 
 
 
-Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
- 
+Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix for the Robin boundary condition\+:
 
 \[ \Delta u \cdot \mathbf{n} + \alpha (\mathbf{x}) = \beta (\mathbf{x}) \] 
 
-Definition at line 936 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 919 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -304,7 +297,7 @@ Function to calculate the prescribed alpha at a given spatial position.
 
 
 
-Definition at line 804 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 793 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -323,7 +316,7 @@ Function to calculate the prescribed beta at a given spatial position.
 
 
 
-Definition at line 788 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 777 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -346,7 +339,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 724 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 714 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -369,7 +362,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 731 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 721 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -388,7 +381,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 742 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 731 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -407,7 +400,7 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 766 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 755 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -430,7 +423,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 717 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 704 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -452,7 +445,7 @@ Function pointer to the (global) prescribed-\/alpha function.
 
 
 
-Definition at line 832 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 818 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -471,7 +464,7 @@ Function pointer to the (global) prescribed-\/beta function.
 
 
 
-Definition at line 829 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 815 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -490,7 +483,7 @@ The index at which the unknown is stored at the nodes.
 
 
 
-Definition at line 835 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 821 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 

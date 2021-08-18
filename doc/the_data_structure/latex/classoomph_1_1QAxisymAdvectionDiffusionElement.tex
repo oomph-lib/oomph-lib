@@ -25,24 +25,20 @@ Inheritance diagram for oomph\+::Q\+Axisym\+Advection\+Diffusion\+Element$<$ N\+
 unsigned \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_ae0c6b6099761b998688e2c22f2280a21}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a398cd25b07bc4709163369e2db6e8202}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- r,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: r,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a20cbe0ae52a064c6c5f6a065596beea5}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_ac095435d0ae6a5f3d74fa474d93906f8}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- r,z,u. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a636e99ae2ec6ac0c5e691acb89c3f5ef}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a07a6680226c412753604695d77b19467}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: r,z,u\+\_\+exact at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_aa940ad09f185dfde0eaeff61bc9c0a31}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axi\+\_\+adv\+\_\+diff}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a4bb026009c2c69e6870ff45450382418}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
@@ -59,7 +55,7 @@ class oomph\+::\+Q\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+
 
 \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{Q\+Axisym\+Advection\+Diffusion\+Element}} elements are linear/quadrilateral/brick-\/shaped Axisymmetric Advection Diffusion elements with isoparametric interpolation for the function. 
 
-Definition at line 586 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 604 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -77,7 +73,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\
 
 
 
-Definition at line 601 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 616 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAxisymAdvectionDiffusionElement_ae4e969a1020ebfd6922029a63a14a08e}\label{classoomph_1_1QAxisymAdvectionDiffusionElement_ae4e969a1020ebfd6922029a63a14a08e}} 
 \index{oomph::QAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::QAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!QAxisymAdvectionDiffusionElement@{QAxisymAdvectionDiffusionElement}}
@@ -92,7 +88,7 @@ Broken copy constructor.
 
 
 
-Definition at line 606 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 622 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -120,7 +116,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquations_a6d8
 
 
 
-Definition at line 731 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 747 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QAxisymAdvectionDiffusionElement_aa940ad09f185dfde0eaeff61bc9c0a31}\label{classoomph_1_1QAxisymAdvectionDiffusionElement_aa940ad09f185dfde0eaeff61bc9c0a31}} 
 \index{oomph::QAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::QAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_axi\_adv\_diff@{dshape\_and\_dtest\_eulerian\_axi\_adv\_diff}}
@@ -131,9 +127,9 @@ double \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{oomph\+:
 
 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
 
 Galerkin\+: Test functions = shape functions 
 
@@ -141,7 +137,7 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquations_a92b
 
 
 
-Definition at line 696 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 713 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -156,8 +152,7 @@ void \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{oomph\+::\
 
 
 
-C-\/style output function\+: ~\newline
- r,z,u. 
+C-\/style output function\+: r,z,u. 
 
 
 
@@ -165,7 +160,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquati
 
 
 
-Definition at line 642 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 658 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -180,8 +175,7 @@ void \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{oomph\+::\
 
 
 
-C-\/style output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
+C-\/style output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
 
 
 
@@ -189,7 +183,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquati
 
 
 
-Definition at line 649 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 665 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -204,8 +198,7 @@ void \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{oomph\+::\
 
 
 
-Output function\+: ~\newline
- r,z,u. 
+Output function\+: r,z,u. 
 
 
 
@@ -213,7 +206,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquati
 
 
 
-Definition at line 627 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 643 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -228,8 +221,7 @@ void \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{oomph\+::\
 
 
 
-Output function\+: ~\newline
- r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
+Output function\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. 
 
 
 
@@ -237,7 +229,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquati
 
 
 
-Definition at line 634 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 650 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -260,7 +252,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymAdvectionDiffusionEquati
 
 
 
-Definition at line 656 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 672 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -283,7 +275,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 620 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 636 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -305,7 +297,7 @@ Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nval
 
 
 
-Definition at line 594 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line 611 of file axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
